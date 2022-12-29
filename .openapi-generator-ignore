@@ -1,0 +1,26 @@
+# OpenAPI Generator Ignore
+# Lines beginning with a # are comments
+
+# Prevent the following content from being generated.
+.gitattributes
+.gitignore
+.openapi-generator-ignore
+appveyor.yml
+git_push.sh
+README.md
+
+# Prevent the EssSharp .sln and .csproj files from being generated.
+EssSharp.sln
+src/EssSharp/EssSharp.csproj
+
+# Sidestep naming conflict between Essbase OpenAPI spec and OpenAPI generator model
+# "Validate" property and "Validate(ValidationContext validationContext)" method.
+src/EssSharp/Model/OtlEditMain.cs
+
+# Sidestep what appears to be a bug in the OpenAPI Generator handling a naming conflict in the Essbase OpenAPI spec 
+# between the Datasource and DataSource definitions.
+src/EssSharp/Model/Rules.cs
+
+# Sidestep what appears to be a bug in the OpenAPI Generator in that creates a reference to a model type "SmartSmartList"
+# that is not part of the spec or the generated model (the reference should be to "SmartList").
+src/EssSharp/Model/DimBuildOptions.cs

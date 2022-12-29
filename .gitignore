@@ -1,0 +1,33 @@
+# openapi-generator metadata
+.openapi-generator
+
+# openapi spec processing intermediate output
+json.tmp
+temp.json
+
+### JetBrains Rider ###
+.idea/
+*.sln.iml
+
+### VisualStudioCode ###
+.vscode/
+.history/
+
+### VisualStudio ###
+.vs/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/

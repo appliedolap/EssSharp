@@ -1,0 +1,11 @@
+# EssSharp.Model.Generation
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**GenerationNumber** | **int** |  | 
+**ColumnName** | **string** |  | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+

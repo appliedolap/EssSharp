@@ -1,0 +1,8 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# The OpenAPI Generator always produces files with LF endings,
+# so ensure the endings of these are left alone on Windows.
+*.cs      text eol=lf
+*.md      text eol=lf
+*.json    text eol=lf
