@@ -22,6 +22,7 @@
                 HorizontalOptions="Center" />
 
             <Label
+                x:Name="Label"
                 Text="Welcome to .NET Multi-platform App UI"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
