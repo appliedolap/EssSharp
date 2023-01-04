@@ -110,7 +110,7 @@ namespace EssSharp
 
         /// <summary />
         /// <typeparam name="T" />
-        /// <param name="configuration />
+        /// <param name="configuration" />
         /// <param name="client" />
         /// <param name="callerPath" />
         /// <param name="callerName" />
