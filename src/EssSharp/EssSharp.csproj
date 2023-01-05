@@ -31,7 +31,8 @@
   <ItemGroup>
     <None Remove="System.Web" />
   </ItemGroup>
+
   <ItemGroup>
-    <Reference Include="System.Web" />
+    <ProjectReference Include="..\EssSharp.Abstractions\EssSharp.Abstractions.csproj" />
   </ItemGroup>
 </Project>
