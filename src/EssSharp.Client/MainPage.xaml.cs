@@ -5,7 +5,7 @@ namespace EssSharp.Client
 {
     public partial class MainPage : ContentPage
     {
-        string server = "http://essbase-21-4:9000/essbase/rest/v1";
+        string server = "http://localhost:9000/essbase";
         string username = "admin";
         string password = "password1";
 
@@ -18,38 +18,33 @@ namespace EssSharp.Client
         {
             try
             {
-                Label.Text = "Collecting server info.";
+                Label.Text = "Collecting server info...";
 
-                string providedServer = await DisplayPromptAsync("Server", "Enter a fully formed Essbase REST URL:", initialValue: server, keyboard: Keyboard.Text);
-
-                if ( string.IsNullOrWhiteSpace(providedServer) || !Uri.TryCreate(providedServer, UriKind.Absolute, out _) )
-                {
-                    // Doesn't work on MacCatalyst...
-                    //await DisplayAlert("Whoops", "An absolute REST URL basepath is required.", "OK");
-
-                    Label.Text = "An absolute REST URL basepath is required";
-                    return;
-                }
-
-                string providedUsername = await DisplayPromptAsync("Username", "Enter a valid Essbase user:", initialValue: username, keyboard: Keyboard.Text);
+                string providedServer   = await DisplayPromptAsync("Server",   "Enter an Essbase server URL:",             initialValue: server,   keyboard: Keyboard.Text);
+                string providedUsername = await DisplayPromptAsync("Username", "Enter a valid Essbase user:",              initialValue: username, keyboard: Keyboard.Text);
                 string providedPassword = await DisplayPromptAsync("Password", "Enter the password for the Essbase user:", initialValue: password, keyboard: Keyboard.Text);
+
+                Label.Text = "Getting app and cube info...";
 
                 server   = providedServer;
                 username = providedUsername;
                 password = providedPassword;
 
-                var sessionApi = EssSharp.GetApi<UserSessionApi>(server, username, password, TimeSpan.FromSeconds(20));
-                var session    = await sessionApi?.UserSessionGetSessionAsync(true, true);
+                var    cancellationToken    = new CancellationTokenSource(TimeSpan.FromSeconds(30)).Token;
+                string appAndCubeNames = null;
 
-                if ( string.IsNullOrWhiteSpace(session?.Token) )
-                    throw new Exception($"Unable to get a valid session token for user {username}.");
+                EssServer essServer = new EssServer(server, username, password);
 
-                SemanticScreenReader.Announce($"Sucessfully obtained a session token for {username}.");
+                foreach ( EssApplication essApplication in await essServer.GetApplicationsAsync(cancellationToken) )
+                    foreach ( EssCube essCube in await essApplication.GetCubesAsync(cancellationToken) )
+                        appAndCubeNames = $@"{appAndCubeNames};{essApplication.Name}.{essCube.Name}".Trim(';');
+
+                SemanticScreenReader.Announce($"Sucessfully obtained app and cube names.");
 
                 // Doesn't work on MacCatalyst...
-                //await DisplayAlert("Nice", $"Got token '{token}' for user {username}.", "OK");
+                //await DisplayAlert("Nice", $"Sucessfully obtained app and cube names.", "OK");
 
-                Label.Text = $"Sucessfully obtained a session token for {username}.";
+                Label.Text = appAndCubeNames;
             }
             catch ( Exception ex )
             {
