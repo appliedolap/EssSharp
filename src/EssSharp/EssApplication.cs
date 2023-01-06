@@ -47,5 +47,24 @@ namespace EssSharp
                 throw;
             }
         }
+
+        /// <summary>
+        /// Starts the application
+        /// </summary>
+        public async Task StartAsync( CancellationToken cancellationToken)
+        {
+            var api = ApiClientFactory.GetApi<ApplicationsApi>(Configuration, Client);
+            await api.ApplicationsPerformOperationAsync(application?.Name, "Start", 0, cancellationToken);
+            // in practice, it seems that 'start' also works or the input parameter is simply not case-sensitive
+        }
+
+        /// <summary>
+        /// Starts the application
+        /// </summary>
+        public async Task StopAsync( CancellationToken cancellationToken )
+        {
+            var api = ApiClientFactory.GetApi<ApplicationsApi>(Configuration, Client);
+            await api.ApplicationsPerformOperationAsync(application?.Name, "Stop", 0, cancellationToken);
+        }
     }
 }
