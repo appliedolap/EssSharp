@@ -12,8 +12,14 @@ namespace EssSharp
     /// <summary />
     public class EssApplication : EssObject, IEssApplication
     {
+        #region Private Data
+
         private readonly EssServer   server;
         private readonly Application application;
+
+        #endregion
+
+        #region Constructors
 
         /// <summary />
         public EssApplication( EssServer server, Application application ) : base(server.Configuration, server.Client)
@@ -22,23 +28,28 @@ namespace EssSharp
             this.application = application;
         }
 
+        #endregion
+
+        #region IEssObject Members
+
         /// <inheritdoc />
-        public override string Name => application?.Name;
+        public override string  Name => application?.Name;
 
         /// <inheritdoc />
         public override EssType Type => EssType.Application;
 
-        /// <summary>
-        /// Gets the list of cubes for this application available to the currently connected user.
-        /// </summary>
-        /// <returns>A list of <see cref="EssCube" /> objects under this application.</returns>
-        public async Task<List<EssCube>> GetCubesAsync( CancellationToken cancellationToken )
+        #endregion
+
+        #region IEssApplication Members
+
+        /// <inheritdoc />
+        public async Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken )
         {
             try
             {
-                var api = ApiClientFactory.GetApi<ApplicationsApi>(Configuration, Client);
+                var api = GetApi<ApplicationsApi>();
                 var cubes = (await api.ApplicationsGetCubesAsync(application?.Name, null, null, 0, cancellationToken))?.Items?
-                    .Select(x => new EssCube(this, x))?.ToList() ?? new List<EssCube>();
+                    .Select(cube => new EssCube(this, cube) as IEssCube)?.ToList() ?? new List<IEssCube>();
 
                 return cubes;
             }
@@ -48,23 +59,21 @@ namespace EssSharp
             }
         }
 
-        /// <summary>
-        /// Starts the application
-        /// </summary>
+        /// <inheritdoc />
         public async Task StartAsync( CancellationToken cancellationToken)
         {
-            var api = ApiClientFactory.GetApi<ApplicationsApi>(Configuration, Client);
+            var   api = GetApi<ApplicationsApi>();
             await api.ApplicationsPerformOperationAsync(application?.Name, "Start", 0, cancellationToken);
             // in practice, it seems that 'start' also works or the input parameter is simply not case-sensitive
         }
 
-        /// <summary>
-        /// Starts the application
-        /// </summary>
+        /// <inheritdoc />
         public async Task StopAsync( CancellationToken cancellationToken )
         {
-            var api = ApiClientFactory.GetApi<ApplicationsApi>(Configuration, Client);
+            var   api = GetApi<ApplicationsApi>();
             await api.ApplicationsPerformOperationAsync(application?.Name, "Stop", 0, cancellationToken);
         }
+
+        #endregion
     }
 }

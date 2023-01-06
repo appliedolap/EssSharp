@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using EssSharp.Api;
-using EssSharp.Client;
 
 namespace EssSharp
 {
@@ -14,13 +13,28 @@ namespace EssSharp
     /// </summary>
     public class EssServer : EssObject, IEssServer
     {
+        #region Private Data
+
         private const string defaultRestApiPath = "/rest/v1";
         private const int    maxApplications    = 100;
 
         private readonly string server;
 
+        #endregion
+
+        #region Constructors
+
         /// <summary />
-        internal EssServer( Configuration configuration, ApiClient client ) : base(configuration, client) { }
+        internal EssServer( Client.Configuration configuration, Client.ApiClient client ) : base(configuration, client) 
+        {
+            if ( !Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out _) )
+                throw new ArgumentException("A fully qualified server REST endpoint must be set on the configuration.", nameof(configuration));
+
+            int defaultRestApiPathIndex = configuration.BasePath.ToLowerInvariant().LastIndexOf(defaultRestApiPath);
+
+            if ( defaultRestApiPathIndex >= 0 )
+                this.server = configuration.BasePath.Substring(0, defaultRestApiPathIndex);
+        }
 
         /// <summary>
         /// 
@@ -30,45 +44,52 @@ namespace EssSharp
         /// <param name="password"></param>
         public EssServer( string server, string username, string password )
         {
-            var basePath = $@"{server?.TrimEnd()}{defaultRestApiPath}";
+            this.server = server?.TrimEnd('/');
+
+            var basePath = $@"{this.server}{defaultRestApiPath}";
 
             if ( !Uri.TryCreate(basePath, UriKind.Absolute, out _) )
                 throw new ArgumentException("A fully qualified server URL is required.", nameof(server));
 
-            this.server = server;
-
             if ( string.IsNullOrEmpty(username) )
                 throw new ArgumentException("A username is required.", nameof(username));
 
-            Client = new ApiClient(basePath);
-            Configuration = new Configuration()
+            Client        = new Client.ApiClient(basePath);
+            Configuration = new Client.Configuration()
             {
                 BasePath  = basePath,
                 Username  = username,
                 Password  = password,
                 Timeout   = TimeSpan.FromMilliseconds(int.MaxValue).Milliseconds,
-                UserAgent = "EssSharp.Client/1.0.0.0"
+                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}"
             };
+
+            var test = new EssServer(Configuration, Client);
         }
 
+        #endregion
+
+        #region IEssObject Members
+
         /// <inheritdoc />
-        public override string Name => server;
+        public override string  Name => server;
 
         /// <inheritdoc />
         public override EssType Type => EssType.Server;
 
-        /// <summary>
-        /// Gets the list of applications for this server available to the currently connected user.
-        /// </summary>
-        /// <returns> A list of <see cref="EssApplication"/> objects.</returns>
+        #endregion
+
+        #region IEssServer Members
+
+        /// <inheritdoc />
         /// <remarks>The number of returned applications is limited to the value of <see cref="maxApplications"/>.</remarks>
-        public async Task<List<EssApplication>> GetApplicationsAsync( CancellationToken cancellationToken )
+        public async Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken )
         {
             try
             {
-                var api = ApiClientFactory.GetApi<ApplicationsApi>(Configuration, Client);
+                var api = GetApi<ApplicationsApi>();
                 var applications = (await api.ApplicationsGetApplicationsAsync(null, null, maxApplications, null, null, null, 0, cancellationToken))?.Items?
-                    .Select(application => new EssApplication(this, application))?.ToList() ?? new List<EssApplication>();
+                    .Select(application => new EssApplication(this, application) as IEssApplication)?.ToList() ?? new List<IEssApplication>();
 
                 return applications;
             }
@@ -77,5 +98,7 @@ namespace EssSharp
                 throw;
             }
         }
+
+        #endregion
     }
 }
