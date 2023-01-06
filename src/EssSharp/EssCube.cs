@@ -24,7 +24,6 @@ namespace EssSharp
         /// <summary />
         public EssCube( EssApplication application, Cube cube ) : base(application?.Configuration, application?.Client)
         {
-            this.Parent      = application;
             this.application = application;
             this.cube        = cube;
         }
@@ -48,10 +47,10 @@ namespace EssSharp
             try
             {
                 var api = GetApi<VariablesApi>();
-                var variables = (await api.VariablesListVariablesAsync(Parent?.Parent?.Name, Parent?.Name, 0, cancellationToken))?.Items?
-                    .Select(variable => new EssVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
+                //var variables = (await api.VariablesListVariablesAsync(application?.Name, cube?.Name, 0, cancellationToken))?.Items?
+                    //.Select(variable => new EssCubeVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
 
-                return variables;
+                return null;
             }
             catch ( Exception )
             {
