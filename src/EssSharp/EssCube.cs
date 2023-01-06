@@ -15,7 +15,7 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        public EssCube( EssApplication application, Cube cube ) : base(application.Configuration, application.Client)
+        public EssCube( EssApplication application, Cube cube ) : base(application?.Configuration, application?.Client)
         {
             this.application = application;
             this.cube        = cube;

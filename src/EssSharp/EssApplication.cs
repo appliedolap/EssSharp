@@ -22,7 +22,7 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        public EssApplication( EssServer server, Application application ) : base(server.Configuration, server.Client)
+        public EssApplication( EssServer server, Application application ) : base(server?.Configuration, server?.Client)
         {
             this.server      = server;
             this.application = application;

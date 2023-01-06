@@ -14,10 +14,10 @@ namespace EssSharp
         /// <summary />
         /// <param name="configuration" />
         /// <param name="client" />
-        internal EssObject( EssSharp.Client.Configuration configuration, EssSharp.Client.ApiClient client )
+        internal EssObject( EssSharp.Client.Configuration configuration, EssSharp.Client.ApiClient client = null )
         {
-            Configuration = configuration;
-            Client        = client;
+            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            Client        = client ?? new EssSharp.Client.ApiClient(configuration.BasePath);
         }
 
         #endregion
@@ -29,7 +29,7 @@ namespace EssSharp
 
         /// <inheritdoc />
         public virtual EssType Type => throw new NotImplementedException();
-        
+
         #endregion
 
         #region Internal Properties and Methods
