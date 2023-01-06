@@ -25,5 +25,10 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task StopAsync( CancellationToken cancellationToken );
+
+        /// <summary>
+        /// 
+        /// </summary>    
+        public Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken );
     }
 }

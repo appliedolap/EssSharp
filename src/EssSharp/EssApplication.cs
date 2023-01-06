@@ -24,6 +24,7 @@ namespace EssSharp
         /// <summary />
         public EssApplication( EssServer server, Application application ) : base(server?.Configuration, server?.Client)
         {
+            this.Parent      = server;
             this.server      = server;
             this.application = application;
         }
@@ -72,6 +73,23 @@ namespace EssSharp
         {
             var   api = GetApi<ApplicationsApi>();
             await api.ApplicationsPerformOperationAsync(application?.Name, "Stop", 0, cancellationToken);
+        }
+
+        /// <inheritdoc />
+        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken )
+        {
+            try
+            {
+                var api = GetApi<VariablesApi>();
+                var variables = (await api.VariablesListAppVariablesAsync(Parent?.Name, 0, cancellationToken))?.Items?
+                    .Select(variable => new EssVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
+
+                return variables;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
         }
 
         #endregion

@@ -12,5 +12,6 @@ namespace EssSharp
         /// </summary>
         /// <returns> A list of <see cref="IEssApplication"/> objects.</returns>
         public Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken );
+        public Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken );
     }
 }

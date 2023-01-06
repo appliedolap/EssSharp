@@ -99,6 +99,23 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken )
+        {
+            try
+            {
+                var api = GetApi<ServerVariablesApi>();
+                var variables = (await api.VariablesListServerVariablesAsync(true.ToString().ToLowerInvariant(), 0, cancellationToken))?.Items?
+                    .Select(variable => new EssVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
+
+                return variables;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
         #endregion
     }
 }
