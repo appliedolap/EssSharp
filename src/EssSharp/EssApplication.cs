@@ -43,7 +43,7 @@ namespace EssSharp
         #region IEssApplication Members
 
         /// <inheritdoc />
-        public async Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken )
+        public async Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -60,7 +60,24 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public async Task StartAsync( CancellationToken cancellationToken)
+        public async Task<List<IEssVariable>> GetVariablesAsync(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var api = GetApi<VariablesApi>();
+                //var variables = (await api.VariablesListAppVariablesAsync(application?.Name, 0, cancellationToken))?.Items?
+                //.Select(variable => new EssApplicationVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task StartAsync( CancellationToken cancellationToken = default )
         {
             var   api = GetApi<ApplicationsApi>();
             await api.ApplicationsPerformOperationAsync(application?.Name, "Start", 0, cancellationToken);
@@ -68,27 +85,10 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public async Task StopAsync( CancellationToken cancellationToken )
+        public async Task StopAsync( CancellationToken cancellationToken = default )
         {
             var   api = GetApi<ApplicationsApi>();
             await api.ApplicationsPerformOperationAsync(application?.Name, "Stop", 0, cancellationToken);
-        }
-
-        /// <inheritdoc />
-        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken )
-        {
-            try
-            {
-                var api = GetApi<VariablesApi>();
-                //var variables = (await api.VariablesListAppVariablesAsync(application?.Name, 0, cancellationToken))?.Items?
-                    //.Select(variable => new EssApplicationVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
-
-                return null;
-            }
-            catch ( Exception )
-            {
-                throw;
-            }
         }
 
         #endregion

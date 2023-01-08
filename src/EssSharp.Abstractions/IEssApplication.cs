@@ -12,23 +12,25 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         /// <returns>A list of <see cref="IEssCube" /> objects under this application.</returns>
-        public Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken );
+        public Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Starts the application.
         /// </summary>
         /// <param name="cancellationToken" />
-        public Task StartAsync( CancellationToken cancellationToken );
+        public Task StartAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Stops the application.
         /// </summary>
         /// <param name="cancellationToken" />
-        public Task StopAsync( CancellationToken cancellationToken );
+        public Task StopAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
-        /// </summary>    
-        public Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken );
+        /// Gets the list of application-scoped variables available to the connected user.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
+        public Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
     }
 }

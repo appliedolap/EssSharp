@@ -1,11 +1,11 @@
-﻿using EssSharp.Api;
-using EssSharp.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using EssSharp.Api;
+using EssSharp.Model;
 
 namespace EssSharp
 {
@@ -40,9 +40,10 @@ namespace EssSharp
 
         #endregion
 
+        #region IEssCube Members
 
         /// <inheritdoc />
-        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken )
+        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -58,5 +59,6 @@ namespace EssSharp
             }
         }
 
+        #endregion
     }
 }

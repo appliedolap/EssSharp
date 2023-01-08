@@ -39,7 +39,7 @@ namespace EssSharp
         public VariableScope Scope => VariableScope.SERVER;
 
         /// <inheritdoc />
-        public async Task DeleteAsync( CancellationToken cancellationToken )
+        public async Task DeleteAsync( CancellationToken cancellationToken = default )
         {
             switch ( Scope )
             {
