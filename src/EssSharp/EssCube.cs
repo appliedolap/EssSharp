@@ -43,6 +43,9 @@ namespace EssSharp
         #region IEssCube Members
 
         /// <inheritdoc />
+        public IEssApplication Application => application;
+
+        /// <inheritdoc />
         public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try

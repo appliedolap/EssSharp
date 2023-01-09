@@ -8,6 +8,11 @@ namespace EssSharp
     public interface IEssCube : IEssObject
     {
         /// <summary>
+        /// Returns the parent application of the cube.
+        /// </summary>
+        public IEssApplication Application { get; }
+
+        /// <summary>
         /// Gets the list of cube-scoped variables available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
