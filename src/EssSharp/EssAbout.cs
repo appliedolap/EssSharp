@@ -1,11 +1,4 @@
-﻿using EssSharp.Api;
-using EssSharp.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
+﻿using EssSharp.Model;
 
 namespace EssSharp
 {
@@ -14,8 +7,7 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssServer server;
-        private readonly About           about;
+        private readonly About _about;
 
         #endregion
 
@@ -24,8 +16,7 @@ namespace EssSharp
         /// <summary />
         public EssAbout( EssServer server, About about ) : base(server?.Configuration, server?.Client)
         {
-            this.server = server;
-            this.about        = about;
+            _about  = about;
         }
 
         #endregion
@@ -33,7 +24,7 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string Name => about?.Name;
+        public override string Name => _about?.Name;
 
         /// <inheritdoc />
         public override EssType Type => EssType.About;
@@ -41,11 +32,11 @@ namespace EssSharp
         #endregion
         #region IEsssAboutMembers
         /// <inheritdoc />
-        public string Description => about?.Description;
+        public string Description => _about?.Description;
         /// <inheritdoc />
-        public string Version => about?._Version;
+        public string Version => _about?._Version;
         /// <inheritdoc />
-        public string Build => about?.Build;
+        public string Build => _about?.Build;
         #endregion
 
 

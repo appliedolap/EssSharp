@@ -9,16 +9,14 @@ namespace EssSharp
     /// <summary />
     public class EssVariable : EssObject, IEssVariable
     {
-        private readonly EssServer essServer;
-        private readonly Variable  variable;
+        private readonly Variable _variable;
 
         #region Constructors
 
         /// <summary />
         public EssVariable( EssServer essServer, Variable variable ) : base(essServer?.Configuration, essServer?.Client)
         {
-            this.essServer = essServer;
-            this.variable  = variable;
+            _variable  = variable;
         }
 
         #endregion
@@ -26,7 +24,7 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string Name => variable?.Name;
+        public override string Name  => _variable?.Name;
 
         /// <inheritdoc />
         public override EssType Type => EssType.Variable;
@@ -36,15 +34,15 @@ namespace EssSharp
         #region IEssVariable Members
 
         /// <inheritdoc />
-        public VariableScope Scope => VariableScope.SERVER;
+        public VariableScope Scope => VariableScope.Server;
 
         /// <inheritdoc />
         public async Task DeleteAsync( CancellationToken cancellationToken = default )
         {
             switch ( Scope )
             {
-                case VariableScope.SERVER:
-                    await GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(variable?.Name, 0, cancellationToken);
+                case VariableScope.Server:
+                    await GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(_variable?.Name, 0, cancellationToken);
                     break;
                 //case VariableScope.APPLICATION:
                     //await GetApi<VariablesApi>().VariablesDeleteAppVariableAsync(Parent?.Name, variable?.Name, 0, cancellationToken);
