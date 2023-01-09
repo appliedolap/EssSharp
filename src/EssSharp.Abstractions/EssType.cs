@@ -23,6 +23,8 @@
         Dimension,
         Generation,
         Level,
-        Lock
+        Lock,
+        About,
+        AboutInstance
     }
 }

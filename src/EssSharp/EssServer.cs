@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using EssSharp.Api;
+using EssSharp.Model;
 
 namespace EssSharp
 {
@@ -77,7 +78,7 @@ namespace EssSharp
         /// <inheritdoc />
         public override EssType Type => EssType.Server;
 
-        #endregion
+         #endregion
 
         #region IEssServer Members
 
@@ -109,6 +110,40 @@ namespace EssSharp
                     .Select(variable => new EssVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
 
                 return variables;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+
+        /// <inheritdoc />
+        public async Task <IEssAbout> GetAboutAsync( CancellationToken cancellationToken )
+        {
+            try
+            {
+                var   api = GetApi<AboutEssbaseApi>();
+                var about =await api.AboutGetAboutAsync(0, cancellationToken);
+                //  return WrapperUtil.wrapFunc(()->api.getAboutEssbaseApi().aboutGetAbout(), About::new);
+                //null check
+                return new EssAbout(this, about) ;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task <IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken )
+        {
+            try
+            {
+                var   api = GetApi<AboutEssbaseApi>();
+                var aboutinstance =await api.AboutGetInstanceDetailsAsync(0, cancellationToken);
+                return new EssAboutInstance(this, aboutinstance);
+                //return WrapperUtil.wrapFunc(()->api.getAboutEssbaseApi().getInstanceDetails(), AboutInstance::new);
             }
             catch ( Exception )
             {
