@@ -41,15 +41,17 @@ namespace EssSharp
         #region IEssApplication Members
 
         /// <inheritdoc />
+        public List<IEssCube> GetCubes() => GetCubesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCube>();
+
+        /// <inheritdoc />
         public async Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<ApplicationsApi>();
-                var cubes = (await api.ApplicationsGetCubesAsync(_application?.Name, null, null, 0, cancellationToken))?.Items?
-                    .Select(cube => new EssCube(this, cube) as IEssCube)?.ToList() ?? new List<IEssCube>();
+                var cubes = await api.ApplicationsGetCubesAsync(_application?.Name, null, null, 0, cancellationToken).ConfigureAwait(false);
 
-                return cubes;
+                return cubes?.ToEssSharpList(this) ?? new List<IEssCube>();
             }
             catch ( Exception )
             {

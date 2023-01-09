@@ -90,7 +90,7 @@ namespace EssSharp
                 var api = GetApi<ApplicationsApi>();
                 var applications = await api.ApplicationsGetApplicationsAsync(null, null, _maxApplications, null, null, null, 0, cancellationToken).ConfigureAwait(false);
 
-                return applications?.ToEssApplicationList(this) ?? new List<IEssApplication>();
+                return applications?.ToEssSharpList(this) ?? new List<IEssApplication>();
             }
             catch ( Exception )
             {
