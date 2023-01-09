@@ -5,7 +5,7 @@ using System;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssAbout: IEssObject
+    public interface IEssAbout
     {
         /// <summary>
         /// Gets or Sets Description
@@ -21,6 +21,5 @@ namespace EssSharp
         public string Build { get; }
 
     }
-
-
+    
 }

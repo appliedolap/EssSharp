@@ -24,7 +24,5 @@
         Generation,
         Level,
         Lock,
-        About,
-        AboutInstance
     }
 }

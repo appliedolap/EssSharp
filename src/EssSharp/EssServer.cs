@@ -120,13 +120,13 @@ namespace EssSharp
 
 
         /// <inheritdoc />
-        public async Task <IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default )
+        public async Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var   api = GetApi<AboutEssbaseApi>();
-                var about =await api.AboutGetAboutAsync(0, cancellationToken) ?? new About();
-                return new EssAbout(this, about);
+                var about = await api.AboutGetAboutAsync(0, cancellationToken) ?? new About();
+                return new EssAbout(about);
             }
             catch ( Exception )
             {
@@ -135,14 +135,13 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public async Task <IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken = default )
+        public async Task<IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken = default )
         {
             try
             {
-                var   api = GetApi<AboutEssbaseApi>();
-                var aboutinstance =await api.AboutGetInstanceDetailsAsync(0, cancellationToken) ?? new AboutInstance(); ;
-                return new EssAboutInstance(this, aboutinstance);
-
+                var api = GetApi<AboutEssbaseApi>();
+                var aboutInstance = await api.AboutGetInstanceDetailsAsync(0, cancellationToken) ?? new AboutInstance(); ;
+                return new EssAboutInstance(aboutInstance);
             }
             catch ( Exception )
             {

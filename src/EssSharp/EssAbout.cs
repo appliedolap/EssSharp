@@ -3,7 +3,7 @@
 namespace EssSharp
 {
     /// <summary />
-    public class EssAbout : EssObject, IEssAbout
+    public class EssAbout : IEssAbout
     {
         #region Private Data
 
@@ -14,20 +14,10 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        public EssAbout( EssServer server, About about ) : base(server?.Configuration, server?.Client)
+        public EssAbout(About about )
         {
             _about  = about;
         }
-
-        #endregion
-
-        #region IEssObject Members
-
-        /// <inheritdoc />
-        public override string Name => _about?.Name;
-
-        /// <inheritdoc />
-        public override EssType Type => EssType.About;
 
         #endregion
 
@@ -40,10 +30,6 @@ namespace EssSharp
         /// <inheritdoc />
         public string Build => _about?.Build;
         #endregion
-
-
-
-
 
     }
 }
