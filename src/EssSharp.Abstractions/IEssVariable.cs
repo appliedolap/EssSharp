@@ -24,6 +24,10 @@ namespace EssSharp
     public enum VariableScope
     {
         /// <summary />
-        SERVER
+        Server,
+        /// <summary />
+        Application,
+        /// <summary />
+        Cube
     }
 }

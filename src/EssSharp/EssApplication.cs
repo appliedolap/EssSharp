@@ -14,8 +14,7 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssServer   server;
-        private readonly Application application;
+        private readonly Application _application;
 
         #endregion
 
@@ -24,8 +23,7 @@ namespace EssSharp
         /// <summary />
         public EssApplication( EssServer server, Application application ) : base(server?.Configuration, server?.Client)
         {
-            this.server      = server;
-            this.application = application;
+            _application = application;
         }
 
         #endregion
@@ -33,7 +31,7 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string  Name => application?.Name;
+        public override string  Name => _application?.Name;
 
         /// <inheritdoc />
         public override EssType Type => EssType.Application;
@@ -48,7 +46,7 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ApplicationsApi>();
-                var cubes = (await api.ApplicationsGetCubesAsync(application?.Name, null, null, 0, cancellationToken))?.Items?
+                var cubes = (await api.ApplicationsGetCubesAsync(_application?.Name, null, null, 0, cancellationToken))?.Items?
                     .Select(cube => new EssCube(this, cube) as IEssCube)?.ToList() ?? new List<IEssCube>();
 
                 return cubes;
@@ -80,7 +78,7 @@ namespace EssSharp
         public async Task StartAsync( CancellationToken cancellationToken = default )
         {
             var   api = GetApi<ApplicationsApi>();
-            await api.ApplicationsPerformOperationAsync(application?.Name, "Start", 0, cancellationToken);
+            await api.ApplicationsPerformOperationAsync(_application?.Name, "Start", 0, cancellationToken);
             // in practice, it seems that 'start' also works or the input parameter is simply not case-sensitive
         }
 
@@ -88,7 +86,7 @@ namespace EssSharp
         public async Task StopAsync( CancellationToken cancellationToken = default )
         {
             var   api = GetApi<ApplicationsApi>();
-            await api.ApplicationsPerformOperationAsync(application?.Name, "Stop", 0, cancellationToken);
+            await api.ApplicationsPerformOperationAsync(_application?.Name, "Stop", 0, cancellationToken);
         }
 
         #endregion

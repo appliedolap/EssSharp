@@ -1,11 +1,4 @@
-﻿using EssSharp.Api;
-using EssSharp.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
+﻿using EssSharp.Model;
 
 namespace EssSharp
 {
@@ -14,8 +7,7 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssServer server;
-        private readonly AboutInstance         aboutinstance;
+        private readonly AboutInstance _aboutinstance;
 
         #endregion
 
@@ -24,8 +16,7 @@ namespace EssSharp
         /// <summary />
         public EssAboutInstance( EssServer server, AboutInstance aboutinstance ) : base(server?.Configuration, server?.Client)
         {
-            this.server = server;
-            this.aboutinstance = aboutinstance;
+            _aboutinstance = aboutinstance;
         }
 
         #endregion
@@ -42,14 +33,16 @@ namespace EssSharp
 
         #endregion
 
-        #region IESSAboutInstance Mmebers
-        /// <inheritdoc />
+        #region IESSAboutInstance Members
 
-        public bool ProvisioningSupported => aboutinstance?.ProvisioningSupported ?? false;
         /// <inheritdoc />
-        public bool ResetPasswordSupported => aboutinstance?.ResetPasswordSupported ?? false;
+        public bool ProvisioningSupported => _aboutinstance?.ProvisioningSupported ?? false;
         /// <inheritdoc />
-        public bool EasInstalled => aboutinstance?.EasInstalled ?? false;
+        public bool ResetPasswordSupported => _aboutinstance?.ResetPasswordSupported ?? false;
+        /// <inheritdoc />
+        public bool EasInstalled => _aboutinstance?.EasInstalled ?? false;
+
+
         #endregion
 
 

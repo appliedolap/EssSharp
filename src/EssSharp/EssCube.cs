@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,8 +13,8 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssApplication application;
-        private readonly Cube           cube;
+        private readonly EssApplication _application;
+        private readonly Cube           _cube;
 
         #endregion
 
@@ -24,8 +23,8 @@ namespace EssSharp
         /// <summary />
         public EssCube( EssApplication application, Cube cube ) : base(application?.Configuration, application?.Client)
         {
-            this.application = application;
-            this.cube        = cube;
+            _application = application;
+            _cube        = cube;
         }
 
         #endregion
@@ -33,7 +32,7 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string Name => cube?.Name;
+        public override string Name => _cube?.Name;
 
         /// <inheritdoc />
         public override EssType Type => EssType.Cube;
@@ -43,7 +42,7 @@ namespace EssSharp
         #region IEssCube Members
 
         /// <inheritdoc />
-        public IEssApplication Application => application;
+        public IEssApplication Application => _application;
 
         /// <inheritdoc />
         public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )

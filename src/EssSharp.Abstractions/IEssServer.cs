@@ -10,6 +10,12 @@ namespace EssSharp
         /// <summary>
         /// Gets the list of applications for this server available to the connected user.
         /// </summary>
+        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
+        public List<IEssApplication> GetApplications();
+
+        /// <summary>
+        /// Gets the list of applications for this server available to the connected user.
+        /// </summary>
         /// <param name="cancellationToken" />
         /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
         public Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default );
