@@ -1,51 +1,37 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using EssSharp.Api;
 using EssSharp.Model;
 
 namespace EssSharp
 {
-    /// <summary />
-    public class EssCubeVariable : EssObject, IEssCubeVariable
+    /// <summary>
+    /// Represents a variable that is specific to a particular cube.
+    /// </summary>
+    public class EssCubeVariable : EssApplicationVariable, IEssCubeVariable
     {
-        private readonly Variable  variable;
-        private readonly EssApplication application;
-        private readonly EssCube           cube;
 
-        #region Constructors
+        private readonly EssCube _cube;
 
-        /// <summary />
-        public EssCubeVariable( EssApplication application,EssCube cube, Variable variable ) : base(application?.Configuration, application?.Client)
+        internal EssCubeVariable(EssApplication application, EssCube cube, Variable variable) : base(application,
+            variable)
         {
-            this.variable  = variable;
-            this.application = application;
-            this.cube = cube;
+            _cube = cube;
         }
 
-        #endregion
-
-        #region IEssObject Members
-
         /// <inheritdoc />
-        public override string Name => variable?.Name;
+        public override VariableScope Scope => VariableScope.Cube;
 
-        /// <inheritdoc />
-        public override EssType Type => EssType.Variable;
+        /// <summary>
+        /// Gets the cube for this variable.
+        /// </summary>
+        public IEssCube Cube => _cube;
 
-        #endregion
-
-        #region IEssVariable Members
-
-        /// <inheritdoc />
-        public CubeVariableScope Scope => CubeVariableScope.CUBE;
-
-        /// <inheritdoc />
-        public async Task DeleteAsync( CancellationToken cancellationToken = default )
+        /// <summary>
+        /// Returns a textual description of this variable.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
         {
-            await GetApi<VariablesApi>().VariablesDeleteVariableAsync(application?.Name, cube?.Name, variable?.Name, 0, cancellationToken);
+            return
+                $"EssCubeVariable {{ Cube = {_cube.Name}, Application = {_cube.Application.Name}, Name = {Name}, Value = {Value} }}";
         }
-
-        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        public EssCube( EssApplication application, Cube cube ) : base(application?.Configuration, application?.Client)
+        internal EssCube(EssApplication application, Cube cube ) : base(application.Configuration, application.Client)
         {
             _application = application;
             _cube        = cube;
@@ -45,15 +46,13 @@ namespace EssSharp
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
-        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
+        public async Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<VariablesApi>();
-                //var variables = (await api.VariablesListVariablesAsync(application?.Name, cube?.Name, 0, cancellationToken))?.Items?
-                    //.Select(variable => new EssCubeVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
-
-                return null;
+                return (await api.VariablesListVariablesAsync(_application?.Name, _cube?.Name, 0, cancellationToken))?.Items?
+                    .Select(variable => new EssCubeVariable(_application, this, variable) as IEssCubeVariable)?.ToList() ?? new List<IEssCubeVariable>();
             }
             catch ( Exception )
             {

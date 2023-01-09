@@ -13,6 +13,11 @@ namespace EssSharp
         public Task DeleteAsync( CancellationToken cancellationToken = default );
         
         /// <summary>
+        /// Gets the value of this variable.
+        /// </summary>
+        public string Value { get; }
+        
+        /// <summary>
         /// Returns the scope of the current variable.
         /// </summary>
         public VariableScope Scope { get; }

@@ -14,7 +14,7 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        public EssVariable( EssServer essServer, Variable variable ) : base(essServer?.Configuration, essServer?.Client)
+        internal EssVariable( EssObject parent, Variable variable ) : base(parent.Configuration, parent.Client)
         {
             _variable  = variable;
         }
@@ -34,7 +34,7 @@ namespace EssSharp
         #region IEssVariable Members
 
         /// <inheritdoc />
-        public VariableScope Scope => VariableScope.Server;
+        public virtual VariableScope Scope => VariableScope.Server;
 
         /// <inheritdoc />
         public async Task DeleteAsync( CancellationToken cancellationToken = default )
@@ -42,6 +42,18 @@ namespace EssSharp
             await GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(_variable?.Name, 0, cancellationToken);
         }
 
+        /// <inheritdoc />
+        public string Value => _variable.Value;
+
         #endregion
+        
+        /// <summary>
+        /// Returns a textual description of this variable.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"EssVariable {{ Name = {Name}, Value = {Value} }}";
+        }
     }
 }

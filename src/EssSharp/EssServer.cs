@@ -105,9 +105,11 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ServerVariablesApi>();
-                var variables = (await api.VariablesListServerVariablesAsync(true.ToString().ToLowerInvariant(), 0, cancellationToken))?.Items?
+                // false here means we'll get server scoped variables only. Setting true would mean we get everything,
+                // including app and cube variables (qualified with app and cube names). TODO: enhance API to allow
+                // getting all
+                var variables = (await api.VariablesListServerVariablesAsync(false.ToString().ToLowerInvariant(), 0, cancellationToken))?.Items?
                     .Select(variable => new EssVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
-
                 return variables;
             }
             catch ( Exception )

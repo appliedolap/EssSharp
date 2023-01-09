@@ -14,6 +14,8 @@ namespace EssSharp
     {
         #region Private Data
 
+        private readonly EssServer _server;
+        
         private readonly Application _application;
 
         #endregion
@@ -23,6 +25,7 @@ namespace EssSharp
         /// <summary />
         public EssApplication( EssServer server, Application application ) : base(server?.Configuration, server?.Client)
         {
+            _server = server;
             _application = application;
         }
 
@@ -43,6 +46,8 @@ namespace EssSharp
         /// <inheritdoc />
         public List<IEssCube> GetCubes() => GetCubesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCube>();
 
+        public IEssServer Server => _server;
+
         /// <inheritdoc />
         public async Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default )
         {
@@ -60,15 +65,13 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public async Task<List<IEssVariable>> GetVariablesAsync(CancellationToken cancellationToken = default)
+        public async Task<List<IEssApplicationVariable>> GetVariablesAsync(CancellationToken cancellationToken = default)
         {
             try
             {
                 var api = GetApi<VariablesApi>();
-                //var variables = (await api.VariablesListAppVariablesAsync(application?.Name, 0, cancellationToken))?.Items?
-                //.Select(variable => new EssApplicationVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
-
-                return null;
+                var variableList = await api.VariablesListAppVariablesAsync(_application?.Name, 0, cancellationToken);
+                return variableList.Items.Select(variable => new EssApplicationVariable(this, variable)).Cast<IEssApplicationVariable>().ToList();
             }
             catch (Exception)
             {
@@ -92,5 +95,6 @@ namespace EssSharp
         }
 
         #endregion
+
     }
 }

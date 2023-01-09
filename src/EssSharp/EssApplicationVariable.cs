@@ -1,51 +1,33 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using EssSharp.Api;
 using EssSharp.Model;
 
-namespace EssSharp
+namespace EssSharp;
+
+/// <summary>
+/// Models an application-level variable.
+/// </summary>
+public class EssApplicationVariable : EssVariable, IEssApplicationVariable
 {
-    /// <summary />
-    public class EssApplicationVariable : EssObject, IEssApplicationVariable
+    private readonly EssApplication _application;
+    
+    internal EssApplicationVariable(EssApplication application, Variable variable) : base(application, variable)
     {
-        private readonly EssServer essServer;
-        private readonly Variable  variable;
-        private readonly EssApplication application;
+        _application = application;
+    }
 
-        #region Constructors
+    /// <inheritdoc />
+    public override VariableScope Scope => VariableScope.Application;
 
-        /// <summary />
-        public EssApplicationVariable( EssServer essServer,EssApplication application, Variable variable ) : base(essServer?.Configuration, essServer?.Client)
-        {
-            this.essServer = essServer;
-            this.application = application;
-            this.variable = variable;
-        }
+    /// <summary>
+    /// Gets the application for this variable.
+    /// </summary>
+    public IEssApplication Application => _application;
 
-        #endregion
-
-        #region IEssObject Members
-
-        /// <inheritdoc />
-        public override string Name => variable?.Name;
-
-        /// <inheritdoc />
-        public override EssType Type => EssType.Variable;
-
-        #endregion
-
-        #region IEssVariable Members
-
-        /// <inheritdoc />
-        public ApplicationVariableScope Scope => ApplicationVariableScope.APPLICATION;
-
-        /// <inheritdoc />
-        public async Task DeleteAsync( CancellationToken cancellationToken = default )
-        {
-            await GetApi<VariablesApi>().VariablesDeleteAppVariableAsync(application?.Name, variable?.Name, 0, cancellationToken);
-        }
-
-        #endregion
+    /// <summary>
+    /// Returns a textual description of this variable.
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+        return $"EssApplicationVariable {{ Application = {_application.Name}, Name = {Name}, Value = {Value} }}";
     }
 }

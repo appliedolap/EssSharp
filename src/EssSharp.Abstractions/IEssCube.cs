@@ -17,6 +17,6 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
-        public Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
     }
 }

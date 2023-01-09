@@ -7,6 +7,13 @@ namespace EssSharp
     /// <summary />
     public interface IEssApplication : IEssObject
     {
+        
+        /// <summary>
+        /// Get the server that contains this application.
+        /// </summary>
+        /// <returns>The server that contains this application.</returns>
+        IEssServer Server { get; }
+        
         /// <summary>
         /// Gets the list of cubes for this application available to the currently connected user.
         /// </summary>
@@ -37,6 +44,6 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
-        public Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssApplicationVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
     }
 }
