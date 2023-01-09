@@ -45,11 +45,6 @@ namespace EssSharp
         internal virtual EssSharp.Client.Configuration Configuration { get; set; }
 
         /// <summary>
-        /// The <see cref="EssObject"/> parent of this <see cref="EssObject"/>.
-        /// </summary>
-        internal virtual EssObject Parent { get; set; }
-
-        /// <summary>
         /// Gets the requested API using the <see cref="EssSharp.Client.Configuration"/> and <see cref="EssSharp.Client.ApiClient"/> 
         /// assigned to this <see cref="IEssObject"/> implementation.
         /// </summary>

@@ -2,21 +2,26 @@
 using System.Threading.Tasks;
 using System.Threading;
 
-
 namespace EssSharp
 {
     /// <summary />
     public interface IEssServer : IEssObject
     {
         /// <summary>
-        /// Gets the list of applications for this server available to the currently connected user.
+        /// Gets the list of applications for this server available to the connected user.
         /// </summary>
-        /// <returns> A list of <see cref="IEssApplication"/> objects.</returns>
-        public Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken );
+        /// <param name="cancellationToken" />
+        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
+        public Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default );
+
         /// <summary>
-        /// Gets the List of Variables
+        /// Gets the list of server-scoped variables available to the connected user.
         /// </summary>
-        public Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken );
+        /// <param name="cancellationToken" />
+        /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
+        public Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
+
+
         /// <summary>
         /// Gets the about information of this server
         /// </summary>

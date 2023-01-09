@@ -1,6 +1,6 @@
 ﻿namespace EssSharp
 {
-    internal class Extensions
+    internal static class Extensions
     {
     }
 }

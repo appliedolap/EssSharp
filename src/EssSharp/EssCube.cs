@@ -1,11 +1,11 @@
-﻿using EssSharp.Api;
-using EssSharp.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using EssSharp.Api;
+using EssSharp.Model;
 
 namespace EssSharp
 {
@@ -24,7 +24,6 @@ namespace EssSharp
         /// <summary />
         public EssCube( EssApplication application, Cube cube ) : base(application?.Configuration, application?.Client)
         {
-            this.Parent      = application;
             this.application = application;
             this.cube        = cube;
         }
@@ -41,17 +40,21 @@ namespace EssSharp
 
         #endregion
 
+        #region IEssCube Members
 
         /// <inheritdoc />
-        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken )
+        public IEssApplication Application => application;
+
+        /// <inheritdoc />
+        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<VariablesApi>();
-                var variables = (await api.VariablesListVariablesAsync(Parent?.Parent?.Name, Parent?.Name, 0, cancellationToken))?.Items?
-                    .Select(variable => new EssVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
+                //var variables = (await api.VariablesListVariablesAsync(application?.Name, cube?.Name, 0, cancellationToken))?.Items?
+                    //.Select(variable => new EssCubeVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
 
-                return variables;
+                return null;
             }
             catch ( Exception )
             {
@@ -59,5 +62,6 @@ namespace EssSharp
             }
         }
 
+        #endregion
     }
 }

@@ -84,7 +84,7 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <remarks>The number of returned applications is limited to the value of <see cref="maxApplications"/>.</remarks>
-        public async Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken )
+        public async Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -101,7 +101,7 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken )
+        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try
             {
