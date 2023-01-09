@@ -73,10 +73,14 @@ namespace EssSharp
         /// <inheritdoc />
         public override EssType Type => EssType.Server;
 
-         #endregion
+        #endregion
 
         #region IEssServer Members
 
+        /// <inheritdoc />
+        /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
+        public List<IEssApplication> GetApplications() => GetApplicationsAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
+        
         /// <inheritdoc />
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
         public async Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default )
@@ -84,10 +88,9 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ApplicationsApi>();
-                var applications = (await api.ApplicationsGetApplicationsAsync(null, null, _maxApplications, null, null, null, 0, cancellationToken))?.Items?
-                    .Select(application => new EssApplication(this, application) as IEssApplication)?.ToList() ?? new List<IEssApplication>();
+                var applications = await api.ApplicationsGetApplicationsAsync(null, null, _maxApplications, null, null, null, 0, cancellationToken).ConfigureAwait(false);
 
-                return applications;
+                return applications?.ToEssApplicationList(this) ?? new List<IEssApplication>();
             }
             catch ( Exception )
             {
