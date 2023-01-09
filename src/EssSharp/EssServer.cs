@@ -119,15 +119,13 @@ namespace EssSharp
 
 
         /// <inheritdoc />
-        public async Task <IEssAbout> GetAboutAsync( CancellationToken cancellationToken )
+        public async Task <IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var   api = GetApi<AboutEssbaseApi>();
-                var about =await api.AboutGetAboutAsync(0, cancellationToken);
-                //  return WrapperUtil.wrapFunc(()->api.getAboutEssbaseApi().aboutGetAbout(), About::new);
-                //null check
-                return new EssAbout(this, about) ;
+                var about =await api.AboutGetAboutAsync(0, cancellationToken) ?? new About();
+                return new EssAbout(this, about);
             }
             catch ( Exception )
             {
@@ -136,14 +134,14 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public async Task <IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken )
+        public async Task <IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var   api = GetApi<AboutEssbaseApi>();
-                var aboutinstance =await api.AboutGetInstanceDetailsAsync(0, cancellationToken);
+                var aboutinstance =await api.AboutGetInstanceDetailsAsync(0, cancellationToken) ?? new AboutInstance(); ;
                 return new EssAboutInstance(this, aboutinstance);
-                //return WrapperUtil.wrapFunc(()->api.getAboutEssbaseApi().getInstanceDetails(), AboutInstance::new);
+
             }
             catch ( Exception )
             {

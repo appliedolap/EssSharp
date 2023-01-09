@@ -3,15 +3,15 @@
     public interface IEssAboutInstance
     {
         /// <summary>
-        /// Gets or Sets ProvisioningSupported
+        /// Returns whether ProvisioningSupported
         /// </summary>
         public bool ProvisioningSupported { get; }
         /// <summary>
-        /// Gets or Sets ResetPasswordSupported
+        /// Returns whether ResetPasswordSupported
         /// </summary>
         public bool ResetPasswordSupported { get; }
         /// <summary>
-        /// Gets or Sets EasInstalled
+        /// Returns whether EasInstalled
         /// </summary>
         public bool EasInstalled { get; }
 

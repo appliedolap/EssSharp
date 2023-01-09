@@ -26,12 +26,12 @@ namespace EssSharp
         /// Gets the about information of this server
         /// </summary>
 
-        public Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken );
+        public Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default );
         /// <summary>
         /// Gets the about information of this server
         /// </summary>
 
-        public Task<IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken );
+        public Task<IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken = default );
 
     }
 }

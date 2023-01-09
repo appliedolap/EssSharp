@@ -39,13 +39,16 @@ namespace EssSharp
         public override EssType Type => EssType.About;
 
         #endregion
-        #region IEsssAboutMembers
+
+        #region IEssAboutMembers
+
         /// <inheritdoc />
         public string Description => about?.Description;
         /// <inheritdoc />
         public string Version => about?._Version;
         /// <inheritdoc />
         public string Build => about?.Build;
+
         #endregion
 
 

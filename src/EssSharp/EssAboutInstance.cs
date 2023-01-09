@@ -32,21 +32,24 @@ namespace EssSharp
 
         #region IEssObject Members
 
-        ///// <inheritdoc />
-        //public override string Name => aboutinstance?.Name;
+        ////// <summary >
+        ///
+        ////// <summary />
+        public override string Name => string.Empty;
 
         /// <inheritdoc />
-        public override EssType Type => EssType.About;
+        public override EssType Type => EssType.AboutInstance;
 
         #endregion
 
         #region IESSAboutInstance Mmebers
         /// <inheritdoc />
-        public bool ProvisioningSupported => (bool)aboutinstance?.ProvisioningSupported;
+
+        public bool ProvisioningSupported => aboutinstance?.ProvisioningSupported ?? false;
         /// <inheritdoc />
-        public bool ResetPasswordSupported => (bool)aboutinstance?.ResetPasswordSupported;
+        public bool ResetPasswordSupported => aboutinstance?.ResetPasswordSupported ?? false;
         /// <inheritdoc />
-        public bool EasInstalled => (bool)aboutinstance?.EasInstalled;
+        public bool EasInstalled => aboutinstance?.EasInstalled ?? false;
         #endregion
 
 
