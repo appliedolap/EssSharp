@@ -39,7 +39,7 @@ namespace EssSharp
         /// <inheritdoc />
         public async Task DeleteAsync( CancellationToken cancellationToken = default )
         {
-            await GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(variable?.Name, 0, cancellationToken);
+            await GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(_variable?.Name, 0, cancellationToken);
         }
 
         #endregion
