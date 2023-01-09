@@ -4,7 +4,7 @@ using System.Threading;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssVariable : IEssObject
+    public interface IEssApplicationVariable : IEssObject
     {
         /// <summary>
         /// Deletes the current variable.
@@ -15,15 +15,15 @@ namespace EssSharp
         /// <summary>
         /// Returns the scope of the current variable.
         /// </summary>
-        public VariableScope Scope { get; }
+        public ApplicationVariableScope Scope { get; }
     }
 
     /// <summary>
-    /// The <see cref="IEssVariable" /> scope.
+    /// The <see cref="IEssApplicationVariable" /> scope.
     /// </summary>
-    public enum VariableScope
+    public enum ApplicationVariableScope
     {
         /// <summary />
-        SERVER
+        APPLICATION,
     }
 }

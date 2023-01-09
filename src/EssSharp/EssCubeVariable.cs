@@ -7,18 +7,20 @@ using EssSharp.Model;
 namespace EssSharp
 {
     /// <summary />
-    public class EssVariable : EssObject, IEssVariable
+    public class EssCubeVariable : EssObject, IEssCubeVariable
     {
-        private readonly EssServer essServer;
         private readonly Variable  variable;
+        private readonly EssApplication application;
+        private readonly EssCube           cube;
 
         #region Constructors
 
         /// <summary />
-        public EssVariable( EssServer essServer, Variable variable ) : base(essServer?.Configuration, essServer?.Client)
+        public EssCubeVariable( EssApplication application,EssCube cube, Variable variable ) : base(application?.Configuration, application?.Client)
         {
-            this.essServer = essServer;
             this.variable  = variable;
+            this.application = application;
+            this.cube = cube;
         }
 
         #endregion
@@ -36,12 +38,12 @@ namespace EssSharp
         #region IEssVariable Members
 
         /// <inheritdoc />
-        public VariableScope Scope => VariableScope.SERVER;
+        public CubeVariableScope Scope => CubeVariableScope.CUBE;
 
         /// <inheritdoc />
         public async Task DeleteAsync( CancellationToken cancellationToken = default )
         {
-            await GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(variable?.Name, 0, cancellationToken);
+            await GetApi<VariablesApi>().VariablesDeleteVariableAsync(application?.Name, cube?.Name, variable?.Name, 0, cancellationToken);
         }
 
         #endregion
