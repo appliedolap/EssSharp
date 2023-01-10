@@ -9,7 +9,7 @@ using EssSharp.Model;
 namespace EssSharp
 {
     /// <summary />
-    public class EssUrl : IEssUrl
+    public class EssUrl : EssObject ,IEssUrl
     {
         #region Private Data
 
