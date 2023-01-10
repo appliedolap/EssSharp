@@ -55,6 +55,7 @@ namespace EssSharp
             return (new T
             {
                 AsynchronousClient = client ??= new ApiClient(configuration.BasePath),
+                Client             = client,
                 Configuration      = configuration,
                 ExceptionFactory   = Configuration.DefaultExceptionFactory
             }, client);
