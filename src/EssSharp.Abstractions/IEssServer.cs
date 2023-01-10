@@ -44,6 +44,11 @@ namespace EssSharp
         /// </summary>
 
         public Task<IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken = default );
+        /// <summary>
+        /// Gets the Urls from API
+        /// </summary>
+        public Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default );
+        
 
     }
 }
