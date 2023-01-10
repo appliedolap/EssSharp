@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using EssSharp.Api;
+using EssSharp.Client;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -18,6 +19,7 @@ namespace EssSharp
         private const int    _maxApplications    = 100;
 
         private readonly string _server;
+        private EssApplication application;
 
         #endregion
 
@@ -149,6 +151,25 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        public async Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<URLsApi>();
+                var urls = (await api.URLsGetAsync(0, cancellationToken))?.Items?
+                    .Select(url => new EssUrl(application, url) as IEssUrl)?.ToList() ?? new List<IEssUrl>();
+
+                return urls;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+
+       
         #endregion
     }
 }
