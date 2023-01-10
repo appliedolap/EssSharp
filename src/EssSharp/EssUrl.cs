@@ -32,7 +32,7 @@ namespace EssSharp
         public string Url => _url?.Url;
 
         /// <inheritdoc />
-        public override string Name => string.Empty;
+        public override string Name => _url.Application;
         #endregion
     }
 }
