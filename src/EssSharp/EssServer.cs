@@ -17,9 +17,7 @@ namespace EssSharp
 
         private const string _defaultRestApiPath = "/rest/v1";
         private const int    _maxApplications    = 100;
-
         private readonly string _server;
-        private EssApplication application;
 
         #endregion
 
@@ -158,7 +156,7 @@ namespace EssSharp
             {
                 var api = GetApi<URLsApi>();
                 var urls = (await api.URLsGetAsync(0, cancellationToken))?.Items?
-                    .Select(url => new EssUrl(application, url) as IEssUrl)?.ToList() ?? new List<IEssUrl>();
+                    .Select(url => new EssUrl(url) as IEssUrl)?.ToList() ?? new List<IEssUrl>();
 
                 return urls;
             }
@@ -167,9 +165,9 @@ namespace EssSharp
                 throw;
             }
         }
+        
+ 
 
-
-       
         #endregion
     }
 }

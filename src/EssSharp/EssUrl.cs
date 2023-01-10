@@ -9,42 +9,21 @@ using EssSharp.Model;
 namespace EssSharp
 {
     /// <summary />
-    public class EssUrl : EssObject
+    public class EssUrl : IEssUrl
     {
         #region Private Data
 
-        private readonly EssApplication _application;
-        private readonly EssbaseURL           _url;
+        private readonly EssbaseURL  _url;
 
         #endregion
 
         #region Constructors
 
         /// <summary />
-        public EssUrl( EssApplication application, EssbaseURL url ) : base(application?.Configuration, application?.Client)
+        public EssUrl( EssbaseURL url )
         {
-            _application = application;
-            _url        = url;
+            _url = url;
         }
-
-        #endregion
-
-        #region IEssObject Members
-
-        /// <inheritdoc />
-        public override string Name => string.Empty;
-
-        /// <inheritdoc />
-        public override EssType Type => EssType.Url;
-
-        #endregion
-
-        #region IEssCube Members
-
-        /// <inheritdoc />
-        public IEssApplication Application => _application;
-
-
 
         #endregion
         #region IEssUrl Members
