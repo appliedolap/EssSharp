@@ -85,6 +85,9 @@ namespace EssSharp
         public List<IEssApplication> GetApplications() => GetApplicationsAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
 
         /// <inheritdoc />
+        public List<IEssSession> GetSessions() => GetSessionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssSession>();
+
+        /// <inheritdoc />
         public IEssApplication GetApplication(string applicationName)
         {
             try
@@ -197,9 +200,8 @@ namespace EssSharp
             try
             {
                 var api = GetApi<SessionsApi>();
-                var sessions = (await api.SessionsGetAllActiveSessionsAsync(null,null,null, 0, cancellationToken))?
+                var sessions = (await api.SessionsGetAllActiveSessionsAsync(null, null, null, 0, cancellationToken).ConfigureAwait(false))?
                     .Select(sessionAttributes => new EssSession(sessionAttributes) as IEssSession)?.ToList() ?? new List<IEssSession>();
-
                 return sessions;
             }
             catch ( Exception )
@@ -207,7 +209,6 @@ namespace EssSharp
                 throw;
             }
         }
-
         #endregion
     }
 }

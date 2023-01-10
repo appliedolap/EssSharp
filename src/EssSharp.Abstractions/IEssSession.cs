@@ -32,8 +32,5 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task KillAsync( bool logoff, CancellationToken cancellationToken = default );
-
     }
-
-
 }

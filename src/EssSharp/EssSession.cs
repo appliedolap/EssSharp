@@ -10,38 +10,37 @@ using EssSharp.Model;
 namespace EssSharp
 {
     /// <summary />
-    public class EssSession : EssObject,IEssSession
+    public class EssSession : EssObject, IEssSession
     {
         #region Private Data
-        private readonly SessionAttributes  _sessionattributes;
+        private readonly SessionAttributes  _sessionAttributes;
         #endregion
 
         #region Constructors
         /// <summary />
-        public EssSession(SessionAttributes sessionattributes )
+        public EssSession(SessionAttributes sessionAttributes )
         {
-            _sessionattributes = sessionattributes;
+            _sessionAttributes = sessionAttributes;
         }
         #endregion
 
         #region IEssSession Members
 
         /// <inheritdoc />
-        public string UserId =>_sessionattributes.UserId;
+        public string UserId => _sessionAttributes.UserId;
 
         /// <inheritdoc />
-        public long SessionId => long.Parse(_sessionattributes.SessionId);
+        public long SessionId => long.Parse(_sessionAttributes.SessionId);
         /// <inheritdoc />
-        public string LoginTimeInSeconds => _sessionattributes.LoginTimeInSeconds;
+        public string LoginTimeInSeconds => _sessionAttributes.LoginTimeInSeconds;
         /// <inheritdoc />
-        public string ConnectionSource => _sessionattributes.ConnectionSource;
+        public string ConnectionSource => _sessionAttributes.ConnectionSource;
 
         /// <inheritdoc />
         public async Task KillAsync( bool logoff, CancellationToken cancellationToken = default )
         {
             try
             {
-               // logger.info("Killing session {}, logging off: {}", SessionId, logoff);
                 var api = GetApi<SessionsApi>();
                 await api.SessionsDeleteSessionWithIdAsync(SessionId, logoff, 0, cancellationToken);
             }
@@ -50,7 +49,6 @@ namespace EssSharp
                 throw;
             }
         }
-
         #endregion
     }
 }

@@ -48,12 +48,16 @@ namespace EssSharp
         /// Gets the Urls from API
         /// </summary>
         public Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default );
+        
+        /// <summary>
+        /// Gets the list of applications for this server available to the connected user.
+        /// </summary>
+        /// <returns>A list of <see cref="IEssSession"/> objects.</returns>
+        public List<IEssSession> GetSessions();
 
         /// <summary>
         /// Gets the Sessions
         /// </summary>
         public Task<List<IEssSession>> GetSessionsAsync( CancellationToken cancellationToken = default );
-
-
     }
 }
