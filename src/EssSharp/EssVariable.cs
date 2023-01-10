@@ -6,7 +6,9 @@ using EssSharp.Model;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// Represents a variable that is specific to a particular server.
+    /// </summary>
     public class EssVariable : EssObject, IEssVariable
     {
         private readonly Variable _variable;
@@ -14,7 +16,7 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssVariable( EssObject parent, Variable variable ) : base(parent.Configuration, parent.Client)
+        internal EssVariable( EssServer server, Variable variable ) : base(server?.Configuration, server?.Client)
         {
             _variable  = variable;
         }
@@ -37,20 +39,20 @@ namespace EssSharp
         public virtual VariableScope Scope => VariableScope.Server;
 
         /// <inheritdoc />
-        public async Task DeleteAsync( CancellationToken cancellationToken = default )
-        {
-            await GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(_variable?.Name, 0, cancellationToken);
-        }
+        public virtual string Value => _variable.Value;
 
         /// <inheritdoc />
-        public string Value => _variable.Value;
+        public virtual void Delete() => DeleteAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public virtual Task DeleteAsync( CancellationToken cancellationToken = default ) =>
+            GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(_variable?.Name, 0, cancellationToken);
 
         #endregion
-        
+
         /// <summary>
         /// Returns a textual description of this variable.
         /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             return $"EssVariable {{ Name = {Name}, Value = {Value} }}";

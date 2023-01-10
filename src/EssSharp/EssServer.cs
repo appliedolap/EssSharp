@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -60,7 +61,8 @@ namespace EssSharp
                 Username  = username,
                 Password  = password,
                 Timeout   = TimeSpan.FromMilliseconds(int.MaxValue).Milliseconds,
-                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}"
+                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}",
+                //Proxy = new WebProxy("localhost", 8070)
             };
         }
 
@@ -81,6 +83,29 @@ namespace EssSharp
         /// <inheritdoc />
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
         public List<IEssApplication> GetApplications() => GetApplicationsAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
+
+        /// <inheritdoc />
+        public IEssApplication GetApplication(string applicationName)
+        {
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+                var application = api.ApplicationsGetApplication(applicationName);
+                if (application != null)
+                {
+                    return new EssApplication(this, application);
+                }
+                else
+                {
+                    // TODO: replace with custom exception or something more appropriate
+                    throw new ArgumentException($"No such app {applicationName}");
+                }
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
         
         /// <inheritdoc />
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
