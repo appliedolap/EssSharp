@@ -190,8 +190,23 @@ namespace EssSharp
                 throw;
             }
         }
-        
- 
+
+        /// <inheritdoc />
+        public async Task<List<IEssSession>> GetSessionsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<SessionsApi>();
+                var sessions = (await api.SessionsGetAllActiveSessionsAsync(null,null,null, 0, cancellationToken))?
+                    .Select(sessionAttributes => new EssSession(sessionAttributes) as IEssSession)?.ToList() ?? new List<IEssSession>();
+
+                return sessions;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
 
         #endregion
     }
