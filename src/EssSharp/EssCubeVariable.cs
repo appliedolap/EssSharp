@@ -20,9 +20,7 @@ namespace EssSharp
 
         #region IEssCubeVariable members
 
-        /// <summary>
-        /// Gets the cube for this variable.
-        /// </summary>
+        /// <inheritdoc />
         public IEssCube Cube => _cube;
 
         /// <inheritdoc />
