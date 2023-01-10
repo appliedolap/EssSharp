@@ -20,9 +20,8 @@ namespace EssSharp
         }
 
         #endregion
-        
-        #region IEssObject Members
 
+        #region IEssObject Members
         /// <inheritdoc />
         public override EssType Type => EssType.Url;
         #endregion
@@ -32,8 +31,8 @@ namespace EssSharp
         /// <inheritdoc />
         public string Url => _url?.Url;
 
+        /// <inheritdoc />
+        public override string Name => string.Empty;
         #endregion
-        
     }
-    
 }

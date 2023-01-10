@@ -12,6 +12,9 @@ namespace EssSharp
         /// </summary>
         public string Url { get; }
 
+        /// <summary>
+        /// Gets the Name as a string
+        /// </summary>
+        public string Name { get; }
     }
-
 }
