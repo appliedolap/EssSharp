@@ -52,7 +52,7 @@ namespace EssSharp
             {
                 var api = GetApi<VariablesApi>();
                 return (await api.VariablesListVariablesAsync(_application?.Name, _cube?.Name, 0, cancellationToken))?.Items?
-                    .Select(variable => new EssCubeVariable(_application, this, variable) as IEssCubeVariable)?.ToList() ?? new List<IEssCubeVariable>();
+                    .Select(variable => new EssCubeVariable(this, variable) as IEssCubeVariable)?.ToList() ?? new List<IEssCubeVariable>();
             }
             catch ( Exception )
             {
