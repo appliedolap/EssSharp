@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-using EssSharp.Api;
-using EssSharp.Model;
+﻿using EssSharp.Model;
 
 namespace EssSharp
 {
     /// <summary />
-    public class EssUrl : EssObject ,IEssUrl
+    public class EssUrl : EssObject, IEssUrl
     {
         #region Private Data
 
@@ -26,11 +20,20 @@ namespace EssSharp
         }
 
         #endregion
+        
+        #region IEssObject Members
+
+        /// <inheritdoc />
+        public override EssType Type => EssType.Url;
+        #endregion
+        
         #region IEssUrl Members
 
         /// <inheritdoc />
         public string Url => _url?.Url;
 
         #endregion
+        
     }
+    
 }

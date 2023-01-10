@@ -8,11 +8,10 @@ namespace EssSharp
     public interface IEssUrl
     {
         /// <summary>
-        /// Gets or Sets Url
+        /// Gets the URL as a string
         /// </summary>
         public string Url { get; }
 
     }
-
 
 }
