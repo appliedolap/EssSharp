@@ -60,7 +60,7 @@ namespace EssSharp
                 BasePath  = basePath,
                 Username  = username,
                 Password  = password,
-                Timeout   = TimeSpan.FromMilliseconds(int.MaxValue).Milliseconds,
+                Timeout   = int.MaxValue,
                 UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}",
                 //Proxy = new WebProxy("localhost", 8070)
             };
