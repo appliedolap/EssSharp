@@ -1,4 +1,6 @@
-﻿namespace EssSharp.Client
+﻿using System.Reflection;
+
+namespace EssSharp.Client
 {
     public partial class App : Application
     {
@@ -7,6 +9,17 @@
             InitializeComponent();
 
             MainPage = page;
+        }
+
+        protected override Window CreateWindow( IActivationState activationState )
+        {
+            if ( base.CreateWindow(activationState) is { } window )
+            {
+                window.Title = Assembly.GetExecutingAssembly().GetName().Name;
+                return window;
+            }
+
+            return null; ;
         }
     }
 }
