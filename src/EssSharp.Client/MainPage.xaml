@@ -1,42 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:vm="clr-namespace:EssSharp.Client.ViewModels"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EssSharp.Client.MainPage">
-
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                x:Name="Label"
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="Button"
-                Text="Click me"
-                SemanticProperties.Hint="Does something fun"
-                Clicked="OnButtonClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
+    <ContentPage.BindingContext>
+        <vm:TreeViewEssServerViewModel />
+    </ContentPage.BindingContext>
+    <ScrollView Margin="5,15,0,0">
+        <ScrollView>
+            <material:TreeView ItemsSource="{Binding Nodes}" Spacing="5" LoadChildrenCommand="{Binding LoadChildrenCommand}" IsExpandedPropertyName="IsExtended" IsLeafPropertyName="IsLeaf" ArrowColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+                <material:TreeView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Spacing="2" VerticalOptions="Center">
+                            <Image VerticalOptions="Center" Scale=".66">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Server}">
+                                        <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Computer}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Application}">
+                                        <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Dns}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Cube}">
+                                        <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.View_in_ar}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" VerticalOptions="Center" />
+                            <Label Text="{Binding Children.Count, StringFormat='({0})'}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </material:TreeView.ItemTemplate>
+            </material:TreeView>
+        </ScrollView>
     </ScrollView>
 
 </ContentPage>

@@ -4,10 +4,17 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:EssSharp.Client"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="{OnIdiom Desktop=Locked, Default=Flyout}">
 
+    <Shell.FlyoutHeader>
+        <!-- throws an absolute fit if you attempt to use a StaticResource here... -->
+        <VerticalStackLayout StyleClass="PrimaryContainer" Padding="20" BackgroundColor="#DFD8F7">
+            <Label Text="EssSharp.Client" FontSize="Large" HorizontalTextAlignment="Center" Margin="10" />
+        </VerticalStackLayout>
+    </Shell.FlyoutHeader>
+    
     <ShellContent
-        Title="Home"
+        Title="Navigator"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
