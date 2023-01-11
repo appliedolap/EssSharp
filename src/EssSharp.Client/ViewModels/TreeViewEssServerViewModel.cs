@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-
 using Microsoft.Extensions.Configuration;
 using UraniumUI;
 
@@ -24,7 +23,7 @@ namespace EssSharp.Client.ViewModels
 
             InitializeNodes();
 
-            LoadChildrenCommand = new Command<IEssNode>(( node ) => node.GetChildren());
+            LoadChildrenCommand = new Command<IEssNode>(async (node) => await node.GetChildrenAsync(new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token));
         }
 
         void InitializeNodes()
@@ -52,7 +51,7 @@ namespace EssSharp.Client.ViewModels
 
             public NodeType Type { get; }
 
-            public ObservableCollection<IEssNode> GetChildren();
+            public Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default );
         }
 
         public enum NodeType
@@ -78,12 +77,12 @@ namespace EssSharp.Client.ViewModels
 
             public ObservableCollection<IEssNode> Children { get => _children; set => SetProperty(ref _children, value); }
 
-            public virtual ObservableCollection<IEssNode> GetChildren()
+            public virtual Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
             {
                 var children = new ObservableCollection<IEssNode>();
 
                 IsLeaf = children.Count == 0;
-                return Children = children;
+                return Task.FromResult(Children = children);
             }
         }
 
@@ -95,13 +94,20 @@ namespace EssSharp.Client.ViewModels
 
             public override NodeType Type => NodeType.Server;
 
-            public override ObservableCollection<IEssNode> GetChildren()
+            public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
             {
                 var children = new ObservableCollection<IEssNode>();
 
-                foreach ( var application in Server.GetApplications() )
-                    if ( application is { } )
-                        children.Add(new EssApplicationNode() { Application = application });
+                try
+                {
+                    foreach ( var application in await Server.GetApplicationsAsync(cancellationToken) )
+                        if ( application is { } )
+                            children.Add(new EssApplicationNode() { Application = application });
+                }
+                catch
+                {
+                    // swallow
+                }
 
                 IsLeaf = children.Count == 0;
                 return Children = children;
@@ -116,13 +122,20 @@ namespace EssSharp.Client.ViewModels
 
             public override NodeType Type => NodeType.Application;
 
-            public override ObservableCollection<IEssNode> GetChildren()
+            public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
             {
                 var children = new ObservableCollection<IEssNode>();
 
-                foreach ( var cube in Application.GetCubes() )
-                    if ( cube is { } )
-                        children.Add(new EssCubeNode() { Cube = cube, IsLeaf = true });
+                try
+                {
+                    foreach ( var cube in await Application.GetCubesAsync(cancellationToken) )
+                        if ( cube is { } )
+                            children.Add(new EssCubeNode() { Cube = cube, IsLeaf = true });
+                }
+                catch
+                {
+                    // swallow
+                }
 
                 IsLeaf = children.Count == 0;
                 return Children = children;
