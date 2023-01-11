@@ -77,6 +77,18 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         public Task StopAsync( CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Copy the application.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <param name="copyName" />
+        public Task CopyAsync( String copyName, CancellationToken cancellationToken = default );
+        
+        /// <summary>
+        /// Delete the application.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task DeleteAsync( CancellationToken cancellationToken = default );
         #endregion
     }
 }

@@ -144,7 +144,34 @@ namespace EssSharp
             await api.ApplicationsPerformOperationAsync(_application?.Name, "Stop", 0, cancellationToken).ConfigureAwait(false);
         }
 
-        #endregion
+        /// <inheritdoc />
+        public async Task CopyAsync( String copyName, CancellationToken cancellationToken = default )
+        {
+            CopyRenameBean copy = new (_application?.Name, copyName);
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+                await api.ApplicationsCopyApplicationAsync(copy, 0, cancellationToken).ConfigureAwait(false); ;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
 
+        /// <inheritdoc />
+        public async Task DeleteAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+                await api.ApplicationsDeleteApplicationAsync(_application?.Name, 0, cancellationToken).ConfigureAwait(false); ;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }
