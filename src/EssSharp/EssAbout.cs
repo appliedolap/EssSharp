@@ -1,4 +1,6 @@
-﻿using EssSharp.Model;
+﻿using System;
+
+using EssSharp.Model;
 
 namespace EssSharp
 {
@@ -14,9 +16,10 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        public EssAbout(About about )
+        internal EssAbout( About about )
         {
-            _about  = about;
+            _about  = about ??
+                throw new ArgumentNullException(nameof(about), $"An API model {nameof(about)} is required to create an {nameof(EssAbout)}.");
         }
 
         #endregion
@@ -24,11 +27,14 @@ namespace EssSharp
         #region IEssAboutMembers
 
         /// <inheritdoc />
+        public string Build       => _about?.Build;
+
+        /// <inheritdoc />
         public string Description => _about?.Description;
+
         /// <inheritdoc />
-        public string Version => _about?._Version;
-        /// <inheritdoc />
-        public string Build => _about?.Build;
+        public string Version     => _about?._Version;
+
         #endregion
 
     }

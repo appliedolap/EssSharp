@@ -1,4 +1,6 @@
-﻿using EssSharp.Model;
+﻿using System;
+
+using EssSharp.Model;
 
 namespace EssSharp
 {
@@ -16,7 +18,8 @@ namespace EssSharp
         /// <summary />
         public EssAboutInstance( AboutInstance aboutInstance )
         {
-            _aboutInstance = aboutInstance;
+            _aboutInstance = aboutInstance ??
+                throw new ArgumentNullException(nameof(aboutInstance), $"An API model {nameof(aboutInstance)} is required to create an {nameof(EssAboutInstance)}.");
         }
 
         #endregion
@@ -24,13 +27,14 @@ namespace EssSharp
         #region IESSAboutInstance Members
 
         /// <inheritdoc />
-        public bool ProvisioningSupported => _aboutInstance?.ProvisioningSupported ?? false;
-        /// <inheritdoc />
-        public bool ResetPasswordSupported => _aboutInstance?.ResetPasswordSupported ?? false;
-        /// <inheritdoc />
         public bool EasInstalled => _aboutInstance?.EasInstalled ?? false;
 
-        #endregion
+        /// <inheritdoc />
+        public bool ProvisioningSupported  => _aboutInstance?.ProvisioningSupported ?? false;
 
+        /// <inheritdoc />
+        public bool ResetPasswordSupported => _aboutInstance?.ResetPasswordSupported ?? false;
+
+        #endregion
     }
 }

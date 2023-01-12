@@ -1,25 +1,21 @@
-﻿using System.Threading.Tasks;
-using System.Threading;
-using System;
-
-namespace EssSharp
+﻿namespace EssSharp
 {
     /// <summary />
     public interface IEssAbout
     {
         /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        public string Description { get; }
-        /// <summary>
-        /// Gets or Sets _Version
-        /// </summary>
-        public string Version { get; }
-        /// <summary>
-        ///  Gets or Sets Build
+        /// Returns the server build revision.
         /// </summary>
         public string Build { get; }
 
+        /// <summary>
+        /// Returns the server description.
+        /// </summary>
+        public string Description { get; }
+
+        /// <summary>
+        /// Returns the server version.
+        /// </summary>
+        public string Version { get; }
     }
-    
 }
