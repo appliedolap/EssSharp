@@ -326,7 +326,7 @@ namespace EssSharp.Client.ViewModels
         {
             public IEssVariable Variable { get; set; }
 
-            public override string Name => Variable?.ToString();
+            public override string Name => $"{Variable?.Name} = '{Variable?.Value}'";
 
             public override NodeType Type => NodeType.Variable;
         }
