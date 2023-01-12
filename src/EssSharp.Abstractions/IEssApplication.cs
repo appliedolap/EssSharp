@@ -66,29 +66,47 @@ namespace EssSharp
         public Task<List<IEssApplicationVariable>> GetVariablesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Asynchronously starts the application.
+        /// Copy The Application.
         /// </summary>
-        /// <param name="cancellationToken" />
-        public Task StartAsync( CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Asynchronously stops the application.
-        /// </summary>
-        /// <param name="cancellationToken" />
-        public Task StopAsync( CancellationToken cancellationToken = default );
-
+        public void Copy( String copyName );
         /// <summary>
         /// Copy the application.
         /// </summary>
         /// <param name="cancellationToken" />
         /// <param name="copyName" />
         public Task CopyAsync( String copyName, CancellationToken cancellationToken = default );
-        
+
+        /// <summary>
+        /// Deletes The Application.
+        /// </summary>
+        public void Delete();
         /// <summary>
         /// Delete the application.
         /// </summary>
         /// <param name="cancellationToken" />
         public Task DeleteAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Start The Application.
+        /// </summary>
+        public void Start();
+        /// <summary>
+        /// Asynchronously starts the application.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task StartAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Stop The Application.
+        /// </summary>
+        public void Stop();
+
+        /// <summary>
+        /// Asynchronously stops the application.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task StopAsync( CancellationToken cancellationToken = default );
         #endregion
     }
+    
 }

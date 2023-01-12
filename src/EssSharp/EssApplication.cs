@@ -123,6 +123,41 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        public void Copy(String copyName ) => CopyAsync(copyName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task CopyAsync( String copyName, CancellationToken cancellationToken = default )
+        {
+            CopyRenameBean copy = new (_application?.Name, copyName);
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+                await api.ApplicationsCopyApplicationAsync(copy, 0, cancellationToken).ConfigureAwait(false); ;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public void Delete() => DeleteAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task DeleteAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+                await api.ApplicationsDeleteApplicationAsync(_application?.Name, 0, cancellationToken).ConfigureAwait(false); ;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
         public void Start() => StartAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -142,35 +177,6 @@ namespace EssSharp
             var api = GetApi<ApplicationsApi>();
             // in practice, it seems that 'stop' also works or the input parameter is simply not case-sensitive
             await api.ApplicationsPerformOperationAsync(_application?.Name, "Stop", 0, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public async Task CopyAsync( String copyName, CancellationToken cancellationToken = default )
-        {
-            CopyRenameBean copy = new (_application?.Name, copyName);
-            try
-            {
-                var api = GetApi<ApplicationsApi>();
-                await api.ApplicationsCopyApplicationAsync(copy, 0, cancellationToken).ConfigureAwait(false); ;
-            }
-            catch ( Exception )
-            {
-                throw;
-            }
-        }
-
-        /// <inheritdoc />
-        public async Task DeleteAsync( CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var api = GetApi<ApplicationsApi>();
-                await api.ApplicationsDeleteApplicationAsync(_application?.Name, 0, cancellationToken).ConfigureAwait(false); ;
-            }
-            catch ( Exception )
-            {
-                throw;
-            }
         }
         #endregion
     }
