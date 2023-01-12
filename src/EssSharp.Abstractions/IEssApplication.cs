@@ -121,9 +121,19 @@ namespace EssSharp
         /// </summary>
         public ApplicationStatus Status();
 
+        /// <summary>
+        /// Created Date
+        /// </summary>
+        public DateTime CreatedDate { get; }
+
+        /// <summary>
+        /// Returns the Status
+        /// </summary>
+        public DateTime ModifiedDate { get; }
+
         #endregion
     }
-
+    
     /// <summary>
     /// 
     /// </summary>

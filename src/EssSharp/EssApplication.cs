@@ -189,6 +189,12 @@ namespace EssSharp
             else
             return ApplicationStatus.Unknown;
          }
+        /// <inheritdoc />
+        public DateTime CreatedDate => DateTimeOffset.FromUnixTimeMilliseconds(_application.CreationTime).DateTime;
+
+        /// <inheritdoc />
+        public DateTime ModifiedDate => DateTimeOffset.FromUnixTimeMilliseconds(_application.ModifiedTime).DateTime;
+
         #endregion
     }
 }
