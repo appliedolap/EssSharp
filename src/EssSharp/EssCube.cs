@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,6 +47,9 @@ namespace EssSharp
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
+        public List<IEssCubeVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCubeVariable>();
+
+        /// <inheritdoc />
         public async Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -60,6 +64,24 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        public List<IEssDimension> GetDimensions() => GetDimensionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssDimension>();
+
+        /// <inheritdoc />
+        public async Task<List<IEssDimension>> GetDimensionsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<DimensionsApi>();
+                var dimensions = (await api.DimensionsListDimensionsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false))?.Items?
+                    .Select(dimensionBean => new EssDimension(this,dimensionBean) as IEssDimension)?.ToList() ?? new List<IEssDimension>();
+                return dimensions;
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
         #endregion
     }
 }

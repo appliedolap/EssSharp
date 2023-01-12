@@ -106,7 +106,24 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task StopAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns the Status
+        /// </summary>
+        public ApplicationStatus Status();
         #endregion
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum ApplicationStatus
+    {
+        /// <summary />
+        Stopped,
+        /// <summary />
+        Started,
+        /// <summary />
+        Unknown
+    }
 }

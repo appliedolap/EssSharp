@@ -15,7 +15,8 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssServer   _server;
+        private readonly EssServer _server;
+
         private readonly Application _application;
 
         #endregion
@@ -166,7 +167,7 @@ namespace EssSharp
         {
             var api = GetApi<ApplicationsApi>();
             // in practice, it seems that 'start' also works or the input parameter is simply not case-sensitive
-            await api.ApplicationsPerformOperationAsync(_application?.Name, "Start", 0, cancellationToken).ConfigureAwait(false);            
+            await api.ApplicationsPerformOperationAsync(_application?.Name, "Start", 0, cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -179,6 +180,15 @@ namespace EssSharp
             // in practice, it seems that 'stop' also works or the input parameter is simply not case-sensitive
             await api.ApplicationsPerformOperationAsync(_application?.Name, "Stop", 0, cancellationToken).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public virtual ApplicationStatus Status()
+        { 
+            if (Enum.TryParse(_application.Status, true, out ApplicationStatus status) )
+                return status;
+            else
+            return ApplicationStatus.Unknown;
+         }
         #endregion
     }
 }

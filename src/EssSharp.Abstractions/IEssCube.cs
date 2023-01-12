@@ -15,8 +15,25 @@ namespace EssSharp
         /// <summary>
         /// Gets the list of cube-scoped variables available to the connected user.
         /// </summary>
+        public List<IEssCubeVariable> GetVariables();
+
+        /// <summary>
+        /// Gets the list of cube-scoped variables available to the connected user.
+        /// </summary>
         /// <param name="cancellationToken" />
         /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
         public Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
+        
+        /// <summary>
+        /// Gets the list of dimensions.
+        /// </summary>
+        public List<IEssDimension> GetDimensions();
+
+        /// <summary>
+        /// Gets the list of dimensions.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <returns>A list of <see cref="IEssDimension"/> objects.</returns>
+        public Task<List<IEssDimension>> GetDimensionsAsync( CancellationToken cancellationToken = default );
     }
 }
