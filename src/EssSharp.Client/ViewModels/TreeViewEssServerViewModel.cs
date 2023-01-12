@@ -59,7 +59,9 @@ namespace EssSharp.Client.ViewModels
             Unknown,
             Server,
             Application,
-            Cube
+            Cube,
+            Url,
+            Folder
         }
 
         public class EssNode : UraniumBindableObject, IEssNode
@@ -94,6 +96,27 @@ namespace EssSharp.Client.ViewModels
 
             public override NodeType Type => NodeType.Server;
 
+            public override Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
+            {
+                var children = new ObservableCollection<IEssNode>
+                {
+                    new EssServerApplicationsNode() { Server = Server },
+                    new EssServerUrlsNode() { Server = Server }
+                };
+
+                IsLeaf = children.Count == 0;
+                return Task.FromResult(Children = children);
+            }
+        }
+
+        public class EssServerApplicationsNode : EssNode
+        {
+            public IEssServer Server { get; set; }
+
+            public override string Name => "Applications";
+
+            public override NodeType Type => NodeType.Folder;
+
             public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
             {
                 var children = new ObservableCollection<IEssNode>();
@@ -112,6 +135,43 @@ namespace EssSharp.Client.ViewModels
                 IsLeaf = children.Count == 0;
                 return Children = children;
             }
+        }
+
+        public class EssServerUrlsNode : EssNode
+        {
+            public IEssServer Server { get; set; }
+
+            public override string Name => "Urls";
+
+            public override NodeType Type => NodeType.Folder;
+
+            public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
+            {
+                var children = new ObservableCollection<IEssNode>();
+
+                try
+                {
+                    foreach ( var url in await Server.GetURLsAsync(cancellationToken) )
+                        if ( url is { } )
+                            children.Add(new EssUrlNode() { Url = url, IsLeaf = true });
+                }
+                catch
+                {
+                    // swallow
+                }
+
+                IsLeaf = children.Count == 0;
+                return Children = children;
+            }
+        }
+
+        public class EssUrlNode : EssNode
+        {
+            public IEssUrl Url { get; set; }
+
+            public override string Name => $@"{Url?.Name} ({Url?.Path})";
+
+            public override NodeType Type => NodeType.Url;
         }
 
         public class EssApplicationNode : EssNode

@@ -15,8 +15,7 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssServer _server;
-        
+        private readonly EssServer   _server;
         private readonly Application _application;
 
         #endregion
@@ -24,10 +23,12 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        public EssApplication( EssServer server, Application application ) : base(server?.Configuration, server?.Client)
+        internal EssApplication( Application application, EssServer server = null ) : base(server?.Configuration, server?.Client)
         {
+            _application = application ?? 
+                throw new ArgumentNullException(nameof(application), $"An API model {nameof(application)} is required to create an {nameof(EssApplication)}.");
+
             _server = server;
-            _application = application;
         }
 
         #endregion

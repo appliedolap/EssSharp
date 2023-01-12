@@ -93,16 +93,12 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ApplicationsApi>();
-                var application = api.ApplicationsGetApplication(applicationName);
-                if (application != null)
-                {
-                    return new EssApplication(this, application);
-                }
-                else
-                {
-                    // TODO: replace with custom exception or something more appropriate
-                    throw new ArgumentException($"No such app {applicationName}");
-                }
+                if ( api.ApplicationsGetApplication(applicationName) is { } application )
+                    return new EssApplication(application, this);
+
+                // TODO: replace with custom exception or something more appropriate
+                throw new ArgumentException($"No such app {applicationName}");
+                
             }
             catch ( Exception )
             {
@@ -178,23 +174,6 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public async Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var api = GetApi<URLsApi>();
-                var urls = (await api.URLsGetAsync(0, cancellationToken))?.Items?
-                    .Select(url => new EssUrl(url) as IEssUrl)?.ToList() ?? new List<IEssUrl>();
-
-                return urls;
-            }
-            catch ( Exception )
-            {
-                throw;
-            }
-        }
-
-        /// <inheritdoc />
         public async Task<List<IEssSession>> GetSessionsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -209,6 +188,23 @@ namespace EssSharp
                 throw;
             }
         }
+
+        /// <inheritdoc />
+        public async Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<URLsApi>();
+                var urls = await api.URLsGetAsync(0, cancellationToken).ConfigureAwait(false);
+
+                return urls?.ToEssSharpList(this) ?? new List<IEssUrl>();
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
         #endregion
     }
 }

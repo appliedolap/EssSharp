@@ -21,7 +21,7 @@ namespace EssSharp
             return applicationList?
                 .Items?
                 .Where (application => application is not null)
-                .Select(application => new EssApplication(server, application) as IEssApplication)?
+                .Select(application => new EssApplication(application, server) as IEssApplication)?
                 .ToList() ?? new List<IEssApplication>();
         }
 
@@ -41,5 +41,24 @@ namespace EssSharp
                 .Select(cube => new EssCube(application, cube) as IEssCube)?
                 .ToList() ?? new List<IEssCube>();
         }
+
+        /// <summary>
+        /// Returns an <see cref="List{T}"/> of <see cref="IEssUrl"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="urlList" />
+        /// <param name="server" />
+        internal static List<IEssUrl> ToEssSharpList( this EssbaseURLList urlList, EssServer server )
+        {
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), @"The given {nameof(server)} is null.");
+
+            return urlList?
+                .Items?
+                .Where( url => url is not null)
+                .Select(url => new EssUrl(url, server) as IEssUrl)?
+                .ToList() ?? new List<IEssUrl>();
+        }
+
+
     }
 }

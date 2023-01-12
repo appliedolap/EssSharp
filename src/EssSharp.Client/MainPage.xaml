@@ -16,6 +16,9 @@
                         <HorizontalStackLayout Spacing="2" VerticalOptions="Center">
                             <Image VerticalOptions="Center" Scale=".66">
                                 <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Folder}">
+                                        <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Folder}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
+                                    </DataTrigger>
                                     <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Server}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Computer}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>
@@ -24,6 +27,9 @@
                                     </DataTrigger>
                                     <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Cube}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.View_in_ar}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Url}">
+                                        <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Link}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>
                                 </Image.Triggers>
                             </Image>

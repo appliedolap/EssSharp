@@ -1,20 +1,18 @@
-﻿using System.Threading.Tasks;
-using System.Threading;
-using System;
+﻿using System;
 
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssUrl
+    public interface IEssUrl : IEssObject
     {
         /// <summary>
-        /// Gets the URL as a string
+        /// Returns the URL path of the resource as a string.
         /// </summary>
-        public string Url { get; }
+        public string Path { get; }
 
         /// <summary>
-        /// Gets the Name as a string
+        /// Returns the abolute URL of the resource.
         /// </summary>
-        public string Name { get; }
+        public Uri Url { get; }
     }
 }
