@@ -23,10 +23,12 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssCube(EssApplication application, Cube cube ) : base(application.Configuration, application.Client)
+        internal EssCube( Cube cube, EssApplication application = null ) : base(application?.Configuration, application?.Client)
         {
+            _cube = cube ??
+                throw new ArgumentNullException(nameof(cube), $"An API model {nameof(cube)} is required to create an {nameof(EssCube)}.");
+
             _application = application;
-            _cube        = cube;
         }
 
         #endregion
@@ -55,8 +57,8 @@ namespace EssSharp
             try
             {
                 var api = GetApi<VariablesApi>();
-                return (await api.VariablesListVariablesAsync(_application?.Name, _cube?.Name, 0, cancellationToken))?.Items?
-                    .Select(variable => new EssCubeVariable(this, variable) as IEssCubeVariable)?.ToList() ?? new List<IEssCubeVariable>();
+                return (await api.VariablesListVariablesAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false))?.Items?
+                    .Select(variable => new EssCubeVariable(variable, this) as IEssCubeVariable)?.ToList() ?? new List<IEssCubeVariable>();
             }
             catch ( Exception )
             {

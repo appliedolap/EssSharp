@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Maui.Controls;
 using UraniumUI;
 
 namespace EssSharp.Client.ViewModels
@@ -61,6 +62,7 @@ namespace EssSharp.Client.ViewModels
             Application,
             Cube,
             Url,
+            Variable,
             Folder
         }
 
@@ -101,7 +103,8 @@ namespace EssSharp.Client.ViewModels
                 var children = new ObservableCollection<IEssNode>
                 {
                     new EssServerApplicationsNode() { Server = Server },
-                    new EssServerUrlsNode() { Server = Server }
+                    new EssServerUrlsNode()         { Server = Server },
+                    new EssServerVariablesNode()    { Server = Server }
                 };
 
                 IsLeaf = children.Count == 0;
@@ -165,13 +168,32 @@ namespace EssSharp.Client.ViewModels
             }
         }
 
-        public class EssUrlNode : EssNode
+        public class EssServerVariablesNode : EssNode
         {
-            public IEssUrl Url { get; set; }
+            public IEssServer Server { get; set; }
 
-            public override string Name => $@"{Url?.Name} ({Url?.Path})";
+            public override string Name => "Variables";
 
-            public override NodeType Type => NodeType.Url;
+            public override NodeType Type => NodeType.Folder;
+
+            public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
+            {
+                var children = new ObservableCollection<IEssNode>();
+
+                try
+                {
+                    foreach ( var variable in await Server.GetVariablesAsync(cancellationToken) )
+                        if ( variable is { } )
+                            children.Add(new EssVariableNode() { Variable = variable, IsLeaf = true });
+                }
+                catch
+                {
+                    // swallow
+                }
+
+                IsLeaf = children.Count == 0;
+                return Children = children;
+            }
         }
 
         public class EssApplicationNode : EssNode
@@ -182,6 +204,27 @@ namespace EssSharp.Client.ViewModels
 
             public override NodeType Type => NodeType.Application;
 
+            public override Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
+            {
+                var children = new ObservableCollection<IEssNode>
+                {
+                    new EssApplicationCubesNode()     { Application = Application },
+                    new EssApplicationVariablesNode() { Application = Application }
+                };
+
+                IsLeaf = children.Count == 0;
+                return Task.FromResult(Children = children);
+            }
+        }
+
+        public class EssApplicationCubesNode : EssNode
+        {
+            public IEssApplication Application { get; set; }
+
+            public override string Name => "Cubes";
+
+            public override NodeType Type => NodeType.Folder;
+
             public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
             {
                 var children = new ObservableCollection<IEssNode>();
@@ -190,7 +233,31 @@ namespace EssSharp.Client.ViewModels
                 {
                     foreach ( var cube in await Application.GetCubesAsync(cancellationToken) )
                         if ( cube is { } )
-                            children.Add(new EssCubeNode() { Cube = cube, IsLeaf = true });
+                            children.Add(new EssCubeNode() { Cube = cube });
+                }
+                catch
+                {
+                    // swallow
+                }
+
+                IsLeaf = children.Count == 0;
+                return Children = children;
+            }
+        }
+
+        public class EssApplicationVariablesNode : EssServerVariablesNode
+        {
+            public IEssApplication Application { get; set; }
+
+            public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
+            {
+                var children = new ObservableCollection<IEssNode>();
+
+                try
+                {
+                    foreach ( var variable in await Application.GetVariablesAsync(cancellationToken) )
+                        if ( variable is { } )
+                            children.Add(new EssVariableNode() { Variable = variable, IsLeaf = true });
                 }
                 catch
                 {
@@ -209,6 +276,59 @@ namespace EssSharp.Client.ViewModels
             public override string Name => Cube.Name;
 
             public override NodeType Type => NodeType.Cube;
+
+            public override Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
+            {
+                var children = new ObservableCollection<IEssNode>
+                {
+                    new EssCubeVariablesNode() { Cube = Cube }
+                };
+
+                IsLeaf = children.Count == 0;
+                return Task.FromResult(Children = children);
+            }
+        }
+
+        public class EssCubeVariablesNode : EssApplicationVariablesNode
+        {
+            public IEssCube Cube { get; set; }
+
+            public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
+            {
+                var children = new ObservableCollection<IEssNode>();
+
+                try
+                {
+                    foreach ( var variable in await Cube.GetVariablesAsync(cancellationToken) )
+                        if ( variable is { } )
+                            children.Add(new EssVariableNode() { Variable = variable, IsLeaf = true });
+                }
+                catch
+                {
+                    // swallow
+                }
+
+                IsLeaf = children.Count == 0;
+                return Children = children;
+            }
+        }
+
+        public class EssUrlNode : EssNode
+        {
+            public IEssUrl Url { get; set; }
+
+            public override string Name => $@"{Url?.Name} ({Url?.Path})";
+
+            public override NodeType Type => NodeType.Url;
+        }
+
+        public class EssVariableNode : EssNode
+        {
+            public IEssVariable Variable { get; set; }
+
+            public override string Name => Variable?.ToString();
+
+            public override NodeType Type => NodeType.Variable;
         }
     }
 }

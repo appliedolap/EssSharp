@@ -38,7 +38,7 @@ namespace EssSharp
             return cubeList?
                 .Items?
                 .Where (cube => cube is not null)
-                .Select(cube => new EssCube(application, cube) as IEssCube)?
+                .Select(cube => new EssCube(cube, application) as IEssCube)?
                 .ToList() ?? new List<IEssCube>();
         }
 

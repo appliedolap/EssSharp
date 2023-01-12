@@ -116,7 +116,7 @@ namespace EssSharp
             {
                 var api = GetApi<VariablesApi>();
                 var variableList = await api.VariablesListAppVariablesAsync(_application?.Name, 0, cancellationToken).ConfigureAwait(false);
-                return variableList.Items.Select(variable => new EssApplicationVariable(this, variable)).Cast<IEssApplicationVariable>().ToList();
+                return variableList.Items.Select(variable => new EssApplicationVariable(variable, this)).Cast<IEssApplicationVariable>().ToList();
             }
             catch (Exception)
             {

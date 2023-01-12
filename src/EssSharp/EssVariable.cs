@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 using EssSharp.Api;
@@ -16,9 +17,10 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssVariable( EssServer server, Variable variable ) : base(server?.Configuration, server?.Client)
+        internal EssVariable( Variable variable, EssServer server = null ) : base(server?.Configuration, server?.Client)
         {
-            _variable  = variable;
+            _variable = variable ??
+                throw new ArgumentNullException(nameof(variable), $"An API model {nameof(variable)} is required to create an {nameof(EssVariable)}.");
         }
 
         #endregion
@@ -39,10 +41,10 @@ namespace EssSharp
         public virtual VariableScope Scope => VariableScope.Server;
 
         /// <inheritdoc />
-        public virtual string Value => _variable.Value;
+        public virtual string Value => _variable?.Value;
 
         /// <inheritdoc />
-        public virtual void Delete() => DeleteAsync().GetAwaiter().GetResult();
+        public virtual void Delete() => DeleteAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
         public virtual Task DeleteAsync( CancellationToken cancellationToken = default ) =>
@@ -53,9 +55,8 @@ namespace EssSharp
         /// <summary>
         /// Returns a textual description of this variable.
         /// </summary>
-        public override string ToString()
-        {
-            return $"EssVariable {{ Name = {Name}, Value = {Value} }}";
-        }
+        public override string ToString() =>
+            $"{nameof(EssVariable)} {{ {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
+
     }
 }

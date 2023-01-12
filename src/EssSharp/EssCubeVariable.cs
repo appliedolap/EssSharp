@@ -12,8 +12,8 @@ namespace EssSharp
     public class EssCubeVariable : EssApplicationVariable, IEssCubeVariable
     {
         private readonly EssCube _cube;
-  
-        internal EssCubeVariable( EssCube cube, Variable variable ) : base( cube?.Application as EssApplication, variable )
+
+        internal EssCubeVariable( Variable variable, EssCube cube = null ) : base(variable, cube?.Application as EssApplication)
         {
             _cube = cube;
         }
@@ -33,9 +33,7 @@ namespace EssSharp
         #endregion
 
         /// <inheritdoc />
-        public override string ToString()
-        {
-            return $"EssCubeVariable {{ Cube = {_cube?.Name}, Application = {_cube?.Application?.Name}, Name = {Name}, Value = {Value} }}";
-        }
+        public override string ToString() =>
+            $"{nameof(EssCubeVariable)} {{ {nameof(Cube)} = {_cube?.Name}, {nameof(Application)} = {_cube?.Application?.Name}, {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
     }
 }

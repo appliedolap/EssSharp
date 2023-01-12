@@ -11,17 +11,25 @@ namespace EssSharp
     /// </summary>
     public class EssApplicationVariable : EssVariable, IEssApplicationVariable
     {
+        #region Private Data
+
         private readonly EssApplication _application;
 
-        internal EssApplicationVariable( EssApplication application, Variable variable ) : base(application?.Server as EssServer, variable)
+        #endregion
+
+        #region Constructors
+
+        internal EssApplicationVariable( Variable variable, EssApplication application = null ) : base(variable, application?.Server as EssServer)
         {
             _application = application;
         }
 
+        #endregion
+
         #region IEssApplicationVariable Members
 
         /// <inheritdoc />
-        public IEssApplication Application => _application;
+        public IEssApplication Application  => _application;
 
         /// <inheritdoc />
         public override VariableScope Scope => VariableScope.Application;
@@ -33,9 +41,7 @@ namespace EssSharp
         #endregion
 
         /// <inheritdoc />
-        public override string ToString()
-        {
-            return $"EssApplicationVariable {{ Application = {_application?.Name}, Name = {Name}, Value = {Value} }}";
-        }
+        public override string ToString() =>
+            $"{nameof(EssApplicationVariable)} {{ {nameof(Application)} = {_application?.Name}, {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
     }
 }

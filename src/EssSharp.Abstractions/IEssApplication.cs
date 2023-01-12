@@ -59,27 +59,35 @@ namespace EssSharp
         public Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Gets the list of application-scoped variables available to the connected user.
+        /// </summary>
+        /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
+        public List<IEssApplicationVariable> GetVariables();
+
+        /// <summary>
         /// Asynchronously gets the list of application-scoped variables available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
         /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
-        public Task<List<IEssApplicationVariable>> GetVariablesAsync(CancellationToken cancellationToken = default);
+        public Task<List<IEssApplicationVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Copy The Application.
         /// </summary>
-        public void Copy( String copyName );
+        public void Copy( string copyName );
+
         /// <summary>
         /// Copy the application.
         /// </summary>
         /// <param name="cancellationToken" />
         /// <param name="copyName" />
-        public Task CopyAsync( String copyName, CancellationToken cancellationToken = default );
+        public Task CopyAsync( string copyName, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Deletes The Application.
         /// </summary>
         public void Delete();
+
         /// <summary>
         /// Delete the application.
         /// </summary>
@@ -90,6 +98,7 @@ namespace EssSharp
         /// Start The Application.
         /// </summary>
         public void Start();
+
         /// <summary>
         /// Asynchronously starts the application.
         /// </summary>
@@ -111,9 +120,10 @@ namespace EssSharp
         /// Returns the Status
         /// </summary>
         public ApplicationStatus Status();
+
         #endregion
     }
-    
+
     /// <summary>
     /// 
     /// </summary>

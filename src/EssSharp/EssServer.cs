@@ -123,6 +123,10 @@ namespace EssSharp
             }
         }
 
+
+        /// <inheritdoc />
+        public List<IEssVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssVariable>();
+
         /// <inheritdoc />
         public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
@@ -132,8 +136,8 @@ namespace EssSharp
                 // false here means we'll get server scoped variables only. Setting true would mean we get everything,
                 // including app and cube variables (qualified with app and cube names). TODO: enhance API to allow
                 // getting all
-                var variables = (await api.VariablesListServerVariablesAsync(false.ToString().ToLowerInvariant(), 0, cancellationToken))?.Items?
-                    .Select(variable => new EssVariable(this, variable) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
+                var variables = (await api.VariablesListServerVariablesAsync(false.ToString().ToLowerInvariant(), 0, cancellationToken).ConfigureAwait(false))?.Items?
+                    .Select(variable => new EssVariable(variable, this) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
                 return variables;
             }
             catch ( Exception )
