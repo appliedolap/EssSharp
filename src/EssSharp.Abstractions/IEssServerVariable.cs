@@ -4,7 +4,7 @@ using System.Threading;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssVariable : IEssObject
+    public interface IEssServerVariable : IEssObject
     {
         /// <summary>
         /// Deletes this variable.
@@ -31,7 +31,7 @@ namespace EssSharp
     }
 
     /// <summary>
-    /// The <see cref="IEssVariable" /> scope.
+    /// The <see cref="IEssServerVariable" /> scope.
     /// </summary>
     public enum VariableScope
     {

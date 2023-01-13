@@ -18,10 +18,10 @@ namespace EssSharp
             if ( server is null )
                 throw new ArgumentNullException(nameof(server), "The given server is null.");
 
-            return applicationList?
+            return applicationList
                 .Items?
                 .Where (application => application is not null)
-                .Select(application => new EssApplication(application, server) as IEssApplication)?
+                .Select(application => new EssApplication(application, server) as IEssApplication)
                 .ToList() ?? new List<IEssApplication>();
         }
 
@@ -33,12 +33,12 @@ namespace EssSharp
         internal static List<IEssCube> ToEssSharpList( this CubeList cubeList, EssApplication application )
         {
             if ( application is null )
-                throw new ArgumentNullException(nameof(application), "The given application is null.");
+                throw new ArgumentNullException(nameof(application), $"The given application is null.");
 
-            return cubeList?
+            return cubeList
                 .Items?
                 .Where (cube => cube is not null)
-                .Select(cube => new EssCube(cube, application) as IEssCube)?
+                .Select(cube => new EssCube(cube, application) as IEssCube)
                 .ToList() ?? new List<IEssCube>();
         }
 
@@ -50,15 +50,37 @@ namespace EssSharp
         internal static List<IEssUrl> ToEssSharpList( this EssbaseURLList urlList, EssServer server )
         {
             if ( server is null )
-                throw new ArgumentNullException(nameof(server), @"The given {nameof(server)} is null.");
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
 
-            return urlList?
+            return urlList
                 .Items?
-                .Where( url => url is not null)
-                .Select(url => new EssUrl(url, server) as IEssUrl)?
+                .Where (url => url is not null)
+                .Select(url => new EssUrl(url, server) as IEssUrl)
                 .ToList() ?? new List<IEssUrl>();
         }
 
+        /// <summary>
+        /// Returns an <see cref="List{T}"/> of <see cref="IEssServerVariable"/> objects associated with the given <paramref name="variableList"/>.
+        /// </summary>
+        /// <param name="variableList" />
+        /// <param name="parent" />
+        internal static List<T> ToEssSharpList<T>( this VariableList variableList, EssObject parent ) where T : class, IEssServerVariable
+        {
+            if ( parent is null )
+                throw new ArgumentNullException(nameof(parent), $"The given {nameof(parent)} is null.");
 
+            return variableList
+                .Items?
+                .Where (variable => variable is not null)
+                .Select(variable => parent switch 
+                {
+                    EssServer      server      => new EssServerVariable           (variable, server),
+                    EssApplication application => new EssApplicationVariable(variable, application),
+                    EssCube        cube        => new EssCubeVariable       (variable, cube),
+                                   _           => null 
+                } as T)
+                .Where(variable => variable is not null)
+                .ToList() ?? new List<T>();
+        }
     }
 }

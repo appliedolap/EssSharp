@@ -15,14 +15,14 @@ namespace EssSharp
         /// <summary>
         /// Gets the list of cube-scoped variables available to the connected user.
         /// </summary>
-        /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssServerVariable"/> objects.</returns>
         public List<IEssCubeVariable> GetVariables();
 
         /// <summary>
         /// Asynchronously gets the list of cube-scoped variables available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
-        /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssServerVariable"/> objects.</returns>
         public Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
         
         /// <summary>

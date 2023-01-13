@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EssSharp.Client;
+using RestSharp;
 using System.IO;
-using System.IO.Compression;
-using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
-using EssSharp.Model;
+using System.Xml;
 
 namespace EssSharp.Api
 {
@@ -41,5 +39,32 @@ namespace EssSharp.Api
         {
             return new MemoryStream(Encoding.UTF8.GetBytes(await ApplicationLogsDownloadLatestLogFileContentAsync(api, applicationName, operationIndex, cancellationToken).ConfigureAwait(false)));
         }
+
+        /// <summary>
+        /// A extension overload that returns a boolean to indicate whether an exception can 
+        /// reasonably thrown for an <see cref="RestResponse"/>.
+        /// </summary>
+        /// <param name="response" />
+        internal static bool IsSuccessful( this RestResponse response )
+        {
+            if ( response.StatusCode.IsSuccessful() )
+                return true;
+
+            if ( response.ErrorException is XmlException || response.ErrorException is ApiException )
+                response.ErrorException = new WebException($@"The request failed with status code {(int)response.StatusCode} - {response.StatusCode}.", response.ErrorException);
+            else if ( response.ErrorException is WebException webException )
+            {
+                if ( response.StatusCode != 0 )
+                    response.ErrorException = new WebException($@"The request failed with status code {(int)response.StatusCode} - {response.StatusCode}. {(!string.IsNullOrEmpty(webException.Message?.Trim()) ? webException.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(webException.InnerException?.Message?.Trim()) ? webException.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd());
+                else
+                    response.ErrorException = new WebException($@"The request failed. {(!string.IsNullOrEmpty(webException.Message?.Trim()) ? webException.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(webException.InnerException?.Message?.Trim()) ? webException.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd());
+            }
+
+            return false;
+        }
+
+        /// <summary />
+        /// <param name="statusCode" />
+        private static bool IsSuccessful( this HttpStatusCode statusCode ) => (int)statusCode >= 200 && (int)statusCode <= 399;
     }
 }

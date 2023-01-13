@@ -61,14 +61,14 @@ namespace EssSharp
         /// <summary>
         /// Gets the list of application-scoped variables available to the connected user.
         /// </summary>
-        /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssServerVariable"/> objects.</returns>
         public List<IEssApplicationVariable> GetVariables();
 
         /// <summary>
         /// Asynchronously gets the list of application-scoped variables available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
-        /// <returns>A list of <see cref="IEssVariable"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssServerVariable"/> objects.</returns>
         public Task<List<IEssApplicationVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>

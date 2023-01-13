@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace EssSharp
     /// <summary>
     /// Represents a variable that is specific to a particular application.
     /// </summary>
-    public class EssApplicationVariable : EssVariable, IEssApplicationVariable
+    public class EssApplicationVariable : EssServerVariable, IEssApplicationVariable
     {
         #region Private Data
 
@@ -19,9 +20,10 @@ namespace EssSharp
 
         #region Constructors
 
-        internal EssApplicationVariable( Variable variable, EssApplication application = null ) : base(variable, application?.Server as EssServer)
+        internal EssApplicationVariable( Variable variable, EssApplication application ) : base(variable, application?.Server as EssServer)
         {
-            _application = application;
+            _application = application ??
+                throw new ArgumentNullException(nameof(application), $"An {nameof(EssApplication)} {nameof(application)} is required to create an {nameof(EssApplicationVariable)}.");
         }
 
         #endregion
@@ -29,19 +31,19 @@ namespace EssSharp
         #region IEssApplicationVariable Members
 
         /// <inheritdoc />
-        public IEssApplication Application  => _application;
+        public IEssApplication Application => _application;
 
         /// <inheritdoc />
         public override VariableScope Scope => VariableScope.Application;
 
         /// <inheritdoc />
         public override Task DeleteAsync( CancellationToken cancellationToken = default ) =>
-            GetApi<VariablesApi>().VariablesDeleteAppVariableAsync(_application?.Name, Name, 0, cancellationToken);
+            GetApi<VariablesApi>().VariablesDeleteAppVariableAsync(Application.Name, Name, 0, cancellationToken);
 
         #endregion
 
         /// <inheritdoc />
         public override string ToString() =>
-            $"{nameof(EssApplicationVariable)} {{ {nameof(Application)} = {_application?.Name}, {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
+            $"{nameof(EssApplicationVariable)} {{ {nameof(Application)} = {Application.Name}, {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
     }
 }

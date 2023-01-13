@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,12 +22,13 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssCube( Cube cube, EssApplication application = null ) : base(application?.Configuration, application?.Client)
+        internal EssCube( Cube cube, EssApplication application ) : base(application?.Configuration, application?.Client)
         {
             _cube = cube ??
                 throw new ArgumentNullException(nameof(cube), $"An API model {nameof(cube)} is required to create an {nameof(EssCube)}.");
 
-            _application = application;
+            _application = application ??
+                throw new ArgumentNullException(nameof(application), $"An {nameof(EssApplication)} {nameof(application)} is required to create an {nameof(EssCube)}.");
         }
 
         #endregion
@@ -57,8 +57,9 @@ namespace EssSharp
             try
             {
                 var api = GetApi<VariablesApi>();
-                return (await api.VariablesListVariablesAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false))?.Items?
-                    .Select(variable => new EssCubeVariable(variable, this) as IEssCubeVariable)?.ToList() ?? new List<IEssCubeVariable>();
+                var variables = await api.VariablesListVariablesAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false);
+
+                return variables?.ToEssSharpList<IEssCubeVariable>(this) ?? new List<IEssCubeVariable>();
             }
             catch ( Exception )
             {
@@ -76,7 +77,7 @@ namespace EssSharp
             {
                 var api = GetApi<DimensionsApi>();
                 var dimensions = (await api.DimensionsListDimensionsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false))?.Items?
-                    .Select(dimensionBean => new EssDimension(this,dimensionBean) as IEssDimension)?.ToList() ?? new List<IEssDimension>();
+                    .Select(dimensionBean => new EssDimension(this, dimensionBean) as IEssDimension)?.ToList() ?? new List<IEssDimension>();
                 return dimensions;
             }
             catch ( Exception )

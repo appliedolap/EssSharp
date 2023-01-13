@@ -15,8 +15,7 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssServer _server;
-
+        private readonly EssServer   _server;
         private readonly Application _application;
 
         #endregion
@@ -24,12 +23,13 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssApplication( Application application, EssServer server = null ) : base(server?.Configuration, server?.Client)
+        internal EssApplication( Application application, EssServer server ) : base(server?.Configuration, server?.Client)
         {
             _application = application ?? 
                 throw new ArgumentNullException(nameof(application), $"An API model {nameof(application)} is required to create an {nameof(EssApplication)}.");
 
-            _server = server;
+            _server = server ??
+                throw new ArgumentNullException(nameof(server), $"An {nameof(EssServer)} {nameof(server)} is required to create an {nameof(EssApplication)}.");
         }
 
         #endregion
@@ -81,7 +81,7 @@ namespace EssSharp
 
                 return fileContent;
             }
-            catch (Exception)
+            catch ( Exception )
             {
                 throw;
             }
@@ -115,10 +115,11 @@ namespace EssSharp
             try
             {
                 var api = GetApi<VariablesApi>();
-                var variableList = await api.VariablesListAppVariablesAsync(_application?.Name, 0, cancellationToken).ConfigureAwait(false);
-                return variableList.Items.Select(variable => new EssApplicationVariable(variable, this)).Cast<IEssApplicationVariable>().ToList();
+                var variables = await api.VariablesListAppVariablesAsync(_application?.Name, 0, cancellationToken).ConfigureAwait(false);
+
+                return variables?.ToEssSharpList<IEssApplicationVariable>(this) ?? new List<IEssApplicationVariable>();
             }
-            catch (Exception)
+            catch ( Exception )
             {
                 throw;
             }

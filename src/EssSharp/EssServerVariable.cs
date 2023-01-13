@@ -10,17 +10,20 @@ namespace EssSharp
     /// <summary>
     /// Represents a variable that is specific to a particular server.
     /// </summary>
-    public class EssVariable : EssObject, IEssVariable
+    public class EssServerVariable : EssObject, IEssServerVariable
     {
         private readonly Variable _variable;
 
         #region Constructors
 
         /// <summary />
-        internal EssVariable( Variable variable, EssServer server = null ) : base(server?.Configuration, server?.Client)
+        internal EssServerVariable( Variable variable, EssServer server ) : base(server?.Configuration, server?.Client)
         {
             _variable = variable ??
-                throw new ArgumentNullException(nameof(variable), $"An API model {nameof(variable)} is required to create an {nameof(EssVariable)}.");
+                throw new ArgumentNullException(nameof(variable), $"An API model {nameof(variable)} is required to create an {nameof(EssServerVariable)}.");
+
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"An {nameof(EssServer)} {nameof(server)} is required to create an {nameof(EssServerVariable)}.");
         }
 
         #endregion
@@ -28,7 +31,7 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string Name  => _variable?.Name;
+        public override string Name => _variable.Name;
 
         /// <inheritdoc />
         public override EssType Type => EssType.Variable;
@@ -41,14 +44,14 @@ namespace EssSharp
         public virtual VariableScope Scope => VariableScope.Server;
 
         /// <inheritdoc />
-        public virtual string Value => _variable?.Value;
+        public virtual string Value => _variable.Value;
 
         /// <inheritdoc />
         public virtual void Delete() => DeleteAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
         public virtual Task DeleteAsync( CancellationToken cancellationToken = default ) =>
-            GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(_variable?.Name, 0, cancellationToken);
+            GetApi<ServerVariablesApi>().VariablesDeleteServerVariableAsync(Name, 0, cancellationToken);
 
         #endregion
 
@@ -56,7 +59,7 @@ namespace EssSharp
         /// Returns a textual description of this variable.
         /// </summary>
         public override string ToString() =>
-            $"{nameof(EssVariable)} {{ {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
+            $"{nameof(EssServerVariable)} {{ {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
 
     }
 }

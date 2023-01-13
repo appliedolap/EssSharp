@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,12 +12,21 @@ namespace EssSharp
     /// </summary>
     public class EssCubeVariable : EssApplicationVariable, IEssCubeVariable
     {
+        #region Private Data
+
         private readonly EssCube _cube;
 
-        internal EssCubeVariable( Variable variable, EssCube cube = null ) : base(variable, cube?.Application as EssApplication)
+        #endregion
+
+        #region Constructors
+
+        internal EssCubeVariable( Variable variable, EssCube cube ) : base(variable, cube?.Application as EssApplication)
         {
-            _cube = cube;
+            _cube = cube ??
+                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssCubeVariable)}.");
         }
+
+        #endregion
 
         #region IEssCubeVariable members
 
@@ -28,12 +38,12 @@ namespace EssSharp
 
         /// <inheritdoc />
         public override Task DeleteAsync( CancellationToken cancellationToken = default ) =>
-            GetApi<VariablesApi>().VariablesDeleteVariableAsync(_cube?.Application?.Name, _cube?.Name, Name, 0, cancellationToken);
+            GetApi<VariablesApi>().VariablesDeleteVariableAsync(Application.Name, Cube.Name, Name, 0, cancellationToken);
 
         #endregion
 
         /// <inheritdoc />
         public override string ToString() =>
-            $"{nameof(EssCubeVariable)} {{ {nameof(Cube)} = {_cube?.Name}, {nameof(Application)} = {_cube?.Application?.Name}, {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
+            $"{nameof(EssCubeVariable)} {{ {nameof(Cube)} = {Cube.Name}, {nameof(Application)} = {Application.Name}, {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
     }
 }

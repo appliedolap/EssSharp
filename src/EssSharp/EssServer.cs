@@ -81,73 +81,6 @@ namespace EssSharp
         #region IEssServer Members
 
         /// <inheritdoc />
-        /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
-        public List<IEssApplication> GetApplications() => GetApplicationsAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
-
-        /// <inheritdoc />
-        public List<IEssSession> GetSessions() => GetSessionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssSession>();
-
-        /// <inheritdoc />
-        public IEssApplication GetApplication(string applicationName)
-        {
-            try
-            {
-                var api = GetApi<ApplicationsApi>();
-                if ( api.ApplicationsGetApplication(applicationName) is { } application )
-                    return new EssApplication(application, this);
-
-                // TODO: replace with custom exception or something more appropriate
-                throw new ArgumentException($"No such app {applicationName}");
-                
-            }
-            catch ( Exception )
-            {
-                throw;
-            }
-        }
-        
-        /// <inheritdoc />
-        /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
-        public async Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var api = GetApi<ApplicationsApi>();
-                var applications = await api.ApplicationsGetApplicationsAsync(null, null, _maxApplications, null, null, null, 0, cancellationToken).ConfigureAwait(false);
-
-                return applications?.ToEssSharpList(this) ?? new List<IEssApplication>();
-            }
-            catch ( Exception )
-            {
-                throw;
-            }
-        }
-
-
-        /// <inheritdoc />
-        public List<IEssVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssVariable>();
-
-        /// <inheritdoc />
-        public async Task<List<IEssVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var api = GetApi<ServerVariablesApi>();
-                // false here means we'll get server scoped variables only. Setting true would mean we get everything,
-                // including app and cube variables (qualified with app and cube names). TODO: enhance API to allow
-                // getting all
-                var variables = (await api.VariablesListServerVariablesAsync(false.ToString().ToLowerInvariant(), 0, cancellationToken).ConfigureAwait(false))?.Items?
-                    .Select(variable => new EssVariable(variable, this) as IEssVariable)?.ToList() ?? new List<IEssVariable>();
-                return variables;
-            }
-            catch ( Exception )
-            {
-                throw;
-            }
-        }
-
-
-        /// <inheritdoc />
         public async Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -178,6 +111,72 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        public IEssApplication GetApplication(string applicationName)
+        {
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+                if ( api.ApplicationsGetApplication(applicationName) is { } application )
+                    return new EssApplication(application, this);
+
+                // TODO: replace with custom exception or something more appropriate
+                throw new ArgumentException($"No such app {applicationName}");
+                
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
+        public List<IEssApplication> GetApplications() => GetApplicationsAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
+
+        /// <inheritdoc />
+        /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
+        public async Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+                var applications = await api.ApplicationsGetApplicationsAsync(null, null, _maxApplications, null, null, null, 0, cancellationToken).ConfigureAwait(false);
+
+                return applications?.ToEssSharpList(this) ?? new List<IEssApplication>();
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public IEssUserSession GetUserSession( bool includeToken = true, bool includeGroups = true ) => GetUserSessionAsync(includeToken, includeGroups)?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<IEssUserSession> GetUserSessionAsync( bool includeToken = true, bool includeGroups = true, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<UserSessionApi>();
+                if ( await api.UserSessionGetSessionAsync(includeToken, includeGroups, 0, cancellationToken).ConfigureAwait(false) is { } userSession )
+                    return new EssUserSession(userSession);
+
+                return null;
+            }
+            catch ( Exception e )
+            {
+                if ( !string.IsNullOrWhiteSpace(Configuration?.Username) )
+                    throw new Exception($@"Unable to create a new session for user ""{Configuration.Username}"". {e.Message}", e);
+                else
+                    throw new Exception($"Unable to create a new session. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public List<IEssSession> GetSessions() => GetSessionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssSession>();
+
+        /// <inheritdoc />
         public async Task<List<IEssSession>> GetSessionsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -192,6 +191,30 @@ namespace EssSharp
                 throw;
             }
         }
+
+        /// <inheritdoc />
+        public List<IEssServerVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssServerVariable>();
+
+        /// <inheritdoc />
+        public async Task<List<IEssServerVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // Setting getAllVariables to true would mean we get everything, including app and cube variables (qualified with app and cube names).
+                // TODO: Enhance API to support getting all variables via the server.
+                bool getAllVariables = false;
+
+                var api = GetApi<ServerVariablesApi>();
+                var variables = await api.VariablesListServerVariablesAsync(getAllVariables.ToString().ToLowerInvariant(), 0, cancellationToken).ConfigureAwait(false);
+
+                return variables?.ToEssSharpList<IEssServerVariable>(this) ?? new List<IEssServerVariable>();
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
 
         /// <inheritdoc />
         public async Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default )

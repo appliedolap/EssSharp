@@ -1,7 +1,7 @@
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssApplicationVariable : IEssVariable
+    public interface IEssApplicationVariable : IEssServerVariable
     {
         /// <summary>
         /// Returns the application of this variable.
