@@ -42,12 +42,12 @@ namespace EssSharp.Client
                     .Build();
 
                 builder.Configuration.AddConfiguration(config);
-                //builder.Services.AddSingleton(config.GetSection("Settings").Get<AppSettings>());
             }
 
-            builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<AppShell>();
-            builder.Services.AddSingleton<TreeViewEssServerViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<IEssServerFactory, EssServerFactory>();
+            builder.Services.AddSingleton<EssServerTreeViewModel>();
 
             return builder.Build();
         }

@@ -4,7 +4,7 @@ namespace EssSharp.Client
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage( TreeViewEssServerViewModel viewModel )
+        public MainPage( EssServerTreeViewModel viewModel )
         {
             InitializeComponent();
 

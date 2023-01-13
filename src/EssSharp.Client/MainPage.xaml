@@ -2,36 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
-             xmlns:vm="clr-namespace:EssSharp.Client.ViewModels"
+             xmlns:vm="clr-namespace:EssSharp.Client.ViewModels" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EssSharp.Client.MainPage">
-    <ContentPage.BindingContext>
-        <vm:TreeViewEssServerViewModel />
-    </ContentPage.BindingContext>
+             x:Class="EssSharp.Client.MainPage"
+             x:DataType="vm:EssServerTreeViewModel">
     <ScrollView Margin="5,15,0,0">
         <ScrollView>
-            <material:TreeView ItemsSource="{Binding Nodes}" Spacing="5" LoadChildrenCommand="{Binding LoadChildrenCommand}" IsExpandedPropertyName="IsExtended" IsLeafPropertyName="IsLeaf" ArrowColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+            <material:TreeView  ItemsSource="{Binding Nodes}" Spacing="5" LoadChildrenCommand="{Binding LoadChildrenCommand}" IsExpandedPropertyName="IsExtended" IsLeafPropertyName="IsLeaf" ArrowColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
                 <material:TreeView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="vm:IEssNode">
                         <HorizontalStackLayout Spacing="2" VerticalOptions="Center">
+                            <material:CheckBox Scale=".6" VerticalOptions="Center" Margin="-2,0,-2,0">
+                                <material:CheckBox.Behaviors>
+                                    <vm:EssServerTreeViewSelectBehavior />
+                                </material:CheckBox.Behaviors>
+                            </material:CheckBox>
                             <Image VerticalOptions="Center" Scale=".66">
                                 <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Folder}">
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:EssNodeType.Folder}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Folder}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Server}">
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:EssNodeType.Server}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Computer}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Application}">
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:EssNodeType.Application}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Dns}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Cube}">
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:EssNodeType.Cube}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.View_in_ar}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Url}">
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:EssNodeType.Url}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Link}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:TreeViewEssServerViewModel+NodeType.Variable}">
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:EssNodeType.Variable}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Article}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>
                                 </Image.Triggers>
