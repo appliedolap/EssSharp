@@ -1,11 +1,13 @@
-﻿using EssSharp.Client;
-using RestSharp;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+
+using EssSharp.Client;
+using RestSharp;
 
 namespace EssSharp.Api
 {
@@ -45,23 +47,17 @@ namespace EssSharp.Api
         /// reasonably thrown for an <see cref="RestResponse"/>.
         /// </summary>
         /// <param name="response" />
-        internal static bool IsSuccessful( this RestResponse response )
-        {
-            if ( response.StatusCode.IsSuccessful() )
-                return true;
-
-            if ( response.ErrorException is XmlException || response.ErrorException is ApiException )
-                response.ErrorException = new WebException($@"The request failed with status code {(int)response.StatusCode} - {response.StatusCode}.", response.ErrorException);
-            else if ( response.ErrorException is WebException webException )
+        internal static bool IsSuccessful( this RestResponse response ) 
+            => response.ErrorException switch
             {
-                if ( response.StatusCode != 0 )
-                    response.ErrorException = new WebException($@"The request failed with status code {(int)response.StatusCode} - {response.StatusCode}. {(!string.IsNullOrEmpty(webException.Message?.Trim()) ? webException.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(webException.InnerException?.Message?.Trim()) ? webException.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd());
-                else
-                    response.ErrorException = new WebException($@"The request failed. {(!string.IsNullOrEmpty(webException.Message?.Trim()) ? webException.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(webException.InnerException?.Message?.Trim()) ? webException.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd());
-            }
-
-            return false;
-        }
+                OperationCanceledException   oce => throw oce,
+                XmlException or ApiException     => throw new WebException($@"The request failed with status code {(int)response.StatusCode} - {response.StatusCode}.", response.ErrorException),
+                WebException                 we  => response.StatusCode > 0
+                                                        ? throw new WebException($@"The request failed with status code {(int)response.StatusCode} - {response.StatusCode}. {(!string.IsNullOrEmpty(we.Message?.Trim()) ? we.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(we.InnerException?.Message?.Trim()) ? we.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd())
+                                                        : throw new WebException($@"The request failed. {(!string.IsNullOrEmpty(we.Message?.Trim()) ? we.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(we.InnerException?.Message?.Trim()) ? we.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd()),
+                                             _   => response.StatusCode.IsSuccessful()
+            };
+        
 
         /// <summary />
         /// <param name="statusCode" />

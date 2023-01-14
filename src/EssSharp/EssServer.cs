@@ -162,7 +162,7 @@ namespace EssSharp
                 if ( await api.UserSessionGetSessionAsync(includeToken, includeGroups, 0, cancellationToken).ConfigureAwait(false) is { } userSession )
                     return new EssUserSession(userSession);
 
-                return null;
+                throw new Exception("Received an empty or invalid response.");
             }
             catch ( Exception e )
             {
