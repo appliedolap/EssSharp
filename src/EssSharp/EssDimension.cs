@@ -1,4 +1,5 @@
-﻿using EssSharp.Client;
+﻿using System;
+
 using EssSharp.Model;
 
 namespace EssSharp
@@ -7,21 +8,31 @@ namespace EssSharp
     public class EssDimension : IEssDimension
     {
         #region Private Data
-        private readonly DimensionBean _dimensionBean;
-        private readonly EssCube _cube;
+
+        private readonly EssCube       _cube;
+        private readonly DimensionBean _dimension;
+
         #endregion
 
         #region Constructors
+
         /// <summary />
-        public EssDimension( EssCube cube, DimensionBean dimensionBean )
+        internal EssDimension( DimensionBean dimension, EssCube cube )
         {
-            _cube = cube;
-            _dimensionBean = dimensionBean;
+            _dimension = dimension ??
+                throw new ArgumentNullException(nameof(dimension), $"An API model {nameof(dimension)} is required to create an {nameof(EssDimension)}.");
+
+            _cube = cube ??
+                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssCube)}.");
         }
+
         #endregion
+
         #region IEssDimensionMembers
+
         /// <inheritdoc />
-        public string Name =>_dimensionBean.Name;
+        public string Name => _dimension?.Name;
+
         #endregion
     }
 }

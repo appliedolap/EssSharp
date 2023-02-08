@@ -49,6 +49,44 @@ namespace EssSharp
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
+        public List<IEssDimension> GetDimensions() => GetDimensionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssDimension>();
+
+        /// <inheritdoc />
+        public async Task<List<IEssDimension>> GetDimensionsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<DimensionsApi>();
+                var dimensions = await api.DimensionsListDimensionsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false);
+
+                return dimensions?.ToEssSharpList(this) ?? new List<IEssDimension>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public List<IEssDrillThroughReport> GetDrillThroughReports() => GetDrillThroughReportsAsync()?.GetAwaiter().GetResult() ?? new List<IEssDrillThroughReport>();
+
+        /// <inheritdoc />
+        public async Task<List<IEssDrillThroughReport>> GetDrillThroughReportsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<DrillThroughReportsApi>();
+                var reports = await api.DrillThroughReportsGetReportsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false);
+
+                return reports?.ToEssSharpList(this) ?? new List<IEssDrillThroughReport>();
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
         public List<IEssCubeVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCubeVariable>();
 
         /// <inheritdoc />
@@ -61,30 +99,12 @@ namespace EssSharp
 
                 return variables?.ToEssSharpList<IEssCubeVariable>(this) ?? new List<IEssCubeVariable>();
             }
-            catch ( Exception )
+            catch (Exception)
             {
                 throw;
             }
         }
 
-        /// <inheritdoc />
-        public List<IEssDimension> GetDimensions() => GetDimensionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssDimension>();
-
-        /// <inheritdoc />
-        public async Task<List<IEssDimension>> GetDimensionsAsync( CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var api = GetApi<DimensionsApi>();
-                var dimensions = (await api.DimensionsListDimensionsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false))?.Items?
-                    .Select(dimensionBean => new EssDimension(this, dimensionBean) as IEssDimension)?.ToList() ?? new List<IEssDimension>();
-                return dimensions;
-            }
-            catch ( Exception )
-            {
-                throw;
-            }
-        }
         #endregion
     }
 }

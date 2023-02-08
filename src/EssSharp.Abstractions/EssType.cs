@@ -6,7 +6,7 @@
         Application,
         Cube,
         DataSource,
-        Drillthrough,
+        DrillThroughReport,
         File,
         Group,
         Job,

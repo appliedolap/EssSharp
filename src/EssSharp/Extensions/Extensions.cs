@@ -9,14 +9,14 @@ namespace EssSharp
     internal static class Extensions
     {
         /// <summary>
-        /// Returns an <see cref="List{T}"/> of <see cref="IEssApplication"/> objects associated with the given <see cref="EssServer"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssApplication"/> objects associated with the given <see cref="EssServer"/>.
         /// </summary>
         /// <param name="applicationList" />
         /// <param name="server" />
         internal static List<IEssApplication> ToEssSharpList( this ApplicationList applicationList, EssServer server )
         {
             if ( server is null )
-                throw new ArgumentNullException(nameof(server), "The given server is null.");
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
 
             return applicationList
                 .Items?
@@ -26,14 +26,14 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns an <see cref="List{T}"/> of <see cref="IEssCube"/> objects associated with the given <see cref="EssApplication"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssCube"/> objects associated with the given <see cref="EssApplication"/>.
         /// </summary>
         /// <param name="cubeList" />
         /// <param name="application" />
         internal static List<IEssCube> ToEssSharpList( this CubeList cubeList, EssApplication application )
         {
             if ( application is null )
-                throw new ArgumentNullException(nameof(application), $"The given application is null.");
+                throw new ArgumentNullException(nameof(application), $"The given {nameof(application)} is null.");
 
             return cubeList
                 .Items?
@@ -43,7 +43,41 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns an <see cref="List{T}"/> of <see cref="IEssUrl"/> objects associated with the given <see cref="EssServer"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssDimension"/> objects associated with the given <see cref="EssCube"/>.
+        /// </summary>
+        /// <param name="dimensionList" />
+        /// <param name="cube" />
+        internal static List<IEssDimension> ToEssSharpList( this DimensionList dimensionList, EssCube cube )
+        {
+            if (cube is null)
+                throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
+
+            return dimensionList
+                .Items?
+                .Where (dimension => dimension is not null)
+                .Select(dimension => new EssDimension(dimension, cube) as IEssDimension)
+                .ToList() ?? new List<IEssDimension>();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssDrillThroughReport"/> objects associated with the given <see cref="EssCube"/>.
+        /// </summary>
+        /// <param name="reportList" />
+        /// <param name="cube" />
+        internal static List<IEssDrillThroughReport> ToEssSharpList( this ReportList reportList, EssCube cube )
+        {
+            if (cube is null)
+                throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
+
+            return reportList
+                .Items?
+                .Where (report => report is not null)
+                .Select(report => new EssDrillThroughReport(report, cube) as IEssDrillThroughReport)
+                .ToList() ?? new List<IEssDrillThroughReport>();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssUrl"/> objects associated with the given <see cref="EssServer"/>.
         /// </summary>
         /// <param name="urlList" />
         /// <param name="server" />
@@ -60,7 +94,7 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns an <see cref="List{T}"/> of <see cref="IEssServerVariable"/> objects associated with the given <paramref name="variableList"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssServerVariable"/> objects associated with the given <paramref name="variableList"/>.
         /// </summary>
         /// <param name="variableList" />
         /// <param name="parent" />
