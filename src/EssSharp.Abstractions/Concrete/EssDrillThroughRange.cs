@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EssSharp
 {
@@ -13,6 +14,13 @@ namespace EssSharp
 		/// <summary />
 		/// <param name="dimensionMemberSets" />
 		public EssDrillThroughRange( Dictionary<string, List<string>> dimensionMemberSets ) { DimensionMemberSets = dimensionMemberSets; }
+
+        /// <summary />
+        /// <param name="dimensionMemberSet" />
+        public EssDrillThroughRange( Dictionary<string, string> dimensionMemberSet )
+        {
+            DimensionMemberSets = dimensionMemberSet?.ToDictionary(kvp => kvp.Key, kvp => new List<string>() { kvp.Value });
+        }
 
         #endregion
 
