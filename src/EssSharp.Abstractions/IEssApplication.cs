@@ -46,16 +46,27 @@ namespace EssSharp
         public Task<string> DownloadLatestLogFileStringAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Gets the cube with the given name.
+        /// </summary>
+        /// <param name="cubeName" />
+        public IEssCube GetCube( string cubeName );
+
+        /// <summary>
+        /// Asynchronously gets the cube with the given name.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="cancellationToken" />
+        public Task<IEssCube> GetCubeAsync( string cubeName, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Gets the list of cubes for this application available to the currently connected user.
         /// </summary>
-        /// <returns>A list of <see cref="IEssCube" /> objects under this application.</returns>
         public List<IEssCube> GetCubes();
 
         /// <summary>
         /// Asynchronously gets the list of cubes for this application available to the currently connected user.
         /// </summary>
         /// <param name="cancellationToken" />
-        /// <returns>A list of <see cref="IEssCube" /> objects under this application.</returns>
         public Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>

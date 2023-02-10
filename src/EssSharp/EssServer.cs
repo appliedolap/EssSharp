@@ -111,29 +111,38 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public IEssApplication GetApplication(string applicationName)
+        /// <returns>An <see cref="EssApplication"/> object.</returns>
+        public IEssApplication GetApplication( string applicationName ) => GetApplicationAsync(applicationName)?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssApplication"/> object.</returns>
+        public async Task<IEssApplication> GetApplicationAsync( string applicationName, CancellationToken cancellationToken = default )
         {
+            if ( string.IsNullOrWhiteSpace(applicationName) )
+                throw new ArgumentException($"An application name is required to get an {nameof(EssApplication)}.", nameof(applicationName));
+
             try
             {
                 var api = GetApi<ApplicationsApi>();
-                if ( api.ApplicationsGetApplication(applicationName) is { } application )
+                
+                if ( await api.ApplicationsGetApplicationAsync(applicationName, null, 0, cancellationToken).ConfigureAwait(false) is { } application )
                     return new EssApplication(application, this);
 
-                // TODO: replace with custom exception or something more appropriate
-                throw new ArgumentException($"No such app {applicationName}");
-                
+                throw new Exception("Received an empty or invalid response.");
             }
-            catch ( Exception )
+            catch ( Exception e )
             {
-                throw;
+                throw new Exception($@"Unable to get the application ""{applicationName}"". {e.Message}", e);
             }
         }
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
         public List<IEssApplication> GetApplications() => GetApplicationsAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
         public async Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default )
         {

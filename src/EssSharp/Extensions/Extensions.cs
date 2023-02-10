@@ -8,6 +8,8 @@ namespace EssSharp
 {
     internal static class Extensions
     {
+        # region Migrations to EssSharp.Abstractions
+
         /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssApplication"/> objects associated with the given <see cref="EssServer"/>.
         /// </summary>
@@ -116,5 +118,32 @@ namespace EssSharp
                 .Where(variable => variable is not null)
                 .ToList() ?? new List<T>();
         }
+
+        #endregion
+
+        #region Migrations from EssSharp.Abstractions
+
+        internal static DrillthroughMetadataBean ToModelBean( this IEssDrillThroughRange context, string aliasTable = null, string sessionId = null )
+            => ToModelBean(new List<IEssDrillThroughRange>() { context }, aliasTable, sessionId);
+
+        /// <summary>
+        /// Returns a <see cref="DrillthroughMetadataBean"/> from the collection of <see cref="IEssDrillThroughRange"/> objects
+        /// and optionally, an <paramref name="aliasTable"/> and <paramref name="sessionId"/>.
+        /// </summary>
+        /// <param name="context" />
+        /// <param name="aliasTable" />
+        /// <param name="sessionId" />
+        internal static DrillthroughMetadataBean ToModelBean( this IEnumerable<IEssDrillThroughRange> context, string aliasTable = null, string sessionId = null )
+        {
+            if ( context?.Any(dtr => dtr is not null) is not true ) 
+                throw new ArgumentException($"At least one {nameof(IEssDrillThroughRange)} is required to produce a {nameof(DrillthroughMetadataBean)}.", nameof(context));
+
+            return new DrillthroughMetadataBean(context?
+                .Where (dtr => dtr is not null)
+                .Select(dtr => new DrillThroughRange(dtr.DimensionMemberSets))
+                .ToList(), aliasTable, sessionId);
+        }
+
+        # endregion
     }
 }

@@ -8,23 +8,26 @@ namespace EssSharp
     public interface IEssServer : IEssObject
     {
         /// <summary>
+        /// Gets the application with the given name.
+        /// </summary>
+        /// <param name="applicationName" />
+        public IEssApplication GetApplication( string applicationName );
+
+        /// <summary>
+        /// Asynchronously gets the application with the given name.
+        /// </summary>
+        /// <param name="applicationName" />
+        public Task<IEssApplication> GetApplicationAsync( string applicationName, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Gets the list of applications for this server available to the connected user.
         /// </summary>
-        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
         public List<IEssApplication> GetApplications();
 
         /// <summary>
-        /// Gets the application with the given name.
-        /// </summary>
-        /// <param name="applicationName"></param>
-        /// <returns>An application object.</returns>
-        public IEssApplication GetApplication(string applicationName);
-        
-        /// <summary>
-        /// Gets the list of applications for this server available to the connected user.
+        /// Asynchronously gets the list of applications for this server available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
-        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
         public Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>

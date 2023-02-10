@@ -11,7 +11,7 @@ namespace EssSharp
         /// <summary>
         /// Returns or sets the list of values for each member in the contiguous drill-through range.
         /// </summary>
-        Dictionary<string, List<string>> MemberSets { get; set; }
+        Dictionary<string, List<string>> DimensionMemberSets { get; set; }
 
         #endregion
     }

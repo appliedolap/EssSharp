@@ -88,9 +88,37 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
+        public IEssCube GetCube( string cubeName ) => GetCubeAsync(cubeName)?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
+        public async Task<IEssCube> GetCubeAsync( string cubeName, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(cubeName) )
+                throw new ArgumentException($"A cube name is required to get an {nameof(EssCube)}.", nameof(cubeName));
+
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+
+                if ( await api.ApplicationsGetCubeAsync(_application?.Name, cubeName, 0, cancellationToken).ConfigureAwait(false) is { } cube )
+                    return new EssCube(cube, this);
+
+                throw new Exception("Received an empty or invalid response.");
+            }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to get the cube ""{cubeName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssCube" /> objects under this application.</returns>
         public List<IEssCube> GetCubes() => GetCubesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCube>();
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssCube" /> objects under this application.</returns>
         public async Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default )
         {
             try
