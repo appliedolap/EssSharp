@@ -27,11 +27,16 @@ namespace EssSharp.Client
         /// <param name="request">The RestSharp request object</param>
         partial void InterceptRequest( RestRequest request )
         {
+            // NOTE: We are waiting on RestSharp v109 to address an issue with cookie management.
+            // https://github.com/restsharp/RestSharp/issues/1792
+            /*
+            // If we have a JSESSIONID, remove any authorization headers.
             if ( !string.IsNullOrEmpty(SessionID) )
             {
-                // Since we have a JSESSIONID, remove any authorization headers.
                 request?.Parameters.GetParameters(ParameterType.HttpHeader).RemoveParameter("Authorization");
+                request?.AddCookie("JSESSIONID", SessionID);
             }
+            */
         }
 
         /// <summary>
@@ -39,14 +44,19 @@ namespace EssSharp.Client
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-        /// <param name="configuration">The configuration object</param>
-        protected partial RestResponse<T> InterceptResponse<T>( RestRequest request, RestResponse<T> response, IReadableConfiguration configuration )
+        partial void InterceptResponse( RestRequest request, RestResponse response )
         {
             // If the response was not successful and an exception is available, throw it.
             if ( !response.IsSuccessful() && response.ErrorException is WebException webException )
                 throw webException;
 
-            return response;
+            // NOTE: We are waiting on RestSharp v109 to address an issue with cookie management.
+            // https://github.com/restsharp/RestSharp/issues/1792
+            /*
+            // If we have a JSESSIONID, retain it.
+            if ( response.Cookies?.Cast<Cookie>().FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) is { } cookie )
+                SessionID = cookie.Value;
+            */
         }
 
         #endregion

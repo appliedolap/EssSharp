@@ -201,28 +201,6 @@ namespace EssSharp.Client
         partial void InterceptResponse(RestRequest request, RestResponse response);
 
         /// <summary>
-        /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
-        /// </summary>
-        /// <param name="request">The RestSharp request object</param>
-        /// <param name="response">The RestSharp response object</param>
-        /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
-        /// GlobalConfiguration has been done before calling this method.</param>
-        /// <returns>The HTTP response, potentially after a reauthorization and retry.</returns>
-        protected partial RestResponse<T> InterceptResponse<T>( RestRequest request, RestResponse<T> response, IReadableConfiguration configuration );
-
-        /*
-        /// <summary>
-        /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
-        /// </summary>
-        /// <param name="request">The RestSharp request object</param>
-        /// <param name="response">The RestSharp response object</param>
-        /// <param name="configuration">A per-request configuration object. It is assumed that any merge with
-        /// GlobalConfiguration has been done before calling this method.</param>
-        /// <returns>The HTTP response, potentially after a reauthorization and retry.</returns>
-        protected partial RestResponse<T> InterceptResponse<T>( RestRequest request, RestResponse<T> response, IReadableConfiguration configuration ) => response;
-        */
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" />, defaulting to the global configurations' base url.
         /// </summary>
         public ApiClient()
@@ -522,7 +500,7 @@ namespace EssSharp.Client
                 response.Data = (T)(object)response.Content;
             }
 
-            response = InterceptResponse(req, response, configuration);
+            InterceptResponse(req, response);
 
             var result = ToApiResponse(response);
             if (response.ErrorMessage != null)
@@ -606,7 +584,7 @@ namespace EssSharp.Client
                 response.Data = (T)(object)response.RawBytes;
             }
 
-            response = InterceptResponse(req, response, configuration);
+            InterceptResponse(req, response);
 
             var result = ToApiResponse(response);
             if (response.ErrorMessage != null)
