@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,6 +17,8 @@ namespace EssSharp
 
         private const string _defaultRestApiPath = "/rest/v1";
         private const int    _maxApplications    = 100;
+        private const long   _maxJobs            = 100;
+
         private readonly string _server;
 
         #endregion
@@ -25,7 +26,7 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssServer( Client.Configuration configuration, Client.ApiClient client ) : base(configuration, client) 
+        internal EssServer( Configuration configuration, ApiClient client ) : base(configuration, client) 
         {
             if ( !Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out _) )
                 throw new ArgumentException("A fully qualified server REST endpoint must be set on the configuration.", nameof(configuration));
@@ -54,8 +55,8 @@ namespace EssSharp
             if ( string.IsNullOrEmpty(username) )
                 throw new ArgumentException("A username is required.", nameof(username));
 
-            Client        = new Client.ApiClient(basePath);
-            Configuration = new Client.Configuration()
+            Client        = new ApiClient(basePath);
+            Configuration = new Configuration()
             {
                 BasePath  = basePath,
                 Username  = username,
@@ -81,12 +82,18 @@ namespace EssSharp
         #region IEssServer Members
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssAbout"/> object.</returns>
+        public IEssAbout GetAbout() => GetAboutAsync()?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssAbout"/> object.</returns>
         public async Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default )
         {
             try
             {
-                var   api = GetApi<AboutEssbaseApi>();
-                var about = await api.AboutGetAboutAsync(0, cancellationToken) ?? new About();
+                var api = GetApi<AboutEssbaseApi>();
+                var about = await api.AboutGetAboutAsync(0, cancellationToken).ConfigureAwait(false) ?? new About();
+
                 return new EssAbout(about);
             }
             catch ( Exception )
@@ -96,12 +103,18 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssAboutInstance"/> object.</returns>
+        public IEssAboutInstance GetAboutInstance() => GetAboutInstanceAsync()?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssAboutInstance"/> object.</returns>
         public async Task<IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<AboutEssbaseApi>();
-                var aboutInstance = await api.AboutGetInstanceDetailsAsync(0, cancellationToken) ?? new AboutInstance(); ;
+                var aboutInstance = await api.AboutGetInstanceDetailsAsync(0, cancellationToken).ConfigureAwait(false) ?? new AboutInstance();
+
                 return new EssAboutInstance(aboutInstance);
             }
             catch ( Exception )
@@ -139,19 +152,62 @@ namespace EssSharp
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
-        public List<IEssApplication> GetApplications() => GetApplicationsAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
+        public List<IEssApplication> GetApplications() => GetApplicationsAsync(_maxApplications)?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
+        /// <remarks>The number of returned applications is limited to the value of <paramref name="applicationsLimit"/>.</remarks>
+        public List<IEssApplication> GetApplications( int applicationsLimit ) => GetApplicationsAsync(applicationsLimit)?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
-        public async Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default )
+        public Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default ) => GetApplicationsAsync(_maxApplications, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
+        /// <remarks>The number of returned applications is limited to the value of <paramref name="applicationsLimit"/>.</remarks>
+        public async Task<List<IEssApplication>> GetApplicationsAsync( int applicationsLimit, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<ApplicationsApi>();
-                var applications = await api.ApplicationsGetApplicationsAsync(null, null, _maxApplications, null, null, null, 0, cancellationToken).ConfigureAwait(false);
+                var applications = await api.ApplicationsGetApplicationsAsync(null, null, applicationsLimit, null, null, null, 0, cancellationToken).ConfigureAwait(false);
 
                 return applications?.ToEssSharpList(this) ?? new List<IEssApplication>();
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssJob"/> objects.</returns>
+        /// <remarks>The number of returned jobs is limited to the value of <see cref="_maxJobs"/>.</remarks>
+        public List<IEssJob> GetJobs() => GetJobsAsync(_maxJobs)?.GetAwaiter().GetResult() ?? new List<IEssJob>();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssJob"/> objects.</returns>
+        /// <remarks>The number of returned jobs is limited to the value of <paramref name="jobsLimit"/>.</remarks>
+        public List<IEssJob> GetJobs( long jobsLimit ) => GetJobsAsync(jobsLimit)?.GetAwaiter().GetResult() ?? new List<IEssJob>();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssJob"/> objects.</returns>
+        /// <remarks>The number of returned jobs is limited to the value of <see cref="_maxJobs"/>.</remarks>
+        public Task<List<IEssJob>> GetJobsAsync( CancellationToken cancellationToken = default ) => GetJobsAsync(_maxJobs, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssJob"/> objects.</returns>
+        /// <remarks>The number of returned jobs is limited to the value of <paramref name="jobsLimit"/>.</remarks>
+        public async Task<List<IEssJob>> GetJobsAsync( long jobsLimit, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<JobsApi>();
+                var jobs = await api.JobsGetAllJobRecordsAsync(null, null, "job_ID:desc", null, jobsLimit, null, 0, cancellationToken).ConfigureAwait(false);
+
+                return jobs?.ToEssSharpList(this) ?? new List<IEssJob>();
             }
             catch ( Exception )
             {
@@ -183,17 +239,19 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssSession"/> objects.</returns>
         public List<IEssSession> GetSessions() => GetSessionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssSession>();
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssSession"/> objects.</returns>
         public async Task<List<IEssSession>> GetSessionsAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<SessionsApi>();
-                var sessions = (await api.SessionsGetAllActiveSessionsAsync(null, null, null, 0, cancellationToken).ConfigureAwait(false))?
-                    .Select(sessionAttributes => new EssSession(sessionAttributes) as IEssSession)?.ToList() ?? new List<IEssSession>();
-                return sessions;
+                var sessions = await api.SessionsGetAllActiveSessionsAsync(null, null, null, 0, cancellationToken).ConfigureAwait(false);
+
+                return sessions?.ToEssSharpList(this) ?? new List<IEssSession>();
             }
             catch ( Exception )
             {
@@ -202,9 +260,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssServerVariable" /> objects.</returns>
         public List<IEssServerVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssServerVariable>();
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssServerVariable" /> objects.</returns>
         public async Task<List<IEssServerVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -224,8 +284,12 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssUrl" /> objects.</returns>
+        public List<IEssUrl> GetURLs() => GetURLsAsync()?.GetAwaiter().GetResult() ?? new List<IEssUrl>();
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssUrl" /> objects.</returns>
         public async Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default )
         {
             try

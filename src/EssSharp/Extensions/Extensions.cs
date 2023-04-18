@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 using EssSharp.Model;
@@ -68,14 +69,47 @@ namespace EssSharp
         /// <param name="cube" />
         internal static List<IEssDrillThroughReport> ToEssSharpList( this ReportList reportList, EssCube cube )
         {
-            if (cube is null)
+            if ( cube is null )
                 throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
 
             return reportList
                 .Items?
-                .Where (report => report is not null)
+                .Where(report => report is not null)
                 .Select(report => new EssDrillThroughReport(report, cube) as IEssDrillThroughReport)
                 .ToList() ?? new List<IEssDrillThroughReport>();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssJob"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="jobWrapper" />
+        /// <param name="server" />
+        internal static List<IEssJob> ToEssSharpList( this JobRecordPaginatedResultWrapper jobWrapper, EssServer server )
+        {
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+
+            return jobWrapper
+                .Items?
+                .Where(job => job is not null)
+                .Select(job => new EssJob(job, server) as IEssJob)
+                .ToList() ?? new List<IEssJob>();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssSession"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="sessionList" />
+        /// <param name="server" />
+        internal static List<IEssSession> ToEssSharpList( this List<SessionAttributes> sessionList, EssServer server )
+        {
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+
+            return sessionList
+                .Where(session => session is not null)
+                .Select(session => new EssSession(session) as IEssSession)
+                .ToList() ?? new List<IEssSession>();
         }
 
         /// <summary>
@@ -144,6 +178,53 @@ namespace EssSharp
                 .ToList(), aliasTable, sessionId);
         }
 
-        # endregion
+        #endregion
+
+        #region System.Enum
+
+        /// <summary>
+        /// Converts the value of this instance to its equivalent descriptive string representation.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        internal static string ToDescription( this Enum value )
+        {
+            // Get the DescriptionAttribute value for the given enum value.
+            var fieldInfo = value.GetType().GetField(value.ToString());
+            var descriptions = fieldInfo?.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+            string description = null;
+
+            // If we were able to get a description, use it.
+            if ( (descriptions?.Length ?? 0) > 0 )
+                description = descriptions[0]?.Description;
+
+            // Return either the obtained description or the string representation.
+            return !string.IsNullOrEmpty(description) ? description : value.ToString();
+        }
+
+        /// <summary>
+        /// Converts the given description to the <typeparamref name="T"/> <see cref="Enum"/> value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="description">The <see cref="DescriptionAttribute.Description"/> for which to find a value.</param>
+        /// <remarks>If an appropriate description cannot be found, the default value is returned.</remarks>
+        internal static T ToValueFromDescription<T>( string description ) where T : struct, Enum
+        {
+            foreach ( var field in typeof(T).GetFields() )
+            {
+                if ( Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attribute )
+                {
+                    if ( string.Equals(attribute.Description, description, StringComparison.OrdinalIgnoreCase) )
+                        return (T)field.GetValue(null);
+                }
+            }
+
+            if ( Enum.TryParse<T>(description, true, out var value) )
+                return value;
+
+            return default;
+        }
+
+        #endregion
     }
 }

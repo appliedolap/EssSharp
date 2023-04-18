@@ -17,12 +17,13 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssUrl( EssbaseURL url, EssServer server = null ) : base(server?.Configuration, server?.Client)
+        internal EssUrl( EssbaseURL url, EssServer server ) : base(server?.Configuration, server?.Client)
         {
             _url = url ?? 
                 throw new ArgumentNullException(nameof(url), $"An API model {nameof(url)} is required to create an {nameof(EssUrl)}.");
 
-            _server = server;
+            _server = server ??
+                throw new ArgumentNullException(nameof(server), $"An {nameof(EssServer)} {nameof(server)} is required to create an {nameof(EssUrl)}.");
         }
 
         #endregion

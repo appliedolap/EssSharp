@@ -119,6 +119,7 @@ namespace EssSharp.Client.ViewModels
                     children = new ObservableCollection<IEssNode>
                     {
                         new EssServerApplicationsNode() { Server = Server },
+                        new EssServerJobsNode()         { Server = Server },
                         new EssServerUrlsNode()         { Server = Server },
                         new EssServerVariablesNode()    { Server = Server }
                     };
@@ -147,6 +148,26 @@ namespace EssSharp.Client.ViewModels
                 foreach ( var application in await Server.GetApplicationsAsync(cancellationToken) )
                     if ( application is { } )
                         children.Add(new EssApplicationNode() { Application = application });
+
+                IsLeaf = children.Count == 0;
+                return Children = children;
+            }
+        }
+
+        private class EssServerJobsNode : EssNode
+        {
+            public IEssServer Server { get; set; }
+
+            public override string Name => "Jobs";
+
+            public override EssNodeType Type => EssNodeType.Folder;
+
+            public override async Task<ObservableCollection<IEssNode>> GetChildrenAsync( CancellationToken cancellationToken = default )
+            {
+                var children = new ObservableCollection<IEssNode>();
+
+                foreach ( var job in await Server.GetJobsAsync(5, cancellationToken) )
+                    children.Add(new EssJobNode() { Job = job, IsLeaf = true });
 
                 IsLeaf = children.Count == 0;
                 return Children = children;
@@ -291,6 +312,15 @@ namespace EssSharp.Client.ViewModels
             }
         }
 
+        private class EssJobNode : EssNode
+        {
+            public IEssJob Job { get; set; }
+
+            public override string Name => $@"{Job?.Name} - {Job?.JobType.ToDescription()} - {Job?.JobStatus}";
+
+            public override EssNodeType Type => EssNodeType.Job;
+        }
+
         private class EssUrlNode : EssNode
         {
             public IEssUrl Url { get; set; }
@@ -341,6 +371,7 @@ namespace EssSharp.Client.ViewModels
         Cube,
         Url,
         Variable,
-        Folder
+        Folder,
+        Job
     }
 }

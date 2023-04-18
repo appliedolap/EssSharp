@@ -19,8 +19,4 @@
     <VersionPrefix>1.0.0</VersionPrefix>
     <VersionSuffix>alpha</VersionSuffix>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Concrete\" />
-  </ItemGroup>
 </Project>

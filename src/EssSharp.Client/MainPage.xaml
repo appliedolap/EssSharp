@@ -19,6 +19,9 @@
                             </material:CheckBox>
                             <Image VerticalOptions="Center" Scale=".66">
                                 <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:EssNodeType.Job}">
+                                        <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Build_circle}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
+                                    </DataTrigger>
                                     <DataTrigger TargetType="Image" Binding="{Binding Type}" Value="{x:Static vm:EssNodeType.Folder}">
                                         <Setter Property="Source" Value="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Folder}, Color={AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}}" />
                                     </DataTrigger>

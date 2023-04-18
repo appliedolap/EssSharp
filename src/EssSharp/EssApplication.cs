@@ -107,7 +107,7 @@ namespace EssSharp
 
                 throw new Exception("Received an empty or invalid response.");
             }
-            catch (Exception e)
+            catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the cube ""{cubeName}"". {e.Message}", e);
             }
@@ -211,13 +211,8 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public virtual ApplicationStatus Status()
-        { 
-            if (Enum.TryParse(_application.Status, true, out ApplicationStatus status) )
-                return status;
-            else
-            return ApplicationStatus.Unknown;
-         }
+        public EssApplicationStatus Status => Enum.TryParse(_application?.Status, true, out EssApplicationStatus status) ? status : EssApplicationStatus.Unknown;
+
         /// <inheritdoc />
         public DateTime CreatedDate => DateTimeOffset.FromUnixTimeMilliseconds(_application.CreationTime).DateTime;
 

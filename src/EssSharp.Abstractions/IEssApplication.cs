@@ -130,7 +130,7 @@ namespace EssSharp
         /// <summary>
         /// Returns the Status
         /// </summary>
-        public ApplicationStatus Status();
+        public EssApplicationStatus Status { get; }
 
         /// <summary>
         /// Created Date
@@ -143,18 +143,5 @@ namespace EssSharp
         public DateTime ModifiedDate { get; }
 
         #endregion
-    }
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum ApplicationStatus
-    {
-        /// <summary />
-        Stopped,
-        /// <summary />
-        Started,
-        /// <summary />
-        Unknown
     }
 }
