@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EssSharp.Test", "src\EssSha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EssSharp.Client", "src\EssSharp.Client\EssSharp.Client.csproj", "{3AFC5A71-BCD9-4F26-AA4F-9378EE8A4ECE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssSharp.Abstractions", "src\EssSharp.Abstractions\EssSharp.Abstractions.csproj", "{838FC343-2F11-49AF-BBB0-1F03C10D1925}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EssSharp.Abstractions", "src\EssSharp.Abstractions\EssSharp.Abstractions.csproj", "{838FC343-2F11-49AF-BBB0-1F03C10D1925}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

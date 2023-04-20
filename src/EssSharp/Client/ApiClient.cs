@@ -35,7 +35,7 @@ namespace EssSharp.Client
     internal class CustomJsonCodec : IRestSerializer, ISerializer, IDeserializer
     {
         private readonly IReadableConfiguration _configuration;
-        private static readonly string _contentType = "application/json";
+        private static readonly string _contentType = ContentType.Json;
         private readonly JsonSerializerSettings _serializerSettings = new JsonSerializerSettings
         {
             // OpenAPI generated types generally hide default constructors.
@@ -134,6 +134,12 @@ namespace EssSharp.Client
                 return Convert.ChangeType(response.Content, type);
             }
 
+            // If the ContentType is an octet-stream, return the raw bytes.
+            if (type == typeof(object) && string.Equals(response.ContentType, "application/octet-stream", StringComparison.OrdinalIgnoreCase))
+            {
+                return response.RawBytes;
+            }
+
             // at this point, it must be a model (json)
             try
             {
@@ -148,13 +154,13 @@ namespace EssSharp.Client
         public ISerializer Serializer => this;
         public IDeserializer Deserializer => this;
 
-        public string[] AcceptedContentTypes => RestSharp.Serializers.ContentType.JsonAccept;
+        public string[] AcceptedContentTypes => RestSharp.ContentType.JsonAccept;
 
         public SupportsContentType SupportsContentType => contentType =>
-            contentType.EndsWith("json", StringComparison.InvariantCultureIgnoreCase) ||
-            contentType.EndsWith("javascript", StringComparison.InvariantCultureIgnoreCase);
+            contentType.Value.EndsWith("json", StringComparison.InvariantCultureIgnoreCase) ||
+            contentType.Value.EndsWith("javascript", StringComparison.InvariantCultureIgnoreCase);
 
-        public string ContentType
+        public ContentType ContentType
         {
             get { return _contentType; }
             set { throw new InvalidOperationException("Not allowed to set content type."); }
@@ -454,8 +460,7 @@ namespace EssSharp.Client
                 UserAgent = configuration.UserAgent
             };
 
-            RestClient client = new RestClient(clientOptions)
-                .UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration));
+            RestClient client = new RestClient(clientOptions, configureSerialization: sc => sc.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration)));
 
             InterceptRequest(req);
 
@@ -464,9 +469,8 @@ namespace EssSharp.Client
             {
                 var policy = RetryConfiguration.RetryPolicy;
                 var policyResult = policy.ExecuteAndCapture(() => client.Execute(req));
-                response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>
+                response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>(req)
                 {
-                    Request = req,
                     ErrorException = policyResult.FinalException
                 };
             }
@@ -498,6 +502,10 @@ namespace EssSharp.Client
             else if (typeof(T).Name == "String") // for string response
             {
                 response.Data = (T)(object)response.Content;
+            }
+            else if (typeof(T).Name == "Object") // for raw object response
+            {
+                response.Data = (T)(object)response.RawBytes;
             }
 
             InterceptResponse(req, response);
@@ -549,8 +557,7 @@ namespace EssSharp.Client
                 UserAgent = configuration.UserAgent
             };
 
-            RestClient client = new RestClient(clientOptions)
-                .UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration));
+            RestClient client = new RestClient(clientOptions, configureSerialization: sc => sc.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration)));
 
             InterceptRequest(req);
 
@@ -559,9 +566,8 @@ namespace EssSharp.Client
             {
                 var policy = RetryConfiguration.AsyncRetryPolicy;
                 var policyResult = await policy.ExecuteAndCaptureAsync((ct) => client.ExecuteAsync(req, ct), cancellationToken).ConfigureAwait(false);
-                response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>
+                response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>(req)
                 {
-                    Request = req,
                     ErrorException = policyResult.FinalException
                 };
             }
@@ -580,6 +586,14 @@ namespace EssSharp.Client
                 response.Data = (T)(object)new MemoryStream(response.RawBytes);
             }
             else if (typeof(T).Name == "Byte[]") // for byte response
+            {
+                response.Data = (T)(object)response.RawBytes;
+            }
+            else if (typeof(T).Name == "String") // for string response
+            {
+                response.Data = (T)(object)response.Content;
+            }
+            else if (typeof(T).Name == "Object") // for raw object response
             {
                 response.Data = (T)(object)response.RawBytes;
             }

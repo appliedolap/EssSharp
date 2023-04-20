@@ -12,7 +12,6 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
-using EssSharp.Api;
 using EssSharp.Model;
 using EssSharp.Client;
 using System.Reflection;
