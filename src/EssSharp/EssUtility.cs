@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EssSharp.Api;
@@ -47,21 +48,24 @@ namespace EssSharp
         public IEssServer Server => _server;
 
         /// <inheritdoc />
-        /// <remarks>Returns false if the links collection is null or empty.</remarks>
+        /// <remarks>Returns <see langword="false"/> if the links collection is null or empty.</remarks>
         public bool IsDownloadable => _resource?.Links?.Count > 0;
 
         /// <inheritdoc />
-        public string Path => _resource?.Url;
-
-        /// <inheritdoc />
+        /// <remarks>Returns the first href from the links collection or the external resource url.</remarks>
         public Uri Url
         {
             get
             {
-                if ( !Uri.TryCreate($@"{_server?.Name}/{_resource?.Url}", UriKind.Absolute, out var url) )
-                    throw new Exception("Unable to construct an absolute URL for the resource.");
+                // If a (local) resource URL is available as a link, return it here.
+                if ( Uri.TryCreate(_resource?.Links?.FirstOrDefault(link => !string.IsNullOrEmpty(link?.Href))?.Href, UriKind.Absolute, out var localUri) )
+                    return localUri;
 
-                return url;
+                // If an (external) resource URL is available, return it here.
+                if ( Uri.TryCreate(_resource?.Url, UriKind.Absolute, out var externalUri) )
+                    return externalUri;
+
+                return null;
             }
         }
 
@@ -74,7 +78,7 @@ namespace EssSharp
             try
             {
                 var api = GetApi<TemplatesAndUtilitiesApi>();
-                var fileStream = await api.ResourcesDownloadUtilityFileStreamAsync(_resource?.Id, 0, cancellationToken).ConfigureAwait(false);
+                var fileStream = await api.ResourcesDownloadUtilityAsync(_resource?.Id, 0, cancellationToken).ConfigureAwait(false);
 
                 return fileStream;
             }

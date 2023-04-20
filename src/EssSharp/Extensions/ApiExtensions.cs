@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -28,35 +26,6 @@ namespace EssSharp.Api
                 return null;
 
             return rawContent;
-        }
-
-        /// <summary>
-        /// Downloads and returns a <see cref="Stream"/> containing the latest application log file's text content.
-        /// </summary>
-        /// <param name="api" />
-        /// <param name="applicationName" />
-        /// <param name="operationIndex" />
-        /// <param name="cancellationToken" />
-        internal static async Task<Stream> ApplicationLogsDownloadLatestLogFileStreamAsync( this ApplicationLogsApi api, string applicationName, int operationIndex = 0, CancellationToken cancellationToken = default )
-        {
-            return new MemoryStream(Encoding.UTF8.GetBytes(await ApplicationLogsDownloadLatestLogFileContentAsync(api, applicationName, operationIndex, cancellationToken).ConfigureAwait(false)));
-        }
-
-        /// <summary>
-        /// Downloads and returns a <see cref="Stream"/> containing the utility file.
-        /// </summary>
-        /// <param name="api" />
-        /// <param name="id" />
-        /// <param name="operationIndex" />
-        /// <param name="cancellationToken" />
-        internal static async Task<Stream> ResourcesDownloadUtilityFileStreamAsync(this TemplatesAndUtilitiesApi api, string id, int operationIndex = 0, CancellationToken cancellationToken = default)
-        {
-            var rawContent = (await api.ResourcesDownloadUtilityWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false))?.RawContent;
-
-            if ( string.IsNullOrEmpty(rawContent) )
-                return null;
-
-            return new MemoryStream(Encoding.UTF8.GetBytes(rawContent));
         }
 
         /// <summary>

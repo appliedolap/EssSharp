@@ -58,7 +58,7 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ApplicationLogsApi>();
-                var fileStream = await api.ApplicationLogsDownloadLatestLogFileStreamAsync(_application?.Name, 0, cancellationToken).ConfigureAwait(false);
+                var fileStream = await api.ApplicationLogsDownloadLatestLogFileAsync(_application?.Name, 0, cancellationToken).ConfigureAwait(false);
 
                 return fileStream;
             }

@@ -1,6 +1,7 @@
-using System.Threading.Tasks;
-using System.Threading;
+using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EssSharp
 {
@@ -16,10 +17,16 @@ namespace EssSharp
         public IEssServer Server { get; }
 
         /// <summary>
-        /// Returns true if the resource is a downloadable file, false if not.
+        /// Returns whether the utility can be downloaded.
         /// </summary>
-        /// <returns>true if the resource is a downloadable file, false if not.</returns>
+        /// <returns>A <see cref="bool"/> that represents whether the utility can be downloaded.</returns>
         public bool IsDownloadable { get; }
+
+        /// <summary>
+        /// Returns a url from which the utility can be downloaded.
+        /// </summary>
+        /// <returns>A <see cref="Uri"/> that represents the location of the utility.</returns>
+        public Uri Url { get; }
 
         #endregion
 
