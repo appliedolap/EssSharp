@@ -65,6 +65,12 @@ cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseN
 # Fix the consumes for the application datasource stream endpoint
 cat temp.json | jq '.paths."/applications/{applicationName}/datasources/query/stream".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
+# Fix the response schema for the application all logs download endpoint.
+cat temp.json | jq '.paths."/applications/{applicationName}/logs/all".get.responses."200".schema = {"type":"string","format":"binary"}' > json.tmp && mv json.tmp temp.json
+
+# Fix the response schema for the application latest logs download endpoint.
+cat temp.json | jq '.paths."/applications/{applicationName}/logs/latest".get.responses."200".schema = {"type":"string","format":"binary"}' > json.tmp && mv json.tmp temp.json
+
 # Return types for variables are not a List<VariableList>, they are a VariableList
 cat temp.json | jq '.paths."/applications/{applicationName}/variables".get.responses."200".schema = {"$ref": "#/definitions/VariableList"}' > json.tmp && mv json.tmp temp.json
 
@@ -126,6 +132,10 @@ cat temp.json | jq '.paths."/preferences/grid".put.consumes = ["application/json
 cat temp.json | jq '.paths."/sessions".get.responses."200".schema = {"type": "array","items": {"$ref": "#/definitions/SessionAttributes"}}' > json.tmp && mv json.tmp temp.json
 
 cat temp.json | jq '.paths."/urls".get.responses."200".schema = { "$ref": "#/definitions/EssbaseURLList" }' > json.tmp && mv json.tmp temp.json
+
+# Fix the produces and response schema for the download utility endpoint
+cat temp.json | jq '.paths."/utilities/{id}".get.produces = ["application/zip","application/octet-stream","application/json","application/xml"]' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/utilities/{id}".get.responses."200".schema = {"type":"string","format":"binary"}' > json.tmp && mv json.tmp temp.json
 
 # Return types for variables are not a List<VariableList>, they are a VariableList
 cat temp.json | jq '.paths."/variables".get.responses."200".schema = {"$ref": "#/definitions/VariableList"}' > json.tmp && mv json.tmp temp.json

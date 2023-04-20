@@ -4543,7 +4543,19 @@ paths:
           type: string
       responses:
         "200":
-          content: {}
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+            application/json:
+              schema:
+                format: binary
+                type: string
+            application/xml:
+              schema:
+                format: binary
+                type: string
           description: <p><strong>OK</strong></p><p>Log file returned successfully.</p>
         "400":
           content: {}
@@ -4601,7 +4613,23 @@ paths:
           type: string
       responses:
         "200":
-          content: {}
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+            application/json:
+              schema:
+                format: binary
+                type: string
+            application/xml:
+              schema:
+                format: binary
+                type: string
           description: <p><strong>OK</strong></p><p>Logs returned successfully.</p>
         "400":
           content: {}
@@ -6452,7 +6480,23 @@ paths:
           type: string
       responses:
         "200":
-          content: {}
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+            application/json:
+              schema:
+                format: binary
+                type: string
+            application/xml:
+              schema:
+                format: binary
+                type: string
           description: <p><strong>OK</strong></p><p>Utility with specified ID found.</p>
         "400":
           content: {}

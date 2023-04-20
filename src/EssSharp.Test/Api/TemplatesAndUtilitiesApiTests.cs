@@ -60,7 +60,8 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string id = null;
-            //instance.ResourcesDownloadUtility(id);
+            //var response = instance.ResourcesDownloadUtility(id);
+            //Assert.IsType<System.IO.Stream>(response);
         }
 
         /// <summary>

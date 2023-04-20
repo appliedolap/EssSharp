@@ -5382,7 +5382,11 @@
         ],
         "responses": {
           "200": {
-            "description": "<p><strong>OK</strong></p><p>Log file returned successfully.</p>"
+            "description": "<p><strong>OK</strong></p><p>Log file returned successfully.</p>",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
           },
           "400": {
             "description": "<p><strong>Bad Request</strong></p><p>Failed to return log file.</p>"
@@ -5455,7 +5459,11 @@
         ],
         "responses": {
           "200": {
-            "description": "<p><strong>OK</strong></p><p>Logs returned successfully.</p>"
+            "description": "<p><strong>OK</strong></p><p>Logs returned successfully.</p>",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
           },
           "400": {
             "description": "<p><strong>Bad Request</strong></p><p>Failed to return logs.</p>"
@@ -7588,12 +7596,22 @@
         ],
         "responses": {
           "200": {
-            "description": "<p><strong>OK</strong></p><p>Utility with specified ID found.</p>"
+            "description": "<p><strong>OK</strong></p><p>Utility with specified ID found.</p>",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
           },
           "400": {
             "description": "<p><strong>Bad Request</strong></p><p>Failed to download utility with specified ID.</p>"
           }
-        }
+        },
+        "produces": [
+          "application/zip",
+          "application/octet-stream",
+          "application/json",
+          "application/xml"
+        ]
       }
     },
     "/applications/{applicationName}/databases/{databaseName}/asodataload/buffers": {

@@ -33,8 +33,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of the utility.&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;code&gt;exportutility&lt;/code&gt;: Command-line cube export utility.&lt;/li&gt;&lt;li&gt;&lt;code&gt;smartview&lt;/code&gt;: Smart View for Essbase&lt;/li&gt;&lt;li&gt;&lt;code&gt;lcm&lt;/code&gt;: Life Cycle Management (LCM) utility for backup/restore/migration. &lt;/li&gt;&lt;li&gt;&lt;code&gt;cli&lt;/code&gt;: Essbase Command-Line Interface&lt;/li&gt;&lt;li&gt;&lt;code&gt;migrationTool&lt;/code&gt;: Command-line migration utility &lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseMaxlClient&lt;/code&gt;: MaxL Client for Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseLinuxMaxlClient&lt;/code&gt;:  MaxL Client for Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientLinux&lt;/code&gt;: Essbase client libraries for C developers on Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientWindows&lt;/code&gt;: Essbase client libraries for C developers on  Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientMacosx&lt;/code&gt;: Essbase client libraries for C developers on Mac OS&lt;/li&gt;&lt;li&gt;&lt;code&gt;japi&lt;/code&gt;: Essbase tools and libraries for Java API&lt;/li&gt;&lt;li&gt;&lt;code&gt;esscdext&lt;/code&gt;: Cube Designer extension and add-in to Smart View&lt;/li&gt;&lt;/ul&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        void ResourcesDownloadUtility(string id, int operationIndex = 0);
+        /// <returns>System.IO.Stream</returns>
+        System.IO.Stream ResourcesDownloadUtility(string id, int operationIndex = 0);
 
         /// <summary>
         /// Download Utility
@@ -45,8 +45,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of the utility.&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;code&gt;exportutility&lt;/code&gt;: Command-line cube export utility.&lt;/li&gt;&lt;li&gt;&lt;code&gt;smartview&lt;/code&gt;: Smart View for Essbase&lt;/li&gt;&lt;li&gt;&lt;code&gt;lcm&lt;/code&gt;: Life Cycle Management (LCM) utility for backup/restore/migration. &lt;/li&gt;&lt;li&gt;&lt;code&gt;cli&lt;/code&gt;: Essbase Command-Line Interface&lt;/li&gt;&lt;li&gt;&lt;code&gt;migrationTool&lt;/code&gt;: Command-line migration utility &lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseMaxlClient&lt;/code&gt;: MaxL Client for Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseLinuxMaxlClient&lt;/code&gt;:  MaxL Client for Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientLinux&lt;/code&gt;: Essbase client libraries for C developers on Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientWindows&lt;/code&gt;: Essbase client libraries for C developers on  Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientMacosx&lt;/code&gt;: Essbase client libraries for C developers on Mac OS&lt;/li&gt;&lt;li&gt;&lt;code&gt;japi&lt;/code&gt;: Essbase tools and libraries for Java API&lt;/li&gt;&lt;li&gt;&lt;code&gt;esscdext&lt;/code&gt;: Cube Designer extension and add-in to Smart View&lt;/li&gt;&lt;/ul&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ResourcesDownloadUtilityWithHttpInfo(string id, int operationIndex = 0);
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        ApiResponse<System.IO.Stream> ResourcesDownloadUtilityWithHttpInfo(string id, int operationIndex = 0);
         /// <summary>
         /// List Utilities
         /// </summary>
@@ -87,8 +87,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of the utility.&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;code&gt;exportutility&lt;/code&gt;: Command-line cube export utility.&lt;/li&gt;&lt;li&gt;&lt;code&gt;smartview&lt;/code&gt;: Smart View for Essbase&lt;/li&gt;&lt;li&gt;&lt;code&gt;lcm&lt;/code&gt;: Life Cycle Management (LCM) utility for backup/restore/migration. &lt;/li&gt;&lt;li&gt;&lt;code&gt;cli&lt;/code&gt;: Essbase Command-Line Interface&lt;/li&gt;&lt;li&gt;&lt;code&gt;migrationTool&lt;/code&gt;: Command-line migration utility &lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseMaxlClient&lt;/code&gt;: MaxL Client for Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseLinuxMaxlClient&lt;/code&gt;:  MaxL Client for Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientLinux&lt;/code&gt;: Essbase client libraries for C developers on Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientWindows&lt;/code&gt;: Essbase client libraries for C developers on  Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientMacosx&lt;/code&gt;: Essbase client libraries for C developers on Mac OS&lt;/li&gt;&lt;li&gt;&lt;code&gt;japi&lt;/code&gt;: Essbase tools and libraries for Java API&lt;/li&gt;&lt;li&gt;&lt;code&gt;esscdext&lt;/code&gt;: Cube Designer extension and add-in to Smart View&lt;/li&gt;&lt;/ul&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ResourcesDownloadUtilityAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of System.IO.Stream</returns>
+        System.Threading.Tasks.Task<System.IO.Stream> ResourcesDownloadUtilityAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Download Utility
@@ -100,8 +100,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of the utility.&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;code&gt;exportutility&lt;/code&gt;: Command-line cube export utility.&lt;/li&gt;&lt;li&gt;&lt;code&gt;smartview&lt;/code&gt;: Smart View for Essbase&lt;/li&gt;&lt;li&gt;&lt;code&gt;lcm&lt;/code&gt;: Life Cycle Management (LCM) utility for backup/restore/migration. &lt;/li&gt;&lt;li&gt;&lt;code&gt;cli&lt;/code&gt;: Essbase Command-Line Interface&lt;/li&gt;&lt;li&gt;&lt;code&gt;migrationTool&lt;/code&gt;: Command-line migration utility &lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseMaxlClient&lt;/code&gt;: MaxL Client for Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseLinuxMaxlClient&lt;/code&gt;:  MaxL Client for Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientLinux&lt;/code&gt;: Essbase client libraries for C developers on Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientWindows&lt;/code&gt;: Essbase client libraries for C developers on  Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientMacosx&lt;/code&gt;: Essbase client libraries for C developers on Mac OS&lt;/li&gt;&lt;li&gt;&lt;code&gt;japi&lt;/code&gt;: Essbase tools and libraries for Java API&lt;/li&gt;&lt;li&gt;&lt;code&gt;esscdext&lt;/code&gt;: Cube Designer extension and add-in to Smart View&lt;/li&gt;&lt;/ul&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ResourcesDownloadUtilityWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> ResourcesDownloadUtilityWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List Utilities
         /// </summary>
@@ -251,10 +251,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of the utility.&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;code&gt;exportutility&lt;/code&gt;: Command-line cube export utility.&lt;/li&gt;&lt;li&gt;&lt;code&gt;smartview&lt;/code&gt;: Smart View for Essbase&lt;/li&gt;&lt;li&gt;&lt;code&gt;lcm&lt;/code&gt;: Life Cycle Management (LCM) utility for backup/restore/migration. &lt;/li&gt;&lt;li&gt;&lt;code&gt;cli&lt;/code&gt;: Essbase Command-Line Interface&lt;/li&gt;&lt;li&gt;&lt;code&gt;migrationTool&lt;/code&gt;: Command-line migration utility &lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseMaxlClient&lt;/code&gt;: MaxL Client for Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseLinuxMaxlClient&lt;/code&gt;:  MaxL Client for Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientLinux&lt;/code&gt;: Essbase client libraries for C developers on Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientWindows&lt;/code&gt;: Essbase client libraries for C developers on  Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientMacosx&lt;/code&gt;: Essbase client libraries for C developers on Mac OS&lt;/li&gt;&lt;li&gt;&lt;code&gt;japi&lt;/code&gt;: Essbase tools and libraries for Java API&lt;/li&gt;&lt;li&gt;&lt;code&gt;esscdext&lt;/code&gt;: Cube Designer extension and add-in to Smart View&lt;/li&gt;&lt;/ul&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        public void ResourcesDownloadUtility(string id, int operationIndex = 0)
+        /// <returns>System.IO.Stream</returns>
+        public System.IO.Stream ResourcesDownloadUtility(string id, int operationIndex = 0)
         {
-            ResourcesDownloadUtilityWithHttpInfo(id);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = ResourcesDownloadUtilityWithHttpInfo(id);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -263,8 +264,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of the utility.&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;code&gt;exportutility&lt;/code&gt;: Command-line cube export utility.&lt;/li&gt;&lt;li&gt;&lt;code&gt;smartview&lt;/code&gt;: Smart View for Essbase&lt;/li&gt;&lt;li&gt;&lt;code&gt;lcm&lt;/code&gt;: Life Cycle Management (LCM) utility for backup/restore/migration. &lt;/li&gt;&lt;li&gt;&lt;code&gt;cli&lt;/code&gt;: Essbase Command-Line Interface&lt;/li&gt;&lt;li&gt;&lt;code&gt;migrationTool&lt;/code&gt;: Command-line migration utility &lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseMaxlClient&lt;/code&gt;: MaxL Client for Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseLinuxMaxlClient&lt;/code&gt;:  MaxL Client for Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientLinux&lt;/code&gt;: Essbase client libraries for C developers on Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientWindows&lt;/code&gt;: Essbase client libraries for C developers on  Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientMacosx&lt;/code&gt;: Essbase client libraries for C developers on Mac OS&lt;/li&gt;&lt;li&gt;&lt;code&gt;japi&lt;/code&gt;: Essbase tools and libraries for Java API&lt;/li&gt;&lt;li&gt;&lt;code&gt;esscdext&lt;/code&gt;: Cube Designer extension and add-in to Smart View&lt;/li&gt;&lt;/ul&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ResourcesDownloadUtilityWithHttpInfo(string id, int operationIndex = 0)
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        public EssSharp.Client.ApiResponse<System.IO.Stream> ResourcesDownloadUtilityWithHttpInfo(string id, int operationIndex = 0)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -279,6 +280,10 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/zip",
+                "application/octet-stream",
+                "application/json",
+                "application/xml"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -306,7 +311,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<Object>("/utilities/{id}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<System.IO.Stream>("/utilities/{id}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ResourcesDownloadUtility", localVarResponse);
@@ -326,10 +331,11 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of the utility.&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;code&gt;exportutility&lt;/code&gt;: Command-line cube export utility.&lt;/li&gt;&lt;li&gt;&lt;code&gt;smartview&lt;/code&gt;: Smart View for Essbase&lt;/li&gt;&lt;li&gt;&lt;code&gt;lcm&lt;/code&gt;: Life Cycle Management (LCM) utility for backup/restore/migration. &lt;/li&gt;&lt;li&gt;&lt;code&gt;cli&lt;/code&gt;: Essbase Command-Line Interface&lt;/li&gt;&lt;li&gt;&lt;code&gt;migrationTool&lt;/code&gt;: Command-line migration utility &lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseMaxlClient&lt;/code&gt;: MaxL Client for Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseLinuxMaxlClient&lt;/code&gt;:  MaxL Client for Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientLinux&lt;/code&gt;: Essbase client libraries for C developers on Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientWindows&lt;/code&gt;: Essbase client libraries for C developers on  Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientMacosx&lt;/code&gt;: Essbase client libraries for C developers on Mac OS&lt;/li&gt;&lt;li&gt;&lt;code&gt;japi&lt;/code&gt;: Essbase tools and libraries for Java API&lt;/li&gt;&lt;li&gt;&lt;code&gt;esscdext&lt;/code&gt;: Cube Designer extension and add-in to Smart View&lt;/li&gt;&lt;/ul&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ResourcesDownloadUtilityAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of System.IO.Stream</returns>
+        public async System.Threading.Tasks.Task<System.IO.Stream> ResourcesDownloadUtilityAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            await ResourcesDownloadUtilityWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = await ResourcesDownloadUtilityWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -339,8 +345,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of the utility.&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;code&gt;exportutility&lt;/code&gt;: Command-line cube export utility.&lt;/li&gt;&lt;li&gt;&lt;code&gt;smartview&lt;/code&gt;: Smart View for Essbase&lt;/li&gt;&lt;li&gt;&lt;code&gt;lcm&lt;/code&gt;: Life Cycle Management (LCM) utility for backup/restore/migration. &lt;/li&gt;&lt;li&gt;&lt;code&gt;cli&lt;/code&gt;: Essbase Command-Line Interface&lt;/li&gt;&lt;li&gt;&lt;code&gt;migrationTool&lt;/code&gt;: Command-line migration utility &lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseMaxlClient&lt;/code&gt;: MaxL Client for Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseLinuxMaxlClient&lt;/code&gt;:  MaxL Client for Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientLinux&lt;/code&gt;: Essbase client libraries for C developers on Linux&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientWindows&lt;/code&gt;: Essbase client libraries for C developers on  Windows&lt;/li&gt;&lt;li&gt;&lt;code&gt;EssbaseClientMacosx&lt;/code&gt;: Essbase client libraries for C developers on Mac OS&lt;/li&gt;&lt;li&gt;&lt;code&gt;japi&lt;/code&gt;: Essbase tools and libraries for Java API&lt;/li&gt;&lt;li&gt;&lt;code&gt;esscdext&lt;/code&gt;: Cube Designer extension and add-in to Smart View&lt;/li&gt;&lt;/ul&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ResourcesDownloadUtilityWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<System.IO.Stream>> ResourcesDownloadUtilityWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -356,6 +362,10 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/zip",
+                "application/octet-stream",
+                "application/json",
+                "application/xml"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -383,7 +393,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/utilities/{id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<System.IO.Stream>("/utilities/{id}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

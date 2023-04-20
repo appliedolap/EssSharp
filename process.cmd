@@ -26,7 +26,6 @@ jq . "versions\%ESSBASE_SWAGGER_VERSION%\swagger.json" > formatted.json || ( ech
 if exist temp.json del /f temp.json >nul 2>&1 || ( echo Unable to delete temp.json, exiting. & exit /B 1 )
 if exist json.tmp  del /f json.tmp  >nul 2>&1 || ( echo Unable to delete json.tmp, exiting.  & exit /B 1 )
 
-
 :: copy the formatted.json to temp.json
 copy /Y formatted.json temp.json >nul 2>&1 || ( echo Unable to copy formatted.json to temp.json, exiting. & exit /B 1)
 
@@ -68,6 +67,12 @@ type temp.json | jq ".paths.\"/applications/{applicationName}/databases/{databas
 :: Fix the consumes for the application datasource stream endpoint
 type temp.json | jq ".paths.\"/applications/{applicationName}/datasources/query/stream\".post.consumes = [\"application/json\"]" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
+# Fix the response schema for the application all logs download endpoint.
+type temp.json | jq ".paths.\"/applications/{applicationName}/logs/all\".get.responses.\"200\".schema = {\"type\":\"string\",\"format\":\"binary\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
+
+# Fix the response schema for the application latest logs download endpoint.
+type temp.json | jq ".paths.\"/applications/{applicationName}/logs/latest\".get.responses.\"200\".schema = {\"type\":\"string\",\"format\":\"binary\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
+
 :: Return types for variables are not a List<VariableList>, they are a VariableList
 type temp.json | jq ".paths.\"/applications/{applicationName}/variables\".get.responses.\"200\".schema = {\"$ref\": \"#/definitions/VariableList\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
@@ -92,6 +97,10 @@ type temp.json | jq ".paths.\"/preferences/grid\".put.consumes = [\"application/
 type temp.json | jq ".paths.\"/sessions\".get.responses.\"200\".schema = {\"type\": \"array\",\"items\": {\"$ref\": \"#/definitions/SessionAttributes\"}}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
 type temp.json | jq ".paths.\"/urls\".get.responses.\"200\".schema = {\"$ref\": \"#/definitions/EssbaseURLList\" }" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
+
+:: Fix the produces and response schema for the download utility endpoint
+type temp.json | jq ".paths.\"/utilities/{id}\".get.produces = [\"application/zip\",\"application/octet-stream\",\"application/json\",\"application/xml\"]" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
+type temp.json | jq ".paths.\"/utilities/{id}\".get.responses.\"200\".schema = {\"type\":\"string\",\"format\":\"binary\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
 :: Return types for variables are not a List<VariableList>, they are a VariableList
 type temp.json | jq ".paths.\"/variables\".get.responses.\"200\".schema = {\"$ref\": \"#/definitions/VariableList\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )

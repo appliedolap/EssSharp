@@ -33,8 +33,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        void ApplicationLogsDownloadAllLogFiles(string applicationName, int operationIndex = 0);
+        /// <returns>System.IO.Stream</returns>
+        System.IO.Stream ApplicationLogsDownloadAllLogFiles(string applicationName, int operationIndex = 0);
 
         /// <summary>
         /// Download All Logs
@@ -45,8 +45,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApplicationLogsDownloadAllLogFilesWithHttpInfo(string applicationName, int operationIndex = 0);
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        ApiResponse<System.IO.Stream> ApplicationLogsDownloadAllLogFilesWithHttpInfo(string applicationName, int operationIndex = 0);
         /// <summary>
         /// Download Logs
         /// </summary>
@@ -79,8 +79,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        void ApplicationLogsDownloadLatestLogFile(string applicationName, int operationIndex = 0);
+        /// <returns>System.IO.Stream</returns>
+        System.IO.Stream ApplicationLogsDownloadLatestLogFile(string applicationName, int operationIndex = 0);
 
         /// <summary>
         /// Download Latest Log
@@ -91,8 +91,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApplicationLogsDownloadLatestLogFileWithHttpInfo(string applicationName, int operationIndex = 0);
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        ApiResponse<System.IO.Stream> ApplicationLogsDownloadLatestLogFileWithHttpInfo(string applicationName, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -112,8 +112,8 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationLogsDownloadAllLogFilesAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of System.IO.Stream</returns>
+        System.Threading.Tasks.Task<System.IO.Stream> ApplicationLogsDownloadAllLogFilesAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Download All Logs
@@ -125,8 +125,8 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationLogsDownloadAllLogFilesWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> ApplicationLogsDownloadAllLogFilesWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Download Logs
         /// </summary>
@@ -162,8 +162,8 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationLogsDownloadLatestLogFileAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of System.IO.Stream</returns>
+        System.Threading.Tasks.Task<System.IO.Stream> ApplicationLogsDownloadLatestLogFileAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Download Latest Log
@@ -175,8 +175,8 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationLogsDownloadLatestLogFileWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> ApplicationLogsDownloadLatestLogFileWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -303,10 +303,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        public void ApplicationLogsDownloadAllLogFiles(string applicationName, int operationIndex = 0)
+        /// <returns>System.IO.Stream</returns>
+        public System.IO.Stream ApplicationLogsDownloadAllLogFiles(string applicationName, int operationIndex = 0)
         {
-            ApplicationLogsDownloadAllLogFilesWithHttpInfo(applicationName);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = ApplicationLogsDownloadAllLogFilesWithHttpInfo(applicationName);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -315,8 +316,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ApplicationLogsDownloadAllLogFilesWithHttpInfo(string applicationName, int operationIndex = 0)
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        public EssSharp.Client.ApiResponse<System.IO.Stream> ApplicationLogsDownloadAllLogFilesWithHttpInfo(string applicationName, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -331,6 +332,10 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/zip",
+                "application/octet-stream",
+                "application/json",
+                "application/xml"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -358,7 +363,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<Object>("/applications/{applicationName}/logs/all", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<System.IO.Stream>("/applications/{applicationName}/logs/all", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ApplicationLogsDownloadAllLogFiles", localVarResponse);
@@ -378,10 +383,11 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationLogsDownloadAllLogFilesAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of System.IO.Stream</returns>
+        public async System.Threading.Tasks.Task<System.IO.Stream> ApplicationLogsDownloadAllLogFilesAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            await ApplicationLogsDownloadAllLogFilesWithHttpInfoAsync(applicationName, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = await ApplicationLogsDownloadAllLogFilesWithHttpInfoAsync(applicationName, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -391,8 +397,8 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationLogsDownloadAllLogFilesWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<System.IO.Stream>> ApplicationLogsDownloadAllLogFilesWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -408,6 +414,10 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/zip",
+                "application/octet-stream",
+                "application/json",
+                "application/xml"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -435,7 +445,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/applications/{applicationName}/logs/all", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<System.IO.Stream>("/applications/{applicationName}/logs/all", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -613,10 +623,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        public void ApplicationLogsDownloadLatestLogFile(string applicationName, int operationIndex = 0)
+        /// <returns>System.IO.Stream</returns>
+        public System.IO.Stream ApplicationLogsDownloadLatestLogFile(string applicationName, int operationIndex = 0)
         {
-            ApplicationLogsDownloadLatestLogFileWithHttpInfo(applicationName);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = ApplicationLogsDownloadLatestLogFileWithHttpInfo(applicationName);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -625,8 +636,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ApplicationLogsDownloadLatestLogFileWithHttpInfo(string applicationName, int operationIndex = 0)
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        public EssSharp.Client.ApiResponse<System.IO.Stream> ApplicationLogsDownloadLatestLogFileWithHttpInfo(string applicationName, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -641,6 +652,9 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/octet-stream",
+                "application/json",
+                "application/xml"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -668,7 +682,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<Object>("/applications/{applicationName}/logs/latest", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<System.IO.Stream>("/applications/{applicationName}/logs/latest", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ApplicationLogsDownloadLatestLogFile", localVarResponse);
@@ -688,10 +702,11 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationLogsDownloadLatestLogFileAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of System.IO.Stream</returns>
+        public async System.Threading.Tasks.Task<System.IO.Stream> ApplicationLogsDownloadLatestLogFileAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            await ApplicationLogsDownloadLatestLogFileWithHttpInfoAsync(applicationName, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = await ApplicationLogsDownloadLatestLogFileWithHttpInfoAsync(applicationName, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -701,8 +716,8 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationLogsDownloadLatestLogFileWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<System.IO.Stream>> ApplicationLogsDownloadLatestLogFileWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -718,6 +733,9 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/octet-stream",
+                "application/json",
+                "application/xml"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -745,7 +763,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/applications/{applicationName}/logs/latest", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<System.IO.Stream>("/applications/{applicationName}/logs/latest", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

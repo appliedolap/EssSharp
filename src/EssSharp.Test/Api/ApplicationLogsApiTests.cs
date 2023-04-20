@@ -60,7 +60,8 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
-            //instance.ApplicationLogsDownloadAllLogFiles(applicationName);
+            //var response = instance.ApplicationLogsDownloadAllLogFiles(applicationName);
+            //Assert.IsType<System.IO.Stream>(response);
         }
 
         /// <summary>
@@ -83,7 +84,8 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
-            //instance.ApplicationLogsDownloadLatestLogFile(applicationName);
+            //var response = instance.ApplicationLogsDownloadLatestLogFile(applicationName);
+            //Assert.IsType<System.IO.Stream>(response);
         }
     }
 }

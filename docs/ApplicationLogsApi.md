@@ -10,7 +10,7 @@ All URIs are relative to */essbase/rest/v1*
 
 <a name="applicationlogsdownloadalllogfiles"></a>
 # **ApplicationLogsDownloadAllLogFiles**
-> void ApplicationLogsDownloadAllLogFiles (string applicationName)
+> System.IO.Stream ApplicationLogsDownloadAllLogFiles (string applicationName)
 
 Download All Logs
 
@@ -42,7 +42,8 @@ namespace Example
             try
             {
                 // Download All Logs
-                apiInstance.ApplicationLogsDownloadAllLogFiles(applicationName);
+                System.IO.Stream result = apiInstance.ApplicationLogsDownloadAllLogFiles(applicationName);
+                Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
@@ -62,7 +63,10 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Download All Logs
-    apiInstance.ApplicationLogsDownloadAllLogFilesWithHttpInfo(applicationName);
+    ApiResponse<System.IO.Stream> response = apiInstance.ApplicationLogsDownloadAllLogFilesWithHttpInfo(applicationName);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
@@ -80,7 +84,7 @@ catch (ApiException e)
 
 ### Return type
 
-void (empty response body)
+**System.IO.Stream**
 
 ### Authorization
 
@@ -89,7 +93,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/zip, application/octet-stream, application/json, application/xml
 
 
 ### HTTP response details
@@ -200,7 +204,7 @@ catch (ApiException e)
 
 <a name="applicationlogsdownloadlatestlogfile"></a>
 # **ApplicationLogsDownloadLatestLogFile**
-> void ApplicationLogsDownloadLatestLogFile (string applicationName)
+> System.IO.Stream ApplicationLogsDownloadLatestLogFile (string applicationName)
 
 Download Latest Log
 
@@ -232,7 +236,8 @@ namespace Example
             try
             {
                 // Download Latest Log
-                apiInstance.ApplicationLogsDownloadLatestLogFile(applicationName);
+                System.IO.Stream result = apiInstance.ApplicationLogsDownloadLatestLogFile(applicationName);
+                Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
@@ -252,7 +257,10 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Download Latest Log
-    apiInstance.ApplicationLogsDownloadLatestLogFileWithHttpInfo(applicationName);
+    ApiResponse<System.IO.Stream> response = apiInstance.ApplicationLogsDownloadLatestLogFileWithHttpInfo(applicationName);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
@@ -270,7 +278,7 @@ catch (ApiException e)
 
 ### Return type
 
-void (empty response body)
+**System.IO.Stream**
 
 ### Authorization
 
@@ -279,7 +287,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/octet-stream, application/json, application/xml
 
 
 ### HTTP response details

@@ -9,7 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 
 <a name="resourcesdownloadutility"></a>
 # **ResourcesDownloadUtility**
-> void ResourcesDownloadUtility (string id)
+> System.IO.Stream ResourcesDownloadUtility (string id)
 
 Download Utility
 
@@ -41,7 +41,8 @@ namespace Example
             try
             {
                 // Download Utility
-                apiInstance.ResourcesDownloadUtility(id);
+                System.IO.Stream result = apiInstance.ResourcesDownloadUtility(id);
+                Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
@@ -61,7 +62,10 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Download Utility
-    apiInstance.ResourcesDownloadUtilityWithHttpInfo(id);
+    ApiResponse<System.IO.Stream> response = apiInstance.ResourcesDownloadUtilityWithHttpInfo(id);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
@@ -79,7 +83,7 @@ catch (ApiException e)
 
 ### Return type
 
-void (empty response body)
+**System.IO.Stream**
 
 ### Authorization
 
@@ -88,7 +92,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/zip, application/octet-stream, application/json, application/xml
 
 
 ### HTTP response details
