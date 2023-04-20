@@ -103,20 +103,43 @@ namespace EssSharp.Client
             if (type == typeof(Stream))
             {
                 var bytes = response.RawBytes;
-                if (response.Headers != null)
+                if ((response.Headers != null && response.Headers.Count > 0) || 
+                    (response.ContentHeaders != null && response.ContentHeaders.Count > 0))
                 {
                     var filePath = string.IsNullOrEmpty(_configuration.TempFolderPath)
                         ? Path.GetTempPath()
                         : _configuration.TempFolderPath;
-                    var regex = new Regex(@"Content-Disposition=.*filename=['""]?([^'""\s]+)['""]?$");
-                    foreach (var header in response.Headers)
+                    var regex = new Regex(@".*filename=['""]?([^'""\s]+)['""]?$");
+                    if (response.ContentHeaders != null && response.ContentHeaders.Count > 0)
                     {
-                        var match = regex.Match(header.ToString());
-                        if (match.Success)
+                        foreach (var header in response.ContentHeaders)
                         {
-                            string fileName = filePath + ClientUtils.SanitizeFilename(match.Groups[1].Value.Replace("\"", "").Replace("'", ""));
-                            File.WriteAllBytes(fileName, bytes);
-                            return new FileStream(fileName, FileMode.Open);
+                            if ( string.Equals(header.Name, "Content-Disposition", StringComparison.OrdinalIgnoreCase) )
+                            {
+                                var match = regex.Match(header.ToString());
+                                if ( match.Success )
+                                {
+                                    string fileName = filePath + ClientUtils.SanitizeFilename(match.Groups[1].Value.Replace("\"", "").Replace("'", ""));
+                                    File.WriteAllBytes(fileName, bytes);
+                                    return new FileStream(fileName, FileMode.Open);
+                                }
+                            }
+                        }
+                    }
+                    if ( response.Headers != null && response.Headers.Count > 0 )
+                    {
+                        foreach ( var header in response.Headers )
+                        {
+                            if ( string.Equals(header.Name, "Content-Disposition", StringComparison.OrdinalIgnoreCase) )
+                            {
+                                var match = regex.Match(header.ToString());
+                                if ( match.Success )
+                                {
+                                    string fileName = filePath + ClientUtils.SanitizeFilename(match.Groups[1].Value.Replace("\"", "").Replace("'", ""));
+                                    File.WriteAllBytes(fileName, bytes);
+                                    return new FileStream(fileName, FileMode.Open);
+                                }
+                            }
                         }
                     }
                 }
@@ -134,11 +157,13 @@ namespace EssSharp.Client
                 return Convert.ChangeType(response.Content, type);
             }
 
+            /*
             // If the ContentType is an octet-stream, return the raw bytes.
-            if (type == typeof(object) && string.Equals(response.ContentType, "application/octet-stream", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(response.ContentType, "application/octet-stream", StringComparison.OrdinalIgnoreCase))
             {
                 return response.RawBytes;
             }
+            */
 
             // at this point, it must be a model (json)
             try
@@ -493,7 +518,11 @@ namespace EssSharp.Client
             }
             else if (typeof(T).Name == "Stream") // for binary response
             {
-                response.Data = (T)(object)new MemoryStream(response.RawBytes);
+                // if the response data was not already deserialized as a stream, create a MemoryStream from the raw bytes
+                if ( response.Data is not Stream )
+                {
+                    response.Data = (T)(object)new MemoryStream(response.RawBytes);
+                }
             }
             else if (typeof(T).Name == "Byte[]") // for byte response
             {
@@ -583,7 +612,11 @@ namespace EssSharp.Client
             }
             else if (typeof(T).Name == "Stream") // for binary response
             {
-                response.Data = (T)(object)new MemoryStream(response.RawBytes);
+                // if the response data was not already deserialized as a stream, create a MemoryStream from the raw bytes
+                if ( response.Data is not Stream )
+                {
+                    response.Data = (T)(object)new MemoryStream(response.RawBytes);
+                }
             }
             else if (typeof(T).Name == "Byte[]") // for byte response
             {
