@@ -8,6 +8,16 @@ namespace EssSharp
     public interface IEssServer : IEssObject
     {
         /// <summary>
+        /// Gets the about information of this server
+        /// </summary>
+        public Task<IEssAbout> GetAboutAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Gets the about information of this server
+        /// </summary>
+        public Task<IEssAboutInstance> GetAboutInstanceAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Gets the application with the given name.
         /// </summary>
         /// <param name="applicationName" />
@@ -93,16 +103,16 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssServerVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
-        
-        /// <summary>
-        /// Gets the about information of this server
-        /// </summary>
-        public Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the about information of this server
+        /// Gets the list of server sessions available to the connected user.
         /// </summary>
-        public Task<IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken = default );
+        public List<IEssSession> GetSessions();
+
+        /// <summary>
+        /// Asynchronously gets the list of server sessions available to the connected user.
+        /// </summary>
+        public Task<List<IEssSession>> GetSessionsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets the list of server URLs available to the connected user.
@@ -115,13 +125,13 @@ namespace EssSharp
         public Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of server sessions available to the connected user.
+        /// Gets the list of server utilities available to the connected user.
         /// </summary>
-        public List<IEssSession> GetSessions();
+        public List<IEssUtility> GetUtilities();
 
         /// <summary>
-        /// Asynchronously gets the list of server sessions available to the connected user.
+        /// Asynchronously gets the list of server utilities available to the connected user.
         /// </summary>
-        public Task<List<IEssSession>> GetSessionsAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssUtility>> GetUtilitiesAsync(CancellationToken cancellationToken = default);
     }
 }

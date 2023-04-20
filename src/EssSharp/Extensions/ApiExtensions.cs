@@ -43,6 +43,23 @@ namespace EssSharp.Api
         }
 
         /// <summary>
+        /// Downloads and returns a <see cref="Stream"/> containing the utility file.
+        /// </summary>
+        /// <param name="api" />
+        /// <param name="id" />
+        /// <param name="operationIndex" />
+        /// <param name="cancellationToken" />
+        internal static async Task<Stream> ResourcesDownloadUtilityFileStreamAsync(this TemplatesAndUtilitiesApi api, string id, int operationIndex = 0, CancellationToken cancellationToken = default)
+        {
+            var rawContent = (await api.ResourcesDownloadUtilityWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false))?.RawContent;
+
+            if ( string.IsNullOrEmpty(rawContent) )
+                return null;
+
+            return new MemoryStream(Encoding.UTF8.GetBytes(rawContent));
+        }
+
+        /// <summary>
         /// A extension overload that returns a boolean to indicate whether an exception can 
         /// reasonably thrown for an <see cref="RestResponse"/>.
         /// </summary>

@@ -305,6 +305,28 @@ namespace EssSharp
             }
         }
 
+        
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssUtility"/> objects.</returns>
+        public List<IEssUtility> GetUtilities() => GetUtilitiesAsync()?.GetAwaiter().GetResult() ?? new List<IEssUtility>();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssUtility"/> objects.</returns>
+        public async Task<List<IEssUtility>> GetUtilitiesAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<TemplatesAndUtilitiesApi>();
+                var utilities = await api.ResourcesGetUtilitiesAsync(0, cancellationToken).ConfigureAwait(false);
+
+                return utilities?.ToEssSharpList(this) ?? new List<IEssUtility>();
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+        }
+
         #endregion
     }
 }
