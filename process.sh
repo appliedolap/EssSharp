@@ -161,6 +161,68 @@ cat temp.json | jq '.definitions."AboutInstance" = {
   }
 }' > json.tmp && mv json.tmp temp.json
 
+# The Files api doesn't model a response at all, so we create and stick a FileList and File definitions.
+cat temp.json | jq '.definitions."FileList" = {
+  "type": "object",
+  "properties": {
+    "hasMore": {
+      "type": "boolean"
+    },
+    "totalResults": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "count": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/File"
+      }
+    },
+    "limit": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "properties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "offset": {
+      "type": "integer",
+      "format": "int64"
+    }
+  }
+}' > json.tmp && mv json.tmp temp.json
+
+cat temp.json | jq '.definitions."File" = {
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "fullPath": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "permissions" {
+      "type": "object"
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Link"
+      }
+    }
+  }
+}' > json.tmp && mv json.tmp temp.json
+
 # There are duplicate "Datasource" definitions, and jq discards all but the last duplicate field of an object.
 # Were this an array, it would be easy enough to handle with unique/unique_by or even just simple indexing,
 # but for an object it is very difficult without leaning on the streaming parser. A simple fix is to just 
