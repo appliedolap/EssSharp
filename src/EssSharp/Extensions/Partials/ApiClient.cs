@@ -1,15 +1,10 @@
-﻿
-using Polly;
-using RestSharp.Serializers;
-using RestSharp;
-using System;
-using System.IO;
+﻿using System;
 using System.Net;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Linq;
 
 using EssSharp.Api;
+
+using RestSharp;
 
 namespace EssSharp.Client
 {
@@ -17,7 +12,7 @@ namespace EssSharp.Client
     public partial class ApiClient
     {
         /// <summary />
-        public string SessionID { get; private set; } = null;
+        public Cookie SessionCookie { get; private set; } = null;
 
         #region Partial Methods
 
@@ -27,16 +22,19 @@ namespace EssSharp.Client
         /// <param name="request">The RestSharp request object</param>
         partial void InterceptRequest( RestRequest request )
         {
-            // NOTE: We are waiting on RestSharp v109 to address an issue with cookie management.
+            // Return if the request is null.
+            if ( request is null )
+                return;
+
+            // NOTE: We are waiting on the OpenAPI Generator to bring in RestSharp v109+ to address an issue with cookie management.
             // https://github.com/restsharp/RestSharp/issues/1792
-            /*
+
             // If we have a JSESSIONID, remove any authorization headers.
-            if ( !string.IsNullOrEmpty(SessionID) )
+            if ( SessionCookie is not null )
             {
-                request?.Parameters.GetParameters(ParameterType.HttpHeader).RemoveParameter("Authorization");
-                request?.AddCookie("JSESSIONID", SessionID);
+                request.Parameters?.RemoveParameter("Authorization");
+                request.AddCookie(SessionCookie.Name, SessionCookie.Value, SessionCookie.Path, SessionCookie.Domain);
             }
-            */
         }
 
         /// <summary>
@@ -46,17 +44,20 @@ namespace EssSharp.Client
         /// <param name="response">The RestSharp response object</param>
         partial void InterceptResponse( RestRequest request, RestResponse response )
         {
+            // Return if the response is null.
+            if ( response is null )
+                return;
+
             // If the response was not successful and an exception is available, throw it.
             if ( !response.IsSuccessful() && response.ErrorException is WebException webException )
                 throw webException;
 
-            // NOTE: We are waiting on RestSharp v109 to address an issue with cookie management.
+            // NOTE: We are waiting on the OpenAPI Generator to bring in RestSharp v109+ to address an issue with cookie management.
             // https://github.com/restsharp/RestSharp/issues/1792
-            /*
-            // If we have a JSESSIONID, retain it.
+
+            // If we have a JSESSIONID, retain the session cookie.
             if ( response.Cookies?.Cast<Cookie>().FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) is { } cookie )
-                SessionID = cookie.Value;
-            */
+                SessionCookie = cookie;
         }
 
         #endregion
