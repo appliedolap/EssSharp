@@ -493,7 +493,7 @@ namespace EssSharp.Client
             if (RetryConfiguration.RetryPolicy != null)
             {
                 var policy = RetryConfiguration.RetryPolicy;
-                var policyResult = policy.ExecuteAndCapture(() => client.Execute(req));
+                var policyResult = policy.ExecuteAndCapture((context) => client.Execute(req), new Dictionary<string, object> { ["client"] = this, ["configuration"] = configuration, ["request"] = req });
                 response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>(req)
                 {
                     ErrorException = policyResult.FinalException
@@ -594,7 +594,7 @@ namespace EssSharp.Client
             if (RetryConfiguration.AsyncRetryPolicy != null)
             {
                 var policy = RetryConfiguration.AsyncRetryPolicy;
-                var policyResult = await policy.ExecuteAndCaptureAsync((ct) => client.ExecuteAsync(req, ct), cancellationToken).ConfigureAwait(false);
+                var policyResult = await policy.ExecuteAndCaptureAsync((context, ct) => client.ExecuteAsync(req, ct), new Dictionary<string, object> { ["client"] = this, ["configuration"] = configuration, ["request"] = req }, cancellationToken).ConfigureAwait(false);
                 response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>(req)
                 {
                     ErrorException = policyResult.FinalException

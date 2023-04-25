@@ -12,7 +12,7 @@ namespace EssSharp.Client
     public partial class ApiClient
     {
         /// <summary />
-        public Cookie SessionCookie { get; private set; } = null;
+        public Cookie SessionCookie { get; internal set; } = null;
 
         #region Partial Methods
 
