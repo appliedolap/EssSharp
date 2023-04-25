@@ -3,7 +3,11 @@
 
 # The OpenAPI Generator always produces files with LF endings,
 # so ensure the endings of these are left alone on Windows.
-*.cs      text eol=lf
-*.md      text eol=lf
-*.json    text eol=lf
-*.sh      text eol=lf
+/src/EssSharp/Api/**/*.cs    text eol=lf
+/src/EssSharp/Client/**/*.cs text eol=lf
+/src/EssSharp/Model/**/*.cs  text eol=lf
+/src/EssSharp.Test/**/*.cs   text eol=lf
+
+*.md   text eol=lf
+*.json text eol=lf
+*.sh   text eol=lf
