@@ -144,9 +144,9 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of System.IO.Stream</returns>
-        public async System.Threading.Tasks.Task<System.IO.Stream> DownloadFileAsync( string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken) )
+        public async System.Threading.Tasks.Task<System.IO.Stream> FilesDownloadFileAsync( string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken) )
         {
-            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = await DownloadFileWithHttpInfoAsync(path, offset, limit, type, overwrite, action, fileSize, filter, recursive, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = await FilesDownloadFileWithHttpInfoAsync(path, offset, limit, type, overwrite, action, fileSize, filter, recursive, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -166,7 +166,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<System.IO.Stream>> DownloadFileWithHttpInfoAsync( string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken) )
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<System.IO.Stream>> FilesDownloadFileWithHttpInfoAsync( string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken) )
         {
             // verify the required parameter 'path' is set
             if ( path == null )
