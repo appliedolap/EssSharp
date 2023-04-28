@@ -127,20 +127,24 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         public Task StopAsync( CancellationToken cancellationToken = default );
 
-        /// <summary>
-        /// Returns the Status
-        /// </summary>
-        public EssApplicationStatus Status { get; }
+        #endregion
+
+        #region Properties
 
         /// <summary>
-        /// Created Date
+        /// Returns the date and time the application was created.
         /// </summary>
         public DateTime CreatedDate { get; }
 
         /// <summary>
-        /// Returns the Status
+        /// Returns the date and time the application was last modified.
         /// </summary>
         public DateTime ModifiedDate { get; }
+
+        /// <summary>
+        /// Returns the status of the application.
+        /// </summary>
+        public EssApplicationStatus Status { get; }
 
         #endregion
     }
