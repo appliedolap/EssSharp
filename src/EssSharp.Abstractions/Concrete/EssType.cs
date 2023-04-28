@@ -8,6 +8,7 @@
         DataSource,
         DrillThroughReport,
         File,
+        Folder,
         Group,
         Job,
         Member,

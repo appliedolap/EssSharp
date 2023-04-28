@@ -1,9 +1,182 @@
-﻿using System;
+﻿using EssSharp.Model;
+using System;
 
 namespace EssSharp.Api
 {
     public partial class FilesApi
     {
+        /// <summary>
+        /// Upload File or Create Folder &lt;p&gt;Uploads a file to Essbase.&lt;/p&gt;&lt;p&gt;Supported file types include text files, rules files, calculation script files, and MaxL script files.&lt;/p&gt; &lt;p&gt;If there is no content type, and a folder name is specified in the URL, a folder is created.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
+        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>GenericEntity</returns>
+        public GenericEntity FilesCreateFolder(string path, bool? append = default(bool?), int operationIndex = 0)
+        {
+            EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = FilesCreateFolderWithHttpInfo(path, append);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Upload File or Create Folder &lt;p&gt;Uploads a file to Essbase.&lt;/p&gt;&lt;p&gt;Supported file types include text files, rules files, calculation script files, and MaxL script files.&lt;/p&gt; &lt;p&gt;If there is no content type, and a folder name is specified in the URL, a folder is created.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
+        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of GenericEntity</returns>
+        public EssSharp.Client.ApiResponse<GenericEntity> FilesCreateFolderWithHttpInfo(string path, bool? append = default(bool?), int operationIndex = 0)
+        {
+            // verify the required parameter 'path' is set
+            if (path == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'path' when calling FilesApi->FilesCreateFolder");
+            }
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/xml"
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("path", EssSharp.Client.ClientUtils.ParameterToString(path)); // path parameter
+            if (append != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("append", EssSharp.Client.ClientUtils.ParameterToString(append)); // header parameter
+            }
+
+            localVarRequestOptions.Operation = "FilesApi.FilesCreateFolder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Put<GenericEntity>("/files/{path}", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FilesCreateFolder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Upload File or Create Folder &lt;p&gt;Uploads a file to Essbase.&lt;/p&gt;&lt;p&gt;Supported file types include text files, rules files, calculation script files, and MaxL script files.&lt;/p&gt; &lt;p&gt;If there is no content type, and a folder name is specified in the URL, a folder is created.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
+        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GenericEntity</returns>
+        public async System.Threading.Tasks.Task<GenericEntity> FilesCreateFolderAsync(string path, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = await FilesCreateFolderWithHttpInfoAsync(path, append, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Upload File or Create Folder &lt;p&gt;Uploads a file to Essbase.&lt;/p&gt;&lt;p&gt;Supported file types include text files, rules files, calculation script files, and MaxL script files.&lt;/p&gt; &lt;p&gt;If there is no content type, and a folder name is specified in the URL, a folder is created.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
+        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GenericEntity)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenericEntity>> FilesCreateFolderWithHttpInfoAsync(string path, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'path' is set
+            if (path == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'path' when calling FilesApi->FilesCreateFolder");
+            }
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/xml"
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("path", EssSharp.Client.ClientUtils.ParameterToString(path)); // path parameter
+            if (append != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("append", EssSharp.Client.ClientUtils.ParameterToString(append)); // header parameter
+            }
+
+            localVarRequestOptions.Operation = "FilesApi.FilesCreateFolder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PutAsync<GenericEntity>("/files/{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("FilesCreateFolder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+
         /// <summary>
         /// List or Download Files &lt;p&gt;Returns a list of files, or downloads the specified file. To list files, use &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; for the Accept header. To download, use &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt; for the Accept header.&lt;/p&gt;
         /// </summary>

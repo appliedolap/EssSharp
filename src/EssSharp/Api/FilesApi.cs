@@ -58,10 +58,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
+        /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>GenericEntity</returns>
-        GenericEntity FilesAddFile(string path, bool overwrite, bool? append = default(bool?), int operationIndex = 0);
+        GenericEntity FilesAddFile(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0);
 
         /// <summary>
         /// Upload File or Create Folder
@@ -72,10 +73,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
+        /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of GenericEntity</returns>
-        ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, bool? append = default(bool?), int operationIndex = 0);
+        ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0);
         /// <summary>
         /// Copy File
         /// </summary>
@@ -267,8 +269,8 @@ namespace EssSharp.Api
         /// <param name="filter">&lt;p&gt;Filter the list of files.&lt;/p&gt; (optional)</param>
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>CollectionResponse</returns>
-        CollectionResponse FilesListRootFolders(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0);
+        /// <returns>FileCollectionResponse</returns>
+        FileCollectionResponse FilesListRootFolders(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0);
 
         /// <summary>
         /// List Root Folders
@@ -280,8 +282,8 @@ namespace EssSharp.Api
         /// <param name="filter">&lt;p&gt;Filter the list of files.&lt;/p&gt; (optional)</param>
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of CollectionResponse</returns>
-        ApiResponse<CollectionResponse> FilesListRootFoldersWithHttpInfo(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0);
+        /// <returns>ApiResponse of FileCollectionResponse</returns>
+        ApiResponse<FileCollectionResponse> FilesListRootFoldersWithHttpInfo(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0);
         /// <summary>
         /// Move or Rename File
         /// </summary>
@@ -424,11 +426,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
+        /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenericEntity</returns>
-        System.Threading.Tasks.Task<GenericEntity> FilesAddFileAsync(string path, bool overwrite, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GenericEntity> FilesAddFileAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Upload File or Create Folder
@@ -439,11 +442,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
+        /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenericEntity)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenericEntity>> FilesAddFileWithHttpInfoAsync(string path, bool overwrite, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GenericEntity>> FilesAddFileWithHttpInfoAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Copy File
         /// </summary>
@@ -650,8 +654,8 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of CollectionResponse</returns>
-        System.Threading.Tasks.Task<CollectionResponse> FilesListRootFoldersAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of FileCollectionResponse</returns>
+        System.Threading.Tasks.Task<FileCollectionResponse> FilesListRootFoldersAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List Root Folders
@@ -664,8 +668,8 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (CollectionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CollectionResponse>> FilesListRootFoldersWithHttpInfoAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (FileCollectionResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<FileCollectionResponse>> FilesListRootFoldersWithHttpInfoAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Move or Rename File
         /// </summary>
@@ -1070,12 +1074,13 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
+        /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>GenericEntity</returns>
-        public GenericEntity FilesAddFile(string path, bool overwrite, bool? append = default(bool?), int operationIndex = 0)
+        public GenericEntity FilesAddFile(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = FilesAddFileWithHttpInfo(path, overwrite, append);
+            EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = FilesAddFileWithHttpInfo(path, overwrite, stream, append);
             return localVarResponse.Data;
         }
 
@@ -1085,10 +1090,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
+        /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of GenericEntity</returns>
-        public EssSharp.Client.ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, bool? append = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -1096,9 +1102,16 @@ namespace EssSharp.Api
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'path' when calling FilesApi->FilesAddFile");
             }
 
+            // verify the required parameter 'stream' is set
+            if (stream == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'stream' when calling FilesApi->FilesAddFile");
+            }
+
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/octet-stream"
             };
 
             // to determine the Accept header
@@ -1125,6 +1138,7 @@ namespace EssSharp.Api
             {
                 localVarRequestOptions.HeaderParameters.Add("append", EssSharp.Client.ClientUtils.ParameterToString(append)); // header parameter
             }
+            localVarRequestOptions.Data = stream;
 
             localVarRequestOptions.Operation = "FilesApi.FilesAddFile";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1156,13 +1170,14 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
+        /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenericEntity</returns>
-        public async System.Threading.Tasks.Task<GenericEntity> FilesAddFileAsync(string path, bool overwrite, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GenericEntity> FilesAddFileAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = await FilesAddFileWithHttpInfoAsync(path, overwrite, append, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = await FilesAddFileWithHttpInfoAsync(path, overwrite, stream, append, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1172,11 +1187,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
+        /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenericEntity)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenericEntity>> FilesAddFileWithHttpInfoAsync(string path, bool overwrite, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenericEntity>> FilesAddFileWithHttpInfoAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -1184,10 +1200,17 @@ namespace EssSharp.Api
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'path' when calling FilesApi->FilesAddFile");
             }
 
+            // verify the required parameter 'stream' is set
+            if (stream == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'stream' when calling FilesApi->FilesAddFile");
+            }
+
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/octet-stream"
             };
 
             // to determine the Accept header
@@ -1214,6 +1237,7 @@ namespace EssSharp.Api
             {
                 localVarRequestOptions.HeaderParameters.Add("append", EssSharp.Client.ClientUtils.ParameterToString(append)); // header parameter
             }
+            localVarRequestOptions.Data = stream;
 
             localVarRequestOptions.Operation = "FilesApi.FilesAddFile";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -2439,10 +2463,10 @@ namespace EssSharp.Api
         /// <param name="filter">&lt;p&gt;Filter the list of files.&lt;/p&gt; (optional)</param>
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>CollectionResponse</returns>
-        public CollectionResponse FilesListRootFolders(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0)
+        /// <returns>FileCollectionResponse</returns>
+        public FileCollectionResponse FilesListRootFolders(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<CollectionResponse> localVarResponse = FilesListRootFoldersWithHttpInfo(filter, recursive);
+            EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = FilesListRootFoldersWithHttpInfo(filter, recursive);
             return localVarResponse.Data;
         }
 
@@ -2453,8 +2477,8 @@ namespace EssSharp.Api
         /// <param name="filter">&lt;p&gt;Filter the list of files.&lt;/p&gt; (optional)</param>
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of CollectionResponse</returns>
-        public EssSharp.Client.ApiResponse<CollectionResponse> FilesListRootFoldersWithHttpInfo(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0)
+        /// <returns>ApiResponse of FileCollectionResponse</returns>
+        public EssSharp.Client.ApiResponse<FileCollectionResponse> FilesListRootFoldersWithHttpInfo(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -2499,7 +2523,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<CollectionResponse>("/files", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<FileCollectionResponse>("/files", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("FilesListRootFolders", localVarResponse);
@@ -2520,10 +2544,10 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of CollectionResponse</returns>
-        public async System.Threading.Tasks.Task<CollectionResponse> FilesListRootFoldersAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of FileCollectionResponse</returns>
+        public async System.Threading.Tasks.Task<FileCollectionResponse> FilesListRootFoldersAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<CollectionResponse> localVarResponse = await FilesListRootFoldersWithHttpInfoAsync(filter, recursive, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = await FilesListRootFoldersWithHttpInfoAsync(filter, recursive, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2535,8 +2559,8 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (CollectionResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CollectionResponse>> FilesListRootFoldersWithHttpInfoAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (FileCollectionResponse)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FileCollectionResponse>> FilesListRootFoldersWithHttpInfoAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2582,7 +2606,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<CollectionResponse>("/files", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<FileCollectionResponse>("/files", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

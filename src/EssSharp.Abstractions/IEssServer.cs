@@ -7,6 +7,42 @@ namespace EssSharp
     /// <summary />
     public interface IEssServer : IEssObject
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public IEssFile GetFile(string path);
+
+        /// <summary />
+        /// <param name="path" />
+        /// <param name="cancellationToken" />
+        public Task<IEssFile> GetFileAsync(string path, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public IEssFolder GetFolder( string path );
+
+        /// <summary />
+        /// <param name="path" />
+        /// <param name="cancellationToken" />
+        public Task<IEssFolder> GetFolderAsync( string path, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the list of files for this server available to the connected user.
+        /// </summary>
+        public List<IEssFolder> GetFolders();
+
+        /// <summary>
+        /// Asynchronously gets the list of files for this server available to the connected user.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task<List<IEssFolder>> GetFoldersAsync(CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Gets the about information of this server
         /// </summary>

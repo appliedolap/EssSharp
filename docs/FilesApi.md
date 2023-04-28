@@ -115,7 +115,7 @@ void (empty response body)
 
 <a name="filesaddfile"></a>
 # **FilesAddFile**
-> GenericEntity FilesAddFile (string path, bool overwrite, bool? append = null)
+> GenericEntity FilesAddFile (string path, bool overwrite, System.IO.Stream stream, bool? append = null)
 
 Upload File or Create Folder
 
@@ -144,12 +144,13 @@ namespace Example
             var apiInstance = new FilesApi(config);
             var path = "path_example";  // string | <p>Catalog path. If <code>Content-Type=application/octet-stream</code>, this is a file name. Otherwise, it is a folder name.</p>
             var overwrite = false;  // bool | <p>Applicable only for adding a file. Overwriting folders is not supported.</p> (default to false)
+            var stream = new System.IO.MemoryStream(System.IO.File.ReadAllBytes("/path/to/file.txt"));  // System.IO.Stream | <p>Applicable only for adding a file. Provides the stream to upload.</p>
             var append = false;  // bool? | append (optional)  (default to false)
 
             try
             {
                 // Upload File or Create Folder
-                GenericEntity result = apiInstance.FilesAddFile(path, overwrite, append);
+                GenericEntity result = apiInstance.FilesAddFile(path, overwrite, stream, append);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -170,7 +171,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Upload File or Create Folder
-    ApiResponse<GenericEntity> response = apiInstance.FilesAddFileWithHttpInfo(path, overwrite, append);
+    ApiResponse<GenericEntity> response = apiInstance.FilesAddFileWithHttpInfo(path, overwrite, stream, append);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -189,6 +190,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **path** | **string** | &lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt; |  |
 | **overwrite** | **bool** | &lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt; | [default to false] |
+| **stream** | **System.IO.Stream****System.IO.Stream** | &lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt; |  |
 | **append** | **bool?** | append | [optional] [default to false] |
 
 ### Return type
@@ -201,7 +203,7 @@ catch (ApiException e)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/octet-stream
  - **Accept**: application/json, application/xml
 
 
@@ -897,7 +899,7 @@ catch (ApiException e)
 
 <a name="fileslistrootfolders"></a>
 # **FilesListRootFolders**
-> CollectionResponse FilesListRootFolders (string filter = null, bool? recursive = null)
+> FileCollectionResponse FilesListRootFolders (string filter = null, bool? recursive = null)
 
 List Root Folders
 
@@ -930,7 +932,7 @@ namespace Example
             try
             {
                 // List Root Folders
-                CollectionResponse result = apiInstance.FilesListRootFolders(filter, recursive);
+                FileCollectionResponse result = apiInstance.FilesListRootFolders(filter, recursive);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -951,7 +953,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List Root Folders
-    ApiResponse<CollectionResponse> response = apiInstance.FilesListRootFoldersWithHttpInfo(filter, recursive);
+    ApiResponse<FileCollectionResponse> response = apiInstance.FilesListRootFoldersWithHttpInfo(filter, recursive);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -973,7 +975,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**CollectionResponse**](CollectionResponse.md)
+[**FileCollectionResponse**](FileCollectionResponse.md)
 
 ### Authorization
 

@@ -512,7 +512,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Folder list.</p>",
             "schema": {
-              "$ref": "#/definitions/CollectionResponse"
+              "$ref": "#/definitions/FileCollectionResponse"
             }
           },
           "400": {
@@ -814,6 +814,16 @@
             "required": false,
             "type": "boolean",
             "default": false
+          },
+          {
+            "name": "stream",
+            "in": "body",
+            "description": "<p>Applicable only for adding a file. Provides the stream to upload.</p>",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
           }
         ],
         "responses": {

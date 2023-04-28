@@ -336,10 +336,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CollectionResponse'
+                $ref: '#/components/schemas/FileCollectionResponse'
             application/xml:
               schema:
-                $ref: '#/components/schemas/CollectionResponse'
+                $ref: '#/components/schemas/FileCollectionResponse'
           description: <p><strong>OK</strong></p><p>Folder list.</p>
         "400":
           content: {}
@@ -628,6 +628,15 @@ paths:
         schema:
           default: false
           type: boolean
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              format: binary
+              type: string
+        description: <p>Applicable only for adding a file. Provides the stream to
+          upload.</p>
+        required: true
       responses:
         "200":
           content:
@@ -650,6 +659,7 @@ paths:
       summary: Upload File or Create Folder
       tags:
       - Files
+      x-codegen-request-body-name: stream
   /applications/{applicationName}/configurations/{configId}:
     delete:
       description: <p>Deletes the specified configuration property from the specified
@@ -14412,17 +14422,6 @@ components:
           type: string
       type: object
     CollectionResponse:
-      example:
-        totalResults: 0
-        offset: 5
-        hasMore: true
-        count: 6
-        limit: 1
-        items:
-        - "{}"
-        - "{}"
-        properties:
-          key: properties
       properties:
         hasMore:
           type: boolean

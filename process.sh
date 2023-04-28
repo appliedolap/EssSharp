@@ -83,8 +83,24 @@ cat temp.json | jq '.paths."/datasources/query".post.consumes = ["application/js
 # Fix the consumes for the datasources query stream endpoint
 cat temp.json | jq '.paths."/datasources/query/stream".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
-# Add a modeled response type for the files endpoint.
+# Add a modeled response type for the files get endpoint.
+cat temp.json | jq '.paths."/files".get.responses."200".schema = { "$ref": "#/definitions/FileCollectionResponse" }' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/files/{path}".get.responses."200".schema = { "$ref": "#/definitions/FileCollectionResponse" }' > json.tmp && mv json.tmp temp.json
+
+# Add a stream request parameter to the files put endpoint.
+cat temp.json | jq '.paths."/files/{path}".put.consumes = ["application/octet-stream"]' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/files/{path}".put.parameters += [
+  {
+    "name": "stream",
+    "in": "body",
+    "description": "<p>Applicable only for adding a file. Provides the stream to upload.</p>",
+    "required": true,
+    "schema": {
+      "type": "string",
+      "format": "binary"
+    }
+  }
+]' > json.tmp && mv json.tmp temp.json
 
 # Fix the post parameters for the export outline to xml endpoint. 
 cat temp.json | jq '.paths."/outline/{app}/{cube}/xml".post.parameters = [
@@ -161,67 +177,6 @@ cat temp.json | jq '.definitions."AboutInstance" = {
   }
 }' > json.tmp && mv json.tmp temp.json
 
-# The Files api doesn't model a response at all, so we create and stick a FileList and File definitions.
-cat temp.json | jq '.definitions."FileList" = {
-  "type": "object",
-  "properties": {
-    "hasMore": {
-      "type": "boolean"
-    },
-    "totalResults": {
-      "type": "integer",
-      "format": "int64"
-    },
-    "count": {
-      "type": "integer",
-      "format": "int64"
-    },
-    "items": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/File"
-      }
-    },
-    "limit": {
-      "type": "integer",
-      "format": "int64"
-    },
-    "properties": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      }
-    },
-    "offset": {
-      "type": "integer",
-      "format": "int64"
-    }
-  }
-}' > json.tmp && mv json.tmp temp.json
-
-cat temp.json | jq '.definitions."File" = {
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string"
-    },
-    "fullPath": {
-      "type": "string"
-    },
-    "type": {
-      "type": "string"
-    },
-    "permissions" {
-      "type": "object"
-    },
-    "links": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Link"
-      }
-    }
-  }
-}' > json.tmp && mv json.tmp temp.json
 
 # There are duplicate "Datasource" definitions, and jq discards all but the last duplicate field of an object.
 # Were this an array, it would be easy enough to handle with unique/unique_by or even just simple indexing,

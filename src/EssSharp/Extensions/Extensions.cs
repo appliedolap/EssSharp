@@ -50,14 +50,14 @@ namespace EssSharp
         /// </summary>
         /// <param name="dimensionList" />
         /// <param name="cube" />
-        internal static List<IEssDimension> ToEssSharpList( this DimensionList dimensionList, EssCube cube )
+        internal static List<IEssDimension> ToEssSharpList(this DimensionList dimensionList, EssCube cube)
         {
             if (cube is null)
                 throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
 
             return dimensionList
                 .Items?
-                .Where (dimension => dimension is not null)
+                .Where(dimension => dimension is not null)
                 .Select(dimension => new EssDimension(dimension, cube) as IEssDimension)
                 .ToList() ?? new List<IEssDimension>();
         }
@@ -77,6 +77,24 @@ namespace EssSharp
                 .Where(report => report is not null)
                 .Select(report => new EssDrillThroughReport(report, cube) as IEssDrillThroughReport)
                 .ToList() ?? new List<IEssDrillThroughReport>();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssUtility"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="fileCollectionResponse" />
+        /// <param name="server" />
+        internal static List<T> ToEssSharpList<T>(this FileCollectionResponse fileCollectionResponse, EssServer server) where T : class, IEssFile
+        {
+            if (server is null)
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+
+            return fileCollectionResponse
+                .Items?
+                .Where(file => file is not null)
+                .Select(file => (string.Equals(file.Type, "folder", StringComparison.OrdinalIgnoreCase) ? new EssFolder(file, server) : new EssFile(file, server)) as T)
+                .Where(file => file is not null && (typeof(T) == typeof(IEssFolder) || file is not EssFolder))
+                .ToList() ?? new List<T>();
         }
 
         /// <summary>

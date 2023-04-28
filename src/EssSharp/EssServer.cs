@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -97,6 +98,117 @@ namespace EssSharp
                 return new EssAbout(about);
             }
             catch ( Exception )
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc/>
+        public IEssFile GetFile(string path) => GetFileAsync(path)?.GetAwaiter().GetResult();
+
+        /// <inheritdoc/>
+        public async Task<IEssFile> GetFileAsync(string path, CancellationToken cancellationToken = default)
+        {
+            // Trim leading and trailing slashes from the given folder path.
+            if ( string.IsNullOrEmpty(path = path?.Trim('/')) )
+                throw new ArgumentException("A file path is required.", nameof(path));
+
+            try
+            {
+                var api = GetApi<FilesApi>();
+                var files = default(FileCollectionResponse);
+
+                // Split the given folder path into components and capture the last component as the folder name to filter on.
+                var pathComponents = path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                var fileName = pathComponents?.LastOrDefault();
+
+                // If we have one or fewer path components, we're looking for a root folder.
+                if (pathComponents?.Length <= 1)
+                {
+                    files = await api.FilesListRootFoldersAsync(fileName, false, 0, cancellationToken).ConfigureAwait(false);
+                }
+                // Otherwise, we're looking for a nested folder.
+                else
+                {
+                    // Build the search path from all but the last path component.
+                    var searchPath = string.Join(@"/", pathComponents.Take(pathComponents.Length - 1));
+                    files = await api.FilesListFilesAsync(searchPath, null, null, null, null, null, null, fileName, false, 0, cancellationToken).ConfigureAwait(false);
+                }
+
+                // If the given folder path was found, return it.
+                foreach (var file in files?.ToEssSharpList<IEssFile>(this) ?? new List<IEssFile>())
+                    if (string.Equals(fileName, file.Name, StringComparison.OrdinalIgnoreCase))
+                        return file;
+
+                throw new Exception("File not found.");
+            }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to get the file ""/{path}"". {e.Message}", e);
+            }
+        }
+
+
+        /// <inheritdoc/>
+        public IEssFolder GetFolder( string path ) => GetFolderAsync(path)?.GetAwaiter().GetResult();
+
+        /// <inheritdoc/>
+        public async Task<IEssFolder> GetFolderAsync( string path, CancellationToken cancellationToken = default )
+        {
+            // Trim leading and trailing slashes from the given folder path.
+            if ( string.IsNullOrEmpty(path = path?.Trim('/')) )
+                throw new ArgumentException("A folder path is required.", nameof(path));
+
+            try
+            {
+                var api = GetApi<FilesApi>();
+                var files = default(FileCollectionResponse);
+
+                // Split the given folder path into components and capture the last component as the folder name to filter on.
+                var pathComponents = path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                var folderName = pathComponents?.LastOrDefault();
+
+                // If we have one or fewer path components, we're looking for a root folder.
+                if ( pathComponents?.Length <= 1 )
+                {
+                    files = await api.FilesListRootFoldersAsync(folderName, false, 0, cancellationToken).ConfigureAwait(false);
+                }
+                // Otherwise, we're looking for a nested folder.
+                else
+                {
+                    // Build the search path from all but the last path component.
+                    var searchPath = string.Join(@"/", pathComponents.Take(pathComponents.Length - 1));
+                    files = await api.FilesListFilesAsync(searchPath, null, null, "folder", null, null, null, folderName, false, 0, cancellationToken).ConfigureAwait(false);
+                }
+
+                // If the given folder path was found, return it.
+                foreach ( var folder in files?.ToEssSharpList<IEssFolder>(this) ?? new List<IEssFolder>() )
+                    if ( string.Equals(folderName, folder.Name, StringComparison.OrdinalIgnoreCase) )
+                        return folder;
+
+                throw new Exception("Folder not found.");
+            }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to get the folder ""/{path}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc/>
+        public List<IEssFolder> GetFolders() => GetFoldersAsync()?.GetAwaiter().GetResult() ?? new List<IEssFolder>();
+
+        /// <inheritdoc/>
+        public async Task<List<IEssFolder>> GetFoldersAsync(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var api = GetApi<FilesApi>();
+                var files = await api.FilesListRootFoldersAsync(null, false).ConfigureAwait(false);
+
+                return files?.ToEssSharpList<IEssFolder>(this) ?? new List<IEssFolder>();
+
+            }
+            catch (Exception)
             {
                 throw;
             }

@@ -73,8 +73,9 @@ namespace EssSharp.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string path = null;
             //bool overwrite = null;
+            //System.IO.Stream stream = null;
             //bool? append = null;
-            //var response = instance.FilesAddFile(path, overwrite, append);
+            //var response = instance.FilesAddFile(path, overwrite, stream, append);
             //Assert.IsType<GenericEntity>(response);
         }
 
@@ -179,7 +180,7 @@ namespace EssSharp.Test.Api
             //string filter = null;
             //bool? recursive = null;
             //var response = instance.FilesListRootFolders(filter, recursive);
-            //Assert.IsType<CollectionResponse>(response);
+            //Assert.IsType<FileCollectionResponse>(response);
         }
 
         /// <summary>
