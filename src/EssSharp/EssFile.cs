@@ -23,7 +23,7 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssFile(FileBean file, EssServer server) : base(server?.Configuration, server?.Client)
+        internal EssFile( FileBean file, EssServer server ) : base( server?.Configuration, server?.Client ) 
         {
             _server = server ??
                 throw new ArgumentNullException(nameof(server), $"An {nameof(EssServer)} {nameof(server)} is required to create an {nameof(EssFile)}.");
@@ -86,14 +86,11 @@ namespace EssSharp
         #region IEssFile Methods
 
         /// <inheritdoc/>
-        public virtual void Copy(string newFilePath, bool overwrite = false) =>
-            CopyAsync(newFilePath, overwrite).GetAwaiter().GetResult();
+        public virtual void Copy( string newFilePath, bool overwrite = false ) =>
+            CopyAsync( newFilePath, overwrite ).GetAwaiter().GetResult();
 
         /// <inheritdoc/>
-        // change type from void to task
-        // capitalize method and property in a class
-        // add configure await
-        public virtual async Task CopyAsync(string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default)
+        public virtual async Task CopyAsync( string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -114,10 +111,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
+        /// <returns> A <see cref="Stream"/> object.</returns>
         public Stream Download() => DownloadAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc/>
-        public async Task<Stream> DownloadAsync(CancellationToken cancellationToken = default)
+        /// <returns> A <see cref="Stream"/> object.</returns>
+        public async Task<Stream> DownloadAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -134,7 +133,7 @@ namespace EssSharp
         public void Delete() => DeleteAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        public async Task DeleteAsync(CancellationToken cancellationToken = default)
+        public async Task DeleteAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -148,7 +147,7 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
-        public virtual void Move( string newFilePath, bool overwrite = false ) => MoveAsync(newFilePath, overwrite)?.GetAwaiter().GetResult();
+        public virtual void Move( string newFilePath, bool overwrite = false ) => MoveAsync( newFilePath, overwrite )?.GetAwaiter().GetResult();
 
         /// <inheritdoc/>
         public virtual async Task MoveAsync( string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default )
@@ -175,7 +174,7 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
-        public void Rename(string newFilePath, bool overwrite = false) => RenameAsync(newFilePath, overwrite)?.GetAwaiter().GetResult();
+        public void Rename( string newFilePath, bool overwrite = false ) => RenameAsync( newFilePath, overwrite )?.GetAwaiter().GetResult();
 
         /// <inheritdoc/>
         public virtual async Task RenameAsync( string newFileName, bool overwrite = false, CancellationToken cancellationToken = default )
@@ -202,10 +201,10 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
-        public virtual void Extract(bool overwrite = false) => ExtractAsync(overwrite).GetAwaiter().GetResult();
+        public virtual void Extract( bool overwrite = false ) => ExtractAsync( overwrite ).GetAwaiter().GetResult();
 
         /// <inheritdoc/>
-        public virtual async Task ExtractAsync(bool overwrite = false, CancellationToken cancellationToken = default)
+        public virtual async Task ExtractAsync( bool overwrite = false, CancellationToken cancellationToken = default )
         {
             try
             {

@@ -43,13 +43,12 @@ namespace EssSharp
         #region Methods
 
         /// <inheritdoc/>
-       public IEssFolder CreateSubfolder( string subfolderName, bool append = false ) => 
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
+        public IEssFolder CreateSubfolder( string subfolderName, bool append = false ) => 
             CreateSubfolderAsync(subfolderName, append)?.GetAwaiter().GetResult();
 
         /// <inheritdoc/>
-        /// return folder that is created
-        /// check if you have permission and if folder exists already
-        /// figure out exception to throw
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public async Task<IEssFolder> CreateSubfolderAsync( string subfolderName, bool append = false, CancellationToken cancellationToken = default )
         {
             try
@@ -125,15 +124,19 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile UploadFile(string path, string filename = default, bool overwrite = false) => UploadFileAsync(path, filename, overwrite)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile UploadFile(FileStream stream, string filename = null, bool overwrite = false) => UploadFileAsync(stream, filename, overwrite)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile UploadFile(Stream stream, string filename, bool overwrite = false) => UploadFileAsync(stream, filename, overwrite)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> UploadFileAsync(string path, string filename = default, bool overwrite = false, CancellationToken cancellationToken = default)
         {
             if ( !File.Exists(path) )
@@ -144,10 +147,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public Task<IEssFile> UploadFileAsync( FileStream stream, string filename = null, bool overwrite = false, CancellationToken cancellationToken = default ) =>
             UploadFileAsync(stream as Stream, filename ?? Path.GetFileName(stream.Name), overwrite, cancellationToken);
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> UploadFileAsync( Stream stream, string filename, bool overwrite = false, CancellationToken cancellationToken = default )
         {
             try
@@ -179,10 +184,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssFile"/> objects.</returns>
         public List<IEssFile> GetFiles(string nameFilter = null) => GetFilesAsync()?.GetAwaiter().GetResult();
 
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssFile"/> objects.</returns>
         public async Task<List<IEssFile>> GetFilesAsync(string nameFilter = null, CancellationToken cancellationToken = default)
         {
             var api = GetApi<FilesApi>();
@@ -193,10 +200,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssFolder"/> objects.</returns>
         public List<IEssFolder> GetFolders( string nameFilter = null) => GetFoldersAsync(nameFilter)?.GetAwaiter().GetResult();
 
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssFolder"/> objects.</returns>
         public async Task<List<IEssFolder>> GetFoldersAsync( string nameFilter = null, CancellationToken cancellationToken = default )
         {
             var api = GetApi<FilesApi>();

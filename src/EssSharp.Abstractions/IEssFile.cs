@@ -14,7 +14,6 @@ namespace EssSharp
         /// <summary>
         /// Returns the server that contains this file.
         /// </summary>
-        /// <returns>The server that contains this file.</returns>
         IEssServer Server { get; }
 
         /// <summary>
@@ -49,16 +48,24 @@ namespace EssSharp
         /// </summary>
         /// <param name="newFilePath"></param>
         /// <param name="overwrite"></param>
-        public Task CopyAsync(string newFilePath, bool overwrite = default, CancellationToken cancellationToken = default);
+        /// <param name="cancellationToken"></param>
+        public Task CopyAsync( string newFilePath, bool overwrite = default, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Download a file to a Stream
+        /// </summary>
         public Stream Download();
 
+        /// <summary>
+        /// Download a file to a Stream
+        /// </summary>
+        /// <param name="cancellationToken"></param>
         public Task<Stream> DownloadAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Delete a specific file
         /// </summary>
-        public void Delete( );
+        public void Delete();
 
         /// <summary>
         /// Delete a specific file
@@ -77,7 +84,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="newFilePath"></param>
         /// <param name="overwrite"></param>
-        public Task MoveAsync(string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default);
+        /// <param name="cancellationToken"></param
+        public Task MoveAsync( string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Renames a file or folder
@@ -91,7 +99,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="newFilePath"></param>
         /// <param name="overwrite"></param>
-        public Task RenameAsync(string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default );
+        /// <param name="cancellationToken"></param>
+        public Task RenameAsync( string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Extract a zip file on same location
@@ -103,6 +112,7 @@ namespace EssSharp
         /// Extract a zip file on same location
         /// </summary>
         /// <param name="overwrite"></param>
+        /// <param name="cancellationToken"></param>
         public Task ExtractAsync( bool overwrite = false, CancellationToken cancellationToken = default );
 
         #endregion

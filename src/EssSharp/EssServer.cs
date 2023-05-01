@@ -104,9 +104,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile GetFile(string path) => GetFileAsync(path)?.GetAwaiter().GetResult();
 
         /// <inheritdoc/>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> GetFileAsync(string path, CancellationToken cancellationToken = default)
         {
             // Trim leading and trailing slashes from the given folder path.
@@ -150,9 +152,11 @@ namespace EssSharp
 
 
         /// <inheritdoc/>
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public IEssFolder GetFolder( string path ) => GetFolderAsync(path)?.GetAwaiter().GetResult();
 
         /// <inheritdoc/>
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public async Task<IEssFolder> GetFolderAsync( string path, CancellationToken cancellationToken = default )
         {
             // Trim leading and trailing slashes from the given folder path.
@@ -195,9 +199,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
+        /// <returns>A List of <see cref="IEssFolder"/> objects.</returns>
         public List<IEssFolder> GetFolders() => GetFoldersAsync()?.GetAwaiter().GetResult() ?? new List<IEssFolder>();
 
         /// <inheritdoc/>
+        /// <returns>A List of <see cref="IEssFolder"/> objects.</returns>
         public async Task<List<IEssFolder>> GetFoldersAsync(CancellationToken cancellationToken = default)
         {
             try
