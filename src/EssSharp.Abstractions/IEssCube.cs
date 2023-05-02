@@ -43,6 +43,30 @@ namespace EssSharp
         public Task<List<IEssDrillThroughReport>> GetDrillThroughReportsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Returns a  specific scripts in a cube
+        /// </summary>
+        /// <param name="scriptName"></param>
+        /// <returns></returns>
+        public IEssScript GetScript( string scriptName );
+
+        /// <summary>
+        /// Returns a specific script in a cube
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssScript> GetScriptAsync( string scriptName, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns a list of scripts in a cube
+        /// </summary>
+        public List<IEssScript> GetScripts();
+
+        /// <summary>
+        /// Returns a list of scripts in a cube
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssScript>> GetScriptsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Gets the list of cube-scoped variables available to the connected user.
         /// </summary>
         public List<IEssCubeVariable> GetVariables();

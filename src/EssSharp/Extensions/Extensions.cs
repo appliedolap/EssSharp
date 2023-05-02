@@ -164,6 +164,22 @@ namespace EssSharp
                 .ToList() ?? new List<IEssUtility>();
         }
 
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssScript"/> objects associated with the given <see cref="EssCube"/>.
+        /// </summary>
+        /// <param name="scriptList" />
+        /// <param name="cube" />
+        internal static List<IEssScript> ToEssSharpList(this ScriptList scriptList, EssCube cube)
+        {
+            if (cube is null)
+                throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
+
+            return scriptList
+                .Items?
+                .Where(script => script is not null)
+                .Select(script => new EssScript(script, cube) as IEssScript)
+                .ToList() ?? new List<IEssScript>();
+        }
 
         /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssServerVariable"/> objects associated with the given <paramref name="variableList"/>.

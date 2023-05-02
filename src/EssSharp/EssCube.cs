@@ -116,6 +116,49 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns> A list of <see cref="IEssScript"/> objects. </returns>
+        public IEssScript GetScript( string scriptName ) => GetScriptAsync( scriptName ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns> An <see cref="IEssScript"/> objects. </returns>
+        public async Task<IEssScript> GetScriptAsync( string scriptName, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ScriptsApi>();
+                if (await api.ScriptsListScriptsAsync(Application?.Name, _cube.Name, scriptName, 0, cancellationToken).ConfigureAwait(false) is { } script)
+                    return new EssScript(script.Items[0], this) as IEssScript;
+
+                throw new Exception($"Cannot find script {scriptName}");
+            }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to get the script ""{scriptName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns> A list of <see cref="EssScript"/> objects. </returns>
+        public List<IEssScript> GetScripts() => GetScriptsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns> A list of <see cref="EssScript"/> objects. </returns>
+        public async Task<List<IEssScript>> GetScriptsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ScriptsApi>();
+                var scripts = await api.ScriptsListScriptsAsync(Application?.Name, _cube.Name, null, 0, cancellationToken).ConfigureAwait(false);
+
+                return scripts?.ToEssSharpList(this) ?? new List<IEssScript>();
+            }
+            catch ( Exception ) 
+            {
+                throw; 
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>A list of <see cref="EssCubeVariable"/> objects.</returns>
         public List<IEssCubeVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCubeVariable>();
 
