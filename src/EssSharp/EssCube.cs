@@ -179,6 +179,35 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        /// <returns>true if scenarios are enabled, else false</returns>
+        public bool isScenariosEnabled() => isScenariosEnabledAsync().GetAwaiter().GetResult();
+
+
+        /// <inheritdoc />
+        /// <returns>true if scenarios are enabled, else false</returns>
+        public async Task<bool> isScenariosEnabledAsync()
+        {
+            try
+            {
+                var api = GetApi<ScenariosApi>();
+                var scenarioCubeList = await api.ScenariosGetRegisteredCubesAsync().ConfigureAwait(false);
+
+                foreach (var scenarioCube in scenarioCubeList.Items)
+                {
+                    if (scenarioCube.Application.Equals(this.Application.Name))
+                    {
+                        var databases = scenarioCube.Databases;
+                        return databases.Contains(this.Name);
+                    }
+                }
+                return false;
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
+        }
         #endregion
     }
 }

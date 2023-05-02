@@ -76,5 +76,15 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns true if this cube has scenarios are enabled, else false
+        /// </summary>
+        public bool isScenariosEnabled();
+
+        /// <summary>
+        /// Returns true if this cube has scenarios are enabled, else false
+        /// </summary>
+        public Task<bool> isScenariosEnabledAsync();
     }
 }
