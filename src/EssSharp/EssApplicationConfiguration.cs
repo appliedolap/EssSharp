@@ -1,11 +1,11 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using EssSharp.Model;
 
 namespace EssSharp
 {
     /// <summary />
-    public class EssApplicationConfiguration : IEssApplicationConfiguration
+    public class EssApplicationConfiguration : EssObject, IEssApplicationConfiguration
     {
         #region Private Data
 
@@ -18,9 +18,9 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssApplicationConfiguration( EssApplication application, string key, string value )
+        internal EssApplicationConfiguration(EssApplication application, string key, string value) : base(application?.Configuration, application?.Client)
         {
-            _application = application ?? 
+            _application = application ??
                 throw new ArgumentNullException(nameof(application), $"An API model {nameof(application)} is required to create an {nameof(EssApplicationConfiguration)}.");
 
             _key = key ??
@@ -33,16 +33,29 @@ namespace EssSharp
 
         #endregion
 
+        #region IEssObject Members
+
+        /// <inheritdoc />
+        public override string Name => _application?.Name;
+
+        /// <inheritdoc />
+        public override EssType Type => EssType.ApplicationConfiguration;
+
+        #endregion
+
         #region IEssApplicatonConfiguration Members
 
         /// <inheritdoc />
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
+        public List<IEssApplicationConfiguration> ApplicaationConfigurationList => _application.GetConfigurations();
+
+        /// <inheritdoc />
         public string Key => _key;
 
         /// <inheritdoc />
-        public string value => _value;
+        public string Value => _value;
 
         #endregion
 
