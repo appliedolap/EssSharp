@@ -29,6 +29,25 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssApplicationConfiguration"/> objects associated with the given <see cref="EssApplication"/>.
+        /// </summary>
+        /// <param name="configList"></param>
+        /// <param name="application"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static List<IEssApplicationConfiguration> ToEssSharpList(this ApplicationConfigList configList, EssApplication application)
+        {
+            if (application is null)
+                throw new ArgumentNullException(nameof(application), $"The given {nameof(application)} is null.");
+
+            return configList
+                .Items?
+                .Where(config => config is not null)
+                .Select(config => new EssApplicationConfiguration(application, config.Key, config.Value) as IEssApplicationConfiguration)
+                .ToList() ?? new List<IEssApplicationConfiguration>();
+        }
+
+        /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssCube"/> objects associated with the given <see cref="EssApplication"/>.
         /// </summary>
         /// <param name="cubeList" />

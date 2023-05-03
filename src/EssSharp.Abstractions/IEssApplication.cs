@@ -69,6 +69,10 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         public Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default );
 
+        public List<IEssApplicationConfiguration> GetConfigurations();
+
+        public Task<List<IEssApplicationConfiguration>> GetConfigurationsAsync(CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Gets the list of application-scoped variables available to the connected user.
         /// </summary>
@@ -93,6 +97,7 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <param name="copyName" />
         public Task CopyAsync( string copyName, CancellationToken cancellationToken = default );
+
 
         /// <summary>
         /// Deletes The Application.
