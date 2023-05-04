@@ -45,15 +45,13 @@ namespace EssSharp
         /// <summary>
         /// Returns a list of locked objects
         /// </summary>
-        /// <returns></returns>
-        public List<IEssLock> GetLocks();
+        public List<IEssLock> GetLockedObjects();
 
         /// <summary>
         /// Asynchronously gets a list of locked objects
         /// </summary>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<List<IEssLock>> GetLocksAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssLock>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns a  specific scripts in a cube

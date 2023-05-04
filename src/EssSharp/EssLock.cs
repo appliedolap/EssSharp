@@ -1,5 +1,6 @@
 ﻿using System;
 using EssSharp.Model;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace EssSharp
 {
@@ -46,7 +47,7 @@ namespace EssSharp
         public string User => _lock?.User;
 
         /// <inheritdoc />
-        public long Time => _lock.Time;
+        public DateTime Time => DateTimeOffset.FromUnixTimeMilliseconds(_lock.Time).DateTime;
 
         #endregion
 

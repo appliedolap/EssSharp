@@ -18,7 +18,7 @@ namespace EssSharp
         /// <summary>
         /// Returns the time
         /// </summary>
-        public long Time { get; }
+        public DateTime Time { get; }
 
     }
 }

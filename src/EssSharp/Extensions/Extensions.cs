@@ -150,15 +150,6 @@ namespace EssSharp
                 .Where(lockObject => lockObject is not null)
                 .Select(lockObject => new EssLock(lockObject, cube) as IEssLock)
                 .ToList() ?? new List<IEssLock>();
-            
-            /*
-             * return lockObjectList
-                .Items?
-                .Where(lock => lock is not null)
-                .Select(lock => new EssLock(lock, cube) as IEssLock)
-                .ToList() ?? new List<IEssLock>();
-             */
-
         }
 
         /// <summary>
