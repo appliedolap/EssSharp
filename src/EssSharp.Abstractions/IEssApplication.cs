@@ -69,8 +69,15 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         public Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Returns a list of configurations for this application
+        /// </summary>
         public List<IEssApplicationConfiguration> GetConfigurations();
 
+        /// <summary>
+        /// returns a list of configurations for this application
+        /// </summary>
+        /// <param name="cancellationToken"></param>
         public Task<List<IEssApplicationConfiguration>> GetConfigurationsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>

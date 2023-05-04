@@ -43,7 +43,7 @@ namespace EssSharp
             return configList
                 .Items?
                 .Where(config => config is not null)
-                .Select(config => new EssApplicationConfiguration(application, config.Key, config.Value) as IEssApplicationConfiguration)
+                .Select(config => new EssApplicationConfiguration(application, config) as IEssApplicationConfiguration)
                 .ToList() ?? new List<IEssApplicationConfiguration>();
         }
 

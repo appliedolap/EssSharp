@@ -10,24 +10,20 @@ namespace EssSharp
         #region Private Data
 
         private readonly EssApplication _application;
-        private readonly string _key;
-        private readonly string _value;
+        private readonly ApplicationConfigEntry _appConfigEntity;
 
         #endregion
 
         #region Constructors
 
         /// <summary />
-        internal EssApplicationConfiguration(EssApplication application, string key, string value) : base(application?.Configuration, application?.Client)
+        internal EssApplicationConfiguration(EssApplication application, ApplicationConfigEntry appConfigEntity) : base(application?.Configuration, application?.Client)
         {
             _application = application ??
                 throw new ArgumentNullException(nameof(application), $"An API model {nameof(application)} is required to create an {nameof(EssApplicationConfiguration)}.");
 
-            _key = key ??
-                throw new ArgumentNullException(nameof(key), $"An {nameof(EssServer)} {nameof(key)} is required to create an {nameof(EssApplicationConfiguration)}.");
-
-            _value = value ??
-               throw new ArgumentNullException(nameof(value), $"An {nameof(EssServer)} {nameof(value)} is required to create an {nameof(EssApplicationConfiguration)}.");
+            _appConfigEntity = appConfigEntity ??
+                throw new ArgumentNullException(nameof(appConfigEntity), $"An {nameof(EssServer)} {nameof(appConfigEntity)} is required to create an {nameof(EssApplicationConfiguration)}.");
         }
 
 
@@ -36,7 +32,7 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string Name => _application?.Name;
+        public override string Name => _appConfigEntity.Key;
 
         /// <inheritdoc />
         public override EssType Type => EssType.ApplicationConfiguration;
@@ -49,13 +45,10 @@ namespace EssSharp
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
-        public List<IEssApplicationConfiguration> ApplicaationConfigurationList => _application.GetConfigurations();
+        public string Key => _appConfigEntity.Key;
 
         /// <inheritdoc />
-        public string Key => _key;
-
-        /// <inheritdoc />
-        public string Value => _value;
+        public string Value => _appConfigEntity.Value;
 
         #endregion
 

@@ -4,6 +4,7 @@
     public enum EssType
     {
         Application,
+        ApplicationConfiguration,
         Cube,
         DataSource,
         DrillThroughReport,

@@ -12,11 +12,6 @@ namespace EssSharp
         IEssApplication Application { get; }
 
         /// <summary>
-        /// Returns a list of configurations for this application
-        /// </summary>
-        List<IEssApplicationConfiguration> ApplicationConfigurationList { get; }
-
-        /// <summary>
         /// Returns the key for this configuration
         /// </summary>
         public string Key { get; }  
