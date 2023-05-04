@@ -8,7 +8,7 @@ namespace EssSharp
         /// <summary>
         /// Returns the Lock Object Type
         /// </summary>
-        public string lockObjectType { get; }
+        public EssLockType lockType { get; }
 
         /// <summary>
         /// Returns the user 
@@ -16,7 +16,7 @@ namespace EssSharp
         public string User { get;  }
 
         /// <summary>
-        /// Returns the time
+        /// Returns the time 
         /// </summary>
         public DateTime Time { get; }
 

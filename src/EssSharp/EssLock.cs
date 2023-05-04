@@ -41,7 +41,7 @@ namespace EssSharp
         #region IEssLock Members
 
         /// <inheritdoc />
-        public string lockObjectType => _lock?.Type.ToString();
+        public EssLockType TypeEnum lockObjectType => _lock?.Type;
 
         /// <inheritdoc />
         public string User => _lock?.User;
