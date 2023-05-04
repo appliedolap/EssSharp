@@ -134,6 +134,34 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssLock"/> objects associated with the given <see cref="EssCube"/>.
+        /// </summary>
+        /// <param name="lockObjectList"></param>
+        /// <param name="cube"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static List<IEssLock> ToEssSharpList(this LockObjectList lockObjectList, EssCube cube)
+        {
+            if (cube is null)
+                throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
+            
+            return lockObjectList
+                .Items?
+                .Where(lockObject => lockObject is not null)
+                .Select(lockObject => new EssLock(lockObject, cube) as IEssLock)
+                .ToList() ?? new List<IEssLock>();
+            
+            /*
+             * return lockObjectList
+                .Items?
+                .Where(lock => lock is not null)
+                .Select(lock => new EssLock(lock, cube) as IEssLock)
+                .ToList() ?? new List<IEssLock>();
+             */
+
+        }
+
+        /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssSession"/> objects associated with the given <see cref="EssServer"/>.
         /// </summary>
         /// <param name="sessionList" />

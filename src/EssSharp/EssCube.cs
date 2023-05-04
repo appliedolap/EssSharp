@@ -116,6 +116,28 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        public List<IEssLock> GetLockedObjects() => GetLockedObjectsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <param name="cancellationToken"></param>
+        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        public async Task<List<IEssLock>> GetLockedObjectsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<LocksApi>();
+                var lockedObjects = await api.LocksGetLockedObjectsAsync(Application.Name, Name, null, null, 0, cancellationToken).ConfigureAwait(false);
+
+                return lockedObjects?.ToEssSharpList(this) ?? new List<IEssLock>();
+            }
+            catch ( Exception ) 
+            { 
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns> A list of <see cref="IEssScript"/> objects. </returns>
         public IEssScript GetScript( string scriptName ) => GetScriptAsync( scriptName ).GetAwaiter().GetResult();
 

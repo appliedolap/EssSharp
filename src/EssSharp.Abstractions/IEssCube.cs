@@ -43,6 +43,19 @@ namespace EssSharp
         public Task<List<IEssDrillThroughReport>> GetDrillThroughReportsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Returns a list of locked objects
+        /// </summary>
+        /// <returns></returns>
+        public List<IEssLock> GetLocks();
+
+        /// <summary>
+        /// Asynchronously gets a list of locked objects
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<List<IEssLock>> GetLocksAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Returns a  specific scripts in a cube
         /// </summary>
         /// <param name="scriptName"></param>
