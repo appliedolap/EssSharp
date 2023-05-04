@@ -9,6 +9,10 @@ namespace EssSharp
     public enum EssLockType
     {
         /// <summary>
+        /// Enum UNKNOWN for for value: UNKNOWN
+        /// </summary>
+        UNKNOWN = 0,
+        /// <summary>
         /// Enum OUTLINE for value: OUTLINE
         /// </summary>
         OUTLINE = 1,

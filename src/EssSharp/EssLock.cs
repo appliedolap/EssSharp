@@ -41,7 +41,7 @@ namespace EssSharp
         #region IEssLock Members
 
         /// <inheritdoc />
-        public EssLockType TypeEnum lockObjectType => _lock?.Type;
+        public EssLockType LockType => Enum.IsDefined(typeof(EssLockType), _lock.Type) ? (EssLockType) _lock?.Type : EssLockType.UNKNOWN;
 
         /// <inheritdoc />
         public string User => _lock?.User;
