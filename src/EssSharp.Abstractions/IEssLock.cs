@@ -8,7 +8,7 @@ namespace EssSharp
         /// <summary>
         /// Returns the Lock Object Type
         /// </summary>
-        public EssLockType lockType { get; }
+        public EssLockType LockType { get; }
 
         /// <summary>
         /// Returns the user 
