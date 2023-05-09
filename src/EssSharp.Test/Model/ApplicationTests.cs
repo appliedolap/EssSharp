@@ -29,12 +29,12 @@ namespace EssSharp.Test.Model
     public class ApplicationTests : IDisposable
     {
         // TODO uncomment below to declare an instance variable for Application
-        //private Application instance;
+        private Application instance;
 
         public ApplicationTests()
         {
             // TODO uncomment below to create an instance of Application
-            //instance = new Application();
+            instance = new Application(name: "name");
         }
 
         public void Dispose()
@@ -48,10 +48,12 @@ namespace EssSharp.Test.Model
         [Fact]
         public void ApplicationInstanceTest()
         {
-            // TODO uncomment below to test "IsType" Application
-            //Assert.IsType<Application>(instance);
-        }
+            // Assert not null
+            Assert.NotNull(instance);
 
+            // Assert instance type
+            Assert.IsType<Application>(instance);
+        }
 
         /// <summary>
         /// Test the property 'Name'
@@ -60,7 +62,9 @@ namespace EssSharp.Test.Model
         public void NameTest()
         {
             // TODO unit test for the property 'Name'
+            Assert.IsType<string>(instance.Name);
         }
+
         /// <summary>
         /// Test the property 'Owner'
         /// </summary>

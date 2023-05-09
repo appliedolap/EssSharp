@@ -85,7 +85,7 @@ namespace EssSharp
 
         /// <inheritdoc/>
         /// <exception cref="NotImplementedException">Copying a folder is not supported.</exception>
-        public override async Task CopyAsync(string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default)
+        public override Task CopyAsync(string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default)
             => throw new NotImplementedException("Copying a folder is not supported.");
 
         /// <inheritdoc/>
