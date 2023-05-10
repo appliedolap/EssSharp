@@ -80,13 +80,14 @@ namespace EssSharp
         public void Execute() => ExecuteAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <remarks>TODO: FIGURE OUT HOW TO MAP SCRIPT TYPE TO JOBTYPE.</remarks>
         public async Task ExecuteAsync( CancellationToken cancellationToken = default)
         {
             try
             {
                 var api = GetApi<JobsApi>();
                 var parameters = new ParametersBean(file: Name);
-                var job = new JobsInputBean(Cube.Application.Name, Cube.Name, "calc", parameters);
+                var job = new JobsInputBean(Cube.Application.Name, Cube.Name, JobsInputBean.JobtypeEnum.Calc, parameters);
 
                 await api.JobsExecuteJobAsync(job, 0, cancellationToken).ConfigureAwait(false);
             }

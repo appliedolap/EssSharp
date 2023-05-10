@@ -18253,7 +18253,23 @@
           "type": "string"
         },
         "jobtype": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "dataload",
+            "dimbuild",
+            "calc",
+            "clear",
+            "importExcel",
+            "exportExcel",
+            "lcmExport",
+            "lcmImport",
+            "clearAggregation",
+            "buildAggregation",
+            "asoBufferDataLoad",
+            "asoBufferCommit",
+            "exportData",
+            "mdxScript"
+          ]
         },
         "parameters": {
           "$ref": "#/definitions/ParametersBean"
@@ -18303,7 +18319,11 @@
           "type": "string"
         },
         "buildMethod": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "PARENT-CHILD",
+            "GENERATION"
+          ]
         },
         "data": {
           "type": "string"
@@ -18351,7 +18371,14 @@
           "type": "string"
         },
         "buildOption": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "NONE",
+            "RETAIN_ALL_DATA",
+            "RETAIN_INPUT_DATA",
+            "RETAIN_LEAF_DATA",
+            "REMOVE_ALL_DATA"
+          ]
         },
         "copyToStorage": {
           "type": "string"
@@ -18360,7 +18387,14 @@
           "type": "string"
         },
         "dataLevel": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "ALL_DATA",
+            "UPPER_LEVEL_BLOCKS",
+            "NON_INPUT_BLOCKS",
+            "LEVEL_ZERO_BLOCKS",
+            "INPUT_LEVEL_DATA_BLOCKS"
+          ]
         },
         "columnFormat": {
           "type": "string"

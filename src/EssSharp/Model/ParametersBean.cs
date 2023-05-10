@@ -30,6 +30,120 @@ namespace EssSharp.Model
     public partial class ParametersBean : IEquatable<ParametersBean>, IValidatableObject
     {
         /// <summary>
+        /// Defines BuildMethod
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BuildMethodEnum
+        {
+            /// <summary>
+            /// Enum PARENTCHILD for value: PARENT-CHILD
+            /// </summary>
+            [EnumMember(Value = "PARENT-CHILD")]
+            PARENTCHILD = 1,
+
+            /// <summary>
+            /// Enum GENERATION for value: GENERATION
+            /// </summary>
+            [EnumMember(Value = "GENERATION")]
+            GENERATION = 2
+
+        }
+
+
+        /// <summary>
+        /// Gets or Sets BuildMethod
+        /// </summary>
+        [DataMember(Name = "buildMethod", EmitDefaultValue = false)]
+        public BuildMethodEnum? BuildMethod { get; set; }
+        /// <summary>
+        /// Defines BuildOption
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BuildOptionEnum
+        {
+            /// <summary>
+            /// Enum NONE for value: NONE
+            /// </summary>
+            [EnumMember(Value = "NONE")]
+            NONE = 1,
+
+            /// <summary>
+            /// Enum RETAINALLDATA for value: RETAIN_ALL_DATA
+            /// </summary>
+            [EnumMember(Value = "RETAIN_ALL_DATA")]
+            RETAINALLDATA = 2,
+
+            /// <summary>
+            /// Enum RETAININPUTDATA for value: RETAIN_INPUT_DATA
+            /// </summary>
+            [EnumMember(Value = "RETAIN_INPUT_DATA")]
+            RETAININPUTDATA = 3,
+
+            /// <summary>
+            /// Enum RETAINLEAFDATA for value: RETAIN_LEAF_DATA
+            /// </summary>
+            [EnumMember(Value = "RETAIN_LEAF_DATA")]
+            RETAINLEAFDATA = 4,
+
+            /// <summary>
+            /// Enum REMOVEALLDATA for value: REMOVE_ALL_DATA
+            /// </summary>
+            [EnumMember(Value = "REMOVE_ALL_DATA")]
+            REMOVEALLDATA = 5
+
+        }
+
+
+        /// <summary>
+        /// Gets or Sets BuildOption
+        /// </summary>
+        [DataMember(Name = "buildOption", EmitDefaultValue = false)]
+        public BuildOptionEnum? BuildOption { get; set; }
+        /// <summary>
+        /// Defines DataLevel
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum DataLevelEnum
+        {
+            /// <summary>
+            /// Enum ALLDATA for value: ALL_DATA
+            /// </summary>
+            [EnumMember(Value = "ALL_DATA")]
+            ALLDATA = 1,
+
+            /// <summary>
+            /// Enum UPPERLEVELBLOCKS for value: UPPER_LEVEL_BLOCKS
+            /// </summary>
+            [EnumMember(Value = "UPPER_LEVEL_BLOCKS")]
+            UPPERLEVELBLOCKS = 2,
+
+            /// <summary>
+            /// Enum NONINPUTBLOCKS for value: NON_INPUT_BLOCKS
+            /// </summary>
+            [EnumMember(Value = "NON_INPUT_BLOCKS")]
+            NONINPUTBLOCKS = 3,
+
+            /// <summary>
+            /// Enum LEVELZEROBLOCKS for value: LEVEL_ZERO_BLOCKS
+            /// </summary>
+            [EnumMember(Value = "LEVEL_ZERO_BLOCKS")]
+            LEVELZEROBLOCKS = 4,
+
+            /// <summary>
+            /// Enum INPUTLEVELDATABLOCKS for value: INPUT_LEVEL_DATA_BLOCKS
+            /// </summary>
+            [EnumMember(Value = "INPUT_LEVEL_DATA_BLOCKS")]
+            INPUTLEVELDATABLOCKS = 5
+
+        }
+
+
+        /// <summary>
+        /// Gets or Sets DataLevel
+        /// </summary>
+        [DataMember(Name = "dataLevel", EmitDefaultValue = false)]
+        public DataLevelEnum? DataLevel { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="ParametersBean" /> class.
         /// </summary>
         /// <param name="rule">rule.</param>
@@ -111,7 +225,7 @@ namespace EssSharp.Model
         /// <param name="exportpartitions">exportpartitions.</param>
         /// <param name="exportfilters">exportfilters.</param>
         /// <param name="physical">physical.</param>
-        public ParametersBean(string rule = default(string), string file = default(string), string abortOnError = default(string), string restructureOption = default(string), string forceDimBuild = default(string), string script = default(string), string option = default(string), string loaddata = default(string), string useConnection = default(string), string connection = default(string), string user = default(string), string password = default(string), string calc = default(string), string buildMethod = default(string), string data = default(string), string memberIds = default(string), string zipFileName = default(string), string skipdata = default(string), string threads = default(string), string overwrite = default(string), string lcmImportFromStorage = default(string), string analyzeFileName = default(string), string analyzeSheetName = default(string), string deleteExcelOnSuccess = default(string), string catalogExcelPath = default(string), string importExcelFileName = default(string), string recreateApplication = default(string), string createFiles = default(string), string executeScript = default(string), string buildOption = default(string), string copyToStorage = default(string), string filesystemcopy = default(string), string dataLevel = default(string), string columnFormat = default(string), string targetApplicationName = default(string), string partialDataExpression = default(string), string allApp = default(string), string includeServerLevel = default(string), string enableSandboxing = default(string), string dbType = default(string), string dimDesignationMode = default(string), CompactDesignation unstructuredAnalysis = default(CompactDesignation), string ratioToStop = default(string), string basedOnQueryData = default(string), string enableAlternateRollups = default(string), string compress = default(string), string generateArtifactList = default(string), string artifactList = default(string), string verbose = default(string), string disasterRecovery = default(string), string force = default(string), string backupType = default(string), string appId = default(string), string timestamp = default(string), string maxParallel = default(string), List<string> selectedDimensions = default(List<string>), List<RTSV> rtsv = default(List<RTSV>), int bufferId = default(int), List<int> bufferIds = default(List<int>), string commitOption = default(string), string actionType = default(string), string termOption = default(string), string discoverDimensionTables = default(string), string exportDynamicBlocks = default(string), string shadowAppName = default(string), string primaryAppName = default(string), string timeoutToForceUnloadApp = default(string), string hideShadow = default(string), string waitForOngoingUpdatesInSecs = default(string), string reportScriptFilename = default(string), bool lockForUpdate = default(bool), bool isScriptContent = default(bool), bool useCatalogPath = default(bool), bool exportdata = default(bool), string cube = default(string), string filetype = default(string), bool exportpartitions = default(bool), bool exportfilters = default(bool), bool physical = default(bool))
+        public ParametersBean(string rule = default(string), string file = default(string), string abortOnError = default(string), string restructureOption = default(string), string forceDimBuild = default(string), string script = default(string), string option = default(string), string loaddata = default(string), string useConnection = default(string), string connection = default(string), string user = default(string), string password = default(string), string calc = default(string), BuildMethodEnum? buildMethod = default(BuildMethodEnum?), string data = default(string), string memberIds = default(string), string zipFileName = default(string), string skipdata = default(string), string threads = default(string), string overwrite = default(string), string lcmImportFromStorage = default(string), string analyzeFileName = default(string), string analyzeSheetName = default(string), string deleteExcelOnSuccess = default(string), string catalogExcelPath = default(string), string importExcelFileName = default(string), string recreateApplication = default(string), string createFiles = default(string), string executeScript = default(string), BuildOptionEnum? buildOption = default(BuildOptionEnum?), string copyToStorage = default(string), string filesystemcopy = default(string), DataLevelEnum? dataLevel = default(DataLevelEnum?), string columnFormat = default(string), string targetApplicationName = default(string), string partialDataExpression = default(string), string allApp = default(string), string includeServerLevel = default(string), string enableSandboxing = default(string), string dbType = default(string), string dimDesignationMode = default(string), CompactDesignation unstructuredAnalysis = default(CompactDesignation), string ratioToStop = default(string), string basedOnQueryData = default(string), string enableAlternateRollups = default(string), string compress = default(string), string generateArtifactList = default(string), string artifactList = default(string), string verbose = default(string), string disasterRecovery = default(string), string force = default(string), string backupType = default(string), string appId = default(string), string timestamp = default(string), string maxParallel = default(string), List<string> selectedDimensions = default(List<string>), List<RTSV> rtsv = default(List<RTSV>), int bufferId = default(int), List<int> bufferIds = default(List<int>), string commitOption = default(string), string actionType = default(string), string termOption = default(string), string discoverDimensionTables = default(string), string exportDynamicBlocks = default(string), string shadowAppName = default(string), string primaryAppName = default(string), string timeoutToForceUnloadApp = default(string), string hideShadow = default(string), string waitForOngoingUpdatesInSecs = default(string), string reportScriptFilename = default(string), bool lockForUpdate = default(bool), bool isScriptContent = default(bool), bool useCatalogPath = default(bool), bool exportdata = default(bool), string cube = default(string), string filetype = default(string), bool exportpartitions = default(bool), bool exportfilters = default(bool), bool physical = default(bool))
         {
             this.Rule = rule;
             this.File = file;
@@ -273,12 +387,6 @@ namespace EssSharp.Model
         public string Calc { get; set; }
 
         /// <summary>
-        /// Gets or Sets BuildMethod
-        /// </summary>
-        [DataMember(Name = "buildMethod", EmitDefaultValue = false)]
-        public string BuildMethod { get; set; }
-
-        /// <summary>
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
@@ -369,12 +477,6 @@ namespace EssSharp.Model
         public string ExecuteScript { get; set; }
 
         /// <summary>
-        /// Gets or Sets BuildOption
-        /// </summary>
-        [DataMember(Name = "buildOption", EmitDefaultValue = false)]
-        public string BuildOption { get; set; }
-
-        /// <summary>
         /// Gets or Sets CopyToStorage
         /// </summary>
         [DataMember(Name = "copyToStorage", EmitDefaultValue = false)]
@@ -385,12 +487,6 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "filesystemcopy", EmitDefaultValue = false)]
         public string Filesystemcopy { get; set; }
-
-        /// <summary>
-        /// Gets or Sets DataLevel
-        /// </summary>
-        [DataMember(Name = "dataLevel", EmitDefaultValue = false)]
-        public string DataLevel { get; set; }
 
         /// <summary>
         /// Gets or Sets ColumnFormat
@@ -857,8 +953,7 @@ namespace EssSharp.Model
                 ) && 
                 (
                     this.BuildMethod == input.BuildMethod ||
-                    (this.BuildMethod != null &&
-                    this.BuildMethod.Equals(input.BuildMethod))
+                    this.BuildMethod.Equals(input.BuildMethod)
                 ) && 
                 (
                     this.Data == input.Data ||
@@ -937,8 +1032,7 @@ namespace EssSharp.Model
                 ) && 
                 (
                     this.BuildOption == input.BuildOption ||
-                    (this.BuildOption != null &&
-                    this.BuildOption.Equals(input.BuildOption))
+                    this.BuildOption.Equals(input.BuildOption)
                 ) && 
                 (
                     this.CopyToStorage == input.CopyToStorage ||
@@ -952,8 +1046,7 @@ namespace EssSharp.Model
                 ) && 
                 (
                     this.DataLevel == input.DataLevel ||
-                    (this.DataLevel != null &&
-                    this.DataLevel.Equals(input.DataLevel))
+                    this.DataLevel.Equals(input.DataLevel)
                 ) && 
                 (
                     this.ColumnFormat == input.ColumnFormat ||
@@ -1243,10 +1336,7 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.Calc.GetHashCode();
                 }
-                if (this.BuildMethod != null)
-                {
-                    hashCode = (hashCode * 59) + this.BuildMethod.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.BuildMethod.GetHashCode();
                 if (this.Data != null)
                 {
                     hashCode = (hashCode * 59) + this.Data.GetHashCode();
@@ -1307,10 +1397,7 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.ExecuteScript.GetHashCode();
                 }
-                if (this.BuildOption != null)
-                {
-                    hashCode = (hashCode * 59) + this.BuildOption.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.BuildOption.GetHashCode();
                 if (this.CopyToStorage != null)
                 {
                     hashCode = (hashCode * 59) + this.CopyToStorage.GetHashCode();
@@ -1319,10 +1406,7 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.Filesystemcopy.GetHashCode();
                 }
-                if (this.DataLevel != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataLevel.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.DataLevel.GetHashCode();
                 if (this.ColumnFormat != null)
                 {
                     hashCode = (hashCode * 59) + this.ColumnFormat.GetHashCode();

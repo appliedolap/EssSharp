@@ -288,6 +288,9 @@ cat temp.json | jq '.definitions."FileCollectionResponse" = {
 #   value not one of declared Enum instance names: [removeonly, keeponly, pivot, submit, pivotToPOV, refresh, zoomin, zoomout]
 cat temp.json | jq '.definitions.GridOperation.properties.action.enum = ["zoomin", "zoomout", "keeponly", "removeonly", "refresh", "pivot", "pivotToPOV", "submit"]' > json.tmp && mv json.tmp temp.json
 
+# Add an enumerated jobtype to the JobsInputBean definition.
+cat temp.json | jq '.definitions.JobsInputBean.properties.jobtype.enum = ["dataload", "dimbuild", "calc", "clear", "importExcel", "exportExcel", "lcmExport", "lcmImport", "clearAggregation", "buildAggregation", "asoBufferDataLoad", "asoBufferCommit", "exportData", "mdxScript"]' > json.tmp && mv json.tmp temp.json
+
 # The properties for the MemberBean definition are incomplete. Add the following properties.
 cat temp.json | jq '.definitions.MemberBean.properties += {
   "uda": {
@@ -303,6 +306,11 @@ cat temp.json | jq '.definitions.MemberBean.properties += {
     "type": "string"
   }
 }' > json.tmp && mv json.tmp temp.json
+
+# Add a few enumerated types to the ParametersBean definition.
+cat temp.json | jq '.definitions.ParametersBean.properties.buildMethod.enum = ["PARENT-CHILD", "GENERATION"]' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.buildOption.enum = ["NONE", "RETAIN_ALL_DATA", "RETAIN_INPUT_DATA", "RETAIN_LEAF_DATA", "REMOVE_ALL_DATA"]' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.dataLevel.enum = ["ALL_DATA", "UPPER_LEVEL_BLOCKS", "NON_INPUT_BLOCKS", "LEVEL_ZERO_BLOCKS", "INPUT_LEVEL_DATA_BLOCKS"]' > json.tmp && mv json.tmp temp.json
 
 # There are duplicate "Datasource" definitions: "Datasource" and "DataSource", and the OpenAPI generator fails 
 # to generate model classes for case-insensitive duplicates correctly. Update the dataSource property of Rules.

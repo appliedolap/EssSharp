@@ -30,6 +30,104 @@ namespace EssSharp.Model
     public partial class JobsInputBean : IEquatable<JobsInputBean>, IValidatableObject
     {
         /// <summary>
+        /// Defines Jobtype
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum JobtypeEnum
+        {
+            /// <summary>
+            /// Enum Dataload for value: dataload
+            /// </summary>
+            [EnumMember(Value = "dataload")]
+            Dataload = 1,
+
+            /// <summary>
+            /// Enum Dimbuild for value: dimbuild
+            /// </summary>
+            [EnumMember(Value = "dimbuild")]
+            Dimbuild = 2,
+
+            /// <summary>
+            /// Enum Calc for value: calc
+            /// </summary>
+            [EnumMember(Value = "calc")]
+            Calc = 3,
+
+            /// <summary>
+            /// Enum Clear for value: clear
+            /// </summary>
+            [EnumMember(Value = "clear")]
+            Clear = 4,
+
+            /// <summary>
+            /// Enum ImportExcel for value: importExcel
+            /// </summary>
+            [EnumMember(Value = "importExcel")]
+            ImportExcel = 5,
+
+            /// <summary>
+            /// Enum ExportExcel for value: exportExcel
+            /// </summary>
+            [EnumMember(Value = "exportExcel")]
+            ExportExcel = 6,
+
+            /// <summary>
+            /// Enum LcmExport for value: lcmExport
+            /// </summary>
+            [EnumMember(Value = "lcmExport")]
+            LcmExport = 7,
+
+            /// <summary>
+            /// Enum LcmImport for value: lcmImport
+            /// </summary>
+            [EnumMember(Value = "lcmImport")]
+            LcmImport = 8,
+
+            /// <summary>
+            /// Enum ClearAggregation for value: clearAggregation
+            /// </summary>
+            [EnumMember(Value = "clearAggregation")]
+            ClearAggregation = 9,
+
+            /// <summary>
+            /// Enum BuildAggregation for value: buildAggregation
+            /// </summary>
+            [EnumMember(Value = "buildAggregation")]
+            BuildAggregation = 10,
+
+            /// <summary>
+            /// Enum AsoBufferDataLoad for value: asoBufferDataLoad
+            /// </summary>
+            [EnumMember(Value = "asoBufferDataLoad")]
+            AsoBufferDataLoad = 11,
+
+            /// <summary>
+            /// Enum AsoBufferCommit for value: asoBufferCommit
+            /// </summary>
+            [EnumMember(Value = "asoBufferCommit")]
+            AsoBufferCommit = 12,
+
+            /// <summary>
+            /// Enum ExportData for value: exportData
+            /// </summary>
+            [EnumMember(Value = "exportData")]
+            ExportData = 13,
+
+            /// <summary>
+            /// Enum MdxScript for value: mdxScript
+            /// </summary>
+            [EnumMember(Value = "mdxScript")]
+            MdxScript = 14
+
+        }
+
+
+        /// <summary>
+        /// Gets or Sets Jobtype
+        /// </summary>
+        [DataMember(Name = "jobtype", IsRequired = true, EmitDefaultValue = true)]
+        public JobtypeEnum Jobtype { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="JobsInputBean" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -41,7 +139,7 @@ namespace EssSharp.Model
         /// <param name="db">db (required).</param>
         /// <param name="jobtype">jobtype (required).</param>
         /// <param name="parameters">parameters.</param>
-        public JobsInputBean(string application = default(string), string db = default(string), string jobtype = default(string), ParametersBean parameters = default(ParametersBean))
+        public JobsInputBean(string application = default(string), string db = default(string), JobtypeEnum jobtype = default(JobtypeEnum), ParametersBean parameters = default(ParametersBean))
         {
             // to ensure "application" is required (not null)
             if (application == null)
@@ -55,11 +153,6 @@ namespace EssSharp.Model
                 throw new ArgumentNullException("db is a required property for JobsInputBean and cannot be null");
             }
             this.Db = db;
-            // to ensure "jobtype" is required (not null)
-            if (jobtype == null)
-            {
-                throw new ArgumentNullException("jobtype is a required property for JobsInputBean and cannot be null");
-            }
             this.Jobtype = jobtype;
             this.Parameters = parameters;
         }
@@ -75,12 +168,6 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "db", IsRequired = true, EmitDefaultValue = true)]
         public string Db { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Jobtype
-        /// </summary>
-        [DataMember(Name = "jobtype", IsRequired = true, EmitDefaultValue = true)]
-        public string Jobtype { get; set; }
 
         /// <summary>
         /// Gets or Sets Parameters
@@ -147,8 +234,7 @@ namespace EssSharp.Model
                 ) && 
                 (
                     this.Jobtype == input.Jobtype ||
-                    (this.Jobtype != null &&
-                    this.Jobtype.Equals(input.Jobtype))
+                    this.Jobtype.Equals(input.Jobtype)
                 ) && 
                 (
                     this.Parameters == input.Parameters ||
@@ -174,10 +260,7 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.Db.GetHashCode();
                 }
-                if (this.Jobtype != null)
-                {
-                    hashCode = (hashCode * 59) + this.Jobtype.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.Jobtype.GetHashCode();
                 if (this.Parameters != null)
                 {
                     hashCode = (hashCode * 59) + this.Parameters.GetHashCode();

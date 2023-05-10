@@ -16417,7 +16417,7 @@ components:
     JobsInputBean:
       example:
         application: application
-        jobtype: jobtype
+        jobtype: dataload
         parameters:
           filesystemcopy: filesystemcopy
           filetype: filetype
@@ -16457,7 +16457,7 @@ components:
           targetApplicationName: targetApplicationName
           compress: compress
           executeScript: executeScript
-          buildMethod: buildMethod
+          buildMethod: PARENT-CHILD
           exportfilters: true
           deleteExcelOnSuccess: deleteExcelOnSuccess
           generateArtifactList: generateArtifactList
@@ -16573,7 +16573,7 @@ components:
           force: force
           bufferId: 7
           memberIds: memberIds
-          dataLevel: dataLevel
+          dataLevel: ALL_DATA
           option: option
           discoverDimensionTables: discoverDimensionTables
           forceDimBuild: forceDimBuild
@@ -16584,7 +16584,7 @@ components:
           basedOnQueryData: basedOnQueryData
           disasterRecovery: disasterRecovery
           skipdata: skipdata
-          buildOption: buildOption
+          buildOption: NONE
           backupType: backupType
           lcmImportFromStorage: lcmImportFromStorage
           recreateApplication: recreateApplication
@@ -16625,6 +16625,21 @@ components:
         db:
           type: string
         jobtype:
+          enum:
+          - dataload
+          - dimbuild
+          - calc
+          - clear
+          - importExcel
+          - exportExcel
+          - lcmExport
+          - lcmImport
+          - clearAggregation
+          - buildAggregation
+          - asoBufferDataLoad
+          - asoBufferCommit
+          - exportData
+          - mdxScript
           type: string
         parameters:
           $ref: '#/components/schemas/ParametersBean'
@@ -16673,7 +16688,7 @@ components:
         targetApplicationName: targetApplicationName
         compress: compress
         executeScript: executeScript
-        buildMethod: buildMethod
+        buildMethod: PARENT-CHILD
         exportfilters: true
         deleteExcelOnSuccess: deleteExcelOnSuccess
         generateArtifactList: generateArtifactList
@@ -16789,7 +16804,7 @@ components:
         force: force
         bufferId: 7
         memberIds: memberIds
-        dataLevel: dataLevel
+        dataLevel: ALL_DATA
         option: option
         discoverDimensionTables: discoverDimensionTables
         forceDimBuild: forceDimBuild
@@ -16800,7 +16815,7 @@ components:
         basedOnQueryData: basedOnQueryData
         disasterRecovery: disasterRecovery
         skipdata: skipdata
-        buildOption: buildOption
+        buildOption: NONE
         backupType: backupType
         lcmImportFromStorage: lcmImportFromStorage
         recreateApplication: recreateApplication
@@ -16862,6 +16877,9 @@ components:
         calc:
           type: string
         buildMethod:
+          enum:
+          - PARENT-CHILD
+          - GENERATION
           type: string
         data:
           type: string
@@ -16894,12 +16912,24 @@ components:
         executeScript:
           type: string
         buildOption:
+          enum:
+          - NONE
+          - RETAIN_ALL_DATA
+          - RETAIN_INPUT_DATA
+          - RETAIN_LEAF_DATA
+          - REMOVE_ALL_DATA
           type: string
         copyToStorage:
           type: string
         filesystemcopy:
           type: string
         dataLevel:
+          enum:
+          - ALL_DATA
+          - UPPER_LEVEL_BLOCKS
+          - NON_INPUT_BLOCKS
+          - LEVEL_ZERO_BLOCKS
+          - INPUT_LEVEL_DATA_BLOCKS
           type: string
         columnFormat:
           type: string
