@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -105,28 +104,24 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public IEssDatasource GetDatasource( string datasourceName ) => GetDataSourceAsync( datasourceName ).GetAwaiter().GetResult();
+        public IEssDatasource GetDatasource( string datasourceName ) => GetDatasourceAsync( datasourceName ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<IEssDatasource> GetDataSourceAsync( string datasourceName , CancellationToken cancellationToken = default )
+        public async Task<IEssDatasource> GetDatasourceAsync (string datasourceName , CancellationToken cancellationToken = default)
         {
             try
             {
+                var api = GetApi<GlobalDatasourcesApi>();
 
-                foreach ( var source in await GetDataSourcesAsync(cancellationToken).ConfigureAwait(false) )
-                {
-                    if (string.Equals(datasourceName, source?.Name, StringComparison.Ordinal))
-                    {
-                        return source;
-                    }
-                }
+                if ( await api.GlobalDatasourcesGetDatasourceDetailsAsync(datasourceName, 0, cancellationToken).ConfigureAwait(false) is { } datasource )
+                    return new EssDatasource(datasource, this);
 
-                throw new Exception("Data Source not found.");
+                throw new Exception("Received an empty or invalid response.");
             }
-            catch 
+            catch ( Exception e )
             {
-                throw;
+                throw new Exception($@"Unable to get the datasource ""{datasourceName}"". {e.Message}", e);
             }
         }
 
@@ -149,7 +144,6 @@ namespace EssSharp
             {
                 throw;
             }
-
         }
 
         /// <inheritdoc/>

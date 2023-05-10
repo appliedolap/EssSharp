@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 
+using EssSharp.Api;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -42,6 +44,25 @@ namespace EssSharp
 
         /// <inheritdoc />
         public IEssServer Server => _server;
+
+        /// <inheritdoc />
+        public string Query( string query, string delimiter = "," )
+        {
+            var datasourcesApi = GetApi<GlobalDatasourcesApi>();
+            var results = datasourcesApi.GlobalDatasourcesGetResults(body: new DatasourceQueryInfo(query, delimiter));
+
+            string streamId = null;
+
+            // Capture the streamed result ID from the first result link.
+            if ( Uri.TryCreate(results?.Links?.FirstOrDefault()?.Href?.TrimEnd('/'), UriKind.RelativeOrAbsolute, out Uri streamUri) )
+                streamId = streamUri?.Segments?.Last();
+
+            if ( string.IsNullOrEmpty(streamId) )
+                throw new Exception("unable to get stream id");
+
+            //var result = datasourcesApi.GlobalDatasourcesGetData(streamId);
+            return datasourcesApi.GlobalDatasourcesGetDataWithHttpInfo(streamId)?.RawContent;
+        }
 
         #endregion 
     }

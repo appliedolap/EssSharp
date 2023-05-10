@@ -8,27 +8,28 @@ namespace EssSharp
     public interface IEssServer : IEssObject
     {
         /// <summary>
-        /// Return a specified data source as an IEssDataSource object
+        /// Return a specified data source as an IEssDatasource object
         /// </summary>
-        /// <param name="dataSourceName"></param>
-        public IEssDataSource GetDataSource(string dataSourceName);
+        /// <param name="datasourceName"></param>
+        public IEssDatasource GetDatasource(string dataSourceName);
 
         /// <summary>
-        /// Returns a specified data source as an IEssDataSource object
+        /// Returns a specified data source as an IEssDatasource object
         /// </summary>
-        /// <param name="dataSourceName"></param>
+        /// <param name="datasourceName"></param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssDataSource> GetDataSourceAsync(string dataSourceName, CancellationToken cancellationToken = default);
-        /// <summary>
-        /// Returns a list of IEssDataSource objects
-        /// </summary>
-        public List<IEssDataSource> GetDataSources();
+        public Task<IEssDatasource> GetDatasourceAsync(string datasourceName, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns a list of IEssDataSource Ojbects
+        /// Returns a list of IEssDatasource objects
+        /// </summary>
+        public List<IEssDatasource> GetDatasources();
+
+        /// <summary>
+        /// Returns a list of IEssDatasource Ojbects
         /// </summary>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssDataSource>> GetDataSourcesAsync(CancellationToken cancellationToken = default);
+        public Task<List<IEssDatasource>> GetDatasourcesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
