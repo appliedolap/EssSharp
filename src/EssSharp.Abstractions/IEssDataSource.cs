@@ -3,7 +3,7 @@
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssDataSource : IEssObject
+    public interface IEssDatasource : IEssObject
     {
         /// <summary>
         /// Returns the server that contains this job.

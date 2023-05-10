@@ -66,11 +66,11 @@ namespace EssSharp
 
 
         /// <summary>
-        /// Returns a <see cref="List{T}"/> of <see cref="IEssDataSource"/> objects associated with the given <see cref="EssServer"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssDatasource"/> objects associated with the given <see cref="EssServer"/>.
         /// </summary>
         /// <param name="datasourcesList" />
         /// <param name="server" />
-        internal static List<IEssDataSource> ToEssSharpList(this DatasourcesList datasourcesList, EssServer server)
+        internal static List<IEssDatasource> ToEssSharpList(this DatasourcesList datasourcesList, EssServer server)
         {
             if (server is null)
                 throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
@@ -78,8 +78,8 @@ namespace EssSharp
             return datasourcesList
                 .Items?
                 .Where(datasource => datasource is not null)
-                .Select(datasource => new EssDataSource(datasource, server) as IEssDataSource)
-                .ToList() ?? new List<IEssDataSource>();
+                .Select(datasource => new EssDatasource(datasource, server) as IEssDatasource)
+                .ToList() ?? new List<IEssDatasource>();
         }
 
         /// <summary>

@@ -105,21 +105,18 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public IEssDataSource GetDataSource( string dataSourceName ) => GetDataSourceAsync( dataSourceName ).GetAwaiter().GetResult();
+        public IEssDatasource GetDatasource( string datasourceName ) => GetDataSourceAsync( datasourceName ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<IEssDataSource> GetDataSourceAsync (string dataSourceName , CancellationToken cancellationToken = default)
+        public async Task<IEssDatasource> GetDataSourceAsync( string datasourceName , CancellationToken cancellationToken = default )
         {
             try
             {
 
-                var api = GetApi<GlobalDatasourcesApi>();
-                var dataSource = await api.GlobalDatasourcesGetDatasourcesAsync(null, null, 0, cancellationToken).ConfigureAwait(false);
-
-                foreach (var source in dataSource?.ToEssSharpList(this) ?? new List<IEssDataSource>())
+                foreach ( var source in await GetDataSourcesAsync(cancellationToken).ConfigureAwait(false) )
                 {
-                    if (string.Equals(dataSourceName, source.Name, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(datasourceName, source?.Name, StringComparison.Ordinal))
                     {
                         return source;
                     }
@@ -134,19 +131,19 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns> A list of <see cref="IEssDataSource"/> objects </returns>
-        public List<IEssDataSource> GetDataSources() => GetDataSourcesAsync()?.GetAwaiter().GetResult();
+        /// <returns> A list of <see cref="IEssDatasource"/> objects </returns>
+        public List<IEssDatasource> GetDatasources() => GetDatasourcesAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns> A list of <see cref="IEssDataSource"/> objects </returns>
-        public async Task<List<IEssDataSource>> GetDataSourcesAsync( CancellationToken cancellationToken = default )
+        /// <returns> A list of <see cref="IEssDatasource"/> objects </returns>
+        public async Task<List<IEssDatasource>> GetDatasourcesAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<GlobalDatasourcesApi>();
                 var dataSource = await api.GlobalDatasourcesGetDatasourcesAsync(null, null, 0, cancellationToken).ConfigureAwait(false);
 
-                return dataSource?.ToEssSharpList(this) ?? new List<IEssDataSource>();
+                return dataSource?.ToEssSharpList(this) ?? new List<IEssDatasource>();
             }
             catch 
             {
