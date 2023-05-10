@@ -1,8 +1,10 @@
-﻿using EssSharp.Model;
-using System;
+﻿using System;
+
+using EssSharp.Model;
 
 namespace EssSharp.Api
 {
+    /// <summary />
     public partial class FilesApi
     {
         /// <summary>
