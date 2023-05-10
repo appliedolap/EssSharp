@@ -17121,7 +17121,6 @@
     "Datasource": {
       "type": "object",
       "required": [
-        "columns",
         "connection",
         "type"
       ],

@@ -103,6 +103,58 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssDataSource GetDataSource( string dataSourceName ) => GetDataSourceAsync( dataSourceName ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssDataSource> GetDataSourceAsync (string dataSourceName , CancellationToken cancellationToken = default)
+        {
+            try
+            {
+
+                var api = GetApi<GlobalDatasourcesApi>();
+                var dataSource = await api.GlobalDatasourcesGetDatasourcesAsync(null, null, 0, cancellationToken).ConfigureAwait(false);
+
+                foreach (var source in dataSource?.ToEssSharpList(this) ?? new List<IEssDataSource>())
+                {
+                    if (string.Equals(dataSourceName, source.Name, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return source;
+                    }
+                }
+
+                throw new Exception("Data Source not found.");
+            }
+            catch 
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns> A list of <see cref="IEssDataSource"/> objects </returns>
+        public List<IEssDataSource> GetDataSources() => GetDataSourcesAsync()?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns> A list of <see cref="IEssDataSource"/> objects </returns>
+        public async Task<List<IEssDataSource>> GetDataSourcesAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GlobalDatasourcesApi>();
+                var dataSource = await api.GlobalDatasourcesGetDatasourcesAsync(null, null, 0, cancellationToken).ConfigureAwait(false);
+
+                return dataSource?.ToEssSharpList(this) ?? new List<IEssDataSource>();
+            }
+            catch 
+            {
+                throw;
+            }
+
+        }
+
         /// <inheritdoc/>
         /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile GetFile(string path) => GetFileAsync(path)?.GetAwaiter().GetResult();

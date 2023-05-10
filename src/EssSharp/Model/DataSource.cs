@@ -138,7 +138,7 @@ namespace EssSharp.Model
         /// <param name="type">type (required).</param>
         /// <param name="connection">connection (required).</param>
         /// <param name="description">description.</param>
-        /// <param name="columns">columns (required).</param>
+        /// <param name="columns">columns.</param>
         /// <param name="name">name.</param>
         /// <param name="ignoreErrorRecords">ignoreErrorRecords.</param>
         /// <param name="delimeter">delimeter.</param>
@@ -164,13 +164,8 @@ namespace EssSharp.Model
                 throw new ArgumentNullException("connection is a required property for Datasource and cannot be null");
             }
             this.Connection = connection;
-            // to ensure "columns" is required (not null)
-            if (columns == null)
-            {
-                throw new ArgumentNullException("columns is a required property for Datasource and cannot be null");
-            }
-            this.Columns = columns;
             this.Description = description;
+            this.Columns = columns;
             this.Name = name;
             this.IgnoreErrorRecords = ignoreErrorRecords;
             this.Delimeter = delimeter;
@@ -204,7 +199,7 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets Columns
         /// </summary>
-        [DataMember(Name = "columns", IsRequired = true, EmitDefaultValue = true)]
+        [DataMember(Name = "columns", EmitDefaultValue = false)]
         public ColumnsType Columns { get; set; }
 
         /// <summary>

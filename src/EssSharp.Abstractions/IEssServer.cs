@@ -7,6 +7,28 @@ namespace EssSharp
     /// <summary />
     public interface IEssServer : IEssObject
     {
+        /// <summary>
+        /// Return a specified data source as an IEssDataSource object
+        /// </summary>
+        /// <param name="dataSourceName"></param>
+        public IEssDataSource GetDataSource(string dataSourceName);
+
+        /// <summary>
+        /// Returns a specified data source as an IEssDataSource object
+        /// </summary>
+        /// <param name="dataSourceName"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssDataSource> GetDataSourceAsync(string dataSourceName, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Returns a list of IEssDataSource objects
+        /// </summary>
+        public List<IEssDataSource> GetDataSources();
+
+        /// <summary>
+        /// Returns a list of IEssDataSource Ojbects
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssDataSource>> GetDataSourcesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 

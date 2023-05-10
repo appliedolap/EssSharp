@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** |  | 
 **Connection** | **string** |  | 
 **Description** | **string** |  | [optional] 
-**Columns** | [**ColumnsType**](ColumnsType.md) |  | 
+**Columns** | [**ColumnsType**](ColumnsType.md) |  | [optional] 
 **Name** | **string** |  | [optional] 
 **IgnoreErrorRecords** | **bool** |  | [optional] 
 **Delimeter** | **string** |  | [optional] 

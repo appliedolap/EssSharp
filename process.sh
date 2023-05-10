@@ -182,7 +182,7 @@ cat temp.json | jq '.definitions."AboutInstance" = {
 cat temp.json | jq '.definitions |= with_entries(if .key == "DataSource" then .key = "RuleDataSource" else . end)' > json.tmp && mv json.tmp temp.json
 
 # The required properties for the Datasource definition are incorrect. Adjust the list of required properties.
-cat temp.json | jq '.definitions.Datasource.required = ["columns", "connection", "type"]' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.Datasource.required = ["connection", "type"]' > json.tmp && mv json.tmp temp.json
 
 cat temp.json | jq '.definitions."EssbaseURL" = {
   "type": "object",
