@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Dimensions** | [**List&lt;Dimension&gt;**](Dimension.md) |  | [optional] 
 **Fields** | [**List&lt;Field&gt;**](Field.md) |  | [optional] 
 **TimeStamp** | **long** |  | [optional] 
-**DataSource** | [**DataSource**](DataSource.md) |  | [optional] 
+**DataSource** | [**RuleDataSource**](RuleDataSource.md) |  | [optional] 
 **DimensionBuildOptions** | [**DimBuildOptions**](DimBuildOptions.md) |  | [optional] 
 **DataLoadOptions** | [**DataLoadOptions**](DataLoadOptions.md) |  | [optional] 
 **EditorOptions** | [**EditorOptions**](EditorOptions.md) |  | [optional] 

@@ -177,135 +177,9 @@ cat temp.json | jq '.definitions."AboutInstance" = {
   }
 }' > json.tmp && mv json.tmp temp.json
 
-
-# There are duplicate "Datasource" definitions, and jq discards all but the last duplicate field of an object.
-# Were this an array, it would be easy enough to handle with unique/unique_by or even just simple indexing,
-# but for an object it is very difficult without leaning on the streaming parser. A simple fix is to just 
-# rewrite the remaining "Datasource" definition to the one that we actually need.
-cat temp.json | jq '.definitions.Datasource = {
-    "type": "object",
-    "required": [
-        "application",
-        "columns",
-        "connection",
-        "cube",
-        "description",
-        "query",
-        "sheet",
-        "startRow",
-        "type",
-        "widths"
-    ],
-    "properties": {
-        "type": {
-            "type": "string",
-            "enum": [
-                "TEMPLATE",
-                "EXCELFILE",
-                "DB",
-                "DELIMITEDFILE",
-                "FIXEDWIDTHFILE",
-                "BI",
-                "ESSBASE",
-                "JDBC",
-                "SPARK",
-                "MS_SQL",
-                "MYSQL",
-                "DB2",
-                "ORACLE",
-                "FILE"
-            ]
-        },
-        "connection": {
-            "type": "string"
-        },
-        "description": {
-            "type": "string"
-        },
-        "columns": {
-            "$ref": "#/definitions/ColumnsType"
-        },
-        "name": {
-            "type": "string"
-        },
-        "ignoreErrorRecords": {
-            "type": "boolean"
-        },
-        "delimeter": {
-            "type": "string",
-            "xml": {
-                "name": "delimiter"
-            }
-        },
-        "customDelimiter": {
-            "type": "string"
-        },
-        "query": {
-            "type": "string"
-        },
-        "application": {
-            "type": "string"
-        },
-        "cube": {
-            "type": "string"
-        },
-        "startRow": {
-            "type": "integer",
-            "format": "int64"
-        },
-        "endRow": {
-            "type": "integer",
-            "format": "int64"
-        },
-        "headerRow": {
-            "type": "integer",
-            "format": "int64"
-        },
-        "sheet": {
-            "type": "string"
-        },
-        "skipHiddenRows": {
-            "type": "boolean"
-        },
-        "widths": {
-            "type": "array",
-            "items": {
-                "type": "integer",
-                "format": "int64",
-                "xml": {
-                    "name": "widths"
-                }
-            }
-        },
-        "queryParameters": {
-            "type": "array",
-            "items": {
-                "xml": {
-                    "name": "queryParameters"
-                },
-                "$ref": "#/definitions/QueryParamsInfo"
-            }
-        },
-        "headers": {
-            "type": "array",
-            "items": {
-                "xml": {
-                    "name": "headers"
-                },
-                "$ref": "#/definitions/HeaderType"
-            }
-        },
-        "links": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/Link"
-            }
-        }
-    },
-    "xml": {
-        "name": "datasource"
-    }
-}' > json.tmp && mv json.tmp temp.json
+# There are duplicate "Datasource" definitions, "Datasource" and "DataSource", and the OpenAPI generator fails 
+# to generate model classes for case-insensitive duplicates correctly. Rename "DataSource" to "RuleDataSource".
+cat temp.json | jq '.definitions |= with_entries(if .key == "DataSource" then .key = "RuleDataSource" else . end)' > json.tmp && mv json.tmp temp.json
 
 # The required properties for the Datasource definition are incorrect. Adjust the list of required properties.
 cat temp.json | jq '.definitions.Datasource.required = ["columns", "connection", "type"]' > json.tmp && mv json.tmp temp.json
@@ -429,6 +303,10 @@ cat temp.json | jq '.definitions.MemberBean.properties += {
     "type": "string"
   }
 }' > json.tmp && mv json.tmp temp.json
+
+# There are duplicate "Datasource" definitions: "Datasource" and "DataSource", and the OpenAPI generator fails 
+# to generate model classes for case-insensitive duplicates correctly. Update the dataSource property of Rules.
+cat temp.json | jq '.definitions.Rules.properties.dataSource = { "$ref": "#/definitions/RuleDataSource" }' > json.tmp && mv json.tmp temp.json
 
 cat temp.json | jq '.definitions.ZoomIn.properties.ancestor.enum = ["top", "bottom"]' > json.tmp && mv json.tmp temp.json
 

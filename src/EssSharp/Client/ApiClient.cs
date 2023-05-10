@@ -152,19 +152,18 @@ namespace EssSharp.Client
                 return DateTime.Parse(response.Content, null, System.Globalization.DateTimeStyles.RoundtripKind);
             }
 
-            /*
             if (type == typeof(string) || type.Name.StartsWith("System.Nullable")) // return primitive type
             {
                 return Convert.ChangeType(response.Content, type);
             }
-            */
-            
+
+            /*
             // If the ContentType is an octet-stream, return the raw bytes.
             if (string.Equals(response.ContentType, "application/octet-stream", StringComparison.OrdinalIgnoreCase))
             {
                 return response.RawBytes;
             }
-           
+            */
 
             // at this point, it must be a model (json)
             try

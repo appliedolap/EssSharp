@@ -22206,7 +22206,7 @@
         }
       }
     },
-    "DataSource": {
+    "RuleDataSource": {
       "type": "object",
       "properties": {
         "header": {
@@ -22785,7 +22785,7 @@
           "format": "int64"
         },
         "dataSource": {
-          "$ref": "#/definitions/DataSource"
+          "$ref": "#/definitions/RuleDataSource"
         },
         "dimensionBuildOptions": {
           "$ref": "#/definitions/DimBuildOptions"

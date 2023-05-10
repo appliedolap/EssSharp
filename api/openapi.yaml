@@ -23585,7 +23585,7 @@ components:
         signFlipUDA:
           type: string
       type: object
-    DataSource:
+    RuleDataSource:
       example:
         sqlProperties:
           server: server
@@ -24969,7 +24969,7 @@ components:
           format: int64
           type: integer
         dataSource:
-          $ref: '#/components/schemas/DataSource'
+          $ref: '#/components/schemas/RuleDataSource'
         dimensionBuildOptions:
           $ref: '#/components/schemas/DimBuildOptions'
         dataLoadOptions:
