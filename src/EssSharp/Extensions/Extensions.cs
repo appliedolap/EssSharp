@@ -72,7 +72,7 @@ namespace EssSharp
         /// <param name="server" />
         internal static List<IEssDatasource> ToEssSharpList(this DatasourcesList datasourcesList, EssServer server)
         {
-            if (server is null)
+            if ( server is null )
                 throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
 
             return datasourcesList
@@ -80,6 +80,23 @@ namespace EssSharp
                 .Where(datasource => datasource is not null)
                 .Select(datasource => new EssDatasource(datasource, server) as IEssDatasource)
                 .ToList() ?? new List<IEssDatasource>();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssFile"/> or <see cref="IEssFolder"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="datasourcesList" />
+        /// <param name="application" />
+        internal static List<IEssApplicationDatasource> ToEssSharpList( this DatasourcesList datasourcesList, EssApplication application )
+        {
+            if ( application is null )
+                throw new ArgumentNullException(nameof(application), $"The given {nameof(application)} is null.");
+
+            return datasourcesList
+                .Items?
+                .Where(datasource => datasource is not null)
+                .Select(datasource => new EssApplicationDatasource(datasource, application) as IEssApplicationDatasource)
+                .ToList() ?? new List<IEssApplicationDatasource>();
         }
 
         /// <summary>
@@ -100,24 +117,7 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns a <see cref="List{T}"/> of <see cref="IEssDrillThroughReport"/> objects associated with the given <see cref="EssCube"/>.
-        /// </summary>
-        /// <param name="reportList" />
-        /// <param name="cube" />
-        internal static List<IEssDrillThroughReport> ToEssSharpList( this ReportList reportList, EssCube cube )
-        {
-            if ( cube is null )
-                throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
-
-            return reportList
-                .Items?
-                .Where(report => report is not null)
-                .Select(report => new EssDrillThroughReport(report, cube) as IEssDrillThroughReport)
-                .ToList() ?? new List<IEssDrillThroughReport>();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="List{T}"/> of <see cref="IEssUtility"/> objects associated with the given <see cref="EssServer"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssFile"/> or <see cref="IEssFolder"/> objects associated with the given <see cref="EssServer"/>.
         /// </summary>
         /// <param name="fileCollectionResponse" />
         /// <param name="server" />
@@ -171,36 +171,20 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns a <see cref="List{T}"/> of <see cref="IEssSession"/> objects associated with the given <see cref="EssServer"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssDrillThroughReport"/> objects associated with the given <see cref="EssCube"/>.
         /// </summary>
-        /// <param name="sessionList" />
-        /// <param name="server" />
-        internal static List<IEssSession> ToEssSharpList( this List<SessionAttributes> sessionList, EssServer server )
+        /// <param name="reportList" />
+        /// <param name="cube" />
+        internal static List<IEssDrillThroughReport> ToEssSharpList( this ReportList reportList, EssCube cube )
         {
-            if ( server is null )
-                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+            if ( cube is null )
+                throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
 
-            return sessionList
-                .Where(session => session is not null)
-                .Select(session => new EssSession(session) as IEssSession)
-                .ToList() ?? new List<IEssSession>();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="List{T}"/> of <see cref="IEssUrl"/> objects associated with the given <see cref="EssServer"/>.
-        /// </summary>
-        /// <param name="urlList" />
-        /// <param name="server" />
-        internal static List<IEssUrl> ToEssSharpList( this EssbaseURLList urlList, EssServer server )
-        {
-            if ( server is null )
-                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
-
-            return urlList
+            return reportList
                 .Items?
-                .Where (url => url is not null)
-                .Select(url => new EssUrl(url, server) as IEssUrl)
-                .ToList() ?? new List<IEssUrl>();
+                .Where(report => report is not null)
+                .Select(report => new EssDrillThroughReport(report, cube) as IEssDrillThroughReport)
+                .ToList() ?? new List<IEssDrillThroughReport>();
         }
 
         /// <summary>
@@ -221,6 +205,22 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssSession"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="sessionList" />
+        /// <param name="server" />
+        internal static List<IEssSession> ToEssSharpList( this List<SessionAttributes> sessionList, EssServer server )
+        {
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+
+            return sessionList
+                .Where(session => session is not null)
+                .Select(session => new EssSession(session) as IEssSession)
+                .ToList() ?? new List<IEssSession>();
+        }
+
+        /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssScript"/> objects associated with the given <see cref="EssCube"/>.
         /// </summary>
         /// <param name="scriptList" />
@@ -235,6 +235,23 @@ namespace EssSharp
                 .Where(script => script is not null)
                 .Select(script => new EssScript(script, cube) as IEssScript)
                 .ToList() ?? new List<IEssScript>();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssUrl"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="urlList" />
+        /// <param name="server" />
+        internal static List<IEssUrl> ToEssSharpList( this EssbaseURLList urlList, EssServer server )
+        {
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+
+            return urlList
+                .Items?
+                .Where(url => url is not null)
+                .Select(url => new EssUrl(url, server) as IEssUrl)
+                .ToList() ?? new List<IEssUrl>();
         }
 
         /// <summary>
