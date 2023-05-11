@@ -1,4 +1,8 @@
-﻿namespace EssSharp
+﻿
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace EssSharp
 {
     /// <summary />
     public interface IEssDatasource : IEssObject
@@ -8,12 +12,28 @@
         /// </summary>
         public IEssServer Server { get; }
 
-        //public EssDatasourceType DatasourceType { get; }
+        /// <summary>
+        /// Returns the name of the Connection
+        /// </summary>
+        public string ConnectionName { get; }
 
-        //public string ConnectionName { get; }
+        /// <summary>
+        /// Returns the Datasource type
+        /// </summary>
+        public EssDatasourceType DatasourceType { get; }
 
-        //public async Task<IEssDatasourceConnection> GetConnectionAsync( CancellationToken cancellationToken = default );
+        public IEssDatasourceConnection GetConnection();
 
-        public string Query( string query, string delimiter = "," );
+        public Task<IEssDatasourceConnection> GetConnectionAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
+        public string Query( IEssDatasourceQueryInfo queryInfo );
+
+        public Task<string> QueryAsync( IEssDatasourceQueryInfo queryInfo, CancellationToken cancellationToken = default );
     }
 }

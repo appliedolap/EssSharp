@@ -7,6 +7,7 @@
         ApplicationConfiguration,
         Cube,
         Datasource,
+        DatasourceConnection,
         DrillThroughReport,
         File,
         Folder,

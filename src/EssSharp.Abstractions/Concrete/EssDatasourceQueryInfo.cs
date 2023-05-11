@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssDatasourceQueryInfo : IEssDatasourceQueryInfo
     {
         #region Constructors
@@ -42,19 +43,13 @@ namespace EssSharp
             if ( string.IsNullOrEmpty(select) )
                 throw new ArgumentNullException(nameof(select), $"A select clause is required to create an {nameof(EssDatasourceQueryInfo)} with this overload.");
 
-            if ( (select = select.Trim()).StartsWith("select", StringComparison.OrdinalIgnoreCase) is false )
+            if ( !(select = select.Trim()).StartsWith("select", StringComparison.OrdinalIgnoreCase) )
                 select = $@"SELECT {select}";
 
-            if ( !string.IsNullOrEmpty(where = where?.Trim()) && where.StartsWith("where", StringComparison.OrdinalIgnoreCase) is false )
+            if ( !string.IsNullOrEmpty(where = where?.Trim()) && !where.StartsWith("where", StringComparison.OrdinalIgnoreCase) )
                 where = $@"WHERE {where}";
 
-            string identifier = datasource switch
-            {
-                IEssApplicationDatasource ads => $@"{ads.Application?.Name}.{ads.Name}".Trim('.'),
-                                            _ => $@"{datasource.Name}"
-            };
-
-            Query = $@"{select} FROM {identifier} {where}".Trim();
+            Query = $@"{select} FROM {datasource} {where}".Trim();
         }
 
         #endregion

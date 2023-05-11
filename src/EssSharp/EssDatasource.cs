@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 using EssSharp.Api;
 using EssSharp.Model;
@@ -46,24 +48,64 @@ namespace EssSharp
         public IEssServer Server => _server;
 
         /// <inheritdoc />
-        public string Query( string query, string delimiter = "," )
+        public string ConnectionName => _datasource?.Connection;
+
+        /// <inheritdoc />
+        public EssDatasourceType DatasourceType => Enum.IsDefined(typeof(EssDatasourceType), _datasource?.Type) ? (EssDatasourceType) _datasource?.Type : EssDatasourceType.UNKNOWN;
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssDatasourceConnection"/>.</returns>
+        public IEssDatasourceConnection GetConnection() => GetConnectionAsync()?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssDatasourceConnection"/>.</returns>
+        public async Task<IEssDatasourceConnection> GetConnectionAsync( CancellationToken cancellationToken = default )
         {
-            var datasourcesApi = GetApi<GlobalDatasourcesApi>();
-            var results = datasourcesApi.GlobalDatasourcesGetResults(body: new DatasourceQueryInfo(query, delimiter));
+            var api = GetApi<GlobalConnectionsApi>();
+            var connection = await api.GlobalConnectionsGetConnectionDetailsAsync(connectionName: _datasource?.Connection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            string streamId = null;
+            return new EssDatasourceConnection( connection, Server as EssServer );
+        }
+        
+        /// <inheritdoc />
+        public string Query( IEssDatasourceQueryInfo queryInfo ) => QueryAsync(queryInfo)?.GetAwaiter().GetResult();
 
-            // Capture the streamed result ID from the first result link.
-            if ( Uri.TryCreate(results?.Links?.FirstOrDefault()?.Href?.TrimEnd('/'), UriKind.RelativeOrAbsolute, out Uri streamUri) )
-                streamId = streamUri?.Segments?.Last();
+        /// <inheritdoc />
+        public async Task<string> QueryAsync( IEssDatasourceQueryInfo queryInfo, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GlobalDatasourcesApi>();
+                var results = await api.GlobalDatasourcesGetResultsAsync(body: new DatasourceQueryInfo(queryInfo.Query, queryInfo.Delimiter), cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            if ( string.IsNullOrEmpty(streamId) )
-                throw new Exception("unable to get stream id");
+                string streamId = null;
 
-            //var result = datasourcesApi.GlobalDatasourcesGetData(streamId);
-            return datasourcesApi.GlobalDatasourcesGetDataWithHttpInfo(streamId)?.RawContent;
+                if (Uri.TryCreate(results?.Links?.FirstOrDefault()?.Href?.TrimEnd('/'), UriKind.RelativeOrAbsolute, out Uri streamUri) )
+                    streamId = streamUri?.Segments?.Last();
+
+                if ( string.IsNullOrEmpty(streamId) )
+                    throw new Exception("Unable to capture a valid stream ID.");
+
+                if ( await api.GlobalDatasourcesGetDataWithHttpInfoAsync(streamId: streamId, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } response )
+                    throw new Exception("Received an empty or invalid response.");
+
+                return response.RawContent;
+            }
+            catch ( Exception e ) 
+            {
+                throw new Exception($@"Unable to query the ""{this}"" datasource. {e.Message}", e);
+            }
         }
 
-        #endregion 
+        #endregion
+
+        #region System.Object Overrides
+
+        /// <inheritdoc />
+        /// <remarks>Provides the name of this datasource in the following format:<br />
+        /// <b>&lt;datasource&gt;</b>.</remarks>
+        public override string ToString() => $@"{_datasource?.Name}";
+
+        #endregion
     }
 }
