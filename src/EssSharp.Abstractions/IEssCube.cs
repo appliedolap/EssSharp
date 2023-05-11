@@ -33,6 +33,7 @@ namespace EssSharp
         /// Asynchronously gets the drillthrough report with the given name.
         /// </summary>
         /// <param name="reportName" />
+        /// <param name="cancellationToken" />
         public Task<IEssDrillThroughReport> GetDrillThroughReportAsync( string reportName, CancellationToken cancellationToken = default );
 
 
@@ -97,5 +98,19 @@ namespace EssSharp
         /// Returns true if this cube has scenarios are enabled, else false
         /// </summary>
         public Task<bool> isScenariosEnabledAsync();
+    }
+
+    /// <summary>
+    /// Fluent extensions for <see cref="IEssCube"/>.
+    /// </summary>
+    public static class IEssCubeExtensions
+    {
+        /// <summary>
+        /// Asynchronously gets the drillthrough report with the given name.
+        /// </summary>
+        /// <param name="reportName" />
+        /// <param name="cancellationToken" />
+        public static async Task<IEssDrillThroughReport> GetDrillThroughReportAsync( this Task<IEssCube> cubeTask, string reportName, CancellationToken cancellationToken = default ) =>
+            await (await cubeTask).GetDrillThroughReportAsync(reportName, cancellationToken).ConfigureAwait(false);
     }
 }
