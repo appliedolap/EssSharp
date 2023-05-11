@@ -20,6 +20,9 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <VersionPrefix>0.1.0</VersionPrefix>
     <VersionSuffix>beta</VersionSuffix>
+    <!-- Strong Name Signing -->
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>EssSharp.snk</AssemblyOriginatorKeyFile>
     <!-- SourceLink Options -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -32,7 +35,7 @@
     <ProjectReference Include="..\EssSharp.Abstractions\EssSharp.Abstractions.csproj" />
     <!-- Package References -->
     <PackageReference Include="JsonSubTypes" Version="1.9.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
     <PackageReference Include="Polly" Version="7.2.3" />
