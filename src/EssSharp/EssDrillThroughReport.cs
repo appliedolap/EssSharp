@@ -81,10 +81,10 @@ namespace EssSharp
                 var api = GetApi<DrillThroughReportsApi>();
                 var response = await api.DrillThroughReportsExecuteWithHttpInfoAsync(_cube?.Application?.Name, _cube?.Name, _definition?.Name ?? _report?.Name, context.ToModelBean(aliasTable), 0, cancellationToken).ConfigureAwait(false);
 
-                if ( response.Data is JArray jArray )
-                    return To2DReport(jArray);
+                if ( response?.Data is not JArray jArray )
+                    throw new Exception($"Received an empty or invalid response. {response.RawContent}".TrimEnd());
 
-                throw new Exception($"Received an empty or invalid response. {response.RawContent}");
+                return To2DReport(jArray);
             }
             catch ( Exception e )
             {

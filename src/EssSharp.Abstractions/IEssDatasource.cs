@@ -36,4 +36,18 @@ namespace EssSharp
 
         public Task<string> QueryAsync( IEssDatasourceQueryInfo queryInfo, CancellationToken cancellationToken = default );
     }
+
+    /// <summary>
+    /// Fluent extensions for <see cref="IEssDatasource"/>.
+    /// </summary>
+    public static class IEssDatasourceExtensions
+    {
+        /// <summary>
+        /// Asynchronously executes the datasource query and returns the records.
+        /// </summary>
+        /// <param name="queryInfo" />
+        /// <param name="cancellationToken" />
+        public static async Task<string> QueryAsync( this Task<IEssDatasource> datasourceTask, IEssDatasourceQueryInfo queryInfo, CancellationToken cancellationToken = default ) =>
+            await (await datasourceTask).QueryAsync(queryInfo, cancellationToken).ConfigureAwait(false);
+    }
 }

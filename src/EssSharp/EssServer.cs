@@ -45,9 +45,13 @@ namespace EssSharp
         /// <param name="password"></param>
         public EssServer( string server, string username, string password )
         {
-            _server = server?.TrimEnd('/');
+            _server = server?.TrimEnd('/') ?? string.Empty;
 
-            var basePath = $@"{_server}{_defaultRestApiPath}";
+            var basePath = _server;
+
+            // If necessary, append the default REST API path if necessary.
+            if ( !server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
+                basePath = $@"{_server}{_defaultRestApiPath}";
 
             if ( !Uri.TryCreate(basePath, UriKind.Absolute, out _) )
                 throw new ArgumentException("A fully qualified server URL is required.", nameof(server));
@@ -72,7 +76,7 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string  Name => _server;
+        public override string Name => _server;
 
         /// <inheritdoc />
         public override EssType Type => EssType.Server;
