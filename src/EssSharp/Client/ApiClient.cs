@@ -534,7 +534,8 @@ namespace EssSharp.Client
             }
             else if (typeof(T).Name == "Object") // for raw object response
             {
-                response.Data = (T)(object)response.RawBytes;
+                // if the response data was not already deserialized, return the raw bytes.
+                response.Data ??= (T)(object)response.RawBytes;
             }
 
             InterceptResponse(req, response);
@@ -628,7 +629,8 @@ namespace EssSharp.Client
             }
             else if (typeof(T).Name == "Object") // for raw object response
             {
-                response.Data = (T)(object)response.RawBytes;
+                // if the response data was not already deserialized, return the raw bytes.
+                response.Data ??= (T)(object)response.RawBytes;
             }
 
             InterceptResponse(req, response);
