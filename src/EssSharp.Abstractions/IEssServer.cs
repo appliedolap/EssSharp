@@ -7,6 +7,15 @@ namespace EssSharp
     /// <summary />
     public interface IEssServer : IEssObject
     {
+        public IEssDatasourceConnection GetConnection( string connectionName );
+
+        public Task<IEssDatasourceConnection> GetConnectionAsync( string connectionName, CancellationToken cancellationToken = default );
+
+        public List<IEssDatasourceConnection> GetConnections();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Task<List<IEssDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default );
         /// <summary>
         /// Return a specified data source as an IEssDatasource object
         /// </summary>
