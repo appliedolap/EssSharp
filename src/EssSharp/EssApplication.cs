@@ -135,6 +135,54 @@ namespace EssSharp
             }
         }
 
+        public IEssApplicationDatasourceConnection GetConnection( string appConnectionName ) => GetConnectionAsync(appConnectionName).GetAwaiter().GetResult();
+
+        public async Task<IEssApplicationDatasourceConnection> GetConnectionAsync( string appConnectionName, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationConnectionsApi>();
+                if ( await api.ApplicationConnectionsGetConnectionDetailsAsync(applicationName: Name, connectionName: appConnectionName, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } applicationConnection )
+                    throw new Exception($@"Application connection cannot be found.");
+
+                return new EssApplicationDatasourceConnection(applicationConnection, this);
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to find application connection with name: ""{this}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssApplicationDatasourceConnection> GetConnections() => GetConnectionsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssApplicationDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default )
+        {
+
+            try
+            {
+                var api = GetApi<ApplicationConnectionsApi>();
+                if ( await api.ApplicationConnectionsGetConnectionsAsync(applicationName: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } connections )
+                    throw new Exception("Application connections cannot be found.");
+
+                var connectionsList = new List<IEssApplicationDatasourceConnection>();
+
+                foreach ( var connection in connections.Items )
+                {
+                    connectionsList.Add(GetConnection(connection.Name));
+                }
+
+                return connectionsList;
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to find application connections list on ""{this}"". {e.Message}", e);
+            }
+        }
+
         /// <inheritdoc />
         /// <returns>An <see cref="EssCube"/> object.</returns>
         public IEssCube GetCube( string cubeName ) => GetCubeAsync(cubeName)?.GetAwaiter().GetResult();

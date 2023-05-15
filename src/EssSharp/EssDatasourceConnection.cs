@@ -113,10 +113,10 @@ namespace EssSharp
         #region IEssDatasourceConnection Methods
 
         /// <inheritdoc />
-        public void TestConnection() => TestConnectionAsync().GetAwaiter().GetResult();
+        public virtual void TestConnection() => TestConnectionAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        public async Task TestConnectionAsync( CancellationToken cancellationToken = default )
+        public virtual async Task TestConnectionAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -130,11 +130,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public void DeleteConnection() => DeleteConnectionAsync().GetAwaiter().GetResult();
+        public virtual void DeleteConnection() => DeleteConnectionAsync().GetAwaiter().GetResult();
 
 
         /// <inheritdoc />
-        public async Task DeleteConnectionAsync( CancellationToken cancellationToken = default )
+        public virtual async Task DeleteConnectionAsync( CancellationToken cancellationToken = default )
         {
             try
             {

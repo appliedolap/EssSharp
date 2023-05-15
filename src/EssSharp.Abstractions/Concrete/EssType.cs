@@ -5,6 +5,7 @@
     {
         Application,
         ApplicationConfiguration,
+        ApplicationDatasourceConnection,
         Cube,
         Datasource,
         DatasourceConnection,

@@ -45,6 +45,19 @@ namespace EssSharp
         /// <returns>A <see cref="string"/> containing the log file content.</returns>
         public Task<string> DownloadLatestLogFileStringAsync( CancellationToken cancellationToken = default );
 
+
+        public IEssApplicationDatasourceConnection GetConnection( string appConnectionName );
+
+        public Task<IEssApplicationDatasourceConnection> GetConnectionAsync( string appConnectionName, CancellationToken cancellationToken = default );
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssApplicationDatasourceConnection> GetConnections();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Task<List<IEssApplicationDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default );
+
         /// <summary>
         /// Gets the cube with the given name.
         /// </summary>
