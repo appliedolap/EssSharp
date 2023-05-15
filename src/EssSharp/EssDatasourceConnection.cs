@@ -46,10 +46,10 @@ namespace EssSharp
         public IEssServer Server => _server;
 
         /// <inheritdoc />
-        public EssDatasourceConnectionType ConnectionType => Enum.IsDefined(typeof(EssDatasourceConnectionType), _connection.Type) ? (EssDatasourceConnectionType) _connection.Type : EssDatasourceConnectionType.UNKNOWN;
+        public EssDatasourceConnectionType ConnectionType => Enum.IsDefined(typeof(EssDatasourceConnectionType), (EssDatasourceConnectionType) _connection.Type) ? (EssDatasourceConnectionType) _connection.Type : EssDatasourceConnectionType.UNKNOWN;
 
         /// <inheritdoc />
-        public EssDatasourceConnectionSubtype ConnectionSubtype => Enum.IsDefined(typeof(EssDatasourceConnectionSubtype), _connection?.Subtype) ? (EssDatasourceConnectionSubtype)_connection.Subtype : EssDatasourceConnectionSubtype.UNKNOWN;
+        public EssDatasourceConnectionSubtype ConnectionSubtype => Enum.IsDefined(typeof(EssDatasourceConnectionSubtype), (EssDatasourceConnectionSubtype) _connection?.Subtype) ? (EssDatasourceConnectionSubtype)_connection.Subtype : EssDatasourceConnectionSubtype.UNKNOWN;
 
         /// <inheritdoc />
         public string Description { get =>_connection.Description; set => _connection.Description = value; }
