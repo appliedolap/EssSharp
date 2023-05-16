@@ -135,6 +135,23 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssGroup"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="groups" />
+        /// <param name="server" />
+        internal static List<IEssGroup> ToEssSharpList( this Groups groups, EssServer server )
+        {
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+
+            return groups
+                .Items?
+                .Where(group => group is not null)
+                .Select(group => new EssGroup(group, server) as IEssGroup)
+                .ToList() ?? new List<IEssGroup>();
+        }
+
+        /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssJob"/> objects associated with the given <see cref="EssServer"/>.
         /// </summary>
         /// <param name="jobWrapper" />
@@ -252,6 +269,23 @@ namespace EssSharp
                 .Where(url => url is not null)
                 .Select(url => new EssUrl(url, server) as IEssUrl)
                 .ToList() ?? new List<IEssUrl>();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssUser"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="userList" />
+        /// <param name="server" />
+        internal static List<IEssUser> ToEssSharpList( this Users userList, EssServer server )
+        {
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+
+            return userList
+                .Items?
+                .Where(user => user is not null)
+                .Select(user => new EssUser(user, server) as IEssUser)
+                .ToList() ?? new List<IEssUser>();
         }
 
         /// <summary>

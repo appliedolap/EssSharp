@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -397,6 +399,46 @@ namespace EssSharp
             catch ( Exception )
             {
                 throw;
+            }
+        }
+
+        public IEssGroup GetGroup( string name ) => GetGroupAsync(name).GetAwaiter().GetResult();
+
+        public async Task<IEssGroup> GetGroupAsync( string name, CancellationToken cancellationToken = default )
+        {
+            {
+                try
+                {
+                    var api = GetApi<GroupsApi>();
+                    foreach ( var group in (await api.GroupsSearchAsync(filter: name, cancellationToken: cancellationToken).ConfigureAwait(false)).Items )
+                    {
+                        return new EssGroup(group, this);
+                    }
+
+                    throw new Exception("Groups not found.")
+                }
+                catch ( Exception e )
+                {
+                    throw new Exception($@"Unable to get the groups on ""{Name}"". {e.Message}", e);
+                }
+            }
+        }
+
+        public List<IEssGroup> GetGroups() => GetGroupsAsync().GetAwaiter().GetResult();
+
+        public async Task<List<IEssGroup>> GetGroupsAsync(CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GroupsApi>();
+                if ( await api.GroupsSearchAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groups ) 
+                    throw new Exception("Groups not found.");
+
+                return groups?.ToEssSharpList(this) ?? new List<IEssGroup>();
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the groups on ""{Name}"". {e.Message}", e);
             }
         }
 

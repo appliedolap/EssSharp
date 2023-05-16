@@ -36,7 +36,7 @@ namespace EssSharp
         public override string Name  => _connection?.Name;
 
         /// <inheritdoc />
-        public override EssType Type => EssType.ApplicationConnection;
+        public override EssType Type => EssType.ApplicationDatasourceConnection;
 
         #endregion
 
