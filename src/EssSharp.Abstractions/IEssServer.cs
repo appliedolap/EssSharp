@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using System;
 
 namespace EssSharp
 {
@@ -74,6 +75,14 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssFolder>> GetFoldersAsync(CancellationToken cancellationToken = default);
+
+        public IEssGroup GetGroup( string name );
+
+        public Task<IEssGroup> GetGroupAsync( string name, CancellationToken cancellationToken = default );
+
+        public List<IEssGroup> GetGroups();
+
+        public Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the about information of this server
