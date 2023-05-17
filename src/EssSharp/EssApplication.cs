@@ -242,7 +242,7 @@ namespace EssSharp
             var configurationList = await api.ApplicationConfigurationGetConfigurationsAsync(Name).ConfigureAwait(false);
 
             return configurationList?.ToEssSharpList(this) ?? new List<IEssApplicationConfiguration>();
-      }
+        }
 
         /// <inheritdoc />
         public List<IEssApplicationVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplicationVariable>();
@@ -299,7 +299,5 @@ namespace EssSharp
         }
 
         #endregion
-
-
     }
 }

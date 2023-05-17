@@ -5,11 +5,10 @@
     {
         Application,
         ApplicationConfiguration,
-        ApplicationDatasourceConnection,
         Cube,
         Datasource,
         DatasourceConnection,
-        DrillThroughReport,
+        DrillthroughReport,
         File,
         Folder,
         Group,

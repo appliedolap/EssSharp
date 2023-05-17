@@ -188,11 +188,11 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns a <see cref="List{T}"/> of <see cref="IEssDrillThroughReport"/> objects associated with the given <see cref="EssCube"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssDrillthroughReport"/> objects associated with the given <see cref="EssCube"/>.
         /// </summary>
         /// <param name="reportList" />
         /// <param name="cube" />
-        internal static List<IEssDrillThroughReport> ToEssSharpList( this ReportList reportList, EssCube cube )
+        internal static List<IEssDrillthroughReport> ToEssSharpList( this ReportList reportList, EssCube cube )
         {
             if ( cube is null )
                 throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
@@ -200,8 +200,8 @@ namespace EssSharp
             return reportList
                 .Items?
                 .Where(report => report is not null)
-                .Select(report => new EssDrillThroughReport(report, cube) as IEssDrillThroughReport)
-                .ToList() ?? new List<IEssDrillThroughReport>();
+                .Select(report => new EssDrillthroughReport(report, cube) as IEssDrillthroughReport)
+                .ToList() ?? new List<IEssDrillthroughReport>();
         }
 
         /// <summary>
@@ -316,25 +316,30 @@ namespace EssSharp
 
         #region Migrations from EssSharp.Abstractions
 
-        internal static DrillthroughMetadataBean ToModelBean( this IEssDrillThroughRange context, string aliasTable = null, string sessionId = null )
-            => ToModelBean(new List<IEssDrillThroughRange>() { context }, aliasTable, sessionId);
-
         /// <summary>
-        /// Returns a <see cref="DrillthroughMetadataBean"/> from the collection of <see cref="IEssDrillThroughRange"/> objects
-        /// and optionally, an <paramref name="aliasTable"/> and <paramref name="sessionId"/>.
+        /// Returns a <see cref="DrillthroughMetadataBean"/> from the given <see cref="IEssDrillthroughRange"/> object
+        /// and optionally, an <see cref="IEssDrillthroughOptions"/>..
         /// </summary>
         /// <param name="context" />
-        /// <param name="aliasTable" />
-        /// <param name="sessionId" />
-        internal static DrillthroughMetadataBean ToModelBean( this IEnumerable<IEssDrillThroughRange> context, string aliasTable = null, string sessionId = null )
+        /// <param name="options" />
+        internal static DrillthroughMetadataBean ToModelBean( this IEssDrillthroughRange context, IEssDrillthroughOptions options = null )
+            => ToModelBean(new List<IEssDrillthroughRange>() { context }, options);
+
+        /// <summary>
+        /// Returns a <see cref="DrillthroughMetadataBean"/> from the collection of <see cref="IEssDrillthroughRange"/> objects
+        /// and optionally, an <see cref="IEssDrillthroughOptions"/>..
+        /// </summary>
+        /// <param name="context" />
+        /// <param name="options" />
+        internal static DrillthroughMetadataBean ToModelBean( this IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null )
         {
-            if ( context?.Any(dtr => dtr is not null) is not true ) 
-                throw new ArgumentException($"At least one {nameof(IEssDrillThroughRange)} is required to produce a {nameof(DrillthroughMetadataBean)}.", nameof(context));
+            if ( context?.Any(dtr => dtr is not null) is not true )
+                throw new ArgumentException($"At least one {nameof(IEssDrillthroughRange)} is required to produce a {nameof(DrillthroughMetadataBean)}.", nameof(context));
 
             return new DrillthroughMetadataBean(context?
-                .Where (dtr => dtr is not null)
+                .Where(dtr => dtr is not null)
                 .Select(dtr => new DrillThroughRange(dtr.DimensionMemberSets))
-                .ToList(), aliasTable, sessionId);
+                .ToList(), aliasTable: options?.AliasTable);
         }
 
         #endregion
