@@ -415,7 +415,7 @@ namespace EssSharp
                         return new EssGroup(group, this);
                     }
 
-                    throw new Exception("Groups not found.")
+                    throw new Exception("Groups not found.");
                 }
                 catch ( Exception e )
                 {
