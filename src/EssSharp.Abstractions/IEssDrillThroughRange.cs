@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssDrillThroughRange
+    public interface IEssDrillthroughRange
     {
         #region Properties
 

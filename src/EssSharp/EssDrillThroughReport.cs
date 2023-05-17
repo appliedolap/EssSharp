@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 namespace EssSharp
 {
     /// <summary />
-    public class EssDrillThroughReport : EssObject, IEssDrillThroughReport
+    public class EssDrillthroughReport : EssObject, IEssDrillthroughReport
     {
         #region Private Data
 
@@ -25,23 +25,23 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssDrillThroughReport( DrillthroughBean report, EssCube cube ) : base(cube?.Configuration, cube?.Client)
+        internal EssDrillthroughReport( DrillthroughBean report, EssCube cube ) : base(cube?.Configuration, cube?.Client)
         {
             _definition = report ??
-                throw new ArgumentNullException(nameof(report), $"An API model {nameof(report)} is required to create an {nameof(EssDrillThroughReport)}.");
+                throw new ArgumentNullException(nameof(report), $"An API model {nameof(report)} is required to create an {nameof(EssDrillthroughReport)}.");
 
             _cube = cube ??
-                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssDrillThroughReport)}.");
+                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssDrillthroughReport)}.");
         }
 
         /// <summary />
-        internal EssDrillThroughReport( ReportBean report, EssCube cube ) : base(cube?.Configuration, cube?.Client)
+        internal EssDrillthroughReport( ReportBean report, EssCube cube ) : base(cube?.Configuration, cube?.Client)
         {
             _report = report ??
-                throw new ArgumentNullException(nameof(report), $"An API model {nameof(report)} is required to create an {nameof(EssDrillThroughReport)}.");
+                throw new ArgumentNullException(nameof(report), $"An API model {nameof(report)} is required to create an {nameof(EssDrillthroughReport)}.");
 
             _cube = cube ??
-                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssDrillThroughReport)}.");
+                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssDrillthroughReport)}.");
         }
 
         #endregion
@@ -52,29 +52,29 @@ namespace EssSharp
         public override string Name => _definition?.Name ?? _report?.Name;
 
         /// <inheritdoc />
-        public override EssType Type => EssType.DrillThroughReport;
+        public override EssType Type => EssType.DrillthroughReport;
 
         #endregion
 
-        #region IEssDrillThroughReport Members
+        #region IEssDrillthroughReport Members
 
         /// <inheritdoc />
         public IEssCube Cube => _cube;
 
         /// <inheritdoc />
-        public (object[,] report, string[] columnTypes) Execute( IEssDrillThroughRange context, IEssDrillthroughOptions options = null ) => Execute(new List<IEssDrillThroughRange>() { context }, options);
+        public (object[,] report, string[] columnTypes) Execute( IEssDrillthroughRange context, IEssDrillthroughOptions options = null ) => Execute(new List<IEssDrillthroughRange>() { context }, options);
 
         /// <inheritdoc />
-        public (object[,] report, string[] columnTypes) Execute( IEnumerable<IEssDrillThroughRange> context, IEssDrillthroughOptions options = null ) => ExecuteAsync(context, options)?.GetAwaiter().GetResult() ?? (new string[0, 0], new string[0]);
+        public (object[,] report, string[] columnTypes) Execute( IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null ) => ExecuteAsync(context, options)?.GetAwaiter().GetResult() ?? (new string[0, 0], new string[0]);
 
         /// <inheritdoc />
-        public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEssDrillThroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) => ExecuteAsync(new List<IEssDrillThroughRange>() { context }, options, cancellationToken);
+        public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEssDrillthroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) => ExecuteAsync(new List<IEssDrillthroughRange>() { context }, options, cancellationToken);
 
         /// <inheritdoc />
-        public async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillThroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default )
+        public async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default )
         {
             if ( context?.Any(dtr => dtr is not null) is not true )
-                throw new ArgumentException($"At least one {nameof(EssDrillThroughRange)} is required to execute an {nameof(EssDrillThroughReport)}.", nameof(context));
+                throw new ArgumentException($"At least one {nameof(EssDrillthroughRange)} is required to execute an {nameof(EssDrillthroughReport)}.", nameof(context));
 
             try
             {

@@ -8,7 +8,7 @@
         Cube,
         Datasource,
         DatasourceConnection,
-        DrillThroughReport,
+        DrillthroughReport,
         File,
         Folder,
         Group,

@@ -4,27 +4,27 @@ using System.Linq;
 
 namespace EssSharp
 {
-	public class EssDrillThroughRange : IEssDrillThroughRange
+	public class EssDrillthroughRange : IEssDrillthroughRange
 	{
         #region Constructors
 
         /// <summary />
-        public EssDrillThroughRange() { }
+        public EssDrillthroughRange() { }
 
 		/// <summary />
 		/// <param name="dimensionMemberSets" />
-		public EssDrillThroughRange( Dictionary<string, List<string>> dimensionMemberSets ) { DimensionMemberSets = dimensionMemberSets; }
+		public EssDrillthroughRange( Dictionary<string, List<string>> dimensionMemberSets ) { DimensionMemberSets = dimensionMemberSets; }
 
         /// <summary />
         /// <param name="dimensionMemberSet" />
-        public EssDrillThroughRange( Dictionary<string, string> dimensionMemberSet )
+        public EssDrillthroughRange( Dictionary<string, string> dimensionMemberSet )
         {
             DimensionMemberSets = dimensionMemberSet?.ToDictionary(kvp => kvp.Key, kvp => new List<string>() { kvp.Value });
         }
 
         #endregion
 
-        #region IEssDrillThroughRange Members
+        #region IEssDrillthroughRange Members
 
         /// <inheritdoc />
         public Dictionary<string, List<string>> DimensionMemberSets { get; set; } = new Dictionary<string, List<string>>();

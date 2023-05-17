@@ -27,25 +27,25 @@ namespace EssSharp
         /// Gets the drillthrough report with the given name.
         /// </summary>
         /// <param name="reportName" />
-        public IEssDrillThroughReport GetDrillThroughReport( string reportName );
+        public IEssDrillthroughReport GetDrillthroughReport( string reportName );
 
         /// <summary>
         /// Asynchronously gets the drillthrough report with the given name.
         /// </summary>
         /// <param name="reportName" />
         /// <param name="cancellationToken" />
-        public Task<IEssDrillThroughReport> GetDrillThroughReportAsync( string reportName, CancellationToken cancellationToken = default );
+        public Task<IEssDrillthroughReport> GetDrillthroughReportAsync( string reportName, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the list of drillthrough reports for this cube.
         /// </summary>
-        public List<IEssDrillThroughReport> GetDrillThroughReports();
+        public List<IEssDrillthroughReport> GetDrillthroughReports();
 
         /// <summary>
         /// Asynchronously gets the list of drillthrough reports for this cube.
         /// </summary>
         /// <param name="cancellationToken" />
-        public Task<List<IEssDrillThroughReport>> GetDrillThroughReportsAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns a list of locked objects
@@ -114,14 +114,14 @@ namespace EssSharp
         /// </summary>
         /// <param name="reportName" />
         /// <param name="cancellationToken" />
-        public static async Task<IEssDrillThroughReport> GetDrillThroughReportAsync( this Task<IEssCube> cubeTask, string reportName, CancellationToken cancellationToken = default ) =>
-            await (await cubeTask).GetDrillThroughReportAsync(reportName, cancellationToken).ConfigureAwait(false);
+        public static async Task<IEssDrillthroughReport> GetDrillthroughReportAsync( this Task<IEssCube> cubeTask, string reportName, CancellationToken cancellationToken = default ) =>
+            await (await cubeTask).GetDrillthroughReportAsync(reportName, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Asynchronously gets the list of drillthrough reports.
         /// </summary>
         /// <param name="cancellationToken" />
-        public static async Task<List<IEssDrillThroughReport>> GetDrillThroughReportsAsync( this Task<IEssCube> cubeTask, CancellationToken cancellationToken = default ) =>
-            await (await cubeTask).GetDrillThroughReportsAsync(cancellationToken).ConfigureAwait(false);
+        public static async Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( this Task<IEssCube> cubeTask, CancellationToken cancellationToken = default ) =>
+            await (await cubeTask).GetDrillthroughReportsAsync(cancellationToken).ConfigureAwait(false);
     }
 }

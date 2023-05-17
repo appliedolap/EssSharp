@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssDrillThroughReport : IEssObject
+    public interface IEssDrillthroughReport : IEssObject
     {
         /// <summary>
         /// Returns the cube of this report.
@@ -14,40 +14,40 @@ namespace EssSharp
         public IEssCube Cube { get; }
 
         /// <summary>
-        /// Executes the drill-through report and returns records.
+        /// Executes the drillthrough report and returns records.
         /// </summary>
         /// <param name="context" />
         /// <param name="options" />
-        public (object[,] report, string[] columnTypes) Execute( IEssDrillThroughRange context, IEssDrillthroughOptions options );
+        public (object[,] report, string[] columnTypes) Execute( IEssDrillthroughRange context, IEssDrillthroughOptions options );
 
         /// <summary>
-        /// Executes the drill-through report and returns records.
+        /// Executes the drillthrough report and returns records.
         /// </summary>
         /// <param name="context" />
         /// <param name="options" />
-        public (object[,] report, string[] columnTypes) Execute( IEnumerable<IEssDrillThroughRange> context, IEssDrillthroughOptions options );
+        public (object[,] report, string[] columnTypes) Execute( IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options );
 
         /// <summary>
-        /// Asynchronously executes the drill-through report and returns records.
+        /// Asynchronously executes the drillthrough report and returns records.
         /// </summary>
         /// <param name="context" />
         /// <param name="options" />
         /// <param name="cancellationToken" />
-        public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEssDrillThroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default );
+        public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEssDrillthroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Asynchronously executes the drill-through report and returns records.
+        /// Asynchronously executes the drillthrough report and returns records.
         /// </summary>
         /// <param name="context" />
         /// <param name="options" />
         /// <param name="cancellationToken" />
-        public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillThroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default );
+        public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default );
     }
 
     /// <summary>
-    /// Fluent extensions for <see cref="IEssDrillThroughReport"/>.
+    /// Fluent extensions for <see cref="IEssDrillthroughReport"/>.
     /// </summary>
-    public static class IEssDrillThroughReportExtensions
+    public static class IEssDrillthroughReportExtensions
     {
         /// <summary>
         /// Asynchronously executes the drill-through report and returns records.
@@ -55,8 +55,8 @@ namespace EssSharp
         /// <param name="context" />
         /// <param name="options" />
         /// <param name="cancellationToken" />
-        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillThroughReport> drillThroughReportTask, IEssDrillThroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
-            await (await drillThroughReportTask).ExecuteAsync(new List<IEssDrillThroughRange>() { context }, options, cancellationToken).ConfigureAwait(false);
+        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillthroughReport> drillThroughReportTask, IEssDrillthroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
+            await (await drillThroughReportTask).ExecuteAsync(new List<IEssDrillthroughRange>() { context }, options, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Asynchronously executes the drill-through report and returns records.
@@ -64,7 +64,7 @@ namespace EssSharp
         /// <param name="context" />
         /// <param name="options" />
         /// <param name="cancellationToken" />
-        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillThroughReport> drillThroughReportTask, IEnumerable<IEssDrillThroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
+        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillthroughReport> drillThroughReportTask, IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
             await (await drillThroughReportTask).ExecuteAsync(context, options, cancellationToken).ConfigureAwait(false);
     }
 }
