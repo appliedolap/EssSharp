@@ -8,6 +8,26 @@ namespace EssSharp
     /// <summary />
     public interface IEssServer : IEssObject
     {
+        /// <summary>
+        /// Creates a new Application and database with the given name and options
+        /// </summary>
+        /// <param name="applicationName"></param>
+        /// <param name="databaseName"></param>
+        /// <param name="appType"></param>
+        /// <param name="dbType"></param>
+        /// <param name="enableScenarios"></param>
+        /// <param name="allowDuplicates"></param>
+        public void createApplication( string applicationName, string databaseName, bool enableScenarios = default, bool allowDuplicates = default );
+
+        /// <summary>
+        /// Creates a new Application and database with the given name and options
+        /// </summary>
+        /// <param name="applicationName"></param>
+        /// <param name="databaseName"></param>
+        /// <param name="createOptions"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task createApplicationAsync( string applicationName, string databaseName, EssDatabaseCreateOptions createOptions, CancellationToken cancellationToken = default );
         public IEssDatasourceConnection GetConnection( string connectionName );
 
         public Task<IEssDatasourceConnection> GetConnectionAsync( string connectionName, CancellationToken cancellationToken = default );

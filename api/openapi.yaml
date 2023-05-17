@@ -5577,7 +5577,7 @@ paths:
       operationId: Applications.createApplications
       requestBody:
         content:
-          '*/*':
+          application/json:
             schema:
               $ref: '#/components/schemas/CreateApplication'
         description: <p>Application details.</p>

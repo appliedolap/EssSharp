@@ -87,6 +87,24 @@ namespace EssSharp
 
         #region IEssServer Members
 
+
+        public void createApplication( string applicationName, string databaseName, bool enableScenarios = default, bool allowDuplicates = default ) => createApplicationAsync(applicationName, databaseName, new EssDatabaseCreateOptions(enableScenarios, allowDuplicates)).GetAwaiter().GetResult();
+        
+        public async Task createApplicationAsync(string applicationName, string databaseName, EssDatabaseCreateOptions createOptions, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var createApp = new CreateApplication(applicationName: applicationName, databaseName: databaseName, allowDuplicates: createOptions.AllowDuplicates, enableScenario: createOptions.EnableScenarios, databaseType: createOptions.DatabaseType);
+                
+                var api = GetApi<ApplicationsApi>();
+                await api.ApplicationsCreateApplicationsAsync(body: createApp, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         /// <inheritdoc />
         /// <returns>An <see cref="EssAbout"/> object.</returns>
         public IEssAbout GetAbout() => GetAboutAsync()?.GetAwaiter().GetResult();
@@ -415,7 +433,7 @@ namespace EssSharp
                         return new EssGroup(group, this);
                     }
 
-                    throw new Exception("Groups not found.")
+                    throw new Exception("Groups not found.");
                 }
                 catch ( Exception e )
                 {

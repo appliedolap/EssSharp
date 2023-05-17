@@ -31,6 +31,9 @@ cp formatted.json temp.json >/dev/null 2>&1 || { echo "Unable to copy formatted.
 
 cat temp.json | jq '.paths."/about/instance".get.responses = {"200": {"description": "successful operation", "schema": { "$ref": "#/definitions/AboutInstance" }}}' > json.tmp && mv json.tmp temp.json 
 
+# Fix the consumes for the create application method
+cat temp.json | jq '.paths."/applications".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
+
 # Fix the consumes for the execute mdx endpoint
 cat temp.json | jq '.paths."/applications/{application}/databases/{database}/mdx".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
