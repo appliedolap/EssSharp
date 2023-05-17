@@ -36,9 +36,13 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         public Task<IEssDrillThroughReport> GetDrillThroughReportAsync( string reportName, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Gets the list of drillthrough reports for this cube.
+        /// </summary>
+        public List<IEssDrillThroughReport> GetDrillThroughReports();
 
         /// <summary>
-        /// Asynchronously gets the list of cubes for this application available to the currently connected user.
+        /// Asynchronously gets the list of drillthrough reports for this cube.
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssDrillThroughReport>> GetDrillThroughReportsAsync( CancellationToken cancellationToken = default );
@@ -112,5 +116,12 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         public static async Task<IEssDrillThroughReport> GetDrillThroughReportAsync( this Task<IEssCube> cubeTask, string reportName, CancellationToken cancellationToken = default ) =>
             await (await cubeTask).GetDrillThroughReportAsync(reportName, cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Asynchronously gets the list of drillthrough reports.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public static async Task<List<IEssDrillThroughReport>> GetDrillThroughReportsAsync( this Task<IEssCube> cubeTask, CancellationToken cancellationToken = default ) =>
+            await (await cubeTask).GetDrillThroughReportsAsync(cancellationToken).ConfigureAwait(false);
     }
 }

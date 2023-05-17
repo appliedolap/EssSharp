@@ -17,31 +17,31 @@ namespace EssSharp
         /// Executes the drill-through report and returns records.
         /// </summary>
         /// <param name="context" />
-        /// <param name="aliasTable" />
-        public (string[,] report, string[] columnTypes) Execute( IEssDrillThroughRange context, string aliasTable = null );
+        /// <param name="options" />
+        public (object[,] report, string[] columnTypes) Execute( IEssDrillThroughRange context, IEssDrillthroughOptions options );
 
         /// <summary>
         /// Executes the drill-through report and returns records.
         /// </summary>
         /// <param name="context" />
-        /// <param name="aliasTable" />
-        public (string[,] report, string[] columnTypes) Execute( IEnumerable<IEssDrillThroughRange> context, string aliasTable = null );
+        /// <param name="options" />
+        public (object[,] report, string[] columnTypes) Execute( IEnumerable<IEssDrillThroughRange> context, IEssDrillthroughOptions options );
 
         /// <summary>
         /// Asynchronously executes the drill-through report and returns records.
         /// </summary>
         /// <param name="context" />
-        /// <param name="aliasTable" />
+        /// <param name="options" />
         /// <param name="cancellationToken" />
-        public Task<(string[,] report, string[] columnTypes)> ExecuteAsync( IEssDrillThroughRange context, string aliasTable = null, CancellationToken cancellationToken = default );
+        public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEssDrillThroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Asynchronously executes the drill-through report and returns records.
         /// </summary>
         /// <param name="context" />
-        /// <param name="aliasTable" />
+        /// <param name="options" />
         /// <param name="cancellationToken" />
-        public Task<(string[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillThroughRange> context, string aliasTable = null, CancellationToken cancellationToken = default );
+        public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillThroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default );
     }
 
     /// <summary>
@@ -53,18 +53,18 @@ namespace EssSharp
         /// Asynchronously executes the drill-through report and returns records.
         /// </summary>
         /// <param name="context" />
-        /// <param name="aliasTable" />
+        /// <param name="options" />
         /// <param name="cancellationToken" />
-        public static async Task<(string[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillThroughReport> drillThroughReportTask, IEssDrillThroughRange context, string aliasTable = null, CancellationToken cancellationToken = default ) =>
-            await (await drillThroughReportTask).ExecuteAsync(new List<IEssDrillThroughRange>() { context }, aliasTable, cancellationToken).ConfigureAwait(false);
+        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillThroughReport> drillThroughReportTask, IEssDrillThroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
+            await (await drillThroughReportTask).ExecuteAsync(new List<IEssDrillThroughRange>() { context }, options, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Asynchronously executes the drill-through report and returns records.
         /// </summary>
         /// <param name="context" />
-        /// <param name="aliasTable" />
+        /// <param name="options" />
         /// <param name="cancellationToken" />
-        public static async Task<(string[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillThroughReport> drillThroughReportTask, IEnumerable<IEssDrillThroughRange> context, string aliasTable = null, CancellationToken cancellationToken = default ) =>
-            await (await drillThroughReportTask).ExecuteAsync(context, aliasTable, cancellationToken).ConfigureAwait(false);
+        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillThroughReport> drillThroughReportTask, IEnumerable<IEssDrillThroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
+            await (await drillThroughReportTask).ExecuteAsync(context, options, cancellationToken).ConfigureAwait(false);
     }
 }
