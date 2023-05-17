@@ -17,17 +17,18 @@ namespace EssSharp
         /// <param name="dbType"></param>
         /// <param name="enableScenarios"></param>
         /// <param name="allowDuplicates"></param>
-        public void createApplication( string applicationName, string databaseName, bool enableScenarios = default, bool allowDuplicates = default );
+        public IEssApplication CreateApplication( string applicationName, string cubeName, EssDatabaseCreationOptions options = null );
 
         /// <summary>
         /// Creates a new Application and database with the given name and options
         /// </summary>
         /// <param name="applicationName"></param>
         /// <param name="databaseName"></param>
-        /// <param name="createOptions"></param>
+        /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task createApplicationAsync( string applicationName, string databaseName, EssDatabaseCreateOptions createOptions, CancellationToken cancellationToken = default );
+        public Task<IEssApplication> CreateApplicationAsync( string applicationName, string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
+
         public IEssDatasourceConnection GetConnection( string connectionName );
 
         public Task<IEssDatasourceConnection> GetConnectionAsync( string connectionName, CancellationToken cancellationToken = default );

@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -48,6 +49,12 @@ namespace EssSharp
 
         /// <inheritdoc />
         public string Email => _user?.Email;
+
+        /// <inheritdoc />
+        public string Role => _user?.Role;
+
+        /// <inheritdoc />
+        public List<string> GroupNames => _user?.Groups;
 
         #endregion
 

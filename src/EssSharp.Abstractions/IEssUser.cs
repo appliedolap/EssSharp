@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace EssSharp
 {
@@ -19,5 +21,9 @@ namespace EssSharp
         /// Return the user email
         /// </summary>
         public string Email { get; }
+
+        public string Role { get; }
+
+        public List<string> GroupNames { get; }
     }
 }

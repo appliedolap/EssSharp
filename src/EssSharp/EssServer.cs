@@ -87,21 +87,32 @@ namespace EssSharp
 
         #region IEssServer Members
 
-
-        public void createApplication( string applicationName, string databaseName, bool enableScenarios = default, bool allowDuplicates = default ) => createApplicationAsync(applicationName, databaseName, new EssDatabaseCreateOptions(enableScenarios, allowDuplicates)).GetAwaiter().GetResult();
+        /// <inheritdoc />
+        public IEssApplication CreateApplication( string applicationName, string cubeName, EssDatabaseCreationOptions options = null ) => CreateApplicationAsync(applicationName, cubeName, options).GetAwaiter().GetResult();
         
-        public async Task createApplicationAsync(string applicationName, string databaseName, EssDatabaseCreateOptions createOptions, CancellationToken cancellationToken = default )
+        /// <inheritdoc />
+        public async Task<IEssApplication> CreateApplicationAsync(string applicationName, string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default )
         {
+            if ( string.IsNullOrWhiteSpace(applicationName) )
+                throw new ArgumentException($"An application name is required to create an {nameof(EssApplication)}.", nameof(applicationName));
+
+            if ( string.IsNullOrWhiteSpace(cubeName) )
+                throw new ArgumentException($"An cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
+
             try
             {
-                var createApp = new CreateApplication(applicationName: applicationName, databaseName: databaseName, allowDuplicates: createOptions.AllowDuplicates, enableScenario: createOptions.EnableScenarios, databaseType: createOptions.DatabaseType);
+                options ??= new EssDatabaseCreationOptions();
+                var createApp = new CreateApplication(applicationName: applicationName, databaseName: cubeName, allowDuplicates: options.AllowDuplicates, enableScenario: options.EnableScenarios, databaseType: options.DatabaseType.ToString());
                 
                 var api = GetApi<ApplicationsApi>();
                 await api.ApplicationsCreateApplicationsAsync(body: createApp, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                // Return the newly created application.
+                return await GetApplicationAsync(applicationName).ConfigureAwait(false);
             }
-            catch
+            catch ( Exception e )
             {
-                throw;
+                throw new Exception($@"Unable to create the application ""{applicationName}"". {e.Message}", e);
             }
         }
 

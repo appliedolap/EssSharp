@@ -22,7 +22,7 @@ namespace EssSharp
         /// <summary>
         /// Returns the groups in this Group
         /// </summary>
-        public List<string> Groups { get; }
+        public List<string> GroupNames { get; }
 
         /// <summary>
         /// Returns the role of this group
