@@ -50,7 +50,7 @@ namespace EssSharp
         public string Description => _group?.Description;
 
         /// <inheritdoc />
-        public List<string> Groups => _group?.Groups;
+        public List<string> GroupNames => _group?.Groups;
 
         /// <inheritdoc />
         public string Role => _group?.Role;

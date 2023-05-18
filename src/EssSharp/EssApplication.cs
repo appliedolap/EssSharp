@@ -63,6 +63,34 @@ namespace EssSharp
         #region IEssApplication Methods
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        public IEssCube CreateCube(string cubeName, EssDatabaseCreationOptions options = null ) => CreateCubeAsync(cubeName, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        public async Task<IEssCube> CreateCubeAsync( string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(cubeName) )
+                throw new ArgumentException($"A cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
+
+            try
+            {
+                options ??= new EssDatabaseCreationOptions();
+                var createApp = new CreateApplication(applicationName: Name, databaseName: cubeName, allowDuplicates: options.AllowDuplicates, enableScenario: options.EnableScenarios, databaseType: options.DatabaseType.ToString());
+
+                var api = GetApi<ApplicationsApi>();
+                await api.ApplicationsCreateApplicationsAsync(body: createApp, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                // Return the newly created application.
+                return await GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the cube ""{cubeName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         public void Copy( string copyName ) => CopyAsync(copyName)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />

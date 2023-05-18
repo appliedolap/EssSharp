@@ -22,6 +22,21 @@ namespace EssSharp
         #region Methods
 
         /// <summary>
+        /// Create a new cube on an Application
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        public IEssCube CreateCube( string cubeName, EssDatabaseCreationOptions options = null );
+
+        /// <summary>
+        /// Create a new cube on an Application
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssCube> CreateCubeAsync( string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Downloads the latest log file for this application.
         /// </summary>
         /// <returns>A <see cref="Stream"/> containing the log file content.</returns>
