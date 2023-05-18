@@ -176,6 +176,18 @@ namespace EssSharp
         public Task<List<IEssJob>> GetJobsAsync( long jobsLimit, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Returns all users on a server.
+        /// </summary>
+        /// <returns></returns>
+        public List<IEssUser> GetUsers();
+
+        /// <summary>
+        /// Returns all users on a server.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Gets a user session from the server for the configured user.
         /// </summary>
         /// <param name="includeToken">Whether to capture a session token.</param>

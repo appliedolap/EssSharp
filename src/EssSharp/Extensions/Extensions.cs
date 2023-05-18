@@ -289,6 +289,23 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssUser"/> objects associated with the given <see cref="EssServer"/>.
+        /// </summary>
+        /// <param name="userList" />
+        /// <param name="server" />
+        internal static List<IEssUser> ToEssSharpList( this Users userList, EssServer server )
+        {
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
+
+            return userList
+                .Items?
+                .Where(user => user is not null)
+                .Select(user => new EssUser(user, server) as IEssUser)
+                .ToList() ?? new List<IEssUser>();
+        }
+
+        /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssServerVariable"/> objects associated with the given <paramref name="variableList"/>.
         /// </summary>
         /// <param name="variableList" />

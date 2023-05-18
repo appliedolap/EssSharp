@@ -547,6 +547,49 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A <see cref="IEssUser"/> object</returns>
+        public IEssUser GetUser( string id ) => GetUserAsync( id ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A <see cref="IEssUser"/> object</returns>
+        public async Task<IEssUser> GetUserAsync( string id, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<UsersApi>();
+                if ( await api.UsersGetAsync(id: id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )
+                    throw new Exception("Unable to find user.");
+
+                return new EssUser(user, this);
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
+            }
+        }
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
+        public List<IEssUser> GetUsers() => GetUsersAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
+        public async Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<UsersApi>();
+                if ( await api.UsersSearchAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { } userList )
+                    throw new Exception("No users were found.");
+
+                return userList?.ToEssSharpList(this) ?? new List<IEssUser>();
+            }
+            catch (Exception e )
+            {
+                throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         public IEssUserSession GetUserSession( bool includeToken = true, bool includeGroups = true ) => GetUserSessionAsync(includeToken, includeGroups)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
