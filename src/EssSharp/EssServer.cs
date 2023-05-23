@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -635,11 +633,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A <see cref="IEssUser"/> object</returns>
+        /// <returns>An <see cref="EssUser"/> object</returns>
         public IEssUser GetUser( string id ) => GetUserAsync( id ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A <see cref="IEssUser"/> object</returns>
+        /// <returns>An <see cref="EssUser"/> object</returns>
         public async Task<IEssUser> GetUserAsync( string id, CancellationToken cancellationToken = default )
         {
             try
@@ -655,32 +653,41 @@ namespace EssSharp
                 throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
             }
         }
-        /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
-        public List<IEssUser> GetUsers() => GetUsersAsync().GetAwaiter().GetResult();
 
-        /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
-        public async Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default )
+        /// <inheritdoc/>
+        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        public IEssFolder GetUserHomeFolder() => GetUserHomeFolderAsync()?.GetAwaiter().GetResult();
+
+        /// <inheritdoc/>
+        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        public async Task<IEssFolder> GetUserHomeFolderAsync( CancellationToken cancellationToken = default )
         {
             try
             {
-                var api = GetApi<UsersApi>();
-                if ( await api.UsersSearchAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { } userList )
-                    throw new Exception("No users were found.");
+                var api = GetApi<FilesApi>();
 
-                return userList?.ToEssSharpList(this) ?? new List<IEssUser>();
+                // Get the home path for the current user.
+                if ( await api.FilesGetUserHomePathAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { Length: > 0 } homePath )
+                    throw new Exception("Could not resolve the user home path.");
+
+                // Get the folder that corresponds to the obtained home path.
+                return await GetFolderAsync(homePath).ConfigureAwait(false);
             }
-            catch (Exception e )
+            catch ( Exception e )
             {
-                throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
+                if ( !string.IsNullOrWhiteSpace(Configuration?.Username) )
+                    throw new Exception($@"Unable to get the home folder for user ""{Configuration.Username}"". {e.Message}", e);
+                else
+                    throw new Exception($"Unable to get the user home folder. {e.Message}", e);
             }
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssUserSession"/> object.</returns>
         public IEssUserSession GetUserSession( bool includeToken = true, bool includeGroups = true ) => GetUserSessionAsync(includeToken, includeGroups)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssUserSession"/> object.</returns>
         public async Task<IEssUserSession> GetUserSessionAsync( bool includeToken = true, bool includeGroups = true, CancellationToken cancellationToken = default )
         {
             try
@@ -697,6 +704,56 @@ namespace EssSharp
                     throw new Exception($@"Unable to create a new session for user ""{Configuration.Username}"". {e.Message}", e);
                 else
                     throw new Exception($"Unable to create a new session. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc/>
+        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        public IEssFolder GetUserSharedFolder() => GetUserSharedFolderAsync()?.GetAwaiter().GetResult();
+
+        /// <inheritdoc/>
+        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        public async Task<IEssFolder> GetUserSharedFolderAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<FilesApi>();
+
+                // Get the shared path for the current user.
+                if ( await api.FilesGetSharedPathAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { Length: > 0 } homePath )
+                    throw new Exception("Could not resolve the user shared path.");
+
+                // Return the folder that corresponds to the obtained shared path.
+                return await GetFolderAsync(homePath).ConfigureAwait(false);
+            }
+            catch ( Exception e )
+            {
+                if ( !string.IsNullOrWhiteSpace(Configuration?.Username) )
+                    throw new Exception($@"Unable to get the shared folder for user ""{Configuration.Username}"". {e.Message}", e);
+                else
+                    throw new Exception($"Unable to get the user shared folder. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssUser"/> objects.</returns>
+        public List<IEssUser> GetUsers() => GetUsersAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssUser"/> objects.</returns>
+        public async Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<UsersApi>();
+                if ( await api.UsersSearchAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { } userList )
+                    throw new Exception("No users were found.");
+
+                return userList?.ToEssSharpList(this) ?? new List<IEssUser>();
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
             }
         }
 

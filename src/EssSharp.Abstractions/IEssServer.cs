@@ -6,11 +6,9 @@ using System.IO;
 
 namespace EssSharp
 {
-
     /// <summary />
     public interface IEssServer : IEssObject
     {
-
         /// <summary>
         /// Creates a new Application and database with the given name and options
         /// </summary>
@@ -83,6 +81,7 @@ namespace EssSharp
         /// <inheritdoc />
         /// <returns></returns>
         public Task<List<IEssDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default );
+
         /// <summary>
         /// Return a specified data source as an IEssDatasource object
         /// </summary>
@@ -221,31 +220,28 @@ namespace EssSharp
         public Task<List<IEssJob>> GetJobsAsync( long jobsLimit, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns a specified user.
+        /// Gets the user with the given ID.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IEssUser GetUser( string id );
+        /// <param name="userId" />
+        /// <param name="cancellationToken" />
+        public IEssUser GetUser( string userId );
 
         /// <summary>
-        /// Returns a specified user.
+        /// Asynchronously gets the user with the given ID.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<IEssUser> GetUserAsync( string id, CancellationToken cancellationToken = default );
+        /// <param name="userId" />
+        /// <param name="cancellationToken" />
+        public Task<IEssUser> GetUserAsync( string userId, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns all users on a server.
+        /// Gets the home folder for the current user.
         /// </summary>
-        /// <returns></returns>
-        public List<IEssUser> GetUsers();
+        public IEssFolder GetUserHomeFolder();
 
         /// <summary>
-        /// Returns all users on a server.
+        /// Asynchronously gets the home folder for the current user.
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        public Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default );
+        public Task<IEssFolder> GetUserHomeFolderAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets a user session from the server for the configured user.
@@ -262,6 +258,28 @@ namespace EssSharp
         /// <param name="includeGroups">Whether to capture the user's groups.</param>
         /// <param name="cancellationToken" />
         public Task<IEssUserSession> GetUserSessionAsync( bool includeToken = true, bool includeGroups = true, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the shared folder for the current user.
+        /// </summary>
+        public IEssFolder GetUserSharedFolder();
+
+        /// <summary>
+        /// Asynchronously gets the shared folder for the current user.
+        /// </summary>
+        public Task<IEssFolder> GetUserSharedFolderAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the list of all users for this server.
+        /// </summary>
+        /// <returns></returns>
+        public List<IEssUser> GetUsers();
+
+        /// <summary>
+        /// Gets the list of all users for this server.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the list of server-scoped variables available to the connected user.
