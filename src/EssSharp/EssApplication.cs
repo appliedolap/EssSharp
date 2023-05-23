@@ -91,15 +91,19 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns> An <see cref="IEssCube"/> object. </returns>
+        public IEssCube CreateCubeFromWorkbook( string cubeName, string path ) => CreateCubeFromWorkbookAsync( cubeName, path ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, string path )
+        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string path, CancellationToken cancellationToken = default )
         {
             if ( !File.Exists(path) )
                 throw new FileNotFoundException("Unable to find the given file.");
             try
             {
                 using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                return CreateCubeFromWorkbookAsync(cubeName, stream ).GetAwaiter().GetResult();
+                return await CreateCubeFromWorkbookAsync(cubeName, stream, cancellationToken ).ConfigureAwait(false);
             }
             catch
             {
@@ -117,7 +121,7 @@ namespace EssSharp
         public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(cubeName) )
-                throw new ArgumentException($"An cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
+                throw new ArgumentException($"A cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
 
             if ( stream is null )
                 throw new ArgumentException($"A stream is required to create an {nameof(EssCube)}.", nameof(cubeName));

@@ -117,7 +117,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path )
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path ) => CreateApplicationFromWorkbookAsync(applicationName, cubeName, path ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string path, CancellationToken cancellationToken = default )
         {
             if ( !File.Exists(path) )
                 throw new FileNotFoundException("Unable to find the given file.");
@@ -125,7 +129,7 @@ namespace EssSharp
             {
                 using var stream = new FileStream(path, FileMode.Open, FileAccess.Read) as Stream;
 
-                return CreateApplicationFromWorkbookAsync(applicationName, cubeName, stream).GetAwaiter().GetResult();
+                return await CreateApplicationFromWorkbookAsync(applicationName, cubeName, stream).ConfigureAwait(false);
             }
             catch
             {
@@ -226,6 +230,27 @@ namespace EssSharp
             {
                 throw;
             }
+        }
+
+        /// <inheritdoc />
+        public async Task<IEssServerVariable> CreateVariable( string name, string value, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var variableInfo = new Variable( name: name, value: value );
+                var api = GetApi<ServerVariablesApi>();
+
+                if ( await api.VariablesCreateServerVariableAsync(body: variableInfo, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } variable )
+                    throw new Exception("Cannot create new variable.");
+
+                return new EssServerVariable(variable, this);
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the variable ""{name}"". {e.Message}", e);
+            }
+
+
         }
 
         /// <inheritdoc />

@@ -37,7 +37,6 @@ namespace EssSharp
         /// <param name="applicationName"></param>
         /// <param name="cubeName"></param>
         /// <param name="path"></param>
-        /// <param name="overwrite"></param>
         /// <returns></returns>
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path );
 
@@ -46,10 +45,17 @@ namespace EssSharp
         /// </summary>
         /// <param name="applicationName"></param>
         /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        /// <param name="filename"></param>
-        /// <param name="overwrite"></param>
+        /// <param name="path"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string path, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new Application and database from a worksheet
+        /// </summary>
+        /// <param name="applicationName"></param>
+        /// <param name="cubeName"></param>
+        /// <param name="stream"></param>
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream );
 
         /// <summary>

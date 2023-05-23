@@ -45,7 +45,17 @@ namespace EssSharp
         /// <param name="path"></param>
         /// <param name="overwrite"></param>
         /// <returns></returns>
-        public IEssCube CreateApplicationFromWorkbook( string cubeName, string path );
+        public IEssCube CreateCubeFromWorkbook( string cubeName, string path );
+
+        /// <summary>
+        /// Creates a new Cube from a worksheet
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="path"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string path, CancellationToken cancellationToken = default );
+
 
         /// <summary>
         /// Creates a new Cube from a worksheet
@@ -56,16 +66,7 @@ namespace EssSharp
         /// <param name="filename"></param>
         /// <param name="overwrite"></param>
         /// <returns></returns>
-        public IEssCube CreateApplicationFromWorkbook( string cubeName, Stream stream );
-
-        /// <summary>
-        /// Creates a new cube from a worksheet
-        /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        /// <param name="options"></param>
-        public IEssCube CreateApplicationFromWorkbook( string cubeName, FileStream stream );
+        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream );
 
         /// <summary>
         /// Creates a new cube from a worksheet
@@ -76,7 +77,7 @@ namespace EssSharp
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<IEssCube> CreateApplicationFromWorkbookAsync( string cubeName, FileStream stream, CancellationToken cancellationToken = default );
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Downloads the latest log file for this application.
