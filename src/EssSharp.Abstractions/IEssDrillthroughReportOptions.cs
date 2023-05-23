@@ -23,7 +23,12 @@
         /// <summary>
         /// Returns or sets the whether to prefix string values with an apostrophe (') for use in Excel.
         /// </summary>
-        bool PrefixStringValuesAsExcelText { get; set; }
+        bool PrefixStringValuesForExcel { get; set; }
+
+        /// <summary>
+        /// Returns or sets the whether report values should be converted to the column types indicated by the server.
+        /// </summary>
+        bool ReturnTypedValues { get; set; }
 
         #endregion
     }

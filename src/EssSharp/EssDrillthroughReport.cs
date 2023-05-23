@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,9 +17,10 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssCube          _cube;
-        private readonly DrillthroughBean _definition;
-        private readonly ReportBean       _report;
+        private readonly EssCube    _cube;
+        private readonly ReportBean _report;
+
+        private DrillthroughBean _definition;
 
         #endregion
 
@@ -88,19 +90,43 @@ namespace EssSharp
             }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to execute or process the drill-through report ""{_definition?.Name ?? _report?.Name}"". {e.Message}", e);
+                if ( e is WebException we && we.Response is WebExceptionRestResponse response && response?.StatusCode is HttpStatusCode.MethodNotAllowed )
+                    throw new NotSupportedException($@"Drillthough report execution is not suported by this server version. {e.Message}", e);
+
+                throw new Exception($@"Unable to execute or process the drillthrough report ""{_definition?.Name ?? _report?.Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public void GetDetails() => GetDetailsAsync()?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task GetDetailsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<DrillThroughReportsApi>();
+
+                if ( await api.DrillThroughReportsGetReportAsync(Cube?.Application?.Name, _cube?.Name, _definition?.Name ?? _report?.Name, 0, cancellationToken).ConfigureAwait(false) is not { } definition )
+                    throw new Exception("Received an empty or invalid response.");
+
+                _definition = definition;
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the details for report ""{_definition?.Name ?? _report?.Name}"". {e.Message}", e);
             }
         }
 
         #endregion
 
-        #region Public Static Methods
+        #region Private Methods
 
         /// <summary />
         /// <param name="source" />
         /// <param name="options" />
         /// <exception cref="InvalidOperationException" />
-        public static (object[,] report, string[] columnTypes) To2DReport( JArray source, IEssDrillthroughOptions options = null )
+        private (object[,] report, string[] columnTypes) To2DReport( JArray source, IEssDrillthroughOptions options = null )
         {
             // Construct a new EssDrillthroughOptions if one is not given.
             options ??= new EssDrillthroughOptions();
@@ -128,7 +154,7 @@ namespace EssSharp
             try
             {
                 // If string values should be prefixed as Excel text AND we have at least one data row AND at least one column type is a string...
-                if ( options.PrefixStringValuesAsExcelText && lastSourceIndex >= 2 && columnTypes.Any(ct => string.Equals("string", ct, StringComparison.OrdinalIgnoreCase)) )
+                if ( options.PrefixStringValuesForExcel && lastSourceIndex >= 2 && columnTypes.Any(ct => string.Equals("string", ct, StringComparison.OrdinalIgnoreCase)) )
                 {
                     // Iterate over columns first, since we need to prepend every value in at least one column with an apostrophe.
                     for ( int c = 0; c < secondDimLength; ++c )
@@ -137,42 +163,62 @@ namespace EssSharp
                         {
                             case "double":
                             {
-                                // If there is a column header row, process that first.
-                                if ( options.IncludeColumnHeaders && firstSourceIndex < sourceDataIndex )
+                                // If values should be typed...
+                                if ( options.ReturnTypedValues )
                                 {
-                                    // Process the column header row first.
-                                    report[0, c] = source[firstSourceIndex][c].Value<string>();
+                                    // If there is a column header row, process that first.
+                                    if ( options.IncludeColumnHeaders && firstSourceIndex < sourceDataIndex )
+                                    {
+                                        // Process the column header row first.
+                                        report[0, c] = source[firstSourceIndex][c].Value<string>();
 
-                                    // Iterate over data rows, prepending each cell value with an apostrophe.
-                                    for ( int ri = 1, si = firstSourceIndex + 1; si <= lastSourceIndex; ri++, si++ )
-                                        report[ri, c] = source[si][c].Value<double>();
+                                        // Iterate over data rows, capturing each cell value as a double.
+                                        for ( int ri = 1, si = firstSourceIndex + 1; si <= lastSourceIndex; ri++, si++ )
+                                            report[ri, c] = source[si][c].Value<double>();
+                                    }
+                                    else
+                                    {
+                                        // Iterate over rows, capturing each cell value as a double.
+                                        for ( int ri = 0, si = firstSourceIndex; si <= lastSourceIndex; ri++, si++ )
+                                            report[ri, c] = source[si][c].Value<double>();
+                                    }
                                 }
                                 else
                                 {
-                                    // Iterate over rows, prepending each cell value with an apostrophe.
+                                    // Iterate over rows, capturing each cell value as a string.
                                     for ( int ri = 0, si = firstSourceIndex; si <= lastSourceIndex; ri++, si++ )
-                                        report[ri, c] = source[si][c].Value<double>();
+                                        report[ri, c] = source[si][c].Value<string>();
                                 }
                                 break;
                             }
 
                             case "long":
                             {
-                                // If there is a column header row, process that first.
-                                if ( options.IncludeColumnHeaders && firstSourceIndex < sourceDataIndex )
+                                // If values should be typed...
+                                if ( options.ReturnTypedValues )
                                 {
-                                    // Process the column header row first.
-                                    report[0, c] = source[firstSourceIndex][c].Value<string>();
+                                    // If there is a column header row, process that first.
+                                    if ( options.IncludeColumnHeaders && firstSourceIndex < sourceDataIndex )
+                                    {
+                                        // Process the column header row first.
+                                        report[0, c] = source[firstSourceIndex][c].Value<string>();
 
-                                    // Iterate over data rows, prepending each cell value with an apostrophe.
-                                    for ( int ri = 1, si = firstSourceIndex + 1; si <= lastSourceIndex; ri++, si++ )
-                                        report[ri, c] = source[si][c].Value<long>();
+                                        // Iterate over data rows, capturing each cell value as a long.
+                                        for ( int ri = 1, si = firstSourceIndex + 1; si <= lastSourceIndex; ri++, si++ )
+                                            report[ri, c] = source[si][c].Value<long>();
+                                    }
+                                    else
+                                    {
+                                        // Iterate over rows, capturing each cell value as a long.
+                                        for ( int ri = 0, si = firstSourceIndex; si <= lastSourceIndex; ri++, si++ )
+                                            report[ri, c] = source[si][c].Value<long>();
+                                    }
                                 }
                                 else
                                 {
-                                    // Iterate over rows, prepending each cell value with an apostrophe.
+                                    // Iterate over rows, capturing each cell value as a string.
                                     for ( int ri = 0, si = firstSourceIndex; si <= lastSourceIndex; ri++, si++ )
-                                        report[ri, c] = source[si][c].Value<long>();
+                                        report[ri, c] = source[si][c].Value<string>();
                                 }
                                 break;
                             }
@@ -200,9 +246,70 @@ namespace EssSharp
                         }
                     }
                 }
+                // If typed values should be returned AND we have at least one data row AND at least one column type is not a string...
+                if ( options.ReturnTypedValues && lastSourceIndex >= 2 && columnTypes.Any(ct => !string.Equals("string", ct, StringComparison.OrdinalIgnoreCase)) )
+                {
+                    // Iterate over columns first, since we need to convert every value to the appropriate return type.
+                    for ( int c = 0; c < secondDimLength; ++c )
+                    {
+                        switch ( columnTypes[c]?.ToLowerInvariant() )
+                        {
+                            case "double":
+                            {
+                                // If there is a column header row, process that first.
+                                if ( options.IncludeColumnHeaders && firstSourceIndex < sourceDataIndex )
+                                {
+                                    // Process the column header row first.
+                                    report[0, c] = source[firstSourceIndex][c].Value<string>();
+
+                                    // Iterate over data rows, capturing each cell value as a double.
+                                    for ( int ri = 1, si = firstSourceIndex + 1; si <= lastSourceIndex; ri++, si++ )
+                                        report[ri, c] = source[si][c].Value<double>();
+                                }
+                                else
+                                {
+                                    // Iterate over rows, capturing each cell value as a double.
+                                    for ( int ri = 0, si = firstSourceIndex; si <= lastSourceIndex; ri++, si++ )
+                                        report[ri, c] = source[si][c].Value<double>();
+                                }
+                                break;
+                            }
+
+                            case "long":
+                            {
+                                // If there is a column header row, process that first.
+                                if ( options.IncludeColumnHeaders && firstSourceIndex < sourceDataIndex )
+                                {
+                                    // Process the column header row first.
+                                    report[0, c] = source[firstSourceIndex][c].Value<string>();
+
+                                    // Iterate over data rows, capturing each cell value as a long.
+                                    for ( int ri = 1, si = firstSourceIndex + 1; si <= lastSourceIndex; ri++, si++ )
+                                        report[ri, c] = source[si][c].Value<long>();
+                                }
+                                else
+                                {
+                                    // Iterate over rows, capturing each cell value as a long.
+                                    for ( int ri = 0, si = firstSourceIndex; si <= lastSourceIndex; ri++, si++ )
+                                        report[ri, c] = source[si][c].Value<long>();
+                                }
+                                break;
+                            }
+
+                            default:
+                            {
+                                // Iterate over rows, capturing each cell value as a string.
+                                for ( int ri = 0, si = firstSourceIndex; si <= lastSourceIndex; ri++, si++ )
+                                    report[ri, c] = source[si][c].Value<string>();
+
+                                break;
+                            }
+                        }
+                    }
+                }
                 else
                 {
-                    // Iterate over rows, capturing each cell value.
+                    // Iterate over rows, capturing each cell value as a string.
                     for ( int ri = 0, si = firstSourceIndex; si <= lastSourceIndex; ri++, si++ )
                         for ( int c = 0; c < secondDimLength; ++c )
                             report[ri, c] = source[si][c].Value<string>();

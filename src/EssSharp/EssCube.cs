@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -70,11 +71,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssDrillthroughReport"/> object.</returns>
-        public IEssDrillthroughReport GetDrillthroughReport( string reportName ) => GetDrillthroughReportAsync(reportName)?.GetAwaiter().GetResult();
+        public IEssDrillthroughReport GetDrillthroughReport( string reportName, bool getDetails = false ) => GetDrillthroughReportAsync(reportName, getDetails)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssDrillthroughReport"/> object.</returns>
-        public async Task<IEssDrillthroughReport> GetDrillthroughReportAsync( string reportName, CancellationToken cancellationToken = default )
+        public async Task<IEssDrillthroughReport> GetDrillthroughReportAsync( string reportName, bool getDetails = false, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(reportName) )
                 throw new ArgumentException($"A report name is required to get an {nameof(EssDrillthroughReport)}.", nameof(reportName));
@@ -83,10 +84,13 @@ namespace EssSharp
             {
                 var api = GetApi<DrillThroughReportsApi>();
 
-                if ( await api.DrillThroughReportsGetReportAsync(_application?.Name, _cube?.Name, reportName, 0, cancellationToken).ConfigureAwait(false) is { } report )
-                    return new EssDrillthroughReport(report, this);
+                if ( (await GetDrillthroughReportsAsync(false, cancellationToken).ConfigureAwait(false)).FirstOrDefault(dtr => string.Equals(dtr?.Name, reportName, StringComparison.OrdinalIgnoreCase)) is not { } report )
+                    throw new Exception($@"The given {nameof(reportName)} could not be found.");
 
-                throw new Exception("Received an empty or invalid response.");
+                if ( getDetails )
+                    await report.GetDetailsAsync(cancellationToken).ConfigureAwait(false);
+
+                return report;
             }
             catch (Exception e)
             {
@@ -96,18 +100,22 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssDrillthroughReport"/> objects.</returns>
-        public List<IEssDrillthroughReport> GetDrillthroughReports() => GetDrillthroughReportsAsync()?.GetAwaiter().GetResult() ?? new List<IEssDrillthroughReport>();
+        public List<IEssDrillthroughReport> GetDrillthroughReports( bool getDetails = false ) => GetDrillthroughReportsAsync(getDetails)?.GetAwaiter().GetResult() ?? new List<IEssDrillthroughReport>();
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssDrillthroughReport"/> objects.</returns>
-        public async Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( CancellationToken cancellationToken = default )
+        public async Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( bool getDetails = false, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<DrillThroughReportsApi>();
-                var reports = await api.DrillThroughReportsGetReportsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false);
+                var reports = (await api.DrillThroughReportsGetReportsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false))?
+                    .ToEssSharpList(this) ?? new List<IEssDrillthroughReport>();
 
-                return reports?.ToEssSharpList(this) ?? new List<IEssDrillthroughReport>();
+                if ( getDetails )
+                    reports.ForEach(async dtr => await dtr.GetDetailsAsync(cancellationToken));
+
+                return reports;
             }
             catch ( Exception )
             {

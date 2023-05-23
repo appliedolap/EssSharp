@@ -8,10 +8,14 @@ namespace EssSharp
     /// <summary />
     public interface IEssDrillthroughReport : IEssObject
     {
+        #region Properties
+
         /// <summary>
         /// Returns the cube of this report.
         /// </summary>
         public IEssCube Cube { get; }
+
+        #endregion
 
         /// <summary>
         /// Executes the drillthrough report and returns records.
@@ -42,6 +46,17 @@ namespace EssSharp
         /// <param name="options" />
         /// <param name="cancellationToken" />
         public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the full report specification.
+        /// </summary>
+        public void GetDetails();
+
+        /// <summary>
+        /// Asynchronously gets the full report specification.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task GetDetailsAsync( CancellationToken cancellationToken = default );
     }
 
     /// <summary>

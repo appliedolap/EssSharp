@@ -19,13 +19,15 @@ namespace EssSharp
         /// <param name="aliasTable">(optional) The alias table that was used to produce the associated drillthrough ranges.</param>
         /// <param name="includeColumnHeaders">(optional) Whether to include column headers in the report.</param>
         /// <param name="includeMetadataOnly">(optional) Whether to include only column types and, optionally, column headers in the report.</param>
-        /// <param name="prefixStringValuesAsExcelText">(optional) Whether to prefix string values with an apostrophe (') for use in Excel.</param>
-        public EssDrillthroughOptions( string aliasTable = null, bool includeColumnHeaders = true, bool includeMetadataOnly = false, bool prefixStringValuesAsExcelText = false )
+        /// <param name="returnTypedValues">(optional) Whether report values should be converted to the column types indicated by the server.</param>
+        /// <param name="prefixStringValuesForExcel">(optional) Whether to prefix string values with an apostrophe (') for use in Excel.</param>
+        public EssDrillthroughOptions( string aliasTable = null, bool includeColumnHeaders = true, bool includeMetadataOnly = false, bool returnTypedValues = false, bool prefixStringValuesForExcel = false )
         {
-            AliasTable                    = aliasTable;
-            IncludeColumnHeaders          = includeColumnHeaders;
-            IncludeMetadataOnly           = includeMetadataOnly;
-            PrefixStringValuesAsExcelText = prefixStringValuesAsExcelText;
+            AliasTable                 = aliasTable;
+            IncludeColumnHeaders       = includeColumnHeaders;
+            IncludeMetadataOnly        = includeMetadataOnly;
+            PrefixStringValuesForExcel = prefixStringValuesForExcel;
+            ReturnTypedValues          = returnTypedValues;
         }
 
         #endregion
@@ -42,7 +44,10 @@ namespace EssSharp
         public bool IncludeMetadataOnly { get; set; } = false;
 
         /// <inheritdoc />
-        public bool PrefixStringValuesAsExcelText { get; set; } = false;
+        public bool PrefixStringValuesForExcel { get; set; } = false;
+
+        /// <inheritdoc />
+        public bool ReturnTypedValues { get; set; } = false;
 
         #endregion
     }
