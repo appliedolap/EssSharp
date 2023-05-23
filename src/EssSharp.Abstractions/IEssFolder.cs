@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
@@ -15,94 +14,150 @@ namespace EssSharp
         #region Methods
 
         /// <summary>
-        /// create a subfolder in this folder
+        /// Creates a subfolder with the given <paramref name="subfolderName" /> if it does not already exist.
+        /// If the subfolder already exists, it is returned.
         /// </summary>
-        /// <param name="subfolderName"></param>
-        /// <param name="append"></param>
-        public IEssFolder CreateSubfolder( string subfolderName, bool append = default );
+        /// <param name="subfolderName" />
+        public IEssFolder CreateSubfolder( string subfolderName );
 
         /// <summary>
-        /// create a subfolder in this folder
+        /// Asynchronously creates a subfolder with the given <paramref name="subfolderName" /> if it does not already exist.
+        /// If the subfolder already exists, it is returned.
         /// </summary>
-        /// <param name="subfolderName"></param>
-        /// <param name="append"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<IEssFolder> CreateSubfolderAsync( string subfolderName, bool append = default, CancellationToken cancellationToken = default );
+        /// <param name="subfolderName" />
+        /// <param name="cancellationToken" />
+        public Task<IEssFolder> CreateSubfolderAsync( string subfolderName, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Upload file to Server using a Filepath
+        /// Gets a list of the immediate files of this folder, optionally matching a given <paramref name="nameFilter" />.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="fileName"></param>
-        /// <param name="overwrite"></param>
-        public IEssFile UploadFile( string path, string fileName = default, bool overwrite = default );
-
-        /// <summary>
-        /// Upload file to Server using FileStream 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="fileName"></param>
-        /// <param name="overwrite"></param>
-        public IEssFile UploadFile( FileStream stream, string fileName = default, bool overwrite = default );
-
-        /// <summary>
-        /// Upload file to Server using Stream
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="fileName"></param>
-        /// <param name="overwrite"></param>
-        public IEssFile UploadFile( Stream stream, string fileName = default, bool overwrite = default );
-
-        /// <summary>
-        /// Upload file to Server using a Filepath
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="fileName"></param>
-        /// <param name="overwrite"></param>
-        public Task<IEssFile> UploadFileAsync( string path, string fileName = default, bool overwrite = default, CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Upload file to Server using FileStream 
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="fileName"></param>
-        /// <param name="overwrite"></param>
-        public Task<IEssFile> UploadFileAsync( FileStream stream, string fileName = default, bool overwrite = default, CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Upload file to Server using Stream
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="fileName"></param>
-        /// <param name="overwrite"></param>
-        public Task<IEssFile> UploadFileAsync( Stream stream, string fileName = default, bool overwrite = default, CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Get a lst of all Files in specified folder
-        /// </summary>
-        /// <param name="nameFilter"></param>
+        /// <param name="nameFilter" />
         public List<IEssFile> GetFiles( string nameFilter = null );
 
         /// <summary>
-        /// Get a list of all Files in specified folder
+        /// Asynchronously gets a list of the immediate files of this folder, optionally matching a given <paramref name="nameFilter" />.
         /// </summary>
-        /// <param name="nameFilter"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="nameFilter" />
+        /// <param name="cancellationToken" />
         public Task<List<IEssFile>> GetFilesAsync( string nameFilter = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Get a list of all Folders in specified folder
+        /// Gets a list of the immediate subfolders of this folder, optionally matching a given <paramref name="nameFilter" />.
         /// </summary>
-        /// <param name="nameFilter"></param>
+        /// <param name="nameFilter" />
         public List<IEssFolder> GetFolders( string nameFilter = null );
 
         /// <summary>
-        /// Get a list of all Folders in specified folder
+        /// Asynchronously gets a list of the immediate subfolders of this folder, optionally matching a given <paramref name="nameFilter" />.
         /// </summary>
-        /// <param name="nameFilter"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="nameFilter" />
+        /// <param name="cancellationToken" />
         public Task<List<IEssFolder>> GetFoldersAsync( string nameFilter = null, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Uploads a local file with the given <paramref name="path"/> to the server with the given <paramref name="filename"/>, 
+        /// optionally overwriting an existing file on the server if it already exists.
+        /// </summary>
+        /// <param name="path" />
+        /// <param name="filename" />
+        /// <param name="overwrite" />
+        public IEssFile UploadFile( string path, string filename = null, bool overwrite = false );
+
+        /// <summary>
+        /// Asynchronously uploads a local file with the given <paramref name="path"/> to the server with the given <paramref name="filename"/>, 
+        /// optionally overwriting an existing file on the server if it already exists.
+        /// </summary>
+        /// <param name="path" />
+        /// <param name="filename" />
+        /// <param name="overwrite" />
+        /// <param name="cancellationToken" />
+        public Task<IEssFile> UploadFileAsync( string path, string filename = null, bool overwrite = false, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Uploads a local file <paramref name="stream"/> to the server with the given <paramref name="filename"/>, 
+        /// optionally overwriting an existing file on the server if it already exists.
+        /// </summary>
+        /// <param name="stream" />
+        /// <param name="filename" />
+        /// <param name="overwrite" />
+        public IEssFile UploadFile( FileStream stream, string filename = null, bool overwrite = false );
+
+        /// <summary>
+        /// Asynchronously uploads a local file <paramref name="stream"/> to the server with the given <paramref name="filename"/>, 
+        /// optionally overwriting an existing file on the server if it already exists.
+        /// </summary>
+        /// <param name="stream" />
+        /// <param name="filename" />
+        /// <param name="overwrite" />
+        /// <param name="cancellationToken" />
+        public Task<IEssFile> UploadFileAsync( FileStream stream, string filename = null, bool overwrite = false, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Upload file to Server using Stream
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="fileName"></param>
+        /// <param name="overwrite"></param>
+        public IEssFile UploadFile( Stream stream, string filename = null, bool overwrite = false );
+
+        /// <summary>
+        /// Asynchronously uploads an arbitrary <paramref name="stream"/> to the server with the given <paramref name="filename"/>, 
+        /// optionally overwriting an existing file on the server if it already exists.
+        /// </summary>
+        /// <param name="stream" />
+        /// <param name="filename" />
+        /// <param name="overwrite" />
+        /// <param name="cancellationToken" />
+        public Task<IEssFile> UploadFileAsync( Stream stream, string filename = null, bool overwrite = false, CancellationToken cancellationToken = default );
+
         #endregion
+    }
+
+    /// <summary>
+    /// Fluent extensions for <see cref="IEssFolder"/>.
+    /// </summary>
+    public static class IEssFolderExtensions
+    {
+        /// <summary>
+        /// Asynchronously creates a subfolder with the given <paramref name="subfolderName" /> if it does not already exist.
+        /// If the subfolder already exists, it is returned.
+        /// </summary>
+        /// <param name="subfolderName" />
+        /// <param name="cancellationToken" />
+        public static async Task<IEssFolder> CreateSubfolderAsync( this Task<IEssFolder> folderTask, string subfolderName, CancellationToken cancellationToken = default ) =>
+            await (await folderTask.ConfigureAwait(false)).CreateSubfolderAsync(subfolderName, cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Asynchronously uploads a local file with the given <paramref name="path"/> to the server with the given <paramref name="filename"/>, 
+        /// optionally overwriting an existing file on the server if it already exists.
+        /// </summary>
+        /// <param name="path" />
+        /// <param name="filename" />
+        /// <param name="overwrite" />
+        /// <param name="cancellationToken" />
+        public static async Task<IEssFile> UploadFileAsync( this Task<IEssFolder> folderTask, string path, string filename = default, bool overwrite = default, CancellationToken cancellationToken = default ) =>
+            await(await folderTask.ConfigureAwait(false)).UploadFileAsync(path, filename, overwrite, cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Asynchronously uploads a local file <paramref name="stream"/> to the server with the given <paramref name="filename"/>, 
+        /// optionally overwriting an existing file on the server if it already exists.
+        /// </summary>
+        /// <param name="stream" />
+        /// <param name="filename" />
+        /// <param name="overwrite" />
+        /// <param name="cancellationToken" />
+        public static async Task<IEssFile> UploadFileAsync( this Task<IEssFolder> folderTask, FileStream stream, string filename = default, bool overwrite = default, CancellationToken cancellationToken = default ) =>
+            await (await folderTask.ConfigureAwait(false)).UploadFileAsync(stream, filename, overwrite, cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Asynchronously uploads an arbitrary <paramref name="stream"/> to the server with the given <paramref name="filename"/>, 
+        /// optionally overwriting an existing file on the server if it already exists.
+        /// </summary>
+        /// <param name="stream" />
+        /// <param name="filename" />
+        /// <param name="overwrite" />
+        /// <param name="cancellationToken" />
+        public static async Task<IEssFile> UploadFileAsync( this Task<IEssFolder> folderTask, Stream stream, string filename = default, bool overwrite = default, CancellationToken cancellationToken = default ) =>
+            await (await folderTask.ConfigureAwait(false)).UploadFileAsync(stream, filename, overwrite, cancellationToken).ConfigureAwait(false);
     }
 }
