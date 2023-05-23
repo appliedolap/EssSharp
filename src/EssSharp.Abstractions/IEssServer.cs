@@ -59,18 +59,9 @@ namespace EssSharp
         /// <param name="cubeName"></param>
         /// <param name="stream"></param>
         /// <param name="options"></param>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, FileStream stream );
-
-        /// <summary>
-        /// Creates a new Application and database from a worksheet
-        /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, FileStream stream, CancellationToken cancellationToken = default );
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, CancellationToken cancellationToken = default );
 
         public IEssDatasourceConnection GetConnection( string connectionName );
 

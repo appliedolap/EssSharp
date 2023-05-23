@@ -117,22 +117,30 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path ) =>
-            CreateApplicationFromWorkbookAsync(applicationName, cubeName, new FileStream(path, FileMode.Open, FileAccess.Read)).GetAwaiter().GetResult();
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path )
+        {
+            if ( !File.Exists(path) )
+                throw new FileNotFoundException("Unable to find the given file.");
+            try
+            {
+                using var stream = new FileStream(path, FileMode.Open, FileAccess.Read) as Stream;
+
+                return CreateApplicationFromWorkbookAsync(applicationName, cubeName, stream).GetAwaiter().GetResult();
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream ) =>
-            CreateApplicationFromWorkbookAsync(applicationName, cubeName, stream as FileStream).GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, FileStream stream ) => 
             CreateApplicationFromWorkbookAsync(applicationName, cubeName, stream).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync(string applicationName, string cubeName, FileStream stream, CancellationToken cancellationToken = default)
+        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync(string applicationName, string cubeName, Stream stream, CancellationToken cancellationToken = default)
         {
             if ( string.IsNullOrWhiteSpace(applicationName) )
                 throw new ArgumentException($"An application name is required to create an {nameof(EssApplication)}.", nameof(applicationName));
@@ -145,24 +153,21 @@ namespace EssSharp
 
             try
             {
-                if ( await GetFolderAsync("shared").ConfigureAwait(false) is not { } rootFolder )
-                    throw new Exception("Could not get root folder.");
-
-                if ( await rootFolder.CreateSubfolderAsync(applicationName, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } appSubFolder )
-                    throw new Exception($"Could not create folder with name {applicationName}.");
-
-                if ( await appSubFolder.CreateSubfolderAsync(cubeName, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } catalogExcelPath )
-                    throw new Exception($"Could not create folder with name {cubeName}.");
+                if( await GetFolderAsync("shared", cancellationToken)
+                    .CreateSubfolderAsync(applicationName, cancellationToken)
+                    .CreateSubfolderAsync(cubeName, cancellationToken)
+                    .ConfigureAwait(false) is not { } catalogExcelPath )
+                    throw new Exception($"Could not create folder with name shared/{applicationName}/{cubeName}/.");
 
                 if ( await catalogExcelPath.UploadFileAsync(stream, "temp.xlsx", true, cancellationToken).ConfigureAwait(false) is not { } uploadedFile )
-                    throw new Exception($"Could not upload FIle {stream.Name}.");
+                    throw new Exception($"Could not upload file.");
 
                 var paramBean = new ParametersBean
                 {
                     Loaddata = "false",
                     CatalogExcelPath = catalogExcelPath.FullPath,
-                    CreateFiles = true.ToString().ToLowerInvariant(),
-                    DeleteExcelOnSuccess = false.ToString().ToLowerInvariant(),
+                    CreateFiles = "true",
+                    DeleteExcelOnSuccess = "false",
                     ImportExcelFileName = uploadedFile.Name,
                     Overwrite = "true",
                     RecreateApplication = "true"
@@ -190,7 +195,7 @@ namespace EssSharp
                 if ( jobInfo.StatusCode is 200 )
                     if ( await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false) is { } app )
                     {
-                        await appSubFolder.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                        await (await GetFolderAsync($"shared/{applicationName}").ConfigureAwait(false)).DeleteAsync(cancellationToken).ConfigureAwait(false);
                         return app;
                     }
                         

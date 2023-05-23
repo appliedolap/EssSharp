@@ -17,17 +17,6 @@ namespace EssSharp
         IEssServer Server { get; }
 
         /// <summary>
-        /// Returns true if the usercan add a file
-        /// </summary>
-        bool AddFile { get; }
-
-        /// <summary>
-        /// Returns true if the user can add a folder
-        /// </summary>
-        bool AddFolder { get; }
-
-        
-        /// <summary>
         /// Returns the full path of the file
         /// </summary>
         string FullPath { get; }
@@ -90,7 +79,7 @@ namespace EssSharp
         /// <summary>
         /// Renames a file or folder
         /// </summary>
-        /// <param name="newFilePath"></param>
+        /// <param name="newFileName"></param>
         /// <param name="overwrite"></param>
         public void Rename( string newFileName, bool overwrite = false );
 

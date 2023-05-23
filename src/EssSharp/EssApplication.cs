@@ -92,21 +92,29 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public IEssCube CreateApplicationFromWorkbook( string cubeName, string path ) =>
-            CreateApplicationFromWorkbookAsync( cubeName, new FileStream(path, FileMode.Open, FileAccess.Read)).GetAwaiter().GetResult();
+        public IEssCube CreateCubeFromWorkbook( string cubeName, string path )
+        {
+            if ( !File.Exists(path) )
+                throw new FileNotFoundException("Unable to find the given file.");
+            try
+            {
+                using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                return CreateCubeFromWorkbookAsync(cubeName, stream ).GetAwaiter().GetResult();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+            
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream ) =>
+            CreateCubeFromWorkbookAsync( cubeName, stream ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public IEssCube CreateApplicationFromWorkbook( string cubeName, Stream stream ) =>
-            CreateApplicationFromWorkbookAsync( cubeName, stream as FileStream).GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public IEssCube CreateApplicationFromWorkbook( string cubeName, FileStream stream ) => CreateApplicationFromWorkbookAsync( cubeName, stream).GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public async Task<IEssCube> CreateApplicationFromWorkbookAsync( string cubeName, FileStream stream, CancellationToken cancellationToken = default )
+        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(cubeName) )
                 throw new ArgumentException($"An cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
@@ -116,56 +124,10 @@ namespace EssSharp
 
             try
             {
-                if ( await _server.GetFolderAsync("shared").ConfigureAwait(false) is not { } rootFolder )
-                    throw new Exception("Could not get root folder.");
+                if ( await _server.CreateApplicationFromWorkbookAsync(Name, cubeName, stream, cancellationToken).ConfigureAwait(false) is not { } app )
+                    throw new Exception($"Could not create new cube {cubeName} on Application {Name}.");
 
-                if ( await rootFolder.CreateSubfolderAsync(Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } appSubFolder )
-                    throw new Exception($"Could not create folder with name {Name}.");
-
-                if ( await appSubFolder.CreateSubfolderAsync(cubeName, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } catalogExcelPath )
-                    throw new Exception($"Could not create folder with name {cubeName}.");
-
-                if ( await catalogExcelPath.UploadFileAsync(stream, "temp.xlsx", true, cancellationToken).ConfigureAwait(false) is not { } uploadedFile )
-                    throw new Exception($"Could not upload FIle {stream.Name}.");
-
-                var paramBean = new ParametersBean
-                {
-                    Loaddata = "false",
-                    CatalogExcelPath = catalogExcelPath.FullPath,
-                    CreateFiles = true.ToString().ToLowerInvariant(),
-                    DeleteExcelOnSuccess = false.ToString().ToLowerInvariant(),
-                    ImportExcelFileName = uploadedFile.Name,
-                    Overwrite = "true",
-                    RecreateApplication = "true"
-                };
-
-                var inputBean = new JobsInputBean(Name, cubeName, JobsInputBean.JobtypeEnum.ImportExcel, paramBean);
-                var jobApi = GetApi<JobsApi>();
-                if ( await jobApi.JobsExecuteJobAsync(body: inputBean, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } job )
-                    throw new Exception($@"Could not execute job {paramBean.ImportExcelFileName}.");
-
-                var jobID = job.JobID.ToString();
-
-                // validate
-                if ( await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } jobInfo )
-                    throw new Exception("Could not retrieve job information.");
-
-                while ( jobInfo.StatusCode is 100 )
-                {
-                    await Task.Delay(500);
-                    jobInfo = await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false);
-                }
-
-                var errorMessage = jobInfo.JobOutputInfo.TryGetValue("errorMessage", out var value).ToString();
-
-                if ( jobInfo.StatusCode is 200 )
-                    if ( await GetCubeAsync(cubeName: cubeName, cancellationToken: cancellationToken).ConfigureAwait(false) is { } cube )
-                    {
-                        await appSubFolder.DeleteAsync(cancellationToken).ConfigureAwait(false);
-                        return cube;
-                    }
-
-                throw new Exception($"Job failed with status code: {jobInfo.StatusCode}.");
+                return await GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);
             }
             catch ( Exception e )
             {

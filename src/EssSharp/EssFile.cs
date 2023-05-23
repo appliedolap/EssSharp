@@ -59,12 +59,6 @@ namespace EssSharp
         /// <inheritdoc/>
         public IEssServer Server => _server;
 
-        ///<inheritdoc />
-        public bool AddFile => _file.Permissions.AddFile;
-
-        /// <inheritdoc/>
-        public bool AddFolder => _file.Permissions.AddFolder;
-
         /// <inheritdoc/>
         public string FullPath => _file.FullPath;
 
