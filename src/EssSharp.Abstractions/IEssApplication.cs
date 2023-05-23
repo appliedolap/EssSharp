@@ -21,6 +21,7 @@ namespace EssSharp
 
         #region Methods
 
+
         /// <summary>
         /// Create a new cube on an Application
         /// </summary>
@@ -35,6 +36,47 @@ namespace EssSharp
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         public Task<IEssCube> CreateCubeAsync( string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new Cube from a worksheet
+        /// </summary>
+        /// <param name="applicationName"></param>
+        /// <param name="cubeName"></param>
+        /// <param name="path"></param>
+        /// <param name="overwrite"></param>
+        /// <returns></returns>
+        public IEssCube CreateApplicationFromWorkbook( string cubeName, string path );
+
+        /// <summary>
+        /// Creates a new Cube from a worksheet
+        /// </summary>
+        /// <param name="applicationName"></param>
+        /// <param name="cubeName"></param>
+        /// <param name="stream"></param>
+        /// <param name="filename"></param>
+        /// <param name="overwrite"></param>
+        /// <returns></returns>
+        public IEssCube CreateApplicationFromWorkbook( string cubeName, Stream stream );
+
+        /// <summary>
+        /// Creates a new cube from a worksheet
+        /// </summary>
+        /// <param name="applicationName"></param>
+        /// <param name="cubeName"></param>
+        /// <param name="stream"></param>
+        /// <param name="options"></param>
+        public IEssCube CreateApplicationFromWorkbook( string cubeName, FileStream stream );
+
+        /// <summary>
+        /// Creates a new cube from a worksheet
+        /// </summary>
+        /// <param name="applicationName"></param>
+        /// <param name="cubeName"></param>
+        /// <param name="stream"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEssCube> CreateApplicationFromWorkbookAsync( string cubeName, FileStream stream, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Downloads the latest log file for this application.
