@@ -496,7 +496,25 @@ namespace EssSharp.Client
                 var policyResult = policy.ExecuteAndCapture((context) => client.Execute(req), new Dictionary<string, object> { ["client"] = this, ["configuration"] = configuration, ["request"] = req });
                 response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>(req)
                 {
-                    ErrorException = policyResult.FinalException
+                    Content = policyResult.FinalHandledResult?.Content,
+                    ContentEncoding = policyResult.FinalHandledResult?.ContentEncoding,
+                    ContentHeaders = policyResult.FinalHandledResult?.ContentHeaders,
+                    ContentLength = policyResult.FinalHandledResult?.ContentLength,
+                    ContentType = policyResult.FinalHandledResult?.ContentType,
+                    Cookies = policyResult.FinalHandledResult?.Cookies,
+                    ErrorException = policyResult.FinalException ?? policyResult.FinalHandledResult?.ErrorException,
+                    ErrorMessage = policyResult.FinalHandledResult?.ErrorMessage,
+                    IsSuccessStatusCode = policyResult.FinalHandledResult?.IsSuccessStatusCode ?? false,
+                    Headers = policyResult.FinalHandledResult?.Headers,
+                    RawBytes = policyResult.FinalHandledResult?.RawBytes,
+                    Request = policyResult.FinalHandledResult?.Request,
+                    ResponseStatus = policyResult.FinalHandledResult?.ResponseStatus ?? default,
+                    ResponseUri = policyResult.FinalHandledResult?.ResponseUri,
+                    RootElement = policyResult.FinalHandledResult?.RootElement,
+                    Server = policyResult.FinalHandledResult?.Server,
+                    StatusCode = policyResult.FinalHandledResult?.StatusCode ?? default,
+                    StatusDescription = policyResult.FinalHandledResult?.StatusDescription,
+                    Version = policyResult.FinalHandledResult?.Version
                 };
             }
             else
@@ -598,7 +616,25 @@ namespace EssSharp.Client
                 var policyResult = await policy.ExecuteAndCaptureAsync((context, ct) => client.ExecuteAsync(req, ct), new Dictionary<string, object> { ["client"] = this, ["configuration"] = configuration, ["request"] = req }, cancellationToken).ConfigureAwait(false);
                 response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>(req)
                 {
-                    ErrorException = policyResult.FinalException
+                    Content = policyResult.FinalHandledResult?.Content,
+                    ContentEncoding = policyResult.FinalHandledResult?.ContentEncoding,
+                    ContentHeaders = policyResult.FinalHandledResult?.ContentHeaders,
+                    ContentLength = policyResult.FinalHandledResult?.ContentLength,
+                    ContentType = policyResult.FinalHandledResult?.ContentType,
+                    Cookies = policyResult.FinalHandledResult?.Cookies,
+                    ErrorException = policyResult.FinalException ?? policyResult.FinalHandledResult?.ErrorException,
+                    ErrorMessage = policyResult.FinalHandledResult?.ErrorMessage,
+                    IsSuccessStatusCode = policyResult.FinalHandledResult?.IsSuccessStatusCode ?? false,
+                    Headers = policyResult.FinalHandledResult?.Headers,
+                    RawBytes = policyResult.FinalHandledResult?.RawBytes,
+                    Request = policyResult.FinalHandledResult?.Request,
+                    ResponseStatus = policyResult.FinalHandledResult?.ResponseStatus ?? default,
+                    ResponseUri = policyResult.FinalHandledResult?.ResponseUri,
+                    RootElement = policyResult.FinalHandledResult?.RootElement,
+                    Server = policyResult.FinalHandledResult?.Server,
+                    StatusCode = policyResult.FinalHandledResult?.StatusCode ?? default,
+                    StatusDescription = policyResult.FinalHandledResult?.StatusDescription,
+                    Version = policyResult.FinalHandledResult?.Version
                 };
             }
             else
