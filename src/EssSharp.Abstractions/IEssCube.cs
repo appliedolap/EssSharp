@@ -120,7 +120,7 @@ namespace EssSharp
         /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public static async Task<IEssDrillthroughReport> GetDrillthroughReportAsync( this Task<IEssCube> cubeTask, string reportName, bool getDetails = false, CancellationToken cancellationToken = default ) =>
-            await (await cubeTask).GetDrillthroughReportAsync(reportName, getDetails, cancellationToken).ConfigureAwait(false);
+            await (await cubeTask.ConfigureAwait(false)).GetDrillthroughReportAsync(reportName, getDetails, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Asynchronously gets the list of drillthrough reports.
@@ -128,6 +128,6 @@ namespace EssSharp
         /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public static async Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( this Task<IEssCube> cubeTask, bool getDetails = false, CancellationToken cancellationToken = default ) =>
-            await (await cubeTask).GetDrillthroughReportsAsync(getDetails, cancellationToken).ConfigureAwait(false);
+            await (await cubeTask.ConfigureAwait(false)).GetDrillthroughReportsAsync(getDetails, cancellationToken).ConfigureAwait(false);
     }
 }

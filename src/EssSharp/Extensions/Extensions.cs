@@ -303,7 +303,7 @@ namespace EssSharp
                 .Where (variable => variable is not null)
                 .Select(variable => parent switch 
                 {
-                    EssServer      server      => new EssServerVariable           (variable, server),
+                    EssServer      server      => new EssServerVariable     (variable, server),
                     EssApplication application => new EssApplicationVariable(variable, application),
                     EssCube        cube        => new EssCubeVariable       (variable, cube),
                                    _           => null 

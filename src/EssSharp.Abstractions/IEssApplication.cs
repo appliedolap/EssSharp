@@ -242,6 +242,6 @@ namespace EssSharp
         /// <param name="cubeName" />
         /// <param name="cancellationToken" />
         public static async Task<IEssCube> GetCubeAsync( this Task<IEssApplication> applicationTask, string cubeName, CancellationToken cancellationToken = default ) =>
-            await (await applicationTask).GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);
+            await (await applicationTask.ConfigureAwait(false)).GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);
     }
 }

@@ -70,8 +70,8 @@ namespace EssSharp
         /// <param name="context" />
         /// <param name="options" />
         /// <param name="cancellationToken" />
-        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillthroughReport> drillThroughReportTask, IEssDrillthroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
-            await (await drillThroughReportTask).ExecuteAsync(new List<IEssDrillthroughRange>() { context }, options, cancellationToken).ConfigureAwait(false);
+        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillthroughReport> drillthroughReportTask, IEssDrillthroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
+            await (await drillthroughReportTask.ConfigureAwait(false)).ExecuteAsync(new List<IEssDrillthroughRange>() { context }, options, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Asynchronously executes the drill-through report and returns records.
@@ -79,7 +79,7 @@ namespace EssSharp
         /// <param name="context" />
         /// <param name="options" />
         /// <param name="cancellationToken" />
-        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillthroughReport> drillThroughReportTask, IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
-            await (await drillThroughReportTask).ExecuteAsync(context, options, cancellationToken).ConfigureAwait(false);
+        public static async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( this Task<IEssDrillthroughReport> drillthroughReportTask, IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) =>
+            await (await drillthroughReportTask.ConfigureAwait(false)).ExecuteAsync(context, options, cancellationToken).ConfigureAwait(false);
     }
 }

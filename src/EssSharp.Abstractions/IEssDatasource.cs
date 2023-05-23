@@ -48,6 +48,6 @@ namespace EssSharp
         /// <param name="queryInfo" />
         /// <param name="cancellationToken" />
         public static async Task<string> QueryAsync( this Task<IEssDatasource> datasourceTask, IEssDatasourceQueryInfo queryInfo, CancellationToken cancellationToken = default ) =>
-            await (await datasourceTask).QueryAsync(queryInfo, cancellationToken).ConfigureAwait(false);
+            await (await datasourceTask.ConfigureAwait(false)).QueryAsync(queryInfo, cancellationToken).ConfigureAwait(false);
     }
 }
