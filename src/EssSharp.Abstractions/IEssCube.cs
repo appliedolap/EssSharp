@@ -11,7 +11,23 @@ namespace EssSharp
         /// Returns the parent application of the cube.
         /// </summary>
         public IEssApplication Application { get; }
-        
+
+        /// <summary>
+        /// Create a cube variable
+        /// </summary>
+        /// <param name="varName"></param>
+        /// <param name="value"></param>
+        public IEssCubeVariable CreateCubeVariable( string name, string value );
+
+        /// <summary>
+        /// Create a cube variable
+        /// </summary>
+        /// <param name="varName"></param>
+        /// <param name="value"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
+
         /// <summary>
         /// Gets the list of dimensions.
         /// </summary>

@@ -140,6 +140,34 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>an <see cref="IEssApplicationVariable"/></returns>
+        public IEssApplicationVariable CreateApplicationVariable( string varName, string value ) => CreateApplicationVariableAsync( varName, value ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>an <see cref="IEssApplicationVariable"/></returns>
+        public async Task<IEssApplicationVariable> CreateApplicationVariableAsync( string name, string value, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(name) )
+                throw new ArgumentException($"A variable name is required to create an {nameof(EssApplication)}.", nameof(name));
+
+            if ( string.IsNullOrWhiteSpace(value) )
+                throw new ArgumentException($"A value is required to create an {nameof(EssCube)}.", nameof(value));
+            try
+            {
+                var variableInfo = new Variable(name: name, value: value);
+                var api = GetApi<VariablesApi>();
+                if ( await api.VariablesCreateAppVariableAsync(applicationName: Name, body: variableInfo, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } variable )
+                    throw new Exception("Could not create application variable.");
+
+                return new EssApplicationVariable(variable, this);
+            }
+            catch (Exception e )
+            {
+                throw new Exception($@"Unable to create application variable ""{name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         public void Copy( string copyName ) => CopyAsync(copyName)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />

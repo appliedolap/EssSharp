@@ -49,6 +49,34 @@ namespace EssSharp
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
+        /// <returns>an <see cref="IEssCubeVariable"/></returns>
+        public IEssCubeVariable CreateCubeVariable( string name, string value ) => CreateCubeVariableAsync(name, value).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>an <see cref="IEssCubeVariable"/></returns>
+        public async Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(name) )
+                throw new ArgumentException($"A variable name is required to create an {nameof(EssCubeVariable)}.", nameof(name));
+
+            if ( string.IsNullOrWhiteSpace(value) )
+                throw new ArgumentException($"A value is required to create an {nameof(EssCubeVariable)}.", nameof(value));
+            try
+            {
+                var variableInfo = new Variable(name: name, value: value);
+                var api = GetApi<VariablesApi>();
+                if ( await api.VariablesCreateVariableAsync(applicationName: _application.Name, databaseName: Name, body: variableInfo, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } variable )
+                    throw new Exception("Could not create cube variable.");
+
+                return new EssCubeVariable(variable, this);
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create cube variable ""{name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>A list of <see cref="EssDimension"/> objects.</returns>
         public List<IEssDimension> GetDimensions() => GetDimensionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssDimension>();
 

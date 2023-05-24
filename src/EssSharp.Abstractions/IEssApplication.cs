@@ -80,6 +80,23 @@ namespace EssSharp
         public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Create an application variable
+        /// </summary>
+        /// <param name="appName"></param>
+        /// <param name="varName"></param>
+        /// <param name="value"></param>
+        public IEssApplicationVariable CreateApplicationVariable( string varName, string value );
+
+        /// <summary>
+        /// Create an application variable
+        /// </summary>
+        /// <param name="appName"></param>
+        /// <param name="varName"></param>
+        /// <param name="value"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssApplicationVariable> CreateApplicationVariableAsync( string varName, string value, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Downloads the latest log file for this application.
         /// </summary>
         /// <returns>A <see cref="Stream"/> containing the log file content.</returns>
