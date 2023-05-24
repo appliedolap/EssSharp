@@ -150,7 +150,7 @@ namespace EssSharp
                 throw new ArgumentException($"An application name is required to create an {nameof(EssApplication)}.", nameof(applicationName));
 
             if ( string.IsNullOrWhiteSpace(cubeName) )
-                throw new ArgumentException($"An cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
+                throw new ArgumentException($"A cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
 
             if ( stream is null )
                 throw new ArgumentException($"A stream is required to create an {nameof(EssApplication)}.", nameof(applicationName));
@@ -222,6 +222,12 @@ namespace EssSharp
         /// <returns> An <see cref="IEssServerVariable"/> object.</returns>
         public async Task<IEssServerVariable> CreateVariableAsync( string name, string value, CancellationToken cancellationToken = default )
         {
+            if ( string.IsNullOrWhiteSpace(name) )
+                throw new ArgumentException($"A variable name is required to create an {nameof(EssApplication)}.", nameof(name));
+
+            if ( string.IsNullOrWhiteSpace(value) )
+                throw new ArgumentException($"A value is required to create an {nameof(EssCube)}.", nameof(value));
+
             try
             {
                 var variableInfo = new Variable(name: name, value: value);
@@ -232,9 +238,9 @@ namespace EssSharp
 
                 return new EssServerVariable(variable, this);
             }
-            catch 
+            catch (Exception e)
             {
-                throw;
+                throw new Exception($@"Unable to create the server variable ""{name}"". {e.Message}", e);
             }
         }
         
