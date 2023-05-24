@@ -92,18 +92,18 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns> An <see cref="IEssCube"/> object. </returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, string path ) => CreateCubeFromWorkbookAsync( cubeName, path ).GetAwaiter().GetResult();
+        public IEssCube CreateCubeFromWorkbook( string cubeName, string path, EssApplicationCreationOptions options = null ) => CreateCubeFromWorkbookAsync( cubeName, path, options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string path, CancellationToken cancellationToken = default )
+        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string path, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default )
         {
             if ( !File.Exists(path) )
                 throw new FileNotFoundException("Unable to find the given file.");
             try
             {
                 using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                return await CreateCubeFromWorkbookAsync(cubeName, stream, cancellationToken ).ConfigureAwait(false);
+                return await CreateCubeFromWorkbookAsync(cubeName, stream, options, cancellationToken ).ConfigureAwait(false);
             }
             catch
             {
@@ -113,12 +113,12 @@ namespace EssSharp
             
         /// <inheritdoc />
         /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream ) =>
-            CreateCubeFromWorkbookAsync( cubeName, stream ).GetAwaiter().GetResult();
+        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream, EssApplicationCreationOptions options = null ) =>
+            CreateCubeFromWorkbookAsync( cubeName, stream, options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, CancellationToken cancellationToken = default )
+        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(cubeName) )
                 throw new ArgumentException($"A cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
@@ -128,7 +128,7 @@ namespace EssSharp
 
             try
             {
-                if ( await _server.CreateApplicationFromWorkbookAsync(Name, cubeName, stream, cancellationToken).ConfigureAwait(false) is not { } app )
+                if ( await _server.CreateApplicationFromWorkbookAsync(Name, cubeName, stream, options, cancellationToken).ConfigureAwait(false) is not { } app )
                     throw new Exception($"Could not create new cube {cubeName} on Application {Name}.");
 
                 return await GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);

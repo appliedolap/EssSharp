@@ -38,7 +38,7 @@ namespace EssSharp
         /// <param name="cubeName"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path );
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path, EssApplicationCreationOptions options = null );
 
         /// <summary>
         /// Creates a new Application and database from a worksheet
@@ -48,7 +48,7 @@ namespace EssSharp
         /// <param name="path"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string path, CancellationToken cancellationToken = default );
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string path, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Creates a new Application and database from a worksheet
@@ -56,7 +56,7 @@ namespace EssSharp
         /// <param name="applicationName"></param>
         /// <param name="cubeName"></param>
         /// <param name="stream"></param>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream );
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream, EssApplicationCreationOptions options = null );
 
         /// <summary>
         /// Creates a new Application and database from a worksheet
@@ -67,7 +67,22 @@ namespace EssSharp
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, CancellationToken cancellationToken = default );
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new server variable
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public IEssServerVariable CreateVariable( string name, string value );
+
+        /// <summary>
+        /// Create a new server variable
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssServerVariable> CreateVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         public IEssDatasourceConnection GetConnection( string connectionName );
 

@@ -45,7 +45,7 @@ namespace EssSharp
         /// <param name="path"></param>
         /// <param name="overwrite"></param>
         /// <returns></returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, string path );
+        public IEssCube CreateCubeFromWorkbook( string cubeName, string path, EssApplicationCreationOptions options = null );
 
         /// <summary>
         /// Creates a new Cube from a worksheet
@@ -54,7 +54,7 @@ namespace EssSharp
         /// <param name="path"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string path, CancellationToken cancellationToken = default );
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string path, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
 
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace EssSharp
         /// <param name="filename"></param>
         /// <param name="overwrite"></param>
         /// <returns></returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream );
+        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream, EssApplicationCreationOptions options = null );
 
         /// <summary>
         /// Creates a new cube from a worksheet
@@ -77,7 +77,7 @@ namespace EssSharp
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, CancellationToken cancellationToken = default );
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Downloads the latest log file for this application.

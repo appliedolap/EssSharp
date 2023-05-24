@@ -117,11 +117,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path ) => CreateApplicationFromWorkbookAsync(applicationName, cubeName, path ).GetAwaiter().GetResult();
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path, EssApplicationCreationOptions options = null ) => CreateApplicationFromWorkbookAsync(applicationName, cubeName, path, options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string path, CancellationToken cancellationToken = default )
+        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string path, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default )
         {
             if ( !File.Exists(path) )
                 throw new FileNotFoundException("Unable to find the given file.");
@@ -139,12 +139,12 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream ) =>
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream, EssApplicationCreationOptions options = null ) =>
             CreateApplicationFromWorkbookAsync(applicationName, cubeName, stream).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync(string applicationName, string cubeName, Stream stream, CancellationToken cancellationToken = default)
+        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync(string applicationName, string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default)
         {
             if ( string.IsNullOrWhiteSpace(applicationName) )
                 throw new ArgumentException($"An application name is required to create an {nameof(EssApplication)}.", nameof(applicationName));
@@ -157,7 +157,9 @@ namespace EssSharp
 
             try
             {
-                if( await GetFolderAsync("shared", cancellationToken)
+                options ??= new EssApplicationCreationOptions();
+
+                if ( await GetFolderAsync("shared", cancellationToken)
                     .CreateSubfolderAsync(applicationName, cancellationToken)
                     .CreateSubfolderAsync(cubeName, cancellationToken)
                     .ConfigureAwait(false) is not { } catalogExcelPath )
@@ -168,13 +170,14 @@ namespace EssSharp
 
                 var paramBean = new ParametersBean
                 {
-                    Loaddata = "false",
+                    Loaddata = options.LoadData.ToString().ToLowerInvariant(),
+                    ExecuteScript = options.ExecuteScript.ToString().ToLowerInvariant(),
                     CatalogExcelPath = catalogExcelPath.FullPath,
-                    CreateFiles = "true",
-                    DeleteExcelOnSuccess = "false",
+                    CreateFiles = options.CreateFiles.ToString().ToLowerInvariant(),
+                    DeleteExcelOnSuccess = options.DeleteExcelOnExecute.ToString().ToLowerInvariant(),
                     ImportExcelFileName = uploadedFile.Name,
-                    Overwrite = "true",
-                    RecreateApplication = "true"
+                    Overwrite = options.Overwrite.ToString().ToLowerInvariant(),
+                    RecreateApplication = options.ToString().ToLowerInvariant()
                 };
 
                 var inputBean = new JobsInputBean(applicationName, cubeName, JobsInputBean.JobtypeEnum.ImportExcel, paramBean);
@@ -210,6 +213,31 @@ namespace EssSharp
                 throw new Exception($@"Unable to create the Application ""{applicationName}"". {e.Message}", e);
             }
         }
+
+        /// <inheritdoc />
+        /// <returns> An <see cref="IEssServerVariable"/> object.</returns>
+        public IEssServerVariable CreateVariable( string name, string value ) => CreateVariableAsync( name, value ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns> An <see cref="IEssServerVariable"/> object.</returns>
+        public async Task<IEssServerVariable> CreateVariableAsync( string name, string value, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var variableInfo = new Variable(name: name, value: value);
+
+                var api = GetApi<ServerVariablesApi>();
+                if ( await api.VariablesCreateServerVariableAsync(body: variableInfo, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } variable )
+                    throw new Exception("Cannot create new server variable.");
+
+                return new EssServerVariable(variable, this);
+            }
+            catch 
+            {
+                throw;
+            }
+        }
+        
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssAbout"/> object.</returns>
