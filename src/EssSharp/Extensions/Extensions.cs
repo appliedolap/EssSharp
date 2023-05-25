@@ -344,12 +344,16 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns a <see cref="DrillthroughMetadataBean"/> from the given <see cref="IEssDrillthroughRange"/> object
-        /// and optionally, an <see cref="IEssDrillthroughOptions"/>..
+        /// Returns a <see cref="ParametersBean"/> from the given <see cref="IEssJobOptions"/> object.
         /// </summary>
         /// <param name="options" />
         internal static ParametersBean ToModelBean( this IEssJobOptions options ) => new ParametersBean()
         {
+            // EssJobType.exportExcel
+            BuildMethod          = options.BuildMethod.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildMethodEnum), (int)options.BuildMethod) ? (ParametersBean.BuildMethodEnum)options.BuildMethod : null,
+            Calc                 = options.Calc?.ToString().ToLowerInvariant(),
+            Data                 = options.Data?.ToString().ToLowerInvariant(),
+            MemberIds            = options.MemberIds?.ToString().ToLowerInvariant(),
             // EssJobType.importExcel
             BuildOption          = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
             CatalogExcelPath     = options.CatalogExcelPath,
@@ -361,6 +365,17 @@ namespace EssSharp
             Overwrite            = options.Overwrite?.ToString().ToLowerInvariant(),
             RecreateApplication  = options.RecreateApp?.ToString().ToLowerInvariant(),
         };
+
+        /// <summary>
+        /// Returns an <see cref="EssJobType" /> from the given <see cref="JobsInputBean.JobtypeEnum" />.
+        /// </summary>
+        internal static JobsInputBean.JobtypeEnum ToModelEnum( this EssJobType jobType )
+        {
+            if ( Enum.IsDefined(typeof(JobsInputBean.JobtypeEnum), (int)jobType) )
+                return (JobsInputBean.JobtypeEnum)jobType;
+
+            throw new ArgumentException($@"{nameof(EssJobType)}.{jobType} does not map to a model job type.");
+        }
 
         #endregion
 

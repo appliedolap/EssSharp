@@ -208,36 +208,16 @@ namespace EssSharp
                     catch { /* The application does not exist. */ }
                 }
 
-                // Build an ImportExcel job input bean with our options.
-                var inputBean = new JobsInputBean(applicationName, cubeName, JobsInputBean.JobtypeEnum.ImportExcel, options.ToModelBean());
-                var jobApi = GetApi<JobsApi>();
+                // Set the application and cube names for the job.
+                options.ApplicationName = applicationName;
+                options.CubeName        = cubeName;
 
-                // Execute the job.
-                if ( await jobApi.JobsExecuteJobAsync(body: inputBean, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } job )
-                    throw new Exception($@"Could not execute {nameof(JobsInputBean.JobtypeEnum.ImportExcel)} job with ""{options.ImportExcelFilename}"".");
+                // Execute the import job and verify that it is successful.
+                if ( await ExecuteJobAsync(options, cancellationToken).ConfigureAwait(false) is not EssJobStatus.Completed )
+                    throw new Exception($@"Unable to successfully execute {options.JobType.ToDescription()} job.");
 
-                var jobID = job.JobID.ToString();
-
-                // Get the job info.
-                if ( await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } jobInfo )
-                    throw new Exception("Could not retrieve job information.");
-
-                // Wait for the job to complete by polling the job info.
-                while ( jobInfo.StatusCode is 100 )
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(1));
-                    jobInfo = await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false);
-                }
-
-                // If the job was successful, return the corresponding application.
-                if ( jobInfo.StatusCode is 200 && await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false) is { } application )
-                    return application;
-
-                // Since the job failed, try to capture the error message from the job output info.
-                object errorMessage = null;
-                jobInfo.JobOutputInfo?.TryGetValue("errorMessage", out errorMessage);
-
-                throw new Exception( $@"Job failed with status code: {jobInfo.StatusCode}. {errorMessage}".TrimEnd() );
+                // Return the corresponding application.
+                return await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
@@ -275,7 +255,6 @@ namespace EssSharp
                 throw new Exception($@"Unable to create the server variable ""{name}"". {e.Message}", e);
             }
         }
-        
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssAbout"/> object.</returns>
@@ -475,11 +454,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns> A list of <see cref="IEssDatasource"/> objects </returns>
+        /// <returns>A list of <see cref="EssDatasource"/> objects.</returns>
         public List<IEssDatasource> GetDatasources() => GetDatasourcesAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns> A list of <see cref="IEssDatasource"/> objects </returns>
+        /// <returns>A list of <see cref="EssDatasource"/> objects.</returns>
         public async Task<List<IEssDatasource>> GetDatasourcesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -495,7 +474,56 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssJobStatus" />.</returns>
+        public EssJobStatus ExecuteJob( EssJobOptions options ) => ExecuteJobAsync(options).GetAwaiter().GetResult();
 
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssJobStatus" />.</returns>
+        public async Task<EssJobStatus> ExecuteJobAsync( EssJobOptions options, CancellationToken cancellationToken = default )
+        {
+            if ( options is not IEssJobOptions iOptions )
+                throw new ArgumentNullException(nameof(options), $@"A specific {nameof(EssJobOptions)} type is required to execute a job.");
+
+            try
+            {
+                // Build an ImportExcel job input bean with our options.
+                var inputBean = new JobsInputBean(options.ApplicationName, options.CubeName, options.JobType.ToModelEnum(), iOptions.ToModelBean());
+                var jobApi = GetApi<JobsApi>();
+
+                // Execute the job.
+                if ( await jobApi.JobsExecuteJobAsync(body: inputBean, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } job )
+                    throw new Exception($@"Failed to execute job.");
+
+                var jobID = job.JobID.ToString();
+
+                // Get the job info.
+                if ( await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } jobInfo )
+                    throw new Exception("Failed to retrieve job information.");
+
+                // Wait for the job to complete by polling the job info.
+                while ( jobInfo.StatusCode is 100 )
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(1));
+                    jobInfo = await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false);
+                }
+
+                // If the job was successful, return the corresponding application.
+                if ( jobInfo.StatusCode is 200 )
+                    return EssJobStatus.Completed;
+
+                // Since the job failed, try to capture the error message from the job output info.
+                object errorMessage = null;
+                jobInfo.JobOutputInfo?.TryGetValue("errorMessage", out errorMessage);
+
+                throw new Exception($@"Job failed with status code: {jobInfo.StatusCode}. {errorMessage}".TrimEnd());
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to successfully execute {options.JobType.ToDescription()} job. {e.Message}", e);
+            }
+        }
 
         /// <inheritdoc/>
         /// <returns>An <see cref="IEssFile"/> object.</returns>

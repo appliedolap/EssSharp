@@ -3,37 +3,21 @@
 namespace EssSharp
 {
     /// <summary />
-    public class EssJobOptions : IEssJobOptions
+    public class EssJobOptions
     {
-        #region EssJobType.importExcel Members
+        /// <summary />
+        public EssJobOptions( EssJobType jobType )
+        {
+            JobType = jobType;
+        }
 
-        /// <inheritdoc />
-        public virtual EssBuildOption? BuildOption { get; set; }
+        /// <summary />
+        public string ApplicationName { get; set; }
 
-        /// <inheritdoc />
-        public virtual string CatalogExcelPath { get; set; }
+        /// <summary />
+        public string CubeName { get; set; }
 
-        /// <inheritdoc />
-        public virtual bool? CreateFiles { get; set; }
-
-        /// <inheritdoc />
-        public virtual bool? DeleteExcelOnSuccess { get; set; }
-
-        /// <inheritdoc />
-        public virtual bool? ExecuteScripts { get; set; }
-
-        /// <inheritdoc />
-        public virtual string ImportExcelFilename { get; set; }
-
-        /// <inheritdoc />
-        public virtual bool? LoadData { get; set; }
-
-        /// <inheritdoc />
-        public virtual bool? Overwrite { get; set; }
-
-        /// <inheritdoc />
-        public virtual bool? RecreateApp { get; set; }
-
-        #endregion
+        /// <summary />
+        public EssJobType JobType { get; private set; } = EssJobType.Unknown;
     }
 }
