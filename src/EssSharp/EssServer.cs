@@ -117,100 +117,132 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path, EssApplicationCreationOptions options = null ) => CreateApplicationFromWorkbookAsync(applicationName, cubeName, path, options ).GetAwaiter().GetResult();
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, EssJobImportExcelOptions options ) => 
+            CreateApplicationFromWorkbookAsync(applicationName, cubeName, options, CancellationToken.None).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string path, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default )
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, EssJobImportExcelOptions options, CancellationToken cancellationToken = default ) =>
+            CreateApplicationFromWorkbookAsync(applicationName, cubeName, options, null, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null ) => 
+            CreateApplicationFromWorkbookAsync(applicationName, cubeName, localWorkbookPath, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default )
         {
-            if ( !File.Exists(path) )
-                throw new FileNotFoundException("Unable to find the given file.");
             try
             {
-                using var stream = new FileStream(path, FileMode.Open, FileAccess.Read) as Stream;
+                if ( !File.Exists(localWorkbookPath) )
+                    throw new FileNotFoundException("Unable to find the workbook file at the given local path.", localWorkbookPath);
 
-                return await CreateApplicationFromWorkbookAsync(applicationName, cubeName, stream).ConfigureAwait(false);
+                using var stream = new FileStream(localWorkbookPath, FileMode.Open, FileAccess.Read);
+                return await CreateApplicationFromWorkbookAsync(applicationName, cubeName, options, stream).ConfigureAwait(false);
             }
-            catch
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
             {
-                throw;
+                throw new Exception($@"Unable to create the application ""{applicationName}"". {e.Message}", e);
             }
         }
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream, EssApplicationCreationOptions options = null ) =>
-            CreateApplicationFromWorkbookAsync(applicationName, cubeName, stream).GetAwaiter().GetResult();
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null ) =>
+            CreateApplicationFromWorkbookAsync(applicationName, cubeName, options, stream).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
-        public async Task<IEssApplication> CreateApplicationFromWorkbookAsync(string applicationName, string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default)
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default ) =>
+            CreateApplicationFromWorkbookAsync(applicationName, cubeName, options, stream, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        internal IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, EssJobImportExcelOptions options = null, Stream stream = null ) =>
+            CreateApplicationFromWorkbookAsync(applicationName, cubeName, options, stream).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        internal async Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, EssJobImportExcelOptions options = null, Stream stream = null, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(applicationName) )
-                throw new ArgumentException($"An application name is required to create an {nameof(EssApplication)}.", nameof(applicationName));
+                throw new ArgumentException($"An application name is required to create an an {nameof(EssApplication)} from a workbook.", nameof(applicationName));
 
             if ( string.IsNullOrWhiteSpace(cubeName) )
-                throw new ArgumentException($"A cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
+                throw new ArgumentException($"A cube name is required to create an an {nameof(EssApplication)} from a workbook.", nameof(cubeName));
 
-            if ( stream is null )
-                throw new ArgumentException($"A stream is required to create an {nameof(EssApplication)}.", nameof(applicationName));
+            if ( stream is null && (string.IsNullOrEmpty(options?.CatalogExcelPath) || string.IsNullOrEmpty(options?.ImportExcelFilename)) )
+                throw new ArgumentException($"A local path, stream, or server file is required to create an {nameof(EssApplication)} from a workbook.");
 
             try
             {
-                options ??= new EssApplicationCreationOptions();
+                // Construct new options if none were given.
+                options ??= new EssJobImportExcelOptions();
 
-                if ( await GetFolderAsync("shared", cancellationToken)
-                    .CreateSubfolderAsync(applicationName, cancellationToken)
-                    .CreateSubfolderAsync(cubeName, cancellationToken)
-                    .ConfigureAwait(false) is not { } catalogExcelPath )
-                    throw new Exception($"Could not create folder with name shared/{applicationName}/{cubeName}/.");
+                var catalogExcelFolder = string.IsNullOrEmpty(options.CatalogExcelPath) ?
+                    await GetUserHomeFolderAsync(cancellationToken).ConfigureAwait(false) :
+                    await GetFolderAsync(options.CatalogExcelPath, cancellationToken).ConfigureAwait(false);
 
-                if ( await catalogExcelPath.UploadFileAsync(stream, "temp.xlsx", true, cancellationToken).ConfigureAwait(false) is not { } uploadedFile )
-                    throw new Exception($"Could not upload file.");
+                var importExcelFile = string.IsNullOrEmpty(options.ImportExcelFilename) ?
+                    await catalogExcelFolder.UploadFileAsync(stream, Path.GetFileNameWithoutExtension(Path.GetRandomFileName()), true, cancellationToken).ConfigureAwait(false) :
+                    await catalogExcelFolder.GetFileAsync(options.ImportExcelFilename).ConfigureAwait(false);
 
-                var paramBean = new ParametersBean
+                // Set the CatalogExcelPath and ImportExcelFilename.
+                options.CatalogExcelPath    = catalogExcelFolder.FullPath;
+                options.ImportExcelFilename = importExcelFile.Name;
+
+                // Set the BuildOption if it's not already set.
+                if ( options.BuildOption is null )
                 {
-                    Loaddata = options.LoadData.ToString().ToLowerInvariant(),
-                    ExecuteScript = options.ExecuteScript.ToString().ToLowerInvariant(),
-                    CatalogExcelPath = catalogExcelPath.FullPath,
-                    CreateFiles = options.CreateFiles.ToString().ToLowerInvariant(),
-                    DeleteExcelOnSuccess = options.DeleteExcelOnExecute.ToString().ToLowerInvariant(),
-                    ImportExcelFileName = uploadedFile.Name,
-                    Overwrite = options.Overwrite.ToString().ToLowerInvariant(),
-                    RecreateApplication = options.ToString().ToLowerInvariant()
-                };
+                    options.BuildOption = EssBuildOption.NONE;
 
-                var inputBean = new JobsInputBean(applicationName, cubeName, JobsInputBean.JobtypeEnum.ImportExcel, paramBean);
+                    try
+                    {
+                        if ( await GetApplicationAsync(applicationName, cancellationToken).ConfigureAwait(false) is { } )
+                            options.BuildOption = EssBuildOption.RETAINALLDATA;
+                    }
+                    catch ( OperationCanceledException ) { throw; }
+                    catch { /* The application does not exist. */ }
+                }
+
+                // Build an ImportExcel job input bean with our options.
+                var inputBean = new JobsInputBean(applicationName, cubeName, JobsInputBean.JobtypeEnum.ImportExcel, options.ToModelBean());
                 var jobApi = GetApi<JobsApi>();
+
+                // Execute the job.
                 if ( await jobApi.JobsExecuteJobAsync(body: inputBean, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } job )
-                    throw new Exception($@"Could not execute job {paramBean.ImportExcelFileName}.");
+                    throw new Exception($@"Could not execute {nameof(JobsInputBean.JobtypeEnum.ImportExcel)} job with ""{options.ImportExcelFilename}"".");
 
                 var jobID = job.JobID.ToString();
 
-                // validate
+                // Get the job info.
                 if ( await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } jobInfo )
                     throw new Exception("Could not retrieve job information.");
 
+                // Wait for the job to complete by polling the job info.
                 while ( jobInfo.StatusCode is 100 )
                 {
-                    await Task.Delay(500);
+                    await Task.Delay(TimeSpan.FromSeconds(1));
                     jobInfo = await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false);
                 }
 
-                var errorMessage = jobInfo.JobOutputInfo.TryGetValue("errorMessage", out var value).ToString();
+                // If the job was successful, return the corresponding application.
+                if ( jobInfo.StatusCode is 200 && await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false) is { } application )
+                    return application;
 
-                if ( jobInfo.StatusCode is 200 )
-                    if ( await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false) is { } app )
-                    {
-                        await (await GetFolderAsync($"shared/{applicationName}").ConfigureAwait(false)).DeleteAsync(cancellationToken).ConfigureAwait(false);
-                        return app;
-                    }
-                        
-                throw new Exception( $"Job failed with status code: {jobInfo.StatusCode}." );
+                // Since the job failed, try to capture the error message from the job output info.
+                object errorMessage = null;
+                jobInfo.JobOutputInfo?.TryGetValue("errorMessage", out errorMessage);
+
+                throw new Exception( $@"Job failed with status code: {jobInfo.StatusCode}. {errorMessage}".TrimEnd() );
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to create the Application ""{applicationName}"". {e.Message}", e);
+                throw new Exception($@"Unable to create the application ""{applicationName}"". {e.Message}", e);
             }
         }
 

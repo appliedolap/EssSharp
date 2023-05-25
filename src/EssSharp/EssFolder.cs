@@ -11,7 +11,7 @@ namespace EssSharp
 {
     /// <summary />
     public class EssFolder : EssFile, IEssFolder
-    { 
+    {
         #region Private Data
         #endregion
 
@@ -122,6 +122,29 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssFile"/> object.</returns>
+        public IEssFile GetFile( string filename ) => GetFileAsync(filename)?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssFile"/> object.</returns>
+        public async Task<IEssFile> GetFileAsync( string filename, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // If a file with the given filename is found, return it.
+                foreach ( var file in await GetFilesAsync(filename, cancellationToken).ConfigureAwait(false) )
+                    if ( string.Equals(filename, file?.Name, StringComparison.OrdinalIgnoreCase) )
+                        return file;
+
+                throw new Exception("File not found.");
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the file ""{filename}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>A list of <see cref="EssFile"/> objects.</returns>
         public List<IEssFile> GetFiles( string nameFilter = null ) => GetFilesAsync()?.GetAwaiter().GetResult();
 
@@ -134,6 +157,29 @@ namespace EssSharp
             var files = await api.FilesListFilesAsync(path: path, filter: nameFilter, recursive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             return files?.ToEssSharpList<IEssFile>(Server as EssServer) ?? new List<IEssFile>();
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        public IEssFolder GetFolder( string folderName ) => GetFolderAsync(folderName)?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        public async Task<IEssFolder> GetFolderAsync( string folderName, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // If a folder with the given folder name is found, return it.
+                foreach ( var folder in await GetFoldersAsync(folderName, cancellationToken).ConfigureAwait(false) )
+                    if ( string.Equals(folderName, folder?.Name, StringComparison.OrdinalIgnoreCase) )
+                        return folder;
+
+                throw new Exception("Folder not found.");
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the folder ""{folderName}"". {e.Message}", e);
+            }
         }
 
         /// <inheritdoc />
@@ -159,11 +205,19 @@ namespace EssSharp
         /// <returns>An <see cref="EssFile"/> object.</returns>
         public async Task<IEssFile> UploadFileAsync( string path, string filename = null, bool overwrite = false, CancellationToken cancellationToken = default )
         {
-            if ( !File.Exists(path) )
-                throw new FileNotFoundException("Unable to find the given file.");
+            try
+            {
+                if ( !File.Exists(path) )
+                    throw new FileNotFoundException("Unable to find the file at the given local path.", path);
 
-            using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            return await UploadFileAsync(stream, filename, overwrite, cancellationToken).ConfigureAwait(false);
+                using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                return await UploadFileAsync(stream, filename, overwrite, cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the file ""{filename ?? Path.GetFileName(path)}"". {e.Message}", e);
+            }
         }
 
         /// <inheritdoc />

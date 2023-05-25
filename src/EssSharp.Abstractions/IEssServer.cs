@@ -30,44 +30,60 @@ namespace EssSharp
         /// <returns></returns>
         public Task<IEssApplication> CreateApplicationAsync( string applicationName, string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Creates a new application (and cube) from an existing server file.
+        /// </summary>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="options" />
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, EssJobImportExcelOptions options );
 
         /// <summary>
-        /// Creates a new Application and database from a worksheet
+        /// Asynchronously creates a new application (and cube) from an existing server file.
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string path, EssApplicationCreationOptions options = null );
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="options" />
+        /// <param name="cancellationToken" />
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, EssJobImportExcelOptions options, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Creates a new Application and database from a worksheet
+        /// Creates a new application (and cube) from a local workbook file path.
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="path"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string path, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="localWorkbookPath" />
+        /// <param name="options" />
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null );
 
         /// <summary>
-        /// Creates a new Application and database from a worksheet
+        /// Asynchronously creates a new application (and cube) from a local workbook file path.
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream, EssApplicationCreationOptions options = null );
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="localWorkbookPath" />
+        /// <param name="options" />
+        /// <param name="cancellationToken" />
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Creates a new Application and database from a worksheet
+        /// Creates a new application (and cube) from a workbook stream.
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="stream" />
+        /// <param name="options" />
+        public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null );
+
+        /// <summary>
+        /// Asynchronously creates a new application (and cube) from a workbook stream.
+        /// </summary>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="stream" />
+        /// <param name="options" />
+        /// <param name="cancellationToken" />
+        public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Creates a new server variable

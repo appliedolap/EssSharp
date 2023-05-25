@@ -69,7 +69,7 @@ namespace EssSharp
         /// <inheritdoc />
         public string User { get => _connection.User; }
 
-        /// <inheritdoc />
+        ///// <inheritdoc />
         //public string Password { get => _connection.Password; protected set => _connection.Password = value; }
 
         /// <inheritdoc />

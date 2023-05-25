@@ -91,51 +91,75 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        public IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options ) =>
+            CreateCubeFromWorkbookAsync(cubeName, options, CancellationToken.None).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, EssJobImportExcelOptions options, CancellationToken cancellationToken = default ) =>
+            CreateCubeFromWorkbookAsync(cubeName, options, null, cancellationToken);
+
+        /// <inheritdoc />
         /// <returns> An <see cref="IEssCube"/> object. </returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, string path, EssApplicationCreationOptions options = null ) => CreateCubeFromWorkbookAsync( cubeName, path, options ).GetAwaiter().GetResult();
+        public IEssCube CreateCubeFromWorkbook( string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null ) => 
+            CreateCubeFromWorkbookAsync( cubeName, localWorkbookPath, options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string path, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default )
+        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default )
         {
-            if ( !File.Exists(path) )
-                throw new FileNotFoundException("Unable to find the given file.");
             try
             {
-                using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                return await CreateCubeFromWorkbookAsync(cubeName, stream, options, cancellationToken ).ConfigureAwait(false);
+                if ( !File.Exists(localWorkbookPath) )
+                    throw new FileNotFoundException("Unable to find the workbook file at the given local path.", localWorkbookPath);
+
+                using var stream = new FileStream(localWorkbookPath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                return await CreateCubeFromWorkbookAsync(cubeName, options, stream, cancellationToken).ConfigureAwait(false);
             }
-            catch
-            {
-                throw;
-            }
-        }
-            
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream, EssApplicationCreationOptions options = null ) =>
-            CreateCubeFromWorkbookAsync( cubeName, stream, options ).GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
-        public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default )
-        {
-            if ( string.IsNullOrWhiteSpace(cubeName) )
-                throw new ArgumentException($"A cube name is required to create an {nameof(EssCube)}.", nameof(cubeName));
-
-            if ( stream is null )
-                throw new ArgumentException($"A stream is required to create an {nameof(EssCube)}.", nameof(cubeName));
-
-            try
-            {
-                if ( await _server.CreateApplicationFromWorkbookAsync(Name, cubeName, stream, options, cancellationToken).ConfigureAwait(false) is not { } app )
-                    throw new Exception($"Could not create new cube {cubeName} on Application {Name}.");
-
-                return await GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);
-            }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to create Cube ""{cubeName}"". {e.Message}", e);
+                throw new Exception($@"Unable to create the cube ""{cubeName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream, EssJobImportExcelOptions options = null ) =>
+            CreateCubeFromWorkbookAsync(cubeName, options, stream).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default ) =>
+            CreateCubeFromWorkbookAsync(cubeName, options, stream, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        internal IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options = null, Stream stream = null ) =>
+            CreateCubeFromWorkbookAsync(cubeName, options, stream).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        internal async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, EssJobImportExcelOptions options = null, Stream stream = null, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(cubeName) )
+                throw new ArgumentException($"A cube name is required to create an an {nameof(EssCube)} from a workbook.", nameof(cubeName));
+
+            if ( stream is null && (string.IsNullOrEmpty(options?.CatalogExcelPath) || string.IsNullOrEmpty(options?.ImportExcelFilename)) )
+                throw new ArgumentException($"A local path, stream, or server file is required to create an {nameof(EssCube)} from a workbook.");
+
+            try
+            {
+                // Create the cube via the server's create application from workbook method.
+                await Server.CreateApplicationFromWorkbookAsync(Name, cubeName, stream, options, cancellationToken).ConfigureAwait(false);
+                // Return the cube.
+                return await GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the cube ""{cubeName}"". {e.Message}", e);
             }
         }
 
@@ -240,8 +264,12 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        /// <returns></returns>
         public IEssApplicationDatasourceConnection GetConnection( string appConnectionName ) => GetConnectionAsync(appConnectionName).GetAwaiter().GetResult();
 
+        /// <inheritdoc />
+        /// <returns></returns>
         public async Task<IEssApplicationDatasourceConnection> GetConnectionAsync( string appConnectionName, CancellationToken cancellationToken = default )
         {
             try
@@ -266,7 +294,6 @@ namespace EssSharp
         /// <returns></returns>
         public async Task<List<IEssApplicationDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default )
         {
-
             try
             {
                 var api = GetApi<ApplicationConnectionsApi>();

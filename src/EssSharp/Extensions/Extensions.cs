@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Linq;
 
 using EssSharp.Model;
@@ -342,6 +343,25 @@ namespace EssSharp
                 .ToList(), aliasTable: options?.AliasTable);
         }
 
+        /// <summary>
+        /// Returns a <see cref="DrillthroughMetadataBean"/> from the given <see cref="IEssDrillthroughRange"/> object
+        /// and optionally, an <see cref="IEssDrillthroughOptions"/>..
+        /// </summary>
+        /// <param name="options" />
+        internal static ParametersBean ToModelBean( this IEssJobOptions options ) => new ParametersBean()
+        {
+            // EssJobType.importExcel
+            BuildOption          = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
+            CatalogExcelPath     = options.CatalogExcelPath,
+            CreateFiles          = options.CreateFiles?.ToString().ToLowerInvariant(),
+            DeleteExcelOnSuccess = options.DeleteExcelOnSuccess?.ToString().ToLowerInvariant(),
+            ExecuteScript        = options.ExecuteScripts?.ToString().ToLowerInvariant(),
+            ImportExcelFileName  = options.ImportExcelFilename,
+            Loaddata             = options.LoadData?.ToString().ToLowerInvariant(),
+            Overwrite            = options.Overwrite?.ToString().ToLowerInvariant(),
+            RecreateApplication  = options.RecreateApp?.ToString().ToLowerInvariant(),
+        };
+
         #endregion
 
         #region System.Enum
@@ -350,7 +370,6 @@ namespace EssSharp
         /// Converts the value of this instance to its equivalent descriptive string representation.
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
         internal static string ToDescription( this Enum value )
         {
             // Get the DescriptionAttribute value for the given enum value.

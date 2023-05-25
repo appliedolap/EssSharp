@@ -38,46 +38,53 @@ namespace EssSharp
         public Task<IEssCube> CreateCubeAsync( string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Creates a new Cube from a worksheet
+        /// Creates a new cube (and application) from an existing server file.
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="path"></param>
-        /// <param name="overwrite"></param>
-        /// <returns></returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, string path, EssApplicationCreationOptions options = null );
+        /// <param name="cubeName" />
+        /// <param name="options" />
+        public IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options );
 
         /// <summary>
-        /// Creates a new Cube from a worksheet
+        /// Asynchronously creates a new cube (and application) from a server file.
         /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="path"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string path, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
-
+        /// <param name="cubeName" />
+        /// <param name="options" />
+        /// <param name="cancellationToken" />
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Creates a new Cube from a worksheet
+        /// Creates a new cube (and application) from a local workbook file path.
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        /// <param name="filename"></param>
-        /// <param name="overwrite"></param>
-        /// <returns></returns>
-        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream, EssApplicationCreationOptions options = null );
+        /// <param name="cubeName" />
+        /// <param name="localWorkbookPath" />
+        /// <param name="options" />
+        public IEssCube CreateCubeFromWorkbook( string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null );
 
         /// <summary>
-        /// Creates a new cube from a worksheet
+        /// Asynchronously creates a new cube (and application) from a local workbook file path.
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssApplicationCreationOptions options = null, CancellationToken cancellationToken = default );
+        /// <param name="cubeName" />
+        /// <param name="localWorkbookPath" />
+        /// <param name="options" />
+        /// <param name="cancellationToken" />
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new cube (and application) from a workbook stream.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="stream" />
+        /// <param name="options" />
+        public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream, EssJobImportExcelOptions options = null );
+
+        /// <summary>
+        /// Asynchronously creates a new cube (and application) from a workbook stream.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="stream" />
+        /// <param name="options" />
+        /// <param name="cancellationToken" />
+        public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Create an application variable

@@ -29,6 +29,19 @@ namespace EssSharp
         public Task<IEssFolder> CreateSubfolderAsync( string subfolderName, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Gets the immediate file of this folder with the given <paramref name="filename" />.
+        /// </summary>
+        /// <param name="filename" />
+        public IEssFile GetFile( string filename );
+
+        /// <summary>
+        /// Asynchronously gets the immediate file of this folder with the given <paramref name="filename" />.
+        /// </summary>
+        /// <param name="filename" />
+        /// <param name="cancellationToken" />
+        public Task<IEssFile> GetFileAsync( string filename, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Gets a list of the immediate files of this folder, optionally matching a given <paramref name="nameFilter" />.
         /// </summary>
         /// <param name="nameFilter" />
@@ -40,6 +53,19 @@ namespace EssSharp
         /// <param name="nameFilter" />
         /// <param name="cancellationToken" />
         public Task<List<IEssFile>> GetFilesAsync( string nameFilter = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the immediate subfolder of this folder with the given <paramref name="folderName" />.
+        /// </summary>
+        /// <param name="folderName" />
+        public IEssFolder GetFolder( string folderName );
+
+        /// <summary>
+        /// Asynchronously gets the immediate subfolder of this folder with the given <paramref name="folderName" />.
+        /// </summary>
+        /// <param name="folderName" />
+        /// <param name="cancellationToken" />
+        public Task<IEssFolder> GetFolderAsync( string folderName, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets a list of the immediate subfolders of this folder, optionally matching a given <paramref name="nameFilter" />.

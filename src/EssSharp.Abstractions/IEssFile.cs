@@ -17,9 +17,14 @@ namespace EssSharp
         IEssServer Server { get; }
 
         /// <summary>
-        /// Returns the full path of the file
+        /// Returns the full path of the file.
         /// </summary>
         string FullPath { get; }
+
+        /// <summary>
+        /// Returns the full path of the parent folder.
+        /// </summary>
+        string ParentPath { get; }
 
         #endregion
 

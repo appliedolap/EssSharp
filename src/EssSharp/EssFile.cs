@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
+
 using EssSharp.Api;
 using EssSharp.Model;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace EssSharp
 {
