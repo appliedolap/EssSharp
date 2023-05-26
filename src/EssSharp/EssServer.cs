@@ -212,10 +212,9 @@ namespace EssSharp
                 options.ApplicationName = applicationName;
                 options.CubeName        = cubeName;
 
-                // Execute the import job and verify that it is successful.
-                if ( await ExecuteJobAsync(options, cancellationToken).ConfigureAwait(false) is not EssJobStatus.Completed )
-                    throw new Exception($@"Unable to successfully execute {options.JobType.ToDescription()} job.");
-
+                // Execute the import job and throw an exception if the job failed.
+                (await CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+                
                 // Return the corresponding application.
                 return await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
@@ -225,6 +224,10 @@ namespace EssSharp
                 throw new Exception($@"Unable to create the application ""{applicationName}"". {e.Message}", e);
             }
         }
+
+        /// <inheritdoc />
+        /// <returns> An <see cref="EssJob"/> object.</returns>
+        public IEssJob CreateJob( IEssJobOptions options ) => new EssJob(options, this);
 
         /// <inheritdoc />
         /// <returns> An <see cref="IEssServerVariable"/> object.</returns>
@@ -476,19 +479,19 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssJobStatus" />.</returns>
-        public EssJobStatus ExecuteJob( EssJobOptions options ) => ExecuteJobAsync(options).GetAwaiter().GetResult();
+        public EssJobStatus ExecuteJob( IEssJobOptions options ) => ExecuteJobAsync(options).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssJobStatus" />.</returns>
-        public async Task<EssJobStatus> ExecuteJobAsync( EssJobOptions options, CancellationToken cancellationToken = default )
+        public async Task<EssJobStatus> ExecuteJobAsync( IEssJobOptions options, CancellationToken cancellationToken = default )
         {
-            if ( options is not IEssJobOptions iOptions )
-                throw new ArgumentNullException(nameof(options), $@"A specific {nameof(EssJobOptions)} type is required to execute a job.");
+            if ( options is not EssJobOptions jobOptions )
+                throw new ArgumentNullException(nameof(options), $@"A specific type of {nameof(EssJobOptions)} is required to execute a job.");
 
             try
             {
                 // Build an ImportExcel job input bean with our options.
-                var inputBean = new JobsInputBean(options.ApplicationName, options.CubeName, options.JobType.ToModelEnum(), iOptions.ToModelBean());
+                var inputBean = new JobsInputBean(jobOptions.ApplicationName, jobOptions.CubeName, jobOptions.JobType.ToModelEnum(), options.ToModelBean());
                 var jobApi = GetApi<JobsApi>();
 
                 // Execute the job.
@@ -521,7 +524,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to successfully execute {options.JobType.ToDescription()} job. {e.Message}", e);
+                throw new Exception($@"Unable to successfully execute {jobOptions.JobType.ToDescription()} job. {e.Message}", e);
             }
         }
 

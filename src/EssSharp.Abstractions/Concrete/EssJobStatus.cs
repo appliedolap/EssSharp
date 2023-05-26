@@ -5,6 +5,9 @@ namespace EssSharp
     /// <summary >
     public enum EssJobStatus
     {
+        /// <summary>Unstarted</summary>
+        [Description("Unstarted")]
+        Unstarted = -1,
         /// <summary>Unknown</summary>
         [Description("Unknown")]
         Unknown,
@@ -19,6 +22,6 @@ namespace EssSharp
         Failed,
         /// <summary>In Progress</summary>
         [Description("In Progress")]
-        InProgress
+        InProgress,
     }
 }

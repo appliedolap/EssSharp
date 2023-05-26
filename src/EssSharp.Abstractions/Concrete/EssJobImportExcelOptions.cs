@@ -6,8 +6,11 @@ namespace EssSharp
     public class EssJobImportExcelOptions : EssJobOptions, IEssJobOptions
     {
         /// <summary />
-        public EssJobImportExcelOptions( EssBuildOption? buildOption = null, string catalogExcelPath = null, bool? createFiles = true, bool? deleteExcelOnSuccess = null, bool? executeScripts = true, string importExcelFilename = null, bool? loadData = true, bool? overwrite = null, bool? recreateApp = false ) : base( EssJobType.ImportExcel )
+        public EssJobImportExcelOptions( string applicationName = null, EssBuildOption ? buildOption = null, string catalogExcelPath = null, bool? createFiles = true, string cubeName = null, bool ? deleteExcelOnSuccess = null, bool? executeScripts = true, string importExcelFilename = null, bool? loadData = true, bool? overwrite = null, bool? recreateApp = false ) : base( EssJobType.ImportExcel )
         {
+            ApplicationName      = applicationName;
+            CubeName             = cubeName;
+
             BuildOption          = buildOption;
             CatalogExcelPath     = catalogExcelPath;
             CreateFiles          = createFiles;
@@ -23,10 +26,13 @@ namespace EssSharp
         /// <param name="essFile" />
         /// <param name="buildOption" />
         /// <param name="deleteExcelOnSuccess" />
-        public EssJobImportExcelOptions( IEssFile essFile, EssBuildOption? buildOption = null, bool? createFiles = true, bool? deleteExcelOnSuccess = null, bool? executeScripts = true, bool? loadData = true, bool? overwrite = null, bool? recreateApp = false ) : base( EssJobType.ImportExcel )
+        public EssJobImportExcelOptions( IEssFile essFile, string applicationName = null, EssBuildOption? buildOption = null, bool? createFiles = true, string cubeName = null, bool ? deleteExcelOnSuccess = null, bool? executeScripts = true, bool? loadData = true, bool? overwrite = null, bool? recreateApp = false ) : base( EssJobType.ImportExcel )
         {
             if ( essFile is null )
                 throw new ArgumentNullException($@"An {nameof(IEssFile)} file is required to create an {nameof(EssJobImportExcelOptions)} with this constructor.", nameof(essFile));
+
+            ApplicationName      = applicationName;
+            CubeName             = cubeName;
 
             BuildOption          = buildOption;
             CatalogExcelPath     = essFile.ParentPath;

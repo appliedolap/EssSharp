@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Common;
 using System.Linq;
-
+using System.Runtime.Serialization;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -382,7 +382,7 @@ namespace EssSharp
         #region System.Enum
 
         /// <summary>
-        /// Converts the value of this instance to its equivalent descriptive string representation.
+        /// Converts the value of this instance to its equivalent <see cref="DescriptionAttribute" /> value..
         /// </summary>
         /// <param name="value"></param>
         internal static string ToDescription( this Enum value )
@@ -398,6 +398,25 @@ namespace EssSharp
 
             // Return either the obtained description or the string representation.
             return !string.IsNullOrEmpty(description) ? description : value.ToString();
+        }
+
+        /// <summary>
+        /// Converts the value of this instance to its equivalent <see cref="EnumMemberAttribute" /> value.
+        /// </summary>
+        /// <param name="value"></param>
+        internal static string ToMemberValue( this Enum value )
+        {
+            // Get the EnumMemberAttribute value for the given enum value.
+            var fieldInfo = value.GetType().GetField(value.ToString());
+            var memberValues = fieldInfo?.GetCustomAttributes(typeof(EnumMemberAttribute), false) as EnumMemberAttribute[];
+            string memberValue = null;
+
+            // If we were able to get a member value, use it.
+            if ( (memberValues?.Length ?? 0) > 0 )
+                memberValue = memberValues[0]?.Value;
+
+            // Return either the obtained member value or the string representation.
+            return !string.IsNullOrEmpty(memberValue) ? memberValue : value.ToString();
         }
 
         /// <summary>

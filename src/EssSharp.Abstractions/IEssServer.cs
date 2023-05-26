@@ -86,6 +86,12 @@ namespace EssSharp
         public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Creates a new (unstarted) job on the server.
+        /// </summary>
+        /// <param name="options" />
+        public IEssJob CreateJob( IEssJobOptions options );
+
+        /// <summary>
         /// Creates a new server variable
         /// </summary>
         /// <param name="name"></param>

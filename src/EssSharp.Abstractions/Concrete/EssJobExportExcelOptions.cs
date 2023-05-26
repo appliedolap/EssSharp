@@ -6,12 +6,15 @@ namespace EssSharp
     public class EssJobExportExcelOptions : EssJobOptions, IEssJobOptions
     {
         /// <summary />
-        public EssJobExportExcelOptions( EssBuildMethod? buildMethod = EssBuildMethod.ParentChild, bool? calc = false, bool? data = false, bool? memberIds = false ) : base( EssJobType.ExportExcel )
+        public EssJobExportExcelOptions( string applicationName = null, EssBuildMethod? buildMethod = EssBuildMethod.ParentChild, bool? calc = false, string cubeName = null, bool? data = false, bool? memberIds = false ) : base( EssJobType.ExportExcel )
         {
-            BuildMethod = buildMethod;
-            Calc        = calc;
-            Data        = data;
-            MemberIds   = memberIds;
+            ApplicationName = applicationName;
+            CubeName        = cubeName;
+
+            BuildMethod     = buildMethod;
+            Calc            = calc;
+            Data            = data;
+            MemberIds       = memberIds;
         }
 
         #region IEssJobOptions EssJobType.ExportExcel Members
