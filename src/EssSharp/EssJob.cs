@@ -67,10 +67,10 @@ namespace EssSharp
         #region IEssJob Properties
 
         /// <inheritdoc />
-        public string ErrorMessage => JobOutputInfo.TryGetValue("errorMessage", out var value) ? value.ToString() : null;
+        public string ErrorMessage => JobOutputInfo.TryGetValue("errorMessage", out var value) ? value?.ToString()?.Trim() ?? string.Empty : string.Empty;
 
         /// <inheritdoc />
-        public string InfoMessage => JobOutputInfo.TryGetValue("infoMessage", out var value) ? value.ToString() : null;
+        public string InfoMessage => JobOutputInfo.TryGetValue("infoMessage", out var value) ? value?.ToString()?.Trim() ?? string.Empty : string.Empty;
 
         /// <inheritdoc />
         public long JobID => _job.JobID;
@@ -96,24 +96,25 @@ namespace EssSharp
         public IEssServer Server => _server;
 
         /// <inheritdoc />
-        public string StatusMessage => JobStatus is EssJobStatus.Unstarted ? EssJobStatus.Unstarted.ToString() : _job.StatusMessage;
+        public string StatusMessage => JobStatus is EssJobStatus.Unstarted ? EssJobStatus.Unstarted.ToString() : _job.StatusMessage?.Trim() ?? string.Empty;
 
         #endregion
 
         #region IEssJob Methods
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssJob" /> object.</returns>
         public IEssJob Execute() => ExecuteAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssJob" /> object.</returns>
         public async Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default )
         {
             // If the backing bean has a JobID, then it has already been executed. Attempt to re-run the job.
             if ( _job.JobID >= 0 && await ReRunAsync(cancellationToken).ConfigureAwait(false) is EssJob reRunJob )
             {
-                // Update the backing job with the updated job info.
+                // Update the backing job and return this (now updated) job.
                 _job = reRunJob._job;
-                // Return this (now updated) job.
                 return this;
             }
 
@@ -146,9 +147,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssJob" /> object.</returns>
         public IEssJob ReRun() => ReRunAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssJob" /> object.</returns>
         public async Task<IEssJob> ReRunAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -177,11 +180,15 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public void ThrowIfFailed()
+        /// <returns>An <see cref="EssJob" /> object.</returns>
+        public IEssJob ThrowIfFailed()
         {
-            // Execute the import job and verify that it is successful.
+            // Throw an exception if the job failed or has an error message.
             if ( JobStatus is EssJobStatus.Failed || !string.IsNullOrEmpty(ErrorMessage) )
                 throw new Exception($@"Unable to successfully execute {JobType.ToDescription().ToLowerInvariant()} job. {ErrorMessage}".TrimEnd());
+
+            // Otherwise, return the job.
+            return this;
         }
 
         #endregion
@@ -204,6 +211,7 @@ namespace EssSharp
                 jobInfo = await jobsApi.JobsGetJobInfoAsync(id: jobId.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false);
             }
 
+            // Return the completed (or failed) job.
             return jobInfo;
         }
 

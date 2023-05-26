@@ -54,31 +54,59 @@ namespace EssSharp
         #region Methods
 
         /// <summary>
-        /// Executes (or re-runs) this job, updating its status and returning the updated job if the job completes successfully.
+        /// Executes (or re-runs) this job, updating its status and returning the updated job.
         /// </summary>
         IEssJob Execute();
 
         /// <summary>
-        /// Asynchronously executes (or re-runs) this job, updating its status and returning the updated job if the job completes successfully.
+        /// Asynchronously executes (or re-runs) this job, updating its status and returning the updated job.
         /// </summary>
         Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Re-runs an already executed job, returning the updated job if the job completes successfully.
+        /// Re-runs an already executed job, returning the new job.
         /// </summary>
         IEssJob ReRun();
 
         /// <summary>
-        /// Asynchronously re-runs an already executed job, returning the updated job if the job completes successfully.
+        /// Asynchronously re-runs an already executed job, returning the new job.
         /// </summary>
         Task<IEssJob> ReRunAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Throws an <see cref="System.Exception" /> containing any available error message if the job failed.
+        /// Throws an <see cref="System.Exception" /> containing any available error message if the job failed 
+        /// or, otherwise, returns the job.
         /// </summary>
         /// <exception cref="System.Exception" />
-        void ThrowIfFailed();
+        IEssJob ThrowIfFailed();
 
         #endregion
+    }
+
+    /// <summary>
+    /// Fluent extensions for <see cref="IEssJob"/>.
+    /// </summary>
+    public static class IEssJobExtensions
+    {
+        /// <summary>
+        /// Asynchronously executes (or re-runs) this job, updating its status and returning the updated job.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public static async Task<IEssJob> ExecuteAsync( this Task<IEssJob> jobTask, CancellationToken cancellationToken = default ) =>
+            await (await jobTask.ConfigureAwait(false)).ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Asynchronously re-runs an already executed job, returning the new job.
+        /// </summary>
+        public static async Task<IEssJob> ReRunAsync( this Task<IEssJob> jobTask, CancellationToken cancellationToken = default ) =>
+            await (await jobTask.ConfigureAwait(false)).ReRunAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Throws an <see cref="System.Exception" /> with any available error message if the job failed
+        /// or, otherwise, returns the job.
+        /// </summary>
+        /// <exception cref="System.Exception" />
+        public static async Task<IEssJob> ThrowIfFailed( this Task<IEssJob> jobTask ) =>
+            (await jobTask.ConfigureAwait(false)).ThrowIfFailed();
     }
 }
