@@ -87,5 +87,11 @@ namespace EssSharp
         bool? IEssJobOptions.MemberIds { get; set; }
 
         #endregion
+
+        #region IEssJobOptions EssJobType.Calc Members
+
+        string IEssJobOptions.File { get; set; }
+
+        #endregion
     }
 }

@@ -75,5 +75,15 @@
         public bool? RecreateApp { get; set; }
 
         #endregion
+
+        #region IEssJobOptions EssJobType.Calc Members
+
+        /// <summary>
+        /// Returns or sets the file to execute for an <see cref="EssJobType.Calc"/> job.
+        /// </summary>
+        public string File { get; set; }
+
+        #endregion
+
     }
 }

@@ -26,14 +26,12 @@ namespace EssSharp
         /// <param name="varName"></param>
         /// <param name="value"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Exports a cube to an excel workbook
         /// </summary>
         /// <param name="options"></param>
-        /// <returns></returns>
         public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null );
 
         /// <summary>
@@ -41,7 +39,6 @@ namespace EssSharp
         /// </summary>
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task<Stream> ExportCubeToWorkbookAsync( EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -98,7 +95,6 @@ namespace EssSharp
         /// Returns a  specific scripts in a cube
         /// </summary>
         /// <param name="scriptName"></param>
-        /// <returns></returns>
         public IEssScript GetScript( string scriptName );
 
         /// <summary>

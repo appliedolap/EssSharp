@@ -47,13 +47,13 @@ namespace EssSharp
         /// <summary>
         /// Executes a script
         /// </summary>
-        void Execute();
+        void Execute( EssJobSciptOptions options = null );
 
         /// <summary>
         /// Executes a script
         /// </summary>
         /// <param name="cancellationToken"></param>
-        Task ExecuteAsync( CancellationToken cancellationToken = default );
+        Task ExecuteAsync( EssJobSciptOptions options = null, CancellationToken cancellationToken = default );
         #endregion
     }
 }

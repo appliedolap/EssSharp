@@ -77,20 +77,23 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public void Execute() => ExecuteAsync().GetAwaiter().GetResult();
+        public void Execute( EssJobSciptOptions options = null ) => ExecuteAsync( options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <remarks>TODO: FIGURE OUT HOW TO MAP SCRIPT TYPE TO JOBTYPE.</remarks>
-        public async Task ExecuteAsync( CancellationToken cancellationToken = default)
+        public async Task ExecuteAsync( EssJobSciptOptions options = null, CancellationToken cancellationToken = default)
         {
             try
             {
-                var api = GetApi<JobsApi>();
-                var parameters = new ParametersBean(file: Name);
-                var job = new JobsInputBean(Cube.Application.Name, Cube.Name, JobsInputBean.JobtypeEnum.Calc, parameters);
+                options ??= new EssJobSciptOptions();
 
-                await api.JobsExecuteJobAsync(job, 0, cancellationToken).ConfigureAwait(false);
+                options.ApplicationName = Cube.Application.Name;
+                options.CubeName = Cube.Name;
+                options.File ??= Name;
+
+                await Cube.Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception)
             {
                 throw;

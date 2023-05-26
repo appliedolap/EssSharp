@@ -364,6 +364,8 @@ namespace EssSharp
             Loaddata             = options.LoadData?.ToString().ToLowerInvariant(),
             Overwrite            = options.Overwrite?.ToString().ToLowerInvariant(),
             RecreateApplication  = options.RecreateApp?.ToString().ToLowerInvariant(),
+            // EssJobType.Script
+            File                 = options.File
         };
 
         /// <summary>

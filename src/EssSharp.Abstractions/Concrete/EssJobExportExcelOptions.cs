@@ -63,5 +63,17 @@ namespace EssSharp
         bool? IEssJobOptions.RecreateApp { get; set; }
 
         #endregion
+
+        #region IEssJobOptions EssJobType.Calc Members
+
+        public string File { get; set; }
+
+        #endregion        
+        
+        #region IEssJobOptions EssJobType.Calc Members
+
+        string IEssJobOptions.File { get; set; }
+
+        #endregion
     }
 }
