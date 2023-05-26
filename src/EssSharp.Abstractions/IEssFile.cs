@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,14 +47,14 @@ namespace EssSharp
         public Task CopyAsync( string newFilePath, bool overwrite = default, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Download a file to a Stream
+        /// Downloads a file to a stream.
         /// </summary>
         public Stream Download();
 
         /// <summary>
-        /// Download a file to a Stream
+        /// Asynchronously downloads a file to a stream.
         /// </summary>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken" />
         public Task<Stream> DownloadAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -110,5 +111,18 @@ namespace EssSharp
         public Task ExtractAsync( bool overwrite = false, CancellationToken cancellationToken = default );
 
         #endregion
+    }
+
+    /// <summary>
+    /// Fluent extensions for <see cref="IEssFile"/>.
+    /// </summary>
+    public static class IEssFileExtensions
+    {
+        /// <summary>
+        /// Asynchronously downloads a file to a stream.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public static async Task<Stream> DownloadAsync( this Task<IEssFile> fileTask, CancellationToken cancellationToken = default ) =>
+            await (await fileTask.ConfigureAwait(false)).DownloadAsync(cancellationToken).ConfigureAwait(false);
     }
 }

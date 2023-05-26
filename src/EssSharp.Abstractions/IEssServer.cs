@@ -106,13 +106,31 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         public Task<IEssServerVariable> CreateVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionName"></param>
+        /// <returns></returns>
         public IEssDatasourceConnection GetConnection( string connectionName );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IEssDatasourceConnection> GetConnectionAsync( string connectionName, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<IEssDatasourceConnection> GetConnections();
 
-        /// <inheritdoc />
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<List<IEssDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default );
 
@@ -175,12 +193,29 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         public Task<List<IEssFolder>> GetFoldersAsync(CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Returns a specified group
+        /// </summary>
+        /// <param name="name"></param>
         public IEssGroup GetGroup( string name );
 
+        /// <summary>
+        /// Returns a speicified
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IEssGroup> GetGroupAsync( string name, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Returns a litst of <see cref="IEssGroup"/> objects
+        /// </summary>
         public List<IEssGroup> GetGroups();
 
+        /// <summary>
+        /// Returns a litst of <see cref="IEssGroup"/> objects
+        /// </summary>
+        /// <param name="cancellationToken"></param>
         public Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>

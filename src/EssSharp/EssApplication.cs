@@ -265,6 +265,40 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns><see cref="Stream"/></returns>
+        public Stream ExportCubeToWorkbook( string cubeName, EssJobExportExcelOptions options = null ) => ExportCubeToWorkbookAsync(cubeName, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns><see cref="Stream"/></returns>
+        public async Task<Stream> ExportCubeToWorkbookAsync( string cubeName, EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // Construct new options if none were given.
+                options ??= new EssJobExportExcelOptions();
+
+                // Assign the application and cube name to the given options.
+                options.ApplicationName = Name;
+                options.CubeName = cubeName;
+
+                // Execute the export job and throw an exception if the job failed.
+                var job = (await Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+
+                // Capture the metadata file path from the server.
+                if ( !job.JobOutputInfo.TryGetValue("metadataFile", out var path) || path is null )
+                    throw new Exception("Failed to get the workbook file details.");
+
+                // Return the workbook file stream.
+                return await Server.GetFileAsync(path.ToString(), cancellationToken).DownloadAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to export the cube ""{Name}"" to an application workbook. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns></returns>
         public IEssApplicationDatasourceConnection GetConnection( string appConnectionName ) => GetConnectionAsync(appConnectionName).GetAwaiter().GetResult();
 

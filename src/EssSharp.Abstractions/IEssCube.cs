@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using System.IO;
 
 namespace EssSharp
 {
@@ -27,6 +28,21 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Exports a cube to an excel workbook
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null );
+
+        /// <summary>
+        /// Exports a cube to an excel workbook
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<Stream> ExportCubeToWorkbookAsync( EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the list of dimensions.

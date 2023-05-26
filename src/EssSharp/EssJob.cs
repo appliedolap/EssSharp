@@ -38,7 +38,7 @@ namespace EssSharp
                 DbName     = jobOptions.CubeName,
                 JobID      = -1,
                 JobType    = jobOptions.JobType.ToModelEnum().ToMemberValue(),
-                StatusCode = (int)EssJobStatus.Unstarted
+                StatusCode = (int)EssJobStatus.New
             };
         }
 
@@ -81,7 +81,7 @@ namespace EssSharp
         /// <inheritdoc />
         public EssJobStatus JobStatus => _job.StatusCode switch
         {
-             -1 => EssJobStatus.Unstarted,
+             -1 => EssJobStatus.New,
             100 => EssJobStatus.InProgress,
             200 => EssJobStatus.Completed,
             300 => EssJobStatus.CompletedWithWarnings,
@@ -96,7 +96,7 @@ namespace EssSharp
         public IEssServer Server => _server;
 
         /// <inheritdoc />
-        public string StatusMessage => JobStatus is EssJobStatus.Unstarted ? EssJobStatus.Unstarted.ToString() : _job.StatusMessage?.Trim() ?? string.Empty;
+        public string StatusMessage => JobStatus is EssJobStatus.New ? EssJobStatus.New.ToString() : _job.StatusMessage?.Trim() ?? string.Empty;
 
         #endregion
 
@@ -156,7 +156,7 @@ namespace EssSharp
         {
             try
             {
-                if ( JobStatus is EssJobStatus.Unstarted || _job.JobID < 0 )
+                if ( JobStatus is EssJobStatus.New || _job.JobID < 0 )
                     throw new ArgumentException($"An unstarted {nameof(EssJob)} cannot be re-run.");
 
                 var api = GetApi<JobsApi>();

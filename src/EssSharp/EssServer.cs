@@ -477,57 +477,6 @@ namespace EssSharp
             }
         }
 
-        /// <inheritdoc />
-        /// <returns>An <see cref="EssJobStatus" />.</returns>
-        public EssJobStatus ExecuteJob( IEssJobOptions options ) => ExecuteJobAsync(options).GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        /// <returns>An <see cref="EssJobStatus" />.</returns>
-        public async Task<EssJobStatus> ExecuteJobAsync( IEssJobOptions options, CancellationToken cancellationToken = default )
-        {
-            if ( options is not EssJobOptions jobOptions )
-                throw new ArgumentNullException(nameof(options), $@"A specific type of {nameof(EssJobOptions)} is required to execute a job.");
-
-            try
-            {
-                // Build an ImportExcel job input bean with our options.
-                var inputBean = new JobsInputBean(jobOptions.ApplicationName, jobOptions.CubeName, jobOptions.JobType.ToModelEnum(), options.ToModelBean());
-                var jobApi = GetApi<JobsApi>();
-
-                // Execute the job.
-                if ( await jobApi.JobsExecuteJobAsync(body: inputBean, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } job )
-                    throw new Exception($@"Failed to execute job.");
-
-                var jobID = job.JobID.ToString();
-
-                // Get the job info.
-                if ( await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } jobInfo )
-                    throw new Exception("Failed to retrieve job information.");
-
-                // Wait for the job to complete by polling the job info.
-                while ( jobInfo.StatusCode is 100 )
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(1));
-                    jobInfo = await jobApi.JobsGetJobInfoAsync(id: jobID, cancellationToken: cancellationToken).ConfigureAwait(false);
-                }
-
-                // If the job was successful, return the corresponding application.
-                if ( jobInfo.StatusCode is 200 )
-                    return EssJobStatus.Completed;
-
-                // Since the job failed, try to capture the error message from the job output info.
-                object errorMessage = null;
-                jobInfo.JobOutputInfo?.TryGetValue("errorMessage", out errorMessage);
-
-                throw new Exception($@"Job failed with status code: {jobInfo.StatusCode}. {errorMessage}".TrimEnd());
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to successfully execute {jobOptions.JobType.ToDescription()} job. {e.Message}", e);
-            }
-        }
-
         /// <inheritdoc/>
         /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile GetFile(string path) => GetFileAsync(path)?.GetAwaiter().GetResult();
@@ -536,12 +485,12 @@ namespace EssSharp
         /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> GetFileAsync(string path, CancellationToken cancellationToken = default)
         {
-            // Trim leading and trailing slashes from the given folder path.
-            if ( string.IsNullOrEmpty(path = path?.Trim('/')) )
-                throw new ArgumentException("A file path is required.", nameof(path));
-
             try
             {
+                // Trim leading and trailing slashes from the given folder path.
+                if ( string.IsNullOrEmpty(path = path?.Trim('/')) )
+                    throw new ArgumentException("A file path is required.", nameof(path));
+
                 var api = GetApi<FilesApi>();
                 var files = default(FileCollectionResponse);
 
@@ -549,29 +498,33 @@ namespace EssSharp
                 var pathComponents = path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
                 var fileName = pathComponents?.LastOrDefault();
 
-                // If we have one or fewer path components, we're looking for a root folder.
+                // If we have one or fewer path components, we're looking for a root file.
                 if (pathComponents?.Length <= 1)
                 {
-                    files = await api.FilesListRootFoldersAsync(fileName, false, 0, cancellationToken).ConfigureAwait(false);
+                    files = await api.FilesListFilesAsync(path: @"/", filter: fileName, recursive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
                 }
-                // Otherwise, we're looking for a nested folder.
+                // Otherwise, we're looking for a nested file.
                 else
                 {
                     // Build the search path from all but the last path component.
                     var searchPath = string.Join(@"/", pathComponents.Take(pathComponents.Length - 1));
-                    files = await api.FilesListFilesAsync(searchPath, null, null, null, null, null, null, fileName, false, 0, cancellationToken).ConfigureAwait(false);
+                    files = await api.FilesListFilesAsync(path: searchPath, filter: fileName, recursive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
                 }
 
-                // If the given folder path was found, return it.
-                foreach (var file in files?.ToEssSharpList<IEssFile>(this) ?? new List<IEssFile>())
-                    if (string.Equals(fileName, file.Name, StringComparison.OrdinalIgnoreCase))
+                // If the given file path was found, return it.
+                foreach ( var file in files?.ToEssSharpList<IEssFile>(this) ?? new List<IEssFile>() )
+                    if ( string.Equals(fileName, file.Name, StringComparison.OrdinalIgnoreCase) )
                         return file;
 
                 throw new Exception("File not found.");
             }
-            catch (Exception e)
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
             {
-                throw new Exception($@"Unable to get the file ""/{path}"". {e.Message}", e);
+                if ( !string.IsNullOrEmpty(path) )
+                    throw new Exception($@"Unable to get the file ""/{path}"". {e.Message}", e);
+                else
+                    throw new Exception($@"Unable to get the file. {e.Message}", e); 
             }
         }
 
@@ -644,8 +597,10 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
         public IEssGroup GetGroup( string name ) => GetGroupAsync(name).GetAwaiter().GetResult();
 
+        /// <inheritdoc />
         public async Task<IEssGroup> GetGroupAsync( string name, CancellationToken cancellationToken = default )
         {
             {
@@ -666,8 +621,10 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
         public List<IEssGroup> GetGroups() => GetGroupsAsync().GetAwaiter().GetResult();
 
+        /// <inheritdoc />
         public async Task<List<IEssGroup>> GetGroupsAsync(CancellationToken cancellationToken = default )
         {
             try

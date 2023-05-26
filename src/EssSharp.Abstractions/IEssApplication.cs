@@ -127,9 +127,36 @@ namespace EssSharp
         /// <returns>A <see cref="string"/> containing the log file content.</returns>
         public Task<string> DownloadLatestLogFileStringAsync( CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Exports a cube to an excel workbook
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public Stream ExportCubeToWorkbook( string cubeName, EssJobExportExcelOptions options = null );
 
+        /// <summary>
+        /// Asynchronously Exports a cube to an excel workbook
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<Stream> ExportCubeToWorkbookAsync( string cubeName, EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appConnectionName"></param>
+        /// <returns></returns>
         public IEssApplicationDatasourceConnection GetConnection( string appConnectionName );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appConnectionName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IEssApplicationDatasourceConnection> GetConnectionAsync( string appConnectionName, CancellationToken cancellationToken = default );
 
         /// <inheritdoc />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -75,6 +76,15 @@ namespace EssSharp
                 throw new Exception($@"Unable to create cube variable ""{name}"". {e.Message}", e);
             }
         }
+
+        /// <inheritdoc />
+        /// <returns><see cref="Stream"/></returns>
+        public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null ) => ExportCubeToWorkbookAsync( options ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns><see cref="Stream"/></returns>
+        public Task<Stream> ExportCubeToWorkbookAsync( EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default ) => 
+            Application.ExportCubeToWorkbookAsync(Name, options, cancellationToken);
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssDimension"/> objects.</returns>
