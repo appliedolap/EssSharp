@@ -7,7 +7,7 @@ using System.IO;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssServer : IEssObject
+    public interface IEssServer : IEssObject, IDisposable, IAsyncDisposable
     {
         /// <summary>
         /// Creates a new Application and database with the given name and options
@@ -390,5 +390,32 @@ namespace EssSharp
         /// Asynchronously gets the list of server utilities available to the connected user.
         /// </summary>
         public Task<List<IEssUtility>> GetUtilitiesAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Signs into the server and returns the user session for the connected user.
+        /// </summary>
+        /// <param name="includeGroups" />
+        /// <param name="includeToken" />
+        public IEssUserSession SignIn( bool includeToken = false, bool includeGroups = false );
+
+        /// <summary>
+        /// Asynchronously signs into the server and returns the user session for the connected user.
+        /// </summary>
+        /// <param name="includeGroups" />
+        /// <param name="includeToken" />
+        /// <param name="cancellationToken" />
+        public Task<IEssUserSession> SignInAsync( bool includeToken = false, bool includeGroups = false, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Signs out of the server.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public void SignOut();
+
+        /// <summary>
+        /// Asynchronously signs out of the server.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task SignOutAsync( CancellationToken cancellationToken = default );
     }
 }

@@ -31,6 +31,7 @@ namespace EssSharp
 
         /// <inheritdoc />
         public long SessionId => long.Parse(_sessionAttributes.SessionId);
+
         /// <inheritdoc />
         public string LoginTimeInSeconds => _sessionAttributes.LoginTimeInSeconds;
         /// <inheritdoc />

@@ -22,6 +22,8 @@ namespace EssSharp
 
         private readonly string _server;
 
+        private bool _disposed;
+
         #endregion
 
         #region Constructors
@@ -214,7 +216,7 @@ namespace EssSharp
 
                 // Execute the import job and throw an exception if the job failed.
                 (await CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
-                
+
                 // Return the corresponding application.
                 return await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
@@ -885,6 +887,75 @@ namespace EssSharp
             {
                 throw;
             }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssUserSession"/> object, optionally containing a session token and group membership information.</returns>
+        public IEssUserSession SignIn( bool includeToken = false, bool includeGroups = false ) => SignInAsync(includeToken, includeGroups).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssUserSession"/> object, optionally containing a session token and group membership information.</returns>
+        public Task<IEssUserSession> SignInAsync( bool includeToken = false, bool includeGroups = false, CancellationToken cancellationToken = default ) => GetUserSessionAsync(includeToken, includeGroups, cancellationToken);
+
+        /// <inheritdoc />
+        public void SignOut() => SignOutAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task SignOutAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<UserSessionApi>();
+                await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                if ( !string.IsNullOrWhiteSpace(Configuration?.Username) )
+                    throw new Exception($@"Unable to sign out of the current session for user ""{Configuration.Username}"". {e.Message}", e);
+                else
+                    throw new Exception(@"Unable to sign out of the current session.");
+            }
+        }
+
+        #endregion
+
+        #region IDisposable/IDisposableAsync Members
+
+        /// <summary />
+        /// <param name="disposing" />
+        protected virtual void Dispose( bool disposing ) => DisposeAsync(disposing).GetAwaiter().GetResult();
+
+        /// <summary />
+        /// <param name="disposing" />
+        /// <param name="cancellationToken" />
+        protected virtual async Task DisposeAsync( bool disposing, CancellationToken cancellationToken = default )
+        {
+            if ( !_disposed )
+            {
+                if ( disposing )
+                {
+                    // Attempt to sign out of the server.
+                    try { await SignOutAsync(cancellationToken).ConfigureAwait(false); } catch { }
+                }
+
+                _disposed = true;
+            }
+        }
+
+        /// <inheritdoc />
+        public async ValueTask DisposeAsync()
+        {
+            await DisposeAsync(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion
