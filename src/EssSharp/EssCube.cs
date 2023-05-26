@@ -194,8 +194,12 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ScriptsApi>();
-                if (await api.ScriptsListScriptsAsync(Application?.Name, _cube.Name, scriptName, 0, cancellationToken).ConfigureAwait(false) is { } script)
-                    return new EssScript(script.Items[0], this) as IEssScript;
+
+                foreach (var script in await GetScriptsAsync(cancellationToken).ConfigureAwait(false))
+                {
+                    if ( string.Equals(script?.Name, scriptName, StringComparison.OrdinalIgnoreCase) )
+                        return script;
+                }
 
                 throw new Exception($"Cannot find script {scriptName}");
             }

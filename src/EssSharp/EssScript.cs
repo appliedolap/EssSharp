@@ -77,24 +77,24 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public void Execute( EssJobSciptOptions options = null ) => ExecuteAsync( options ).GetAwaiter().GetResult();
+        public void Execute() => ExecuteAsync( ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <remarks>TODO: FIGURE OUT HOW TO MAP SCRIPT TYPE TO JOBTYPE.</remarks>
-        public async Task ExecuteAsync( EssJobSciptOptions options = null, CancellationToken cancellationToken = default)
+        public async Task ExecuteAsync( CancellationToken cancellationToken = default)
         {
             try
             {
-                options ??= new EssJobSciptOptions();
+                var options = new EssJobScriptOptions(scriptName: Name)
+                {
+                    ApplicationName = Cube.Application.Name,
+                    CubeName        = Cube.Name
+                };
 
-                options.ApplicationName = Cube.Application.Name;
-                options.CubeName = Cube.Name;
-                options.File ??= Name;
-
-                await Cube.Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false);
+                await Cube.Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ThrowIfFailed().ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
-            catch (Exception)
+            catch ( Exception )
             {
                 throw;
             }

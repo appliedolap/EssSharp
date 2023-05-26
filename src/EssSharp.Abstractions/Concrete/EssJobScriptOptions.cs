@@ -3,19 +3,28 @@
 namespace EssSharp
 {
     /// <summary />
-    public class EssJobSciptOptions : EssJobOptions, IEssJobOptions
+    public class EssJobScriptOptions : EssJobOptions, IEssJobOptions
     {
-        /// <summary />
-        public EssJobSciptOptions( string applicationName = null, string cubeName = null, string file = null ) : base( EssJobType.Calc )
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scriptName">The name of script to execute. Maps to <see cref="File" />.</param>
+        /// <param name="applicationName"></param>
+        /// <param name="cubeName"></param>
+        public EssJobScriptOptions( string scriptName, string applicationName = null, string cubeName = null ) : base(EssJobType.Calc)
         {
-            ApplicationName      = applicationName;
-            CubeName             = cubeName;
+            if ( string.IsNullOrEmpty(scriptName) )
+                throw new ArgumentNullException($@"The name of a script is required to create an {nameof(EssJobScriptOptions)} with this constructor.", nameof(scriptName));
 
-            File                 = file;
+            ApplicationName = applicationName;
+            CubeName        = cubeName;
+
+            File            = scriptName;
         }
 
         #region IEssJobOptions EssJobType.Calc Members
 
+        /// <inheritdoc />
         public string File { get; set; }
 
         #endregion
@@ -52,13 +61,16 @@ namespace EssSharp
         #endregion
 
         #region Explicit IEssJobOptions Members
-
+        /// <inheritdoc />
         EssBuildMethod? IEssJobOptions.BuildMethod { get; set; }
 
+        /// <inheritdoc />
         bool? IEssJobOptions.Calc { get; set; }
 
+        /// <inheritdoc />
         bool? IEssJobOptions.Data { get; set; }
-        
+
+        /// <inheritdoc />
         bool? IEssJobOptions.MemberIds { get; set; }
 
         #endregion
