@@ -14,6 +14,21 @@ namespace EssSharp
         public IEssApplication Application { get; }
 
         /// <summary>
+        /// Clears data from a cube
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        public void ClearDataFromCube( EssJobClearDataOptions options = null );
+
+        /// <summary>
+        /// Clears data from a cube
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        public Task ClearDataFromCubeAsync( EssJobClearDataOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Create a cube variable
         /// </summary>
         /// <param name="varName"></param>

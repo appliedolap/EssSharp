@@ -21,6 +21,20 @@ namespace EssSharp
 
         #region Methods
 
+        /// <summary>
+        /// Clears data from a cube
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        public void ClearDataFromCube( string cubeName, EssJobClearDataOptions options = null );
+
+        /// <summary>
+        /// Clears data from a cube
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        public Task ClearDataFromCubeAsync( string cubeName, EssJobClearDataOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Create a new cube on an Application

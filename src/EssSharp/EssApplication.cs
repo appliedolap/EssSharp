@@ -63,6 +63,28 @@ namespace EssSharp
         #region IEssApplication Methods
 
         /// <inheritdoc />
+        public void ClearDataFromCube( string cubeName, EssJobClearDataOptions options = null ) => ClearDataFromCubeAsync(cubeName, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task ClearDataFromCubeAsync( string cubeName, EssJobClearDataOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                options ??= new EssJobClearDataOptions();
+
+                options.ApplicationName = Name;
+                options.CubeName = cubeName;
+
+                var job = (await Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to export the cube ""{Name}"" to an application workbook. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssCube"/> object.</returns>
         public IEssCube CreateCube(string cubeName, EssDatabaseCreationOptions options = null ) => CreateCubeAsync(cubeName, options).GetAwaiter().GetResult();
 

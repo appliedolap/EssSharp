@@ -85,5 +85,13 @@
 
         #endregion
 
+        #region IEssJobOptions EssJobType.Clear Members
+
+        public string Option { get; set; }
+
+        public string PartialDataExpression { get; set; }
+
+        #endregion
+
     }
 }

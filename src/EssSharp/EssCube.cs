@@ -50,6 +50,13 @@ namespace EssSharp
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
+        public void ClearDataFromCube( EssJobClearDataOptions options = null ) => ClearDataFromCubeAsync( options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public Task ClearDataFromCubeAsync( EssJobClearDataOptions options = null, CancellationToken cancellationToken = default ) =>
+            Application.ClearDataFromCubeAsync(Name, options, cancellationToken);
+
+        /// <inheritdoc />
         /// <returns>an <see cref="IEssCubeVariable"/></returns>
         public IEssCubeVariable CreateCubeVariable( string name, string value ) => CreateCubeVariableAsync(name, value).GetAwaiter().GetResult();
 

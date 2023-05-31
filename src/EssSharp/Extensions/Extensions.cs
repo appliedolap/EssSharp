@@ -350,22 +350,25 @@ namespace EssSharp
         internal static ParametersBean ToModelBean( this IEssJobOptions options ) => new ParametersBean()
         {
             // EssJobType.exportExcel
-            BuildMethod          = options.BuildMethod.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildMethodEnum), (int)options.BuildMethod) ? (ParametersBean.BuildMethodEnum)options.BuildMethod : null,
-            Calc                 = options.Calc?.ToString().ToLowerInvariant(),
-            Data                 = options.Data?.ToString().ToLowerInvariant(),
-            MemberIds            = options.MemberIds?.ToString().ToLowerInvariant(),
+            BuildMethod           = options.BuildMethod.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildMethodEnum), (int)options.BuildMethod) ? (ParametersBean.BuildMethodEnum)options.BuildMethod : null,
+            Calc                  = options.Calc?.ToString().ToLowerInvariant(),
+            Data                  = options.Data?.ToString().ToLowerInvariant(),
+            MemberIds             = options.MemberIds?.ToString().ToLowerInvariant(),
             // EssJobType.importExcel
-            BuildOption          = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
-            CatalogExcelPath     = options.CatalogExcelPath,
-            CreateFiles          = options.CreateFiles?.ToString().ToLowerInvariant(),
-            DeleteExcelOnSuccess = options.DeleteExcelOnSuccess?.ToString().ToLowerInvariant(),
-            ExecuteScript        = options.ExecuteScripts?.ToString().ToLowerInvariant(),
-            ImportExcelFileName  = options.ImportExcelFilename,
-            Loaddata             = options.LoadData?.ToString().ToLowerInvariant(),
-            Overwrite            = options.Overwrite?.ToString().ToLowerInvariant(),
-            RecreateApplication  = options.RecreateApp?.ToString().ToLowerInvariant(),
+            BuildOption           = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
+            CatalogExcelPath      = options.CatalogExcelPath,
+            CreateFiles           = options.CreateFiles?.ToString().ToLowerInvariant(),
+            DeleteExcelOnSuccess  = options.DeleteExcelOnSuccess?.ToString().ToLowerInvariant(),
+            ExecuteScript         = options.ExecuteScripts?.ToString().ToLowerInvariant(),
+            ImportExcelFileName   = options.ImportExcelFilename,
+            Loaddata              = options.LoadData?.ToString().ToLowerInvariant(),
+            Overwrite             = options.Overwrite?.ToString().ToLowerInvariant(),
+            RecreateApplication   = options.RecreateApp?.ToString().ToLowerInvariant(),
             // EssJobType.Script
-            File                 = options.File
+            File                  = options.File,
+            // EssJobType.Clear
+            Option                = options.Option,
+            PartialDataExpression = options.PartialDataExpression
         };
 
         /// <summary>

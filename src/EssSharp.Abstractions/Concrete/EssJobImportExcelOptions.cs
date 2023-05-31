@@ -93,5 +93,13 @@ namespace EssSharp
         string IEssJobOptions.File { get; set; }
 
         #endregion
+
+        #region IEssJobOptions EssJobType.Clear Members
+
+        string IEssJobOptions.Option { get; set; }
+
+        string IEssJobOptions.PartialDataExpression { get; set; }
+
+        #endregion
     }
 }

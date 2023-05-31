@@ -3,33 +3,39 @@
 namespace EssSharp
 {
     /// <summary />
-    public class EssJobExportExcelOptions : EssJobOptions, IEssJobOptions
+    public class EssJobClearDataOptions : EssJobOptions, IEssJobOptions
     {
         /// <summary />
-        public EssJobExportExcelOptions( string applicationName = null, EssBuildMethod? buildMethod = EssBuildMethod.ParentChild, bool? calc = false, string cubeName = null, bool? data = false, bool? memberIds = false ) : base( EssJobType.ExportExcel )
+        public EssJobClearDataOptions( string applicationName = null, string cubeName = null, EssClearOption option = EssClearOption.ALL_DATA , string dataExpression = null ): base( EssJobType.Clear )
         {
-            ApplicationName = applicationName;
-            CubeName        = cubeName;
+            ApplicationName       = applicationName;
+            CubeName              = cubeName;
 
-            BuildMethod     = buildMethod;
-            Calc            = calc;
-            Data            = data;
-            MemberIds       = memberIds;
+            Option                = option.ToString();
+            PartialDataExpression = "{" + dataExpression + "}";
         }
+
+        #region IEssJobOptions EssJobType.Clear Members
+
+        public string Option { get; set; }
+
+        public string PartialDataExpression { get; set; }
+
+        #endregion
 
         #region IEssJobOptions EssJobType.ExportExcel Members
 
         /// <inheritdoc />
-        public EssBuildMethod? BuildMethod { get; set; } = EssBuildMethod.ParentChild;
+        EssBuildMethod? IEssJobOptions.BuildMethod { get; set; } = EssBuildMethod.ParentChild;
 
         /// <inheritdoc />
-        public bool? Calc { get; set; } = false;
+        bool? IEssJobOptions.Calc { get; set; } = false;
 
         /// <inheritdoc />
-        public bool? Data { get; set; } = false;
+        bool? IEssJobOptions.Data { get; set; } = false;
 
         /// <inheritdoc />
-        public bool? MemberIds { get; set; } = false;
+        bool? IEssJobOptions.MemberIds { get; set; } = false;
 
         #endregion
 
@@ -62,25 +68,11 @@ namespace EssSharp
         /// <inheritdoc />
         bool? IEssJobOptions.RecreateApp { get; set; }
 
-        #endregion
-
-        #region IEssJobOptions EssJobType.Calc Members
-
-        public string File { get; set; }
-
-        #endregion        
+        #endregion    
         
         #region IEssJobOptions EssJobType.Calc Members
 
         string IEssJobOptions.File { get; set; }
-
-        #endregion
-
-        #region IEssJobOptions EssJobType.Clear Members
-
-        string IEssJobOptions.Option { get; set; }
-
-        string IEssJobOptions.PartialDataExpression { get; set; }
 
         #endregion
     }
