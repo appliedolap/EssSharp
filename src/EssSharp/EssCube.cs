@@ -287,6 +287,96 @@ namespace EssSharp
                 throw;
             }
         }
+
+        /// <inheritdoc />
+        public void LoadDataToCube( EssJobLoadDataOptions options ) => LoadDataToCubeAsync(options).GetAwaiter().GetResult();
+
+
+        /// <inheritdoc />
+        public async Task LoadDataToCubeAsync( EssJobLoadDataOptions options, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // Check that EssJobLoadDataOptions is not null
+                if ( options is null )
+                    throw new ArgumentException($"{nameof(EssJobLoadDataOptions)} is required to load data to a {nameof(EssCube)}.");
+
+                // Add Application and Cube name to options
+                options.ApplicationName = Application.Name;
+                options.CubeName = Name;
+
+                // Check that options.File is not null - this field holds the file name of the data being loaded and is required
+                if ( string.IsNullOrEmpty(options.File) )
+                    throw new Exception($"A server file is required to load data to {Name}.");
+
+                // create and execute the Load Data job
+                (await Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to load data to cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public void LoadDataToCube( string localFilePath, EssJobLoadDataOptions options = null ) => LoadDataToCubeAsync(localFilePath, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task LoadDataToCubeAsync( string localFilePath, EssJobLoadDataOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // Check that the local file path is valid
+                if ( !File.Exists(localFilePath) )
+                    throw new FileNotFoundException("Unable to find the data file at the given local path.", localFilePath);
+
+                // Create a filestream to pass
+                var stream = new FileStream(localFilePath, FileMode.Open, FileAccess.Read);
+
+                // call overloaded method that takes a stream and adds it to the server, then executes job
+                await LoadDataToCubeAsync( stream, options, cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to load data to cube ""{Name}"" with local file path {localFilePath}. {e.Message}", e);
+            }
+
+        }
+
+        /// <inheritdoc />
+        public void LoadDataToCube( Stream stream, EssJobLoadDataOptions options = null ) => LoadDataToCubeAsync(stream, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task LoadDataToCubeAsync( Stream stream, EssJobLoadDataOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // Check that stream is not null
+                if ( stream is null )
+                    throw new FileNotFoundException($"A local path, stream, or server file is required to load data to {Name}.", nameof(Name));
+
+                // Add the stream to the server 
+                // The load data file has to be in the specified cube's folder
+                if ( await Application.Server.GetFolderAsync($@"application/{Application.Name}/{Name}").UploadFileAsync(stream: stream, filename: Path.GetFileNameWithoutExtension(Path.GetRandomFileName())).ConfigureAwait(false) is not { } file )
+                    throw new Exception("Unable to upload stream to Server.");
+
+                // if options is null, created a new EssJobLoadDataOptions with the IEssFile object that is returned for the UploadFile Method
+                options ??= new EssJobLoadDataOptions(essFile: file);
+
+                // Always update options to ensure there is a file name in EssJobLoadDataOptions object
+                options.File = file.Name;
+
+                // call overloaded function that creates and executes job.
+                await LoadDataToCubeAsync(options, cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to load data to cube ""{Name}"" with stream. {e.Message}", e);
+            }
+        }
         #endregion
     }
 }

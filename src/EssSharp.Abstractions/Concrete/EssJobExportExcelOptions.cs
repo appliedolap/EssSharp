@@ -76,12 +76,19 @@ namespace EssSharp
 
         #endregion
 
-        #region IEssJobOptions EssJobType.Clear Members
+        #region IEssJobOptions EssJobType.Clear and EssJobType.DataLoad Members
 
         string IEssJobOptions.Option { get; set; }
 
         string IEssJobOptions.PartialDataExpression { get; set; }
 
         #endregion
+
+        #region IEssJobOptions EssJobType.DataLoad Members
+
+        string IEssJobOptions.AbortOnError { get; set; }
+
+        #endregion
+
     }
 }

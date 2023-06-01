@@ -88,7 +88,7 @@ namespace EssSharp
 
         #endregion
 
-        #region IEssJobOptions EssJobType.Calc Members
+        #region IEssJobOptions EssJobType.Calc and EssJobType.DataLoad Members
 
         string IEssJobOptions.File { get; set; }
 
@@ -99,6 +99,12 @@ namespace EssSharp
         string IEssJobOptions.Option { get; set; }
 
         string IEssJobOptions.PartialDataExpression { get; set; }
+
+        #endregion
+
+        #region IEssJobOptions EssJobType.DataLoad Members
+
+        string IEssJobOptions.AbortOnError { get; set; }
 
         #endregion
     }

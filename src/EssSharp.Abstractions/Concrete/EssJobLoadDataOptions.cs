@@ -3,23 +3,32 @@
 namespace EssSharp
 {
     /// <summary />
-    public class EssJobClearDataOptions : EssJobOptions, IEssJobOptions
+    public class EssJobLoadDataOptions : EssJobOptions, IEssJobOptions
     {
+        public EssJobLoadDataOptions( string fileName = null, string applicationName = null, string cubeName = null, bool abortOnError = true ) : base(EssJobType.Dataload)
+        {
+            ApplicationName = applicationName;
+            CubeName = cubeName;
+
+            File = fileName;
+            AbortOnError = abortOnError.ToString().ToLowerInvariant();
+        }
+
         /// <summary />
-        public EssJobClearDataOptions( string applicationName = null, string cubeName = null, EssClearOption option = EssClearOption.ALL_DATA , string dataExpression = null ): base( EssJobType.Clear )
+        public EssJobLoadDataOptions( IEssFile essFile, string applicationName = null, string cubeName = null, bool abortOnError = true ): base( EssJobType.Dataload )
         {
             ApplicationName       = applicationName;
             CubeName              = cubeName;
 
-            Option                = option.ToString();
-            PartialDataExpression = "{" + dataExpression + "}";
+            File            = essFile.Name;
+            AbortOnError    = abortOnError.ToString().ToLowerInvariant();
         }
 
         #region IEssJobOptions EssJobType.Clear Members
 
-        public string Option { get; set; }
+        string IEssJobOptions.Option { get; set; }
 
-        public string PartialDataExpression { get; set; }
+        string IEssJobOptions.PartialDataExpression { get; set; }
 
         #endregion
 
@@ -70,15 +79,15 @@ namespace EssSharp
 
         #endregion    
         
-        #region IEssJobOptions EssJobType.Calc Members
+        #region IEssJobOptions EssJobType.Calc and EssJobType.DataLoad Members
 
-        string IEssJobOptions.File { get; set; }
+        public string File { get; set; }
 
         #endregion
 
         #region IEssJobOptions EssJobType.DataLoad Members
 
-        string IEssJobOptions.AbortOnError { get; set; }
+        public string AbortOnError { get; set; }
 
         #endregion
     }

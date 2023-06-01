@@ -93,5 +93,11 @@
 
         #endregion
 
+        #region IEssJobOptions EssJobType.DataLoad Members
+
+        public string AbortOnError { get; set; }
+
+        #endregion
+
     }
 }

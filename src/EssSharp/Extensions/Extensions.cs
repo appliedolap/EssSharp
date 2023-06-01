@@ -368,7 +368,9 @@ namespace EssSharp
             File                  = options.File,
             // EssJobType.Clear
             Option                = options.Option,
-            PartialDataExpression = options.PartialDataExpression
+            PartialDataExpression = options.PartialDataExpression,
+            // EssJobType.LoadData
+            AbortOnError          = options.AbortOnError?.ToString().ToLowerInvariant()
         };
 
         /// <summary>
