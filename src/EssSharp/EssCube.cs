@@ -50,11 +50,26 @@ namespace EssSharp
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
-        public void ClearDataFromCube( EssJobClearDataOptions options = null ) => ClearDataFromCubeAsync( options).GetAwaiter().GetResult();
+        public void ClearDataFromCube( EssJobClearDataOptions options = null ) => ClearDataFromCubeAsync(options).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        public Task ClearDataFromCubeAsync( EssJobClearDataOptions options = null, CancellationToken cancellationToken = default ) =>
-            Application.ClearDataFromCubeAsync(Name, options, cancellationToken);
+        public async Task ClearDataFromCubeAsync( EssJobClearDataOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                options ??= new EssJobClearDataOptions();
+
+                options.ApplicationName = Application.Name;
+                options.CubeName = Name;
+
+                var job = (await Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to clear data from cube ""{Name}"". {e.Message}", e);
+            }
+        }
 
         /// <inheritdoc />
         /// <returns>an <see cref="IEssCubeVariable"/></returns>

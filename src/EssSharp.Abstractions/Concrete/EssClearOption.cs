@@ -28,7 +28,17 @@ namespace EssSharp
         /// <summary>
         /// Non input blocks are cleared
         /// </summary>
-        NON_INPUT_BLOCKS = 3
+        NON_INPUT_BLOCKS = 3,
+
+        /// <summary>
+        /// only specified data region(s) cleared 
+        /// </summary>
+        PARTIAL_DATA = 4,
+
+        /// <summary>
+        /// all aggrefated data is cleared
+        /// </summary>
+        ALL_AGGREGATIONS = 5
 
     }
 

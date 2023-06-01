@@ -12,7 +12,7 @@ namespace EssSharp
             CubeName              = cubeName;
 
             Option                = option.ToString();
-            PartialDataExpression = "{" + dataExpression + "}";
+            PartialDataExpression = dataExpression;
         }
 
         #region IEssJobOptions EssJobType.Clear Members
