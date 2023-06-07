@@ -189,7 +189,7 @@ namespace EssSharp
                     await GetFolderAsync(options.CatalogExcelPath, cancellationToken).ConfigureAwait(false);
 
                 var importExcelFile = string.IsNullOrEmpty(options.ImportExcelFilename) ?
-                    await catalogExcelFolder.UploadFileAsync(stream, Path.GetFileNameWithoutExtension(Path.GetRandomFileName()), true, cancellationToken).ConfigureAwait(false) :
+                    await catalogExcelFolder.UploadFileAsync(stream, $@"{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}.xlsx", true, cancellationToken).ConfigureAwait(false) :
                     await catalogExcelFolder.GetFileAsync(options.ImportExcelFilename).ConfigureAwait(false);
 
                 // Set the CatalogExcelPath and ImportExcelFilename.
