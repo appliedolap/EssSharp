@@ -15,7 +15,7 @@ namespace EssSharp
             if ( !string.IsNullOrEmpty(dataFilePath) )
             {
                 File = new List<string>() { $@"catalog/{dataFilePath}" };
-                Rule = new List<string>() { $@"catalog/{ruleFilePath}" ?? "" };
+                Rule = new List<string>() { ruleFilePath is null ? "" : $@"catalog/{ruleFilePath}" };
             }
 
             AbortOnError = abortOnError;
@@ -31,7 +31,7 @@ namespace EssSharp
             CubeName        = cubeName;
 
             File            = new List<string>() { $@"catalog{essDataFile.FullPath}" };
-            Rule            = new List<string>() { $@"catalog{essRuleFile?.FullPath}" ?? "" };
+            Rule            = new List<string>() { essRuleFile is null ? "" : $@"catalog{essRuleFile?.FullPath}" };
             AbortOnError    = abortOnError;
         }
 
