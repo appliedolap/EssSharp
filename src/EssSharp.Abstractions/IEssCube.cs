@@ -165,41 +165,6 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         public Task LoadDataToCubeAsync( EssJobLoadDataOptions options, CancellationToken cancellationToken = default );
 
-        /// <summary>
-        /// Adds file to server with file path and loads data to a cube from a file on the Server
-        /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="localFilePath"></param>
-        /// <param name="options"></param>
-        public void LoadDataToCube( string localFilePath, EssJobLoadDataOptions options = null );
-
-        /// <summary>
-        /// Adds file to server with file path and loads data to a cube from a file on the Server
-        /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="localFilePath"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task LoadDataToCubeAsync( string localFilePath, EssJobLoadDataOptions options = null, CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Adds file to server with <see cref="Stream"/> and loads data to a cube from a file on the Server
-        /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        /// <param name="options"></param>
-        public void LoadDataToCube( Stream stream, EssJobLoadDataOptions options = null );
-
-        /// <summary>
-        /// Adds file to server with <see cref="Stream"/> and loads data to a cube from a file on the Server
-        /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="stream"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task LoadDataToCubeAsync( Stream stream, EssJobLoadDataOptions options = null, CancellationToken cancellationToken = default );
     }
 
     /// <summary>

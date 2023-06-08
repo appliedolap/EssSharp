@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EssSharp
 {
@@ -21,6 +22,8 @@ namespace EssSharp
             Overwrite            = overwrite;
             RecreateApp          = recreateApp;
         }
+
+
 
         /// <summary />
         /// <param name="essFile" />
@@ -90,7 +93,7 @@ namespace EssSharp
 
         #region IEssJobOptions EssJobType.Calc and EssJobType.DataLoad Members
 
-        string IEssJobOptions.File { get; set; }
+        List<string> IEssJobOptions.File { get; set; }
 
         #endregion
 
@@ -104,7 +107,9 @@ namespace EssSharp
 
         #region IEssJobOptions EssJobType.DataLoad Members
 
-        string IEssJobOptions.AbortOnError { get; set; }
+        List<string> IEssJobOptions.Rule { get; set; }
+
+        bool? IEssJobOptions.AbortOnError { get; set; }
 
         #endregion
     }

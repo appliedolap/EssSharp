@@ -1,4 +1,6 @@
-﻿namespace EssSharp
+﻿using System.Collections.Generic;
+
+namespace EssSharp
 {
     /// <summary />
     public interface IEssJobOptions
@@ -81,7 +83,7 @@
         /// <summary>
         /// Returns or sets the file to execute for an <see cref="EssJobType.Calc"/> job.
         /// </summary>
-        public string File { get; set; }
+        public List<string> File { get; set; }
 
         #endregion
 
@@ -95,7 +97,9 @@
 
         #region IEssJobOptions EssJobType.DataLoad Members
 
-        public string AbortOnError { get; set; }
+        public List<string> Rule { get; set; }
+
+        public bool? AbortOnError { get; set; }
 
         #endregion
 

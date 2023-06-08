@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EssSharp
 {
@@ -19,13 +20,13 @@ namespace EssSharp
             ApplicationName = applicationName;
             CubeName        = cubeName;
 
-            File            = scriptName;
+            File            = new List<string>() { scriptName };
         }
 
         #region IEssJobOptions EssJobType.Calc Members
 
         /// <inheritdoc />
-        public string File { get; set; }
+        public List<string> File { get; set; }
 
         #endregion
 
@@ -85,7 +86,9 @@ namespace EssSharp
 
         #region IEssJobOptions EssJobType.DataLoad Members
 
-        string IEssJobOptions.AbortOnError { get; set; }
+        List<string> IEssJobOptions.Rule { get; set; }
+
+        bool? IEssJobOptions.AbortOnError { get; set; }
 
         #endregion
     }

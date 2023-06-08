@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EssSharp
 {
@@ -68,17 +69,19 @@ namespace EssSharp
         /// <inheritdoc />
         bool? IEssJobOptions.RecreateApp { get; set; }
 
-        #endregion    
-        
+        #endregion
+
         #region IEssJobOptions EssJobType.Calc Members
 
-        string IEssJobOptions.File { get; set; }
+        List<string> IEssJobOptions.File { get; set; }
 
         #endregion
 
         #region IEssJobOptions EssJobType.DataLoad Members
 
-        string IEssJobOptions.AbortOnError { get; set; }
+        List<string> IEssJobOptions.Rule { get; set; }
+
+        bool? IEssJobOptions.AbortOnError { get; set; }
 
         #endregion
     }

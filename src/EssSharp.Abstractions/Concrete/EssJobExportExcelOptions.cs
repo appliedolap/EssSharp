@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EssSharp
 {
@@ -66,15 +67,9 @@ namespace EssSharp
 
         #region IEssJobOptions EssJobType.Calc Members
 
-        public string File { get; set; }
+        public List<string> File { get; set; }
 
         #endregion        
-        
-        #region IEssJobOptions EssJobType.Calc Members
-
-        string IEssJobOptions.File { get; set; }
-
-        #endregion
 
         #region IEssJobOptions EssJobType.Clear and EssJobType.DataLoad Members
 
@@ -86,7 +81,8 @@ namespace EssSharp
 
         #region IEssJobOptions EssJobType.DataLoad Members
 
-        string IEssJobOptions.AbortOnError { get; set; }
+        List<string> IEssJobOptions.Rule { get; set; }
+        bool? IEssJobOptions.AbortOnError { get; set; }
 
         #endregion
 

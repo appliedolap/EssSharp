@@ -365,11 +365,12 @@ namespace EssSharp
             Overwrite             = options.Overwrite?.ToString().ToLowerInvariant(),
             RecreateApplication   = options.RecreateApp?.ToString().ToLowerInvariant(),
             // EssJobType.Script
-            File                  = options.File,
+            File                  = $"[\"{string.Join("\", \"", options.File)}\"]",
             // EssJobType.Clear
             Option                = options.Option,
             PartialDataExpression = options.PartialDataExpression,
             // EssJobType.LoadData
+            Rule                  = $"[\"{string.Join(", ", options.Rule)}\"]",
             AbortOnError          = options.AbortOnError?.ToString().ToLowerInvariant()
         };
 

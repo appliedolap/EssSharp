@@ -1,28 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace EssSharp
 {
     /// <summary />
     public class EssJobLoadDataOptions : EssJobOptions, IEssJobOptions
     {
-        public EssJobLoadDataOptions( string fileName = null, string applicationName = null, string cubeName = null, bool abortOnError = true ) : base(EssJobType.Dataload)
+        public EssJobLoadDataOptions( string dataFilePath = null, string ruleFilePath = null, string applicationName = null, string cubeName = null, bool? abortOnError = false ) : base(EssJobType.Dataload)
         {
             ApplicationName = applicationName;
             CubeName = cubeName;
 
-            File = fileName;
-            AbortOnError = abortOnError.ToString().ToLowerInvariant();
+            if ( !string.IsNullOrEmpty(dataFilePath) )
+            {
+                File = new List<string>() { $@"catalog/{dataFilePath}" };
+                Rule = new List<string>() { $@"catalog/{ruleFilePath}" ?? "" };
+            }
+
+            AbortOnError = abortOnError;
         }
 
         /// <summary />
-        public EssJobLoadDataOptions( IEssFile essFile, string applicationName = null, string cubeName = null, bool abortOnError = true ): base( EssJobType.Dataload )
+        public EssJobLoadDataOptions( IEssFile essDataFile, IEssFile essRuleFile = null, string applicationName = null, string cubeName = null, bool? abortOnError = false ): base( EssJobType.Dataload )
         {
-            ApplicationName       = applicationName;
-            CubeName              = cubeName;
+            if ( essDataFile is null )
+                throw new ArgumentNullException();
 
-            File            = essFile.Name;
-            AbortOnError    = abortOnError.ToString().ToLowerInvariant();
+            ApplicationName = applicationName;
+            CubeName        = cubeName;
+
+            File            = new List<string>() { $@"catalog{essDataFile.FullPath}" };
+            Rule            = new List<string>() { $@"catalog{essRuleFile?.FullPath}" ?? "" };
+            AbortOnError    = abortOnError;
         }
+
+        #region Public Properties
+
+        /// <summary />
+        public string DataFileLocalPath { get; set; }
+
+        /// <summary />
+        public string RuleFileLocalPath { get; set; }
+
+        /// <summary />
+        public FileStream DataFileStream { get; set; }
+
+        /// <summary />
+        public FileStream RuleFileStream { get; set; }
+
+        #endregion
 
         #region IEssJobOptions EssJobType.Clear Members
 
@@ -81,13 +108,15 @@ namespace EssSharp
         
         #region IEssJobOptions EssJobType.Calc and EssJobType.DataLoad Members
 
-        public string File { get; set; }
+        public List<string> File { get; set; }
 
         #endregion
 
         #region IEssJobOptions EssJobType.DataLoad Members
 
-        public string AbortOnError { get; set; }
+        public List<string> Rule { get; set; }
+
+        public bool? AbortOnError { get; set; }
 
         #endregion
     }
