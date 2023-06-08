@@ -349,12 +349,22 @@ namespace EssSharp
         /// <param name="options" />
         internal static ParametersBean ToModelBean( this IEssJobOptions options ) => new ParametersBean()
         {
-            // EssJobType.exportExcel
+            // EssJobType.Unknown (Multiple)
+            File                  = options is EssJobLoadDataOptions ?
+                                        $@"[""{string.Join(@""",""", options.File ?? new List<string>())}""]" :
+                                        options.File?.FirstOrDefault(),
+
+            // EssJobType.Clear
+            Option                = options.Option?.ToString(),
+            PartialDataExpression = options.PartialDataExpression,
+
+            // EssJobType.ExportExcel
             BuildMethod           = options.BuildMethod.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildMethodEnum), (int)options.BuildMethod) ? (ParametersBean.BuildMethodEnum)options.BuildMethod : null,
             Calc                  = options.Calc?.ToString().ToLowerInvariant(),
             Data                  = options.Data?.ToString().ToLowerInvariant(),
             MemberIds             = options.MemberIds?.ToString().ToLowerInvariant(),
-            // EssJobType.importExcel
+
+            // EssJobType.ImportExcel
             BuildOption           = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
             CatalogExcelPath      = options.CatalogExcelPath,
             CreateFiles           = options.CreateFiles?.ToString().ToLowerInvariant(),
@@ -364,18 +374,12 @@ namespace EssSharp
             Loaddata              = options.LoadData?.ToString().ToLowerInvariant(),
             Overwrite             = options.Overwrite?.ToString().ToLowerInvariant(),
             RecreateApplication   = options.RecreateApp?.ToString().ToLowerInvariant(),
-            // EssJobType.Script
-            File                  = options is EssJobLoadDataOptions 
-                                        ? $@"[""{string.Join(@""",""", options.File ?? new List<string>())}""]" 
-                                        : options.File?.FirstOrDefault(),
-            // EssJobType.Clear
-            Option                = options.Option,
-            PartialDataExpression = options.PartialDataExpression,
+
             // EssJobType.LoadData
-            Rule                  = options is EssJobLoadDataOptions 
-                                        ? $@"[""{string.Join(@""",""", options.Rule ?? new List<string>())}""]" 
-                                        : options.Rule?.FirstOrDefault(),
-            AbortOnError          = options.AbortOnError?.ToString().ToLowerInvariant()
+            AbortOnError          = options.AbortOnError?.ToString().ToLowerInvariant(),
+            Rule                  = options is EssJobLoadDataOptions ?
+                                        $@"[""{string.Join(@""",""", options.Rule ?? new List<string>())}""]" :
+                                        options.Rule?.FirstOrDefault()
         };
 
         /// <summary>

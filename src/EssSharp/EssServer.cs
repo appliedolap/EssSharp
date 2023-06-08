@@ -217,6 +217,11 @@ namespace EssSharp
                 // Execute the import job and throw an exception if the job failed.
                 (await CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
 
+                // If the options are configured to do so, attempt to delete the imported Excel file.
+                // The server doesn't respect the "deleteExcelOnSuccess" parameter.
+                if ( options.DeleteExcelOnSuccess is true )
+                    try { await importExcelFile.DeleteAsync(cancellationToken).ConfigureAwait(false); } catch { }
+
                 // Return the corresponding application.
                 return await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false);
             }

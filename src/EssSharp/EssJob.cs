@@ -24,7 +24,7 @@ namespace EssSharp
 
         internal EssJob( IEssJobOptions options, EssServer server ) : base(server?.Configuration, server?.Client)
         {
-            if ( options is not EssJobOptions jobOptions )
+            if ( options is not EssJobOptions jobOptions || jobOptions.JobType is EssJobType.Unknown )
                 throw new ArgumentException($@"A specific type of {nameof(EssJobOptions)} is required to create an {nameof(EssJob)}.", nameof(options));
 
             _options = options;

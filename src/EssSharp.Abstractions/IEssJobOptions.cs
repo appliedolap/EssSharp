@@ -5,6 +5,45 @@ namespace EssSharp
     /// <summary />
     public interface IEssJobOptions
     {
+        #region IEssJobOptions EssJobType.Unknown (Multiple) Members
+
+        /// <summary>
+        /// Returns or sets the file to execute for an <see cref="EssJobType.Calc" /> job or 
+        /// the file (or files) to load for an <see cref="EssJobType.Dataload" /> job.
+        /// </summary>
+        public List<string> File { get; set; }
+
+        #endregion
+
+        #region IEssJobOptions EssJobType.Clear Members
+
+        /// <summary>
+        /// Returns or sets the clear option for an <see cref="EssJobType.Clear" /> job.
+        /// </summary>
+        public EssClearOption? Option { get; set; }
+
+        /// <summary>
+        /// Returns or sets the mdx expression specifying the region to clear for an ASO cube when the
+        /// <see cref="EssClearOption.PARTIAL_DATA" /> is used for an <see cref="EssJobType.Clear"/> job.
+        /// </summary>
+        public string PartialDataExpression { get; set; }
+
+        #endregion
+
+        #region IEssJobOptions EssJobType.DataLoad Members
+
+        /// <summary>
+        /// Returns or sets whether to abort the data load if an error is encountered for an <see cref="EssJobType.Dataload"/> job.
+        /// </summary>
+        public bool? AbortOnError { get; set; }
+
+        /// <summary>
+        /// Returns or sets the rule file (or files) to use for an <see cref="EssJobType.Dataload" /> job.
+        /// </summary>
+        public List<string> Rule { get; set; }
+
+        #endregion
+
         #region IEssJobOptions EssJobType.ExportExcel Members
 
         /// <summary>
@@ -77,31 +116,5 @@ namespace EssSharp
         public bool? RecreateApp { get; set; }
 
         #endregion
-
-        #region IEssJobOptions EssJobType.Calc Members
-
-        /// <summary>
-        /// Returns or sets the file to execute for an <see cref="EssJobType.Calc"/> job.
-        /// </summary>
-        public List<string> File { get; set; }
-
-        #endregion
-
-        #region IEssJobOptions EssJobType.Clear Members
-
-        public string Option { get; set; }
-
-        public string PartialDataExpression { get; set; }
-
-        #endregion
-
-        #region IEssJobOptions EssJobType.DataLoad Members
-
-        public List<string> Rule { get; set; }
-
-        public bool? AbortOnError { get; set; }
-
-        #endregion
-
     }
 }
