@@ -321,30 +321,36 @@ namespace EssSharp
                 options.CubeName = Name;
                 IEssFolder folder = null;
 
+                // If the data list is null or empty...
                 if ( options.File?.Any() != true )
                 {
-                    if ( !string.IsNullOrEmpty(options.DataFileLocalPath) && options.DataFileStream is null ) 
-                                throw new FileNotFoundException("Unable to find the data file at the given local path.", options.DataFileLocalPath);
+                    if ( !File.Exists(options.LocalDataFilePath) && options.LocalDataFileStream is null ) 
+                        throw new FileNotFoundException("Unable to find the data file at the given local path.", options.LocalDataFilePath);
 
-                    folder = await Application.Server.GetFolderAsync($@"catalog/application/{Application.Name}/{Name}").ConfigureAwait(false);
-                    var file = !string.IsNullOrEmpty(options.DataFileLocalPath) ?
-                        await folder.UploadFileAsync(path: options.DataFileLocalPath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
-                        await folder.UploadFileAsync(stream: options.DataFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    folder = await Application.Server.GetFolderAsync($@"/applications/{Application.Name}/{Name}").ConfigureAwait(false);
+                    var dataFile = File.Exists(options.LocalDataFilePath) ?
+                        await folder.UploadFileAsync(path: options.LocalDataFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
+                        await folder.UploadFileAsync(stream: options.LocalDataFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                    options.File = new list<string>() { file.FullPath };
+                    options.File = new list<string>() { $@"catalog{dataFile.FullPath}" };
                 }
 
+                // If the rule list is null...
                 if ( options.Rule is null )
                 {
-                    if ( !string.IsNullOrEmpty(options.RuleFileLocalPath) && options.RuleFileStream is null )
-                        throw new FileNotFoundException("Unable to find the data file at the given local path.", options.DataFileLocalPath);
+                    if ( !File.Exists(options.LocalRuleFilePath) && options.LocalRuleFileStream is null )
+                    {
+                        options.Rule = new List<string>() { "" };
+                    }
+                    else
+                    {
+                        folder = await Application.Server.GetFolderAsync($@"/applications/{Application.Name}/{Name}").ConfigureAwait(false);
+                        var ruleFile = File.Exists(options.LocalRuleFilePath) ?
+                            await folder.UploadFileAsync(path: options.LocalRuleFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
+                            await folder.UploadFileAsync(stream: options.LocalRuleFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                    folder = await Application.Server.GetFolderAsync($@"/application/{Application.Name}/{Name}").ConfigureAwait(false);
-                    var file = !string.IsNullOrEmpty(options.RuleFileLocalPath) ?
-                        await folder.UploadFileAsync(path: options.RuleFileLocalPath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
-                        await folder.UploadFileAsync(stream: options.RuleFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-                    options.File = new list<string>() { file.FullPath };
+                        options.Rule = new list<string>() { $@"catalog{ruleFile.FullPath}" };
+                    }
                 }
 
                 // Check that options.File is not null - this field holds the file name of the data being loaded and is required
