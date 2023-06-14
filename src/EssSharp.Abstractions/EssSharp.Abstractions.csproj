@@ -17,7 +17,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <VersionSuffix>beta</VersionSuffix>
+    <!--<VersionSuffix>beta</VersionSuffix>-->
     <!-- Strong Name Signing -->
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../EssSharp/EssSharp.snk</AssemblyOriginatorKeyFile>
