@@ -66,7 +66,7 @@ namespace EssSharp.Client.ViewModels
             {
                 foreach ( var connection in connections )
                     if ( !string.IsNullOrEmpty(connection?.Server) )
-                        nodes.Add(new EssServerNode() { Server = _factory.CreateEssServer(connection.Server, connection.Username, connection.Password) });
+                        nodes.Add(new EssServerNode() { Server = _factory.CreateEssServer(connection.Server, connection.Username, connection.Password, false) });
             }
 
             Nodes = nodes;
