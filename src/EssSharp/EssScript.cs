@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using EssSharp.Api;
@@ -11,20 +13,19 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssCube     _cube;
-        private readonly Script   _script;
+        private readonly EssCube _cube;
+        private readonly Script  _script;
 
         #endregion
 
         #region Constructors
 
         /// <summary />
-        internal EssScript(Script script, EssCube cube) : base( cube?.Configuration, cube?.Client )
+        internal EssScript( Script script, EssCube cube ) : base(cube?.Configuration, cube?.Client)
         {
-
-            _script = script ?? 
+            _script = script ??
                 throw new ArgumentNullException(nameof(script), $"An API model {nameof(script)} is required to create an {nameof(EssScript)}.");
-            
+
             _cube = cube ??
                 throw new ArgumentNullException(nameof(cube), $"An API model {nameof(cube)} is required to create an {nameof(EssScript)}.");
         }
@@ -51,6 +52,9 @@ namespace EssSharp
 
         /// <inheritdoc />
         public long ModifiedTime => _script.ModifiedTime;
+
+        /// <inheritdoc />
+        public EssScriptType? ScriptType { get; set; }
 
         /// <inheritdoc />
         public long Size => _script.SizeInBytes;
@@ -85,13 +89,14 @@ namespace EssSharp
         {
             try
             {
-                var options = new EssJobScriptOptions(scriptName: Name)
+                var options = new EssJobScriptOptions(essScript: this)
                 {
                     ApplicationName = Cube.Application.Name,
-                    CubeName        = Cube.Name
+                    CubeName = Cube.Name
                 };
-
+                
                 await Cube.Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ThrowIfFailed().ConfigureAwait(false);
+                
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception )

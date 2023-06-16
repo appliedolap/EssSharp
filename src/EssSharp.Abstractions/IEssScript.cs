@@ -29,6 +29,11 @@ namespace EssSharp
         /// </summary>
         public long Size { get; }
 
+        /// <summary >
+        /// 
+        /// </summary>
+        public EssScriptType? ScriptType { get; set; }
+
         #endregion
 
         #region Methods

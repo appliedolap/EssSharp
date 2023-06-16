@@ -99,6 +99,30 @@ namespace EssSharp
             }
         }
 
+        /// <<inheritdoc />
+        public void ExecuteScript( EssJobScriptOptions options ) => ExecuteScriptAsync( options ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task ExecuteScriptAsync( EssJobScriptOptions options, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                if (options is null ) 
+                    throw new ArgumentNullException($@"{nameof(EssJobScriptOptions)} initialized with a script name or {nameof(IEssScript)} is a required parameter.");
+
+                options.ApplicationName = Application.Name;
+                options.CubeName = Name;
+
+                (await Application.Server.CreateJob(options).ExecuteAsync().ConfigureAwait(false)).ThrowIfFailed();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to load data to cube ""{Name}"". {e.Message}", e);
+            }
+
+        }
+
         /// <inheritdoc />
         /// <returns><see cref="Stream"/></returns>
         public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null ) => ExportCubeToWorkbookAsync( options ).GetAwaiter().GetResult();
@@ -207,21 +231,19 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns> A list of <see cref="IEssScript"/> objects. </returns>
-        public IEssScript GetScript( string scriptName ) => GetScriptAsync( scriptName ).GetAwaiter().GetResult();
+        public IEssScript GetScript( string scriptName, EssScriptType scriptType ) => GetScriptAsync( scriptName, scriptType ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns> An <see cref="IEssScript"/> objects. </returns>
-        public async Task<IEssScript> GetScriptAsync( string scriptName, CancellationToken cancellationToken = default )
+        public async Task<IEssScript> GetScriptAsync( string scriptName, EssScriptType scriptType, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<ScriptsApi>();
 
-                foreach (var script in await GetScriptsAsync(cancellationToken).ConfigureAwait(false))
-                {
-                    if ( string.Equals(script?.Name, scriptName, StringComparison.OrdinalIgnoreCase) )
+                foreach ( var script in await GetScriptsAsync(scriptType, cancellationToken).ConfigureAwait(false) )
+                    if ( string.Equals(script.Name, scriptName, StringComparison.OrdinalIgnoreCase) )
                         return script;
-                }
 
                 throw new Exception($"Cannot find script {scriptName}");
             }
@@ -232,19 +254,23 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns> A list of <see cref="EssScript"/> objects. </returns>
-        public List<IEssScript> GetScripts() => GetScriptsAsync().GetAwaiter().GetResult();
+        /// <returns>A list of <see cref="EssScript"/> objects.</returns>
+        public List<IEssScript> GetScripts( EssScriptType scriptType = EssScriptType.Calc ) => GetScriptsAsync( scriptType ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns> A list of <see cref="EssScript"/> objects. </returns>
-        public async Task<List<IEssScript>> GetScriptsAsync( CancellationToken cancellationToken = default )
+        /// <returns>A list of <see cref="EssScript"/> objects.</returns>
+       public async Task<List<IEssScript>> GetScriptsAsync( EssScriptType scriptType = EssScriptType.Calc, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<ScriptsApi>();
-                var scripts = await api.ScriptsListScriptsAsync(Application?.Name, _cube.Name, null, 0, cancellationToken).ConfigureAwait(false);
-
-                return scripts?.ToEssSharpList(this) ?? new List<IEssScript>();
+                var scripts = (await api.ScriptsListScriptsAsync(applicationName: Application?.Name, databaseName: _cube.Name, file: scriptType.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false))?.ToEssSharpList(this) ?? new List<IEssScript>();
+                
+                // Set the script type for each script.
+                foreach ( var script in scripts )
+                    script.ScriptType = scriptType;
+                
+                return scripts;
             }
             catch ( Exception ) 
             {

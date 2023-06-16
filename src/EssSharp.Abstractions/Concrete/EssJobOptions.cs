@@ -26,11 +26,13 @@ namespace EssSharp
         /// <summary>
         /// Returns the job type.
         /// </summary>
-        public EssJobType JobType { get; private set; } = EssJobType.Unknown;
+        public EssJobType JobType { get; protected set; } = EssJobType.Unknown;
 
         #endregion
 
         #region Explicit IEssJobOptions EssJobType.Unknown (Multiple) Members
+
+        string IEssJobOptions.Script { get; set; }
 
         List<string> IEssJobOptions.File { get; set; }
 

@@ -11,7 +11,7 @@ namespace EssSharp
         /// Returns or sets the file to execute for an <see cref="EssJobType.Calc" /> job or 
         /// the file (or files) to load for an <see cref="EssJobType.Dataload" /> job.
         /// </summary>
-        public List<string> File { get; set; }
+        public string Script { get; set; }
 
         #endregion
 
@@ -31,6 +31,8 @@ namespace EssSharp
         #endregion
 
         #region IEssJobOptions EssJobType.DataLoad Members
+
+        public List<string> File { get; set; }
 
         /// <summary>
         /// Returns or sets whether to abort the data load if an error is encountered for an <see cref="EssJobType.Dataload"/> job.

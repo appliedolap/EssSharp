@@ -44,6 +44,20 @@ namespace EssSharp
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Executes a script (Calc or MDX) on a cube
+        /// </summary>
+        /// <param name="options"></param>
+        public void ExecuteScript( EssJobScriptOptions options );
+
+        /// <summary>
+        /// Executes a script (Calc or MDX) on a cube
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task ExecuteScriptAsync( EssJobScriptOptions options, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Exports a cube to an excel workbook
         /// </summary>
         /// <param name="options"></param>
@@ -110,24 +124,24 @@ namespace EssSharp
         /// Returns a  specific scripts in a cube
         /// </summary>
         /// <param name="scriptName"></param>
-        public IEssScript GetScript( string scriptName );
+        public IEssScript GetScript( string scriptName, EssScriptType scriptType );
 
         /// <summary>
         /// Returns a specific script in a cube
         /// </summary>
         /// <param name="cancellationToken"></param>
-        public Task<IEssScript> GetScriptAsync( string scriptName, CancellationToken cancellationToken = default );
+        public Task<IEssScript> GetScriptAsync( string scriptName, EssScriptType scriptType, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns a list of scripts in a cube
         /// </summary>
-        public List<IEssScript> GetScripts();
+        public List<IEssScript> GetScripts( EssScriptType scriptType = EssScriptType.Calc );
 
         /// <summary>
         /// Returns a list of scripts in a cube
         /// </summary>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssScript>> GetScriptsAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssScript>> GetScriptsAsync( EssScriptType scriptType = EssScriptType.Calc, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the list of cube-scoped variables available to the connected user.

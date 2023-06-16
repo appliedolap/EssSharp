@@ -350,9 +350,7 @@ namespace EssSharp
         internal static ParametersBean ToModelBean( this IEssJobOptions options ) => new ParametersBean()
         {
             // EssJobType.Unknown (Multiple)
-            File                  = options is EssJobLoadDataOptions ?
-                                        $@"[""{string.Join(@""",""", options.File ?? new List<string>())}""]" :
-                                        options.File?.FirstOrDefault(),
+            Script                = options?.Script,
 
             // EssJobType.Clear
             Option                = options.Option?.ToString(),
@@ -376,6 +374,9 @@ namespace EssSharp
             RecreateApplication   = options.RecreateApp?.ToString().ToLowerInvariant(),
 
             // EssJobType.LoadData
+            File                  = options is EssJobLoadDataOptions ?
+                                        $@"[""{string.Join(@""",""", options.File ?? new List<string>())}""]" :
+                                        options.File?.FirstOrDefault(),
             AbortOnError          = options.AbortOnError?.ToString().ToLowerInvariant(),
             Rule                  = options is EssJobLoadDataOptions ?
                                         $@"[""{string.Join(@""",""", options.Rule ?? new List<string>())}""]" :
