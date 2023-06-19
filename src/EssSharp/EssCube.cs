@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -131,6 +132,54 @@ namespace EssSharp
         /// <returns><see cref="Stream"/></returns>
         public Task<Stream> ExportCubeToWorkbookAsync( EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default ) => 
             Application.ExportCubeToWorkbookAsync(Name, options, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns><see cref="string"/></returns>
+        public string GetActiveAlias() => GetActiveAliasAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns><see cref="string"/></returns>
+        public async Task<string> GetActiveAliasAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+
+                if ( await api.ApplicationsGetActiveAliasAsync(applicationName: Application.Name, databaseName: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } activeAlias )
+                    throw new Exception("Could not get active alias.");
+
+                return activeAlias;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get Active Alias for cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<string> GetAliases() => GetAliasesAsync().GetAwaiter().GetResult();
+
+        /// <inherit />
+        /// <returns></returns>
+        public async Task<List<string>> GetAliasesAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+
+                if ( await api.ApplicationsGetAliasesAsync(applicationName: Application.Name, databaseName: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } aliasList )
+                    throw new Exception("Could not get list of aliases.");
+
+                return aliasList?.Items;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get Active Alias for cube ""{Name}"". {e.Message}", e);
+            }
+        }
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssDimension"/> objects.</returns>

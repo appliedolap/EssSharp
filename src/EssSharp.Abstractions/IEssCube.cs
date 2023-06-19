@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
+using System;
 
 namespace EssSharp
 {
@@ -69,6 +70,32 @@ namespace EssSharp
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         public Task<Stream> ExportCubeToWorkbookAsync( EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns the active alias of the cube.
+        /// </summary>
+        /// <returns></returns>
+        public string GetActiveAlias();
+
+        /// <summary>
+        /// Returns the active alias of the cube.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<string> GetActiveAliasAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns a list of aliases on a cube.
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetAliases();
+
+        /// <summary>
+        /// Returns a list of aliases on a cube.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<List<string>> GetAliasesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the list of dimensions.
