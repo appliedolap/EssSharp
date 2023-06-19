@@ -52,8 +52,9 @@ cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseN
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/dimensions/{dimensionName}/generations".get.responses."200".schema = {"$ref": "#/definitions/GenerationLevelList"}' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/dimensions/{dimensionName}/levels".get.responses."200".schema = {"$ref": "#/definitions/GenerationLevelList"}' > json.tmp && mv json.tmp temp.json
 
-# Fix the consumes for the grid execute endpoint
+# Fix the consumes for the grid execute and mdx endpoints
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid/mdx".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
 # Return types for locked objects are not a List<LockObjectList>, they are a LockObjectList
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/locks/objects".get.responses."200".schema = {"$ref": "#/definitions/LockObjectList"}' > json.tmp && mv json.tmp temp.json

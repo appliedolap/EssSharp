@@ -7947,7 +7947,10 @@
           "500": {
             "description": "<p>Internal Server Error.</p>"
           }
-        }
+        },
+        "consumes": [
+          "application/json"
+        ]
       }
     },
     "/applications/{applicationName}/databases/{databaseName}/grid/layout/{layout}": {
