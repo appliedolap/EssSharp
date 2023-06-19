@@ -51,8 +51,9 @@ type temp.json | jq ".paths.\"/applications/{applicationName}/databases/{databas
 type temp.json | jq ".paths.\"/applications/{applicationName}/databases/{databaseName}/dimensions/{dimensionName}/generations\".get.responses.\"200\".schema = {\"$ref\": \"#/definitions/GenerationLevelList\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 type temp.json | jq ".paths.\"/applications/{applicationName}/databases/{databaseName}/dimensions/{dimensionName}/levels\".get.responses.\"200\".schema = {\"$ref\": \"#/definitions/GenerationLevelList\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
-:: Fix the consumes for the grid execute endpoint
+:: Fix the consumes for the grid execute and mdx endpoints
 type temp.json | jq ".paths.\"/applications/{applicationName}/databases/{databaseName}/grid\".post.consumes = [\"application/json\"]" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
+type temp.json | jq ".paths.\"/applications/{applicationName}/databases/{databaseName}/grid/mdx\".post.consumes = [\"application/json\"]" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
 :: Return types for locked objects are not a List<LockObjectList>, they are a LockObjectList
 type temp.json | jq ".paths.\"/applications/{applicationName}/databases/{databaseName}/locks/objects\".get.responses.\"200\".schema = {\"$ref\": \"#/definitions/LockObjectList\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
