@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/appliedolap/EssSharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>0.1.1</VersionPrefix>
     <!--<VersionSuffix>beta</VersionSuffix>-->
     <!-- Strong Name Signing -->
     <SignAssembly>true</SignAssembly>
