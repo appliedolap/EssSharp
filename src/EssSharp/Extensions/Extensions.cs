@@ -383,6 +383,62 @@ namespace EssSharp
                                         options.Rule?.FirstOrDefault()
         };
 
+        internal static List<EssGridDimension> ToEssGridDimention( this List<GridDimension> gridDimensions )
+        {
+            var dimensionList = new List<EssGridDimension>();
+
+            foreach ( var dimension in gridDimensions)
+            {
+                dimensionList?.Add(
+                    new EssGridDimension()
+                    {
+                        Column = dimension.Column,
+                        Row = dimension.Row,
+                        DisplayName = dimension.DisplayName,
+                        Name = dimension.Name,
+                        Pov = dimension.Pov,
+                        Expanded = dimension.Expanded,
+                        Hidden = dimension.Hidden
+                    }
+                );
+            }
+            return dimensionList;   
+        }
+
+        internal static EssGridSliceData ToEssGridSliceData( this Data data)
+        {
+            var sliceData = new EssGridSliceData();
+
+            foreach (var range in  data?.Ranges )
+            {
+                sliceData.Ranges.Add(
+                    new EssGridRange() {
+                        DataFormats = range.DataFormats,
+                        End = range.End,
+                        EnumIds = range.EnumIds,
+                        Filters = range.Filters,
+                        Start = range.Start,
+                        Statuses = range.Statuses,
+                        Texts = range.Texts,
+                        Types = range.Types,
+                        Values = range.Values
+                    }
+                );
+            };
+            return sliceData;
+        }
+
+        internal static EssGridSlice ToEssGridSlice( this Slice slice ) => new EssGridSlice()
+        {
+            Columns = slice.Columns,
+            Data = slice.Data.ToEssGridSliceData(),
+            DirtyCells = slice.DirtyCells,
+            DirtyTexts = slice.DirtyTexts,
+            Rows = slice.Rows
+        };
+        
+
+
         /// <summary>
         /// Returns an <see cref="EssJobType" /> from the given <see cref="JobsInputBean.JobtypeEnum" />.
         /// </summary>

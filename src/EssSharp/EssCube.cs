@@ -182,6 +182,30 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns><see cref="IEssGrid"/></returns>
+        public IEssGrid GetDefaultGrid( bool reset = false ) => GetDefaultGridAsync(reset).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns><see cref="IEssGrid"/></returns>
+        public async Task<IEssGrid> GetDefaultGridAsync( bool reset = false, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GridApi>();
+
+                if ( await api.GridGetDefaultAsync(applicationName: Application.Name, databaseName: Name, reset: reset, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                    throw new Exception("Cannot get default grid.");
+
+                return new EssGrid(grid, this);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get default grid of cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>A list of <see cref="EssDimension"/> objects.</returns>
         public List<IEssDimension> GetDimensions() => GetDimensionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssDimension>();
 

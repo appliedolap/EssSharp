@@ -98,6 +98,19 @@ namespace EssSharp
         public Task<List<string>> GetAliasesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Returns the default grid of a cube
+        /// </summary>
+        /// <param name="reset"></param>
+        public IEssGrid GetDefaultGrid( bool reset = false );
+
+        /// <summary>
+        /// Returns the default grid of a cube
+        /// </summary>
+        /// <param name="reset"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssGrid> GetDefaultGridAsync( bool reset = false, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Gets the list of dimensions.
         /// </summary>
         public List<IEssDimension> GetDimensions();

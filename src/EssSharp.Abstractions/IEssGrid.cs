@@ -6,27 +6,27 @@ using System.Collections.Generic;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssDimension
+    public interface IEssGrid : IEssObject
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEssCube Cube { get; }
+
         /// <summary>
         /// Gets the Name as a string
         /// </summary>
-        public string Name { get; }
+        public string Alias { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Type { get; }
+        public List<EssGridDimension> Dimensions { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int Members { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int StoredMembers { get; }
-
-}
+        public EssGridSlice Slice { get; }
+    }
 }

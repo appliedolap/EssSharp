@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -33,6 +33,15 @@ namespace EssSharp
         /// <inheritdoc />
         public string Name => _dimension?.Name;
 
+        /// <inheritdoc />
+        public string Type => _dimension?.Type;
+
+        /// <inheritdoc />
+        public int Members => _dimension.Members;
+
+        /// <inheritdoc />
+        public int StoredMembers => _dimension.StoredMembers;
+        
         #endregion
     }
 }

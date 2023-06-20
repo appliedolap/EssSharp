@@ -11,6 +11,7 @@
         DrillthroughReport,
         File,
         Folder,
+        Grid,
         Group,
         Job,
         Member,
