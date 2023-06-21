@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using EssSharp.Api;
 using EssSharp.Model;
+using Newtonsoft.Json.Linq;
 
 namespace EssSharp
 {
@@ -122,6 +123,50 @@ namespace EssSharp
                 throw new Exception($@"Unable to load data to cube ""{Name}"". {e.Message}", e);
             }
 
+        }
+
+        /// <inheritdoc />
+        public Object ExecuteMDXQuery(string query, EssQueryPreferences preferences = null) => ExecuteMDXQueryAsync(query, preferences).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<Object> ExecuteMDXQueryAsync(string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                if ( string.IsNullOrEmpty(query) )
+                    throw new ArgumentException($@"{nameof(query)} is required to execute MDX Query.");
+
+                preferences ??= new EssQueryPreferences();
+
+                var body = new MDXInput( query: query, preferences.ToNamedQueriesPreferences() );
+
+                var api = GetApi<ExecuteMDXApi>();
+
+                if ( await api.MDXExecuteMDXAsync(application: Application.Name, database: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not JObject mdxResponse )
+                    throw new Exception($@"Could not execute query: {query}");
+
+                var report = new EssQueryReport
+                {
+                    Metadata = new EssQueryReport.ReportMetadata()
+                    {
+                        PageDimensionMembers = new List<string>(mdxResponse["metadata"]["page"]?.ToObject<string[]>() ?? new string[0]),
+                        ColumnDimensionMembers = new List<string>(mdxResponse["metadata"]["column"]?.ToObject<string[]>() ?? new string[0]),
+                        RowDimensionMembers = new List<string>(mdxResponse["metadata"]["row"]?.ToObject<string[]>() ?? new string[0])
+                    },
+
+                    //TODO: add mdxResponse["data"]
+                    Data = new object[0,0]
+                };
+
+                return report;
+
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to execute MDX query on cube ""{Name}"". {e.Message}", e);
+            }
         }
 
         /// <inheritdoc />

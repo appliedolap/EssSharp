@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
 using System;
+using System.Xml.Linq;
 
 namespace EssSharp
 {
@@ -43,6 +44,21 @@ namespace EssSharp
         /// <param name="value"></param>
         /// <param name="cancellationToken"></param>
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="preferences"></param>
+        public Object ExecuteMDXQuery( string query, EssQueryPreferences preferences = null );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="preferences"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Object> ExecuteMDXQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Executes a script (Calc or MDX) on a cube

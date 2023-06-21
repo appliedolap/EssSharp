@@ -436,8 +436,19 @@ namespace EssSharp
             DirtyTexts = slice.DirtyTexts,
             Rows = slice.Rows
         };
-        
 
+        internal static NamedQueriesPreferences ToNamedQueriesPreferences( this EssQueryPreferences queryPreferences ) => new NamedQueriesPreferences()
+        {
+            Dataless = queryPreferences.Dataless,
+            HideRestrictedData = queryPreferences.HideRestrictedData,
+            CellAttributes = queryPreferences.CellAttributes,
+            FormatString = queryPreferences.FormatString,
+            FormatValues = queryPreferences.FormatValues,
+            MeaninglessCells = queryPreferences.MeaninglessCells,
+            TextList = queryPreferences.TextList,
+            UrlDrillThrough = queryPreferences.UrlDrillThrough,
+            MemberIdentifierType = queryPreferences.MemberIdentifierType.HasValue && Enum.IsDefined(typeof(NamedQueriesPreferences.MemberIdentifierTypeEnum), (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifierType) ? (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifierType : null 
+        };
 
         /// <summary>
         /// Returns an <see cref="EssJobType" /> from the given <see cref="JobsInputBean.JobtypeEnum" />.
