@@ -14659,7 +14659,11 @@
         ],
         "responses": {
           "200": {
-            "description": "<strong>OK</strong></p><p>Script content retrieved successfully.</p>"
+            "description": "<strong>OK</strong></p><p>Script content retrieved successfully.</p>",
+            "schema": {
+              "$ref": "#/definitions/ScriptContent"
+            }
+
           },
           "400": {
             "description": "<p><strong>Bad Request</strong></p><p>Failed to get script contents. The application, database, or script name may be incorrect.</p>"
@@ -23933,6 +23937,14 @@
         "maximum": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "ScriptContent": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
         }
       }
     },

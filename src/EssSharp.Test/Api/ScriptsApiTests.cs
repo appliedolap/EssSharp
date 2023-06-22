@@ -166,7 +166,8 @@ namespace EssSharp.Test.Api
             //string databaseName = null;
             //string scriptName = null;
             //string file = null;
-            //instance.ScriptsGetScriptContent(applicationName, databaseName, scriptName, file);
+            //var response = instance.ScriptsGetScriptContent(applicationName, databaseName, scriptName, file);
+            //Assert.IsType<ScriptContent>(response);
         }
 
         /// <summary>

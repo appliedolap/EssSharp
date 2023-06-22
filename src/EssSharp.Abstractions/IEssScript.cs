@@ -59,6 +59,19 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken"></param>
         Task ExecuteAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetScriptContent();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<string> GetScriptContentAsync( CancellationToken cancellationToken = default );
         #endregion
     }
 }

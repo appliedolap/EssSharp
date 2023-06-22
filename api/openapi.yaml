@@ -12557,7 +12557,13 @@ paths:
           type: string
       responses:
         "200":
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptContent'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ScriptContent'
           description: <strong>OK</strong></p><p>Script content retrieved successfully.</p>
         "400":
           content: {}
@@ -26324,6 +26330,13 @@ components:
         maximum:
           format: int64
           type: integer
+      type: object
+    ScriptContent:
+      example:
+        content: content
+      properties:
+        content:
+          type: string
       type: object
     Limits:
       example:

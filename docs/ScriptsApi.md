@@ -739,7 +739,7 @@ catch (ApiException e)
 
 <a name="scriptsgetscriptcontent"></a>
 # **ScriptsGetScriptContent**
-> void ScriptsGetScriptContent (string applicationName, string databaseName, string scriptName, string file = null)
+> ScriptContent ScriptsGetScriptContent (string applicationName, string databaseName, string scriptName, string file = null)
 
 Get Essbase Script Contents
 
@@ -774,7 +774,8 @@ namespace Example
             try
             {
                 // Get Essbase Script Contents
-                apiInstance.ScriptsGetScriptContent(applicationName, databaseName, scriptName, file);
+                ScriptContent result = apiInstance.ScriptsGetScriptContent(applicationName, databaseName, scriptName, file);
+                Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
@@ -794,7 +795,10 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Essbase Script Contents
-    apiInstance.ScriptsGetScriptContentWithHttpInfo(applicationName, databaseName, scriptName, file);
+    ApiResponse<ScriptContent> response = apiInstance.ScriptsGetScriptContentWithHttpInfo(applicationName, databaseName, scriptName, file);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
@@ -815,7 +819,7 @@ catch (ApiException e)
 
 ### Return type
 
-void (empty response body)
+[**ScriptContent**](ScriptContent.md)
 
 ### Authorization
 
@@ -824,7 +828,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json, application/xml
 
 
 ### HTTP response details

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using EssSharp.Api;
 using EssSharp.Model;
+using Newtonsoft.Json.Linq;
 
 namespace EssSharp
 {
@@ -104,6 +106,30 @@ namespace EssSharp
                 throw;
             }
             
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public string GetScriptContent() => GetScriptContentAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<string> GetScriptContentAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ScriptsApi>();
+
+                if ( await api.ScriptsGetScriptContentAsync(applicationName: Cube.Application.Name, databaseName: Cube.Name, scriptName: Name, file: ScriptType.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } content )
+                    throw new Exception("Could not get script content.");
+
+                return content.Content;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e)
+            {
+                throw new Exception($@"Unable to get script content for {Name}. {e.Message}");
+            }
         }
         #endregion
     }

@@ -237,8 +237,8 @@ namespace EssSharp.Api
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        void ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
+        /// <returns>ScriptContent</returns>
+        ScriptContent ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
 
         /// <summary>
         /// Get Essbase Script Contents
@@ -252,8 +252,8 @@ namespace EssSharp.Api
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
+        /// <returns>ApiResponse of ScriptContent</returns>
+        ApiResponse<ScriptContent> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
         /// <summary>
         /// Get Essbase Script Permissions
         /// </summary>
@@ -632,8 +632,8 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScriptsGetScriptContentAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ScriptContent</returns>
+        System.Threading.Tasks.Task<ScriptContent> ScriptsGetScriptContentAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Essbase Script Contents
@@ -648,8 +648,8 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScriptsGetScriptContentWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (ScriptContent)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ScriptContent>> ScriptsGetScriptContentWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get Essbase Script Permissions
         /// </summary>
@@ -2374,10 +2374,11 @@ namespace EssSharp.Api
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        public void ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
+        /// <returns>ScriptContent</returns>
+        public ScriptContent ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
         {
-            ScriptsGetScriptContentWithHttpInfo(applicationName, databaseName, scriptName, file);
+            EssSharp.Client.ApiResponse<ScriptContent> localVarResponse = ScriptsGetScriptContentWithHttpInfo(applicationName, databaseName, scriptName, file);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2389,8 +2390,8 @@ namespace EssSharp.Api
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
+        /// <returns>ApiResponse of ScriptContent</returns>
+        public EssSharp.Client.ApiResponse<ScriptContent> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2417,6 +2418,8 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/json",
+                "application/xml"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -2450,7 +2453,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<Object>("/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<ScriptContent>("/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ScriptsGetScriptContent", localVarResponse);
@@ -2473,10 +2476,11 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScriptsGetScriptContentAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ScriptContent</returns>
+        public async System.Threading.Tasks.Task<ScriptContent> ScriptsGetScriptContentAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            await ScriptsGetScriptContentWithHttpInfoAsync(applicationName, databaseName, scriptName, file, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<ScriptContent> localVarResponse = await ScriptsGetScriptContentWithHttpInfoAsync(applicationName, databaseName, scriptName, file, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2489,8 +2493,8 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScriptsGetScriptContentWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (ScriptContent)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptContent>> ScriptsGetScriptContentWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2518,6 +2522,8 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/json",
+                "application/xml"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -2551,7 +2557,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<ScriptContent>("/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
