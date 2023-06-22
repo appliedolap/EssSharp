@@ -243,7 +243,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="scriptList" />
         /// <param name="cube" />
-        internal static List<IEssScript> ToEssSharpList(this ScriptList scriptList, EssCube cube)
+        internal static List<T> ToEssSharpList<T>(this ScriptList scriptList, EssCube cube) where T : class, IEssScript
         {
             if (cube is null)
                 throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
@@ -251,8 +251,13 @@ namespace EssSharp
             return scriptList
                 .Items?
                 .Where(script => script is not null)
-                .Select(script => new EssScript(script, cube) as IEssScript)
-                .ToList() ?? new List<IEssScript>();
+                .Select(script => GetScriptType<T>() switch
+                {
+                    EssScriptType.Calc => new EssScript(script, cube) as T, // new EssCalcScript()
+                    EssScriptType.MDX  => new EssScript(script, cube) as T, // new EssMdxScript()
+                    _                  => new EssScript(script, cube) as T
+                })
+                .ToList() ?? new List<T>();
         }
 
         /// <summary>
@@ -525,6 +530,13 @@ namespace EssSharp
 
             return default;
         }
+
+        /// <summary />
+        internal static EssScriptType GetScriptType<T>() where T : class, IEssScript => typeof(T).Name?.ToLowerInvariant() switch
+        {
+            "IEssMdxScript" => EssScriptType.MDX, // nameof(IEssMdxScript)
+            _               => EssScriptType.Unknown
+        };
 
         #endregion
     }

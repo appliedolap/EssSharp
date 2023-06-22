@@ -54,7 +54,7 @@ namespace EssSharp
         public long ModifiedTime => _script.ModifiedTime;
 
         /// <inheritdoc />
-        public EssScriptType? ScriptType { get; set; }
+        public EssScriptType ScriptType => EssScriptType.Unknown;
 
         /// <inheritdoc />
         public long Size => _script.SizeInBytes;

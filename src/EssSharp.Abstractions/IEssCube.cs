@@ -177,27 +177,30 @@ namespace EssSharp
         public Task<List<IEssLock>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns a  specific scripts in a cube
+        /// Returns the script (of a specific <see cref="IEssScript" />) type of the cube.
         /// </summary>
-        /// <param name="scriptName"></param>
-        public IEssScript GetScript( string scriptName, EssScriptType scriptType );
+        /// <param name="scriptName">The name of the script (without an extension).</param>
+        public T GetScript<T>( string scriptName ) where T : class, IEssScript;
 
         /// <summary>
-        /// Returns a specific script in a cube
+        /// Asynchronously returns the script (of a specific <see cref="IEssScript" />) type of the cube.
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        public Task<IEssScript> GetScriptAsync( string scriptName, EssScriptType scriptType, CancellationToken cancellationToken = default );
+        /// <param name="scriptName">The name of the script (without an extension).</param>
+        /// <param name="cancellationToken" />
+        public Task<T> GetScriptAsync<T>( string scriptName, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
-        /// Returns a list of scripts in a cube
+        /// Returns the list of scripts (of a specific <see cref="IEssScript" />) type of the cube.
         /// </summary>
-        public List<IEssScript> GetScripts( EssScriptType scriptType = EssScriptType.Calc );
+        /// <typeparam name="T">An <see cref="IEssScript"/>.</typeparam>
+        public List<T> GetScripts<T>() where T : class, IEssScript;
 
         /// <summary>
-        /// Returns a list of scripts in a cube
+        /// Asynchronously returns the list of scripts (of a specific <see cref="IEssScript" />) type of the cube.
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        public Task<List<IEssScript>> GetScriptsAsync( EssScriptType scriptType = EssScriptType.Calc, CancellationToken cancellationToken = default );
+        /// <param name="cancellationToken" />
+        /// <typeparam name="T">An <see cref="IEssScript" />.</typeparam>
+        public Task<List<T>> GetScriptsAsync<T>( CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
         /// Gets the list of cube-scoped variables available to the connected user.

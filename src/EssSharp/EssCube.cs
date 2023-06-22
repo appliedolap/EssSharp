@@ -349,17 +349,17 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns> A list of <see cref="IEssScript"/> objects. </returns>
-        public IEssScript GetScript( string scriptName, EssScriptType scriptType ) => GetScriptAsync( scriptName, scriptType ).GetAwaiter().GetResult();
+        public T GetScript<T>( string scriptName ) where T : class, IEssScript => GetScriptAsync<T>(scriptName).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns> An <see cref="IEssScript"/> objects. </returns>
-        public async Task<IEssScript> GetScriptAsync( string scriptName, EssScriptType scriptType, CancellationToken cancellationToken = default )
+        /// <returns>An <see cref="EssScript"/> object of type <typeparamref name="T"/>.</returns>
+        public async Task<T> GetScriptAsync<T>( string scriptName, CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
             try
             {
                 var api = GetApi<ScriptsApi>();
 
-                foreach ( var script in await GetScriptsAsync(scriptType, cancellationToken).ConfigureAwait(false) )
+                foreach ( var script in await GetScriptsAsync<T>(cancellationToken).ConfigureAwait(false) )
                     if ( string.Equals(script.Name, scriptName, StringComparison.OrdinalIgnoreCase) )
                         return script;
 
@@ -373,22 +373,18 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssScript"/> objects.</returns>
-        public List<IEssScript> GetScripts( EssScriptType scriptType = EssScriptType.Calc ) => GetScriptsAsync( scriptType ).GetAwaiter().GetResult();
+        public List<T> GetScripts<T>() where T : class, IEssScript => GetScriptsAsync<T>().GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssScript"/> objects.</returns>
-       public async Task<List<IEssScript>> GetScriptsAsync( EssScriptType scriptType = EssScriptType.Calc, CancellationToken cancellationToken = default )
+       public async Task<List<T>> GetScriptsAsync<T>(CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
             try
             {
                 var api = GetApi<ScriptsApi>();
-                var scripts = (await api.ScriptsListScriptsAsync(applicationName: Application?.Name, databaseName: _cube.Name, file: scriptType.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false))?.ToEssSharpList(this) ?? new List<IEssScript>();
-                
-                // Set the script type for each script.
-                foreach ( var script in scripts )
-                    script.ScriptType = scriptType;
-                
-                return scripts;
+                var scripts = await api.ScriptsListScriptsAsync(applicationName: Application?.Name, databaseName: _cube.Name, file: Extensions.GetScriptType<T>().ToString(), cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return scripts?.ToEssSharpList<T>(this) ?? new List<T>();
             }
             catch ( Exception ) 
             {

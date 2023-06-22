@@ -30,9 +30,9 @@ namespace EssSharp
         public long Size { get; }
 
         /// <summary >
-        /// 
+        /// Returns the type of the script.
         /// </summary>
-        public EssScriptType? ScriptType { get; set; }
+        public EssScriptType ScriptType { get; }
 
         #endregion
 

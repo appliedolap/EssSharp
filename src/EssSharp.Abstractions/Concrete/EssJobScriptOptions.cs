@@ -8,9 +8,11 @@ namespace EssSharp
     public enum EssScriptType
     {
         /// <summary />
-        Calc = 0,
+        Unknown = 0,
         /// <summary />
-        MDX = 1
+        Calc = 1,
+        /// <summary />
+        MDX = 2
     };
 
     /// <summary />
@@ -52,7 +54,7 @@ namespace EssSharp
             if ( essScript is null )
                 throw new ArgumentNullException($@"An {nameof(IEssScript)} object is required to create an {nameof(EssJobScriptOptions)} with this constructor.", nameof(essScript));
 
-            if ( essScript.ScriptType is null )
+            if ( essScript.ScriptType is EssScriptType.Unknown )
                 throw new ArgumentException($@"A {nameof(essScript.ScriptType)} must be set on the {nameof(essScript)} given to this constructor.", nameof(essScript));
 
             JobType = essScript.ScriptType switch
