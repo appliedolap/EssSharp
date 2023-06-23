@@ -101,7 +101,7 @@ namespace EssSharp
             }
         }
 
-        /// <<inheritdoc />
+        /// <inheritdoc />
         public void ExecuteScript( EssJobScriptOptions options ) => ExecuteScriptAsync( options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -355,19 +355,45 @@ namespace EssSharp
         /// <returns>An <see cref="EssScript"/> object of type <typeparamref name="T"/>.</returns>
         public async Task<T> GetScriptAsync<T>( string scriptName, CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
+            // Throw if a specific type of IEssScript is not given.
+            if ( typeof(T) == typeof(IEssScript) )
+                throw new ArgumentException($"A specific type of {nameof(IEssScript)} must be requested.", "T");
+
+            // Get the script type associated with the given IEssScript interface.
+            var scriptType = Extensions.GetScriptType<T>();
+
+            if ( string.IsNullOrWhiteSpace(scriptName) )
+                throw new ArgumentException($"A script name is required to get {(scriptType is EssScriptType.MDX ? "an" : "a")} {scriptType} script.", nameof(scriptName));
+
+            // If a script name with an extension was given...
+            if ( Path.HasExtension(scriptName) )
+            {
+                // ...and the extension is appropriate for the given script type
+                bool hasAppropriateExtension = Path.GetExtension(scriptName)?.ToLowerInvariant() switch
+                {
+                    ".csc" => scriptType is EssScriptType.Calc,
+                    ".rep" => scriptType is EssScriptType.Report,
+                    ".mdx" => scriptType is EssScriptType.MDX,
+                    ".msh" => scriptType is EssScriptType.MaxL,
+                    _      => false
+                };
+
+                // Strip an appropriate extension for the given script type.
+                if ( hasAppropriateExtension )
+                    scriptName = Path.GetFileNameWithoutExtension(scriptName);
+            }
+
             try
             {
-                var api = GetApi<ScriptsApi>();
-
                 foreach ( var script in await GetScriptsAsync<T>(cancellationToken).ConfigureAwait(false) )
                     if ( string.Equals(script.Name, scriptName, StringComparison.OrdinalIgnoreCase) )
                         return script;
 
-                throw new Exception($"Cannot find script {scriptName}");
+                throw new Exception($"Script not found.");
             }
             catch (Exception e)
             {
-                throw new Exception($@"Unable to get the script ""{scriptName}"". {e.Message}", e);
+                throw new Exception($@"Unable to get the {scriptType} script named ""{scriptName}"". {e.Message}", e);
             }
         }
 
@@ -379,16 +405,22 @@ namespace EssSharp
         /// <returns>A list of <see cref="EssScript"/> objects.</returns>
        public async Task<List<T>> GetScriptsAsync<T>(CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
+            // Throw if a specific type of IEssScript is not given.
+            if ( typeof(T) == typeof(IEssScript) )
+                throw new ArgumentException($"A specific type of {nameof(IEssScript)} must be requested.", "T");
+
+            var scriptType = Extensions.GetScriptType<T>();
+
             try
             {
                 var api = GetApi<ScriptsApi>();
-                var scripts = await api.ScriptsListScriptsAsync(applicationName: Application?.Name, databaseName: _cube.Name, file: Extensions.GetScriptType<T>().ToString(), cancellationToken: cancellationToken).ConfigureAwait(false);
+                var scripts = await api.ScriptsListScriptsAsync(applicationName: Application.Name, databaseName: _cube.Name, file: scriptType.ToString()?.ToLowerInvariant(), cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return scripts?.ToEssSharpList<T>(this) ?? new List<T>();
             }
-            catch ( Exception ) 
+            catch ( Exception e ) 
             {
-                throw; 
+                throw new Exception($@"Unable to get the list of {scriptType} scripts. {e.Message}", e); 
             }
         }
 

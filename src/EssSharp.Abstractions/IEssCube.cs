@@ -177,26 +177,26 @@ namespace EssSharp
         public Task<List<IEssLock>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns the script (of a specific <see cref="IEssScript" />) type of the cube.
+        /// Returns the script (of a specific <see cref="IEssScript" /> type) from the cube.
         /// </summary>
         /// <param name="scriptName">The name of the script (without an extension).</param>
         public T GetScript<T>( string scriptName ) where T : class, IEssScript;
 
         /// <summary>
-        /// Asynchronously returns the script (of a specific <see cref="IEssScript" />) type of the cube.
+        /// Asynchronously returns the script (of a specific <see cref="IEssScript" /> type) from the cube.
         /// </summary>
         /// <param name="scriptName">The name of the script (without an extension).</param>
         /// <param name="cancellationToken" />
         public Task<T> GetScriptAsync<T>( string scriptName, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
-        /// Returns the list of scripts (of a specific <see cref="IEssScript" />) type of the cube.
+        /// Returns the list of scripts (of a specific <see cref="IEssScript" /> type) from the cube.
         /// </summary>
         /// <typeparam name="T">An <see cref="IEssScript"/>.</typeparam>
         public List<T> GetScripts<T>() where T : class, IEssScript;
 
         /// <summary>
-        /// Asynchronously returns the list of scripts (of a specific <see cref="IEssScript" />) type of the cube.
+        /// Asynchronously returns the list of scripts (of a specific <see cref="IEssScript" /> type) from the cube.
         /// </summary>
         /// <param name="cancellationToken" />
         /// <typeparam name="T">An <see cref="IEssScript" />.</typeparam>

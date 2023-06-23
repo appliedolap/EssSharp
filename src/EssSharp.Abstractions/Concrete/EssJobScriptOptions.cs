@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace EssSharp
@@ -12,7 +11,11 @@ namespace EssSharp
         /// <summary />
         Calc = 1,
         /// <summary />
-        MDX = 2
+        MaxL = 2,
+        /// <summary />
+        MDX = 3,
+        /// <summary />
+        Report = 4
     };
 
     /// <summary />
