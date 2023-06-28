@@ -116,13 +116,13 @@ namespace EssSharp
 
                 var script = new Script() { Name = name, Content = content };
 
-                return typeof(T)?.Name switch
+                return Extensions.GetScriptType<T>() switch
                 {
-                    nameof(IEssCalcScript) => new EssCalcScript(script, this as EssCube) as T,
-                    nameof(IEssMdxScript) => new EssMdxScript(script, this as EssCube) as T,
-                    nameof(IEssMaxlScript) => new EssMaxlScript(script, this as EssCube) as T,
-                    nameof(IEssReportScript) => new EssReportScript(script, this as EssCube) as T,
-                    _ => throw new Exception()
+                    EssScriptType.Calc   => new EssCalcScript(script, this as EssCube) as T,
+                    EssScriptType.MDX    => new EssMdxScript(script, this as EssCube) as T,
+                    EssScriptType.MaxL   => new EssMaxlScript(script, this as EssCube) as T,
+                    EssScriptType.Report => new EssReportScript(script, this as EssCube) as T,
+                    _                    => throw new Exception()
                 };
             }
 
