@@ -118,11 +118,11 @@ namespace EssSharp
 
                 return typeof(T)?.Name switch
                 {
-                    nameof(IEssCalcScript)     => new EssCalcScript(script, this as EssCube) as T,
-                    nameof(IEssMdxScript)      => new EssMdxScript(script, this as EssCube) as T,
-                    //nameof(IEssMaxlScript)   => new EssMaxLScript(script, this as EssCube) as T,
-                    //nameof(IEssReportScript) => new EssReportScript(script, this as EssCube) as T, 
-                    _                          => throw new Exception()
+                    nameof(IEssCalcScript) => new EssCalcScript(script, this as EssCube) as T,
+                    nameof(IEssMdxScript) => new EssMdxScript(script, this as EssCube) as T,
+                    nameof(IEssMaxlScript) => new EssMaxlScript(script, this as EssCube) as T,
+                    nameof(IEssReportScript) => new EssReportScript(script, this as EssCube) as T,
+                    _ => throw new Exception()
                 };
             }
 

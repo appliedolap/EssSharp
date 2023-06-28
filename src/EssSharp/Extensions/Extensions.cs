@@ -241,10 +241,10 @@ namespace EssSharp
         /// <summary />
         internal static EssScriptType GetScriptType<T>() where T : class, IEssScript => typeof(T)?.Name switch
         {
-            "IEssCalcScript"      => EssScriptType.Calc,   // nameof(IEssCalcScript)
+            nameof(IEssCalcScript) => EssScriptType.Calc,
             nameof(IEssMdxScript) => EssScriptType.MDX,
-            "IEssMaxlScript"      => EssScriptType.MaxL,   // nameof(IEssMaxlScript)
-            "IEssReportScript"    => EssScriptType.Report, // nameof(IEssReportScript)
+            nameof(IEssMaxlScript) => EssScriptType.MaxL, 
+            nameof(IEssReportScript) => EssScriptType.Report,
             _                     => EssScriptType.Unknown
         };
 

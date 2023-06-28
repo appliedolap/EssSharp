@@ -46,6 +46,7 @@ namespace EssSharp
 
         #region IEssScript Members
 
+        /// <inheritdoc />
         public string Content
         {
             get => _script.Content;
