@@ -28,10 +28,10 @@ namespace EssSharp
         internal EssMdxScript( Script script, EssCube cube ) : base(script, cube)
         {
             _script = script ??
-                throw new ArgumentNullException(nameof(script), $"An API model {nameof(script)} is required to create an {nameof(EssScript)}.");
+                throw new ArgumentNullException(nameof(script), $"An API model {nameof(script)} is required to create an {nameof(EssMdxScript)}.");
 
             _cube = cube ??
-                throw new ArgumentNullException(nameof(cube), $"An API model {nameof(cube)} is required to create an {nameof(EssScript)}.");
+                throw new ArgumentNullException(nameof(cube), $"An API model {nameof(cube)} is required to create an {nameof(EssMdxScript)}.");
         }
 
         #endregion

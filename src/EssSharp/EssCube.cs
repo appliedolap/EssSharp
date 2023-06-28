@@ -114,18 +114,12 @@ namespace EssSharp
                 if ( string.IsNullOrWhiteSpace(name) )
                     throw new ArgumentException($@"nameof{name} is required to create a new {nameof(T)}.");
 
-                var script = new Script() { Name = name, Content = content };
-
-                return Extensions.GetScriptType<T>() switch
-                {
-                    EssScriptType.Calc   => new EssCalcScript(script, this as EssCube) as T,
-                    EssScriptType.MDX    => new EssMdxScript(script, this as EssCube) as T,
-                    EssScriptType.MaxL   => new EssMaxlScript(script, this as EssCube) as T,
-                    EssScriptType.Report => new EssReportScript(script, this as EssCube) as T,
-                    _                    => throw new Exception()
-                };
+                // Create a new specific IEssScript of the given type with the given name and content.
+                var script = Extensions.CreateScript<T>(new Script() { Name = name, Content = content }, this);
+                
+                // Save the script to the server.
+                return await script.SaveAsync<T>(cancellationToken).ConfigureAwait(false);
             }
-
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
