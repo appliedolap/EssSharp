@@ -102,6 +102,38 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns></returns>
+        public T CreateScript<T>( string name, string content = null ) where T : class, IEssScript => CreateScriptAsync<T>(name, content).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript 
+        {
+            try
+            {
+                if ( string.IsNullOrWhiteSpace(name) )
+                    throw new ArgumentException($@"nameof{name} is required to create a new {nameof(T)}.");
+
+                var script = new Script() { Name = name, Content = content };
+
+                return typeof(T)?.Name switch
+                {
+                    nameof(IEssCalcScript)     => new EssCalcScript(script, this as EssCube) as T,
+                    nameof(IEssMdxScript)      => new EssMdxScript(script, this as EssCube) as T,
+                    //nameof(IEssMaxlScript)   => new EssMaxLScript(script, this as EssCube) as T,
+                    //nameof(IEssReportScript) => new EssReportScript(script, this as EssCube) as T, 
+                    _                          => throw new Exception()
+                };
+            }
+
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get create new {nameof(T)} ""{name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         public void ExecuteScript( EssJobScriptOptions options ) => ExecuteScriptAsync( options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -126,48 +158,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public Object ExecuteMDXQuery(string query, EssQueryPreferences preferences = null) => ExecuteMDXQueryAsync(query, preferences).GetAwaiter().GetResult();
+        public EssQueryReport ExecuteMDXQuery(string query, EssQueryPreferences preferences = null) => ExecuteMDXQueryAsync(query, preferences).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<Object> ExecuteMDXQueryAsync(string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                if ( string.IsNullOrEmpty(query) )
-                    throw new ArgumentException($@"{nameof(query)} is required to execute MDX Query.");
-
-                preferences ??= new EssQueryPreferences();
-
-                var body = new MDXInput( query: query, preferences.ToNamedQueriesPreferences() );
-
-                var api = GetApi<ExecuteMDXApi>();
-
-                if ( await api.MDXExecuteMDXAsync(application: Application.Name, database: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not JObject mdxResponse )
-                    throw new Exception($@"Could not execute query: {query}");
-
-                var report = new EssQueryReport
-                {
-                    Metadata = new EssQueryReport.ReportMetadata()
-                    {
-                        PageDimensionMembers = new List<string>(mdxResponse["metadata"]["page"]?.ToObject<string[]>() ?? new string[0]),
-                        ColumnDimensionMembers = new List<string>(mdxResponse["metadata"]["column"]?.ToObject<string[]>() ?? new string[0]),
-                        RowDimensionMembers = new List<string>(mdxResponse["metadata"]["row"]?.ToObject<string[]>() ?? new string[0])
-                    },
-
-                    //TODO: add mdxResponse["data"]
-                    Data = new object[0,0]
-                };
-
-                return report;
-
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to execute MDX query on cube ""{Name}"". {e.Message}", e);
-            }
-        }
+        public async Task<EssQueryReport> ExecuteMDXQueryAsync(string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default ) => 
+            await new EssMdxScript(new Script() { Content = query }, this).QueryAsync(preferences, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
         /// <returns><see cref="Stream"/></returns>
@@ -349,11 +345,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns> A list of <see cref="IEssScript"/> objects. </returns>
-        public T GetScript<T>( string scriptName ) where T : class, IEssScript => GetScriptAsync<T>(scriptName).GetAwaiter().GetResult();
+        public T GetScript<T>( string scriptName, bool getContent = false ) where T : class, IEssScript => GetScriptAsync<T>(scriptName, getContent).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssScript"/> object of type <typeparamref name="T"/>.</returns>
-        public async Task<T> GetScriptAsync<T>( string scriptName, CancellationToken cancellationToken = default ) where T : class, IEssScript
+        public async Task<T> GetScriptAsync<T>( string scriptName, bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
             // Throw if a specific type of IEssScript is not given.
             if ( typeof(T) == typeof(IEssScript) )
@@ -385,9 +381,16 @@ namespace EssSharp
 
             try
             {
-                foreach ( var script in await GetScriptsAsync<T>(cancellationToken).ConfigureAwait(false) )
+                foreach ( var script in await GetScriptsAsync<T>(false, cancellationToken).ConfigureAwait(false) )
+                {
                     if ( string.Equals(script.Name, scriptName, StringComparison.OrdinalIgnoreCase) )
+                    {
+                        if ( getContent )
+                            await script.GetContentAsync(cancellationToken).ConfigureAwait(false);
+
                         return script;
+                    }
+                }
 
                 throw new Exception($"Script not found.");
             }
@@ -399,11 +402,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssScript"/> objects.</returns>
-        public List<T> GetScripts<T>() where T : class, IEssScript => GetScriptsAsync<T>().GetAwaiter().GetResult();
+        public List<T> GetScripts<T>( bool getContent = false ) where T : class, IEssScript => GetScriptsAsync<T>(getContent).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="EssScript"/> objects.</returns>
-       public async Task<List<T>> GetScriptsAsync<T>(CancellationToken cancellationToken = default ) where T : class, IEssScript
+       public async Task<List<T>> GetScriptsAsync<T>( bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
             // Throw if a specific type of IEssScript is not given.
             if ( typeof(T) == typeof(IEssScript) )
@@ -414,9 +417,13 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ScriptsApi>();
-                var scripts = await api.ScriptsListScriptsAsync(applicationName: Application.Name, databaseName: _cube.Name, file: scriptType.ToString()?.ToLowerInvariant(), cancellationToken: cancellationToken).ConfigureAwait(false);
+                var scripts = (await api.ScriptsListScriptsAsync(applicationName: Application.Name, databaseName: _cube.Name, file: scriptType.ToString()?.ToLowerInvariant(), cancellationToken: cancellationToken).ConfigureAwait(false))?
+                    .ToEssSharpList<T>(this) ?? new List<T>();
 
-                return scripts?.ToEssSharpList<T>(this) ?? new List<T>();
+                if ( getContent )
+                    scripts.ForEach(async script => await script.GetContentAsync(cancellationToken));
+
+                return scripts;
             }
             catch ( Exception e ) 
             {

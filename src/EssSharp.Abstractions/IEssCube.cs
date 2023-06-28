@@ -48,9 +48,26 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <param name="content"></param>
+        public T CreateScript<T>( string name, string content = null ) where T : class, IEssScript;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <param name="content"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript;
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="query"></param>
         /// <param name="preferences"></param>
-        public Object ExecuteMDXQuery( string query, EssQueryPreferences preferences = null );
+        public EssQueryReport ExecuteMDXQuery( string query, EssQueryPreferences preferences = null );
 
         /// <summary>
         /// 
@@ -58,7 +75,7 @@ namespace EssSharp
         /// <param name="query"></param>
         /// <param name="preferences"></param>
         /// <param name="cancellationToken"></param>
-        public Task<Object> ExecuteMDXQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
+        public Task<EssQueryReport> ExecuteMDXQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Executes a script (Calc or MDX) on a cube
@@ -180,27 +197,27 @@ namespace EssSharp
         /// Returns the script (of a specific <see cref="IEssScript" /> type) from the cube.
         /// </summary>
         /// <param name="scriptName">The name of the script (without an extension).</param>
-        public T GetScript<T>( string scriptName ) where T : class, IEssScript;
+        public T GetScript<T>( string scriptName, bool getContent = false ) where T : class, IEssScript;
 
         /// <summary>
         /// Asynchronously returns the script (of a specific <see cref="IEssScript" /> type) from the cube.
         /// </summary>
         /// <param name="scriptName">The name of the script (without an extension).</param>
         /// <param name="cancellationToken" />
-        public Task<T> GetScriptAsync<T>( string scriptName, CancellationToken cancellationToken = default ) where T : class, IEssScript;
+        public Task<T> GetScriptAsync<T>( string scriptName, bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
         /// Returns the list of scripts (of a specific <see cref="IEssScript" /> type) from the cube.
         /// </summary>
         /// <typeparam name="T">An <see cref="IEssScript"/>.</typeparam>
-        public List<T> GetScripts<T>() where T : class, IEssScript;
+        public List<T> GetScripts<T>( bool getContent = false ) where T : class, IEssScript;
 
         /// <summary>
         /// Asynchronously returns the list of scripts (of a specific <see cref="IEssScript" /> type) from the cube.
         /// </summary>
         /// <param name="cancellationToken" />
         /// <typeparam name="T">An <see cref="IEssScript" />.</typeparam>
-        public Task<List<T>> GetScriptsAsync<T>( CancellationToken cancellationToken = default ) where T : class, IEssScript;
+        public Task<List<T>> GetScriptsAsync<T>( bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
         /// Gets the list of cube-scoped variables available to the connected user.

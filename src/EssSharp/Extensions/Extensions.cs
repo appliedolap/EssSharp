@@ -241,11 +241,11 @@ namespace EssSharp
         /// <summary />
         internal static EssScriptType GetScriptType<T>() where T : class, IEssScript => typeof(T)?.Name switch
         {
-            "IEssCalcScript"   => EssScriptType.Calc,   // nameof(IEssCalcScript)
-            "IEssMdxScript"    => EssScriptType.MDX,    // nameof(IEssMdxScript)
-            "IEssMaxlScript"   => EssScriptType.MaxL,   // nameof(IEssMaxlScript)
-            "IEssReportScript" => EssScriptType.Report, // nameof(IEssReportScript)
-            _                  => EssScriptType.Unknown
+            "IEssCalcScript"      => EssScriptType.Calc,   // nameof(IEssCalcScript)
+            nameof(IEssMdxScript) => EssScriptType.MDX,
+            "IEssMaxlScript"      => EssScriptType.MaxL,   // nameof(IEssMaxlScript)
+            "IEssReportScript"    => EssScriptType.Report, // nameof(IEssReportScript)
+            _                     => EssScriptType.Unknown
         };
 
         /// <summary>
@@ -269,9 +269,9 @@ namespace EssSharp
                 .Where(script => script is not null)
                 .Select(script => scriptType switch
                 {
-                    EssScriptType.Calc   => new EssScript(script, cube) as T, // new EssCalcScript(script, cube) as T,
+                    EssScriptType.Calc   => new EssCalcScript(script, cube) as T,
                     EssScriptType.MaxL   => new EssScript(script, cube) as T, // new EssMaxlScript(script, cube) as T,
-                    EssScriptType.MDX    => new EssScript(script, cube) as T, // new EssMdxScript(script, cube) as T,
+                    EssScriptType.MDX    => new EssMdxScript(script, cube) as T,
                     EssScriptType.Report => new EssScript(script, cube) as T, // new EssReportScript(script, cube) as T,
                     _                    => new EssScript(script, cube) as T
                 })

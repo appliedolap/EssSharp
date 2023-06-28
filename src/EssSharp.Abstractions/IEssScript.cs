@@ -12,7 +12,7 @@ namespace EssSharp
         /// <summary>
         /// Returns the content of the script
         /// </summary>
-        public string Content { get; }
+        public string Content { get; set; }
 
         /// <summary>
         /// Returns the cube that holds the script
@@ -33,7 +33,7 @@ namespace EssSharp
         /// Returns the type of the script.
         /// </summary>
         public EssScriptType ScriptType { get; }
-
+        
         #endregion
 
         #region Methods
@@ -64,14 +64,27 @@ namespace EssSharp
         /// 
         /// </summary>
         /// <returns></returns>
-        public string GetScriptContent();
+        public string GetContent();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<string> GetScriptContentAsync( CancellationToken cancellationToken = default );
+        public Task<string> GetContentAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public T Save<T>() where T: class, IEssScript;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<T> SaveAsync<T>( CancellationToken cancellationToken = default ) where T : class, IEssScript;
         #endregion
     }
 }

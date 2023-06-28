@@ -66,6 +66,15 @@ namespace EssSharp
 
         /// <summary>MDX Script</summary>
         [Description("MDX Script")]
-        MdxScript = 14
+        MdxScript = 14,
+
+        /// <summary>Report Script</summary>
+        [Description("Report Script")]
+        ReportScript = 15,
+
+        /// <summary>MAXL Script</summary>
+        [Description("MAXL Script")]
+        MAXLScript = 16
+
     }
 }

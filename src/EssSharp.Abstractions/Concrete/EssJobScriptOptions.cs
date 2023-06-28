@@ -39,6 +39,8 @@ namespace EssSharp
             {
                 "csc" => EssJobType.Calc,
                 "mdx" => EssJobType.MdxScript,
+                "rep" => EssJobType.ReportScript,
+                "msh" => EssJobType.MAXLScript,
                 _     => throw new NotImplementedException()
             };
 
@@ -64,6 +66,8 @@ namespace EssSharp
             {
                 EssScriptType.Calc => EssJobType.Calc,
                 EssScriptType.MDX  => EssJobType.MdxScript,
+                EssScriptType.Report => EssJobType.ReportScript,
+                EssScriptType.MaxL => EssJobType.MAXLScript,
                 _                  => throw new NotImplementedException()
             };
 
