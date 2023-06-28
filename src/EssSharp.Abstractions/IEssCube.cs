@@ -46,20 +46,21 @@ namespace EssSharp
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="name"></param>
-        /// <param name="content"></param>
+        /// <param name="name">The name of the script.</param>
+        /// <param name="content">(optional) The content of the new script.</param>
+        /// <param name="cancellationToken"></param>
+        /// <remarks>Creates an <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
         public T CreateScript<T>( string name, string content = null ) where T : class, IEssScript;
 
         /// <summary>
-        /// 
+        /// Asynchronously creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="name"></param>
-        /// <param name="content"></param>
+        /// <param name="name">The name of the script.</param>
+        /// <param name="content">(optional) The content of the new script.</param>
         /// <param name="cancellationToken"></param>
+        /// <remarks>Creates an <see cref="IEssScript"/> of the specific type <typeparamref name="T"/>.</remarks>
         public Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
@@ -194,29 +195,37 @@ namespace EssSharp
         public Task<List<IEssLock>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns the script (of a specific <see cref="IEssScript" /> type) from the cube.
+        /// Gets the script with the given name (and type <typeparamref name="T"/>) from the cube.
         /// </summary>
-        /// <param name="scriptName">The name of the script (without an extension).</param>
+        /// <param name="scriptName">The name of the script.</param>
+        /// <param name="getContent">Whether to get the full script, including content, or only summary details.</param>
+        /// <param name="cancellationToken" />
+        /// <remarks>Returns an <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
         public T GetScript<T>( string scriptName, bool getContent = false ) where T : class, IEssScript;
 
         /// <summary>
-        /// Asynchronously returns the script (of a specific <see cref="IEssScript" /> type) from the cube.
+        /// Asynchronously gets the script with the given name (and type <typeparamref name="T"/>) from the cube.
         /// </summary>
-        /// <param name="scriptName">The name of the script (without an extension).</param>
+        /// <param name="scriptName">The name of the script.</param>
+        /// <param name="getContent">Whether to get the full script, including content, or only summary details.</param>
         /// <param name="cancellationToken" />
+        /// <remarks>Returns an <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
         public Task<T> GetScriptAsync<T>( string scriptName, bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
-        /// Returns the list of scripts (of a specific <see cref="IEssScript" /> type) from the cube.
+        /// Gets the list of scripts with the given type <typeparamref name="T"/> from the cube.
         /// </summary>
-        /// <typeparam name="T">An <see cref="IEssScript"/>.</typeparam>
+        /// <param name="getContent">Whether to get the full scripts, including content, or only summary details.</param>
+        /// <param name="cancellationToken" />
+        /// <remarks>Returns a list of <see cref="IEssScript"/> objects of the specific given type <typeparamref name="T"/>.</remarks>
         public List<T> GetScripts<T>( bool getContent = false ) where T : class, IEssScript;
 
         /// <summary>
-        /// Asynchronously returns the list of scripts (of a specific <see cref="IEssScript" /> type) from the cube.
+        /// Asynchronously gets the list of scripts with the given type <typeparamref name="T"/> from the cube.
         /// </summary>
+        /// <param name="getContent">Whether to get the full scripts, including content, or only summary details.</param>
         /// <param name="cancellationToken" />
-        /// <typeparam name="T">An <see cref="IEssScript" />.</typeparam>
+        /// <remarks>Returns a list of <see cref="IEssScript"/> objects of the specific given type <typeparamref name="T"/>.</remarks>
         public Task<List<T>> GetScriptsAsync<T>( bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
@@ -263,6 +272,16 @@ namespace EssSharp
     public static class IEssCubeExtensions
     {
         /// <summary>
+        /// Asynchronously creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
+        /// </summary>
+        /// <param name="name">The name of the script.</param>
+        /// <param name="content">(optional) The content of the new script.</param>
+        /// <param name="cancellationToken"></param>
+        /// <remarks>Creates an <see cref="IEssScript"/> of the specific type <typeparamref name="T"/>.</remarks>
+        public static async Task<T> CreateScriptAsync<T>( this Task<IEssCube> cubeTask, string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript =>
+            await (await cubeTask.ConfigureAwait(false)).CreateScriptAsync<T>(name, content, cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
         /// Asynchronously gets the drillthrough report with the given name.
         /// </summary>
         /// <param name="reportName" />
@@ -274,9 +293,19 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously gets the list of drillthrough reports.
         /// </summary>
-        /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
+        /// <param name="getDetails">Whether to get the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public static async Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( this Task<IEssCube> cubeTask, bool getDetails = false, CancellationToken cancellationToken = default ) =>
             await (await cubeTask.ConfigureAwait(false)).GetDrillthroughReportsAsync(getDetails, cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Asynchronously gets the script with the given name (and type <typeparamref name="T"/>) from the cube.
+        /// </summary>
+        /// <param name="scriptName">The name of the script.</param>
+        /// <param name="getContent">Whether to get the full script, including content, or only summary details.</param>
+        /// <param name="cancellationToken" />
+        /// <remarks>Returns an <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
+        public static async Task<T> GetScriptAsync<T>( this Task<IEssCube> cubeTask, string scriptName, bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript =>
+            await (await cubeTask.ConfigureAwait(false)).GetScriptAsync<T>(scriptName, getContent, cancellationToken).ConfigureAwait(false);
     }
 }

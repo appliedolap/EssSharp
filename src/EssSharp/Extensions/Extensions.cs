@@ -335,7 +335,7 @@ namespace EssSharp
 
         /// <summary>
         /// Returns a <see cref="DrillthroughMetadataBean"/> from the given <see cref="IEssDrillthroughRange"/> object
-        /// and optionally, an <see cref="IEssDrillthroughOptions"/>..
+        /// and optionally, an <see cref="IEssDrillthroughOptions"/>.
         /// </summary>
         /// <param name="context" />
         /// <param name="options" />
@@ -344,7 +344,7 @@ namespace EssSharp
 
         /// <summary>
         /// Returns a <see cref="DrillthroughMetadataBean"/> from the collection of <see cref="IEssDrillthroughRange"/> objects
-        /// and optionally, an <see cref="IEssDrillthroughOptions"/>..
+        /// and optionally, an <see cref="IEssDrillthroughOptions"/>.
         /// </summary>
         /// <param name="context" />
         /// <param name="options" />
