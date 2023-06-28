@@ -56,6 +56,12 @@ cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseN
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid/mdx".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
+# Fix Schema for script content
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content".get.responses."200".schema = {"$ref": "#/definitions/ScriptContent"}' > json.tmp && mv json.tmp temp.json
+
+# Fix produces for createScript
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/scripts".post.produces = ["application/json"]' > json.tmp && mv json.tmp temp.json
+
 # Return types for locked objects are not a List<LockObjectList>, they are a LockObjectList
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/locks/objects".get.responses."200".schema = {"$ref": "#/definitions/LockObjectList"}' > json.tmp && mv json.tmp temp.json
 
@@ -245,6 +251,16 @@ cat temp.json | jq '.definitions."FileBean" = {
   },
   "xml": {
     "name": "File"
+  }
+}' > json.tmp && mv json.tmp temp.json
+
+# Modeling response for Getting script content
+cat temp.json | jq '.definitions."ScriptContent" = {
+  "type": "object",
+    "properties": {
+    "content": {
+      "type": "string"
+    }
   }
 }' > json.tmp && mv json.tmp temp.json
 

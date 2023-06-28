@@ -14430,7 +14430,10 @@
           "500": {
             "description": "<p>Internal Server Error.</p>"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}": {
@@ -14663,7 +14666,6 @@
             "schema": {
               "$ref": "#/definitions/ScriptContent"
             }
-
           },
           "400": {
             "description": "<p><strong>Bad Request</strong></p><p>Failed to get script contents. The application, database, or script name may be incorrect.</p>"
@@ -23940,14 +23942,6 @@
         }
       }
     },
-    "ScriptContent": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "type": "string"
-        }
-      }
-    },
     "Limits": {
       "type": "object",
       "properties": {
@@ -24102,6 +24096,14 @@
       },
       "xml": {
         "name": "File"
+      }
+    },
+    "ScriptContent": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
       }
     },
     "FileCollectionResponse": {

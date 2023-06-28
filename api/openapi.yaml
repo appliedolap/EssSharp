@@ -12346,7 +12346,7 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/Script'
           description: "<p><strong>OK</strong></p><p>Script created successfully,\
@@ -26331,13 +26331,6 @@ components:
           format: int64
           type: integer
       type: object
-    ScriptContent:
-      example:
-        content: content
-      properties:
-        content:
-          type: string
-      type: object
     Limits:
       example:
         dataSegmentSize:
@@ -26558,6 +26551,13 @@ components:
       type: object
       xml:
         name: File
+    ScriptContent:
+      example:
+        content: content
+      properties:
+        content:
+          type: string
+      type: object
     FileCollectionResponse:
       example:
         totalResults: 6
