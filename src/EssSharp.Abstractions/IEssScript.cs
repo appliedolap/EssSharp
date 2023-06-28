@@ -52,13 +52,13 @@ namespace EssSharp
         /// <summary>
         /// Executes a script
         /// </summary>
-        void Execute( );
+        IEssJob Execute( );
 
         /// <summary>
         /// Executes a script
         /// </summary>
         /// <param name="cancellationToken"></param>
-        Task ExecuteAsync( CancellationToken cancellationToken = default );
+        Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// 

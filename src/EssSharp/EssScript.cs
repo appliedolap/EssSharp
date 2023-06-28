@@ -101,7 +101,9 @@ namespace EssSharp
                     CubeName = Cube.Name
                 };
                 
-                await Cube.Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ThrowIfFailed().ConfigureAwait(false);
+                var job = await Cube.Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ThrowIfFailed().ConfigureAwait(false);
+
+                return job;
                 
             }
             catch ( OperationCanceledException ) { throw; }
