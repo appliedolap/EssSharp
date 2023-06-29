@@ -87,11 +87,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public void Execute() => ExecuteAsync( ).GetAwaiter().GetResult();
+        public IEssJob Execute() => ExecuteAsync( ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <remarks>TODO: FIGURE OUT HOW TO MAP SCRIPT TYPE TO JOBTYPE.</remarks>
-        public async Task ExecuteAsync( CancellationToken cancellationToken = default)
+        public async Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default)
         {
             try
             {
