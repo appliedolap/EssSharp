@@ -23,11 +23,11 @@ using Xunit.Sdk;
 namespace EssSharp.Integration.Setup
 {
     [CollectionDefinition("EssSharp Integration Tests")]
-    public class TestsCollection { }
+    public class TestsCollection : ICollectionFixture<CollectionFixture> { }
 
-    public class TestsFixture : IDisposable
+    public class CollectionFixture : IDisposable
     {
-        public TestsFixture()
+        public CollectionFixture()
         {
             // Do "global" initialization here; Only called once.
             var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync();
@@ -140,7 +140,7 @@ namespace EssSharp.Integration.Setup
         }
     }
 
-    public class IntegrationTestBase : IClassFixture<TestsFixture>
+    public class IntegrationTestBase
     {
         public IntegrationTestBase() { }
 
