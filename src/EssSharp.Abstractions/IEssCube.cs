@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
-using System.IO;
-using System;
-using System.Xml.Linq;
 
 namespace EssSharp
 {
@@ -14,6 +12,11 @@ namespace EssSharp
         /// Returns the parent application of the cube.
         /// </summary>
         public IEssApplication Application { get; }
+
+        /// <summary>
+        /// Returns the type of the cube.
+        /// </summary>
+        public EssCubeType CubeType { get; }
 
         /// <summary>
         /// Clears data from a cube
