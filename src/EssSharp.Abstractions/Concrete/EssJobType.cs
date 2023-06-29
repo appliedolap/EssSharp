@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace EssSharp
 {
-    /// <summary >
+    /// <summary />
     public enum EssJobType
     {
         /// <summary>Unknown</summary>

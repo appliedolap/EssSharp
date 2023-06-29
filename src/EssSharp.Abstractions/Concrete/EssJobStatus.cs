@@ -2,7 +2,7 @@
 
 namespace EssSharp
 {
-    /// <summary >
+    /// <summary />
     public enum EssJobStatus
     {
         /// <summary>New</summary>

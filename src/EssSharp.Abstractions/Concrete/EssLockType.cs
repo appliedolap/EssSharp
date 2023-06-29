@@ -1,17 +1,13 @@
-﻿using System.Runtime.Serialization;
-
-namespace EssSharp
+﻿namespace EssSharp
 {
-    /// <summary >
-    /// <summary>
-    /// Defines Type
-    /// </summary>
+    /// <summary />
     public enum EssLockType
     {
         /// <summary>
         /// Enum UNKNOWN for for value: UNKNOWN
         /// </summary>
         UNKNOWN = 0,
+
         /// <summary>
         /// Enum OUTLINE for value: OUTLINE
         /// </summary>
