@@ -46,10 +46,17 @@ namespace EssSharp
 
         #endregion
 
-        #region IEssCube Members
+        #region IEssCube Properties
 
         /// <inheritdoc />
         public IEssApplication Application => _application;
+
+        /// <inheritdoc />
+        public EssCubeType CubeType => _cube.Type.HasValue && Enum.IsDefined(typeof(EssCubeType), (int)_cube.Type) ? (EssCubeType)_cube.Type : EssCubeType.Unknown;
+
+        #endregion
+
+        #region IEssCube Methods
 
         /// <inheritdoc />
         public void ClearDataFromCube( EssJobClearDataOptions options = null ) => ClearDataFromCubeAsync(options).GetAwaiter().GetResult();
@@ -109,11 +116,36 @@ namespace EssSharp
         /// <returns></returns>
         public async Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript 
         {
+            // Throw if a specific type of IEssScript is not given.
+            if ( typeof(T) == typeof(IEssScript) )
+                throw new ArgumentException($"A specific type of {nameof(IEssScript)} must be given.", "T");
+
+            // Get the script type associated with the given IEssScript interface.
+            var scriptType = Extensions.GetScriptType<T>();
+
+            if ( string.IsNullOrWhiteSpace(name) )
+                throw new ArgumentException($"A script name is required to create a new {scriptType} script.", nameof(name));
+
+            // If a script name with an extension was given...
+            if ( Path.HasExtension(name) )
+            {
+                // ...and the extension is appropriate for the given script type
+                bool hasAppropriateExtension = Path.GetExtension(name)?.ToLowerInvariant() switch
+                {
+                    ".csc" => scriptType is EssScriptType.Calc,
+                    ".rep" => scriptType is EssScriptType.Report,
+                    ".mdx" => scriptType is EssScriptType.MDX,
+                    ".msh" => scriptType is EssScriptType.MaxL,
+                    _      => false
+                };
+
+                // Strip an appropriate extension for the given script type.
+                if ( hasAppropriateExtension )
+                    name = Path.GetFileNameWithoutExtension(name);
+            }
+
             try
             {
-                if ( string.IsNullOrWhiteSpace(name) )
-                    throw new ArgumentException($@"nameof{name} is required to create a new {nameof(T)}.");
-
                 // Create a new specific IEssScript of the given type with the given name and content.
                 var script = Extensions.CreateScript<T>(new Script() { Name = name, Content = content }, this);
                 
@@ -123,7 +155,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get create new {nameof(T)} ""{name}"". {e.Message}", e);
+                throw new Exception($@"Unable to create {scriptType} script ""{name}"". {e.Message}", e);
             }
         }
 
