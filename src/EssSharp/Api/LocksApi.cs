@@ -36,8 +36,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">Maximum number of blocks to return. Default is 50. (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;LockBlockList&gt;</returns>
-        List<LockBlockList> LocksGetLockedBlocks(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        /// <returns>LockBlockList</returns>
+        LockBlockList LocksGetLockedBlocks(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
 
         /// <summary>
         /// List Locked Blocks
@@ -51,8 +51,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">Maximum number of blocks to return. Default is 50. (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;LockBlockList&gt;</returns>
-        ApiResponse<List<LockBlockList>> LocksGetLockedBlocksWithHttpInfo(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        /// <returns>ApiResponse of LockBlockList</returns>
+        ApiResponse<LockBlockList> LocksGetLockedBlocksWithHttpInfo(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
         /// <summary>
         /// List Locked Objects
         /// </summary>
@@ -210,8 +210,8 @@ namespace EssSharp.Api
         /// <param name="limit">Maximum number of blocks to return. Default is 50. (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;LockBlockList&gt;</returns>
-        System.Threading.Tasks.Task<List<LockBlockList>> LocksGetLockedBlocksAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of LockBlockList</returns>
+        System.Threading.Tasks.Task<LockBlockList> LocksGetLockedBlocksAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List Locked Blocks
@@ -226,8 +226,8 @@ namespace EssSharp.Api
         /// <param name="limit">Maximum number of blocks to return. Default is 50. (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;LockBlockList&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<LockBlockList>>> LocksGetLockedBlocksWithHttpInfoAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (LockBlockList)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LockBlockList>> LocksGetLockedBlocksWithHttpInfoAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List Locked Objects
         /// </summary>
@@ -502,10 +502,10 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">Maximum number of blocks to return. Default is 50. (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;LockBlockList&gt;</returns>
-        public List<LockBlockList> LocksGetLockedBlocks(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        /// <returns>LockBlockList</returns>
+        public LockBlockList LocksGetLockedBlocks(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<List<LockBlockList>> localVarResponse = LocksGetLockedBlocksWithHttpInfo(applicationName, databaseName, offset, limit);
+            EssSharp.Client.ApiResponse<LockBlockList> localVarResponse = LocksGetLockedBlocksWithHttpInfo(applicationName, databaseName, offset, limit);
             return localVarResponse.Data;
         }
 
@@ -518,8 +518,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">Maximum number of blocks to return. Default is 50. (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;LockBlockList&gt;</returns>
-        public EssSharp.Client.ApiResponse<List<LockBlockList>> LocksGetLockedBlocksWithHttpInfo(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        /// <returns>ApiResponse of LockBlockList</returns>
+        public EssSharp.Client.ApiResponse<LockBlockList> LocksGetLockedBlocksWithHttpInfo(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -578,7 +578,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<List<LockBlockList>>("/applications/{applicationName}/databases/{databaseName}/locks/blocks", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<LockBlockList>("/applications/{applicationName}/databases/{databaseName}/locks/blocks", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("LocksGetLockedBlocks", localVarResponse);
@@ -601,10 +601,10 @@ namespace EssSharp.Api
         /// <param name="limit">Maximum number of blocks to return. Default is 50. (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;LockBlockList&gt;</returns>
-        public async System.Threading.Tasks.Task<List<LockBlockList>> LocksGetLockedBlocksAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of LockBlockList</returns>
+        public async System.Threading.Tasks.Task<LockBlockList> LocksGetLockedBlocksAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<List<LockBlockList>> localVarResponse = await LocksGetLockedBlocksWithHttpInfoAsync(applicationName, databaseName, offset, limit, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<LockBlockList> localVarResponse = await LocksGetLockedBlocksWithHttpInfoAsync(applicationName, databaseName, offset, limit, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -618,8 +618,8 @@ namespace EssSharp.Api
         /// <param name="limit">Maximum number of blocks to return. Default is 50. (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;LockBlockList&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<LockBlockList>>> LocksGetLockedBlocksWithHttpInfoAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (LockBlockList)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<LockBlockList>> LocksGetLockedBlocksWithHttpInfoAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -679,7 +679,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<LockBlockList>>("/applications/{applicationName}/databases/{databaseName}/locks/blocks", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<LockBlockList>("/applications/{applicationName}/databases/{databaseName}/locks/blocks", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

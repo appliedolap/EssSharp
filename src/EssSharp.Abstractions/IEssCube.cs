@@ -189,13 +189,36 @@ namespace EssSharp
         /// <summary>
         /// Returns a list of locked objects
         /// </summary>
-        public List<IEssLock> GetLockedObjects();
+        public List<IEssLockObject> GetLockedObjects();
 
         /// <summary>
         /// Asynchronously gets a list of locked objects
         /// </summary>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssLock>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssLockObject>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="IEssLockBlock"></typeparam>
+        public List<IEssLockBlock> GetLockedBlocks();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<List<IEssLockBlock>> GetLockedBlocksAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="lockedList"></param>
+        public void Unlock<T>( List<T> lockedList ) where T : class, IEssLock;
+
+        /// <inheritdoc />
+        public Task UnlockAsync<T>( List<T> lockedList, CancellationToken cancellationToken = default ) where T : class, IEssLock;
 
         /// <summary>
         /// Gets the script with the given name (and type <typeparamref name="T"/>) from the cube.

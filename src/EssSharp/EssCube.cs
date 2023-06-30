@@ -349,23 +349,98 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
-        public List<IEssLock> GetLockedObjects() => GetLockedObjectsAsync().GetAwaiter().GetResult();
+        public IEssLockObject GetLockedObject( string name ) => GetLockedObjectAsync( name ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <param name="cancellationToken"></param>
         /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
-        public async Task<List<IEssLock>> GetLockedObjectsAsync( CancellationToken cancellationToken = default )
+        public async Task<IEssLockObject> GetLockedObjectAsync( string name, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<LocksApi>();
-                var lockedObjects = await api.LocksGetLockedObjectsAsync(Application.Name, Name, null, null, 0, cancellationToken).ConfigureAwait(false);
 
-                return lockedObjects?.ToEssSharpList(this) ?? new List<IEssLock>();
+                foreach ( var lockObject in await GetLockedObjectsAsync( cancellationToken ).ConfigureAwait(false) )
+                {
+                    if ( String.Equals(name, lockObject.Name, StringComparison.OrdinalIgnoreCase ) )
+                        return lockObject; 
+                }
+                
+                throw new Exception($@"Could not get locked object {name}.");
+
             }
-            catch ( Exception ) 
-            { 
-                throw;
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get locked objects from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        public List<IEssLockObject> GetLockedObjects( ) => GetLockedObjectsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <param name="cancellationToken"></param>
+        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        public async Task<List<IEssLockObject>> GetLockedObjectsAsync(CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<LocksApi>();
+
+                if ( await api.LocksGetLockedObjectsAsync(applicationName: Application.Name, databaseName: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } lockObjects )
+                    throw new Exception("Cannot get locked objects.");
+
+                return lockObjects.ToEssSharpList(this) ?? new List<IEssLockObject>();
+
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get locked objects from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public void Unlock<T>( List<T> lockedList ) where T : class, IEssLock  => UnlockAsync<T>(lockedList).GetAwaiter().GetResult(); 
+
+        /// <inheritdoc />
+        public async Task UnlockAsync<T>(List<T> lockedList, CancellationToken cancellationToken = default ) where T : class, IEssLock
+        {
+            try
+            {
+                foreach ( var locked in lockedList )
+                    await locked.UnlockAsync( cancellationToken ).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get locked objects from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        public List<IEssLockBlock> GetLockedBlocks() => GetLockedBlocksAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssLockBlock>> GetLockedBlocksAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<LocksApi>();
+
+                if ( await api.LocksGetLockedBlocksAsync(applicationName: Application.Name, databaseName: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } lockBlocks )
+                    throw new Exception("Cannot get locked blocks.");
+
+                return lockBlocks?.ToEssSharpList(this) ?? new List<IEssLockBlock>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to load get locked blocks from cube ""{Name}"". {e.Message}", e);
             }
         }
 

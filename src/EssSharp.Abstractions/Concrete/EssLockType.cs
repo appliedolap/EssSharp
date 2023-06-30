@@ -1,7 +1,33 @@
 ﻿namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// 
+    /// </summary>
     public enum EssLockType
+    {
+        /// <summary>
+        /// Enum UNKNOWN for for value: UNKNOWN
+        /// </summary>
+        Unknown = 0,
+
+        /// <summary>
+        /// Enum Object for for value: Object
+        /// </summary>
+        Object = 1,
+
+        /// <summary>
+        /// Enum Blocked for for value: Blocked
+        /// </summary>
+        Block = 2
+
+    };
+
+
+    /// <summary >
+    /// <summary>
+    /// Defines Type
+    /// </summary>
+    public enum EssLockedFileType
     {
         /// <summary>
         /// Enum UNKNOWN for for value: UNKNOWN

@@ -1,24 +1,24 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EssSharp
 {
     /// <summary />
     public interface IEssLock : IEssObject
     {
+        #region IEssLock Member Properties
+
         /// <summary>
-        /// Returns the Lock Object Type
+        /// 
         /// </summary>
         public EssLockType LockType { get; }
 
-        /// <summary>
-        /// Returns the user 
-        /// </summary>
-        public string User { get;  }
+        #endregion
 
-        /// <summary>
-        /// Returns the time 
-        /// </summary>
-        public DateTime Time { get; }
+        public void Unlock();
+
+        public Task UnlockAsync( CancellationToken cancellationToken = default );
 
     }
 }

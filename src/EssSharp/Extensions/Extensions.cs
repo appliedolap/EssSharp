@@ -170,13 +170,13 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns a <see cref="List{T}"/> of <see cref="IEssLock"/> objects associated with the given <see cref="EssCube"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssLockObject"/> objects associated with the given <see cref="EssCube"/>.
         /// </summary>
         /// <param name="lockObjectList"></param>
         /// <param name="cube"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static List<IEssLock> ToEssSharpList(this LockObjectList lockObjectList, EssCube cube)
+        internal static List<IEssLockObject> ToEssSharpList(this LockObjectList lockObjectList, EssCube cube)
         {
             if (cube is null)
                 throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
@@ -184,9 +184,29 @@ namespace EssSharp
             return lockObjectList
                 .Items?
                 .Where(lockObject => lockObject is not null)
-                .Select(lockObject => new EssLock(lockObject, cube) as IEssLock)
-                .ToList() ?? new List<IEssLock>();
+                .Select(lockObject => new EssLockObject(lockObject, cube)  as IEssLockObject)
+                .ToList() ?? new List<IEssLockObject>();
         }
+
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssLockBlock"/> objects associated with the given <see cref="EssCube"/>.
+        /// </summary>
+        /// <param name="lockBlockList"></param>
+        /// <param name="cube"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static List<IEssLockBlock> ToEssSharpList( this LockBlockList lockBlockList, EssCube cube )
+        {
+            if ( cube is null )
+                throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
+
+            return lockBlockList
+                .Items?
+                .Where(lockBlock => lockBlock is not null)
+                .Select(lockBlock => new EssLockBlock(lockBlock, cube) as IEssLockBlock)
+                .ToList() ?? new List<IEssLockBlock>();
+        }
+
 
         /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssDrillthroughReport"/> objects associated with the given <see cref="EssCube"/>.

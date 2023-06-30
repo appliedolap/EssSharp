@@ -4392,14 +4392,10 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/LockBlockList'
-                type: array
+                $ref: '#/components/schemas/LockBlockList'
             application/xml:
               schema:
-                items:
-                  $ref: '#/components/schemas/LockBlockList'
-                type: array
+                $ref: '#/components/schemas/LockBlockList'
           description: "<p><strong>OK</strong></p><p>Locked blocks returned successfully,\
             \ including details of locked blocks and links to unlock the objects.</p>"
         "400":

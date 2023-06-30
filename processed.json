@@ -5205,10 +5205,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Locked blocks returned successfully, including details of locked blocks and links to unlock the objects.</p>",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/LockBlockList"
-              }
+              "$ref": "#/definitions/LockBlockList"
             }
           },
           "400": {

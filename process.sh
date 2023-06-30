@@ -97,6 +97,9 @@ cat temp.json | jq '.paths."/datasources/query/stream".post.consumes = ["applica
 cat temp.json | jq '.paths."/files".get.responses."200".schema = { "$ref": "#/definitions/FileCollectionResponse" }' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/files/{path}".get.responses."200".schema = { "$ref": "#/definitions/FileCollectionResponse" }' > json.tmp && mv json.tmp temp.json
 
+# Updating get.Response for GetLockedBlock
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/locks/blocks".get.responses."200".schema = { "$ref": "#/definitions/LockBlockList" }' > json.tmp && mv json.tmp temp.json
+
 # Add a stream request parameter to the files put endpoint.
 cat temp.json | jq '.paths."/files/{path}".put.consumes = ["application/octet-stream"]' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/files/{path}".put.parameters += [

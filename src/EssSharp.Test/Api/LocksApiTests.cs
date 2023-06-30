@@ -64,7 +64,7 @@ namespace EssSharp.Test.Api
             //int? offset = null;
             //int? limit = null;
             //var response = instance.LocksGetLockedBlocks(applicationName, databaseName, offset, limit);
-            //Assert.IsType<List<LockBlockList>>(response);
+            //Assert.IsType<LockBlockList>(response);
         }
 
         /// <summary>

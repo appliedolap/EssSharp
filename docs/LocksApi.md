@@ -13,7 +13,7 @@ All URIs are relative to */essbase/rest/v1*
 
 <a name="locksgetlockedblocks"></a>
 # **LocksGetLockedBlocks**
-> List&lt;LockBlockList&gt; LocksGetLockedBlocks (string applicationName, string databaseName, int? offset = null, int? limit = null)
+> LockBlockList LocksGetLockedBlocks (string applicationName, string databaseName, int? offset = null, int? limit = null)
 
 List Locked Blocks
 
@@ -48,7 +48,7 @@ namespace Example
             try
             {
                 // List Locked Blocks
-                List<LockBlockList> result = apiInstance.LocksGetLockedBlocks(applicationName, databaseName, offset, limit);
+                LockBlockList result = apiInstance.LocksGetLockedBlocks(applicationName, databaseName, offset, limit);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -69,7 +69,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List Locked Blocks
-    ApiResponse<List<LockBlockList>> response = apiInstance.LocksGetLockedBlocksWithHttpInfo(applicationName, databaseName, offset, limit);
+    ApiResponse<LockBlockList> response = apiInstance.LocksGetLockedBlocksWithHttpInfo(applicationName, databaseName, offset, limit);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -93,7 +93,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;LockBlockList&gt;**](LockBlockList.md)
+[**LockBlockList**](LockBlockList.md)
 
 ### Authorization
 
