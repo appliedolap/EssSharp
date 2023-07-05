@@ -352,7 +352,6 @@ namespace EssSharp
         public IEssLockObject GetLockedObject( string name ) => GetLockedObjectAsync( name ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <param name="cancellationToken"></param>
         /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
         public async Task<IEssLockObject> GetLockedObjectAsync( string name, CancellationToken cancellationToken = default )
         {
