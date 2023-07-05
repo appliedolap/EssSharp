@@ -10,10 +10,9 @@ using Docker.DotNet.Models;
 using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Configurations;
 using DotNet.Testcontainers.Containers;
-
 using Testcontainers.MsSql;
-
-using AccessMode = DotNet.Testcontainers.Configurations.AccessMode;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace EssSharp.Integration.Setup
 {
@@ -33,7 +32,7 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         /// <param name="cancellationToken" />
-        public static async Task InitializeDatabaseContainerAsync( CancellationToken cancellationToken = default )
+        public static async Task InitializeDatabaseContainerAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
         {
             // If the database test container is running, update the retained ID and return.
             if ( _databaseTestContainer?.State is TestcontainersStates.Running )
@@ -59,6 +58,8 @@ namespace EssSharp.Integration.Setup
             var binPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var msSqlScriptPath = Path.Combine(binPath, "Scripts", "MsSql");
 
+            sink?.OnMessage(new DiagnosticMessage($@"""{msSqlScriptPath}"" {(Path.Exists(msSqlScriptPath) ? "exists." : "does not exist.")}"));
+
             _databaseTestContainer = new MsSqlBuilder()
                 .WithImage(@"mcr.microsoft.com/mssql/server:2022-latest")
                 .WithName("essbase-21-4-database")
@@ -70,7 +71,7 @@ namespace EssSharp.Integration.Setup
                 // mounts with insufficient permissions AND is not available in time
                 // for use with the startup/entrypoint command.
                 //.WithResourceMapping(Path.Combine(msSqlScriptPath, @"start-db.sh"), @"/opt/scripts/start-db.sh")
-                .WithBindMount(msSqlScriptPath, @"/opt/scripts", AccessMode.ReadWrite)
+                .WithBindMount(msSqlScriptPath, @"/opt/scripts", DotNet.Testcontainers.Configurations.AccessMode.ReadWrite)
                 .WithCommand(@"/opt/scripts/start-db.sh")
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" })
                 .WithCreateParameterModifier(pm => pm.Healthcheck = new Docker.DotNet.Models.HealthConfig()
@@ -96,7 +97,7 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         /// <param name="cancellationToken" />
-        public static async Task InitializeEssbaseContainerAsync( CancellationToken cancellationToken = default )
+        public static async Task InitializeEssbaseContainerAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
         {
             // If the essbase test container is running, update the retained ID and return.
             if ( _essbaseTestContainer?.State is TestcontainersStates.Running )

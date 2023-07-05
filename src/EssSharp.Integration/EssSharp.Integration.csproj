@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Scripts\MsSql\configure-db.sh" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Scripts\MsSql\setup.sql" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Scripts\MsSql\start-db.sh" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
@@ -23,15 +30,4 @@
     <ProjectReference Include="..\EssSharp\EssSharp.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Scripts\MsSql\configure-db.sh">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Scripts\MsSql\setup.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Scripts\MsSql\start-db.sh">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

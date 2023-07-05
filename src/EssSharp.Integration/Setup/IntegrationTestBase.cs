@@ -27,11 +27,11 @@ namespace EssSharp.Integration.Setup
 
     public class CollectionFixture : IDisposable
     {
-        public CollectionFixture()
+        public CollectionFixture( IMessageSink sink )
         {
             // Do "global" initialization here; Only called once.
-            var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync();
-            var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync();
+            var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync(sink);
+            var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync(sink);
 
             Task.WhenAll(databaseTask, essbaseTask).GetAwaiter().GetResult();
         }
