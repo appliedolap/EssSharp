@@ -28,6 +28,7 @@ namespace EssSharp.Integration.Setup
             TestcontainersSettings.OS?.DockerEndpointAuthConfig?.GetDockerClientConfiguration()?.CreateClient();
 
         /// <summary />
+        /// <param name="sink" />
         /// <param name="cancellationToken" />
         public static async Task InitializeDatabaseContainerAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
         {
@@ -55,8 +56,7 @@ namespace EssSharp.Integration.Setup
             var binPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var msSqlScriptPath = Path.Combine(binPath, "Scripts", "MsSql");
 
-            sink?.OnMessage(new DiagnosticMessage($@"""{msSqlScriptPath}"" {(Path.Exists(msSqlScriptPath) ? "exists." : "does not exist.")}"));
-
+            // Build the database container.
             _databaseTestContainer = new MsSqlBuilder()
                 .WithImage(@"mcr.microsoft.com/mssql/server:2022-latest")
                 .WithName("essbase-21-4-database")
@@ -89,6 +89,7 @@ namespace EssSharp.Integration.Setup
         public static string DatabaseContainerId => _databaseContainerId ?? throw new Exception("A database container must be initialized or running.");
 
         /// <summary />
+        /// <param name="sink" />
         /// <param name="cancellationToken" />
         public static async Task InitializeEssbaseContainerAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
         {
@@ -124,7 +125,6 @@ namespace EssSharp.Integration.Setup
                 .WithEnvironment("DATABASE_ADMIN_USERNAME", "sa")
                 .WithEnvironment("DATABASE_ADMIN_PASSWORD", "StrongPassw0rd")
                 .WithEnvironment("DATABASE_WAIT_TIMEOUT", "240")
-                //.WithBindMount(msSqlScriptPath, @"/opt/scripts", AccessMode.ReadWrite)
                 .WithCommand(@"/u01/container-scripts/createAndStartDomain.sh")
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" })
                 .Build() as DockerContainer;
