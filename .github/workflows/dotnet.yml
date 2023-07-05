@@ -1,13 +1,14 @@
 # This workflow will build and test a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: Build/Test EssSharp
+name: Build / Test
 
 on:
   push:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,19 +22,23 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    # Setup .NET 6.0
-    - name: Setup .NET 6.0
+    # Setup .NET 7.0
+    - name: Setup .NET 7.0
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 7.0.x
     
     # The full MAUI Workload with the required target platforms is not supported on Linux.
     # We build and test a solution filter without the MAUI client to workaround this issue.
     #- name: Install MAUI Workload
     #  run: dotnet workload install maui --ignore-failed-sources
-    - name: Restore dependencies
+    
+    # Restore the dependencies of the EssSharp and EssSharp.Abstractions libraries.
+    - name: Restore EssSharp dependencies
       run: dotnet restore EssSharp.slnf
-    - name: Build
+    
+    # Build the EssSharp and EssSharp.Abstractions
+    - name: Build EssSharp
       run: dotnet build EssSharp.slnf --no-restore
     
     # Login to Docker Hub using the username and token secrets.

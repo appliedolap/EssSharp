@@ -64,11 +64,7 @@ namespace EssSharp.Integration.Setup
                 .WithEnvironment("ACCEPT_EULA", "Y")
                 .WithEnvironment("SA_PASSWORD", "StrongPassw0rd")
                 .WithPassword("StrongPassw0rd")
-                // Does NOT work. .WithResourceMapping is recommeded, but the resource
-                // mounts with insufficient permissions AND is not available in time
-                // for use with the startup/entrypoint command.
-                //.WithResourceMapping(Path.Combine(msSqlScriptPath, @"start-db.sh"), @"/opt/scripts/start-db.sh")
-                .WithBindMount(msSqlScriptPath, @"/opt/scripts", DotNet.Testcontainers.Configurations.AccessMode.ReadWrite)
+                .WithResourceMapping(new DirectoryInfo(msSqlScriptPath), @"/opt/scripts", UnixFileModes.UserRead | UnixFileModes.UserWrite | UnixFileModes.UserExecute | UnixFileModes.GroupRead | UnixFileModes.GroupExecute | UnixFileModes.OtherRead | UnixFileModes.OtherExecute)
                 .WithCommand(@"/opt/scripts/start-db.sh")
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" })
                 .WithCreateParameterModifier(pm => pm.Healthcheck = new Docker.DotNet.Models.HealthConfig()
