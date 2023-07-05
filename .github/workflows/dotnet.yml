@@ -12,7 +12,11 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    # Linux containers are not supported on the windows-latest runner.
+    # We use the ubuntu-latest runner to workaround this issue:
+    # https://github.com/actions/runner-images/issues/1143
+    # runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -20,16 +24,18 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Install MAUI Workload
-      run: dotnet workload install maui --ignore-failed-sources
+    # The full MAUI Workload with the required target platforms is not supported on Linux.
+    # We build and test a solution filter without the MAUI client to workaround this issue.
+    #- name: Install MAUI Workload
+    #  run: dotnet workload install maui --ignore-failed-sources
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build EssSharp.slnf --no-restore
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Test
-      run: dotnet test --no-build --nologo --logger:"console;verbosity=detailed"
+      run: dotnet test EssSharp.slnf --no-build --nologo --logger:"console;verbosity=detailed"

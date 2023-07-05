@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Docker.DotNet;
-using Docker.DotNet.Models;
 using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Configurations;
 using DotNet.Testcontainers.Containers;
@@ -18,8 +17,6 @@ namespace EssSharp.Integration.Setup
 {
     public static class IntegrationTestFactory
     {
-        private static Network         _standaloneNetwork;
-
         private static DockerContainer _databaseTestContainer;
         private static string          _databaseContainerId;
 
