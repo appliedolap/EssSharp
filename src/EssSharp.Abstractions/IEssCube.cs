@@ -21,14 +21,12 @@ namespace EssSharp
         /// <summary>
         /// Clears data from a cube
         /// </summary>
-        /// <param name="cubeName"></param>
         /// <param name="options"></param>
         public void ClearDataFromCube( EssJobClearDataOptions options = null );
 
         /// <summary>
         /// Clears data from a cube
         /// </summary>
-        /// <param name="cubeName"></param>
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         public Task ClearDataFromCubeAsync( EssJobClearDataOptions options = null, CancellationToken cancellationToken = default );
@@ -36,50 +34,36 @@ namespace EssSharp
         /// <summary>
         /// Create a cube variable
         /// </summary>
-        /// <param name="varName"></param>
+        /// <param name="name"></param>
         /// <param name="value"></param>
         public IEssCubeVariable CreateCubeVariable( string name, string value );
 
         /// <summary>
         /// Create a cube variable
         /// </summary>
-        /// <param name="varName"></param>
+        /// <param name="name"></param>
         /// <param name="value"></param>
         /// <param name="cancellationToken"></param>
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        public IEssLockObject GetLockedObject( string name );
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<IEssLockObject> GetLockedObjectAsync( string name, CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Sychronously lock an object on the server.
+        /// Synchronously lock an object on the server.
         /// </summary>
         /// <param name="lockOptions"></param>
         public IEssLockObject CreateLockObject( EssLockOptions lockOptions );
 
         /// <summary>
-        /// Asychronously lock an object on the server.
+        /// Asynchronously lock an object on the server.
         /// </summary>
         /// <param name="lockOptions"></param>
         /// <param name="cancellationToken"></param>
         public Task<IEssLockObject> CreateLockObjectAsync( EssLockOptions lockOptions, CancellationToken cancellationToken = default );
-        
+
         /// <summary>
         /// Creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
         /// </summary>
         /// <param name="name">The name of the script.</param>
         /// <param name="content">(optional) The content of the new script.</param>
-        /// <param name="cancellationToken"></param>
         /// <remarks>Creates an <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
         public T CreateScript<T>( string name, string content = null ) where T : class, IEssScript;
 
@@ -213,12 +197,25 @@ namespace EssSharp
         public Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( bool getDetails = false, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns a list of locked objects
+        /// Gets the locked object with the given name.
+        /// </summary>
+        /// <param name="name" />
+        public IEssLockObject GetLockedObject( string name );
+
+        /// <summary>
+        /// Asynchronously gets the locked object with the given name.
+        /// </summary>
+        /// <param name="name" />
+        /// <param name="cancellationToken" />
+        public Task<IEssLockObject> GetLockedObjectAsync( string name, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the list of locked objects.
         /// </summary>
         public List<IEssLockObject> GetLockedObjects();
 
         /// <summary>
-        /// Asynchronously gets a list of locked objects
+        /// Asynchronously gets the list of locked objects.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssLockObject>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
@@ -226,7 +223,6 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="IEssLockBlock"></typeparam>
         public List<IEssLockBlock> GetLockedBlocks();
 
         /// <summary>
@@ -243,7 +239,13 @@ namespace EssSharp
         /// <param name="lockedList"></param>
         public void Unlock<T>( List<T> lockedList ) where T : class, IEssLock;
 
-        /// <inheritdoc />
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="lockedList"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task UnlockAsync<T>( List<T> lockedList, CancellationToken cancellationToken = default ) where T : class, IEssLock;
 
         /// <summary>
@@ -251,7 +253,6 @@ namespace EssSharp
         /// </summary>
         /// <param name="scriptName">The name of the script.</param>
         /// <param name="getContent">Whether to get the full script, including content, or only summary details.</param>
-        /// <param name="cancellationToken" />
         /// <remarks>Returns an <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
         public T GetScript<T>( string scriptName, bool getContent = false ) where T : class, IEssScript;
 
@@ -268,7 +269,6 @@ namespace EssSharp
         /// Gets the list of scripts with the given type <typeparamref name="T"/> from the cube.
         /// </summary>
         /// <param name="getContent">Whether to get the full scripts, including content, or only summary details.</param>
-        /// <param name="cancellationToken" />
         /// <remarks>Returns a list of <see cref="IEssScript"/> objects of the specific given type <typeparamref name="T"/>.</remarks>
         public List<T> GetScripts<T>( bool getContent = false ) where T : class, IEssScript;
 
@@ -304,14 +304,12 @@ namespace EssSharp
         /// <summary>
         /// Loads data to a cube from a file on the Server
         /// </summary>
-        /// <param name="cubeName"></param>
         /// <param name="options"></param>
         public void LoadDataToCube( EssJobLoadDataOptions options );
 
         /// <summary>
         /// Loads data to a cube from a file on the Server
         /// </summary>
-        /// <param name="cubeName"></param>
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         public Task LoadDataToCubeAsync( EssJobLoadDataOptions options, CancellationToken cancellationToken = default );
@@ -321,11 +319,12 @@ namespace EssSharp
     /// <summary>
     /// Fluent extensions for <see cref="IEssCube"/>.
     /// </summary>
-    public static class IEssCubeExtensions
+    public static class FluentIEssCubeExtensions
     {
         /// <summary>
         /// Asynchronously creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
         /// </summary>
+        /// <param name="cubeTask" />
         /// <param name="name">The name of the script.</param>
         /// <param name="content">(optional) The content of the new script.</param>
         /// <param name="cancellationToken"></param>
@@ -336,6 +335,7 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously gets the drillthrough report with the given name.
         /// </summary>
+        /// <param name="cubeTask" />
         /// <param name="reportName" />
         /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
@@ -345,14 +345,25 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously gets the list of drillthrough reports.
         /// </summary>
+        /// <param name="cubeTask" />
         /// <param name="getDetails">Whether to get the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public static async Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( this Task<IEssCube> cubeTask, bool getDetails = false, CancellationToken cancellationToken = default ) =>
             await (await cubeTask.ConfigureAwait(false)).GetDrillthroughReportsAsync(getDetails, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
+        /// Asynchronously gets the locked object with the given name.
+        /// </summary>
+        /// <param name="cubeTask" />
+        /// <param name="name" />
+        /// <param name="cancellationToken" />
+        public static async Task<IEssLockObject> GetLockedObjectAsync( this Task<IEssCube> cubeTask, string name, CancellationToken cancellationToken = default ) =>
+            await (await cubeTask.ConfigureAwait(false)).GetLockedObjectAsync(name, cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
         /// Asynchronously gets the script with the given name (and type <typeparamref name="T"/>) from the cube.
         /// </summary>
+        /// <param name="cubeTask" />
         /// <param name="scriptName">The name of the script.</param>
         /// <param name="getContent">Whether to get the full script, including content, or only summary details.</param>
         /// <param name="cancellationToken" />

@@ -119,8 +119,8 @@ namespace EssSharp
             {
                 var api = GetApi<LocksApi>();
 
-                if (await api.LocksLockObjectAsync(applicationName: Application.Name, databaseName: Name, lockOptions.ToLockObject(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } lockObject)
-                    throw new Exception($@"Unable to lock Object {lockOptions.LockObjectName}.");
+                if ( await api.LocksLockObjectAsync(applicationName: Application.Name, databaseName: Name, lockOptions.ToLockObject(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } lockObject )
+                    throw new Exception($@"Unable to lock object {lockOptions.LockObjectName}.");
 
                 return new EssLockObject(lockObject, this);
             }
@@ -130,7 +130,7 @@ namespace EssSharp
                 throw new Exception($@"Unable to lock object {lockOptions.LockObjectName} on cube ""{Name}"". {e.Message}", e);
             }
         }
-        
+
         /// <inheritdoc />
         /// <returns></returns>
         public T CreateScript<T>( string name, string content = null ) where T : class, IEssScript => CreateScriptAsync<T>(name, content).GetAwaiter().GetResult();
