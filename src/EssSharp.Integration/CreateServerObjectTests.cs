@@ -78,44 +78,25 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = $@"CreateServerObjectTests - 03 - Essbase_AfterScriptCreation_CanExecuteMdxScript"), Priority(03)]
-        public async Task Essbase_AfterScriptCreation_CanExecuteMdxScript()
+        [Fact(DisplayName = @"CreateServerObjectTests - 04 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(03)]
+        public async Task Essbase_AfterScriptCreation_CanCreateLockOnScript()
         {
             // Get an unconnected server.
             var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
 
-            // Get the test mdx script from the server.
+            // Get the "CalcAll" script from Sample.Basic.
             var script = await server.GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssMdxScript>("test");
+                .GetScriptAsync<IEssCalcScript>("CalcAll");
 
-            // Execute the mdx job and capture the results.
-            var job = await script.ExecuteAsync();
+            // Create lock options object.
+            var options = new EssLockOptions(script.Name, EssLockedFileType.CALCSCRIPT);
 
-            // Assert that the run mdx job completed without warnings.
-            Assert.Equal(EssJobStatus.Completed, job?.JobStatus);
-        }
+            // Lock Script on server.
+            var lockedScript = await script.Cube.CreateLockObjectAsync(options);
 
-        [Fact(DisplayName = $@"GetServerObjectTests - 01 - EssBase_AfterLockCreation_CanGetLockedObjects"), Priority(04)]
-        public async Task EssBase_AfterLockCreation_CanGetLockedObjects()
-        {
-            // Get an unconnected server.
-            var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
-
-            // Get the cube from the server.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
-
-            // Create lock options object
-            var body = new EssLockOptions("CalcAll", EssLockedFileType.CALCSCRIPT);
-
-            // Lock Script on server
-            var lockedScript = await cube.CreateLockObjectAsync(body).ConfigureAwait(false);
-
-            // Assert that the lock object name is the same as the one we passed. --Make better 
+            // Assert that the lock object name is the same as the one we passed.
             Assert.Equal("CalcAll", lockedScript.Name);
         }
-
-
     }
 }
