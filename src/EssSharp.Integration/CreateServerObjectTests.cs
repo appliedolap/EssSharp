@@ -16,7 +16,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterClean_CanCreateSampleApplications()
         {
             // Get an unconnected server.
-            var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
+            var server = GetEssServer();
 
             // Get the list of applications.
             var applications = await server.GetApplicationsAsync();
@@ -56,7 +56,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterCubeCreation_CanCreateMdxScript()
         {
             // Get an unconnected server.
-            var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
+            var server = GetEssServer();
 
             // Get the Sample.Basic cube.
             var cube = await server.GetApplicationAsync("Sample")
@@ -78,11 +78,11 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = @"CreateServerObjectTests - 04 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(03)]
+        [Fact(DisplayName = @"CreateServerObjectTests - 03 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(03)]
         public async Task Essbase_AfterScriptCreation_CanCreateLockOnScript()
         {
             // Get an unconnected server.
-            var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
+            var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
             var script = await server.GetApplicationAsync("Sample")

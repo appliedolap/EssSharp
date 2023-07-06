@@ -4,7 +4,6 @@ using EssSharp.Integration.Setup;
 
 using Xunit;
 
-
 namespace EssSharp.Integration
 {
     [Collection("EssSharp Integration Tests"), Trait("type", "clean"), CollectionPriority(3)]
@@ -14,7 +13,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterConnection_CanRemoveLocks()
         {
             // Get an unconnected server.
-            var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
+            var server = GetEssServer();
 
             // Get the list of existing applications.
             foreach ( var application in await server.GetApplicationsAsync() )
@@ -36,7 +35,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterConnection_CanRemoveScripts()
         {
             // Get an unconnected server.
-            var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
+            var server = GetEssServer();
 
             // Get the list of existing applications.
             foreach ( var application in await server.GetApplicationsAsync() )
@@ -83,7 +82,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterConnection_CanRemoveApplications()
         {
             // Get an unconnected server.
-            var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
+            var server = GetEssServer();
 
             // Get and delete all existing applications.
             foreach ( var application in await server.GetApplicationsAsync() )

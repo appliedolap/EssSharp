@@ -1,12 +1,13 @@
-﻿using Docker.DotNet;
-using Docker.DotNet.Models;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Docker.DotNet;
+using Docker.DotNet.Models;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -29,6 +30,64 @@ namespace EssSharp.Integration.Setup
     {
         public CollectionFixture( IMessageSink sink )
         {
+            IConfigurationRoot config = null;
+
+            try
+            {
+                // Attempt to build a configuration around a local settings file.
+                config = new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.local.json")
+                    .Build();
+            }
+            catch ( FileNotFoundException )
+            {
+                // Swallow a FileNotFoundException, which occurs when a local configuration does not exist.
+            }
+
+            try
+            {
+                // Attempt to build a configuration around the default settings file,
+                // if a local configuration was not available.
+                config ??= new ConfigurationBuilder()
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+            }
+            catch ( FileNotFoundException )
+            {
+                // Swallow a FileNotFoundException, which occurs when the default settings file does not exist.
+            }
+
+            // If connections could be obtained from the configuration, make them available to the EssServerFactory.
+            if ( config?.GetSection("Settings")?.Get<IntegrationTestSettings>().Connections is { Length: > 0 } connections )
+                IntegrationTestFactory.Connections = connections;
+            else
+            {
+                IntegrationTestFactory.Connections = new IntegrationTestSettingsConnection[]
+                {
+                    new IntegrationTestSettingsConnection()
+                    {
+                        Server   = "http://localhost:9000/essbase",
+                        Username = "admin",
+                        Password = "welcome1",
+                        Role     = Role.ServiceAdministrator
+                    },
+                    new IntegrationTestSettingsConnection()
+                    {
+                        Server   = "http://localhost:9000/essbase",
+                        Username = "poweruser",
+                        Password = "welcome2",
+                        Role     = Role.PowerUser
+                    },
+                    new IntegrationTestSettingsConnection()
+                    {
+                        Server   = "http://localhost:9000/essbase",
+                        Username = "user",
+                        Password = "welcome3",
+                        Role     = Role.User
+                    }
+                };
+            }
+
             // Do "global" initialization here; Only called once.
             var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync(sink);
             var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync(sink);
@@ -142,15 +201,17 @@ namespace EssSharp.Integration.Setup
 
     public class IntegrationTestBase
     {
-        public IntegrationTestBase() { }
+        /// <summary />
+        protected string Database => IntegrationTestFactory.DatabaseContainerId;
 
-        public DockerClient GetClient() => IntegrationTestFactory.GetDockerClient();
+        /// <summary />
+        protected string Essbase => IntegrationTestFactory.EssbaseContainerId;
 
-        public string Database => IntegrationTestFactory.DatabaseContainerId;
-
-        public string Essbase => IntegrationTestFactory.EssbaseContainerId;
-
-        public async Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, CancellationToken cancellationToken = default )
+        /// <summary />
+        /// <param name="id" />
+        /// <param name="command" />
+        /// <param name="cancellationToken" />
+        protected async Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, CancellationToken cancellationToken = default )
         {
             var execParams = new ContainerExecCreateParameters()
             {
@@ -171,5 +232,21 @@ namespace EssSharp.Integration.Setup
 
             return (details, stdout);
         }
+
+        /// <summary />
+        protected DockerClient GetClient() => IntegrationTestFactory.GetDockerClient();
+
+        /// <summary />
+        protected IntegrationTestSettingsConnection GetEssConnection() => GetEssConnection(Role.ServiceAdministrator);
+
+        /// <summary />
+        protected IntegrationTestSettingsConnection GetEssConnection( Role role ) => IntegrationTestFactory.GetEssConnection(role);
+
+        /// <summary />
+        protected IEssServer GetEssServer() => GetEssServer(Role.ServiceAdministrator);
+
+        /// <summary />
+        /// <param name="role" />
+        protected IEssServer GetEssServer( Role role ) => IntegrationTestFactory.GetEssServer(role);
     }
 }

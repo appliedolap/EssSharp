@@ -13,7 +13,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterScriptCreation_CanExecuteMdxScript()
         {
             // Get an unconnected server.
-            var server = new EssServerFactory().CreateEssServer(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: false);
+            var server = GetEssServer();
 
             // Get the test mdx script from the server.
             var script = await server.GetApplicationAsync("Sample")

@@ -27,6 +27,23 @@ namespace EssSharp.Integration.Setup
         public static DockerClient GetDockerClient() => 
             TestcontainersSettings.OS?.DockerEndpointAuthConfig?.GetDockerClientConfiguration()?.CreateClient();
 
+        internal static IntegrationTestSettingsConnection[] Connections { get; set; }
+
+        internal static IntegrationTestSettingsConnection GetEssConnection( Role role = Role.ServiceAdministrator )
+        {
+            if ( Connections?.FirstOrDefault(conn => conn?.Role == role) is not IntegrationTestSettingsConnection connection )
+                throw new Exception($@"A connection with the {role} role is not available");
+
+            return connection;
+        }
+
+        public static IEssServer GetEssServer( Role role = Role.ServiceAdministrator )
+        {
+            var connection = GetEssConnection(role);
+
+            return new EssServerFactory().CreateEssServer(connection.Server, connection.Username, connection.Password, connect: false);
+        }
+
         /// <summary />
         /// <param name="sink" />
         /// <param name="cancellationToken" />
@@ -114,12 +131,17 @@ namespace EssSharp.Integration.Setup
             }
 
             // Otherwise, build and start a new essbase test container.
+
+            // Start by getting the admin password and host port from configuration.
+            var connection  = GetEssConnection(Role.ServiceAdministrator);
+            string hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : "9000";
+
             _essbaseTestContainer = new ContainerBuilder()
                 .WithImage(@"appliedolap/essbase:21.4-latest")
                 .WithName("essbase-21-4")
                 .WithNetwork("standalone")
-                .WithPortBinding("9000", "9000")
-                .WithEnvironment("ADMIN_PASSWORD", "password1")
+                .WithPortBinding(hostPort, "9000") // "9000"
+                .WithEnvironment("ADMIN_PASSWORD", connection.Password) // "welcome1"
                 .WithEnvironment("DATABASE_TYPE", "sqlserver")
                 .WithEnvironment("DATABASE_CONNECT_STRING", "essbase-21-4-database:1433:CertDB")
                 .WithEnvironment("DATABASE_ADMIN_USERNAME", "sa")
@@ -129,8 +151,8 @@ namespace EssSharp.Integration.Setup
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" })
                 .Build() as DockerContainer;
 
-            // Start the essbase test container.
-            await _essbaseTestContainer.StartAsync(cancellationToken);
+            // Start the essbase test container
+            await (_essbaseTestContainer?.StartAsync(cancellationToken) ?? throw new Exception("Unable to build and start Essbase container."));
 
             // If the essbase test container is running, update the retained ID and return.
             if ( _essbaseTestContainer?.State is TestcontainersStates.Running )

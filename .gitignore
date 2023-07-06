@@ -5,6 +5,9 @@
 json.tmp
 temp.json
 
+# EssSharp local appsettings
+appsettings.local.json
+
 ### JetBrains Rider ###
 .idea/
 *.sln.iml
