@@ -49,6 +49,19 @@ namespace EssSharp
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        public IEssLockObject GetLockedObject( string name );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssLockObject> GetLockedObjectAsync( string name, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Sychronously lock an object on the server.
         /// </summary>
         /// <param name="lockOptions"></param>
