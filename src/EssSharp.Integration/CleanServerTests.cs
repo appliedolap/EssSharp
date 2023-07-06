@@ -24,7 +24,7 @@ namespace EssSharp.Integration
                 {
                     // Get the list of existing locks and unlock them.
                     foreach ( var essLock in await cube.GetLockedObjectsAsync() )
-                        essLock.ToString(); // await essLock.UnlockAsync();
+                        await essLock.UnlockAsync();
 
                     // Assert that the (refreshed) list of existing locks is empty.
                     Assert.Empty(await cube.GetLockedObjectsAsync());
