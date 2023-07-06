@@ -5362,10 +5362,7 @@
           "500": {
             "description": "<p>Internal Server Error.</p>"
           }
-        },
-        "produces": [
-          "application/json"
-        ]
+        }
       }
     },
     "/applications/{applicationName}/logs/latest": {

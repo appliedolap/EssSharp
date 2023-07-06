@@ -404,7 +404,7 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Accept**: */*
 
 
 ### HTTP response details

@@ -5,7 +5,6 @@ using System.Data.Common;
 using System.Linq;
 using System.Runtime.Serialization;
 using EssSharp.Model;
-using Newtonsoft.Json;
 
 namespace EssSharp
 {
@@ -472,12 +471,6 @@ namespace EssSharp
             DirtyCells = slice.DirtyCells,
             DirtyTexts = slice.DirtyTexts,
             Rows = slice.Rows
-        };
-
-        internal static LockObject ToLockObject( this EssLockOptions lockOptions ) => new LockObject()
-        {
-            Name = lockOptions.LockObjectName,
-            Type = lockOptions.LockedFileType.HasValue && Enum.IsDefined(typeof(LockObject.TypeEnum), (LockObject.TypeEnum)lockOptions.LockedFileType) ? (LockObject.TypeEnum)lockOptions.LockedFileType : throw new Exception($@"{nameof(EssLockedFileType)} is required.")
         };
 
         internal static NamedQueriesPreferences ToNamedQueriesPreferences( this EssQueryPreferences queryPreferences ) => new NamedQueriesPreferences()

@@ -62,9 +62,6 @@ cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseN
 # Fix produces for createScript
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/scripts".post.produces = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
-# Fix produces for CreateLockObject
-cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/locks/objects/lock".post.produces = ["application/json"]' > json.tmp && mv json.tmp temp.json
-
 # Return types for locked objects are not a List<LockObjectList>, they are a LockObjectList
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/locks/objects".get.responses."200".schema = {"$ref": "#/definitions/LockObjectList"}' > json.tmp && mv json.tmp temp.json
 
