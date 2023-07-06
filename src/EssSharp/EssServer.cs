@@ -951,7 +951,7 @@ namespace EssSharp
         /// <inheritdoc />
         public async ValueTask DisposeAsync()
         {
-            await DisposeAsync(disposing: true);
+            await DisposeAsync(disposing: true).ConfigureAwait(false);
             GC.SuppressFinalize(this);
         }
 

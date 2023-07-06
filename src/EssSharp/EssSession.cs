@@ -43,7 +43,7 @@ namespace EssSharp
             try
             {
                 var api = GetApi<SessionsApi>();
-                await api.SessionsDeleteSessionWithIdAsync(SessionId, logoff, 0, cancellationToken);
+                await api.SessionsDeleteSessionWithIdAsync(SessionId, logoff, 0, cancellationToken).ConfigureAwait(false);
             }
             catch ( Exception )
             {

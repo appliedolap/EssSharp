@@ -360,7 +360,10 @@ namespace EssSharp
                     .ToEssSharpList(this) ?? new List<IEssDrillthroughReport>();
 
                 if ( getDetails )
-                    reports.ForEach(async dtr => await dtr.GetDetailsAsync(cancellationToken));
+                {
+                    foreach ( var report in reports )
+                        await report.GetDetailsAsync(cancellationToken).ConfigureAwait(false);
+                }
 
                 return reports;
             }
@@ -544,7 +547,10 @@ namespace EssSharp
                     .ToEssSharpList<T>(this) ?? new List<T>();
 
                 if ( getContent )
-                    scripts.ForEach(async script => await script.GetContentAsync(cancellationToken));
+                {
+                    foreach ( var script in scripts )
+                        await script.GetContentAsync(cancellationToken).ConfigureAwait(false);
+                }
 
                 return scripts;
             }
