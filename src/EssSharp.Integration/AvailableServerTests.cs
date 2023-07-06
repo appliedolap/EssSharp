@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
@@ -14,47 +16,55 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "AvailableServerTests - 01 - Essbase_AfterStartup_IsRestApiReady"), Priority(01)]
         public async Task Essbase_AfterStartup_IsRestApiReady()
         {
-            // Get a docker client.
-            using var client = GetClient();
+            // Get a server connection.
+            var connection = GetEssConnection();
 
             // Poll for the REST API and capture a status code for an unauthorized request.
             var statusCode = await PollForRestfulApiAndReturnStatusCodeAsync();
 
             // Assert that the REST API is available and returns a 401 status code (for unauthorized requests).
-            Assert.Equal(401, statusCode);
+            Assert.Equal(HttpStatusCode.Unauthorized, statusCode);
 
             // Local polling function.
-            async Task<int> PollForRestfulApiAndReturnStatusCodeAsync()
+            async Task<HttpStatusCode> PollForRestfulApiAndReturnStatusCodeAsync()
             {
-                // Wait up to 20 minutes for the REST API to become available.
-                for ( int i = 0; i < (TimeSpan.FromMinutes(20).TotalSeconds / 5); i++ )
-                {
-                    // Poll the /rest/v1/ endpoint for the availability of the REST API.
-                    var (details, stdout) = await ExecAsync(Essbase, new[] { @"curl", "--output", "/dev/null", "--silent", "--head", "--fail", "--write-out", "%{http_code}", "http://localhost:9000/essbase/rest/v1/" });
+                using var client = new HttpClient() { BaseAddress = new Uri($"{connection.Server.TrimEnd('/')}/") };
 
-                    // Exit code 22 means that the server is available and returning a 40x status code.
-                    if ( details?.ExitCode is 22 )
+                // Wait up to 20 minutes for the REST API to become available.
+                for ( int i = 0; i < TimeSpan.FromMinutes(20).TotalSeconds / 5; i++ )
+                {
+                    try
                     {
-                        if ( int.TryParse(stdout?.Trim(), out var statusCode) )
-                            return statusCode;
+                        // Poll the "rest/v1/" endpoint 
+                        var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get,
+                            new Uri(client.BaseAddress, @"rest/v1/")));
+
+                        // If the server is available and returning an unauthorized status code, return it.
+                        if ( response.StatusCode is HttpStatusCode.Unauthorized )
+                            return response.StatusCode;
+                    }
+                    catch ( HttpRequestException )
+                    {
+                        // Swallow an HttpRequestException, which usually indicates that the server is not ready yet.
                     }
 
                     // Wait 5 seconds.
                     await Task.Delay(TimeSpan.FromSeconds(5));
                 }
 
-                return 0;
+                // Return service unavailable.
+                return HttpStatusCode.ServiceUnavailable;
             }
         }
 
         [Fact(DisplayName = "AvailableServerTests - 02 - Essbase_AfterStartup_CanConnect"), Priority(02)]
         public async Task Essbase_AfterStartup_CanConnect()
         {
-            // Get a connected server.
-            var server = await new EssServerFactory().CreateEssServerAsync(server: @"http://localhost:9000/essbase", username: "admin", password: "password1", connect: true);
+            // Get a connected user session.
+            var session = await GetEssServer().SignInAsync();
 
-            // Assert that a connected server is returned.
-            Assert.NotEqual(default, server);
+            // Assert that a connected user session is returned.
+            Assert.NotEqual(default, session);
         }
     }
 }
