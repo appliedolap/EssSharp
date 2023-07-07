@@ -374,6 +374,73 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <param name="fileName"></param>
+        public IEssFile GetFile( string fileName ) => GetFileAsync( fileName ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <param name="fileName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<IEssFile> GetFileAsync( string fileName, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                foreach ( var file in await GetFilesAsync().ConfigureAwait(false) )
+                {
+                    if ( string.Equals(file.Name, fileName, StringComparison.OrdinalIgnoreCase) )
+                        return file;
+                }
+
+                throw new Exception($@"Unable to get file {fileName}.");
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get file {fileName} from ""application/{Application.Name}/{Name}"" from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssFile> GetFiles() => GetFilesAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssFile>> GetFilesAsync( CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await (await GetFolderAsync(cancellationToken).ConfigureAwait(false)).GetFilesAsync(cancellationToken: cancellationToken) ??
+                    throw new Exception($@"Unable to get files.");
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get files from ""application/{Application.Name}/{Name}"" from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssFolder GetFolder() => GetFolderAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssFolder> GetFolderAsync( CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await Application.Server.GetFolderAsync($@"applications/{Application.Name}/{Name}", cancellationToken).ConfigureAwait(false) ??
+                    throw new Exception($@"Unable to retrieve folder ""application/{Application.Name}/{Name}"".");
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get folder from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
         public IEssLockObject GetLockedObject( string name ) => GetLockedObjectAsync( name ).GetAwaiter().GetResult();
 
@@ -392,7 +459,6 @@ namespace EssSharp
                 }
                 
                 throw new Exception($@"Could not get locked object {name}.");
-
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
@@ -418,7 +484,6 @@ namespace EssSharp
                     throw new Exception("Cannot get locked objects.");
 
                 return lockObjects.ToEssSharpList(this) ?? new List<IEssLockObject>();
-
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
+using System;
 
 namespace EssSharp
 {
@@ -195,6 +196,44 @@ namespace EssSharp
         /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( bool getDetails = false, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEssFile GetFile( string fileName);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssFile> GetFileAsync( string fileName, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<IEssFile> GetFiles();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<List<IEssFile>> GetFilesAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IEssFolder GetFolder();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEssFolder> GetFolderAsync( CancellationToken cancellationToken = default );
+
 
         /// <summary>
         /// Gets the locked object with the given name.
