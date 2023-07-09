@@ -28,6 +28,7 @@ namespace EssSharp.Integration
             // Local polling function.
             async Task<HttpStatusCode> PollForRestfulApiAndReturnStatusCodeAsync()
             {
+                // Get a new client with the connection's base address.
                 using var client = new HttpClient() { BaseAddress = new Uri($"{connection.Server.TrimEnd('/')}/") };
 
                 // Wait up to 20 minutes for the REST API to become available.
@@ -35,17 +36,18 @@ namespace EssSharp.Integration
                 {
                     try
                     {
-                        // Poll the "rest/v1/" endpoint 
-                        var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get,
-                            new Uri(client.BaseAddress, @"rest/v1/")));
+                        // Poll the "rest/v1/" endpoint for a proper response.
+                        var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, new Uri(client.BaseAddress, @"rest/v1/")));
 
-                        // If the server is available and returning an unauthorized status code, return it.
-                        if ( response.StatusCode is HttpStatusCode.Unauthorized )
+                        // Return any status code except a GatewayTimeout...
+                        if ( response.StatusCode is not HttpStatusCode.GatewayTimeout )
                             return response.StatusCode;
                     }
-                    catch ( HttpRequestException )
+                    catch ( HttpRequestException hre )
                     {
-                        // Swallow an HttpRequestException, which usually indicates that the server is not ready yet.
+                        // The HttpRequestException's StatusCode will be null until the server becomes available.
+                        if ( hre.StatusCode.HasValue )
+                            return hre.StatusCode.Value;
                     }
 
                     // Wait 5 seconds.
