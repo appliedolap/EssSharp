@@ -1,0 +1,2555 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Interface IEssServer
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IEssServer
+ ">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/appliedolap/EssSharp/new/develop/apiSpec/new?filename=EssSharp_IEssServer.md&amp;value=---%0Auid%3A%20EssSharp.IEssServer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../../public/main.js'
+    import { init } from './../../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <article data-uid="EssSharp.IEssServer">
+
+
+
+  <h1 id="EssSharp_IEssServer" data-uid="EssSharp.IEssServer" class="text-break">
+    Interface IEssServer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="../EssSharp.Abstractions/EssSharp.html">Ess<wbr>Sharp</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>EssSharp.Abstractions.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IEssServer : IEssObject, IDisposable, IAsyncDisposable</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="EssSharp.IEssObject.html#EssSharp_IEssObject_Name">IEssObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="EssSharp.IEssObject.html#EssSharp_IEssObject_Type">IEssObject.Type</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable.dispose">IDisposable.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable.disposeasync">IAsyncDisposable.DisposeAsync()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="EssSharp_IEssServer_CreateApplication_" data-uid="EssSharp.IEssServer.CreateApplication*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateApplication_System_String_System_String_EssSharp_EssDatabaseCreationOptions_" data-uid="EssSharp.IEssServer.CreateApplication(System.String,System.String,EssSharp.EssDatabaseCreationOptions)">
+  CreateApplication(string, string, EssDatabaseCreationOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new Application and database with the given name and options</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssApplication CreateApplication(string applicationName, string cubeName, EssDatabaseCreationOptions options = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cubeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="EssSharp.EssDatabaseCreationOptions.html">EssDatabaseCreationOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateApplicationAsync_" data-uid="EssSharp.IEssServer.CreateApplicationAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateApplicationAsync_System_String_System_String_EssSharp_EssDatabaseCreationOptions_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.CreateApplicationAsync(System.String,System.String,EssSharp.EssDatabaseCreationOptions,System.Threading.CancellationToken)">
+  CreateApplicationAsync(string, string, EssDatabaseCreationOptions, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new Application and database with the given name and options</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssApplication&gt; CreateApplicationAsync(string applicationName, string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cubeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="EssSharp.EssDatabaseCreationOptions.html">EssDatabaseCreationOptions</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateApplicationFromWorkbook_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbook*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateApplicationFromWorkbook_System_String_System_String_EssSharp_EssJobImportExcelOptions_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbook(System.String,System.String,EssSharp.EssJobImportExcelOptions)">
+  CreateApplicationFromWorkbook(string, string, EssJobImportExcelOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new application (and cube) from an existing server file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssApplication CreateApplicationFromWorkbook(string applicationName, string cubeName, EssJobImportExcelOptions options)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cubeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="EssSharp.EssJobImportExcelOptions.html">EssJobImportExcelOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateApplicationFromWorkbook_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbook*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateApplicationFromWorkbook_System_String_System_String_System_IO_Stream_EssSharp_EssJobImportExcelOptions_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbook(System.String,System.String,System.IO.Stream,EssSharp.EssJobImportExcelOptions)">
+  CreateApplicationFromWorkbook(string, string, Stream, EssJobImportExcelOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new application (and cube) from a workbook stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssApplication CreateApplicationFromWorkbook(string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cubeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="EssSharp.EssJobImportExcelOptions.html">EssJobImportExcelOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateApplicationFromWorkbook_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbook*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateApplicationFromWorkbook_System_String_System_String_System_String_EssSharp_EssJobImportExcelOptions_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbook(System.String,System.String,System.String,EssSharp.EssJobImportExcelOptions)">
+  CreateApplicationFromWorkbook(string, string, string, EssJobImportExcelOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new application (and cube) from a local workbook file path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssApplication CreateApplicationFromWorkbook(string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cubeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>localWorkbookPath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="EssSharp.EssJobImportExcelOptions.html">EssJobImportExcelOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateApplicationFromWorkbookAsync_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbookAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateApplicationFromWorkbookAsync_System_String_System_String_EssSharp_EssJobImportExcelOptions_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbookAsync(System.String,System.String,EssSharp.EssJobImportExcelOptions,System.Threading.CancellationToken)">
+  CreateApplicationFromWorkbookAsync(string, string, EssJobImportExcelOptions, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously creates a new application (and cube) from an existing server file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssApplication&gt; CreateApplicationFromWorkbookAsync(string applicationName, string cubeName, EssJobImportExcelOptions options, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cubeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="EssSharp.EssJobImportExcelOptions.html">EssJobImportExcelOptions</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateApplicationFromWorkbookAsync_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbookAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateApplicationFromWorkbookAsync_System_String_System_String_System_IO_Stream_EssSharp_EssJobImportExcelOptions_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbookAsync(System.String,System.String,System.IO.Stream,EssSharp.EssJobImportExcelOptions,System.Threading.CancellationToken)">
+  CreateApplicationFromWorkbookAsync(string, string, Stream, EssJobImportExcelOptions, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously creates a new application (and cube) from a workbook stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssApplication&gt; CreateApplicationFromWorkbookAsync(string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cubeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>stream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="EssSharp.EssJobImportExcelOptions.html">EssJobImportExcelOptions</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateApplicationFromWorkbookAsync_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbookAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateApplicationFromWorkbookAsync_System_String_System_String_System_String_EssSharp_EssJobImportExcelOptions_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.CreateApplicationFromWorkbookAsync(System.String,System.String,System.String,EssSharp.EssJobImportExcelOptions,System.Threading.CancellationToken)">
+  CreateApplicationFromWorkbookAsync(string, string, string, EssJobImportExcelOptions, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously creates a new application (and cube) from a local workbook file path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssApplication&gt; CreateApplicationFromWorkbookAsync(string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cubeName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>localWorkbookPath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="EssSharp.EssJobImportExcelOptions.html">EssJobImportExcelOptions</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateJob_" data-uid="EssSharp.IEssServer.CreateJob*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateJob_EssSharp_IEssJobOptions_" data-uid="EssSharp.IEssServer.CreateJob(EssSharp.IEssJobOptions)">
+  CreateJob(IEssJobOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new (unstarted) job on the server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssJob CreateJob(IEssJobOptions options)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>options</code> <a class="xref" href="EssSharp.IEssJobOptions.html">IEssJobOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssJob.html">IEssJob</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateVariable_" data-uid="EssSharp.IEssServer.CreateVariable*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateVariable_System_String_System_String_" data-uid="EssSharp.IEssServer.CreateVariable(System.String,System.String)">
+  CreateVariable(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new server variable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssServerVariable CreateVariable(string name, string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssServerVariable.html">IEssServerVariable</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_CreateVariableAsync_" data-uid="EssSharp.IEssServer.CreateVariableAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_CreateVariableAsync_System_String_System_String_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.CreateVariableAsync(System.String,System.String,System.Threading.CancellationToken)">
+  CreateVariableAsync(string, string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Create a new server variable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssServerVariable&gt; CreateVariableAsync(string name, string value, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssServerVariable.html">IEssServerVariable</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetAbout_" data-uid="EssSharp.IEssServer.GetAbout*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetAbout" data-uid="EssSharp.IEssServer.GetAbout">
+  GetAbout()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L224"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the about information of this server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssAbout GetAbout()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssAbout.html">IEssAbout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetAboutAsync_" data-uid="EssSharp.IEssServer.GetAboutAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetAboutAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetAboutAsync(System.Threading.CancellationToken)">
+  GetAboutAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L229"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the about information of this server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssAbout&gt; GetAboutAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssAbout.html">IEssAbout</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetAboutInstance_" data-uid="EssSharp.IEssServer.GetAboutInstance*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetAboutInstance" data-uid="EssSharp.IEssServer.GetAboutInstance">
+  GetAboutInstance()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the about information of this server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssAboutInstance GetAboutInstance()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssAboutInstance.html">IEssAboutInstance</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetAboutInstanceAsync_" data-uid="EssSharp.IEssServer.GetAboutInstanceAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetAboutInstanceAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetAboutInstanceAsync(System.Threading.CancellationToken)">
+  GetAboutInstanceAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the about information of this server</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssAboutInstance&gt; GetAboutInstanceAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssAboutInstance.html">IEssAboutInstance</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetApplication_" data-uid="EssSharp.IEssServer.GetApplication*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetApplication_System_String_" data-uid="EssSharp.IEssServer.GetApplication(System.String)">
+  GetApplication(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L245"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the application with the given name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssApplication GetApplication(string applicationName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetApplicationAsync_" data-uid="EssSharp.IEssServer.GetApplicationAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetApplicationAsync_System_String_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetApplicationAsync(System.String,System.Threading.CancellationToken)">
+  GetApplicationAsync(string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the application with the given name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssApplication&gt; GetApplicationAsync(string applicationName, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetApplications_" data-uid="EssSharp.IEssServer.GetApplications*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetApplications" data-uid="EssSharp.IEssServer.GetApplications">
+  GetApplications()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L257"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of applications for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssApplication&gt; GetApplications()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetApplications_" data-uid="EssSharp.IEssServer.GetApplications*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetApplications_System_Int32_" data-uid="EssSharp.IEssServer.GetApplications(System.Int32)">
+  GetApplications(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of applications for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssApplication&gt; GetApplications(int applicationsLimit)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationsLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The maximum number of applications to return.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetApplicationsAsync_" data-uid="EssSharp.IEssServer.GetApplicationsAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetApplicationsAsync_System_Int32_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetApplicationsAsync(System.Int32,System.Threading.CancellationToken)">
+  GetApplicationsAsync(int, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of applications for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssApplication&gt;&gt; GetApplicationsAsync(int applicationsLimit, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>applicationsLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The maximum number of applications to return.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetApplicationsAsync_" data-uid="EssSharp.IEssServer.GetApplicationsAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetApplicationsAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetApplicationsAsync(System.Threading.CancellationToken)">
+  GetApplicationsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L269"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of applications for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssApplication&gt;&gt; GetApplicationsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssApplication.html">IEssApplication</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetConnection_" data-uid="EssSharp.IEssServer.GetConnection*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetConnection_System_String_" data-uid="EssSharp.IEssServer.GetConnection(System.String)">
+  GetConnection(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssDatasourceConnection GetConnection(string connectionName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>connectionName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssDatasourceConnection.html">IEssDatasourceConnection</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetConnectionAsync_" data-uid="EssSharp.IEssServer.GetConnectionAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetConnectionAsync_System_String_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetConnectionAsync(System.String,System.Threading.CancellationToken)">
+  GetConnectionAsync(string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssDatasourceConnection&gt; GetConnectionAsync(string connectionName, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>connectionName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssDatasourceConnection.html">IEssDatasourceConnection</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetConnections_" data-uid="EssSharp.IEssServer.GetConnections*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetConnections" data-uid="EssSharp.IEssServer.GetConnections">
+  GetConnections()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L128"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssDatasourceConnection&gt; GetConnections()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssDatasourceConnection.html">IEssDatasourceConnection</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetConnectionsAsync_" data-uid="EssSharp.IEssServer.GetConnectionsAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetConnectionsAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetConnectionsAsync(System.Threading.CancellationToken)">
+  GetConnectionsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L135"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssDatasourceConnection&gt;&gt; GetConnectionsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssDatasourceConnection.html">IEssDatasourceConnection</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetDatasource_" data-uid="EssSharp.IEssServer.GetDatasource*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetDatasource_System_String_" data-uid="EssSharp.IEssServer.GetDatasource(System.String)">
+  GetDatasource(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L141"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Return a specified data source as an IEssDatasource object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssDatasource GetDatasource(string datasourceName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>datasourceName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssDatasource.html">IEssDatasource</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetDatasourceAsync_" data-uid="EssSharp.IEssServer.GetDatasourceAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetDatasourceAsync_System_String_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetDatasourceAsync(System.String,System.Threading.CancellationToken)">
+  GetDatasourceAsync(string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a specified data source as an IEssDatasource object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssDatasource&gt; GetDatasourceAsync(string datasourceName, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>datasourceName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssDatasource.html">IEssDatasource</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetDatasources_" data-uid="EssSharp.IEssServer.GetDatasources*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetDatasources" data-uid="EssSharp.IEssServer.GetDatasources">
+  GetDatasources()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a list of IEssDatasource objects</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssDatasource&gt; GetDatasources()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssDatasource.html">IEssDatasource</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetDatasourcesAsync_" data-uid="EssSharp.IEssServer.GetDatasourcesAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetDatasourcesAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetDatasourcesAsync(System.Threading.CancellationToken)">
+  GetDatasourcesAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L159"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a list of IEssDatasource objects</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssDatasource&gt;&gt; GetDatasourcesAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssDatasource.html">IEssDatasource</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetFile_" data-uid="EssSharp.IEssServer.GetFile*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetFile_System_String_" data-uid="EssSharp.IEssServer.GetFile(System.String)">
+  GetFile(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L166"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssFile GetFile(string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssFile.html">IEssFile</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetFileAsync_" data-uid="EssSharp.IEssServer.GetFileAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetFileAsync_System_String_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetFileAsync(System.String,System.Threading.CancellationToken)">
+  GetFileAsync(string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssFile&gt; GetFileAsync(string path, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssFile.html">IEssFile</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetFolder_" data-uid="EssSharp.IEssServer.GetFolder*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetFolder_System_String_" data-uid="EssSharp.IEssServer.GetFolder(System.String)">
+  GetFolder(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssFolder GetFolder(string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssFolder.html">IEssFolder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetFolderAsync_" data-uid="EssSharp.IEssServer.GetFolderAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetFolderAsync_System_String_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetFolderAsync(System.String,System.Threading.CancellationToken)">
+  GetFolderAsync(string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L183"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssFolder&gt; GetFolderAsync(string path, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssFolder.html">IEssFolder</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetFolders_" data-uid="EssSharp.IEssServer.GetFolders*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetFolders" data-uid="EssSharp.IEssServer.GetFolders">
+  GetFolders()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of files for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssFolder&gt; GetFolders()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssFolder.html">IEssFolder</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetFoldersAsync_" data-uid="EssSharp.IEssServer.GetFoldersAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetFoldersAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetFoldersAsync(System.Threading.CancellationToken)">
+  GetFoldersAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L194"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of files for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssFolder&gt;&gt; GetFoldersAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssFolder.html">IEssFolder</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetGroup_" data-uid="EssSharp.IEssServer.GetGroup*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetGroup_System_String_" data-uid="EssSharp.IEssServer.GetGroup(System.String)">
+  GetGroup(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the specified group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssGroup GetGroup(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssGroup.html">IEssGroup</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetGroupAsync_" data-uid="EssSharp.IEssServer.GetGroupAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetGroupAsync_System_String_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetGroupAsync(System.String,System.Threading.CancellationToken)">
+  GetGroupAsync(string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the specified group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssGroup&gt; GetGroupAsync(string name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssGroup.html">IEssGroup</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetGroups_" data-uid="EssSharp.IEssServer.GetGroups*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetGroups" data-uid="EssSharp.IEssServer.GetGroups">
+  GetGroups()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a list of <a class="xref" href="EssSharp.IEssGroup.html">IEssGroup</a> objects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssGroup&gt; GetGroups()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssGroup.html">IEssGroup</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetGroupsAsync_" data-uid="EssSharp.IEssServer.GetGroupsAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetGroupsAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetGroupsAsync(System.Threading.CancellationToken)">
+  GetGroupsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a list of <a class="xref" href="EssSharp.IEssGroup.html">IEssGroup</a> objects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssGroup&gt;&gt; GetGroupsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssGroup.html">IEssGroup</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetJobs_" data-uid="EssSharp.IEssServer.GetJobs*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetJobs" data-uid="EssSharp.IEssServer.GetJobs">
+  GetJobs()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of jobs for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssJob&gt; GetJobs()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssJob.html">IEssJob</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetJobs_" data-uid="EssSharp.IEssServer.GetJobs*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetJobs_System_Int64_" data-uid="EssSharp.IEssServer.GetJobs(System.Int64)">
+  GetJobs(long)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L287"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of jobs for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssJob&gt; GetJobs(long jobsLimit)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jobsLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The maximum number of jobs to return.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssJob.html">IEssJob</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetJobsAsync_" data-uid="EssSharp.IEssServer.GetJobsAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetJobsAsync_System_Int64_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetJobsAsync(System.Int64,System.Threading.CancellationToken)">
+  GetJobsAsync(long, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of jobs for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssJob&gt;&gt; GetJobsAsync(long jobsLimit, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jobsLimit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd><p>The maximum number of jobs to return.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssJob.html">IEssJob</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetJobsAsync_" data-uid="EssSharp.IEssServer.GetJobsAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetJobsAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetJobsAsync(System.Threading.CancellationToken)">
+  GetJobsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L293"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of jobs for this server available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssJob&gt;&gt; GetJobsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssJob.html">IEssJob</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetSessions_" data-uid="EssSharp.IEssServer.GetSessions*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetSessions" data-uid="EssSharp.IEssServer.GetSessions">
+  GetSessions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L378"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of server sessions available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssSession&gt; GetSessions()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssSession.html">IEssSession</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetSessionsAsync_" data-uid="EssSharp.IEssServer.GetSessionsAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetSessionsAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetSessionsAsync(System.Threading.CancellationToken)">
+  GetSessionsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L383"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of server sessions available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssSession&gt;&gt; GetSessionsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssSession.html">IEssSession</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetURLs_" data-uid="EssSharp.IEssServer.GetURLs*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetURLs" data-uid="EssSharp.IEssServer.GetURLs">
+  GetURLs()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L388"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of server URLs available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssUrl&gt; GetURLs()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssUrl.html">IEssUrl</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetURLsAsync_" data-uid="EssSharp.IEssServer.GetURLsAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetURLsAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetURLsAsync(System.Threading.CancellationToken)">
+  GetURLsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L393"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of server URLs available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssUrl&gt;&gt; GetURLsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssUrl.html">IEssUrl</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUser_" data-uid="EssSharp.IEssServer.GetUser*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUser_System_String_" data-uid="EssSharp.IEssServer.GetUser(System.String)">
+  GetUser(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L307"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the user with the given ID.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssUser GetUser(string userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssUser.html">IEssUser</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUserAsync_" data-uid="EssSharp.IEssServer.GetUserAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUserAsync_System_String_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetUserAsync(System.String,System.Threading.CancellationToken)">
+  GetUserAsync(string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the user with the given ID.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssUser&gt; GetUserAsync(string userId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssUser.html">IEssUser</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUserHomeFolder_" data-uid="EssSharp.IEssServer.GetUserHomeFolder*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUserHomeFolder" data-uid="EssSharp.IEssServer.GetUserHomeFolder">
+  GetUserHomeFolder()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the home folder for the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssFolder GetUserHomeFolder()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssFolder.html">IEssFolder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUserHomeFolderAsync_" data-uid="EssSharp.IEssServer.GetUserHomeFolderAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUserHomeFolderAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetUserHomeFolderAsync(System.Threading.CancellationToken)">
+  GetUserHomeFolderAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the home folder for the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssFolder&gt; GetUserHomeFolderAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssFolder.html">IEssFolder</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUserSession_" data-uid="EssSharp.IEssServer.GetUserSession*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUserSession_System_Boolean_System_Boolean_" data-uid="EssSharp.IEssServer.GetUserSession(System.Boolean,System.Boolean)">
+  GetUserSession(bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a user session from the server for the configured user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssUserSession GetUserSession(bool includeToken = true, bool includeGroups = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>includeToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to capture a session token.</p>
+</dd>
+    <dt><code>includeGroups</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to capture the user's groups.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssUserSession.html">IEssUserSession</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUserSessionAsync_" data-uid="EssSharp.IEssServer.GetUserSessionAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUserSessionAsync_System_Boolean_System_Boolean_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetUserSessionAsync(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+  GetUserSessionAsync(bool, bool, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets a user session from the server for the configured user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssUserSession&gt; GetUserSessionAsync(bool includeToken = true, bool includeGroups = true, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>includeToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to capture a session token.</p>
+</dd>
+    <dt><code>includeGroups</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to capture the user's groups.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssUserSession.html">IEssUserSession</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUserSharedFolder_" data-uid="EssSharp.IEssServer.GetUserSharedFolder*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUserSharedFolder" data-uid="EssSharp.IEssServer.GetUserSharedFolder">
+  GetUserSharedFolder()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L345"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the shared folder for the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssFolder GetUserSharedFolder()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssFolder.html">IEssFolder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUserSharedFolderAsync_" data-uid="EssSharp.IEssServer.GetUserSharedFolderAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUserSharedFolderAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetUserSharedFolderAsync(System.Threading.CancellationToken)">
+  GetUserSharedFolderAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L350"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the shared folder for the current user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssFolder&gt; GetUserSharedFolderAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssFolder.html">IEssFolder</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUsers_" data-uid="EssSharp.IEssServer.GetUsers*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUsers" data-uid="EssSharp.IEssServer.GetUsers">
+  GetUsers()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L356"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of all users for this server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssUser&gt; GetUsers()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssUser.html">IEssUser</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUsersAsync_" data-uid="EssSharp.IEssServer.GetUsersAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUsersAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetUsersAsync(System.Threading.CancellationToken)">
+  GetUsersAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L362"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of all users for this server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssUser&gt;&gt; GetUsersAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssUser.html">IEssUser</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUtilities_" data-uid="EssSharp.IEssServer.GetUtilities*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUtilities" data-uid="EssSharp.IEssServer.GetUtilities">
+  GetUtilities()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L398"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of server utilities available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssUtility&gt; GetUtilities()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssUtility.html">IEssUtility</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetUtilitiesAsync_" data-uid="EssSharp.IEssServer.GetUtilitiesAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetUtilitiesAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetUtilitiesAsync(System.Threading.CancellationToken)">
+  GetUtilitiesAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L403"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of server utilities available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssUtility&gt;&gt; GetUtilitiesAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssUtility.html">IEssUtility</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetVariables_" data-uid="EssSharp.IEssServer.GetVariables*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetVariables" data-uid="EssSharp.IEssServer.GetVariables">
+  GetVariables()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L367"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the list of server-scoped variables available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;IEssServerVariable&gt; GetVariables()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssServerVariable.html">IEssServerVariable</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_GetVariablesAsync_" data-uid="EssSharp.IEssServer.GetVariablesAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_GetVariablesAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.GetVariablesAsync(System.Threading.CancellationToken)">
+  GetVariablesAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously gets the list of server-scoped variables available to the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;List&lt;IEssServerVariable&gt;&gt; GetVariablesAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="EssSharp.IEssServerVariable.html">IEssServerVariable</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_SignIn_" data-uid="EssSharp.IEssServer.SignIn*"></a>
+
+  <h3 id="EssSharp_IEssServer_SignIn_System_Boolean_System_Boolean_" data-uid="EssSharp.IEssServer.SignIn(System.Boolean,System.Boolean)">
+  SignIn(bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L410"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Signs into the server and returns the user session for the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssUserSession SignIn(bool includeToken = false, bool includeGroups = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>includeToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>includeGroups</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssUserSession.html">IEssUserSession</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_SignInAsync_" data-uid="EssSharp.IEssServer.SignInAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_SignInAsync_System_Boolean_System_Boolean_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.SignInAsync(System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+  SignInAsync(bool, bool, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L418"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously signs into the server and returns the user session for the connected user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssUserSession&gt; SignInAsync(bool includeToken = false, bool includeGroups = false, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>includeToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>includeGroups</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssUserSession.html">IEssUserSession</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_SignOut_" data-uid="EssSharp.IEssServer.SignOut*"></a>
+
+  <h3 id="EssSharp_IEssServer_SignOut" data-uid="EssSharp.IEssServer.SignOut">
+  SignOut()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L424"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Signs out of the server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void SignOut()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssServer_SignOutAsync_" data-uid="EssSharp.IEssServer.SignOutAsync*"></a>
+
+  <h3 id="EssSharp_IEssServer_SignOutAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssServer.SignOutAsync(System.Threading.CancellationToken)">
+  SignOutAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L430"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously signs out of the server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task SignOutAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssServer.cs/#L10" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2022-2023 Applied OLAP
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

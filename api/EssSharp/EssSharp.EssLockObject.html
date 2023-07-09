@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class EssLockObject
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class EssLockObject
+ ">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/appliedolap/EssSharp/new/develop/apiSpec/new?filename=EssSharp_EssLockObject.md&amp;value=---%0Auid%3A%20EssSharp.EssLockObject%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../../public/main.js'
+    import { init } from './../../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <article data-uid="EssSharp.EssLockObject">
+
+
+
+  <h1 id="EssSharp_EssLockObject" data-uid="EssSharp.EssLockObject" class="text-break">
+    Class EssLockObject
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssLockObject.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="../EssSharp/EssSharp.html">Ess<wbr>Sharp</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>EssSharp.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EssLockObject : EssLock, IEssLockObject, IEssLock, IEssObject</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="EssSharp.EssObject.html">EssObject</a></div>
+      <div><a class="xref" href="EssSharp.EssLock.html">EssLock</a></div>
+      <div><span class="xref">EssLockObject</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssLockObject.html">IEssLockObject</a></div>
+      <div><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssLock.html">IEssLock</a></div>
+      <div><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssObject.html">IEssObject</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="EssSharp.EssLock.html#EssSharp_EssLock_Type">EssLock.Type</a>
+    </div>
+    <div>
+      <a class="xref" href="EssSharp.EssLock.html#EssSharp_EssLock_Unlock">EssLock.Unlock()</a>
+    </div>
+    <div>
+      <a class="xref" href="EssSharp.EssLock.html#EssSharp_EssLock_UnlockAsync_System_Threading_CancellationToken_">EssLock.UnlockAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="EssSharp_EssLockObject_LockType_" data-uid="EssSharp.EssLockObject.LockType*"></a>
+
+  <h3 id="EssSharp_EssLockObject_LockType" data-uid="EssSharp.EssLockObject.LockType">
+  LockType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssLockObject.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override EssLockType LockType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="../EssSharp.Abstractions/EssSharp.EssLockType.html">EssLockType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssLockObject_LockedFileType_" data-uid="EssSharp.EssLockObject.LockedFileType*"></a>
+
+  <h3 id="EssSharp_EssLockObject_LockedFileType" data-uid="EssSharp.EssLockObject.LockedFileType">
+  LockedFileType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssLockObject.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the Lock Object Type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EssLockedFileType LockedFileType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="../EssSharp.Abstractions/EssSharp.EssLockedFileType.html">EssLockedFileType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssLockObject_Name_" data-uid="EssSharp.EssLockObject.Name*"></a>
+
+  <h3 id="EssSharp_EssLockObject_Name" data-uid="EssSharp.EssLockObject.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssLockObject.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The name of the thing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string Name { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssLockObject_Time_" data-uid="EssSharp.EssLockObject.Time*"></a>
+
+  <h3 id="EssSharp_EssLockObject_Time" data-uid="EssSharp.EssLockObject.Time">
+  Time
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssLockObject.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the time</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTime Time { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssLockObject_User_" data-uid="EssSharp.EssLockObject.User*"></a>
+
+  <h3 id="EssSharp_EssLockObject_User" data-uid="EssSharp.EssLockObject.User">
+  User
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssLockObject.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the user</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string User { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssLockObject.cs/#L8" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2022-2023 Applied OLAP
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

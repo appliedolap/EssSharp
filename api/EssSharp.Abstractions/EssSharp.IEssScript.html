@@ -1,0 +1,586 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Interface IEssScript
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IEssScript
+ ">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/appliedolap/EssSharp/new/develop/apiSpec/new?filename=EssSharp_IEssScript.md&amp;value=---%0Auid%3A%20EssSharp.IEssScript%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../../public/main.js'
+    import { init } from './../../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <article data-uid="EssSharp.IEssScript">
+
+
+
+  <h1 id="EssSharp_IEssScript" data-uid="EssSharp.IEssScript" class="text-break">
+    Interface IEssScript
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="../EssSharp.Abstractions/EssSharp.html">Ess<wbr>Sharp</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>EssSharp.Abstractions.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IEssScript : IEssObject</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="EssSharp.IEssObject.html#EssSharp_IEssObject_Name">IEssObject.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="EssSharp.IEssObject.html#EssSharp_IEssObject_Type">IEssObject.Type</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="EssSharp_IEssScript_Content_" data-uid="EssSharp.IEssScript.Content*"></a>
+
+  <h3 id="EssSharp_IEssScript_Content" data-uid="EssSharp.IEssScript.Content">
+  Content
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the content of the script</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Content { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_Cube_" data-uid="EssSharp.IEssScript.Cube*"></a>
+
+  <h3 id="EssSharp_IEssScript_Cube" data-uid="EssSharp.IEssScript.Cube">
+  Cube
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the cube that holds the script</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssCube Cube { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssCube.html">IEssCube</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_ModifiedTime_" data-uid="EssSharp.IEssScript.ModifiedTime*"></a>
+
+  <h3 id="EssSharp_IEssScript_ModifiedTime" data-uid="EssSharp.IEssScript.ModifiedTime">
+  ModifiedTime
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns not sure</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long ModifiedTime { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_ScriptType_" data-uid="EssSharp.IEssScript.ScriptType*"></a>
+
+  <h3 id="EssSharp_IEssScript_ScriptType" data-uid="EssSharp.IEssScript.ScriptType">
+  ScriptType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the type of the script.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">EssScriptType ScriptType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.EssScriptType.html">EssScriptType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_Size_" data-uid="EssSharp.IEssScript.Size*"></a>
+
+  <h3 id="EssSharp_IEssScript_Size" data-uid="EssSharp.IEssScript.Size">
+  Size
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the size of the script in bytes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long Size { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="EssSharp_IEssScript_Delete_" data-uid="EssSharp.IEssScript.Delete*"></a>
+
+  <h3 id="EssSharp_IEssScript_Delete" data-uid="EssSharp.IEssScript.Delete">
+  Delete()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Deletes a script from the cube</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Delete()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_DeleteAsync_" data-uid="EssSharp.IEssScript.DeleteAsync*"></a>
+
+  <h3 id="EssSharp_IEssScript_DeleteAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssScript.DeleteAsync(System.Threading.CancellationToken)">
+  DeleteAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Deletes a script from the cube</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task DeleteAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_Execute_" data-uid="EssSharp.IEssScript.Execute*"></a>
+
+  <h3 id="EssSharp_IEssScript_Execute" data-uid="EssSharp.IEssScript.Execute">
+  Execute()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a script</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEssJob Execute()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.IEssJob.html">IEssJob</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_ExecuteAsync_" data-uid="EssSharp.IEssScript.ExecuteAsync*"></a>
+
+  <h3 id="EssSharp_IEssScript_ExecuteAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssScript.ExecuteAsync(System.Threading.CancellationToken)">
+  ExecuteAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Executes a script</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IEssJob&gt; ExecuteAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="EssSharp.IEssJob.html">IEssJob</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_GetContent_" data-uid="EssSharp.IEssScript.GetContent*"></a>
+
+  <h3 id="EssSharp_IEssScript_GetContent" data-uid="EssSharp.IEssScript.GetContent">
+  GetContent()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string GetContent()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_GetContentAsync_" data-uid="EssSharp.IEssScript.GetContentAsync*"></a>
+
+  <h3 id="EssSharp_IEssScript_GetContentAsync_System_Threading_CancellationToken_" data-uid="EssSharp.IEssScript.GetContentAsync(System.Threading.CancellationToken)">
+  GetContentAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;string&gt; GetContentAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_SaveAsync_" data-uid="EssSharp.IEssScript.SaveAsync*"></a>
+
+  <h3 id="EssSharp_IEssScript_SaveAsync__1_System_Threading_CancellationToken_" data-uid="EssSharp.IEssScript.SaveAsync``1(System.Threading.CancellationToken)">
+  SaveAsync&lt;T&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;T&gt; SaveAsync&lt;T&gt;(CancellationToken cancellationToken = default) where T : class, IEssScript</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssScript_Save_" data-uid="EssSharp.IEssScript.Save*"></a>
+
+  <h3 id="EssSharp_IEssScript_Save__1" data-uid="EssSharp.IEssScript.Save``1">
+  Save&lt;T&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">T Save&lt;T&gt;() where T : class, IEssScript</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssScript.cs/#L8" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2022-2023 Applied OLAP
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

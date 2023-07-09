@@ -1,0 +1,1300 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/runner/work/EssSharp/EssSharp/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.DatabaseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.DatabaseType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssAggregateClear.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssAggregateClear.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssApplicationStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssApplicationStatus.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssBuildMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssBuildMethod.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssBuildOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssBuildOption.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssClearOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssClearOption.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssCubeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssCubeType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatabaseCreationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatabaseCreationOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatasourceConnectionSubtype.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatasourceConnectionSubtype.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatasourceConnectionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatasourceConnectionType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatasourceQueryInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatasourceQueryInfo.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatasourceType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssDatasourceType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssDrillthroughOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssDrillthroughOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssDrillthroughRange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssDrillthroughRange.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssGridDimension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssGridDimension.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssGridRange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssGridRange.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssGridSlice.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssGridSlice.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssGridSliceData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssGridSliceData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobClearDataOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobClearDataOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobExecuteMDXOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobExecuteMDXOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobExportExcelOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobExportExcelOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobImportExcelOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobImportExcelOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobLoadDataOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobLoadDataOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobScriptOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobScriptOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobStatus.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssJobType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssLockOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssLockOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssLockType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssLockType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssLockedFileType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssLockedFileType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssMemberIdentifierType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssMemberIdentifierType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssNamedQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssNamedQuery.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssQuery.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssQueryPreferences.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssQueryPreferences.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssQueryReport.ReportMetadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssQueryReport.ReportMetadata.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssQueryReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssQueryReport.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssScriptType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssScriptType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.EssType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.EssType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.FluentIEssCubeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.FluentIEssCubeExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssAbout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssAbout.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssAboutInstance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssAboutInstance.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplication.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationConfiguration.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationDatasource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationDatasource.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationDatasourceConnection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationDatasourceConnection.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationVariable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssApplicationVariable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssCalcScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssCalcScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssCube.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssCube.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssCubeVariable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssCubeVariable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDatasource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDatasource.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDatasourceConnection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDatasourceConnection.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDatasourceExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDatasourceExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDatasourceQueryInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDatasourceQueryInfo.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDimension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDimension.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDrillthroughOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDrillthroughOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDrillthroughRange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDrillthroughRange.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDrillthroughReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDrillthroughReport.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDrillthroughReportExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssDrillthroughReportExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssFile.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssFileExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssFileExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssFolder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssFolder.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssFolderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssFolderExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssGrid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssGrid.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssGroup.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssJob.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssJob.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssJobExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssJobExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssJobOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssJobOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssLock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssLock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssLockBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssLockBlock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssLockObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssLockObject.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssMaxlScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssMaxlScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssMdxScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssMdxScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssObject.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssReportScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssReportScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssServerFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssServerFactory.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssServerVariable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssServerVariable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssSession.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssSession.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssUrl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssUrl.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssUser.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssUserSession.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssUserSession.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.IEssUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.IEssUtility.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.NamedQueryType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.NamedQueryType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.VariableScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.VariableScope.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp.Abstractions/EssSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp.Abstractions/EssSharp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssAbout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssAbout.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssAboutInstance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssAboutInstance.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssApplication.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssApplicationConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssApplicationConfiguration.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssApplicationDatasource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssApplicationDatasource.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssApplicationDatasourceConnection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssApplicationDatasourceConnection.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssApplicationVariable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssApplicationVariable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssCalcScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssCalcScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssCube.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssCube.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssCubeVariable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssCubeVariable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssDatasource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssDatasource.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssDatasourceConnection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssDatasourceConnection.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssDimension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssDimension.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssDrillthroughReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssDrillthroughReport.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssFile.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssFolder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssFolder.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssGrid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssGrid.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssGroup.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssJob.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssJob.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssLock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssLock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssLockBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssLockBlock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssLockObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssLockObject.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssMaxlScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssMaxlScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssMdxScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssMdxScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssObject.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssReportScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssReportScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssScript.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssServer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssServer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssServerFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssServerFactory.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssServerVariable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssServerVariable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssSession.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssSession.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssUrl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssUrl.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssUser.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssUserSession.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssUserSession.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.EssUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.EssUtility.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "DuplicateUids"
+      ],
+      "type": "ManagedReference",
+      "source_relative_path": "api/EssSharp/EssSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/EssSharp/EssSharp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -1,0 +1,1031 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class EssDatasourceConnection
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class EssDatasourceConnection
+ ">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/appliedolap/EssSharp/new/develop/apiSpec/new?filename=EssSharp_EssDatasourceConnection.md&amp;value=---%0Auid%3A%20EssSharp.EssDatasourceConnection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../../public/main.js'
+    import { init } from './../../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <article data-uid="EssSharp.EssDatasourceConnection">
+
+
+
+  <h1 id="EssSharp_EssDatasourceConnection" data-uid="EssSharp.EssDatasourceConnection" class="text-break">
+    Class EssDatasourceConnection
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="../EssSharp/EssSharp.html">Ess<wbr>Sharp</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>EssSharp.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EssDatasourceConnection : EssObject, IEssDatasourceConnection, IEssObject</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="EssSharp.EssObject.html">EssObject</a></div>
+      <div><span class="xref">EssDatasourceConnection</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssDatasourceConnection.html">IEssDatasourceConnection</a></div>
+      <div><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssObject.html">IEssObject</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="EssSharp.EssApplicationDatasourceConnection.html">EssApplicationDatasourceConnection</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="EssSharp_EssDatasourceConnection_Catalog_" data-uid="EssSharp.EssDatasourceConnection.Catalog*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Catalog" data-uid="EssSharp.EssDatasourceConnection.Catalog">
+  Catalog
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Catalog { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_ConnectionSubtype_" data-uid="EssSharp.EssDatasourceConnection.ConnectionSubtype*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_ConnectionSubtype" data-uid="EssSharp.EssDatasourceConnection.ConnectionSubtype">
+  ConnectionSubtype
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the Connection Subtype</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EssDatasourceConnectionSubtype ConnectionSubtype { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="../EssSharp.Abstractions/EssSharp.EssDatasourceConnectionSubtype.html">EssDatasourceConnectionSubtype</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_ConnectionType_" data-uid="EssSharp.EssDatasourceConnection.ConnectionType*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_ConnectionType" data-uid="EssSharp.EssDatasourceConnection.ConnectionType">
+  ConnectionType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the Connection Type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EssDatasourceConnectionType ConnectionType { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="../EssSharp.Abstractions/EssSharp.EssDatasourceConnectionType.html">EssDatasourceConnectionType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_DatasourceName_" data-uid="EssSharp.EssDatasourceConnection.DatasourceName*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_DatasourceName" data-uid="EssSharp.EssDatasourceConnection.DatasourceName">
+  DatasourceName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DatasourceName { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_DbDriver_" data-uid="EssSharp.EssDatasourceConnection.DbDriver*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_DbDriver" data-uid="EssSharp.EssDatasourceConnection.DbDriver">
+  DbDriver
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DbDriver { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_DbURL_" data-uid="EssSharp.EssDatasourceConnection.DbURL*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_DbURL" data-uid="EssSharp.EssDatasourceConnection.DbURL">
+  DbURL
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DbURL { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Description_" data-uid="EssSharp.EssDatasourceConnection.Description*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Description" data-uid="EssSharp.EssDatasourceConnection.Description">
+  Description
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Description { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Encrypted_" data-uid="EssSharp.EssDatasourceConnection.Encrypted*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Encrypted" data-uid="EssSharp.EssDatasourceConnection.Encrypted">
+  Encrypted
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Encrypted { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Host_" data-uid="EssSharp.EssDatasourceConnection.Host*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Host" data-uid="EssSharp.EssDatasourceConnection.Host">
+  Host
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Host { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_MaxPoolSize_" data-uid="EssSharp.EssDatasourceConnection.MaxPoolSize*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_MaxPoolSize" data-uid="EssSharp.EssDatasourceConnection.MaxPoolSize">
+  MaxPoolSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxPoolSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_MinPoolSize_" data-uid="EssSharp.EssDatasourceConnection.MinPoolSize*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_MinPoolSize" data-uid="EssSharp.EssDatasourceConnection.MinPoolSize">
+  MinPoolSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MinPoolSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Name_" data-uid="EssSharp.EssDatasourceConnection.Name*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Name" data-uid="EssSharp.EssDatasourceConnection.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The name of the thing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string Name { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Path_" data-uid="EssSharp.EssDatasourceConnection.Path*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Path" data-uid="EssSharp.EssDatasourceConnection.Path">
+  Path
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Path { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Port_" data-uid="EssSharp.EssDatasourceConnection.Port*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Port" data-uid="EssSharp.EssDatasourceConnection.Port">
+  Port
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Port { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_RepoWallet_" data-uid="EssSharp.EssDatasourceConnection.RepoWallet*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_RepoWallet" data-uid="EssSharp.EssDatasourceConnection.RepoWallet">
+  RepoWallet
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RepoWallet { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Schema_" data-uid="EssSharp.EssDatasourceConnection.Schema*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Schema" data-uid="EssSharp.EssDatasourceConnection.Schema">
+  Schema
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Schema { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Server_" data-uid="EssSharp.EssDatasourceConnection.Server*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Server" data-uid="EssSharp.EssDatasourceConnection.Server">
+  Server
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the server that contains this job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEssServer Server { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssServer.html">IEssServer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Service_" data-uid="EssSharp.EssDatasourceConnection.Service*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Service" data-uid="EssSharp.EssDatasourceConnection.Service">
+  Service
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Service { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Sid_" data-uid="EssSharp.EssDatasourceConnection.Sid*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Sid" data-uid="EssSharp.EssDatasourceConnection.Sid">
+  Sid
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Sid { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Token_" data-uid="EssSharp.EssDatasourceConnection.Token*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Token" data-uid="EssSharp.EssDatasourceConnection.Token">
+  Token
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Token { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_Type_" data-uid="EssSharp.EssDatasourceConnection.Type*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_Type" data-uid="EssSharp.EssDatasourceConnection.Type">
+  Type
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The type of the thing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override EssType Type { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="../EssSharp.Abstractions/EssSharp.EssType.html">EssType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_User_" data-uid="EssSharp.EssDatasourceConnection.User*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_User" data-uid="EssSharp.EssDatasourceConnection.User">
+  User
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string User { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_WalletPath_" data-uid="EssSharp.EssDatasourceConnection.WalletPath*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_WalletPath" data-uid="EssSharp.EssDatasourceConnection.WalletPath">
+  WalletPath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string WalletPath { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="EssSharp_EssDatasourceConnection_DeleteConnection_" data-uid="EssSharp.EssDatasourceConnection.DeleteConnection*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_DeleteConnection" data-uid="EssSharp.EssDatasourceConnection.DeleteConnection">
+  DeleteConnection()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete a connection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void DeleteConnection()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_DeleteConnectionAsync_" data-uid="EssSharp.EssDatasourceConnection.DeleteConnectionAsync*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_DeleteConnectionAsync_System_Threading_CancellationToken_" data-uid="EssSharp.EssDatasourceConnection.DeleteConnectionAsync(System.Threading.CancellationToken)">
+  DeleteConnectionAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete a connection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteConnectionAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_TestConnection_" data-uid="EssSharp.EssDatasourceConnection.TestConnection*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_TestConnection" data-uid="EssSharp.EssDatasourceConnection.TestConnection">
+  TestConnection()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tests the connection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void TestConnection()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssDatasourceConnection_TestConnectionAsync_" data-uid="EssSharp.EssDatasourceConnection.TestConnectionAsync*"></a>
+
+  <h3 id="EssSharp_EssDatasourceConnection_TestConnectionAsync_System_Threading_CancellationToken_" data-uid="EssSharp.EssDatasourceConnection.TestConnectionAsync(System.Threading.CancellationToken)">
+  TestConnectionAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tests the connection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task TestConnectionAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssDatasourceConnection.cs/#L10" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2022-2023 Applied OLAP
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,775 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class EssFile
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class EssFile
+ ">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/appliedolap/EssSharp/new/develop/apiSpec/new?filename=EssSharp_EssFile.md&amp;value=---%0Auid%3A%20EssSharp.EssFile%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../../public/main.js'
+    import { init } from './../../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <article data-uid="EssSharp.EssFile">
+
+
+
+  <h1 id="EssSharp_EssFile" data-uid="EssSharp.EssFile" class="text-break">
+    Class EssFile
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="../EssSharp/EssSharp.html">Ess<wbr>Sharp</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>EssSharp.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EssFile : EssObject, IEssFile, IEssObject</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="EssSharp.EssObject.html">EssObject</a></div>
+      <div><span class="xref">EssFile</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssFile.html">IEssFile</a></div>
+      <div><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssObject.html">IEssObject</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="EssSharp.EssFolder.html">EssFolder</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="EssSharp_EssFile_FullPath_" data-uid="EssSharp.EssFile.FullPath*"></a>
+
+  <h3 id="EssSharp_EssFile_FullPath" data-uid="EssSharp.EssFile.FullPath">
+  FullPath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the full path of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string FullPath { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_Name_" data-uid="EssSharp.EssFile.Name*"></a>
+
+  <h3 id="EssSharp_EssFile_Name" data-uid="EssSharp.EssFile.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The name of the thing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string Name { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_ParentPath_" data-uid="EssSharp.EssFile.ParentPath*"></a>
+
+  <h3 id="EssSharp_EssFile_ParentPath" data-uid="EssSharp.EssFile.ParentPath">
+  ParentPath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the full path of the parent folder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ParentPath { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_Server_" data-uid="EssSharp.EssFile.Server*"></a>
+
+  <h3 id="EssSharp_EssFile_Server" data-uid="EssSharp.EssFile.Server">
+  Server
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the server that contains this file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEssServer Server { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="../EssSharp.Abstractions/EssSharp.IEssServer.html">IEssServer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_Type_" data-uid="EssSharp.EssFile.Type*"></a>
+
+  <h3 id="EssSharp_EssFile_Type" data-uid="EssSharp.EssFile.Type">
+  Type
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The type of the thing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override EssType Type { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="../EssSharp.Abstractions/EssSharp.EssType.html">EssType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="EssSharp_EssFile_Copy_" data-uid="EssSharp.EssFile.Copy*"></a>
+
+  <h3 id="EssSharp_EssFile_Copy_System_String_System_Boolean_" data-uid="EssSharp.EssFile.Copy(System.String,System.Boolean)">
+  Copy(string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copy a file from source to destination</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Copy(string newFilePath, bool overwrite = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>newFilePath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>overwrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_CopyAsync_" data-uid="EssSharp.EssFile.CopyAsync*"></a>
+
+  <h3 id="EssSharp_EssFile_CopyAsync_System_String_System_Boolean_System_Threading_CancellationToken_" data-uid="EssSharp.EssFile.CopyAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+  CopyAsync(string, bool, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copy a file from source to destination</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task CopyAsync(string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>newFilePath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>overwrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_Delete_" data-uid="EssSharp.EssFile.Delete*"></a>
+
+  <h3 id="EssSharp_EssFile_Delete" data-uid="EssSharp.EssFile.Delete">
+  Delete()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete a specific file</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Delete()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_DeleteAsync_" data-uid="EssSharp.EssFile.DeleteAsync*"></a>
+
+  <h3 id="EssSharp_EssFile_DeleteAsync_System_Threading_CancellationToken_" data-uid="EssSharp.EssFile.DeleteAsync(System.Threading.CancellationToken)">
+  DeleteAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Delete a specific file</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task DeleteAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_Download_" data-uid="EssSharp.EssFile.Download*"></a>
+
+  <h3 id="EssSharp_EssFile_Download" data-uid="EssSharp.EssFile.Download">
+  Download()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Downloads a file to a stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Stream Download()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a> object.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_DownloadAsync_" data-uid="EssSharp.EssFile.DownloadAsync*"></a>
+
+  <h3 id="EssSharp_EssFile_DownloadAsync_System_Threading_CancellationToken_" data-uid="EssSharp.EssFile.DownloadAsync(System.Threading.CancellationToken)">
+  DownloadAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Asynchronously downloads a file to a stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;Stream&gt; DownloadAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a>&gt;</dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a> object.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_Extract_" data-uid="EssSharp.EssFile.Extract*"></a>
+
+  <h3 id="EssSharp_EssFile_Extract_System_Boolean_" data-uid="EssSharp.EssFile.Extract(System.Boolean)">
+  Extract(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extract a zip file on same location</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Extract(bool overwrite = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>overwrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_ExtractAsync_" data-uid="EssSharp.EssFile.ExtractAsync*"></a>
+
+  <h3 id="EssSharp_EssFile_ExtractAsync_System_Boolean_System_Threading_CancellationToken_" data-uid="EssSharp.EssFile.ExtractAsync(System.Boolean,System.Threading.CancellationToken)">
+  ExtractAsync(bool, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extract a zip file on same location</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task ExtractAsync(bool overwrite = false, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>overwrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_Move_" data-uid="EssSharp.EssFile.Move*"></a>
+
+  <h3 id="EssSharp_EssFile_Move_System_String_System_Boolean_" data-uid="EssSharp.EssFile.Move(System.String,System.Boolean)">
+  Move(string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L143"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Moves a file from source to destination</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Move(string newFilePath, bool overwrite = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>newFilePath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>overwrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_MoveAsync_" data-uid="EssSharp.EssFile.MoveAsync*"></a>
+
+  <h3 id="EssSharp_EssFile_MoveAsync_System_String_System_Boolean_System_Threading_CancellationToken_" data-uid="EssSharp.EssFile.MoveAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+  MoveAsync(string, bool, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task MoveAsync(string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>newFilePath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>overwrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_Rename_" data-uid="EssSharp.EssFile.Rename*"></a>
+
+  <h3 id="EssSharp_EssFile_Rename_System_String_System_Boolean_" data-uid="EssSharp.EssFile.Rename(System.String,System.Boolean)">
+  Rename(string, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Renames a file or folder</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Rename(string newFilePath, bool overwrite = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>newFilePath</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>overwrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="EssSharp_EssFile_RenameAsync_" data-uid="EssSharp.EssFile.RenameAsync*"></a>
+
+  <h3 id="EssSharp_EssFile_RenameAsync_System_String_System_Boolean_System_Threading_CancellationToken_" data-uid="EssSharp.EssFile.RenameAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+  RenameAsync(string, bool, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Renames a file or folder</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task RenameAsync(string newFileName, bool overwrite = false, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>newFileName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>overwrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp/EssFile.cs/#L13" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2022-2023 Applied OLAP
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

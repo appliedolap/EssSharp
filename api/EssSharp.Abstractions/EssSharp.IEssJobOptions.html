@@ -1,0 +1,744 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Interface IEssJobOptions
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IEssJobOptions
+ ">
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/appliedolap/EssSharp/new/develop/apiSpec/new?filename=EssSharp_IEssJobOptions.md&amp;value=---%0Auid%3A%20EssSharp.IEssJobOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../../public/main.js'
+    import { init } from './../../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <article data-uid="EssSharp.IEssJobOptions">
+
+
+
+  <h1 id="EssSharp_IEssJobOptions" data-uid="EssSharp.IEssJobOptions" class="text-break">
+    Interface IEssJobOptions
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="../EssSharp.Abstractions/EssSharp.html">Ess<wbr>Sharp</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>EssSharp.Abstractions.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IEssJobOptions</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="EssSharp_IEssJobOptions_AbortOnError_" data-uid="EssSharp.IEssJobOptions.AbortOnError*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_AbortOnError" data-uid="EssSharp.IEssJobOptions.AbortOnError">
+  AbortOnError
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets whether to abort the data load if an error is encountered for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_Dataload">Dataload</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? AbortOnError { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_BuildMethod_" data-uid="EssSharp.IEssJobOptions.BuildMethod*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_BuildMethod" data-uid="EssSharp.IEssJobOptions.BuildMethod">
+  BuildMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the build method for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ExportExcel">ExportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">EssBuildMethod? BuildMethod { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.EssBuildMethod.html">EssBuildMethod</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_BuildOption_" data-uid="EssSharp.IEssJobOptions.BuildOption*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_BuildOption" data-uid="EssSharp.IEssJobOptions.BuildOption">
+  BuildOption
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the build option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">EssBuildOption? BuildOption { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.EssBuildOption.html">EssBuildOption</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_Calc_" data-uid="EssSharp.IEssJobOptions.Calc*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_Calc" data-uid="EssSharp.IEssJobOptions.Calc">
+  Calc
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the include calc option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ExportExcel">ExportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? Calc { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_CatalogExcelPath_" data-uid="EssSharp.IEssJobOptions.CatalogExcelPath*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_CatalogExcelPath" data-uid="EssSharp.IEssJobOptions.CatalogExcelPath">
+  CatalogExcelPath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the catalog excel path option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string CatalogExcelPath { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_CreateFiles_" data-uid="EssSharp.IEssJobOptions.CreateFiles*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_CreateFiles" data-uid="EssSharp.IEssJobOptions.CreateFiles">
+  CreateFiles
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the create files option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? CreateFiles { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_Data_" data-uid="EssSharp.IEssJobOptions.Data*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_Data" data-uid="EssSharp.IEssJobOptions.Data">
+  Data
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the include data option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ExportExcel">ExportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? Data { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_DeleteExcelOnSuccess_" data-uid="EssSharp.IEssJobOptions.DeleteExcelOnSuccess*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_DeleteExcelOnSuccess" data-uid="EssSharp.IEssJobOptions.DeleteExcelOnSuccess">
+  DeleteExcelOnSuccess
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the delete excel file (on success) option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? DeleteExcelOnSuccess { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_ExecuteScripts_" data-uid="EssSharp.IEssJobOptions.ExecuteScripts*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_ExecuteScripts" data-uid="EssSharp.IEssJobOptions.ExecuteScripts">
+  ExecuteScripts
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the execute scripts option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? ExecuteScripts { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_File_" data-uid="EssSharp.IEssJobOptions.File*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_File" data-uid="EssSharp.IEssJobOptions.File">
+  File
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;string&gt; File { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_ImportExcelFilename_" data-uid="EssSharp.IEssJobOptions.ImportExcelFilename*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_ImportExcelFilename" data-uid="EssSharp.IEssJobOptions.ImportExcelFilename">
+  ImportExcelFilename
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the import excel file name option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ImportExcelFilename { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_LoadData_" data-uid="EssSharp.IEssJobOptions.LoadData*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_LoadData" data-uid="EssSharp.IEssJobOptions.LoadData">
+  LoadData
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the load data option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? LoadData { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_MemberIds_" data-uid="EssSharp.IEssJobOptions.MemberIds*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_MemberIds" data-uid="EssSharp.IEssJobOptions.MemberIds">
+  MemberIds
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the inlcude member IDs options for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ExportExcel">ExportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? MemberIds { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_Option_" data-uid="EssSharp.IEssJobOptions.Option*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_Option" data-uid="EssSharp.IEssJobOptions.Option">
+  Option
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the clear option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_Clear">Clear</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">EssClearOption? Option { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="EssSharp.EssClearOption.html">EssClearOption</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_Overwrite_" data-uid="EssSharp.IEssJobOptions.Overwrite*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_Overwrite" data-uid="EssSharp.IEssJobOptions.Overwrite">
+  Overwrite
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the overwrite option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? Overwrite { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_PartialDataExpression_" data-uid="EssSharp.IEssJobOptions.PartialDataExpression*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_PartialDataExpression" data-uid="EssSharp.IEssJobOptions.PartialDataExpression">
+  PartialDataExpression
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the mdx expression specifying the region to clear for an ASO cube when the
+<a class="xref" href="EssSharp.EssClearOption.html#EssSharp_EssClearOption_PARTIAL_DATA">PARTIAL_DATA</a> is used for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_Clear">Clear</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string PartialDataExpression { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_RecreateApp_" data-uid="EssSharp.IEssJobOptions.RecreateApp*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_RecreateApp" data-uid="EssSharp.IEssJobOptions.RecreateApp">
+  RecreateApp
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the recreate app option for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_ImportExcel">ImportExcel</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool? RecreateApp { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_Rule_" data-uid="EssSharp.IEssJobOptions.Rule*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_Rule" data-uid="EssSharp.IEssJobOptions.Rule">
+  Rule
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the rule file (or files) to use for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_Dataload">Dataload</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">List&lt;string&gt; Rule { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="EssSharp_IEssJobOptions_Script_" data-uid="EssSharp.IEssJobOptions.Script*"></a>
+
+  <h3 id="EssSharp_IEssJobOptions_Script" data-uid="EssSharp.IEssJobOptions.Script">
+  Script
+  <a class="header-action link-secondary" title="View source" href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns or sets the file to execute for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_Calc">Calc</a> job or
+the file (or files) to load for an <a class="xref" href="EssSharp.EssJobType.html#EssSharp_EssJobType_Dataload">Dataload</a> job.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Script { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/appliedolap/EssSharp/blob/develop/src/EssSharp.Abstractions/IEssJobOptions.cs/#L6" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Copyright © 2022-2023 Applied OLAP
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
