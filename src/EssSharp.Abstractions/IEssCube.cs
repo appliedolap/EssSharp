@@ -172,28 +172,28 @@ namespace EssSharp
         /// <summary>
         /// Gets the drillthrough report with the given name.
         /// </summary>
-        /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
-        /// <param name="reportName" />
+        /// <param name="reportName">The name of the report</param>
+        /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
         public IEssDrillthroughReport GetDrillthroughReport( string reportName, bool getDetails = false );
 
         /// <summary>
         /// Asynchronously gets the drillthrough report with the given name.
         /// </summary>
-        /// <param name="reportName" />
-        /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
+        /// <param name="reportName">The name of the report.</param> />
+        /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public Task<IEssDrillthroughReport> GetDrillthroughReportAsync( string reportName, bool getDetails = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the list of drillthrough reports for this cube.
         /// </summary>
-        /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
+        /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
         public List<IEssDrillthroughReport> GetDrillthroughReports( bool getDetails = false );
 
         /// <summary>
         /// Asynchronously gets the list of drillthrough reports for this cube.
         /// </summary>
-        /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
+        /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( bool getDetails = false, CancellationToken cancellationToken = default );
 
@@ -375,8 +375,8 @@ namespace EssSharp
         /// Asynchronously gets the drillthrough report with the given name.
         /// </summary>
         /// <param name="cubeTask" />
-        /// <param name="reportName" />
-        /// <param name="getDetails">Whether to the full report specification (or only summary details).</param>
+        /// <param name="reportName">The name of the report.</param>
+        /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public static async Task<IEssDrillthroughReport> GetDrillthroughReportAsync( this Task<IEssCube> cubeTask, string reportName, bool getDetails = false, CancellationToken cancellationToken = default ) =>
             await (await cubeTask.ConfigureAwait(false)).GetDrillthroughReportAsync(reportName, getDetails, cancellationToken).ConfigureAwait(false);
@@ -385,7 +385,7 @@ namespace EssSharp
         /// Asynchronously gets the list of drillthrough reports.
         /// </summary>
         /// <param name="cubeTask" />
-        /// <param name="getDetails">Whether to get the full report specification (or only summary details).</param>
+        /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
         /// <param name="cancellationToken" />
         public static async Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( this Task<IEssCube> cubeTask, bool getDetails = false, CancellationToken cancellationToken = default ) =>
             await (await cubeTask.ConfigureAwait(false)).GetDrillthroughReportsAsync(getDetails, cancellationToken).ConfigureAwait(false);

@@ -138,14 +138,14 @@ namespace EssSharp
         /// Return a specified data source as an IEssDatasource object
         /// </summary>
         /// <param name="datasourceName"></param>
-        public IEssDatasource GetDatasource(string dataSourceName);
+        public IEssDatasource GetDatasource( string datasourceName );
 
         /// <summary>
         /// Returns a specified data source as an IEssDatasource object
         /// </summary>
         /// <param name="datasourceName"></param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssDatasource> GetDatasourceAsync(string datasourceName, CancellationToken cancellationToken = default);
+        public Task<IEssDatasource> GetDatasourceAsync( string datasourceName, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns a list of IEssDatasource objects
@@ -153,10 +153,10 @@ namespace EssSharp
         public List<IEssDatasource> GetDatasources();
 
         /// <summary>
-        /// Returns a list of IEssDatasource Ojbects
+        /// Returns a list of IEssDatasource objects
         /// </summary>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssDatasource>> GetDatasourcesAsync(CancellationToken cancellationToken = default);
+        public Task<List<IEssDatasource>> GetDatasourcesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// 
@@ -194,13 +194,13 @@ namespace EssSharp
         public Task<List<IEssFolder>> GetFoldersAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns a specified group
+        /// Gets the specified group.
         /// </summary>
         /// <param name="name"></param>
         public IEssGroup GetGroup( string name );
 
         /// <summary>
-        /// Returns a speicified
+        /// Gets the specified group.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="cancellationToken"></param>
@@ -208,20 +208,30 @@ namespace EssSharp
         public Task<IEssGroup> GetGroupAsync( string name, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns a litst of <see cref="IEssGroup"/> objects
+        /// Returns a list of <see cref="IEssGroup"/> objects.
         /// </summary>
         public List<IEssGroup> GetGroups();
 
         /// <summary>
-        /// Returns a litst of <see cref="IEssGroup"/> objects
+        /// Returns a list of <see cref="IEssGroup"/> objects.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the about information of this server
+        /// Gets the about information of this server.
         /// </summary>
-        public Task<IEssAbout> GetAboutAsync(CancellationToken cancellationToken = default);
+        public IEssAbout GetAbout();
+
+        /// <summary>
+        /// Asynchronously gets the about information of this server.
+        /// </summary>
+        public Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the about information of this server.
+        /// </summary>
+        public IEssAboutInstance GetAboutInstance();
 
         /// <summary>
         /// Gets the about information of this server
@@ -238,6 +248,7 @@ namespace EssSharp
         /// Asynchronously gets the application with the given name.
         /// </summary>
         /// <param name="applicationName" />
+        /// <param name="cancellationToken" />
         public Task<IEssApplication> GetApplicationAsync( string applicationName, CancellationToken cancellationToken = default );
 
         /// <summary>
