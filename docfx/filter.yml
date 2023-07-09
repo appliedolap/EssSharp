@@ -1,0 +1,10 @@
+apiRules:
+- exclude:
+    uidRegex: ^EssSharp\.Api$
+    type: Namespace
+- exclude:
+    uidRegex: ^EssSharp\.Client$
+    type: Namespace
+- exclude:
+    uidRegex: ^EssSharp\.Model$
+    type: Namespace

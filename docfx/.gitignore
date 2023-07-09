@@ -1,0 +1,13 @@
+###############
+#    folder   #
+###############
+/**/DROP/
+/**/TEMP/
+/**/packages/
+/**/bin/
+/**/obj/
+
+# generated content
+.cache
+_site/
+api/
