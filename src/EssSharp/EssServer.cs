@@ -288,27 +288,6 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public async Task<IEssServerVariable> CreateVariable( string name, string value, CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var variableInfo = new Variable( name: name, value: value );
-                var api = GetApi<ServerVariablesApi>();
-
-                if ( await api.VariablesCreateServerVariableAsync(body: variableInfo, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } variable )
-                    throw new Exception("Cannot create new variable.");
-
-                return new EssServerVariable(variable, this);
-            }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to create the variable ""{name}"". {e.Message}", e);
-            }
-
-
-        }
-
-        /// <inheritdoc />
         /// <returns>An <see cref="EssAboutInstance"/> object.</returns>
         public IEssAboutInstance GetAboutInstance() => GetAboutInstanceAsync()?.GetAwaiter().GetResult();
 

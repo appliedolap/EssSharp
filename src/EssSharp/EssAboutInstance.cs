@@ -16,7 +16,7 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        public EssAboutInstance( AboutInstance aboutInstance )
+        internal EssAboutInstance( AboutInstance aboutInstance )
         {
             _aboutInstance = aboutInstance ??
                 throw new ArgumentNullException(nameof(aboutInstance), $"An API model {nameof(aboutInstance)} is required to create an {nameof(EssAboutInstance)}.");
