@@ -70,7 +70,7 @@ namespace EssSharp
 
         /// <summary>Report Script</summary>
         [Description("Report Script")]
-        ReportScript = 15,
+        ExecuteReport = 15,
 
         /// <summary>MAXL Script</summary>
         [Description("MAXL Script")]

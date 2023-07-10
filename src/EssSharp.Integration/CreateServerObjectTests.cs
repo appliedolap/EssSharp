@@ -78,7 +78,42 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = @"CreateServerObjectTests - 03 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(03)]
+        [Fact(DisplayName = "CreateServerObjectTests - 03 - Essbase_AfterCubeCreation_CanCreateReportScript"), Priority(03)]
+        public async Task Essbase_AfterCubeCreation_CanCreateReportScript()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube.
+            var cube = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Assert that the cube does not contain an report script called "test" before we create one.
+            Assert.Empty((await cube.GetScriptsAsync<IEssReportScript>()).Where(report => string.Equals(report?.Name, "test", StringComparison.Ordinal)));
+
+            // Create some script content.
+            var content = 
+@"<PAGE(""Measures"")
+""Sales""
+<COLUMN(""Scenario"", ""Year"")
+""Scenario""
+""Jan"" ""Feb"" ""Mar"" ""Apr""
+<ROW(""Market"", ""Product"")
+""New York""
+""Product"" ""100"" ""100-10""
+!";
+
+            // Create a script on the server with the given content.
+            await cube.CreateScriptAsync<IEssReportScript>("test", content);
+
+            // Get the script back from the server.
+            var script = await cube.GetScriptAsync<IEssReportScript>("test", getContent: true);
+
+            // Assert that the script exists and contains the content we gave it.
+            Assert.Equal(content, script?.Content);
+        }
+
+        [Fact(DisplayName = @"CreateServerObjectTests - 04 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(04)]
         public async Task Essbase_AfterScriptCreation_CanCreateLockOnScript()
         {
             // Get an unconnected server.
@@ -98,5 +133,6 @@ namespace EssSharp.Integration
             // Assert that the lock object name is the same as the one we passed.
             Assert.Equal("CalcAll", lockedScript.Name);
         }
+
     }
 }

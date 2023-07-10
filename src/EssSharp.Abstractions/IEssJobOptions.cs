@@ -118,5 +118,19 @@ namespace EssSharp
         public bool? RecreateApp { get; set; }
 
         #endregion
+
+        #region EssJobType.ExecuteReport
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ReportScriptFilename { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool? LockForUpdate { get; set; }
+
+        #endregion
     }
 }

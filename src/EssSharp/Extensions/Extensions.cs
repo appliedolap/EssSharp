@@ -417,7 +417,11 @@ namespace EssSharp
             AbortOnError          = options.AbortOnError?.ToString().ToLowerInvariant(),
             Rule                  = options is EssJobLoadDataOptions ?
                                         $@"[""{string.Join(@""",""", options.Rule ?? new List<string>())}""]" :
-                                        options.Rule?.FirstOrDefault()
+                                        options.Rule?.FirstOrDefault(),
+
+            // EssJobType.ExecuteReport
+            ReportScriptFilename  = options.ReportScriptFilename,
+            LockForUpdate         = options.LockForUpdate ?? false
         };
 
         internal static List<EssGridDimension> ToEssGridDimention( this List<GridDimension> gridDimensions )

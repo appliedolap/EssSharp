@@ -315,7 +315,7 @@ cat temp.json | jq '.definitions."FileCollectionResponse" = {
 cat temp.json | jq '.definitions.GridOperation.properties.action.enum = ["zoomin", "zoomout", "keeponly", "removeonly", "refresh", "pivot", "pivotToPOV", "submit"]' > json.tmp && mv json.tmp temp.json
 
 # Add an enumerated jobtype to the JobsInputBean definition.
-cat temp.json | jq '.definitions.JobsInputBean.properties.jobtype.enum = ["dataload", "dimbuild", "calc", "clear", "importExcel", "exportExcel", "lcmExport", "lcmImport", "clearAggregation", "buildAggregation", "asoBufferDataLoad", "asoBufferCommit", "exportData", "mdxScript"]' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.JobsInputBean.properties.jobtype.enum = ["dataload", "dimbuild", "calc", "clear", "importExcel", "exportExcel", "lcmExport", "lcmImport", "clearAggregation", "buildAggregation", "asoBufferDataLoad", "asoBufferCommit", "exportData", "mdxScript", "executeReport"]' > json.tmp && mv json.tmp temp.json
 
 # The properties for the MemberBean definition are incomplete. Add the following properties.
 cat temp.json | jq '.definitions.MemberBean.properties += {

@@ -26,5 +26,25 @@ namespace EssSharp.Integration
             // Assert that the run mdx job completed without warnings.
             Assert.Equal(EssJobStatus.Completed, job?.JobStatus);
         }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 02 - Essbase_AfterScriptCreation_CanExecuteReportScript"), Priority(02)]
+        public async Task Essbase_AfterScriptCreation_CanExecuteReportScript()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the test Report script from the server.
+            var script = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic")
+                .GetScriptAsync<IEssReportScript>("test");
+
+            // Execute the Report job and capture the results.
+            var job = await script.ExecuteAsync();
+
+            // Assert that the run Report job completed without warnings.
+            Assert.Equal(EssJobStatus.Completed, job?.JobStatus);
+        }
     }
+
+
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace EssSharp
@@ -31,23 +32,36 @@ namespace EssSharp
             if ( string.IsNullOrEmpty(fileName) )
                 throw new ArgumentNullException($@"The name of a script is required to create an {nameof(EssJobScriptOptions)} with this constructor.", nameof(fileName));
 
-            var extension = fileName?.Split('.').Last();
-            if ( !(string.Equals(extension, "csc") || string.Equals(extension, "mdx")) )
-                throw new ArgumentException($@"{nameof(EssJobScriptOptions)} requires file extension for parameter {nameof(fileName)}.");
-
-            JobType = extension switch
+            // Throw if a filename without an extension was given.
+            if ( !Path.HasExtension(fileName) )
+                throw new ArgumentException($@"{nameof(EssJobScriptOptions)} requires the {nameof(fileName)} parameter to include a file extension.");
+            
+            // Determine the JobType on the basis of the given filename's extension.
+            JobType = Path.GetExtension(fileName)?.ToLowerInvariant() switch
             {
-                "csc" => EssJobType.Calc,
-                "mdx" => EssJobType.MdxScript,
-                "rep" => EssJobType.ReportScript,
-                "msh" => EssJobType.MAXLScript,
-                _     => throw new NotImplementedException()
+                ".csc" => EssJobType.Calc,
+                ".mdx" => EssJobType.MdxScript,
+                ".msh" => EssJobType.MAXLScript,
+                ".rep" => EssJobType.ExecuteReport,
+                _      => throw new ArgumentException($@"{nameof(EssJobScriptOptions)} requires the {nameof(fileName)} parameter to include a known script file extension.")
             };
+
+            // Strip the extension from the given script filename.
+            var name = Path.GetFileNameWithoutExtension(fileName);
 
             ApplicationName = applicationName;
             CubeName        = cubeName;
 
-            Script          = fileName;
+            switch ( JobType )
+            {
+                case EssJobType.ExecuteReport:
+                    ReportScriptFilename = fileName;
+                    LockForUpdate = LockForUpdate;
+                    break;
+                default:
+                    Script = fileName;
+                    break;
+            }
         }
 
         /// <summary />
@@ -64,20 +78,40 @@ namespace EssSharp
 
             JobType = essScript.ScriptType switch
             {
-                EssScriptType.Calc => EssJobType.Calc,
-                EssScriptType.MDX  => EssJobType.MdxScript,
-                EssScriptType.Report => EssJobType.ReportScript,
-                EssScriptType.MaxL => EssJobType.MAXLScript,
-                _                  => throw new NotImplementedException()
+                EssScriptType.Calc   => EssJobType.Calc,
+                EssScriptType.MDX    => EssJobType.MdxScript,
+                EssScriptType.Report => EssJobType.ExecuteReport,
+                EssScriptType.MaxL   => EssJobType.MAXLScript,
+                _                    => throw new NotImplementedException()
             };
 
             ApplicationName = applicationName;
             CubeName        = cubeName;
 
-            Script = $@"{essScript.Name}.{(JobType is EssJobType.Calc ? "csc" : "mdx")}";
+            switch ( JobType )
+            {
+                case EssJobType.Calc:
+                    Script = $@"{essScript.Name}.csc";
+                    break;
+                case EssJobType.MdxScript:
+                    Script = $@"{essScript.Name}.mdx";
+                    break;
+                case EssJobType.ExecuteReport:
+                    ReportScriptFilename = essScript.Name;
+                    LockForUpdate = LockForUpdate;
+                    break;
+                case EssJobType.MAXLScript:
+                    break;
+            }
         }
 
         #region IEssJobOptions EssJobType.Calc Members
+
+        /// <inheritdoc />
+        public bool? LockForUpdate { get; set; }
+
+        /// <inheritdoc />
+        public string ReportScriptFilename { get; set; }
 
         /// <inheritdoc />
         public string Script { get; set; }

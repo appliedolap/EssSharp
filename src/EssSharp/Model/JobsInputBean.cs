@@ -117,7 +117,13 @@ namespace EssSharp.Model
             /// Enum MdxScript for value: mdxScript
             /// </summary>
             [EnumMember(Value = "mdxScript")]
-            MdxScript = 14
+            MdxScript = 14,
+
+            /// <summary>
+            /// Enum ExecuteReport for value: executeReport
+            /// </summary>
+            [EnumMember(Value = "executeReport")]
+            ExecuteReport = 15
 
         }
 

@@ -87,5 +87,13 @@ namespace EssSharp
         bool? IEssJobOptions.RecreateApp { get; set; }
 
         #endregion
+
+        #region Explicit IEssJobOptions EssJobType.ExecuteReport Members
+
+        string IEssJobOptions.ReportScriptFilename { get; set; }
+
+        bool? IEssJobOptions.LockForUpdate { get; set; }
+
+        #endregion
     }
 }

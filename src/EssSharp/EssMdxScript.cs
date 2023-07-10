@@ -56,7 +56,8 @@ namespace EssSharp
             try
             {
                 if ( string.IsNullOrEmpty(Content) )
-                    throw new ArgumentException($@"{nameof(Content)} is required to execute MDX Query.");
+                    try { await GetContentAsync().ConfigureAwait(false); }
+                    catch { throw new ArgumentException($@"{nameof(Content)} is required to execute MDX Query."); }
 
                 preferences ??= new EssQueryPreferences();
 

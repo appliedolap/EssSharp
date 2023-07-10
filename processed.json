@@ -18280,7 +18280,8 @@
             "asoBufferDataLoad",
             "asoBufferCommit",
             "exportData",
-            "mdxScript"
+            "mdxScript",
+            "executeReport"
           ]
         },
         "parameters": {
