@@ -10,7 +10,9 @@ using Newtonsoft.Json.Linq;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// Represents an MDX script that is specific to a cube.
+    /// </summary>
     public class EssCalcScript : EssScript, IEssCalcScript
     {
         #region Private Data

@@ -12,7 +12,9 @@ using Newtonsoft.Json.Linq;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// Represents an MDX script that is specific to a cube.
+    /// </summary>
     public class  EssMdxScript : EssScript, IEssMdxScript
     {
         #region Private Data
@@ -46,7 +48,7 @@ namespace EssSharp
         #region IEssScript Methods
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns><see cref="EssQueryReport"/></returns>
         public EssQueryReport Query( EssQueryPreferences preferences = null ) => QueryAsync( preferences ).GetAwaiter().GetResult();
 
         /// <inheritdoc />

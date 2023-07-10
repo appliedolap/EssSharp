@@ -10,7 +10,9 @@ using Newtonsoft.Json.Linq;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// Represents a Report script that is specific to a cube.
+    /// </summary>
     public class EssReportScript : EssScript, IEssReportScript
     {
         #region Private Data

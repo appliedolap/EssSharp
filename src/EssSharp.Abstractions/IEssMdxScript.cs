@@ -14,14 +14,13 @@ namespace EssSharp
         #region Methods
 
         /// <summary>
-        /// 
+        /// Synchronously executes MDX query on the cube.
         /// </summary>
         /// <param name="preferences"></param>
-        /// <param name="getContent"></param>
         public EssQueryReport Query( EssQueryPreferences preferences = null );
 
         /// <summary>
-        /// 
+        /// Asynchronously executes MDX query on the cube.
         /// </summary>
         /// <param name="preferences"></param>
         /// <param name="getContent"></param>
@@ -29,12 +28,12 @@ namespace EssSharp
         public Task<EssQueryReport> QueryAsync( EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Synchronously executes MDX query and generates a <see cref="IEssGrid"/>.
         /// </summary>
         public IEssGrid GetGrid();
 
         /// <summary>
-        /// 
+        /// Asynchronously executes MDX query and generates a <see cref="IEssGrid"/>.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<IEssGrid> GetGridAsync( CancellationToken cancellationToken = default );

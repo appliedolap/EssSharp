@@ -4,7 +4,9 @@ using System.Linq;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// Supported script types.
+    /// </summary> />
     public enum EssScriptType
     {
         /// <summary />
@@ -19,14 +21,15 @@ namespace EssSharp
         Report = 4
     };
 
-    /// <summary />
+    /// <summary>
+    /// Options required to execute <see cref="IEssCalcScript"/>, <see cref="IEssMdxScript"/>, <see cref="IEssMaxlScript"/>, and <see cref="IEssReportScript"/> scripts.
+    /// </summary>
     public class EssJobScriptOptions : EssJobOptions, IEssJobOptions
     {
-
-        /// <summary />
-        /// <param name="scriptName">The name of script to execute. Maps to <see cref="File" />.</param>
-        /// <param name="applicationName" />
-        /// <param name="cubeName" />
+        /// <summary/>
+        /// <param name="fileName">The name of script to execute. Maps to <see cref="File" />.</param>
+        /// <param name="applicationName">Name of application.</param>
+        /// <param name="cubeName">Name of cube</param>
         public EssJobScriptOptions( string fileName, string applicationName = null, string cubeName = null ) : base(EssJobType.Unknown)
         {
             if ( string.IsNullOrEmpty(fileName) )
@@ -65,7 +68,7 @@ namespace EssSharp
         }
 
         /// <summary />
-        /// <param name="scriptName">The name of script to execute. Maps to <see cref="File" />.</param>
+        /// <param name="essScript">The name of script to execute. Maps to <see cref="IEssScript" />.</param>
         /// <param name="applicationName" />
         /// <param name="cubeName" />
         public EssJobScriptOptions( IEssScript essScript, string applicationName = null, string cubeName = null ) : base(EssJobType.Unknown)

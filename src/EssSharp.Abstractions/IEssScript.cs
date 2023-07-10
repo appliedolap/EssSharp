@@ -33,54 +33,54 @@ namespace EssSharp
         /// Returns the type of the script.
         /// </summary>
         public EssScriptType ScriptType { get; }
-        
+
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Deletes a script from the cube
+        /// Synchronously deletes a script from the cube.
         /// </summary>
         void Delete();
 
         /// <summary>
-        /// Deletes a script from the cube
+        /// Asynchronously deletes a script from the cube.
         /// </summary>
         /// <param name="cancellationToken"></param>
         Task DeleteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Executes a script
+        /// Synchronously executes a script.
         /// </summary>
         IEssJob Execute( );
 
         /// <summary>
-        /// Executes a script
+        /// Asynchronously executes a script.
         /// </summary>
         /// <param name="cancellationToken"></param>
         Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Syncronously returns and sets the script content.
         /// </summary>
         /// <returns></returns>
         public string GetContent();
 
         /// <summary>
-        /// 
+        /// Asyncronously retrieves and sets the script content.
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<string> GetContentAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Sycronously Saves script to the cube.
         /// </summary>
         /// <returns></returns>
         public T Save<T>() where T: class, IEssScript;
 
         /// <summary>
-        /// 
+        /// Asycronously Saves script to the cube.
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>

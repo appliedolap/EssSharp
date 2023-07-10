@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using EssSharp.Api;
 using EssSharp.Model;
-using Newtonsoft.Json.Linq;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// Represents a script that is specific to a cube.
+    /// </summary>
     public class EssScript : EssObject, IEssScript
     {
         #region Private Data
@@ -87,10 +85,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns><see cref="IEssJob"/></returns>
         public IEssJob Execute() => ExecuteAsync( ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <remarks>TODO: FIGURE OUT HOW TO MAP SCRIPT TYPE TO JOBTYPE.</remarks>
+        /// <returns><see cref="IEssJob"/></returns>
         public async Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default)
         {
             try
@@ -115,11 +114,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns><see cref="string"/> containing script content</returns>
         public string GetContent() => GetContentAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns><see cref="string"/> containing script content</returns>
         public async Task<string> GetContentAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -139,11 +138,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>T where T is <see cref="IEssScript"/></returns>
         public T Save<T>() where T: class, IEssScript => SaveAsync<T>().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>T where T is <see cref="IEssScript"/></returns>
         public async Task<T> SaveAsync<T>( CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
             try
