@@ -1,5 +1,8 @@
 apiRules:
 - exclude:
+    uidRegex: ^System\.Object$
+    type: Type
+- exclude:
     uidRegex: ^EssSharp\.Api$
     type: Namespace
 - exclude:
