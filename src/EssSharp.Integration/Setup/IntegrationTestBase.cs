@@ -30,14 +30,17 @@ namespace EssSharp.Integration.Setup
     {
         public CollectionFixture( IMessageSink sink )
         {
-            IConfigurationRoot config = null;
+            var localSettings   = default(IntegrationTestSettings);
+            var defaultSettings = default(IntegrationTestSettings);
 
             try
             {
-                // Attempt to build a configuration around a local settings file.
-                config = new ConfigurationBuilder()
+                // Attempt to build a configuration around and get the local settings.
+                localSettings = new ConfigurationBuilder()
                     .AddJsonFile("appsettings.local.json")
-                    .Build();
+                    .Build()
+                    .GetSection("Settings")
+                    .Get<IntegrationTestSettings>();
             }
             catch ( FileNotFoundException )
             {
@@ -46,20 +49,23 @@ namespace EssSharp.Integration.Setup
 
             try
             {
-                // Attempt to build a configuration around the default settings file,
-                // if a local configuration was not available.
-                config ??= new ConfigurationBuilder()
+                // Attempt to build a configuration around and get the default settings.
+                defaultSettings = new ConfigurationBuilder()
                     .AddJsonFile("appsettings.json")
-                    .Build();
+                    .Build()
+                    .GetSection("Settings")
+                    .Get<IntegrationTestSettings>();
             }
             catch ( FileNotFoundException )
             {
                 // Swallow a FileNotFoundException, which occurs when the default settings file does not exist.
             }
 
-            // If connections could be obtained from the configuration, make them available to the EssServerFactory.
-            if ( config?.GetSection("Settings")?.Get<IntegrationTestSettings>().Connections is { Length: > 0 } connections )
-                IntegrationTestFactory.Connections = connections;
+            // If connections could be obtained from either configuration, make them available to the EssServerFactory.
+            if ( localSettings?.Connections is { Length: > 0 } localConnections )
+                IntegrationTestFactory.Connections = localConnections;
+            else if ( defaultSettings?.Connections is { Length: > 0 } defaultConnections )
+                IntegrationTestFactory.Connections = defaultConnections;
             else
             {
                 IntegrationTestFactory.Connections = new IntegrationTestSettingsConnection[]
@@ -85,6 +91,19 @@ namespace EssSharp.Integration.Setup
                         Password = "welcome3",
                         Role     = Role.User
                     }
+                };
+            }
+
+            // If an images list could be obtained from either configuration, make them available to the EssServerFactory.
+            if ( localSettings?.Images is { Length: > 0 } localImages )
+                IntegrationTestFactory.Images = localImages;
+            else if ( defaultSettings?.Images is { Length: > 0 } defaultImages )
+                IntegrationTestFactory.Images = defaultImages;
+            else
+            {
+                IntegrationTestFactory.Images = new []
+                {
+                    "appliedolap/essbase:21.5-latest"
                 };
             }
 

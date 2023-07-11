@@ -5,6 +5,9 @@
     {
         /// <summary />
         public IntegrationTestSettingsConnection[] Connections { get; set; }
+
+        /// <summary />
+        public string[] Images { get; set; }
     }
 
     /// <summary />
