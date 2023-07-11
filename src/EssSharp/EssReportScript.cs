@@ -41,10 +41,36 @@ namespace EssSharp
         /// <inheritdoc />
         public override EssScriptType ScriptType => EssScriptType.Report;
 
+        /// <inheritdoc />
+        public string Report { get; set; }
+
         #endregion
 
         #region IEssScript Methods
 
+        /// <inheritdoc />
+        /// <returns></returns>
+        public string GetReport() => GetReportAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<string> GetReportAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var job = await ExecuteAsync().ThrowIfFailed();
+                job.JobOutputInfo.TryGetValue("REPORT_OUTPUT", out var report);
+
+                Report = report?.ToString() ?? throw new Exception("Cannot get report.");
+
+                return Report;
+            }
+            catch (OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get Report from {Name}. {e.Message}", e);
+            }
+        }
 
         #endregion
     }
