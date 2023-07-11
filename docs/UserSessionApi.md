@@ -8,7 +8,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**UserSessionResetPassword**](UserSessionApi.md#usersessionresetpassword) | **PUT** /session/password | Reset Password |
 | [**UserSessionSignoff**](UserSessionApi.md#usersessionsignoff) | **DELETE** /session | Logout Session |
 
-<a name="usersessiongetsession"></a>
+<a id="usersessiongetsession"></a>
 # **UserSessionGetSession**
 > UserBean UserSessionGetSession (bool? token = null, bool? includeGroups = null)
 
@@ -106,7 +106,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="usersessionresetpassword"></a>
+<a id="usersessionresetpassword"></a>
 # **UserSessionResetPassword**
 > void UserSessionResetPassword (ResetPasswordBean body)
 
@@ -198,7 +198,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="usersessionsignoff"></a>
+<a id="usersessionsignoff"></a>
 # **UserSessionSignoff**
 > void UserSessionSignoff ()
 

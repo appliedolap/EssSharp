@@ -8,7 +8,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**SessionsDeleteSessionWithId**](SessionsApi.md#sessionsdeletesessionwithid) | **DELETE** /sessions/{sessionId} | Delete Session By ID |
 | [**SessionsGetAllActiveSessions**](SessionsApi.md#sessionsgetallactivesessions) | **GET** /sessions | List Sessions |
 
-<a name="sessionsdeleteallactivesessions"></a>
+<a id="sessionsdeleteallactivesessions"></a>
 # **SessionsDeleteAllActiveSessions**
 > void SessionsDeleteAllActiveSessions (string application = null, string database = null, string userId = null, bool? disconnect = null)
 
@@ -107,7 +107,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="sessionsdeletesessionwithid"></a>
+<a id="sessionsdeletesessionwithid"></a>
 # **SessionsDeleteSessionWithId**
 > void SessionsDeleteSessionWithId (long sessionId, bool? disconnect = null)
 
@@ -202,7 +202,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="sessionsgetallactivesessions"></a>
+<a id="sessionsgetallactivesessions"></a>
 # **SessionsGetAllActiveSessions**
 > List&lt;SessionAttributes&gt; SessionsGetAllActiveSessions (string application = null, string database = null, string userId = null)
 

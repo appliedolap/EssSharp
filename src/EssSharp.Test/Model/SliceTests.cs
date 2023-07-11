@@ -54,14 +54,6 @@ namespace EssSharp.Test.Model
 
 
         /// <summary>
-        /// Test the property 'Rows'
-        /// </summary>
-        [Fact]
-        public void RowsTest()
-        {
-            // TODO unit test for the property 'Rows'
-        }
-        /// <summary>
         /// Test the property 'DirtyCells'
         /// </summary>
         [Fact]
@@ -84,6 +76,14 @@ namespace EssSharp.Test.Model
         public void ColumnsTest()
         {
             // TODO unit test for the property 'Columns'
+        }
+        /// <summary>
+        /// Test the property 'Rows'
+        /// </summary>
+        [Fact]
+        public void RowsTest()
+        {
+            // TODO unit test for the property 'Rows'
         }
         /// <summary>
         /// Test the property 'Data'

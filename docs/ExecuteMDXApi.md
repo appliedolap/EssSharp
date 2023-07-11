@@ -7,7 +7,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**MDXExecuteMDX**](ExecuteMDXApi.md#mdxexecutemdx) | **POST** /applications/{application}/databases/{database}/mdx | Run MDX Query |
 | [**MDXExecutenq**](ExecuteMDXApi.md#mdxexecutenq) | **GET** /applications/{application}/databases/{database}/mdx/{name} | Run MDX Report |
 
-<a name="mdxexecutemdx"></a>
+<a id="mdxexecutemdx"></a>
 # **MDXExecuteMDX**
 > Object MDXExecuteMDX (string application, string database, string format = null, MDXInput body = null)
 
@@ -110,7 +110,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="mdxexecutenq"></a>
+<a id="mdxexecutenq"></a>
 # **MDXExecutenq**
 > Object MDXExecutenq (string application, string database, string name, string format = null)
 

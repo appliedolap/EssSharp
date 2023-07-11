@@ -88,7 +88,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void DrillThroughReportsExecute(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0);
@@ -103,7 +103,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DrillThroughReportsExecuteWithHttpInfo(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0);
@@ -160,7 +160,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of ReportList</returns>
         ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, int operationIndex = 0);
         /// <summary>
-        /// Update Drill Through Reoprt
+        /// Update Drill Through Report
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
@@ -175,7 +175,7 @@ namespace EssSharp.Api
         DrillthroughBean DrillThroughReportsUpdateReport(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0);
 
         /// <summary>
-        /// Update Drill Through Reoprt
+        /// Update Drill Through Report
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
@@ -265,7 +265,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -281,7 +281,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -343,7 +343,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (ReportList)</returns>
         System.Threading.Tasks.Task<ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Update Drill Through Reoprt
+        /// Update Drill Through Report
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
@@ -359,7 +359,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsUpdateReportAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Update Drill Through Reoprt
+        /// Update Drill Through Report
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
@@ -886,7 +886,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void DrillThroughReportsExecute(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0)
@@ -901,7 +901,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> DrillThroughReportsExecuteWithHttpInfo(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0)
@@ -988,7 +988,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -1004,7 +1004,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -1458,7 +1458,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Drill Through Reoprt &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
+        /// Update Drill Through Report &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1474,7 +1474,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Drill Through Reoprt &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
+        /// Update Drill Through Report &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1564,7 +1564,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Drill Through Reoprt &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
+        /// Update Drill Through Report &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1581,7 +1581,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Drill Through Reoprt &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
+        /// Update Drill Through Report &lt;p&gt;Updates the drill through report in the specified application and database, and returns details of the updated report.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

@@ -6,7 +6,7 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**GlobalDatasourcesCreateDatasource**](GlobalDatasourcesApi.md#globaldatasourcescreatedatasource) | **POST** /datasources | Create Global Datasource |
 | [**GlobalDatasourcesDeleteDatasource**](GlobalDatasourcesApi.md#globaldatasourcesdeletedatasource) | **DELETE** /datasources/{datasourceName} | Delete Global Datasource |
-| [**GlobalDatasourcesGetData**](GlobalDatasourcesApi.md#globaldatasourcesgetdata) | **GET** /datasources/query/data/{streamId} | Get Streamed Datasource Results |
+| [**GlobalDatasourcesGetData**](GlobalDatasourcesApi.md#globaldatasourcesgetdata) | **GET** /datasources/query/data/{streamId} | Get Streamed Datasource Results by ID |
 | [**GlobalDatasourcesGetDataStream**](GlobalDatasourcesApi.md#globaldatasourcesgetdatastream) | **POST** /datasources/query/stream | Get Streamed Datasource Results |
 | [**GlobalDatasourcesGetDatasourceDetails**](GlobalDatasourcesApi.md#globaldatasourcesgetdatasourcedetails) | **GET** /datasources/{datasouceName} | Get Global Datasource |
 | [**GlobalDatasourcesGetDatasources**](GlobalDatasourcesApi.md#globaldatasourcesgetdatasources) | **GET** /datasources | Get Global Datasource |
@@ -14,7 +14,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**GlobalDatasourcesGetResults**](GlobalDatasourcesApi.md#globaldatasourcesgetresults) | **POST** /datasources/query | Stream Datasource Results |
 | [**GlobalDatasourcesUpdateDatasource**](GlobalDatasourcesApi.md#globaldatasourcesupdatedatasource) | **PUT** /datasources/{datasouceName} | Update Global Datasource |
 
-<a name="globaldatasourcescreatedatasource"></a>
+<a id="globaldatasourcescreatedatasource"></a>
 # **GlobalDatasourcesCreateDatasource**
 > void GlobalDatasourcesCreateDatasource (Datasource body = null)
 
@@ -106,7 +106,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globaldatasourcesdeletedatasource"></a>
+<a id="globaldatasourcesdeletedatasource"></a>
 # **GlobalDatasourcesDeleteDatasource**
 > void GlobalDatasourcesDeleteDatasource (string datasourceName)
 
@@ -198,11 +198,11 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globaldatasourcesgetdata"></a>
+<a id="globaldatasourcesgetdata"></a>
 # **GlobalDatasourcesGetData**
 > void GlobalDatasourcesGetData (string streamId)
 
-Get Streamed Datasource Results
+Get Streamed Datasource Results by ID
 
 <p>Returns results from a global-level Datasource associated with the specified stream id.</p>
 
@@ -231,7 +231,7 @@ namespace Example
 
             try
             {
-                // Get Streamed Datasource Results
+                // Get Streamed Datasource Results by ID
                 apiInstance.GlobalDatasourcesGetData(streamId);
             }
             catch (ApiException  e)
@@ -251,7 +251,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Streamed Datasource Results
+    // Get Streamed Datasource Results by ID
     apiInstance.GlobalDatasourcesGetDataWithHttpInfo(streamId);
 }
 catch (ApiException e)
@@ -291,7 +291,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globaldatasourcesgetdatastream"></a>
+<a id="globaldatasourcesgetdatastream"></a>
 # **GlobalDatasourcesGetDataStream**
 > void GlobalDatasourcesGetDataStream (bool? includeHeaders = null, bool? metaDataOnly = null, DatasourceQueryInfo body = null)
 
@@ -388,7 +388,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globaldatasourcesgetdatasourcedetails"></a>
+<a id="globaldatasourcesgetdatasourcedetails"></a>
 # **GlobalDatasourcesGetDatasourceDetails**
 > Datasource GlobalDatasourcesGetDatasourceDetails (string datasouceName)
 
@@ -484,7 +484,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globaldatasourcesgetdatasources"></a>
+<a id="globaldatasourcesgetdatasources"></a>
 # **GlobalDatasourcesGetDatasources**
 > DatasourcesList GlobalDatasourcesGetDatasources (int? offset = null, int? limit = null)
 
@@ -582,7 +582,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globaldatasourcesgetdelimiteddatastream"></a>
+<a id="globaldatasourcesgetdelimiteddatastream"></a>
 # **GlobalDatasourcesGetDelimitedDataStream**
 > void GlobalDatasourcesGetDelimitedDataStream (bool? includeHeaders = null, bool? metaDataOnly = null, DatasourceQueryInfo body = null)
 
@@ -679,7 +679,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globaldatasourcesgetresults"></a>
+<a id="globaldatasourcesgetresults"></a>
 # **GlobalDatasourcesGetResults**
 > ResultBean GlobalDatasourcesGetResults (int? pageSize = null, DatasourceQueryInfo body = null)
 
@@ -778,7 +778,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globaldatasourcesupdatedatasource"></a>
+<a id="globaldatasourcesupdatedatasource"></a>
 # **GlobalDatasourcesUpdateDatasource**
 > Datasource GlobalDatasourcesUpdateDatasource (string datasouceName, Datasource body = null)
 

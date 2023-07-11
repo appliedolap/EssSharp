@@ -54,20 +54,20 @@ namespace EssSharp.Test.Model
 
 
         /// <summary>
-        /// Test the property 'HasMore'
-        /// </summary>
-        [Fact]
-        public void HasMoreTest()
-        {
-            // TODO unit test for the property 'HasMore'
-        }
-        /// <summary>
         /// Test the property 'TotalResults'
         /// </summary>
         [Fact]
         public void TotalResultsTest()
         {
             // TODO unit test for the property 'TotalResults'
+        }
+        /// <summary>
+        /// Test the property 'HasMore'
+        /// </summary>
+        [Fact]
+        public void HasMoreTest()
+        {
+            // TODO unit test for the property 'HasMore'
         }
         /// <summary>
         /// Test the property 'Count'

@@ -13,17 +13,5 @@ README.md
 EssSharp.sln
 src/EssSharp/EssSharp.csproj
 
-# We cannot preserve the existing EssSharp.Test .csproj file, since the generator deletes it when tests will be generated.
-# src/EssSharp.Test/EssSharp.Test.csproj
-
-# Sidestep naming conflict between Essbase OpenAPI spec and OpenAPI generator model
-# "Validate" property and "Validate(ValidationContext validationContext)" method.
-src/EssSharp/Model/OtlEditMain.cs
-
-# Sidestep what appears to be a bug in the OpenAPI Generator handling a naming conflict in the Essbase OpenAPI spec 
-# between the Datasource and DataSource definitions.
-src/EssSharp/Model/Rules.cs
-
-# Sidestep what appears to be a bug in the OpenAPI Generator in that creates a reference to a model type "SmartSmartList"
-# that is not part of the spec or the generated model (the reference should be to "SmartList").
-src/EssSharp/Model/DimBuildOptions.cs
+# Prevent the EssSharp.Test .csproj file from being generated.
+src/EssSharp.Test/EssSharp.Test.csproj

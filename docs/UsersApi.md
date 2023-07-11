@@ -11,7 +11,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**UsersPUT**](UsersApi.md#usersput) | **PUT** /users/{id} | Update User |
 | [**UsersSearch**](UsersApi.md#userssearch) | **GET** /users | Search or Export Users |
 
-<a name="usersadd"></a>
+<a id="usersadd"></a>
 # **UsersAdd**
 > UserBean UsersAdd (UserBean body)
 
@@ -108,7 +108,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="usersdelete"></a>
+<a id="usersdelete"></a>
 # **UsersDelete**
 > void UsersDelete (string id)
 
@@ -201,7 +201,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="usersdeleteusers"></a>
+<a id="usersdeleteusers"></a>
 # **UsersDeleteUsers**
 > Object UsersDeleteUsers ()
 
@@ -293,7 +293,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="usersget"></a>
+<a id="usersget"></a>
 # **UsersGet**
 > UserBean UsersGet (string id)
 
@@ -391,7 +391,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="usersput"></a>
+<a id="usersput"></a>
 # **UsersPUT**
 > UserBean UsersPUT (string id, UserBean body)
 
@@ -490,7 +490,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="userssearch"></a>
+<a id="userssearch"></a>
 # **UsersSearch**
 > Users UsersSearch (string filter = null, int? limit = null, string expand = null)
 

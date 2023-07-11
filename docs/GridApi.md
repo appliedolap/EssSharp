@@ -10,7 +10,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**GridGetDefault**](GridApi.md#gridgetdefault) | **GET** /applications/{applicationName}/databases/{databaseName}/grid | Get Default Grid |
 | [**GridGetLayoutGrid**](GridApi.md#gridgetlayoutgrid) | **POST** /applications/{applicationName}/databases/{databaseName}/grid/layout | Get Layout Grid |
 
-<a name="gridexecute"></a>
+<a id="gridexecute"></a>
 # **GridExecute**
 > Grid GridExecute (string applicationName, string databaseName, GridOperation body = null)
 
@@ -111,7 +111,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="gridexecutelayout"></a>
+<a id="gridexecutelayout"></a>
 # **GridExecuteLayout**
 > Grid GridExecuteLayout (string applicationName, string databaseName, string layout, string user = null)
 
@@ -214,7 +214,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="gridexecutemdx"></a>
+<a id="gridexecutemdx"></a>
 # **GridExecuteMDX**
 > Grid GridExecuteMDX (string applicationName, string databaseName, MDXOperation body)
 
@@ -315,13 +315,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="gridgetdefault"></a>
+<a id="gridgetdefault"></a>
 # **GridGetDefault**
 > Grid GridGetDefault (string applicationName, string databaseName, bool? reset = null)
 
 Get Default Grid
 
-<p>Returns the default grid layout for the specified cube.</p>
+<p>Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.</p>
 
 ### Example
 ```csharp
@@ -416,7 +416,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="gridgetlayoutgrid"></a>
+<a id="gridgetlayoutgrid"></a>
 # **GridGetLayoutGrid**
 > Grid GridGetLayoutGrid (string applicationName, string databaseName, Grid body)
 

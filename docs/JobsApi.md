@@ -11,7 +11,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**JobsGetJobStatistics**](JobsApi.md#jobsgetjobstatistics) | **GET** /jobs/statistics/{userId} | Get Job Statistics |
 | [**JobsPurge**](JobsApi.md#jobspurge) | **DELETE** /jobs/purge | Delete jobs |
 
-<a name="jobsexecutebyjobid"></a>
+<a id="jobsexecutebyjobid"></a>
 # **JobsExecuteByJobId**
 > JobRecordBean JobsExecuteByJobId (long id)
 
@@ -108,7 +108,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="jobsexecutejob"></a>
+<a id="jobsexecutejob"></a>
 # **JobsExecuteJob**
 > JobRecordBean JobsExecuteJob (JobsInputBean body)
 
@@ -206,7 +206,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="jobsgetalljobrecords"></a>
+<a id="jobsgetalljobrecords"></a>
 # **JobsGetAllJobRecords**
 > JobRecordPaginatedResultWrapper JobsGetAllJobRecords (string keyword = null, string fullAppName = null, string orderBy = null, long? offset = null, long? limit = null, bool? systemjobs = null)
 
@@ -313,7 +313,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="jobsgetjobinfo"></a>
+<a id="jobsgetjobinfo"></a>
 # **JobsGetJobInfo**
 > JobRecordBean JobsGetJobInfo (string id)
 
@@ -410,7 +410,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="jobsgetjobstatistics"></a>
+<a id="jobsgetjobstatistics"></a>
 # **JobsGetJobStatistics**
 > JobStatisticsBean JobsGetJobStatistics (string userId)
 
@@ -507,7 +507,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="jobspurge"></a>
+<a id="jobspurge"></a>
 # **JobsPurge**
 > void JobsPurge (long? olderthan = null, long? rangeStartTime = null, long? rangeEndTime = null, string application = null, string database = null, string jobtype = null, int? jobstatus = null)
 

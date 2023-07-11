@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**MaxFileCount** | **long** |  | [optional] 
 **Interval** | **long** |  | [optional] 
 **Enabled** | **bool** |  | [optional] 
 

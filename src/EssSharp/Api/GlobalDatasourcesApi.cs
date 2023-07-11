@@ -71,7 +71,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> GlobalDatasourcesDeleteDatasourceWithHttpInfo(string datasourceName, int operationIndex = 0);
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Datasource Results by ID
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
@@ -83,7 +83,7 @@ namespace EssSharp.Api
         void GlobalDatasourcesGetData(string streamId, int operationIndex = 0);
 
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Datasource Results by ID
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
@@ -305,7 +305,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> GlobalDatasourcesDeleteDatasourceWithHttpInfoAsync(string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Datasource Results by ID
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
@@ -318,7 +318,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task GlobalDatasourcesGetDataAsync(string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Datasource Results by ID
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
@@ -910,7 +910,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
+        /// Get Streamed Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="streamId">&lt;p&gt;Stream id.&lt;/p&gt;</param>
@@ -922,7 +922,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
+        /// Get Streamed Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="streamId">&lt;p&gt;Stream id.&lt;/p&gt;</param>
@@ -984,7 +984,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
+        /// Get Streamed Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="streamId">&lt;p&gt;Stream id.&lt;/p&gt;</param>
@@ -997,7 +997,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
+        /// Get Streamed Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="streamId">&lt;p&gt;Stream id.&lt;/p&gt;</param>

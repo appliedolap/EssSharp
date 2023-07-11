@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Items** | [**List&lt;RoleBean&gt;**](RoleBean.md) |  | [optional] 
-**HasMore** | **bool** |  | [optional] 
 **TotalResults** | **long** |  | [optional] 
+**HasMore** | **bool** |  | [optional] 
 **Count** | **long** |  | [optional] 
 **Limit** | **long** |  | [optional] 
 **Properties** | **Dictionary&lt;string, string&gt;** |  | [optional] 

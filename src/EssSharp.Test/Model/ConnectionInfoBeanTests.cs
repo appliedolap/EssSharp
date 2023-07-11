@@ -142,6 +142,14 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'FactTableName'
         }
         /// <summary>
+        /// Test the property 'IsFactManagedByFederatedCube'
+        /// </summary>
+        [Fact]
+        public void IsFactManagedByFederatedCubeTest()
+        {
+            // TODO unit test for the property 'IsFactManagedByFederatedCube'
+        }
+        /// <summary>
         /// Test the property 'EssbaseToColumnMap'
         /// </summary>
         [Fact]

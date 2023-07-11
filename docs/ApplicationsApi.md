@@ -33,7 +33,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DatabasesSetCurrencySettings**](ApplicationsApi.md#databasessetcurrencysettings) | **POST** /applications/{applicationName}/databases/{databaseName}/currencySettings | Set Currency Settings |
 | [**SetActiveAlias**](ApplicationsApi.md#setactivealias) | **PUT** /applications/{applicationName}/databases/{databaseName}/aliases/setActiveAlias | Set Active Alias |
 
-<a name="applicationscopyapplication"></a>
+<a id="applicationscopyapplication"></a>
 # **ApplicationsCopyApplication**
 > void ApplicationsCopyApplication (CopyRenameBean body)
 
@@ -126,7 +126,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationscopydatabase"></a>
+<a id="applicationscopydatabase"></a>
 # **ApplicationsCopyDatabase**
 > void ApplicationsCopyDatabase (string applicationName, CubeCopy body)
 
@@ -221,7 +221,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationscreateapplications"></a>
+<a id="applicationscreateapplications"></a>
 # **ApplicationsCreateApplications**
 > void ApplicationsCreateApplications (CreateApplication body)
 
@@ -314,13 +314,13 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationscreateshadowapplication"></a>
+<a id="applicationscreateshadowapplication"></a>
 # **ApplicationsCreateShadowApplication**
 > void ApplicationsCreateShadowApplication (ShadowCopyBean body)
 
 Create Shadow Application
 
-<p>Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.</p> <p>A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.</p> <p>Permission required: power user.</p> <p>Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.</p> <p>Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their queries against the primary application, while the restructure is occurring on the shadow application.</p> <p>Note that a shadow application can be made as hidden copy of the primary application.</p> <p>This means if you invoke <a href='./op-applications-get.html'>List Applications</a>, you will not see the shadow application in that list.</p> <p>The parameter <i>waitForOngoingUpdatesInSecs</i> allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.</p> <p>For example, if there is a data load in progress, the cloning process fails.</p> <p>If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.</p> <p>If the data load doesn't complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.</p><p><b>See Also</b></p><ul><li><a href='./op-applications-actions-name-appvisiblity-get.html'>List Application Names</a></li><li><a href='./op-applications-actions-shadowpromote-post.html'>Promote Shadow Application</a></li><li><a href='./op-applications-actions-shadowdelete-shadowappname-delete.html'>Delete Shadow Application</a></li></ul>
+<p>Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.</p> <p>A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.</p> <p>Permission required: power user.</p> <p>Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.</p> <p>Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.</p> <p>Note that a shadow application can be made as hidden copy of the primary application.</p> <p>This means if you invoke <a href='./op-applications-get.html'>List Applications</a>, you will not see the shadow application in that list.</p> <p>The parameter <i>waitForOngoingUpdatesInSecs</i> allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.</p> <p>For example, if there is a data load in progress, the cloning process fails.</p> <p>If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.</p> <p>If the data load doesn't complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.</p><p><b>See Also</b></p><ul><li><a href='./op-applications-actions-name-appvisiblity-get.html'>List Application Names</a></li><li><a href='./op-applications-actions-shadowpromote-post.html'>Promote Shadow Application</a></li><li><a href='./op-applications-actions-shadowdelete-shadowappname-delete.html'>Delete Shadow Application</a></li></ul>
 
 ### Example
 ```csharp
@@ -408,7 +408,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsdeleteapplication"></a>
+<a id="applicationsdeleteapplication"></a>
 # **ApplicationsDeleteApplication**
 > void ApplicationsDeleteApplication (string applicationName)
 
@@ -501,7 +501,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsdeletedatabase"></a>
+<a id="applicationsdeletedatabase"></a>
 # **ApplicationsDeleteDatabase**
 > void ApplicationsDeleteDatabase (string applicationName, string databaseName)
 
@@ -596,7 +596,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsdropshadowapplication"></a>
+<a id="applicationsdropshadowapplication"></a>
 # **ApplicationsDropShadowApplication**
 > void ApplicationsDropShadowApplication (string shadowAppName)
 
@@ -690,7 +690,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsexecutereportscript"></a>
+<a id="applicationsexecutereportscript"></a>
 # **ApplicationsExecuteReportScript**
 > void ApplicationsExecuteReportScript (string applicationName, string databaseName, string filename, string lockForUpdate = null)
 
@@ -788,7 +788,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetactivealias"></a>
+<a id="applicationsgetactivealias"></a>
 # **ApplicationsGetActiveAlias**
 > string ApplicationsGetActiveAlias (string applicationName, string databaseName)
 
@@ -886,7 +886,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetaliases"></a>
+<a id="applicationsgetaliases"></a>
 # **ApplicationsGetAliases**
 > StringCollectionResponse ApplicationsGetAliases (string applicationName, string databaseName)
 
@@ -984,7 +984,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetapplication"></a>
+<a id="applicationsgetapplication"></a>
 # **ApplicationsGetApplication**
 > Application ApplicationsGetApplication (string applicationName, bool? role = null)
 
@@ -1083,7 +1083,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetapplicationnames"></a>
+<a id="applicationsgetapplicationnames"></a>
 # **ApplicationsGetApplicationNames**
 > Object ApplicationsGetApplicationNames (string appVisiblity)
 
@@ -1181,7 +1181,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetapplicationprovisionreport"></a>
+<a id="applicationsgetapplicationprovisionreport"></a>
 # **ApplicationsGetApplicationProvisionReport**
 > void ApplicationsGetApplicationProvisionReport (string applicationName)
 
@@ -1274,7 +1274,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetapplications"></a>
+<a id="applicationsgetapplications"></a>
 # **ApplicationsGetApplications**
 > ApplicationList ApplicationsGetApplications (string filter = null, int? offset = null, int? limit = null, string connectionName = null, string applicationNameForConnection = null, string fields = null)
 
@@ -1381,7 +1381,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetapplicationstree"></a>
+<a id="applicationsgetapplicationstree"></a>
 # **ApplicationsGetApplicationsTree**
 > string ApplicationsGetApplicationsTree ()
 
@@ -1472,7 +1472,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetcube"></a>
+<a id="applicationsgetcube"></a>
 # **ApplicationsGetCube**
 > Cube ApplicationsGetCube (string applicationName, string databaseName)
 
@@ -1571,7 +1571,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsgetcubes"></a>
+<a id="applicationsgetcubes"></a>
 # **ApplicationsGetCubes**
 > CubeList ApplicationsGetCubes (string applicationName, string connectionName = null, string applicationNameForConnection = null)
 
@@ -1672,7 +1672,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsperformdboperation"></a>
+<a id="applicationsperformdboperation"></a>
 # **ApplicationsPerformDbOperation**
 > void ApplicationsPerformDbOperation (string applicationName, string databaseName, string action)
 
@@ -1769,7 +1769,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsperformoperation"></a>
+<a id="applicationsperformoperation"></a>
 # **ApplicationsPerformOperation**
 > void ApplicationsPerformOperation (string applicationName, string action)
 
@@ -1864,13 +1864,13 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationspromoteshadowapplication"></a>
+<a id="applicationspromoteshadowapplication"></a>
 # **ApplicationsPromoteShadowApplication**
 > void ApplicationsPromoteShadowApplication (ShadowPromoteBean body)
 
 Promote Shadow Application
 
-<p>Promotes the shadow application as the base application. Conceptually, the promote operation is equivalent to moving the Essbase application directory from a source to destination location, at the file system level.</p> <p>Essbase must stop (unload) both applications, if they are running, before promoting. At the time of unloading, if the destination application is serving any ongoing operations, such as queries, Essbase terminates those operations and attempts to unload the application.</p> <p>If a graceful unload process fails or takes longer than permitted by the input argument <i>timeoutToForceUnloadApp</i> (unit=seconds), Essbase forcefully terminates the application.</p> <p>Example: if you specify 60 seconds for the timeout, but the termination of ongoing requests and graceful unloading of the application does not complete within one minute, Essbase triggers a forceful termination.  After termination, Essbase promotes the shadow application.</p> <p>The promote operation is supported on all applications, including aggregate storage, block storage, and Hybrid mode.</p> <p>Note: when moving an existing application, only the application and cube artifacts (such as metadata and data) are replaced from the source to destination.</p> <p>During a promotion, all security layer associations on the destination application, such as  users, groups, and security filters, are retained, while that of shadow/source are lost. The same rule applies for partition definitions.</p> <p>Example: If users X and Y had read-access to App1, and an admin promotes a shadow App2 to replace App1, both X and Y will be able to access App1.</p> <p>If user Z had access to App2, then after promotion, Z is not be able to access App1.</p> <p>Promotion from shadowed application to base is honored only if there are no changes to the number of cubes and cube names. In other words, if a cube gets renamed or if there is any addition or deletion of an application after it was shadowed, then promotion of such an application fails with an error, leaving both applications as they were.</p> <p>Example:  ASOAppNew.cubeNew <i>cannot</i> be replaced as ASO.cube. ASOAppNew.cube <i>can</i> be replaced as ASO.cube.</p> <p>Tips: You need not unload or stop the application prior to calling this promotion API. Essbase loads the application to gather information, and unloads it prior to moving the applications.</p>
+<p>Promotes the shadow application as the base application. Conceptually, the promote operation is equivalent to moving the Essbase application directory from a source to destination location, at the file system level.</p> <p>Essbase must stop (unload) both applications, if they are running, before promoting. At the time of unloading, if the destination application is serving any ongoing operations, such as queries, Essbase terminates those operations and attempts to unload the application.</p> <p>If a graceful unload process fails or takes longer than permitted by the input argument <i>timeoutToForceUnloadApp</i> (unit=seconds), Essbase forcefully terminates the application.</p> <p>Example: if you specify 60 seconds for the timeout, but the termination of ongoing requests and graceful unloading of the application does not complete within one minute, Essbase triggers a forceful termination.  After termination, Essbase promotes the shadow application.</p> <p>The promote operation is supported on all applications, including aggregate storage, block storage, and Hybrid mode.</p> <p>Note: when moving an existing application, only the application and cube artifacts (such as metadata and data) are replaced from the source to destination.</p> <p>During a promotion, all security layer associations on the destination application, such as  users, groups, and security filters, are retained, while that of shadow/source are lost. The same rule applies for partition definitions.</p> <p>Example: If users X and Y had read-access to App1, and an admin promotes a shadow App2 to replace App1, both X and Y will be able to access App1.</p> <p>If user Z had access to App2, then after promotion, Z is not able to access App1.</p> <p>Promotion from shadowed application to base is honored only if there are no changes to the number of cubes and cube names. In other words, if a cube gets renamed or if there is any addition or deletion of an application after it was shadowed, then promotion of such an application fails with an error, leaving both applications as they were.</p> <p>Example:  ASOAppNew.cubeNew <i>cannot</i> be replaced as ASO.cube. ASOAppNew.cube <i>can</i> be replaced as ASO.cube.</p> <p>Tips: You need not unload or stop the application prior to calling this promotion API. Essbase loads the application to gather information, and unloads it prior to moving the applications.</p>
 
 ### Example
 ```csharp
@@ -1958,7 +1958,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsrenameapplication"></a>
+<a id="applicationsrenameapplication"></a>
 # **ApplicationsRenameApplication**
 > void ApplicationsRenameApplication (CopyRenameBean body)
 
@@ -2051,7 +2051,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsrenamedatabase"></a>
+<a id="applicationsrenamedatabase"></a>
 # **ApplicationsRenameDatabase**
 > void ApplicationsRenameDatabase (string applicationName, CopyRenameBean body)
 
@@ -2146,7 +2146,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesformulafunctions"></a>
+<a id="databasesformulafunctions"></a>
 # **DatabasesFormulaFunctions**
 > string DatabasesFormulaFunctions (string applicationName, string databaseName)
 
@@ -2244,7 +2244,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesgetcalculationfunctions"></a>
+<a id="databasesgetcalculationfunctions"></a>
 # **DatabasesGetCalculationFunctions**
 > string DatabasesGetCalculationFunctions (string applicationName, string databaseName)
 
@@ -2342,7 +2342,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesgetcurrencysettings"></a>
+<a id="databasesgetcurrencysettings"></a>
 # **DatabasesGetCurrencySettings**
 > string DatabasesGetCurrencySettings (string applicationName, string databaseName)
 
@@ -2440,7 +2440,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesgetmdxfunctions"></a>
+<a id="databasesgetmdxfunctions"></a>
 # **DatabasesGetMdxFunctions**
 > string DatabasesGetMdxFunctions (string applicationName, string databaseName)
 
@@ -2538,7 +2538,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasessetcurrencysettings"></a>
+<a id="databasessetcurrencysettings"></a>
 # **DatabasesSetCurrencySettings**
 > string DatabasesSetCurrencySettings (string applicationName, string databaseName, CurrencySettings body)
 
@@ -2638,7 +2638,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="setactivealias"></a>
+<a id="setactivealias"></a>
 # **SetActiveAlias**
 > StringCollectionResponse SetActiveAlias (string applicationName, string databaseName, string aliasTableName = null)
 

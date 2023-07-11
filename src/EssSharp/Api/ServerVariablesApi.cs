@@ -122,7 +122,7 @@ namespace EssSharp.Api
         /// Get Server Variables
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the substitution variables from the server.&lt;/p&gt;
+        /// &lt;p&gt;Returns all the substitution variables from the Essbase server.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
@@ -134,7 +134,7 @@ namespace EssSharp.Api
         /// Get Server Variables
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the substitution variables from the server.&lt;/p&gt;
+        /// &lt;p&gt;Returns all the substitution variables from the Essbase server.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
@@ -256,7 +256,7 @@ namespace EssSharp.Api
         /// Get Server Variables
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the substitution variables from the server.&lt;/p&gt;
+        /// &lt;p&gt;Returns all the substitution variables from the Essbase server.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
@@ -269,7 +269,7 @@ namespace EssSharp.Api
         /// Get Server Variables
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the substitution variables from the server.&lt;/p&gt;
+        /// &lt;p&gt;Returns all the substitution variables from the Essbase server.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
@@ -1050,7 +1050,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Server Variables &lt;p&gt;Returns all the substitution variables from the server.&lt;/p&gt;
+        /// Get Server Variables &lt;p&gt;Returns all the substitution variables from the Essbase server.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
@@ -1063,7 +1063,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Server Variables &lt;p&gt;Returns all the substitution variables from the server.&lt;/p&gt;
+        /// Get Server Variables &lt;p&gt;Returns all the substitution variables from the Essbase server.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
@@ -1124,7 +1124,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Server Variables &lt;p&gt;Returns all the substitution variables from the server.&lt;/p&gt;
+        /// Get Server Variables &lt;p&gt;Returns all the substitution variables from the Essbase server.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
@@ -1138,7 +1138,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Server Variables &lt;p&gt;Returns all the substitution variables from the server.&lt;/p&gt;
+        /// Get Server Variables &lt;p&gt;Returns all the substitution variables from the Essbase server.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>

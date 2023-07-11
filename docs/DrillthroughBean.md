@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] 
-**ColumnMapping** | [**Dictionary&lt;string, ColumnMappingInfo&gt;**](ColumnMappingInfo.md) |  | [optional] 
-**ParameterMapping** | [**Dictionary&lt;string, RunTimeParametersInfo&gt;**](RunTimeParametersInfo.md) |  | [optional] 
-**DrillableRegions** | **List&lt;string&gt;** |  | [optional] 
 **UseTempTables** | **bool** |  | [optional] 
+**ParameterMapping** | [**Dictionary&lt;string, RunTimeParametersInfo&gt;**](RunTimeParametersInfo.md) |  | [optional] 
+**ColumnMapping** | [**Dictionary&lt;string, ColumnMappingInfo&gt;**](ColumnMappingInfo.md) |  | [optional] 
+**DrillableRegions** | **List&lt;string&gt;** |  | [optional] 
 **Columns** | **List&lt;string&gt;** |  | [optional] 
 **DataSourceName** | **string** |  | [optional] 
 **Url** | **string** |  | [optional] 

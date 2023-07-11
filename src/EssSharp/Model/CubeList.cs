@@ -33,17 +33,17 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="CubeList" /> class.
         /// </summary>
         /// <param name="items">items.</param>
-        /// <param name="hasMore">hasMore.</param>
         /// <param name="totalResults">totalResults.</param>
+        /// <param name="hasMore">hasMore.</param>
         /// <param name="count">count.</param>
         /// <param name="limit">limit.</param>
         /// <param name="properties">properties.</param>
         /// <param name="offset">offset.</param>
-        public CubeList(List<Cube> items = default(List<Cube>), bool hasMore = default(bool), long totalResults = default(long), long count = default(long), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
+        public CubeList(List<Cube> items = default(List<Cube>), long totalResults = default(long), bool hasMore = default(bool), long count = default(long), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
         {
             this.Items = items;
-            this.HasMore = hasMore;
             this.TotalResults = totalResults;
+            this.HasMore = hasMore;
             this.Count = count;
             this.Limit = limit;
             this.Properties = properties;
@@ -57,16 +57,16 @@ namespace EssSharp.Model
         public List<Cube> Items { get; set; }
 
         /// <summary>
-        /// Gets or Sets HasMore
-        /// </summary>
-        [DataMember(Name = "hasMore", EmitDefaultValue = true)]
-        public bool HasMore { get; set; }
-
-        /// <summary>
         /// Gets or Sets TotalResults
         /// </summary>
         [DataMember(Name = "totalResults", EmitDefaultValue = false)]
         public long TotalResults { get; set; }
+
+        /// <summary>
+        /// Gets or Sets HasMore
+        /// </summary>
+        [DataMember(Name = "hasMore", EmitDefaultValue = true)]
+        public bool HasMore { get; set; }
 
         /// <summary>
         /// Gets or Sets Count
@@ -101,8 +101,8 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class CubeList {\n");
             sb.Append("  Items: ").Append(Items).Append("\n");
-            sb.Append("  HasMore: ").Append(HasMore).Append("\n");
             sb.Append("  TotalResults: ").Append(TotalResults).Append("\n");
+            sb.Append("  HasMore: ").Append(HasMore).Append("\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Properties: ").Append(Properties).Append("\n");
@@ -149,12 +149,12 @@ namespace EssSharp.Model
                     this.Items.SequenceEqual(input.Items)
                 ) && 
                 (
-                    this.HasMore == input.HasMore ||
-                    this.HasMore.Equals(input.HasMore)
-                ) && 
-                (
                     this.TotalResults == input.TotalResults ||
                     this.TotalResults.Equals(input.TotalResults)
+                ) && 
+                (
+                    this.HasMore == input.HasMore ||
+                    this.HasMore.Equals(input.HasMore)
                 ) && 
                 (
                     this.Count == input.Count ||
@@ -189,8 +189,8 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.Items.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.HasMore.GetHashCode();
                 hashCode = (hashCode * 59) + this.TotalResults.GetHashCode();
+                hashCode = (hashCode * 59) + this.HasMore.GetHashCode();
                 hashCode = (hashCode * 59) + this.Count.GetHashCode();
                 hashCode = (hashCode * 59) + this.Limit.GetHashCode();
                 if (this.Properties != null)
@@ -207,7 +207,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

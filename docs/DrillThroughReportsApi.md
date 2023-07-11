@@ -9,9 +9,9 @@ All URIs are relative to */essbase/rest/v1*
 | [**DrillThroughReportsExecute**](DrillThroughReportsApi.md#drillthroughreportsexecute) | **POST** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Execute Drill Through Report |
 | [**DrillThroughReportsGetReport**](DrillThroughReportsApi.md#drillthroughreportsgetreport) | **GET** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Get Drill Through Report |
 | [**DrillThroughReportsGetReports**](DrillThroughReportsApi.md#drillthroughreportsgetreports) | **GET** /applications/{applicationName}/databases/{databaseName}/reports | Get Drill Through Reports |
-| [**DrillThroughReportsUpdateReport**](DrillThroughReportsApi.md#drillthroughreportsupdatereport) | **PUT** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Update Drill Through Reoprt |
+| [**DrillThroughReportsUpdateReport**](DrillThroughReportsApi.md#drillthroughreportsupdatereport) | **PUT** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Update Drill Through Report |
 
-<a name="drillthroughreportscreate"></a>
+<a id="drillthroughreportscreate"></a>
 # **DrillThroughReportsCreate**
 > DrillthroughBean DrillThroughReportsCreate (string applicationName, string databaseName, DrillthroughBean body)
 
@@ -113,7 +113,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="drillthroughreportsdelete"></a>
+<a id="drillthroughreportsdelete"></a>
 # **DrillThroughReportsDelete**
 > void DrillThroughReportsDelete (string applicationName, string databaseName, string name)
 
@@ -210,7 +210,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="drillthroughreportsexecute"></a>
+<a id="drillthroughreportsexecute"></a>
 # **DrillThroughReportsExecute**
 > void DrillThroughReportsExecute (string applicationName, string databaseName, string name, DrillthroughMetadataBean body)
 
@@ -242,7 +242,7 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
             var name = "name_example";  // string | <p>Drillthrough report name.</p>
-            var body = new DrillthroughMetadataBean(); // DrillthroughMetadataBean | <p>Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.</p>
+            var body = new DrillthroughMetadataBean(); // DrillthroughMetadataBean | <p>Drill through metadata. In the example request body, <i>dtrContext</i> corresponds to the intersection of cells in Smart View.</p>
 
             try
             {
@@ -284,7 +284,7 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **name** | **string** | &lt;p&gt;Drillthrough report name.&lt;/p&gt; |  |
-| **body** | [**DrillthroughMetadataBean**](DrillthroughMetadataBean.md) | &lt;p&gt;Drillthrough metadata. In example request body, dtrContext corresponds to the intersection of cells in smartview.&lt;/p&gt; |  |
+| **body** | [**DrillthroughMetadataBean**](DrillthroughMetadataBean.md) | &lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -303,14 +303,14 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The drillthrough report was executed successfully. Result is a json array where first node is the datatype of each column, second node is the column names and rest are the data nodes corresponding to each record in the report.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The drillthrough report was executed successfully. Result is a JSON array where the first node is the datatype of each column, the  second node is the column names, and the remaining nodes are the data nodes corresponding to each record in the report.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to execute the drillthrough report.&lt;/p&gt; |  -  |
 | **415** | &lt;p&gt;&lt;strong&gt;Not Acceptable&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The media type isn&#39;t supported or wasn&#39;t specified.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="drillthroughreportsgetreport"></a>
+<a id="drillthroughreportsgetreport"></a>
 # **DrillThroughReportsGetReport**
 > DrillthroughBean DrillThroughReportsGetReport (string applicationName, string databaseName, string name)
 
@@ -411,7 +411,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="drillthroughreportsgetreports"></a>
+<a id="drillthroughreportsgetreports"></a>
 # **DrillThroughReportsGetReports**
 > ReportList DrillThroughReportsGetReports (string applicationName, string databaseName)
 
@@ -510,11 +510,11 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="drillthroughreportsupdatereport"></a>
+<a id="drillthroughreportsupdatereport"></a>
 # **DrillThroughReportsUpdateReport**
 > DrillthroughBean DrillThroughReportsUpdateReport (string applicationName, string databaseName, string name, DrillthroughBean body)
 
-Update Drill Through Reoprt
+Update Drill Through Report
 
 <p>Updates the drill through report in the specified application and database, and returns details of the updated report.</p>
 
@@ -546,7 +546,7 @@ namespace Example
 
             try
             {
-                // Update Drill Through Reoprt
+                // Update Drill Through Report
                 DrillthroughBean result = apiInstance.DrillThroughReportsUpdateReport(applicationName, databaseName, name, body);
                 Debug.WriteLine(result);
             }
@@ -567,7 +567,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Update Drill Through Reoprt
+    // Update Drill Through Report
     ApiResponse<DrillthroughBean> response = apiInstance.DrillThroughReportsUpdateReportWithHttpInfo(applicationName, databaseName, name, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

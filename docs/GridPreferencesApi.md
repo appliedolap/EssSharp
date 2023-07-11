@@ -7,7 +7,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**GridPreferencesGet**](GridPreferencesApi.md#gridpreferencesget) | **GET** /preferences/grid | Get Grid Preferences |
 | [**GridPreferencesSet**](GridPreferencesApi.md#gridpreferencesset) | **PUT** /preferences/grid | Set Grid Preferences |
 
-<a name="gridpreferencesget"></a>
+<a id="gridpreferencesget"></a>
 # **GridPreferencesGet**
 > Preferences GridPreferencesGet ()
 
@@ -99,7 +99,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="gridpreferencesset"></a>
+<a id="gridpreferencesset"></a>
 # **GridPreferencesSet**
 > void GridPreferencesSet (Preferences body)
 

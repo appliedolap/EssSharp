@@ -7,7 +7,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**AboutGetAbout**](AboutEssbaseApi.md#aboutgetabout) | **GET** /about | About Essbase |
 | [**AboutGetInstanceDetails**](AboutEssbaseApi.md#aboutgetinstancedetails) | **GET** /about/instance | About Essbase Instance |
 
-<a name="aboutgetabout"></a>
+<a id="aboutgetabout"></a>
 # **AboutGetAbout**
 > About AboutGetAbout ()
 
@@ -97,7 +97,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="aboutgetinstancedetails"></a>
+<a id="aboutgetinstancedetails"></a>
 # **AboutGetInstanceDetails**
 > AboutInstance AboutGetInstanceDetails ()
 

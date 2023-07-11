@@ -12,7 +12,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**EmailGetIMAPServerDetail**](EmailApi.md#emailgetimapserverdetail) | **GET** /email/imap | Get IMAP Configuration |
 | [**EmailGetSMTPServerDetail**](EmailApi.md#emailgetsmtpserverdetail) | **GET** /email/smtp | Get SMTP Configuration |
 
-<a name="emailaddimapdetails"></a>
+<a id="emailaddimapdetails"></a>
 # **EmailAddIMAPDetails**
 > ListLinkResponseObject EmailAddIMAPDetails (ServerConfiguration body = null)
 
@@ -109,7 +109,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="emailaddsmtpdetails"></a>
+<a id="emailaddsmtpdetails"></a>
 # **EmailAddSMTPDetails**
 > ListLinkResponseObject EmailAddSMTPDetails (ServerConfiguration body = null)
 
@@ -206,7 +206,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="emaildeleteimapdetails"></a>
+<a id="emaildeleteimapdetails"></a>
 # **EmailDeleteIMAPDetails**
 > void EmailDeleteIMAPDetails ()
 
@@ -294,7 +294,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="emaildeletesmtpdetails"></a>
+<a id="emaildeletesmtpdetails"></a>
 # **EmailDeleteSMTPDetails**
 > void EmailDeleteSMTPDetails ()
 
@@ -382,7 +382,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="emailgetemaillinks"></a>
+<a id="emailgetemaillinks"></a>
 # **EmailGetEmailLinks**
 > ListLinkResponseObject EmailGetEmailLinks ()
 
@@ -474,7 +474,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="emailgetimapserverdetail"></a>
+<a id="emailgetimapserverdetail"></a>
 # **EmailGetIMAPServerDetail**
 > ServerConfiguration EmailGetIMAPServerDetail ()
 
@@ -567,7 +567,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="emailgetsmtpserverdetail"></a>
+<a id="emailgetsmtpserverdetail"></a>
 # **EmailGetSMTPServerDetail**
 > ServerConfiguration EmailGetSMTPServerDetail ()
 

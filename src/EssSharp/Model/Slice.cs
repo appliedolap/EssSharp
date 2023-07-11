@@ -32,25 +32,19 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Slice" /> class.
         /// </summary>
-        /// <param name="rows">rows.</param>
         /// <param name="dirtyCells">dirtyCells.</param>
         /// <param name="dirtyTexts">dirtyTexts.</param>
         /// <param name="columns">columns.</param>
+        /// <param name="rows">rows.</param>
         /// <param name="data">data.</param>
-        public Slice(int rows = default(int), List<int> dirtyCells = default(List<int>), List<int> dirtyTexts = default(List<int>), int columns = default(int), Data data = default(Data))
+        public Slice(List<int> dirtyCells = default(List<int>), List<int> dirtyTexts = default(List<int>), int columns = default(int), int rows = default(int), Data data = default(Data))
         {
-            this.Rows = rows;
             this.DirtyCells = dirtyCells;
             this.DirtyTexts = dirtyTexts;
             this.Columns = columns;
+            this.Rows = rows;
             this.Data = data;
         }
-
-        /// <summary>
-        /// Gets or Sets Rows
-        /// </summary>
-        [DataMember(Name = "rows", EmitDefaultValue = false)]
-        public int Rows { get; set; }
 
         /// <summary>
         /// Gets or Sets DirtyCells
@@ -71,6 +65,12 @@ namespace EssSharp.Model
         public int Columns { get; set; }
 
         /// <summary>
+        /// Gets or Sets Rows
+        /// </summary>
+        [DataMember(Name = "rows", EmitDefaultValue = false)]
+        public int Rows { get; set; }
+
+        /// <summary>
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name = "data", EmitDefaultValue = false)]
@@ -84,10 +84,10 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Slice {\n");
-            sb.Append("  Rows: ").Append(Rows).Append("\n");
             sb.Append("  DirtyCells: ").Append(DirtyCells).Append("\n");
             sb.Append("  DirtyTexts: ").Append(DirtyTexts).Append("\n");
             sb.Append("  Columns: ").Append(Columns).Append("\n");
+            sb.Append("  Rows: ").Append(Rows).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -125,10 +125,6 @@ namespace EssSharp.Model
             }
             return 
                 (
-                    this.Rows == input.Rows ||
-                    this.Rows.Equals(input.Rows)
-                ) && 
-                (
                     this.DirtyCells == input.DirtyCells ||
                     this.DirtyCells != null &&
                     input.DirtyCells != null &&
@@ -143,6 +139,10 @@ namespace EssSharp.Model
                 (
                     this.Columns == input.Columns ||
                     this.Columns.Equals(input.Columns)
+                ) && 
+                (
+                    this.Rows == input.Rows ||
+                    this.Rows.Equals(input.Rows)
                 ) && 
                 (
                     this.Data == input.Data ||
@@ -160,7 +160,6 @@ namespace EssSharp.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Rows.GetHashCode();
                 if (this.DirtyCells != null)
                 {
                     hashCode = (hashCode * 59) + this.DirtyCells.GetHashCode();
@@ -170,6 +169,7 @@ namespace EssSharp.Model
                     hashCode = (hashCode * 59) + this.DirtyTexts.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Columns.GetHashCode();
+                hashCode = (hashCode * 59) + this.Rows.GetHashCode();
                 if (this.Data != null)
                 {
                     hashCode = (hashCode * 59) + this.Data.GetHashCode();
@@ -183,7 +183,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

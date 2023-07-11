@@ -33,15 +33,15 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="LockBlock" /> class.
         /// </summary>
         /// <param name="links">links.</param>
+        /// <param name="duration">duration.</param>
         /// <param name="user">user.</param>
         /// <param name="count">count.</param>
-        /// <param name="duration">duration.</param>
-        public LockBlock(List<Link> links = default(List<Link>), string user = default(string), int count = default(int), int duration = default(int))
+        public LockBlock(List<Link> links = default(List<Link>), int duration = default(int), string user = default(string), int count = default(int))
         {
             this.Links = links;
+            this.Duration = duration;
             this.User = user;
             this.Count = count;
-            this.Duration = duration;
         }
 
         /// <summary>
@@ -49,6 +49,12 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "links", EmitDefaultValue = false)]
         public List<Link> Links { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Duration
+        /// </summary>
+        [DataMember(Name = "duration", EmitDefaultValue = false)]
+        public int Duration { get; set; }
 
         /// <summary>
         /// Gets or Sets User
@@ -63,12 +69,6 @@ namespace EssSharp.Model
         public int Count { get; set; }
 
         /// <summary>
-        /// Gets or Sets Duration
-        /// </summary>
-        [DataMember(Name = "duration", EmitDefaultValue = false)]
-        public int Duration { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -77,9 +77,9 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class LockBlock {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("  Duration: ").Append(Duration).Append("\n");
             sb.Append("  User: ").Append(User).Append("\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
-            sb.Append("  Duration: ").Append(Duration).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -122,6 +122,10 @@ namespace EssSharp.Model
                     this.Links.SequenceEqual(input.Links)
                 ) && 
                 (
+                    this.Duration == input.Duration ||
+                    this.Duration.Equals(input.Duration)
+                ) && 
+                (
                     this.User == input.User ||
                     (this.User != null &&
                     this.User.Equals(input.User))
@@ -129,10 +133,6 @@ namespace EssSharp.Model
                 (
                     this.Count == input.Count ||
                     this.Count.Equals(input.Count)
-                ) && 
-                (
-                    this.Duration == input.Duration ||
-                    this.Duration.Equals(input.Duration)
                 );
         }
 
@@ -149,12 +149,12 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.Links.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.Duration.GetHashCode();
                 if (this.User != null)
                 {
                     hashCode = (hashCode * 59) + this.User.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Count.GetHashCode();
-                hashCode = (hashCode * 59) + this.Duration.GetHashCode();
                 return hashCode;
             }
         }
@@ -164,7 +164,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

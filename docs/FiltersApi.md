@@ -18,7 +18,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**FiltersReplaceFilterPermission**](FiltersApi.md#filtersreplacefilterpermission) | **PUT** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions | Edit Permissions |
 | [**FiltersValidateFilter**](FiltersApi.md#filtersvalidatefilter) | **POST** /applications/{applicationName}/databases/{databaseName}/filters/filterops/validate | Validate Filter |
 
-<a name="filtersaddfilterpermission"></a>
+<a id="filtersaddfilterpermission"></a>
 # **FiltersAddFilterPermission**
 > UserGroupProvisionInfo FiltersAddFilterPermission (string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body)
 
@@ -122,7 +122,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filterscopyfilter"></a>
+<a id="filterscopyfilter"></a>
 # **FiltersCopyFilter**
 > FilterBean FiltersCopyFilter (string applicationName, string databaseName, FilterCopy body)
 
@@ -224,7 +224,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filterscreatefilter"></a>
+<a id="filterscreatefilter"></a>
 # **FiltersCreateFilter**
 > FilterBean FiltersCreateFilter (string applicationName, string databaseName, FilterBean body)
 
@@ -326,7 +326,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filtersdeletefilter"></a>
+<a id="filtersdeletefilter"></a>
 # **FiltersDeleteFilter**
 > void FiltersDeleteFilter (string applicationName, string databaseName, string filterName)
 
@@ -423,7 +423,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filterseditfilter"></a>
+<a id="filterseditfilter"></a>
 # **FiltersEditFilter**
 > FilterBean FiltersEditFilter (string applicationName, string databaseName, string filterName, FilterBean body)
 
@@ -527,7 +527,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filtersgetfilter"></a>
+<a id="filtersgetfilter"></a>
 # **FiltersGetFilter**
 > FilterBean FiltersGetFilter (string applicationName, string databaseName, string filterName)
 
@@ -628,7 +628,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filtersgetfilterpermissions"></a>
+<a id="filtersgetfilterpermissions"></a>
 # **FiltersGetFilterPermissions**
 > List&lt;UserGroupProvisionInfoList&gt; FiltersGetFilterPermissions (string applicationName, string databaseName, string filterName)
 
@@ -729,7 +729,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filtersgetfilterrows"></a>
+<a id="filtersgetfilterrows"></a>
 # **FiltersGetFilterRows**
 > FilterRowList FiltersGetFilterRows (string applicationName, string databaseName, string filterName)
 
@@ -830,7 +830,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filterslistfilters"></a>
+<a id="filterslistfilters"></a>
 # **FiltersListFilters**
 > List&lt;FilterList&gt; FiltersListFilters (string applicationName, string databaseName)
 
@@ -929,7 +929,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filtersremovefilterpermission"></a>
+<a id="filtersremovefilterpermission"></a>
 # **FiltersRemoveFilterPermission**
 > void FiltersRemoveFilterPermission (string applicationName, string databaseName, string filterName, string userGroupId, bool group)
 
@@ -1030,7 +1030,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filtersrenamefilter"></a>
+<a id="filtersrenamefilter"></a>
 # **FiltersRenameFilter**
 > FilterBean FiltersRenameFilter (string applicationName, string databaseName, FilterCopy body)
 
@@ -1132,7 +1132,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filtersreplacefilterpermission"></a>
+<a id="filtersreplacefilterpermission"></a>
 # **FiltersReplaceFilterPermission**
 > UserGroupProvisionInfo FiltersReplaceFilterPermission (string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body)
 
@@ -1236,7 +1236,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filtersvalidatefilter"></a>
+<a id="filtersvalidatefilter"></a>
 # **FiltersValidateFilter**
 > void FiltersValidateFilter (string applicationName, string databaseName, FilterBean body)
 

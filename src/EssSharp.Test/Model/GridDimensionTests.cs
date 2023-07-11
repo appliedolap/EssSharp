@@ -54,20 +54,20 @@ namespace EssSharp.Test.Model
 
 
         /// <summary>
-        /// Test the property 'Pov'
-        /// </summary>
-        [Fact]
-        public void PovTest()
-        {
-            // TODO unit test for the property 'Pov'
-        }
-        /// <summary>
         /// Test the property 'Expanded'
         /// </summary>
         [Fact]
         public void ExpandedTest()
         {
             // TODO unit test for the property 'Expanded'
+        }
+        /// <summary>
+        /// Test the property 'Pov'
+        /// </summary>
+        [Fact]
+        public void PovTest()
+        {
+            // TODO unit test for the property 'Pov'
         }
         /// <summary>
         /// Test the property 'Column'

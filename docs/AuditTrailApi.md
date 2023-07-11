@@ -7,7 +7,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**AuditTrailGetDataAudit**](AuditTrailApi.md#audittrailgetdataaudit) | **GET** /applications/{application}/databases/{database}/audittrail/data | Get Audit Data |
 | [**AuditTrailPurge**](AuditTrailApi.md#audittrailpurge) | **DELETE** /applications/{application}/databases/{database}/audittrail/data | Delete Audit Data |
 
-<a name="audittrailgetdataaudit"></a>
+<a id="audittrailgetdataaudit"></a>
 # **AuditTrailGetDataAudit**
 > string AuditTrailGetDataAudit (string application, string database, long? fetchCount = null)
 
@@ -108,7 +108,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="audittrailpurge"></a>
+<a id="audittrailpurge"></a>
 # **AuditTrailPurge**
 > void AuditTrailPurge (string application, string database, long? olderthan = null)
 

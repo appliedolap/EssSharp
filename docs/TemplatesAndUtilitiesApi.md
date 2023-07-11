@@ -7,7 +7,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ResourcesDownloadUtility**](TemplatesAndUtilitiesApi.md#resourcesdownloadutility) | **GET** /utilities/{id} | Download Utility |
 | [**ResourcesGetUtilities**](TemplatesAndUtilitiesApi.md#resourcesgetutilities) | **GET** /utilities | List Utilities |
 
-<a name="resourcesdownloadutility"></a>
+<a id="resourcesdownloadutility"></a>
 # **ResourcesDownloadUtility**
 > System.IO.Stream ResourcesDownloadUtility (string id)
 
@@ -103,7 +103,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="resourcesgetutilities"></a>
+<a id="resourcesgetutilities"></a>
 # **ResourcesGetUtilities**
 > ResourceList ResourcesGetUtilities ()
 

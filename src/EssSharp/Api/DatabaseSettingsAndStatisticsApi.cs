@@ -152,6 +152,33 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of CompressionSettings</returns>
         ApiResponse<CompressionSettings> DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfo(string applicationName, string databaseName, int operationIndex = 0);
         /// <summary>
+        /// Get Compression Settings
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>CompressionInfoOutput</returns>
+        CompressionInfoOutput DatabaseSettingsStatisticsGetCompressionInfoSettings(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0);
+
+        /// <summary>
+        /// Get Compression Settings
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of CompressionInfoOutput</returns>
+        ApiResponse<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0);
+        /// <summary>
         /// Get Attribute Settings
         /// </summary>
         /// <remarks>
@@ -617,6 +644,35 @@ namespace EssSharp.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CompressionSettings)</returns>
         System.Threading.Tasks.Task<ApiResponse<CompressionSettings>> DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Get Compression Settings
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of CompressionInfoOutput</returns>
+        System.Threading.Tasks.Task<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get Compression Settings
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (CompressionInfoOutput)</returns>
+        System.Threading.Tasks.Task<ApiResponse<CompressionInfoOutput>> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfoAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get Attribute Settings
         /// </summary>
@@ -1964,6 +2020,194 @@ namespace EssSharp.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DatabaseSettingsStatisticsGetCompressSettings", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get Compression Settings &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>CompressionInfoOutput</returns>
+        public CompressionInfoOutput DatabaseSettingsStatisticsGetCompressionInfoSettings(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0)
+        {
+            EssSharp.Client.ApiResponse<CompressionInfoOutput> localVarResponse = DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo(applicationName, databaseName, fetch);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Compression Settings &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of CompressionInfoOutput</returns>
+        public EssSharp.Client.ApiResponse<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0)
+        {
+            // verify the required parameter 'applicationName' is set
+            if (applicationName == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationName' when calling DatabaseSettingsAndStatisticsApi->DatabaseSettingsStatisticsGetCompressionInfoSettings");
+            }
+
+            // verify the required parameter 'databaseName' is set
+            if (databaseName == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'databaseName' when calling DatabaseSettingsAndStatisticsApi->DatabaseSettingsStatisticsGetCompressionInfoSettings");
+            }
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/xml"
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            if (fetch != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "fetch", fetch));
+            }
+
+            localVarRequestOptions.Operation = "DatabaseSettingsAndStatisticsApi.DatabaseSettingsStatisticsGetCompressionInfoSettings";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<CompressionInfoOutput>("/applications/{applicationName}/databases/{databaseName}/settings/compressioninfo", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DatabaseSettingsStatisticsGetCompressionInfoSettings", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get Compression Settings &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of CompressionInfoOutput</returns>
+        public async System.Threading.Tasks.Task<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            EssSharp.Client.ApiResponse<CompressionInfoOutput> localVarResponse = await DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfoAsync(applicationName, databaseName, fetch, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Compression Settings &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (CompressionInfoOutput)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CompressionInfoOutput>> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfoAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'applicationName' is set
+            if (applicationName == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationName' when calling DatabaseSettingsAndStatisticsApi->DatabaseSettingsStatisticsGetCompressionInfoSettings");
+            }
+
+            // verify the required parameter 'databaseName' is set
+            if (databaseName == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'databaseName' when calling DatabaseSettingsAndStatisticsApi->DatabaseSettingsStatisticsGetCompressionInfoSettings");
+            }
+
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/xml"
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            if (fetch != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "fetch", fetch));
+            }
+
+            localVarRequestOptions.Operation = "DatabaseSettingsAndStatisticsApi.DatabaseSettingsStatisticsGetCompressionInfoSettings";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<CompressionInfoOutput>("/applications/{applicationName}/databases/{databaseName}/settings/compressioninfo", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DatabaseSettingsStatisticsGetCompressionInfoSettings", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

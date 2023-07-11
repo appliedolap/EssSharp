@@ -8,7 +8,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationLogsDownloadAppLogFiles**](ApplicationLogsApi.md#applicationlogsdownloadapplogfiles) | **GET** /applications/{applicationName}/logs | Download Logs |
 | [**ApplicationLogsDownloadLatestLogFile**](ApplicationLogsApi.md#applicationlogsdownloadlatestlogfile) | **GET** /applications/{applicationName}/logs/latest | Download Latest Log |
 
-<a name="applicationlogsdownloadalllogfiles"></a>
+<a id="applicationlogsdownloadalllogfiles"></a>
 # **ApplicationLogsDownloadAllLogFiles**
 > System.IO.Stream ApplicationLogsDownloadAllLogFiles (string applicationName)
 
@@ -105,7 +105,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationlogsdownloadapplogfiles"></a>
+<a id="applicationlogsdownloadapplogfiles"></a>
 # **ApplicationLogsDownloadAppLogFiles**
 > Link ApplicationLogsDownloadAppLogFiles (string applicationName)
 
@@ -202,7 +202,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationlogsdownloadlatestlogfile"></a>
+<a id="applicationlogsdownloadlatestlogfile"></a>
 # **ApplicationLogsDownloadLatestLogFile**
 > System.IO.Stream ApplicationLogsDownloadLatestLogFile (string applicationName)
 

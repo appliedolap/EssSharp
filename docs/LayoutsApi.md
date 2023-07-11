@@ -11,7 +11,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**LayoutsMarkDefaultLayout**](LayoutsApi.md#layoutsmarkdefaultlayout) | **POST** /applications/{application}/databases/{database}/layouts/{layout}/actions/markDefault | Mark Layout as Default |
 | [**LayoutsSaveLayout**](LayoutsApi.md#layoutssavelayout) | **POST** /applications/{application}/databases/{database}/layouts | Save Layout |
 
-<a name="layoutsdeletelayout"></a>
+<a id="layoutsdeletelayout"></a>
 # **LayoutsDeleteLayout**
 > void LayoutsDeleteLayout (string application, string database, string layout, string user = null)
 
@@ -109,7 +109,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="layoutseditlayout"></a>
+<a id="layoutseditlayout"></a>
 # **LayoutsEditLayout**
 > Layout LayoutsEditLayout (string application, string database, string layout, string user = null, Layout body = null)
 
@@ -213,7 +213,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="layoutsgetlayoutdetails"></a>
+<a id="layoutsgetlayoutdetails"></a>
 # **LayoutsGetLayoutDetails**
 > Layout LayoutsGetLayoutDetails (string application, string database, string layout, string user = null)
 
@@ -315,7 +315,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="layoutsgetlayouts"></a>
+<a id="layoutsgetlayouts"></a>
 # **LayoutsGetLayouts**
 > Layouts LayoutsGetLayouts (string application, string database)
 
@@ -413,7 +413,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="layoutsmarkdefaultlayout"></a>
+<a id="layoutsmarkdefaultlayout"></a>
 # **LayoutsMarkDefaultLayout**
 > Layout LayoutsMarkDefaultLayout (string application, string database, string layout, DefaultLayoutBean body = null)
 
@@ -515,7 +515,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="layoutssavelayout"></a>
+<a id="layoutssavelayout"></a>
 # **LayoutsSaveLayout**
 > Layout LayoutsSaveLayout (string application, string database, Layout body = null)
 

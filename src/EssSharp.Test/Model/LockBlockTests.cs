@@ -62,6 +62,14 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'Links'
         }
         /// <summary>
+        /// Test the property 'Duration'
+        /// </summary>
+        [Fact]
+        public void DurationTest()
+        {
+            // TODO unit test for the property 'Duration'
+        }
+        /// <summary>
         /// Test the property 'User'
         /// </summary>
         [Fact]
@@ -76,14 +84,6 @@ namespace EssSharp.Test.Model
         public void CountTest()
         {
             // TODO unit test for the property 'Count'
-        }
-        /// <summary>
-        /// Test the property 'Duration'
-        /// </summary>
-        [Fact]
-        public void DurationTest()
-        {
-            // TODO unit test for the property 'Duration'
         }
 
     }

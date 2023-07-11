@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HasMore** | **bool** |  | [optional] 
 **TotalResults** | **long** |  | [optional] 
+**HasMore** | **bool** |  | [optional] 
 **Count** | **long** |  | [optional] 
 **Items** | [**List&lt;LayoutMetadata&gt;**](LayoutMetadata.md) |  | [optional] 
 **Limit** | **long** |  | [optional] 

@@ -25,27 +25,27 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Abort File Upload
+        /// Abort Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
+        /// &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id of file to abort&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void FilesAbortUpload(string path, string uploadId, int operationIndex = 0);
 
         /// <summary>
-        /// Abort File Upload
+        /// Abort Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
+        /// &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id of file to abort&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> FilesAbortUploadWithHttpInfo(string path, string uploadId, int operationIndex = 0);
@@ -104,29 +104,29 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> FilesCopyResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0);
         /// <summary>
-        /// Create Upload
+        /// Create Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog path&lt;/p&gt;</param>
-        /// <param name="overwrite">&lt;p&gt;Overwrite the file&lt;/p&gt;</param>
-        /// <param name="append">&lt;p&gt;Append&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="overwrite">&lt;p&gt;Overwrite if file exists?&lt;/p&gt;</param>
+        /// <param name="append">&lt;p&gt;Append to an existing file?&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CreateFilePartUploadResponse</returns>
         CreateFilePartUploadResponse FilesCreateUpload(string path, bool overwrite, bool append, int operationIndex = 0);
 
         /// <summary>
-        /// Create Upload
+        /// Create Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog path&lt;/p&gt;</param>
-        /// <param name="overwrite">&lt;p&gt;Overwrite the file&lt;/p&gt;</param>
-        /// <param name="append">&lt;p&gt;Append&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="overwrite">&lt;p&gt;Overwrite if file exists?&lt;/p&gt;</param>
+        /// <param name="append">&lt;p&gt;Append to an existing file?&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CreateFilePartUploadResponse</returns>
         ApiResponse<CreateFilePartUploadResponse> FilesCreateUploadWithHttpInfo(string path, bool overwrite, bool append, int operationIndex = 0);
@@ -310,10 +310,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> FilesMoveResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0);
         /// <summary>
-        /// Upload Commit
+        /// Commit Partial File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag value for each part.&lt;/p&gt;
+        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path"></param>
@@ -324,10 +324,10 @@ namespace EssSharp.Api
         CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0);
 
         /// <summary>
-        /// Upload Commit
+        /// Commit Partial File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag value for each part.&lt;/p&gt;
+        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path"></param>
@@ -337,29 +337,29 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of CommitFilePartUploadResponse</returns>
         ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0);
         /// <summary>
-        /// Upload the part
+        /// Upload File Part
         /// </summary>
         /// <remarks>
-        /// Upload Part request for each object part upload. It should contain upload ID.
+        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog Path &lt;/p&gt;</param>
-        /// <param name="partNum">&lt;p&gt;Part Number&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="partNum">&lt;p&gt;Part number for partial file upload.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UploadFilePartResponse</returns>
         UploadFilePartResponse FilesUploadPart(string path, int partNum, string uploadId, int operationIndex = 0);
 
         /// <summary>
-        /// Upload the part
+        /// Upload File Part
         /// </summary>
         /// <remarks>
-        /// Upload Part request for each object part upload. It should contain upload ID.
+        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog Path &lt;/p&gt;</param>
-        /// <param name="partNum">&lt;p&gt;Part Number&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="partNum">&lt;p&gt;Part number for partial file upload.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UploadFilePartResponse</returns>
         ApiResponse<UploadFilePartResponse> FilesUploadPartWithHttpInfo(string path, int partNum, string uploadId, int operationIndex = 0);
@@ -391,28 +391,28 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Abort File Upload
+        /// Abort Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
+        /// &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id of file to abort&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task FilesAbortUploadAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Abort File Upload
+        /// Abort Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
+        /// &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id of file to abort&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -476,30 +476,30 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> FilesCopyResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Create Upload
+        /// Create Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog path&lt;/p&gt;</param>
-        /// <param name="overwrite">&lt;p&gt;Overwrite the file&lt;/p&gt;</param>
-        /// <param name="append">&lt;p&gt;Append&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="overwrite">&lt;p&gt;Overwrite if file exists?&lt;/p&gt;</param>
+        /// <param name="append">&lt;p&gt;Append to an existing file?&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CreateFilePartUploadResponse</returns>
         System.Threading.Tasks.Task<CreateFilePartUploadResponse> FilesCreateUploadAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Create Upload
+        /// Create Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog path&lt;/p&gt;</param>
-        /// <param name="overwrite">&lt;p&gt;Overwrite the file&lt;/p&gt;</param>
-        /// <param name="append">&lt;p&gt;Append&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="overwrite">&lt;p&gt;Overwrite if file exists?&lt;/p&gt;</param>
+        /// <param name="append">&lt;p&gt;Append to an existing file?&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CreateFilePartUploadResponse)</returns>
@@ -698,10 +698,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> FilesMoveResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Upload Commit
+        /// Commit Partial File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag value for each part.&lt;/p&gt;
+        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path"></param>
@@ -713,10 +713,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Upload Commit
+        /// Commit Partial File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag value for each part.&lt;/p&gt;
+        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path"></param>
@@ -727,30 +727,30 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (CommitFilePartUploadResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Upload the part
+        /// Upload File Part
         /// </summary>
         /// <remarks>
-        /// Upload Part request for each object part upload. It should contain upload ID.
+        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog Path &lt;/p&gt;</param>
-        /// <param name="partNum">&lt;p&gt;Part Number&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="partNum">&lt;p&gt;Part number for partial file upload.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UploadFilePartResponse</returns>
         System.Threading.Tasks.Task<UploadFilePartResponse> FilesUploadPartAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Upload the part
+        /// Upload File Part
         /// </summary>
         /// <remarks>
-        /// Upload Part request for each object part upload. It should contain upload ID.
+        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog Path &lt;/p&gt;</param>
-        /// <param name="partNum">&lt;p&gt;Part Number&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="partNum">&lt;p&gt;Part number for partial file upload.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UploadFilePartResponse)</returns>
@@ -899,11 +899,11 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Abort File Upload &lt;p&gt;Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
+        /// Abort Multipart File Upload &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id of file to abort&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void FilesAbortUpload(string path, string uploadId, int operationIndex = 0)
@@ -912,11 +912,11 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Abort File Upload &lt;p&gt;Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
+        /// Abort Multipart File Upload &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id of file to abort&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> FilesAbortUploadWithHttpInfo(string path, string uploadId, int operationIndex = 0)
@@ -982,11 +982,11 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Abort File Upload &lt;p&gt;Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
+        /// Abort Multipart File Upload &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id of file to abort&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -996,11 +996,11 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Abort File Upload &lt;p&gt;Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
+        /// Abort Multipart File Upload &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id of file to abort&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -1433,12 +1433,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Upload Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog path&lt;/p&gt;</param>
-        /// <param name="overwrite">&lt;p&gt;Overwrite the file&lt;/p&gt;</param>
-        /// <param name="append">&lt;p&gt;Append&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="overwrite">&lt;p&gt;Overwrite if file exists?&lt;/p&gt;</param>
+        /// <param name="append">&lt;p&gt;Append to an existing file?&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CreateFilePartUploadResponse</returns>
         public CreateFilePartUploadResponse FilesCreateUpload(string path, bool overwrite, bool append, int operationIndex = 0)
@@ -1448,12 +1448,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Upload Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog path&lt;/p&gt;</param>
-        /// <param name="overwrite">&lt;p&gt;Overwrite the file&lt;/p&gt;</param>
-        /// <param name="append">&lt;p&gt;Append&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="overwrite">&lt;p&gt;Overwrite if file exists?&lt;/p&gt;</param>
+        /// <param name="append">&lt;p&gt;Append to an existing file?&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CreateFilePartUploadResponse</returns>
         public EssSharp.Client.ApiResponse<CreateFilePartUploadResponse> FilesCreateUploadWithHttpInfo(string path, bool overwrite, bool append, int operationIndex = 0)
@@ -1516,12 +1516,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Upload Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog path&lt;/p&gt;</param>
-        /// <param name="overwrite">&lt;p&gt;Overwrite the file&lt;/p&gt;</param>
-        /// <param name="append">&lt;p&gt;Append&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="overwrite">&lt;p&gt;Overwrite if file exists?&lt;/p&gt;</param>
+        /// <param name="append">&lt;p&gt;Append to an existing file?&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CreateFilePartUploadResponse</returns>
@@ -1532,12 +1532,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Upload Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog path&lt;/p&gt;</param>
-        /// <param name="overwrite">&lt;p&gt;Overwrite the file&lt;/p&gt;</param>
-        /// <param name="append">&lt;p&gt;Append&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="overwrite">&lt;p&gt;Overwrite if file exists?&lt;/p&gt;</param>
+        /// <param name="append">&lt;p&gt;Append to an existing file?&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CreateFilePartUploadResponse)</returns>
@@ -2789,7 +2789,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload Commit &lt;p&gt;Commit the upload. Include the part number and corresponding ETag value for each part.&lt;/p&gt;
+        /// Commit Partial File Upload &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path"></param>
@@ -2804,7 +2804,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload Commit &lt;p&gt;Commit the upload. Include the part number and corresponding ETag value for each part.&lt;/p&gt;
+        /// Commit Partial File Upload &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path"></param>
@@ -2877,7 +2877,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload Commit &lt;p&gt;Commit the upload. Include the part number and corresponding ETag value for each part.&lt;/p&gt;
+        /// Commit Partial File Upload &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path"></param>
@@ -2893,7 +2893,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload Commit &lt;p&gt;Commit the upload. Include the part number and corresponding ETag value for each part.&lt;/p&gt;
+        /// Commit Partial File Upload &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path"></param>
@@ -2969,12 +2969,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload the part Upload Part request for each object part upload. It should contain upload ID.
+        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog Path &lt;/p&gt;</param>
-        /// <param name="partNum">&lt;p&gt;Part Number&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="partNum">&lt;p&gt;Part number for partial file upload.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UploadFilePartResponse</returns>
         public UploadFilePartResponse FilesUploadPart(string path, int partNum, string uploadId, int operationIndex = 0)
@@ -2984,12 +2984,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload the part Upload Part request for each object part upload. It should contain upload ID.
+        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog Path &lt;/p&gt;</param>
-        /// <param name="partNum">&lt;p&gt;Part Number&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="partNum">&lt;p&gt;Part number for partial file upload.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UploadFilePartResponse</returns>
         public EssSharp.Client.ApiResponse<UploadFilePartResponse> FilesUploadPartWithHttpInfo(string path, int partNum, string uploadId, int operationIndex = 0)
@@ -3058,12 +3058,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload the part Upload Part request for each object part upload. It should contain upload ID.
+        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog Path &lt;/p&gt;</param>
-        /// <param name="partNum">&lt;p&gt;Part Number&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="partNum">&lt;p&gt;Part number for partial file upload.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UploadFilePartResponse</returns>
@@ -3074,12 +3074,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload the part Upload Part request for each object part upload. It should contain upload ID.
+        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;Catalog Path &lt;/p&gt;</param>
-        /// <param name="partNum">&lt;p&gt;Part Number&lt;/p&gt;</param>
-        /// <param name="uploadId">&lt;p&gt;Upload Id&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="partNum">&lt;p&gt;Part number for partial file upload.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UploadFilePartResponse)</returns>

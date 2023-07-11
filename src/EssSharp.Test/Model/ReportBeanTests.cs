@@ -62,6 +62,14 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'Links'
         }
         /// <summary>
+        /// Test the property 'LockedTime'
+        /// </summary>
+        [Fact]
+        public void LockedTimeTest()
+        {
+            // TODO unit test for the property 'LockedTime'
+        }
+        /// <summary>
         /// Test the property 'ModifiedTime'
         /// </summary>
         [Fact]
@@ -70,12 +78,12 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'ModifiedTime'
         }
         /// <summary>
-        /// Test the property 'SizeInBytes'
+        /// Test the property 'Locked'
         /// </summary>
         [Fact]
-        public void SizeInBytesTest()
+        public void LockedTest()
         {
-            // TODO unit test for the property 'SizeInBytes'
+            // TODO unit test for the property 'Locked'
         }
         /// <summary>
         /// Test the property 'LockedBy'
@@ -86,20 +94,12 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'LockedBy'
         }
         /// <summary>
-        /// Test the property 'LockedTime'
+        /// Test the property 'SizeInBytes'
         /// </summary>
         [Fact]
-        public void LockedTimeTest()
+        public void SizeInBytesTest()
         {
-            // TODO unit test for the property 'LockedTime'
-        }
-        /// <summary>
-        /// Test the property 'Locked'
-        /// </summary>
-        [Fact]
-        public void LockedTest()
-        {
-            // TODO unit test for the property 'Locked'
+            // TODO unit test for the property 'SizeInBytes'
         }
         /// <summary>
         /// Test the property 'Name'

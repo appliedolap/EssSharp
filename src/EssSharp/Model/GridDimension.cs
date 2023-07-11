@@ -32,17 +32,17 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GridDimension" /> class.
         /// </summary>
-        /// <param name="pov">pov.</param>
         /// <param name="expanded">expanded.</param>
+        /// <param name="pov">pov.</param>
         /// <param name="column">column.</param>
         /// <param name="row">row.</param>
         /// <param name="displayName">displayName.</param>
         /// <param name="hidden">hidden.</param>
         /// <param name="name">name.</param>
-        public GridDimension(string pov = default(string), bool expanded = default(bool), int column = default(int), int row = default(int), string displayName = default(string), bool hidden = default(bool), string name = default(string))
+        public GridDimension(bool expanded = default(bool), string pov = default(string), int column = default(int), int row = default(int), string displayName = default(string), bool hidden = default(bool), string name = default(string))
         {
-            this.Pov = pov;
             this.Expanded = expanded;
+            this.Pov = pov;
             this.Column = column;
             this.Row = row;
             this.DisplayName = displayName;
@@ -51,16 +51,16 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Gets or Sets Pov
-        /// </summary>
-        [DataMember(Name = "pov", EmitDefaultValue = false)]
-        public string Pov { get; set; }
-
-        /// <summary>
         /// Gets or Sets Expanded
         /// </summary>
         [DataMember(Name = "expanded", EmitDefaultValue = true)]
         public bool Expanded { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Pov
+        /// </summary>
+        [DataMember(Name = "pov", EmitDefaultValue = false)]
+        public string Pov { get; set; }
 
         /// <summary>
         /// Gets or Sets Column
@@ -100,8 +100,8 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GridDimension {\n");
-            sb.Append("  Pov: ").Append(Pov).Append("\n");
             sb.Append("  Expanded: ").Append(Expanded).Append("\n");
+            sb.Append("  Pov: ").Append(Pov).Append("\n");
             sb.Append("  Column: ").Append(Column).Append("\n");
             sb.Append("  Row: ").Append(Row).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
@@ -143,13 +143,13 @@ namespace EssSharp.Model
             }
             return 
                 (
+                    this.Expanded == input.Expanded ||
+                    this.Expanded.Equals(input.Expanded)
+                ) && 
+                (
                     this.Pov == input.Pov ||
                     (this.Pov != null &&
                     this.Pov.Equals(input.Pov))
-                ) && 
-                (
-                    this.Expanded == input.Expanded ||
-                    this.Expanded.Equals(input.Expanded)
                 ) && 
                 (
                     this.Column == input.Column ||
@@ -184,11 +184,11 @@ namespace EssSharp.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                hashCode = (hashCode * 59) + this.Expanded.GetHashCode();
                 if (this.Pov != null)
                 {
                     hashCode = (hashCode * 59) + this.Pov.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Expanded.GetHashCode();
                 hashCode = (hashCode * 59) + this.Column.GetHashCode();
                 hashCode = (hashCode * 59) + this.Row.GetHashCode();
                 if (this.DisplayName != null)
@@ -209,7 +209,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

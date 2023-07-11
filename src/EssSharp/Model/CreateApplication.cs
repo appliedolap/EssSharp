@@ -30,6 +30,32 @@ namespace EssSharp.Model
     public partial class CreateApplication : IEquatable<CreateApplication>, IValidatableObject
     {
         /// <summary>
+        /// Defines AppType
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AppTypeEnum
+        {
+            /// <summary>
+            /// Enum NATIVE for value: NATIVE
+            /// </summary>
+            [EnumMember(Value = "NATIVE")]
+            NATIVE = 1,
+
+            /// <summary>
+            /// Enum UTF8 for value: UTF8
+            /// </summary>
+            [EnumMember(Value = "UTF8")]
+            UTF8 = 2
+
+        }
+
+
+        /// <summary>
+        /// Gets or Sets AppType
+        /// </summary>
+        [DataMember(Name = "appType", EmitDefaultValue = false)]
+        public AppTypeEnum? AppType { get; set; }
+        /// <summary>
         /// Defines DbType
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -62,32 +88,6 @@ namespace EssSharp.Model
         [DataMember(Name = "dbType", EmitDefaultValue = false)]
         public DbTypeEnum? DbType { get; set; }
         /// <summary>
-        /// Defines AppType
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum AppTypeEnum
-        {
-            /// <summary>
-            /// Enum NATIVE for value: NATIVE
-            /// </summary>
-            [EnumMember(Value = "NATIVE")]
-            NATIVE = 1,
-
-            /// <summary>
-            /// Enum UTF8 for value: UTF8
-            /// </summary>
-            [EnumMember(Value = "UTF8")]
-            UTF8 = 2
-
-        }
-
-
-        /// <summary>
-        /// Gets or Sets AppType
-        /// </summary>
-        [DataMember(Name = "appType", EmitDefaultValue = false)]
-        public AppTypeEnum? AppType { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="CreateApplication" /> class.
         /// </summary>
         /// <param name="applicationName">applicationName.</param>
@@ -96,10 +96,10 @@ namespace EssSharp.Model
         /// <param name="enableScenario">enableScenario.</param>
         /// <param name="memberCount">memberCount.</param>
         /// <param name="databaseType">databaseType.</param>
-        /// <param name="dbType">dbType.</param>
         /// <param name="appType">appType.</param>
         /// <param name="memberPrefix">memberPrefix.</param>
-        public CreateApplication(string applicationName = default(string), string databaseName = default(string), bool allowDuplicates = default(bool), bool enableScenario = default(bool), int memberCount = default(int), string databaseType = default(string), DbTypeEnum? dbType = default(DbTypeEnum?), AppTypeEnum? appType = default(AppTypeEnum?), string memberPrefix = default(string))
+        /// <param name="dbType">dbType.</param>
+        public CreateApplication(string applicationName = default(string), string databaseName = default(string), bool allowDuplicates = default(bool), bool enableScenario = default(bool), int memberCount = default(int), string databaseType = default(string), AppTypeEnum? appType = default(AppTypeEnum?), string memberPrefix = default(string), DbTypeEnum? dbType = default(DbTypeEnum?))
         {
             this.ApplicationName = applicationName;
             this.DatabaseName = databaseName;
@@ -107,9 +107,9 @@ namespace EssSharp.Model
             this.EnableScenario = enableScenario;
             this.MemberCount = memberCount;
             this.DatabaseType = databaseType;
-            this.DbType = dbType;
             this.AppType = appType;
             this.MemberPrefix = memberPrefix;
+            this.DbType = dbType;
         }
 
         /// <summary>
@@ -168,9 +168,9 @@ namespace EssSharp.Model
             sb.Append("  EnableScenario: ").Append(EnableScenario).Append("\n");
             sb.Append("  MemberCount: ").Append(MemberCount).Append("\n");
             sb.Append("  DatabaseType: ").Append(DatabaseType).Append("\n");
-            sb.Append("  DbType: ").Append(DbType).Append("\n");
             sb.Append("  AppType: ").Append(AppType).Append("\n");
             sb.Append("  MemberPrefix: ").Append(MemberPrefix).Append("\n");
+            sb.Append("  DbType: ").Append(DbType).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -234,10 +234,6 @@ namespace EssSharp.Model
                     this.DatabaseType.Equals(input.DatabaseType))
                 ) && 
                 (
-                    this.DbType == input.DbType ||
-                    this.DbType.Equals(input.DbType)
-                ) && 
-                (
                     this.AppType == input.AppType ||
                     this.AppType.Equals(input.AppType)
                 ) && 
@@ -245,6 +241,10 @@ namespace EssSharp.Model
                     this.MemberPrefix == input.MemberPrefix ||
                     (this.MemberPrefix != null &&
                     this.MemberPrefix.Equals(input.MemberPrefix))
+                ) && 
+                (
+                    this.DbType == input.DbType ||
+                    this.DbType.Equals(input.DbType)
                 );
         }
 
@@ -272,12 +272,12 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.DatabaseType.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.DbType.GetHashCode();
                 hashCode = (hashCode * 59) + this.AppType.GetHashCode();
                 if (this.MemberPrefix != null)
                 {
                     hashCode = (hashCode * 59) + this.MemberPrefix.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.DbType.GetHashCode();
                 return hashCode;
             }
         }
@@ -287,7 +287,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

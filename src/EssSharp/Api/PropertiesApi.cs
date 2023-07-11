@@ -28,7 +28,7 @@ namespace EssSharp.Api
         /// Create Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Adds the property in the server and returns the property.&lt;/p&gt;
+        /// &lt;p&gt;Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Property entry</param>
@@ -40,7 +40,7 @@ namespace EssSharp.Api
         /// Create Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Adds the property in the server and returns the property.&lt;/p&gt;
+        /// &lt;p&gt;Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Property entry</param>
@@ -51,7 +51,7 @@ namespace EssSharp.Api
         /// Delete Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes a property from the server.&lt;/p&gt;
+        /// &lt;p&gt;Deletes a Provider Services configuration property from the Essbase Server.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -63,7 +63,7 @@ namespace EssSharp.Api
         /// Delete Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes a property from the server.&lt;/p&gt;
+        /// &lt;p&gt;Deletes a Provider Services configuration property from the Essbase Server.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -74,7 +74,7 @@ namespace EssSharp.Api
         /// Get Server Properties
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the properties from the server.&lt;/p&gt;
+        /// &lt;p&gt;Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -85,7 +85,7 @@ namespace EssSharp.Api
         /// Get Server Properties
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the properties from the server.&lt;/p&gt;
+        /// &lt;p&gt;Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -118,7 +118,7 @@ namespace EssSharp.Api
         /// Update Property Values
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the properties in the server, and returns the list of updated properties.&lt;/p&gt;
+        /// &lt;p&gt;Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;List of property entries.&lt;/p&gt;</param>
@@ -130,7 +130,7 @@ namespace EssSharp.Api
         /// Update Property Values
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the properties in the server, and returns the list of updated properties.&lt;/p&gt;
+        /// &lt;p&gt;Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;List of property entries.&lt;/p&gt;</param>
@@ -141,7 +141,7 @@ namespace EssSharp.Api
         /// Update Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the property in the server, and returns the updated property.&lt;/p&gt;
+        /// &lt;p&gt;Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -154,7 +154,7 @@ namespace EssSharp.Api
         /// Update Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the property in the server, and returns the updated property.&lt;/p&gt;
+        /// &lt;p&gt;Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -175,7 +175,7 @@ namespace EssSharp.Api
         /// Create Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Adds the property in the server and returns the property.&lt;/p&gt;
+        /// &lt;p&gt;Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Property entry</param>
@@ -188,7 +188,7 @@ namespace EssSharp.Api
         /// Create Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Adds the property in the server and returns the property.&lt;/p&gt;
+        /// &lt;p&gt;Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Property entry</param>
@@ -200,7 +200,7 @@ namespace EssSharp.Api
         /// Delete Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes a property from the server.&lt;/p&gt;
+        /// &lt;p&gt;Deletes a Provider Services configuration property from the Essbase Server.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -213,7 +213,7 @@ namespace EssSharp.Api
         /// Delete Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes a property from the server.&lt;/p&gt;
+        /// &lt;p&gt;Deletes a Provider Services configuration property from the Essbase Server.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -225,7 +225,7 @@ namespace EssSharp.Api
         /// Get Server Properties
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the properties from the server.&lt;/p&gt;
+        /// &lt;p&gt;Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -237,7 +237,7 @@ namespace EssSharp.Api
         /// Get Server Properties
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the properties from the server.&lt;/p&gt;
+        /// &lt;p&gt;Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -273,7 +273,7 @@ namespace EssSharp.Api
         /// Update Property Values
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the properties in the server, and returns the list of updated properties.&lt;/p&gt;
+        /// &lt;p&gt;Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;List of property entries.&lt;/p&gt;</param>
@@ -286,7 +286,7 @@ namespace EssSharp.Api
         /// Update Property Values
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the properties in the server, and returns the list of updated properties.&lt;/p&gt;
+        /// &lt;p&gt;Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;List of property entries.&lt;/p&gt;</param>
@@ -298,7 +298,7 @@ namespace EssSharp.Api
         /// Update Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the property in the server, and returns the updated property.&lt;/p&gt;
+        /// &lt;p&gt;Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -312,7 +312,7 @@ namespace EssSharp.Api
         /// Update Server Property
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the property in the server, and returns the updated property.&lt;/p&gt;
+        /// &lt;p&gt;Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -442,7 +442,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Server Property &lt;p&gt;Adds the property in the server and returns the property.&lt;/p&gt;
+        /// Create Server Property &lt;p&gt;Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Property entry</param>
@@ -455,7 +455,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Server Property &lt;p&gt;Adds the property in the server and returns the property.&lt;/p&gt;
+        /// Create Server Property &lt;p&gt;Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Property entry</param>
@@ -521,7 +521,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Server Property &lt;p&gt;Adds the property in the server and returns the property.&lt;/p&gt;
+        /// Create Server Property &lt;p&gt;Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Property entry</param>
@@ -535,7 +535,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Server Property &lt;p&gt;Adds the property in the server and returns the property.&lt;/p&gt;
+        /// Create Server Property &lt;p&gt;Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Property entry</param>
@@ -604,7 +604,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Server Property &lt;p&gt;Deletes a property from the server.&lt;/p&gt;
+        /// Delete Server Property &lt;p&gt;Deletes a Provider Services configuration property from the Essbase Server.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -617,7 +617,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Server Property &lt;p&gt;Deletes a property from the server.&lt;/p&gt;
+        /// Delete Server Property &lt;p&gt;Deletes a Provider Services configuration property from the Essbase Server.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -681,7 +681,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Server Property &lt;p&gt;Deletes a property from the server.&lt;/p&gt;
+        /// Delete Server Property &lt;p&gt;Deletes a Provider Services configuration property from the Essbase Server.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -695,7 +695,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Server Property &lt;p&gt;Deletes a property from the server.&lt;/p&gt;
+        /// Delete Server Property &lt;p&gt;Deletes a Provider Services configuration property from the Essbase Server.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -762,7 +762,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Server Properties &lt;p&gt;Returns all the properties from the server.&lt;/p&gt;
+        /// Get Server Properties &lt;p&gt;Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -774,7 +774,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Server Properties &lt;p&gt;Returns all the properties from the server.&lt;/p&gt;
+        /// Get Server Properties &lt;p&gt;Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -830,7 +830,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Server Properties &lt;p&gt;Returns all the properties from the server.&lt;/p&gt;
+        /// Get Server Properties &lt;p&gt;Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -843,7 +843,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Server Properties &lt;p&gt;Returns all the properties from the server.&lt;/p&gt;
+        /// Get Server Properties &lt;p&gt;Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1060,7 +1060,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Property Values &lt;p&gt;Updates the properties in the server, and returns the list of updated properties.&lt;/p&gt;
+        /// Update Property Values &lt;p&gt;Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;List of property entries.&lt;/p&gt;</param>
@@ -1073,7 +1073,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Property Values &lt;p&gt;Updates the properties in the server, and returns the list of updated properties.&lt;/p&gt;
+        /// Update Property Values &lt;p&gt;Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;List of property entries.&lt;/p&gt;</param>
@@ -1139,7 +1139,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Property Values &lt;p&gt;Updates the properties in the server, and returns the list of updated properties.&lt;/p&gt;
+        /// Update Property Values &lt;p&gt;Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;List of property entries.&lt;/p&gt;</param>
@@ -1153,7 +1153,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Property Values &lt;p&gt;Updates the properties in the server, and returns the list of updated properties.&lt;/p&gt;
+        /// Update Property Values &lt;p&gt;Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;List of property entries.&lt;/p&gt;</param>
@@ -1222,7 +1222,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Server Property &lt;p&gt;Updates the property in the server, and returns the updated property.&lt;/p&gt;
+        /// Update Server Property &lt;p&gt;Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -1236,7 +1236,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Server Property &lt;p&gt;Updates the property in the server, and returns the updated property.&lt;/p&gt;
+        /// Update Server Property &lt;p&gt;Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -1310,7 +1310,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Server Property &lt;p&gt;Updates the property in the server, and returns the updated property.&lt;/p&gt;
+        /// Update Server Property &lt;p&gt;Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>
@@ -1325,7 +1325,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Server Property &lt;p&gt;Updates the property in the server, and returns the updated property.&lt;/p&gt;
+        /// Update Server Property &lt;p&gt;Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="propertyName">&lt;p&gt;Property name.&lt;/p&gt;</param>

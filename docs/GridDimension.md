@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Pov** | **string** |  | [optional] 
 **Expanded** | **bool** |  | [optional] 
+**Pov** | **string** |  | [optional] 
 **Column** | **int** |  | [optional] 
 **Row** | **int** |  | [optional] 
 **DisplayName** | **string** |  | [optional] 

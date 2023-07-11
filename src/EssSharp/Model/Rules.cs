@@ -80,7 +80,7 @@ namespace EssSharp.Model
         /// <param name="flatFileBased">flatFileBased.</param>
         /// <param name="essbaseInfo">essbaseInfo.</param>
         /// <param name="columnOperations">columnOperations.</param>
-        public Rules(List<Dimension> dimensions = default(List<Dimension>), List<Field> fields = default(List<Field>), long timeStamp = default(long), Datasource dataSource = default(Datasource), DimBuildOptions dimensionBuildOptions = default(DimBuildOptions), DataLoadOptions dataLoadOptions = default(DataLoadOptions), EditorOptions editorOptions = default(EditorOptions), EncodingEnum? encoding = default(EncodingEnum?), string name = default(string), string locale = default(string), bool studio = default(bool), bool bibpm = default(bool), bool xolap = default(bool), bool flatFileBased = default(bool), EssbaseInfo essbaseInfo = default(EssbaseInfo), List<ColumnOperation> columnOperations = default(List<ColumnOperation>))
+        public Rules(List<Dimension> dimensions = default(List<Dimension>), List<Field> fields = default(List<Field>), long timeStamp = default(long), RuleDataSource dataSource = default(RuleDataSource), DimBuildOptions dimensionBuildOptions = default(DimBuildOptions), DataLoadOptions dataLoadOptions = default(DataLoadOptions), EditorOptions editorOptions = default(EditorOptions), EncodingEnum? encoding = default(EncodingEnum?), string name = default(string), string locale = default(string), bool studio = default(bool), bool bibpm = default(bool), bool xolap = default(bool), bool flatFileBased = default(bool), EssbaseInfo essbaseInfo = default(EssbaseInfo), List<ColumnOperation> columnOperations = default(List<ColumnOperation>))
         {
             this.Dimensions = dimensions;
             this.Fields = fields;
@@ -122,7 +122,7 @@ namespace EssSharp.Model
         /// Gets or Sets DataSource
         /// </summary>
         [DataMember(Name = "dataSource", EmitDefaultValue = false)]
-        public Datasource DataSource { get; set; }
+        public RuleDataSource DataSource { get; set; }
 
         /// <summary>
         /// Gets or Sets DimensionBuildOptions
@@ -392,7 +392,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

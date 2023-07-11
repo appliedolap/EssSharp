@@ -62,6 +62,14 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'Indentation'
         }
         /// <summary>
+        /// Test the property 'RemoveUnSelectedGroup'
+        /// </summary>
+        [Fact]
+        public void RemoveUnSelectedGroupTest()
+        {
+            // TODO unit test for the property 'RemoveUnSelectedGroup'
+        }
+        /// <summary>
         /// Test the property 'IncludeDescriptionLabel'
         /// </summary>
         [Fact]
@@ -100,14 +108,6 @@ namespace EssSharp.Test.Model
         public void MaxColumnsTest()
         {
             // TODO unit test for the property 'MaxColumns'
-        }
-        /// <summary>
-        /// Test the property 'RemoveUnSelectedGroup'
-        /// </summary>
-        [Fact]
-        public void RemoveUnSelectedGroupTest()
-        {
-            // TODO unit test for the property 'RemoveUnSelectedGroup'
         }
         /// <summary>
         /// Test the property 'RowSupression'

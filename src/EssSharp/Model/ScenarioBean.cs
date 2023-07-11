@@ -110,18 +110,18 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="scenarioUser">scenarioUser.</param>
-        /// <param name="database">database.</param>
         /// <param name="scripts">scripts.</param>
         /// <param name="approvers">approvers.</param>
         /// <param name="sandbox">sandbox.</param>
         /// <param name="dueDate">dueDate.</param>
-        /// <param name="useCalculatedValues">useCalculatedValues.</param>
         /// <param name="overdue">overdue.</param>
         /// <param name="createdTime">createdTime.</param>
         /// <param name="submittedTime">submittedTime.</param>
         /// <param name="appliedTime">appliedTime.</param>
         /// <param name="refreshedTime">refreshedTime.</param>
+        /// <param name="useCalculatedValues">useCalculatedValues.</param>
         /// <param name="commentsCount">commentsCount.</param>
+        /// <param name="database">database.</param>
         /// <param name="application">application.</param>
         /// <param name="description">description.</param>
         /// <param name="participants">participants.</param>
@@ -130,22 +130,22 @@ namespace EssSharp.Model
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
         /// <param name="priority">priority.</param>
-        public ScenarioBean(List<Link> links = default(List<Link>), bool scenarioUser = default(bool), string database = default(string), List<ScriptBean> scripts = default(List<ScriptBean>), List<ApproverBean> approvers = default(List<ApproverBean>), string sandbox = default(string), long dueDate = default(long), bool useCalculatedValues = default(bool), bool overdue = default(bool), long createdTime = default(long), long submittedTime = default(long), long appliedTime = default(long), long refreshedTime = default(long), int commentsCount = default(int), string application = default(string), string description = default(string), List<ParticipantBean> participants = default(List<ParticipantBean>), string owner = default(string), StateEnum? state = default(StateEnum?), long id = default(long), string name = default(string), PriorityEnum? priority = default(PriorityEnum?))
+        public ScenarioBean(List<Link> links = default(List<Link>), bool scenarioUser = default(bool), List<ScriptBean> scripts = default(List<ScriptBean>), List<ApproverBean> approvers = default(List<ApproverBean>), string sandbox = default(string), long dueDate = default(long), bool overdue = default(bool), long createdTime = default(long), long submittedTime = default(long), long appliedTime = default(long), long refreshedTime = default(long), bool useCalculatedValues = default(bool), int commentsCount = default(int), string database = default(string), string application = default(string), string description = default(string), List<ParticipantBean> participants = default(List<ParticipantBean>), string owner = default(string), StateEnum? state = default(StateEnum?), long id = default(long), string name = default(string), PriorityEnum? priority = default(PriorityEnum?))
         {
             this.Links = links;
             this.ScenarioUser = scenarioUser;
-            this.Database = database;
             this.Scripts = scripts;
             this.Approvers = approvers;
             this.Sandbox = sandbox;
             this.DueDate = dueDate;
-            this.UseCalculatedValues = useCalculatedValues;
             this.Overdue = overdue;
             this.CreatedTime = createdTime;
             this.SubmittedTime = submittedTime;
             this.AppliedTime = appliedTime;
             this.RefreshedTime = refreshedTime;
+            this.UseCalculatedValues = useCalculatedValues;
             this.CommentsCount = commentsCount;
+            this.Database = database;
             this.Application = application;
             this.Description = description;
             this.Participants = participants;
@@ -167,12 +167,6 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "scenarioUser", EmitDefaultValue = true)]
         public bool ScenarioUser { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Database
-        /// </summary>
-        [DataMember(Name = "database", EmitDefaultValue = false)]
-        public string Database { get; set; }
 
         /// <summary>
         /// Gets or Sets Scripts
@@ -197,12 +191,6 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "dueDate", EmitDefaultValue = false)]
         public long DueDate { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UseCalculatedValues
-        /// </summary>
-        [DataMember(Name = "useCalculatedValues", EmitDefaultValue = true)]
-        public bool UseCalculatedValues { get; set; }
 
         /// <summary>
         /// Gets or Sets Overdue
@@ -235,10 +223,22 @@ namespace EssSharp.Model
         public long RefreshedTime { get; set; }
 
         /// <summary>
+        /// Gets or Sets UseCalculatedValues
+        /// </summary>
+        [DataMember(Name = "useCalculatedValues", EmitDefaultValue = true)]
+        public bool UseCalculatedValues { get; set; }
+
+        /// <summary>
         /// Gets or Sets CommentsCount
         /// </summary>
         [DataMember(Name = "commentsCount", EmitDefaultValue = false)]
         public int CommentsCount { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Database
+        /// </summary>
+        [DataMember(Name = "database", EmitDefaultValue = false)]
+        public string Database { get; set; }
 
         /// <summary>
         /// Gets or Sets Application
@@ -286,18 +286,18 @@ namespace EssSharp.Model
             sb.Append("class ScenarioBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  ScenarioUser: ").Append(ScenarioUser).Append("\n");
-            sb.Append("  Database: ").Append(Database).Append("\n");
             sb.Append("  Scripts: ").Append(Scripts).Append("\n");
             sb.Append("  Approvers: ").Append(Approvers).Append("\n");
             sb.Append("  Sandbox: ").Append(Sandbox).Append("\n");
             sb.Append("  DueDate: ").Append(DueDate).Append("\n");
-            sb.Append("  UseCalculatedValues: ").Append(UseCalculatedValues).Append("\n");
             sb.Append("  Overdue: ").Append(Overdue).Append("\n");
             sb.Append("  CreatedTime: ").Append(CreatedTime).Append("\n");
             sb.Append("  SubmittedTime: ").Append(SubmittedTime).Append("\n");
             sb.Append("  AppliedTime: ").Append(AppliedTime).Append("\n");
             sb.Append("  RefreshedTime: ").Append(RefreshedTime).Append("\n");
+            sb.Append("  UseCalculatedValues: ").Append(UseCalculatedValues).Append("\n");
             sb.Append("  CommentsCount: ").Append(CommentsCount).Append("\n");
+            sb.Append("  Database: ").Append(Database).Append("\n");
             sb.Append("  Application: ").Append(Application).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Participants: ").Append(Participants).Append("\n");
@@ -352,11 +352,6 @@ namespace EssSharp.Model
                     this.ScenarioUser.Equals(input.ScenarioUser)
                 ) && 
                 (
-                    this.Database == input.Database ||
-                    (this.Database != null &&
-                    this.Database.Equals(input.Database))
-                ) && 
-                (
                     this.Scripts == input.Scripts ||
                     this.Scripts != null &&
                     input.Scripts != null &&
@@ -376,10 +371,6 @@ namespace EssSharp.Model
                 (
                     this.DueDate == input.DueDate ||
                     this.DueDate.Equals(input.DueDate)
-                ) && 
-                (
-                    this.UseCalculatedValues == input.UseCalculatedValues ||
-                    this.UseCalculatedValues.Equals(input.UseCalculatedValues)
                 ) && 
                 (
                     this.Overdue == input.Overdue ||
@@ -402,8 +393,17 @@ namespace EssSharp.Model
                     this.RefreshedTime.Equals(input.RefreshedTime)
                 ) && 
                 (
+                    this.UseCalculatedValues == input.UseCalculatedValues ||
+                    this.UseCalculatedValues.Equals(input.UseCalculatedValues)
+                ) && 
+                (
                     this.CommentsCount == input.CommentsCount ||
                     this.CommentsCount.Equals(input.CommentsCount)
+                ) && 
+                (
+                    this.Database == input.Database ||
+                    (this.Database != null &&
+                    this.Database.Equals(input.Database))
                 ) && 
                 (
                     this.Application == input.Application ||
@@ -459,10 +459,6 @@ namespace EssSharp.Model
                     hashCode = (hashCode * 59) + this.Links.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.ScenarioUser.GetHashCode();
-                if (this.Database != null)
-                {
-                    hashCode = (hashCode * 59) + this.Database.GetHashCode();
-                }
                 if (this.Scripts != null)
                 {
                     hashCode = (hashCode * 59) + this.Scripts.GetHashCode();
@@ -476,13 +472,17 @@ namespace EssSharp.Model
                     hashCode = (hashCode * 59) + this.Sandbox.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.DueDate.GetHashCode();
-                hashCode = (hashCode * 59) + this.UseCalculatedValues.GetHashCode();
                 hashCode = (hashCode * 59) + this.Overdue.GetHashCode();
                 hashCode = (hashCode * 59) + this.CreatedTime.GetHashCode();
                 hashCode = (hashCode * 59) + this.SubmittedTime.GetHashCode();
                 hashCode = (hashCode * 59) + this.AppliedTime.GetHashCode();
                 hashCode = (hashCode * 59) + this.RefreshedTime.GetHashCode();
+                hashCode = (hashCode * 59) + this.UseCalculatedValues.GetHashCode();
                 hashCode = (hashCode * 59) + this.CommentsCount.GetHashCode();
+                if (this.Database != null)
+                {
+                    hashCode = (hashCode * 59) + this.Database.GetHashCode();
+                }
                 if (this.Application != null)
                 {
                     hashCode = (hashCode * 59) + this.Application.GetHashCode();
@@ -515,7 +515,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

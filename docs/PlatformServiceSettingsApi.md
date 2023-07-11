@@ -11,7 +11,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**PSMSettingsSetDatabaseSettings**](PlatformServiceSettingsApi.md#psmsettingssetdatabasesettings) | **PUT** /settings/database | Store Database Settings |
 | [**Setodllogsettings**](PlatformServiceSettingsApi.md#setodllogsettings) | **PUT** /settings/odlLogSettings | Set Diagnostic Log Settings |
 
-<a name="getodllogsettings"></a>
+<a id="getodllogsettings"></a>
 # **Getodllogsettings**
 > void Getodllogsettings ()
 
@@ -97,7 +97,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="psmsettingsgetall"></a>
+<a id="psmsettingsgetall"></a>
 # **PSMSettingsGetAll**
 > Settings PSMSettingsGetAll ()
 
@@ -187,7 +187,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="psmsettingsgetdatabasesettings"></a>
+<a id="psmsettingsgetdatabasesettings"></a>
 # **PSMSettingsGetDatabaseSettings**
 > Limits PSMSettingsGetDatabaseSettings ()
 
@@ -278,7 +278,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="psmsettingsgetsystemmaintenancelimits"></a>
+<a id="psmsettingsgetsystemmaintenancelimits"></a>
 # **PSMSettingsGetSystemMaintenanceLimits**
 > Limits PSMSettingsGetSystemMaintenanceLimits ()
 
@@ -369,7 +369,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="psmsettingssetdatabasesettings"></a>
+<a id="psmsettingssetdatabasesettings"></a>
 # **PSMSettingsSetDatabaseSettings**
 > Limits PSMSettingsSetDatabaseSettings (DatabaseSettings body = null)
 
@@ -465,7 +465,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="setodllogsettings"></a>
+<a id="setodllogsettings"></a>
 # **Setodllogsettings**
 > void Setodllogsettings (List<ODLLogHandlerSetting> body = null)
 

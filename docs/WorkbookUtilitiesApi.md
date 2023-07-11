@@ -6,7 +6,7 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**ExcelUtilitiesAnalyzeDataFormat**](WorkbookUtilitiesApi.md#excelutilitiesanalyzedataformat) | **GET** /excel/utils/dataformat | Get Workbook Format |
 
-<a name="excelutilitiesanalyzedataformat"></a>
+<a id="excelutilitiesanalyzedataformat"></a>
 # **ExcelUtilitiesAnalyzeDataFormat**
 > void ExcelUtilitiesAnalyzeDataFormat (string path)
 

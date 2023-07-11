@@ -8,10 +8,10 @@ All URIs are relative to */essbase/rest/v1*
 | [**RulesGetPreviewData**](RulesApi.md#rulesgetpreviewdata) | **POST** /utils/rules/preview | Preview Rules Data |
 | [**RulesImportRule**](RulesApi.md#rulesimportrule) | **POST** /utils/rules/actions/import | Import Rules |
 | [**RulesSave**](RulesApi.md#rulessave) | **POST** /utils/rules | Create Rules |
-| [**RulesVerify**](RulesApi.md#rulesverify) | **POST** /utils/rules/verify | Verify Rules |
+| [**RulesVerify**](RulesApi.md#rulesverify) | **POST** /utils/rules/verify | Verify Rules (Deprecated) |
 | [**RulesVerifyRule**](RulesApi.md#rulesverifyrule) | **POST** /utils/rules/verifyRule | Verify Rules |
 
-<a name="rulesget"></a>
+<a id="rulesget"></a>
 # **RulesGet**
 > Rules RulesGet (string path = null)
 
@@ -108,7 +108,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="rulesgetpreviewdata"></a>
+<a id="rulesgetpreviewdata"></a>
 # **RulesGetPreviewData**
 > RulePreviewOutput RulesGetPreviewData (RulePreviewInput body = null)
 
@@ -205,7 +205,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="rulesimportrule"></a>
+<a id="rulesimportrule"></a>
 # **RulesImportRule**
 > void RulesImportRule (bool? overwrite = null, FilePathDetail body = null)
 
@@ -300,7 +300,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="rulessave"></a>
+<a id="rulessave"></a>
 # **RulesSave**
 > void RulesSave (string path = null, bool? overwrite = null, Rules body = null)
 
@@ -397,11 +397,11 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="rulesverify"></a>
+<a id="rulesverify"></a>
 # **RulesVerify**
 > void RulesVerify (Rules body = null)
 
-Verify Rules
+Verify Rules (Deprecated)
 
 <p>Verifies a rules file.</p>
 
@@ -430,7 +430,7 @@ namespace Example
 
             try
             {
-                // Verify Rules
+                // Verify Rules (Deprecated)
                 apiInstance.RulesVerify(body);
             }
             catch (ApiException  e)
@@ -450,7 +450,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Verify Rules
+    // Verify Rules (Deprecated)
     apiInstance.RulesVerifyWithHttpInfo(body);
 }
 catch (ApiException e)
@@ -490,7 +490,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="rulesverifyrule"></a>
+<a id="rulesverifyrule"></a>
 # **RulesVerifyRule**
 > void RulesVerifyRule (string application = null, string database = null, Rules body = null)
 

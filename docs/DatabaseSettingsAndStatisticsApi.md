@@ -9,6 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DatabaseSettingsStatisticsGetCachesSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcachessettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/caches | Get Cache Settings |
 | [**DatabaseSettingsStatisticsGetCalculationSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcalculationsettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/calculation | Get Calculation Settings |
 | [**DatabaseSettingsStatisticsGetCompressSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcompresssettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/compression | Get Compression Settings |
+| [**DatabaseSettingsStatisticsGetCompressionInfoSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcompressioninfosettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/compressioninfo | Get Compression Settings |
 | [**DatabaseSettingsStatisticsGetOutlineAttributesSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetoutlineattributessettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/outline/attributes | Get Attribute Settings |
 | [**DatabaseSettingsStatisticsGetOutlineSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetoutlinesettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/outline | Get Outline Settings |
 | [**DatabaseSettingsStatisticsGetOutlineSettingsDateFormats**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetoutlinesettingsdateformats) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/outline/dateformats | Get Date Formats |
@@ -22,7 +23,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DatabaseSettingsStatisticsUpdateOutlineSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsupdateoutlinesettings) | **PATCH** /applications/{applicationName}/databases/{databaseName}/settings/outline | Update Outline Settings |
 | [**DatabaseSettingsStatisticsUpdateSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsupdatesettings) | **PATCH** /applications/{applicationName}/databases/{databaseName}/settings | Update Settings |
 
-<a name="databasesettingsstatisticsexportquerydata"></a>
+<a id="databasesettingsstatisticsexportquerydata"></a>
 # **DatabaseSettingsStatisticsExportQueryData**
 > void DatabaseSettingsStatisticsExportQueryData (string applicationName, string databaseName, QueryTrackingInputs body)
 
@@ -119,7 +120,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetbufferssettings"></a>
+<a id="databasesettingsstatisticsgetbufferssettings"></a>
 # **DatabaseSettingsStatisticsGetBuffersSettings**
 > BufferSettings DatabaseSettingsStatisticsGetBuffersSettings (string applicationName, string databaseName)
 
@@ -218,7 +219,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetcachessettings"></a>
+<a id="databasesettingsstatisticsgetcachessettings"></a>
 # **DatabaseSettingsStatisticsGetCachesSettings**
 > CacheSettings DatabaseSettingsStatisticsGetCachesSettings (string applicationName, string databaseName)
 
@@ -317,7 +318,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetcalculationsettings"></a>
+<a id="databasesettingsstatisticsgetcalculationsettings"></a>
 # **DatabaseSettingsStatisticsGetCalculationSettings**
 > CalculationSettings DatabaseSettingsStatisticsGetCalculationSettings (string applicationName, string databaseName)
 
@@ -416,7 +417,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetcompresssettings"></a>
+<a id="databasesettingsstatisticsgetcompresssettings"></a>
 # **DatabaseSettingsStatisticsGetCompressSettings**
 > CompressionSettings DatabaseSettingsStatisticsGetCompressSettings (string applicationName, string databaseName)
 
@@ -515,7 +516,108 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetoutlineattributessettings"></a>
+<a id="databasesettingsstatisticsgetcompressioninfosettings"></a>
+# **DatabaseSettingsStatisticsGetCompressionInfoSettings**
+> CompressionInfoOutput DatabaseSettingsStatisticsGetCompressionInfoSettings (string applicationName, string databaseName, bool? fetch = null)
+
+Get Compression Settings
+
+<p>Returns compression settings of the specified database.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class DatabaseSettingsStatisticsGetCompressionInfoSettingsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new DatabaseSettingsAndStatisticsApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var fetch = false;  // bool? | <p>Set it to true, if you need to re-evaluate compression info. Default is false</p> (optional)  (default to false)
+
+            try
+            {
+                // Get Compression Settings
+                CompressionInfoOutput result = apiInstance.DatabaseSettingsStatisticsGetCompressionInfoSettings(applicationName, databaseName, fetch);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DatabaseSettingsAndStatisticsApi.DatabaseSettingsStatisticsGetCompressionInfoSettings: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get Compression Settings
+    ApiResponse<CompressionInfoOutput> response = apiInstance.DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo(applicationName, databaseName, fetch);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling DatabaseSettingsAndStatisticsApi.DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **fetch** | **bool?** | &lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; | [optional] [default to false] |
+
+### Return type
+
+[**CompressionInfoOutput**](CompressionInfoOutput.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/xml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Compression info retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to get compression info. The application or database name may be incorrect.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="databasesettingsstatisticsgetoutlineattributessettings"></a>
 # **DatabaseSettingsStatisticsGetOutlineAttributesSettings**
 > AttributeOutlineSettings DatabaseSettingsStatisticsGetOutlineAttributesSettings (string applicationName, string databaseName, string connectionName = null, string applicationNameForConnection = null)
 
@@ -618,7 +720,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetoutlinesettings"></a>
+<a id="databasesettingsstatisticsgetoutlinesettings"></a>
 # **DatabaseSettingsStatisticsGetOutlineSettings**
 > OutlineSettingsList DatabaseSettingsStatisticsGetOutlineSettings (string applicationName, string databaseName, string connectionName = null, string applicationNameForConnection = null, string expand = null)
 
@@ -723,7 +825,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetoutlinesettingsdateformats"></a>
+<a id="databasesettingsstatisticsgetoutlinesettingsdateformats"></a>
 # **DatabaseSettingsStatisticsGetOutlineSettingsDateFormats**
 > OutlineDateFormat DatabaseSettingsStatisticsGetOutlineSettingsDateFormats (string applicationName, string databaseName)
 
@@ -822,7 +924,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetruntimestats"></a>
+<a id="databasesettingsstatisticsgetruntimestats"></a>
 # **DatabaseSettingsStatisticsGetRuntimeStats**
 > RuntimeStatistics DatabaseSettingsStatisticsGetRuntimeStats (string applicationName, string databaseName)
 
@@ -921,7 +1023,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetsettings"></a>
+<a id="databasesettingsstatisticsgetsettings"></a>
 # **DatabaseSettingsStatisticsGetSettings**
 > SettingsList DatabaseSettingsStatisticsGetSettings (string applicationName, string databaseName, string expand = null)
 
@@ -1022,7 +1124,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetstartupsettings"></a>
+<a id="databasesettingsstatisticsgetstartupsettings"></a>
 # **DatabaseSettingsStatisticsGetStartupSettings**
 > StartupSettings DatabaseSettingsStatisticsGetStartupSettings (string applicationName, string databaseName)
 
@@ -1121,7 +1223,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetstatistics"></a>
+<a id="databasesettingsstatisticsgetstatistics"></a>
 # **DatabaseSettingsStatisticsGetStatistics**
 > StatisticsList DatabaseSettingsStatisticsGetStatistics (string applicationName, string databaseName, string expand = null)
 
@@ -1222,7 +1324,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgetstoragestats"></a>
+<a id="databasesettingsstatisticsgetstoragestats"></a>
 # **DatabaseSettingsStatisticsGetStorageStats**
 > StorageStatistics DatabaseSettingsStatisticsGetStorageStats (string applicationName, string databaseName)
 
@@ -1321,7 +1423,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsgettranssettings"></a>
+<a id="databasesettingsstatisticsgettranssettings"></a>
 # **DatabaseSettingsStatisticsGetTransSettings**
 > TransactionSettings DatabaseSettingsStatisticsGetTransSettings (string applicationName, string databaseName)
 
@@ -1420,7 +1522,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsimportquerydata"></a>
+<a id="databasesettingsstatisticsimportquerydata"></a>
 # **DatabaseSettingsStatisticsImportQueryData**
 > void DatabaseSettingsStatisticsImportQueryData (string applicationName, string databaseName, QueryTrackingInputs body)
 
@@ -1517,7 +1619,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsupdateoutlinesettings"></a>
+<a id="databasesettingsstatisticsupdateoutlinesettings"></a>
 # **DatabaseSettingsStatisticsUpdateOutlineSettings**
 > void DatabaseSettingsStatisticsUpdateOutlineSettings (string applicationName, string databaseName, List<PatchElement> body)
 
@@ -1615,7 +1717,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="databasesettingsstatisticsupdatesettings"></a>
+<a id="databasesettingsstatisticsupdatesettings"></a>
 # **DatabaseSettingsStatisticsUpdateSettings**
 > void DatabaseSettingsStatisticsUpdateSettings (string applicationName, string databaseName, List<PatchElement> body)
 

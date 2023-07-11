@@ -28,7 +28,7 @@ namespace EssSharp.Api
         /// Create Application Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -41,7 +41,7 @@ namespace EssSharp.Api
         /// Create Application Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -105,7 +105,7 @@ namespace EssSharp.Api
         /// List Application Connections
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;
+        /// &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -122,7 +122,7 @@ namespace EssSharp.Api
         /// List Application Connections
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;
+        /// &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -212,10 +212,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Connection</returns>
         ApiResponse<Connection> ApplicationConnectionsUpdateConnectionWithHttpInfo(string applicationName, string connectionName, Connection body, int operationIndex = 0);
         /// <summary>
-        /// Upload a connection wallet file
+        /// Upload Application Connection Wallet File
         /// </summary>
         /// <remarks>
-        /// Upload a connection wallet file.
+        /// &lt;p&gt;Upload a wallet file for an application-level connection.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -225,10 +225,10 @@ namespace EssSharp.Api
         WalletLocation ApplicationConnectionsWallets(string applicationName, string connectionName, int operationIndex = 0);
 
         /// <summary>
-        /// Upload a connection wallet file
+        /// Upload Application Connection Wallet File
         /// </summary>
         /// <remarks>
-        /// Upload a connection wallet file.
+        /// &lt;p&gt;Upload a wallet file for an application-level connection.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -249,7 +249,7 @@ namespace EssSharp.Api
         /// Create Application Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -263,7 +263,7 @@ namespace EssSharp.Api
         /// Create Application Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -332,7 +332,7 @@ namespace EssSharp.Api
         /// List Application Connections
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;
+        /// &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -350,7 +350,7 @@ namespace EssSharp.Api
         /// List Application Connections
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;
+        /// &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -447,10 +447,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Connection)</returns>
         System.Threading.Tasks.Task<ApiResponse<Connection>> ApplicationConnectionsUpdateConnectionWithHttpInfoAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Upload a connection wallet file
+        /// Upload Application Connection Wallet File
         /// </summary>
         /// <remarks>
-        /// Upload a connection wallet file.
+        /// &lt;p&gt;Upload a wallet file for an application-level connection.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -461,10 +461,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<WalletLocation> ApplicationConnectionsWalletsAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Upload a connection wallet file
+        /// Upload Application Connection Wallet File
         /// </summary>
         /// <remarks>
-        /// Upload a connection wallet file.
+        /// &lt;p&gt;Upload a wallet file for an application-level connection.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -594,7 +594,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -607,7 +607,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -679,7 +679,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -693,7 +693,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1126,7 +1126,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Application Connections &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;
+        /// List Application Connections &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1144,7 +1144,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Application Connections &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;
+        /// List Application Connections &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1233,7 +1233,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Application Connections &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;
+        /// List Application Connections &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1252,7 +1252,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Application Connections &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;
+        /// List Application Connections &lt;p&gt;Returns a list of connections for the application, including details such as name, description, and type.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1886,7 +1886,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload a connection wallet file Upload a connection wallet file.
+        /// Upload Application Connection Wallet File &lt;p&gt;Upload a wallet file for an application-level connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1900,7 +1900,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload a connection wallet file Upload a connection wallet file.
+        /// Upload Application Connection Wallet File &lt;p&gt;Upload a wallet file for an application-level connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1972,7 +1972,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload a connection wallet file Upload a connection wallet file.
+        /// Upload Application Connection Wallet File &lt;p&gt;Upload a wallet file for an application-level connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1987,7 +1987,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload a connection wallet file Upload a connection wallet file.
+        /// Upload Application Connection Wallet File &lt;p&gt;Upload a wallet file for an application-level connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

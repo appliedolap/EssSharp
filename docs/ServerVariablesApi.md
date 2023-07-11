@@ -10,7 +10,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**VariablesGetServerVariable**](ServerVariablesApi.md#variablesgetservervariable) | **GET** /variables/{variableName} | Get Server Variable |
 | [**VariablesListServerVariables**](ServerVariablesApi.md#variableslistservervariables) | **GET** /variables | Get Server Variables |
 
-<a name="variablescreateservervariable"></a>
+<a id="variablescreateservervariable"></a>
 # **VariablesCreateServerVariable**
 > Variable VariablesCreateServerVariable (Variable body)
 
@@ -108,7 +108,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variablesdeleteservervariable"></a>
+<a id="variablesdeleteservervariable"></a>
 # **VariablesDeleteServerVariable**
 > void VariablesDeleteServerVariable (string variableName)
 
@@ -201,7 +201,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variableseditservervariable"></a>
+<a id="variableseditservervariable"></a>
 # **VariablesEditServerVariable**
 > Variable VariablesEditServerVariable (string variableName, Variable body)
 
@@ -301,7 +301,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variablesgetservervariable"></a>
+<a id="variablesgetservervariable"></a>
 # **VariablesGetServerVariable**
 > Variable VariablesGetServerVariable (string variableName)
 
@@ -398,13 +398,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variableslistservervariables"></a>
+<a id="variableslistservervariables"></a>
 # **VariablesListServerVariables**
 > VariableList VariablesListServerVariables (string all = null)
 
 Get Server Variables
 
-<p>Returns all the substitution variables from the server.</p>
+<p>Returns all the substitution variables from the Essbase server.</p>
 
 ### Example
 ```csharp

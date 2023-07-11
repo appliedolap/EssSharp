@@ -43,12 +43,13 @@ namespace EssSharp.Model
         /// <param name="measuresDimensionName">measuresDimensionName.</param>
         /// <param name="schemaName">schemaName.</param>
         /// <param name="factTableName">factTableName.</param>
+        /// <param name="isFactManagedByFederatedCube">isFactManagedByFederatedCube.</param>
         /// <param name="essbaseToColumnMap">essbaseToColumnMap.</param>
         /// <param name="essbaseToDataSourceMap">essbaseToDataSourceMap.</param>
         /// <param name="alterCredentials">alterCredentials.</param>
         /// <param name="applicationLevelConnection">applicationLevelConnection.</param>
         /// <param name="applicationLevelDatasource">applicationLevelDatasource.</param>
-        public ConnectionInfoBean(string connectionName = default(string), string serverName = default(string), string userName = default(string), string password = default(string), string description = default(string), string applicationName = default(string), string databaseName = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), string schemaName = default(string), string factTableName = default(string), EsbToColMap essbaseToColumnMap = default(EsbToColMap), EssToDsMapDTO essbaseToDataSourceMap = default(EssToDsMapDTO), bool alterCredentials = default(bool), bool applicationLevelConnection = default(bool), bool applicationLevelDatasource = default(bool))
+        public ConnectionInfoBean(string connectionName = default(string), string serverName = default(string), string userName = default(string), string password = default(string), string description = default(string), string applicationName = default(string), string databaseName = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), string schemaName = default(string), string factTableName = default(string), bool isFactManagedByFederatedCube = default(bool), EsbToColMap essbaseToColumnMap = default(EsbToColMap), EssToDsMapDTO essbaseToDataSourceMap = default(EssToDsMapDTO), bool alterCredentials = default(bool), bool applicationLevelConnection = default(bool), bool applicationLevelDatasource = default(bool))
         {
             this.ConnectionName = connectionName;
             this.ServerName = serverName;
@@ -61,6 +62,7 @@ namespace EssSharp.Model
             this.MeasuresDimensionName = measuresDimensionName;
             this.SchemaName = schemaName;
             this.FactTableName = factTableName;
+            this.IsFactManagedByFederatedCube = isFactManagedByFederatedCube;
             this.EssbaseToColumnMap = essbaseToColumnMap;
             this.EssbaseToDataSourceMap = essbaseToDataSourceMap;
             this.AlterCredentials = alterCredentials;
@@ -135,6 +137,12 @@ namespace EssSharp.Model
         public string FactTableName { get; set; }
 
         /// <summary>
+        /// Gets or Sets IsFactManagedByFederatedCube
+        /// </summary>
+        [DataMember(Name = "isFactManagedByFederatedCube", EmitDefaultValue = true)]
+        public bool IsFactManagedByFederatedCube { get; set; }
+
+        /// <summary>
         /// Gets or Sets EssbaseToColumnMap
         /// </summary>
         [DataMember(Name = "essbaseToColumnMap", EmitDefaultValue = false)]
@@ -183,6 +191,7 @@ namespace EssSharp.Model
             sb.Append("  MeasuresDimensionName: ").Append(MeasuresDimensionName).Append("\n");
             sb.Append("  SchemaName: ").Append(SchemaName).Append("\n");
             sb.Append("  FactTableName: ").Append(FactTableName).Append("\n");
+            sb.Append("  IsFactManagedByFederatedCube: ").Append(IsFactManagedByFederatedCube).Append("\n");
             sb.Append("  EssbaseToColumnMap: ").Append(EssbaseToColumnMap).Append("\n");
             sb.Append("  EssbaseToDataSourceMap: ").Append(EssbaseToDataSourceMap).Append("\n");
             sb.Append("  AlterCredentials: ").Append(AlterCredentials).Append("\n");
@@ -279,6 +288,10 @@ namespace EssSharp.Model
                     this.FactTableName.Equals(input.FactTableName))
                 ) && 
                 (
+                    this.IsFactManagedByFederatedCube == input.IsFactManagedByFederatedCube ||
+                    this.IsFactManagedByFederatedCube.Equals(input.IsFactManagedByFederatedCube)
+                ) && 
+                (
                     this.EssbaseToColumnMap == input.EssbaseToColumnMap ||
                     (this.EssbaseToColumnMap != null &&
                     this.EssbaseToColumnMap.Equals(input.EssbaseToColumnMap))
@@ -355,6 +368,7 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.FactTableName.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.IsFactManagedByFederatedCube.GetHashCode();
                 if (this.EssbaseToColumnMap != null)
                 {
                     hashCode = (hashCode * 59) + this.EssbaseToColumnMap.GetHashCode();
@@ -375,7 +389,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

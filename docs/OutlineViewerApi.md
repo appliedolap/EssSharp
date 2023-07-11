@@ -11,7 +11,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**OutlineGetMembers**](OutlineViewerApi.md#outlinegetmembers) | **GET** /outline/{app}/{cube} | Get Dimensions, Children, or Search |
 | [**OutlineGetOutlineXML**](OutlineViewerApi.md#outlinegetoutlinexml) | **POST** /outline/{app}/{cube}/xml | Export Outline to XML |
 
-<a name="outlinegetallsmartlist"></a>
+<a id="outlinegetallsmartlist"></a>
 # **OutlineGetAllSmartList**
 > void OutlineGetAllSmartList (string app, string cube, string connection = null, string applicationNameForConnection = null, string accept = null)
 
@@ -110,7 +110,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="outlinegetancestorsmemberinfo"></a>
+<a id="outlinegetancestorsmemberinfo"></a>
 # **OutlineGetAncestorsMemberInfo**
 > MemberBean OutlineGetAncestorsMemberInfo (string app, string cube, string memberUniqueName, string connection = null, string applicationNameForConnection = null, string fields = null)
 
@@ -217,7 +217,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="outlinegetdescendantscount"></a>
+<a id="outlinegetdescendantscount"></a>
 # **OutlineGetDescendantsCount**
 > int OutlineGetDescendantsCount (string app, string cube, string memberUniqueName, string connection = null, string applicationNameForConnection = null)
 
@@ -322,7 +322,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="outlinegetmemberinfo"></a>
+<a id="outlinegetmemberinfo"></a>
 # **OutlineGetMemberInfo**
 > MemberBean OutlineGetMemberInfo (string app, string cube, string memberUniqueName, string connection = null, string applicationNameForConnection = null, string fields = null)
 
@@ -353,7 +353,7 @@ namespace Example
             var apiInstance = new OutlineViewerApi(config);
             var app = "app_example";  // string | <p>Application name.</p>
             var cube = "cube_example";  // string | <p>Database name.</p>
-            var memberUniqueName = "memberUniqueName_example";  // string | <p>Unique member name (fully qualified name).</p>
+            var memberUniqueName = "memberUniqueName_example";  // string | <p>Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.</p>
             var connection = "connection_example";  // string | <p>Essbase connection name.</p> (optional) 
             var applicationNameForConnection = "applicationNameForConnection_example";  // string | <p>Application name for connection.</p> (optional) 
             var fields = "fields_example";  // string | <p>Comma-separated list of member properties to fetch.</p> (optional) 
@@ -401,7 +401,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **app** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **cube** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **memberUniqueName** | **string** | &lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt; |  |
+| **memberUniqueName** | **string** | &lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt; |  |
 | **connection** | **string** | &lt;p&gt;Essbase connection name.&lt;/p&gt; | [optional]  |
 | **applicationNameForConnection** | **string** | &lt;p&gt;Application name for connection.&lt;/p&gt; | [optional]  |
 | **fields** | **string** | &lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; | [optional]  |
@@ -429,7 +429,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="outlinegetmembers"></a>
+<a id="outlinegetmembers"></a>
 # **OutlineGetMembers**
 > RestCollectionResponse OutlineGetMembers (string app, string cube, string connection = null, string applicationNameForConnection = null, string keyword = null, bool? matchWholeWord = null, string parent = null, string parentUniqueName = null, string isMbrId = null, string fields = null, int? offset = null, int? limit = null)
 
@@ -548,7 +548,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="outlinegetoutlinexml"></a>
+<a id="outlinegetoutlinexml"></a>
 # **OutlineGetOutlineXML**
 > void OutlineGetOutlineXML (string app, string cube, string connection = null, string applicationNameForConnection = null, ExportOptions body = null)
 

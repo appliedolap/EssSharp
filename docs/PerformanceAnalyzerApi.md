@@ -11,7 +11,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**PerformanceGetFiles**](PerformanceAnalyzerApi.md#performancegetfiles) | **GET** /performance/files | Get Performance Analyzer Files |
 | [**PerformanceSetConfig**](PerformanceAnalyzerApi.md#performancesetconfig) | **PUT** /performance/settings | Set Performance Analyzer Settings |
 
-<a name="performancedeleteall"></a>
+<a id="performancedeleteall"></a>
 # **PerformanceDeleteall**
 > Object PerformanceDeleteall ()
 
@@ -103,7 +103,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="performancedownload"></a>
+<a id="performancedownload"></a>
 # **PerformanceDownload**
 > Object PerformanceDownload (string file)
 
@@ -200,7 +200,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="performancedownloadall"></a>
+<a id="performancedownloadall"></a>
 # **PerformanceDownloadall**
 > Object PerformanceDownloadall ()
 
@@ -292,7 +292,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="performancegetconfig"></a>
+<a id="performancegetconfig"></a>
 # **PerformanceGetConfig**
 > HPA PerformanceGetConfig ()
 
@@ -384,7 +384,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="performancegetfiles"></a>
+<a id="performancegetfiles"></a>
 # **PerformanceGetFiles**
 > PerformanceFiles PerformanceGetFiles ()
 
@@ -476,7 +476,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="performancesetconfig"></a>
+<a id="performancesetconfig"></a>
 # **PerformanceSetConfig**
 > HPA PerformanceSetConfig (HPA body)
 

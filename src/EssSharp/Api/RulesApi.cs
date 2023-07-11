@@ -123,7 +123,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> RulesSaveWithHttpInfo(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0);
         /// <summary>
-        /// Verify Rules
+        /// Verify Rules (Deprecated)
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
@@ -135,7 +135,7 @@ namespace EssSharp.Api
         void RulesVerify(Rules body = default(Rules), int operationIndex = 0);
 
         /// <summary>
-        /// Verify Rules
+        /// Verify Rules (Deprecated)
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
@@ -288,7 +288,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> RulesSaveWithHttpInfoAsync(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Verify Rules
+        /// Verify Rules (Deprecated)
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
@@ -301,7 +301,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task RulesVerifyAsync(Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Verify Rules
+        /// Verify Rules (Deprecated)
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
@@ -1088,7 +1088,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rules (Deprecated) &lt;p&gt;Verifies a rules file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
@@ -1100,7 +1100,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rules (Deprecated) &lt;p&gt;Verifies a rules file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
@@ -1160,7 +1160,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rules (Deprecated) &lt;p&gt;Verifies a rules file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
@@ -1173,7 +1173,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rules (Deprecated) &lt;p&gt;Verifies a rules file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>

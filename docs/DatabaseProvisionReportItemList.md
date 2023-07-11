@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Items** | [**List&lt;DatabaseProvisionReportItem&gt;**](DatabaseProvisionReportItem.md) |  | [optional] 
 **Links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] 
-**HasMore** | **bool** |  | [optional] 
 **TotalResults** | **long** |  | [optional] 
+**HasMore** | **bool** |  | [optional] 
 **Count** | **long** |  | [optional] 
 **Limit** | **long** |  | [optional] 
 **Properties** | **Dictionary&lt;string, string&gt;** |  | [optional] 

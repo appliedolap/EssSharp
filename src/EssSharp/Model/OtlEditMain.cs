@@ -81,7 +81,7 @@ namespace EssSharp.Model
         {
             this.EditActions = editActions;
             this.OtlVersion = otlVersion;
-            this.ValidateOutline = validate;
+            this.Validate = validate;
             this.ValidateFormulas = validateFormulas;
             this.KeepTransaction = keepTransaction;
             this.RestructOption = restructOption;
@@ -104,7 +104,7 @@ namespace EssSharp.Model
         /// Gets or Sets Validate
         /// </summary>
         [DataMember(Name = "validate", EmitDefaultValue = true)]
-        public bool ValidateOutline { get; set; }
+        public bool Validate { get; set; }
 
         /// <summary>
         /// Gets or Sets ValidateFormulas
@@ -134,7 +134,7 @@ namespace EssSharp.Model
             sb.Append("class OtlEditMain {\n");
             sb.Append("  EditActions: ").Append(EditActions).Append("\n");
             sb.Append("  OtlVersion: ").Append(OtlVersion).Append("\n");
-            sb.Append("  Validate: ").Append(ValidateOutline).Append("\n");
+            sb.Append("  Validate: ").Append(Validate).Append("\n");
             sb.Append("  ValidateFormulas: ").Append(ValidateFormulas).Append("\n");
             sb.Append("  KeepTransaction: ").Append(KeepTransaction).Append("\n");
             sb.Append("  RestructOption: ").Append(RestructOption).Append("\n");
@@ -185,8 +185,8 @@ namespace EssSharp.Model
                     this.OtlVersion.Equals(input.OtlVersion)
                 ) && 
                 (
-                    this.ValidateOutline == input.ValidateOutline ||
-                    this.ValidateOutline.Equals(input.ValidateOutline)
+                    this.Validate == input.Validate ||
+                    this.Validate.Equals(input.Validate)
                 ) && 
                 (
                     this.ValidateFormulas == input.ValidateFormulas ||
@@ -220,7 +220,7 @@ namespace EssSharp.Model
                     hashCode = (hashCode * 59) + this.EditActions.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.OtlVersion.GetHashCode();
-                hashCode = (hashCode * 59) + this.ValidateOutline.GetHashCode();
+                hashCode = (hashCode * 59) + this.Validate.GetHashCode();
                 hashCode = (hashCode * 59) + this.ValidateFormulas.GetHashCode();
                 hashCode = (hashCode * 59) + this.KeepTransaction.GetHashCode();
                 hashCode = (hashCode * 59) + this.RestructOption.GetHashCode();
@@ -234,7 +234,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

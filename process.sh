@@ -75,6 +75,9 @@ cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseN
 # Return types for variables are not a List<VariableList>, they are a VariableList
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/variables".get.responses."200".schema = {"$ref": "#/definitions/VariableList"}' > json.tmp && mv json.tmp temp.json
 
+# Fix a duplicate operationId for the database compression info settings endpoint
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/settings/compressioninfo".get.operationId = "DatabaseSettingsStatistics.getCompressionInfoSettings"' > json.tmp && mv json.tmp temp.json
+
 # Fix the consumes for the application datasource stream endpoint
 cat temp.json | jq '.paths."/applications/{applicationName}/datasources/query/stream".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 

@@ -36,22 +36,22 @@ namespace EssSharp.Model
         /// <param name="texts">texts.</param>
         /// <param name="enumIds">enumIds.</param>
         /// <param name="dataFormats">dataFormats.</param>
-        /// <param name="filters">filters.</param>
         /// <param name="start">start.</param>
         /// <param name="types">types.</param>
-        /// <param name="end">end.</param>
+        /// <param name="filters">filters.</param>
         /// <param name="values">values.</param>
-        public GridRange(List<string> statuses = default(List<string>), List<string> texts = default(List<string>), List<string> enumIds = default(List<string>), List<string> dataFormats = default(List<string>), List<string> filters = default(List<string>), int start = default(int), List<string> types = default(List<string>), int end = default(int), List<string> values = default(List<string>))
+        /// <param name="end">end.</param>
+        public GridRange(List<string> statuses = default(List<string>), List<string> texts = default(List<string>), List<string> enumIds = default(List<string>), List<string> dataFormats = default(List<string>), int start = default(int), List<string> types = default(List<string>), List<string> filters = default(List<string>), List<string> values = default(List<string>), int end = default(int))
         {
             this.Statuses = statuses;
             this.Texts = texts;
             this.EnumIds = enumIds;
             this.DataFormats = dataFormats;
-            this.Filters = filters;
             this.Start = start;
             this.Types = types;
-            this.End = end;
+            this.Filters = filters;
             this.Values = values;
+            this.End = end;
         }
 
         /// <summary>
@@ -79,12 +79,6 @@ namespace EssSharp.Model
         public List<string> DataFormats { get; set; }
 
         /// <summary>
-        /// Gets or Sets Filters
-        /// </summary>
-        [DataMember(Name = "filters", EmitDefaultValue = false)]
-        public List<string> Filters { get; set; }
-
-        /// <summary>
         /// Gets or Sets Start
         /// </summary>
         [DataMember(Name = "start", EmitDefaultValue = false)]
@@ -97,16 +91,22 @@ namespace EssSharp.Model
         public List<string> Types { get; set; }
 
         /// <summary>
-        /// Gets or Sets End
+        /// Gets or Sets Filters
         /// </summary>
-        [DataMember(Name = "end", EmitDefaultValue = false)]
-        public int End { get; set; }
+        [DataMember(Name = "filters", EmitDefaultValue = false)]
+        public List<string> Filters { get; set; }
 
         /// <summary>
         /// Gets or Sets Values
         /// </summary>
         [DataMember(Name = "values", EmitDefaultValue = false)]
         public List<string> Values { get; set; }
+
+        /// <summary>
+        /// Gets or Sets End
+        /// </summary>
+        [DataMember(Name = "end", EmitDefaultValue = false)]
+        public int End { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -120,11 +120,11 @@ namespace EssSharp.Model
             sb.Append("  Texts: ").Append(Texts).Append("\n");
             sb.Append("  EnumIds: ").Append(EnumIds).Append("\n");
             sb.Append("  DataFormats: ").Append(DataFormats).Append("\n");
-            sb.Append("  Filters: ").Append(Filters).Append("\n");
             sb.Append("  Start: ").Append(Start).Append("\n");
             sb.Append("  Types: ").Append(Types).Append("\n");
-            sb.Append("  End: ").Append(End).Append("\n");
+            sb.Append("  Filters: ").Append(Filters).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
+            sb.Append("  End: ").Append(End).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -185,12 +185,6 @@ namespace EssSharp.Model
                     this.DataFormats.SequenceEqual(input.DataFormats)
                 ) && 
                 (
-                    this.Filters == input.Filters ||
-                    this.Filters != null &&
-                    input.Filters != null &&
-                    this.Filters.SequenceEqual(input.Filters)
-                ) && 
-                (
                     this.Start == input.Start ||
                     this.Start.Equals(input.Start)
                 ) && 
@@ -201,14 +195,20 @@ namespace EssSharp.Model
                     this.Types.SequenceEqual(input.Types)
                 ) && 
                 (
-                    this.End == input.End ||
-                    this.End.Equals(input.End)
+                    this.Filters == input.Filters ||
+                    this.Filters != null &&
+                    input.Filters != null &&
+                    this.Filters.SequenceEqual(input.Filters)
                 ) && 
                 (
                     this.Values == input.Values ||
                     this.Values != null &&
                     input.Values != null &&
                     this.Values.SequenceEqual(input.Values)
+                ) && 
+                (
+                    this.End == input.End ||
+                    this.End.Equals(input.End)
                 );
         }
 
@@ -237,20 +237,20 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.DataFormats.GetHashCode();
                 }
-                if (this.Filters != null)
-                {
-                    hashCode = (hashCode * 59) + this.Filters.GetHashCode();
-                }
                 hashCode = (hashCode * 59) + this.Start.GetHashCode();
                 if (this.Types != null)
                 {
                     hashCode = (hashCode * 59) + this.Types.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.End.GetHashCode();
+                if (this.Filters != null)
+                {
+                    hashCode = (hashCode * 59) + this.Filters.GetHashCode();
+                }
                 if (this.Values != null)
                 {
                     hashCode = (hashCode * 59) + this.Values.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.End.GetHashCode();
                 return hashCode;
             }
         }
@@ -260,7 +260,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

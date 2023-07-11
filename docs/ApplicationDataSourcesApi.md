@@ -11,7 +11,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationDatasourcesGetDatasources**](ApplicationDatasourcesApi.md#applicationdatasourcesgetdatasources) | **GET** /applications/{applicationName}/datasources | Get Application Datasources |
 | [**ApplicationDatasourcesUpdateDatasource**](ApplicationDatasourcesApi.md#applicationdatasourcesupdatedatasource) | **PUT** /applications/{applicationName}/datasources/{datasouceName} | Update Application Datasource |
 
-<a name="applicationdatasourcescreatedatasource"></a>
+<a id="applicationdatasourcescreatedatasource"></a>
 # **ApplicationDatasourcesCreateDatasource**
 > void ApplicationDatasourcesCreateDatasource (string applicationName, Datasource body = null)
 
@@ -105,7 +105,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationdatasourcesdeletedatasource"></a>
+<a id="applicationdatasourcesdeletedatasource"></a>
 # **ApplicationDatasourcesDeleteDatasource**
 > void ApplicationDatasourcesDeleteDatasource (string applicationName, string datasourceName)
 
@@ -199,7 +199,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationdatasourcesgetdatastream"></a>
+<a id="applicationdatasourcesgetdatastream"></a>
 # **ApplicationDatasourcesGetDataStream**
 > void ApplicationDatasourcesGetDataStream (string applicationName, bool? includeHeaders = null, bool? metaDataOnly = null, DatasourceQueryInfo body = null)
 
@@ -298,7 +298,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationdatasourcesgetdatasourcedetails"></a>
+<a id="applicationdatasourcesgetdatasourcedetails"></a>
 # **ApplicationDatasourcesGetDatasourceDetails**
 > Datasource ApplicationDatasourcesGetDatasourceDetails (string applicationName, string datasouceName)
 
@@ -396,7 +396,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationdatasourcesgetdatasources"></a>
+<a id="applicationdatasourcesgetdatasources"></a>
 # **ApplicationDatasourcesGetDatasources**
 > DatasourcesList ApplicationDatasourcesGetDatasources (string applicationName, int? offset = null, int? limit = null)
 
@@ -496,7 +496,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationdatasourcesupdatedatasource"></a>
+<a id="applicationdatasourcesupdatedatasource"></a>
 # **ApplicationDatasourcesUpdateDatasource**
 > Datasource ApplicationDatasourcesUpdateDatasource (string applicationName, string datasouceName, Datasource body = null)
 

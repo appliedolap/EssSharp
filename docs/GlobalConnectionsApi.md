@@ -13,7 +13,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**GlobalConnectionsUpdateConnection**](GlobalConnectionsApi.md#globalconnectionsupdateconnection) | **PUT** /connections/{connectionName} | Update Connection |
 | [**GlobalConnectionsWallets**](GlobalConnectionsApi.md#globalconnectionswallets) | **PUT** /connections/{connectionName}/wallet | Upload Connection Wallet File |
 
-<a name="globalconnectionscreateconnection"></a>
+<a id="globalconnectionscreateconnection"></a>
 # **GlobalConnectionsCreateConnection**
 > void GlobalConnectionsCreateConnection (Connection body)
 
@@ -105,7 +105,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globalconnectionsdeleteconnection"></a>
+<a id="globalconnectionsdeleteconnection"></a>
 # **GlobalConnectionsDeleteConnection**
 > void GlobalConnectionsDeleteConnection (string connectionName)
 
@@ -197,7 +197,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globalconnectionsgetconnectiondetails"></a>
+<a id="globalconnectionsgetconnectiondetails"></a>
 # **GlobalConnectionsGetConnectionDetails**
 > Connection GlobalConnectionsGetConnectionDetails (string connectionName, bool? password = null)
 
@@ -295,7 +295,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globalconnectionsgetconnections"></a>
+<a id="globalconnectionsgetconnections"></a>
 # **GlobalConnectionsGetConnections**
 > ConnectionsList GlobalConnectionsGetConnections (int? offset = null, int? limit = null, string connType = null, bool? repoConn = null, bool? walletConn = null)
 
@@ -399,7 +399,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globalconnectionstestconnection"></a>
+<a id="globalconnectionstestconnection"></a>
 # **GlobalConnectionsTestConnection**
 > void GlobalConnectionsTestConnection (Connection body)
 
@@ -491,7 +491,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globalconnectionstestconnectionexisting"></a>
+<a id="globalconnectionstestconnectionexisting"></a>
 # **GlobalConnectionsTestConnectionExisting**
 > void GlobalConnectionsTestConnectionExisting (string connectionName)
 
@@ -583,7 +583,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globalconnectionsupdateconnection"></a>
+<a id="globalconnectionsupdateconnection"></a>
 # **GlobalConnectionsUpdateConnection**
 > Connection GlobalConnectionsUpdateConnection (string connectionName, Connection body)
 
@@ -681,7 +681,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="globalconnectionswallets"></a>
+<a id="globalconnectionswallets"></a>
 # **GlobalConnectionsWallets**
 > WalletLocation GlobalConnectionsWallets (string connectionName)
 

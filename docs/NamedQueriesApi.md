@@ -10,7 +10,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**NamedqueriesGetNamedQueryDetails**](NamedQueriesApi.md#namedqueriesgetnamedquerydetails) | **GET** /applications/{application}/databases/{database}/queries/{query} | Get MDX Report Details |
 | [**NamedqueriesSaveNamedQuery**](NamedQueriesApi.md#namedqueriessavenamedquery) | **POST** /applications/{application}/databases/{database}/queries | Save MDX Report |
 
-<a name="namedqueriesdeletenamedquery"></a>
+<a id="namedqueriesdeletenamedquery"></a>
 # **NamedqueriesDeleteNamedQuery**
 > void NamedqueriesDeleteNamedQuery (string application, string database, string query)
 
@@ -106,7 +106,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="namedquerieseditnamedquery"></a>
+<a id="namedquerieseditnamedquery"></a>
 # **NamedqueriesEditNamedQuery**
 > NamedQuery NamedqueriesEditNamedQuery (string application, string database, string query, Query body = null)
 
@@ -208,7 +208,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="namedqueriesgetnamedqueries"></a>
+<a id="namedqueriesgetnamedqueries"></a>
 # **NamedqueriesGetNamedQueries**
 > Queries NamedqueriesGetNamedQueries (string application, string database)
 
@@ -306,7 +306,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="namedqueriesgetnamedquerydetails"></a>
+<a id="namedqueriesgetnamedquerydetails"></a>
 # **NamedqueriesGetNamedQueryDetails**
 > NamedQuery NamedqueriesGetNamedQueryDetails (string application, string database, string query)
 
@@ -406,7 +406,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="namedqueriessavenamedquery"></a>
+<a id="namedqueriessavenamedquery"></a>
 # **NamedqueriesSaveNamedQuery**
 > NamedQuery NamedqueriesSaveNamedQuery (string application, string database, NamedQuery body = null)
 

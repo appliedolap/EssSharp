@@ -33,20 +33,20 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="ReportBean" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        /// <param name="modifiedTime">modifiedTime.</param>
-        /// <param name="sizeInBytes">sizeInBytes.</param>
-        /// <param name="lockedBy">lockedBy.</param>
         /// <param name="lockedTime">lockedTime.</param>
+        /// <param name="modifiedTime">modifiedTime.</param>
         /// <param name="locked">locked.</param>
+        /// <param name="lockedBy">lockedBy.</param>
+        /// <param name="sizeInBytes">sizeInBytes.</param>
         /// <param name="name">name.</param>
-        public ReportBean(List<Link> links = default(List<Link>), long modifiedTime = default(long), long sizeInBytes = default(long), string lockedBy = default(string), long lockedTime = default(long), bool locked = default(bool), string name = default(string))
+        public ReportBean(List<Link> links = default(List<Link>), long lockedTime = default(long), long modifiedTime = default(long), bool locked = default(bool), string lockedBy = default(string), long sizeInBytes = default(long), string name = default(string))
         {
             this.Links = links;
-            this.ModifiedTime = modifiedTime;
-            this.SizeInBytes = sizeInBytes;
-            this.LockedBy = lockedBy;
             this.LockedTime = lockedTime;
+            this.ModifiedTime = modifiedTime;
             this.Locked = locked;
+            this.LockedBy = lockedBy;
+            this.SizeInBytes = sizeInBytes;
             this.Name = name;
         }
 
@@ -57,16 +57,22 @@ namespace EssSharp.Model
         public List<Link> Links { get; set; }
 
         /// <summary>
+        /// Gets or Sets LockedTime
+        /// </summary>
+        [DataMember(Name = "lockedTime", EmitDefaultValue = false)]
+        public long LockedTime { get; set; }
+
+        /// <summary>
         /// Gets or Sets ModifiedTime
         /// </summary>
         [DataMember(Name = "modifiedTime", EmitDefaultValue = false)]
         public long ModifiedTime { get; set; }
 
         /// <summary>
-        /// Gets or Sets SizeInBytes
+        /// Gets or Sets Locked
         /// </summary>
-        [DataMember(Name = "sizeInBytes", EmitDefaultValue = false)]
-        public long SizeInBytes { get; set; }
+        [DataMember(Name = "locked", EmitDefaultValue = true)]
+        public bool Locked { get; set; }
 
         /// <summary>
         /// Gets or Sets LockedBy
@@ -75,16 +81,10 @@ namespace EssSharp.Model
         public string LockedBy { get; set; }
 
         /// <summary>
-        /// Gets or Sets LockedTime
+        /// Gets or Sets SizeInBytes
         /// </summary>
-        [DataMember(Name = "lockedTime", EmitDefaultValue = false)]
-        public long LockedTime { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Locked
-        /// </summary>
-        [DataMember(Name = "locked", EmitDefaultValue = true)]
-        public bool Locked { get; set; }
+        [DataMember(Name = "sizeInBytes", EmitDefaultValue = false)]
+        public long SizeInBytes { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -101,11 +101,11 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ReportBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
-            sb.Append("  ModifiedTime: ").Append(ModifiedTime).Append("\n");
-            sb.Append("  SizeInBytes: ").Append(SizeInBytes).Append("\n");
-            sb.Append("  LockedBy: ").Append(LockedBy).Append("\n");
             sb.Append("  LockedTime: ").Append(LockedTime).Append("\n");
+            sb.Append("  ModifiedTime: ").Append(ModifiedTime).Append("\n");
             sb.Append("  Locked: ").Append(Locked).Append("\n");
+            sb.Append("  LockedBy: ").Append(LockedBy).Append("\n");
+            sb.Append("  SizeInBytes: ").Append(SizeInBytes).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -149,12 +149,16 @@ namespace EssSharp.Model
                     this.Links.SequenceEqual(input.Links)
                 ) && 
                 (
+                    this.LockedTime == input.LockedTime ||
+                    this.LockedTime.Equals(input.LockedTime)
+                ) && 
+                (
                     this.ModifiedTime == input.ModifiedTime ||
                     this.ModifiedTime.Equals(input.ModifiedTime)
                 ) && 
                 (
-                    this.SizeInBytes == input.SizeInBytes ||
-                    this.SizeInBytes.Equals(input.SizeInBytes)
+                    this.Locked == input.Locked ||
+                    this.Locked.Equals(input.Locked)
                 ) && 
                 (
                     this.LockedBy == input.LockedBy ||
@@ -162,12 +166,8 @@ namespace EssSharp.Model
                     this.LockedBy.Equals(input.LockedBy))
                 ) && 
                 (
-                    this.LockedTime == input.LockedTime ||
-                    this.LockedTime.Equals(input.LockedTime)
-                ) && 
-                (
-                    this.Locked == input.Locked ||
-                    this.Locked.Equals(input.Locked)
+                    this.SizeInBytes == input.SizeInBytes ||
+                    this.SizeInBytes.Equals(input.SizeInBytes)
                 ) && 
                 (
                     this.Name == input.Name ||
@@ -189,14 +189,14 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.Links.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.LockedTime.GetHashCode();
                 hashCode = (hashCode * 59) + this.ModifiedTime.GetHashCode();
-                hashCode = (hashCode * 59) + this.SizeInBytes.GetHashCode();
+                hashCode = (hashCode * 59) + this.Locked.GetHashCode();
                 if (this.LockedBy != null)
                 {
                     hashCode = (hashCode * 59) + this.LockedBy.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.LockedTime.GetHashCode();
-                hashCode = (hashCode * 59) + this.Locked.GetHashCode();
+                hashCode = (hashCode * 59) + this.SizeInBytes.GetHashCode();
                 if (this.Name != null)
                 {
                     hashCode = (hashCode * 59) + this.Name.GetHashCode();
@@ -210,7 +210,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -33,22 +33,22 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="DrillthroughBean" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        /// <param name="columnMapping">columnMapping.</param>
-        /// <param name="parameterMapping">parameterMapping.</param>
-        /// <param name="drillableRegions">drillableRegions.</param>
         /// <param name="useTempTables">useTempTables.</param>
+        /// <param name="parameterMapping">parameterMapping.</param>
+        /// <param name="columnMapping">columnMapping.</param>
+        /// <param name="drillableRegions">drillableRegions.</param>
         /// <param name="columns">columns.</param>
         /// <param name="dataSourceName">dataSourceName.</param>
         /// <param name="url">url.</param>
         /// <param name="type">type.</param>
         /// <param name="name">name.</param>
-        public DrillthroughBean(List<Link> links = default(List<Link>), Dictionary<string, ColumnMappingInfo> columnMapping = default(Dictionary<string, ColumnMappingInfo>), Dictionary<string, RunTimeParametersInfo> parameterMapping = default(Dictionary<string, RunTimeParametersInfo>), List<string> drillableRegions = default(List<string>), bool useTempTables = default(bool), List<string> columns = default(List<string>), string dataSourceName = default(string), string url = default(string), string type = default(string), string name = default(string))
+        public DrillthroughBean(List<Link> links = default(List<Link>), bool useTempTables = default(bool), Dictionary<string, RunTimeParametersInfo> parameterMapping = default(Dictionary<string, RunTimeParametersInfo>), Dictionary<string, ColumnMappingInfo> columnMapping = default(Dictionary<string, ColumnMappingInfo>), List<string> drillableRegions = default(List<string>), List<string> columns = default(List<string>), string dataSourceName = default(string), string url = default(string), string type = default(string), string name = default(string))
         {
             this.Links = links;
-            this.ColumnMapping = columnMapping;
-            this.ParameterMapping = parameterMapping;
-            this.DrillableRegions = drillableRegions;
             this.UseTempTables = useTempTables;
+            this.ParameterMapping = parameterMapping;
+            this.ColumnMapping = columnMapping;
+            this.DrillableRegions = drillableRegions;
             this.Columns = columns;
             this.DataSourceName = dataSourceName;
             this.Url = url;
@@ -63,10 +63,10 @@ namespace EssSharp.Model
         public List<Link> Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets ColumnMapping
+        /// Gets or Sets UseTempTables
         /// </summary>
-        [DataMember(Name = "columnMapping", EmitDefaultValue = false)]
-        public Dictionary<string, ColumnMappingInfo> ColumnMapping { get; set; }
+        [DataMember(Name = "useTempTables", EmitDefaultValue = true)]
+        public bool UseTempTables { get; set; }
 
         /// <summary>
         /// Gets or Sets ParameterMapping
@@ -75,16 +75,16 @@ namespace EssSharp.Model
         public Dictionary<string, RunTimeParametersInfo> ParameterMapping { get; set; }
 
         /// <summary>
+        /// Gets or Sets ColumnMapping
+        /// </summary>
+        [DataMember(Name = "columnMapping", EmitDefaultValue = false)]
+        public Dictionary<string, ColumnMappingInfo> ColumnMapping { get; set; }
+
+        /// <summary>
         /// Gets or Sets DrillableRegions
         /// </summary>
         [DataMember(Name = "drillableRegions", EmitDefaultValue = false)]
         public List<string> DrillableRegions { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UseTempTables
-        /// </summary>
-        [DataMember(Name = "useTempTables", EmitDefaultValue = true)]
-        public bool UseTempTables { get; set; }
 
         /// <summary>
         /// Gets or Sets Columns
@@ -125,10 +125,10 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class DrillthroughBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
-            sb.Append("  ColumnMapping: ").Append(ColumnMapping).Append("\n");
-            sb.Append("  ParameterMapping: ").Append(ParameterMapping).Append("\n");
-            sb.Append("  DrillableRegions: ").Append(DrillableRegions).Append("\n");
             sb.Append("  UseTempTables: ").Append(UseTempTables).Append("\n");
+            sb.Append("  ParameterMapping: ").Append(ParameterMapping).Append("\n");
+            sb.Append("  ColumnMapping: ").Append(ColumnMapping).Append("\n");
+            sb.Append("  DrillableRegions: ").Append(DrillableRegions).Append("\n");
             sb.Append("  Columns: ").Append(Columns).Append("\n");
             sb.Append("  DataSourceName: ").Append(DataSourceName).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
@@ -176,10 +176,8 @@ namespace EssSharp.Model
                     this.Links.SequenceEqual(input.Links)
                 ) && 
                 (
-                    this.ColumnMapping == input.ColumnMapping ||
-                    this.ColumnMapping != null &&
-                    input.ColumnMapping != null &&
-                    this.ColumnMapping.SequenceEqual(input.ColumnMapping)
+                    this.UseTempTables == input.UseTempTables ||
+                    this.UseTempTables.Equals(input.UseTempTables)
                 ) && 
                 (
                     this.ParameterMapping == input.ParameterMapping ||
@@ -188,14 +186,16 @@ namespace EssSharp.Model
                     this.ParameterMapping.SequenceEqual(input.ParameterMapping)
                 ) && 
                 (
+                    this.ColumnMapping == input.ColumnMapping ||
+                    this.ColumnMapping != null &&
+                    input.ColumnMapping != null &&
+                    this.ColumnMapping.SequenceEqual(input.ColumnMapping)
+                ) && 
+                (
                     this.DrillableRegions == input.DrillableRegions ||
                     this.DrillableRegions != null &&
                     input.DrillableRegions != null &&
                     this.DrillableRegions.SequenceEqual(input.DrillableRegions)
-                ) && 
-                (
-                    this.UseTempTables == input.UseTempTables ||
-                    this.UseTempTables.Equals(input.UseTempTables)
                 ) && 
                 (
                     this.Columns == input.Columns ||
@@ -238,19 +238,19 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.Links.GetHashCode();
                 }
-                if (this.ColumnMapping != null)
-                {
-                    hashCode = (hashCode * 59) + this.ColumnMapping.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.UseTempTables.GetHashCode();
                 if (this.ParameterMapping != null)
                 {
                     hashCode = (hashCode * 59) + this.ParameterMapping.GetHashCode();
+                }
+                if (this.ColumnMapping != null)
+                {
+                    hashCode = (hashCode * 59) + this.ColumnMapping.GetHashCode();
                 }
                 if (this.DrillableRegions != null)
                 {
                     hashCode = (hashCode * 59) + this.DrillableRegions.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.UseTempTables.GetHashCode();
                 if (this.Columns != null)
                 {
                     hashCode = (hashCode * 59) + this.Columns.GetHashCode();
@@ -280,7 +280,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

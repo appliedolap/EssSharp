@@ -32,21 +32,15 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Grid" /> class.
         /// </summary>
-        /// <param name="dimensions">dimensions.</param>
         /// <param name="slice">slice.</param>
         /// <param name="alias">alias.</param>
-        public Grid(List<GridDimension> dimensions = default(List<GridDimension>), Slice slice = default(Slice), string alias = default(string))
+        /// <param name="dimensions">dimensions.</param>
+        public Grid(Slice slice = default(Slice), string alias = default(string), List<GridDimension> dimensions = default(List<GridDimension>))
         {
-            this.Dimensions = dimensions;
             this.Slice = slice;
             this.Alias = alias;
+            this.Dimensions = dimensions;
         }
-
-        /// <summary>
-        /// Gets or Sets Dimensions
-        /// </summary>
-        [DataMember(Name = "dimensions", EmitDefaultValue = false)]
-        public List<GridDimension> Dimensions { get; set; }
 
         /// <summary>
         /// Gets or Sets Slice
@@ -61,6 +55,12 @@ namespace EssSharp.Model
         public string Alias { get; set; }
 
         /// <summary>
+        /// Gets or Sets Dimensions
+        /// </summary>
+        [DataMember(Name = "dimensions", EmitDefaultValue = false)]
+        public List<GridDimension> Dimensions { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -68,9 +68,9 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Grid {\n");
-            sb.Append("  Dimensions: ").Append(Dimensions).Append("\n");
             sb.Append("  Slice: ").Append(Slice).Append("\n");
             sb.Append("  Alias: ").Append(Alias).Append("\n");
+            sb.Append("  Dimensions: ").Append(Dimensions).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -107,12 +107,6 @@ namespace EssSharp.Model
             }
             return 
                 (
-                    this.Dimensions == input.Dimensions ||
-                    this.Dimensions != null &&
-                    input.Dimensions != null &&
-                    this.Dimensions.SequenceEqual(input.Dimensions)
-                ) && 
-                (
                     this.Slice == input.Slice ||
                     (this.Slice != null &&
                     this.Slice.Equals(input.Slice))
@@ -121,6 +115,12 @@ namespace EssSharp.Model
                     this.Alias == input.Alias ||
                     (this.Alias != null &&
                     this.Alias.Equals(input.Alias))
+                ) && 
+                (
+                    this.Dimensions == input.Dimensions ||
+                    this.Dimensions != null &&
+                    input.Dimensions != null &&
+                    this.Dimensions.SequenceEqual(input.Dimensions)
                 );
         }
 
@@ -133,10 +133,6 @@ namespace EssSharp.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Dimensions != null)
-                {
-                    hashCode = (hashCode * 59) + this.Dimensions.GetHashCode();
-                }
                 if (this.Slice != null)
                 {
                     hashCode = (hashCode * 59) + this.Slice.GetHashCode();
@@ -144,6 +140,10 @@ namespace EssSharp.Model
                 if (this.Alias != null)
                 {
                     hashCode = (hashCode * 59) + this.Alias.GetHashCode();
+                }
+                if (this.Dimensions != null)
+                {
+                    hashCode = (hashCode * 59) + this.Dimensions.GetHashCode();
                 }
                 return hashCode;
             }
@@ -154,7 +154,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

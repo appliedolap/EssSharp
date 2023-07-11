@@ -11,13 +11,13 @@ All URIs are relative to */essbase/rest/v1*
 | [**PropertiesSetProperties**](PropertiesApi.md#propertiessetproperties) | **PUT** /properties | Update Property Values |
 | [**PropertiesSetProperty**](PropertiesApi.md#propertiessetproperty) | **PUT** /properties/{propertyName} | Update Server Property |
 
-<a name="propertiesaddproperty"></a>
+<a id="propertiesaddproperty"></a>
 # **PropertiesAddProperty**
 > PropertyEntry PropertiesAddProperty (PropertyEntry body)
 
 Create Server Property
 
-<p>Adds the property in the server and returns the property.</p>
+<p>Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.</p>
 
 ### Example
 ```csharp
@@ -109,13 +109,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="propertiesdeleteproperty"></a>
+<a id="propertiesdeleteproperty"></a>
 # **PropertiesDeleteProperty**
 > PropertyEntry PropertiesDeleteProperty (string propertyName)
 
 Delete Server Property
 
-<p>Deletes a property from the server.</p>
+<p>Deletes a Provider Services configuration property from the Essbase Server.</p>
 
 ### Example
 ```csharp
@@ -208,13 +208,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="propertiesgetproperties"></a>
+<a id="propertiesgetproperties"></a>
 # **PropertiesGetProperties**
 > List&lt;PropertyList&gt; PropertiesGetProperties ()
 
 Get Server Properties
 
-<p>Returns all the properties from the server.</p>
+<p>Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.</p>
 
 ### Example
 ```csharp
@@ -300,7 +300,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="propertiesgetproperty"></a>
+<a id="propertiesgetproperty"></a>
 # **PropertiesGetProperty**
 > PropertyEntry PropertiesGetProperty (string propertyName)
 
@@ -397,13 +397,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="propertiessetproperties"></a>
+<a id="propertiessetproperties"></a>
 # **PropertiesSetProperties**
 > PropertyEntry PropertiesSetProperties (List<PropertyEntry> body)
 
 Update Property Values
 
-<p>Updates the properties in the server, and returns the list of updated properties.</p>
+<p>Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.</p>
 
 ### Example
 ```csharp
@@ -495,13 +495,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="propertiessetproperty"></a>
+<a id="propertiessetproperty"></a>
 # **PropertiesSetProperty**
 > PropertyEntry PropertiesSetProperty (string propertyName, PropertyEntry body)
 
 Update Server Property
 
-<p>Updates the property in the server, and returns the updated property.</p>
+<p>Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.</p>
 
 ### Example
 ```csharp

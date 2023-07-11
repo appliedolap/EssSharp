@@ -118,6 +118,20 @@ namespace EssSharp.Test.Api
         }
 
         /// <summary>
+        /// Test DatabaseSettingsStatisticsGetCompressionInfoSettings
+        /// </summary>
+        [Fact]
+        public void DatabaseSettingsStatisticsGetCompressionInfoSettingsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string applicationName = null;
+            //string databaseName = null;
+            //bool? fetch = null;
+            //var response = instance.DatabaseSettingsStatisticsGetCompressionInfoSettings(applicationName, databaseName, fetch);
+            //Assert.IsType<CompressionInfoOutput>(response);
+        }
+
+        /// <summary>
         /// Test DatabaseSettingsStatisticsGetOutlineAttributesSettings
         /// </summary>
         [Fact]

@@ -9,7 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**FileScannerSet**](FileScannerApi.md#filescannerset) | **PUT** /filescanner | Set Antivirus |
 | [**FileScannerValidate**](FileScannerApi.md#filescannervalidate) | **POST** /filescanner/actions/validate | Validate Antivirus |
 
-<a name="filescannerdelete"></a>
+<a id="filescannerdelete"></a>
 # **FileScannerDelete**
 > AVClientInfo FileScannerDelete ()
 
@@ -100,7 +100,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filescannerget"></a>
+<a id="filescannerget"></a>
 # **FileScannerGet**
 > AVClientInfo FileScannerGet ()
 
@@ -191,7 +191,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filescannerset"></a>
+<a id="filescannerset"></a>
 # **FileScannerSet**
 > AVClientInfo FileScannerSet (AVClientInfo body)
 
@@ -287,7 +287,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filescannervalidate"></a>
+<a id="filescannervalidate"></a>
 # **FileScannerValidate**
 > void FileScannerValidate (AVClientInfo body)
 

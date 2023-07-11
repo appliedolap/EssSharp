@@ -6,7 +6,7 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**DatabaseSizeStatisticsGetDBSizes**](DatabaseSizeStatisticsApi.md#databasesizestatisticsgetdbsizes) | **GET** /databasesizestatistics | Get Database Size Statistics |
 
-<a name="databasesizestatisticsgetdbsizes"></a>
+<a id="databasesizestatisticsgetdbsizes"></a>
 # **DatabaseSizeStatisticsGetDBSizes**
 > DBSizeList DatabaseSizeStatisticsGetDBSizes ()
 

@@ -15,7 +15,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**PartitionUpdatePartition**](PartitionsApi.md#partitionupdatepartition) | **PATCH** /applications/{applicationName}/databases/{databaseName}/partitions | Update Partition |
 | [**PartitionValidatePartition**](PartitionsApi.md#partitionvalidatepartition) | **POST** /applications/{applicationName}/databases/{databaseName}/partitions/validate | Validate Partition |
 
-<a name="partitioncreatepartition"></a>
+<a id="partitioncreatepartition"></a>
 # **PartitionCreatePartition**
 > void PartitionCreatePartition (string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = null)
 
@@ -114,7 +114,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitiondeletepartition"></a>
+<a id="partitiondeletepartition"></a>
 # **PartitionDeletePartition**
 > void PartitionDeletePartition (string applicationName, string databaseName, string type, string serverName = null, string applicationName2 = null, string databaseName2 = null, string datasourceName = null, string measuresDimensionName = null, bool? applicationLevelDatasource = null)
 
@@ -223,7 +223,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitiongetpartitioncellcount"></a>
+<a id="partitiongetpartitioncellcount"></a>
 # **PartitionGetPartitionCellCount**
 > PartitionBean PartitionGetPartitionCellCount (string applicationName, string databaseName, PartitionBean body)
 
@@ -324,7 +324,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitiongetpartitions"></a>
+<a id="partitiongetpartitions"></a>
 # **PartitionGetPartitions**
 > PartitionList PartitionGetPartitions (string applicationName, string databaseName, List<string> type = null, int? offset = null, int? limit = null, string serverName = null, string applicationName2 = null, string databaseName2 = null, string datasourceName = null, string measuresDimensionName = null, bool? applicationLevelDatasource = null)
 
@@ -441,7 +441,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitiongetsupportedfederatedtypes"></a>
+<a id="partitiongetsupportedfederatedtypes"></a>
 # **PartitionGetSupportedFederatedTypes**
 > void PartitionGetSupportedFederatedTypes (string applicationName, string databaseName)
 
@@ -536,7 +536,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitionlockpartition"></a>
+<a id="partitionlockpartition"></a>
 # **PartitionLockPartition**
 > void PartitionLockPartition (string applicationName, string databaseName, string type, string serverName = null, string applicationName2 = null, string databaseName2 = null, string datasourceName = null, string measuresDimensionName = null, bool? applicationLevelDatasource = null)
 
@@ -645,7 +645,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitionreplicatedatafromsource"></a>
+<a id="partitionreplicatedatafromsource"></a>
 # **PartitionReplicateDataFromSource**
 > void PartitionReplicateDataFromSource (string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = null, string replicateOption = null)
 
@@ -748,7 +748,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitionunlockpartition"></a>
+<a id="partitionunlockpartition"></a>
 # **PartitionUnlockPartition**
 > void PartitionUnlockPartition (string applicationName, string databaseName, string type, string serverName = null, string applicationName2 = null, string databaseName2 = null, string datasourceName = null, string measuresDimensionName = null, bool? applicationLevelDatasource = null)
 
@@ -857,7 +857,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitionupdatepartition"></a>
+<a id="partitionupdatepartition"></a>
 # **PartitionUpdatePartition**
 > void PartitionUpdatePartition (string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = null)
 
@@ -956,7 +956,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="partitionvalidatepartition"></a>
+<a id="partitionvalidatepartition"></a>
 # **PartitionValidatePartition**
 > void PartitionValidatePartition (string applicationName, string databaseName, PartitionBean body)
 

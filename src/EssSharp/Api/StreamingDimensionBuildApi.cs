@@ -137,7 +137,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
         ApiResponse<StreamProcessStartResponse> DimensionBuildStartDimBuildWithHttpInfo(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0);
         /// <summary>
-        /// Push Data
+        /// Push Dimensions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
@@ -152,7 +152,7 @@ namespace EssSharp.Api
         StreamProcessStartResponse DimensionBuildStreamDimBuildData(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0);
 
         /// <summary>
-        /// Push Data
+        /// Push Dimensions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
@@ -295,7 +295,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DimensionBuildStartDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Push Data
+        /// Push Dimensions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
@@ -311,7 +311,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Push Data
+        /// Push Dimensions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
@@ -1250,7 +1250,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Push Data &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
+        /// Push Dimensions &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1266,7 +1266,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Push Data &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
+        /// Push Dimensions &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1350,7 +1350,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Push Data &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
+        /// Push Dimensions &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1367,7 +1367,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Push Data &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
+        /// Push Dimensions &lt;p&gt;Pushes data for streaming dimension build.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

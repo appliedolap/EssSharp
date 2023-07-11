@@ -8,7 +8,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DataloadStart**](StreamingDataLoadApi.md#dataloadstart) | **POST** /applications/{applicationName}/databases/{databaseName}/dataload | Start Data Load |
 | [**DataloadStreamData**](StreamingDataLoadApi.md#dataloadstreamdata) | **POST** /applications/{applicationName}/databases/{databaseName}/dataload/{streamId} | Push Data |
 
-<a name="dataloadend"></a>
+<a id="dataloadend"></a>
 # **DataloadEnd**
 > StreamProcessEndResponse DataloadEnd (string applicationName, string databaseName, string streamId)
 
@@ -109,7 +109,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dataloadstart"></a>
+<a id="dataloadstart"></a>
 # **DataloadStart**
 > StreamProcessStartResponse DataloadStart (string applicationName, string databaseName, DataLoadStartPayload body = null)
 
@@ -210,7 +210,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dataloadstreamdata"></a>
+<a id="dataloadstreamdata"></a>
 # **DataloadStreamData**
 > StreamProcessStartResponse DataloadStreamData (string applicationName, string databaseName, string streamId, string body = null)
 

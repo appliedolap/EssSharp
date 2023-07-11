@@ -9,7 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**SandboxDimensionDelete**](SandboxDimensionApi.md#sandboxdimensiondelete) | **DELETE** /applications/{applicationName}/databases/{databaseName}/sandbox | Delete Sandbox |
 | [**SandboxDimensionGet**](SandboxDimensionApi.md#sandboxdimensionget) | **GET** /applications/{applicationName}/databases/{databaseName}/sandbox | Get Sandbox Details |
 
-<a name="sandboxdimensionaddmembers"></a>
+<a id="sandboxdimensionaddmembers"></a>
 # **SandboxDimensionAddMembers**
 > SandboxDetail SandboxDimensionAddMembers (string applicationName, string databaseName, SandboxRequestPayload body = null)
 
@@ -110,7 +110,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="sandboxdimensioncreate"></a>
+<a id="sandboxdimensioncreate"></a>
 # **SandboxDimensionCreate**
 > SandboxDetail SandboxDimensionCreate (string applicationName, string databaseName, SandboxRequestPayload body = null)
 
@@ -211,7 +211,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="sandboxdimensiondelete"></a>
+<a id="sandboxdimensiondelete"></a>
 # **SandboxDimensionDelete**
 > void SandboxDimensionDelete (string applicationName, string databaseName)
 
@@ -306,7 +306,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="sandboxdimensionget"></a>
+<a id="sandboxdimensionget"></a>
 # **SandboxDimensionGet**
 > SandboxDetail SandboxDimensionGet (string applicationName, string databaseName)
 

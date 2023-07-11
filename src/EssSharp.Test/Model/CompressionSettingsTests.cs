@@ -70,12 +70,12 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'IsCompression'
         }
         /// <summary>
-        /// Test the property 'Level0MB'
+        /// Test the property 'StoredLevel0Members'
         /// </summary>
         [Fact]
-        public void Level0MBTest()
+        public void StoredLevel0MembersTest()
         {
-            // TODO unit test for the property 'Level0MB'
+            // TODO unit test for the property 'StoredLevel0Members'
         }
         /// <summary>
         /// Test the property 'AverageBundleFill'
@@ -94,12 +94,12 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'AverageValueLength'
         }
         /// <summary>
-        /// Test the property 'StoredLevel0Members'
+        /// Test the property 'Level0MB'
         /// </summary>
         [Fact]
-        public void StoredLevel0MembersTest()
+        public void Level0MBTest()
         {
-            // TODO unit test for the property 'StoredLevel0Members'
+            // TODO unit test for the property 'Level0MB'
         }
 
     }

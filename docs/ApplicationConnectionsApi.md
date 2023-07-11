@@ -11,15 +11,15 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationConnectionsTestConnection**](ApplicationConnectionsApi.md#applicationconnectionstestconnection) | **POST** /applications/{applicationName}/connections/actions/test | Test New Application Connection |
 | [**ApplicationConnectionsTestConnectionExisting**](ApplicationConnectionsApi.md#applicationconnectionstestconnectionexisting) | **POST** /applications/{applicationName}/connections/{connectionName}/actions/test | Test Saved Application Connection |
 | [**ApplicationConnectionsUpdateConnection**](ApplicationConnectionsApi.md#applicationconnectionsupdateconnection) | **PUT** /applications/{applicationName}/connections/{connectionName} | Update Application Connection |
-| [**ApplicationConnectionsWallets**](ApplicationConnectionsApi.md#applicationconnectionswallets) | **PUT** /applications/{applicationName}/connections/{connectionName}/wallet | Upload a connection wallet file |
+| [**ApplicationConnectionsWallets**](ApplicationConnectionsApi.md#applicationconnectionswallets) | **PUT** /applications/{applicationName}/connections/{connectionName}/wallet | Upload Application Connection Wallet File |
 
-<a name="applicationconnectionscreateconnection"></a>
+<a id="applicationconnectionscreateconnection"></a>
 # **ApplicationConnectionsCreateConnection**
 > void ApplicationConnectionsCreateConnection (string applicationName, Connection body)
 
 Create Application Connection
 
-<p>Creates an application-level connection based on specified inputs. <code>name</code> and <code>type</code> are required inputs for all types of connections. Other required inputs differ based on the type of the connection.</p>
+<p>Creates an application-level connection based on specified inputs. <code>name</code> and <code>type</code> are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.</p><p>A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.</p>
 
 ### Example
 ```csharp
@@ -107,7 +107,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationconnectionsdeleteconnection"></a>
+<a id="applicationconnectionsdeleteconnection"></a>
 # **ApplicationConnectionsDeleteConnection**
 > void ApplicationConnectionsDeleteConnection (string applicationName, string connectionName)
 
@@ -201,7 +201,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationconnectionsgetconnectiondetails"></a>
+<a id="applicationconnectionsgetconnectiondetails"></a>
 # **ApplicationConnectionsGetConnectionDetails**
 > Connection ApplicationConnectionsGetConnectionDetails (string applicationName, string connectionName, bool? password = null)
 
@@ -301,13 +301,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationconnectionsgetconnections"></a>
+<a id="applicationconnectionsgetconnections"></a>
 # **ApplicationConnectionsGetConnections**
 > ConnectionsList ApplicationConnectionsGetConnections (string applicationName, int? offset = null, int? limit = null, string connType = null, bool? repoConn = null, bool? walletConn = null)
 
 List Application Connections
 
-<p>Returns a list of connections for the application, including details such as name, description, and type.</p>
+<p>Returns a list of connections for the application, including details such as name, description, and type.</p><p>A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.</p>
 
 ### Example
 ```csharp
@@ -407,7 +407,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationconnectionstestconnection"></a>
+<a id="applicationconnectionstestconnection"></a>
 # **ApplicationConnectionsTestConnection**
 > void ApplicationConnectionsTestConnection (string applicationName, Connection body)
 
@@ -501,7 +501,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationconnectionstestconnectionexisting"></a>
+<a id="applicationconnectionstestconnectionexisting"></a>
 # **ApplicationConnectionsTestConnectionExisting**
 > void ApplicationConnectionsTestConnectionExisting (string applicationName, string connectionName)
 
@@ -595,7 +595,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationconnectionsupdateconnection"></a>
+<a id="applicationconnectionsupdateconnection"></a>
 # **ApplicationConnectionsUpdateConnection**
 > Connection ApplicationConnectionsUpdateConnection (string applicationName, string connectionName, Connection body)
 
@@ -695,13 +695,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationconnectionswallets"></a>
+<a id="applicationconnectionswallets"></a>
 # **ApplicationConnectionsWallets**
 > WalletLocation ApplicationConnectionsWallets (string applicationName, string connectionName)
 
-Upload a connection wallet file
+Upload Application Connection Wallet File
 
-Upload a connection wallet file.
+<p>Upload a wallet file for an application-level connection.</p>
 
 ### Example
 ```csharp
@@ -729,7 +729,7 @@ namespace Example
 
             try
             {
-                // Upload a connection wallet file
+                // Upload Application Connection Wallet File
                 WalletLocation result = apiInstance.ApplicationConnectionsWallets(applicationName, connectionName);
                 Debug.WriteLine(result);
             }
@@ -750,7 +750,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Upload a connection wallet file
+    // Upload Application Connection Wallet File
     ApiResponse<WalletLocation> response = apiInstance.ApplicationConnectionsWalletsWithHttpInfo(applicationName, connectionName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

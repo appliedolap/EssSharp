@@ -34,18 +34,18 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="dimensionName">dimensionName.</param>
         /// <param name="isCompression">isCompression.</param>
-        /// <param name="level0MB">level0MB.</param>
+        /// <param name="storedLevel0Members">storedLevel0Members.</param>
         /// <param name="averageBundleFill">averageBundleFill.</param>
         /// <param name="averageValueLength">averageValueLength.</param>
-        /// <param name="storedLevel0Members">storedLevel0Members.</param>
-        public CompressionSettings(string dimensionName = default(string), bool isCompression = default(bool), double level0MB = default(double), double averageBundleFill = default(double), double averageValueLength = default(double), double storedLevel0Members = default(double))
+        /// <param name="level0MB">level0MB.</param>
+        public CompressionSettings(string dimensionName = default(string), bool isCompression = default(bool), double storedLevel0Members = default(double), double averageBundleFill = default(double), double averageValueLength = default(double), double level0MB = default(double))
         {
             this.DimensionName = dimensionName;
             this.IsCompression = isCompression;
-            this.Level0MB = level0MB;
+            this.StoredLevel0Members = storedLevel0Members;
             this.AverageBundleFill = averageBundleFill;
             this.AverageValueLength = averageValueLength;
-            this.StoredLevel0Members = storedLevel0Members;
+            this.Level0MB = level0MB;
         }
 
         /// <summary>
@@ -61,10 +61,10 @@ namespace EssSharp.Model
         public bool IsCompression { get; set; }
 
         /// <summary>
-        /// Gets or Sets Level0MB
+        /// Gets or Sets StoredLevel0Members
         /// </summary>
-        [DataMember(Name = "level0MB", EmitDefaultValue = false)]
-        public double Level0MB { get; set; }
+        [DataMember(Name = "storedLevel0Members", EmitDefaultValue = false)]
+        public double StoredLevel0Members { get; set; }
 
         /// <summary>
         /// Gets or Sets AverageBundleFill
@@ -79,10 +79,10 @@ namespace EssSharp.Model
         public double AverageValueLength { get; set; }
 
         /// <summary>
-        /// Gets or Sets StoredLevel0Members
+        /// Gets or Sets Level0MB
         /// </summary>
-        [DataMember(Name = "storedLevel0Members", EmitDefaultValue = false)]
-        public double StoredLevel0Members { get; set; }
+        [DataMember(Name = "level0MB", EmitDefaultValue = false)]
+        public double Level0MB { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -94,10 +94,10 @@ namespace EssSharp.Model
             sb.Append("class CompressionSettings {\n");
             sb.Append("  DimensionName: ").Append(DimensionName).Append("\n");
             sb.Append("  IsCompression: ").Append(IsCompression).Append("\n");
-            sb.Append("  Level0MB: ").Append(Level0MB).Append("\n");
+            sb.Append("  StoredLevel0Members: ").Append(StoredLevel0Members).Append("\n");
             sb.Append("  AverageBundleFill: ").Append(AverageBundleFill).Append("\n");
             sb.Append("  AverageValueLength: ").Append(AverageValueLength).Append("\n");
-            sb.Append("  StoredLevel0Members: ").Append(StoredLevel0Members).Append("\n");
+            sb.Append("  Level0MB: ").Append(Level0MB).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -143,8 +143,8 @@ namespace EssSharp.Model
                     this.IsCompression.Equals(input.IsCompression)
                 ) && 
                 (
-                    this.Level0MB == input.Level0MB ||
-                    this.Level0MB.Equals(input.Level0MB)
+                    this.StoredLevel0Members == input.StoredLevel0Members ||
+                    this.StoredLevel0Members.Equals(input.StoredLevel0Members)
                 ) && 
                 (
                     this.AverageBundleFill == input.AverageBundleFill ||
@@ -155,8 +155,8 @@ namespace EssSharp.Model
                     this.AverageValueLength.Equals(input.AverageValueLength)
                 ) && 
                 (
-                    this.StoredLevel0Members == input.StoredLevel0Members ||
-                    this.StoredLevel0Members.Equals(input.StoredLevel0Members)
+                    this.Level0MB == input.Level0MB ||
+                    this.Level0MB.Equals(input.Level0MB)
                 );
         }
 
@@ -174,10 +174,10 @@ namespace EssSharp.Model
                     hashCode = (hashCode * 59) + this.DimensionName.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.IsCompression.GetHashCode();
-                hashCode = (hashCode * 59) + this.Level0MB.GetHashCode();
+                hashCode = (hashCode * 59) + this.StoredLevel0Members.GetHashCode();
                 hashCode = (hashCode * 59) + this.AverageBundleFill.GetHashCode();
                 hashCode = (hashCode * 59) + this.AverageValueLength.GetHashCode();
-                hashCode = (hashCode * 59) + this.StoredLevel0Members.GetHashCode();
+                hashCode = (hashCode * 59) + this.Level0MB.GetHashCode();
                 return hashCode;
             }
         }
@@ -187,7 +187,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

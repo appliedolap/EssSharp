@@ -27,7 +27,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ScenariosUpdateComment**](ScenariosApi.md#scenariosupdatecomment) | **PUT** /scenarios/{scenarioId}/comments/{commentId} | Update Comment |
 | [**ScenariosUpdateScript**](ScenariosApi.md#scenariosupdatescript) | **PUT** /scenarios/{scenarioId}/scripts/{scriptType} | Update Scenario with Script |
 
-<a name="scenariosaddapprover"></a>
+<a id="scenariosaddapprover"></a>
 # **ScenariosAddApprover**
 > void ScenariosAddApprover (long scenarioId, ApproverBean body = null)
 
@@ -122,7 +122,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosaddcomment"></a>
+<a id="scenariosaddcomment"></a>
 # **ScenariosAddComment**
 > CommentBean ScenariosAddComment (long scenarioId, CommentBean body = null)
 
@@ -221,7 +221,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosaddparticipant"></a>
+<a id="scenariosaddparticipant"></a>
 # **ScenariosAddParticipant**
 > void ScenariosAddParticipant (long scenarioId, ParticipantBean body = null)
 
@@ -316,7 +316,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenarioscreate"></a>
+<a id="scenarioscreate"></a>
 # **ScenariosCreate**
 > ScenarioBean ScenariosCreate (ScenarioBean body = null)
 
@@ -413,7 +413,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosdelete"></a>
+<a id="scenariosdelete"></a>
 # **ScenariosDelete**
 > void ScenariosDelete (long id)
 
@@ -506,7 +506,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosdeleteapprover"></a>
+<a id="scenariosdeleteapprover"></a>
 # **ScenariosDeleteApprover**
 > void ScenariosDeleteApprover (long scenarioId, string userId)
 
@@ -601,7 +601,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosdeletecomment"></a>
+<a id="scenariosdeletecomment"></a>
 # **ScenariosDeleteComment**
 > void ScenariosDeleteComment (long scenarioId, long commentId)
 
@@ -696,7 +696,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosdeleteparticipant"></a>
+<a id="scenariosdeleteparticipant"></a>
 # **ScenariosDeleteParticipant**
 > void ScenariosDeleteParticipant (long scenarioId, string userId)
 
@@ -791,7 +791,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosget"></a>
+<a id="scenariosget"></a>
 # **ScenariosGet**
 > ScenarioBean ScenariosGet (long id, string expand = null)
 
@@ -890,7 +890,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosgetapprovers"></a>
+<a id="scenariosgetapprovers"></a>
 # **ScenariosGetApprovers**
 > ApproverListResponse ScenariosGetApprovers (long scenarioId)
 
@@ -987,7 +987,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosgetchangedata"></a>
+<a id="scenariosgetchangedata"></a>
 # **ScenariosGetChangeData**
 > ScenarioChangesListResponse ScenariosGetChangeData (long id)
 
@@ -1084,7 +1084,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosgetcomment"></a>
+<a id="scenariosgetcomment"></a>
 # **ScenariosGetComment**
 > CommentBean ScenariosGetComment (long scenarioId, long commentId)
 
@@ -1183,7 +1183,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosgetcomments"></a>
+<a id="scenariosgetcomments"></a>
 # **ScenariosGetComments**
 > CommentListResponse ScenariosGetComments (long scenarioId)
 
@@ -1280,7 +1280,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosgetparticipants"></a>
+<a id="scenariosgetparticipants"></a>
 # **ScenariosGetParticipants**
 > ParticipantListResponse ScenariosGetParticipants (long scenarioId)
 
@@ -1377,7 +1377,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosgetregisteredcubes"></a>
+<a id="scenariosgetregisteredcubes"></a>
 # **ScenariosGetRegisteredCubes**
 > ScenarioCubesList ScenariosGetRegisteredCubes ()
 
@@ -1469,7 +1469,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosgetscenarios"></a>
+<a id="scenariosgetscenarios"></a>
 # **ScenariosGetScenarios**
 > ScenarioCollectionResponse ScenariosGetScenarios (string filter = null, string role = null, bool? overdue = null, string state = null, string application = null, string database = null, bool? approvalPending = null, long? offset = null, long? limit = null, string orderBy = null, bool? count = null)
 
@@ -1586,7 +1586,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosgetscripts"></a>
+<a id="scenariosgetscripts"></a>
 # **ScenariosGetScripts**
 > ScriptListResponse ScenariosGetScripts (long scenarioId)
 
@@ -1683,7 +1683,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariospatch"></a>
+<a id="scenariospatch"></a>
 # **ScenariosPatch**
 > ScenarioBean ScenariosPatch (long id, ScenarioEditBean body = null)
 
@@ -1782,7 +1782,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosperformaction"></a>
+<a id="scenariosperformaction"></a>
 # **ScenariosPerformAction**
 > ScenarioBean ScenariosPerformAction (long id, string action = null, bool? overwrite = null, ScenarioActionPayload body = null)
 
@@ -1885,7 +1885,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosupdate"></a>
+<a id="scenariosupdate"></a>
 # **ScenariosUpdate**
 > ScenarioBean ScenariosUpdate (long id, ScenarioBean body = null)
 
@@ -1984,7 +1984,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosupdatecomment"></a>
+<a id="scenariosupdatecomment"></a>
 # **ScenariosUpdateComment**
 > void ScenariosUpdateComment (long scenarioId, long commentId, CommentBean body = null)
 
@@ -2081,7 +2081,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scenariosupdatescript"></a>
+<a id="scenariosupdatescript"></a>
 # **ScenariosUpdateScript**
 > void ScenariosUpdateScript (long scenarioId, string scriptType, ScriptBean body = null)
 

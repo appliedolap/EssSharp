@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -402,10 +401,10 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="IEssApplicationConfiguration" /> objects under this application.</returns>
-        public async Task<List<IEssApplicationConfiguration>> GetConfigurationsAsync(CancellationToken cancellationToken = default)
+        public async Task<List<IEssApplicationConfiguration>> GetConfigurationsAsync( CancellationToken cancellationToken = default )
         {
             var api = GetApi<ApplicationConfigurationApi>();
-            var configurationList = await api.ApplicationConfigurationGetConfigurationsAsync(Name).ConfigureAwait(false);
+            var configurationList = await api.ApplicationConfigurationGetConfigurationsAsync(Name, cancellationToken: cancellationToken).ConfigureAwait(false);
 
             return configurationList?.ToEssSharpList(this) ?? new List<IEssApplicationConfiguration>();
         }

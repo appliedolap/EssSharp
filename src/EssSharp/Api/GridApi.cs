@@ -111,7 +111,7 @@ namespace EssSharp.Api
         /// Get Default Grid
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the default grid layout for the specified cube.&lt;/p&gt;
+        /// &lt;p&gt;Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for default grid.&lt;/p&gt;</param>
@@ -125,7 +125,7 @@ namespace EssSharp.Api
         /// Get Default Grid
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the default grid layout for the specified cube.&lt;/p&gt;
+        /// &lt;p&gt;Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for default grid.&lt;/p&gt;</param>
@@ -263,7 +263,7 @@ namespace EssSharp.Api
         /// Get Default Grid
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the default grid layout for the specified cube.&lt;/p&gt;
+        /// &lt;p&gt;Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for default grid.&lt;/p&gt;</param>
@@ -278,7 +278,7 @@ namespace EssSharp.Api
         /// Get Default Grid
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the default grid layout for the specified cube.&lt;/p&gt;
+        /// &lt;p&gt;Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for default grid.&lt;/p&gt;</param>
@@ -1024,7 +1024,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Default Grid &lt;p&gt;Returns the default grid layout for the specified cube.&lt;/p&gt;
+        /// Get Default Grid &lt;p&gt;Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for default grid.&lt;/p&gt;</param>
@@ -1039,7 +1039,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Default Grid &lt;p&gt;Returns the default grid layout for the specified cube.&lt;/p&gt;
+        /// Get Default Grid &lt;p&gt;Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for default grid.&lt;/p&gt;</param>
@@ -1116,7 +1116,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Default Grid &lt;p&gt;Returns the default grid layout for the specified cube.&lt;/p&gt;
+        /// Get Default Grid &lt;p&gt;Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for default grid.&lt;/p&gt;</param>
@@ -1132,7 +1132,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Default Grid &lt;p&gt;Returns the default grid layout for the specified cube.&lt;/p&gt;
+        /// Get Default Grid &lt;p&gt;Returns the default grid for the specified cube. The default grid is the first grid you would see in an ad hoc analysis of the database, before performing any grid operations.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for default grid.&lt;/p&gt;</param>

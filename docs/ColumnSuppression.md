@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Zero** | **bool** |  | [optional] 
-**Missing** | **bool** |  | [optional] 
 **UnderScore** | **bool** |  | [optional] 
 **Derived** | **bool** |  | [optional] 
 **NoAccess** | **bool** |  | [optional] 
 **EmptyBlocks** | **bool** |  | [optional] 
+**Zero** | **bool** |  | [optional] 
+**Missing** | **bool** |  | [optional] 
 **Invalid** | **bool** |  | [optional] 
 **Error** | **bool** |  | [optional] 
 

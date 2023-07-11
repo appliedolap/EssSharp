@@ -18,7 +18,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ScriptsRenameScript**](ScriptsApi.md#scriptsrenamescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/rename | Rename Essbase Script |
 | [**ScriptsValidateScript**](ScriptsApi.md#scriptsvalidatescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/validate | Validate Essbase Script |
 
-<a name="scriptsaddscriptpermission"></a>
+<a id="scriptsaddscriptpermission"></a>
 # **ScriptsAddScriptPermission**
 > UserGroupProvisionInfo ScriptsAddScriptPermission (string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body)
 
@@ -122,7 +122,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptscopyscript"></a>
+<a id="scriptscopyscript"></a>
 # **ScriptsCopyScript**
 > Script ScriptsCopyScript (string applicationName, string databaseName, ScriptCopy body)
 
@@ -224,7 +224,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptscreatescript"></a>
+<a id="scriptscreatescript"></a>
 # **ScriptsCreateScript**
 > Script ScriptsCreateScript (string applicationName, string databaseName, Script body, string file = null)
 
@@ -328,7 +328,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptsdeletescript"></a>
+<a id="scriptsdeletescript"></a>
 # **ScriptsDeleteScript**
 > void ScriptsDeleteScript (string applicationName, string databaseName, string scriptName, string file = null)
 
@@ -427,7 +427,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptseditscript"></a>
+<a id="scriptseditscript"></a>
 # **ScriptsEditScript**
 > Script ScriptsEditScript (string applicationName, string databaseName, string scriptName, Script body, string file = null)
 
@@ -533,7 +533,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptsgetrtsvsforscripts"></a>
+<a id="scriptsgetrtsvsforscripts"></a>
 # **ScriptsGetRTSVsForScripts**
 > List&lt;RTSVList&gt; ScriptsGetRTSVsForScripts (string applicationName, string databaseName, string scriptName)
 
@@ -634,7 +634,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptsgetscript"></a>
+<a id="scriptsgetscript"></a>
 # **ScriptsGetScript**
 > Script ScriptsGetScript (string applicationName, string databaseName, string scriptName, string file = null)
 
@@ -737,7 +737,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptsgetscriptcontent"></a>
+<a id="scriptsgetscriptcontent"></a>
 # **ScriptsGetScriptContent**
 > ScriptContent ScriptsGetScriptContent (string applicationName, string databaseName, string scriptName, string file = null)
 
@@ -840,7 +840,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptsgetscriptpermissions"></a>
+<a id="scriptsgetscriptpermissions"></a>
 # **ScriptsGetScriptPermissions**
 > List&lt;UserGroupProvisionInfoList&gt; ScriptsGetScriptPermissions (string applicationName, string databaseName, string scriptName)
 
@@ -941,7 +941,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptslistscripts"></a>
+<a id="scriptslistscripts"></a>
 # **ScriptsListScripts**
 > ScriptList ScriptsListScripts (string applicationName, string databaseName, string file = null)
 
@@ -1042,7 +1042,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptsremovescriptpermission"></a>
+<a id="scriptsremovescriptpermission"></a>
 # **ScriptsRemoveScriptPermission**
 > void ScriptsRemoveScriptPermission (string applicationName, string databaseName, string scriptName, string userGroupId, bool group)
 
@@ -1143,7 +1143,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptsrenamescript"></a>
+<a id="scriptsrenamescript"></a>
 # **ScriptsRenameScript**
 > Script ScriptsRenameScript (string applicationName, string databaseName, ScriptCopy body)
 
@@ -1245,7 +1245,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="scriptsvalidatescript"></a>
+<a id="scriptsvalidatescript"></a>
 # **ScriptsValidateScript**
 > void ScriptsValidateScript (string applicationName, string databaseName, Script body, string file = null)
 

@@ -102,14 +102,6 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'DatabaseType'
         }
         /// <summary>
-        /// Test the property 'DbType'
-        /// </summary>
-        [Fact]
-        public void DbTypeTest()
-        {
-            // TODO unit test for the property 'DbType'
-        }
-        /// <summary>
         /// Test the property 'AppType'
         /// </summary>
         [Fact]
@@ -124,6 +116,14 @@ namespace EssSharp.Test.Model
         public void MemberPrefixTest()
         {
             // TODO unit test for the property 'MemberPrefix'
+        }
+        /// <summary>
+        /// Test the property 'DbType'
+        /// </summary>
+        [Fact]
+        public void DbTypeTest()
+        {
+            // TODO unit test for the property 'DbType'
         }
 
     }

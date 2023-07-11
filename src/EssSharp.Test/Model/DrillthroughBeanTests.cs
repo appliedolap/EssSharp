@@ -62,12 +62,12 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'Links'
         }
         /// <summary>
-        /// Test the property 'ColumnMapping'
+        /// Test the property 'UseTempTables'
         /// </summary>
         [Fact]
-        public void ColumnMappingTest()
+        public void UseTempTablesTest()
         {
-            // TODO unit test for the property 'ColumnMapping'
+            // TODO unit test for the property 'UseTempTables'
         }
         /// <summary>
         /// Test the property 'ParameterMapping'
@@ -78,20 +78,20 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'ParameterMapping'
         }
         /// <summary>
+        /// Test the property 'ColumnMapping'
+        /// </summary>
+        [Fact]
+        public void ColumnMappingTest()
+        {
+            // TODO unit test for the property 'ColumnMapping'
+        }
+        /// <summary>
         /// Test the property 'DrillableRegions'
         /// </summary>
         [Fact]
         public void DrillableRegionsTest()
         {
             // TODO unit test for the property 'DrillableRegions'
-        }
-        /// <summary>
-        /// Test the property 'UseTempTables'
-        /// </summary>
-        [Fact]
-        public void UseTempTablesTest()
-        {
-            // TODO unit test for the property 'UseTempTables'
         }
         /// <summary>
         /// Test the property 'Columns'

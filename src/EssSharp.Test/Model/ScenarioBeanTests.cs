@@ -70,14 +70,6 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'ScenarioUser'
         }
         /// <summary>
-        /// Test the property 'Database'
-        /// </summary>
-        [Fact]
-        public void DatabaseTest()
-        {
-            // TODO unit test for the property 'Database'
-        }
-        /// <summary>
         /// Test the property 'Scripts'
         /// </summary>
         [Fact]
@@ -108,14 +100,6 @@ namespace EssSharp.Test.Model
         public void DueDateTest()
         {
             // TODO unit test for the property 'DueDate'
-        }
-        /// <summary>
-        /// Test the property 'UseCalculatedValues'
-        /// </summary>
-        [Fact]
-        public void UseCalculatedValuesTest()
-        {
-            // TODO unit test for the property 'UseCalculatedValues'
         }
         /// <summary>
         /// Test the property 'Overdue'
@@ -158,12 +142,28 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'RefreshedTime'
         }
         /// <summary>
+        /// Test the property 'UseCalculatedValues'
+        /// </summary>
+        [Fact]
+        public void UseCalculatedValuesTest()
+        {
+            // TODO unit test for the property 'UseCalculatedValues'
+        }
+        /// <summary>
         /// Test the property 'CommentsCount'
         /// </summary>
         [Fact]
         public void CommentsCountTest()
         {
             // TODO unit test for the property 'CommentsCount'
+        }
+        /// <summary>
+        /// Test the property 'Database'
+        /// </summary>
+        [Fact]
+        public void DatabaseTest()
+        {
+            // TODO unit test for the property 'Database'
         }
         /// <summary>
         /// Test the property 'Application'

@@ -10,7 +10,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationSettingsStatisticsGetStatistics**](ApplicationSettingsAndStatisticsApi.md#applicationsettingsstatisticsgetstatistics) | **GET** /applications/{applicationName}/statistics | Get Application Statistics |
 | [**ApplicationSettingsStatisticsUpdateSettings**](ApplicationSettingsAndStatisticsApi.md#applicationsettingsstatisticsupdatesettings) | **PATCH** /applications/{applicationName}/settings | Update Application Settings |
 
-<a name="applicationsettingsstatisticsgetsecuritysettings"></a>
+<a id="applicationsettingsstatisticsgetsecuritysettings"></a>
 # **ApplicationSettingsStatisticsGetSecuritySettings**
 > AppSecuritySettings ApplicationSettingsStatisticsGetSecuritySettings (string applicationName)
 
@@ -107,7 +107,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsettingsstatisticsgetsettings"></a>
+<a id="applicationsettingsstatisticsgetsettings"></a>
 # **ApplicationSettingsStatisticsGetSettings**
 > AppSettingsList ApplicationSettingsStatisticsGetSettings (string applicationName, string expand = null)
 
@@ -206,7 +206,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsettingsstatisticsgetstartupsettings"></a>
+<a id="applicationsettingsstatisticsgetstartupsettings"></a>
 # **ApplicationSettingsStatisticsGetStartupSettings**
 > AppStartupSettings ApplicationSettingsStatisticsGetStartupSettings (string applicationName)
 
@@ -303,7 +303,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsettingsstatisticsgetstatistics"></a>
+<a id="applicationsettingsstatisticsgetstatistics"></a>
 # **ApplicationSettingsStatisticsGetStatistics**
 > ApplicationStatistics ApplicationSettingsStatisticsGetStatistics (string applicationName)
 
@@ -400,7 +400,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="applicationsettingsstatisticsupdatesettings"></a>
+<a id="applicationsettingsstatisticsupdatesettings"></a>
 # **ApplicationSettingsStatisticsUpdateSettings**
 > void ApplicationSettingsStatisticsUpdateSettings (string applicationName, List<PatchElement> body)
 

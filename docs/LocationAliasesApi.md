@@ -10,7 +10,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**LocationAliasesGetLocationAliases**](LocationAliasesApi.md#locationaliasesgetlocationaliases) | **GET** /applications/{applicationName}/databases/{databaseName}/locationaliases | Get Location Alias |
 | [**LocationAliasesUpdate**](LocationAliasesApi.md#locationaliasesupdate) | **PATCH** /applications/{applicationName}/databases/{databaseName}/locationaliases/{aliasName} | Update Location Alias |
 
-<a name="locationaliasescreate"></a>
+<a id="locationaliasescreate"></a>
 # **LocationAliasesCreate**
 > void LocationAliasesCreate (string applicationName, string databaseName, LocationAliasBean body)
 
@@ -107,7 +107,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="locationaliasesdelete"></a>
+<a id="locationaliasesdelete"></a>
 # **LocationAliasesDelete**
 > void LocationAliasesDelete (string applicationName, string databaseName, string aliasName)
 
@@ -204,7 +204,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="locationaliasesgetlocationalias"></a>
+<a id="locationaliasesgetlocationalias"></a>
 # **LocationAliasesGetLocationAlias**
 > LocationAliasBean LocationAliasesGetLocationAlias (string applicationName, string databaseName, string aliasName)
 
@@ -305,7 +305,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="locationaliasesgetlocationaliases"></a>
+<a id="locationaliasesgetlocationaliases"></a>
 # **LocationAliasesGetLocationAliases**
 > LocationAliasList LocationAliasesGetLocationAliases (string applicationName, string databaseName, int? offset = null, int? limit = null, string serverName = null, string applicationName2 = null, string databaseName2 = null)
 
@@ -414,7 +414,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="locationaliasesupdate"></a>
+<a id="locationaliasesupdate"></a>
 # **LocationAliasesUpdate**
 > void LocationAliasesUpdate (string applicationName, string databaseName, string aliasName, LocationAliasBean body)
 

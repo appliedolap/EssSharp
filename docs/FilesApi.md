@@ -4,10 +4,10 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**FilesAbortUpload**](FilesApi.md#filesabortupload) | **DELETE** /files/abort/{path} | Abort File Upload |
+| [**FilesAbortUpload**](FilesApi.md#filesabortupload) | **DELETE** /files/abort/{path} | Abort Multipart File Upload |
 | [**FilesAddFile**](FilesApi.md#filesaddfile) | **PUT** /files/{path} | Upload File or Create Folder |
 | [**FilesCopyResource**](FilesApi.md#filescopyresource) | **POST** /files/actions/copy | Copy File |
-| [**FilesCreateUpload**](FilesApi.md#filescreateupload) | **POST** /files/upload-create/{path} | Create Upload |
+| [**FilesCreateUpload**](FilesApi.md#filescreateupload) | **POST** /files/upload-create/{path} | Create Multipart File Upload |
 | [**FilesDeleteFile**](FilesApi.md#filesdeletefile) | **DELETE** /files/{path} | Delete File or Folder |
 | [**FilesExtract**](FilesApi.md#filesextract) | **POST** /files/actions/extract | Extract Zip File |
 | [**FilesGetSharedPath**](FilesApi.md#filesgetsharedpath) | **GET** /files/sharedpath | Get Shared Path |
@@ -15,17 +15,17 @@ All URIs are relative to */essbase/rest/v1*
 | [**FilesListFiles**](FilesApi.md#fileslistfiles) | **GET** /files/{path} | List or Download Files |
 | [**FilesListRootFolders**](FilesApi.md#fileslistrootfolders) | **GET** /files | List Root Folders |
 | [**FilesMoveResource**](FilesApi.md#filesmoveresource) | **POST** /files/actions/move | Move or Rename File |
-| [**FilesUploadCommit**](FilesApi.md#filesuploadcommit) | **POST** /files/upload-commit/{path} | Upload Commit |
-| [**FilesUploadPart**](FilesApi.md#filesuploadpart) | **PUT** /files/upload-part/{path} | Upload the part |
+| [**FilesUploadCommit**](FilesApi.md#filesuploadcommit) | **POST** /files/upload-commit/{path} | Commit Partial File Upload |
+| [**FilesUploadPart**](FilesApi.md#filesuploadpart) | **PUT** /files/upload-part/{path} | Upload File Part |
 | [**GetUploadConfig**](FilesApi.md#getuploadconfig) | **GET** /files/uploadconfig |  |
 
-<a name="filesabortupload"></a>
+<a id="filesabortupload"></a>
 # **FilesAbortUpload**
 > void FilesAbortUpload (string path, string uploadId)
 
-Abort File Upload
+Abort Multipart File Upload
 
-<p>Abort file upload api , abort the upload operation of a file and delete all the uploaded parts.</p>
+<p>Terminate the multipart upload operation of a file and delete all the uploaded parts.</p>
 
 ### Example
 ```csharp
@@ -49,11 +49,11 @@ namespace Example
 
             var apiInstance = new FilesApi(config);
             var path = "path_example";  // string | <p>File Path to abort</p>
-            var uploadId = "uploadId_example";  // string | <p>Upload Id of file to abort</p>
+            var uploadId = "uploadId_example";  // string | <p>Upload ID of partial file upload initiation.</p>
 
             try
             {
-                // Abort File Upload
+                // Abort Multipart File Upload
                 apiInstance.FilesAbortUpload(path, uploadId);
             }
             catch (ApiException  e)
@@ -73,7 +73,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Abort File Upload
+    // Abort Multipart File Upload
     apiInstance.FilesAbortUploadWithHttpInfo(path, uploadId);
 }
 catch (ApiException e)
@@ -89,7 +89,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **path** | **string** | &lt;p&gt;File Path to abort&lt;/p&gt; |  |
-| **uploadId** | **string** | &lt;p&gt;Upload Id of file to abort&lt;/p&gt; |  |
+| **uploadId** | **string** | &lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -108,12 +108,12 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | &lt;p&gt;&lt;strong&gt;No Content&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The file upload operation abort successfully.&lt;/p&gt; |  -  |
+| **204** | &lt;p&gt;&lt;strong&gt;No Content&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The file upload operation was terminated successfully.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filesaddfile"></a>
+<a id="filesaddfile"></a>
 # **FilesAddFile**
 > GenericEntity FilesAddFile (string path, bool overwrite, System.IO.Stream stream, bool? append = null)
 
@@ -216,7 +216,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filescopyresource"></a>
+<a id="filescopyresource"></a>
 # **FilesCopyResource**
 > void FilesCopyResource (FilePathDetail body, bool? overwrite = null)
 
@@ -311,13 +311,13 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filescreateupload"></a>
+<a id="filescreateupload"></a>
 # **FilesCreateUpload**
 > CreateFilePartUploadResponse FilesCreateUpload (string path, bool overwrite, bool append)
 
-Create Upload
+Create Multipart File Upload
 
-Initialize file upload in parts by registering the file, it returns unique upload id , which must be included in any request related to this file part upload.
+<p>Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.</p><p>Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.</p>
 
 ### Example
 ```csharp
@@ -340,13 +340,13 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new FilesApi(config);
-            var path = "path_example";  // string | <p>Catalog path</p>
-            var overwrite = false;  // bool | <p>Overwrite the file</p> (default to false)
-            var append = false;  // bool | <p>Append</p> (default to false)
+            var path = "path_example";  // string | <p>Catalog path of the folder to which you want to upload the file.</p>
+            var overwrite = false;  // bool | <p>Overwrite if file exists?</p> (default to false)
+            var append = false;  // bool | <p>Append to an existing file?</p> (default to false)
 
             try
             {
-                // Create Upload
+                // Create Multipart File Upload
                 CreateFilePartUploadResponse result = apiInstance.FilesCreateUpload(path, overwrite, append);
                 Debug.WriteLine(result);
             }
@@ -367,7 +367,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create Upload
+    // Create Multipart File Upload
     ApiResponse<CreateFilePartUploadResponse> response = apiInstance.FilesCreateUploadWithHttpInfo(path, overwrite, append);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -385,9 +385,9 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **path** | **string** | &lt;p&gt;Catalog path&lt;/p&gt; |  |
-| **overwrite** | **bool** | &lt;p&gt;Overwrite the file&lt;/p&gt; | [default to false] |
-| **append** | **bool** | &lt;p&gt;Append&lt;/p&gt; | [default to false] |
+| **path** | **string** | &lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt; |  |
+| **overwrite** | **bool** | &lt;p&gt;Overwrite if file exists?&lt;/p&gt; | [default to false] |
+| **append** | **bool** | &lt;p&gt;Append to an existing file?&lt;/p&gt; | [default to false] |
 
 ### Return type
 
@@ -406,13 +406,13 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Registered file successfully. Returns unique id.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;File registered successfully. Returns unique ID.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Logged in user may not have appropriate permissions, or the file may already exist.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filesdeletefile"></a>
+<a id="filesdeletefile"></a>
 # **FilesDeleteFile**
 > void FilesDeleteFile (string path)
 
@@ -505,7 +505,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filesextract"></a>
+<a id="filesextract"></a>
 # **FilesExtract**
 > void FilesExtract (ZipFileDetails body, bool? overwrite = null)
 
@@ -600,7 +600,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filesgetsharedpath"></a>
+<a id="filesgetsharedpath"></a>
 # **FilesGetSharedPath**
 > string FilesGetSharedPath ()
 
@@ -692,7 +692,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filesgetuserhomepath"></a>
+<a id="filesgetuserhomepath"></a>
 # **FilesGetUserHomePath**
 > string FilesGetUserHomePath ()
 
@@ -784,7 +784,7 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="fileslistfiles"></a>
+<a id="fileslistfiles"></a>
 # **FilesListFiles**
 > FileCollectionResponse FilesListFiles (string path, int? offset = null, int? limit = null, string type = null, bool? overwrite = null, string action = null, long? fileSize = null, string filter = null, bool? recursive = null)
 
@@ -897,7 +897,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="fileslistrootfolders"></a>
+<a id="fileslistrootfolders"></a>
 # **FilesListRootFolders**
 > FileCollectionResponse FilesListRootFolders (string filter = null, bool? recursive = null)
 
@@ -996,7 +996,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filesmoveresource"></a>
+<a id="filesmoveresource"></a>
 # **FilesMoveResource**
 > void FilesMoveResource (FilePathDetail body, bool? overwrite = null)
 
@@ -1091,13 +1091,13 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filesuploadcommit"></a>
+<a id="filesuploadcommit"></a>
 # **FilesUploadCommit**
 > CommitFilePartUploadResponse FilesUploadCommit (string path, string uploadId = null, Dictionary<string, string> body = null)
 
-Upload Commit
+Commit Partial File Upload
 
-<p>Commit the upload. Include the part number and corresponding ETag value for each part.</p>
+<p>Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.</p>
 
 ### Example
 ```csharp
@@ -1126,7 +1126,7 @@ namespace Example
 
             try
             {
-                // Upload Commit
+                // Commit Partial File Upload
                 CommitFilePartUploadResponse result = apiInstance.FilesUploadCommit(path, uploadId, body);
                 Debug.WriteLine(result);
             }
@@ -1147,7 +1147,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Upload Commit
+    // Commit Partial File Upload
     ApiResponse<CommitFilePartUploadResponse> response = apiInstance.FilesUploadCommitWithHttpInfo(path, uploadId, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -1192,13 +1192,13 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="filesuploadpart"></a>
+<a id="filesuploadpart"></a>
 # **FilesUploadPart**
 > UploadFilePartResponse FilesUploadPart (string path, int partNum, string uploadId)
 
-Upload the part
+Upload File Part
 
-Upload Part request for each object part upload. It should contain upload ID.
+<p>Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.</p>
 
 ### Example
 ```csharp
@@ -1221,13 +1221,13 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new FilesApi(config);
-            var path = "path_example";  // string | <p>Catalog Path </p>
-            var partNum = 56;  // int | <p>Part Number</p>
-            var uploadId = "uploadId_example";  // string | <p>Upload Id</p>
+            var path = "path_example";  // string | <p>Catalog path of the folder to which you want to upload the file.</p>
+            var partNum = 56;  // int | <p>Part number for partial file upload.</p>
+            var uploadId = "uploadId_example";  // string | <p>Upload ID of partial file upload initiation.</p>
 
             try
             {
-                // Upload the part
+                // Upload File Part
                 UploadFilePartResponse result = apiInstance.FilesUploadPart(path, partNum, uploadId);
                 Debug.WriteLine(result);
             }
@@ -1248,7 +1248,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Upload the part
+    // Upload File Part
     ApiResponse<UploadFilePartResponse> response = apiInstance.FilesUploadPartWithHttpInfo(path, partNum, uploadId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -1266,9 +1266,9 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **path** | **string** | &lt;p&gt;Catalog Path &lt;/p&gt; |  |
-| **partNum** | **int** | &lt;p&gt;Part Number&lt;/p&gt; |  |
-| **uploadId** | **string** | &lt;p&gt;Upload Id&lt;/p&gt; |  |
+| **path** | **string** | &lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt; |  |
+| **partNum** | **int** | &lt;p&gt;Part number for partial file upload.&lt;/p&gt; |  |
+| **uploadId** | **string** | &lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -1293,7 +1293,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="getuploadconfig"></a>
+<a id="getuploadconfig"></a>
 # **GetUploadConfig**
 > void GetUploadConfig ()
 

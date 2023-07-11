@@ -54,22 +54,6 @@ namespace EssSharp.Test.Model
 
 
         /// <summary>
-        /// Test the property 'Zero'
-        /// </summary>
-        [Fact]
-        public void ZeroTest()
-        {
-            // TODO unit test for the property 'Zero'
-        }
-        /// <summary>
-        /// Test the property 'Missing'
-        /// </summary>
-        [Fact]
-        public void MissingTest()
-        {
-            // TODO unit test for the property 'Missing'
-        }
-        /// <summary>
         /// Test the property 'UnderScore'
         /// </summary>
         [Fact]
@@ -100,6 +84,22 @@ namespace EssSharp.Test.Model
         public void EmptyBlocksTest()
         {
             // TODO unit test for the property 'EmptyBlocks'
+        }
+        /// <summary>
+        /// Test the property 'Zero'
+        /// </summary>
+        [Fact]
+        public void ZeroTest()
+        {
+            // TODO unit test for the property 'Zero'
+        }
+        /// <summary>
+        /// Test the property 'Missing'
+        /// </summary>
+        [Fact]
+        public void MissingTest()
+        {
+            // TODO unit test for the property 'Missing'
         }
         /// <summary>
         /// Test the property 'Invalid'

@@ -128,7 +128,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt;</param>
+        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt;</param>
         /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
@@ -145,7 +145,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt;</param>
+        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt;</param>
         /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
@@ -347,7 +347,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt;</param>
+        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt;</param>
         /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
@@ -365,7 +365,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt;</param>
+        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt;</param>
         /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
@@ -1231,7 +1231,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt;</param>
+        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt;</param>
         /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
@@ -1249,7 +1249,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt;</param>
+        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt;</param>
         /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
@@ -1344,7 +1344,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt;</param>
+        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt;</param>
         /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
@@ -1363,7 +1363,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name).&lt;/p&gt;</param>
+        /// <param name="memberUniqueName">&lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt;</param>
         /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>

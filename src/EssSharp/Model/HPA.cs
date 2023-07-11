@@ -32,13 +32,21 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="HPA" /> class.
         /// </summary>
+        /// <param name="maxFileCount">maxFileCount.</param>
         /// <param name="interval">interval.</param>
         /// <param name="enabled">enabled.</param>
-        public HPA(long interval = default(long), bool enabled = default(bool))
+        public HPA(long maxFileCount = default(long), long interval = default(long), bool enabled = default(bool))
         {
+            this.MaxFileCount = maxFileCount;
             this.Interval = interval;
             this.Enabled = enabled;
         }
+
+        /// <summary>
+        /// Gets or Sets MaxFileCount
+        /// </summary>
+        [DataMember(Name = "maxFileCount", EmitDefaultValue = false)]
+        public long MaxFileCount { get; set; }
 
         /// <summary>
         /// Gets or Sets Interval
@@ -60,6 +68,7 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class HPA {\n");
+            sb.Append("  MaxFileCount: ").Append(MaxFileCount).Append("\n");
             sb.Append("  Interval: ").Append(Interval).Append("\n");
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
             sb.Append("}\n");
@@ -98,6 +107,10 @@ namespace EssSharp.Model
             }
             return 
                 (
+                    this.MaxFileCount == input.MaxFileCount ||
+                    this.MaxFileCount.Equals(input.MaxFileCount)
+                ) && 
+                (
                     this.Interval == input.Interval ||
                     this.Interval.Equals(input.Interval)
                 ) && 
@@ -116,6 +129,7 @@ namespace EssSharp.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                hashCode = (hashCode * 59) + this.MaxFileCount.GetHashCode();
                 hashCode = (hashCode * 59) + this.Interval.GetHashCode();
                 hashCode = (hashCode * 59) + this.Enabled.GetHashCode();
                 return hashCode;
@@ -127,7 +141,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

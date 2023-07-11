@@ -54,6 +54,14 @@ namespace EssSharp.Test.Model
 
 
         /// <summary>
+        /// Test the property 'MaxFileCount'
+        /// </summary>
+        [Fact]
+        public void MaxFileCountTest()
+        {
+            // TODO unit test for the property 'MaxFileCount'
+        }
+        /// <summary>
         /// Test the property 'Interval'
         /// </summary>
         [Fact]

@@ -6,7 +6,7 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**RolesGetRoles**](RolesApi.md#rolesgetroles) | **GET** /roles | Get Essbase Roles |
 
-<a name="rolesgetroles"></a>
+<a id="rolesgetroles"></a>
 # **RolesGetRoles**
 > Roles RolesGetRoles (string type = null)
 

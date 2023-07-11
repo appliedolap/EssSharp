@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Indentation** | **string** |  | [optional] 
+**RemoveUnSelectedGroup** | **bool** |  | [optional] 
 **IncludeDescriptionLabel** | **bool** |  | [optional] 
 **MissingText** | **string** |  | [optional] 
 **NoAccessText** | **string** |  | [optional] 
 **FormulaRetention** | [**FormulaRetention**](FormulaRetention.md) |  | [optional] 
 **MaxColumns** | **long** |  | [optional] 
-**RemoveUnSelectedGroup** | **bool** |  | [optional] 
 **RowSupression** | [**RowSuppression**](RowSuppression.md) |  | [optional] 
 **ColumnSupression** | [**ColumnSuppression**](ColumnSuppression.md) |  | [optional] 
 **CellText** | **bool** |  | [optional] 

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **MeasuresDimensionName** | **string** |  | [optional] 
 **SchemaName** | **string** |  | [optional] 
 **FactTableName** | **string** |  | [optional] 
+**IsFactManagedByFederatedCube** | **bool** |  | [optional] 
 **EssbaseToColumnMap** | [**EsbToColMap**](EsbToColMap.md) |  | [optional] 
 **EssbaseToDataSourceMap** | [**EssToDsMapDTO**](EssToDsMapDTO.md) |  | [optional] 
 **AlterCredentials** | **bool** |  | [optional] 

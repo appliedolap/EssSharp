@@ -15,7 +15,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**VariablesListAppVariables**](VariablesApi.md#variableslistappvariables) | **GET** /applications/{applicationName}/variables | Get Application Variables |
 | [**VariablesListVariables**](VariablesApi.md#variableslistvariables) | **GET** /applications/{applicationName}/databases/{databaseName}/variables | Get Database Variables |
 
-<a name="variablescreateappvariable"></a>
+<a id="variablescreateappvariable"></a>
 # **VariablesCreateAppVariable**
 > Variable VariablesCreateAppVariable (string applicationName, Variable body)
 
@@ -115,7 +115,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variablescreatevariable"></a>
+<a id="variablescreatevariable"></a>
 # **VariablesCreateVariable**
 > Variable VariablesCreateVariable (string applicationName, string databaseName, Variable body)
 
@@ -217,7 +217,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variablesdeleteappvariable"></a>
+<a id="variablesdeleteappvariable"></a>
 # **VariablesDeleteAppVariable**
 > void VariablesDeleteAppVariable (string applicationName, string variableName)
 
@@ -312,7 +312,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variablesdeletevariable"></a>
+<a id="variablesdeletevariable"></a>
 # **VariablesDeleteVariable**
 > void VariablesDeleteVariable (string applicationName, string databaseName, string variableName)
 
@@ -409,7 +409,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variableseditappvariable"></a>
+<a id="variableseditappvariable"></a>
 # **VariablesEditAppVariable**
 > Variable VariablesEditAppVariable (string applicationName, string variableName, Variable body)
 
@@ -511,7 +511,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variableseditvariable"></a>
+<a id="variableseditvariable"></a>
 # **VariablesEditVariable**
 > Variable VariablesEditVariable (string applicationName, string databaseName, string variableName, Variable body)
 
@@ -615,7 +615,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variablesgetappvariable"></a>
+<a id="variablesgetappvariable"></a>
 # **VariablesGetAppVariable**
 > Variable VariablesGetAppVariable (string applicationName, string variableName)
 
@@ -714,7 +714,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variablesgetvariable"></a>
+<a id="variablesgetvariable"></a>
 # **VariablesGetVariable**
 > Variable VariablesGetVariable (string applicationName, string databaseName, string variableName)
 
@@ -815,7 +815,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variableslistappvariables"></a>
+<a id="variableslistappvariables"></a>
 # **VariablesListAppVariables**
 > VariableList VariablesListAppVariables (string applicationName)
 
@@ -912,7 +912,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="variableslistvariables"></a>
+<a id="variableslistvariables"></a>
 # **VariablesListVariables**
 > VariableList VariablesListVariables (string applicationName, string databaseName)
 

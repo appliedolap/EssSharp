@@ -12,7 +12,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DimensionsListDimLevels**](DimensionsApi.md#dimensionslistdimlevels) | **GET** /applications/{applicationName}/databases/{databaseName}/dimensions/{dimensionName}/levels | List Levels |
 | [**DimensionsListDimensions**](DimensionsApi.md#dimensionslistdimensions) | **GET** /applications/{applicationName}/databases/{databaseName}/dimensions | List Dimensions |
 
-<a name="dimensionseditdimgenerations"></a>
+<a id="dimensionseditdimgenerations"></a>
 # **DimensionsEditDimGenerations**
 > GenerationLevel DimensionsEditDimGenerations (string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body)
 
@@ -118,7 +118,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionseditdimlevels"></a>
+<a id="dimensionseditdimlevels"></a>
 # **DimensionsEditDimLevels**
 > GenerationLevel DimensionsEditDimLevels (string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body)
 
@@ -224,7 +224,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionsgetdimgenerations"></a>
+<a id="dimensionsgetdimgenerations"></a>
 # **DimensionsGetDimGenerations**
 > GenerationLevel DimensionsGetDimGenerations (string applicationName, string databaseName, string dimensionName, int generationNumber)
 
@@ -327,7 +327,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionsgetdimlevels"></a>
+<a id="dimensionsgetdimlevels"></a>
 # **DimensionsGetDimLevels**
 > GenerationLevel DimensionsGetDimLevels (string applicationName, string databaseName, string dimensionName, int levelNumber)
 
@@ -430,7 +430,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionslistdimgenerations"></a>
+<a id="dimensionslistdimgenerations"></a>
 # **DimensionsListDimGenerations**
 > GenerationLevelList DimensionsListDimGenerations (string applicationName, string databaseName, string dimensionName)
 
@@ -531,7 +531,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionslistdimlevels"></a>
+<a id="dimensionslistdimlevels"></a>
 # **DimensionsListDimLevels**
 > GenerationLevelList DimensionsListDimLevels (string applicationName, string databaseName, string dimensionName)
 
@@ -632,7 +632,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionslistdimensions"></a>
+<a id="dimensionslistdimensions"></a>
 # **DimensionsListDimensions**
 > DimensionList DimensionsListDimensions (string applicationName, string databaseName)
 

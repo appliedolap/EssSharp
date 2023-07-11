@@ -8,9 +8,9 @@ All URIs are relative to */essbase/rest/v1*
 | [**DimensionBuildEndDimBuild**](StreamingDimensionBuildApi.md#dimensionbuildenddimbuild) | **DELETE** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId}/{ruleFileName} | End Dimension Build |
 | [**DimensionBuildStart**](StreamingDimensionBuildApi.md#dimensionbuildstart) | **POST** /applications/{applicationName}/databases/{databaseName}/dimbuild | Start Streaming Dimension Build |
 | [**DimensionBuildStartDimBuild**](StreamingDimensionBuildApi.md#dimensionbuildstartdimbuild) | **POST** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId}/{ruleFileName} | Start Dimension Build&lt;/p&gt; |
-| [**DimensionBuildStreamDimBuildData**](StreamingDimensionBuildApi.md#dimensionbuildstreamdimbuilddata) | **POST** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId} | Push Data |
+| [**DimensionBuildStreamDimBuildData**](StreamingDimensionBuildApi.md#dimensionbuildstreamdimbuilddata) | **POST** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId} | Push Dimensions |
 
-<a name="dimensionbuildend"></a>
+<a id="dimensionbuildend"></a>
 # **DimensionBuildEnd**
 > StreamProcessEndResponse DimensionBuildEnd (string applicationName, string databaseName, string streamId)
 
@@ -111,7 +111,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionbuildenddimbuild"></a>
+<a id="dimensionbuildenddimbuild"></a>
 # **DimensionBuildEndDimBuild**
 > StreamProcessEndResponse DimensionBuildEndDimBuild (string applicationName, string databaseName, string streamId, string ruleFileName)
 
@@ -214,7 +214,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionbuildstart"></a>
+<a id="dimensionbuildstart"></a>
 # **DimensionBuildStart**
 > StreamProcessStartResponse DimensionBuildStart (string applicationName, string databaseName, DimBuildStartPayload body = null)
 
@@ -315,7 +315,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionbuildstartdimbuild"></a>
+<a id="dimensionbuildstartdimbuild"></a>
 # **DimensionBuildStartDimBuild**
 > StreamProcessStartResponse DimensionBuildStartDimBuild (string applicationName, string databaseName, string streamId, string ruleFileName)
 
@@ -418,11 +418,11 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="dimensionbuildstreamdimbuilddata"></a>
+<a id="dimensionbuildstreamdimbuilddata"></a>
 # **DimensionBuildStreamDimBuildData**
 > StreamProcessStartResponse DimensionBuildStreamDimBuildData (string applicationName, string databaseName, string streamId, string body = null)
 
-Push Data
+Push Dimensions
 
 <p>Pushes data for streaming dimension build.</p>
 
@@ -454,7 +454,7 @@ namespace Example
 
             try
             {
-                // Push Data
+                // Push Dimensions
                 StreamProcessStartResponse result = apiInstance.DimensionBuildStreamDimBuildData(applicationName, databaseName, streamId, body);
                 Debug.WriteLine(result);
             }
@@ -475,7 +475,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Push Data
+    // Push Dimensions
     ApiResponse<StreamProcessStartResponse> response = apiInstance.DimensionBuildStreamDimBuildDataWithHttpInfo(applicationName, databaseName, streamId, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

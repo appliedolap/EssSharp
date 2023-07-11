@@ -18,7 +18,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**GroupsSearch**](GroupsApi.md#groupssearch) | **GET** /groups | Search or Export Groups |
 | [**UsersDeleteGroups**](GroupsApi.md#usersdeletegroups) | **POST** /groups/actions/delete | Delete Groups in File |
 
-<a name="groupsadd"></a>
+<a id="groupsadd"></a>
 # **GroupsAdd**
 > GroupBean GroupsAdd (GroupBean body)
 
@@ -115,7 +115,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsaddgroupmemberstogroup"></a>
+<a id="groupsaddgroupmemberstogroup"></a>
 # **GroupsAddGroupMembersToGroup**
 > UserBean GroupsAddGroupMembersToGroup (string id, List<string> body)
 
@@ -214,7 +214,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsaddusermemberstogroup"></a>
+<a id="groupsaddusermemberstogroup"></a>
 # **GroupsAddUserMembersToGroup**
 > UserBean GroupsAddUserMembersToGroup (string id, List<string> body)
 
@@ -313,7 +313,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsdelete"></a>
+<a id="groupsdelete"></a>
 # **GroupsDelete**
 > void GroupsDelete (string id)
 
@@ -406,7 +406,7 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsedit"></a>
+<a id="groupsedit"></a>
 # **GroupsEdit**
 > GroupBean GroupsEdit (string id, GroupBean body)
 
@@ -505,7 +505,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsget"></a>
+<a id="groupsget"></a>
 # **GroupsGet**
 > GroupBean GroupsGet (string id)
 
@@ -603,7 +603,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsgetgroupmembersofgroup"></a>
+<a id="groupsgetgroupmembersofgroup"></a>
 # **GroupsGetGroupMembersOfGroup**
 > Groups GroupsGetGroupMembersOfGroup (string id)
 
@@ -700,7 +700,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsgetmembers"></a>
+<a id="groupsgetmembers"></a>
 # **GroupsGetMembers**
 > UserBean GroupsGetMembers (string id)
 
@@ -795,7 +795,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsgetusermembersofgroup"></a>
+<a id="groupsgetusermembersofgroup"></a>
 # **GroupsGetUserMembersOfGroup**
 > Users GroupsGetUserMembersOfGroup (string id)
 
@@ -892,7 +892,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsremovegroupmembersfromgroup"></a>
+<a id="groupsremovegroupmembersfromgroup"></a>
 # **GroupsRemoveGroupMembersFromGroup**
 > UserBean GroupsRemoveGroupMembersFromGroup (string id, List<string> body)
 
@@ -991,7 +991,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupsremoveusermembersfromgroup"></a>
+<a id="groupsremoveusermembersfromgroup"></a>
 # **GroupsRemoveUserMembersFromGroup**
 > UserBean GroupsRemoveUserMembersFromGroup (string id, List<string> body)
 
@@ -1090,7 +1090,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="groupssearch"></a>
+<a id="groupssearch"></a>
 # **GroupsSearch**
 > Groups GroupsSearch (string filter = null, int? limit = null, string expand = null)
 
@@ -1191,7 +1191,7 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a name="usersdeletegroups"></a>
+<a id="usersdeletegroups"></a>
 # **UsersDeleteGroups**
 > Object UsersDeleteGroups ()
 

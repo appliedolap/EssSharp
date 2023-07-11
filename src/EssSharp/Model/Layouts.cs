@@ -32,17 +32,17 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Layouts" /> class.
         /// </summary>
-        /// <param name="hasMore">hasMore.</param>
         /// <param name="totalResults">totalResults.</param>
+        /// <param name="hasMore">hasMore.</param>
         /// <param name="count">count.</param>
         /// <param name="items">items.</param>
         /// <param name="limit">limit.</param>
         /// <param name="properties">properties.</param>
         /// <param name="offset">offset.</param>
-        public Layouts(bool hasMore = default(bool), long totalResults = default(long), long count = default(long), List<LayoutMetadata> items = default(List<LayoutMetadata>), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
+        public Layouts(long totalResults = default(long), bool hasMore = default(bool), long count = default(long), List<LayoutMetadata> items = default(List<LayoutMetadata>), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
         {
-            this.HasMore = hasMore;
             this.TotalResults = totalResults;
+            this.HasMore = hasMore;
             this.Count = count;
             this.Items = items;
             this.Limit = limit;
@@ -51,16 +51,16 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Gets or Sets HasMore
-        /// </summary>
-        [DataMember(Name = "hasMore", EmitDefaultValue = true)]
-        public bool HasMore { get; set; }
-
-        /// <summary>
         /// Gets or Sets TotalResults
         /// </summary>
         [DataMember(Name = "totalResults", EmitDefaultValue = false)]
         public long TotalResults { get; set; }
+
+        /// <summary>
+        /// Gets or Sets HasMore
+        /// </summary>
+        [DataMember(Name = "hasMore", EmitDefaultValue = true)]
+        public bool HasMore { get; set; }
 
         /// <summary>
         /// Gets or Sets Count
@@ -100,8 +100,8 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Layouts {\n");
-            sb.Append("  HasMore: ").Append(HasMore).Append("\n");
             sb.Append("  TotalResults: ").Append(TotalResults).Append("\n");
+            sb.Append("  HasMore: ").Append(HasMore).Append("\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
             sb.Append("  Items: ").Append(Items).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
@@ -143,12 +143,12 @@ namespace EssSharp.Model
             }
             return 
                 (
-                    this.HasMore == input.HasMore ||
-                    this.HasMore.Equals(input.HasMore)
-                ) && 
-                (
                     this.TotalResults == input.TotalResults ||
                     this.TotalResults.Equals(input.TotalResults)
+                ) && 
+                (
+                    this.HasMore == input.HasMore ||
+                    this.HasMore.Equals(input.HasMore)
                 ) && 
                 (
                     this.Count == input.Count ||
@@ -185,8 +185,8 @@ namespace EssSharp.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                hashCode = (hashCode * 59) + this.HasMore.GetHashCode();
                 hashCode = (hashCode * 59) + this.TotalResults.GetHashCode();
+                hashCode = (hashCode * 59) + this.HasMore.GetHashCode();
                 hashCode = (hashCode * 59) + this.Count.GetHashCode();
                 if (this.Items != null)
                 {
@@ -207,7 +207,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        public IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> Validate(ValidationContext validationContext)
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

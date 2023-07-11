@@ -6,7 +6,7 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**PreferencesGet**](PreferencesApi.md#preferencesget) | **GET** /preferences | Get User Preferences |
 
-<a name="preferencesget"></a>
+<a id="preferencesget"></a>
 # **PreferencesGet**
 > Preference PreferencesGet ()
 
