@@ -20,7 +20,7 @@ namespace EssSharp
         public EssCubeType CubeType { get; }
 
         /// <summary>
-        /// Synchronously clears data from a cube.
+        /// Clears data from a cube.
         /// </summary>
         /// <param name="options"></param>
         public void ClearDataFromCube( EssJobClearDataOptions options = null );
@@ -33,7 +33,7 @@ namespace EssSharp
         public Task ClearDataFromCubeAsync( EssJobClearDataOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously create a cube variable.
+        /// Create a cube variable.
         /// </summary>
         /// <param name="name">Name of cube variable.</param>
         /// <param name="value">Value to store in the cube variable.</param>
@@ -48,7 +48,7 @@ namespace EssSharp
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously lock an object on the server.
+        /// Lock an object on the server.
         /// </summary>
         /// <param name="lockOptions">Includes file name, and file type</param>
         public IEssLockObject CreateLockObject( EssLockOptions lockOptions );
@@ -61,7 +61,7 @@ namespace EssSharp
         public Task<IEssLockObject> CreateLockObjectAsync( EssLockOptions lockOptions, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
+        /// Creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
         /// </summary>
         /// <param name="name">The name of the script.</param>
         /// <param name="content">(optional) The content of the new script.</param>
@@ -78,7 +78,24 @@ namespace EssSharp
         public Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
-        /// Synchronously executes an MDX query.
+        /// Executes a report query.
+        /// </summary>
+        /// <param name="name">Name of report query.</param>
+        /// <param name="query">Report query to execute.</param>
+        /// <returns></returns>
+        public string ExecuteReportQuery( string name, string query );
+
+        /// <summary>
+        /// Asynchronously executes a report query.
+        /// </summary>
+        /// <param name="name">Name of report query.</param>
+        /// <param name="query">Report query to execute.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<string> ExecuteReportQueryAsync( string name, string query, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Executes an MDX query.
         /// </summary>
         /// <param name="query">Query to execute</param>
         /// <param name="preferences">Execution preferences</param>
@@ -93,7 +110,7 @@ namespace EssSharp
         public Task<EssQueryReport> ExecuteMDXQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously executes a script (Calc or MDX) on a cube.
+        /// Executes a script (Calc or MDX) on a cube.
         /// </summary>
         /// <param name="options"></param>
         public void ExecuteScript( EssJobScriptOptions options );
@@ -107,7 +124,7 @@ namespace EssSharp
         public Task ExecuteScriptAsync( EssJobScriptOptions options, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously exports a cube to an excel workbook.
+        /// Exports a cube to an excel workbook.
         /// </summary>
         /// <param name="options">Export options including Build method, calc, data, and include member IDs.</param>
         /// <returns></returns>
@@ -121,18 +138,18 @@ namespace EssSharp
         public Task<Stream> ExportCubeToWorkbookAsync( EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously returns the active alias of the cube.
+        /// Returns the active alias of the cube.
         /// </summary>
         public string GetActiveAlias();
 
         /// <summary>
-        /// Synchronously returns the active alias of the cube.
+        /// Asynchronously returns the active alias of the cube.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<string> GetActiveAliasAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously returns a list of aliases on a cube.
+        /// Returns a list of aliases on a cube.
         /// </summary>
         public List<string> GetAliases();
 
@@ -143,7 +160,7 @@ namespace EssSharp
         public Task<List<string>> GetAliasesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously returns the default grid from a cube.
+        /// Returns the default grid from a cube.
         /// </summary>
         /// <param name="reset">Reset flag to avoid saved grid layout.</param>
         public IEssGrid GetDefaultGrid( bool reset = false );
@@ -156,7 +173,7 @@ namespace EssSharp
         public Task<IEssGrid> GetDefaultGridAsync( bool reset = false, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously gets the list of dimensions.
+        /// Gets the list of dimensions.
         /// </summary>
         public List<IEssDimension> GetDimensions();
 
@@ -167,7 +184,7 @@ namespace EssSharp
         public Task<List<IEssDimension>> GetDimensionsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously ets the drillthrough report with the given name.
+        /// Gets the drillthrough report with the given name.
         /// </summary>
         /// <param name="reportName">The name of the report</param>
         /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
@@ -182,7 +199,7 @@ namespace EssSharp
         public Task<IEssDrillthroughReport> GetDrillthroughReportAsync( string reportName, bool getDetails = false, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously gets the list of drillthrough reports for this cube.
+        /// Gets the list of drillthrough reports for this cube.
         /// </summary>
         /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
         public List<IEssDrillthroughReport> GetDrillthroughReports( bool getDetails = false );
@@ -195,7 +212,7 @@ namespace EssSharp
         public Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( bool getDetails = false, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously gets a file with the given file name.
+        /// Gets a file with the given file name.
         /// </summary>
         /// <param name="fileName">Name of file on the server.</param>
         /// <returns></returns>
@@ -209,7 +226,7 @@ namespace EssSharp
         public Task<IEssFile> GetFileAsync( string fileName, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously gets a list of all files on a cube.
+        /// Gets a list of all files on a cube.
         /// </summary>
         public List<IEssFile> GetFiles();
 
@@ -220,7 +237,7 @@ namespace EssSharp
         public Task<List<IEssFile>> GetFilesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously gets a list of all folders on a cube.
+        /// Gets a list of all folders on a cube.
         /// </summary>
         public IEssFolder GetFolder();
 
@@ -232,7 +249,7 @@ namespace EssSharp
 
 
         /// <summary>
-        /// Synchronously gets a locked object with the given name.
+        /// Gets a locked object with the given name.
         /// </summary>
         /// <param name="name" />
         public IEssLockObject GetLockedObject( string name );
@@ -245,7 +262,7 @@ namespace EssSharp
         public Task<IEssLockObject> GetLockedObjectAsync( string name, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously gets a list of locked objects.
+        /// Gets a list of locked objects.
         /// </summary>
         public List<IEssLockObject> GetLockedObjects();
 
@@ -256,7 +273,7 @@ namespace EssSharp
         public Task<List<IEssLockObject>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously gets a list of locked blocks on a cube.
+        /// Gets a list of locked blocks on a cube.
         /// </summary>
         public List<IEssLockBlock> GetLockedBlocks();
 
@@ -267,7 +284,7 @@ namespace EssSharp
         public Task<List<IEssLockBlock>> GetLockedBlocksAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously unlocks an object or block of type <typeparamref name="T"/>.
+        /// Unlocks an object or block of type <typeparamref name="T"/>.
         /// </summary>
         /// <param name="lockedList">List of locked objects or blocks to unlock.</param>
         public void Unlock<T>( List<T> lockedList ) where T : class, IEssLock;
@@ -313,7 +330,7 @@ namespace EssSharp
         public Task<List<T>> GetScriptsAsync<T>( bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
-        /// Synchronously ets the list of cube-scoped variables available to the connected user.
+        /// Gets the list of cube-scoped variables available to the connected user.
         /// </summary>
         public List<IEssCubeVariable> GetVariables();
 
@@ -324,7 +341,7 @@ namespace EssSharp
         public Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously eturns true if this cube has scenarios are enabled, else false
+        /// Returns true if this cube has scenarios are enabled, else false
         /// </summary>
         public bool IsScenariosEnabled();
 
@@ -334,7 +351,7 @@ namespace EssSharp
         public Task<bool> IsScenariosEnabledAsync();
 
         /// <summary>
-        /// Synchronously loads data to a cube from a file on the Server.
+        /// Loads data to a cube from a file on the Server.
         /// </summary>
         /// <param name="options">Options for loading data, includes data file, rule file, and whether to abort on error</param>
         public void LoadDataToCube( EssJobLoadDataOptions options );

@@ -205,6 +205,15 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns><see cref="string"/></returns>
+        public string ExecuteReportQuery(string name, string query) => ExecuteReportQueryAsync(name, query).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns><see cref="string"/></returns>
+        public async Task<string> ExecuteReportQueryAsync( string name, string query, CancellationToken cancellationToken = default ) =>
+            await new EssReportScript(new Script() {Content = query, Name = name}, this).QueryAsync().ConfigureAwait(false);
+
+        /// <inheritdoc />
         /// <returns><see cref="EssQueryReport"/></returns>
         public EssQueryReport ExecuteMDXQuery(string query, EssQueryPreferences preferences = null) => ExecuteMDXQueryAsync(query, preferences).GetAwaiter().GetResult();
 

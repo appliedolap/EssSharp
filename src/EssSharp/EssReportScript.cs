@@ -50,11 +50,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public string GetReport() => GetReportAsync().GetAwaiter().GetResult();
+        public string Query() => QueryAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<string> GetReportAsync( CancellationToken cancellationToken = default )
+        public async Task<string> QueryAsync( CancellationToken cancellationToken = default )
         {
             try
             {
