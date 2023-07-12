@@ -106,11 +106,11 @@ namespace EssSharp
             }
         }
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns><see cref="IEssLockObject"/></returns>
         public IEssLockObject CreateLockObject( EssLockOptions lockOptions ) => CreateLockObjectAsync(lockOptions).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns><see cref="IEssLockObject"/></returns>
         public async Task<IEssLockObject> CreateLockObjectAsync( EssLockOptions lockOptions, CancellationToken cancellationToken = default )
         {
             try
@@ -130,11 +130,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="EssScript"/> object of type <typeparamref name="T"/>.</returns>
         public T CreateScript<T>( string name, string content = null ) where T : class, IEssScript => CreateScriptAsync<T>(name, content).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="EssScript"/> object of type <typeparamref name="T"/>.</returns>
         public async Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript 
         {
             // Throw if a specific type of IEssScript is not given.
@@ -205,10 +205,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns><see cref="EssQueryReport"/></returns>
         public EssQueryReport ExecuteMDXQuery(string query, EssQueryPreferences preferences = null) => ExecuteMDXQueryAsync(query, preferences).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns><see cref="EssQueryReport"/></returns>
         public async Task<EssQueryReport> ExecuteMDXQueryAsync(string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default ) => 
             await new EssMdxScript(new Script() { Content = query }, this).QueryAsync(preferences, cancellationToken).ConfigureAwait(false);
 
@@ -246,11 +247,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="string"/></returns>
         public List<string> GetAliases() => GetAliasesAsync().GetAwaiter().GetResult();
 
         /// <inherit />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="string"/></returns>
         public async Task<List<string>> GetAliasesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -372,13 +373,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <param name="fileName"></param>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile GetFile( string fileName ) => GetFileAsync( fileName ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <param name="fileName"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> GetFileAsync( string fileName, CancellationToken cancellationToken = default )
         {
             try
@@ -399,11 +398,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssFile"/> objects.</returns>
         public List<IEssFile> GetFiles() => GetFilesAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssFile"/> objects.</returns>
         public async Task<List<IEssFile>> GetFilesAsync( CancellationToken cancellationToken = default)
         {
             try
@@ -419,11 +418,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public IEssFolder GetFolder() => GetFolderAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public async Task<IEssFolder> GetFolderAsync( CancellationToken cancellationToken = default)
         {
             try
@@ -439,11 +438,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        /// <returns>An <see cref="IEssLockObject"/> object.</returns>
         public IEssLockObject GetLockedObject( string name ) => GetLockedObjectAsync( name ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        /// <returns>An <see cref="IEssLockObject"/> object.</returns>
         public async Task<IEssLockObject> GetLockedObjectAsync( string name, CancellationToken cancellationToken = default )
         {
             try
@@ -466,12 +465,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssLockObject"/> objects.</returns>
         public List<IEssLockObject> GetLockedObjects( ) => GetLockedObjectsAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <param name="cancellationToken"></param>
-        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssLockObject"/> objects.</returns>
         public async Task<List<IEssLockObject>> GetLockedObjectsAsync(CancellationToken cancellationToken = default )
         {
             try
@@ -509,11 +508,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssLock"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssLockBlock"/> objects.</returns>
         public List<IEssLockBlock> GetLockedBlocks() => GetLockedBlocksAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssLockBlock"/> objects.</returns>
         public async Task<List<IEssLockBlock>> GetLockedBlocksAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -533,7 +532,7 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns> A list of <see cref="IEssScript"/> objects. </returns>
+        /// <returns> An <see cref="IEssScript"/> object of type <typeparamref name="T"/>. </returns>
         public T GetScript<T>( string scriptName, bool getContent = false ) where T : class, IEssScript => GetScriptAsync<T>(scriptName, getContent).GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -590,11 +589,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssScript"/> objects.</returns>
+        /// <returns>A list of <see cref="EssScript"/> objects of <typeparamref name="T"/>.</returns>
         public List<T> GetScripts<T>( bool getContent = false ) where T : class, IEssScript => GetScriptsAsync<T>(getContent).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssScript"/> objects.</returns>
+        /// <returns>A list of <see cref="EssScript"/> objects of <typeparamref name="T"/>.</returns>
        public async Task<List<T>> GetScriptsAsync<T>( bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
             // Throw if a specific type of IEssScript is not given.
@@ -646,12 +645,12 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>true if scenarios are enabled, else false</returns>
-        public bool isScenariosEnabled() => isScenariosEnabledAsync().GetAwaiter().GetResult();
+        public bool IsScenariosEnabled() => IsScenariosEnabledAsync().GetAwaiter().GetResult();
 
 
         /// <inheritdoc />
         /// <returns>true if scenarios are enabled, else false</returns>
-        public async Task<bool> isScenariosEnabledAsync()
+        public async Task<bool> IsScenariosEnabledAsync()
         {
             try
             {

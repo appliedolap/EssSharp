@@ -20,48 +20,48 @@ namespace EssSharp
         public EssCubeType CubeType { get; }
 
         /// <summary>
-        /// Clears data from a cube
+        /// Synchronously clears data from a cube.
         /// </summary>
         /// <param name="options"></param>
         public void ClearDataFromCube( EssJobClearDataOptions options = null );
 
         /// <summary>
-        /// Clears data from a cube
+        /// Asynchronously clears data from a cube.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Options for clearingn data from a cube.</param>
         /// <param name="cancellationToken"></param>
         public Task ClearDataFromCubeAsync( EssJobClearDataOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Create a cube variable
+        /// Synchronously create a cube variable.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name">Name of cube variable.</param>
+        /// <param name="value">Value to store in the cube variable.</param>
         public IEssCubeVariable CreateCubeVariable( string name, string value );
 
         /// <summary>
-        /// Create a cube variable
+        /// Asynchronously create a cube variable.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name">Name of cube variable.</param>
+        /// <param name="value">Value to store in the cube variable.</param>
         /// <param name="cancellationToken"></param>
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Synchronously lock an object on the server.
         /// </summary>
-        /// <param name="lockOptions"></param>
+        /// <param name="lockOptions">Includes file name, and file type</param>
         public IEssLockObject CreateLockObject( EssLockOptions lockOptions );
 
         /// <summary>
         /// Asynchronously lock an object on the server.
         /// </summary>
-        /// <param name="lockOptions"></param>
+        /// <param name="lockOptions">Includes file name, and file type</param>
         /// <param name="cancellationToken"></param>
         public Task<IEssLockObject> CreateLockObjectAsync( EssLockOptions lockOptions, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
+        /// Synchronously creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
         /// </summary>
         /// <param name="name">The name of the script.</param>
         /// <param name="content">(optional) The content of the new script.</param>
@@ -78,99 +78,96 @@ namespace EssSharp
         public Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
-        /// 
+        /// Synchronously executes an MDX query.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="preferences"></param>
+        /// <param name="query">Query to execute</param>
+        /// <param name="preferences">Execution preferences</param>
         public EssQueryReport ExecuteMDXQuery( string query, EssQueryPreferences preferences = null );
 
         /// <summary>
-        /// 
+        /// Asynchronously executes an MDX query.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="preferences"></param>
+        /// <param name="query">Query to execute</param>
+        /// <param name="preferences">Execution preferences</param>
         /// <param name="cancellationToken"></param>
         public Task<EssQueryReport> ExecuteMDXQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Executes a script (Calc or MDX) on a cube
+        /// Synchronously executes a script (Calc or MDX) on a cube.
         /// </summary>
         /// <param name="options"></param>
         public void ExecuteScript( EssJobScriptOptions options );
 
         /// <summary>
-        /// Executes a script (Calc or MDX) on a cube
+        /// Asynchronously executes a script (Calc or MDX) on a cube.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Options incude script name or report script name, and lock for update</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task ExecuteScriptAsync( EssJobScriptOptions options, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Exports a cube to an excel workbook
+        /// Synchronously exports a cube to an excel workbook.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Export options including Build method, calc, data, and include member IDs.</param>
+        /// <returns></returns>
         public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null );
 
         /// <summary>
-        /// Exports a cube to an excel workbook
+        /// Asynchronously exports a cube to an excel workbook.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Export options including Build method, calc, data, and include member IDs.</param>
         /// <param name="cancellationToken"></param>
         public Task<Stream> ExportCubeToWorkbookAsync( EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns the active alias of the cube.
+        /// Synchronously returns the active alias of the cube.
         /// </summary>
-        /// <returns></returns>
         public string GetActiveAlias();
 
         /// <summary>
-        /// Returns the active alias of the cube.
+        /// Synchronously returns the active alias of the cube.
         /// </summary>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task<string> GetActiveAliasAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns a list of aliases on a cube.
+        /// Synchronously returns a list of aliases on a cube.
         /// </summary>
-        /// <returns></returns>
         public List<string> GetAliases();
 
         /// <summary>
-        /// Returns a list of aliases on a cube.
+        /// Asynchronously returns a list of aliases on a cube.
         /// </summary>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task<List<string>> GetAliasesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns the default grid of a cube
+        /// Synchronously returns the default grid from a cube.
         /// </summary>
-        /// <param name="reset"></param>
+        /// <param name="reset">Reset flag to avoid saved grid layout.</param>
         public IEssGrid GetDefaultGrid( bool reset = false );
 
         /// <summary>
-        /// Returns the default grid of a cube
+        /// Asynchronously returns the default grid from a cube
         /// </summary>
-        /// <param name="reset"></param>
+        /// <param name="reset">Reset flag to avoid saved grid layout.</param>
         /// <param name="cancellationToken"></param>
         public Task<IEssGrid> GetDefaultGridAsync( bool reset = false, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of dimensions.
+        /// Synchronously gets the list of dimensions.
         /// </summary>
         public List<IEssDimension> GetDimensions();
 
         /// <summary>
-        /// Gets the list of dimensions.
+        /// Asynchronously gets the list of dimensions.
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssDimension>> GetDimensionsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the drillthrough report with the given name.
+        /// Synchronously ets the drillthrough report with the given name.
         /// </summary>
         /// <param name="reportName">The name of the report</param>
         /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
@@ -185,7 +182,7 @@ namespace EssSharp
         public Task<IEssDrillthroughReport> GetDrillthroughReportAsync( string reportName, bool getDetails = false, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of drillthrough reports for this cube.
+        /// Synchronously gets the list of drillthrough reports for this cube.
         /// </summary>
         /// <param name="getDetails">(optional) Whether to get the full report specification (or only summary details).</param>
         public List<IEssDrillthroughReport> GetDrillthroughReports( bool getDetails = false );
@@ -198,91 +195,87 @@ namespace EssSharp
         public Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( bool getDetails = false, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Synchronously gets a file with the given file name.
         /// </summary>
-        public IEssFile GetFile( string fileName);
+        /// <param name="fileName">Name of file on the server.</param>
+        /// <returns></returns>
+        public IEssFile GetFile( string fileName );
 
         /// <summary>
-        /// 
+        /// Asynchronously gets a file with the given file name.
         /// </summary>
+        /// <param name="fileName">Name of file on the server.</param>
         /// <param name="cancellationToken"></param>
         public Task<IEssFile> GetFileAsync( string fileName, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Synchronously gets a list of all files on a cube.
         /// </summary>
-        /// <returns></returns>
         public List<IEssFile> GetFiles();
 
         /// <summary>
-        /// 
+        /// Asynchronously gets a list of all files on a cube.
         /// </summary>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task<List<IEssFile>> GetFilesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Synchronously gets a list of all folders on a cube.
         /// </summary>
-        /// <returns></returns>
         public IEssFolder GetFolder();
 
         /// <summary>
-        /// 
+        /// Asynchronously gets a list of all folders on a cube.
         /// </summary>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task<IEssFolder> GetFolderAsync( CancellationToken cancellationToken = default );
 
 
         /// <summary>
-        /// Gets the locked object with the given name.
+        /// Synchronously gets a locked object with the given name.
         /// </summary>
         /// <param name="name" />
         public IEssLockObject GetLockedObject( string name );
 
         /// <summary>
-        /// Asynchronously gets the locked object with the given name.
+        /// Asynchronously gets a locked object with the given name.
         /// </summary>
         /// <param name="name" />
         /// <param name="cancellationToken" />
         public Task<IEssLockObject> GetLockedObjectAsync( string name, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of locked objects.
+        /// Synchronously gets a list of locked objects.
         /// </summary>
         public List<IEssLockObject> GetLockedObjects();
 
         /// <summary>
-        /// Asynchronously gets the list of locked objects.
+        /// Asynchronously gets a list of locked objects.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssLockObject>> GetLockedObjectsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Synchronously gets a list of locked blocks on a cube.
         /// </summary>
         public List<IEssLockBlock> GetLockedBlocks();
 
         /// <summary>
-        /// 
+        /// Asynchronously gets a list of locked blocks on a cube.
         /// </summary>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task<List<IEssLockBlock>> GetLockedBlocksAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Synchronously unlocks an object or block of type <typeparamref name="T"/>.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="lockedList"></param>
+        /// <param name="lockedList">List of locked objects or blocks to unlock.</param>
         public void Unlock<T>( List<T> lockedList ) where T : class, IEssLock;
 
         /// <summary>
-        /// 
+        /// Asynchronously unlocks an object or block of type <typeparamref name="T"/>.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="lockedList"></param>
+        /// <param name="lockedList">List of locked objects or blocks to unlock.</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task UnlockAsync<T>( List<T> lockedList, CancellationToken cancellationToken = default ) where T : class, IEssLock;
@@ -320,7 +313,7 @@ namespace EssSharp
         public Task<List<T>> GetScriptsAsync<T>( bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
-        /// Gets the list of cube-scoped variables available to the connected user.
+        /// Synchronously ets the list of cube-scoped variables available to the connected user.
         /// </summary>
         public List<IEssCubeVariable> GetVariables();
 
@@ -331,25 +324,25 @@ namespace EssSharp
         public Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns true if this cube has scenarios are enabled, else false
+        /// Synchronously eturns true if this cube has scenarios are enabled, else false
         /// </summary>
-        public bool isScenariosEnabled();
+        public bool IsScenariosEnabled();
 
         /// <summary>
-        /// Returns true if this cube has scenarios are enabled, else false
+        /// Asynchronously returns true if this cube has scenarios are enabled, else false
         /// </summary>
-        public Task<bool> isScenariosEnabledAsync();
+        public Task<bool> IsScenariosEnabledAsync();
 
         /// <summary>
-        /// Loads data to a cube from a file on the Server
+        /// Synchronously loads data to a cube from a file on the Server.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Options for loading data, includes data file, rule file, and whether to abort on error</param>
         public void LoadDataToCube( EssJobLoadDataOptions options );
 
         /// <summary>
-        /// Loads data to a cube from a file on the Server
+        /// Asynchronously loads data to a cube from a file on the Server.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">Options for loading data, includes data file, rule file, and whether to abort on error</param>
         /// <param name="cancellationToken"></param>
         public Task LoadDataToCubeAsync( EssJobLoadDataOptions options, CancellationToken cancellationToken = default );
 
