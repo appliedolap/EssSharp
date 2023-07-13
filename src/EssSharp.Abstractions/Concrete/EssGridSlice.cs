@@ -14,17 +14,17 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public EssGridSliceData Data { get; set; }
+        public EssGridSliceData Data { get; set; } = new EssGridSliceData();
 
         /// <summary>
         /// 
         /// </summary>
-        public List<int> DirtyCells { get; set; }
+        public List<int> DirtyCells { get; set; } = new List<int>();
 
         /// <summary>
         /// 
         /// </summary>
-        public List<int> DirtyTexts { get; set; }
+        public List<int> DirtyTexts { get; set; } = new List<int>();
 
         /// <summary>
         /// 

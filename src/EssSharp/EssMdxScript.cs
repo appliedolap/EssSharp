@@ -254,8 +254,7 @@ namespace EssSharp
                 {
                     // If the current index is less than the number of row dimension members, relocate the column
                     if (c < rowDimensionMembers.Length && firstColumnAxisIndex > 0)
-                        sourceColumnSequence[c] =
-                            firstColumnAxisIndex - rowDimensionMembers.Length + relocatedColumns++;
+                        sourceColumnSequence[c] = firstColumnAxisIndex - rowDimensionMembers.Length + relocatedColumns++;
                     else if (relocatedColumns > 0 && c <= firstColumnAxisIndex - relocatedColumns)
                         sourceColumnSequence[c] = c - relocatedColumns;
                     else
