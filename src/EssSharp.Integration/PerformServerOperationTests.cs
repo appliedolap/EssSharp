@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
@@ -100,7 +101,24 @@ namespace EssSharp.Integration
             // Assert that the run Report job completed without warnings.
             Assert.Equal(EssJobStatus.Completed, job?.JobStatus);
         }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 05 - Essbase_AfterScriptCreation_CannotExecuteMaxLScript"), Priority(05)]
+        public async Task Essbase_AfterScriptCreation_CannotExecuteMaxLScript()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the test MaxL script from the server.
+            var script = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic")
+                .GetScriptAsync<IEssMaxlScript>("test");
+
+            // Assert that an Exception is thrown when we try to execute a MaxL script,
+            // and capture the base exception, since this is not supported by the server.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await script.ExecuteAsync())).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
+            Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
+        }
     }
-
-
 }

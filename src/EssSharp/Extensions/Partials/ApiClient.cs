@@ -48,16 +48,13 @@ namespace EssSharp.Client
             if ( response is null )
                 return;
 
-            // If the response was not successful and an exception is available, throw it.
-            if ( !response.IsSuccessful() && response.ErrorException is WebException webException )
-                throw webException;
-
-            // NOTE: We are waiting on the OpenAPI Generator to bring in RestSharp v109+ to address an issue with cookie management.
-            // https://github.com/restsharp/RestSharp/issues/1792
-
             // If we have a JSESSIONID, retain the session cookie.
             if ( response.Cookies?.Cast<Cookie>().FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) is { } cookie )
                 SessionCookie = cookie;
+
+            // If the response was not successful and an exception is available, throw it.
+            if ( !response.IsSuccessful() && response.ErrorException is WebException webException )
+                throw webException;
         }
 
         #endregion

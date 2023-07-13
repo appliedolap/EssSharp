@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
@@ -6,6 +7,8 @@ using System.Threading.Tasks;
 using System.Xml;
 
 using EssSharp.Client;
+
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace EssSharp.Api
@@ -45,6 +48,7 @@ namespace EssSharp.Api
                 {
                     0                           => throw new WebException($@"The request failed. {(!string.IsNullOrEmpty(hre.Message?.Trim()) ? hre.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(hre.InnerException?.Message?.Trim()) ? hre.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd(), hre.InnerException, WebExceptionStatus.UnknownError, new WebExceptionRestResponse(response)),
                     HttpStatusCode.Unauthorized => throw new WebException($@"The request failed with status code {(int)response.StatusCode} ({response.StatusCode}). Verify that the credentials are valid and the user is authorized to access this resource.", hre.InnerException, WebExceptionStatus.UnknownError, new WebExceptionRestResponse(response)),
+                    HttpStatusCode.BadRequest   => throw new WebException($@"The request failed with status code {(int)response.StatusCode} ({response.StatusCode}). {ParseJsonErrorMessage(response.Content) ?? (!string.IsNullOrEmpty(hre.Message?.Trim()) ? hre.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(hre.InnerException?.Message?.Trim()) ? hre.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd(), hre.InnerException, WebExceptionStatus.UnknownError, new WebExceptionRestResponse(response)),
                     _                           => throw new WebException($@"The request failed with status code {(int)response.StatusCode} ({response.StatusCode}). {(!string.IsNullOrEmpty(hre.Message?.Trim()) ? hre.Message.TrimEnd('.').Trim() + ". " : null)}{(!string.IsNullOrEmpty(hre.InnerException?.Message?.Trim()) ? hre.InnerException.Message.TrimEnd('.').Trim() + "." : null)}".TrimEnd(), hre.InnerException, WebExceptionStatus.UnknownError, new WebExceptionRestResponse(response))
                 },
                 _                               => response.StatusCode.IsSuccessful()
@@ -53,10 +57,60 @@ namespace EssSharp.Api
         /// <summary />
         /// <param name="statusCode" />
         private static bool IsSuccessful( this HttpStatusCode statusCode ) => (int)statusCode >= 200 && (int)statusCode <= 399;
+
+        #region Embarrasing Extensions
+
+        private static string ParseJsonErrorMessage( string json )
+        {
+            try
+            {
+                if ( JObject.Parse(json).TryGetValue("errorMessage", StringComparison.OrdinalIgnoreCase, out var token) && token.Value<string>() is { Length: > 0 } message )
+                    return message.AppendPunctuation('.', abortIfTrailingNewline: false);
+            }
+            catch
+            {
+                // swallow any exception here.
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// The array of whitespace characters trimmed by <see cref="string.Trim()"/>.
+        /// </summary>
+        private static readonly char[] WhiteSpaceCharacters = { '\x0009', '\x000a', '\x000b', '\x000c', '\x000d', '\x0020', '\x0085', '\x00a0', '\x1680', '\x2000', '\x2001', '\x2002', '\x2003', '\x2004', '\x2005', '\x2006', '\x2007', '\x2008', '\x2009', '\x200a', '\x2028', '\x2029', '\x202f', '\x205f', '\x3000' };
+
+        /// <summary>
+        /// Appends the given character to the end of the given string (if necessary).
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="character"></param>
+        /// <param name="trim"></param>
+        /// <param name="abortIfTrailingNewline"></param>
+        private static string AppendPunctuation( this string input, char character, bool trim = true, bool abortIfTrailingNewline = true )
+        {
+            if ( string.IsNullOrWhiteSpace(input) )
+                return input;
+
+            if ( abortIfTrailingNewline && trim && input.TrimEnd(WhiteSpaceCharacters.Where(c => c != '\n').ToArray()).EndsWith('\n'.ToString()) )
+                return input.Trim();
+
+            if ( trim )
+                input = input.Trim();
+
+            input = input.Trim(character);
+
+            if ( trim )
+                input = input.Trim();
+
+            return input + character;
+        }
+
+        #endregion
     }
 
     /// <summary />
-    internal class WebExceptionRestResponse : WebResponse
+    public class WebExceptionRestResponse : WebResponse
     {
         private readonly RestResponse _response;
 
