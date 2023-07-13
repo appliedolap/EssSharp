@@ -9,6 +9,6 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public List<EssGridRange> Ranges { get; set; }
+        public List<EssGridRange> Ranges { get; set; } = new List<EssGridRange>();
     }
 }

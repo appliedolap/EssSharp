@@ -80,7 +80,7 @@ namespace EssSharp.Integration
                 .Name);
 
             // Assert that the last data cell equals "105522.0".
-            Assert.Equal("105522.0", grid.Slice.Data.Ranges.FirstOrDefault().Values.LastOrDefault());
+            Assert.Equal("105522.0", grid.Slice.Data.Ranges.LastOrDefault().Values.LastOrDefault());
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 04 - Essbase_AfterScriptCreation_CanExecuteReportScript"), Priority(04)]
