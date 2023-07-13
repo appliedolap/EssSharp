@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// An Essbase script.
+    /// </summary>
     public interface IEssScript : IEssObject
     {
         #region Properties 

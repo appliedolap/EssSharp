@@ -84,14 +84,14 @@ namespace EssSharp
                 var response = await api.DrillThroughReportsExecuteWithHttpInfoAsync(_cube?.Application?.Name, _cube?.Name, _definition?.Name ?? _report?.Name, context.ToModelBean(options), 0, cancellationToken).ConfigureAwait(false);
 
                 if ( response?.Data is not JArray jArray )
-                    throw new Exception($"Received an empty or invalid response. {response.RawContent}".TrimEnd());
+                    throw new Exception($"Received an empty or invalid response. {response?.RawContent}".TrimEnd());
 
                 return To2DReport(jArray, options);
             }
             catch ( Exception e )
             {
-                if ( e is WebException we && we.Response is WebExceptionRestResponse response && response?.StatusCode is HttpStatusCode.MethodNotAllowed )
-                    throw new NotSupportedException($@"Drillthough report execution is not suported by this server version. {e.Message}", e);
+                if ( e is WebException { Response: WebExceptionRestResponse { StatusCode: HttpStatusCode.MethodNotAllowed } } )
+                    throw new NotSupportedException($@"Drillthrough report execution is not supported by this server version. {e.Message}", e);
 
                 throw new Exception($@"Unable to execute or process the drillthrough report ""{_definition?.Name ?? _report?.Name}"". {e.Message}", e);
             }

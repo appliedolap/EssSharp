@@ -494,7 +494,7 @@ namespace EssSharp
             MeaninglessCells = queryPreferences.MeaninglessCells,
             TextList = queryPreferences.TextList,
             UrlDrillThrough = queryPreferences.UrlDrillThrough,
-            MemberIdentifierType = queryPreferences.MemberIdentifierType.HasValue && Enum.IsDefined(typeof(NamedQueriesPreferences.MemberIdentifierTypeEnum), (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifierType) ? (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifierType : null 
+            MemberIdentifierType = Enum.IsDefined(typeof(NamedQueriesPreferences.MemberIdentifierTypeEnum), (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifier) ? (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifier : null 
         };
 
         /// <summary>

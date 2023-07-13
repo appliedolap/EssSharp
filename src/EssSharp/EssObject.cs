@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Net;
-using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 using Polly;
 using RestSharp;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <inheritdoc />
     public abstract class EssObject : IEssObject
     {
         #region Constructors

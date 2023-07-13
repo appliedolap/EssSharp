@@ -220,7 +220,7 @@ namespace EssSharp
         /// <inheritdoc />
         /// <returns><see cref="EssQueryReport"/></returns>
         public async Task<EssQueryReport> ExecuteMDXQueryAsync(string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default ) => 
-            await new EssMdxScript(new Script() { Content = query }, this).QueryAsync(preferences, cancellationToken).ConfigureAwait(false);
+            await new EssMdxScript(new Script() { Content = query }, this).GetReportAsync(preferences, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
         /// <returns><see cref="Stream"/></returns>
@@ -337,8 +337,6 @@ namespace EssSharp
 
             try
             {
-                var api = GetApi<DrillThroughReportsApi>();
-
                 if ( (await GetDrillthroughReportsAsync(false, cancellationToken).ConfigureAwait(false)).FirstOrDefault(dtr => string.Equals(dtr?.Name, reportName, StringComparison.OrdinalIgnoreCase)) is not { } report )
                     throw new Exception($@"The given {nameof(reportName)} could not be found.");
 

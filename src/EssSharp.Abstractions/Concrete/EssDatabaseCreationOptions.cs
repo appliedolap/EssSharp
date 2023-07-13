@@ -6,8 +6,7 @@ using System.Xml.Linq;
 
 namespace EssSharp
 {
-
-    public enum DatabaseType
+    public enum EssDatabaseType
     {
         ASO,
 
@@ -17,7 +16,7 @@ namespace EssSharp
     public class EssDatabaseCreationOptions
     {
 
-        public EssDatabaseCreationOptions( DatabaseType dbType = DatabaseType.BSO, bool enableScenarios = false, bool allowDuplicates = false )
+        public EssDatabaseCreationOptions( EssDatabaseType dbType = EssDatabaseType.BSO, bool enableScenarios = false, bool allowDuplicates = false )
         {
             DatabaseType = dbType;
 
@@ -27,7 +26,7 @@ namespace EssSharp
         }
 
 
-        public DatabaseType DatabaseType { get; set; }
+        public EssDatabaseType DatabaseType { get; set; }
 
         public bool EnableScenarios { get; set; }
 

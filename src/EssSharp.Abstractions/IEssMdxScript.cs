@@ -1,42 +1,38 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace EssSharp
 {
-    /// <summary />
-    public interface IEssMdxScript : IEssObject, IEssScript
+    /// <summary>
+    /// An Essbase MDX script.
+    /// </summary>
+    public interface IEssMdxScript : IEssScript
     {
-        #region Properties 
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Synchronously executes MDX query on the cube.
-        /// </summary>
-        /// <param name="preferences"></param>
-        public EssQueryReport Query( EssQueryPreferences preferences = null );
-
-        /// <summary>
-        /// Asynchronously executes MDX query on the cube.
-        /// </summary>
-        /// <param name="preferences"></param>
-        /// <param name="getContent"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<EssQueryReport> QueryAsync( EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Synchronously executes MDX query and generates a <see cref="IEssGrid"/>.
+        /// Executes an MDX query and returns a grid with the result.
         /// </summary>
         public IEssGrid GetGrid();
 
         /// <summary>
-        /// Asynchronously executes MDX query and generates a <see cref="IEssGrid"/>.
+        /// Asynchronously executes an MDX query and returns a grid with the result.
         /// </summary>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken" />
         public Task<IEssGrid> GetGridAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Executes an MDX query and returns a report with the result.
+        /// </summary>
+        /// <param name="preferences">(optional) The preferences that configure the returned report.</param>
+        public EssQueryReport GetReport( EssQueryPreferences preferences = null );
+
+        /// <summary>
+        /// Asynchronously executes an MDX query and returns a report with the result.
+        /// </summary>
+        /// <param name="preferences">(optional) The preferences that configure the returned report.</param>
+        /// <param name="cancellationToken" />
+        public Task<EssQueryReport> GetReportAsync( EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         #endregion
     }
