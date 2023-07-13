@@ -44,7 +44,7 @@ namespace EssSharp
             {
                 ".csc" => EssJobType.Calc,
                 ".mdx" => EssJobType.MdxScript,
-                ".msh" => EssJobType.MAXLScript,
+                ".msh" => EssJobType.Maxl,
                 ".rep" => EssJobType.ExecuteReport,
                 _      => throw new ArgumentException($@"{nameof(EssJobScriptOptions)} requires the {nameof(fileName)} parameter to include a known script file extension.")
             };
@@ -84,7 +84,7 @@ namespace EssSharp
                 EssScriptType.Calc   => EssJobType.Calc,
                 EssScriptType.MDX    => EssJobType.MdxScript,
                 EssScriptType.Report => EssJobType.ExecuteReport,
-                EssScriptType.MaxL   => EssJobType.MAXLScript,
+                EssScriptType.MaxL   => EssJobType.Maxl,
                 _                    => throw new NotImplementedException()
             };
 
@@ -103,7 +103,8 @@ namespace EssSharp
                     ReportScriptFilename = essScript.Name;
                     LockForUpdate = LockForUpdate;
                     break;
-                case EssJobType.MAXLScript:
+                case EssJobType.Maxl:
+                    Script = $"{essScript.Name}.msh";
                     break;
             }
         }

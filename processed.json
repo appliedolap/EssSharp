@@ -18344,7 +18344,9 @@
             "asoBufferCommit",
             "exportData",
             "mdxScript",
-            "executeReport"
+            "executeReport",
+            "maxl",
+            "groovy"
           ]
         },
         "parameters": {

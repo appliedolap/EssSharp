@@ -74,7 +74,10 @@ namespace EssSharp
 
         /// <summary>MAXL Script</summary>
         [Description("MAXL Script")]
-        MAXLScript = 16
+        Maxl = 16,
 
+        /// <summary>Groovy Script</summary>
+        [Description("Groovy Script")]
+        Groovy = 17
     }
 }

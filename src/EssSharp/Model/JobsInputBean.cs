@@ -123,7 +123,19 @@ namespace EssSharp.Model
             /// Enum ExecuteReport for value: executeReport
             /// </summary>
             [EnumMember(Value = "executeReport")]
-            ExecuteReport = 15
+            ExecuteReport = 15,
+
+            /// <summary>
+            /// Enum Maxl for value: maxl
+            /// </summary>
+            [EnumMember(Value = "maxl")]
+            Maxl = 16,
+
+            /// <summary>
+            /// Enum Groovy for value: groovy
+            /// </summary>
+            [EnumMember(Value = "groovy")]
+            Groovy = 17
 
         }
 

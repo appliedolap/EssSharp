@@ -113,7 +113,33 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = @"CreateServerObjectTests - 04 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(04)]
+        [Fact(DisplayName = "CreateServerObjectTests - 04 - Essbase_AfterCubeCreation_CanCreateMaxLScript"), Priority(04)]
+        public async Task Essbase_AfterCubeCreation_CanCreateMaxLScript()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube.
+            var cube = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Assert that the cube does not contain an MaxL script called "test" before we create one.
+            Assert.Empty((await cube.GetScriptsAsync<IEssMaxlScript>()).Where(maxl => string.Equals(maxl?.Name, "test", StringComparison.Ordinal)));
+
+            // Create some script content.
+            var content = @"query database sample.basic get dbstats dimension;";
+
+            // Create a script on the server with the given content.
+            await cube.CreateScriptAsync<IEssMaxlScript>("test", content);
+
+            // Get the script back from the server.
+            var script = await cube.GetScriptAsync<IEssMaxlScript>("test", getContent: true);
+
+            // Assert that the script exists and contains the content we gave it.
+            Assert.Equal(content, script?.Content);
+        }
+
+        [Fact(DisplayName = @"CreateServerObjectTests - 05 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(05)]
         public async Task Essbase_AfterScriptCreation_CanCreateLockOnScript()
         {
             // Get an unconnected server.

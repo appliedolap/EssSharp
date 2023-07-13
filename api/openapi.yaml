@@ -16775,6 +16775,8 @@ components:
           - exportData
           - mdxScript
           - executeReport
+          - maxl
+          - groovy
           type: string
         parameters:
           $ref: '#/components/schemas/ParametersBean'
