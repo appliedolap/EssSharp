@@ -12465,7 +12465,7 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/Script'
           description: "<strong>OK</strong></p><p>Script updated successfully. Includes\
