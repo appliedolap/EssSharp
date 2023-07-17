@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
 
@@ -92,19 +94,24 @@ namespace EssSharp.Integration
             Assert.Empty(await server.GetApplicationsAsync());
         }
 
-        [Fact(DisplayName = "CleanServerTests - 04 - Essbase_AfterConnection_CanRemoveApplications"), Priority(04)]
+        [Fact(DisplayName = "CleanServerTests - 04 - Essbase_AfterConnection_CanRemoveUsers"), Priority(04)]
         public async Task Essbase_AfterConnection_CanRemoveUsers()
         {
             // Get an unconnected server.
             var server = GetEssServer();
 
-            // Get and delete all existing applications.
-            var user = await server.GetUserAsync("Matthew");
+            // Get and delete all existing users except admin.
+            foreach ( var user in (await server.GetUsersAsync()).Where(u => u is not null && !string.Equals(u.Name, "admin")) )
+                await user.DeleteAsync();
 
-            await user.DeleteAsync();
+            // Get the full list of users.
+            var users = await server.GetUsersAsync();
 
-            // Assert that the (refreshed) list of applications is empty.
-            Assert.True((await server.GetUsersAsync()).Count == 1);
+            // Assert that the (refreshed) list of users contains a single user.
+            Assert.Single(await server.GetUsersAsync());
+
+            // Assert that the name of the only remaining user is "admin".
+            Assert.Equal("admin", users.First()?.Name);
         }
     }
 }
