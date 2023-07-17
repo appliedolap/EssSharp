@@ -75,21 +75,21 @@ namespace EssSharp.Integration.Setup
                         Server   = "http://localhost:9000/essbase",
                         Username = "admin",
                         Password = "welcome1",
-                        Role     = Role.ServiceAdministrator
+                        Role     = EssUserRole.ServiceAdministrator
                     },
                     new IntegrationTestSettingsConnection()
                     {
                         Server   = "http://localhost:9000/essbase",
                         Username = "poweruser",
                         Password = "welcome2",
-                        Role     = Role.PowerUser
+                        Role     = EssUserRole.PowerUser
                     },
                     new IntegrationTestSettingsConnection()
                     {
                         Server   = "http://localhost:9000/essbase",
                         Username = "user",
                         Password = "welcome3",
-                        Role     = Role.User
+                        Role     = EssUserRole.User
                     }
                 };
             }
@@ -256,16 +256,16 @@ namespace EssSharp.Integration.Setup
         protected DockerClient GetClient() => IntegrationTestFactory.GetDockerClient();
 
         /// <summary />
-        protected IntegrationTestSettingsConnection GetEssConnection() => GetEssConnection(Role.ServiceAdministrator);
+        protected IntegrationTestSettingsConnection GetEssConnection() => GetEssConnection(EssUserRole.ServiceAdministrator);
 
         /// <summary />
-        protected IntegrationTestSettingsConnection GetEssConnection( Role role ) => IntegrationTestFactory.GetEssConnection(role);
+        protected IntegrationTestSettingsConnection GetEssConnection( EssUserRole role ) => IntegrationTestFactory.GetEssConnection(role);
 
         /// <summary />
-        protected IEssServer GetEssServer() => GetEssServer(Role.ServiceAdministrator);
+        protected IEssServer GetEssServer() => GetEssServer(EssUserRole.ServiceAdministrator);
 
         /// <summary />
         /// <param name="role" />
-        protected IEssServer GetEssServer( Role role ) => IntegrationTestFactory.GetEssServer(role);
+        protected IEssServer GetEssServer( EssUserRole role ) => IntegrationTestFactory.GetEssServer(role);
     }
 }

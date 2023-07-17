@@ -514,9 +514,9 @@ namespace EssSharp
             Password = options.Password,
             Groups = options.Groups,
             Role = options.Role switch{
-                EssUserRole.SERVICE_ADMINISTRATOR => "Service Administrator",
-                EssUserRole.USER => "User",
-                EssUserRole.POWER_USER => "Power User",
+                EssUserRole.ServiceAdministrator => "Service Administrator",
+                EssUserRole.PowerUser => "Power User",
+                EssUserRole.User => "User",
                 _ => null
             }
         };

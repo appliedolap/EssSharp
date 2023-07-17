@@ -166,14 +166,16 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
+            var userConnection = GetEssConnection(EssUserRole.User);
+
             // Create EssUserCreationOptions
-            var options = new EssUserCreationOptions("Matthew", "password1") { Role = EssUserRole.SERVICE_ADMINISTRATOR };
+            var options = new EssUserCreationOptions(userConnection.Username, userConnection.Password) { Role = userConnection.Role };
 
             var newUser = await server.CreateUserAsync(options);
 
-            Assert.Equal("Matthew", newUser.Name);
+            Assert.Equal(userConnection.Username, newUser.Name);
 
-            Assert.Equal("Service Administrator", newUser.Role);
+            Assert.Equal( userConnection.Role.ToString(), newUser.Role);
         }
 
     }

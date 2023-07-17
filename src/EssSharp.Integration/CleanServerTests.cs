@@ -99,9 +99,35 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get and delete all existing applications.
-            var user = await server.GetUserAsync("Matthew");
+            var adminConnections = GetEssConnection(EssUserRole.ServiceAdministrator);
+            var puConnections = GetEssConnection(EssUserRole.PowerUser);
+            var userConnections = GetEssConnection(EssUserRole.User);
 
-            await user.DeleteAsync();
+            // Check for admin users and delete any that are not named "admin"
+            try
+            {
+                var admin = await server.GetUserAsync(adminConnections.Username).ConfigureAwait(false); 
+                    
+                if (!string.Equals("admin", admin.Name))
+                    await admin.DeleteAsync().ConfigureAwait(false);
+            }  
+            catch { }
+
+            // Try to get and delete any power users
+            try
+            {
+                var powerUser = await server.GetUserAsync(puConnections.Username).ConfigureAwait(false);
+                await powerUser.DeleteAsync().ConfigureAwait(false);
+            } 
+            catch { }
+
+            // try to get and delete any users
+            try
+            {
+                var user = await server.GetUserAsync(userConnections.Username).ConfigureAwait(false);
+                await user.DeleteAsync().ConfigureAwait(false);
+            }
+            catch { }
 
             // Assert that the (refreshed) list of applications is empty.
             Assert.True((await server.GetUsersAsync()).Count == 1);

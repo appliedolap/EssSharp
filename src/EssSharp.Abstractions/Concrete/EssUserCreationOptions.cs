@@ -11,16 +11,16 @@ namespace EssSharp
 {
     public enum EssUserRole
     {
-        SERVICE_ADMINISTRATOR = 1,
+        ServiceAdministrator,
 
-        POWER_USER = 2,
+        PowerUser,
 
-        USER = 3
+        User
     }; 
 
     public class EssUserCreationOptions
     {
-        public EssUserCreationOptions(string id, string password, EssUserRole role = EssUserRole.USER, List<string> groups = default )
+        public EssUserCreationOptions(string id, string password, EssUserRole role = EssUserRole.User, List<string> groups = default )
         {
             ID = id ?? 
                 throw new ArgumentNullException( $@"The ID of a user is required to create an {nameof(EssUserCreationOptions)}.", nameof(ID) );
