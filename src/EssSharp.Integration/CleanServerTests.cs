@@ -101,7 +101,7 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get and delete all existing users except admin.
-            foreach ( var user in (await server.GetUsersAsync()).Where(u => u is not null && !string.Equals(u.Name, "admin")) )
+            foreach ( var user in (await server.GetUsersAsync()).Where(u => !string.Equals(u.Name, "admin")) )
                 await user.DeleteAsync();
 
             // Get the full list of users.

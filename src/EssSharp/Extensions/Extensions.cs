@@ -517,7 +517,7 @@ namespace EssSharp
                 EssUserRole.ServiceAdministrator => "Service Administrator",
                 EssUserRole.PowerUser => "Power User",
                 EssUserRole.User => "User",
-                _ => null
+                _ => throw new NotSupportedException($@"The role {options.Role} is not supported.")
             }
         };
 

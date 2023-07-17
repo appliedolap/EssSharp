@@ -54,7 +54,13 @@ namespace EssSharp
         public string Email => _user?.Email;
 
         /// <inheritdoc />
-        public string Role => _user?.Role;
+        public EssUserRole Role => _user?.Role switch
+        {
+            "Serice Administrator" => EssUserRole.ServiceAdministrator,
+            "Power User" => EssUserRole.PowerUser,
+            "User" => EssUserRole.User,
+            _ => EssUserRole.Unkown
+        };
 
         /// <inheritdoc />
         public List<string> GroupNames => _user?.Groups;

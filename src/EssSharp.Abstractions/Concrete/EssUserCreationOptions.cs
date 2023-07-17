@@ -11,6 +11,8 @@ namespace EssSharp
 {
     public enum EssUserRole
     {
+        Unkown, 
+
         ServiceAdministrator,
 
         PowerUser,

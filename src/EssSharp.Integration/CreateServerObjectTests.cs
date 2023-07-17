@@ -169,13 +169,13 @@ namespace EssSharp.Integration
             var userConnection = GetEssConnection(EssUserRole.User);
 
             // Create EssUserCreationOptions
-            var options = new EssUserCreationOptions(userConnection.Username, userConnection.Password) { Role = userConnection.Role };
+            var options = new EssUserCreationOptions(userConnection.Username, userConnection.Password, userConnection.Role);
 
             var newUser = await server.CreateUserAsync(options);
 
             Assert.Equal(userConnection.Username, newUser.Name);
 
-            Assert.Equal( userConnection.Role.ToString(), newUser.Role);
+            Assert.Equal( userConnection.Role, newUser.Role);
         }
 
     }
