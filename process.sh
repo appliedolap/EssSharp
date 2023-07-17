@@ -56,11 +56,14 @@ cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseN
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid/mdx".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
-# Fix Schema for script content
-cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content".get.responses."200".schema = {"$ref": "#/definitions/ScriptContent"}' > json.tmp && mv json.tmp temp.json
-
-# Fix produces for createScript
+# Fix produces for script create
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/scripts".post.produces = ["application/json"]' > json.tmp && mv json.tmp temp.json
+
+# Fix produces for script update
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}".put.produces = ["application/json"]' > json.tmp && mv json.tmp temp.json
+
+# Fix schema for script content
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content".get.responses."200".schema = {"$ref": "#/definitions/ScriptContent"}' > json.tmp && mv json.tmp temp.json
 
 # Fix produces for CreateLockObject
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/locks/objects/lock".post.produces = ["application/json"]' > json.tmp && mv json.tmp temp.json

@@ -131,11 +131,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssScript"/> object of type <typeparamref name="T"/>.</returns>
-        public T CreateScript<T>( string name, string content = null ) where T : class, IEssScript => CreateScriptAsync<T>(name, content).GetAwaiter().GetResult();
+        public T CreateScript<T>( string name, string content = null, bool saveToCube = true ) where T : class, IEssScript => CreateScriptAsync<T>(name, content, saveToCube).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssScript"/> object of type <typeparamref name="T"/>.</returns>
-        public async Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript 
+        public async Task<T> CreateScriptAsync<T>( string name, string content = null, bool saveToCube = true, CancellationToken cancellationToken = default ) where T : class, IEssScript 
         {
             // Throw if a specific type of IEssScript is not given.
             if ( typeof(T) == typeof(IEssScript) )
@@ -169,9 +169,20 @@ namespace EssSharp
             {
                 // Create a new specific IEssScript of the given type with the given name and content.
                 var script = Extensions.CreateScript<T>(new Script() { Name = name, Content = content }, this);
-                
-                // Save the script to the server.
-                return await script.SaveAsync<T>(cancellationToken).ConfigureAwait(false);
+
+                // Save the script to the server if necessary.
+                if ( saveToCube )
+                {
+                    // If a script with the given name already exists, throw an exception.
+                    if ( await script.ExistsAsync(cancellationToken).ConfigureAwait(false) )
+                        throw new Exception("A script with the given name already exists.");
+
+                    // Save the new script to the server.
+                    await script.SaveAsync(cancellationToken).ConfigureAwait(false);
+                }
+
+                // Return the newly saved script.
+                return script;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )

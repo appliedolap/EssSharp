@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
-using System;
 
 namespace EssSharp
 {
@@ -65,17 +64,19 @@ namespace EssSharp
         /// </summary>
         /// <param name="name">The name of the script.</param>
         /// <param name="content">(optional) The content of the new script.</param>
+        /// <param name="saveToCube">(optional) Whether to save the new script to the cube or just create it in memory for temporary use.</param>
         /// <remarks>Creates an <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
-        public T CreateScript<T>( string name, string content = null ) where T : class, IEssScript;
+        public T CreateScript<T>( string name, string content = null, bool saveToCube = true ) where T : class, IEssScript;
 
         /// <summary>
         /// Asynchronously creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
         /// </summary>
         /// <param name="name">The name of the script.</param>
         /// <param name="content">(optional) The content of the new script.</param>
+        /// <param name="saveToCube">(optional) Whether to save the new script to the cube or just create it in memory for temporary use.</param>
         /// <param name="cancellationToken"></param>
         /// <remarks>Creates an <see cref="IEssScript"/> of the specific type <typeparamref name="T"/>.</remarks>
-        public Task<T> CreateScriptAsync<T>( string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript;
+        public Task<T> CreateScriptAsync<T>( string name, string content = null, bool saveToCube = true, CancellationToken cancellationToken = default ) where T : class, IEssScript;
 
         /// <summary>
         /// Executes a report query.
@@ -366,9 +367,9 @@ namespace EssSharp
     }
 
     /// <summary>
-    /// Fluent extensions for <see cref="IEssCube"/>.
+    /// Fluent extensions for <see cref="EssSharp" />.
     /// </summary>
-    public static class FluentIEssCubeExtensions
+    public static partial class FluentExtensions
     {
         /// <summary>
         /// Asynchronously creates a script with the given name (and type <typeparamref name="T"/>) on the cube.
@@ -376,10 +377,11 @@ namespace EssSharp
         /// <param name="cubeTask" />
         /// <param name="name">The name of the script.</param>
         /// <param name="content">(optional) The content of the new script.</param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="saveToCube">(optional) Whether to save the new script to the cube or just create it in memory for temporary use.</param>
+        /// <param name="cancellationToken" />
         /// <remarks>Creates an <see cref="IEssScript"/> of the specific type <typeparamref name="T"/>.</remarks>
-        public static async Task<T> CreateScriptAsync<T>( this Task<IEssCube> cubeTask, string name, string content = null, CancellationToken cancellationToken = default ) where T : class, IEssScript =>
-            await (await cubeTask.ConfigureAwait(false)).CreateScriptAsync<T>(name, content, cancellationToken).ConfigureAwait(false);
+        public static async Task<T> CreateScriptAsync<T>( this Task<IEssCube> cubeTask, string name, string content = null, bool saveToCube = true, CancellationToken cancellationToken = default ) where T : class, IEssScript =>
+            await (await cubeTask.ConfigureAwait(false)).CreateScriptAsync<T>(name, content, saveToCube, cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Asynchronously gets the drillthrough report with the given name.

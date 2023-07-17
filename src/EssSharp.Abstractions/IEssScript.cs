@@ -9,25 +9,34 @@ namespace EssSharp
     /// </summary>
     public interface IEssScript : IEssObject
     {
-        #region Properties 
+        #region IEssObject Properties
 
         /// <summary>
-        /// Returns the content of the script
+        /// Returns or sets the name of the script.
+        /// </summary>
+        public new string Name { get; set; }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Returns or sets the content of the script.
         /// </summary>
         public string Content { get; set; }
 
         /// <summary>
-        /// Returns the cube that holds the script
+        /// Returns the cube that holds the script.
         /// </summary>
         IEssCube Cube { get; }
 
         /// <summary>
-        /// Returns not sure
+        /// Returns the date and time the script was last modified.
         /// </summary>
-        public long ModifiedTime { get; }
+        public DateTime ModifiedTime { get; }
 
         /// <summary>
-        /// Returns the size of the script in bytes
+        /// Returns the size of the script in bytes.
         /// </summary>
         public long Size { get; }
 
@@ -41,52 +50,104 @@ namespace EssSharp
         #region Methods
 
         /// <summary>
-        /// Synchronously deletes a script from the cube.
+        /// Copies this script and returns the copy.
+        /// </summary>
+        /// <param name="newName">The name of the copy.</param>
+        /// <remarks>Creates a copy of this <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
+        public T Copy<T>( string newName ) where T : class, IEssScript;
+
+        /// <summary>
+        /// Asynchronously copies this script and returns the copy.
+        /// </summary>
+        /// <param name="newName">The name of the copy.</param>
+        /// <param name="cancellationToken" />
+        /// <remarks>Creates a copy of this <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/>.</remarks>
+        public Task<T> CopyAsync<T>( string newName, CancellationToken cancellationToken = default ) where T : class, IEssScript;
+
+        /// <summary>
+        /// Deletes this script from the cube.
         /// </summary>
         void Delete();
 
         /// <summary>
-        /// Asynchronously deletes a script from the cube.
+        /// Asynchronously deletes this script from the cube.
         /// </summary>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken" />
         Task DeleteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Synchronously executes a script.
+        /// Executes this script.
         /// </summary>
-        IEssJob Execute( );
+        IEssJob Execute();
 
         /// <summary>
-        /// Asynchronously executes a script.
+        /// Asynchronously executes this script.
         /// </summary>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken" />
         Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Syncronously returns and sets the script content.
+        /// Gets whether this script exists on the cube.
         /// </summary>
-        /// <returns></returns>
+        public bool Exists();
+
+        /// <summary>
+        /// Asynchronously gets whether this script exists on the cube.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task<bool> ExistsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the content of this script.
+        /// </summary>
         public string GetContent();
 
         /// <summary>
-        /// Asyncronously retrieves and sets the script content.
+        /// Asynchronously gets the content of this script.
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="cancellationToken" />
         public Task<string> GetContentAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Sycronously Saves script to the cube.
+        /// Renames this script and saves the changes to the cube.
         /// </summary>
-        /// <returns></returns>
-        public T Save<T>() where T: class, IEssScript;
+        /// <param name="newName">The name of the renamed script.</param>
+        public void Rename( string newName );
 
         /// <summary>
-        /// Asycronously Saves script to the cube.
+        /// Renames this script and saves the changes to the cube.
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<T> SaveAsync<T>( CancellationToken cancellationToken = default ) where T : class, IEssScript;
+        /// <param name="newName">The name of the renamed script.</param>
+        /// <param name="cancellationToken" />
+        public Task RenameAsync( string newName, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Saves any changes to the cube.
+        /// </summary>
+        /// <remarks>If the <see cref="Name" /> of this script has changed, a "Save As" operation is performed.</remarks>
+        public void Save();
+
+        /// <summary>
+        /// Asynchronously saves any changes to the cube.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <remarks>If the <see cref="Name" /> of this script has changed, a "Save As" operation is performed.</remarks>
+        public Task SaveAsync( CancellationToken cancellationToken = default );
+
         #endregion
+    }
+
+    /// <summary>
+    /// Fluent extensions for <see cref="EssSharp" />.
+    /// </summary>
+    public static partial class FluentExtensions
+    {
+        /// <summary>
+        /// Asynchronously deletes this script from the cube.
+        /// </summary>
+        /// <param name="scriptTask" />
+        /// <param name="cancellationToken" />
+        public static async Task DeleteAsync<T>(this Task<T> scriptTask, CancellationToken cancellationToken = default) where T : class, IEssScript =>
+            await (await scriptTask.ConfigureAwait(false)).DeleteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

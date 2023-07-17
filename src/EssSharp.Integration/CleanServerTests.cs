@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
 
@@ -92,45 +94,24 @@ namespace EssSharp.Integration
             Assert.Empty(await server.GetApplicationsAsync());
         }
 
-        [Fact(DisplayName = "CleanServerTests - 04 - Essbase_AfterConnection_CanRemoveApplications"), Priority(04)]
+        [Fact(DisplayName = "CleanServerTests - 04 - Essbase_AfterConnection_CanRemoveUsers"), Priority(04)]
         public async Task Essbase_AfterConnection_CanRemoveUsers()
         {
             // Get an unconnected server.
             var server = GetEssServer();
 
-            // Get and delete all existing applications.
-            var adminConnections = GetEssConnection(EssUserRole.ServiceAdministrator);
-            var puConnections = GetEssConnection(EssUserRole.PowerUser);
-            var userConnections = GetEssConnection(EssUserRole.User);
+            // Get and delete all existing users except admin.
+            foreach ( var user in (await server.GetUsersAsync()).Where(u => u is not null && !string.Equals(u.Name, "admin")) )
+                await user.DeleteAsync();
 
-            // Check for admin users and delete any that are not named "admin"
-            try
-            {
-                var admin = await server.GetUserAsync(adminConnections.Username).ConfigureAwait(false); 
-                    
-                if (!string.Equals("admin", admin.Name))
-                    await admin.DeleteAsync().ConfigureAwait(false);
-            }  
-            catch { }
+            // Get the full list of users.
+            var users = await server.GetUsersAsync();
 
-            // Try to get and delete any power users
-            try
-            {
-                var powerUser = await server.GetUserAsync(puConnections.Username).ConfigureAwait(false);
-                await powerUser.DeleteAsync().ConfigureAwait(false);
-            } 
-            catch { }
+            // Assert that the (refreshed) list of users contains a single user.
+            Assert.Single(await server.GetUsersAsync());
 
-            // try to get and delete any users
-            try
-            {
-                var user = await server.GetUserAsync(userConnections.Username).ConfigureAwait(false);
-                await user.DeleteAsync().ConfigureAwait(false);
-            }
-            catch { }
-
-            // Assert that the (refreshed) list of applications is empty.
-            Assert.True((await server.GetUsersAsync()).Count == 1);
+            // Assert that the name of the only remaining user is "admin".
+            Assert.Equal("admin", users.First()?.Name);
         }
     }
 }

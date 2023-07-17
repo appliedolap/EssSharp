@@ -84,7 +84,82 @@ namespace EssSharp.Integration
             Assert.Equal("105522.0", grid.Slice.Data.Ranges.LastOrDefault().Values.LastOrDefault());
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 04 - Essbase_AfterScriptCreation_CanExecuteReportScript"), Priority(04)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 04 - Essbase_AfterScriptCreation_CanRenameMdxScript"), Priority(04)]
+        public async Task Essbase_AfterScriptCreation_CanRenameAndCopyMdxScript()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Get the "test" mdx script from the cube and capture its content.
+            var script = await cube.GetScriptAsync<IEssMdxScript>("test", getContent: true);
+            var content = script.Content;
+
+            // Rename the "test" mdx script as "test2".
+            await script.RenameAsync("test2");
+
+            // Get all of the mdx scripts back from the cube.
+            var scripts = await cube.GetScriptsAsync<IEssMdxScript>(getContent: true);
+
+            // Assert that only a single mdx script remains on the server.
+            Assert.Single(scripts);
+
+            // Capture the renamed "test2" mdx script.
+            var renamedScript = scripts.First();
+
+            // Assert that the mdx script is named "test2".
+            Assert.Equal("test2", renamedScript.Name);
+
+            // Assert that the content of "test2" matches the original "test" mdx script.
+            Assert.Equal(content, renamedScript.Content);
+
+            // Copy the renamed script back to "test" mdx.
+            await renamedScript.CopyAsync<IEssMdxScript>("test");
+
+            // Get all of the mdx scripts back from the cube.
+            scripts = await cube.GetScriptsAsync<IEssMdxScript>(getContent: true);
+
+            // Assert that the cube now has 2 mdx scripts.
+            Assert.Equal(2, scripts.Count);
+
+            // Assert that both "test" and "test2" are now present on the cube.
+            Assert.True(scripts.Any(s => string.Equals("test", s.Name)) && scripts.Any(s => string.Equals("test2", s.Name)));
+
+            // Assert that both "test" and "test2" contain the original content.
+            Assert.True(scripts.All(s => string.Equals(content, s.Content)));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 05 - Essbase_AfterScriptRename_CanUpdateMdxScript"), Priority(05)]
+        public async Task Essbase_AfterScriptCreation_CanUpdateMdxScript()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Create some updated script content.
+            var content = @"SELECT {([Market], [Product])} ON COLUMNS, {[YEAR]} ON ROWS";
+
+            // Get the "test2" mdx script from the cube and update the content.
+            var script = await cube.GetScriptAsync<IEssMdxScript>("test2", getContent: true);
+            script.Content = content;
+
+            // Save the "test2" mdx script.
+            await script.SaveAsync();
+
+            // Get the updated script back from the cube.
+            script = await cube.GetScriptAsync<IEssMdxScript>("test2", getContent: true);
+
+            // Assert that the updated script exists and contains the updated content we saved to it.
+            Assert.Equal(content, script?.Content);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 06 - Essbase_AfterScriptCreation_CanExecuteReportScript"), Priority(06)]
         public async Task Essbase_AfterScriptCreation_CanExecuteReportScript()
         {
             // Get an unconnected server.
@@ -102,7 +177,7 @@ namespace EssSharp.Integration
             Assert.Equal(EssJobStatus.Completed, job?.JobStatus);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 05 - Essbase_AfterScriptCreation_CannotExecuteMaxLScript"), Priority(05)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 07 - Essbase_AfterScriptCreation_CannotExecuteMaxLScript"), Priority(07)]
         public async Task Essbase_AfterScriptCreation_CannotExecuteMaxLScript()
         {
             // Get an unconnected server.
