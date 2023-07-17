@@ -89,9 +89,11 @@ namespace EssSharp
         #region IEssServer Members
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
         public IEssApplication CreateApplication( string applicationName, string cubeName, EssDatabaseCreationOptions options = null ) => CreateApplicationAsync(applicationName, cubeName, options).GetAwaiter().GetResult();
         
         /// <inheritdoc />
+        /// <returns>An<see cref="IEssApplication"/> object.</returns>
         public async Task<IEssApplication> CreateApplicationAsync(string applicationName, string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(applicationName) )
@@ -233,7 +235,7 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns> An <see cref="EssJob"/> object.</returns>
+        /// <returns> An <see cref="IEssJob"/> object.</returns>
         public IEssJob CreateJob( IEssJobOptions options ) => new EssJob(options, this);
 
         /// <inheritdoc />
@@ -267,11 +269,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssAbout"/> object.</returns>
+        /// <returns>An <see cref="IEssAbout"/> object.</returns>
         public IEssAbout GetAbout() => GetAboutAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssAbout"/> object.</returns>
+        /// <returns>An <see cref="IEssAbout"/> object.</returns>
         public async Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -288,11 +290,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssAboutInstance"/> object.</returns>
+        /// <returns>An <see cref="IEssAboutInstance"/> object.</returns>
         public IEssAboutInstance GetAboutInstance() => GetAboutInstanceAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssAboutInstance"/> object.</returns>
+        /// <returns>An <see cref="IEssAboutInstance"/> object.</returns>
         public async Task<IEssAboutInstance> GetAboutInstanceAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -309,11 +311,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssApplication"/> object.</returns>
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
         public IEssApplication GetApplication( string applicationName ) => GetApplicationAsync(applicationName)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssApplication"/> object.</returns>
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
         public async Task<IEssApplication> GetApplicationAsync( string applicationName, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(applicationName) )
@@ -335,22 +337,22 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
         public List<IEssApplication> GetApplications() => GetApplicationsAsync(_maxApplications)?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
         /// <remarks>The number of returned applications is limited to the value of <paramref name="applicationsLimit"/>.</remarks>
         public List<IEssApplication> GetApplications( int applicationsLimit ) => GetApplicationsAsync(applicationsLimit)?.GetAwaiter().GetResult() ?? new List<IEssApplication>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
         /// <remarks>The number of returned applications is limited to the value of <see cref="_maxApplications"/>.</remarks>
         public Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default ) => GetApplicationsAsync(_maxApplications, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssApplication"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
         /// <remarks>The number of returned applications is limited to the value of <paramref name="applicationsLimit"/>.</remarks>
         public async Task<List<IEssApplication>> GetApplicationsAsync( int applicationsLimit, CancellationToken cancellationToken = default )
         {
@@ -368,11 +370,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssDatasourceConnection"/> object.</returns>
         public IEssDatasourceConnection GetConnection( string connectionName ) => GetConnectionAsync(connectionName).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssDatasourceConnection"/> object.</returns>
         public async Task<IEssDatasourceConnection> GetConnectionAsync( string connectionName, CancellationToken cancellationToken = default )
         {
             try
@@ -390,11 +392,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssDatasourceConnection"/> objects.</returns>
         public List<IEssDatasourceConnection> GetConnections() => GetConnectionsAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssDatasourceConnection"/> objects.</returns>
         public async Task<List<IEssDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default )
         {
 
@@ -420,11 +422,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssDatasource"/> object.</returns>
         public IEssDatasource GetDatasource( string datasourceName ) => GetDatasourceAsync( datasourceName ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssDatasource"/> object.</returns>
         public async Task<IEssDatasource> GetDatasourceAsync (string datasourceName , CancellationToken cancellationToken = default)
         {
             try
@@ -443,11 +445,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssDatasource"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssDatasource"/> objects.</returns>
         public List<IEssDatasource> GetDatasources() => GetDatasourcesAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssDatasource"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssDatasource"/> objects.</returns>
         public async Task<List<IEssDatasource>> GetDatasourcesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -463,11 +465,11 @@ namespace EssSharp
             }
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile GetFile(string path) => GetFileAsync(path)?.GetAwaiter().GetResult();
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> GetFileAsync(string path, CancellationToken cancellationToken = default)
         {
@@ -514,11 +516,11 @@ namespace EssSharp
             }
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public IEssFolder GetFolder( string path ) => GetFolderAsync(path)?.GetAwaiter().GetResult();
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public async Task<IEssFolder> GetFolderAsync( string path, CancellationToken cancellationToken = default )
         {
@@ -561,11 +563,11 @@ namespace EssSharp
             }
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         /// <returns>A List of <see cref="IEssFolder"/> objects.</returns>
         public List<IEssFolder> GetFolders() => GetFoldersAsync()?.GetAwaiter().GetResult() ?? new List<IEssFolder>();
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         /// <returns>A List of <see cref="IEssFolder"/> objects.</returns>
         public async Task<List<IEssFolder>> GetFoldersAsync( CancellationToken cancellationToken = default )
         {
@@ -584,9 +586,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssGroup"/> object.</returns>
         public IEssGroup GetGroup( string name ) => GetGroupAsync(name).GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssGroup"/> object.</returns>
         public async Task<IEssGroup> GetGroupAsync( string name, CancellationToken cancellationToken = default )
         {
             {
@@ -608,9 +612,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
         public List<IEssGroup> GetGroups() => GetGroupsAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
         public async Task<List<IEssGroup>> GetGroupsAsync(CancellationToken cancellationToken = default )
         {
             try
@@ -628,22 +634,22 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssJob"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssJob"/> objects.</returns>
         /// <remarks>The number of returned jobs is limited to the value of <see cref="_maxJobs"/>.</remarks>
         public List<IEssJob> GetJobs() => GetJobsAsync(_maxJobs)?.GetAwaiter().GetResult() ?? new List<IEssJob>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssJob"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssJob"/> objects.</returns>
         /// <remarks>The number of returned jobs is limited to the value of <paramref name="jobsLimit"/>.</remarks>
         public List<IEssJob> GetJobs( long jobsLimit ) => GetJobsAsync(jobsLimit)?.GetAwaiter().GetResult() ?? new List<IEssJob>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssJob"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssJob"/> objects.</returns>
         /// <remarks>The number of returned jobs is limited to the value of <see cref="_maxJobs"/>.</remarks>
         public Task<List<IEssJob>> GetJobsAsync( CancellationToken cancellationToken = default ) => GetJobsAsync(_maxJobs, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssJob"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssJob"/> objects.</returns>
         /// <remarks>The number of returned jobs is limited to the value of <paramref name="jobsLimit"/>.</remarks>
         public async Task<List<IEssJob>> GetJobsAsync( long jobsLimit, CancellationToken cancellationToken = default )
         {
@@ -661,11 +667,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssSession"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssSession"/> objects.</returns>
         public List<IEssSession> GetSessions() => GetSessionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssSession>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssSession"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssSession"/> objects.</returns>
         public async Task<List<IEssSession>> GetSessionsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -682,11 +688,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssUrl" /> objects.</returns>
+        /// <returns>A list of <see cref="IEssUrl" /> objects.</returns>
         public List<IEssUrl> GetURLs() => GetURLsAsync()?.GetAwaiter().GetResult() ?? new List<IEssUrl>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssUrl" /> objects.</returns>
+        /// <returns>A list of <see cref="IEssUrl" /> objects.</returns>
         public async Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -703,11 +709,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssUser"/> object</returns>
+        /// <returns>An <see cref="IEssUser"/> object</returns>
         public IEssUser GetUser( string id ) => GetUserAsync( id ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssUser"/> object</returns>
+        /// <returns>An <see cref="IEssUser"/> object</returns>
         public async Task<IEssUser> GetUserAsync( string id, CancellationToken cancellationToken = default )
         {
             try
@@ -724,12 +730,12 @@ namespace EssSharp
             }
         }
 
-        /// <inheritdoc/>
-        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public IEssFolder GetUserHomeFolder() => GetUserHomeFolderAsync()?.GetAwaiter().GetResult();
 
-        /// <inheritdoc/>
-        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public async Task<IEssFolder> GetUserHomeFolderAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -753,11 +759,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssUserSession"/> object.</returns>
+        /// <returns>An <see cref="IEssUserSession"/> object.</returns>
         public IEssUserSession GetUserSession( bool includeToken = true, bool includeGroups = true ) => GetUserSessionAsync(includeToken, includeGroups)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssUserSession"/> object.</returns>
+        /// <returns>An <see cref="IEssUserSession"/> object.</returns>
         public async Task<IEssUserSession> GetUserSessionAsync( bool includeToken = true, bool includeGroups = true, CancellationToken cancellationToken = default )
         {
             try
@@ -777,12 +783,12 @@ namespace EssSharp
             }
         }
 
-        /// <inheritdoc/>
-        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public IEssFolder GetUserSharedFolder() => GetUserSharedFolderAsync()?.GetAwaiter().GetResult();
 
-        /// <inheritdoc/>
-        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public async Task<IEssFolder> GetUserSharedFolderAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -806,11 +812,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssUser"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
         public List<IEssUser> GetUsers() => GetUsersAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssUser"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
         public async Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -828,11 +834,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssUtility"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssUtility"/> objects.</returns>
         public List<IEssUtility> GetUtilities() => GetUtilitiesAsync()?.GetAwaiter().GetResult() ?? new List<IEssUtility>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssUtility"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssUtility"/> objects.</returns>
         public async Task<List<IEssUtility>> GetUtilitiesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -849,11 +855,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssServerVariable" /> objects.</returns>
+        /// <returns>A list of <see cref="IEssServerVariable" /> objects.</returns>
         public List<IEssServerVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssServerVariable>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssServerVariable" /> objects.</returns>
+        /// <returns>A list of <see cref="IEssServerVariable" /> objects.</returns>
         public async Task<List<IEssServerVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -874,11 +880,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssUserSession"/> object, optionally containing a session token and group membership information.</returns>
+        /// <returns>An <see cref="IEssUserSession"/> object, optionally containing a session token and group membership information.</returns>
         public IEssUserSession SignIn( bool includeToken = false, bool includeGroups = false ) => SignInAsync(includeToken, includeGroups).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssUserSession"/> object, optionally containing a session token and group membership information.</returns>
+        /// <returns>An <see cref="IEssUserSession"/> object, optionally containing a session token and group membership information.</returns>
         public Task<IEssUserSession> SignInAsync( bool includeToken = false, bool includeGroups = false, CancellationToken cancellationToken = default ) => GetUserSessionAsync(includeToken, includeGroups, cancellationToken);
 
         /// <inheritdoc />

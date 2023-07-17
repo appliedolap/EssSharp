@@ -12,22 +12,18 @@ namespace EssSharp
         /// <summary>
         /// Creates a new Application and database with the given name and options
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="databaseName"></param>
-        /// <param name="appType"></param>
-        /// <param name="dbType"></param>
-        /// <param name="enableScenarios"></param>
-        /// <param name="allowDuplicates"></param>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="options">Options for creating a Database.</param>
         public IEssApplication CreateApplication( string applicationName, string cubeName, EssDatabaseCreationOptions options = null );
 
         /// <summary>
-        /// Creates a new Application and database with the given name and options
+        /// Asynchronously creates a new Application and database with the given name and options
         /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="databaseName"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="options">Options for creating a Database.</param>
+        /// <param name="cancellationToken" />
         public Task<IEssApplication> CreateApplicationAsync( string applicationName, string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -35,7 +31,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="applicationName" />
         /// <param name="cubeName" />
-        /// <param name="options" />
+        /// <param name="options">Job options for creating an application from a workbook.<param> />
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, EssJobImportExcelOptions options );
 
         /// <summary>
@@ -43,7 +39,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="applicationName" />
         /// <param name="cubeName" />
-        /// <param name="options" />
+        /// <param name="options">Job options for creating an application from a workbook.<param> />
         /// <param name="cancellationToken" />
         public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, EssJobImportExcelOptions options, CancellationToken cancellationToken = default );
 
@@ -53,7 +49,7 @@ namespace EssSharp
         /// <param name="applicationName" />
         /// <param name="cubeName" />
         /// <param name="localWorkbookPath" />
-        /// <param name="options" />
+        /// <param name="options">Job options for creating an application from a workbook.<param> />
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null );
 
         /// <summary>
@@ -62,7 +58,7 @@ namespace EssSharp
         /// <param name="applicationName" />
         /// <param name="cubeName" />
         /// <param name="localWorkbookPath" />
-        /// <param name="options" />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
         /// <param name="cancellationToken" />
         public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
@@ -72,7 +68,7 @@ namespace EssSharp
         /// <param name="applicationName" />
         /// <param name="cubeName" />
         /// <param name="stream" />
-        /// <param name="options" />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null );
 
         /// <summary>
@@ -80,131 +76,128 @@ namespace EssSharp
         /// </summary>
         /// <param name="applicationName" />
         /// <param name="cubeName" />
-        /// <param name="stream" />
-        /// <param name="options" />
+        /// <param name="stream">Workbook stream</param>
+        /// <param name="options">Job options for creating an application from a workbook.</param>
         /// <param name="cancellationToken" />
         public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Creates a new (unstarted) job on the server.
         /// </summary>
-        /// <param name="options" />
+        /// <param name="options">Job options.</param>
         public IEssJob CreateJob( IEssJobOptions options );
 
         /// <summary>
-        /// Creates a new server variable
+        /// Creates a new server variable.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name" />
+        /// <param name="value" />
         public IEssServerVariable CreateVariable( string name, string value );
 
         /// <summary>
-        /// Create a new server variable
+        /// Asynchronously create a new server variable.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
+        /// <param name="name" />
+        /// <param name="value" />
         /// <param name="cancellationToken"></param>
         public Task<IEssServerVariable> CreateVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Returns a specified datasource connection as an <see cref="IEssDatasourceConnection"/>.
         /// </summary>
-        /// <param name="connectionName"></param>
-        /// <returns></returns>
+        /// <param name="connectionName" />
         public IEssDatasourceConnection GetConnection( string connectionName );
 
         /// <summary>
-        /// 
+        /// Asynchronously returns a specified datasource connection as an <see cref="IEssDatasourceConnection"/>.
         /// </summary>
-        /// <param name="connectionName"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="connectionName" />
+        /// <param name="cancellationToken" />
         public Task<IEssDatasourceConnection> GetConnectionAsync( string connectionName, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Returns a list of datasource connections as <see cref="IEssDatasourceConnection"/> objects.
         /// </summary>
-        /// <returns></returns>
         public List<IEssDatasourceConnection> GetConnections();
 
         /// <summary>
-        /// 
+        /// Asynchronously returns a list of datasource connections as <see cref="IEssDatasourceConnection"/> objects
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="cancellationToken" />
         public Task<List<IEssDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Return a specified data source as an IEssDatasource object
+        /// Return a specified data source as an <see cref="IEssDatasource"/> object.
         /// </summary>
-        /// <param name="datasourceName"></param>
+        /// <param name="datasourceName" />
         public IEssDatasource GetDatasource( string datasourceName );
 
         /// <summary>
-        /// Returns a specified data source as an IEssDatasource object
+        /// Asynchronously returns a specified data source as an <see cref="IEssDatasource"/> object.
         /// </summary>
-        /// <param name="datasourceName"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="datasourceName" />
+        /// <param name="cancellationToken" />
         public Task<IEssDatasource> GetDatasourceAsync( string datasourceName, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Returns a list of IEssDatasource objects
+        /// returns a list of <see cref="IEssDatasource"/> objects.
         /// </summary>
         public List<IEssDatasource> GetDatasources();
 
         /// <summary>
-        /// Returns a list of IEssDatasource objects
+        /// Asynchronously returns a list of <see cref="IEssDatasource"/> objects.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssDatasource>> GetDatasourcesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Returns a specified server file as an <see cref="IEssFile"/> object.
         /// </summary>
         /// <param name="path"></param>
-        /// <returns></returns>
         public IEssFile GetFile(string path);
 
-        /// <summary />
+        /// <summary>
+        /// Asynchronously returns a specified server file as an <see cref="IEssFile"/> object.
+        /// </summary>
         /// <param name="path" />
         /// <param name="cancellationToken" />
         public Task<IEssFile> GetFileAsync(string path, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// 
+        /// Returns a server folder as an <see cref="IEssFolder"/> object.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <param name="path" />
         public IEssFolder GetFolder( string path );
 
-        /// <summary />
+        /// <summary>
+        /// Asynchronously returns a server folder as an <see cref="IEssFolder"/> object.
+        /// </summary>
         /// <param name="path" />
         /// <param name="cancellationToken" />
         public Task<IEssFolder> GetFolderAsync( string path, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of files for this server available to the connected user.
+        /// Returns a list of <see cref="IEssFile"/> objects for this server available to the connected user.
         /// </summary>
         public List<IEssFolder> GetFolders();
 
         /// <summary>
-        /// Asynchronously gets the list of files for this server available to the connected user.
+        /// Asynchronously gets the list of <see cref="IEssFile"/> objects for this server available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssFolder>> GetFoldersAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Gets the specified group.
+        /// Returns a specified group as an <see cref="IEssGroup"/>.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name" />
         public IEssGroup GetGroup( string name );
 
         /// <summary>
-        /// Gets the specified group.
+        /// Asynchronously Returns a specified group as an <see cref="IEssGroup"/>.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="name" />
+        /// <param name="cancellationToken" />
         public Task<IEssGroup> GetGroupAsync( string name, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -213,126 +206,124 @@ namespace EssSharp
         public List<IEssGroup> GetGroups();
 
         /// <summary>
-        /// Returns a list of <see cref="IEssGroup"/> objects.
+        /// Asynchronously returns a list of <see cref="IEssGroup"/> objects.
         /// </summary>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken" />
         public Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the about information of this server.
+        /// Returns a about information of this server as an <see cref="IEssAbout"/>.
         /// </summary>
         public IEssAbout GetAbout();
 
         /// <summary>
-        /// Asynchronously gets the about information of this server.
+        /// Asynchronously returns the about information of this server as an <see cref="IEssAbout"/>.
         /// </summary>
         public Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the about information of this server.
+        /// Returns a about information of this server as an <see cref="IEssAbout"/>.
         /// </summary>
         public IEssAboutInstance GetAboutInstance();
 
         /// <summary>
-        /// Gets the about information of this server
+        /// Asynchronously returns a about information of this server as an <see cref="IEssAbout"/>.
         /// </summary>
         public Task<IEssAboutInstance> GetAboutInstanceAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Gets the application with the given name.
+        /// Returns an application with the given name as an <see cref="IEssApplication"/>.
         /// </summary>
         /// <param name="applicationName" />
         public IEssApplication GetApplication( string applicationName );
 
         /// <summary>
-        /// Asynchronously gets the application with the given name.
+        /// Asynchronously Returns an application with the given name as an <see cref="IEssApplication"/>.
         /// </summary>
         /// <param name="applicationName" />
         /// <param name="cancellationToken" />
         public Task<IEssApplication> GetApplicationAsync( string applicationName, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of applications for this server available to the connected user.
+        /// Returns a list of <see cref="IEssApplication"/> objects for this server available to the connected user.
         /// </summary>
         public List<IEssApplication> GetApplications();
 
         /// <summary>
-        /// Gets the list of applications for this server available to the connected user.
+        /// Returns a list of <see cref="IEssApplication"/> objects for this server available to the connected user.
         /// </summary>
         /// <param name="applicationsLimit">The maximum number of applications to return.</param>
         public List<IEssApplication> GetApplications( int applicationsLimit );
 
         /// <summary>
-        /// Asynchronously gets the list of applications for this server available to the connected user.
+        /// Asynchronously returns a list of <see cref="IEssApplication"/> objects for this server available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssApplication>> GetApplicationsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Asynchronously gets the list of applications for this server available to the connected user.
+        /// Asynchronously Returns a list of <see cref="IEssApplication"/> objects for this server available to the connected user.
         /// </summary>
         /// <param name="applicationsLimit">The maximum number of applications to return.</param>
         /// <param name="cancellationToken" />
         public Task<List<IEssApplication>> GetApplicationsAsync( int applicationsLimit, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of jobs for this server available to the connected user.
+        /// Returns a list of jobs for this server available to the connected user.
         /// </summary>
         public List<IEssJob> GetJobs();
 
         /// <summary>
-        /// Gets the list of jobs for this server available to the connected user.
+        /// Returns a list of <see cref="IEssJob"/> objects for this server available to the connected user.
         /// </summary>
         /// <param name="jobsLimit">The maximum number of jobs to return.</param>
         public List<IEssJob> GetJobs( long jobsLimit );
 
         /// <summary>
-        /// Asynchronously gets the list of jobs for this server available to the connected user.
+        /// Asynchronously returns a list of <see cref="IEssJob"/> objects for this server available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssJob>> GetJobsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Asynchronously gets the list of jobs for this server available to the connected user.
+        /// Asynchronously returns a list of <see cref="IEssJob"/> objects for this server available to the connected user.
         /// </summary>
         /// <param name="jobsLimit">The maximum number of jobs to return.</param>
         /// <param name="cancellationToken" />
         public Task<List<IEssJob>> GetJobsAsync( long jobsLimit, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the user with the given ID.
+        /// Returns the user with the given ID as an <see cref="IEssUser"/>.
         /// </summary>
         /// <param name="userId" />
-        /// <param name="cancellationToken" />
         public IEssUser GetUser( string userId );
 
         /// <summary>
-        /// Asynchronously gets the user with the given ID.
+        /// Asynchronously returns the user with the given ID as an <see cref="IEssUser"/>.
         /// </summary>
         /// <param name="userId" />
         /// <param name="cancellationToken" />
         public Task<IEssUser> GetUserAsync( string userId, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the home folder for the current user.
+        /// Returns the home folder for the current user as a list of <see cref="IEssFolder"/> objects.
         /// </summary>
         public IEssFolder GetUserHomeFolder();
 
         /// <summary>
-        /// Asynchronously gets the home folder for the current user.
+        /// Asynchronously returns the home folder for the current user as a list of <see cref="IEssFolder"/> objects..
         /// </summary>
         public Task<IEssFolder> GetUserHomeFolderAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets a user session from the server for the configured user.
+        /// Returns a user session from the server for the configured user as an <see cref="IEssUserSession"/>.
         /// </summary>
         /// <param name="includeToken">Whether to capture a session token.</param>
         /// <param name="includeGroups">Whether to capture the user's groups.</param>
-        /// <param name="cancellationToken" />
         public IEssUserSession GetUserSession( bool includeToken = true, bool includeGroups = true );
 
         /// <summary>
-        /// Asynchronously gets a user session from the server for the configured user.
+        /// Asynchronously gets a user session from the server for the configured user as an <see cref="IEssUserSession"/>.
         /// </summary>
         /// <param name="includeToken">Whether to capture a session token.</param>
         /// <param name="includeGroups">Whether to capture the user's groups.</param>
@@ -340,87 +331,86 @@ namespace EssSharp
         public Task<IEssUserSession> GetUserSessionAsync( bool includeToken = true, bool includeGroups = true, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the shared folder for the current user.
+        /// Returns the shared folder for the current user as an <see cref="IEssFolder"/>.
         /// </summary>
         public IEssFolder GetUserSharedFolder();
 
         /// <summary>
-        /// Asynchronously gets the shared folder for the current user.
+        /// Asynchronously returns the shared folder for the current user as an <see cref="IEssFolder"/>.
         /// </summary>
         public Task<IEssFolder> GetUserSharedFolderAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of all users for this server.
+        /// Returns a list of all users for this server as <see cref="IEssUser"/> objects.
         /// </summary>
-        /// <returns></returns>
         public List<IEssUser> GetUsers();
 
         /// <summary>
-        /// Gets the list of all users for this server.
+        /// Asynchronously returns a list of all users for this server as <see cref="IEssUser"/> objects.
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of server-scoped variables available to the connected user.
+        /// Returns a list of server-scoped variables available to the connected user as <see cref="IEssServerVariable"/> objects.
         /// </summary>
         public List<IEssServerVariable> GetVariables();
 
         /// <summary>
-        /// Asynchronously gets the list of server-scoped variables available to the connected user.
+        /// Asynchronously gets the list of server-scoped variables available to the connected user as <see cref="IEssServerVariable"/> objects..
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssServerVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of server sessions available to the connected user.
+        /// Returns a list of server sessions available to the connected user as <see cref="IEssSession"/> objects.
         /// </summary>
         public List<IEssSession> GetSessions();
 
         /// <summary>
-        /// Asynchronously gets the list of server sessions available to the connected user.
+        /// Asynchronously returns the list of server sessions available to the connected user as <see cref="IEssSession"/> objects.
         /// </summary>
+        /// <param name="cancellationToken" />
         public Task<List<IEssSession>> GetSessionsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Gets the list of server URLs available to the connected user.
+        /// Returns a list of server URLs available to the connected user as <see cref="IEssUrl"/>.
         /// </summary>
         public List<IEssUrl> GetURLs();
 
         /// <summary>
-        /// Asynchronously gets the list of server URLs available to the connected user.
+        /// Asynchronously returns a list of server URLs available to the connected user as <see cref="IEssUrl"/> objects.
         /// </summary>
         public Task<List<IEssUrl>> GetURLsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the list of server utilities available to the connected user.
+        /// Returns a list of server utilities available to the connected user as <see cref="IEssUtility"/> objects.
         /// </summary>
         public List<IEssUtility> GetUtilities();
 
         /// <summary>
-        /// Asynchronously gets the list of server utilities available to the connected user.
+        /// Asynchronously returns a list of server utilities available to the connected user as <see cref="IEssUtility"/> objects..
         /// </summary>
         public Task<List<IEssUtility>> GetUtilitiesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Signs into the server and returns the user session for the connected user.
+        /// Signs into the server and returns a user session for the connected user as an <see cref="IEssUserSession"/> object.
         /// </summary>
         /// <param name="includeGroups" />
         /// <param name="includeToken" />
         public IEssUserSession SignIn( bool includeToken = false, bool includeGroups = false );
 
         /// <summary>
-        /// Asynchronously signs into the server and returns the user session for the connected user.
+        /// Asynchronously signs into the server and returns a user session for the connected user as an <see cref="IEssUserSession"/> object.
         /// </summary>
         /// <param name="includeGroups" />
-        /// <param name="includeToken" />
+         /// <param name="includeToken" />
         /// <param name="cancellationToken" />
         public Task<IEssUserSession> SignInAsync( bool includeToken = false, bool includeGroups = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Signs out of the server.
         /// </summary>
-        /// <param name="cancellationToken" />
         public void SignOut();
 
         /// <summary>
