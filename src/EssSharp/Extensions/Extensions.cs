@@ -508,6 +508,19 @@ namespace EssSharp
             throw new ArgumentException($@"{nameof(EssJobType)}.{jobType} does not map to a model job type.");
         }
 
+        internal static UserBean ToUserBean( this EssUserCreationOptions options ) => new UserBean()
+        {
+            Id = options.ID,
+            Password = options.Password,
+            Groups = options.Groups,
+            Role = options.Role switch{
+                EssUserRole.SERVICE_ADMINISTRATOR => "Service Administrator",
+                EssUserRole.USER => "User",
+                EssUserRole.POWER_USER => "Power User",
+                _ => null
+            }
+        };
+
         #endregion
 
         #region EssScript/EssScriptType Extensions

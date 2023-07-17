@@ -91,5 +91,20 @@ namespace EssSharp.Integration
             // Assert that the (refreshed) list of applications is empty.
             Assert.Empty(await server.GetApplicationsAsync());
         }
+
+        [Fact(DisplayName = "CleanServerTests - 04 - Essbase_AfterConnection_CanRemoveApplications"), Priority(04)]
+        public async Task Essbase_AfterConnection_CanRemoveUsers()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get and delete all existing applications.
+            var user = await server.GetUserAsync("Matthew");
+
+            await user.DeleteAsync();
+
+            // Assert that the (refreshed) list of applications is empty.
+            Assert.True((await server.GetUsersAsync()).Count == 1);
+        }
     }
 }

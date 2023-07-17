@@ -40,9 +40,7 @@ namespace EssSharp
                 _server = configuration.BasePath.Substring(0, defaultRestApiPathIndex);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary />
         /// <param name="server"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -237,6 +235,30 @@ namespace EssSharp
         /// <inheritdoc />
         /// <returns> An <see cref="IEssJob"/> object.</returns>
         public IEssJob CreateJob( IEssJobOptions options ) => new EssJob(options, this);
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssUser"/></returns>
+        public IEssUser CreateUser( EssUserCreationOptions options ) => CreateUserAsync( options ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssUser"/></returns>
+        public async Task<IEssUser> CreateUserAsync( EssUserCreationOptions options, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<UsersApi>();
+
+                if ( await api.UsersAddAsync(body: options.ToUserBean(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )
+                    throw new Exception($@"Cannot create new user.");
+
+                return new EssUser(user, this);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create user {options.ID} on server ""{Name}"". {e.Message}", e);
+            }
+        }
 
         /// <inheritdoc />
         /// <returns> An <see cref="IEssServerVariable"/> object.</returns>
@@ -718,11 +740,14 @@ namespace EssSharp
         {
             try
             {
-                var api = GetApi<UsersApi>();
-                if ( await api.UsersGetAsync(id: id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )
-                    throw new Exception("Unable to find user.");
-
-                return new EssUser(user, this);
+                foreach (var user in await GetUsersAsync( cancellationToken ).ConfigureAwait(false))
+                {
+                    if ( string.Equals(id, user.Name, StringComparison.OrdinalIgnoreCase) ) 
+                    { 
+                        return user; 
+                    }
+                }
+                throw new Exception($@"Cannot get user {id}.");
             }
             catch ( Exception e )
             {

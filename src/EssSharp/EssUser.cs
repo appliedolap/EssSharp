@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using EssSharp.Api;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -45,7 +48,7 @@ namespace EssSharp
         public IEssServer Server => _server;
 
         /// <inheritdoc />
-        public string DisplayName => _user?.Name;
+        public string FullName => _user?.Name;
 
         /// <inheritdoc />
         public string Email => _user?.Email;
@@ -59,6 +62,25 @@ namespace EssSharp
         #endregion
 
         #region IEssUser Members
+
+        /// <inheritdoc />
+        public void Delete() => DeleteAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task DeleteAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<UsersApi>();
+
+                await api.UsersDeleteAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to delete user ""{Name}"". {e.Message}", e);
+            }
+        }
 
 
         #endregion

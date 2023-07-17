@@ -160,5 +160,21 @@ namespace EssSharp.Integration
             Assert.Equal("CalcAll", lockedScript.Name);
         }
 
+        [Fact(DisplayName = "CreateServerObjectTests - 06 - Essbase_AfterClean_CanCreateUser"), Priority(06)]
+        public async Task Essbase_AfterClean_CanCreateUser()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Create EssUserCreationOptions
+            var options = new EssUserCreationOptions("Matthew", "password1") { Role = EssUserRole.SERVICE_ADMINISTRATOR };
+
+            var newUser = await server.CreateUserAsync(options);
+
+            Assert.Equal("Matthew", newUser.Name);
+
+            Assert.Equal("Service Administrator", newUser.Role);
+        }
+
     }
 }

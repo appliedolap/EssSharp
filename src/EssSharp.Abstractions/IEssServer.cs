@@ -88,6 +88,20 @@ namespace EssSharp
         public IEssJob CreateJob( IEssJobOptions options );
 
         /// <summary>
+        /// Creates a new user on the server.
+        /// </summary>
+        /// <param name="options">Options for creating a new user.</param>
+        public IEssUser CreateUser( EssUserCreationOptions options );
+
+        /// <summary>
+        /// Asynchronously creates a new user on the server.
+        /// </summary>
+        /// <param name="options">Options for creating a new user.</param>
+        /// <param name="cancellationToken" />
+        /// <returns></returns>
+        public Task<IEssUser> CreateUserAsync( EssUserCreationOptions options, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Creates a new server variable.
         /// </summary>
         /// <param name="name" />
@@ -295,15 +309,15 @@ namespace EssSharp
         /// <summary>
         /// Returns the user with the given ID as an <see cref="IEssUser"/>.
         /// </summary>
-        /// <param name="userId" />
-        public IEssUser GetUser( string userId );
+        /// <param name="id" />
+        public IEssUser GetUser( string id );
 
         /// <summary>
         /// Asynchronously returns the user with the given ID as an <see cref="IEssUser"/>.
         /// </summary>
-        /// <param name="userId" />
+        /// <param name="id" />
         /// <param name="cancellationToken" />
-        public Task<IEssUser> GetUserAsync( string userId, CancellationToken cancellationToken = default );
+        public Task<IEssUser> GetUserAsync( string id, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns the home folder for the current user as a list of <see cref="IEssFolder"/> objects.
