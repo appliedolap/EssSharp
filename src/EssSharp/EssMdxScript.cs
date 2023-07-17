@@ -110,20 +110,6 @@ namespace EssSharp
                 if ( await api.MDXExecuteMDXAsync(application: Cube.Application.Name, database: Cube.Name, body: mdxInput, cancellationToken: cancellationToken).ConfigureAwait(false) is not JObject response )
                     throw new Exception($@"Could not execute the query and/or get the resulting report.");
 
-                /*
-                // Construct an EssQueryReport and return it.
-                var report = new EssQueryReport
-                {
-                    Metadata = new EssQueryReport.ReportMetadata()
-                    {
-                        PageDimensionMembers   = new List<string>(output["metadata"]?["page"]  ?.ToObject<string[]>() ?? new string[0]),
-                        ColumnDimensionMembers = new List<string>(output["metadata"]?["column"]?.ToObject<string[]>() ?? new string[0]),
-                        RowDimensionMembers    = new List<string>(output["metadata"]?["row"]   ?.ToObject<string[]>() ?? new string[0])
-                    },
-                    Data = To2DReport(output["data"], preferences)
-                };
-                */
-
                 return BuildQueryReport(response, preferences);
             }
             catch ( OperationCanceledException ) { throw; }
@@ -241,7 +227,6 @@ namespace EssSharp
             // Create the report if it has not been created yet.
             report ??= new object[reportRowCount, reportColumnCount];
 
-            var compareSequence = new int[sourceColumnCount];
             // Create an array to hold the sequence of source columns.
             var sourceColumnSequence = Enumerable.Range(0, sourceColumnCount).ToArray();
 

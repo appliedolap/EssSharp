@@ -11,7 +11,7 @@ namespace EssSharp
         public string Path { get; }
 
         /// <summary>
-        /// Returns the abolute URL of the resource.
+        /// Returns the absolute URL of the resource.
         /// </summary>
         public Uri Url { get; }
     }
