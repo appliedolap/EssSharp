@@ -326,6 +326,18 @@ namespace EssSharp
                 .ToList() ?? new List<IEssUser>();
         }
 
+        internal static List<IEssUserPermission> ToEssSharpList( this UserGroupProvisionInfoList permissionsList, EssApplication application )
+        {
+            if ( application is null )
+                throw new ArgumentNullException(nameof(application), $"The given {nameof(application)} is null.");
+
+            return permissionsList
+                .Items?
+                .Where(permissions => permissions is not null)
+                .Select(permissions => new EssUserPermission(permissions, application) as IEssUserPermission)
+                .ToList() ?? new List<IEssUserPermission>();
+        }
+
         /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssServerVariable"/> objects associated with the given <paramref name="variableList"/>.
         /// </summary>
@@ -602,6 +614,16 @@ namespace EssSharp
 
             return default;
         }
+
+        internal static EssUserPermissionRole ToEssUserProvisionRole( this string role ) => role switch
+        {
+            "none"        => EssUserPermissionRole.None,
+            "db_access"   => EssUserPermissionRole.db_access,
+            "db_update"   => EssUserPermissionRole.db_update,
+            "db_manager"  => EssUserPermissionRole.db_manager,
+            "app_manager" => EssUserPermissionRole.app_manager,
+            _             => throw new NotSupportedException()
+        };
 
         #endregion
     }

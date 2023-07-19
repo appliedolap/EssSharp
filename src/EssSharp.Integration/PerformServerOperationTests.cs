@@ -195,5 +195,20 @@ namespace EssSharp.Integration
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
         }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 08 - Essbase_AfterScriptCreation_CanUpdateUserPermissions"), Priority(08)]
+        public async Task Essbase_AfterScriptCreation_CanUpdateUserPermissions()
+        {
+
+            var server = GetEssServer();
+
+            var app = await server.GetApplicationAsync("Sample");
+
+            var user = GetEssConnection(EssUserRole.User);
+
+            var userPermissions = await app.UpdateUserPermissionsAsync(user.Username, EssUserPermissionRole.db_access);
+
+            Assert.Equal(EssUserPermissionRole.db_access, userPermissions.Role);
+        }
     }
 }

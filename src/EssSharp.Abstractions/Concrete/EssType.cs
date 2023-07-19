@@ -22,6 +22,7 @@
         Session,
         Url,
         User,
+        UserProvisions,
         Utility,
         Variable,
         Dimension,

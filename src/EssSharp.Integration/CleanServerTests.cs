@@ -113,5 +113,23 @@ namespace EssSharp.Integration
             // Assert that the name of the only remaining user is "admin".
             Assert.Equal("admin", users.First()?.Name);
         }
+
+        [Fact(DisplayName = "CleanServerTests - 05 - Essbase_AfterConnection_CanRemoveUserPermissions"), Priority(05)]
+        public async Task Essbase_AfterConnection_CanRemoveUserPermissions()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the list of existing applications.
+            foreach ( var application in await server.GetApplicationsAsync() )
+            {
+             // Get the list of existing locks and unlock them.
+                foreach ( var essPermission in await application.GetPermissionsAsync() )
+                    await essPermission.RemovePermissionsAsync();
+            
+                // Assert that the (refreshed) list of existing locks is empty.
+                Assert.Empty(await application.GetPermissionsAsync());   
+            }
+        }
     }
 }

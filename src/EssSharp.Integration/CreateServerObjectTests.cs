@@ -178,5 +178,21 @@ namespace EssSharp.Integration
             Assert.Equal( userConnection.Role, newUser.Role);
         }
 
+        [Fact(DisplayName = "CreateServerObjectTests - 07 - Essbase_AfterClean_CanGivePermissions"), Priority(07)]
+        public async Task Essbase_AfterClean_CanGivePermissions()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var userConnection = GetEssConnection(EssUserRole.User);
+
+            var app = await server.GetApplicationAsync("Sample");
+
+            var userPermissions = await app.CreateUserPermissionsAsync(userConnection.Username, EssUserPermissionRole.db_update);
+
+            Assert.Equal(EssUserPermissionRole.db_update, userPermissions.Role);
+
+            Assert.Equal(userConnection.Username, userPermissions.Name);
+        }
     }
 }

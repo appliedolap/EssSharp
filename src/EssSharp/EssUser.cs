@@ -88,7 +88,6 @@ namespace EssSharp
             }
         }
 
-
         #endregion
     }
 }

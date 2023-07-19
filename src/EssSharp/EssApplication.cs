@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using EssSharp.Api;
 using EssSharp.Model;
+using static System.Net.WebRequestMethods;
 
 namespace EssSharp
 {
@@ -110,7 +111,7 @@ namespace EssSharp
         {
             try
             {
-                if ( !File.Exists(localWorkbookPath) )
+                if ( !System.IO.File.Exists(localWorkbookPath) )
                     throw new FileNotFoundException("Unable to find the workbook file at the given local path.", localWorkbookPath);
 
                 using var stream = new FileStream(localWorkbookPath, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -408,6 +409,101 @@ namespace EssSharp
 
             return configurationList?.ToEssSharpList(this) ?? new List<IEssApplicationConfiguration>();
         }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUserPermission"/> objects.</returns>
+        public List<IEssUserPermission> GetPermissions( string filter = null, EssUserPermissionRole? role = null ) => GetPermissionsAsync( filter, role ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUserPermission"/> objects.</returns>
+        public async Task<List<IEssUserPermission>> GetPermissionsAsync( string filter = null, EssUserPermissionRole? role = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationRoleProvisioningApi>();
+
+                if ( await api.ApplicationRoleProvisioningSearchProvisionAsync(app: Name, filter: filter, role: filter?.ToString() ?? "all",  cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissionsList )
+                    throw new Exception("Unable to get provision list.");
+
+                return permissionsList?.ToEssSharpList(this) ?? new List<IEssUserPermission>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get permissions for application ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
+        public IEssUserPermission GetUserPermissions( string id ) => GetUserPermissionsAsync(id).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
+        public async Task<IEssUserPermission> GetUserPermissionsAsync( string id, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationRoleProvisioningApi>();
+
+                if ( await api.ApplicationRoleProvisioningGetProvisionAsync(app: Name, id: id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissions )
+                    throw new Exception("Unable to get provision list.");
+
+                return new EssUserPermission(permissions, this);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get permissions for application ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssUserPermission CreatePermissions( string userId, EssUserPermissionRole newPermissionRole ) => CreateUserPermissionsAsync(userId, newPermissionRole).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssUserPermission> CreateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationRoleProvisioningApi>();
+
+                var options = new UserGroupProvisionInfo()
+                {
+                    Id = userId,
+                    Role = newPermissionRole.ToString()
+                };
+
+                await api.ApplicationRoleProvisioningProvisionAsync(app: Name, id: userId, body: options, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return await GetUserPermissionsAsync(userId, cancellationToken);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to give permissions for user ""{userId}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssUserPermission UpdateUserPermissions( string userId, EssUserPermissionRole newPermissionRole ) => CreateUserPermissionsAsync(userId, newPermissionRole).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssUserPermission> UpdateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default ) =>
+            await UpdateUserPermissionsAsync(await GetUserPermissionsAsync(userId), newPermissionRole, cancellationToken).ConfigureAwait(false);
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssUserPermission UpdatePermissions( IEssUserPermission user, EssUserPermissionRole newPermissionRole ) => UpdateUserPermissionsAsync(user, newPermissionRole).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssUserPermission> UpdateUserPermissionsAsync( IEssUserPermission user, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default ) => 
+            await user.UpdatePermissionsAsync( newPermissionRole, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
         public List<IEssApplicationVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplicationVariable>();

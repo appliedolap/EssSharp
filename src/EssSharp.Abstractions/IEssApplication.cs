@@ -201,6 +201,43 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         public Task<List<IEssApplicationConfiguration>> GetConfigurationsAsync(CancellationToken cancellationToken = default);
 
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUserPermission"/> objects.</returns>
+        public List<IEssUserPermission> GetPermissions( string filter = null, EssUserPermissionRole? role = null );
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUserPermission"/> objects.</returns>
+        public Task<List<IEssUserPermission>> GetPermissionsAsync( string filter = null, EssUserPermissionRole? role = null, CancellationToken cancellationToken = default );
+
+        public IEssUserPermission GetUserPermissions( string id );
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
+        public Task<IEssUserPermission> GetUserPermissionsAsync( string id, CancellationToken cancellationToken = default );
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssUserPermission CreatePermissions( string userId, EssUserPermissionRole newPermissionRole );
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Task<IEssUserPermission> CreateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssUserPermission UpdateUserPermissions( string userId, EssUserPermissionRole newPermissionRole );
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Task<IEssUserPermission> UpdateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssUserPermission UpdatePermissions( IEssUserPermission user, EssUserPermissionRole newPermissionRole );
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Task<IEssUserPermission> UpdateUserPermissionsAsync( IEssUserPermission user, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
         /// <summary>
         /// Gets the list of application-scoped variables available to the connected user.
         /// </summary>
