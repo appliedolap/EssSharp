@@ -7,7 +7,7 @@
     <AssemblyName>EssSharp</AssemblyName>
     <AssemblyTitle>$(AssemblyName)</AssemblyTitle>
     <RootNamespace>EssSharp</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>$(AssemblyName)</PackageId>
     <Title>$(AssemblyName)</Title>
     <Authors>Applied OLAP</Authors>
@@ -40,6 +40,7 @@
     <PackageReference Include="RestSharp" Version="110.2.0" />
     <PackageReference Include="Polly" Version="7.2.3" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="TinyCsvParser" Version="2.7.0" />
     <!-- Excluded References -->
     <None Remove="System.Web" />
   </ItemGroup>

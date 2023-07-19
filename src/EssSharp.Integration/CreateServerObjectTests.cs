@@ -52,7 +52,42 @@ namespace EssSharp.Integration
             Assert.Equal(3, applications?.Count);
         }
 
-        [Fact(DisplayName = "CreateServerObjectTests - 02 - Essbase_AfterCubeCreation_CanCreateMdxScript"), Priority(02)]
+        [Fact(DisplayName = "CreateServerObjectTests - 02 - Essbase_AfterCubeCreation_CanCreateUser"), Priority(02)]
+        public async Task Essbase_AfterCubeCreation_CanCreateUser()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var userConnection = GetEssConnection(EssUserRole.User);
+
+            // Create EssUserCreationOptions
+            var options = new EssUserCreationOptions(userConnection.Username, userConnection.Password, userConnection.Role);
+
+            var newUser = await server.CreateUserAsync(options);
+
+            Assert.Equal(userConnection.Username, newUser.Name);
+
+            Assert.Equal(userConnection.Role, newUser.Role);
+        }
+
+        [Fact(DisplayName = "CreateServerObjectTests - 03 - Essbase_AfterCubeCreation_CanCreateUserPermissions"), Priority(03)]
+        public async Task Essbase_AfterCubeCreation_CanCreateUserPermissions()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var userConnection = GetEssConnection(EssUserRole.User);
+
+            var app = await server.GetApplicationAsync("Sample");
+
+            var userPermissions = await app.CreateUserPermissionsAsync(userConnection.Username, EssUserPermissionRole.db_access);
+
+            Assert.Equal(EssUserPermissionRole.db_access, userPermissions.Role);
+
+            Assert.Equal(userConnection.Username, userPermissions.Name);
+        }
+
+        [Fact(DisplayName = "CreateServerObjectTests - 04 - Essbase_AfterCubeCreation_CanCreateMdxScript"), Priority(04)]
         public async Task Essbase_AfterCubeCreation_CanCreateMdxScript()
         {
             // Get an unconnected server.
@@ -78,7 +113,7 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = "CreateServerObjectTests - 03 - Essbase_AfterCubeCreation_CanCreateReportScript"), Priority(03)]
+        [Fact(DisplayName = "CreateServerObjectTests - 05 - Essbase_AfterCubeCreation_CanCreateReportScript"), Priority(05)]
         public async Task Essbase_AfterCubeCreation_CanCreateReportScript()
         {
             // Get an unconnected server.
@@ -113,7 +148,7 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = "CreateServerObjectTests - 04 - Essbase_AfterCubeCreation_CanCreateMaxLScript"), Priority(04)]
+        [Fact(DisplayName = "CreateServerObjectTests - 06 - Essbase_AfterCubeCreation_CanCreateMaxLScript"), Priority(06)]
         public async Task Essbase_AfterCubeCreation_CanCreateMaxLScript()
         {
             // Get an unconnected server.
@@ -139,7 +174,7 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = @"CreateServerObjectTests - 05 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(05)]
+        [Fact(DisplayName = @"CreateServerObjectTests - 07 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(07)]
         public async Task Essbase_AfterScriptCreation_CanCreateLockOnScript()
         {
             // Get an unconnected server.
@@ -158,41 +193,6 @@ namespace EssSharp.Integration
 
             // Assert that the lock object name is the same as the one we passed.
             Assert.Equal("CalcAll", lockedScript.Name);
-        }
-
-        [Fact(DisplayName = "CreateServerObjectTests - 06 - Essbase_AfterClean_CanCreateUser"), Priority(06)]
-        public async Task Essbase_AfterClean_CanCreateUser()
-        {
-            // Get an unconnected server.
-            var server = GetEssServer();
-
-            var userConnection = GetEssConnection(EssUserRole.User);
-
-            // Create EssUserCreationOptions
-            var options = new EssUserCreationOptions(userConnection.Username, userConnection.Password, userConnection.Role);
-
-            var newUser = await server.CreateUserAsync(options);
-
-            Assert.Equal(userConnection.Username, newUser.Name);
-
-            Assert.Equal( userConnection.Role, newUser.Role);
-        }
-
-        [Fact(DisplayName = "CreateServerObjectTests - 07 - Essbase_AfterClean_CanGivePermissions"), Priority(07)]
-        public async Task Essbase_AfterClean_CanGivePermissions()
-        {
-            // Get an unconnected server.
-            var server = GetEssServer();
-
-            var userConnection = GetEssConnection(EssUserRole.User);
-
-            var app = await server.GetApplicationAsync("Sample");
-
-            var userPermissions = await app.CreateUserPermissionsAsync(userConnection.Username, EssUserPermissionRole.db_update);
-
-            Assert.Equal(EssUserPermissionRole.db_update, userPermissions.Role);
-
-            Assert.Equal(userConnection.Username, userPermissions.Name);
         }
     }
 }

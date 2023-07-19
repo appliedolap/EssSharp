@@ -81,26 +81,24 @@ namespace EssSharp
         /// <summary>
         /// Executes a report query.
         /// </summary>
-        /// <param name="name">Name of report query.</param>
         /// <param name="query">Report query to execute.</param>
-        /// <returns></returns>
-        public string ExecuteReportQuery( string name, string query );
+        /// <param name="preferences">Execution preferences</param>
+        public EssQueryReport ExecuteReportQuery( string query, EssQueryPreferences preferences = null );
 
         /// <summary>
         /// Asynchronously executes a report query.
         /// </summary>
-        /// <param name="name">Name of report query.</param>
         /// <param name="query">Report query to execute.</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<string> ExecuteReportQueryAsync( string name, string query, CancellationToken cancellationToken = default );
+        /// <param name="preferences">Execution preferences</param>
+        /// <param name="cancellationToken" />
+        public Task<EssQueryReport> ExecuteReportQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Executes an MDX query.
         /// </summary>
         /// <param name="query">Query to execute</param>
         /// <param name="preferences">Execution preferences</param>
-        public EssQueryReport ExecuteMDXQuery( string query, EssQueryPreferences preferences = null );
+        public EssQueryReport ExecuteMdxQuery( string query, EssQueryPreferences preferences = null );
 
         /// <summary>
         /// Asynchronously executes an MDX query.
@@ -108,18 +106,18 @@ namespace EssSharp
         /// <param name="query">Query to execute</param>
         /// <param name="preferences">Execution preferences</param>
         /// <param name="cancellationToken"></param>
-        public Task<EssQueryReport> ExecuteMDXQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
+        public Task<EssQueryReport> ExecuteMdxQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Executes a script (Calc or MDX) on a cube.
+        /// Executes a script (Calc, MDX, or Report) on a cube.
         /// </summary>
         /// <param name="options"></param>
         public void ExecuteScript( EssJobScriptOptions options );
 
         /// <summary>
-        /// Asynchronously executes a script (Calc or MDX) on a cube.
+        /// Asynchronously executes a script (Calc, MDX, or Report) on a cube.
         /// </summary>
-        /// <param name="options">Options incude script name or report script name, and lock for update</param>
+        /// <param name="options">Options include script name or report script name, and lock for update</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task ExecuteScriptAsync( EssJobScriptOptions options, CancellationToken cancellationToken = default );

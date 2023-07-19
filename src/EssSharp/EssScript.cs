@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using EssSharp.Api;
 using EssSharp.Model;
 
@@ -26,10 +26,10 @@ namespace EssSharp
         internal EssScript( Script script, EssCube cube ) : base(cube?.Configuration, cube?.Client)
         {
             _script = script ??
-                throw new ArgumentNullException(nameof(script), $"An API model {nameof(script)} is required to create an {nameof(EssScript)}.");
+                throw new ArgumentNullException(nameof(script), $"An API model {nameof(script)} is required to create an {nameof(EssScript)} of type {ScriptType}.");
 
             _cube = cube ??
-                throw new ArgumentNullException(nameof(cube), $"An API model {nameof(cube)} is required to create an {nameof(EssScript)}.");
+                throw new ArgumentNullException(nameof(cube), $"An API model {nameof(cube)} is required to create an {nameof(EssScript)} of type {ScriptType}.");
         }
 
         #endregion
@@ -140,20 +140,20 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns><see cref="IEssJob"/></returns>
-        public IEssJob Execute() => ExecuteAsync( ).GetAwaiter().GetResult();
+        /// <returns>An <see cref="EssJob" /> object.</returns>
+        public virtual IEssJob Execute( EssJobScriptOptions options = null ) => ExecuteAsync(options).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns><see cref="IEssJob"/></returns>
-        public async Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default)
+        /// <returns>An <see cref="EssJob" /> object.</returns>
+        public virtual async Task<IEssJob> ExecuteAsync( EssJobScriptOptions options = null, CancellationToken cancellationToken = default )
         {
             try
             {
-                var options = new EssJobScriptOptions(essScript: this)
-                {
-                    ApplicationName = Cube.Application.Name,
-                    CubeName = Cube.Name
-                };
+                options ??= new EssJobScriptOptions(essScript: this);
+
+                // Set the application and cube names if not explicitly set by the caller.
+                options.ApplicationName ??= Cube.Application.Name;
+                options.CubeName        ??= Cube.Name;
 
                 var job = await Cube.Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ThrowIfFailed().ConfigureAwait(false);
 

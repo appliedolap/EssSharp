@@ -8,6 +8,12 @@ namespace EssSharp
         #region IEssJobOptions EssJobType.Unknown (Multiple) Members
 
         /// <summary>
+        /// Returns or sets the data file (or script file) to use for an <see cref="EssJobType.Dataload" />
+        /// (or <inheritdoc cref="EssJobType.Calc" />/<see cref="EssJobType.MdxScript" />) job."/>
+        /// </summary>
+        public List<string> File { get; set; }
+
+        /// <summary>
         /// Returns or sets the file to execute for an <see cref="EssJobType.Calc" /> job or 
         /// the file (or files) to load for an <see cref="EssJobType.Dataload" /> job.
         /// </summary>
@@ -32,8 +38,6 @@ namespace EssSharp
 
         #region IEssJobOptions EssJobType.DataLoad Members
 
-        public List<string> File { get; set; }
-
         /// <summary>
         /// Returns or sets whether to abort the data load if an error is encountered for an <see cref="EssJobType.Dataload"/> job.
         /// </summary>
@@ -43,6 +47,26 @@ namespace EssSharp
         /// Returns or sets the rule file (or files) to use for an <see cref="EssJobType.Dataload" /> job.
         /// </summary>
         public List<string> Rule { get; set; }
+
+        #endregion
+
+        #region IEssJobOptions EssJobType.ExecuteReport Members
+
+        /// <summary>
+        /// Returns or sets whether the <see cref="ReportScriptFilename" /> property carries script content
+        /// rather than the report script filename.
+        /// </summary>
+        public bool? IsScriptContent { get; set; }
+
+        /// <summary>
+        /// Returns or sets whether all blocks accessed by the report are locked for update.
+        /// </summary>
+        public bool? LockForUpdate { get; set; }
+
+        /// <summary>
+        /// Returns or sets the name of the report script file (or the script content, if <see cref="IsScriptContent" /> is set to <see langword="true" />).
+        /// </summary>
+        public string ReportScriptFilename { get; set; }
 
         #endregion
 
@@ -64,7 +88,7 @@ namespace EssSharp
         public bool? Data { get; set; }
 
         /// <summary>
-        /// Returns or sets the inlcude member IDs options for an <see cref="EssJobType.ExportExcel" /> job.
+        /// Returns or sets the include member IDs options for an <see cref="EssJobType.ExportExcel" /> job.
         /// </summary>
         public bool? MemberIds { get; set; }
 
@@ -116,20 +140,6 @@ namespace EssSharp
         /// Returns or sets the recreate app option for an <see cref="EssJobType.ImportExcel" /> job.
         /// </summary>
         public bool? RecreateApp { get; set; }
-
-        #endregion
-
-        #region EssJobType.ExecuteReport
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string ReportScriptFilename { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool? LockForUpdate { get; set; }
 
         #endregion
     }

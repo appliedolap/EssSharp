@@ -216,22 +216,22 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns><see cref="string"/></returns>
-        public string ExecuteReportQuery(string name, string query) => ExecuteReportQueryAsync(name, query).GetAwaiter().GetResult();
+        /// <returns>An <see cref="EssQueryReport" /> object.</returns>
+        public EssQueryReport ExecuteReportQuery( string query, EssQueryPreferences preferences = null ) => ExecuteReportQueryAsync(query, preferences).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns><see cref="string"/></returns>
-        public async Task<string> ExecuteReportQueryAsync( string name, string query, CancellationToken cancellationToken = default ) =>
-            await new EssReportScript(new Script() {Content = query, Name = name}, this).QueryAsync().ConfigureAwait(false);
+        /// <returns>An <see cref="EssQueryReport" /> object.</returns>
+        public Task<EssQueryReport> ExecuteReportQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default ) =>
+            new EssReportScript(new Script() { Content = query }, this).GetReportAsync(preferences, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns><see cref="EssQueryReport"/></returns>
-        public EssQueryReport ExecuteMDXQuery(string query, EssQueryPreferences preferences = null) => ExecuteMDXQueryAsync(query, preferences).GetAwaiter().GetResult();
+        /// <returns>An <see cref="EssQueryReport" /> object.</returns>
+        public EssQueryReport ExecuteMdxQuery(string query, EssQueryPreferences preferences = null) => ExecuteMdxQueryAsync(query, preferences).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns><see cref="EssQueryReport"/></returns>
-        public async Task<EssQueryReport> ExecuteMDXQueryAsync(string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default ) => 
-            await new EssMdxScript(new Script() { Content = query }, this).GetReportAsync(preferences, cancellationToken).ConfigureAwait(false);
+        /// <returns>An <see cref="EssQueryReport" /> object.</returns>
+        public Task<EssQueryReport> ExecuteMdxQueryAsync( string query, EssQueryPreferences preferences = null, CancellationToken cancellationToken = default ) => 
+            new EssMdxScript(new Script() { Content = query }, this).GetReportAsync(preferences, cancellationToken);
 
         /// <inheritdoc />
         /// <returns><see cref="Stream"/></returns>

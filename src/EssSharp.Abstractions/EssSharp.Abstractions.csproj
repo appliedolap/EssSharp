@@ -6,7 +6,7 @@
     <AssemblyName>EssSharp.Abstractions</AssemblyName>
     <AssemblyTitle>$(AssemblyName)</AssemblyTitle>
     <RootNamespace>EssSharp</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>$(AssemblyName)</PackageId>
     <Title>$(AssemblyName)</Title>
     <Authors>Applied OLAP</Authors>

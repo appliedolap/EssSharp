@@ -177,7 +177,67 @@ namespace EssSharp.Integration
             Assert.Equal(EssJobStatus.Completed, job?.JobStatus);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 07 - Essbase_AfterScriptCreation_CannotExecuteMaxLScript"), Priority(07)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 07 - Essbase_AfterScriptCreation_CanGetReportQueryReport"), Priority(07)]
+        public async Task Essbase_AfterScriptCreation_CanGetReportQueryReport()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the test Report script from the server.
+            var script = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic")
+                .GetScriptAsync<IEssReportScript>("test");
+
+            // Execute the report job and capture the results.
+            var report = await script.GetReportAsync();
+
+            // Assert that there is a single page dimension member.
+            Assert.Single(report.Metadata.PageDimensionMembers);
+            // Assert that the "Measures" dimension is the first page dimension member.
+            Assert.Equal("Measures", report.Metadata.PageDimensionMembers.First());
+
+            // Assert that there are 2 column dimension members.
+            Assert.Equal(2, report.Metadata.ColumnDimensionMembers.Count);
+            // Assert that the "Scenario" and "Year" dimension members are present.
+            Assert.True(report.Metadata.ColumnDimensionMembers.Any(cdm => string.Equals(cdm, "Scenario")) && report.Metadata.ColumnDimensionMembers.Any(cdm => string.Equals(cdm, "Year")));
+
+            // Assert that there are 2 row dimension members.
+            Assert.Equal(2, report.Metadata.RowDimensionMembers.Count);
+            // Assert that the "Market" and "Product" dimension members are present.
+            Assert.True(report.Metadata.RowDimensionMembers.Any(rdm => string.Equals(rdm, "Market")) && report.Metadata.RowDimensionMembers.Any(rdm => string.Equals(rdm, "Product")));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 08 - Essbase_AfterScriptCreation_CanGetReportQueryReportAsUser"), Priority(08)]
+        public async Task Essbase_AfterScriptCreation_CanGetReportQueryReportAsUser()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer(EssUserRole.User);
+
+            // Get the test Report script from the server.
+            var script = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic")
+                .GetScriptAsync<IEssReportScript>("test");
+
+            // Execute the report job and capture the results.
+            var report = await script.GetReportAsync();
+
+            // Assert that there is a single page dimension member.
+            Assert.Single(report.Metadata.PageDimensionMembers);
+            // Assert that the "Measures" dimension is the first page dimension member.
+            Assert.Equal("Measures", report.Metadata.PageDimensionMembers.First());
+
+            // Assert that there are 2 column dimension members.
+            Assert.Equal(2, report.Metadata.ColumnDimensionMembers.Count);
+            // Assert that the "Scenario" and "Year" dimension members are present.
+            Assert.True(report.Metadata.ColumnDimensionMembers.Any(cdm => string.Equals(cdm, "Scenario")) && report.Metadata.ColumnDimensionMembers.Any(cdm => string.Equals(cdm, "Year")));
+
+            // Assert that there are 2 row dimension members.
+            Assert.Equal(2, report.Metadata.RowDimensionMembers.Count);
+            // Assert that the "Market" and "Product" dimension members are present.
+            Assert.True(report.Metadata.RowDimensionMembers.Any(rdm => string.Equals(rdm, "Market")) && report.Metadata.RowDimensionMembers.Any(rdm => string.Equals(rdm, "Product")));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 09 - Essbase_AfterScriptCreation_CannotExecuteMaxLScript"), Priority(09)]
         public async Task Essbase_AfterScriptCreation_CannotExecuteMaxLScript()
         {
             // Get an unconnected server.

@@ -1,11 +1,12 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace EssSharp
 {
-    /// <summary />
-    public interface IEssReportScript : IEssObject, IEssScript
+    /// <summary>
+    /// An Essbase report script.
+    /// </summary>
+    public interface IEssReportScript : IEssScript
     {
         #region Properties 
 
@@ -19,16 +20,17 @@ namespace EssSharp
         #region Methods
 
         /// <summary>
-        /// Synchronously sets the Report property and returns the generated report from the job details.
+        /// Executes a report query and returns a report with the result.
         /// </summary>
-        /// <returns></returns>
-        public string Query();
+        /// <param name="preferences">(optional) The preferences that configure the returned report.</param>
+        public EssQueryReport GetReport( EssQueryPreferences preferences = null );
 
         /// <summary>
-        /// Asynchronously sets the Report property and returns the generated report from the job details.
+        /// Asynchronously executes a report query and returns a report with the result.
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        public Task<string> QueryAsync( CancellationToken cancellationToken = default );
+        /// <param name="preferences">(optional) The preferences that configure the returned report.</param>
+        /// <param name="cancellationToken" />
+        public Task<EssQueryReport> GetReportAsync( EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         #endregion
     }

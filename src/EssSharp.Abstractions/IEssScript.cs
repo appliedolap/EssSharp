@@ -78,13 +78,15 @@ namespace EssSharp
         /// <summary>
         /// Executes this script.
         /// </summary>
-        IEssJob Execute();
+        /// <param name="options">(optional) The options used when executing the script.</param>
+        IEssJob Execute( EssJobScriptOptions options = null );
 
         /// <summary>
         /// Asynchronously executes this script.
         /// </summary>
+        /// <param name="options">(optional) The options used when executing the script.</param>
         /// <param name="cancellationToken" />
-        Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default );
+        Task<IEssJob> ExecuteAsync( EssJobScriptOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets whether this script exists on the cube.

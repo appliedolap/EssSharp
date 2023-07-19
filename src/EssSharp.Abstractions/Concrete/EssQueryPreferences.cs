@@ -11,11 +11,12 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="axes"></param>
-        /// <param name="dataless"></param>
-        /// <param name="formatString"></param>
-        /// <param name="memberIdentifier"></param>
-        public EssQueryPreferences( EssQueryReport.ReportAxes axes = EssQueryReport.ReportAxes.ColumnsRowsAndPages, bool dataless = false, bool formatString = true, EssQueryReport.ReportMemberIdentifier memberIdentifier = EssQueryReport.ReportMemberIdentifier.Name )
+        /// <param name="axes" />
+        /// <param name="dataless" />
+        /// <param name="formatString" />
+        /// <param name="lockForUpdate" />
+        /// <param name="memberIdentifier" />
+        public EssQueryPreferences( EssQueryReport.ReportAxes axes = EssQueryReport.ReportAxes.ColumnsRowsAndPages, bool dataless = false, bool formatString = true, bool lockForUpdate = false, EssQueryReport.ReportMemberIdentifier memberIdentifier = EssQueryReport.ReportMemberIdentifier.Name )
         {
             Axes             = axes;
             Dataless         = dataless;
@@ -55,6 +56,12 @@ namespace EssSharp
         /// Whether formatted values should be returned in the query report.
         /// </summary>
         public bool FormatValues { get; set; }
+
+        /// <summary>
+        /// Whether all blocks accessed by the report are locked for update.
+        /// </summary>
+        /// <remarks>This is supported only for <see cref="IEssReportScript"/> query reports. Defaults to <see langword="false" />.</remarks>
+        public bool LockForUpdate { get; set; } = false;
 
         /// <summary>
         /// Whether invalid data should be returned in the query report.

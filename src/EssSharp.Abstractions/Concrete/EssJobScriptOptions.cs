@@ -109,16 +109,23 @@ namespace EssSharp
             }
         }
 
-        #region IEssJobOptions EssJobType.Calc Members
+        #region IEssJobOptions EssJobType.Unknown (Multiple) Members
+
+        /// <inheritdoc />
+        public string Script { get; set; }
+
+        #endregion
+
+        #region IEssJobOptions EssJobType.ExecuteReport Members
+
+        /// <inheritdoc />
+        public bool? IsScriptContent { get; set; }
 
         /// <inheritdoc />
         public bool? LockForUpdate { get; set; }
 
         /// <inheritdoc />
         public string ReportScriptFilename { get; set; }
-
-        /// <inheritdoc />
-        public string Script { get; set; }
 
         #endregion
     }

@@ -32,118 +32,91 @@ namespace EssSharp
 
         #region Explicit IEssJobOptions EssJobType.Unknown (Multiple) Members
 
-        /// <summary>
-        /// Name of <see cref="IEssScript"/>./>
-        /// </summary>
+        /// <inheritdoc />
         string IEssJobOptions.Script { get; set; }
 
-        /// <summary>
-        /// Name of File.
-        /// </summary>
+        /// <inheritdoc />
         List<string> IEssJobOptions.File { get; set; }
 
         #endregion
 
         #region Explicit IEssJobOptions EssJobType.Clear Members
 
+        /// <inheritdoc />
         EssClearOption? IEssJobOptions.Option { get; set; }
 
+        /// <inheritdoc />
         string IEssJobOptions.PartialDataExpression { get; set; }
 
         #endregion
 
         #region Explicit IEssJobOptions EssJobType.DataLoad Members
 
-        /// <summary>
-        /// Stop job if error occures
-        /// </summary>
+        /// <inheritdoc />
         bool? IEssJobOptions.AbortOnError { get; set; }
 
-        /// <summary>
-        /// Name of Rule file
-        /// </summary>
+        /// <inheritdoc />
         List<string> IEssJobOptions.Rule { get; set; }
+
+        #endregion
+
+        #region Explicit IEssJobOptions EssJobType.ExecuteReport Members
+
+        /// <inheritdoc />
+        bool? IEssJobOptions.IsScriptContent { get; set; }
+
+        /// <inheritdoc />
+        bool? IEssJobOptions.LockForUpdate { get; set; }
+
+        /// <inheritdoc />
+        string IEssJobOptions.ReportScriptFilename { get; set; }
 
         #endregion
 
         #region Explicit IEssJobOptions EssJobType.ExportExcel Members
 
-        /// <summary>
-        /// <see cref="EssBuildMethod"/>
-        /// </summary>
+        /// <inheritdoc />
         EssBuildMethod? IEssJobOptions.BuildMethod { get; set; }
 
+        /// <inheritdoc />
         bool? IEssJobOptions.Calc { get; set; }
 
+        /// <inheritdoc />
         bool? IEssJobOptions.Data { get; set; }
 
-        /// <summary>
-        /// Include Member ID's
-        /// </summary>
+        /// <inheritdoc />
         bool? IEssJobOptions.MemberIds { get; set; }
 
         #endregion
 
         #region Explicit IEssJobOptions EssJobType.ImportExcel Members
 
-        /// <summary>
-        /// <see cref="EssBuildOption"/>
-        /// </summary>
+        /// <inheritdoc />
         EssBuildOption? IEssJobOptions.BuildOption { get; set; }
 
-        /// <summary>
-        /// path to folder that holds excel file
-        /// </summary>
+        /// <inheritdoc />
         string IEssJobOptions.CatalogExcelPath { get; set; }
 
-        /// <summary>
-        /// Create files on cube
-        /// </summary>
+        /// <inheritdoc />
         bool? IEssJobOptions.CreateFiles { get; set; }
 
-        /// <summary>
-        /// Delete excel files after Cube creation
-        /// </summary>
+        /// <inheritdoc />
         bool? IEssJobOptions.DeleteExcelOnSuccess { get; set; }
 
-        /// <summary>
-        /// Execute scripts after creation
-        /// </summary>
+        /// <inheritdoc />
         bool? IEssJobOptions.ExecuteScripts { get; set; }
 
-        /// <summary>
-        /// Name of excel file to import
-        /// </summary>
+        /// <inheritdoc />
         string IEssJobOptions.ImportExcelFilename { get; set; }
 
-        /// <summary>
-        /// Load data to cube
-        /// </summary>
+        /// <inheritdoc />
         bool? IEssJobOptions.LoadData { get; set; }
 
-        /// <summary>
-        /// If file with same name exists, overwrite it
-        /// </summary>
+        /// <inheritdoc />
         bool? IEssJobOptions.Overwrite { get; set; }
 
-        /// <summary>
-        /// If application exists, recreate it
-        /// </summary>
+        /// <inheritdoc />
         bool? IEssJobOptions.RecreateApp { get; set; }
-
-        #endregion
-
-        #region Explicit IEssJobOptions EssJobType.ExecuteReport Members
-
-        /// <summary>
-        /// Name of report script
-        /// </summary>
-        string IEssJobOptions.ReportScriptFilename { get; set; }
-
-        /// <summary>
-        /// Lock script while executing
-        /// </summary>
-        bool? IEssJobOptions.LockForUpdate { get; set; }
 
         #endregion
     }

@@ -399,7 +399,7 @@ namespace EssSharp
         internal static ParametersBean ToModelBean( this IEssJobOptions options ) => new ParametersBean()
         {
             // EssJobType.Unknown (Multiple)
-            Script                = options?.Script,
+            Script                = options.Script,
 
             // EssJobType.Clear
             Option                = options.Option?.ToString(),
@@ -432,8 +432,9 @@ namespace EssSharp
                                         options.Rule?.FirstOrDefault(),
 
             // EssJobType.ExecuteReport
-            ReportScriptFilename  = options.ReportScriptFilename,
-            LockForUpdate         = options.LockForUpdate ?? false
+            IsScriptContent       = options.IsScriptContent ?? false,
+            LockForUpdate         = options.LockForUpdate   ?? false,
+            ReportScriptFilename  = options.ReportScriptFilename
         };
 
         internal static List<EssGridDimension> ToEssGridDimention( this List<GridDimension> gridDimensions )
