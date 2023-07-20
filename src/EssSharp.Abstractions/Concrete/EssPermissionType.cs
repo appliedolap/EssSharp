@@ -4,6 +4,7 @@ using System.Text;
 
 namespace EssSharp
 {
+    [Flags]
     public enum EssPermissionType
     {
         User = 0,
