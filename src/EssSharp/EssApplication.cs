@@ -459,11 +459,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
         public IEssUserPermission CreatePermissions( string userId, EssUserPermissionRole newPermissionRole ) => CreateUserPermissionsAsync(userId, newPermissionRole).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
         public async Task<IEssUserPermission> CreateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default )
         {
             try
@@ -488,20 +488,20 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
         public IEssUserPermission UpdateUserPermissions( string userId, EssUserPermissionRole newPermissionRole ) => CreateUserPermissionsAsync(userId, newPermissionRole).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
         public async Task<IEssUserPermission> UpdateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default ) =>
             await UpdateUserPermissionsAsync(await GetUserPermissionsAsync(userId), newPermissionRole, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
         public IEssUserPermission UpdatePermissions( IEssUserPermission user, EssUserPermissionRole newPermissionRole ) => UpdateUserPermissionsAsync(user, newPermissionRole).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
         public async Task<IEssUserPermission> UpdateUserPermissionsAsync( IEssUserPermission user, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default ) => 
             await user.UpdatePermissionsAsync( newPermissionRole, cancellationToken).ConfigureAwait(false);
 

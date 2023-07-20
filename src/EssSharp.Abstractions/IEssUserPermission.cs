@@ -25,21 +25,6 @@ namespace EssSharp
         public bool Group { get; }
 
         /// <summary>
-        /// Update user permissions for specified cube.
-        /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="role"></param>
-        public IEssUserPermission UpdatePermissions( EssUserPermissionRole role );
-
-        /// <summary>
-        /// Asynchronously update user permissions for specified cube.
-        /// </summary>
-        /// <param name="applicationName"></param>
-        /// <param name="role"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<IEssUserPermission> UpdatePermissionsAsync( EssUserPermissionRole role, CancellationToken cancellationToken = default );
-
-        /// <summary>
         /// Removes user permissions from application.
         /// </summary>
         public void RemovePermissions();
@@ -49,5 +34,18 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task RemovePermissionsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Update user permissions for specified cube.
+        /// </summary>
+        /// <param name="role"></param>
+        public IEssUserPermission UpdatePermissions( EssUserPermissionRole role );
+
+        /// <summary>
+        /// Asynchronously update user permissions for specified cube.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssUserPermission> UpdatePermissionsAsync( EssUserPermissionRole role, CancellationToken cancellationToken = default );
     }
 }

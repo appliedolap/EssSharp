@@ -75,11 +75,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
         public IEssUserPermission UpdatePermissions( EssUserPermissionRole role) => UpdatePermissionsAsync( role).GetAwaiter().GetResult();
-        
+
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
         public async Task<IEssUserPermission> UpdatePermissionsAsync( EssUserPermissionRole role, CancellationToken cancellationToken = default )
         {
             try

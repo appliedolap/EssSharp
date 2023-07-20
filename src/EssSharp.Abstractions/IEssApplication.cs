@@ -103,6 +103,23 @@ namespace EssSharp
         public Task<IEssApplicationVariable> CreateApplicationVariableAsync( string varName, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Add user permissions to an application.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="newPermissionRole"></param>
+        /// <returns></returns>
+        public IEssUserPermission CreatePermissions( string userId, EssUserPermissionRole newPermissionRole );
+
+        /// <summary>
+        /// Add user permissions to an application. 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="newPermissionRole"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEssUserPermission> CreateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Downloads the latest log file for this application.
         /// </summary>
         /// <returns>A <see cref="Stream"/> containing the log file content.</returns>
@@ -201,43 +218,69 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         public Task<List<IEssApplicationConfiguration>> GetConfigurationsAsync(CancellationToken cancellationToken = default);
 
-        /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssUserPermission"/> objects.</returns>
+        /// <summary>
+        /// Get list of user permissions on an application.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         public List<IEssUserPermission> GetPermissions( string filter = null, EssUserPermissionRole? role = null );
 
-        /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssUserPermission"/> objects.</returns>
+        /// <summary>
+        /// Asynchronously get list of user permissions on application.
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="role"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<List<IEssUserPermission>> GetPermissionsAsync( string filter = null, EssUserPermissionRole? role = null, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Get permissions for a specified user.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEssUserPermission GetUserPermissions( string id );
 
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
+        /// <summary>
+        /// Asynchronously get Permissions for a specified user.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IEssUserPermission> GetUserPermissionsAsync( string id, CancellationToken cancellationToken = default );
 
-        /// <inheritdoc />
-        /// <returns></returns>
-        public IEssUserPermission CreatePermissions( string userId, EssUserPermissionRole newPermissionRole );
-
-        /// <inheritdoc />
-        /// <returns></returns>
-        public Task<IEssUserPermission> CreateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
-
-        /// <inheritdoc />
+        /// <summary>
+        /// Updates a specified users permissions on an application.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="newPermissionRole"></param>
         /// <returns></returns>
         public IEssUserPermission UpdateUserPermissions( string userId, EssUserPermissionRole newPermissionRole );
 
-        /// <inheritdoc />
-        /// <returns></returns>
+        /// <summary>
+        /// Asynchronously updates a specified users permissions on an application.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="newPermissionRole"></param>
+        /// <param name="cancellationToken"></param>
         public Task<IEssUserPermission> UpdateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
 
-        /// <inheritdoc />
-        /// <returns></returns>
+        /// <summary>
+        /// Updates a specified users permissions on an application.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="newPermissionRole"></param>
         public IEssUserPermission UpdatePermissions( IEssUserPermission user, EssUserPermissionRole newPermissionRole );
 
-        /// <inheritdoc />
-        /// <returns></returns>
+        /// <summary>
+        /// Asynchronously updates a specified users permissions on an application.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="newPermissionRole"></param>
+        /// <param name="cancellationToken"></param>
         public Task<IEssUserPermission> UpdateUserPermissionsAsync( IEssUserPermission user, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
+        
         /// <summary>
         /// Gets the list of application-scoped variables available to the connected user.
         /// </summary>
