@@ -24,30 +24,30 @@ namespace EssSharp
         /// <summary>
         /// Create a new cube on an Application
         /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="options"></param>
+        /// <param name="cubeName" />
+        /// <param name="options">Options for creating a cube.</param>
         public IEssCube CreateCube( string cubeName, EssDatabaseCreationOptions options = null );
 
         /// <summary>
         /// Create a new cube on an Application
         /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cubeName" />
+        /// <param name="options">Options for creating a cube</param>
+        /// <param name="cancellationToken" />
         public Task<IEssCube> CreateCubeAsync( string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Creates a new cube (and application) from an existing server file.
         /// </summary>
         /// <param name="cubeName" />
-        /// <param name="options" />
+        /// <param name="options">Options for creating a cube from a workbook.</param>
         public IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options );
 
         /// <summary>
         /// Asynchronously creates a new cube (and application) from a server file.
         /// </summary>
         /// <param name="cubeName" />
-        /// <param name="options" />
+        /// <param name="options">Options for creating a cube from a workbook.</param>
         /// <param name="cancellationToken" />
         public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
@@ -55,16 +55,16 @@ namespace EssSharp
         /// Creates a new cube (and application) from a local workbook file path.
         /// </summary>
         /// <param name="cubeName" />
-        /// <param name="localWorkbookPath" />
-        /// <param name="options" />
+        /// <param name="localWorkbookPath">Local path to workbook.</param>
+        /// <param name="options">Options for creating a cube from a workbook.</param>
         public IEssCube CreateCubeFromWorkbook( string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null );
 
         /// <summary>
         /// Asynchronously creates a new cube (and application) from a local workbook file path.
         /// </summary>
         /// <param name="cubeName" />
-        /// <param name="localWorkbookPath" />
-        /// <param name="options" />
+        /// <param name="localWorkbookPath">Local path to workbook.</param>
+        /// <param name="options">Options for creating a cube from a workbook.</param>
         /// <param name="cancellationToken" />
         public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
@@ -72,115 +72,108 @@ namespace EssSharp
         /// Creates a new cube (and application) from a workbook stream.
         /// </summary>
         /// <param name="cubeName" />
-        /// <param name="stream" />
-        /// <param name="options" />
+        /// <param name="stream">Workbook stream.</param>
+        /// <param name="options">Options for creating a cube from a workbook.</param>
         public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream, EssJobImportExcelOptions options = null );
 
         /// <summary>
         /// Asynchronously creates a new cube (and application) from a workbook stream.
         /// </summary>
         /// <param name="cubeName" />
-        /// <param name="stream" />
-        /// <param name="options" />
+        /// <param name="stream">Workbook stream.</param>
+        /// <param name="options">Options for creating a cube from a workbook.</param>
         /// <param name="cancellationToken" />
         public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Create an application variable
+        /// Create an application variable.
         /// </summary>
-        /// <param name="appName"></param>
-        /// <param name="varName"></param>
-        /// <param name="value"></param>
+        /// <param name="varName" />
+        /// <param name="value" />
         public IEssApplicationVariable CreateApplicationVariable( string varName, string value );
 
         /// <summary>
-        /// Create an application variable
+        /// Asynchronously create an application variable.
         /// </summary>
-        /// <param name="appName"></param>
-        /// <param name="varName"></param>
-        /// <param name="value"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="varName" />
+        /// <param name="value" />
+        /// <param name="cancellationToken" />
         public Task<IEssApplicationVariable> CreateApplicationVariableAsync( string varName, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Add user permissions to an application.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="newPermissionRole"></param>
-        /// <returns></returns>
-        public IEssUserPermission CreatePermissions( string userId, EssUserPermissionRole newPermissionRole );
+        /// <param name="userId" />
+        /// <param name="newPermissionRole">User permission level.</param>
+        public IEssApplicationPermission CreatePermissions( string id, EssApplicationRole applicationRole );
 
         /// <summary>
-        /// Add user permissions to an application. 
+        /// Asynchronously add user permissions to an application. 
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="newPermissionRole"></param>
+        /// <param name="userId" />
+        /// <param name="newPermissionRole">User permission level.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<IEssUserPermission> CreateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
+        public Task<IEssApplicationPermission> CreatePermissionsAsync( string id, EssApplicationRole applicationRole, bool group = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Downloads the latest log file for this application.
         /// </summary>
-        /// <returns>A <see cref="Stream"/> containing the log file content.</returns>
         public Stream DownloadLatestLogFile();
 
         /// <summary>
         /// Asynchronously downloads the latest log file for this application.
         /// </summary>
-        /// <returns>A <see cref="Stream"/> containing the log file content.</returns>
+        /// <param name="cancellationToken" />
         public Task<Stream> DownloadLatestLogFileAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Downloads the latest log file for this application.
         /// </summary>
-        /// <returns>A <see cref="string"/> containing the log file content.</returns>
         public string DownloadLatestLogFileString();
 
         /// <summary>
         /// Asynchronously downloads the latest log file for this application.
         /// </summary>
-        /// <returns>A <see cref="string"/> containing the log file content.</returns>
+        /// <param name="cancellationToken" />
         public Task<string> DownloadLatestLogFileStringAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Exports a cube to an excel workbook
+        /// Exports a cube to an excel workbook.
         /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="options"></param>
-        /// <returns></returns>
+        /// <param name="cubeName" />
+        /// <param name="options">Options for exporting excel to workbook.</param>
         public Stream ExportCubeToWorkbook( string cubeName, EssJobExportExcelOptions options = null );
 
         /// <summary>
         /// Asynchronously Exports a cube to an excel workbook
         /// </summary>
-        /// <param name="cubeName"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="cubeName" />
+        /// <param name="options">Options for exporting excel to workbook.</param>
+        /// <param name="cancellationToken" />
         public Task<Stream> ExportCubeToWorkbookAsync( string cubeName, EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Gets the specified Application datasource connection.
         /// </summary>
-        /// <param name="appConnectionName"></param>
-        /// <returns></returns>
+        /// <param name="appConnectionName" />
         public IEssApplicationDatasourceConnection GetConnection( string appConnectionName );
 
         /// <summary>
-        /// 
+        /// Asynchronously gets the specified Application datasource connection.
         /// </summary>
-        /// <param name="appConnectionName"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="appConnectionName" />
+        /// <param name="cancellationToken" />
         public Task<IEssApplicationDatasourceConnection> GetConnectionAsync( string appConnectionName, CancellationToken cancellationToken = default );
 
-        /// <inheritdoc />
-        /// <returns></returns>
+        /// <summary>
+        /// Gets a list of application datasource connections.
+        /// </summary>
         public List<IEssApplicationDatasourceConnection> GetConnections();
 
-        /// <inheritdoc />
-        /// <returns></returns>
+        /// <summary>
+        /// Asynchronously gets a list of application datasource connections.
+        /// </summary>
+        /// <param name="cancellationToken" />
         public Task<List<IEssApplicationDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -213,85 +206,78 @@ namespace EssSharp
         public List<IEssApplicationConfiguration> GetConfigurations();
 
         /// <summary>
-        /// returns a list of configurations for this application
+        /// Asynchronously returns a list of configurations for this application
         /// </summary>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken" />
         public Task<List<IEssApplicationConfiguration>> GetConfigurationsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get list of user permissions on an application.
         /// </summary>
-        /// <param name="filter"></param>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        public List<IEssUserPermission> GetPermissions( string filter = null, EssUserPermissionRole? role = null );
+        /// <param name="filter">Filter by user or group ID.</param>
+        /// <param name="role">Filter by role.</param>
+        public List<IEssApplicationPermission> GetPermissions( EssPermissionType filter = EssPermissionType.All, EssApplicationRole role = EssApplicationRole.All, bool includeInheritence = true );
 
         /// <summary>
         /// Asynchronously get list of user permissions on application.
         /// </summary>
-        /// <param name="filter"></param>
-        /// <param name="role"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<List<IEssUserPermission>> GetPermissionsAsync( string filter = null, EssUserPermissionRole? role = null, CancellationToken cancellationToken = default );
+        /// <param name="filter">Filter by user or group ID.</param>
+        /// <param name="role">Filter by role.</param>
+        /// <param name="cancellationToken" />
+        public Task<List<IEssApplicationPermission>> GetPermissionsAsync( EssPermissionType filter = EssPermissionType.All, EssApplicationRole role = EssApplicationRole.All, bool includeInheritence = true, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Get permissions for a specified user.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IEssUserPermission GetUserPermissions( string id );
+        /// <param name="id" />
+        public IEssApplicationPermission GetPermission( string id );
 
         /// <summary>
         /// Asynchronously get Permissions for a specified user.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public Task<IEssUserPermission> GetUserPermissionsAsync( string id, CancellationToken cancellationToken = default );
+        /// <param name="id" />
+        /// <param name="cancellationToken" />
+        public Task<IEssApplicationPermission> GetPermissionAsync( string id, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Updates a specified users permissions on an application.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="newPermissionRole"></param>
-        /// <returns></returns>
-        public IEssUserPermission UpdateUserPermissions( string userId, EssUserPermissionRole newPermissionRole );
+        /// <param name="userId" />
+        /// <param name="newPermissionRole" />
+        public IEssApplicationPermission UpdatePermissions( string userId, EssApplicationRole newPermissionRole, bool group = false );
 
         /// <summary>
         /// Asynchronously updates a specified users permissions on an application.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="newPermissionRole"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<IEssUserPermission> UpdateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
+        /// <param name="userId" />
+        /// <param name="newPermissionRole" />
+        /// <param name="cancellationToken" />
+        public Task<IEssApplicationPermission> UpdatePermissionsAsync( string userId, EssApplicationRole newPermissionRole, bool group = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Updates a specified users permissions on an application.
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="newPermissionRole"></param>
-        public IEssUserPermission UpdatePermissions( IEssUserPermission user, EssUserPermissionRole newPermissionRole );
+        /// <param name="user" />
+        /// <param name="newPermissionRole" />
+        public IEssApplicationPermission UpdatePermissions( IEssApplicationPermission essPermission, EssApplicationRole newPermissionRole, bool group = false );
 
         /// <summary>
         /// Asynchronously updates a specified users permissions on an application.
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="newPermissionRole"></param>
-        /// <param name="cancellationToken"></param>
-        public Task<IEssUserPermission> UpdateUserPermissionsAsync( IEssUserPermission user, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default );
+        /// <param name="user" />
+        /// <param name="newPermissionRole" />
+        /// <param name="cancellationToken" />
+        public Task<IEssApplicationPermission> UpdatePermissionsAsync( IEssApplicationPermission essPermission, EssApplicationRole newPermissionRole, bool group = false, CancellationToken cancellationToken = default );
         
         /// <summary>
         /// Gets the list of application-scoped variables available to the connected user.
         /// </summary>
-        /// <returns>A list of <see cref="IEssServerVariable"/> objects.</returns>
         public List<IEssApplicationVariable> GetVariables();
 
         /// <summary>
         /// Asynchronously gets the list of application-scoped variables available to the connected user.
         /// </summary>
         /// <param name="cancellationToken" />
-        /// <returns>A list of <see cref="IEssServerVariable"/> objects.</returns>
         public Task<List<IEssApplicationVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>

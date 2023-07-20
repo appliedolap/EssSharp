@@ -5,7 +5,7 @@ using System.Threading;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssUserPermission : IEssObject
+    public interface IEssApplicationPermission : IEssObject
     {
         /// <summary>
         /// Users full name.
@@ -15,14 +15,14 @@ namespace EssSharp
         /// <summary>
         /// Access held by user.
         /// </summary>
-        public EssUserPermissionRole Role { get; }
+        public EssApplicationRole Role { get; }
 
         /// <summary>
         /// TODO: UPDATE? --copied from docs.oracle.com 
         /// 
         /// If true, consider roles derived through parent groups. 
         /// </summary>
-        public bool Group { get; }
+        public EssPermissionType PermissionType { get; }
 
         /// <summary>
         /// Removes user permissions from application.
@@ -39,13 +39,13 @@ namespace EssSharp
         /// Update user permissions for specified cube.
         /// </summary>
         /// <param name="role"></param>
-        public IEssUserPermission UpdatePermissions( EssUserPermissionRole role );
+        public IEssApplicationPermission UpdatePermissions( EssApplicationRole role, bool group = false );
 
         /// <summary>
         /// Asynchronously update user permissions for specified cube.
         /// </summary>
         /// <param name="role"></param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssUserPermission> UpdatePermissionsAsync( EssUserPermissionRole role, CancellationToken cancellationToken = default );
+        public Task<IEssApplicationPermission> UpdatePermissionsAsync( EssApplicationRole role, bool group = false, CancellationToken cancellationToken = default );
     }
 }

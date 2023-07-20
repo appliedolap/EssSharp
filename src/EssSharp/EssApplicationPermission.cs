@@ -7,25 +7,25 @@ using EssSharp.Model;
 namespace EssSharp
 {
     /// <summary />
-    public class EssUserPermission : EssObject, IEssUserPermission
+    public class EssApplicationPermission : EssObject, IEssApplicationPermission
     {
         #region Private Data
 
         private readonly EssApplication _application;
-        private UserGroupProvisionInfo _provisions;
+        private UserGroupProvisionInfo _provisionInfo;
 
         #endregion
 
         #region Constructors
 
         /// <summary />
-        internal EssUserPermission( UserGroupProvisionInfo provisions, EssApplication application ) : base(application?.Configuration, application?.Client)
+        internal EssApplicationPermission( UserGroupProvisionInfo provisionInfo, EssApplication application ) : base(application?.Configuration, application?.Client)
         {
-            _provisions = provisions ?? 
-                throw new ArgumentNullException(nameof(provisions), $"An API model {nameof(provisions)} is required to create an {nameof(EssUserPermission)}.");
+            _provisionInfo = provisionInfo ?? 
+                throw new ArgumentNullException(nameof(provisionInfo), $"An API model {nameof(provisionInfo)} is required to create an {nameof(EssApplicationPermission)}.");
 
             _application = application ??
-                throw new ArgumentNullException(nameof(application), $"An {nameof(EssServer)} {nameof(application)} is required to create an {nameof(EssUserPermission)}.");
+                throw new ArgumentNullException(nameof(application), $"An {nameof(EssServer)} {nameof(application)} is required to create an {nameof(EssApplicationPermission)}.");
         }
 
         #endregion
@@ -33,7 +33,7 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string Name  => _provisions?.Id;
+        public override string Name  => _provisionInfo?.Id;
 
         /// <inheritdoc />
         public override EssType Type => EssType.UserProvisions;
@@ -43,13 +43,13 @@ namespace EssSharp
         #region IEssUserProvisions Member Propeties
 
         /// <inheritdoc />
-        public string FullName => _provisions?.Name;
+        public string FullName => _provisionInfo?.Name;
 
         /// <inheritdoc />
-        public EssUserPermissionRole Role => _provisions.Role.ToEssUserProvisionRole();
+        public EssApplicationRole Role => _provisionInfo.Role.ToEssUserProvisionRole();
 
         /// <inheritdoc />
-        public bool Group => _provisions.Group;
+        public EssPermissionType PermissionType => _provisionInfo.Group ? EssPermissionType.Group : EssPermissionType.User;
 
         #endregion
 
@@ -75,12 +75,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public IEssUserPermission UpdatePermissions( EssUserPermissionRole role) => UpdatePermissionsAsync( role).GetAwaiter().GetResult();
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public IEssApplicationPermission UpdatePermissions( EssApplicationRole role, bool group = false) => UpdatePermissionsAsync( role, group).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public async Task<IEssUserPermission> UpdatePermissionsAsync( EssUserPermissionRole role, CancellationToken cancellationToken = default )
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( EssApplicationRole role, bool group = false, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -90,12 +90,13 @@ namespace EssSharp
                 {
                     Id = Name,
                     Role = role.ToString() ??
-                    throw new ArgumentException($@"{nameof(role)} must be set.")
+                        throw new ArgumentException($@"{nameof(role)} must be set."),
+                    Group = group
                 };
 
                 await api.ApplicationRoleProvisioningProvisionAsync(app: _application.Name, id: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                _provisions = await api.ApplicationRoleProvisioningGetProvisionAsync(app: _application.Name, id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                _provisionInfo = await api.ApplicationRoleProvisioningGetProvisionAsync(app: _application.Name, id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }

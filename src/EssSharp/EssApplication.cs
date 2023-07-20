@@ -164,6 +164,36 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public IEssApplicationPermission CreatePermissions( string id, EssApplicationRole applicationRole ) => CreatePermissionsAsync(id, applicationRole).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public async Task<IEssApplicationPermission> CreatePermissionsAsync( string id, EssApplicationRole applicationRole, bool group = false, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationRoleProvisioningApi>();
+
+                var options = new UserGroupProvisionInfo()
+                {
+                    Id = id,
+                    Role = applicationRole.ToString(),
+                    Group = group
+                };
+
+                await api.ApplicationRoleProvisioningProvisionAsync(app: Name, id: id, body: options, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return await GetPermissionAsync(id, cancellationToken);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to give permissions for user ""{id}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>an <see cref="IEssApplicationVariable"/></returns>
         public IEssApplicationVariable CreateApplicationVariable( string varName, string value ) => CreateApplicationVariableAsync( varName, value ).GetAwaiter().GetResult();
 
@@ -227,9 +257,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/>.</returns>
         public Stream DownloadLatestLogFile() => DownloadLatestLogFileAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/>.</returns>
         public async Task<Stream> DownloadLatestLogFileAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -246,9 +278,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A <see cref="String"/>.</returns>
         public string DownloadLatestLogFileString() => DownloadLatestLogFileStringAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>A <see cref="String"/>.</returns>
         public async Task<string> DownloadLatestLogFileStringAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -265,11 +299,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns><see cref="Stream"/></returns>
+        /// <returns>A <see cref="Stream"/>.</returns>
         public Stream ExportCubeToWorkbook( string cubeName, EssJobExportExcelOptions options = null ) => ExportCubeToWorkbookAsync(cubeName, options).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns><see cref="Stream"/></returns>
+        /// <returns>A <see cref="Stream"/>.</returns>
         public async Task<Stream> ExportCubeToWorkbookAsync( string cubeName, EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default )
         {
             try
@@ -299,11 +333,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssApplicationDatasourceConnection"/> object.</returns>
         public IEssApplicationDatasourceConnection GetConnection( string appConnectionName ) => GetConnectionAsync(appConnectionName).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssApplicationDatasourceConnection"/> object.</returns>
         public async Task<IEssApplicationDatasourceConnection> GetConnectionAsync( string appConnectionName, CancellationToken cancellationToken = default )
         {
             try
@@ -321,11 +355,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssApplicationDatasourceConnection"/> objects.</returns>
         public List<IEssApplicationDatasourceConnection> GetConnections() => GetConnectionsAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssApplicationDatasourceConnection"/> objects.</returns>
         public async Task<List<IEssApplicationDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -350,11 +384,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssCube"/> object.</returns>
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
         public IEssCube GetCube( string cubeName ) => GetCubeAsync(cubeName)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssCube"/> object.</returns>
+        /// <returns>An <see cref="IEssCube"/> object.</returns>
         public async Task<IEssCube> GetCubeAsync( string cubeName, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(cubeName) )
@@ -376,11 +410,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssCube" /> objects under this application.</returns>
+        /// <returns>A list of <see cref="IEssCube" /> objects under this application.</returns>
         public List<IEssCube> GetCubes() => GetCubesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCube>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssCube" /> objects under this application.</returns>
+        /// <returns>A list of <see cref="IEssCube" /> objects under this application.</returns>
         public async Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -411,21 +445,21 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssUserPermission"/> objects.</returns>
-        public List<IEssUserPermission> GetPermissions( string filter = null, EssUserPermissionRole? role = null ) => GetPermissionsAsync( filter, role ).GetAwaiter().GetResult();
+        /// <returns>A list of <see cref="IEssApplicationPermission"/> objects.</returns>
+        public List<IEssApplicationPermission> GetPermissions( EssPermissionType filter = EssPermissionType.All , EssApplicationRole role = EssApplicationRole.All, bool includeInheritence = true ) => GetPermissionsAsync( filter, role, includeInheritence ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssUserPermission"/> objects.</returns>
-        public async Task<List<IEssUserPermission>> GetPermissionsAsync( string filter = null, EssUserPermissionRole? role = null, CancellationToken cancellationToken = default )
+        /// <returns>A list of <see cref="IEssApplicationPermission"/> objects.</returns>
+        public async Task<List<IEssApplicationPermission>> GetPermissionsAsync( EssPermissionType filter = EssPermissionType.All, EssApplicationRole role = EssApplicationRole.All, bool includeInheritence = true, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<ApplicationRoleProvisioningApi>();
 
-                if ( await api.ApplicationRoleProvisioningSearchProvisionAsync(app: Name, filter: filter, role: filter?.ToString() ?? "all",  cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissionsList )
+                if ( await api.ApplicationRoleProvisioningSearchProvisionAsync(app: Name, filter: filter.ToString(), role: role.ToString(), inherited: includeInheritence, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissionsList )
                     throw new Exception("Unable to get provision list.");
 
-                return permissionsList?.ToEssSharpList(this) ?? new List<IEssUserPermission>();
+                return permissionsList?.ToEssSharpList(this) ?? new List<IEssApplicationPermission>();
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
@@ -435,12 +469,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public IEssUserPermission GetUserPermissions( string id ) => GetUserPermissionsAsync(id).GetAwaiter().GetResult();
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public IEssApplicationPermission GetPermission( string id ) => GetPermissionAsync(id).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public async Task<IEssUserPermission> GetUserPermissionsAsync( string id, CancellationToken cancellationToken = default )
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public async Task<IEssApplicationPermission> GetPermissionAsync( string id, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -449,7 +483,7 @@ namespace EssSharp
                 if ( await api.ApplicationRoleProvisioningGetProvisionAsync(app: Name, id: id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissions )
                     throw new Exception("Unable to get provision list.");
 
-                return new EssUserPermission(permissions, this);
+                return new EssApplicationPermission(permissions, this);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
@@ -459,56 +493,29 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public IEssUserPermission CreatePermissions( string userId, EssUserPermissionRole newPermissionRole ) => CreateUserPermissionsAsync(userId, newPermissionRole).GetAwaiter().GetResult();
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public IEssApplicationPermission UpdatePermissions( string id, EssApplicationRole newPermissionRole, bool group = false ) => UpdatePermissionsAsync(id, newPermissionRole, group).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public async Task<IEssUserPermission> CreateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var api = GetApi<ApplicationRoleProvisioningApi>();
-
-                var options = new UserGroupProvisionInfo()
-                {
-                    Id = userId,
-                    Role = newPermissionRole.ToString()
-                };
-
-                await api.ApplicationRoleProvisioningProvisionAsync(app: Name, id: userId, body: options, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-                return await GetUserPermissionsAsync(userId, cancellationToken);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to give permissions for user ""{userId}"". {e.Message}", e);
-            }
-        }
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( string id, EssApplicationRole newPermissionRole, bool group = false, CancellationToken cancellationToken = default ) =>
+            await UpdatePermissionsAsync(await GetPermissionAsync(id), newPermissionRole, group, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public IEssUserPermission UpdateUserPermissions( string userId, EssUserPermissionRole newPermissionRole ) => CreateUserPermissionsAsync(userId, newPermissionRole).GetAwaiter().GetResult();
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public IEssApplicationPermission UpdatePermissions( IEssApplicationPermission essPermission, EssApplicationRole newPermissionRole, bool group = false ) => UpdatePermissionsAsync(essPermission, newPermissionRole, group).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public async Task<IEssUserPermission> UpdateUserPermissionsAsync( string userId, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default ) =>
-            await UpdateUserPermissionsAsync(await GetUserPermissionsAsync(userId), newPermissionRole, cancellationToken).ConfigureAwait(false);
+        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( IEssApplicationPermission essPermission, EssApplicationRole newPermissionRole, bool group = false, CancellationToken cancellationToken = default ) => 
+            await essPermission.UpdatePermissionsAsync( newPermissionRole, group, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public IEssUserPermission UpdatePermissions( IEssUserPermission user, EssUserPermissionRole newPermissionRole ) => UpdateUserPermissionsAsync(user, newPermissionRole).GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssUserPermission"/> object.</returns>
-        public async Task<IEssUserPermission> UpdateUserPermissionsAsync( IEssUserPermission user, EssUserPermissionRole newPermissionRole, CancellationToken cancellationToken = default ) => 
-            await user.UpdatePermissionsAsync( newPermissionRole, cancellationToken).ConfigureAwait(false);
-
-        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplicationVariable"/> object.</returns>
         public List<IEssApplicationVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplicationVariable>();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplicationVariable"/> object.</returns>
         public async Task<List<IEssApplicationVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try

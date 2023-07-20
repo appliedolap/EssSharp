@@ -326,7 +326,7 @@ namespace EssSharp
                 .ToList() ?? new List<IEssUser>();
         }
 
-        internal static List<IEssUserPermission> ToEssSharpList( this UserGroupProvisionInfoList permissionsList, EssApplication application )
+        internal static List<IEssApplicationPermission> ToEssSharpList( this UserGroupProvisionInfoList permissionsList, EssApplication application )
         {
             if ( application is null )
                 throw new ArgumentNullException(nameof(application), $"The given {nameof(application)} is null.");
@@ -334,8 +334,8 @@ namespace EssSharp
             return permissionsList
                 .Items?
                 .Where(permissions => permissions is not null)
-                .Select(permissions => new EssUserPermission(permissions, application) as IEssUserPermission)
-                .ToList() ?? new List<IEssUserPermission>();
+                .Select(permissions => new EssApplicationPermission(permissions, application) as IEssApplicationPermission)
+                .ToList() ?? new List<IEssApplicationPermission>();
         }
 
         /// <summary>
@@ -616,13 +616,13 @@ namespace EssSharp
             return default;
         }
 
-        internal static EssUserPermissionRole ToEssUserProvisionRole( this string role ) => role switch
+        internal static EssApplicationRole ToEssUserProvisionRole( this string role ) => role switch
         {
-            "none"        => EssUserPermissionRole.None,
-            "db_access"   => EssUserPermissionRole.db_access,
-            "db_update"   => EssUserPermissionRole.db_update,
-            "db_manager"  => EssUserPermissionRole.db_manager,
-            "app_manager" => EssUserPermissionRole.app_manager,
+            "none"        => EssApplicationRole.None,
+            "db_access"   => EssApplicationRole.db_access,
+            "db_update"   => EssApplicationRole.db_update,
+            "db_manager"  => EssApplicationRole.db_manager,
+            "app_manager" => EssApplicationRole.app_manager,
             _             => throw new NotSupportedException()
         };
 

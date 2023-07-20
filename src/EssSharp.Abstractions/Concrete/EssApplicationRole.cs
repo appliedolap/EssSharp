@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EssSharp
 {
-    public enum EssUserPermissionRole
+    public enum EssApplicationRole
     {
         Unknown = 0,
 
@@ -16,6 +16,8 @@ namespace EssSharp
 
         db_manager = 4,
 
-        app_manager = 5
+        app_manager = 5,
+
+        All = 6
     }
 }

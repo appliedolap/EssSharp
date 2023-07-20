@@ -266,9 +266,9 @@ namespace EssSharp.Integration
 
             var user = GetEssConnection(EssUserRole.User);
 
-            var userPermissions = await app.UpdateUserPermissionsAsync(user.Username, EssUserPermissionRole.db_access);
+            var userPermissions = await app.UpdatePermissionsAsync(user.Username, EssApplicationRole.db_access);
 
-            Assert.Equal(EssUserPermissionRole.db_access, userPermissions.Role);
+            Assert.Equal(EssApplicationRole.db_access, userPermissions.Role);
         }
     }
 }
