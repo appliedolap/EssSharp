@@ -74,7 +74,7 @@ namespace EssSharp.Test.Api
             //string id = null;
             //List<string> body = null;
             //var response = instance.GroupsAddGroupMembersToGroup(id, body);
-            //Assert.IsType<UserBean>(response);
+            //Assert.IsType<Groups>(response);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace EssSharp.Test.Api
             //string id = null;
             //List<string> body = null;
             //var response = instance.GroupsAddUserMembersToGroup(id, body);
-            //Assert.IsType<UserBean>(response);
+            //Assert.IsType<Users>(response);
         }
 
         /// <summary>

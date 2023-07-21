@@ -117,7 +117,7 @@ catch (ApiException e)
 
 <a id="groupsaddgroupmemberstogroup"></a>
 # **GroupsAddGroupMembersToGroup**
-> UserBean GroupsAddGroupMembersToGroup (string id, List<string> body)
+> Groups GroupsAddGroupMembersToGroup (string id, List<string> body)
 
 Add Groups to Group
 
@@ -150,7 +150,7 @@ namespace Example
             try
             {
                 // Add Groups to Group
-                UserBean result = apiInstance.GroupsAddGroupMembersToGroup(id, body);
+                Groups result = apiInstance.GroupsAddGroupMembersToGroup(id, body);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -171,7 +171,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Add Groups to Group
-    ApiResponse<UserBean> response = apiInstance.GroupsAddGroupMembersToGroupWithHttpInfo(id, body);
+    ApiResponse<Groups> response = apiInstance.GroupsAddGroupMembersToGroupWithHttpInfo(id, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -193,7 +193,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**UserBean**](UserBean.md)
+[**Groups**](Groups.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ catch (ApiException e)
 
 <a id="groupsaddusermemberstogroup"></a>
 # **GroupsAddUserMembersToGroup**
-> UserBean GroupsAddUserMembersToGroup (string id, List<string> body)
+> Users GroupsAddUserMembersToGroup (string id, List<string> body)
 
 Add Group Users
 
@@ -249,7 +249,7 @@ namespace Example
             try
             {
                 // Add Group Users
-                UserBean result = apiInstance.GroupsAddUserMembersToGroup(id, body);
+                Users result = apiInstance.GroupsAddUserMembersToGroup(id, body);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -270,7 +270,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Add Group Users
-    ApiResponse<UserBean> response = apiInstance.GroupsAddUserMembersToGroupWithHttpInfo(id, body);
+    ApiResponse<Users> response = apiInstance.GroupsAddUserMembersToGroupWithHttpInfo(id, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -292,7 +292,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**UserBean**](UserBean.md)
+[**Users**](Users.md)
 
 ### Authorization
 

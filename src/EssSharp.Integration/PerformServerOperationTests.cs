@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -256,8 +257,33 @@ namespace EssSharp.Integration
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 08 - Essbase_AfterScriptCreation_CanUpdateUserPermissions"), Priority(08)]
-        public async Task Essbase_AfterScriptCreation_CanUpdateUserPermissions()
+        [Fact(DisplayName = @"PerformServerFunctionTests - 010 - Essbase_AfterApplicationPermissionCreation_CanGetListOfUserPermissions"), Priority(10)]
+        public async Task Essbase_AfterApplicationPermissionCreation_CanGetListOfUserPermissions()
+        {
+            var server = GetEssServer();
+
+            var app = await server.GetApplicationAsync("Sample");
+
+            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, EssApplicationRole.db_access);
+
+            Assert.NotEmpty(permissionsList);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 010 - Essbase_AfterApplicationPermissionCreation_CanGetListOfGroupPermissions"), Priority(10)]
+        public async Task Essbase_AfterApplicationPermissionCreation_CanGetListOfPermissions()
+        {
+            var server = GetEssServer();
+
+            var app = await server.GetApplicationAsync("Sample");
+
+            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, EssApplicationRole.db_access);
+
+            Assert.NotEmpty(permissionsList);
+        }
+
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 11 - Essbase_AfterApplicationPermissionCreation_CanUpdateUserPermissions"), Priority(11)]
+        public async Task Essbase_AfterApplicationPermissionCreation_CanUpdateUserPermissions()
         {
 
             var server = GetEssServer();
@@ -270,5 +296,81 @@ namespace EssSharp.Integration
 
             Assert.Equal(EssApplicationRole.db_access, userPermissions.Role);
         }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 12 - Essbase_AfterGroupCreation_CanAddUser"), Priority(12)]
+        public async Task Essbase_AfterGroupCreation_CanAddUser()
+        {
+
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var userConnection = GetEssConnection(EssUserRole.User);
+
+            var group = await server.GetGroupAsync("Test_Group");
+                
+            var user = await group.AddUsersAsync(new List<string>() {userConnection.Username });
+
+            Assert.NotEmpty(await group.GetUsersAsync());
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 13 - Essbase_AfterGroupCreation_CanAddGroup"), Priority(13)]
+        public async Task Essbase_AfterGroupCreation_CanAddGroup()
+        {
+
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var group = await server.GetGroupAsync("Test_Group");
+
+            var addedGroup = await group.AddGroupsAsync(new List<string>() { "Test_Group_2" });
+
+            Assert.NotEmpty(await group.GetGroupsAsync());
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 14 - Essbase_AfterGroupCreation_EditGroup"), Priority(14)]
+        public async Task Essbase_AfterGroupCreation_EditGroup()
+        {
+
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var group = await server.GetGroupAsync("Test_Group");
+
+            var editedGroup = await group.EditAsync( EssUserRole.User, "Edited test group");
+
+            Assert.Equal(EssUserRole.User, editedGroup.Role);
+            Assert.Equal("Edited test group", editedGroup.Description);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 15 - Essbase_AfterGroupCreation_CanRemoveUser"), Priority(15)]
+        public async Task Essbase_AfterGroupCreation_CanRemoveUser()
+        {
+
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var userConnection = GetEssConnection(EssUserRole.User);
+
+            var group = await server.GetGroupAsync("Test_Group");
+
+            await group.RemoveUsersAsync(new List<string>() {userConnection.Username });
+
+            Assert.Empty(await group.GetUsersAsync());
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 16 - Essbase_AfterGroupCreation_CanRemoveGroup"), Priority(16)]
+        public async Task Essbase_AfterGroupCreation_CanRemoveGroup()
+        {
+
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var group = await server.GetGroupAsync("Test_Group");
+
+            await group.RemoveGroupsAsync(new List<string>() { "Test_Group_2" });
+
+            Assert.Empty(await group.GetGroupsAsync());
+        }
+
     }
 }

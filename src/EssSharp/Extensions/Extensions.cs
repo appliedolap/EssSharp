@@ -616,14 +616,31 @@ namespace EssSharp
             return default;
         }
 
-        internal static EssApplicationRole ToEssUserProvisionRole( this string role ) => role switch
+        internal static EssApplicationRole ToEssApplicationRole( this string role ) => role switch
         {
             "none"        => EssApplicationRole.None,
             "db_access"   => EssApplicationRole.db_access,
             "db_update"   => EssApplicationRole.db_update,
             "db_manager"  => EssApplicationRole.db_manager,
             "app_manager" => EssApplicationRole.app_manager,
+            "all"         => EssApplicationRole.All,
             _             => throw new NotSupportedException()
+        };
+
+        internal static EssUserRole ToEssUserRole( this string role ) => role.ToLower() switch
+        {
+            "user"                    => EssUserRole.User,
+            "power user"              => EssUserRole.PowerUser,
+            "service admininistrator" => EssUserRole.ServiceAdministrator,
+            _                         => EssUserRole.Unkown
+        };
+
+        internal static string EssUserRoleToString( this EssUserRole role ) => role switch
+        {
+            EssUserRole.User => "user",
+            EssUserRole.PowerUser => "power user",
+            EssUserRole.ServiceAdministrator => "service administration",
+            _ => throw new NotSupportedException("Unsupported user role.")
         };
 
         #endregion

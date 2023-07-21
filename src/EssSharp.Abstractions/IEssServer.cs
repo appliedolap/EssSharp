@@ -82,6 +82,24 @@ namespace EssSharp
         public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Create a new group.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="role"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public IEssGroup CreateGroup( string name, EssUserRole role = EssUserRole.User, string description = null );
+
+        /// <summary>
+        /// Asynchronously create a new group.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="role"></param>
+        /// <param name="description"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssGroup> CreateGroupAsync( string name, EssUserRole role = EssUserRole.User, string description = null, CancellationToken cancellationToken = default );
+        
+        /// <summary>
         /// Creates a new (unstarted) job on the server.
         /// </summary>
         /// <param name="options">Job options.</param>

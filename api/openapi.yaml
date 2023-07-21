@@ -3418,10 +3418,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserBean'
+                $ref: '#/components/schemas/Users'
             application/xml:
               schema:
-                $ref: '#/components/schemas/UserBean'
+                $ref: '#/components/schemas/Users'
           description: <p><strong>OK</strong></p><p>Group updated successfully. Returns
             link to get user members of a group.</p>
         "400":
@@ -3548,10 +3548,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserBean'
+                $ref: '#/components/schemas/Groups'
             application/xml:
               schema:
-                $ref: '#/components/schemas/UserBean'
+                $ref: '#/components/schemas/Groups'
           description: <p><strong>OK</strong></p><p>Group updated successfully. Returns
             link to get group members of a group.</p>
         "400":

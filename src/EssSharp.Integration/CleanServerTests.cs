@@ -131,5 +131,21 @@ namespace EssSharp.Integration
                 Assert.Empty(await application.GetPermissionsAsync());   
             }
         }
+
+        [Fact(DisplayName = "CleanServerTests - 06 - Essbase_AfterConnection_CanRemoveGroups"), Priority(06)]
+        public async Task Essbase_AfterConnection_CanRemoveGroups()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the list of existing applications.
+            foreach ( var group in await server.GetGroupsAsync() )
+            {
+                await group.DeleteAsync();
+            }
+
+            // Assert that the (refreshed) list of existing locks is empty.
+            Assert.Empty(await server.GetGroupsAsync());
+        }
     }
 }

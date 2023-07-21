@@ -57,8 +57,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Array of group IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>UserBean</returns>
-        UserBean GroupsAddGroupMembersToGroup(string id, List<string> body, int operationIndex = 0);
+        /// <returns>Groups</returns>
+        Groups GroupsAddGroupMembersToGroup(string id, List<string> body, int operationIndex = 0);
 
         /// <summary>
         /// Add Groups to Group
@@ -70,8 +70,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Array of group IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of UserBean</returns>
-        ApiResponse<UserBean> GroupsAddGroupMembersToGroupWithHttpInfo(string id, List<string> body, int operationIndex = 0);
+        /// <returns>ApiResponse of Groups</returns>
+        ApiResponse<Groups> GroupsAddGroupMembersToGroupWithHttpInfo(string id, List<string> body, int operationIndex = 0);
         /// <summary>
         /// Add Group Users
         /// </summary>
@@ -82,8 +82,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Array of user IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>UserBean</returns>
-        UserBean GroupsAddUserMembersToGroup(string id, List<string> body, int operationIndex = 0);
+        /// <returns>Users</returns>
+        Users GroupsAddUserMembersToGroup(string id, List<string> body, int operationIndex = 0);
 
         /// <summary>
         /// Add Group Users
@@ -95,8 +95,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Array of user IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of UserBean</returns>
-        ApiResponse<UserBean> GroupsAddUserMembersToGroupWithHttpInfo(string id, List<string> body, int operationIndex = 0);
+        /// <returns>ApiResponse of Users</returns>
+        ApiResponse<Users> GroupsAddUserMembersToGroupWithHttpInfo(string id, List<string> body, int operationIndex = 0);
         /// <summary>
         /// Delete Group
         /// </summary>
@@ -380,8 +380,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Array of group IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> GroupsAddGroupMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of Groups</returns>
+        System.Threading.Tasks.Task<Groups> GroupsAddGroupMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Add Groups to Group
@@ -394,8 +394,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Array of group IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> GroupsAddGroupMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (Groups)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Groups>> GroupsAddGroupMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Add Group Users
         /// </summary>
@@ -407,8 +407,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Array of user IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> GroupsAddUserMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of Users</returns>
+        System.Threading.Tasks.Task<Users> GroupsAddUserMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Add Group Users
@@ -421,8 +421,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Array of user IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> GroupsAddUserMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (Users)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Users>> GroupsAddUserMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Delete Group
         /// </summary>
@@ -970,10 +970,10 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Array of group IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>UserBean</returns>
-        public UserBean GroupsAddGroupMembersToGroup(string id, List<string> body, int operationIndex = 0)
+        /// <returns>Groups</returns>
+        public Groups GroupsAddGroupMembersToGroup(string id, List<string> body, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<UserBean> localVarResponse = GroupsAddGroupMembersToGroupWithHttpInfo(id, body);
+            EssSharp.Client.ApiResponse<Groups> localVarResponse = GroupsAddGroupMembersToGroupWithHttpInfo(id, body);
             return localVarResponse.Data;
         }
 
@@ -984,8 +984,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Array of group IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of UserBean</returns>
-        public EssSharp.Client.ApiResponse<UserBean> GroupsAddGroupMembersToGroupWithHttpInfo(string id, List<string> body, int operationIndex = 0)
+        /// <returns>ApiResponse of Groups</returns>
+        public EssSharp.Client.ApiResponse<Groups> GroupsAddGroupMembersToGroupWithHttpInfo(string id, List<string> body, int operationIndex = 0)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1038,7 +1038,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<UserBean>("/groups/{id}/members/groups", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Groups>("/groups/{id}/members/groups", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GroupsAddGroupMembersToGroup", localVarResponse);
@@ -1059,10 +1059,10 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Array of group IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> GroupsAddGroupMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of Groups</returns>
+        public async System.Threading.Tasks.Task<Groups> GroupsAddGroupMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<UserBean> localVarResponse = await GroupsAddGroupMembersToGroupWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<Groups> localVarResponse = await GroupsAddGroupMembersToGroupWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1074,8 +1074,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Array of group IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> GroupsAddGroupMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (Groups)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Groups>> GroupsAddGroupMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1129,7 +1129,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<UserBean>("/groups/{id}/members/groups", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Groups>("/groups/{id}/members/groups", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1150,10 +1150,10 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Array of user IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>UserBean</returns>
-        public UserBean GroupsAddUserMembersToGroup(string id, List<string> body, int operationIndex = 0)
+        /// <returns>Users</returns>
+        public Users GroupsAddUserMembersToGroup(string id, List<string> body, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<UserBean> localVarResponse = GroupsAddUserMembersToGroupWithHttpInfo(id, body);
+            EssSharp.Client.ApiResponse<Users> localVarResponse = GroupsAddUserMembersToGroupWithHttpInfo(id, body);
             return localVarResponse.Data;
         }
 
@@ -1164,8 +1164,8 @@ namespace EssSharp.Api
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Array of user IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of UserBean</returns>
-        public EssSharp.Client.ApiResponse<UserBean> GroupsAddUserMembersToGroupWithHttpInfo(string id, List<string> body, int operationIndex = 0)
+        /// <returns>ApiResponse of Users</returns>
+        public EssSharp.Client.ApiResponse<Users> GroupsAddUserMembersToGroupWithHttpInfo(string id, List<string> body, int operationIndex = 0)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1218,7 +1218,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<UserBean>("/groups/{id}/members/users", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Users>("/groups/{id}/members/users", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GroupsAddUserMembersToGroup", localVarResponse);
@@ -1239,10 +1239,10 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Array of user IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> GroupsAddUserMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of Users</returns>
+        public async System.Threading.Tasks.Task<Users> GroupsAddUserMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<UserBean> localVarResponse = await GroupsAddUserMembersToGroupWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<Users> localVarResponse = await GroupsAddUserMembersToGroupWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1254,8 +1254,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Array of user IDs.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> GroupsAddUserMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (Users)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Users>> GroupsAddUserMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1309,7 +1309,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<UserBean>("/groups/{id}/members/users", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Users>("/groups/{id}/members/users", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

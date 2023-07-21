@@ -4003,7 +4003,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Group updated successfully. Returns link to get user members of a group.</p>",
             "schema": {
-              "$ref": "#/definitions/UserBean"
+              "$ref": "#/definitions/Users"
             }
           },
           "400": {
@@ -4142,7 +4142,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Group updated successfully. Returns link to get group members of a group.</p>",
             "schema": {
-              "$ref": "#/definitions/UserBean"
+              "$ref": "#/definitions/Groups"
             }
           },
           "400": {

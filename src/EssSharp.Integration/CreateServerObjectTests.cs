@@ -174,7 +174,7 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = @"CreateServerObjectTests - 07 - Essbase_AfterScriptCreation_CanCreateLockOnScript"), Priority(07)]
+        [Fact(DisplayName = @"CreateServerObjectTests - 07 - Essbase_AfterServer_CanCreateLockOnScript"), Priority(07)]
         public async Task Essbase_AfterScriptCreation_CanCreateLockOnScript()
         {
             // Get an unconnected server.
@@ -194,5 +194,31 @@ namespace EssSharp.Integration
             // Assert that the lock object name is the same as the one we passed.
             Assert.Equal("CalcAll", lockedScript.Name);
         }
+
+        [Fact(DisplayName = @"CreateServerObjectTests - 08 - Essbase_AfterClean_CanCreateGroup"), Priority(08)]
+        public async Task Essbase_AfterClean_CanCreateGroup()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // TODO: create Group Creation Class and a proper To
+
+            // Create group one
+            var group1 = await server.CreateGroupAsync("Test_Group", EssUserRole.PowerUser, "test group");
+
+            // Create group 2 - will add to group one in PerformServerFunctionTest
+            var group2 = await server.CreateGroupAsync("Test_Group_2", EssUserRole.PowerUser, "test group 2");
+
+            // Assert that the group name, role, and description is correct is correct
+            Assert.Equal("Test_Group", group1.Name);
+            Assert.Equal(EssUserRole.PowerUser, group1.Role);
+            Assert.Equal("test group", group1.Description);
+
+
+            Assert.Equal("Test_Group_2", group2.Name);
+            Assert.Equal(EssUserRole.PowerUser, group2.Role);
+            Assert.Equal("test group 2", group2.Description);
+        }
+
     }
 }

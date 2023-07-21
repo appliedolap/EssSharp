@@ -46,7 +46,7 @@ namespace EssSharp
         public string FullName => _provisionInfo?.Name;
 
         /// <inheritdoc />
-        public EssApplicationRole Role => _provisionInfo.Role.ToEssUserProvisionRole();
+        public EssApplicationRole Role => _provisionInfo.Role.ToEssApplicationRole();
 
         /// <inheritdoc />
         public EssPermissionType PermissionType => _provisionInfo.Group ? EssPermissionType.Group : EssPermissionType.User;

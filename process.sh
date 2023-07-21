@@ -40,8 +40,11 @@ cat temp.json | jq '.paths."/applications/{application}/databases/{database}/mdx
 cat temp.json | jq '.paths."/applications/{applicationName}/configurations".get.responses."200".schema = {"$ref": "#/definitions/ApplicationConfigList"}' > json.tmp && mv json.tmp temp.json
 
 # Fix the 204 return schema
-# cat temp.json | jq '.paths."/applications/{app}/permissions/{id}".put.responses."204".schema = {"$ref": "#/definitions/UserGroupProvisionInfo"}' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/groups/{id}/members/users".post.responses."200".schema = {"$ref": "#/definitions/Users"}' > json.tmp && mv json.tmp temp.json
 
+cat temp.json | jq '.paths."/groups/{id}/members/groups".post.responses."200".schema = {"$ref": "#/definitions/Groups"}' > json.tmp && mv json.tmp temp.json
+
+"/groups/{id}/members/groups"
 # Replace duplicated fields from "List Aliases" with new ones for "Set Active Alias".
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/aliases/setActiveAlias".put.summary = "Set Active Alias"' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/aliases/setActiveAlias".put.description = "Sets the active alias table associated with the specified application and database."' > json.tmp && mv json.tmp temp.json

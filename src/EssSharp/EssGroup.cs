@@ -13,7 +13,7 @@ namespace EssSharp
         #region Private Data
 
         private readonly EssServer  _server;
-        private readonly GroupBean _group;
+        private GroupBean _group;
 
         #endregion
 
@@ -50,19 +50,120 @@ namespace EssSharp
         public string Description => _group?.Description;
 
         /// <inheritdoc />
-        public List<string> GroupNames => _group?.Groups;
+        public List<string> GroupNames => _group.Groups;
 
         /// <inheritdoc />
-        public string Role => _group?.Role;
+        public EssUserRole Role => _group.Role.ToEssUserRole();
 
         #endregion
 
         #region IEssGroup Members
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
+        public List<IEssUser> AddUsers( List<string> userIds ) => AddUsersAsync( userIds ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
+        public async Task<List<IEssUser>> AddUsersAsync( List<string> userIds, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GroupsApi>();
+
+                if ( await api.GroupsAddUserMembersToGroupAsync(id: Name, body: userIds, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } users )
+                    throw new Exception("Cannot add user(s)");
+
+                return users?.ToEssSharpList(_server) ?? new List<IEssUser>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to add user to group ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
+        public List<IEssGroup> AddGroups( List<string> groupIds ) => AddGroupsAsync(groupIds).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
+        public async Task<List<IEssGroup>> AddGroupsAsync( List<string> groupIds, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GroupsApi>();
+
+                if ( await api.GroupsAddGroupMembersToGroupAsync(id: Name, body: groupIds, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groups )
+                    throw new Exception("Cannot add user(s)");
+
+                return groups?.ToEssSharpList(_server) ?? new List<IEssGroup>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to add user to group ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A <see cref="IEssGroup"/> object.</returns>
+        public IEssGroup Edit( EssUserRole? role = null, string description = null ) => EditAsync( role, description ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A <see cref="IEssGroup"/> object.</returns>
+        public async Task<IEssGroup> EditAsync( EssUserRole? role = null, string description = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GroupsApi>();
+
+                var body = new GroupBean()
+                {
+                    Role = role?.EssUserRoleToString() ?? null,
+                    Description = description
+                };
+
+                if ( await api.GroupsEditAsync(id: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groupBean )
+                    throw new Exception("cannot edit group.");
+
+                _group = groupBean;
+
+                return this;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to edit group ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public void Delete() => DeleteAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task DeleteAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GroupsApi>();
+
+                await api.GroupsDeleteAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to delete group ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
         public List<IEssUser> GetUsers() => GetUsersAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
         public async Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -88,13 +189,58 @@ namespace EssSharp
         /// <returns>A Task<list> of <see cref="IEssGroup"/> objects. </list></returns>
         public async Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default )
         {
-            var api = GetApi<GroupsApi>();
-            if ( await api.GroupsGetGroupMembersOfGroupAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groups )
-                throw new Exception("Could not get groups.");
+            try
+            {
+                var api = GetApi<GroupsApi>();
+                if ( await api.GroupsGetGroupMembersOfGroupAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groups )
+                    throw new Exception("Could not get groups.");
 
-            return groups?.ToEssSharpList(Server as EssServer) ?? new List<IEssGroup>();
+                return groups?.ToEssSharpList(Server as EssServer) ?? new List<IEssGroup>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get group ""{Name}"" groups. {e.Message}", e);
+            }
         }
 
+        /// <inheritdoc />
+        public void RemoveGroups( List<string> groupIds ) => RemoveGroupsAsync(groupIds).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task RemoveGroupsAsync( List<string> groupIds, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GroupsApi>();
+
+                await api.GroupsRemoveGroupMembersFromGroupAsync(id: Name, body: groupIds, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to remove group(s) from group ""{Name}"" groups. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public void RemoveUsers(List<string> userIds ) => RemoveUsersAsync( userIds ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task RemoveUsersAsync( List<string> userIds, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GroupsApi>();
+
+                await api.GroupsRemoveUserMembersFromGroupAsync(id: Name, body: userIds, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to remove user(s) from group ""{Name}"" groups. {e.Message}", e);
+            }
+        }
 
         #endregion
     }

@@ -233,6 +233,40 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssGroup"/> object.</returns>
+        public IEssGroup CreateGroup( string groupName, EssUserRole role = EssUserRole.User, string description = null ) => CreateGroupAsync(groupName, role, description).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssGroup"/> object.</returns>
+        public async Task<IEssGroup> CreateGroupAsync( string groupName, EssUserRole role = EssUserRole.User, string description = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                if ( string.IsNullOrEmpty(groupName) )
+                    throw new ArgumentException("Name is required to create a new group.");
+
+                var api = GetApi<GroupsApi>();
+
+                var body = new GroupBean()
+                {
+                    Name = groupName,
+                    Role = role.EssUserRoleToString(),
+                    Description = description
+                };
+
+                if ( await api.GroupsAddAsync(body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } group )
+                    throw new Exception("cannot create new group.");
+
+                return new EssGroup(group, this);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the group ""{groupName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns> An <see cref="IEssJob"/> object.</returns>
         public IEssJob CreateJob( IEssJobOptions options ) => new EssJob(options, this);
 
