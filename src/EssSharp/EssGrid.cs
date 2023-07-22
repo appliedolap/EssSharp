@@ -47,7 +47,7 @@ namespace EssSharp
         public string Alias => _grid.Alias;
 
         /// <inheritdoc />
-        public List<EssGridDimension> Dimensions => _grid.Dimensions.ToEssGridDimention();
+        public List<EssGridDimension> Dimensions => _grid.Dimensions.ToEssGridDimension();
 
         /// <inheritdoc />
         public EssGridSlice Slice => _grid.Slice.ToEssGridSlice();

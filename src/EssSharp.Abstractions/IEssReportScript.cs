@@ -20,6 +20,17 @@ namespace EssSharp
         #region Methods
 
         /// <summary>
+        /// Executes a report query and returns a grid with the result.
+        /// </summary>
+        public IEssGrid GetGrid();
+
+        /// <summary>
+        /// Asynchronously executes a report query and returns a grid with the result.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task<IEssGrid> GetGridAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Executes a report query and returns a report with the result.
         /// </summary>
         /// <param name="preferences">(optional) The preferences that configure the returned report.</param>

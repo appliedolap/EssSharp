@@ -100,7 +100,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to execute MDX query on cube ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get a report from {Cube.Application.Name}.{Cube.Name} with the ""{Name}"" MDX query. {e.Message}", e);
             }
         }
 

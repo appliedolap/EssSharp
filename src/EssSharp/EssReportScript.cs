@@ -5,7 +5,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
+using EssSharp.Api;
 using EssSharp.Model;
+
 using TinyCsvParser;
 using TinyCsvParser.Mapping;
 using TinyCsvParser.Tokenizer;
@@ -37,7 +39,39 @@ namespace EssSharp
         #region IEssScript Methods
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="EssGrid"/> object.</returns>
+        public IEssGrid GetGrid() => GetGridAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssGrid"/> object.</returns>
+        public async Task<IEssGrid> GetGridAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var report = await GetReportAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                // TODO: FIX THIS ENTIRELY
+                var operation = new GridOperation(new Grid(
+                    new Slice(rows: report.Data.GetLength(0), columns: report.Data.GetLength(1),
+                        data: new Data(new List<GridRange>()
+                            { new GridRange(values: report.Data.OfType<string>().ToList(), end: report.Data.GetLength(0) * report.Data.GetLength(1) - 1) })),
+                    dimensions: report.Metadata.ToModelGridDimensions()), action: GridOperation.ActionEnum.Refresh);
+
+                var api = GetApi<GridApi>();
+                if ( await api.GridExecuteAsync(applicationName: Cube.Application.Name, databaseName: Cube.Name, body: operation, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                    throw new Exception("Could not get the resulting grid.");
+
+                return new EssGrid(grid, Cube as EssCube);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get a grid from {Cube.Application.Name}.{Cube.Name} with the ""{Name}"" report query. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssQueryReport" /> object.</returns>
         public EssQueryReport GetReport( EssQueryPreferences preferences = null ) => GetReportAsync(preferences).GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -94,7 +128,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get Report from {Name}. {e.Message}", e);
+                throw new Exception($@"Unable to get a report from {Cube.Application.Name}.{Cube.Name} with the ""{Name}"" report query. {e.Message}", e);
             }
         }
 

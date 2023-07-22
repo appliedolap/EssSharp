@@ -244,7 +244,28 @@ namespace EssSharp.Integration
             Assert.Equal("2,479", report.Data[2, 2]);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 09 - Essbase_AfterScriptCreation_CannotExecuteMaxLScript"), Priority(09)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 09 - Essbase_AfterScriptCreation_CanGetReportGrid"), Priority(09)]
+        public async Task Essbase_AfterScriptCreation_CanGetReportGrid()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the test Report script from the server.
+            var script = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic")
+                .GetScriptAsync<IEssReportScript>("test");
+
+            // Execute the report query and capture an Essbase grid.
+            var grid = await script.GetGridAsync();
+
+            // Assert that we got a grid back.
+            Assert.NotNull(grid);
+
+            // Assert that the concrete grid is type is an IEssGrid.
+            Assert.IsAssignableFrom<IEssGrid>(grid);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 10 - Essbase_AfterScriptCreation_CannotExecuteMaxLScript"), Priority(10)]
         public async Task Essbase_AfterScriptCreation_CannotExecuteMaxLScript()
         {
             // Get an unconnected server.
@@ -263,7 +284,7 @@ namespace EssSharp.Integration
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 10 - Essbase_AfterPermissionCreation_CanGetListOfUserPermissions"), Priority(10)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 11 - Essbase_AfterPermissionCreation_CanGetListOfUserPermissions"), Priority(11)]
         public async Task Essbase_AfterPermissionCreation_CanGetListOfUserPermissions()
         {
             var server = GetEssServer();
@@ -275,7 +296,7 @@ namespace EssSharp.Integration
             Assert.NotEmpty(permissionsList);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 11 - Essbase_AfterPermissionCreation_CanGetListOfGroupPermissions"), Priority(11)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 12 - Essbase_AfterPermissionCreation_CanGetListOfGroupPermissions"), Priority(12)]
         public async Task Essbase_AfterPermissionCreation_CanGetListOfPermissions()
         {
             var server = GetEssServer();
@@ -288,7 +309,7 @@ namespace EssSharp.Integration
         }
 
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 12 - Essbase_AfterPermissionCreation_CanUpdateUserPermissions"), Priority(12)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 13 - Essbase_AfterPermissionCreation_CanUpdateUserPermissions"), Priority(13)]
         public async Task Essbase_AfterPermissionCreation_CanUpdateUserPermissions()
         {
             var server = GetEssServer();
@@ -302,7 +323,7 @@ namespace EssSharp.Integration
             Assert.Equal(EssApplicationRole.db_access, userPermissions.Role);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 13 - Essbase_AfterGroupCreation_CanAddUser"), Priority(13)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 14 - Essbase_AfterGroupCreation_CanAddUser"), Priority(14)]
         public async Task Essbase_AfterGroupCreation_CanAddUser()
         {
             // Get an unconnected server.
@@ -319,7 +340,7 @@ namespace EssSharp.Integration
             Assert.NotEmpty(await group.GetUsersAsync());
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 14 - Essbase_AfterGroupCreation_CanAddGroup"), Priority(14)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 15 - Essbase_AfterGroupCreation_CanAddGroup"), Priority(15)]
         public async Task Essbase_AfterGroupCreation_CanAddGroup()
         {
             // Get an unconnected server.
@@ -334,7 +355,7 @@ namespace EssSharp.Integration
             Assert.NotEmpty(await group.GetGroupsAsync());
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 15 - Essbase_AfterGroupCreation_EditGroup"), Priority(15)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 16 - Essbase_AfterGroupCreation_EditGroup"), Priority(16)]
         public async Task Essbase_AfterGroupCreation_EditGroup()
         {
             // Get an unconnected server.
@@ -348,7 +369,7 @@ namespace EssSharp.Integration
             Assert.Equal("Edited test group", editedGroup.Description);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 16 - Essbase_AfterGroupCreation_CanRemoveUser"), Priority(16)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 17 - Essbase_AfterGroupCreation_CanRemoveUser"), Priority(17)]
         public async Task Essbase_AfterGroupCreation_CanRemoveUser()
         {
             // Get an unconnected server.
@@ -365,7 +386,7 @@ namespace EssSharp.Integration
             Assert.Empty(await group.GetUsersAsync());
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 17 - Essbase_AfterGroupCreation_CanRemoveGroup"), Priority(17)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 18 - Essbase_AfterGroupCreation_CanRemoveGroup"), Priority(18)]
         public async Task Essbase_AfterGroupCreation_CanRemoveGroup()
         {
             // Get an unconnected server.

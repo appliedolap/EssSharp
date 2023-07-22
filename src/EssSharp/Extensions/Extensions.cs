@@ -393,6 +393,21 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Returns a list of <see cref="GridDimension" /> objects from the given <see cref="EssQueryReport.ReportMetadata" /> object.
+        /// </summary>
+        /// <param name="metadata" />
+        internal static List<GridDimension> ToModelGridDimensions( this EssQueryReport.ReportMetadata metadata )
+        {
+            var gridDimensions = new List<GridDimension>();
+
+            gridDimensions.AddRange(metadata.RowDimensionMembers   .Select(rdm => new GridDimension(row: -1, column:  0, name: rdm)));
+            gridDimensions.AddRange(metadata.ColumnDimensionMembers.Select(rdm => new GridDimension(row:  0, column: -1, name: rdm)));
+            gridDimensions.AddRange(metadata.PageDimensionMembers  .Select(rdm => new GridDimension(row: -1, column: -1, name: rdm)));;
+
+            return gridDimensions;
+        }
+
+        /// <summary>
         /// Returns a <see cref="ParametersBean"/> from the given <see cref="IEssJobOptions"/> object.
         /// </summary>
         /// <param name="options" />
@@ -437,7 +452,7 @@ namespace EssSharp
             ReportScriptFilename  = options.ReportScriptFilename
         };
 
-        internal static List<EssGridDimension> ToEssGridDimention( this List<GridDimension> gridDimensions )
+        internal static List<EssGridDimension> ToEssGridDimension( this List<GridDimension> gridDimensions )
         {
             var dimensionList = new List<EssGridDimension>();
 
