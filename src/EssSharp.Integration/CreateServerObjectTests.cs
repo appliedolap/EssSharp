@@ -52,7 +52,32 @@ namespace EssSharp.Integration
             Assert.Equal(3, applications?.Count);
         }
 
-        [Fact(DisplayName = "CreateServerObjectTests - 02 - Essbase_AfterCubeCreation_CanCreateUser"), Priority(02)]
+        [Fact(DisplayName = @"CreateServerObjectTests - 02 - Essbase_AfterClean_CanCreateGroup"), Priority(02)]
+        public async Task Essbase_AfterClean_CanCreateGroups()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // TODO: create Group Creation Class and a proper To
+
+            // Create group one
+            var group1 = await server.CreateGroupAsync("Test_Group", EssUserRole.PowerUser, "test group");
+
+            // Create group 2 - will add to group one in PerformServerFunctionTest
+            var group2 = await server.CreateGroupAsync("Test_Group_2", EssUserRole.PowerUser, "test group 2");
+
+            // Assert that the group name, role, and description is correct is correct
+            Assert.Equal("Test_Group", group1.Name);
+            Assert.Equal(EssUserRole.PowerUser, group1.Role);
+            Assert.Equal("test group", group1.Description);
+
+
+            Assert.Equal("Test_Group_2", group2.Name);
+            Assert.Equal(EssUserRole.PowerUser, group2.Role);
+            Assert.Equal("test group 2", group2.Description);
+        }
+
+        [Fact(DisplayName = "CreateServerObjectTests - 03 - Essbase_AfterCubeCreation_CanCreateUser"), Priority(03)]
         public async Task Essbase_AfterCubeCreation_CanCreateUser()
         {
             // Get an unconnected server.
@@ -70,7 +95,7 @@ namespace EssSharp.Integration
             Assert.Equal(userConnection.Role, newUser.Role);
         }
 
-        [Fact(DisplayName = "CreateServerObjectTests - 03 - Essbase_AfterCubeCreation_CanCreateUserPermissions"), Priority(03)]
+        [Fact(DisplayName = "CreateServerObjectTests - 04 - Essbase_AfterCubeCreation_CanCreateUserPermissions"), Priority(04)]
         public async Task Essbase_AfterCubeCreation_CanCreateUserPermissions()
         {
             // Get an unconnected server.
@@ -87,7 +112,7 @@ namespace EssSharp.Integration
             Assert.Equal(userConnection.Username, userPermissions.Name);
         }
 
-        [Fact(DisplayName = "CreateServerObjectTests - 04 - Essbase_AfterCubeCreation_CanCreateMdxScript"), Priority(04)]
+        [Fact(DisplayName = "CreateServerObjectTests - 05 - Essbase_AfterCubeCreation_CanCreateMdxScript"), Priority(05)]
         public async Task Essbase_AfterCubeCreation_CanCreateMdxScript()
         {
             // Get an unconnected server.
@@ -113,7 +138,7 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = "CreateServerObjectTests - 05 - Essbase_AfterCubeCreation_CanCreateReportScript"), Priority(05)]
+        [Fact(DisplayName = "CreateServerObjectTests - 06 - Essbase_AfterCubeCreation_CanCreateReportScript"), Priority(06)]
         public async Task Essbase_AfterCubeCreation_CanCreateReportScript()
         {
             // Get an unconnected server.
@@ -148,7 +173,7 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = "CreateServerObjectTests - 06 - Essbase_AfterCubeCreation_CanCreateMaxLScript"), Priority(06)]
+        [Fact(DisplayName = "CreateServerObjectTests - 07 - Essbase_AfterCubeCreation_CanCreateMaxLScript"), Priority(07)]
         public async Task Essbase_AfterCubeCreation_CanCreateMaxLScript()
         {
             // Get an unconnected server.
@@ -174,8 +199,8 @@ namespace EssSharp.Integration
             Assert.Equal(content, script?.Content);
         }
 
-        [Fact(DisplayName = @"CreateServerObjectTests - 07 - Essbase_AfterServer_CanCreateLockOnScript"), Priority(07)]
-        public async Task Essbase_AfterScriptCreation_CanCreateLockOnScript()
+        [Fact(DisplayName = @"CreateServerObjectTests - 08 - Essbase_AfterCubeCreation_CanCreateLockOnScript"), Priority(08)]
+        public async Task Essbase_AfterCubeCreation_CanCreateLockOnScript()
         {
             // Get an unconnected server.
             var server = GetEssServer();
@@ -194,31 +219,5 @@ namespace EssSharp.Integration
             // Assert that the lock object name is the same as the one we passed.
             Assert.Equal("CalcAll", lockedScript.Name);
         }
-
-        [Fact(DisplayName = @"CreateServerObjectTests - 08 - Essbase_AfterClean_CanCreateGroup"), Priority(08)]
-        public async Task Essbase_AfterClean_CanCreateGroup()
-        {
-            // Get an unconnected server.
-            var server = GetEssServer();
-
-            // TODO: create Group Creation Class and a proper To
-
-            // Create group one
-            var group1 = await server.CreateGroupAsync("Test_Group", EssUserRole.PowerUser, "test group");
-
-            // Create group 2 - will add to group one in PerformServerFunctionTest
-            var group2 = await server.CreateGroupAsync("Test_Group_2", EssUserRole.PowerUser, "test group 2");
-
-            // Assert that the group name, role, and description is correct is correct
-            Assert.Equal("Test_Group", group1.Name);
-            Assert.Equal(EssUserRole.PowerUser, group1.Role);
-            Assert.Equal("test group", group1.Description);
-
-
-            Assert.Equal("Test_Group_2", group2.Name);
-            Assert.Equal(EssUserRole.PowerUser, group2.Role);
-            Assert.Equal("test group 2", group2.Description);
-        }
-
     }
 }
