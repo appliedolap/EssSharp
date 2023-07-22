@@ -184,7 +184,7 @@ namespace EssSharp
 
                 await api.ApplicationRoleProvisioningProvisionAsync(app: Name, id: id, body: options, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                return await GetPermissionAsync(id, cancellationToken);
+                return await GetPermissionAsync(id, cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )

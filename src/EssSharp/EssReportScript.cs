@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using EssSharp.Model;
-
 using TinyCsvParser;
 using TinyCsvParser.Mapping;
 using TinyCsvParser.Tokenizer;
@@ -143,20 +142,55 @@ namespace EssSharp
                     .Where     (value => !string.IsNullOrEmpty(value))
                     .ToArray();
 
-            // Construct new preferences if none were given.
-            preferences ??= new EssQueryPreferences();
+            // Build the report metadata.
+            var metadata = new EssQueryReport.ReportMetadata()
+            {
+                PageDimensionMembers   = new List<string>(pageDimensionMembers),
+                ColumnDimensionMembers = new List<string>(columnDimensionMembers),
+                RowDimensionMembers    = new List<string>(rowDimensionMembers)
+            };
 
-            // TODO: Process raw report.
+            // If there is no raw report, return an EssQueryReport without data.
+            if ( string.IsNullOrEmpty(rawReport) )
+                return new EssQueryReport
+                {
+                    Metadata = metadata,
+                    Data     = new object[0, 0]
+                };
 
+            // Note: At this point, we do not utilize the query preferences when building the report.
+            //preferences ??= new EssQueryPreferences();
+
+            // Set up the CSV parser to process the raw report string.
+            csvParserOptions = new CsvParserOptions(false, new StringSplitTokenizer(new []{ '\t' }, false));
+            csvReaderOptions = new CsvReaderOptions(new [] { Environment.NewLine, "\n" });
+            csvParser        = new CsvParser<string[]>(csvParserOptions, new CsvStringArrayMapping());
+
+            int reportRowCount = 0;
+            int reportColCount = 0;
+
+            // Parse the raw report as a tab-delimited csv and suffer multiple enumerations to capture
+            // the row and column counts. If either the row or column count is 0, return an empty data array.
+            if ( csvParser.ReadFromString(csvReaderOptions, rawReport) is not {} parseResults || (reportRowCount = parseResults.Count()) is 0 || (reportColCount = parseResults.FirstOrDefault()?.Result?.Length ?? 0) is 0 )
+                return new EssQueryReport
+                {
+                    Metadata = metadata,
+                    Data     = new object[reportColCount, reportRowCount]
+                };
+
+            // Declare and initialize a report of the appropriate size.
+            object[,] report = new object[reportRowCount, reportColCount];
+
+            // Fill the report.
+            foreach ( var row in parseResults )
+                for ( int ci = 0; ci < reportColCount; ci++ )
+                    report[row.RowIndex, ci] = row.Result[ci];
+
+            // Return a new EssQueryReport with the data.
             return new EssQueryReport
             {
-                Metadata = new EssQueryReport.ReportMetadata()
-                {
-                    PageDimensionMembers = new List<string>(pageDimensionMembers),
-                    ColumnDimensionMembers = new List<string>(columnDimensionMembers),
-                    RowDimensionMembers = new List<string>(rowDimensionMembers)
-                },
-                Data = null
+                Metadata = metadata,
+                Data     = report
             };
         }
 
