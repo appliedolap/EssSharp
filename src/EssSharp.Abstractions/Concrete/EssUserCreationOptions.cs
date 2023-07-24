@@ -9,20 +9,10 @@ using System.Xml.Linq;
 
 namespace EssSharp
 {
-    public enum EssUserRole
-    {
-        Unkown, 
-
-        ServiceAdministrator,
-
-        PowerUser,
-
-        User
-    }; 
 
     public class EssUserCreationOptions
     {
-        public EssUserCreationOptions(string id, string password, EssUserRole role = EssUserRole.User, List<string> groups = default )
+        public EssUserCreationOptions(string id, string password, EssServerRole role = EssServerRole.User, List<string> groups = default )
         {
             ID = id ?? 
                 throw new ArgumentNullException( $@"The ID of a user is required to create an {nameof(EssUserCreationOptions)}.", nameof(ID) );
@@ -52,7 +42,7 @@ namespace EssSharp
         /// <summary>
         /// Gets or Sets Role
         /// </summary>
-        public EssUserRole Role { get; set; }
+        public EssServerRole Role { get; set; }
 
     }
 }

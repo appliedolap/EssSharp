@@ -129,7 +129,7 @@ namespace EssSharp.Integration.Setup
             // Otherwise, build and start a new essbase test container.
 
             // Start by getting the admin password and host port from configuration.
-            var connection  = GetEssConnection(EssUserRole.ServiceAdministrator);
+            var connection  = GetEssConnection(EssServerRole.ServiceAdministrator);
             var hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : "9000";
 
             _essbaseTestContainer = new ContainerBuilder()
@@ -194,7 +194,7 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary />
-        internal static IntegrationTestSettingsConnection GetEssConnection( EssUserRole role = EssUserRole.ServiceAdministrator )
+        internal static IntegrationTestSettingsConnection GetEssConnection( EssServerRole role = EssServerRole.ServiceAdministrator )
         {
             if ( Connections?.FirstOrDefault(conn => conn?.Role == role) is not IntegrationTestSettingsConnection connection )
                 throw new Exception($@"A connection with the {role} role is not available");
@@ -203,7 +203,7 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary />
-        internal static IEssServer GetEssServer( EssUserRole role = EssUserRole.ServiceAdministrator )
+        internal static IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator )
         {
             var connection = GetEssConnection(role);
 

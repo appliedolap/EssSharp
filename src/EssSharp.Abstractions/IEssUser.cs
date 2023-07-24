@@ -24,7 +24,7 @@ namespace EssSharp
         /// </summary>
         public string Email { get; }
 
-        public EssUserRole Role { get; }
+        public EssServerRole Role { get; }
 
         public List<string> GroupNames { get; }
 

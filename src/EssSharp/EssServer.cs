@@ -234,11 +234,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGroup"/> object.</returns>
-        public IEssGroup CreateGroup( string groupName, EssUserRole role = EssUserRole.User, string description = null ) => CreateGroupAsync(groupName, role, description).GetAwaiter().GetResult();
+        public IEssGroup CreateGroup( string groupName, EssServerRole role = EssServerRole.User, string description = null ) => CreateGroupAsync(groupName, role, description).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGroup"/> object.</returns>
-        public async Task<IEssGroup> CreateGroupAsync( string groupName, EssUserRole role = EssUserRole.User, string description = null, CancellationToken cancellationToken = default )
+        public async Task<IEssGroup> CreateGroupAsync( string groupName, EssServerRole role = EssServerRole.User, string description = null, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -250,7 +250,7 @@ namespace EssSharp
                 var body = new GroupBean()
                 {
                     Name = groupName,
-                    Role = role.EssUserRoleToString(),
+                    Role = role.EssServerRoleToString(),
                     Description = description
                 };
 

@@ -88,7 +88,7 @@ namespace EssSharp
         /// <param name="role"></param>
         /// <param name="description"></param>
         /// <returns></returns>
-        public IEssGroup CreateGroup( string name, EssUserRole role = EssUserRole.User, string description = null );
+        public IEssGroup CreateGroup( string name, EssServerRole role = EssServerRole.User, string description = null );
 
         /// <summary>
         /// Asynchronously create a new group.
@@ -97,7 +97,7 @@ namespace EssSharp
         /// <param name="role"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssGroup> CreateGroupAsync( string name, EssUserRole role = EssUserRole.User, string description = null, CancellationToken cancellationToken = default );
+        public Task<IEssGroup> CreateGroupAsync( string name, EssServerRole role = EssServerRole.User, string description = null, CancellationToken cancellationToken = default );
         
         /// <summary>
         /// Creates a new (unstarted) job on the server.

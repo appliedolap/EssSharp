@@ -103,17 +103,19 @@ namespace EssSharp
         /// <summary>
         /// Add user permissions to an application.
         /// </summary>
-        /// <param name="userId" />
-        /// <param name="newPermissionRole">User permission level.</param>
+        /// <param name="id"> Group or User ID.</param>
+        /// <param name="applicationRole" />
+        /// <returns></returns>
         public IEssApplicationPermission CreatePermissions( string id, EssApplicationRole applicationRole );
 
         /// <summary>
         /// Asynchronously add user permissions to an application. 
         /// </summary>
-        /// <param name="userId" />
-        /// <param name="newPermissionRole">User permission level.</param>
+        /// <param name="id">Group or User ID.</param>
+        /// <param name="applicationRole">User permission level.</param>
+        /// <param name="isGroup">If creating a group permission, true.</param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssApplicationPermission> CreatePermissionsAsync( string id, EssApplicationRole applicationRole, bool group = false, CancellationToken cancellationToken = default );
+        public Task<IEssApplicationPermission> CreatePermissionsAsync( string id, EssApplicationRole applicationRole, bool isGroup = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Downloads the latest log file for this application.
@@ -215,59 +217,67 @@ namespace EssSharp
         /// Get list of user permissions on an application.
         /// </summary>
         /// <param name="filter">Filter by user or group ID.</param>
-        /// <param name="role">Filter by role.</param>
-        public List<IEssApplicationPermission> GetPermissions( EssPermissionType filter = EssPermissionType.All, EssApplicationRole role = EssApplicationRole.All, bool includeInheritence = true );
+        /// <param name="roles">Filter by role.</param>
+        /// <param name="includeInheritence" />
+        public List<IEssApplicationPermission> GetPermissions( EssPermissionType filter = EssPermissionType.All, EssApplicationRole[] roles = null, bool includeInheritence = true );
 
         /// <summary>
         /// Asynchronously get list of user permissions on application.
         /// </summary>
         /// <param name="filter">Filter by user or group ID.</param>
-        /// <param name="role">Filter by role.</param>
+        /// <param name="roles">Filter by role.</param>
+        /// <param name="includeInheritence" />
         /// <param name="cancellationToken" />
-        public Task<List<IEssApplicationPermission>> GetPermissionsAsync( EssPermissionType filter = EssPermissionType.All, EssApplicationRole role = EssApplicationRole.All, bool includeInheritence = true, CancellationToken cancellationToken = default );
+        public Task<List<IEssApplicationPermission>> GetPermissionsAsync( EssPermissionType filter = EssPermissionType.All, EssApplicationRole[] roles = null, bool includeInheritence = true, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Get permissions for a specified user.
         /// </summary>
         /// <param name="id" />
-        public IEssApplicationPermission GetPermission( string id );
+        /// <param name="isGroup">If creating a group permission, true.</param>
+        public IEssApplicationPermission GetPermission( string id, bool isGroup = false );
 
         /// <summary>
         /// Asynchronously get Permissions for a specified user.
         /// </summary>
         /// <param name="id" />
+        /// <param name="isGroup">If creating a group permission, true.</param>
         /// <param name="cancellationToken" />
-        public Task<IEssApplicationPermission> GetPermissionAsync( string id, CancellationToken cancellationToken = default );
+        public Task<IEssApplicationPermission> GetPermissionAsync( string id, bool group = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Updates a specified users permissions on an application.
         /// </summary>
         /// <param name="userId" />
-        /// <param name="newPermissionRole" />
-        public IEssApplicationPermission UpdatePermissions( string userId, EssApplicationRole newPermissionRole, bool group = false );
+        /// <param name="newApplicationRole" />
+        /// <param name="isGroup">If creating a group permission, true.</param>
+        public IEssApplicationPermission UpdatePermissions( string userId, EssApplicationRole newApplicationRole, bool isGroup = false );
 
         /// <summary>
         /// Asynchronously updates a specified users permissions on an application.
         /// </summary>
         /// <param name="userId" />
-        /// <param name="newPermissionRole" />
+        /// <param name="newApplicationRole" />
+        /// <param name="isGroup">If creating a group permission, true.</param>
         /// <param name="cancellationToken" />
-        public Task<IEssApplicationPermission> UpdatePermissionsAsync( string userId, EssApplicationRole newPermissionRole, bool group = false, CancellationToken cancellationToken = default );
+        public Task<IEssApplicationPermission> UpdatePermissionsAsync( string userId, EssApplicationRole newApplicationRole, bool group = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Updates a specified users permissions on an application.
         /// </summary>
-        /// <param name="user" />
-        /// <param name="newPermissionRole" />
-        public IEssApplicationPermission UpdatePermissions( IEssApplicationPermission essPermission, EssApplicationRole newPermissionRole, bool group = false );
+        /// <param name="essPermission" />
+        /// <param name="newApplicationRole" />
+        /// <param name="isGroup">If creating a group permission, true.</param>
+        public IEssApplicationPermission UpdatePermissions( IEssApplicationPermission essPermission, EssApplicationRole newApplicationRole, bool isGroup = false );
 
         /// <summary>
         /// Asynchronously updates a specified users permissions on an application.
         /// </summary>
-        /// <param name="user" />
-        /// <param name="newPermissionRole" />
+        /// <param name="essPermission" />
+        /// <param name="newApplicationRole" />
+        /// <param name="isGroup">If creating a group permission, true.</param>
         /// <param name="cancellationToken" />
-        public Task<IEssApplicationPermission> UpdatePermissionsAsync( IEssApplicationPermission essPermission, EssApplicationRole newPermissionRole, bool group = false, CancellationToken cancellationToken = default );
+        public Task<IEssApplicationPermission> UpdatePermissionsAsync( IEssApplicationPermission essPermission, EssApplicationRole newApplicationRole, bool isGroup = false, CancellationToken cancellationToken = default );
         
         /// <summary>
         /// Gets the list of application-scoped variables available to the connected user.

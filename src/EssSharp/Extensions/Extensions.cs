@@ -542,9 +542,9 @@ namespace EssSharp
             Password = options.Password,
             Groups = options.Groups,
             Role = options.Role switch{
-                EssUserRole.ServiceAdministrator => "Service Administrator",
-                EssUserRole.PowerUser => "Power User",
-                EssUserRole.User => "User",
+                EssServerRole.ServiceAdministrator => "Service Administrator",
+                EssServerRole.PowerUser => "Power User",
+                EssServerRole.User => "User",
                 _ => throw new NotSupportedException($@"The role {options.Role} is not supported.")
             }
         };
@@ -633,7 +633,6 @@ namespace EssSharp
 
         internal static EssApplicationRole ToEssApplicationRole( this string role ) => role switch
         {
-            "none"        => EssApplicationRole.None,
             "db_access"   => EssApplicationRole.db_access,
             "db_update"   => EssApplicationRole.db_update,
             "db_manager"  => EssApplicationRole.db_manager,
@@ -642,19 +641,19 @@ namespace EssSharp
             _             => throw new NotSupportedException()
         };
 
-        internal static EssUserRole ToEssUserRole( this string role ) => role.ToLower() switch
+        internal static EssServerRole ToEssServerRole( this string role ) => role.ToLowerInvariant() switch
         {
-            "user"                    => EssUserRole.User,
-            "power user"              => EssUserRole.PowerUser,
-            "service admininistrator" => EssUserRole.ServiceAdministrator,
-            _                         => EssUserRole.Unkown
+            "user"                    => EssServerRole.User,
+            "power user"              => EssServerRole.PowerUser,
+            "service admininistrator" => EssServerRole.ServiceAdministrator,
+            _                         => EssServerRole.Unkown
         };
 
-        internal static string EssUserRoleToString( this EssUserRole role ) => role switch
+        internal static string EssServerRoleToString( this EssServerRole role ) => role switch
         {
-            EssUserRole.User => "user",
-            EssUserRole.PowerUser => "power user",
-            EssUserRole.ServiceAdministrator => "service administration",
+            EssServerRole.User => "user",
+            EssServerRole.PowerUser => "power user",
+            EssServerRole.ServiceAdministrator => "service administration",
             _ => throw new NotSupportedException("Unsupported user role.")
         };
 

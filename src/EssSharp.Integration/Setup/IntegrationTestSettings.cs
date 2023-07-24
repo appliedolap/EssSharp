@@ -20,7 +20,7 @@
         /// <summary />
         public string Password { get; set; }
         /// <summary />
-        public EssUserRole Role { get; set; }
+        public EssServerRole Role { get; set; }
     }
 
     /// <summary />

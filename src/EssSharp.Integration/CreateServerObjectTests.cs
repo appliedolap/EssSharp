@@ -61,19 +61,19 @@ namespace EssSharp.Integration
             // TODO: create Group Creation Class and a proper To
 
             // Create group one
-            var group1 = await server.CreateGroupAsync("Test_Group", EssUserRole.PowerUser, "test group");
+            var group1 = await server.CreateGroupAsync("Test_Group", EssServerRole.PowerUser, "test group");
 
             // Create group 2 - will add to group one in PerformServerFunctionTest
-            var group2 = await server.CreateGroupAsync("Test_Group_2", EssUserRole.PowerUser, "test group 2");
+            var group2 = await server.CreateGroupAsync("Test_Group_2", EssServerRole.PowerUser, "test group 2");
 
             // Assert that the group name, role, and description is correct is correct
             Assert.Equal("Test_Group", group1.Name);
-            Assert.Equal(EssUserRole.PowerUser, group1.Role);
+            Assert.Equal(EssServerRole.PowerUser, group1.Role);
             Assert.Equal("test group", group1.Description);
 
 
             Assert.Equal("Test_Group_2", group2.Name);
-            Assert.Equal(EssUserRole.PowerUser, group2.Role);
+            Assert.Equal(EssServerRole.PowerUser, group2.Role);
             Assert.Equal("test group 2", group2.Description);
         }
 
@@ -83,7 +83,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var userConnection = GetEssConnection(EssUserRole.User);
+            var userConnection = GetEssConnection(EssServerRole.User);
 
             // Create EssUserCreationOptions
             var options = new EssUserCreationOptions(userConnection.Username, userConnection.Password, userConnection.Role);
@@ -101,7 +101,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var userConnection = GetEssConnection(EssUserRole.User);
+            var userConnection = GetEssConnection(EssServerRole.User);
 
             var app = await server.GetApplicationAsync("Sample");
 
@@ -110,6 +110,23 @@ namespace EssSharp.Integration
             Assert.Equal(EssApplicationRole.db_access, userPermissions.Role);
 
             Assert.Equal(userConnection.Username, userPermissions.Name);
+        }
+
+        [Fact(DisplayName = "CreateServerObjectTests - 05 - Essbase_AfterCubeCreation_CanCreateGroupPermissions"), Priority(05)]
+        public async Task Essbase_AfterCubeCreation_CanCreateGroupPermissions()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var group = await server.GetGroupAsync("Test_Group");
+
+            var app = await server.GetApplicationAsync("Sample");
+
+            var groupPermissions = await app.CreatePermissionsAsync(group.Name, EssApplicationRole.db_update, true);
+
+            Assert.Equal(EssApplicationRole.db_update, groupPermissions.Role);
+
+            Assert.Equal("Test_Group", groupPermissions.Name);
         }
 
         [Fact(DisplayName = "CreateServerObjectTests - 05 - Essbase_AfterCubeCreation_CanCreateMdxScript"), Priority(05)]

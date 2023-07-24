@@ -53,7 +53,7 @@ namespace EssSharp
         public List<string> GroupNames => _group.Groups;
 
         /// <inheritdoc />
-        public EssUserRole Role => _group.Role.ToEssUserRole();
+        public EssServerRole Role => _group.Role.ToEssServerRole();
 
         #endregion
 
@@ -109,11 +109,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A <see cref="IEssGroup"/> object.</returns>
-        public IEssGroup Edit( EssUserRole? role = null, string description = null ) => EditAsync( role, description ).GetAwaiter().GetResult();
+        public IEssGroup Edit( EssServerRole? role = null, string description = null ) => EditAsync( role, description ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>A <see cref="IEssGroup"/> object.</returns>
-        public async Task<IEssGroup> EditAsync( EssUserRole? role = null, string description = null, CancellationToken cancellationToken = default )
+        public async Task<IEssGroup> EditAsync( EssServerRole? role = null, string description = null, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -121,7 +121,7 @@ namespace EssSharp
 
                 var body = new GroupBean()
                 {
-                    Role = role?.EssUserRoleToString() ?? null,
+                    Role = role?.EssServerRoleToString() ?? null,
                     Description = description
                 };
 
@@ -185,7 +185,6 @@ namespace EssSharp
         public List<IEssGroup> GetGroups() => GetGroupsAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <param name="cancellationToken"></param>
         /// <returns>A Task<list> of <see cref="IEssGroup"/> objects. </list></returns>
         public async Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default )
         {

@@ -27,7 +27,7 @@ namespace EssSharp
         /// <summary>
         /// Returns the role of this group
         /// </summary>
-        public EssUserRole Role { get; }
+        public EssServerRole Role { get; }
 
         /// <summary>
         /// Adds a group or groups by id to a group.
@@ -60,7 +60,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="role"></param>
         /// <param name="description"></param>
-        public IEssGroup Edit( EssUserRole? role = null, string description = null );
+        public IEssGroup Edit( EssServerRole? role = null, string description = null );
 
         /// <summary>
         /// Asynchronously edits the groups role or description.
@@ -68,7 +68,7 @@ namespace EssSharp
         /// <param name="role"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssGroup> EditAsync( EssUserRole? role = null, string description = null, CancellationToken cancellationToken = default );
+        public Task<IEssGroup> EditAsync( EssServerRole? role = null, string description = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Delete group.

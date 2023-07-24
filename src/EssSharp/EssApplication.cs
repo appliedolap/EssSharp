@@ -184,7 +184,7 @@ namespace EssSharp
 
                 await api.ApplicationRoleProvisioningProvisionAsync(app: Name, id: id, body: options, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                return await GetPermissionAsync(id, cancellationToken).ConfigureAwait(false);
+                return await GetPermissionAsync(id, group, cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
@@ -446,17 +446,20 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="IEssApplicationPermission"/> objects.</returns>
-        public List<IEssApplicationPermission> GetPermissions( EssPermissionType filter = EssPermissionType.All , EssApplicationRole role = EssApplicationRole.All, bool includeInheritence = true ) => GetPermissionsAsync( filter, role, includeInheritence ).GetAwaiter().GetResult();
+        public List<IEssApplicationPermission> GetPermissions( EssPermissionType filter = EssPermissionType.All, EssApplicationRole[] roles = null, bool includeInheritence = true ) => GetPermissionsAsync( filter, roles, includeInheritence ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="IEssApplicationPermission"/> objects.</returns>
-        public async Task<List<IEssApplicationPermission>> GetPermissionsAsync( EssPermissionType filter = EssPermissionType.All, EssApplicationRole role = EssApplicationRole.All, bool includeInheritence = true, CancellationToken cancellationToken = default )
+        public async Task<List<IEssApplicationPermission>> GetPermissionsAsync( EssPermissionType filter = EssPermissionType.All, EssApplicationRole[] roles = null, bool includeInheritence = true, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<ApplicationRoleProvisioningApi>();
 
-                if ( await api.ApplicationRoleProvisioningSearchProvisionAsync(app: Name, filter: filter.ToString(), role: role.ToString(), inherited: includeInheritence, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissionsList )
+                // Include all application roles by default.
+                roles ??= new[] { EssApplicationRole.All };
+
+                if ( await api.ApplicationRoleProvisioningSearchProvisionAsync(app: Name, filter: filter.ToString().ToLowerInvariant(), role: string.Join(", ", roles).ToLowerInvariant(), inherited: includeInheritence, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissionsList )
                     throw new Exception("Unable to get provision list.");
 
                 return permissionsList?.ToEssSharpList(this) ?? new List<IEssApplicationPermission>();
@@ -470,17 +473,17 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
-        public IEssApplicationPermission GetPermission( string id ) => GetPermissionAsync(id).GetAwaiter().GetResult();
+        public IEssApplicationPermission GetPermission( string id, bool isGroup = false ) => GetPermissionAsync(id, isGroup).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
-        public async Task<IEssApplicationPermission> GetPermissionAsync( string id, CancellationToken cancellationToken = default )
+        public async Task<IEssApplicationPermission> GetPermissionAsync( string id, bool isGroup = false, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<ApplicationRoleProvisioningApi>();
 
-                if ( await api.ApplicationRoleProvisioningGetProvisionAsync(app: Name, id: id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissions )
+                if ( await api.ApplicationRoleProvisioningGetProvisionAsync(app: Name, id: id, group: isGroup, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } permissions )
                     throw new Exception("Unable to get provision list.");
 
                 return new EssApplicationPermission(permissions, this);
@@ -494,21 +497,21 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
-        public IEssApplicationPermission UpdatePermissions( string id, EssApplicationRole newPermissionRole, bool group = false ) => UpdatePermissionsAsync(id, newPermissionRole, group).GetAwaiter().GetResult();
+        public IEssApplicationPermission UpdatePermissions( string id, EssApplicationRole newApplicationRole, bool isGroup = false ) => UpdatePermissionsAsync(id, newApplicationRole, isGroup).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
-        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( string id, EssApplicationRole newPermissionRole, bool group = false, CancellationToken cancellationToken = default ) =>
-            await UpdatePermissionsAsync(await GetPermissionAsync(id), newPermissionRole, group, cancellationToken).ConfigureAwait(false);
+        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( string id, EssApplicationRole newApplicationRole, bool isGroup = false, CancellationToken cancellationToken = default ) =>
+            await UpdatePermissionsAsync(await GetPermissionAsync(id), newApplicationRole, isGroup, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
-        public IEssApplicationPermission UpdatePermissions( IEssApplicationPermission essPermission, EssApplicationRole newPermissionRole, bool group = false ) => UpdatePermissionsAsync(essPermission, newPermissionRole, group).GetAwaiter().GetResult();
+        public IEssApplicationPermission UpdatePermissions( IEssApplicationPermission essPermission, EssApplicationRole newApplicationRole, bool isGroup = false ) => UpdatePermissionsAsync(essPermission, newApplicationRole, isGroup).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
-        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( IEssApplicationPermission essPermission, EssApplicationRole newPermissionRole, bool group = false, CancellationToken cancellationToken = default ) => 
-            await essPermission.UpdatePermissionsAsync( newPermissionRole, group, cancellationToken).ConfigureAwait(false);
+        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( IEssApplicationPermission essPermission, EssApplicationRole newApplicationRole, bool isGroup = false, CancellationToken cancellationToken = default ) => 
+            await essPermission.UpdatePermissionsAsync( newApplicationRole, isGroup, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationVariable"/> object.</returns>

@@ -215,7 +215,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterScriptCreation_CanGetReportQueryReportAsUser()
         {
             // Get an unconnected server as a regular user.
-            var server = GetEssServer(EssUserRole.User);
+            var server = GetEssServer(EssServerRole.User);
 
             // Get the test Report script from the server.
             var script = await server.GetApplicationAsync("Sample")
@@ -291,7 +291,7 @@ namespace EssSharp.Integration
 
             var app = await server.GetApplicationAsync("Sample");
 
-            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, EssApplicationRole.db_access);
+            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, new[] { EssApplicationRole.db_access });
 
             Assert.NotEmpty(permissionsList);
         }
@@ -303,7 +303,7 @@ namespace EssSharp.Integration
 
             var app = await server.GetApplicationAsync("Sample");
 
-            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, EssApplicationRole.db_access);
+            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, new[] { EssApplicationRole.db_access });
 
             Assert.NotEmpty(permissionsList);
         }
@@ -316,7 +316,7 @@ namespace EssSharp.Integration
 
             var app = await server.GetApplicationAsync("Sample");
 
-            var user = GetEssConnection(EssUserRole.User);
+            var user = GetEssConnection(EssServerRole.User);
 
             var userPermissions = await app.UpdatePermissionsAsync(user.Username, EssApplicationRole.db_access);
 
@@ -329,7 +329,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var userConnection = GetEssConnection(EssUserRole.User);
+            var userConnection = GetEssConnection(EssServerRole.User);
 
             var group = await server.GetGroupAsync("Test_Group");
 
@@ -363,9 +363,9 @@ namespace EssSharp.Integration
 
             var group = await server.GetGroupAsync("Test_Group");
 
-            var editedGroup = await group.EditAsync( EssUserRole.User, "Edited test group");
+            var editedGroup = await group.EditAsync( EssServerRole.User, "Edited test group");
 
-            Assert.Equal(EssUserRole.User, editedGroup.Role);
+            Assert.Equal(EssServerRole.User, editedGroup.Role);
             Assert.Equal("Edited test group", editedGroup.Description);
         }
 
@@ -375,7 +375,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var userConnection = GetEssConnection(EssUserRole.User);
+            var userConnection = GetEssConnection(EssServerRole.User);
 
             var group = await server.GetGroupAsync("Test_Group");
 
