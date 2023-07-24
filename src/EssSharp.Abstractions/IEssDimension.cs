@@ -14,17 +14,17 @@ namespace EssSharp
         public string Name { get; }
 
         /// <summary>
-        /// 
+        /// Gets the deminsion type.
         /// </summary>
         public string Type { get; }
 
         /// <summary>
-        /// 
+        /// Gets deminsion members.
         /// </summary>
         public int Members { get; }
 
         /// <summary>
-        /// 
+        /// Gets stored deminsion members.
         /// </summary>
         public int StoredMembers { get; }
 

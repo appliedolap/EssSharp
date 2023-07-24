@@ -79,11 +79,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>an <see cref="IEssCubeVariable"/></returns>
+        /// <returns>an <see cref="IEssCubeVariable"/> object.</returns>
         public IEssCubeVariable CreateCubeVariable( string name, string value ) => CreateCubeVariableAsync(name, value).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>an <see cref="IEssCubeVariable"/></returns>
+        /// <returns>an <see cref="IEssCubeVariable"/> object.</returns>
         public async Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(name) )
@@ -106,7 +106,7 @@ namespace EssSharp
             }
         }
         /// <inheritdoc />
-        /// <returns><see cref="IEssLockObject"/></returns>
+        /// <returns>An <see cref="IEssLockObject"/> object.</returns>
         public IEssLockObject CreateLockObject( EssLockOptions lockOptions ) => CreateLockObjectAsync(lockOptions).GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -130,7 +130,7 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssScript"/> object of type <typeparamref name="T"/>.</returns>
+        /// <returns>An <see cref="IEssScript"/> object of type <typeparamref name="T"/>.</returns>
         public T CreateScript<T>( string name, string content = null, bool saveToCube = true ) where T : class, IEssScript => CreateScriptAsync<T>(name, content, saveToCube).GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -234,20 +234,20 @@ namespace EssSharp
             new EssMdxScript(new Script() { Content = query }, this).GetReportAsync(preferences, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns><see cref="Stream"/></returns>
+        /// <returns>A <see cref="Stream"/>.</returns>
         public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null ) => ExportCubeToWorkbookAsync( options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns><see cref="Stream"/></returns>
+        /// <returns>A <see cref="Stream"/>.</returns>
         public Task<Stream> ExportCubeToWorkbookAsync( EssJobExportExcelOptions options = null, CancellationToken cancellationToken = default ) => 
             Application.ExportCubeToWorkbookAsync(Name, options, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns><see cref="string"/></returns>
+        /// <returns>A <see cref="string"/>.</returns>
         public string GetActiveAlias() => GetActiveAliasAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns><see cref="string"/></returns>
+        /// <returns>A <see cref="string"/>.</returns>
         public async Task<string> GetActiveAliasAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -267,11 +267,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="string"/></returns>
+        /// <returns>A list of <see cref="string"/>.</returns>
         public List<string> GetAliases() => GetAliasesAsync().GetAwaiter().GetResult();
 
         /// <inherit />
-        /// <returns>A list of <see cref="string"/></returns>
+        /// <returns>A list of <see cref="string"/>.</returns>
         public async Task<List<string>> GetAliasesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -291,11 +291,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns><see cref="IEssGrid"/></returns>
+        /// <returns>An <see cref="IEssGrid"/> object.</returns>
         public IEssGrid GetDefaultGrid( bool reset = false ) => GetDefaultGridAsync(reset).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns><see cref="IEssGrid"/></returns>
+        /// <returns>An <see cref="IEssGrid"/> object.</returns>
         public async Task<IEssGrid> GetDefaultGridAsync( bool reset = false, CancellationToken cancellationToken = default )
         {
             try
@@ -315,11 +315,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssDimension"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssDimension"/> objects.</returns>
         public List<IEssDimension> GetDimensions() => GetDimensionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssDimension>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssDimension"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssDimension"/> objects.</returns>
         public async Task<List<IEssDimension>> GetDimensionsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -336,11 +336,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssDrillthroughReport"/> object.</returns>
+        /// <returns>An <see cref="IEssDrillthroughReport"/> object.</returns>
         public IEssDrillthroughReport GetDrillthroughReport( string reportName, bool getDetails = false ) => GetDrillthroughReportAsync(reportName, getDetails)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssDrillthroughReport"/> object.</returns>
+        /// <returns>An <see cref="IEssDrillthroughReport"/> object.</returns>
         public async Task<IEssDrillthroughReport> GetDrillthroughReportAsync( string reportName, bool getDetails = false, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(reportName) )
@@ -363,11 +363,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssDrillthroughReport"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssDrillthroughReport"/> objects.</returns>
         public List<IEssDrillthroughReport> GetDrillthroughReports( bool getDetails = false ) => GetDrillthroughReportsAsync(getDetails)?.GetAwaiter().GetResult() ?? new List<IEssDrillthroughReport>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssDrillthroughReport"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssDrillthroughReport"/> objects.</returns>
         public async Task<List<IEssDrillthroughReport>> GetDrillthroughReportsAsync( bool getDetails = false, CancellationToken cancellationToken = default )
         {
             try
@@ -487,7 +487,6 @@ namespace EssSharp
         public List<IEssLockObject> GetLockedObjects( ) => GetLockedObjectsAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <param name="cancellationToken"></param>
         /// <returns>A list of <see cref="IEssLockObject"/> objects.</returns>
         public async Task<List<IEssLockObject>> GetLockedObjectsAsync(CancellationToken cancellationToken = default )
         {
@@ -607,11 +606,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssScript"/> objects of <typeparamref name="T"/>.</returns>
+        /// <returns>A list of <see cref="IEssScript"/> objects of <typeparamref name="T"/>.</returns>
         public List<T> GetScripts<T>( bool getContent = false ) where T : class, IEssScript => GetScriptsAsync<T>(getContent).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssScript"/> objects of <typeparamref name="T"/>.</returns>
+        /// <returns>A list of <see cref="IEssScript"/> objects of <typeparamref name="T"/>.</returns>
        public async Task<List<T>> GetScriptsAsync<T>( bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
             // Throw if a specific type of IEssScript is not given.
@@ -641,11 +640,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssCubeVariable"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssCubeVariable"/> objects.</returns>
         public List<IEssCubeVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCubeVariable>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssCubeVariable"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssCubeVariable"/> objects.</returns>
         public async Task<List<IEssCubeVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try

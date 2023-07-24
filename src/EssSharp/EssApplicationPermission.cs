@@ -76,11 +76,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
-        public IEssApplicationPermission UpdatePermissions( EssApplicationRole role, bool group = false) => UpdatePermissionsAsync( role, group).GetAwaiter().GetResult();
+        public IEssApplicationPermission UpdatePermissions( EssApplicationRole role, bool isGroup = false) => UpdatePermissionsAsync( role, isGroup).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
-        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( EssApplicationRole role, bool group = false, CancellationToken cancellationToken = default )
+        public async Task<IEssApplicationPermission> UpdatePermissionsAsync( EssApplicationRole role, bool isGroup = false, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -91,7 +91,7 @@ namespace EssSharp
                     Id = Name,
                     Role = role.ToString() ??
                         throw new ArgumentException($@"{nameof(role)} must be set."),
-                    Group = group
+                    Group = isGroup
                 };
 
                 await api.ApplicationRoleProvisioningProvisionAsync(app: _application.Name, id: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false);

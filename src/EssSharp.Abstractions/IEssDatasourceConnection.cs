@@ -15,70 +15,108 @@ namespace EssSharp
         public IEssServer Server { get; }
 
         /// <summary>
-        /// Returns the Connection Type
+        /// Returns the Connection Type.
         /// </summary>
         public EssDatasourceConnectionType ConnectionType { get; }
 
         /// <summary>
-        /// Returns the Connection Subtype
+        /// Returns the Connection Subtype.
         /// </summary>
         public EssDatasourceConnectionSubtype ConnectionSubtype { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns Description.
+        /// </summary>
         public string Description { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the Path.
+        /// </summary>
         public string Path {get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the folder path.
+        /// </summary>
         public bool Catalog { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the host.
+        /// </summary>
         public string Host { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the port.
+        /// </summary>
         public int Port { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the user.
+        /// </summary>
         public string User { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns 
+        /// </summary>
         //public string Password { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns true if password is encrypted.
+        /// </summary>
         public bool Encrypted { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the token.
+        /// </summary>
         public string Token { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        ///
+        /// </summary>
         public string Sid { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// 
+        /// </summary>
         public string Service { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the schema.
+        /// </summary>
         public string Schema { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the cube URL.
+        /// </summary>
         public string DbURL { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the cube driver.
+        /// </summary>
         public string DbDriver { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the Datasource name.
+        /// </summary>
         public string DatasourceName { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the wallet path.
+        /// </summary>
         public string WalletPath { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// 
+        /// </summary>
         public bool RepoWallet { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the minimum pool size.
+        /// </summary>
         public int MinPoolSize { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Returns the maximum pool size.
+        /// </summary>
         public int MaxPoolSize { get; }
 
         /// <summary>

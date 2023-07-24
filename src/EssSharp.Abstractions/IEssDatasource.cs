@@ -22,18 +22,29 @@ namespace EssSharp
         /// </summary>
         public EssDatasourceType DatasourceType { get; }
 
+        /// <summary>
+        /// Gets the associated connection.
+        /// </summary>
         public IEssDatasourceConnection GetConnection();
 
+        /// <summary>
+        /// Asynchronously gets the associated connection.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IEssDatasourceConnection> GetConnectionAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Queries the datasource.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="delimiter"></param>
-        /// <returns></returns>
+        /// <param name="queryInfo">Information for querying a datasource.</param>
         public string Query( IEssDatasourceQueryInfo queryInfo );
 
+        /// <summary>
+        /// Asynchronously queries the datasource.
+        /// </summary>
+        /// <param name="queryInfo"></param>
+        /// <param name="cancellationToken"></param>
         public Task<string> QueryAsync( IEssDatasourceQueryInfo queryInfo, CancellationToken cancellationToken = default );
     }
 

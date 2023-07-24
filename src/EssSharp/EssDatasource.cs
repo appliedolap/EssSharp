@@ -54,11 +54,11 @@ namespace EssSharp
         public EssDatasourceType DatasourceType => Enum.IsDefined(typeof(EssDatasourceType), _datasource?.Type) ? (EssDatasourceType) _datasource?.Type : EssDatasourceType.UNKNOWN;
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssDatasourceConnection"/>.</returns>
+        /// <returns>An <see cref="IEssDatasourceConnection"/>.</returns>
         public IEssDatasourceConnection GetConnection() => GetConnectionAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssDatasourceConnection"/>.</returns>
+        /// <returns>An <see cref="IEssDatasourceConnection"/>.</returns>
         public async Task<IEssDatasourceConnection> GetConnectionAsync( CancellationToken cancellationToken = default )
         {
             var api = GetApi<GlobalConnectionsApi>();
@@ -68,9 +68,11 @@ namespace EssSharp
         }
         
         /// <inheritdoc />
+        /// <returns>A <see cref="string"/>.</returns>
         public string Query( IEssDatasourceQueryInfo queryInfo ) => QueryAsync(queryInfo)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>A <see cref="string"/>.</returns>
         public async Task<string> QueryAsync( IEssDatasourceQueryInfo queryInfo, CancellationToken cancellationToken = default )
         {
             try

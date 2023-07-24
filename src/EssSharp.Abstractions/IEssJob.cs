@@ -61,6 +61,7 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously executes (or re-runs) this job, updating its status and returning the updated job.
         /// </summary>
+        /// <param name="cancellationToken" />
         Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -71,13 +72,13 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously re-runs an already executed job, returning the new job.
         /// </summary>
+        /// <param name="cancellationToken" />
         Task<IEssJob> ReRunAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Throws an <see cref="System.Exception" /> containing any available error message if the job failed 
         /// or, otherwise, returns the job.
         /// </summary>
-        /// <exception cref="System.Exception" />
         IEssJob ThrowIfFailed();
 
         #endregion

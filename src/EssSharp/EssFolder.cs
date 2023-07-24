@@ -122,11 +122,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssFile"/> object.</returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile GetFile( string filename ) => GetFileAsync(filename)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssFile"/> object.</returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> GetFileAsync( string filename, CancellationToken cancellationToken = default )
         {
             try
@@ -145,11 +145,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssFile"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssFile"/> objects.</returns>
         public List<IEssFile> GetFiles( string nameFilter = null ) => GetFilesAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssFile"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssFile"/> objects.</returns>
         public async Task<List<IEssFile>> GetFilesAsync( string nameFilter = null, CancellationToken cancellationToken = default )
         {
             var api = GetApi<FilesApi>();
@@ -160,11 +160,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public IEssFolder GetFolder( string folderName ) => GetFolderAsync(folderName)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssFolder"/> object.</returns>
+        /// <returns>An <see cref="IEssFolder"/> object.</returns>
         public async Task<IEssFolder> GetFolderAsync( string folderName, CancellationToken cancellationToken = default )
         {
             try
@@ -183,11 +183,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssFolder"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssFolder"/> objects.</returns>
         public List<IEssFolder> GetFolders( string nameFilter = null ) => GetFoldersAsync(nameFilter)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="EssFolder"/> objects.</returns>
+        /// <returns>A list of <see cref="IEssFolder"/> objects.</returns>
         public async Task<List<IEssFolder>> GetFoldersAsync( string nameFilter = null, CancellationToken cancellationToken = default )
         {
             var api = GetApi<FilesApi>();
@@ -198,11 +198,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc/>
-        /// <returns>An <see cref="EssFile"/> object.</returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile UploadFile( string path, string filename = null, bool overwrite = false ) => UploadFileAsync(path, filename, overwrite)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssFile"/> object.</returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> UploadFileAsync( string path, string filename = null, bool overwrite = false, CancellationToken cancellationToken = default )
         {
             try
@@ -221,20 +221,20 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssFile"/> object.</returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile UploadFile( FileStream stream, string filename = null, bool overwrite = false ) => UploadFileAsync(stream, filename, overwrite)?.GetAwaiter().GetResult();
 
         /// <inheritdoc/>
-        /// <returns>An <see cref="EssFile"/> object.</returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public Task<IEssFile> UploadFileAsync( FileStream stream, string filename = null, bool overwrite = false, CancellationToken cancellationToken = default ) =>
             UploadFileAsync(stream as Stream, filename ?? Path.GetFileName(stream.Name), overwrite, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssFile"/> object.</returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public IEssFile UploadFile( Stream stream, string filename, bool overwrite = false ) => UploadFileAsync(stream, filename, overwrite)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssFile"/> object.</returns>
+        /// <returns>An <see cref="IEssFile"/> object.</returns>
         public async Task<IEssFile> UploadFileAsync( Stream stream, string filename, bool overwrite = false, CancellationToken cancellationToken = default )
         {
             try

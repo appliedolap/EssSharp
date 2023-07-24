@@ -10,7 +10,7 @@ namespace EssSharp
     {
 
         /// <summary>
-        /// 
+        /// Gets cube.
         /// </summary>
         public IEssCube Cube { get; }
 
@@ -20,12 +20,12 @@ namespace EssSharp
         public string Alias { get; }
 
         /// <summary>
-        /// 
+        /// Gets grid dimension.
         /// </summary>
         public List<EssGridDimension> Dimensions { get; }
 
         /// <summary>
-        /// 
+        /// Gets grid slice.
         /// </summary>
         public EssGridSlice Slice { get; }
     }

@@ -18,8 +18,6 @@ namespace EssSharp
         public EssApplicationRole Role { get; }
 
         /// <summary>
-        /// TODO: UPDATE? --copied from docs.oracle.com 
-        /// 
         /// If true, consider roles derived through parent groups. 
         /// </summary>
         public EssPermissionType PermissionType { get; }
@@ -39,13 +37,15 @@ namespace EssSharp
         /// Update user permissions for specified cube.
         /// </summary>
         /// <param name="role"></param>
-        public IEssApplicationPermission UpdatePermissions( EssApplicationRole role, bool group = false );
+        /// <param name="isGroup">If creating a group permission, true</param>
+        public IEssApplicationPermission UpdatePermissions( EssApplicationRole role, bool isGroup = false );
 
         /// <summary>
         /// Asynchronously update user permissions for specified cube.
         /// </summary>
         /// <param name="role"></param>
+        /// <param name="isGroup">If creating a group permission, true</param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssApplicationPermission> UpdatePermissionsAsync( EssApplicationRole role, bool group = false, CancellationToken cancellationToken = default );
+        public Task<IEssApplicationPermission> UpdatePermissionsAsync( EssApplicationRole role, bool isGroup = false, CancellationToken cancellationToken = default );
     }
 }
