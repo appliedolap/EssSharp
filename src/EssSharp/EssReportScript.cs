@@ -48,14 +48,9 @@ namespace EssSharp
         {
             try
             {
-                var report = await GetReportAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-
-                // TODO: FIX THIS ENTIRELY
-                var operation = new GridOperation(new Grid(
-                    new Slice(rows: report.Data.GetLength(0), columns: report.Data.GetLength(1),
-                        data: new Data(new List<GridRange>()
-                            { new GridRange(values: report.Data.OfType<string>().ToList(), end: report.Data.GetLength(0) * report.Data.GetLength(1) - 1) })),
-                    dimensions: report.Metadata.ToModelGridDimensions()), action: GridOperation.ActionEnum.Refresh);
+                // TODO: BE A BIT MORE DEFENSIVE AND ADD BETTER ERROR HANDLING.
+                var report = await GetReportAsync(preferences: new EssQueryPreferences() { CaptureCellTypes = true }, cancellationToken).ConfigureAwait(false);
+                var operation = new GridOperation(report.ToModelGrid(), action: GridOperation.ActionEnum.Refresh);
 
                 var api = GetApi<GridApi>();
                 if ( await api.GridExecuteAsync(applicationName: Cube.Application.Name, databaseName: Cube.Name, body: operation, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
@@ -92,12 +87,16 @@ namespace EssSharp
                 if ( query.IndexOf("{TABDELIMIT}", StringComparison.OrdinalIgnoreCase) is -1 )
                     query = $"{{TABDELIMIT}}\n{query}";
 
-                // To avoid issues with numeric member names/aliases, prepend the report spec with <QUOTEMBRNAMES, if necessary.
-                if ( query.IndexOf("<QUOTEMBRNAMES", StringComparison.OrdinalIgnoreCase) is -1 )
-                    query = $"<QUOTEMBRNAMES\n{query}";
-
                 // Create new preferences, if necessary.
                 preferences ??= new EssQueryPreferences();
+
+                // If we need to capture primitive cell types, quote member names.
+                if ( preferences.CaptureCellTypes )
+                {
+                    // To avoid issues with numeric member names/aliases, prepend the report spec with <QUOTEMBRNAMES, if necessary.
+                    if (query.IndexOf("<QUOTEMBRNAMES", StringComparison.OrdinalIgnoreCase) is -1)
+                        query = $"<QUOTEMBRNAMES\n{query}";
+                }
 
                 // Create new EssJobScriptOptions and set the LockForUpdate parameter.
                 var options = new EssJobScriptOptions(essScript: this)
@@ -192,8 +191,8 @@ namespace EssSharp
                     Data     = new object[0, 0]
                 };
 
-            // Note: At this point, we do not utilize the query preferences when building the report.
-            //preferences ??= new EssQueryPreferences();
+            // Note: At this point, we only utilize the query preferences to tell whether to capture cell types.
+            preferences ??= new EssQueryPreferences();
 
             // Set up the CSV parser to process the raw report string.
             csvParserOptions = new CsvParserOptions(false, new StringSplitTokenizer(new []{ '\t' }, false));
@@ -205,26 +204,50 @@ namespace EssSharp
 
             // Parse the raw report as a tab-delimited csv and suffer multiple enumerations to capture
             // the row and column counts. If either the row or column count is 0, return an empty data array.
-            if ( csvParser.ReadFromString(csvReaderOptions, rawReport) is not {} parseResults || (reportRowCount = parseResults.Count()) is 0 || (reportColCount = parseResults.FirstOrDefault()?.Result?.Length ?? 0) is 0 )
+            if ( csvParser.ReadFromString(csvReaderOptions, rawReport) is not {} parseResults || (reportRowCount = parseResults.Count()) is 0 || (reportColCount = parseResults.LastOrDefault()?.Result?.Length ?? 0) is 0 )
                 return new EssQueryReport
                 {
                     Metadata = metadata,
                     Data     = new object[reportColCount, reportRowCount]
                 };
 
-            // Declare and initialize a report of the appropriate size.
+            // Declare and initialize report and types arrays of the appropriate size.
             object[,] report = new object[reportRowCount, reportColCount];
+            int   [,] types  = new int   [reportRowCount, reportColCount];
 
-            // Fill the report.
-            foreach ( var row in parseResults )
-                for ( int ci = 0; ci < reportColCount; ci++ )
-                    report[row.RowIndex, ci] = row.Result[ci];
+            // Capture primitive cell types if requested.
+            if ( preferences.CaptureCellTypes )
+            {
+                string trimmed;
+
+                // Fill the report and cell types in the least performant way possible.
+                foreach ( var row in parseResults )
+                {
+                    for ( int ci = 0; ci < reportColCount; ci++ )
+                    {
+                        // Capture the cell value.
+                        string value = ci < row.Result.Length ? row.Result[ci] : string.Empty;
+
+                        // Trim quoted member names and identify any quoted cell value as a member.
+                        report[row.RowIndex, ci] = trimmed = value.Trim().Trim('"');
+                        types [row.RowIndex, ci] = !string.Equals(value.Trim(), trimmed, StringComparison.Ordinal) ? 0 : 7;
+                    }
+                }
+            }
+            else
+            {
+                // Fill the report.
+                foreach ( var row in parseResults )
+                    for ( int ci = 0; ci < reportColCount; ci++ )
+                        report[row.RowIndex, ci] = ci < row.Result.Length ? row.Result[ci] : string.Empty;
+            }
 
             // Return a new EssQueryReport with the data.
             return new EssQueryReport
             {
                 Metadata = metadata,
-                Data     = report
+                Data     = report,
+                Types    = types
             };
         }
 

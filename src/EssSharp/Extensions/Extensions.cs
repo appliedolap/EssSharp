@@ -393,6 +393,32 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Returns a <see cref="Grid" /> object from the given <see cref="EssQueryReport" /> object.
+        /// </summary>
+        /// <param name="report" />
+        internal static Grid ToModelGrid( this EssQueryReport report )
+        {
+            if ( report.Data is null )
+                throw new ArgumentNullException(nameof(report.Data), "The report contains no data.");
+
+            int rowCount = report.Data.GetLength(0);
+            int colCount = report.Data.GetLength(1);
+
+            return new Grid(
+                new Slice(
+                    rows: rowCount,
+                    columns: colCount,
+                    data: new Data(new List<GridRange>()
+                    {
+                        new GridRange(
+                            values: report.Data.OfType<string>().ToList(),
+                            types:  report.Types.OfType<int>().Select(t => t.ToString()).ToList(),
+                            end:    rowCount * colCount - 1)
+                    })),
+                dimensions: report.Metadata?.ToModelGridDimensions());
+        }
+
+        /// <summary>
         /// Returns a list of <see cref="GridDimension" /> objects from the given <see cref="EssQueryReport.ReportMetadata" /> object.
         /// </summary>
         /// <param name="metadata" />
@@ -400,9 +426,9 @@ namespace EssSharp
         {
             var gridDimensions = new List<GridDimension>();
 
-            gridDimensions.AddRange(metadata.RowDimensionMembers   .Select(rdm => new GridDimension(row: -1, column:  0, name: rdm)));
-            gridDimensions.AddRange(metadata.ColumnDimensionMembers.Select(rdm => new GridDimension(row:  0, column: -1, name: rdm)));
-            gridDimensions.AddRange(metadata.PageDimensionMembers  .Select(rdm => new GridDimension(row: -1, column: -1, name: rdm)));;
+            gridDimensions.AddRange(metadata.RowDimensionMembers   .Select((rdm, i) => new GridDimension(row: -1, column:  i, name: rdm)));
+            gridDimensions.AddRange(metadata.ColumnDimensionMembers.Select((cdm, i) => new GridDimension(row:  i, column: -1, name: cdm)));
+            gridDimensions.AddRange(metadata.PageDimensionMembers  .Select( pdm     => new GridDimension(row: -1, column: -1, name: pdm)));;
 
             return gridDimensions;
         }

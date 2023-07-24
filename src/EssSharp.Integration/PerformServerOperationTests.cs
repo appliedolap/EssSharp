@@ -263,6 +263,24 @@ namespace EssSharp.Integration
 
             // Assert that the concrete grid is type is an IEssGrid.
             Assert.IsAssignableFrom<IEssGrid>(grid);
+
+            // Assert that the "Year" dimension is the first column dimension member.
+            // Note: The grid operation moves Scenario to the page axis.
+            Assert.Equal("Year", grid.Dimensions
+                .Where(d => d.Column is -1 && d.Row >= 0)
+                .OrderBy(d => d.Row)
+                .FirstOrDefault()
+                .Name);
+
+            // Assert that the "Market" dimensions is the first row dimension member.
+            Assert.Equal("Market", grid.Dimensions
+                .Where(d => d.Row is -1 && d.Column >= 0)
+                .OrderBy(d => d.Column)
+                .FirstOrDefault()
+                .Name);
+
+            // Assert that the last data cell equals "712.0".
+            Assert.Equal("712.0", grid.Slice.Data.Ranges.LastOrDefault().Values.LastOrDefault());
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 10 - Essbase_AfterScriptCreation_CannotExecuteMaxLScript"), Priority(10)]

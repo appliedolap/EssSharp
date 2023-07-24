@@ -51,5 +51,8 @@ namespace EssSharp
 
         /// <summary />
         public object[,] Data { get; set; }
+
+        /// <summary />
+        public int[,] Types { get; set; }
     }
 }

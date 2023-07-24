@@ -14,9 +14,8 @@ namespace EssSharp
         /// <param name="axes" />
         /// <param name="dataless" />
         /// <param name="formatString" />
-        /// <param name="lockForUpdate" />
         /// <param name="memberIdentifier" />
-        public EssQueryPreferences( EssQueryReport.ReportAxes axes = EssQueryReport.ReportAxes.ColumnsRowsAndPages, bool dataless = false, bool formatString = true, bool lockForUpdate = false, EssQueryReport.ReportMemberIdentifier memberIdentifier = EssQueryReport.ReportMemberIdentifier.Name )
+        public EssQueryPreferences( EssQueryReport.ReportAxes axes = EssQueryReport.ReportAxes.ColumnsRowsAndPages, bool dataless = false, bool formatString = true, EssQueryReport.ReportMemberIdentifier memberIdentifier = EssQueryReport.ReportMemberIdentifier.Name )
         {
             Axes             = axes;
             Dataless         = dataless;
@@ -29,6 +28,12 @@ namespace EssSharp
         /// </summary>
         /// <remarks>This is supported only for <see cref="IEssMdxScript" /> and <see cref="IEssReportScript"/> query reports. Defaults to <see cref="EssQueryReport.ReportAxes.ColumnsRowsAndPages" />.</remarks>
         public EssQueryReport.ReportAxes Axes { get; set; } = EssQueryReport.ReportAxes.ColumnsRowsAndPages;
+
+        /// <summary>
+        /// Whether to capture primitive cell types when processing the query report.
+        /// </summary>
+        /// <remarks>This is supported only for <see cref="IEssReportScript"/> query reports. Defaults to <see langword="false" />.</remarks>
+        public bool CaptureCellTypes { get; set; }
 
         /// <summary>
         /// Whether data values should be omitted in the query report.
