@@ -21,12 +21,19 @@
     <!-- Strong Name Signing -->
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../EssSharp/EssSharp.snk</AssemblyOriginatorKeyFile>
+    <!-- NuGet Package Options -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <!-- SourceLink Options -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- NuGet Readme -->
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />

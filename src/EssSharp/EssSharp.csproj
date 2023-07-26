@@ -23,12 +23,19 @@
     <!-- Strong Name Signing -->
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>EssSharp.snk</AssemblyOriginatorKeyFile>
+    <!-- NuGet Package Options -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <!-- SourceLink Options -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- NuGet Readme -->
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <!-- Project References -->
