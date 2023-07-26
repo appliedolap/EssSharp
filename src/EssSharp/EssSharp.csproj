@@ -12,14 +12,14 @@
     <Title>$(AssemblyName)</Title>
     <Authors>Applied OLAP</Authors>
     <Company>$(Authors)</Company>
-    <Description>A (mostly) auto-generated C# REST client for Essbase.</Description>
+    <Description>A (partly) auto-generated C# REST client for Essbase.</Description>
     <Copyright>© 2023 Applied OLAP, Inc.</Copyright>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EssSharp.xml</DocumentationFile>
     <RepositoryUrl>https://github.com/appliedolap/EssSharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <VersionPrefix>0.2.0</VersionPrefix>
-    <VersionSuffix>beta</VersionSuffix>
+    <!-- <VersionSuffix>beta</VersionSuffix> -->
     <!-- Strong Name Signing -->
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>EssSharp.snk</AssemblyOriginatorKeyFile>
