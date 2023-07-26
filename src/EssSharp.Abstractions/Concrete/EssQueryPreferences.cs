@@ -1,27 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml.Linq;
-
-namespace EssSharp
+﻿namespace EssSharp
 {
     public class EssQueryPreferences
     {
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="aliasTable" />
         /// <param name="axes" />
         /// <param name="dataless" />
         /// <param name="formatString" />
         /// <param name="memberIdentifier" />
-        public EssQueryPreferences( EssQueryReport.ReportAxes axes = EssQueryReport.ReportAxes.ColumnsRowsAndPages, bool dataless = false, bool formatString = true, EssQueryReport.ReportMemberIdentifier memberIdentifier = EssQueryReport.ReportMemberIdentifier.Name )
+        public EssQueryPreferences( string aliasTable = "Default", EssQueryReport.ReportAxes axes = EssQueryReport.ReportAxes.ColumnsRowsAndPages, bool dataless = false, bool formatString = true, EssQueryReport.ReportMemberIdentifier memberIdentifier = EssQueryReport.ReportMemberIdentifier.Alias )
         {
+            AliasTable       = aliasTable;
             Axes             = axes;
             Dataless         = dataless;
             FormatString     = formatString;
             MemberIdentifier = memberIdentifier;
         }
+
+        /// <summary>
+        /// The name of the alias table from which to return member aliases when the <see cref="MemberIdentifier" /> is set to <see cref="EssQueryReport.ReportMemberIdentifier.Alias" />.
+        /// </summary>
+        /// <remarks>This is supported only for <see cref="IEssReportScript" /> grid query. Defaults to "<strong>Default</strong>".</remarks>
+        public string AliasTable { get; set; } = "Default";
 
         /// <summary>
         /// The axis (or axes) to return in the query report.
@@ -76,8 +78,8 @@ namespace EssSharp
         /// <summary>
         /// The member identifier to return in the query report.
         /// </summary>
-        /// <remarks>Defaults to <see cref="EssQueryReport.ReportMemberIdentifier.Name" />.</remarks>
-        public EssQueryReport.ReportMemberIdentifier MemberIdentifier { get; set; } = EssQueryReport.ReportMemberIdentifier.Name;
+        /// <remarks>Defaults to <see cref="EssQueryReport.ReportMemberIdentifier.Alias" />.</remarks>
+        public EssQueryReport.ReportMemberIdentifier MemberIdentifier { get; set; } = EssQueryReport.ReportMemberIdentifier.Alias;
 
         /// <summary>
         /// Whether MDX dimension property columns and rows will be relocated outside of the valid Essbase grid.

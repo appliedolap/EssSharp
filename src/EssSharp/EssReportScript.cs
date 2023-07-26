@@ -40,21 +40,25 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssGrid"/> object.</returns>
-        public IEssGrid GetGrid() => GetGridAsync().GetAwaiter().GetResult();
+        public IEssGrid GetGrid( EssQueryPreferences preferences = null ) => GetGridAsync(preferences).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssGrid"/> object.</returns>
-        public async Task<IEssGrid> GetGridAsync( CancellationToken cancellationToken = default )
+        public async Task<IEssGrid> GetGridAsync( EssQueryPreferences preferences = null, CancellationToken cancellationToken = default )
         {
             try
             {
-                // TODO: BE A BIT MORE DEFENSIVE AND ADD BETTER ERROR HANDLING.
-                var report = await GetReportAsync(preferences: new EssQueryPreferences() { CaptureCellTypes = true }, cancellationToken).ConfigureAwait(false);
-                var operation = new GridOperation(report.ToModelGrid(), action: GridOperation.ActionEnum.Refresh);
+                // Create new preferences, if necessary, and ensure cell types are captured.
+                preferences ??= new EssQueryPreferences();
+                preferences.CaptureCellTypes = true;
+
+                // Get the report and build a grid with it.
+                var report = await GetReportAsync(preferences: preferences, cancellationToken).ConfigureAwait(false);
+                var operation = new GridOperation(alias: preferences.AliasTable, grid: report.ToModelGrid(), action: GridOperation.ActionEnum.Refresh);
 
                 var api = GetApi<GridApi>();
                 if ( await api.GridExecuteAsync(applicationName: Cube.Application.Name, databaseName: Cube.Name, body: operation, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
-                    throw new Exception("Could not get the resulting grid.");
+                    throw new Exception("Could not get a grid query result with the report.");
 
                 return new EssGrid(grid, Cube as EssCube);
             }
@@ -202,9 +206,11 @@ namespace EssSharp
             int reportRowCount = 0;
             int reportColCount = 0;
 
-            // Parse the raw report as a tab-delimited csv and suffer multiple enumerations to capture
-            // the row and column counts. If either the row or column count is 0, return an empty data array.
-            if ( csvParser.ReadFromString(csvReaderOptions, rawReport) is not {} parseResults || (reportRowCount = parseResults.Count()) is 0 || (reportColCount = parseResults.LastOrDefault()?.Result?.Length ?? 0) is 0 )
+            // Parse the raw report as a tab-delimited csv and suffer multiple enumerations to capture the row and column counts.
+            // If either the row count or longest column count is 0, return an empty data array.
+            if ( csvParser.ReadFromString(csvReaderOptions, rawReport) is not {} parseResults || 
+               ( reportRowCount = parseResults.Count() ) is 0 ||
+               ( reportColCount = parseResults.Aggregate((longest, current) => longest.Result.Length > current.Result.Length ? longest : current).Result.Length ) is 0 )
                 return new EssQueryReport
                 {
                     Metadata = metadata,

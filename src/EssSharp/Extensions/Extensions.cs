@@ -405,7 +405,7 @@ namespace EssSharp
             int colCount = report.Data.GetLength(1);
 
             return new Grid(
-                new Slice(
+                slice: new Slice(
                     rows: rowCount,
                     columns: colCount,
                     data: new Data(new List<GridRange>()
