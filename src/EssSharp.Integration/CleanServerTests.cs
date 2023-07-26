@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
-
 using Xunit;
 
 namespace EssSharp.Integration
@@ -102,7 +101,31 @@ namespace EssSharp.Integration
 
             // Get and delete all existing users except admin.
             foreach ( var user in (await server.GetUsersAsync()).Where(u => !string.Equals(u.Name, "admin")) )
-                await user.DeleteAsync();
+            {
+                try
+                {
+                    // Attempt to delete the user...
+                    await user.DeleteAsync();
+                }
+                catch ( Exception e )
+                {
+                    // Unless the user only partially exists, which can and does happen with persistent containers, throw.
+                    if ( e.Message?.EndsWith("User does not exist.", StringComparison.OrdinalIgnoreCase) is not true )
+                        throw;
+
+                    try
+                    {
+                        // Attempt to recreate the user and then delete it as a workaround.
+                        await user.Server.CreateUserAsync(new EssUserCreationOptions(id: user.Name, password: Guid.NewGuid().ToString("D").Substring(0, 20).TrimEnd('-'), user.Role));
+                        await user.DeleteAsync();
+                    }
+                    catch
+                    {
+                        // Throw the original exception.
+                        throw e;
+                    }
+                }
+            }
 
             // Get the full list of users.
             var users = await server.GetUsersAsync();
@@ -126,7 +149,7 @@ namespace EssSharp.Integration
              // Get the list of existing locks and unlock them.
                 foreach ( var essPermission in await application.GetPermissionsAsync() )
                     await essPermission.RemovePermissionsAsync();
-            
+
                 // Assert that the (refreshed) list of existing locks is empty.
                 Assert.Empty(await application.GetPermissionsAsync());   
             }
@@ -141,7 +164,29 @@ namespace EssSharp.Integration
             // Get the list of existing applications.
             foreach ( var group in await server.GetGroupsAsync() )
             {
-                await group.DeleteAsync();
+                try
+                {
+                    // Attempt to delete the group...
+                    await group.DeleteAsync();
+                }
+                catch ( Exception e )
+                {
+                    // Unless the group only partially exists, which can and does happen with persistent containers, throw.
+                    if ( e.Message?.EndsWith("Group does not exist.", StringComparison.OrdinalIgnoreCase) is not true )
+                        throw;
+
+                    try
+                    {
+                        // Attempt to recreate the group and then delete it as a workaround.
+                        await group.Server.CreateGroupAsync(name: group.Name, role: group.Role);
+                        await group.DeleteAsync();
+                    }
+                    catch
+                    {
+                        // Throw the original exception.
+                        throw e;
+                    }
+                }
             }
 
             // Assert that the (refreshed) list of existing locks is empty.
