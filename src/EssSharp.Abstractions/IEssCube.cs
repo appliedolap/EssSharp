@@ -27,7 +27,7 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously clears data from a cube.
         /// </summary>
-        /// <param name="options">Options for clearingn data from a cube.</param>
+        /// <param name="options">(optional) Options for clearing data from a cube.</param>
         /// <param name="cancellationToken"></param>
         public Task ClearDataFromCubeAsync( EssJobClearDataOptions options = null, CancellationToken cancellationToken = default );
 

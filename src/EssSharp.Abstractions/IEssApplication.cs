@@ -359,13 +359,14 @@ namespace EssSharp
     }
 
     /// <summary>
-    /// Fluent extensions for <see cref="IEssApplication"/>.
+    /// Fluent extensions for <see cref="EssSharp" />.
     /// </summary>
-    public static class IEssApplicationExtensions
+    public static partial class FluentExtensions
     {
         /// <summary>
         /// Asynchronously gets the cube with the given name.
         /// </summary>
+        /// <param name="applicationTask" />
         /// <param name="cubeName" />
         /// <param name="cancellationToken" />
         public static async Task<IEssCube> GetCubeAsync( this Task<IEssApplication> applicationTask, string cubeName, CancellationToken cancellationToken = default ) =>

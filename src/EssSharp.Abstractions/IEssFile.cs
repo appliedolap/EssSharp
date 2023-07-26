@@ -77,9 +77,9 @@ namespace EssSharp
         /// <summary>
         /// Moves a file from source to destination
         /// </summary>
-        /// <param name="newFilePath"></param>
-        /// <param name="overwrite"></param>
-        /// <param name="cancellationToken"></param
+        /// <param name="newFilePath" />
+        /// <param name="overwrite" />
+        /// <param name="cancellationToken" />
         public Task MoveAsync( string newFilePath, bool overwrite = false, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -114,13 +114,14 @@ namespace EssSharp
     }
 
     /// <summary>
-    /// Fluent extensions for <see cref="IEssFile"/>.
+    /// Fluent extensions for <see cref="EssSharp" />.
     /// </summary>
-    public static class IEssFileExtensions
+    public static partial class FluentExtensions
     {
         /// <summary>
         /// Asynchronously downloads a file to a stream.
         /// </summary>
+        /// <param name="fileTask" />
         /// <param name="cancellationToken" />
         public static async Task<Stream> DownloadAsync( this Task<IEssFile> fileTask, CancellationToken cancellationToken = default ) =>
             await (await fileTask.ConfigureAwait(false)).DownloadAsync(cancellationToken).ConfigureAwait(false);

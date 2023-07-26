@@ -130,7 +130,7 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssScript"/> object of type <typeparamref name="T"/>.</returns>
+        /// <returns>An <see cref="IEssScript"/> object of the specified type <typeparam name="T" />.</returns>
         public T CreateScript<T>( string name, string content = null, bool saveToCube = true ) where T : class, IEssScript => CreateScriptAsync<T>(name, content, saveToCube).GetAwaiter().GetResult();
 
         /// <inheritdoc />

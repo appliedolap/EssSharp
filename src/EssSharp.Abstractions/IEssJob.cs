@@ -85,13 +85,14 @@ namespace EssSharp
     }
 
     /// <summary>
-    /// Fluent extensions for <see cref="IEssJob"/>.
+    /// Fluent extensions for <see cref="EssSharp" />.
     /// </summary>
-    public static class IEssJobExtensions
+    public static partial class FluentExtensions
     {
         /// <summary>
         /// Asynchronously executes (or re-runs) this job, updating its status and returning the updated job.
         /// </summary>
+        /// <param name="jobTask" />
         /// <param name="cancellationToken" />
         public static async Task<IEssJob> ExecuteAsync( this Task<IEssJob> jobTask, CancellationToken cancellationToken = default ) =>
             await (await jobTask.ConfigureAwait(false)).ExecuteAsync(cancellationToken).ConfigureAwait(false);
@@ -99,6 +100,8 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously re-runs an already executed job, returning the new job.
         /// </summary>
+        /// <param name="jobTask" />
+        /// <param name="cancellationToken" />
         public static async Task<IEssJob> ReRunAsync( this Task<IEssJob> jobTask, CancellationToken cancellationToken = default ) =>
             await (await jobTask.ConfigureAwait(false)).ReRunAsync(cancellationToken).ConfigureAwait(false);
 
@@ -106,6 +109,7 @@ namespace EssSharp
         /// Throws an <see cref="System.Exception" /> with any available error message if the job failed
         /// or, otherwise, returns the job.
         /// </summary>
+        /// <param name="jobTask" />
         /// <exception cref="System.Exception" />
         public static async Task<IEssJob> ThrowIfFailed( this Task<IEssJob> jobTask ) =>
             (await jobTask.ConfigureAwait(false)).ThrowIfFailed();

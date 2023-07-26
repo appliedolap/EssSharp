@@ -22,13 +22,15 @@ namespace EssSharp
         /// <summary>
         /// Executes a report query and returns a grid with the result.
         /// </summary>
-        public IEssGrid GetGrid();
+        /// <param name="preferences">(optional) The preferences that configure the returned report and grid.</param>
+        public IEssGrid GetGrid( EssQueryPreferences preferences = null );
 
         /// <summary>
         /// Asynchronously executes a report query and returns a grid with the result.
         /// </summary>
+        /// <param name="preferences">(optional) The preferences that configure the returned report and grid.</param>
         /// <param name="cancellationToken" />
-        public Task<IEssGrid> GetGridAsync( CancellationToken cancellationToken = default );
+        public Task<IEssGrid> GetGridAsync( EssQueryPreferences preferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Executes a report query and returns a report with the result.

@@ -31,7 +31,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="applicationName" />
         /// <param name="cubeName" />
-        /// <param name="options">Job options for creating an application from a workbook.<param> />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, EssJobImportExcelOptions options );
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="applicationName" />
         /// <param name="cubeName" />
-        /// <param name="options">Job options for creating an application from a workbook.<param> />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
         /// <param name="cancellationToken" />
         public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, EssJobImportExcelOptions options, CancellationToken cancellationToken = default );
 
@@ -49,7 +49,7 @@ namespace EssSharp
         /// <param name="applicationName" />
         /// <param name="cubeName" />
         /// <param name="localWorkbookPath" />
-        /// <param name="options">Job options for creating an application from a workbook.<param> />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null );
 
         /// <summary>

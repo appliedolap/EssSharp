@@ -49,13 +49,14 @@ namespace EssSharp
     }
 
     /// <summary>
-    /// Fluent extensions for <see cref="IEssDatasource"/>.
+    /// Fluent extensions for <see cref="EssSharp" />.
     /// </summary>
-    public static class IEssDatasourceExtensions
+    public static partial class FluentExtensions
     {
         /// <summary>
         /// Asynchronously executes the datasource query and returns the records.
         /// </summary>
+        /// <param name="datasourceTask" />
         /// <param name="queryInfo" />
         /// <param name="cancellationToken" />
         public static async Task<string> QueryAsync( this Task<IEssDatasource> datasourceTask, IEssDatasourceQueryInfo queryInfo, CancellationToken cancellationToken = default ) =>

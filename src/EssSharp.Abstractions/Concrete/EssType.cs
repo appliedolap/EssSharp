@@ -1,6 +1,6 @@
 ﻿namespace EssSharp
 {
-    /// <summary >
+    /// <summary />
     public enum EssType
     {
         Application,

@@ -22,8 +22,6 @@
 
     };
 
-
-    /// <summary >
     /// <summary>
     /// Defines Type
     /// </summary>
@@ -208,6 +206,5 @@
         /// Enum MDX for value: MDX
         /// </summary>
         MDX = 35
-
     }
 }

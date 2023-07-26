@@ -8,9 +8,6 @@ namespace EssSharp
     /// <summary />
     public interface IEssFolder : IEssFile
     {
-        #region Properties
-        #endregion
-
         #region Methods
 
         /// <summary>
@@ -122,7 +119,7 @@ namespace EssSharp
         /// Upload file to Server using Stream
         /// </summary>
         /// <param name="stream"></param>
-        /// <param name="fileName"></param>
+        /// <param name="filename"></param>
         /// <param name="overwrite"></param>
         public IEssFile UploadFile( Stream stream, string filename = null, bool overwrite = false );
 
@@ -140,14 +137,15 @@ namespace EssSharp
     }
 
     /// <summary>
-    /// Fluent extensions for <see cref="IEssFolder"/>.
+    /// Fluent extensions for <see cref="EssSharp" />.
     /// </summary>
-    public static class IEssFolderExtensions
+    public static partial class FluentExtensions
     {
         /// <summary>
         /// Asynchronously creates a subfolder with the given <paramref name="subfolderName" /> if it does not already exist.
         /// If the subfolder already exists, it is returned.
         /// </summary>
+        /// <param name="folderTask" />
         /// <param name="subfolderName" />
         /// <param name="cancellationToken" />
         public static async Task<IEssFolder> CreateSubfolderAsync( this Task<IEssFolder> folderTask, string subfolderName, CancellationToken cancellationToken = default ) =>
@@ -157,6 +155,7 @@ namespace EssSharp
         /// Asynchronously uploads a local file with the given <paramref name="path"/> to the server with the given <paramref name="filename"/>, 
         /// optionally overwriting an existing file on the server if it already exists.
         /// </summary>
+        /// <param name="folderTask" />
         /// <param name="path" />
         /// <param name="filename" />
         /// <param name="overwrite" />
@@ -168,6 +167,7 @@ namespace EssSharp
         /// Asynchronously uploads a local file <paramref name="stream"/> to the server with the given <paramref name="filename"/>, 
         /// optionally overwriting an existing file on the server if it already exists.
         /// </summary>
+        /// <param name="folderTask" />
         /// <param name="stream" />
         /// <param name="filename" />
         /// <param name="overwrite" />
@@ -179,6 +179,7 @@ namespace EssSharp
         /// Asynchronously uploads an arbitrary <paramref name="stream"/> to the server with the given <paramref name="filename"/>, 
         /// optionally overwriting an existing file on the server if it already exists.
         /// </summary>
+        /// <param name="folderTask" />
         /// <param name="stream" />
         /// <param name="filename" />
         /// <param name="overwrite" />

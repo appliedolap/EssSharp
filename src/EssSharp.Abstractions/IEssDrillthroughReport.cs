@@ -60,13 +60,14 @@ namespace EssSharp
     }
 
     /// <summary>
-    /// Fluent extensions for <see cref="IEssDrillthroughReport"/>.
+    /// Fluent extensions for <see cref="EssSharp" />.
     /// </summary>
-    public static class IEssDrillthroughReportExtensions
+    public static partial class FluentExtensions
     {
         /// <summary>
         /// Asynchronously executes the drill-through report and returns records.
         /// </summary>
+        /// <param name="drillthroughReportTask" />
         /// <param name="context" />
         /// <param name="options" />
         /// <param name="cancellationToken" />
@@ -76,6 +77,7 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously executes the drill-through report and returns records.
         /// </summary>
+        /// <param name="drillthroughReportTask" />
         /// <param name="context" />
         /// <param name="options" />
         /// <param name="cancellationToken" />
