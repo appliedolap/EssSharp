@@ -59,11 +59,9 @@ namespace EssSharp
         #region IEssLock Methods 
 
         /// <inheritdoc />
-        /// <returns></returns>
         public void Unlock() => UnlockAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
         public async Task UnlockAsync( CancellationToken cancellationToken = default )
         {
             try

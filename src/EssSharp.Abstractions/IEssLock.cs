@@ -25,7 +25,6 @@ namespace EssSharp
         /// Asynchronously unlocks a locked object or block.
         /// </summary>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task UnlockAsync( CancellationToken cancellationToken = default );
 
     }

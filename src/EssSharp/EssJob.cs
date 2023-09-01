@@ -103,11 +103,11 @@ namespace EssSharp
         #region IEssJob Methods
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssJob" /> object.</returns>
+        /// <returns>An <see cref="IEssJob" /> object.</returns>
         public IEssJob Execute() => ExecuteAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssJob" /> object.</returns>
+        /// <returns>An <see cref="IEssJob" /> object.</returns>
         public async Task<IEssJob> ExecuteAsync( CancellationToken cancellationToken = default )
         {
             // If the backing bean has a JobID, then it has already been executed. Attempt to re-run the job.
@@ -147,11 +147,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssJob" /> object.</returns>
+        /// <returns>An <see cref="IEssJob" /> object.</returns>
         public IEssJob ReRun() => ReRunAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="EssJob" /> object.</returns>
+        /// <returns>An <see cref="IEssJob" /> object.</returns>
         public async Task<IEssJob> ReRunAsync( CancellationToken cancellationToken = default )
         {
             try
