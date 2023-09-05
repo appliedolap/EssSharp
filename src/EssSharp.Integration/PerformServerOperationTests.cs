@@ -418,5 +418,18 @@ namespace EssSharp.Integration
 
             Assert.Empty(await group.GetGroupsAsync());
         }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 19 - Essbase_AfterDefaultGrid_CanRefreshGrid"), Priority(19)]
+        public async Task Essbase_AfterDefaultGrid_CanRefreshGrid()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            var refreshGrid = await defaultGrid.RefreshAsync();
+            
+            Assert.True(Object.Equals(defaultGrid, refreshGrid));
+        }
     }
 }

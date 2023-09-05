@@ -28,5 +28,16 @@ namespace EssSharp
         /// Gets grid slice.
         /// </summary>
         public EssGridSlice Slice { get; }
+
+        /// <summary>
+        /// Refresh grid.
+        /// </summary>
+        public IEssGrid Refresh();
+
+        /// <summary>
+        /// Refresh grid.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssGrid> RefreshAsync( CancellationToken cancellationToken = default );
     }
 }

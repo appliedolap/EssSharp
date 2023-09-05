@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Linq;
 using EssSharp.Model;
 using Newtonsoft.Json;
+using TinyCsvParser.Model;
 
 namespace EssSharp
 {
@@ -500,6 +503,88 @@ namespace EssSharp
             return dimensionList;   
         }
 
+        internal static EssGridActionType ToEssGridActionType( this GridOperation.ActionEnum actionEnum )
+        {
+            if ( Enum.IsDefined(typeof(EssGridActionType), (int)actionEnum) )
+                return (EssGridActionType)actionEnum;
+
+            throw new ArgumentException($@"{nameof(EssGridActionType)}.{actionEnum} does not map to a model job type.");
+        }
+
+        internal static GridOperation.ActionEnum ToEssGridActionType( this EssGridActionType actionEnum)
+        {
+            if ( Enum.IsDefined(typeof(GridOperation.ActionEnum), (int)actionEnum) )
+                return (GridOperation.ActionEnum)actionEnum;
+
+            throw new ArgumentException($@"{nameof(GridOperation.ActionEnum)}.{actionEnum} does not map to a model job type.");
+        }
+
+        internal static List<GridDimension> ToModelBean( this List<EssGridDimension> dimensionList )
+        {
+            var dimList = new List<GridDimension>();
+            foreach (var dimension in dimensionList )
+            {
+                dimList.Add(
+                    new GridDimension()
+                    {
+                        Name = dimension.Name,
+                        Row = dimension.Row,
+                        Column = dimension.Column,
+                        Pov = dimension.Pov,
+                        Hidden = dimension.Hidden,
+                        Expanded = dimension.Expanded
+                    }
+                );
+            }
+            return dimList;
+        }
+
+        internal static List<GridRange> ToModelBean(this List<EssGridRange> essGridRangeList )
+        {
+            var gridRangeList = new List<GridRange>();
+
+            foreach (var range in essGridRangeList )
+            {
+                gridRangeList.Add(
+                    new GridRange()
+                    {
+                        Start = range.Start,
+                        End = range.End,
+                        Values = range.Values,
+                        Types = range.Types,
+                        Texts = range.Texts,
+                        DataFormats = range.DataFormats,
+                        Statuses = range.Statuses,
+                        Filters = range.Filters,
+                        EnumIds = range.EnumIds
+                    }
+                );
+            }
+            return gridRangeList;
+        }
+
+        internal static Data ToModelBean( this EssGridSliceData essGridSliceData ) => new Data()
+        {
+            Ranges = essGridSliceData.Ranges.ToModelBean()
+        };
+
+        internal static Slice ToModelBean( this EssGridSlice essGridSlice ) => new Slice()
+        {
+            DirtyCells = essGridSlice.DirtyCells,
+            DirtyTexts = essGridSlice.DirtyTexts,
+            Columns = essGridSlice.Columns,
+            Rows = essGridSlice.Rows,
+            Data = essGridSlice.Data.ToModelBean()
+        };
+
+        internal static Grid ToModelBean( this EssGrid grid ) => new Grid()
+        {
+            Dimensions = grid.Dimensions.ToModelBean(),
+            Slice = grid.Slice.ToModelBean(),
+            Alias = grid.Alias,
+            
+        };
+
         internal static EssGridSliceData ToEssGridSliceData( this Data data)
         {
             var sliceData = new EssGridSliceData();
@@ -531,6 +616,8 @@ namespace EssSharp
             DirtyTexts = slice.DirtyTexts,
             Rows = slice.Rows
         };
+
+        internal static EssGrid ToEssGrid( this Grid grid, EssCube cube ) => new EssGrid(grid, cube);
 
         internal static LockObject ToLockObject( this EssLockOptions lockOptions ) => new LockObject()
         {
