@@ -19,14 +19,26 @@ namespace EssSharp
         public string Type { get; }
 
         /// <summary>
-        /// Gets deminsion members.
+        /// Gets dimension members.
         /// </summary>
-        public int Members { get; }
+        public int MemberCount { get; }
 
         /// <summary>
         /// Gets stored deminsion members.
         /// </summary>
-        public int StoredMembers { get; }
+        public int StoredMemberCount { get; }
 
-}
+        /// <summary>
+        /// Get members names.
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetMembers();
+
+        /// <summary>
+        /// Asynchronously get members names.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<List<string>> GetMembersAsync(CancellationToken cancellationToken = default);
+    }
 }

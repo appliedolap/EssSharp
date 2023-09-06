@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -37,11 +39,31 @@ namespace EssSharp
         public string Type => _dimension?.Type;
 
         /// <inheritdoc />
-        public int Members => _dimension.Members;
+        public int MemberCount => _dimension.Members;
 
         /// <inheritdoc />
-        public int StoredMembers => _dimension.StoredMembers;
-        
+        public int StoredMemberCount => _dimension.StoredMembers;
+
         #endregion
+
+        /// <inheritdoc />
+        /// <returns>A List of <see cref="string"/> of Member Names.</returns>
+        public List<string> GetMembers() => GetMembersAsync().GetAwaiter().GetResult();
+
+        /// TODO: finish implementation 
+        /// <inheritdoc />
+        /// <returns>A List of <see cref="string"/> of Member Names.</returns>
+        public async Task<List<string>> GetMembersAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                return null;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get list of members from dimension ""{Name}"". {e.Message}", e);
+            }
+        }
     }
 }
