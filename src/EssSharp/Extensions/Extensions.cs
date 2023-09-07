@@ -122,6 +122,23 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssMember"/> objects associated with the given <see cref="EssCube"/>.
+        /// </summary>
+        /// <param name="memberList" />
+        /// <param name="cube" />
+        internal static List<IEssMember> ToEssSharpList( this DimensionMemberList memberList, EssCube cube )
+        {
+            if ( cube is null )
+                throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
+
+            return memberList
+                .Items?
+                .Where(member => member is not null)
+                .Select(member => new EssMember(member, cube) as IEssMember)
+                .ToList() ?? new List<IEssMember>();
+        }
+
+        /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssFile"/> or <see cref="IEssFolder"/> objects associated with the given <see cref="EssServer"/>.
         /// </summary>
         /// <param name="fileCollectionResponse" />

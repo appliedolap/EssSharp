@@ -9022,10 +9022,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RestCollectionResponse'
+                $ref: '#/components/schemas/DimensionMemberList'
             application/xml:
               schema:
-                $ref: '#/components/schemas/RestCollectionResponse'
+                $ref: '#/components/schemas/DimensionMemberList'
           description: "<p><strong>OK</strong></p><p>Dimensions, children, or search\
             \ results returned successfully.</p>"
         "400":
@@ -21167,24 +21167,6 @@ components:
           type: boolean
       type: object
     RestCollectionResponse:
-      example:
-        totalResults: 0
-        offset: 5
-        hasMore: true
-        limit: 6
-        count: 1
-        links:
-        - method: method
-          rel: rel
-          href: href
-          type: type
-        - method: method
-          rel: rel
-          href: href
-          type: type
-        items:
-        - "{}"
-        - "{}"
       properties:
         items:
           items:
@@ -26812,6 +26794,135 @@ components:
         offset:
           format: int64
           type: integer
+      type: object
+    DimensionMember:
+      example:
+        formatString: formatString
+        dimensionType: dimensionType
+        aliases:
+          key: aliases
+        dataStorageType: dataStorageType
+        currencyConversionCategory: currencyConversionCategory
+        numberOfChildren: 0
+        uniqueName: uniqueName
+        descentantsCount: 5
+        dimStorageType: dimStorageType
+        name: name
+        levelNumber: 6
+        previousSiblingsCount: 1
+        memberSolveOrder: 5
+        links:
+        - method: method
+          rel: rel
+          href: href
+          type: type
+        - method: method
+          rel: rel
+          href: href
+          type: type
+        dimSolveOrder: 2
+        dimension: true
+        memberId: memberId
+      properties:
+        name:
+          type: string
+        numberOfChildren:
+          type: integer
+        levelNumber:
+          type: integer
+        aliases:
+          additionalProperties:
+            type: string
+          type: object
+        uniqueName:
+          type: string
+        memberId:
+          type: string
+        previousSiblingsCount:
+          type: integer
+        memberSolveOrder:
+          type: integer
+        descentantsCount:
+          type: integer
+        dimension:
+          type: boolean
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        dimSolveOrder:
+          type: integer
+        dimensionType:
+          type: string
+        dataStorageType:
+          type: string
+        formatString:
+          type: string
+        dimStorageType:
+          type: string
+        currencyConversionCategory:
+          type: string
+      type: object
+    DimensionMemberList:
+      example:
+        items:
+        - formatString: formatString
+          dimensionType: dimensionType
+          aliases:
+            key: aliases
+          dataStorageType: dataStorageType
+          currencyConversionCategory: currencyConversionCategory
+          numberOfChildren: 0
+          uniqueName: uniqueName
+          descentantsCount: 5
+          dimStorageType: dimStorageType
+          name: name
+          levelNumber: 6
+          previousSiblingsCount: 1
+          memberSolveOrder: 5
+          links:
+          - method: method
+            rel: rel
+            href: href
+            type: type
+          - method: method
+            rel: rel
+            href: href
+            type: type
+          dimSolveOrder: 2
+          dimension: true
+          memberId: memberId
+        - formatString: formatString
+          dimensionType: dimensionType
+          aliases:
+            key: aliases
+          dataStorageType: dataStorageType
+          currencyConversionCategory: currencyConversionCategory
+          numberOfChildren: 0
+          uniqueName: uniqueName
+          descentantsCount: 5
+          dimStorageType: dimStorageType
+          name: name
+          levelNumber: 6
+          previousSiblingsCount: 1
+          memberSolveOrder: 5
+          links:
+          - method: method
+            rel: rel
+            href: href
+            type: type
+          - method: method
+            rel: rel
+            href: href
+            type: type
+          dimSolveOrder: 2
+          dimension: true
+          memberId: memberId
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DimensionMember'
+          type: array
       type: object
     FileBean_permissions:
       example:

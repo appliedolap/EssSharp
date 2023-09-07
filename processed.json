@@ -10598,7 +10598,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Dimensions, children, or search results returned successfully.</p>",
             "schema": {
-              "$ref": "#/definitions/RestCollectionResponse"
+              "$ref": "#/definitions/DimensionMemberList"
             }
           },
           "400": {
@@ -24291,6 +24291,79 @@
         "offset": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "DimensionMember": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "numberOfChildren": {
+          "type": "integer"
+        },
+        "levelNumber": {
+          "type": "integer"
+        },
+        "aliases": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "uniqueName": {
+          "type": "string"
+        },
+        "memberId": {
+          "type": "string"
+        },
+        "previousSiblingsCount": {
+          "type": "integer"
+        },
+        "memberSolveOrder": {
+          "type": "integer"
+        },
+        "descentantsCount": {
+          "type": "integer"
+        },
+        "dimension": {
+          "type": "boolean"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "dimSolveOrder": {
+          "type": "integer"
+        },
+        "dimensionType": {
+          "type": "string"
+        },
+        "dataStorageType": {
+          "type": "string"
+        },
+        "formatString": {
+          "type": "string"
+        },
+        "dimStorageType": {
+          "type": "string"
+        },
+        "currencyConversionCategory": {
+          "type": "string"
+        }
+      }
+    },
+    "DimensionMemberList": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionMember"
+          }
         }
       }
     }

@@ -39,12 +39,16 @@ cat temp.json | jq '.paths."/applications/{application}/databases/{database}/mdx
 
 cat temp.json | jq '.paths."/applications/{applicationName}/configurations".get.responses."200".schema = {"$ref": "#/definitions/ApplicationConfigList"}' > json.tmp && mv json.tmp temp.json
 
+# Fix 200 return schema
+#cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/RestCollectionResponse"}' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/DimensionMemberList"}' > json.tmp && mv json.tmp temp.json
+
+
 # Fix the 204 return schema
 cat temp.json | jq '.paths."/groups/{id}/members/users".post.responses."200".schema = {"$ref": "#/definitions/Users"}' > json.tmp && mv json.tmp temp.json
 
 cat temp.json | jq '.paths."/groups/{id}/members/groups".post.responses."200".schema = {"$ref": "#/definitions/Groups"}' > json.tmp && mv json.tmp temp.json
 
-"/groups/{id}/members/groups"
 # Replace duplicated fields from "List Aliases" with new ones for "Set Active Alias".
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/aliases/setActiveAlias".put.summary = "Set Active Alias"' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/aliases/setActiveAlias".put.description = "Sets the active alias table associated with the specified application and database."' > json.tmp && mv json.tmp temp.json
@@ -328,6 +332,82 @@ cat temp.json | jq '.definitions.GridOperation.properties.action.enum = ["zoomin
 
 # Add an enumerated jobtype to the JobsInputBean definition.
 cat temp.json | jq '.definitions.JobsInputBean.properties.jobtype.enum = ["dataload", "dimbuild", "calc", "clear", "importExcel", "exportExcel", "lcmExport", "lcmImport", "clearAggregation", "buildAggregation", "asoBufferDataLoad", "asoBufferCommit", "exportData", "mdxScript", "executeReport", "maxl", "groovy"]' > json.tmp && mv json.tmp temp.json
+
+# Adding DimensionMember/List object
+cat temp.json | jq '.definitions.DimensionMember = {
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "numberOfChildren": {
+      "type": "integer"
+    },
+    "levelNumber": {
+      "type": "integer"
+    },
+    "aliases": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "uniqueName": {
+      "type": "string"
+    },
+    "memberId": {
+      "type": "string"
+    },
+    "previousSiblingsCount": {
+      "type": "integer"
+    },
+    "memberSolveOrder": {
+      "type": "integer"
+    },
+    "descentantsCount": {
+      "type": "integer"
+    },
+    "dimension": {
+      "type": "boolean"
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Link"
+      }
+    },
+    "dimSolveOrder": {
+      "type": "integer"
+    },
+    "dimensionType": {
+      "type": "string"
+    },
+    "dataStorageType": {
+      "type": "string"
+    },
+    "formatString": {
+      "type": "string"
+    },
+    "dimStorageType": {
+      "type": "string"
+    },
+    "currencyConversionCategory": {
+      "type": "string"
+    }
+  }
+}' > json.tmp && mv json.tmp temp.json
+
+cat temp.json | jq '.definitions.DimensionMemberList = {    
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DimensionMember"
+      }
+    }
+  }
+}' > json.tmp && mv json.tmp temp.json
 
 # The properties for the MemberBean definition are incomplete. Add the following properties.
 cat temp.json | jq '.definitions.MemberBean.properties += {

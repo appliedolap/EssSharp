@@ -6,17 +6,12 @@ using System.Collections.Generic;
 namespace EssSharp
 {
     /// <summary />
-    public interface IEssDimension
+    public interface IEssDimension : IEssObject
     {
-        /// <summary>
-        /// Gets the Name as a string
-        /// </summary>
-        public string Name { get; }
-
         /// <summary>
         /// Gets the deminsion type.
         /// </summary>
-        public string Type { get; }
+        public string DimensionType { get; }
 
         /// <summary>
         /// Gets dimension members.
@@ -29,16 +24,21 @@ namespace EssSharp
         public int StoredMemberCount { get; }
 
         /// <summary>
+        /// List of member ID's
+        /// </summary>
+        public List<string> Members { get; set; }
+
+        /// <summary>
         /// Get members names.
         /// </summary>
         /// <returns></returns>
-        public List<string> GetMembers();
+        public List<IEssMember> GetChildren();
 
         /// <summary>
         /// Asynchronously get members names.
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<List<string>> GetMembersAsync(CancellationToken cancellationToken = default);
+        public Task<List<IEssMember>> GetChildrenAsync(CancellationToken cancellationToken = default);
     }
 }
