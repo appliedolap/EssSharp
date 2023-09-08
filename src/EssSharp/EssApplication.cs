@@ -63,11 +63,11 @@ namespace EssSharp
         #region IEssApplication Methods
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public IEssCube CreateCube(string cubeName, EssDatabaseCreationOptions options = null ) => CreateCubeAsync(cubeName, options).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public async Task<IEssCube> CreateCubeAsync( string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(cubeName) )
@@ -91,22 +91,22 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options ) =>
             CreateCubeFromWorkbookAsync(cubeName, options, CancellationToken.None).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, EssJobImportExcelOptions options, CancellationToken cancellationToken = default ) =>
             CreateCubeFromWorkbookAsync(cubeName, options, null, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns> An <see cref="IEssCube"/> object. </returns>
+        /// <returns> An <see cref="EssCube"/> object. </returns>
         public IEssCube CreateCubeFromWorkbook( string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null ) => 
             CreateCubeFromWorkbookAsync( cubeName, localWorkbookPath, options ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, string localWorkbookPath, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default )
         {
             try
@@ -125,22 +125,22 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public IEssCube CreateCubeFromWorkbook( string cubeName, Stream stream, EssJobImportExcelOptions options = null ) =>
             CreateCubeFromWorkbookAsync(cubeName, options, stream).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default ) =>
             CreateCubeFromWorkbookAsync(cubeName, options, stream, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         internal IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options = null, Stream stream = null ) =>
             CreateCubeFromWorkbookAsync(cubeName, options, stream).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         internal async Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, EssJobImportExcelOptions options = null, Stream stream = null, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(cubeName) )
@@ -164,11 +164,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public IEssApplicationPermission CreatePermissions( string id, EssApplicationRole applicationRole ) => CreatePermissionsAsync(id, applicationRole).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public async Task<IEssApplicationPermission> CreatePermissionsAsync( string id, EssApplicationRole applicationRole, bool group = false, CancellationToken cancellationToken = default )
         {
             try
@@ -194,11 +194,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>an <see cref="IEssApplicationVariable"/></returns>
+        /// <returns>Returns an <see cref="EssApplicationVariable"/> object.</returns>
         public IEssApplicationVariable CreateApplicationVariable( string varName, string value ) => CreateApplicationVariableAsync( varName, value ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>an <see cref="IEssApplicationVariable"/></returns>
+        /// <returns>Returns an <see cref="EssApplicationVariable"/> object.</returns>
         public async Task<IEssApplicationVariable> CreateApplicationVariableAsync( string name, string value, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(name) )
@@ -333,11 +333,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationDatasourceConnection"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationDatasourceConnection"/> object.</returns>
         public IEssApplicationDatasourceConnection GetConnection( string appConnectionName ) => GetConnectionAsync(appConnectionName).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationDatasourceConnection"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationDatasourceConnection"/> object.</returns>
         public async Task<IEssApplicationDatasourceConnection> GetConnectionAsync( string appConnectionName, CancellationToken cancellationToken = default )
         {
             try
@@ -355,11 +355,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssApplicationDatasourceConnection"/> objects.</returns>
+        /// <returns>A list of <see cref="EssApplicationDatasourceConnection"/> objects.</returns>
         public List<IEssApplicationDatasourceConnection> GetConnections() => GetConnectionsAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssApplicationDatasourceConnection"/> objects.</returns>
+        /// <returns>A list of <see cref="EssApplicationDatasourceConnection"/> objects.</returns>
         public async Task<List<IEssApplicationDatasourceConnection>> GetConnectionsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -384,11 +384,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public IEssCube GetCube( string cubeName ) => GetCubeAsync(cubeName)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssCube"/> object.</returns>
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public async Task<IEssCube> GetCubeAsync( string cubeName, CancellationToken cancellationToken = default )
         {
             if ( string.IsNullOrWhiteSpace(cubeName) )
@@ -410,11 +410,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssCube" /> objects under this application.</returns>
+        /// <returns>A list of <see cref="EssCube" /> objects under this application.</returns>
         public List<IEssCube> GetCubes() => GetCubesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCube>();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssCube" /> objects under this application.</returns>
+        /// <returns>A list of <see cref="EssCube" /> objects under this application.</returns>
         public async Task<List<IEssCube>> GetCubesAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -431,11 +431,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssApplicationConfiguration" /> objects under this application.</returns>
+        /// <returns>A list of <see cref="EssApplicationConfiguration" /> objects under this application.</returns>
         public List<IEssApplicationConfiguration> GetConfigurations() => GetConfigurationsAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssApplicationConfiguration" /> objects under this application.</returns>
+        /// <returns>A list of <see cref="EssApplicationConfiguration" /> objects under this application.</returns>
         public async Task<List<IEssApplicationConfiguration>> GetConfigurationsAsync( CancellationToken cancellationToken = default )
         {
             var api = GetApi<ApplicationConfigurationApi>();
@@ -445,11 +445,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssApplicationPermission"/> objects.</returns>
+        /// <returns>A list of <see cref="EssApplicationPermission"/> objects.</returns>
         public List<IEssApplicationPermission> GetPermissions( EssPermissionType filter = EssPermissionType.All, EssApplicationRole[] roles = null, bool includeInheritence = true ) => GetPermissionsAsync( filter, roles, includeInheritence ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>A list of <see cref="IEssApplicationPermission"/> objects.</returns>
+        /// <returns>A list of <see cref="EssApplicationPermission"/> objects.</returns>
         public async Task<List<IEssApplicationPermission>> GetPermissionsAsync( EssPermissionType filter = EssPermissionType.All, EssApplicationRole[] roles = null, bool includeInheritence = true, CancellationToken cancellationToken = default )
         {
             try
@@ -472,11 +472,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public IEssApplicationPermission GetPermission( string id, bool isGroup = false ) => GetPermissionAsync(id, isGroup).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public async Task<IEssApplicationPermission> GetPermissionAsync( string id, bool isGroup = false, CancellationToken cancellationToken = default )
         {
             try
@@ -496,29 +496,29 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public IEssApplicationPermission UpdatePermissions( string id, EssApplicationRole newApplicationRole, bool isGroup = false ) => UpdatePermissionsAsync(id, newApplicationRole, isGroup).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public async Task<IEssApplicationPermission> UpdatePermissionsAsync( string id, EssApplicationRole newApplicationRole, bool isGroup = false, CancellationToken cancellationToken = default ) =>
             await UpdatePermissionsAsync(await GetPermissionAsync(id), newApplicationRole, isGroup, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public IEssApplicationPermission UpdatePermissions( IEssApplicationPermission essPermission, EssApplicationRole newApplicationRole, bool isGroup = false ) => UpdatePermissionsAsync(essPermission, newApplicationRole, isGroup).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationPermission"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public async Task<IEssApplicationPermission> UpdatePermissionsAsync( IEssApplicationPermission essPermission, EssApplicationRole newApplicationRole, bool isGroup = false, CancellationToken cancellationToken = default ) => 
             await essPermission.UpdatePermissionsAsync( newApplicationRole, isGroup, cancellationToken).ConfigureAwait(false);
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationVariable"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationVariable"/> object.</returns>
         public List<IEssApplicationVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplicationVariable>();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssApplicationVariable"/> object.</returns>
+        /// <returns>An <see cref="EssApplicationVariable"/> object.</returns>
         public async Task<List<IEssApplicationVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
         {
             try
