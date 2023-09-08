@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **MemberId** | **string** |  | [optional] 
 **PreviousSiblingsCount** | **int** |  | [optional] 
 **MemberSolveOrder** | **int** |  | [optional] 
-**DescentantsCount** | **int** |  | [optional] 
+**DescendantsCount** | **int** |  | [optional] 
 **Dimension** | **bool** |  | [optional] 
 **Links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] 
 **DimSolveOrder** | **int** |  | [optional] 

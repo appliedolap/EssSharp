@@ -62,7 +62,7 @@ namespace EssSharp
         public int PerviousSublingCount => _member.PreviousSiblingsCount;
 
         /// inheritDoc />
-        public int descentantsCount => _member.DescentantsCount;
+        public int descentantsCount => _member.DescendantsCount;
 
         /// inheritDoc />
         public bool dimension => _member.Dimension;

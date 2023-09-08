@@ -118,12 +118,12 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'MemberSolveOrder'
         }
         /// <summary>
-        /// Test the property 'DescentantsCount'
+        /// Test the property 'DescendantsCount'
         /// </summary>
         [Fact]
-        public void DescentantsCountTest()
+        public void DescendantsCountTest()
         {
-            // TODO unit test for the property 'DescentantsCount'
+            // TODO unit test for the property 'DescendantsCount'
         }
         /// <summary>
         /// Test the property 'Dimension'

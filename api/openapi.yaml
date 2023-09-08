@@ -9022,10 +9022,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DimensionMemberList'
+                $ref: '#/components/schemas/DimensionMembersList'
             application/xml:
               schema:
-                $ref: '#/components/schemas/DimensionMemberList'
+                $ref: '#/components/schemas/DimensionMembersList'
           description: "<p><strong>OK</strong></p><p>Dimensions, children, or search\
             \ results returned successfully.</p>"
         "400":
@@ -26805,7 +26805,6 @@ components:
         currencyConversionCategory: currencyConversionCategory
         numberOfChildren: 0
         uniqueName: uniqueName
-        descentantsCount: 5
         dimStorageType: dimStorageType
         name: name
         levelNumber: 6
@@ -26822,6 +26821,7 @@ components:
           type: type
         dimSolveOrder: 2
         dimension: true
+        descendantsCount: 5
         memberId: memberId
       properties:
         name:
@@ -26842,7 +26842,7 @@ components:
           type: integer
         memberSolveOrder:
           type: integer
-        descentantsCount:
+        descendantsCount:
           type: integer
         dimension:
           type: boolean
@@ -26863,7 +26863,7 @@ components:
         currencyConversionCategory:
           type: string
       type: object
-    DimensionMemberList:
+    DimensionMembersList:
       example:
         items:
         - formatString: formatString
@@ -26874,7 +26874,6 @@ components:
           currencyConversionCategory: currencyConversionCategory
           numberOfChildren: 0
           uniqueName: uniqueName
-          descentantsCount: 5
           dimStorageType: dimStorageType
           name: name
           levelNumber: 6
@@ -26891,6 +26890,7 @@ components:
             type: type
           dimSolveOrder: 2
           dimension: true
+          descendantsCount: 5
           memberId: memberId
         - formatString: formatString
           dimensionType: dimensionType
@@ -26900,7 +26900,6 @@ components:
           currencyConversionCategory: currencyConversionCategory
           numberOfChildren: 0
           uniqueName: uniqueName
-          descentantsCount: 5
           dimStorageType: dimStorageType
           name: name
           levelNumber: 6
@@ -26917,6 +26916,7 @@ components:
             type: type
           dimSolveOrder: 2
           dimension: true
+          descendantsCount: 5
           memberId: memberId
       properties:
         items:

@@ -41,7 +41,7 @@ cat temp.json | jq '.paths."/applications/{applicationName}/configurations".get.
 
 # Fix 200 return schema
 #cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/RestCollectionResponse"}' > json.tmp && mv json.tmp temp.json
-cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/DimensionMemberList"}' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/DimensionMembersList"}' > json.tmp && mv json.tmp temp.json
 
 
 # Fix the 204 return schema
@@ -364,7 +364,7 @@ cat temp.json | jq '.definitions.DimensionMember = {
     "memberSolveOrder": {
       "type": "integer"
     },
-    "descentantsCount": {
+    "descendantsCount": {
       "type": "integer"
     },
     "dimension": {
@@ -397,7 +397,7 @@ cat temp.json | jq '.definitions.DimensionMember = {
   }
 }' > json.tmp && mv json.tmp temp.json
 
-cat temp.json | jq '.definitions.DimensionMemberList = {    
+cat temp.json | jq '.definitions.DimensionMembersList = {    
   "type": "object",
   "properties": {
     "items": {

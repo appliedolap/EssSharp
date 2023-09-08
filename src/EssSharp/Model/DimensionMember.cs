@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="memberId">memberId.</param>
         /// <param name="previousSiblingsCount">previousSiblingsCount.</param>
         /// <param name="memberSolveOrder">memberSolveOrder.</param>
-        /// <param name="descentantsCount">descentantsCount.</param>
+        /// <param name="descendantsCount">descendantsCount.</param>
         /// <param name="dimension">dimension.</param>
         /// <param name="links">links.</param>
         /// <param name="dimSolveOrder">dimSolveOrder.</param>
@@ -49,7 +49,7 @@ namespace EssSharp.Model
         /// <param name="formatString">formatString.</param>
         /// <param name="dimStorageType">dimStorageType.</param>
         /// <param name="currencyConversionCategory">currencyConversionCategory.</param>
-        public DimensionMember(string name = default(string), int numberOfChildren = default(int), int levelNumber = default(int), Dictionary<string, string> aliases = default(Dictionary<string, string>), string uniqueName = default(string), string memberId = default(string), int previousSiblingsCount = default(int), int memberSolveOrder = default(int), int descentantsCount = default(int), bool dimension = default(bool), List<Link> links = default(List<Link>), int dimSolveOrder = default(int), string dimensionType = default(string), string dataStorageType = default(string), string formatString = default(string), string dimStorageType = default(string), string currencyConversionCategory = default(string))
+        public DimensionMember(string name = default(string), int numberOfChildren = default(int), int levelNumber = default(int), Dictionary<string, string> aliases = default(Dictionary<string, string>), string uniqueName = default(string), string memberId = default(string), int previousSiblingsCount = default(int), int memberSolveOrder = default(int), int descendantsCount = default(int), bool dimension = default(bool), List<Link> links = default(List<Link>), int dimSolveOrder = default(int), string dimensionType = default(string), string dataStorageType = default(string), string formatString = default(string), string dimStorageType = default(string), string currencyConversionCategory = default(string))
         {
             this.Name = name;
             this.NumberOfChildren = numberOfChildren;
@@ -59,7 +59,7 @@ namespace EssSharp.Model
             this.MemberId = memberId;
             this.PreviousSiblingsCount = previousSiblingsCount;
             this.MemberSolveOrder = memberSolveOrder;
-            this.DescentantsCount = descentantsCount;
+            this.DescendantsCount = descendantsCount;
             this.Dimension = dimension;
             this.Links = links;
             this.DimSolveOrder = dimSolveOrder;
@@ -119,10 +119,10 @@ namespace EssSharp.Model
         public int MemberSolveOrder { get; set; }
 
         /// <summary>
-        /// Gets or Sets DescentantsCount
+        /// Gets or Sets DescendantsCount
         /// </summary>
-        [DataMember(Name = "descentantsCount", EmitDefaultValue = false)]
-        public int DescentantsCount { get; set; }
+        [DataMember(Name = "descendantsCount", EmitDefaultValue = false)]
+        public int DescendantsCount { get; set; }
 
         /// <summary>
         /// Gets or Sets Dimension
@@ -188,7 +188,7 @@ namespace EssSharp.Model
             sb.Append("  MemberId: ").Append(MemberId).Append("\n");
             sb.Append("  PreviousSiblingsCount: ").Append(PreviousSiblingsCount).Append("\n");
             sb.Append("  MemberSolveOrder: ").Append(MemberSolveOrder).Append("\n");
-            sb.Append("  DescentantsCount: ").Append(DescentantsCount).Append("\n");
+            sb.Append("  DescendantsCount: ").Append(DescendantsCount).Append("\n");
             sb.Append("  Dimension: ").Append(Dimension).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  DimSolveOrder: ").Append(DimSolveOrder).Append("\n");
@@ -270,8 +270,8 @@ namespace EssSharp.Model
                     this.MemberSolveOrder.Equals(input.MemberSolveOrder)
                 ) && 
                 (
-                    this.DescentantsCount == input.DescentantsCount ||
-                    this.DescentantsCount.Equals(input.DescentantsCount)
+                    this.DescendantsCount == input.DescendantsCount ||
+                    this.DescendantsCount.Equals(input.DescendantsCount)
                 ) && 
                 (
                     this.Dimension == input.Dimension ||
@@ -343,7 +343,7 @@ namespace EssSharp.Model
                 }
                 hashCode = (hashCode * 59) + this.PreviousSiblingsCount.GetHashCode();
                 hashCode = (hashCode * 59) + this.MemberSolveOrder.GetHashCode();
-                hashCode = (hashCode * 59) + this.DescentantsCount.GetHashCode();
+                hashCode = (hashCode * 59) + this.DescendantsCount.GetHashCode();
                 hashCode = (hashCode * 59) + this.Dimension.GetHashCode();
                 if (this.Links != null)
                 {

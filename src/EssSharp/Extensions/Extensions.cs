@@ -126,7 +126,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="memberList" />
         /// <param name="cube" />
-        internal static List<IEssMember> ToEssSharpList( this DimensionMemberList memberList, EssCube cube )
+        internal static List<IEssMember> ToEssSharpList( this DimensionMembersList memberList, EssCube cube )
         {
             if ( cube is null )
                 throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");

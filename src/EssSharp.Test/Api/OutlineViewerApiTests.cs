@@ -137,7 +137,7 @@ namespace EssSharp.Test.Api
             //int? offset = null;
             //int? limit = null;
             //var response = instance.OutlineGetMembers(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
-            //Assert.IsType<DimensionMemberList>(response);
+            //Assert.IsType<DimensionMembersList>(response);
         }
 
         /// <summary>
