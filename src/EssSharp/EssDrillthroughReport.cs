@@ -118,6 +118,23 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        public void Delete() => DeleteAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task DeleteAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<DrillThroughReportsApi>();
+                await api.DrillThroughReportsDeleteAsync(applicationName: Cube.Application.Name, databaseName: Cube.Name, name: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to delete report ""{Name}"". {e.Message}", e);
+            }
+        }
+
         #endregion
 
         #region Private Methods

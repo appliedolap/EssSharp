@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
-
 using Xunit;
 
 namespace EssSharp.Integration
@@ -430,6 +430,72 @@ namespace EssSharp.Integration
             var refreshGrid = await defaultGrid.RefreshAsync();
             
             Assert.True(Object.Equals(defaultGrid, refreshGrid));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(20)]
+        public async Task Essbase_AfterReportCreation_CanExecuteDrillthroughReport()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Declare a drillthrough report.
+            var drillthroughReport = default(IEssDrillthroughReport);
+
+            // Find the "drillthrough_samplebasic" report (if available).
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+                if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
+                    drillthroughReport = dtr;
+
+            // If the report is not available return.
+            if ( drillthroughReport is null )
+                return;
+
+            // Capture the (x.x) server version.
+            var version = new Version(string.Join('.', (await server.GetAboutAsync()).Version.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
+
+            // If the server version is 21.4 or higher, execute the drillthrough report and validate the data.
+            if ( version.CompareTo(new Version(major: 21, minor: 4)) >= 0  )
+            {
+                // Execute the report for the given drillthrough range.
+                var (report, columnTypes) = await drillthroughReport
+                    .ExecuteAsync(new EssDrillthroughRange(dimensionMemberSets: new()
+                    {
+                        ["Year"    ] = new() { "Year",     "Year"       },
+                        ["Product" ] = new() { "Cola",     "Cola"       },
+                        ["Measures"] = new() { "Sales",    "Sales"      },
+                        ["Market"  ] = new() { "New York", "California" },
+                        ["Scenario"] = new() { "Actual",   "Actual"     }
+                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true));
+
+                // Assert the column type, header name, and first row value for the fifth column.
+                Assert.Equal(expected: "double", actual:       columnTypes[4], ignoreCase: true);
+                Assert.Equal(expected: "amount", actual: (string)report[0, 4], ignoreCase: true);
+                Assert.Equal(expected:   501.72, actual: (double)report[1, 4]);
+            }
+            // If the server version is 21.3 or lower, assert that a 405 (method not allowed) exception is thrown.
+            else
+            {
+                // Assert that a NotSupportedException is thrown when we try to execute the drillthrough report,
+                // and capture the inner exception to verify that this method is not allowed by the server.
+                var exception = (await Assert.ThrowsAsync<NotSupportedException>(async () => await drillthroughReport
+                    .ExecuteAsync(new EssDrillthroughRange(dimensionMemberSets: new()
+                    {
+                        ["Year"    ] = new() { "Year",     "Year"       },
+                        ["Product" ] = new() { "Cola",     "Cola"       },
+                        ["Measures"] = new() { "Sales",    "Sales"      },
+                        ["Market"  ] = new() { "New York", "California" },
+                        ["Scenario"] = new() { "Actual",   "Actual"     }
+                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true))
+                )).InnerException;
+
+                // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 405 (method not allowed).
+                Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.MethodNotAllowed } });
+            }
         }
     }
 }

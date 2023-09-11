@@ -57,6 +57,17 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task GetDetailsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Deletes this report from the cube.
+        /// </summary>
+        public void Delete();
+
+        /// <summary>
+        /// Asynchronously deletes this report from the cube.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task DeleteAsync( CancellationToken cancellationToken = default );
     }
 
     /// <summary>
