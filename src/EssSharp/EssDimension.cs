@@ -65,7 +65,7 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name).ConfigureAwait(false) is not { } members )
+                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parent: Name).ConfigureAwait(false) is not { } members )
                     throw new Exception("Cannot get members"); // TODO: update later
 
                 return members.ToEssSharpList(_cube) ?? new List<IEssMember>();
