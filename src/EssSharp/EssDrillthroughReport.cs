@@ -66,7 +66,7 @@ namespace EssSharp
         public IEssCube Cube => _cube;
 
         /// <inheritdoc />
-        public Dictionary<string, EssColumnMapping> dimensions => _definition?.ColumnMapping.ToDictionary();
+        public EssDrillthroughDetails Details => _definition.ToEssDrillThroughDetails();
 
         /// <inheritdoc />
         public (object[,] report, string[] columnTypes) Execute( IEssDrillthroughRange context, IEssDrillthroughOptions options = null ) => Execute(new List<IEssDrillthroughRange>() { context }, options);
@@ -103,10 +103,10 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public Dictionary<string, EssColumnMapping> GetDetails() => GetDetailsAsync()?.GetAwaiter().GetResult();
+        public void GetDetails() => GetDetailsAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        public async Task<Dictionary<string, EssColumnMapping>> GetDetailsAsync( CancellationToken cancellationToken = default )
+        public async Task GetDetailsAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -116,8 +116,6 @@ namespace EssSharp
                     throw new Exception("Received an empty or invalid response.");
 
                 _definition = definition;
-
-                return dimensions;
             }
             catch ( Exception e )
             {

@@ -16,9 +16,9 @@ namespace EssSharp
         public IEssCube Cube { get; }
 
         /// <summary>
-        /// Returns a dictionary with of the dimensions
+        /// Returns drill through details
         /// </summary>
-        public Dictionary<string, EssColumnMapping> dimensions { get; }
+        public EssDrillthroughDetails Details { get; }
 
         #endregion
 
@@ -55,13 +55,13 @@ namespace EssSharp
         /// <summary>
         /// Gets the full report specification.
         /// </summary>
-        public Dictionary<string, EssColumnMapping> GetDetails();
+        public void GetDetails();
 
         /// <summary>
         /// Asynchronously gets the full report specification.
         /// </summary>
         /// <param name="cancellationToken" />
-        public Task<Dictionary<string, EssColumnMapping>> GetDetailsAsync( CancellationToken cancellationToken = default );
+        public Task GetDetailsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Deletes this report from the cube.

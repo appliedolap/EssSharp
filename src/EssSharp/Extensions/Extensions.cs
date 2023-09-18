@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Xml.Linq;
 using EssSharp.Model;
@@ -568,11 +569,25 @@ namespace EssSharp
                                         Generation = mappingInfo[key].Generation,
                                         Level = mappingInfo[key].Level,
                                         GenerationNumber = mappingInfo[key].GenerationNumber
+                                        
                                     };
             }
 
             return essDictionary;
         }
+
+        internal static EssDrillthroughDetails ToEssDrillThroughDetails( this DrillthroughBean dtb ) => new EssDrillthroughDetails()
+        {
+            ColumnMapping = dtb.ColumnMapping.ToDictionary(),
+            Columns = dtb.Columns,
+            DataSourceName = dtb.DataSourceName,
+            DrillableRegions = dtb.DrillableRegions,
+            Name = dtb.Name,
+            Type = dtb.Type,
+            Url = dtb.Url,
+            UseTempTables = dtb.UseTempTables
+
+        };
 
         internal static List<GridRange> ToModelBean(this List<EssGridRange> essGridRangeList )
         {
