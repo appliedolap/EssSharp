@@ -1,21 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.Common;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using System.Xml.Linq;
 using EssSharp.Model;
-using Newtonsoft.Json;
-using TinyCsvParser.Model;
 
 namespace EssSharp
 {
     internal static class Extensions
     {
-        # region Migrations to EssSharp.Abstractions
+        #region Migrations to EssSharp.Abstractions
+
+        /// <summary>
+        /// Returns an <see cref="EssDrillthroughDetails"/> from the given with the given <see cref="DrillthroughBean" />.
+        /// </summary>
+        /// <param name="dtb" />
+        internal static EssDrillthroughDetails ToEssSharpDetails( this DrillthroughBean dtb ) => new EssDrillthroughDetails()
+        {
+            ColumnMappings = dtb.ColumnMapping.ToEssSharpDictionary(),
+            Columns = dtb.Columns,
+            DataSourceName = dtb.DataSourceName,
+            DrillableRegions = dtb.DrillableRegions,
+            Name = dtb.Name,
+            Type = dtb.Type,
+            Url = dtb.Url,
+            UseTempTables = dtb.UseTempTables
+        };
+
+        /// <summary>
+        /// Returns a <see cref="Dictionary{TKey, TValue}" /> of <see cref="EssDrillthroughDetails.ColumnMapping"/> objects with the given dictionary of <see cref="ColumnMappingInfo" /> objects.
+        /// </summary>
+        /// <param name="mappingInfo" />
+        internal static Dictionary<string, EssDrillthroughDetails.ColumnMapping> ToEssSharpDictionary( this Dictionary<string, ColumnMappingInfo> mappingInfo )
+        {
+            var essDictionary = new Dictionary<string, EssDrillthroughDetails.ColumnMapping>();
+
+            if ( mappingInfo is null )
+                return essDictionary;
+
+            foreach ( var key in mappingInfo.Keys )
+            {
+                essDictionary[key] = new EssDrillthroughDetails.ColumnMapping()
+                {
+                    Dimension = mappingInfo[key].Dimension,
+                    Generation = mappingInfo[key].Generation,
+                    Level = mappingInfo[key].Level,
+                    GenerationNumber = mappingInfo[key].GenerationNumber
+                };
+            }
+
+            return essDictionary;
+        }
 
         /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssApplication"/> objects associated with the given <see cref="EssServer"/>.
@@ -556,38 +591,6 @@ namespace EssSharp
             }
             return dimList;
         }
-
-        internal static Dictionary<string, EssColumnMapping> ToDictionary( this Dictionary<string, ColumnMappingInfo> mappingInfo )
-        { 
-            var essDictionary = new Dictionary<string, EssColumnMapping>();
-
-            foreach (var key in mappingInfo.Keys )
-            {
-                essDictionary[key] = new EssColumnMapping()
-                                    {
-                                        Dimension = mappingInfo[key].Dimension,
-                                        Generation = mappingInfo[key].Generation,
-                                        Level = mappingInfo[key].Level,
-                                        GenerationNumber = mappingInfo[key].GenerationNumber
-                                        
-                                    };
-            }
-
-            return essDictionary;
-        }
-
-        internal static EssDrillthroughDetails ToEssDrillThroughDetails( this DrillthroughBean dtb ) => new EssDrillthroughDetails()
-        {
-            ColumnMapping = dtb.ColumnMapping.ToDictionary(),
-            Columns = dtb.Columns,
-            DataSourceName = dtb.DataSourceName,
-            DrillableRegions = dtb.DrillableRegions,
-            Name = dtb.Name,
-            Type = dtb.Type,
-            Url = dtb.Url,
-            UseTempTables = dtb.UseTempTables
-
-        };
 
         internal static List<GridRange> ToModelBean(this List<EssGridRange> essGridRangeList )
         {

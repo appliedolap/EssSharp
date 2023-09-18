@@ -66,7 +66,7 @@ namespace EssSharp
         public IEssCube Cube => _cube;
 
         /// <inheritdoc />
-        public EssDrillthroughDetails Details => _definition.ToEssDrillThroughDetails();
+        public EssDrillthroughDetails Details => _definition?.ToEssSharpDetails();
 
         /// <inheritdoc />
         public (object[,] report, string[] columnTypes) Execute( IEssDrillthroughRange context, IEssDrillthroughOptions options = null ) => Execute(new List<IEssDrillthroughRange>() { context }, options);

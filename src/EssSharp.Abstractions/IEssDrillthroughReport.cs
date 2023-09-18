@@ -16,8 +16,9 @@ namespace EssSharp
         public IEssCube Cube { get; }
 
         /// <summary>
-        /// Returns drill through details
+        /// Returns the full drillthrough report specification details.
         /// </summary>
+        /// <remarks>The report details are available after calling <see cref="GetDetails"/> or <see cref="GetDetailsAsync(CancellationToken)"/>.</remarks>
         public EssDrillthroughDetails Details { get; }
 
         #endregion
@@ -53,12 +54,12 @@ namespace EssSharp
         public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets the full report specification.
+        /// Gets the full report specification details returned by <see cref="Details" />.
         /// </summary>
         public void GetDetails();
 
         /// <summary>
-        /// Asynchronously gets the full report specification.
+        /// Asynchronously gets the full report specification details returned by <see cref="Details" />.
         /// </summary>
         /// <param name="cancellationToken" />
         public Task GetDetailsAsync( CancellationToken cancellationToken = default );

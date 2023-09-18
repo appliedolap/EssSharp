@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
-
 using Xunit;
 
 namespace EssSharp.Integration
@@ -59,6 +59,96 @@ namespace EssSharp.Integration
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 04 - Essbase_AfterReportCreation_CanGetDrillthroughReport"), Priority(04)]
+        public async Task Essbase_AfterReportCreation_CanGetDrillthroughReport()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Declare a drillthrough report.
+            var drillthroughReport = default(IEssDrillthroughReport);
+
+            // Find the "drillthrough_samplebasic" report (if available).
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+                if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
+                    drillthroughReport = dtr;
+
+            // If the report is not available return.
+            if ( drillthroughReport is null )
+                return;
+
+            // Assert that we were able to get the drillthrough report.
+            Assert.NotNull(drillthroughReport);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 05 - Essbase_AfterReportCreation_CanGetDrillthroughReportDetails"), Priority(05)]
+        public async Task Essbase_AfterReportCreation_CanGetDrillthroughReportDetails()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Declare a drillthrough report.
+            var drillthroughReport = default(IEssDrillthroughReport);
+
+            // Find the "drillthrough_samplebasic" report (if available).
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+                if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
+                    drillthroughReport = dtr;
+
+            // If the report is not available return.
+            if ( drillthroughReport is null )
+                return;
+
+            // Get the full report specification details.
+            await drillthroughReport.GetDetailsAsync();
+
+            // Assert that we were able to get the drillthrough report specification details.
+            Assert.NotNull(drillthroughReport.Details);
+            // Assert that we have column mappings.
+            Assert.NotEmpty(drillthroughReport.Details.ColumnMappings);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 06 - Essbase_AfterReportCreation_CannotGetDrillthroughReportDetailsAsUser"), Priority(06)]
+        public async Task Essbase_AfterReportCreation_CannotGetDrillthroughReportDetailsAsUser()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer(EssServerRole.User);
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Declare a drillthrough report.
+            var drillthroughReport = default(IEssDrillthroughReport);
+
+            // Find the "drillthrough_samplebasic" report (if available).
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+                if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
+                    drillthroughReport = dtr;
+
+            // If the report is not available return.
+            if ( drillthroughReport is null )
+                return;
+
+            // Assert that an exception is thrown when we try to get the drillthrough report specification details
+            // as an unprivileged user, and capture the base exception.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await drillthroughReport.GetDetailsAsync())).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 401 (unauthorized).
+            Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.Unauthorized } });
         }
     }
 }

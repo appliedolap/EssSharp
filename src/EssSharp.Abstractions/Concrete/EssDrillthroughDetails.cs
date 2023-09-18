@@ -6,7 +6,30 @@ namespace EssSharp
 {
     public class EssDrillthroughDetails
     {
-        public Dictionary<string, EssColumnMapping> ColumnMapping { get; set; }
+        public class ColumnMapping
+        {
+            /// <summary>
+            /// Gets or Sets Dimension
+            /// </summary>
+            public string Dimension { get; set; }
+
+            /// <summary>
+            /// Gets or Sets Generation
+            /// </summary>
+            public string Generation { get; set; }
+
+            /// <summary>
+            /// Gets or Sets Level
+            /// </summary>
+            public string Level { get; set; }
+
+            /// <summary>
+            /// Gets or Sets GenerationNumber
+            /// </summary>
+            public int GenerationNumber { get; set; }
+        }
+
+        public Dictionary<string, ColumnMapping> ColumnMappings { get; set; }
 
         public List<string> Columns { get; set; }
 
