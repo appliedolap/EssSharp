@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -98,10 +100,10 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public void GetDetails() => GetDetailsAsync()?.GetAwaiter().GetResult();
+        public Dictionary<string, EssColumnMapping> GetDetails() => GetDetailsAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        public async Task GetDetailsAsync( CancellationToken cancellationToken = default )
+        public async Task<Dictionary<string, EssColumnMapping>> GetDetailsAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -111,6 +113,15 @@ namespace EssSharp
                     throw new Exception("Received an empty or invalid response.");
 
                 _definition = definition;
+
+                var columnMapping = new Dictionary<string, EssColumnMapping>();
+
+                foreach ( var key in _definition.ColumnMapping.Keys )
+                {
+                    columnMapping[key] = _definition.ColumnMapping[key].ToEssColumnMappingInfo();
+                }
+
+                return columnMapping;
             }
             catch ( Exception e )
             {

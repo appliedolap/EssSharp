@@ -556,6 +556,14 @@ namespace EssSharp
             return dimList;
         }
 
+        internal static EssColumnMapping ToEssColumnMappingInfo(this ColumnMappingInfo mappingInfo ) => new EssColumnMapping()
+        {
+            Dimension = mappingInfo.Dimension,
+            Generation = mappingInfo.Generation,
+            Level = mappingInfo.Level,
+            GenerationNumber = mappingInfo.GenerationNumber
+        };
+
         internal static List<GridRange> ToModelBean(this List<EssGridRange> essGridRangeList )
         {
             var gridRangeList = new List<GridRange>();

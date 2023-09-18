@@ -50,13 +50,13 @@ namespace EssSharp
         /// <summary>
         /// Gets the full report specification.
         /// </summary>
-        public void GetDetails();
+        public Dictionary<string, EssColumnMapping> GetDetails();
 
         /// <summary>
         /// Asynchronously gets the full report specification.
         /// </summary>
         /// <param name="cancellationToken" />
-        public Task GetDetailsAsync( CancellationToken cancellationToken = default );
+        public Task<Dictionary<string, EssColumnMapping>> GetDetailsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Deletes this report from the cube.
