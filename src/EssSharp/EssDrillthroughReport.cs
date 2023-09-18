@@ -114,14 +114,7 @@ namespace EssSharp
 
                 _definition = definition;
 
-                var columnMapping = new Dictionary<string, EssColumnMapping>();
-
-                foreach ( var key in _definition.ColumnMapping.Keys )
-                {
-                    columnMapping[key] = _definition.ColumnMapping[key].ToEssColumnMappingInfo();
-                }
-
-                return columnMapping;
+                return _definition.ColumnMapping.ToDictionary();
             }
             catch ( Exception e )
             {

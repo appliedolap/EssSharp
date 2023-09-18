@@ -556,13 +556,23 @@ namespace EssSharp
             return dimList;
         }
 
-        internal static EssColumnMapping ToEssColumnMappingInfo(this ColumnMappingInfo mappingInfo ) => new EssColumnMapping()
-        {
-            Dimension = mappingInfo.Dimension,
-            Generation = mappingInfo.Generation,
-            Level = mappingInfo.Level,
-            GenerationNumber = mappingInfo.GenerationNumber
-        };
+        internal static Dictionary<string, EssColumnMapping> ToDictionary( this Dictionary<string, ColumnMappingInfo> mappingInfo )
+        { 
+            var essDictionary = new Dictionary<string, EssColumnMapping>();
+
+            foreach (var key in mappingInfo.Keys )
+            {
+                essDictionary[key] = new EssColumnMapping()
+                                    {
+                                        Dimension = mappingInfo[key].Dimension,
+                                        Generation = mappingInfo[key].Generation,
+                                        Level = mappingInfo[key].Level,
+                                        GenerationNumber = mappingInfo[key].GenerationNumber
+                                    };
+            }
+
+            return essDictionary;
+        }
 
         internal static List<GridRange> ToModelBean(this List<EssGridRange> essGridRangeList )
         {
