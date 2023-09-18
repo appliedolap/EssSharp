@@ -66,6 +66,9 @@ namespace EssSharp
         public IEssCube Cube => _cube;
 
         /// <inheritdoc />
+        public Dictionary<string, EssColumnMapping> dimensions => _definition?.ColumnMapping.ToDictionary();
+
+        /// <inheritdoc />
         public (object[,] report, string[] columnTypes) Execute( IEssDrillthroughRange context, IEssDrillthroughOptions options = null ) => Execute(new List<IEssDrillthroughRange>() { context }, options);
 
         /// <inheritdoc />
@@ -114,7 +117,7 @@ namespace EssSharp
 
                 _definition = definition;
 
-                return _definition.ColumnMapping.ToDictionary();
+                return dimensions;
             }
             catch ( Exception e )
             {

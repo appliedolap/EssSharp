@@ -15,6 +15,11 @@ namespace EssSharp
         /// </summary>
         public IEssCube Cube { get; }
 
+        /// <summary>
+        /// Returns a dictionary with of the dimensions
+        /// </summary>
+        public Dictionary<string, EssColumnMapping> dimensions { get; }
+
         #endregion
 
         /// <summary>
