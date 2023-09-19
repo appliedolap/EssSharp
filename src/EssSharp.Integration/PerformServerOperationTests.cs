@@ -440,9 +440,9 @@ namespace EssSharp.Integration
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
-            var zoomInGrid = await defaultGrid.ZoomInAsync( new List<List<int>>(){ new List<int>() { 1, 0, 1, 1} });
+            var zoomInGrid = await defaultGrid.ZoomInAsync( new List<List<int>>(){ new List<int>() { 3, 1, 1, 1} });
 
-            Assert.True(Object.Equals(defaultGrid, zoomInGrid));
+            Assert.NotEqual(defaultGrid.Slice.Rows, zoomInGrid.Slice.Rows);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 21 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(21)]

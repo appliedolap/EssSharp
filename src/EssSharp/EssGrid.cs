@@ -131,7 +131,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to Zoom into grid ""{Name}"". {e.Message}", e);
             }
         }
 
