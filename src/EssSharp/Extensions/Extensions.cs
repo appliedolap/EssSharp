@@ -564,7 +564,7 @@ namespace EssSharp
             throw new ArgumentException($@"{nameof(EssGridActionType)}.{actionEnum} does not map to a model job type.");
         }
 
-        internal static GridOperation.ActionEnum ToEssGridActionType( this EssGridActionType actionEnum)
+        internal static GridOperation.ActionEnum ToEssGridActionType( this EssGridZoomType actionEnum)
         {
             if ( Enum.IsDefined(typeof(GridOperation.ActionEnum), (int)actionEnum) )
                 return (GridOperation.ActionEnum)actionEnum;
