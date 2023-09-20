@@ -53,7 +53,6 @@ namespace EssSharp
         /// <returns></returns>
         public Task<IEssGrid> ZoomInAsync( List<List<int>> ranges, CancellationToken cancellationToken = default );
 
-        /*
         /// <summary>
         /// Zooms in or out of grid and returns it.
         /// </summary>
@@ -68,6 +67,6 @@ namespace EssSharp
         /// <param name="ranges"></param>
         /// <param name="cancellationToken"></param>
         public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, List<List<int>> ranges, CancellationToken cancellationToken = default );
-        */
+        
     }
 }

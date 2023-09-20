@@ -440,12 +440,25 @@ namespace EssSharp.Integration
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
-            var zoomInGrid = await defaultGrid.ZoomInAsync( new List<List<int>>(){ new List<int>() { 3, 1, 1, 1} });
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new List<List<int>>(){ new List<int>() { 3, 1, 1, 1} });
 
             Assert.NotEqual(defaultGrid.Slice.Rows, zoomInGrid.Slice.Rows);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 21 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(21)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 21 - Essbase_AfterDefaultGrid_CanZoomOutGrid"), Priority(21)]
+        public async Task Essbase_AfterDefaultGrid_CanZoomOutGrid()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT, new List<List<int>>(){ new List<int>() { 3, 1, 1, 1} });
+
+            Assert.NotEqual(defaultGrid.Slice.Rows, zoomOutGrid.Slice.Rows);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 22 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(22)]
         public async Task Essbase_AfterReportCreation_CanExecuteDrillthroughReport()
         {
             // Get an unconnected server.

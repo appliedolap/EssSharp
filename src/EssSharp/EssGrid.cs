@@ -100,45 +100,6 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public IEssGrid ZoomIn( List<List<int>> ranges ) => ZoomInAsync(ranges).GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public async Task<IEssGrid> ZoomInAsync( List<List<int>> ranges, CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var api = GetApi<GridApi>();
-                
-                if (ranges is null)
-                    throw new ArgumentException( nameof(ranges), $"A list of cell coordinants is required to zoom into a grid.");
-/*
-                Slice.Data.Ranges.ForEach(ran => ranges.Add(new List<int>() { ran.Start, ran.End }));
-                */
-                var body = new GridOperation()
-                {
-                    Grid = this.ToModelBean(),
-                    Action = GridOperation.ActionEnum.Zoomin,
-                    Alias = this.Alias,
-                    Ranges = ranges
-                };
-
-                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } zoomInGrid )
-                    throw new Exception($@"Cannot zoom into grid ""{Name}"" at coordinants {ranges}.");
-
-                return new EssGrid(zoomInGrid, _cube);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to Zoom into grid ""{Name}"". {e.Message}", e);
-            }
-        }
-
-        /*
-         * TODO: better option or break zoom in and out into two methods?
-        /// <inheritdoc />
-        /// <returns>An <see cref="IEssGrid"/> object.</returns>
         public IEssGrid Zoom( EssGridZoomType zoomOption, List<List<int>> ranges ) => ZoomAsync(zoomOption, ranges).GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -171,7 +132,6 @@ namespace EssSharp
                 throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
             }
         }
-        */
         #endregion
     }
 }
