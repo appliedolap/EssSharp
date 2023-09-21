@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace EssSharp
 {
-	public class EssDrillthroughRange : IEssDrillthroughRange
-	{
+    public class EssDrillthroughRange : IEssDrillthroughRange
+    {
         #region Constructors
 
         /// <summary />
         public EssDrillthroughRange() { }
 
-		/// <summary />
-		/// <param name="dimensionMemberSets" />
-		public EssDrillthroughRange( Dictionary<string, List<string>> dimensionMemberSets ) { DimensionMemberSets = dimensionMemberSets; }
+        /// <summary />
+        /// <param name="dimensionMemberSets" />
+        public EssDrillthroughRange( Dictionary<string, List<string>> dimensionMemberSets ) { DimensionMemberSets = dimensionMemberSets; }
 
         /// <summary />
         /// <param name="dimensionMemberSet" />
