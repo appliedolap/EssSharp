@@ -30,6 +30,32 @@ namespace EssSharp
         public EssGridSlice Slice { get; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridSelection"></param>
+        public IEssGrid KeepOnly( EssGridSelection gridSelection );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridSelection"></param>
+        public IEssGrid KeepOnly( List<EssGridSelection> gridSelection );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridSelection"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssGrid> KeepOnlyAsync( EssGridSelection gridSelection, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridSelection"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssGrid> KeepOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Refresh grid.
         /// </summary>
         public IEssGrid Refresh();
@@ -41,19 +67,32 @@ namespace EssSharp
         public Task<IEssGrid> RefreshAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Zooms in or out of grid and returns it.
+        /// 
         /// </summary>
         /// <param name="zoomOption"></param>
-        /// <param name="ranges"></param>
-        public IEssGrid Zoom( EssGridZoomType zoomOption, List<List<int>> ranges );
+        /// <param name="gridSelection"></param>
+        public IEssGrid Zoom( EssGridZoomType zoomOption, EssGridSelection gridSelection );
 
         /// <summary>
-        /// Zooms in or out of grid and returns it.
+        /// 
         /// </summary>
         /// <param name="zoomOption"></param>
-        /// <param name="ranges"></param>
+        /// <param name="gridSelection"></param>
+        public IEssGrid Zoom( EssGridZoomType zoomOption, List<EssGridSelection> gridSelection );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="zoomOption"></param>
+        /// <param name="gridSelection"></param>
+        public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, EssGridSelection gridSelection );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="zoomOption"></param>
+        /// <param name="gridSelection"></param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, List<List<int>> ranges, CancellationToken cancellationToken = default );
-        
+        public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
     }
 }

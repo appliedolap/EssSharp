@@ -61,6 +61,52 @@ namespace EssSharp
         #region IEssGrid Members
 
         /// <inheritdoc />
+        /// <returns></returns>
+        public IEssGrid KeepOnly( EssGridSelection gridSelection ) => KeepOnlyAsync( gridSelection ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssGrid KeepOnly( List<EssGridSelection> gridSelection ) => KeepOnlyAsync(gridSelection).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Task<IEssGrid> KeepOnlyAsync( EssGridSelection gridSelection, CancellationToken cancellationToken = default ) => KeepOnlyAsync(new List<EssGridSelection>() { gridSelection }, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssGrid> KeepOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GridApi>();
+
+                var ranges = new List<List<int>>();
+
+                gridSelection.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.columnCount, selection.rowCount, selection.columnCount }));
+
+                var body = new GridOperation()
+                {
+                    Grid = this.ToModelBean(),
+                    Action = GridOperation.ActionEnum.Keeponly,
+                    Alias = this.Alias,
+                    Ranges = ranges
+                };
+
+                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } keepOnlyGrid )
+                    throw new Exception($@"Cannot refresh grid ""{Name}"".");
+
+                _grid = keepOnlyGrid;
+
+                return this;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to keep only specified coordinates of grid ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
         public IEssGrid Refresh() => RefreshAsync().GetAwaiter().GetResult();
 
@@ -100,18 +146,31 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public IEssGrid Zoom( EssGridZoomType zoomOption, List<List<int>> ranges ) => ZoomAsync(zoomOption, ranges).GetAwaiter().GetResult();
+        public IEssGrid Zoom( EssGridZoomType zoomOption, EssGridSelection gridSelection ) => ZoomAsync(zoomOption, gridSelection).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssGrid Zoom( EssGridZoomType zoomOption, List<EssGridSelection> gridSelection ) => ZoomAsync(zoomOption, gridSelection ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, EssGridSelection gridSelection ) => ZoomAsync(zoomOption, new List<EssGridSelection>() { gridSelection });
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public async Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, List<List<int>> ranges, CancellationToken cancellationToken = default )
+        public async Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default )
         {
             try
             {
+                
                 var api = GetApi<GridApi>();
 
-                if ( ranges is null )
-                    throw new ArgumentException(nameof(ranges), $"A list of cell coordinants is required to zoom into a grid.");
+                if ( gridSelection is null )
+                    throw new ArgumentException(nameof(gridSelection), $"A list of cell coordinants is required to zoom into a grid.");
+
+                var ranges = new List<List<int>>();
+
+                gridSelection.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
 
                 var body = new GridOperation()
                 {
@@ -121,10 +180,12 @@ namespace EssSharp
                     Ranges = ranges
                 };
 
-                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } zoomInGrid )
+                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } zoomGrid )
                     throw new Exception($@"Cannot zoom into grid ""{Name}"" at coordinants {ranges}.");
 
-                return new EssGrid(zoomInGrid, _cube);
+                _grid = zoomGrid;
+
+                return this;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )

@@ -440,7 +440,7 @@ namespace EssSharp.Integration
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new List<List<int>>(){ new List<int>() { 3, 1, 1, 1} });
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(1, 0));
 
             Assert.NotEqual(defaultGrid.Slice.Rows, zoomInGrid.Slice.Rows);
         }
@@ -453,7 +453,7 @@ namespace EssSharp.Integration
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
-            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT, new List<List<int>>(){ new List<int>() { 3, 1, 1, 1} });
+            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT, new EssGridSelection(1, 0));
 
             Assert.NotEqual(defaultGrid.Slice.Rows, zoomOutGrid.Slice.Rows);
         }
