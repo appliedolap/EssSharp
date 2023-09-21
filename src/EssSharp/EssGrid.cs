@@ -82,7 +82,7 @@ namespace EssSharp
 
                 var ranges = new List<List<int>>();
 
-                gridSelection.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.columnCount, selection.rowCount, selection.columnCount }));
+                gridSelection.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
 
                 var body = new GridOperation()
                 {
