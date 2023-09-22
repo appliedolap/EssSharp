@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EssSharp.Api;
 using EssSharp.Model;
+using RestSharp;
+using static System.Collections.Specialized.BitVector32;
 
 
 namespace EssSharp
@@ -59,7 +62,6 @@ namespace EssSharp
         #endregion
 
         #region IEssGrid Members
-
         /// <inheritdoc />
         /// <returns></returns>
         public IEssGrid KeepOnly( EssGridSelection gridSelection ) => KeepOnlyAsync( gridSelection ).GetAwaiter().GetResult();
@@ -86,6 +88,44 @@ namespace EssSharp
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to keep only specified coordinates of grid ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public IEssGrid PivotToPov( EssGridSelection currentPosition, EssGridSelection newPosition ) => PivotToPovAsync(currentPosition, newPosition).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssGrid> PivotToPovAsync( EssGridSelection currentPosition, EssGridSelection newPosition, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GridApi>();
+
+                var body = new GridOperation()
+                {
+                    Grid = this.ToModelBean(),
+                    Action = GridOperation.ActionEnum.PivotToPOV,
+                    Alias = this.Alias,
+                    Coordinates = new List<int>()
+                                    {
+                                        currentPosition.startColumn + (Slice.Columns * currentPosition.startRow),
+                                        newPosition.startColumn + (Slice.Columns * newPosition.startRow)
+                                    }
+                };
+
+                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                    throw new Exception($@"Cannot pivot to pov on grid ""{Name}"" at coordinants {{{currentPosition.startRow}, {currentPosition.startColumn}}}.");
+
+                _grid = grid;
+
+                return this;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to pivot to pov on grid ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -165,27 +205,35 @@ namespace EssSharp
 
         private async Task ExecuteGridOperations( GridOperation.ActionEnum action, List<EssGridSelection> gridSelection = null, CancellationToken cancellationToken = default )
         {
-            var api = GetApi<GridApi>();
-
-            if ( action != GridOperation.ActionEnum.Refresh && gridSelection is null )
-                throw new ArgumentException(nameof(gridSelection), $"A list of cell coordinants is required to zoom into a grid.");
-
-            var ranges = new List<List<int>>();
-
-            gridSelection?.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
-
-            var body = new GridOperation()
+            try
             {
-                Grid = this.ToModelBean(),
-                Action = action,
-                Alias = this.Alias,
-                Ranges = ranges ?? null
-            };
+                var api = GetApi<GridApi>();
 
-            if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
-                throw new Exception($@"Cannot zoom into grid ""{Name}"" at coordinants {ranges}.");
+                if ( action != GridOperation.ActionEnum.Refresh && gridSelection is null )
+                    throw new ArgumentException(nameof(gridSelection), $"A list of cell coordinants is required to zoom into a grid.");
 
-            _grid = grid;
+                var ranges = new List<List<int>>();
+
+                gridSelection?.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
+
+                var body = new GridOperation()
+                {
+                    Grid = this.ToModelBean(),
+                    Action = action,
+                    Alias = this.Alias,
+                    Ranges = ranges ?? null
+                };
+
+                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                    throw new Exception($@"Cannot complete grid operation {action} on grid ""{Name}"" at coordinants {ranges}.");
+
+                _grid = grid;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Cannot complete grid operation {action} on grid ""{Name}"".", e);
+            }
         }
 
         #endregion

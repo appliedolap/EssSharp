@@ -494,7 +494,22 @@ namespace EssSharp.Integration
             Assert.True(!string.Equals("Cola", removeOnlyGrid.Slice.Data.Ranges[0].Values[13]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 23 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(23)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 25 - Essbase_AfterDefaultGrid_CanPivotToPovGrid"), Priority(25)]
+        public async Task Essbase_AfterDefaultGrid_CanPivotToPovGrid()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            var pivotPovGrid = await defaultGrid.PivotToPovAsync( new EssGridSelection(2, 0), new EssGridSelection(0, 2));
+
+            Assert.Equal(6, pivotPovGrid.Slice.Rows);
+
+            Assert.True(!string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[1]));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 26 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(26)]
         public async Task Essbase_AfterReportCreation_CanExecuteDrillthroughReport()
         {
             // Get an unconnected server.

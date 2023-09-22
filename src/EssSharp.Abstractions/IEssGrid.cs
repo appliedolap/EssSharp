@@ -56,6 +56,21 @@ namespace EssSharp
         public Task<IEssGrid> KeepOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currentPosition"></param>
+        /// <param name="newPosition"></param>
+        public IEssGrid PivotToPov( EssGridSelection currentPosition, EssGridSelection newPosition );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currentPosition"></param>
+        /// <param name="newPosition"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssGrid> PivotToPovAsync( EssGridSelection currentPosition, EssGridSelection newPosition, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Refresh grid.
         /// </summary>
         public IEssGrid Refresh();
