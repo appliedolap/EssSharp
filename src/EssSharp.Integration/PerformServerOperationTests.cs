@@ -487,11 +487,11 @@ namespace EssSharp.Integration
 
             var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 1));
 
-            var keepOnlyGrid = await defaultGrid.RemoveOnlyAsync( new EssGridSelection(2, 1));
+            var removeOnlyGrid = await defaultGrid.RemoveOnlyAsync( new EssGridSelection(2, 1));
 
-            Assert.Equal(3, keepOnlyGrid.Slice.Rows);
+            Assert.Equal(5, removeOnlyGrid.Slice.Rows);
 
-            Assert.True(string.Equals("551.0", keepOnlyGrid.Slice.Data.Ranges[0].Values[14]));
+            Assert.True(!string.Equals("Cola", removeOnlyGrid.Slice.Data.Ranges[0].Values[13]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 23 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(23)]

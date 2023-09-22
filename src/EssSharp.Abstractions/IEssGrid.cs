@@ -110,7 +110,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="zoomOption"></param>
         /// <param name="gridSelection"></param>
-        public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, EssGridSelection gridSelection );
+        public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, EssGridSelection gridSelection, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// 
