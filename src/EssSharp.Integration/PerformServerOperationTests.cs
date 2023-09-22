@@ -470,9 +470,24 @@ namespace EssSharp.Integration
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
+            var keepOnlyGrid = await defaultGrid.KeepOnlyAsync( new EssGridSelection(3, 1));
+
+            Assert.Equal(3, keepOnlyGrid.Slice.Rows);
+
+            Assert.True(string.Equals("678.0", keepOnlyGrid.Slice.Data.Ranges[0].Values[14]));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 23 - Essbase_AfterDefaultGrid_CanRemoveOnlyGrid"), Priority(23)]
+        public async Task Essbase_AfterDefaultGrid_CanRemoveOnlyGrid()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
             var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 1));
 
-            var keepOnlyGrid = await defaultGrid.KeepOnlyAsync( new EssGridSelection(3, 1));
+            var keepOnlyGrid = await defaultGrid.RemoveOnlyAsync( new EssGridSelection(2, 1));
 
             Assert.Equal(3, keepOnlyGrid.Slice.Rows);
 

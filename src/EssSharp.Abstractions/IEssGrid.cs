@@ -69,6 +69,31 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="gridSelection"></param>
+        public IEssGrid RemoveOnly( EssGridSelection gridSelection );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridSelection"></param>
+        public IEssGrid RemoveOnly( List<EssGridSelection> gridSelection );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridSelection"></param>
+        public Task<IEssGrid> RemoveOnlyAsync( EssGridSelection gridSelection, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridSelection"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssGrid> RemoveOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="zoomOption"></param>
         /// <param name="gridSelection"></param>
         public IEssGrid Zoom( EssGridZoomType zoomOption, EssGridSelection gridSelection );

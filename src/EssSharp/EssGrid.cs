@@ -78,24 +78,7 @@ namespace EssSharp
         {
             try
             {
-                var api = GetApi<GridApi>();
-
-                var ranges = new List<List<int>>();
-
-                gridSelection.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
-
-                var body = new GridOperation()
-                {
-                    Grid = this.ToModelBean(),
-                    Action = GridOperation.ActionEnum.Keeponly,
-                    Alias = this.Alias,
-                    Ranges = ranges
-                };
-
-                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } keepOnlyGrid )
-                    throw new Exception($@"Cannot refresh grid ""{Name}"".");
-
-                _grid = keepOnlyGrid;
+                await ExecuteGridOperations(action:GridOperation.ActionEnum.Keeponly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
@@ -116,29 +99,33 @@ namespace EssSharp
         {
             try
             {
-                var api = GetApi<GridApi>();
-
-                var ranges = new List<List<int>>();
-
-                Slice.Data.Ranges.ForEach(ran => ranges.Add(new List<int>() { ran.Start, ran.End }));
-
-                var body = new GridOperation()
-                {
-                    Grid = this.ToModelBean(),
-                    Action = GridOperation.ActionEnum.Refresh,
-                    Alias = this.Alias,
-                    Ranges = ranges
-                };
-                
-                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } refreshedGrid )
-                    throw new Exception($@"Cannot refresh grid ""{Name}"".");
-
-                _grid = refreshedGrid;
+                await ExecuteGridOperations(action: GridOperation.ActionEnum.Refresh, cancellationToken: cancellationToken).ConfigureAwait( false );
                 
                 return this;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
+            {
+                throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        public IEssGrid RemoveOnly( EssGridSelection gridSelection ) => RemoveOnlyAsync(gridSelection).GetAwaiter().GetResult();
+
+        public IEssGrid RemoveOnly( List<EssGridSelection> gridSelection ) => RemoveOnlyAsync(gridSelection).GetAwaiter().GetResult();
+
+        public Task<IEssGrid> RemoveOnlyAsync( EssGridSelection gridSelection, CancellationToken cancellationToken = default ) => RemoveOnlyAsync(new List<EssGridSelection>() { gridSelection, cancellationToken });
+
+        public async Task<IEssGrid> RemoveOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                await ExecuteGridOperations(action: GridOperation.ActionEnum.Removeonly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return this;
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception e )
             {
                 throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
             }
@@ -154,7 +141,7 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, EssGridSelection gridSelection ) => ZoomAsync(zoomOption, new List<EssGridSelection>() { gridSelection });
+        public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, EssGridSelection gridSelection, CancellationToken cancellationToken = default ) => ZoomAsync(zoomOption, new List<EssGridSelection>() { gridSelection }, cancellationToken);
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
@@ -162,28 +149,7 @@ namespace EssSharp
         {
             try
             {
-                
-                var api = GetApi<GridApi>();
-
-                if ( gridSelection is null )
-                    throw new ArgumentException(nameof(gridSelection), $"A list of cell coordinants is required to zoom into a grid.");
-
-                var ranges = new List<List<int>>();
-
-                gridSelection.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
-
-                var body = new GridOperation()
-                {
-                    Grid = this.ToModelBean(),
-                    Action = zoomOption.ToEssGridActionType(),
-                    Alias = this.Alias,
-                    Ranges = ranges
-                };
-
-                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } zoomGrid )
-                    throw new Exception($@"Cannot zoom into grid ""{Name}"" at coordinants {ranges}.");
-
-                _grid = zoomGrid;
+                await ExecuteGridOperations(action: zoomOption.ToEssGridActionType(), gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
@@ -193,6 +159,35 @@ namespace EssSharp
                 throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
             }
         }
+        #endregion
+
+        #region Private Methods
+
+        private async Task ExecuteGridOperations( GridOperation.ActionEnum action, List<EssGridSelection> gridSelection = null, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GridApi>();
+
+            if ( action != GridOperation.ActionEnum.Refresh && gridSelection is null )
+                throw new ArgumentException(nameof(gridSelection), $"A list of cell coordinants is required to zoom into a grid.");
+
+            var ranges = new List<List<int>>();
+
+            gridSelection?.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
+
+            var body = new GridOperation()
+            {
+                Grid = this.ToModelBean(),
+                Action = action,
+                Alias = this.Alias,
+                Ranges = ranges ?? null
+            };
+
+            if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                throw new Exception($@"Cannot zoom into grid ""{Name}"" at coordinants {ranges}.");
+
+            _grid = grid;
+        }
+
         #endregion
     }
 }
