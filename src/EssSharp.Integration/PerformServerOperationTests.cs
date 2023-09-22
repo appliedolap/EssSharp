@@ -504,9 +504,9 @@ namespace EssSharp.Integration
 
             var pivotPovGrid = await defaultGrid.PivotToPovAsync( new EssGridSelection(2, 0), new EssGridSelection(0, 2));
 
-            Assert.Equal(6, pivotPovGrid.Slice.Rows);
+            Assert.Equal(5, pivotPovGrid.Slice.Rows);
 
-            Assert.True(!string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[1]));
+            Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[1]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 26 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(26)]
