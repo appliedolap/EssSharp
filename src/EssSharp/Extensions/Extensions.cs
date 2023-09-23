@@ -665,7 +665,7 @@ namespace EssSharp
         {
             Columns = slice.Columns,
             Data = slice.Data.ToEssGridSliceData(),
-            DirtyCells = slice.DirtyCells,
+            DirtyCells = slice.DirtyCells ?? new List<int>(),
             DirtyTexts = slice.DirtyTexts,
             Rows = slice.Rows
         };

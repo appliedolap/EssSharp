@@ -109,6 +109,21 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="gridSelection"></param>
+        /// <param name="newValue"></param>
+        public IEssGrid SubmitNewValue( EssGridSelection gridSelection, string newValue );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridSelection"></param>
+        /// <param name="newValue"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssGrid> SubmitNewValueAsync( EssGridSelection gridSelection, string newValue, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="zoomOption"></param>
         /// <param name="gridSelection"></param>
         public IEssGrid Zoom( EssGridZoomType zoomOption, EssGridSelection gridSelection );

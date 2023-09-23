@@ -172,6 +172,48 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns></returns>
+        public IEssGrid SubmitNewValue( EssGridSelection gridSelection, string newValue ) => SubmitNewValueAsync(gridSelection, newValue).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssGrid> SubmitNewValueAsync( EssGridSelection gridSelection, string newValue, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GridApi>();
+
+                var selection = gridSelection.startColumn + (Slice.Columns * gridSelection.startRow);
+
+                var thisGrid = this.ToModelBean();
+
+                thisGrid.Slice.DirtyCells = new List<int>() { selection };
+
+                thisGrid.Slice.Data.Ranges[0].Values[selection] = newValue;
+                var typing = newValue.GetType();
+
+                var body = new GridOperation()
+                {
+                    Grid = thisGrid,
+                    Action = GridOperation.ActionEnum.Submit,
+                    Alias = this.Alias
+                };
+
+                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                    throw new Exception($@"Cannot pivot to pov on grid ""{Name}"" at coordinants {{{gridSelection.startRow}, {gridSelection.startColumn}}}.");
+
+                _grid = grid;
+
+                return this;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to submit new value for grid ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
         public IEssGrid Zoom( EssGridZoomType zoomOption, EssGridSelection gridSelection ) => ZoomAsync(zoomOption, gridSelection).GetAwaiter().GetResult();
 
