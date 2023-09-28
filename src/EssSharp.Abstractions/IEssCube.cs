@@ -162,14 +162,14 @@ namespace EssSharp
         /// Returns the default grid from a cube.
         /// </summary>
         /// <param name="reset">Reset flag to avoid saved grid layout.</param>
-        public IEssGrid GetDefaultGrid( bool reset = false );
+        public IEssGrid GetDefaultGrid( bool reset = true );
 
         /// <summary>
         /// Asynchronously returns the default grid from a cube
         /// </summary>
         /// <param name="reset">Reset flag to avoid saved grid layout.</param>
         /// <param name="cancellationToken"></param>
-        public Task<IEssGrid> GetDefaultGridAsync( bool reset = false, CancellationToken cancellationToken = default );
+        public Task<IEssGrid> GetDefaultGridAsync( bool reset = true, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the list of dimensions.

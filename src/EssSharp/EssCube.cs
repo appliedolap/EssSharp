@@ -292,11 +292,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public IEssGrid GetDefaultGrid( bool reset = false ) => GetDefaultGridAsync(reset).GetAwaiter().GetResult();
+        public IEssGrid GetDefaultGrid( bool reset = true ) => GetDefaultGridAsync(reset).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public async Task<IEssGrid> GetDefaultGridAsync( bool reset = false, CancellationToken cancellationToken = default )
+        public async Task<IEssGrid> GetDefaultGridAsync( bool reset = true, CancellationToken cancellationToken = default )
         {
             try
             {

@@ -623,11 +623,11 @@ namespace EssSharp
 
         internal static Slice ToModelBean( this EssGridSlice essGridSlice ) => new Slice()
         {
-            DirtyCells = essGridSlice.DirtyCells,
-            DirtyTexts = essGridSlice.DirtyTexts,
             Columns = essGridSlice.Columns,
             Rows = essGridSlice.Rows,
-            Data = essGridSlice.Data.ToModelBean()
+            DirtyTexts = essGridSlice.DirtyTexts,
+            Data = essGridSlice.Data.ToModelBean(),
+            DirtyCells = essGridSlice.DirtyCells,
         };
 
         internal static Grid ToModelBean( this EssGrid grid ) => new Grid()

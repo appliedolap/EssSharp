@@ -429,7 +429,7 @@ namespace EssSharp.Integration
 
             var refreshGrid = await defaultGrid.RefreshAsync();
             
-            Assert.Equal(5, refreshGrid.Slice.Rows);
+            Assert.Equal(3, refreshGrid.Slice.Rows);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanZoomInGrid"), Priority(20)]
@@ -440,11 +440,11 @@ namespace EssSharp.Integration
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 1));
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
 
-            Assert.Equal(10, zoomInGrid.Slice.Rows);
+            Assert.Equal(7, zoomInGrid.Slice.Rows);
 
-            Assert.True(string.Equals("678.0", zoomInGrid.Slice.Data.Ranges[0].Values[14]));
+            Assert.True(string.Equals("27107.0", zoomInGrid.Slice.Data.Ranges[0].Values[13]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 21 - Essbase_AfterDefaultGrid_CanZoomOutGrid"), Priority(21)]
@@ -453,13 +453,15 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(reset : true);
 
-            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT, new EssGridSelection(6, 1));
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
 
-            Assert.Equal(5, zoomOutGrid.Slice.Rows);
+            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT, new EssGridSelection(6, 0));
 
-            Assert.True(string.Equals("2479.0", zoomOutGrid.Slice.Data.Ranges[0].Values[14]));
+            Assert.Equal(3, zoomOutGrid.Slice.Rows);
+
+            Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 22 - Essbase_AfterDefaultGrid_CanKeepOnlyGrid"), Priority(22)]
@@ -468,13 +470,15 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(reset : true);
 
-            var keepOnlyGrid = await defaultGrid.KeepOnlyAsync( new EssGridSelection(3, 1));
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+
+            var keepOnlyGrid = await defaultGrid.KeepOnlyAsync( new EssGridSelection(3, 0));
 
             Assert.Equal(3, keepOnlyGrid.Slice.Rows);
 
-            Assert.True(string.Equals("678.0", keepOnlyGrid.Slice.Data.Ranges[0].Values[14]));
+            Assert.True(string.Equals("27107.0", keepOnlyGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 23 - Essbase_AfterDefaultGrid_CanRemoveOnlyGrid"), Priority(23)]
@@ -483,17 +487,45 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(reset : true);
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 1));
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
 
-            var removeOnlyGrid = await defaultGrid.RemoveOnlyAsync( new EssGridSelection(2, 1));
+            var removeOnlyGrid = await defaultGrid.RemoveOnlyAsync( new EssGridSelection(2, 0));
 
-            Assert.Equal(5, removeOnlyGrid.Slice.Rows);
+            Assert.Equal(6, removeOnlyGrid.Slice.Rows);
 
-            Assert.True(!string.Equals("Cola", removeOnlyGrid.Slice.Data.Ranges[0].Values[13]));
+            Assert.True(!string.Equals("     Qtr1", removeOnlyGrid.Slice.Data.Ranges[0].Values[8]));
         }
 
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 24 - Essbase_AfterDefaultGrid_CanPivotToPovWithSelectionAttributeGrid"), Priority(24)]
+        public async Task Essbase_AfterDefaultGrid_CanPivotToPovWithSelectionAttributeGrid()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            defaultGrid.Selection.Add(new EssGridSelection(startRow: 0, startColumn: 3));
+
+            var pivotPovGrid = defaultGrid.Pivot( /*newPosition: new EssGridSelection(startRow: 0, startColumn: 5)*/);
+
+            Assert.Equal(3, pivotPovGrid.Slice.Rows);
+
+            Assert.True(string.Equals("Scenario", pivotPovGrid.Slice.Data.Ranges[0].Values[8]));
+
+            defaultGrid.Selection[0].startRow = 2;
+            defaultGrid.Selection[0].startColumn = 0;
+
+            pivotPovGrid = defaultGrid.Pivot();
+
+            Assert.Equal(4, pivotPovGrid.Slice.Rows);
+
+            Assert.True(!string.Equals("Scenario", pivotPovGrid.Slice.Data.Ranges[0].Values[8]));
+        }
+
+        
         [Fact(DisplayName = @"PerformServerFunctionTests - 25 - Essbase_AfterDefaultGrid_CanPivotToPovGrid"), Priority(25)]
         public async Task Essbase_AfterDefaultGrid_CanPivotToPovGrid()
         {
@@ -502,13 +534,43 @@ namespace EssSharp.Integration
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
-            var pivotPovGrid = await defaultGrid.PivotToPovAsync( new EssGridSelection(2, 0), new EssGridSelection(0, 2));
+            // Year > Qtr1 > Jan
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
 
-            Assert.Equal(5, pivotPovGrid.Slice.Rows);
+            // Product > Colas > Cola
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
 
-            Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[1]));
+            // Market > East > New York 
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+
+            // Scenario > Actual
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3));
+
+            // Measures > Profit > Margin > Sales
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+
+            defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
+            await defaultGrid.KeepOnlyAsync();
+
+            var pivotPovGrid = await defaultGrid.PivotAsync(  new EssGridSelection(2, 0), new EssGridSelection(0, 2));
+
+            Assert.Equal(4, pivotPovGrid.Slice.Rows);
+
+            Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[2]));
+
+            pivotPovGrid = await defaultGrid.PivotAsync(  new EssGridSelection(0, 2) );
+
+            Assert.Equal(3, pivotPovGrid.Slice.Rows);
+
+            Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[8]));
         }
-
+        
+        
         [Fact(DisplayName = @"PerformServerFunctionTests - 26 - Essbase_AfterDefaultGrid_CanSubmitNewValueGrid"), Priority(26)]
         public async Task Essbase_AfterDefaultGrid_CanSubmitNewValueGrid()
         {
@@ -516,15 +578,90 @@ namespace EssSharp.Integration
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
             var defaultGrid = await cube.GetDefaultGridAsync();
+            
+            // Year > Qtr1 > Jan
+            await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            
+            // Product > Colas > Cola
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            
+            // Market > East > New York 
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
 
-            var pivotPovGrid = await defaultGrid.SubmitNewValueAsync( new EssGridSelection(2, 1), "42.0");
+            // Scenario > Actual
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3));
 
-            Assert.Equal(5, pivotPovGrid.Slice.Rows);
+            // Measures > Profit > Margin > Sales
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
 
-            Assert.True(string.Equals("42.0", pivotPovGrid.Slice.Data.Ranges[0].Values[11]));
+            defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
+            await defaultGrid.KeepOnlyAsync();
+
+            defaultGrid.Slice.Data.Ranges[0].Values[11] = "680";
+
+            var submitGrid = await defaultGrid.SubmitNewValueAsync( );
+
+            (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).Execute();
+
+            await submitGrid.RefreshAsync();
+
+            Assert.Equal(3, submitGrid.Slice.Rows);
+
+            Assert.True(string.Equals("680.0", submitGrid.Slice.Data.Ranges[0].Values[11]));
+
+            defaultGrid.Slice.Data.Ranges[0].Values[11] = "678";
+
+            submitGrid = await defaultGrid.SubmitNewValueAsync( );
+
+            await (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).ExecuteAsync();
+        }
+        
+        [Fact(DisplayName = @"PerformServerFunctionTests - 27 - Essbase_AfterDefaultGrid_CanZoomInWithSelectionAttributeGrid"), Priority(27)]
+        public async Task Essbase_AfterDefaultGrid_CanZoomInWithSelectionAttributeGrid()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            defaultGrid.Selection.Add(new EssGridSelection(2, 0));
+
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN );
+
+            Assert.Equal(7, zoomInGrid.Slice.Rows);
+
+            Assert.True(string.Equals("24703.0", zoomInGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 27 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(27)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 28 - Essbase_AfterDefaultGrid_CanZoomOutWithSelectionAttributeGrid"), Priority(28)]
+        public async Task Essbase_AfterDefaultGrid_CanZoomOutWithSelectionAttributeGrid()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            defaultGrid.Selection.Add(new EssGridSelection(2, 0));
+
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN );
+
+            defaultGrid.Selection[0].startRow = 6;
+
+            defaultGrid.Selection[0].startColumn = 0;
+
+            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT);
+
+            Assert.Equal(3, zoomOutGrid.Slice.Rows);
+
+            Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 29 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(29)]
         public async Task Essbase_AfterReportCreation_CanExecuteDrillthroughReport()
         {
             // Get an unconnected server.
