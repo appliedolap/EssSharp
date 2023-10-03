@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Linq;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -670,7 +671,121 @@ namespace EssSharp
             Rows = slice.Rows
         };
 
-        internal static EssGrid ToEssGrid( this Grid grid, EssCube cube ) => new EssGrid(grid, cube);
+        internal static EssGridPreferencesAxisSuppression ToEssSharpObject( this ColumnSuppression columnSuppression ) => new EssGridPreferencesAxisSuppression()
+        { 
+            Derived = columnSuppression.Derived,
+            EmptyBlocks = columnSuppression.EmptyBlocks,
+            Error = columnSuppression.Error,
+            Invalid = columnSuppression.Invalid,
+            Missing = columnSuppression.Missing,
+            NoAccess = columnSuppression.NoAccess,
+            UnderScore = columnSuppression.UnderScore,
+            Zero = columnSuppression.Zero
+        };
+
+        internal static EssGridPreferencesAxisSuppression ToEssSharpObject( this RowSuppression rowSuppression ) => new EssGridPreferencesAxisSuppression()
+        {
+            Derived = rowSuppression.Derived,
+            EmptyBlocks = rowSuppression.EmptyBlocks,
+            Error = rowSuppression.Error,
+            Invalid = rowSuppression.Invalid,
+            Missing = rowSuppression.Missing,
+            NoAccess = rowSuppression.NoAccess,
+            UnderScore = rowSuppression.UnderScore,
+            Zero = rowSuppression.Zero
+        };
+
+        internal static EssGridPreferencesZoomIn ToEssSharpObject( this ZoomIn zoomIn ) => new EssGridPreferencesZoomIn()
+        {
+            Ancestor = Enum.IsDefined(typeof(ZoomInAncestor), (ZoomInAncestor)zoomIn.Ancestor) ? (ZoomInAncestor)zoomIn.Ancestor : ZoomInAncestor.UNKNOWN,
+            Mode = Enum.IsDefined(typeof(ZoomInMode), (ZoomInMode)zoomIn.Mode) ? (ZoomInMode)zoomIn.Mode : ZoomInMode.UNKNOWN
+        };
+
+        internal static EssGridPreferencesFormulaRetention ToEssSharpObject( this FormulaRetention formulaRetention ) => new EssGridPreferencesFormulaRetention()
+        {
+            Comments = formulaRetention.Comments,
+            Fill = formulaRetention.Fill,
+            Focus = formulaRetention.Focus,
+            Retrive = formulaRetention.Retrive,
+            Zoom = formulaRetention.Zoom
+        };
+
+        internal static EssGridPreferences ToEssGridPreferences( this Preferences preferences ) => new EssGridPreferences()
+        {
+            CellText = preferences.CellText,
+            ColumnSupression = preferences.ColumnSupression.ToEssSharpObject(),
+            FormulaRetention = preferences.FormulaRetention.ToEssSharpObject(),
+            IncludeDescriptionLabel = preferences.IncludeDescriptionLabel,
+            Indentation = Enum.IsDefined(typeof(IndentationType), (IndentationType)preferences.Indentation) ? (IndentationType)preferences.Indentation : IndentationType.UNKNOWN,
+            MaxColumns = preferences.MaxColumns,
+            MaxRows = preferences.MaxRows,
+            MissingText = preferences.MissingText,
+            Navigate = preferences.Navigate,
+            NoAccessText = preferences.NoAccessText,
+            RemoveUnSelectedGroup = preferences.RemoveUnSelectedGroup,
+            RepeatMemberLabels = preferences.RepeatMemberLabels,
+            RowSupression = preferences.RowSupression.ToEssSharpObject(),
+            WithinSelectedGroup = preferences.WithinSelectedGroup,
+            ZoomIn = preferences.ZoomIn.ToEssSharpObject()
+        };
+
+        internal static ColumnSuppression ToColumnSuppressionObject( this EssGridPreferencesAxisSuppression columnSuppression ) => new ColumnSuppression()
+        {
+            Derived = columnSuppression.Derived,
+            EmptyBlocks = columnSuppression.EmptyBlocks,
+            Error = columnSuppression.Error,
+            Invalid = columnSuppression.Invalid,
+            Missing = columnSuppression.Missing,
+            NoAccess = columnSuppression.NoAccess,
+            UnderScore = columnSuppression.UnderScore,
+            Zero = columnSuppression.Zero
+        };
+
+        internal static RowSuppression ToRowSuppressionObject( this EssGridPreferencesAxisSuppression rowSuppression ) => new RowSuppression()
+        {
+            Derived = rowSuppression.Derived,
+            EmptyBlocks = rowSuppression.EmptyBlocks,
+            Error = rowSuppression.Error,
+            Invalid = rowSuppression.Invalid,
+            Missing = rowSuppression.Missing,
+            NoAccess = rowSuppression.NoAccess,
+            UnderScore = rowSuppression.UnderScore,
+            Zero = rowSuppression.Zero
+        };
+
+        internal static ZoomIn ToZoomInObject( this EssGridPreferencesZoomIn zoomIn ) => new ZoomIn()
+        {
+            Ancestor = Enum.IsDefined(typeof(ZoomIn.AncestorEnum), (ZoomIn.AncestorEnum)zoomIn.Ancestor) ? (ZoomIn.AncestorEnum)zoomIn.Ancestor : throw new NotSupportedException(),
+            Mode = Enum.IsDefined(typeof(ZoomIn.ModeEnum), (ZoomIn.ModeEnum)zoomIn.Mode) ? (ZoomIn.ModeEnum)zoomIn.Mode : throw new NotSupportedException()
+        };
+
+        internal static FormulaRetention ToFormulaRetentionObject( this EssGridPreferencesFormulaRetention formulaRetention ) => new FormulaRetention()
+        {
+            Comments = formulaRetention.Comments,
+            Fill = formulaRetention.Fill,
+            Focus = formulaRetention.Focus,
+            Retrive = formulaRetention.Retrive,
+            Zoom = formulaRetention.Zoom
+        };
+
+        internal static Preferences ToPreferencesObject( this EssGridPreferences preferences ) => new Preferences()
+        {
+            CellText = preferences.CellText,
+            ColumnSupression = preferences.ColumnSupression.ToColumnSuppressionObject(),
+            FormulaRetention = preferences.FormulaRetention.ToFormulaRetentionObject(),
+            IncludeDescriptionLabel = preferences.IncludeDescriptionLabel,
+            Indentation = Enum.IsDefined(typeof(Preferences.IndentationEnum), (Preferences.IndentationEnum)preferences.Indentation) ? (Preferences.IndentationEnum)preferences.Indentation : throw new NotSupportedException(),
+            MaxColumns = preferences.MaxColumns,
+            MaxRows = preferences.MaxRows,
+            MissingText = preferences.MissingText,
+            Navigate = preferences.Navigate,
+            NoAccessText = preferences.NoAccessText,
+            RemoveUnSelectedGroup = preferences.RemoveUnSelectedGroup,
+            RepeatMemberLabels = preferences.RepeatMemberLabels,
+            RowSupression = preferences.RowSupression.ToRowSuppressionObject(),
+            WithinSelectedGroup = preferences.WithinSelectedGroup,
+            ZoomIn = preferences.ZoomIn.ToZoomInObject()
+        };
 
         internal static LockObject ToLockObject( this EssLockOptions lockOptions ) => new LockObject()
         {

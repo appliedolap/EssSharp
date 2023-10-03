@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using EssSharp.Api;
@@ -63,9 +64,33 @@ namespace EssSharp
         /// <inheritdoc />
         public EssGridSlice Slice => _grid.Slice.ToEssGridSlice();
 
+        /// <inheritdoc />
+        public EssGridPreferences Preferences { get; set; }
         #endregion
 
         #region IEssGrid Members
+
+        /// <inheritdoc />
+        public void GetGridPreferences() => GetGridPreferencesAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task GetGridPreferencesAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GridPreferencesApi>();
+
+                if ( await api.GridPreferencesGetAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { } preferences )
+                    throw new Exception("Cannot get grid preferences.");
+
+                Preferences = preferences.ToEssGridPreferences();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get grid preferences for grid ""{Name}"". {e.Message}", e);
+            }
+        }
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
@@ -190,6 +215,35 @@ namespace EssSharp
             catch (Exception e )
             {
                 throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public void SetGridPreferences( EssGridPreferences gridPreferences = null ) => SetGridPreferencesAsync( gridPreferences ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task SetGridPreferencesAsync( EssGridPreferences gridPreferences = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                if ( gridPreferences == null )
+                {
+                    if ( Preferences is null )
+                        await GetGridPreferencesAsync();
+                    gridPreferences = Preferences;
+                }
+
+                var api = GetApi<GridPreferencesApi>();
+                
+                await api.GridPreferencesSetAsync(body: gridPreferences.ToPreferencesObject(), cancellationToken: cancellationToken);
+
+                await GetGridPreferencesAsync();
+
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to set grid preferences for grid ""{Name}"". {e.Message}", e);
             }
         }
 

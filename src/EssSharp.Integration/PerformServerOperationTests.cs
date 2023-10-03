@@ -661,7 +661,28 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 29 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(29)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 29 - Essbase_AfterDefaultGrid_CanSetGridPreferences"), Priority(29)]
+        public async Task Essbase_AfterDefaultGrid_CanSetGridPreferences()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            await defaultGrid.GetGridPreferencesAsync();
+
+            defaultGrid.Preferences.ZoomIn.Ancestor = ZoomInAncestor.BOTTOM;
+
+            defaultGrid.Preferences.ZoomIn.Mode = ZoomInMode.BASE;
+
+            await defaultGrid.SetGridPreferencesAsync();
+
+            Assert.True(defaultGrid.Preferences.ZoomIn.Ancestor == ZoomInAncestor.BOTTOM);
+
+            Assert.True(defaultGrid.Preferences.ZoomIn.Mode == ZoomInMode.BASE);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 30 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(30)]
         public async Task Essbase_AfterReportCreation_CanExecuteDrillthroughReport()
         {
             // Get an unconnected server.

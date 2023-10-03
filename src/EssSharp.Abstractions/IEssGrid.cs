@@ -37,6 +37,21 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        public EssGridPreferences Preferences { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void GetGridPreferences();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Task GetGridPreferencesAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <remarks>Requires the EssGrid.Selection attribute to be set.</remarks>
         public IEssGrid KeepOnly();
 
@@ -73,6 +88,9 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         public Task<IEssGrid> KeepOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IEssGrid Pivot();
 
         /// <summary>
@@ -137,6 +155,11 @@ namespace EssSharp
         /// <param name="gridSelection"></param>
         /// <param name="cancellationToken"></param>
         public Task<IEssGrid> RemoveOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
+
+        public void SetGridPreferences( EssGridPreferences gridPreferences = null );
+
+        /// <inheritdoc />
+        public Task SetGridPreferencesAsync( EssGridPreferences gridPreferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// 

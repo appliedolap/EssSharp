@@ -150,5 +150,29 @@ namespace EssSharp.Integration
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 401 (unauthorized).
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.Unauthorized } });
         }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 07 - Essbase_AfterReportCreation_CanGetGridPrefernces"), Priority(07)]
+        public async Task Essbase_AfterReportCreation_CanGetGridPrefernces()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            await defaultGrid.GetGridPreferencesAsync();
+
+            Assert.True(defaultGrid.Preferences != null);
+
+            Assert.True(defaultGrid.Preferences.RowSupression.NoAccess == false);
+
+            Assert.True(defaultGrid.Preferences.ZoomIn.Ancestor == ZoomInAncestor.TOP);
+
+            Assert.True(defaultGrid.Preferences.CellText == true);
+        }
     }
 }
