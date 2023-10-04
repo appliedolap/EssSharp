@@ -71,6 +71,27 @@ namespace EssSharp
         #region IEssGrid Members
 
         /// <inheritdoc />
+        public IEssLayout GetGridLayout() => GetGridLayoutAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<IEssLayout> GetGridLayoutAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<GridApi>();
+
+                if ( await api.GridGetLayoutGridAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: _grid, cancellationToken: cancellationToken) is not { } layout )
+                    throw new Exception("Cannot get grid layout.");
+
+                return new EssLayout(layout, _cube);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get grid layout for grid ""{Name}"". {e.Message}", e);
+            }
+        }
+        /// <inheritdoc />
         public void GetGridPreferences() => GetGridPreferencesAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />

@@ -120,7 +120,7 @@ namespace EssSharp.Test.Api
             //string databaseName = null;
             //Grid body = null;
             //var response = instance.GridGetLayoutGrid(applicationName, databaseName, body);
-            //Assert.IsType<Grid>(response);
+            //Assert.IsType<GridLayout>(response);
         }
     }
 }

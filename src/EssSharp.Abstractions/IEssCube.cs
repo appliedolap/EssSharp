@@ -246,6 +246,18 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         public Task<IEssFolder> GetFolderAsync( CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="grid"></param>
+        public IEssLayout GetGridLayout( IEssGrid grid );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssLayout> GetGridLayoutAsync( IEssGrid grid, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets a locked object with the given name.

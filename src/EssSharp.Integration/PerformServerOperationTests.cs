@@ -419,7 +419,73 @@ namespace EssSharp.Integration
             Assert.Empty(await group.GetGroupsAsync());
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 19 - Essbase_AfterDefaultGrid_CanRefreshGrid"), Priority(19)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 19 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(19)]
+        public async Task Essbase_AfterReportCreation_CanExecuteDrillthroughReport()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Declare a drillthrough report.
+            var drillthroughReport = default(IEssDrillthroughReport);
+
+            // Find the "drillthrough_samplebasic" report (if available).
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+                if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
+                    drillthroughReport = dtr;
+
+            // If the report is not available return.
+            if ( drillthroughReport is null )
+                return;
+
+            // Capture the (x.x) server version.
+            var version = new Version(string.Join('.', (await server.GetAboutAsync()).Version.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
+
+            // If the server version is 21.4 or higher, execute the drillthrough report and validate the data.
+            if ( version.CompareTo(new Version(major: 21, minor: 4)) >= 0 )
+            {
+                // Execute the report for the given drillthrough range.
+                var (report, columnTypes) = await drillthroughReport
+                    .ExecuteAsync(new EssDrillthroughRange(dimensionMemberSets: new()
+                    {
+                        ["Year"] = new() { "Year", "Year" },
+                        ["Product"] = new() { "Cola", "Cola" },
+                        ["Measures"] = new() { "Sales", "Sales" },
+                        ["Market"] = new() { "New York", "California" },
+                        ["Scenario"] = new() { "Actual", "Actual" }
+                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true));
+
+                // Assert the column type, header name, and first row value for the fifth column.
+                Assert.Equal(expected: "double", actual: columnTypes[4], ignoreCase: true);
+                Assert.Equal(expected: "amount", actual: (string)report[0, 4], ignoreCase: true);
+                Assert.Equal(expected: 501.72, actual: (double)report[1, 4]);
+            }
+            // If the server version is 21.3 or lower, assert that a 405 (method not allowed) exception is thrown.
+            else
+            {
+                // Assert that a NotSupportedException is thrown when we try to execute the drillthrough report,
+                // and capture the inner exception to verify that this method is not allowed by the server.
+                var exception = (await Assert.ThrowsAsync<NotSupportedException>(async () => await drillthroughReport
+                    .ExecuteAsync(new EssDrillthroughRange(dimensionMemberSets: new()
+                    {
+                        ["Year"    ] = new() { "Year",     "Year"       },
+                        ["Product" ] = new() { "Cola",     "Cola"       },
+                        ["Measures"] = new() { "Sales",    "Sales"      },
+                        ["Market"  ] = new() { "New York", "California" },
+                        ["Scenario"] = new() { "Actual",   "Actual"     }
+                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true))
+                )).InnerException;
+
+                // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 405 (method not allowed).
+                Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.MethodNotAllowed } });
+            }
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanRefreshGrid"), Priority(20)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshGrid()
         {
             // Get an unconnected server.
@@ -432,7 +498,7 @@ namespace EssSharp.Integration
             Assert.Equal(3, refreshGrid.Slice.Rows);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanZoomInGrid"), Priority(20)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 21 - Essbase_AfterDefaultGrid_CanZoomInGrid"), Priority(21)]
         public async Task Essbase_AfterDefaultGrid_CanZoomInGrid()
         {
             // Get an unconnected server.
@@ -447,7 +513,7 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("27107.0", zoomInGrid.Slice.Data.Ranges[0].Values[13]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 21 - Essbase_AfterDefaultGrid_CanZoomOutGrid"), Priority(21)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 22 - Essbase_AfterDefaultGrid_CanZoomOutGrid"), Priority(22)]
         public async Task Essbase_AfterDefaultGrid_CanZoomOutGrid()
         {
             // Get an unconnected server.
@@ -464,7 +530,7 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 22 - Essbase_AfterDefaultGrid_CanKeepOnlyGrid"), Priority(22)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 23 - Essbase_AfterDefaultGrid_CanKeepOnlyGrid"), Priority(23)]
         public async Task Essbase_AfterDefaultGrid_CanKeepOnlyGrid()
         {
             // Get an unconnected server.
@@ -481,7 +547,7 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("27107.0", keepOnlyGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 23 - Essbase_AfterDefaultGrid_CanRemoveOnlyGrid"), Priority(23)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 24 - Essbase_AfterDefaultGrid_CanRemoveOnlyGrid"), Priority(24)]
         public async Task Essbase_AfterDefaultGrid_CanRemoveOnlyGrid()
         {
             // Get an unconnected server.
@@ -499,7 +565,7 @@ namespace EssSharp.Integration
         }
 
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 24 - Essbase_AfterDefaultGrid_CanPivotToPovWithSelectionAttributeGrid"), Priority(24)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 25 - Essbase_AfterDefaultGrid_CanPivotToPovWithSelectionAttributeGrid"), Priority(25)]
         public async Task Essbase_AfterDefaultGrid_CanPivotToPovWithSelectionAttributeGrid()
         {
             // Get an unconnected server.
@@ -526,7 +592,7 @@ namespace EssSharp.Integration
         }
 
         
-        [Fact(DisplayName = @"PerformServerFunctionTests - 25 - Essbase_AfterDefaultGrid_CanPivotToPovGrid"), Priority(25)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 26 - Essbase_AfterDefaultGrid_CanPivotToPovGrid"), Priority(26)]
         public async Task Essbase_AfterDefaultGrid_CanPivotToPovGrid()
         {
             // Get an unconnected server.
@@ -571,7 +637,7 @@ namespace EssSharp.Integration
         }
         
         
-        [Fact(DisplayName = @"PerformServerFunctionTests - 26 - Essbase_AfterDefaultGrid_CanSubmitNewValueGrid"), Priority(26)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 27 - Essbase_AfterDefaultGrid_CanSubmitNewValueGrid"), Priority(27)]
         public async Task Essbase_AfterDefaultGrid_CanSubmitNewValueGrid()
         {
             // Get an unconnected server.
@@ -621,7 +687,7 @@ namespace EssSharp.Integration
             await (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).ExecuteAsync();
         }
         
-        [Fact(DisplayName = @"PerformServerFunctionTests - 27 - Essbase_AfterDefaultGrid_CanZoomInWithSelectionAttributeGrid"), Priority(27)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 28 - Essbase_AfterDefaultGrid_CanZoomInWithSelectionAttributeGrid"), Priority(28)]
         public async Task Essbase_AfterDefaultGrid_CanZoomInWithSelectionAttributeGrid()
         {
             // Get an unconnected server.
@@ -638,7 +704,7 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("24703.0", zoomInGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 28 - Essbase_AfterDefaultGrid_CanZoomOutWithSelectionAttributeGrid"), Priority(28)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 29 - Essbase_AfterDefaultGrid_CanZoomOutWithSelectionAttributeGrid"), Priority(29)]
         public async Task Essbase_AfterDefaultGrid_CanZoomOutWithSelectionAttributeGrid()
         {
             // Get an unconnected server.
@@ -661,7 +727,7 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 29 - Essbase_AfterDefaultGrid_CanSetGridPreferences"), Priority(29)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 30 - Essbase_AfterDefaultGrid_CanSetGridPreferences"), Priority(30)]
         public async Task Essbase_AfterDefaultGrid_CanSetGridPreferences()
         {
             // Get an unconnected server.
@@ -682,70 +748,50 @@ namespace EssSharp.Integration
             Assert.True(defaultGrid.Preferences.ZoomIn.Mode == ZoomInMode.BASE);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 30 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(30)]
-        public async Task Essbase_AfterReportCreation_CanExecuteDrillthroughReport()
+        [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences"), Priority(31)]
+        public async Task Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences()
         {
             // Get an unconnected server.
-            var server = GetEssServer();
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            // Get the Sample.Basic cube from the server.
-            var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var defaultGrid = await cube.GetDefaultGridAsync();
 
-            // Declare a drillthrough report.
-            var drillthroughReport = default(IEssDrillthroughReport);
+            await defaultGrid.GetGridPreferencesAsync();
 
-            // Find the "drillthrough_samplebasic" report (if available).
-            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
-                if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
-                    drillthroughReport = dtr;
+            defaultGrid.Preferences.ZoomIn.Ancestor = ZoomInAncestor.BOTTOM;
 
-            // If the report is not available return.
-            if ( drillthroughReport is null )
-                return;
+            defaultGrid.Preferences.ZoomIn.Mode = ZoomInMode.BASE;
 
-            // Capture the (x.x) server version.
-            var version = new Version(string.Join('.', (await server.GetAboutAsync()).Version.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
+            defaultGrid.Preferences.RepeatMemberLabels = false;
 
-            // If the server version is 21.4 or higher, execute the drillthrough report and validate the data.
-            if ( version.CompareTo(new Version(major: 21, minor: 4)) >= 0  )
-            {
-                // Execute the report for the given drillthrough range.
-                var (report, columnTypes) = await drillthroughReport
-                    .ExecuteAsync(new EssDrillthroughRange(dimensionMemberSets: new()
-                    {
-                        ["Year"    ] = new() { "Year",     "Year"       },
-                        ["Product" ] = new() { "Cola",     "Cola"       },
-                        ["Measures"] = new() { "Sales",    "Sales"      },
-                        ["Market"  ] = new() { "New York", "California" },
-                        ["Scenario"] = new() { "Actual",   "Actual"     }
-                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true));
+            await defaultGrid.SetGridPreferencesAsync();
 
-                // Assert the column type, header name, and first row value for the fifth column.
-                Assert.Equal(expected: "double", actual:       columnTypes[4], ignoreCase: true);
-                Assert.Equal(expected: "amount", actual: (string)report[0, 4], ignoreCase: true);
-                Assert.Equal(expected:   501.72, actual: (double)report[1, 4]);
-            }
-            // If the server version is 21.3 or lower, assert that a 405 (method not allowed) exception is thrown.
-            else
-            {
-                // Assert that a NotSupportedException is thrown when we try to execute the drillthrough report,
-                // and capture the inner exception to verify that this method is not allowed by the server.
-                var exception = (await Assert.ThrowsAsync<NotSupportedException>(async () => await drillthroughReport
-                    .ExecuteAsync(new EssDrillthroughRange(dimensionMemberSets: new()
-                    {
-                        ["Year"    ] = new() { "Year",     "Year"       },
-                        ["Product" ] = new() { "Cola",     "Cola"       },
-                        ["Measures"] = new() { "Sales",    "Sales"      },
-                        ["Market"  ] = new() { "New York", "California" },
-                        ["Scenario"] = new() { "Actual",   "Actual"     }
-                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true))
-                )).InnerException;
+            /*
+            await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 1));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0,3));
+            */
 
-                // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 405 (method not allowed).
-                Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.MethodNotAllowed } });
-            }
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new List<EssGridSelection>() { new EssGridSelection(0, 1), new EssGridSelection(0, 2), new EssGridSelection(0, 3),  new EssGridSelection(2, 0) /*new EssGridSelection(0, 4)*/ } );
+
+            Assert.Equal(15361, defaultGrid.Slice.Rows);
+
+            Assert.True(string.Equals("-208.0", defaultGrid.Slice.Data.Ranges[0].Values[199]));
+
+            Assert.True(string.Equals("Mar", defaultGrid.Slice.Data.Ranges[0].Values[18]));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 32 - Essbase_AfterDefaultGrid_CanGetGridLayout"), Priority(32)]
+        public async Task Essbase_AfterDefaultGrid_CanGetGridLayout()
+        {
+            // Get an unconnected server.
+            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            await defaultGrid.GetGridLayoutAsync();
         }
     }
 }

@@ -29,5 +29,6 @@
         Generation,
         Level,
         Lock,
+        Layout
     }
 }

@@ -42,6 +42,17 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        public IEssLayout GetGridLayout();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssLayout> GetGridLayoutAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void GetGridPreferences();
 
         /// <summary>
@@ -156,9 +167,17 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         public Task<IEssGrid> RemoveOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridPreferences"></param>
         public void SetGridPreferences( EssGridPreferences gridPreferences = null );
 
-        /// <inheritdoc />
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gridPreferences"></param>
+        /// <param name="cancellationToken"></param>
         public Task SetGridPreferencesAsync( EssGridPreferences gridPreferences = null, CancellationToken cancellationToken = default );
 
         /// <summary>

@@ -6763,7 +6763,7 @@ paths:
           type: string
       requestBody:
         content:
-          '*/*':
+          application/json:
             schema:
               $ref: '#/components/schemas/Grid'
         description: <p>The current grid displayed.</p>
@@ -6773,10 +6773,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Grid'
+                $ref: '#/components/schemas/GridLayout'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Grid'
+                $ref: '#/components/schemas/GridLayout'
           description: <p><strong>OK</strong></p><p>Layout grid returned successfully.</p>
         "400":
           content: {}
@@ -18990,16 +18990,16 @@ components:
           hidden: true
           pov: pov
           displayName: displayName
-          column: 7
+          column: 0
           name: name
-          row: 9
+          row: 6
         - expanded: true
           hidden: true
           pov: pov
           displayName: displayName
-          column: 7
+          column: 0
           name: name
-          row: 9
+          row: 6
       properties:
         slice:
           $ref: '#/components/schemas/Slice'
@@ -19016,9 +19016,9 @@ components:
         hidden: true
         pov: pov
         displayName: displayName
-        column: 7
+        column: 0
         name: name
-        row: 9
+        row: 6
       properties:
         expanded:
           type: boolean
@@ -19254,16 +19254,16 @@ components:
             hidden: true
             pov: pov
             displayName: displayName
-            column: 7
+            column: 0
             name: name
-            row: 9
+            row: 6
           - expanded: true
             hidden: true
             pov: pov
             displayName: displayName
-            column: 7
+            column: 0
             name: name
-            row: 9
+            row: 6
         coordinates:
         - 0
         - 0
@@ -19428,16 +19428,16 @@ components:
                 - texts
               - - texts
                 - texts
-              values:
-              - - values
-                - values
-              - - values
-                - values
               dataFormats:
               - - dataFormats
                 - dataFormats
               - - dataFormats
                 - dataFormats
+              values:
+              - - values
+                - values
+              - - values
+                - values
               statuses:
               - - statuses
                 - statuses
@@ -19488,16 +19488,16 @@ components:
           - texts
         - - texts
           - texts
-        values:
-        - - values
-          - values
-        - - values
-          - values
         dataFormats:
         - - dataFormats
           - dataFormats
         - - dataFormats
           - dataFormats
+        values:
+        - - values
+          - values
+        - - values
+          - values
         statuses:
         - - statuses
           - statuses
@@ -19514,13 +19514,7 @@ components:
         - - filters
           - filters
       properties:
-        values:
-          items:
-            items:
-              type: string
-            type: array
-          type: array
-        types:
+        statuses:
           items:
             items:
               type: string
@@ -19532,13 +19526,19 @@ components:
               type: string
             type: array
           type: array
+        enumIds:
+          items:
+            items:
+              type: string
+            type: array
+          type: array
         dataFormats:
           items:
             items:
               type: string
             type: array
           type: array
-        statuses:
+        types:
           items:
             items:
               type: string
@@ -19550,7 +19550,7 @@ components:
               type: string
             type: array
           type: array
-        enumIds:
+        values:
           items:
             items:
               type: string
@@ -19601,16 +19601,16 @@ components:
             - texts
           - - texts
             - texts
-          values:
-          - - values
-            - values
-          - - values
-            - values
           dataFormats:
           - - dataFormats
             - dataFormats
           - - dataFormats
             - dataFormats
+          values:
+          - - values
+            - values
+          - - values
+            - values
           statuses:
           - - statuses
             - statuses
@@ -19801,16 +19801,16 @@ components:
               - texts
             - - texts
               - texts
-            values:
-            - - values
-              - values
-            - - values
-              - values
             dataFormats:
             - - dataFormats
               - dataFormats
             - - dataFormats
               - dataFormats
+            values:
+            - - values
+              - values
+            - - values
+              - values
             statuses:
             - - statuses
               - statuses
@@ -26922,6 +26922,70 @@ components:
         items:
           items:
             $ref: '#/components/schemas/DimensionMember'
+          type: array
+      type: object
+    GridLayout:
+      example:
+        data:
+          types:
+          - - types
+            - types
+          - - types
+            - types
+          texts:
+          - - texts
+            - texts
+          - - texts
+            - texts
+          dataFormats:
+          - - dataFormats
+            - dataFormats
+          - - dataFormats
+            - dataFormats
+          values:
+          - - values
+            - values
+          - - values
+            - values
+          statuses:
+          - - statuses
+            - statuses
+          - - statuses
+            - statuses
+          enumIds:
+          - - enumIds
+            - enumIds
+          - - enumIds
+            - enumIds
+          filters:
+          - - filters
+            - filters
+          - - filters
+            - filters
+        alias: alias
+        dimensions:
+        - expanded: true
+          hidden: true
+          pov: pov
+          displayName: displayName
+          column: 0
+          name: name
+          row: 6
+        - expanded: true
+          hidden: true
+          pov: pov
+          displayName: displayName
+          column: 0
+          name: name
+          row: 6
+      properties:
+        data:
+          $ref: '#/components/schemas/LayoutData'
+        alias:
+          type: string
+        dimensions:
+          items:
+            $ref: '#/components/schemas/GridDimension'
           type: array
       type: object
     FileBean_permissions:

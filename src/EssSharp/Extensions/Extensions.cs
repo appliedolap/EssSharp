@@ -671,6 +671,17 @@ namespace EssSharp
             Rows = slice.Rows
         };
 
+        internal static EssGridLayoutData ToEssSharpObject( this LayoutData layoutData ) => new EssGridLayoutData()
+        {
+            Statuses = layoutData.Statuses,
+            Texts = layoutData.Texts,
+            EnumIds = layoutData.EnumIds,
+            DataFormats = layoutData.DataFormats,
+            Types = layoutData.Types,
+            Filters = layoutData.Filters,
+            Values = layoutData.Values
+        };
+
         internal static EssGridPreferencesAxisSuppression ToEssSharpObject( this ColumnSuppression columnSuppression ) => new EssGridPreferencesAxisSuppression()
         { 
             Derived = columnSuppression.Derived,

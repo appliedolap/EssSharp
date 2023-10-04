@@ -54,20 +54,12 @@ namespace EssSharp.Test.Model
 
 
         /// <summary>
-        /// Test the property 'Values'
+        /// Test the property 'Statuses'
         /// </summary>
         [Fact]
-        public void ValuesTest()
+        public void StatusesTest()
         {
-            // TODO unit test for the property 'Values'
-        }
-        /// <summary>
-        /// Test the property 'Types'
-        /// </summary>
-        [Fact]
-        public void TypesTest()
-        {
-            // TODO unit test for the property 'Types'
+            // TODO unit test for the property 'Statuses'
         }
         /// <summary>
         /// Test the property 'Texts'
@@ -78,6 +70,14 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'Texts'
         }
         /// <summary>
+        /// Test the property 'EnumIds'
+        /// </summary>
+        [Fact]
+        public void EnumIdsTest()
+        {
+            // TODO unit test for the property 'EnumIds'
+        }
+        /// <summary>
         /// Test the property 'DataFormats'
         /// </summary>
         [Fact]
@@ -86,12 +86,12 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'DataFormats'
         }
         /// <summary>
-        /// Test the property 'Statuses'
+        /// Test the property 'Types'
         /// </summary>
         [Fact]
-        public void StatusesTest()
+        public void TypesTest()
         {
-            // TODO unit test for the property 'Statuses'
+            // TODO unit test for the property 'Types'
         }
         /// <summary>
         /// Test the property 'Filters'
@@ -102,12 +102,12 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'Filters'
         }
         /// <summary>
-        /// Test the property 'EnumIds'
+        /// Test the property 'Values'
         /// </summary>
         [Fact]
-        public void EnumIdsTest()
+        public void ValuesTest()
         {
-            // TODO unit test for the property 'EnumIds'
+            // TODO unit test for the property 'Values'
         }
 
     }

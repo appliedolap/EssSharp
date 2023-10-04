@@ -418,7 +418,7 @@ catch (ApiException e)
 
 <a id="gridgetlayoutgrid"></a>
 # **GridGetLayoutGrid**
-> Grid GridGetLayoutGrid (string applicationName, string databaseName, Grid body)
+> GridLayout GridGetLayoutGrid (string applicationName, string databaseName, Grid body)
 
 Get Layout Grid
 
@@ -452,7 +452,7 @@ namespace Example
             try
             {
                 // Get Layout Grid
-                Grid result = apiInstance.GridGetLayoutGrid(applicationName, databaseName, body);
+                GridLayout result = apiInstance.GridGetLayoutGrid(applicationName, databaseName, body);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -473,7 +473,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Layout Grid
-    ApiResponse<Grid> response = apiInstance.GridGetLayoutGridWithHttpInfo(applicationName, databaseName, body);
+    ApiResponse<GridLayout> response = apiInstance.GridGetLayoutGridWithHttpInfo(applicationName, databaseName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -496,7 +496,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**Grid**](Grid.md)
+[**GridLayout**](GridLayout.md)
 
 ### Authorization
 
@@ -504,7 +504,7 @@ catch (ApiException e)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json, application/xml
 
 

@@ -145,8 +145,8 @@ namespace EssSharp.Api
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for default grid.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;The current grid displayed.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>Grid</returns>
-        Grid GridGetLayoutGrid(string applicationName, string databaseName, Grid body, int operationIndex = 0);
+        /// <returns>GridLayout</returns>
+        GridLayout GridGetLayoutGrid(string applicationName, string databaseName, Grid body, int operationIndex = 0);
 
         /// <summary>
         /// Get Layout Grid
@@ -159,8 +159,8 @@ namespace EssSharp.Api
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for default grid.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;The current grid displayed.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Grid</returns>
-        ApiResponse<Grid> GridGetLayoutGridWithHttpInfo(string applicationName, string databaseName, Grid body, int operationIndex = 0);
+        /// <returns>ApiResponse of GridLayout</returns>
+        ApiResponse<GridLayout> GridGetLayoutGridWithHttpInfo(string applicationName, string databaseName, Grid body, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -300,8 +300,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;The current grid displayed.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Grid</returns>
-        System.Threading.Tasks.Task<Grid> GridGetLayoutGridAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of GridLayout</returns>
+        System.Threading.Tasks.Task<GridLayout> GridGetLayoutGridAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Layout Grid
@@ -315,8 +315,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;The current grid displayed.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Grid)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Grid>> GridGetLayoutGridWithHttpInfoAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (GridLayout)</returns>
+        System.Threading.Tasks.Task<ApiResponse<GridLayout>> GridGetLayoutGridWithHttpInfoAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -1219,10 +1219,10 @@ namespace EssSharp.Api
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for default grid.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;The current grid displayed.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>Grid</returns>
-        public Grid GridGetLayoutGrid(string applicationName, string databaseName, Grid body, int operationIndex = 0)
+        /// <returns>GridLayout</returns>
+        public GridLayout GridGetLayoutGrid(string applicationName, string databaseName, Grid body, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<Grid> localVarResponse = GridGetLayoutGridWithHttpInfo(applicationName, databaseName, body);
+            EssSharp.Client.ApiResponse<GridLayout> localVarResponse = GridGetLayoutGridWithHttpInfo(applicationName, databaseName, body);
             return localVarResponse.Data;
         }
 
@@ -1234,8 +1234,8 @@ namespace EssSharp.Api
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for default grid.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;The current grid displayed.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Grid</returns>
-        public EssSharp.Client.ApiResponse<Grid> GridGetLayoutGridWithHttpInfo(string applicationName, string databaseName, Grid body, int operationIndex = 0)
+        /// <returns>ApiResponse of GridLayout</returns>
+        public EssSharp.Client.ApiResponse<GridLayout> GridGetLayoutGridWithHttpInfo(string applicationName, string databaseName, Grid body, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1258,6 +1258,7 @@ namespace EssSharp.Api
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -1293,7 +1294,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Grid>("/applications/{applicationName}/databases/{databaseName}/grid/layout", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<GridLayout>("/applications/{applicationName}/databases/{databaseName}/grid/layout", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GridGetLayoutGrid", localVarResponse);
@@ -1315,10 +1316,10 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;The current grid displayed.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Grid</returns>
-        public async System.Threading.Tasks.Task<Grid> GridGetLayoutGridAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of GridLayout</returns>
+        public async System.Threading.Tasks.Task<GridLayout> GridGetLayoutGridAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<Grid> localVarResponse = await GridGetLayoutGridWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<GridLayout> localVarResponse = await GridGetLayoutGridWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1331,8 +1332,8 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;The current grid displayed.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Grid)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridGetLayoutGridWithHttpInfoAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (GridLayout)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GridLayout>> GridGetLayoutGridWithHttpInfoAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1356,6 +1357,7 @@ namespace EssSharp.Api
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -1391,7 +1393,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Grid>("/applications/{applicationName}/databases/{databaseName}/grid/layout", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<GridLayout>("/applications/{applicationName}/databases/{databaseName}/grid/layout", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

@@ -7938,7 +7938,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Layout grid returned successfully.</p>",
             "schema": {
-              "$ref": "#/definitions/Grid"
+              "$ref": "#/definitions/GridLayout"
             }
           },
           "400": {
@@ -7947,7 +7947,10 @@
           "500": {
             "description": "<p>Internal Server Error.</p>"
           }
-        }
+        },
+        "consumes": [
+          "application/json"
+        ]
       }
     },
     "/applications/{applicationName}/databases/{databaseName}/grid/layout/{layout}": {
@@ -20285,16 +20288,7 @@
     "LayoutData": {
       "type": "object",
       "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "types": {
+        "statuses": {
           "type": "array",
           "items": {
             "type": "array",
@@ -20312,6 +20306,15 @@
             }
           }
         },
+        "enumIds": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
         "dataFormats": {
           "type": "array",
           "items": {
@@ -20321,7 +20324,7 @@
             }
           }
         },
-        "statuses": {
+        "types": {
           "type": "array",
           "items": {
             "type": "array",
@@ -20339,7 +20342,7 @@
             }
           }
         },
-        "enumIds": {
+        "values": {
           "type": "array",
           "items": {
             "type": "array",
@@ -24363,6 +24366,23 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DimensionMember"
+          }
+        }
+      }
+    },
+    "GridLayout": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/LayoutData"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GridDimension"
           }
         }
       }

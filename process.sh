@@ -37,6 +37,12 @@ cat temp.json | jq '.paths."/applications".post.consumes = ["application/json"]'
 # Fix the consumes for the execute mdx endpoint
 cat temp.json | jq '.paths."/applications/{application}/databases/{database}/mdx".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
+# Fix the consumes for the execute mdx endpoint
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid/layout".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
+
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid/layout".post.responses."200".schema = {"$ref": "#/definitions/GridLayout"}' > json.tmp && mv json.tmp temp.json
+
+# Fix 200 return schema
 cat temp.json | jq '.paths."/applications/{applicationName}/configurations".get.responses."200".schema = {"$ref": "#/definitions/ApplicationConfigList"}' > json.tmp && mv json.tmp temp.json
 
 # Fix 200 return schema
@@ -422,6 +428,93 @@ cat temp.json | jq '.definitions.MemberBean.properties += {
   },
   "parentName": {
     "type": "string"
+  }
+}' > json.tmp && mv json.tmp temp.json
+
+cat temp.json | jq '.definitions.GridLayout = {
+  "type": "object",
+  "properties": {
+    "data": {
+      "$ref": "#/definitions/LayoutData"
+    },
+    "alias": {
+      "type": "string"
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GridDimension"
+      }
+    }
+  }
+}' > json.tmp && mv json.tmp temp.json
+
+cat temp.json | jq '.definitions.LayoutData = {
+  "type": "object",
+  "properties": {
+    "statuses": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "texts": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "enumIds": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "dataFormats": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "filters": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
   }
 }' > json.tmp && mv json.tmp temp.json
 

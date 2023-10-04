@@ -456,6 +456,19 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        public IEssLayout GetGridLayout( IEssGrid layout ) => GetGridLayoutAsync( layout ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// 
+        /// TODO: Take out of IEssGrid or IEssCube? this is redundant if you have a IEssGrid object already. 
+        /// 
+        /// change to GetDefaultLayout and use this with no params
+        /// => (await GetDefaultGridAsync()).GetLayoutAsync() ??
+        /// 
+        public Task<IEssLayout> GetGridLayoutAsync( IEssGrid layout, CancellationToken cancellationToken = default ) =>
+            layout.GetGridLayoutAsync(cancellationToken: cancellationToken);
+
+        /// <inheritdoc />
         /// <returns>An <see cref="IEssLockObject"/> object.</returns>
         public IEssLockObject GetLockedObject( string name ) => GetLockedObjectAsync( name ).GetAwaiter().GetResult();
 

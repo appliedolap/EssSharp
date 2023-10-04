@@ -32,47 +32,23 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="LayoutData" /> class.
         /// </summary>
-        /// <param name="values">values.</param>
-        /// <param name="types">types.</param>
-        /// <param name="texts">texts.</param>
-        /// <param name="dataFormats">dataFormats.</param>
         /// <param name="statuses">statuses.</param>
-        /// <param name="filters">filters.</param>
+        /// <param name="texts">texts.</param>
         /// <param name="enumIds">enumIds.</param>
-        public LayoutData(List<List<string>> values = default(List<List<string>>), List<List<string>> types = default(List<List<string>>), List<List<string>> texts = default(List<List<string>>), List<List<string>> dataFormats = default(List<List<string>>), List<List<string>> statuses = default(List<List<string>>), List<List<string>> filters = default(List<List<string>>), List<List<string>> enumIds = default(List<List<string>>))
+        /// <param name="dataFormats">dataFormats.</param>
+        /// <param name="types">types.</param>
+        /// <param name="filters">filters.</param>
+        /// <param name="values">values.</param>
+        public LayoutData(List<List<string>> statuses = default(List<List<string>>), List<List<string>> texts = default(List<List<string>>), List<List<string>> enumIds = default(List<List<string>>), List<List<string>> dataFormats = default(List<List<string>>), List<List<string>> types = default(List<List<string>>), List<List<string>> filters = default(List<List<string>>), List<List<string>> values = default(List<List<string>>))
         {
-            this.Values = values;
-            this.Types = types;
-            this.Texts = texts;
-            this.DataFormats = dataFormats;
             this.Statuses = statuses;
-            this.Filters = filters;
+            this.Texts = texts;
             this.EnumIds = enumIds;
+            this.DataFormats = dataFormats;
+            this.Types = types;
+            this.Filters = filters;
+            this.Values = values;
         }
-
-        /// <summary>
-        /// Gets or Sets Values
-        /// </summary>
-        [DataMember(Name = "values", EmitDefaultValue = false)]
-        public List<List<string>> Values { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Types
-        /// </summary>
-        [DataMember(Name = "types", EmitDefaultValue = false)]
-        public List<List<string>> Types { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Texts
-        /// </summary>
-        [DataMember(Name = "texts", EmitDefaultValue = false)]
-        public List<List<string>> Texts { get; set; }
-
-        /// <summary>
-        /// Gets or Sets DataFormats
-        /// </summary>
-        [DataMember(Name = "dataFormats", EmitDefaultValue = false)]
-        public List<List<string>> DataFormats { get; set; }
 
         /// <summary>
         /// Gets or Sets Statuses
@@ -81,16 +57,40 @@ namespace EssSharp.Model
         public List<List<string>> Statuses { get; set; }
 
         /// <summary>
-        /// Gets or Sets Filters
+        /// Gets or Sets Texts
         /// </summary>
-        [DataMember(Name = "filters", EmitDefaultValue = false)]
-        public List<List<string>> Filters { get; set; }
+        [DataMember(Name = "texts", EmitDefaultValue = false)]
+        public List<List<string>> Texts { get; set; }
 
         /// <summary>
         /// Gets or Sets EnumIds
         /// </summary>
         [DataMember(Name = "enumIds", EmitDefaultValue = false)]
         public List<List<string>> EnumIds { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DataFormats
+        /// </summary>
+        [DataMember(Name = "dataFormats", EmitDefaultValue = false)]
+        public List<List<string>> DataFormats { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Types
+        /// </summary>
+        [DataMember(Name = "types", EmitDefaultValue = false)]
+        public List<List<string>> Types { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Filters
+        /// </summary>
+        [DataMember(Name = "filters", EmitDefaultValue = false)]
+        public List<List<string>> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Values
+        /// </summary>
+        [DataMember(Name = "values", EmitDefaultValue = false)]
+        public List<List<string>> Values { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -100,13 +100,13 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class LayoutData {\n");
-            sb.Append("  Values: ").Append(Values).Append("\n");
-            sb.Append("  Types: ").Append(Types).Append("\n");
-            sb.Append("  Texts: ").Append(Texts).Append("\n");
-            sb.Append("  DataFormats: ").Append(DataFormats).Append("\n");
             sb.Append("  Statuses: ").Append(Statuses).Append("\n");
-            sb.Append("  Filters: ").Append(Filters).Append("\n");
+            sb.Append("  Texts: ").Append(Texts).Append("\n");
             sb.Append("  EnumIds: ").Append(EnumIds).Append("\n");
+            sb.Append("  DataFormats: ").Append(DataFormats).Append("\n");
+            sb.Append("  Types: ").Append(Types).Append("\n");
+            sb.Append("  Filters: ").Append(Filters).Append("\n");
+            sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -143,16 +143,10 @@ namespace EssSharp.Model
             }
             return 
                 (
-                    this.Values == input.Values ||
-                    this.Values != null &&
-                    input.Values != null &&
-                    this.Values.SequenceEqual(input.Values)
-                ) && 
-                (
-                    this.Types == input.Types ||
-                    this.Types != null &&
-                    input.Types != null &&
-                    this.Types.SequenceEqual(input.Types)
+                    this.Statuses == input.Statuses ||
+                    this.Statuses != null &&
+                    input.Statuses != null &&
+                    this.Statuses.SequenceEqual(input.Statuses)
                 ) && 
                 (
                     this.Texts == input.Texts ||
@@ -161,16 +155,22 @@ namespace EssSharp.Model
                     this.Texts.SequenceEqual(input.Texts)
                 ) && 
                 (
+                    this.EnumIds == input.EnumIds ||
+                    this.EnumIds != null &&
+                    input.EnumIds != null &&
+                    this.EnumIds.SequenceEqual(input.EnumIds)
+                ) && 
+                (
                     this.DataFormats == input.DataFormats ||
                     this.DataFormats != null &&
                     input.DataFormats != null &&
                     this.DataFormats.SequenceEqual(input.DataFormats)
                 ) && 
                 (
-                    this.Statuses == input.Statuses ||
-                    this.Statuses != null &&
-                    input.Statuses != null &&
-                    this.Statuses.SequenceEqual(input.Statuses)
+                    this.Types == input.Types ||
+                    this.Types != null &&
+                    input.Types != null &&
+                    this.Types.SequenceEqual(input.Types)
                 ) && 
                 (
                     this.Filters == input.Filters ||
@@ -179,10 +179,10 @@ namespace EssSharp.Model
                     this.Filters.SequenceEqual(input.Filters)
                 ) && 
                 (
-                    this.EnumIds == input.EnumIds ||
-                    this.EnumIds != null &&
-                    input.EnumIds != null &&
-                    this.EnumIds.SequenceEqual(input.EnumIds)
+                    this.Values == input.Values ||
+                    this.Values != null &&
+                    input.Values != null &&
+                    this.Values.SequenceEqual(input.Values)
                 );
         }
 
@@ -195,33 +195,33 @@ namespace EssSharp.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Values != null)
+                if (this.Statuses != null)
                 {
-                    hashCode = (hashCode * 59) + this.Values.GetHashCode();
-                }
-                if (this.Types != null)
-                {
-                    hashCode = (hashCode * 59) + this.Types.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Statuses.GetHashCode();
                 }
                 if (this.Texts != null)
                 {
                     hashCode = (hashCode * 59) + this.Texts.GetHashCode();
                 }
+                if (this.EnumIds != null)
+                {
+                    hashCode = (hashCode * 59) + this.EnumIds.GetHashCode();
+                }
                 if (this.DataFormats != null)
                 {
                     hashCode = (hashCode * 59) + this.DataFormats.GetHashCode();
                 }
-                if (this.Statuses != null)
+                if (this.Types != null)
                 {
-                    hashCode = (hashCode * 59) + this.Statuses.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Types.GetHashCode();
                 }
                 if (this.Filters != null)
                 {
                     hashCode = (hashCode * 59) + this.Filters.GetHashCode();
                 }
-                if (this.EnumIds != null)
+                if (this.Values != null)
                 {
-                    hashCode = (hashCode * 59) + this.EnumIds.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Values.GetHashCode();
                 }
                 return hashCode;
             }
