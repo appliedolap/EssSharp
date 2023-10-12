@@ -20,10 +20,20 @@ namespace EssSharp
 
         private readonly EssCube _cube;
         private Grid _grid;
+        private string _essGridAlias = "";
+        private List<EssGridDimension> _essGridDimension = new List<EssGridDimension>();
+        private EssGridSlice _essGridSlice = new EssGridSlice();
 
         #endregion
 
         #region Constructors
+
+        /// <summary />
+        internal EssGrid( EssCube cube ) : base(cube?.Configuration, cube?.Client)
+        {
+            _cube = cube ??
+                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssCube)}.");
+        }
 
         /// <summary />
         internal EssGrid( Grid grid, EssCube cube ) : base(cube?.Configuration, cube?.Client)
@@ -40,8 +50,16 @@ namespace EssSharp
         #region EssObject Properties
 
         /// <inheritdoc />
-        public override string Name => _grid.Alias;
+        public override string Name //=> _grid.Alias;
+        {
+            get
+            {
+                if ( _grid?.Alias is { } name )
+                    return name;
 
+                return _essGridAlias;
+            }
+        }
         /// <inheritdoc />
         public override EssType Type => EssType.Grid;
 
@@ -53,19 +71,67 @@ namespace EssSharp
         public IEssCube Cube => _cube;
 
         /// <inheritdoc />
-        public string Alias => _grid.Alias;
+        public string Alias //=> _grid.Alias;
+        {
+            get
+            {
+                if ( _grid?.Alias is { } alias )
+                    return alias;
 
+                return _essGridAlias;
+            }
+            set
+            {
+                if ( _grid is not null )
+                    _grid.Alias = value;
+                else 
+                    _essGridAlias = value;
+            }
+        }
         /// <inheritdoc />
-        public List<EssGridDimension> Dimensions => _grid.Dimensions.ToEssGridDimension();
+        public List<EssGridDimension> Dimensions //=> _grid.Dimensions.ToEssGridDimension();
+        {
+            get
+            {
+                if ( _grid?.Dimensions?.ToEssGridDimension() is { } dimensions )
+                    return dimensions;
+
+                return _essGridDimension;
+            }
+            set
+            {
+                if ( _grid is not null )
+                    _grid.Dimensions = value?.ToModelBean();
+                else
+                    _essGridDimension = value;
+            }
+        } 
 
         /// <inheritdoc />
         public List<EssGridSelection> Selection { get; set; } = new List<EssGridSelection>();
 
         /// <inheritdoc />
-        public EssGridSlice Slice => _grid.Slice.ToEssGridSlice();
+        public EssGridSlice Slice //=> _grid?.Slice?.ToEssGridSlice() ?? new EssGridSlice();
+        {
+            get
+            {
+                if ( _grid?.Slice?.ToEssGridSlice() is { } slice )
+                    return slice;
+
+                return _essGridSlice;
+            }
+            set
+            {
+                if ( _grid is not null )
+                    _grid.Slice = value?.ToModelBean();
+                else
+                    _essGridSlice = value;
+            }
+        }
 
         /// <inheritdoc />
         public EssGridPreferences Preferences { get; set; }
+
         #endregion
 
         #region IEssGrid Members
@@ -270,20 +336,26 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public IEssGrid SubmitNewValue( ) => SubmitNewValueAsync().GetAwaiter().GetResult();
+        public IEssGrid Submit( ) => SubmitAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public async Task<IEssGrid> SubmitNewValueAsync( CancellationToken cancellationToken = default )
+        public async Task<IEssGrid> SubmitAsync( CancellationToken cancellationToken = default )
         {
             try
             {
-                _grid.Slice.DirtyCells = new List<int>();
+                if (_grid is not null)
+                    _grid.Slice.DirtyCells = new List<int>();
+                else 
+                    _essGridSlice.DirtyCells ??= new List<int>();
 
                 for ( int i = 0; i < Slice.Data.Ranges[0].Types.Count; i++ )
                 {
                     if ( Slice.Data.Ranges[0].Types[i] == "2" )
-                        _grid.Slice.DirtyCells.Add(i);
+                        if ( _grid is not null )
+                            _grid.Slice.DirtyCells.Add(i);
+                        else
+                            _essGridSlice.DirtyCells.Add(i);
                 }
 
                 //_grid.Slice.DirtyCells.AddRange(Enumerable.Range(0, _grid.Slice.Data.Ranges[0].Values.Count));
@@ -395,7 +467,12 @@ namespace EssSharp
 
                 return new GridOperation()
                         {
-                            Grid = this.ToModelBean(),
+                            Grid = _grid ?? new Grid() 
+                            {
+                                Alias = this.Alias,
+                                Dimensions = this.Dimensions.ToModelBean(),
+                                Slice = this.Slice.ToModelBean(),  
+                            },
                             Action = action,
                             Alias = this.Alias,
                             Ranges = ranges,

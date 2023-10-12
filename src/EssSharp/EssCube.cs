@@ -456,6 +456,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns></returns>
+        public IEssGrid GetGrid() =>
+            new EssGrid(this);
+
+        /// <inheritdoc />
         public IEssLayout GetGridLayout( IEssGrid layout ) => GetGridLayoutAsync( layout ).GetAwaiter().GetResult();
 
         /// <inheritdoc />

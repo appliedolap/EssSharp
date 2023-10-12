@@ -250,6 +250,12 @@ namespace EssSharp
         /// 
         /// </summary>
         /// <param name="grid"></param>
+        public IEssGrid GetGrid();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="grid"></param>
         public IEssLayout GetGridLayout( IEssGrid grid );
 
         /// <summary>
