@@ -744,7 +744,7 @@ namespace EssSharp
                         await folder.UploadFileAsync(path: options.LocalDataFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
                         await folder.UploadFileAsync(stream: options.LocalDataFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                    options.File = new list<string>() { $@"catalog{dataFile.FullPath}" };
+                    options.File = new List<string>() { $@"catalog{dataFile.FullPath}" };
                 }
 
                 // If the rule list is null...
@@ -761,7 +761,7 @@ namespace EssSharp
                             await folder.UploadFileAsync(path: options.LocalRuleFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
                             await folder.UploadFileAsync(stream: options.LocalRuleFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                        options.Rule = new list<string>() { $@"catalog{ruleFile.FullPath}" };
+                        options.Rule = new List<string>() { $@"catalog{ruleFile.FullPath}" };
                     }
                 }
 
