@@ -53,12 +53,12 @@ namespace EssSharp
         /// <summary>
         /// Gets grid preferences.
         /// </summary>
-        public void GetGridPreferences();
+        public EssGridPreferences GetGridPreferences();
 
         /// <summary>
         /// Asynchronously gets grid preferences.
         /// </summary>
-        public Task GetGridPreferencesAsync( CancellationToken cancellationToken = default );
+        public Task<EssGridPreferences> GetGridPreferencesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Keeps the dimension or dimensions at current selected cell or cells and removes all else.

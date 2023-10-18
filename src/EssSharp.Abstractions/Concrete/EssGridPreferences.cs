@@ -30,6 +30,8 @@ namespace EssSharp
 
         public bool IncludeDescriptionLabel { get; set; }
 
+        public bool IncludeSelection { get; set; } 
+
         public IndentationType Indentation { get; set; }
 
         public long MaxColumns { get; set; }

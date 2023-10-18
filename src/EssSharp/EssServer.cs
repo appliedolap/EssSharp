@@ -318,6 +318,7 @@ namespace EssSharp
 
                 return new EssServerVariable(variable, this);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e)
             {
                 throw new Exception($@"Unable to create the server variable ""{name}"". {e.Message}", e);
@@ -386,6 +387,7 @@ namespace EssSharp
 
                 throw new Exception("Received an empty or invalid response.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the application ""{applicationName}"". {e.Message}", e);

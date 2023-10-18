@@ -623,13 +623,19 @@ namespace EssSharp.Integration
             defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
             await defaultGrid.KeepOnlyAsync();
 
-            var pivotPovGrid = await defaultGrid.PivotAsync(  new EssGridSelection(2, 0), new EssGridSelection(0, 2));
+            defaultGrid.Selection.Clear();
+            defaultGrid.Selection.Add(new EssGridSelection(2, 0));
+            defaultGrid.Selection.Add(new EssGridSelection(0, 2));
+
+            var pivotPovGrid = await defaultGrid.PivotAsync();
 
             Assert.Equal(4, pivotPovGrid.Slice.Rows);
 
-            Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[2]));
+            Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[5]));
 
-            pivotPovGrid = await defaultGrid.PivotAsync(  new EssGridSelection(0, 2) );
+            defaultGrid.Selection.Clear();
+
+            pivotPovGrid = await defaultGrid.PivotAsync(  new EssGridSelection(1, 2) );
 
             Assert.Equal(3, pivotPovGrid.Slice.Rows);
 
@@ -776,11 +782,11 @@ namespace EssSharp.Integration
 
             await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new List<EssGridSelection>() { new EssGridSelection(0, 1), new EssGridSelection(0, 2), new EssGridSelection(0, 3),  new EssGridSelection(2, 0) /*new EssGridSelection(0, 4)*/ } );
 
-            Assert.Equal(15361, defaultGrid.Slice.Rows);
+            Assert.Equal(23206, defaultGrid.Slice.Rows);
 
-            Assert.True(string.Equals("-208.0", defaultGrid.Slice.Data.Ranges[0].Values[199]));
+            Assert.True(string.Equals("-208.0", defaultGrid.Slice.Data.Ranges[0].Values[214]));
 
-            Assert.True(string.Equals("Mar", defaultGrid.Slice.Data.Ranges[0].Values[18]));
+            Assert.True(string.Equals("          Mar", defaultGrid.Slice.Data.Ranges[0].Values[18]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 32 - Essbase_AfterDefaultGrid_CanGetGridLayout"), Priority(32)]

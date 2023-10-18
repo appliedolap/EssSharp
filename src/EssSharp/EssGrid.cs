@@ -157,11 +157,12 @@ namespace EssSharp
                 throw new Exception($@"Unable to get grid layout for grid ""{Name}"". {e.Message}", e);
             }
         }
-        /// <inheritdoc />
-        public void GetGridPreferences() => GetGridPreferencesAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        public async Task GetGridPreferencesAsync( CancellationToken cancellationToken = default )
+        public EssGridPreferences GetGridPreferences() => GetGridPreferencesAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssGridPreferences> GetGridPreferencesAsync( CancellationToken cancellationToken = default )
         {
             try
             {
@@ -171,6 +172,8 @@ namespace EssSharp
                     throw new Exception("Cannot get grid preferences.");
 
                 Preferences = preferences.ToEssGridPreferences();
+
+                return Preferences;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
@@ -230,13 +233,14 @@ namespace EssSharp
         {
             try
             {
-                var action = newPosition is not null ? GridOperation.ActionEnum.PivotToPOV : GridOperation.ActionEnum.Pivot;
-
                 if ( currentPosition is null )
                     currentPosition = Selection[0] ??
                         throw new ArgumentException(nameof(currentPosition), $"An {nameof(EssGridSelection)} object, or setting the {nameof(EssGrid.Selection)} property is required to perform pivot on grid.");
 
-                await ExecuteGridOperations(action: action, gridSelection: new List<EssGridSelection>() { currentPosition }, newPosition: newPosition, cancellationToken).ConfigureAwait(false);
+                if ( newPosition is null && Selection.ElementAtOrDefault(1) is not null )
+                    newPosition = Selection[1];
+
+                await ExecuteGridOperations(action: GridOperation.ActionEnum.Pivot, gridSelection: new List<EssGridSelection>() { currentPosition }, newPosition: newPosition, cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
@@ -358,8 +362,6 @@ namespace EssSharp
                             _essGridSlice.DirtyCells.Add(i);
                 }
 
-                //_grid.Slice.DirtyCells.AddRange(Enumerable.Range(0, _grid.Slice.Data.Ranges[0].Values.Count));
-
                 await ExecuteGridOperations(action: GridOperation.ActionEnum.Submit, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
@@ -449,20 +451,27 @@ namespace EssSharp
                 var ranges = default(List<List<int>>);
                 var coordinates = default(List<int>);
 
-                if ( action != GridOperation.ActionEnum.Pivot && action != GridOperation.ActionEnum.PivotToPOV )
+                switch ( action )
                 {
-                    ranges = new List<List<int>>();
-
-                    gridSelection?.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
-                }
-                else
-                {
-                    coordinates = new List<int>() { GetCoordinate(gridSelection: gridSelection[0], columnCount: Slice.Columns) };
-
-                    if ( newPosition is not null )
-                    {
-                        coordinates.Add(GetCoordinate(gridSelection: newPosition, columnCount: Slice.Columns));
-                    }
+                    case GridOperation.ActionEnum.Pivot:
+                    case GridOperation.ActionEnum.PivotToPOV:
+                        coordinates = new List<int>() { GetCoordinate(gridSelection: gridSelection[0], columnCount: Slice.Columns) };
+                        if ( newPosition is not null )
+                            coordinates.Add(GetCoordinate(gridSelection: newPosition, columnCount: Slice.Columns));
+                        break;
+                    case GridOperation.ActionEnum.Zoomin:
+                    case GridOperation.ActionEnum.Zoomout:
+                    case GridOperation.ActionEnum.Keeponly:
+                    case GridOperation.ActionEnum.Removeonly:
+                        ranges = new List<List<int>>();
+                        gridSelection?.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
+                        break;
+                    case GridOperation.ActionEnum.Refresh:
+                    case GridOperation.ActionEnum.Submit:
+                    default:
+                        ranges = null;
+                        coordinates = null;
+                        break;
                 }
 
                 return new GridOperation()
@@ -493,10 +502,8 @@ namespace EssSharp
         /// <param name="gridSelection"></param>
         /// <param name="columnCount"></param>
         /// <returns></returns>
-        private int GetCoordinate(EssGridSelection gridSelection, int columnCount )
-        {
-            return (gridSelection.startRow * columnCount) + gridSelection.startColumn;
-        }
+        private int GetCoordinate(EssGridSelection gridSelection, int columnCount ) =>
+            (gridSelection.startRow * columnCount) + gridSelection.startColumn;
 
         #endregion
     }
