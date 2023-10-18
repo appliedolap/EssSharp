@@ -41,7 +41,7 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public int descentantsCount { get; }
+        public long descentantsCount { get; }
 
         /// <summary>
         /// 
@@ -77,6 +77,26 @@ namespace EssSharp
         /// 
         /// </summary>
         public string CurrencyConversionCategory { get; }
+
+        public int GenerationNumber { get; }
+
+        public string activeAliasName { get; }
+
+        public bool HasUniqueName { get; }
+
+        public string UniqueId { get; }
+
+        public int MemberSolveOrder { get; }
+
+        public string DimensionName { get; }
+
+        public bool Attribute { get; }
+
+        public bool Account { get; }
+
+        public List<string> Uda { get; }
+
+        public string ParentName { get; }
 
         /// <summary>
         /// Gets a list of members.

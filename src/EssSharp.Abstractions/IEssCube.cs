@@ -284,6 +284,16 @@ namespace EssSharp
         public List<IEssLockObject> GetLockedObjects();
 
         /// <summary>
+        /// 
+        /// </summary>
+        public List<IEssMember> GetMembers();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Task<List<IEssMember>> GetMembersAsync();
+
+        /// <summary>
         /// Asynchronously gets a list of locked objects.
         /// </summary>
         /// <param name="cancellationToken"></param>

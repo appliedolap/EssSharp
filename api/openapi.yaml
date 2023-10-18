@@ -9022,10 +9022,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DimensionMembersList'
+                $ref: '#/components/schemas/MembersList'
             application/xml:
               schema:
-                $ref: '#/components/schemas/DimensionMembersList'
+                $ref: '#/components/schemas/MembersList'
           description: "<p><strong>OK</strong></p><p>Dimensions, children, or search\
             \ results returned successfully.</p>"
         "400":
@@ -21054,23 +21054,15 @@ components:
     MemberBean:
       example:
         activeAliasName: activeAliasName
+        formatString: formatString
+        dimensionType: dimensionType
         aliases:
           key: aliases
-        memberHasUniqueName: true
-        generationNumber: 1
         dataStorageType: dataStorageType
         type: NONE
-        dimensionName: dimensionName
-        parentName: parentName
-        numberOfChildren: 0
-        uniqueName: uniqueName
-        uda:
-        - uda
-        - uda
-        name: name
+        currencyConversionCategory: currencyConversionCategory
         levelNumber: 6
         previousSiblingsCount: 2
-        memberSolveOrder: 5
         links:
         - method: method
           rel: rel
@@ -21080,12 +21072,25 @@ components:
           rel: rel
           href: href
           type: type
+        dimSolveOrder: 7
         attribute: true
         dimension: true
-        uniqueId: uniqueId
         descendantsCount: 5
-        account: true
         memberId: memberId
+        memberHasUniqueName: true
+        generationNumber: 1
+        dimensionName: dimensionName
+        parentName: parentName
+        numberOfChildren: 0
+        uniqueName: uniqueName
+        uda:
+        - uda
+        - uda
+        dimStorageType: dimStorageType
+        name: name
+        memberSolveOrder: 5
+        uniqueId: uniqueId
+        account: true
       properties:
         name:
           type: string
@@ -21140,6 +21145,16 @@ components:
           items:
             $ref: '#/components/schemas/Link'
           type: array
+        dimSolveOrder:
+          type: integer
+        dimensionType:
+          type: string
+        formatString:
+          type: string
+        dimStorageType:
+          type: string
+        currencyConversionCategory:
+          type: string
         uda:
           items:
             type: string
@@ -26796,33 +26811,6 @@ components:
           type: integer
       type: object
     DimensionMember:
-      example:
-        formatString: formatString
-        dimensionType: dimensionType
-        aliases:
-          key: aliases
-        dataStorageType: dataStorageType
-        currencyConversionCategory: currencyConversionCategory
-        numberOfChildren: 0
-        uniqueName: uniqueName
-        dimStorageType: dimStorageType
-        name: name
-        levelNumber: 6
-        previousSiblingsCount: 1
-        memberSolveOrder: 5
-        links:
-        - method: method
-          rel: rel
-          href: href
-          type: type
-        - method: method
-          rel: rel
-          href: href
-          type: type
-        dimSolveOrder: 2
-        dimension: true
-        descendantsCount: 5
-        memberId: memberId
       properties:
         name:
           type: string
@@ -26863,22 +26851,19 @@ components:
         currencyConversionCategory:
           type: string
       type: object
-    DimensionMembersList:
+    MembersList:
       example:
         items:
-        - formatString: formatString
+        - activeAliasName: activeAliasName
+          formatString: formatString
           dimensionType: dimensionType
           aliases:
             key: aliases
           dataStorageType: dataStorageType
+          type: NONE
           currencyConversionCategory: currencyConversionCategory
-          numberOfChildren: 0
-          uniqueName: uniqueName
-          dimStorageType: dimStorageType
-          name: name
           levelNumber: 6
-          previousSiblingsCount: 1
-          memberSolveOrder: 5
+          previousSiblingsCount: 2
           links:
           - method: method
             rel: rel
@@ -26888,23 +26873,35 @@ components:
             rel: rel
             href: href
             type: type
-          dimSolveOrder: 2
+          dimSolveOrder: 7
+          attribute: true
           dimension: true
           descendantsCount: 5
           memberId: memberId
-        - formatString: formatString
+          memberHasUniqueName: true
+          generationNumber: 1
+          dimensionName: dimensionName
+          parentName: parentName
+          numberOfChildren: 0
+          uniqueName: uniqueName
+          uda:
+          - uda
+          - uda
+          dimStorageType: dimStorageType
+          name: name
+          memberSolveOrder: 5
+          uniqueId: uniqueId
+          account: true
+        - activeAliasName: activeAliasName
+          formatString: formatString
           dimensionType: dimensionType
           aliases:
             key: aliases
           dataStorageType: dataStorageType
+          type: NONE
           currencyConversionCategory: currencyConversionCategory
-          numberOfChildren: 0
-          uniqueName: uniqueName
-          dimStorageType: dimStorageType
-          name: name
           levelNumber: 6
-          previousSiblingsCount: 1
-          memberSolveOrder: 5
+          previousSiblingsCount: 2
           links:
           - method: method
             rel: rel
@@ -26914,14 +26911,29 @@ components:
             rel: rel
             href: href
             type: type
-          dimSolveOrder: 2
+          dimSolveOrder: 7
+          attribute: true
           dimension: true
           descendantsCount: 5
           memberId: memberId
+          memberHasUniqueName: true
+          generationNumber: 1
+          dimensionName: dimensionName
+          parentName: parentName
+          numberOfChildren: 0
+          uniqueName: uniqueName
+          uda:
+          - uda
+          - uda
+          dimStorageType: dimStorageType
+          name: name
+          memberSolveOrder: 5
+          uniqueId: uniqueId
+          account: true
       properties:
         items:
           items:
-            $ref: '#/components/schemas/DimensionMember'
+            $ref: '#/components/schemas/MemberBean'
           type: array
       type: object
     GridLayout:

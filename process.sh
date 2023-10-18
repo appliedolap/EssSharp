@@ -47,7 +47,7 @@ cat temp.json | jq '.paths."/applications/{applicationName}/configurations".get.
 
 # Fix 200 return schema
 #cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/RestCollectionResponse"}' > json.tmp && mv json.tmp temp.json
-cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/DimensionMembersList"}' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/MembersList"}' > json.tmp && mv json.tmp temp.json
 
 
 # Fix the 204 return schema
@@ -403,13 +403,13 @@ cat temp.json | jq '.definitions.DimensionMember = {
   }
 }' > json.tmp && mv json.tmp temp.json
 
-cat temp.json | jq '.definitions.DimensionMembersList = {    
+cat temp.json | jq '.definitions.MembersList = {    
   "type": "object",
   "properties": {
     "items": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/DimensionMember"
+        "$ref": "#/definitions/MemberBean"
       }
     }
   }
@@ -417,6 +417,21 @@ cat temp.json | jq '.definitions.DimensionMembersList = {
 
 # The properties for the MemberBean definition are incomplete. Add the following properties.
 cat temp.json | jq '.definitions.MemberBean.properties += {
+  "dimSolveOrder": {
+    "type": "integer"
+  },
+  "dimensionType": {
+    "type": "string"
+  },
+  "formatString": {
+    "type": "string"
+  },
+  "dimStorageType": {
+    "type": "string"
+  },
+ "currencyConversionCategory": {
+    "type": "string"
+  },
   "uda": {
     "type": "array",
     "items": {

@@ -10601,7 +10601,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Dimensions, children, or search results returned successfully.</p>",
             "schema": {
-              "$ref": "#/definitions/DimensionMembersList"
+              "$ref": "#/definitions/MembersList"
             }
           },
           "400": {
@@ -21567,6 +21567,21 @@
             "$ref": "#/definitions/Link"
           }
         },
+        "dimSolveOrder": {
+          "type": "integer"
+        },
+        "dimensionType": {
+          "type": "string"
+        },
+        "formatString": {
+          "type": "string"
+        },
+        "dimStorageType": {
+          "type": "string"
+        },
+        "currencyConversionCategory": {
+          "type": "string"
+        },
         "uda": {
           "type": "array",
           "items": {
@@ -24359,13 +24374,13 @@
         }
       }
     },
-    "DimensionMembersList": {
+    "MembersList": {
       "type": "object",
       "properties": {
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DimensionMember"
+            "$ref": "#/definitions/MemberBean"
           }
         }
       }

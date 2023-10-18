@@ -174,5 +174,25 @@ namespace EssSharp.Integration
 
             Assert.True(defaultGrid.Preferences.CellText == true);
         }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 08 - Essbase_AfterReportCreation_CanGetMembers"), Priority(08)]
+        public async Task Essbase_AfterReportCreation_CanGetMembers()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var memberList = await cube.GetMembersAsync();
+
+            Assert.NotNull(memberList);
+
+            var childList = memberList[1].GetChildren();
+
+            Assert.NotNull(childList);
+        }
     }
 }

@@ -431,7 +431,7 @@ catch (ApiException e)
 
 <a id="outlinegetmembers"></a>
 # **OutlineGetMembers**
-> DimensionMembersList OutlineGetMembers (string app, string cube, string connection = null, string applicationNameForConnection = null, string keyword = null, bool? matchWholeWord = null, string parent = null, string parentUniqueName = null, string isMbrId = null, string fields = null, int? offset = null, int? limit = null)
+> MembersList OutlineGetMembers (string app, string cube, string connection = null, string applicationNameForConnection = null, string keyword = null, bool? matchWholeWord = null, string parent = null, string parentUniqueName = null, string isMbrId = null, string fields = null, int? offset = null, int? limit = null)
 
 Get Dimensions, Children, or Search
 
@@ -474,7 +474,7 @@ namespace Example
             try
             {
                 // Get Dimensions, Children, or Search
-                DimensionMembersList result = apiInstance.OutlineGetMembers(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
+                MembersList result = apiInstance.OutlineGetMembers(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -495,7 +495,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Dimensions, Children, or Search
-    ApiResponse<DimensionMembersList> response = apiInstance.OutlineGetMembersWithHttpInfo(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
+    ApiResponse<MembersList> response = apiInstance.OutlineGetMembersWithHttpInfo(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -527,7 +527,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**DimensionMembersList**](DimensionMembersList.md)
+[**MembersList**](MembersList.md)
 
 ### Authorization
 

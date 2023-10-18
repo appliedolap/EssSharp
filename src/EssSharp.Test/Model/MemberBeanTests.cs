@@ -206,6 +206,46 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'Links'
         }
         /// <summary>
+        /// Test the property 'DimSolveOrder'
+        /// </summary>
+        [Fact]
+        public void DimSolveOrderTest()
+        {
+            // TODO unit test for the property 'DimSolveOrder'
+        }
+        /// <summary>
+        /// Test the property 'DimensionType'
+        /// </summary>
+        [Fact]
+        public void DimensionTypeTest()
+        {
+            // TODO unit test for the property 'DimensionType'
+        }
+        /// <summary>
+        /// Test the property 'FormatString'
+        /// </summary>
+        [Fact]
+        public void FormatStringTest()
+        {
+            // TODO unit test for the property 'FormatString'
+        }
+        /// <summary>
+        /// Test the property 'DimStorageType'
+        /// </summary>
+        [Fact]
+        public void DimStorageTypeTest()
+        {
+            // TODO unit test for the property 'DimStorageType'
+        }
+        /// <summary>
+        /// Test the property 'CurrencyConversionCategory'
+        /// </summary>
+        [Fact]
+        public void CurrencyConversionCategoryTest()
+        {
+            // TODO unit test for the property 'CurrencyConversionCategory'
+        }
+        /// <summary>
         /// Test the property 'Uda'
         /// </summary>
         [Fact]

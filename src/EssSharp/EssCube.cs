@@ -529,6 +529,30 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssMember> GetMembers() => GetMembersAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssMember>> GetMembersAsync()
+        {
+            try
+            {
+                var api = GetApi<OutlineViewerApi>();
+
+                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name).ConfigureAwait(false) is not { } membersList )
+                    throw new Exception("Cannot get Members.");
+
+                return membersList.ToEssSharpList(this) ?? new List<IEssMember>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get members from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         public void Unlock<T>( List<T> lockedList ) where T : class, IEssLock  => UnlockAsync<T>(lockedList).GetAwaiter().GetResult(); 
 
         /// <inheritdoc />

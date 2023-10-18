@@ -89,10 +89,15 @@ namespace EssSharp.Model
         /// <param name="attribute">attribute.</param>
         /// <param name="account">account.</param>
         /// <param name="links">links.</param>
+        /// <param name="dimSolveOrder">dimSolveOrder.</param>
+        /// <param name="dimensionType">dimensionType.</param>
+        /// <param name="formatString">formatString.</param>
+        /// <param name="dimStorageType">dimStorageType.</param>
+        /// <param name="currencyConversionCategory">currencyConversionCategory.</param>
         /// <param name="uda">uda.</param>
         /// <param name="dataStorageType">dataStorageType.</param>
         /// <param name="parentName">parentName.</param>
-        public MemberBean(string name = default(string), string dimensionName = default(string), int numberOfChildren = default(int), int levelNumber = default(int), int generationNumber = default(int), Dictionary<string, string> aliases = default(Dictionary<string, string>), string activeAliasName = default(string), bool memberHasUniqueName = default(bool), string uniqueName = default(string), string memberId = default(string), string uniqueId = default(string), TypeEnum? type = default(TypeEnum?), int memberSolveOrder = default(int), long descendantsCount = default(long), int previousSiblingsCount = default(int), bool dimension = default(bool), bool attribute = default(bool), bool account = default(bool), List<Link> links = default(List<Link>), List<string> uda = default(List<string>), string dataStorageType = default(string), string parentName = default(string))
+        public MemberBean(string name = default(string), string dimensionName = default(string), int numberOfChildren = default(int), int levelNumber = default(int), int generationNumber = default(int), Dictionary<string, string> aliases = default(Dictionary<string, string>), string activeAliasName = default(string), bool memberHasUniqueName = default(bool), string uniqueName = default(string), string memberId = default(string), string uniqueId = default(string), TypeEnum? type = default(TypeEnum?), int memberSolveOrder = default(int), long descendantsCount = default(long), int previousSiblingsCount = default(int), bool dimension = default(bool), bool attribute = default(bool), bool account = default(bool), List<Link> links = default(List<Link>), int dimSolveOrder = default(int), string dimensionType = default(string), string formatString = default(string), string dimStorageType = default(string), string currencyConversionCategory = default(string), List<string> uda = default(List<string>), string dataStorageType = default(string), string parentName = default(string))
         {
             this.Name = name;
             this.DimensionName = dimensionName;
@@ -113,6 +118,11 @@ namespace EssSharp.Model
             this.Attribute = attribute;
             this.Account = account;
             this.Links = links;
+            this.DimSolveOrder = dimSolveOrder;
+            this.DimensionType = dimensionType;
+            this.FormatString = formatString;
+            this.DimStorageType = dimStorageType;
+            this.CurrencyConversionCategory = currencyConversionCategory;
             this.Uda = uda;
             this.DataStorageType = dataStorageType;
             this.ParentName = parentName;
@@ -227,6 +237,36 @@ namespace EssSharp.Model
         public List<Link> Links { get; set; }
 
         /// <summary>
+        /// Gets or Sets DimSolveOrder
+        /// </summary>
+        [DataMember(Name = "dimSolveOrder", EmitDefaultValue = false)]
+        public int DimSolveOrder { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DimensionType
+        /// </summary>
+        [DataMember(Name = "dimensionType", EmitDefaultValue = false)]
+        public string DimensionType { get; set; }
+
+        /// <summary>
+        /// Gets or Sets FormatString
+        /// </summary>
+        [DataMember(Name = "formatString", EmitDefaultValue = false)]
+        public string FormatString { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DimStorageType
+        /// </summary>
+        [DataMember(Name = "dimStorageType", EmitDefaultValue = false)]
+        public string DimStorageType { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CurrencyConversionCategory
+        /// </summary>
+        [DataMember(Name = "currencyConversionCategory", EmitDefaultValue = false)]
+        public string CurrencyConversionCategory { get; set; }
+
+        /// <summary>
         /// Gets or Sets Uda
         /// </summary>
         [DataMember(Name = "uda", EmitDefaultValue = false)]
@@ -271,6 +311,11 @@ namespace EssSharp.Model
             sb.Append("  Attribute: ").Append(Attribute).Append("\n");
             sb.Append("  Account: ").Append(Account).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("  DimSolveOrder: ").Append(DimSolveOrder).Append("\n");
+            sb.Append("  DimensionType: ").Append(DimensionType).Append("\n");
+            sb.Append("  FormatString: ").Append(FormatString).Append("\n");
+            sb.Append("  DimStorageType: ").Append(DimStorageType).Append("\n");
+            sb.Append("  CurrencyConversionCategory: ").Append(CurrencyConversionCategory).Append("\n");
             sb.Append("  Uda: ").Append(Uda).Append("\n");
             sb.Append("  DataStorageType: ").Append(DataStorageType).Append("\n");
             sb.Append("  ParentName: ").Append(ParentName).Append("\n");
@@ -396,6 +441,30 @@ namespace EssSharp.Model
                     this.Links.SequenceEqual(input.Links)
                 ) && 
                 (
+                    this.DimSolveOrder == input.DimSolveOrder ||
+                    this.DimSolveOrder.Equals(input.DimSolveOrder)
+                ) && 
+                (
+                    this.DimensionType == input.DimensionType ||
+                    (this.DimensionType != null &&
+                    this.DimensionType.Equals(input.DimensionType))
+                ) && 
+                (
+                    this.FormatString == input.FormatString ||
+                    (this.FormatString != null &&
+                    this.FormatString.Equals(input.FormatString))
+                ) && 
+                (
+                    this.DimStorageType == input.DimStorageType ||
+                    (this.DimStorageType != null &&
+                    this.DimStorageType.Equals(input.DimStorageType))
+                ) && 
+                (
+                    this.CurrencyConversionCategory == input.CurrencyConversionCategory ||
+                    (this.CurrencyConversionCategory != null &&
+                    this.CurrencyConversionCategory.Equals(input.CurrencyConversionCategory))
+                ) && 
+                (
                     this.Uda == input.Uda ||
                     this.Uda != null &&
                     input.Uda != null &&
@@ -464,6 +533,23 @@ namespace EssSharp.Model
                 if (this.Links != null)
                 {
                     hashCode = (hashCode * 59) + this.Links.GetHashCode();
+                }
+                hashCode = (hashCode * 59) + this.DimSolveOrder.GetHashCode();
+                if (this.DimensionType != null)
+                {
+                    hashCode = (hashCode * 59) + this.DimensionType.GetHashCode();
+                }
+                if (this.FormatString != null)
+                {
+                    hashCode = (hashCode * 59) + this.FormatString.GetHashCode();
+                }
+                if (this.DimStorageType != null)
+                {
+                    hashCode = (hashCode * 59) + this.DimStorageType.GetHashCode();
+                }
+                if (this.CurrencyConversionCategory != null)
+                {
+                    hashCode = (hashCode * 59) + this.CurrencyConversionCategory.GetHashCode();
                 }
                 if (this.Uda != null)
                 {

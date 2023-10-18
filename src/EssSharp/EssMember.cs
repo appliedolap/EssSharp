@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using EssSharp.Model;
 using EssSharp.Api;
+using System.Net;
 
 namespace EssSharp
 {
@@ -13,28 +14,39 @@ namespace EssSharp
         #region Private Data
 
         private readonly EssCube  _cube;
-        private readonly DimensionMember _member;
+        //private readonly DimensionMember _member;
+        private readonly MemberBean _memberBean;
 
         #endregion
 
         #region Constructors
 
         /// <summary />
-        internal EssMember( DimensionMember member, EssCube cube) : base(cube?.Configuration, cube?.Client)
+        internal EssMember( MemberBean memberBean, EssCube cube) : base(cube?.Configuration, cube?.Client)
         {
-            _member = member ?? 
-                throw new ArgumentNullException(nameof(member), $"An API model {nameof(member)} is required to create an {nameof(EssMember)}.");
+            _memberBean = memberBean ?? 
+                throw new ArgumentNullException(nameof(memberBean), $"An API model {nameof(memberBean)} is required to create an {nameof(EssMember)}.");
 
             _cube = cube ??
                 throw new ArgumentNullException(nameof(cube), $"An {nameof(EssServer)} {nameof(cube)} is required to create an {nameof(EssMember)}.");
         }
+        /*
+        /// <summary />
+        internal EssMember( MemberBean memberBean, EssCube cube ) : base(cube?.Configuration, cube?.Client)
+        {
+            _memberBean = memberBean ??
+                throw new ArgumentNullException(nameof(memberBean), $"An API model {nameof(memberBean)} is required to create an {nameof(EssMember)}.");
 
+            _cube = cube ??
+                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssServer)} {nameof(cube)} is required to create an {nameof(EssMember)}.");
+        }
+        */
         #endregion
 
         #region IEssObject Members
 
         /// <inheritdoc />
-        public override string Name => _member.Name;
+        public override string Name => _memberBean.Name;
 
         /// inheritDoc />
         public override EssType Type => EssType.Member;
@@ -44,47 +56,77 @@ namespace EssSharp
         #region IEssMember Attributes
 
         /// inheritDoc />
-        public int NumberOfChildren => _member.NumberOfChildren;
+        public int NumberOfChildren => _memberBean.NumberOfChildren;
 
         /// inheritDoc />
-        public int LevelNumber => _member.LevelNumber;
+        public int LevelNumber => _memberBean.LevelNumber;
 
         /// inheritDoc />
-        public Dictionary<string, string> Aliases => _member.Aliases;
+        public Dictionary<string, string> Aliases => _memberBean.Aliases;
 
         /// inheritDoc />
-        public string UniqueName => _member.UniqueName;
+        public string UniqueName => _memberBean.UniqueName;
 
         /// inheritDoc />
-        public string MemberId => _member.MemberId;
+        public string MemberId => _memberBean.MemberId;
 
         /// inheritDoc />
-        public int PerviousSublingCount => _member.PreviousSiblingsCount;
+        public int PerviousSublingCount => _memberBean.PreviousSiblingsCount;
 
         /// inheritDoc />
-        public int descentantsCount => _member.DescendantsCount;
+        public long descentantsCount => _memberBean.DescendantsCount;
 
         /// inheritDoc />
-        public bool dimension => _member.Dimension;
+        public bool dimension => _memberBean.Dimension;
 
         /// inheritDoc />
-        public int DimensionSolveOrder => _member.DimSolveOrder;
+        public int DimensionSolveOrder => _memberBean.DimSolveOrder;
 
         /// inheritDoc />
-        public string DimensionType => _member.DimensionType;
+        public string DimensionType => _memberBean.DimensionType;
 
         /// inheritDoc />
-        public string dataStorageType => _member.DataStorageType;
+        public string dataStorageType => _memberBean.DataStorageType;
 
         /// inheritDoc />
-        public string FormatString => _member.FormatString;
+        public string FormatString => _memberBean.FormatString;
 
         /// inheritDoc />
-        public string DimensionStorageType => _member.DimStorageType;
+        public string DimensionStorageType => _memberBean.DimStorageType;
 
         /// inheritDoc />
-        public string CurrencyConversionCategory => _member.CurrencyConversionCategory;
+        public string CurrencyConversionCategory => _memberBean.CurrencyConversionCategory;
 
+        /// inheritDoc />       
+        public int GenerationNumber => _memberBean.GenerationNumber;
+
+        /// inheritDoc />
+        public string activeAliasName => _memberBean.ActiveAliasName;
+
+        /// inheritDoc />
+        public bool HasUniqueName => _memberBean.MemberHasUniqueName;
+
+        /// inheritDoc />
+        public string UniqueId => _memberBean.UniqueId;
+
+        /// inheritDoc />
+        public int MemberSolveOrder => _memberBean.MemberSolveOrder;
+
+        /// inheritDoc />
+        public string DimensionName => _memberBean.DimensionName;
+
+        /// inheritDoc />
+        public bool Attribute => _memberBean.Attribute;
+
+        /// inheritDoc />
+        public bool Account => _memberBean.Account;
+
+        /// inheritDoc />
+        public List<string> Uda => _memberBean.Uda;
+
+        /// inheritDoc />
+        public string ParentName => _memberBean.ParentName;
+        
         #endregion
 
         #region IEssMember Methods

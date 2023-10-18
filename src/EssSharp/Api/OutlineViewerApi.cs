@@ -172,8 +172,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of members to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>DimensionMembersList</returns>
-        DimensionMembersList OutlineGetMembers(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        /// <returns>MembersList</returns>
+        MembersList OutlineGetMembers(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
 
         /// <summary>
         /// Get Dimensions, Children, or Search
@@ -195,8 +195,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of members to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of DimensionMembersList</returns>
-        ApiResponse<DimensionMembersList> OutlineGetMembersWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        /// <returns>ApiResponse of MembersList</returns>
+        ApiResponse<MembersList> OutlineGetMembersWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
         /// <summary>
         /// Export Outline to XML
         /// </summary>
@@ -394,8 +394,8 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of DimensionMembersList</returns>
-        System.Threading.Tasks.Task<DimensionMembersList> OutlineGetMembersAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of MembersList</returns>
+        System.Threading.Tasks.Task<MembersList> OutlineGetMembersAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Dimensions, Children, or Search
@@ -418,8 +418,8 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (DimensionMembersList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DimensionMembersList>> OutlineGetMembersWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (MembersList)</returns>
+        System.Threading.Tasks.Task<ApiResponse<MembersList>> OutlineGetMembersWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Export Outline to XML
         /// </summary>
@@ -1472,10 +1472,10 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of members to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>DimensionMembersList</returns>
-        public DimensionMembersList OutlineGetMembers(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        /// <returns>MembersList</returns>
+        public MembersList OutlineGetMembers(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<DimensionMembersList> localVarResponse = OutlineGetMembersWithHttpInfo(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
+            EssSharp.Client.ApiResponse<MembersList> localVarResponse = OutlineGetMembersWithHttpInfo(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
             return localVarResponse.Data;
         }
 
@@ -1496,8 +1496,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of members to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of DimensionMembersList</returns>
-        public EssSharp.Client.ApiResponse<DimensionMembersList> OutlineGetMembersWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        /// <returns>ApiResponse of MembersList</returns>
+        public EssSharp.Client.ApiResponse<MembersList> OutlineGetMembersWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1588,7 +1588,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<DimensionMembersList>("/outline/{app}/{cube}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<MembersList>("/outline/{app}/{cube}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("OutlineGetMembers", localVarResponse);
@@ -1619,10 +1619,10 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of DimensionMembersList</returns>
-        public async System.Threading.Tasks.Task<DimensionMembersList> OutlineGetMembersAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of MembersList</returns>
+        public async System.Threading.Tasks.Task<MembersList> OutlineGetMembersAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<DimensionMembersList> localVarResponse = await OutlineGetMembersWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<MembersList> localVarResponse = await OutlineGetMembersWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1644,8 +1644,8 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (DimensionMembersList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DimensionMembersList>> OutlineGetMembersWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (MembersList)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<MembersList>> OutlineGetMembersWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1737,7 +1737,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<DimensionMembersList>("/outline/{app}/{cube}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<MembersList>("/outline/{app}/{cube}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
