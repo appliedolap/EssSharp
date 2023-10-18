@@ -100,6 +100,7 @@ namespace EssSharp
 
                 return new EssCubeVariable(variable, this);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to create cube variable ""{name}"". {e.Message}", e);
@@ -329,6 +330,7 @@ namespace EssSharp
 
                 return dimensions?.ToEssSharpList(this) ?? new List<IEssDimension>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception)
             {
                 throw;
@@ -356,6 +358,7 @@ namespace EssSharp
 
                 return report;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e)
             {
                 throw new Exception($@"Unable to get the report ""{reportName}"". {e.Message}", e);
@@ -384,6 +387,7 @@ namespace EssSharp
 
                 return reports;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -617,6 +621,7 @@ namespace EssSharp
 
                 throw new Exception($"Script not found.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e)
             {
                 throw new Exception($@"Unable to get the {scriptType} script named ""{scriptName}"". {e.Message}", e);
@@ -672,6 +677,7 @@ namespace EssSharp
 
                 return variables?.ToEssSharpList<IEssCubeVariable>(this) ?? new List<IEssCubeVariable>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception)
             {
                 throw;
@@ -702,6 +708,7 @@ namespace EssSharp
                 }
                 return false;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception) 
             {
                 throw;

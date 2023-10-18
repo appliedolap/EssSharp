@@ -47,6 +47,7 @@ namespace EssSharp
                 var api = GetApi<ApplicationConnectionsApi>();
                 await api.ApplicationConnectionsDeleteConnectionAsync(Application.Name, Name, 0, cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch
             {
                 throw;
@@ -64,6 +65,7 @@ namespace EssSharp
                 var api = GetApi<ApplicationConnectionsApi>();
                 await api.ApplicationConnectionsTestConnectionExistingAsync(Application.Name, Name, 0, cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch
             {
                 throw;

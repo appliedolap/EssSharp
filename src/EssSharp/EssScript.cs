@@ -133,6 +133,7 @@ namespace EssSharp
                 var api = GetApi<ScriptsApi>();
                 await api.ScriptsDeleteScriptAsync( Cube.Application.Name, Cube.Name, Name, ScriptType.ToString(), 0, cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;

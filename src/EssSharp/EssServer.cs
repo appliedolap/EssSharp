@@ -111,6 +111,7 @@ namespace EssSharp
                 // Return the newly created application.
                 return await GetApplicationAsync(applicationName).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to create the application ""{applicationName}"". {e.Message}", e);
@@ -340,6 +341,7 @@ namespace EssSharp
 
                 return new EssAbout(about);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -361,6 +363,7 @@ namespace EssSharp
 
                 return new EssAboutInstance(aboutInstance);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -421,6 +424,7 @@ namespace EssSharp
 
                 return applications?.ToEssSharpList(this) ?? new List<IEssApplication>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -443,6 +447,7 @@ namespace EssSharp
 
                 return new EssDatasourceConnection(connection12, this);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e)
             {
                 throw new Exception($@"Unable to find connection with name: ""{this}"". {e.Message}", e);
@@ -473,6 +478,7 @@ namespace EssSharp
 
                 return connectionsList;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to find connections list on ""{this}"". {e.Message}", e);
@@ -496,6 +502,7 @@ namespace EssSharp
 
                 throw new Exception("Received an empty or invalid response.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the datasource ""{datasourceName}"". {e.Message}", e);
@@ -517,6 +524,7 @@ namespace EssSharp
 
                 return dataSource?.ToEssSharpList(this) ?? new List<IEssDatasource>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch 
             {
                 throw;
@@ -615,6 +623,7 @@ namespace EssSharp
 
                 throw new Exception("Folder not found.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e)
             {
                 throw new Exception($@"Unable to get the folder ""/{path}"". {e.Message}", e);
@@ -637,6 +646,7 @@ namespace EssSharp
                 return files?.ToEssSharpList<IEssFolder>(this) ?? new List<IEssFolder>();
 
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -651,21 +661,20 @@ namespace EssSharp
         /// <returns>An <see cref="IEssGroup"/> object.</returns>
         public async Task<IEssGroup> GetGroupAsync( string name, CancellationToken cancellationToken = default )
         {
+            try
             {
-                try
+                var api = GetApi<GroupsApi>();
+                foreach ( var group in (await api.GroupsSearchAsync(filter: name, cancellationToken: cancellationToken).ConfigureAwait(false)).Items )
                 {
-                    var api = GetApi<GroupsApi>();
-                    foreach ( var group in (await api.GroupsSearchAsync(filter: name, cancellationToken: cancellationToken).ConfigureAwait(false)).Items )
-                    {
-                        return new EssGroup(group, this);
-                    }
+                    return new EssGroup(group, this);
+                }
 
-                    throw new Exception("Groups not found.");
-                }
-                catch ( Exception e )
-                {
-                    throw new Exception($@"Unable to get the groups on ""{Name}"". {e.Message}", e);
-                }
+                throw new Exception("Groups not found.");
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the groups on ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -685,6 +694,7 @@ namespace EssSharp
 
                 return groups?.ToEssSharpList(this) ?? new List<IEssGroup>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the groups on ""{Name}"". {e.Message}", e);
@@ -718,6 +728,7 @@ namespace EssSharp
 
                 return jobs?.ToEssSharpList(this) ?? new List<IEssJob>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -739,6 +750,7 @@ namespace EssSharp
 
                 return sessions?.ToEssSharpList(this) ?? new List<IEssSession>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -760,6 +772,7 @@ namespace EssSharp
 
                 return urls?.ToEssSharpList(this) ?? new List<IEssUrl>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -785,6 +798,7 @@ namespace EssSharp
                 }
                 throw new Exception($@"Cannot get user {id}.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
@@ -810,6 +824,7 @@ namespace EssSharp
                 // Get the folder that corresponds to the obtained home path.
                 return await GetFolderAsync(homePath).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 if ( !string.IsNullOrWhiteSpace(Configuration?.Username) )
@@ -835,6 +850,7 @@ namespace EssSharp
 
                 throw new Exception("Received an empty or invalid response.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 if ( !string.IsNullOrWhiteSpace(Configuration?.Username) )
@@ -863,6 +879,7 @@ namespace EssSharp
                 // Return the folder that corresponds to the obtained shared path.
                 return await GetFolderAsync(homePath).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 if ( !string.IsNullOrWhiteSpace(Configuration?.Username) )
@@ -888,6 +905,7 @@ namespace EssSharp
 
                 return userList?.ToEssSharpList(this) ?? new List<IEssUser>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
@@ -909,6 +927,7 @@ namespace EssSharp
 
                 return utilities?.ToEssSharpList(this) ?? new List<IEssUtility>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -934,6 +953,7 @@ namespace EssSharp
 
                 return variables?.ToEssSharpList<IEssServerVariable>(this) ?? new List<IEssServerVariable>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;

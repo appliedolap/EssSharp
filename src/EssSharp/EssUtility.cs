@@ -82,6 +82,7 @@ namespace EssSharp
 
                 return fileStream;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception)
             {
                 throw;

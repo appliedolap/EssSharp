@@ -123,6 +123,7 @@ namespace EssSharp
                 var api = GetApi<GlobalConnectionsApi>();
                 await api.GlobalConnectionsTestConnectionExistingAsync( Name, 0, cancellationToken ).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch
             {
                 throw;
@@ -141,6 +142,7 @@ namespace EssSharp
                 var api = GetApi<GlobalConnectionsApi>();
                 await api.GlobalConnectionsDeleteConnectionAsync(Name, 0, cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch
             {
                 throw;

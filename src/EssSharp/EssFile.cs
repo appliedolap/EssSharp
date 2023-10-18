@@ -97,6 +97,7 @@ namespace EssSharp
                 if (await Server.GetFileAsync(filePathDetails.To, cancellationToken).ConfigureAwait(false) is not EssFile file)
                     throw new Exception("Renamed file not found.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e)
             {
                 throw new Exception($@"Unable to rename the file ""{Name}"". {e.Message}", e);
@@ -116,6 +117,7 @@ namespace EssSharp
                 var api = GetApi<FilesApi>();
                 return await api.FilesDownloadFileAsync(FullPath.Trim('/'), cancellationToken: cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch
             {
                 throw;
@@ -133,6 +135,7 @@ namespace EssSharp
                 var api = GetApi<FilesApi>();
                 await api.FilesDeleteFileAsync(FullPath?.Trim('/')).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception)
             {
                 throw;
@@ -160,6 +163,7 @@ namespace EssSharp
                 // Update our model FileBean with the move FileBean.
                 FileBean = file.FileBean;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e)
             {
                 throw new Exception($@"Unable to rename the file ""{Name}"". {e.Message}", e);
@@ -187,6 +191,7 @@ namespace EssSharp
                 // Update our model FileBean with the renamed FileBean.
                 FileBean = file.FileBean;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e)
             {
                 throw new Exception($@"Unable to rename the file ""{Name}"". {e.Message}", e);
@@ -205,6 +210,7 @@ namespace EssSharp
                 var zipFileDetails = new ZipFileDetails(FullPath);
                 await api.FilesExtractAsync(zipFileDetails, overwrite, 0, cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception)
             {
                 throw;

@@ -93,6 +93,7 @@ namespace EssSharp
 
                 return To2DReport(jArray, options);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 if ( e is WebException { Response: WebExceptionRestResponse { StatusCode: HttpStatusCode.MethodNotAllowed } } )
@@ -117,6 +118,7 @@ namespace EssSharp
 
                 _definition = definition;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the details for report ""{_definition?.Name ?? _report?.Name}"". {e.Message}", e);
@@ -134,6 +136,7 @@ namespace EssSharp
                 var api = GetApi<DrillThroughReportsApi>();
                 await api.DrillThroughReportsDeleteAsync(applicationName: Cube.Application.Name, databaseName: Cube.Name, name: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to delete report ""{Name}"". {e.Message}", e);
@@ -337,6 +340,7 @@ namespace EssSharp
                             report[ri, c] = source[si][c].Value<string>();
                 }
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( IndexOutOfRangeException )
             {
                 throw new InvalidOperationException($"The given {nameof(JArray)} is not rectangular.");

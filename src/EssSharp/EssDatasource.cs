@@ -61,10 +61,19 @@ namespace EssSharp
         /// <returns>An <see cref="IEssDatasourceConnection"/>.</returns>
         public async Task<IEssDatasourceConnection> GetConnectionAsync( CancellationToken cancellationToken = default )
         {
-            var api = GetApi<GlobalConnectionsApi>();
-            var connection = await api.GlobalConnectionsGetConnectionDetailsAsync(connectionName: _datasource?.Connection, cancellationToken: cancellationToken).ConfigureAwait(false);
+            try
+            {
+                var api = GetApi<GlobalConnectionsApi>();
+                if ( await api.GlobalConnectionsGetConnectionDetailsAsync(connectionName: _datasource?.Connection, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } connection )
+                    throw new Exception("Cannot get datasource connection.");
 
-            return new EssDatasourceConnection( connection, Server as EssServer );
+                return new EssDatasourceConnection(connection, Server as EssServer);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e ) 
+            {
+                throw new Exception($@"Unable get connection for ""{Name}"" datasource. {e.Message}", e);
+            }
         }
         
         /// <inheritdoc />
@@ -93,9 +102,10 @@ namespace EssSharp
 
                 return response.RawContent;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e ) 
             {
-                throw new Exception($@"Unable to query the ""{this}"" datasource. {e.Message}", e);
+                throw new Exception($@"Unable to query the ""{Name}"" datasource. {e.Message}", e);
             }
         }
 

@@ -45,6 +45,7 @@ namespace EssSharp
                 var api = GetApi<SessionsApi>();
                 await api.SessionsDeleteSessionWithIdAsync(SessionId, logoff, 0, cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;

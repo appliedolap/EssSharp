@@ -84,6 +84,7 @@ namespace EssSharp
                 // Return the newly created application.
                 return await GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to create the cube ""{cubeName}"". {e.Message}", e);
@@ -215,6 +216,7 @@ namespace EssSharp
 
                 return new EssApplicationVariable(variable, this);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch (Exception e )
             {
                 throw new Exception($@"Unable to create application variable ""{name}"". {e.Message}", e);
@@ -233,6 +235,7 @@ namespace EssSharp
                 var copy = new CopyRenameBean(_application.Name, copyName);
                 await api.ApplicationsCopyApplicationAsync(copy, 0, cancellationToken).ConfigureAwait(false); ;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -250,6 +253,7 @@ namespace EssSharp
                 var api = GetApi<ApplicationsApi>();
                 await api.ApplicationsDeleteApplicationAsync(_application.Name, 0, cancellationToken).ConfigureAwait(false); ;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -271,6 +275,7 @@ namespace EssSharp
 
                 return fileStream;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -292,6 +297,7 @@ namespace EssSharp
 
                 return fileContent;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -348,6 +354,7 @@ namespace EssSharp
 
                 return new EssApplicationDatasourceConnection(applicationConnection, this);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to find application connection with name: ""{this}"". {e.Message}", e);
@@ -377,6 +384,7 @@ namespace EssSharp
 
                 return connectionsList;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to find application connections list on ""{this}"". {e.Message}", e);
@@ -403,6 +411,7 @@ namespace EssSharp
 
                 return new EssCube(cube, this);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the cube ""{cubeName}"". {e.Message}", e);
@@ -424,6 +433,7 @@ namespace EssSharp
 
                 return cubes?.ToEssSharpList(this) ?? new List<IEssCube>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -528,6 +538,7 @@ namespace EssSharp
 
                 return variables?.ToEssSharpList<IEssApplicationVariable>(this) ?? new List<IEssApplicationVariable>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
             {
                 throw;
@@ -563,6 +574,7 @@ namespace EssSharp
                 var api = GetApi<ApplicationsApi>();
                 await api.ApplicationsPerformOperationAsync(_application.Name, action.ToString(), 0, cancellationToken).ConfigureAwait(false);
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to perform the requested operation ""{action}"". {e.Message}", e);

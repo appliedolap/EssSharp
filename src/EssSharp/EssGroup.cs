@@ -174,6 +174,7 @@ namespace EssSharp
 
                 return users?.ToEssSharpList(Server as EssServer) ?? new List<IEssUser>();
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get members of group: ""{Name}"". {e.Message}", e);

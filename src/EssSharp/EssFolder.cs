@@ -76,6 +76,7 @@ namespace EssSharp
                 // Update our model FileBean with the renamed FileBean.
                 FileBean = folder.FileBean;
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to rename the folder ""{Name}"". {e.Message}", e);
@@ -115,6 +116,7 @@ namespace EssSharp
 
                 throw new Exception("Folder not found.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to create or get the subfolder ""{subfolderName}"". {e.Message}", e);
@@ -138,6 +140,7 @@ namespace EssSharp
 
                 throw new Exception("File not found.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the file ""{filename}"". {e.Message}", e);
@@ -176,6 +179,7 @@ namespace EssSharp
 
                 throw new Exception("Folder not found.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get the folder ""{folderName}"". {e.Message}", e);
@@ -190,11 +194,20 @@ namespace EssSharp
         /// <returns>A list of <see cref="IEssFolder"/> objects.</returns>
         public async Task<List<IEssFolder>> GetFoldersAsync( string nameFilter = null, CancellationToken cancellationToken = default )
         {
-            var api = GetApi<FilesApi>();
-            var path = FullPath?.TrimStart('/');
-            var files = await api.FilesListFilesAsync(path: path, type: "folder", filter: nameFilter, recursive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
+            try
+            {
+                var api = GetApi<FilesApi>();
+                var path = FullPath?.TrimStart('/');
+                if ( await api.FilesListFilesAsync(path: path, type: "folder", filter: nameFilter, recursive: false, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } files )
+                    throw new Exception("Cannot get the folders.");
 
-            return files?.ToEssSharpList<IEssFolder>(Server as EssServer) ?? new List<IEssFolder>();
+                return files?.ToEssSharpList<IEssFolder>(Server as EssServer) ?? new List<IEssFolder>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the folders. {e.Message}", e);
+            }
         }
 
         /// <inheritdoc/>
@@ -258,6 +271,7 @@ namespace EssSharp
 
                 throw new Exception("File not found.");
             }
+            catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to create the file ""{filename}"". {e.Message}", e);
