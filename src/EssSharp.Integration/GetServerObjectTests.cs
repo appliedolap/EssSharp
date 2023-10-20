@@ -190,9 +190,44 @@ namespace EssSharp.Integration
 
             Assert.NotNull(memberList);
 
+            Assert.True(memberList.Count == 11);
+
+            Assert.True(string.Equals("Market", memberList[3].Name));
+
+            Assert.True(memberList[10].DescentantsCount == 5);
+
             var childList = memberList[1].GetChildren();
 
             Assert.NotNull(childList);
+
+            Assert.True(childList.Count == 3);
+
+            Assert.True(string.Equals("Product", memberList[2].Name));
+
+            Assert.True(memberList[1].DescentantsCount == 16);
         }
+        
+        [Fact(DisplayName = @"GetServerObjectTests - 09 - Essbase_AfterReportCreation_CanGetMember"), Priority(09)]
+        public async Task Essbase_AfterReportCreation_CanGetMember()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var member = await cube.GetMemberAsync("Year");
+
+            Assert.NotNull(member);
+
+            Assert.True(string.Equals("Year", member.Name));
+
+            Assert.True(string.Equals("TIME", member.DimensionType));
+
+            Assert.True(member.Aliases.Count == 6);
+        }
+        
     }
 }

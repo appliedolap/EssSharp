@@ -286,12 +286,22 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        public IEssMember GetMember( string uniqueName );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Task<IEssMember> GetMemberAsync( string uniqueName, CancellationToken cancellationTokenn = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
         public List<IEssMember> GetMembers();
 
         /// <summary>
         /// 
         /// </summary>
-        public Task<List<IEssMember>> GetMembersAsync();
+        public Task<List<IEssMember>> GetMembersAsync( CancellationToken cancellationTokenn = default );
 
         /// <summary>
         /// Asynchronously gets a list of locked objects.

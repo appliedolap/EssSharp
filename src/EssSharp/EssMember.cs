@@ -71,13 +71,13 @@ namespace EssSharp
         public string MemberId => _memberBean.MemberId;
 
         /// inheritDoc />
-        public int PerviousSublingCount => _memberBean.PreviousSiblingsCount;
+        public int PerviousSiblingCount => _memberBean.PreviousSiblingsCount;
 
         /// inheritDoc />
-        public long descentantsCount => _memberBean.DescendantsCount;
+        public long DescentantsCount => _memberBean.DescendantsCount;
 
         /// inheritDoc />
-        public bool dimension => _memberBean.Dimension;
+        public bool Dimension => _memberBean.Dimension;
 
         /// inheritDoc />
         public int DimensionSolveOrder => _memberBean.DimSolveOrder;
@@ -86,7 +86,7 @@ namespace EssSharp
         public string DimensionType => _memberBean.DimensionType;
 
         /// inheritDoc />
-        public string dataStorageType => _memberBean.DataStorageType;
+        public string DataStorageType => _memberBean.DataStorageType;
 
         /// inheritDoc />
         public string FormatString => _memberBean.FormatString;

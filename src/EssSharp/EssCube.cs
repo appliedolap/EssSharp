@@ -530,11 +530,35 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
+        public IEssMember GetMember( string uniqueName ) => GetMemberAsync(uniqueName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<IEssMember> GetMemberAsync( string uniqueName, CancellationToken cancellationTokenn = default )
+        {
+            try
+            {
+                var api = GetApi<OutlineViewerApi>();
+
+                if ( await api.OutlineGetMemberInfoAsync(app: _application?.Name, _cube?.Name, memberUniqueName: uniqueName).ConfigureAwait(false) is not { } member )
+                    throw new Exception("Cannot get Members.");
+
+                return new EssMember(member, this);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get members ""{uniqueName}"" from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
         public List<IEssMember> GetMembers() => GetMembersAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetMembersAsync()
+        public async Task<List<IEssMember>> GetMembersAsync( CancellationToken cancellationTokenn = default )
         {
             try
             {

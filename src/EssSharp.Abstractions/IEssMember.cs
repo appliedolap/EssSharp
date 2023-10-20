@@ -36,17 +36,17 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public int PerviousSublingCount { get; }
+        public int PerviousSiblingCount { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public long descentantsCount { get; }
+        public long DescentantsCount { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool dimension { get; }
+        public bool Dimension { get; }
 
         /// <summary>
         /// 
@@ -61,7 +61,7 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public string dataStorageType { get; }
+        public string DataStorageType { get; }
 
         /// <summary>
         /// 
@@ -78,24 +78,54 @@ namespace EssSharp
         /// </summary>
         public string CurrencyConversionCategory { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int GenerationNumber { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string activeAliasName { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool HasUniqueName { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string UniqueId { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int MemberSolveOrder { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string DimensionName { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Attribute { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool Account { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> Uda { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string ParentName { get; }
 
         /// <summary>
