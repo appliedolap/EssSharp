@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -530,17 +531,17 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public IEssMember GetMember( string uniqueName ) => GetMemberAsync(uniqueName).GetAwaiter().GetResult();
+        public IEssMember GetMember( string uniqueName, string fields = null ) => GetMemberAsync(uniqueName, fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<IEssMember> GetMemberAsync( string uniqueName, CancellationToken cancellationTokenn = default )
+        public async Task<IEssMember> GetMemberAsync( string uniqueName, string fields = null, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                if ( await api.OutlineGetMemberInfoAsync(app: _application?.Name, _cube?.Name, memberUniqueName: uniqueName).ConfigureAwait(false) is not { } member )
+                if ( await api.OutlineGetMemberInfoAsync(app: _application?.Name, _cube?.Name, memberUniqueName: uniqueName, fields: fields, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } member )
                     throw new Exception("Cannot get Members.");
 
                 return new EssMember(member, this);
@@ -554,17 +555,17 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public List<IEssMember> GetMembers() => GetMembersAsync().GetAwaiter().GetResult();
+        public List<IEssMember> GetMembers( string parentUniqueName = null, string fields = null, int limit = 50 ) => GetMembersAsync(parentUniqueName, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetMembersAsync( CancellationToken cancellationTokenn = default )
+        public async Task<List<IEssMember>> GetMembersAsync( string parentUniqueName = null, string fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name).ConfigureAwait(false) is not { } membersList )
+                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, parent: parentUniqueName, fields: fields, limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
 
                 return membersList.ToEssSharpList(this) ?? new List<IEssMember>();

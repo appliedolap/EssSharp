@@ -126,6 +126,9 @@ namespace EssSharp
 
         /// inheritDoc />
         public string ParentName => _memberBean.ParentName;
+
+        /// inheritDoc />
+        public bool IsSharedMember => _memberBean.IsSharedMember;
         
         #endregion
 

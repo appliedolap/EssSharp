@@ -129,6 +129,11 @@ namespace EssSharp
         public string ParentName { get; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool IsSharedMember { get; }
+
+        /// <summary>
         /// Gets a list of members.
         /// </summary>
         public List<IEssMember> GetChildren();
