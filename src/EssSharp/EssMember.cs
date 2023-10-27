@@ -129,10 +129,34 @@ namespace EssSharp
 
         /// inheritDoc />
         public bool IsSharedMember => _memberBean.IsSharedMember;
-        
+
         #endregion
 
         #region IEssMember Methods
+
+        /// inheritDoc />
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public List<IEssMember> GetAncestors() => GetAncestorsAsync().GetAwaiter().GetResult();
+
+        /// inheritDoc />
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public async Task<List<IEssMember>> GetAncestorsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<OutlineViewerApi>();
+
+                if ( await api.OutlineGetAncestorsMemberInfoAsync(app: _cube.Application.Name, cube: _cube.Name, memberUniqueName: UniqueName, cancellationToken: cancellationToken ).ConfigureAwait(false) is not { } ancestor )
+                    throw new Exception("Cannot get ancestors.");
+
+                return ancestor.ToEssSharpList(_cube) ?? new List<IEssMember>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get list of ancestors from Member ""{Name}"". {e.Message}", e);
+            }
+        }
 
         /// inheritDoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
@@ -147,14 +171,14 @@ namespace EssSharp
                 var api = GetApi<OutlineViewerApi>();
 
                 if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parentUniqueName: UniqueName).ConfigureAwait(false) is not { } children )
-                    throw new Exception("Cannot get children");
+                    throw new Exception("Cannot get children.");
 
                 return children.ToEssSharpList(_cube) ?? new List<IEssMember>();
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get list of members from Member ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get list of children from Member ""{Name}"". {e.Message}", e);
             }
         }
 

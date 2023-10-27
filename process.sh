@@ -49,6 +49,9 @@ cat temp.json | jq '.paths."/applications/{applicationName}/configurations".get.
 #cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/RestCollectionResponse"}' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/outline/{app}/{cube}".get.responses."200".schema = {"$ref": "#/definitions/MembersList"}' > json.tmp && mv json.tmp temp.json
 
+# Fix the consumes for the execute mdx endpoint
+cat temp.json | jq '.paths."/outline/{app}/{cube}/ancestors/{memberUniqueName}".get.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/outline/{app}/{cube}/ancestors/{memberUniqueName}".get.responses."200".schema = {"$ref": "#/definitions/AncestorsList"}' > json.tmp && mv json.tmp temp.json
 
 # Fix the 204 return schema
 cat temp.json | jq '.paths."/groups/{id}/members/users".post.responses."200".schema = {"$ref": "#/definitions/Users"}' > json.tmp && mv json.tmp temp.json
@@ -412,6 +415,13 @@ cat temp.json | jq '.definitions.MembersList = {
         "$ref": "#/definitions/MemberBean"
       }
     }
+  }
+}' > json.tmp && mv json.tmp temp.json
+
+cat temp.json | jq '.definitions.AncestorsList = {    
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/MemberBean"
   }
 }' > json.tmp && mv json.tmp temp.json
 

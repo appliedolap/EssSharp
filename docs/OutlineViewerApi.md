@@ -112,7 +112,7 @@ void (empty response body)
 
 <a id="outlinegetancestorsmemberinfo"></a>
 # **OutlineGetAncestorsMemberInfo**
-> MemberBean OutlineGetAncestorsMemberInfo (string app, string cube, string memberUniqueName, string connection = null, string applicationNameForConnection = null, string fields = null)
+> List&lt;MemberBean&gt; OutlineGetAncestorsMemberInfo (string app, string cube, string memberUniqueName, string connection = null, string applicationNameForConnection = null, string fields = null)
 
 Get Member Ancestors
 
@@ -149,7 +149,7 @@ namespace Example
             try
             {
                 // Get Member Ancestors
-                MemberBean result = apiInstance.OutlineGetAncestorsMemberInfo(app, cube, memberUniqueName, connection, applicationNameForConnection, fields);
+                List<MemberBean> result = apiInstance.OutlineGetAncestorsMemberInfo(app, cube, memberUniqueName, connection, applicationNameForConnection, fields);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -170,7 +170,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Member Ancestors
-    ApiResponse<MemberBean> response = apiInstance.OutlineGetAncestorsMemberInfoWithHttpInfo(app, cube, memberUniqueName, connection, applicationNameForConnection, fields);
+    ApiResponse<List<MemberBean>> response = apiInstance.OutlineGetAncestorsMemberInfoWithHttpInfo(app, cube, memberUniqueName, connection, applicationNameForConnection, fields);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -196,7 +196,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**MemberBean**](MemberBean.md)
+[**List&lt;MemberBean&gt;**](MemberBean.md)
 
 ### Authorization
 

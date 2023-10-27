@@ -10374,7 +10374,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>List of ancestors returned successfully.</p>",
             "schema": {
-              "$ref": "#/definitions/MemberBean"
+              "$ref": "#/definitions/AncestorsList"
             }
           },
           "400": {
@@ -10383,7 +10383,10 @@
           "500": {
             "description": "<p>Internal Server Error.</p>"
           }
-        }
+        },
+        "consumes": [
+          "application/json"
+        ]
       }
     },
     "/outline/{app}/{cube}/settings/smartlist": {
@@ -24383,6 +24386,12 @@
             "$ref": "#/definitions/MemberBean"
           }
         }
+      }
+    },
+    "AncestorsList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MemberBean"
       }
     },
     "GridLayout": {

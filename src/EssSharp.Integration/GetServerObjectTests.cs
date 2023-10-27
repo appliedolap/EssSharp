@@ -228,6 +228,33 @@ namespace EssSharp.Integration
 
             Assert.True(member.Aliases.Count == 6);
         }
-        
+
+        [Fact(DisplayName = @"GetServerObjectTests - 10 - Essbase_AfterReportCreation_CanGetAncestor"), Priority(10)]
+        public async Task Essbase_AfterReportCreation_CanGetAncestor()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var member = await cube.GetMemberAsync("Year");
+
+            var children = await member.GetChildrenAsync();
+
+            var ancestor = await children[0].GetAncestorsAsync();
+
+            Assert.NotNull(ancestor);
+
+            Assert.True(ancestor.Count == 1);
+
+            Assert.True(string.Equals("Year", ancestor[0].Name));
+
+            Assert.True(string.Equals("TIME", ancestor[0].DimensionType));
+
+            Assert.True(ancestor[0].Aliases.Count == 6);
+        }
     }
 }

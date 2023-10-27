@@ -134,12 +134,23 @@ namespace EssSharp
         public bool IsSharedMember { get; }
 
         /// <summary>
-        /// Gets a list of members.
+        /// Gets a list of ancestors.
+        /// </summary>
+        public List<IEssMember> GetAncestors();
+
+        /// <summary>
+        /// Asynchronously gets a list of ancestors.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssMember>> GetAncestorsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets a list of children.
         /// </summary>
         public List<IEssMember> GetChildren();
 
         /// <summary>
-        /// Asynchronously gets a list of members.
+        /// Asynchronously gets a list of children.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssMember>> GetChildrenAsync( CancellationToken cancellationToken = default );

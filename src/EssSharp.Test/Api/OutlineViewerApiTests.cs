@@ -81,7 +81,7 @@ namespace EssSharp.Test.Api
             //string applicationNameForConnection = null;
             //string fields = null;
             //var response = instance.OutlineGetAncestorsMemberInfo(app, cube, memberUniqueName, connection, applicationNameForConnection, fields);
-            //Assert.IsType<MemberBean>(response);
+            //Assert.IsType<List<MemberBean>>(response);
         }
 
         /// <summary>

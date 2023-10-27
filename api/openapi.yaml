@@ -8849,10 +8849,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MemberBean'
+                $ref: '#/components/schemas/AncestorsList'
             application/xml:
               schema:
-                $ref: '#/components/schemas/MemberBean'
+                $ref: '#/components/schemas/AncestorsList'
           description: <p><strong>OK</strong></p><p>List of ancestors returned successfully.</p>
         "400":
           content: {}
@@ -26936,6 +26936,10 @@ components:
             $ref: '#/components/schemas/MemberBean'
           type: array
       type: object
+    AncestorsList:
+      items:
+        $ref: '#/components/schemas/MemberBean'
+      type: array
     GridLayout:
       example:
         data:
