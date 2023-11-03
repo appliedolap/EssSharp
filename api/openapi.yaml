@@ -19267,21 +19267,21 @@ components:
         coordinates:
         - 0
         - 0
-        action: ZoomIn
+        action: zoomin
         alias: alias
       properties:
         grid:
           $ref: '#/components/schemas/Grid'
         action:
           enum:
-          - ZoomIn
-          - ZoomOut
-          - KeepOnly
-          - RemoveOnly
-          - Refresh
-          - Pivot
-          - PivotToPOV
-          - Submit
+          - zoomin
+          - zoomout
+          - keeponly
+          - removeonly
+          - refresh
+          - pivot
+          - pivotToPOV
+          - submit
           type: string
         alias:
           type: string

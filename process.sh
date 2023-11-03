@@ -548,8 +548,8 @@ cat temp.json | jq '.definitions.ParametersBean.properties.buildMethod.enum = ["
 cat temp.json | jq '.definitions.ParametersBean.properties.buildOption.enum = ["NONE", "RETAIN_ALL_DATA", "RETAIN_INPUT_DATA", "RETAIN_LEAF_DATA", "REMOVE_ALL_DATA"]' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.definitions.ParametersBean.properties.dataLevel.enum = ["ALL_DATA", "UPPER_LEVEL_BLOCKS", "NON_INPUT_BLOCKS", "LEVEL_ZERO_BLOCKS", "INPUT_LEVEL_DATA_BLOCKS"]' > json.tmp && mv json.tmp temp.json
 
-# fixing casing of action enum
-cat temp.json | jq '.definitions.GridOperation.properties.action.enum = ["ZoomIn", "ZoomOut", "KeepOnly", "RemoveOnly", "Refresh", "Pivot", "PivotToPOV", "Submit"]' > json.tmp && mv json.tmp temp.json
+# fixing casing of action enum - causes problems
+# cat temp.json | jq '.definitions.GridOperation.properties.action.enum = ["ZoomIn", "ZoomOut", "KeepOnly", "RemoveOnly", "Refresh", "Pivot", "PivotToPOV", "Submit"]' > json.tmp && mv json.tmp temp.json
 
 # There are duplicate "Datasource" definitions: "Datasource" and "DataSource", and the OpenAPI generator fails 
 # to generate model classes for case-insensitive duplicates correctly. Update the dataSource property of Rules.

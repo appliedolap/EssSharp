@@ -189,17 +189,17 @@ namespace EssSharp.Integration
             var memberList = await cube.GetMembersAsync();
 
             Assert.NotNull(memberList);
+            
+            Assert.Equal(11, memberList.Count);
 
-            Assert.True(memberList.Count == 11);
-
-            Assert.True(string.Equals("Market", memberList[3].Name));
+            Assert.Equal("Market", memberList[3].Name);
 
             Assert.True(memberList[10].DescentantsCount == 5);
 
             var childList = memberList[1].GetChildren();
 
             Assert.NotNull(childList);
-
+            
             Assert.True(childList.Count == 3);
 
             Assert.True(string.Equals("Product", memberList[2].Name));

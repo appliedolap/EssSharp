@@ -200,7 +200,7 @@ namespace EssSharp
         {
             try
             {
-                await ExecuteGridOperationAsync(action:GridOperation.ActionEnum.KeepOnly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await ExecuteGridOperationAsync(action:GridOperation.ActionEnum.Keeponly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
@@ -290,7 +290,7 @@ namespace EssSharp
         {
             try
             {
-                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.RemoveOnly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Removeonly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
@@ -458,10 +458,10 @@ namespace EssSharp
                         if ( newPosition is not null )
                             coordinates.Add(GetCoordinate(gridSelection: newPosition, columnCount: Slice.Columns));
                         break;
-                    case GridOperation.ActionEnum.ZoomIn:
-                    case GridOperation.ActionEnum.ZoomOut:
-                    case GridOperation.ActionEnum.KeepOnly:
-                    case GridOperation.ActionEnum.RemoveOnly:
+                    case GridOperation.ActionEnum.Zoomin:
+                    case GridOperation.ActionEnum.Zoomout:
+                    case GridOperation.ActionEnum.Keeponly:
+                    case GridOperation.ActionEnum.Removeonly:
                         ranges = new List<List<int>>();
                         gridSelection?.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
                         break;

@@ -20177,14 +20177,14 @@
         "action": {
           "type": "string",
           "enum": [
-            "ZoomIn",
-            "ZoomOut",
-            "KeepOnly",
-            "RemoveOnly",
-            "Refresh",
-            "Pivot",
-            "PivotToPOV",
-            "Submit"
+            "zoomin",
+            "zoomout",
+            "keeponly",
+            "removeonly",
+            "refresh",
+            "pivot",
+            "pivotToPOV",
+            "submit"
           ]
         },
         "alias": {
