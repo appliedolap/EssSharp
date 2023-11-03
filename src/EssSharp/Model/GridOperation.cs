@@ -36,51 +36,51 @@ namespace EssSharp.Model
         public enum ActionEnum
         {
             /// <summary>
-            /// Enum Zoomin for value: zoomin
+            /// Enum ZoomIn for value: ZoomIn
             /// </summary>
-            [EnumMember(Value = "zoomin")]
-            Zoomin = 1,
+            [EnumMember(Value = "ZoomIn")]
+            ZoomIn = 1,
 
             /// <summary>
-            /// Enum Zoomout for value: zoomout
+            /// Enum ZoomOut for value: ZoomOut
             /// </summary>
-            [EnumMember(Value = "zoomout")]
-            Zoomout = 2,
+            [EnumMember(Value = "ZoomOut")]
+            ZoomOut = 2,
 
             /// <summary>
-            /// Enum Keeponly for value: keeponly
+            /// Enum KeepOnly for value: KeepOnly
             /// </summary>
-            [EnumMember(Value = "keeponly")]
-            Keeponly = 3,
+            [EnumMember(Value = "KeepOnly")]
+            KeepOnly = 3,
 
             /// <summary>
-            /// Enum Removeonly for value: removeonly
+            /// Enum RemoveOnly for value: RemoveOnly
             /// </summary>
-            [EnumMember(Value = "removeonly")]
-            Removeonly = 4,
+            [EnumMember(Value = "RemoveOnly")]
+            RemoveOnly = 4,
 
             /// <summary>
-            /// Enum Refresh for value: refresh
+            /// Enum Refresh for value: Refresh
             /// </summary>
-            [EnumMember(Value = "refresh")]
+            [EnumMember(Value = "Refresh")]
             Refresh = 5,
 
             /// <summary>
-            /// Enum Pivot for value: pivot
+            /// Enum Pivot for value: Pivot
             /// </summary>
-            [EnumMember(Value = "pivot")]
+            [EnumMember(Value = "Pivot")]
             Pivot = 6,
 
             /// <summary>
-            /// Enum PivotToPOV for value: pivotToPOV
+            /// Enum PivotToPOV for value: PivotToPOV
             /// </summary>
-            [EnumMember(Value = "pivotToPOV")]
+            [EnumMember(Value = "PivotToPOV")]
             PivotToPOV = 7,
 
             /// <summary>
-            /// Enum Submit for value: submit
+            /// Enum Submit for value: Submit
             /// </summary>
-            [EnumMember(Value = "submit")]
+            [EnumMember(Value = "Submit")]
             Submit = 8
 
         }

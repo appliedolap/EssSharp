@@ -50,16 +50,8 @@ namespace EssSharp
         #region EssObject Properties
 
         /// <inheritdoc />
-        public override string Name //=> _grid.Alias;
-        {
-            get
-            {
-                if ( _grid?.Alias is { } name )
-                    return name;
+        public override string Name => $@"{_cube.Application.Name}.{_cube.Name}";
 
-                return _essGridAlias;
-            }
-        }
         /// <inheritdoc />
         public override EssType Type => EssType.Grid;
 
@@ -154,7 +146,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get grid layout for grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get grid layout for ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -178,7 +170,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get grid preferences for grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get grid preferences for ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -208,14 +200,14 @@ namespace EssSharp
         {
             try
             {
-                await ExecuteGridOperations(action:GridOperation.ActionEnum.Keeponly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await ExecuteGridOperationAsync(action:GridOperation.ActionEnum.KeepOnly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to keep only specified coordinates of grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to keep only specified coordinates of ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -240,14 +232,14 @@ namespace EssSharp
                 if ( newPosition is null && Selection.ElementAtOrDefault(1) is not null )
                     newPosition = Selection[1];
 
-                await ExecuteGridOperations(action: GridOperation.ActionEnum.Pivot, gridSelection: new List<EssGridSelection>() { currentPosition }, newPosition: newPosition, cancellationToken).ConfigureAwait(false);
+                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Pivot, gridSelection: new List<EssGridSelection>() { currentPosition }, newPosition: newPosition, cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to pivot to pov on grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to pivot to pov on ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -261,14 +253,14 @@ namespace EssSharp
         {
             try
             {
-                await ExecuteGridOperations(action: GridOperation.ActionEnum.Refresh, cancellationToken: cancellationToken).ConfigureAwait( false );
+                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Refresh, cancellationToken: cancellationToken).ConfigureAwait( false );
                 
                 return this;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to refresh ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -298,14 +290,14 @@ namespace EssSharp
         {
             try
             {
-                await ExecuteGridOperations(action: GridOperation.ActionEnum.Removeonly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.RemoveOnly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
             catch (OperationCanceledException) { throw; }
             catch (Exception e )
             {
-                throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to refresh ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -334,7 +326,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to set grid preferences for grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to set grid preferences for ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -362,14 +354,14 @@ namespace EssSharp
                             _essGridSlice.DirtyCells.Add(i);
                 }
 
-                await ExecuteGridOperations(action: GridOperation.ActionEnum.Submit, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Submit, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to submit new value for grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to submit new value for ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -399,41 +391,48 @@ namespace EssSharp
         {
             try
             {
-                await ExecuteGridOperations(action: zoomOption.ToEssGridActionType(), gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await ExecuteGridOperationAsync(action: zoomOption.ToEssGridActionType(), gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to refresh grid ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to refresh ""{Name}"" grid. {e.Message}", e);
             }
         }
         #endregion
 
         #region Private Methods
 
-        private async Task ExecuteGridOperations( GridOperation.ActionEnum action, List<EssGridSelection> gridSelection = null, EssGridSelection newPosition = null, CancellationToken cancellationToken = default )
+        private async Task ExecuteGridOperationAsync( GridOperation.ActionEnum action, List<EssGridSelection> gridSelection = null, EssGridSelection newPosition = null, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<GridApi>();
 
-                if ( action != GridOperation.ActionEnum.Refresh && action != GridOperation.ActionEnum.Submit && gridSelection is null)
-                    gridSelection = Selection ??
-                        throw new ArgumentException(nameof(gridSelection), $"An {nameof(EssGridSelection)} object, List of {nameof(EssGridSelection)}, or setting the {nameof(EssGrid.Selection)} property is required to perform {action} on grid.");
+                // Clear/process the grid selection, depending on the operation.
+                gridSelection = action switch
+                {
+                    // Refresh and submit don't use a grid selection.
+                    GridOperation.ActionEnum.Refresh => null,
+                    GridOperation.ActionEnum.Submit  => null,
+                    // Other operations do; use the given selection, fall back to the current selection, or throw.
+                    _ => gridSelection ??= Selection ??
+                        throw new ArgumentNullException(nameof(gridSelection), $"At least one {nameof(EssGridSelection)} or a current {nameof(EssGrid)}.{nameof(EssGrid.Selection)} is required to perform {action} on grid.")
+                };
 
-                var body = GetRequestBody(action, gridSelection, newPosition);
+                var body = GetGridOperation(action, gridSelection, newPosition);
 
                 if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
-                    throw new Exception($@"Cannot complete grid operation {action} on grid ""{Name}"" at coordinants.");
+                    throw new Exception($@"Could not get a grid via the {action} operation.");
 
                 _grid = grid;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Cannot complete grid operation {action} on grid ""{Name}"".", e);
+                throw new Exception($@"Unable to perform grid operation {action} on ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -444,7 +443,7 @@ namespace EssSharp
         /// <param name="gridSelection"></param>
         /// <param name="newPosition"></param>
         /// <returns></returns>
-        private GridOperation GetRequestBody( GridOperation.ActionEnum action, List<EssGridSelection> gridSelection = null, EssGridSelection newPosition = null )
+        private GridOperation GetGridOperation( GridOperation.ActionEnum action, List<EssGridSelection> gridSelection = null, EssGridSelection newPosition = null )
         {
             try
             {
@@ -459,10 +458,10 @@ namespace EssSharp
                         if ( newPosition is not null )
                             coordinates.Add(GetCoordinate(gridSelection: newPosition, columnCount: Slice.Columns));
                         break;
-                    case GridOperation.ActionEnum.Zoomin:
-                    case GridOperation.ActionEnum.Zoomout:
-                    case GridOperation.ActionEnum.Keeponly:
-                    case GridOperation.ActionEnum.Removeonly:
+                    case GridOperation.ActionEnum.ZoomIn:
+                    case GridOperation.ActionEnum.ZoomOut:
+                    case GridOperation.ActionEnum.KeepOnly:
+                    case GridOperation.ActionEnum.RemoveOnly:
                         ranges = new List<List<int>>();
                         gridSelection?.ForEach(selection => ranges.Add(new List<int>() { selection.startRow, selection.startColumn, selection.rowCount, selection.columnCount }));
                         break;
@@ -491,7 +490,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Cannot create {nameof(GridOperation)} response body on grid ""{Name}"".", e);
+                throw new Exception($@"Cannot create {nameof(GridOperation)} response body for ""{Name}"" grid.", e);
             }
             
         }

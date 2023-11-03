@@ -14,7 +14,6 @@ namespace EssSharp
         #region Private Data
 
         private readonly EssCube  _cube;
-        //private readonly DimensionMember _member;
         private readonly MemberBean _memberBean;
 
         #endregion
@@ -30,17 +29,7 @@ namespace EssSharp
             _cube = cube ??
                 throw new ArgumentNullException(nameof(cube), $"An {nameof(EssServer)} {nameof(cube)} is required to create an {nameof(EssMember)}.");
         }
-        /*
-        /// <summary />
-        internal EssMember( MemberBean memberBean, EssCube cube ) : base(cube?.Configuration, cube?.Client)
-        {
-            _memberBean = memberBean ??
-                throw new ArgumentNullException(nameof(memberBean), $"An API model {nameof(memberBean)} is required to create an {nameof(EssMember)}.");
 
-            _cube = cube ??
-                throw new ArgumentNullException(nameof(cube), $"An {nameof(EssServer)} {nameof(cube)} is required to create an {nameof(EssMember)}.");
-        }
-        */
         #endregion
 
         #region IEssObject Members
