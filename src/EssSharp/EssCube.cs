@@ -541,9 +541,11 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                var selectedFields = fields?.ToCommaSeparatedString();
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFilterOption.dataStorageType) is false )
+                    fields |= EssMemberFilterOption.dataStorageType;
 
-                if ( await api.OutlineGetMemberInfoAsync(app: _application?.Name, _cube?.Name, memberUniqueName: uniqueName, fields: selectedFields, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } member )
+                if ( await api.OutlineGetMemberInfoAsync(app: _application?.Name, _cube?.Name, memberUniqueName: uniqueName, fields: fields?.ToDelimitedString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } member )
                     throw new Exception("Cannot get Members.");
 
                 return new EssMember(member, this);
@@ -567,9 +569,11 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                var selectedFields = fields?.ToCommaSeparatedString();
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFilterOption.dataStorageType) is false )
+                    fields |= EssMemberFilterOption.dataStorageType;
 
-                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, parent: parentUniqueName, fields: selectedFields, limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
+                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, parent: parentUniqueName, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
 
                 return membersList.ToEssSharpList(this) ?? new List<IEssMember>();
@@ -593,9 +597,11 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                var selectedFields = fields?.ToCommaSeparatedString();
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFilterOption.dataStorageType) is false )
+                    fields |= EssMemberFilterOption.dataStorageType;
 
-                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, keyword: keyword, fields: selectedFields, limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
+                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, keyword: keyword, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
 
                 return membersList.ToEssSharpList(this) ?? new List<IEssMember>();

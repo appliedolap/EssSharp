@@ -851,7 +851,7 @@ namespace EssSharp
             }
         };
 
-        internal static string ToCommaSeparatedString( this EssMemberFilterOption filterOption )
+        internal static string ToDelimitedString( this EssMemberFilterOption filterOption )
         {
             var values = new List<string>();
 

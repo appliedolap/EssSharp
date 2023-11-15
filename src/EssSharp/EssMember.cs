@@ -37,97 +37,97 @@ namespace EssSharp
         /// <inheritdoc />
         public override string Name => _memberBean.Name;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public override EssType Type => EssType.Member;
 
         #endregion
 
         #region IEssMember Attributes
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public int NumberOfChildren => _memberBean.NumberOfChildren;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public int LevelNumber => _memberBean.LevelNumber;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public Dictionary<string, string> Aliases => _memberBean.Aliases;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string UniqueName => _memberBean.UniqueName;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string MemberId => _memberBean.MemberId;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public int PerviousSiblingCount => _memberBean.PreviousSiblingsCount;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public long DescentantsCount => _memberBean.DescendantsCount;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public bool Dimension => _memberBean.Dimension;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public int DimensionSolveOrder => _memberBean.DimSolveOrder;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public EssDimensionType DimensionType => _memberBean.DimensionType.ToEssEnum();
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string DataStorageType => _memberBean.DataStorageType;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string FormatString => _memberBean.FormatString;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public EssDimStorageType DimensionStorageType => _memberBean.DimStorageType.ToEssEnum();
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string CurrencyConversionCategory => _memberBean.CurrencyConversionCategory;
 
-        /// inheritDoc />       
+        /// <inheritdoc />       
         public int GenerationNumber => _memberBean.GenerationNumber == 0 ? 1 : _memberBean.GenerationNumber;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string activeAliasName => _memberBean.ActiveAliasName;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public bool HasUniqueName => _memberBean.MemberHasUniqueName;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string UniqueId => _memberBean.UniqueId;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public int MemberSolveOrder => _memberBean.MemberSolveOrder;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string DimensionName => _memberBean.DimensionName;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public bool Attribute => _memberBean.Attribute;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public bool Account => _memberBean.Account;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public List<string> Uda => _memberBean.Uda;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public string ParentName => _memberBean.ParentName;
 
-        /// inheritDoc />
+        /// <inheritdoc />
         public bool IsSharedMember => _memberBean.IsSharedMember;
 
         #endregion
 
         #region IEssMember Methods
 
-        /// inheritDoc />
+        /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetAncestors() => GetAncestorsAsync().GetAwaiter().GetResult();
 
-        /// inheritDoc />
+        /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetAncestorsAsync( CancellationToken cancellationToken = default )
         {
@@ -147,11 +147,11 @@ namespace EssSharp
             }
         }
 
-        /// inheritDoc />
+        /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetChildren() => GetChildrenAsync().GetAwaiter().GetResult();
 
-        /// inheritDoc />
+        /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetChildrenAsync( CancellationToken cancellationToken = default )
         {
