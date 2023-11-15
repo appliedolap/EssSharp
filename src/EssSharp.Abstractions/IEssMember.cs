@@ -56,7 +56,7 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public string DimensionType { get; }
+        public EssDimensionType DimensionType { get; }
 
         /// <summary>
         /// 
@@ -71,7 +71,7 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public string DimensionStorageType { get; }
+        public EssDimStorageType DimensionStorageType { get; }
 
         /// <summary>
         /// 
@@ -154,5 +154,13 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssMember>> GetChildrenAsync( CancellationToken cancellationToken = default );
+
+        public List<IEssMember> GetDescendants();
+
+        public Task<List<IEssMember>> GetDescendantsAsync( CancellationToken cancellationToken = default );
+
+        public List<IEssMember> GetSiblings();
+
+        public Task<List<IEssMember>> GetSiblingsAsync( CancellationToken cancellation = default );
     }
 }

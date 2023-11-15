@@ -342,6 +342,9 @@ cat temp.json | jq '.definitions.GridOperation.properties.action.enum = ["zoomin
 # Add an enumerated jobtype to the JobsInputBean definition.
 cat temp.json | jq '.definitions.JobsInputBean.properties.jobtype.enum = ["dataload", "dimbuild", "calc", "clear", "importExcel", "exportExcel", "lcmExport", "lcmImport", "clearAggregation", "buildAggregation", "asoBufferDataLoad", "asoBufferCommit", "exportData", "mdxScript", "executeReport", "maxl", "groovy"]' > json.tmp && mv json.tmp temp.json
 
+# Add en enumerated dimension storage type to the MemberBean
+# cat temp.json | jq '.definitions.MemberBean.properties.dimStorageType.enum = ["DENSE", "SPARSE"]' > json.tmp && mv json.tmp temp.json
+
 # Adding DimensionMember/List object
 cat temp.json | jq '.definitions.DimensionMember = {
   "type": "object",
@@ -431,13 +434,24 @@ cat temp.json | jq '.definitions.MemberBean.properties += {
     "type": "integer"
   },
   "dimensionType": {
-    "type": "string"
+    "type": "string",
+    "enum": [
+      "TIME",
+      "ACCOUNTS",
+      "REGULAR",
+      "ATTRIBUTE",
+      "ATTRIBUTECALC"
+    ]
   },
   "formatString": {
     "type": "string"
   },
   "dimStorageType": {
-    "type": "string"
+    "type": "string",
+    "enum": [
+      "DENSE",
+      "SPARSE"
+    ]
   },
  "currencyConversionCategory": {
     "type": "string"

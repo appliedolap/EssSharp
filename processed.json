@@ -21574,13 +21574,24 @@
           "type": "integer"
         },
         "dimensionType": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "TIME",
+            "ACCOUNTS",
+            "REGULAR",
+            "ATTRIBUTE",
+            "ATTRIBUTECALC"
+          ]
         },
         "formatString": {
           "type": "string"
         },
         "dimStorageType": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "DENSE",
+            "SPARSE"
+          ]
         },
         "currencyConversionCategory": {
           "type": "string"

@@ -21055,7 +21055,7 @@ components:
       example:
         activeAliasName: activeAliasName
         formatString: formatString
-        dimensionType: dimensionType
+        dimensionType: TIME
         aliases:
           key: aliases
         dataStorageType: dataStorageType
@@ -21086,7 +21086,7 @@ components:
         uda:
         - uda
         - uda
-        dimStorageType: dimStorageType
+        dimStorageType: DENSE
         name: name
         memberSolveOrder: 5
         uniqueId: uniqueId
@@ -21148,10 +21148,19 @@ components:
         dimSolveOrder:
           type: integer
         dimensionType:
+          enum:
+          - TIME
+          - ACCOUNTS
+          - REGULAR
+          - ATTRIBUTE
+          - ATTRIBUTECALC
           type: string
         formatString:
           type: string
         dimStorageType:
+          enum:
+          - DENSE
+          - SPARSE
           type: string
         currencyConversionCategory:
           type: string
@@ -26856,7 +26865,7 @@ components:
         items:
         - activeAliasName: activeAliasName
           formatString: formatString
-          dimensionType: dimensionType
+          dimensionType: TIME
           aliases:
             key: aliases
           dataStorageType: dataStorageType
@@ -26887,14 +26896,14 @@ components:
           uda:
           - uda
           - uda
-          dimStorageType: dimStorageType
+          dimStorageType: DENSE
           name: name
           memberSolveOrder: 5
           uniqueId: uniqueId
           account: true
         - activeAliasName: activeAliasName
           formatString: formatString
-          dimensionType: dimensionType
+          dimensionType: TIME
           aliases:
             key: aliases
           dataStorageType: dataStorageType
@@ -26925,7 +26934,7 @@ components:
           uda:
           - uda
           - uda
-          dimStorageType: dimStorageType
+          dimStorageType: DENSE
           name: name
           memberSolveOrder: 5
           uniqueId: uniqueId

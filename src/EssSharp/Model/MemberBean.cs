@@ -68,6 +68,76 @@ namespace EssSharp.Model
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
+        /// Defines DimensionType
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum DimensionTypeEnum
+        {
+            /// <summary>
+            /// Enum TIME for value: TIME
+            /// </summary>
+            [EnumMember(Value = "TIME")]
+            TIME = 1,
+
+            /// <summary>
+            /// Enum ACCOUNTS for value: ACCOUNTS
+            /// </summary>
+            [EnumMember(Value = "ACCOUNTS")]
+            ACCOUNTS = 2,
+
+            /// <summary>
+            /// Enum REGULAR for value: REGULAR
+            /// </summary>
+            [EnumMember(Value = "REGULAR")]
+            REGULAR = 3,
+
+            /// <summary>
+            /// Enum ATTRIBUTE for value: ATTRIBUTE
+            /// </summary>
+            [EnumMember(Value = "ATTRIBUTE")]
+            ATTRIBUTE = 4,
+
+            /// <summary>
+            /// Enum ATTRIBUTECALC for value: ATTRIBUTECALC
+            /// </summary>
+            [EnumMember(Value = "ATTRIBUTECALC")]
+            ATTRIBUTECALC = 5
+
+        }
+
+
+        /// <summary>
+        /// Gets or Sets DimensionType
+        /// </summary>
+        [DataMember(Name = "dimensionType", EmitDefaultValue = false)]
+        public DimensionTypeEnum? DimensionType { get; set; }
+        /// <summary>
+        /// Defines DimStorageType
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum DimStorageTypeEnum
+        {
+            /// <summary>
+            /// Enum DENSE for value: DENSE
+            /// </summary>
+            [EnumMember(Value = "DENSE")]
+            DENSE = 1,
+
+            /// <summary>
+            /// Enum SPARSE for value: SPARSE
+            /// </summary>
+            [EnumMember(Value = "SPARSE")]
+            SPARSE = 2
+
+        }
+
+
+        /// <summary>
+        /// Gets or Sets DimStorageType
+        /// </summary>
+        [DataMember(Name = "dimStorageType", EmitDefaultValue = false)]
+        public DimStorageTypeEnum? DimStorageType { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="MemberBean" /> class.
         /// </summary>
         /// <param name="name">name.</param>
@@ -97,7 +167,7 @@ namespace EssSharp.Model
         /// <param name="uda">uda.</param>
         /// <param name="dataStorageType">dataStorageType.</param>
         /// <param name="parentName">parentName.</param>
-        public MemberBean(string name = default(string), string dimensionName = default(string), int numberOfChildren = default(int), int levelNumber = default(int), int generationNumber = default(int), Dictionary<string, string> aliases = default(Dictionary<string, string>), string activeAliasName = default(string), bool memberHasUniqueName = default(bool), string uniqueName = default(string), string memberId = default(string), string uniqueId = default(string), TypeEnum? type = default(TypeEnum?), int memberSolveOrder = default(int), long descendantsCount = default(long), int previousSiblingsCount = default(int), bool dimension = default(bool), bool attribute = default(bool), bool account = default(bool), List<Link> links = default(List<Link>), int dimSolveOrder = default(int), string dimensionType = default(string), string formatString = default(string), string dimStorageType = default(string), string currencyConversionCategory = default(string), List<string> uda = default(List<string>), string dataStorageType = default(string), string parentName = default(string))
+        public MemberBean(string name = default(string), string dimensionName = default(string), int numberOfChildren = default(int), int levelNumber = default(int), int generationNumber = default(int), Dictionary<string, string> aliases = default(Dictionary<string, string>), string activeAliasName = default(string), bool memberHasUniqueName = default(bool), string uniqueName = default(string), string memberId = default(string), string uniqueId = default(string), TypeEnum? type = default(TypeEnum?), int memberSolveOrder = default(int), long descendantsCount = default(long), int previousSiblingsCount = default(int), bool dimension = default(bool), bool attribute = default(bool), bool account = default(bool), List<Link> links = default(List<Link>), int dimSolveOrder = default(int), DimensionTypeEnum? dimensionType = default(DimensionTypeEnum?), string formatString = default(string), DimStorageTypeEnum? dimStorageType = default(DimStorageTypeEnum?), string currencyConversionCategory = default(string), List<string> uda = default(List<string>), string dataStorageType = default(string), string parentName = default(string))
         {
             this.Name = name;
             this.DimensionName = dimensionName;
@@ -243,22 +313,10 @@ namespace EssSharp.Model
         public int DimSolveOrder { get; set; }
 
         /// <summary>
-        /// Gets or Sets DimensionType
-        /// </summary>
-        [DataMember(Name = "dimensionType", EmitDefaultValue = false)]
-        public string DimensionType { get; set; }
-
-        /// <summary>
         /// Gets or Sets FormatString
         /// </summary>
         [DataMember(Name = "formatString", EmitDefaultValue = false)]
         public string FormatString { get; set; }
-
-        /// <summary>
-        /// Gets or Sets DimStorageType
-        /// </summary>
-        [DataMember(Name = "dimStorageType", EmitDefaultValue = false)]
-        public string DimStorageType { get; set; }
 
         /// <summary>
         /// Gets or Sets CurrencyConversionCategory
@@ -446,8 +504,7 @@ namespace EssSharp.Model
                 ) && 
                 (
                     this.DimensionType == input.DimensionType ||
-                    (this.DimensionType != null &&
-                    this.DimensionType.Equals(input.DimensionType))
+                    this.DimensionType.Equals(input.DimensionType)
                 ) && 
                 (
                     this.FormatString == input.FormatString ||
@@ -456,8 +513,7 @@ namespace EssSharp.Model
                 ) && 
                 (
                     this.DimStorageType == input.DimStorageType ||
-                    (this.DimStorageType != null &&
-                    this.DimStorageType.Equals(input.DimStorageType))
+                    this.DimStorageType.Equals(input.DimStorageType)
                 ) && 
                 (
                     this.CurrencyConversionCategory == input.CurrencyConversionCategory ||
@@ -535,18 +591,12 @@ namespace EssSharp.Model
                     hashCode = (hashCode * 59) + this.Links.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.DimSolveOrder.GetHashCode();
-                if (this.DimensionType != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimensionType.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.DimensionType.GetHashCode();
                 if (this.FormatString != null)
                 {
                     hashCode = (hashCode * 59) + this.FormatString.GetHashCode();
                 }
-                if (this.DimStorageType != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimStorageType.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.DimStorageType.GetHashCode();
                 if (this.CurrencyConversionCategory != null)
                 {
                     hashCode = (hashCode * 59) + this.CurrencyConversionCategory.GetHashCode();

@@ -573,14 +573,6 @@ namespace EssSharp
             return dimensionList;   
         }
 
-        internal static EssGridActionType ToEssGridActionType( this GridOperation.ActionEnum actionEnum )
-        {
-            if ( Enum.IsDefined(typeof(EssGridActionType), (int)actionEnum) )
-                return (EssGridActionType)actionEnum;
-
-            throw new ArgumentException($@"{nameof(EssGridActionType)}.{actionEnum} does not map to a model job type.");
-        }
-
         internal static GridOperation.ActionEnum ToEssGridActionType( this EssGridZoomType actionEnum)
         {
             if ( Enum.IsDefined(typeof(GridOperation.ActionEnum), (int)actionEnum) )
@@ -859,6 +851,21 @@ namespace EssSharp
             }
         };
 
+        internal static string ToCommaSeparatedString( this EssMemberFilterOption filterOption )
+        {
+            var values = new List<string>();
+
+            foreach( EssMemberFilterOption value in Enum.GetValues(typeof(EssMemberFilterOption)) )
+            {
+                if ( filterOption.HasFlag(value) )
+                {
+                    values.Add(value.ToString());
+                }
+            }
+
+            return string.Join(",", values) ?? string.Empty;
+        }
+
         #endregion
 
         #region EssScript/EssScriptType Extensions
@@ -965,6 +972,23 @@ namespace EssSharp
             EssServerRole.PowerUser => "power user",
             EssServerRole.ServiceAdministrator => "service administration",
             _ => throw new NotSupportedException("Unsupported user role.")
+        };
+
+        internal static EssDimStorageType ToEssEnum( this MemberBean.DimStorageTypeEnum? dim ) => dim switch
+        {
+            MemberBean.DimStorageTypeEnum.DENSE => EssDimStorageType.Dense,
+            MemberBean.DimStorageTypeEnum.SPARSE => EssDimStorageType.Sparse,
+            _ => EssDimStorageType.Unknown
+        };
+
+        internal static EssDimensionType ToEssEnum( this MemberBean.DimensionTypeEnum? type ) => type switch
+        {
+            MemberBean.DimensionTypeEnum.TIME => EssDimensionType.TIME,
+            MemberBean.DimensionTypeEnum.REGULAR => EssDimensionType.REGULAR,
+            MemberBean.DimensionTypeEnum.ACCOUNTS => EssDimensionType.ACCOUNTS,
+            MemberBean.DimensionTypeEnum.ATTRIBUTE => EssDimensionType.ATTRIBUTE,
+            MemberBean.DimensionTypeEnum.ATTRIBUTECALC => EssDimensionType.ATTRIBUTECALC,
+            _ => EssDimensionType.Unknown
         };
 
         #endregion

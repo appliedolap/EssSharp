@@ -286,22 +286,39 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public IEssMember GetMember( string uniqueName, string fields = null );
+        public IEssMember GetMember( string uniqueName, EssMemberFilterOption? fields = null );
 
         /// <summary>
         /// 
         /// </summary>
-        public Task<IEssMember> GetMemberAsync( string uniqueName, string fields = null, CancellationToken cancellationToken = default );
+        public Task<IEssMember> GetMemberAsync( string uniqueName, EssMemberFilterOption? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// 
         /// </summary>
-        public List<IEssMember> GetMembers( string parentUniqueName = null, string fields = null, int limit = 50 );
+        public List<IEssMember> GetMembers( string parentUniqueName = null, EssMemberFilterOption? fields = null, int limit = 50 );
 
         /// <summary>
         /// 
         /// </summary>
-        public Task<List<IEssMember>> GetMembersAsync( string parentUniqueName = null, string fields = null, int limit = 50, CancellationToken cancellationToken = default );
+        public Task<List<IEssMember>> GetMembersAsync( string parentUniqueName = null, EssMemberFilterOption? fields = null, int limit = 50, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        public List<IEssMember> GetMembersSearched( string keyword, EssMemberFilterOption? fields = null, int limit = 50 );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationTokenn"></param>
+        public Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, EssMemberFilterOption? fields = null, int limit = 50, CancellationToken cancellationTokenn = default );
 
         /// <summary>
         /// Asynchronously gets a list of locked objects.

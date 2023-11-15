@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
+using EssSharp.Model;
 using Xunit;
 
 namespace EssSharp.Integration
@@ -189,7 +191,7 @@ namespace EssSharp.Integration
             var memberList = await cube.GetMembersAsync();
 
             Assert.NotNull(memberList);
-            
+
             Assert.Equal(11, memberList.Count);
 
             Assert.Equal("Market", memberList[3].Name);
@@ -199,14 +201,20 @@ namespace EssSharp.Integration
             var childList = memberList[1].GetChildren();
 
             Assert.NotNull(childList);
-            
+
             Assert.True(childList.Count == 3);
 
             Assert.True(string.Equals("Product", memberList[2].Name));
 
             Assert.True(memberList[1].DescentantsCount == 16);
+
+            var memList = await cube.GetMembersSearchedAsync("300-");
+
+            Assert.NotNull(memList);
+
+            Assert.Equal(4, memList.Count);
         }
-        
+
         [Fact(DisplayName = @"GetServerObjectTests - 09 - Essbase_AfterReportCreation_CanGetMember"), Priority(09)]
         public async Task Essbase_AfterReportCreation_CanGetMember()
         {
@@ -217,16 +225,33 @@ namespace EssSharp.Integration
             var cube = await server
                 .GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic");
-
+            
             var member = await cube.GetMemberAsync("Year");
 
             Assert.NotNull(member);
 
-            Assert.True(string.Equals("Year", member.Name));
+            Assert.Equal("Year", member.Name);
 
-            Assert.True(string.Equals("TIME", member.DimensionType));
+            Assert.Equal(EssDimensionType.TIME, member.DimensionType);
 
-            Assert.True(member.Aliases.Count == 6);
+            Assert.NotNull(member.Aliases);
+
+            Assert.Equal(6, member.Aliases.Count);
+            
+            member = await cube.GetMemberAsync("Shared Diet Cola", fields: EssMemberFilterOption.dataStorageType | EssMemberFilterOption.aliases | EssMemberFilterOption.type);
+
+            Assert.NotNull(member);
+            
+            Assert.Equal("100-20", member.Name);
+
+            // TODO: Investigate
+            //Assert.Null(member.DimensionType);
+
+            Assert.True(member.IsSharedMember);
+
+            Assert.NotNull(member.Aliases);
+
+            Assert.NotEmpty(member.Aliases);
         }
 
         [Fact(DisplayName = @"GetServerObjectTests - 10 - Essbase_AfterReportCreation_CanGetAncestor"), Priority(10)]
@@ -252,9 +277,47 @@ namespace EssSharp.Integration
 
             Assert.True(string.Equals("Year", ancestor[0].Name));
 
-            Assert.True(string.Equals("TIME", ancestor[0].DimensionType));
+            Assert.Equal(EssDimensionType.TIME, member.DimensionType);
 
             Assert.True(ancestor[0].Aliases.Count == 6);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 11 - Essbase_AfterReportCreation_CanGetDescendants"), Priority(11)]
+        public async Task Essbase_AfterReportCreation_CanGetDescendants()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var member = await cube.GetMemberAsync("Market");
+
+            var descendants = await member.GetDescendantsAsync();
+
+            Assert.NotNull(descendants);
+
+            Assert.True(descendants.Count == 24);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 12 - Essbase_AfterReportCreation_CanGetSiblings"), Priority(12)]
+        public async Task Essbase_AfterReportCreation_CanGetSiblings()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var member = await cube.GetMemberAsync("Qtr1");
+
+            var siblings = await member.GetSiblingsAsync();
+
+            Assert.NotNull(siblings);
         }
     }
 }

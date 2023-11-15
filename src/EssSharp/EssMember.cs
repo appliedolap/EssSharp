@@ -72,7 +72,7 @@ namespace EssSharp
         public int DimensionSolveOrder => _memberBean.DimSolveOrder;
 
         /// inheritDoc />
-        public string DimensionType => _memberBean.DimensionType;
+        public EssDimensionType DimensionType => _memberBean.DimensionType.ToEssEnum();
 
         /// inheritDoc />
         public string DataStorageType => _memberBean.DataStorageType;
@@ -81,13 +81,13 @@ namespace EssSharp
         public string FormatString => _memberBean.FormatString;
 
         /// inheritDoc />
-        public string DimensionStorageType => _memberBean.DimStorageType;
+        public EssDimStorageType DimensionStorageType => _memberBean.DimStorageType.ToEssEnum();
 
         /// inheritDoc />
         public string CurrencyConversionCategory => _memberBean.CurrencyConversionCategory;
 
         /// inheritDoc />       
-        public int GenerationNumber => _memberBean.GenerationNumber;
+        public int GenerationNumber => _memberBean.GenerationNumber == 0 ? 1 : _memberBean.GenerationNumber;
 
         /// inheritDoc />
         public string activeAliasName => _memberBean.ActiveAliasName;
@@ -159,7 +159,7 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parentUniqueName: UniqueName).ConfigureAwait(false) is not { } children )
+                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parent: Name).ConfigureAwait(false) is not { } children )
                     throw new Exception("Cannot get children.");
 
                 return children.ToEssSharpList(_cube) ?? new List<IEssMember>();
@@ -171,6 +171,81 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssMember> GetDimensions() => GetDimensionsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssMember>> GetDimensionsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<OutlineViewerApi>();
+
+                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name).ConfigureAwait(false) is not { } children )
+                    throw new Exception("Cannot get children.");
+
+                return children.ToEssSharpList(_cube) ?? new List<IEssMember>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"{e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssMember> GetDescendants() => GetDescendantsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssMember>> GetDescendantsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var descendants = new List<IEssMember>();
+
+                var children = await GetChildrenAsync().ConfigureAwait(false);
+
+                foreach ( var member in children )
+                {
+                    if ( member.NumberOfChildren > 0 )
+                    {
+                        (await member.GetDescendantsAsync().ConfigureAwait(false)).ForEach(mem => descendants.Add(mem));
+                    }
+                    descendants.Add(member);
+                }
+                return descendants;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"{e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssMember> GetSiblings() => GetSiblingsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssMember>> GetSiblingsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {                
+                var memberList = await (await _cube.GetMemberAsync(ParentName)).GetChildrenAsync();
+
+                return memberList;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"{e.Message}", e);
+            }
+        }
         #endregion
     }
 }
