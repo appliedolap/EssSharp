@@ -851,11 +851,11 @@ namespace EssSharp
             }
         };
 
-        internal static string ToDelimitedString( this EssMemberFilterOption filterOption )
+        internal static string ToDelimitedString( this EssMemberFields filterOption )
         {
             var values = new List<string>();
 
-            foreach( EssMemberFilterOption value in Enum.GetValues(typeof(EssMemberFilterOption)) )
+            foreach( EssMemberFields value in Enum.GetValues(typeof(EssMemberFields)) )
             {
                 if ( filterOption.HasFlag(value) )
                 {

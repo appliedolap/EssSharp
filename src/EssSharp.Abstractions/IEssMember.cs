@@ -136,31 +136,31 @@ namespace EssSharp
         /// <summary>
         /// Gets a list of ancestors.
         /// </summary>
-        public List<IEssMember> GetAncestors();
+        public List<IEssMember> GetAncestors( EssMemberFields? fields = null );
 
         /// <summary>
         /// Asynchronously gets a list of ancestors.
         /// </summary>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssMember>> GetAncestorsAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssMember>> GetAncestorsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets a list of children.
         /// </summary>
-        public List<IEssMember> GetChildren();
+        public List<IEssMember> GetChildren( EssMemberFields? fields = null );
 
         /// <summary>
         /// Asynchronously gets a list of children.
         /// </summary>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssMember>> GetChildrenAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssMember>> GetChildrenAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
-        public List<IEssMember> GetDescendants();
+        public List<IEssMember> GetDescendants( EssMemberFields? fields = null );
 
-        public Task<List<IEssMember>> GetDescendantsAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssMember>> GetDescendantsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
-        public List<IEssMember> GetSiblings();
+        public List<IEssMember> GetSiblings( EssMemberFields? fields = null );
 
-        public Task<List<IEssMember>> GetSiblingsAsync( CancellationToken cancellation = default );
+        public Task<List<IEssMember>> GetSiblingsAsync( EssMemberFields? fields = null, CancellationToken cancellation = default );
     }
 }

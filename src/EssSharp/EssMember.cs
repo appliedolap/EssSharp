@@ -125,17 +125,21 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
-        public List<IEssMember> GetAncestors() => GetAncestorsAsync().GetAwaiter().GetResult();
+        public List<IEssMember> GetAncestors( EssMemberFields? fields = null ) => GetAncestorsAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
-        public async Task<List<IEssMember>> GetAncestorsAsync( CancellationToken cancellationToken = default )
+        public async Task<List<IEssMember>> GetAncestorsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                if ( await api.OutlineGetAncestorsMemberInfoAsync(app: _cube.Application.Name, cube: _cube.Name, memberUniqueName: UniqueName, cancellationToken: cancellationToken ).ConfigureAwait(false) is not { } ancestor )
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
+
+                if ( await api.OutlineGetAncestorsMemberInfoAsync(app: _cube.Application.Name, cube: _cube.Name, memberUniqueName: UniqueName, fields: fields?.ToDelimitedString(), cancellationToken: cancellationToken ).ConfigureAwait(false) is not { } ancestor )
                     throw new Exception("Cannot get ancestors.");
 
                 return ancestor.ToEssSharpList(_cube) ?? new List<IEssMember>();
@@ -149,17 +153,21 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
-        public List<IEssMember> GetChildren() => GetChildrenAsync().GetAwaiter().GetResult();
+        public List<IEssMember> GetChildren( EssMemberFields? fields = null ) => GetChildrenAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
-        public async Task<List<IEssMember>> GetChildrenAsync( CancellationToken cancellationToken = default )
+        public async Task<List<IEssMember>> GetChildrenAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parent: Name).ConfigureAwait(false) is not { } children )
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
+
+                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parent: Name, fields: fields?.ToDelimitedString()).ConfigureAwait(false) is not { } children )
                     throw new Exception("Cannot get children.");
 
                 return children.ToEssSharpList(_cube) ?? new List<IEssMember>();
@@ -173,17 +181,21 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public List<IEssMember> GetDimensions() => GetDimensionsAsync().GetAwaiter().GetResult();
+        public List<IEssMember> GetDimensions( EssMemberFields? fields = null ) => GetDimensionsAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetDimensionsAsync( CancellationToken cancellationToken = default )
+        public async Task<List<IEssMember>> GetDimensionsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name).ConfigureAwait(false) is not { } children )
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
+
+                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, fields: fields?.ToDelimitedString()).ConfigureAwait(false) is not { } children )
                     throw new Exception("Cannot get children.");
 
                 return children.ToEssSharpList(_cube) ?? new List<IEssMember>();
@@ -197,23 +209,27 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public List<IEssMember> GetDescendants() => GetDescendantsAsync().GetAwaiter().GetResult();
+        public List<IEssMember> GetDescendants( EssMemberFields? fields = null ) => GetDescendantsAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetDescendantsAsync( CancellationToken cancellationToken = default )
+        public async Task<List<IEssMember>> GetDescendantsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
             {
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
+
                 var descendants = new List<IEssMember>();
 
-                var children = await GetChildrenAsync().ConfigureAwait(false);
+                var children = await GetChildrenAsync(fields: fields).ConfigureAwait(false);
 
                 foreach ( var member in children )
                 {
                     if ( member.NumberOfChildren > 0 )
                     {
-                        (await member.GetDescendantsAsync().ConfigureAwait(false)).ForEach(mem => descendants.Add(mem));
+                        (await member.GetDescendantsAsync(fields: fields).ConfigureAwait(false)).ForEach(mem => descendants.Add(mem));
                     }
                     descendants.Add(member);
                 }
@@ -228,15 +244,19 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public List<IEssMember> GetSiblings() => GetSiblingsAsync().GetAwaiter().GetResult();
+        public List<IEssMember> GetSiblings( EssMemberFields? fields = null ) => GetSiblingsAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetSiblingsAsync( CancellationToken cancellationToken = default )
+        public async Task<List<IEssMember>> GetSiblingsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
-            {                
-                var memberList = await (await _cube.GetMemberAsync(ParentName)).GetChildrenAsync();
+            {
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
+
+                var memberList = await (await _cube.GetMemberAsync(ParentName, fields: fields)).GetChildrenAsync(fields: fields);
 
                 return memberList;
             }

@@ -225,7 +225,7 @@ namespace EssSharp.Integration
             var cube = await server
                 .GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic");
-            
+
             var member = await cube.GetMemberAsync("Year");
 
             Assert.NotNull(member);
@@ -237,15 +237,12 @@ namespace EssSharp.Integration
             Assert.NotNull(member.Aliases);
 
             Assert.Equal(6, member.Aliases.Count);
-            
-            member = await cube.GetMemberAsync("Shared Diet Cola", fields: EssMemberFilterOption.dataStorageType | EssMemberFilterOption.aliases | EssMemberFilterOption.type);
+
+            member = await cube.GetMemberAsync("Shared Diet Cola");
 
             Assert.NotNull(member);
-            
-            Assert.Equal("100-20", member.Name);
 
-            // TODO: Investigate
-            //Assert.Null(member.DimensionType);
+            Assert.Equal("100-20", member.Name);
 
             Assert.True(member.IsSharedMember);
 
@@ -318,6 +315,66 @@ namespace EssSharp.Integration
             var siblings = await member.GetSiblingsAsync();
 
             Assert.NotNull(siblings);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 13 - Essbase_AfterReportCreation_CanGetMemberWithFields"), Priority(13)]
+        public async Task Essbase_AfterReportCreation_CanGetMemberWithFields()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var member = await cube.GetMemberAsync(uniqueName: "Shared Diet Cola", fields: EssMemberFields.activeAliasName | EssMemberFields.aliases);
+
+            Assert.True(member.IsSharedMember);
+
+            Assert.NotNull(member.Aliases);
+
+            Assert.Equal("Shared Diet Cola", member.activeAliasName);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 14 - Essbase_AfterReportCreation_CanGetMember_returnLevelNumber"), Priority(14)]
+        public async Task Essbase_AfterReportCreation_CanGetMember_returnLevelNumber()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var member = await cube.GetMemberAsync(uniqueName: "Colas");
+
+            Assert.Equal(1, member.LevelNumber);
+
+            Assert.NotNull(member.Aliases);
+
+            Assert.Equal("Colas", member.activeAliasName);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 15 - Essbase_AfterReportCreation_CanGetMember_returnGenerationNumber"), Priority(15)]
+        public async Task Essbase_AfterReportCreation_CanGetMember_returnGenerationNumber()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var member = await cube.GetMemberAsync(uniqueName: "Year");
+
+            Assert.Equal(1, member.GenerationNumber);
+
+            Assert.NotNull(member.Aliases);
+
+            Assert.Null(member.activeAliasName);
         }
     }
 }

@@ -531,19 +531,19 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public IEssMember GetMember( string uniqueName, EssMemberFilterOption? fields = null ) => GetMemberAsync(uniqueName, fields).GetAwaiter().GetResult();
+        public IEssMember GetMember( string uniqueName, EssMemberFields? fields = null ) => GetMemberAsync(uniqueName, fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<IEssMember> GetMemberAsync( string uniqueName, EssMemberFilterOption? fields = null, CancellationToken cancellationToken = default )
+        public async Task<IEssMember> GetMemberAsync( string uniqueName, EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
 
                 // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFilterOption.dataStorageType) is false )
-                    fields |= EssMemberFilterOption.dataStorageType;
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
 
                 if ( await api.OutlineGetMemberInfoAsync(app: _application?.Name, _cube?.Name, memberUniqueName: uniqueName, fields: fields?.ToDelimitedString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } member )
                     throw new Exception("Cannot get Members.");
@@ -559,19 +559,19 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public List<IEssMember> GetMembers( string parentUniqueName = null, EssMemberFilterOption? fields = null, int limit = 50 ) => GetMembersAsync(parentUniqueName, fields, limit).GetAwaiter().GetResult();
+        public List<IEssMember> GetMembers( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50 ) => GetMembersAsync(parentUniqueName, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetMembersAsync( string parentUniqueName = null, EssMemberFilterOption? fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
+        public async Task<List<IEssMember>> GetMembersAsync( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
 
                 // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFilterOption.dataStorageType) is false )
-                    fields |= EssMemberFilterOption.dataStorageType;
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
 
                 if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, parent: parentUniqueName, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
@@ -587,19 +587,19 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public List<IEssMember> GetMembersSearched( string keyword, EssMemberFilterOption? fields = null, int limit = 50 ) => GetMembersSearchedAsync(keyword, fields, limit).GetAwaiter().GetResult();
+        public List<IEssMember> GetMembersSearched( string keyword, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSearchedAsync(keyword, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, EssMemberFilterOption? fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
+        public async Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
 
                 // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFilterOption.dataStorageType) is false )
-                    fields |= EssMemberFilterOption.dataStorageType;
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
 
                 if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, keyword: keyword, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
