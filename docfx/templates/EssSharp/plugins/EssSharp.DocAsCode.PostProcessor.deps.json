@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "EssSharp.DocAsCode.PostProcessor/1.0.0": {
         "dependencies": {
-          "Microsoft.DocAsCode.Plugins": "2.67.5",
+          "Docfx.Plugins": "2.73.2",
           "Newtonsoft.Json": "13.0.3",
           "System.Collections.Immutable": "7.0.0",
           "System.Composition": "7.0.0"
@@ -17,15 +17,15 @@
           "EssSharp.DocAsCode.PostProcessor.dll": {}
         }
       },
-      "Microsoft.DocAsCode.Plugins/2.67.5": {
+      "Docfx.Plugins/2.73.2": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
           "System.Collections.Immutable": "7.0.0"
         },
         "runtime": {
-          "lib/net7.0/Microsoft.DocAsCode.Plugins.dll": {
-            "assemblyVersion": "2.67.5.0",
-            "fileVersion": "2.67.5.0"
+          "lib/net7.0/Docfx.Plugins.dll": {
+            "assemblyVersion": "2.73.2.0",
+            "fileVersion": "2.73.2.0"
           }
         }
       },
@@ -106,12 +106,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.DocAsCode.Plugins/2.67.5": {
+    "Docfx.Plugins/2.73.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ffqNCstXkLymT160GdSbBKeQDdQNep3Lw4qD4yMV7imKJSW8+slfg689ZdknfBjMXyRji2me87EXQPZkACytZw==",
-      "path": "microsoft.docascode.plugins/2.67.5",
-      "hashPath": "microsoft.docascode.plugins.2.67.5.nupkg.sha512"
+      "sha512": "sha512-IVc0xm2TP1jH+yvjRQN000mOUj3Z64VHyYiv0vojcPQgqY7knxH+/KbUsv8kv37eX0opr/vubEIsVZhI+XypYw==",
+      "path": "docfx.plugins/2.73.2",
+      "hashPath": "docfx.plugins.2.73.2.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",
