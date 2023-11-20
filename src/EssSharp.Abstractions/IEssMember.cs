@@ -19,7 +19,7 @@ namespace EssSharp
         public int LevelNumber { get; }
 
         /// <summary>
-        /// List of avaiable aliases 
+        /// List of aliases.
         /// </summary>
         public Dictionary<string, string> Aliases { get; }
 
@@ -49,17 +49,17 @@ namespace EssSharp
         public bool Dimension { get; }
 
         /// <summary>
-        /// 
+        /// A solve order, if assigned for this dimension.
         /// </summary>
         public int DimensionSolveOrder { get; }
 
         /// <summary>
-        /// 
+        /// Data type is designated for the measure.
         /// </summary>
         public EssDimensionType DimensionType { get; }
 
         /// <summary>
-        /// 
+        /// Method of storing data.
         /// </summary>
         public string DataStorageType { get; }
 
@@ -69,12 +69,12 @@ namespace EssSharp
         public string FormatString { get; }
 
         /// <summary>
-        /// 
+        /// Method of storing data.
         /// </summary>
         public EssDimStorageType DimensionStorageType { get; }
 
         /// <summary>
-        /// 
+        /// Specifies how different types of accounts should be converted from one currency to another.
         /// </summary>
         public string CurrencyConversionCategory { get; }
 
@@ -94,12 +94,12 @@ namespace EssSharp
         public bool HasUniqueName { get; }
 
         /// <summary>
-        /// 
+        /// Unique ID for this member.
         /// </summary>
         public string UniqueId { get; }
 
         /// <summary>
-        /// 
+        /// A solve order, if assigned for this member.
         /// </summary>
         public int MemberSolveOrder { get; }
 
@@ -119,48 +119,70 @@ namespace EssSharp
         public bool Account { get; }
 
         /// <summary>
-        /// 
+        /// User Defined Attribute.
         /// </summary>
         public List<string> Uda { get; }
 
         /// <summary>
-        /// 
+        /// Name of this members parent member.
         /// </summary>
         public string ParentName { get; }
 
         /// <summary>
-        /// 
+        /// True if the member is shared
         /// </summary>
         public bool IsSharedMember { get; }
 
         /// <summary>
         /// Gets a list of ancestors.
         /// </summary>
+        /// <param name="fields"></param>
         public List<IEssMember> GetAncestors( EssMemberFields? fields = null );
 
         /// <summary>
         /// Asynchronously gets a list of ancestors.
         /// </summary>
+        /// <param name="fields"></param>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssMember>> GetAncestorsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets a list of children.
         /// </summary>
+        /// <param name="fields"></param>
         public List<IEssMember> GetChildren( EssMemberFields? fields = null );
 
         /// <summary>
         /// Asynchronously gets a list of children.
         /// </summary>
+        /// <param name="fields"></param>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssMember>> GetChildrenAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Gets the descendants for this member.
+        /// </summary>
+        /// <param name="fields"></param>
         public List<IEssMember> GetDescendants( EssMemberFields? fields = null );
 
+        /// <summary>
+        /// Asynchronously gets the descendants for this member.
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <param name="cancellationToken"></param>
         public Task<List<IEssMember>> GetDescendantsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// Get the siblings of this member.
+        /// </summary>
+        /// <param name="fields"></param>
         public List<IEssMember> GetSiblings( EssMemberFields? fields = null );
 
-        public Task<List<IEssMember>> GetSiblingsAsync( EssMemberFields? fields = null, CancellationToken cancellation = default );
+        /// <summary>
+        /// Asynchronously gets the siblings of this member.
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssMember>> GetSiblingsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
     }
 }

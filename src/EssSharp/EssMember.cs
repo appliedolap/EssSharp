@@ -180,11 +180,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetDimensions( EssMemberFields? fields = null ) => GetDimensionsAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetDimensionsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
@@ -208,11 +208,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetDescendants( EssMemberFields? fields = null ) => GetDescendantsAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetDescendantsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
@@ -243,11 +243,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetSiblings( EssMemberFields? fields = null ) => GetSiblingsAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetSiblingsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try

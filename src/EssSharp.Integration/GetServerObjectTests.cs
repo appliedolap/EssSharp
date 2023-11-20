@@ -376,5 +376,30 @@ namespace EssSharp.Integration
 
             Assert.Null(member.activeAliasName);
         }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 16 - Essbase_AfterReportCreation_CanGetMember_Compare"), Priority(16)]
+        public async Task Essbase_AfterReportCreation_CanGetMember_Compare()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var creamSoda = (await (await cube.GetMemberAsync(uniqueName: "Cream Soda")).GetChildrenAsync())[2];
+            var dietDrink = (await (await cube.GetMemberAsync(uniqueName: "Diet Drinks")).GetChildrenAsync())[2];
+
+            Assert.Equal(creamSoda.Name, dietDrink.Name);
+
+            Assert.True(!creamSoda.IsSharedMember);
+            Assert.True(dietDrink.IsSharedMember);
+
+            Assert.Equal("300", creamSoda.ParentName);
+            Assert.Equal("Diet", dietDrink.ParentName);
+
+            Assert.Equal(creamSoda.DimensionName, dietDrink.DimensionName);
+        }
     }
 }
