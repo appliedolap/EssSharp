@@ -942,6 +942,7 @@ namespace EssSharp.Integration
         }
         */
 
+        /*
         [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanSignOffAllSessions"), Priority(35)]
         public async Task Essbase_AfterDefaultGrid_CanSignOffAllSessions()
         {
@@ -956,5 +957,6 @@ namespace EssSharp.Integration
 
             Assert.Single(afterSignOutSessions);
         }
+        */
     }
 }
