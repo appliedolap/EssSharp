@@ -254,7 +254,7 @@ namespace EssSharp
             try
             {
                 await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Refresh, cancellationToken: cancellationToken).ConfigureAwait( false );
-                
+
                 return this;
             }
             catch ( OperationCanceledException ) { throw; }

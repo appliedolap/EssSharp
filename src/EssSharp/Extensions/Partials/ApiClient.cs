@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Linq;
 
@@ -12,7 +13,12 @@ namespace EssSharp.Client
     public partial class ApiClient
     {
         /// <summary />
-        public Cookie SessionCookie { get; internal set; } = null;
+        public static ConcurrentBag<Cookie> SessionCookies { get; } = new ConcurrentBag<Cookie>();
+
+        /*
+        /// <summary />
+        public static ConcurrentBag<Cookie> GridCookies { get; } = new ConcurrentBag<Cookie>();
+        */
 
         #region Partial Methods
 
@@ -26,14 +32,21 @@ namespace EssSharp.Client
             if ( request is null )
                 return;
 
-            // NOTE: We are waiting on the OpenAPI Generator to bring in RestSharp v109+ to address an issue with cookie management.
-            // https://github.com/restsharp/RestSharp/issues/1792
-
-            // If we have a JSESSIONID, remove any authorization headers.
-            if ( SessionCookie is not null )
+            /*
+            if ( request.Resource?.EndsWith("/grid", StringComparison.OrdinalIgnoreCase) is true || 
+               ( string.Equals(request.Resource, "/session", StringComparison.OrdinalIgnoreCase) && request.Method is RestSharp.Method.Delete && SessionCookies.IsEmpty ))
+            {
+                if ( GridCookies.TryTake(out var cookie) )
+                {
+                    request.Parameters?.RemoveParameter("Authorization");
+                    request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
+                }
+            }
+            // If we have a free JSESSIONID, remove any authorization headers and use it.
+            else */ if ( SessionCookies.TryTake( out var cookie ) )
             {
                 request.Parameters?.RemoveParameter("Authorization");
-                request.AddCookie(SessionCookie.Name, SessionCookie.Value, SessionCookie.Path, SessionCookie.Domain);
+                request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
             }
         }
 
@@ -48,9 +61,15 @@ namespace EssSharp.Client
             if ( response is null )
                 return;
 
-            // If we have a JSESSIONID, retain the session cookie.
-            if ( response.Cookies?.Cast<Cookie>().FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) is { } cookie )
-                SessionCookie = cookie;
+            // If we have an unexpired JSESSIONID, retain it as a session cookie.
+            if ( response.Cookies?.Cast<Cookie>().FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) is { Expired: false } cookie )
+            {
+                /*
+                if ( request.Resource?.EndsWith("/grid", StringComparison.OrdinalIgnoreCase) is true )
+                    GridCookies.Add(cookie);
+                else */
+                    SessionCookies.Add(cookie);
+            }
 
             // If the response was not successful and an exception is available, throw it.
             if ( !response.IsSuccessful() && response.ErrorException is WebException webException )

@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Threading;
-using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EssSharp
 {
@@ -237,5 +236,19 @@ namespace EssSharp
         /// <param name="gridSelection"></param>
         /// <param name="cancellationToken"></param>
         public Task<IEssGrid> ZoomAsync( EssGridZoomType zoomOption, List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
+    }
+
+    /// <summary>
+    /// Fluent extensions for <see cref="EssSharp" />.
+    /// </summary>
+    public static partial class FluentExtensions
+    {
+        /// <summary>
+        /// Asynchronously refresh the grid.
+        /// </summary>
+        /// <param name="gridTask" />
+        /// <param name="cancellationToken" />
+        public static async Task<IEssGrid> RefreshAsync( this Task<IEssGrid> gridTask, CancellationToken cancellationToken = default ) =>
+            await (await gridTask.ConfigureAwait(false)).RefreshAsync(cancellationToken).ConfigureAwait(false);
     }
 }

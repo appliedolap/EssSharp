@@ -969,14 +969,23 @@ namespace EssSharp
         public Task<IEssUserSession> SignInAsync( bool includeToken = false, bool includeGroups = false, CancellationToken cancellationToken = default ) => GetUserSessionAsync(includeToken, includeGroups, cancellationToken);
 
         /// <inheritdoc />
-        public void SignOut() => SignOutAsync().GetAwaiter().GetResult();
+        public void SignOut( bool allSessions = false ) => SignOutAsync(allSessions).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        public async Task SignOutAsync( CancellationToken cancellationToken = default )
+        public async Task SignOutAsync( bool allSessions = false, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<UserSessionApi>();
+
+                if ( allSessions )
+                {
+                    while ( !ApiClient.SessionCookies.IsEmpty )
+                        await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    //while ( !ApiClient.GridCookies.IsEmpty )
+                        //await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                }
+
                 await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
@@ -1007,7 +1016,7 @@ namespace EssSharp
                 if ( disposing )
                 {
                     // Attempt to sign out of the server.
-                    try { await SignOutAsync(cancellationToken).ConfigureAwait(false); } catch { }
+                    try { await SignOutAsync(allSessions: false, cancellationToken).ConfigureAwait(false); } catch { }
                 }
 
                 _disposed = true;

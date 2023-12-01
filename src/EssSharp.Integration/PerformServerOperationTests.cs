@@ -888,5 +888,73 @@ namespace EssSharp.Integration
 
             Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[6]);
         }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 33 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperations"), Priority(33)]
+        public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperations()
+        {
+            // Get the Sample.Basic cube.
+            var cube = await GetEssServer(EssServerRole.User).GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var refreshTasks = new List<Task<IEssGrid>>();
+
+            for ( int i = 0; i < 20; i++ )
+                refreshTasks.Add(cube.GetDefaultGridAsync().RefreshAsync());
+
+            var grids = await Task.WhenAll(refreshTasks);
+
+            Assert.All(grids, grid => Assert.Equal(3, grid.Slice.Rows));
+        }
+
+        /*
+        [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions"), Priority(34)]
+        public async Task Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer(EssServerRole.User);
+
+            var beforeSessions = await server.GetSessionsAsync();
+
+            var application = await server.GetApplicationAsync("Sample");
+
+            var afterAppSessions = await server.GetSessionsAsync();
+
+            var cube = await application.GetCubeAsync("Basic");
+
+            var afterCubeSessions = await server.GetSessionsAsync();
+
+            var cubeVariables = await cube.GetVariablesAsync();
+
+            var afterVariablesSessions = await server.GetSessionsAsync();
+
+            var grid = await cube.GetDefaultGridAsync();
+
+            var afterGridSessions = await server.GetSessionsAsync();
+
+            var refreshedGrid = await grid.RefreshAsync();
+
+            var afterRefreshSessions = await server.GetSessionsAsync();
+
+            await server.SignOutAsync(allSessions: true);
+
+            var afterSignOutSessions = await server.GetSessionsAsync();
+
+            Assert.Single(afterSignOutSessions);
+        }
+        */
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanSignOffAllSessions"), Priority(35)]
+        public async Task Essbase_AfterDefaultGrid_CanSignOffAllSessions()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer(EssServerRole.User);
+
+            var beforeSignOutSessions = await server.GetSessionsAsync();
+
+            await server.SignOutAsync(allSessions: true);
+
+            var afterSignOutSessions = await server.GetSessionsAsync();
+
+            Assert.Single(afterSignOutSessions);
+        }
     }
 }

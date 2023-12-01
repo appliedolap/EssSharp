@@ -48,6 +48,7 @@ namespace EssSharp
         /// <inheritdoc />
         public int StoredMemberCount => _dimension.StoredMembers;
 
+        /// <inheritdoc />
         public List<string> Members { get; set; }
 
         #endregion
