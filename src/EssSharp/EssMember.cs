@@ -105,7 +105,7 @@ namespace EssSharp
         public string DimensionName => _memberBean.DimensionName;
 
         /// <inheritdoc />
-        public bool Attribute => _memberBean.Attribute;
+        public bool IsAttributeDimension => _memberBean.Attribute;
 
         /// <inheritdoc />
         public bool Account => _memberBean.Account;
@@ -181,24 +181,23 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
-        public List<IEssMember> GetDimensions( EssMemberFields? fields = null ) => GetDimensionsAsync(fields).GetAwaiter().GetResult();
+        public IEssMember GetDimension( EssMemberFields? fields = null ) => GetDimensionAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
-        public async Task<List<IEssMember>> GetDimensionsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
+        public async Task<IEssMember> GetDimensionAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
             {
-                var api = GetApi<OutlineViewerApi>();
-
                 // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
                 if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
                     fields |= EssMemberFields.dataStorageType;
 
-                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, fields: fields?.ToDelimitedString()).ConfigureAwait(false) is not { } children )
-                    throw new Exception("Cannot get children.");
+                if ( Dimension ) { return this; }
 
-                return children.ToEssSharpList(_cube) ?? new List<IEssMember>();
+                var dim = await _cube.GetMemberAsync(uniqueName: DimensionName, fields: fields, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return dim;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
@@ -206,7 +205,6 @@ namespace EssSharp
                 throw new Exception($@"{e.Message}", e);
             }
         }
-
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetDescendants( EssMemberFields? fields = null ) => GetDescendantsAsync(fields).GetAwaiter().GetResult();
@@ -227,11 +225,11 @@ namespace EssSharp
 
                 foreach ( var member in children )
                 {
+                    descendants.Add( member );
                     if ( member.NumberOfChildren > 0 )
                     {
                         (await member.GetDescendantsAsync(fields: fields).ConfigureAwait(false)).ForEach(mem => descendants.Add(mem));
                     }
-                    descendants.Add(member);
                 }
                 return descendants;
             }
@@ -241,6 +239,15 @@ namespace EssSharp
                 throw new Exception($@"{e.Message}", e);
             }
         }
+
+        /// <inheritdoc />
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public List<IEssMember> GetSameGenerationMembers( EssMemberFields? fields = null, int limit = 50 ) => GetSameGenerationMembersAsync( fields, limit).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public async Task<List<IEssMember>> GetSameGenerationMembersAsync( EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default ) =>
+            await _cube.GetMembersByLevelAsync(dimensionName: DimensionName, levelNumber: LevelNumber, fields: fields, limit: limit, cancellationToken: cancellationToken);
 
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>

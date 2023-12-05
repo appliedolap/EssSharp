@@ -284,24 +284,107 @@ namespace EssSharp
         public List<IEssLockObject> GetLockedObjects();
 
         /// <summary>
-        /// 
+        /// Gets specified member using provided unique name.
         /// </summary>
+        /// <param name="uniqueName"></param>
+        /// <param name="fields"></param>
+        /// <returns></returns>
         public IEssMember GetMember( string uniqueName, EssMemberFields? fields = null );
 
         /// <summary>
-        /// 
+        /// Asynchronously gets specified member using provided unique name.
         /// </summary>
+        /// <param name="uniqueName"></param>
+        /// <param name="fields"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<IEssMember> GetMemberAsync( string uniqueName, EssMemberFields? fields = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets a list of dimension members.
+        /// </summary>
+        /// <param name="fields"></param>
+        public List<IEssMember> GetDimensionMembers( EssMemberFields? fields = null );
+
+        /// <summary>
+        /// Asynchronously gets a list of dimension members.
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssMember>> GetDimensionMembersAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="parentUniqueName"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        /// <returns></returns>
         public List<IEssMember> GetMembers( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50 );
 
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="parentUniqueName"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<List<IEssMember>> GetMembersAsync( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        public List<IEssMember> GetDynamicTimeSeriesMembers( EssMemberFields? fields = null );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<List<IEssMember>> GetDynamicTimeSeriesMembersAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dimensionName"></param>
+        /// <param name="generationNumber"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        public List<IEssMember> GetMembersByGeneration( string dimensionName, int generationNumber, EssMemberFields? fields = null, int limit = 50 );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dimensionName"></param>
+        /// <param name="generationNumber"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssMember>> GetMembersByGenerationAsync( string dimensionName, int generationNumber, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dimensionName"></param>
+        /// <param name="generationNumber"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        public List<IEssMember> GetMembersByLevel( string dimensionName, int levelNumber, EssMemberFields? fields = null, int limit = 50 );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dimensionName"></param>
+        /// <param name="generationNumber"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssMember>> GetMembersByLevelAsync( string dimensionName, int levelNumber, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default );
+
 
         /// <summary>
         /// 
@@ -309,7 +392,7 @@ namespace EssSharp
         /// <param name="keyword"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
-        public List<IEssMember> GetMembersSearched( string keyword, EssMemberFields? fields = null, int limit = 50 );
+        public List<IEssMember> GetMembersSearched( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50 );
 
         /// <summary>
         /// 
@@ -318,7 +401,7 @@ namespace EssSharp
         /// <param name="fields"></param>
         /// <param name="limit"></param>
         /// <param name="cancellationTokenn"></param>
-        public Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default );
+        public Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default );
 
         /// <summary>
         /// Asynchronously gets a list of locked objects.

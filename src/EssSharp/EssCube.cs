@@ -558,6 +558,34 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public List<IEssMember> GetDimensionMembers( EssMemberFields? fields = null ) => GetDimensionMembersAsync(fields).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public async Task<List<IEssMember>> GetDimensionMembersAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<OutlineViewerApi>();
+
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
+
+                if ( await api.OutlineGetMembersAsync(app: Application.Name, cube: Name, fields: fields?.ToDelimitedString()).ConfigureAwait(false) is not { } children )
+                    throw new Exception("Cannot get children.");
+
+                return children.ToEssSharpList(this) ?? new List<IEssMember>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"{e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns></returns>
         public List<IEssMember> GetMembers( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50 ) => GetMembersAsync(parentUniqueName, fields, limit).GetAwaiter().GetResult();
 
@@ -586,12 +614,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
-        public List<IEssMember> GetMembersSearched( string keyword, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSearchedAsync(keyword, fields, limit).GetAwaiter().GetResult();
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public List<IEssMember> GetDynamicTimeSeriesMembers( EssMemberFields? fields = null ) => GetDynamicTimeSeriesMembersAsync(fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
-        public async Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public async Task<List<IEssMember>> GetDynamicTimeSeriesMembersAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -601,7 +629,77 @@ namespace EssSharp
                 if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
                     fields |= EssMemberFields.dataStorageType;
 
-                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, keyword: keyword, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
+                if ( await api.OutlineGetDynamicTimeSeriesMemberInfoAsync(app: Application?.Name, cube: Name, fields: fields?.ToDelimitedString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } dtsMembers ) //.ConfigureAwait(false) is not { } ancestor )
+                    throw new Exception("Cannot get Dynamic Time Series members.");
+
+                return dtsMembers?.ToEssSharpList(this) ?? new List<IEssMember>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get list of Dynamic Time Series members from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssMember> GetMembersByGeneration( string dimensionName, int generationNumber, EssMemberFields? fields = null, int limit = 50 ) => GetMembersByGenerationAsync(dimensionName, generationNumber, fields, limit).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssMember>> GetMembersByGenerationAsync( string dimensionName, int generationNumber, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
+        {
+            try
+            {   
+                return (await (await GetMemberAsync(dimensionName, fields, cancellationToken).ConfigureAwait(false))
+                    .GetDescendantsAsync()).Where(mem => mem.GenerationNumber == generationNumber).ToList(); 
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"{e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssMember> GetMembersByLevel( string dimensionName, int levelNumber, EssMemberFields? fields = null, int limit = 50 ) => GetMembersByLevelAsync(dimensionName, levelNumber, fields, limit).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssMember>> GetMembersByLevelAsync( string dimensionName, int levelNumber, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                return (await GetMemberAsync(dimensionName, fields, cancellationToken)
+                                .GetDescendantsAsync(fields, cancellationToken))
+                                .Where(mem => mem.LevelNumber == levelNumber)
+                                .ToList();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"{e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssMember> GetMembersSearched( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSearchedAsync(keyword, matchWholeWord, fields, limit).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
+        {
+            try
+            {
+                var api = GetApi<OutlineViewerApi>();
+
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
+
+                if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, keyword: keyword, matchWholeWord: matchWholeWord, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
 
                 return membersList.ToEssSharpList(this) ?? new List<IEssMember>();

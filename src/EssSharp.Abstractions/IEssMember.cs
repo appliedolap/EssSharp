@@ -109,11 +109,6 @@ namespace EssSharp
         public string DimensionName { get; }
 
         /// <summary>
-        /// True if member is an attribute dimension
-        /// </summary>
-        public bool Attribute { get; }
-
-        /// <summary>
         /// True if member is part of an account dimension
         /// </summary>
         public bool Account { get; }
@@ -127,6 +122,11 @@ namespace EssSharp
         /// Name of this members parent member.
         /// </summary>
         public string ParentName { get; }
+
+        /// <summary>
+        /// True if member is an attribute dimension
+        /// </summary>
+        public bool IsAttributeDimension { get; }
 
         /// <summary>
         /// True if the member is shared
@@ -160,6 +160,19 @@ namespace EssSharp
         public Task<List<IEssMember>> GetChildrenAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Gets the dimension this member belongs to.
+        /// </summary>
+        /// <param name="fields"></param>
+        public IEssMember GetDimension( EssMemberFields? fields = null );
+
+        /// <summary>
+        /// Asynchronously gets the dimension this member belongs to.
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<IEssMember> GetDimensionAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Gets the descendants for this member.
         /// </summary>
         /// <param name="fields"></param>
@@ -173,6 +186,23 @@ namespace EssSharp
         public Task<List<IEssMember>> GetDescendantsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Gets members of the same generation level.
+        /// </summary>
+        /// <param name="levelNumber"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        public List<IEssMember> GetSameGenerationMembers( EssMemberFields? fields = null, int limit = 50 );
+
+        /// <summary>
+        /// Asynchronously gets members of the same generation level.
+        /// </summary>
+        /// <param name="levelNumber"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssMember>> GetSameGenerationMembersAsync( EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Get the siblings of this member.
         /// </summary>
         /// <param name="fields"></param>
@@ -184,5 +214,19 @@ namespace EssSharp
         /// <param name="fields"></param>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssMember>> GetSiblingsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
+    }
+
+    /// <summary>
+    /// Fluent extensions for <see cref="EssSharp" />.
+    /// </summary>
+    public static partial class FluentExtensions
+    {
+        /// <summary>
+        /// Asynchronously gets the descendants for this member.
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <param name="cancellationToken"></param>
+        public static async Task<List<IEssMember>> GetDescendantsAsync( this Task<IEssMember> memberTask, EssMemberFields? fields = null, CancellationToken cancellationToken = default ) =>
+            await (await memberTask.ConfigureAwait(false)).GetDescendantsAsync(fields, cancellationToken).ConfigureAwait(false);
     }
 }
