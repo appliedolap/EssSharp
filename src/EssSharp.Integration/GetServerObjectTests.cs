@@ -228,7 +228,7 @@ namespace EssSharp.Integration
                 .GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic");
 
-            var member = await cube.GetMemberAsync("H-T-D");
+            var member = await cube.GetMemberAsync("Year");
 
             Assert.NotNull(member);
 
@@ -424,7 +424,7 @@ namespace EssSharp.Integration
 
             var dimMembers = await cube.GetDimensionMembersAsync();
 
-            Assert.Equal(20, dimMembers.Count);
+            Assert.Equal(11, dimMembers.Count);
         }
 
         [Fact(DisplayName = @"GetServerObjectTests - 18 - Essbase_AfterReportCreation_CanGetDimensionFromMember"), Priority(18)]
