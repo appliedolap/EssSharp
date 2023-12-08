@@ -443,13 +443,13 @@ namespace EssSharp
         /// <summary>
         /// Signs out of the server.
         /// </summary>
-        /// <param name="allSessions">Whether to sign out all sessions associated with the consuming process.</param>
+        /// <param name="allSessions">Whether to sign out all sessions associated with the <see cref="IEssServer"/> instance.</param>
         public void SignOut( bool allSessions = false );
 
         /// <summary>
         /// Asynchronously signs out of the server.
         /// </summary>
-        /// <param name="allSessions">Whether to sign out all sessions associated with the consuming process.</param>
+        /// <param name="allSessions">Whether to sign out all sessions associated with the <see cref="IEssServer"/> instance.</param>
         /// <param name="cancellationToken" />
         public Task SignOutAsync( bool allSessions = false, CancellationToken cancellationToken = default );
     }

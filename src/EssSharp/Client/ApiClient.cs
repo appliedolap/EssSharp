@@ -222,14 +222,16 @@ namespace EssSharp.Client
         /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
-        partial void InterceptRequest(RestRequest request);
+        /// <param name="configuration">A per-request configuration object.</param>
+        partial void InterceptRequest(RestRequest request, IReadableConfiguration configuration);
 
         /// <summary>
         /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-        partial void InterceptResponse(RestRequest request, RestResponse response);
+        /// <param name="configuration">A per-request configuration object.</param>
+        partial void InterceptResponse(RestRequest request, RestResponse response, IReadableConfiguration configuration);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" />, defaulting to the global configurations' base url.
@@ -487,7 +489,7 @@ namespace EssSharp.Client
 
             RestClient client = new RestClient(clientOptions, configureSerialization: sc => sc.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration)));
 
-            InterceptRequest(req);
+            InterceptRequest(req, configuration);
 
             RestResponse<T> response;
             if (RetryConfiguration.RetryPolicy != null)
@@ -556,7 +558,7 @@ namespace EssSharp.Client
                 response.Data ??= (T)(object)response.RawBytes;
             }
 
-            InterceptResponse(req, response);
+            InterceptResponse(req, response, configuration);
 
             var result = ToApiResponse(response);
             if (response.ErrorMessage != null)
@@ -607,7 +609,7 @@ namespace EssSharp.Client
 
             RestClient client = new RestClient(clientOptions, configureSerialization: sc => sc.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration)));
 
-            InterceptRequest(req);
+            InterceptRequest(req, configuration);
 
             RestResponse<T> response;
             if (RetryConfiguration.AsyncRetryPolicy != null)
@@ -669,7 +671,7 @@ namespace EssSharp.Client
                 response.Data ??= (T)(object)response.RawBytes;
             }
 
-            InterceptResponse(req, response);
+            InterceptResponse(req, response, configuration);
 
             var result = ToApiResponse(response);
             if (response.ErrorMessage != null)

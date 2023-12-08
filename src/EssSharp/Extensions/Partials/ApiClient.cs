@@ -13,7 +13,7 @@ namespace EssSharp.Client
     public partial class ApiClient
     {
         /// <summary />
-        public static ConcurrentBag<Cookie> SessionCookies { get; } = new ConcurrentBag<Cookie>();
+        public ConcurrentBag<Cookie> SessionCookies { get; } = new ConcurrentBag<Cookie>();
 
         /*
         /// <summary />
@@ -26,24 +26,15 @@ namespace EssSharp.Client
         /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
-        partial void InterceptRequest( RestRequest request )
+        /// <param name="configuration">A per-request configuration object.</param>
+        partial void InterceptRequest( RestRequest request, IReadableConfiguration configuration )
         {
             // Return if the request is null.
             if ( request is null )
                 return;
 
-            /*
-            if ( request.Resource?.EndsWith("/grid", StringComparison.OrdinalIgnoreCase) is true || 
-               ( string.Equals(request.Resource, "/session", StringComparison.OrdinalIgnoreCase) && request.Method is RestSharp.Method.Delete && SessionCookies.IsEmpty ))
-            {
-                if ( GridCookies.TryTake(out var cookie) )
-                {
-                    request.Parameters?.RemoveParameter("Authorization");
-                    request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
-                }
-            }
-            // If we have a free JSESSIONID, remove any authorization headers and use it.
-            else */ if ( SessionCookies.TryTake( out var cookie ) )
+            // If we have a free JSESSIONID for the user, remove any authorization headers and use it.
+            if ( SessionCookies.TryTake( out var cookie ) )
             {
                 request.Parameters?.RemoveParameter("Authorization");
                 request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
@@ -55,7 +46,8 @@ namespace EssSharp.Client
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-        partial void InterceptResponse( RestRequest request, RestResponse response )
+        /// <param name="configuration">A per-request configuration object.</param>
+        partial void InterceptResponse( RestRequest request, RestResponse response, IReadableConfiguration configuration )
         {
             // Return if the response is null.
             if ( response is null )
@@ -63,13 +55,7 @@ namespace EssSharp.Client
 
             // If we have an unexpired JSESSIONID, retain it as a session cookie.
             if ( response.Cookies?.Cast<Cookie>().FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) is { Expired: false } cookie )
-            {
-                /*
-                if ( request.Resource?.EndsWith("/grid", StringComparison.OrdinalIgnoreCase) is true )
-                    GridCookies.Add(cookie);
-                else */
-                    SessionCookies.Add(cookie);
-            }
+                SessionCookies.Add(cookie);
 
             // If the response was not successful and an exception is available, throw it.
             if ( !response.IsSuccessful() && response.ErrorException is WebException webException )

@@ -980,10 +980,8 @@ namespace EssSharp
 
                 if ( allSessions )
                 {
-                    while ( !ApiClient.SessionCookies.IsEmpty )
+                    while ( !Client.SessionCookies.IsEmpty )
                         await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-                    //while ( !ApiClient.GridCookies.IsEmpty )
-                        //await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 }
 
                 await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
