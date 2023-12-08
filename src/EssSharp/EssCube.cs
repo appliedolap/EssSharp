@@ -546,14 +546,14 @@ namespace EssSharp
                     fields |= EssMemberFields.dataStorageType;
 
                 if ( await api.OutlineGetMemberInfoAsync(app: _application?.Name, _cube?.Name, memberUniqueName: uniqueName, fields: fields?.ToDelimitedString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } member )
-                    throw new Exception("Cannot get Members.");
+                    throw new Exception("Cannot get member.");
 
                 return new EssMember(member, this);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get members ""{uniqueName}"" from cube ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get member ""{uniqueName}"" from cube ""{Name}"". {e.Message}", e);
             }
         }
 
