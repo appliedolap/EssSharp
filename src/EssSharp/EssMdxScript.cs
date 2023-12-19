@@ -157,7 +157,7 @@ namespace EssSharp
                 report = new object[reportRowCount, reportColumnCount];
 
                 // Use the the first column axis member index as the first page column index.
-                var pageColumnIndex = Math.Max(firstColumnAxisIndex, 1);
+                var pageColumnIndex = Math.Max(firstColumnAxisIndex, rowDimensionMembers.Any() ? 1 : 0);
 
                 // Write the page axis dimension members.
                 foreach ( var pageDimensionMember in pageDimensionMembers )
