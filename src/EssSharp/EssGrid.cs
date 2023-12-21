@@ -70,16 +70,17 @@ namespace EssSharp
                 if ( _grid?.Alias is { } alias )
                     return alias;
 
-                return _essGridAlias;
+                return _essGridAlias ??= "";
             }
             set
             {
                 if ( _grid is not null )
-                    _grid.Alias = value;
+                    _grid.Alias = value ?? "";
                 else 
-                    _essGridAlias = value;
+                    _essGridAlias = value ?? "";
             }
         }
+
         /// <inheritdoc />
         public List<EssGridDimension> Dimensions //=> _grid.Dimensions.ToEssGridDimension();
         {
@@ -120,6 +121,9 @@ namespace EssSharp
                     _essGridSlice = value;
             }
         }
+
+        /// <inheritdoc />
+        public bool UseAliases { get; set; } = true;
 
         /// <inheritdoc />
         public EssGridPreferences Preferences { get; set; }
@@ -474,18 +478,18 @@ namespace EssSharp
                 }
 
                 return new GridOperation()
-                        {
-                            Grid = _grid ?? new Grid() 
-                            {
-                                Alias = this.Alias,
-                                Dimensions = this.Dimensions.ToModelBean(),
-                                Slice = this.Slice.ToModelBean(),  
-                            },
-                            Action = action,
-                            Alias = this.Alias,
-                            Ranges = ranges,
-                            Coordinates = coordinates
-                        };
+                {
+                    Grid = _grid ?? new Grid() 
+                    {
+                        //Alias = this.Alias,
+                        Dimensions = this.Dimensions.ToModelBean(),
+                        Slice      = this.Slice.ToModelBean(),  
+                    },
+                    Action      = action,
+                    Alias       = UseAliases ? this.Alias : "none",
+                    Coordinates = coordinates,
+                    Ranges      = ranges
+                };
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )

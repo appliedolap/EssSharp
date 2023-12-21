@@ -39,6 +39,11 @@ namespace EssSharp
         public EssGridPreferences Preferences { get; set; }
 
         /// <summary>
+        /// True if aliases should be used.
+        /// </summary>
+        public bool UseAliases { get; set; }
+
+        /// <summary>
         /// Gets grid layout.
         /// </summary>
         public IEssLayout GetGridLayout();
