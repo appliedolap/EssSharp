@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
@@ -299,6 +300,18 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<IEssMember> GetMemberAsync( string uniqueName, EssMemberFields? fields = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Attempts to get the specified member by unique name, and returns false if the member cannot be found.
+        /// </summary>
+        /// <exception cref="Exception">Any exception other than a web exception with a 400 response will be thrown.</exception>
+        public (bool result, IEssMember member) TryGetMember( string uniqueName, EssMemberFields? fields = null );
+
+        /// <summary>
+        /// Asynchronously attempts to get the specified member by unique name, and returns false if the member cannot be found.
+        /// </summary>
+        /// <exception cref="Exception">Any exception other than a web exception with a 400 response will be thrown.</exception>
+        public Task<(bool result, IEssMember member)> TryGetMemberAsync( string uniqueName, EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets a list of dimension members.

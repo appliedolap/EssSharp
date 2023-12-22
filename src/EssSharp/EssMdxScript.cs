@@ -142,15 +142,14 @@ namespace EssSharp
             object[,] report = null;
 
             // Identify the first column axis column index using the index of the first source row cell with a value.
-            var firstColumnAxisIndex =
-            sourceFirstRow?.TakeWhile(t => string.IsNullOrEmpty(t?.Value<string>()))?.Count() ?? 0;
+            var firstSourceColumnAxisIndex = sourceFirstRow?.TakeWhile(t => string.IsNullOrEmpty(t?.Value<string>()))?.Count() ?? 0;
+            var firstColumnAxisIndex       = columnDimensionMembers.Any() ? firstSourceColumnAxisIndex : sourceColumnCount;
 
             // If the page axis is included and there are page dimension members.
             if ( includePageAxis && pageDimensionMembers.Any() )
             {
                 // Update the column and row counts.
-                reportColumnCount = Math.Max(sourceColumnCount,
-                    Math.Max(firstColumnAxisIndex, 1) + pageDimensionMembers.Length);
+                reportColumnCount = Math.Max(sourceColumnCount, Math.Max(firstColumnAxisIndex, 1) + pageDimensionMembers.Length);
                 reportRowCount += includeColumnAxis ? 1 : 0;
 
                 // Create the report.
@@ -216,30 +215,58 @@ namespace EssSharp
             var sourceColumnSequence = Enumerable.Range(0, sourceColumnCount).ToArray();
 
             // If dimension property columns and rows should be relocated, do so.
-            if ( preferences.RelocateDimensionPropertyColumnsAndRows )
+            if ( preferences.RelocateDimensionPropertyColumnsAndRows && firstColumnAxisIndex > firstSourceColumnAxisIndex )
             {
                 // Now, relocate dimension property columns such that they come before column axis member columns and data.
                 int relocatedColumns = 0;
-                for (int c = 0; c < sourceColumnCount; c++)
+                for ( int c = 0; c < sourceColumnCount; c++ )
                 {
                     // If the current index is less than the number of row dimension members, relocate the column
-                    if (c < rowDimensionMembers.Length && firstColumnAxisIndex > 0)
+                    if ( c < rowDimensionMembers.Length )
                         sourceColumnSequence[c] = firstColumnAxisIndex - rowDimensionMembers.Length + relocatedColumns++;
-                    else if (relocatedColumns > 0 && c <= firstColumnAxisIndex - relocatedColumns)
+                    else if ( relocatedColumns > 0 && c <= firstColumnAxisIndex - relocatedColumns )
                         sourceColumnSequence[c] = c - relocatedColumns;
                     else
                         sourceColumnSequence[c] = c;
                 }
             }
 
-            for ( int c = 0; c < sourceColumnCount; c++ )
+            // If numerics outside of the data block should be prefixed for Excel, apply the prefix if necessary.
+            if ( preferences.PrefixStringValuesForExcel )
             {
-                // Get the report column index for the current source column index.
-                var rc = sourceColumnSequence[c];
+                for ( int c = 0; c < sourceColumnCount; c++ )
+                {
+                    // If there are no data rows OR the current column is to the outside of the data block, prefix numerics.
+                    bool prefixNumericsInColumn = rowDimensionMembers.Length == 0 || c < firstColumnAxisIndex;
 
-                // Iterate over rows, capturing each cell value as a string.
-                for ( int ri = reportFirstIndex, si = sourceFirstIndex; si < sourceRowCount; ri++, si++ )
-                    report[ri, rc] = source[si][c].Value<string>();
+                    // Get the report column index for the current source column index.
+                    var rc = sourceColumnSequence[c];
+
+                    // Iterate over rows, capturing each cell value as a string.
+                    for ( int ri = reportFirstIndex, si = sourceFirstIndex; si < sourceRowCount; ri++, si++ )
+                        report[ri, rc] = prefix(prefixNumericsInColumn || si == sourceFirstIndex && includeColumnAxis && columnDimensionMembers.Length != 0, source[si][c].Value<string>());
+                }
+
+                // Apply a prefix if necessary.
+                static string prefix( bool prefixNumerics, string value )
+                {
+                    if ( !prefixNumerics || (value?.Length ?? 0) == 0 || !char.IsDigit(value[0]) )
+                        return value;
+
+                    return string.Concat("'", value);
+                }
+            }
+            else
+            {
+                for ( int c = 0; c < sourceColumnCount; c++ )
+                {
+                    // Get the report column index for the current source column index.
+                    var rc = sourceColumnSequence[c];
+
+                    // Iterate over rows, capturing each cell value as a string.
+                    for ( int ri = reportFirstIndex, si = sourceFirstIndex; si < sourceRowCount; ri++, si++ )
+                        report[ri, rc] = source[si][c].Value<string>();
+                }
             }
 
             return new EssQueryReport

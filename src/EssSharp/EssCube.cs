@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
@@ -554,6 +556,27 @@ namespace EssSharp
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get member ""{uniqueName}"" from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public (bool result, IEssMember member) TryGetMember( string uniqueName, EssMemberFields? fields = null) => TryGetMemberAsync(uniqueName, fields).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<(bool result, IEssMember member)> TryGetMemberAsync( string uniqueName, EssMemberFields? fields = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                return (true, await GetMemberAsync(uniqueName, fields, cancellationToken).ConfigureAwait(false));
+            }
+            catch ( Exception e )
+            {
+                // Return false if the member does not exist.
+                if ( e?.GetBaseException() is WebException { Response: WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } } )
+                    return (false, null);
+
+                // Otherwise, throw.
+                throw;
             }
         }
 

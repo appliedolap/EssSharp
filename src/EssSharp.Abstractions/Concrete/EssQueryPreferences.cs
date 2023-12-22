@@ -82,6 +82,11 @@
         public EssQueryReport.ReportMemberIdentifier MemberIdentifier { get; set; } = EssQueryReport.ReportMemberIdentifier.Alias;
 
         /// <summary>
+        /// Returns or sets the whether to prefix string values with an apostrophe (') for use in Excel.
+        /// </summary>
+        public bool PrefixStringValuesForExcel { get; set; }
+
+        /// <summary>
         /// Whether MDX dimension property columns and rows will be relocated outside of the valid Essbase grid.
         /// </summary>
         /// <remarks>This is supported only for <see cref="IEssMdxScript" />.</remarks>
