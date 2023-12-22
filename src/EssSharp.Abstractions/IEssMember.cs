@@ -147,6 +147,19 @@ namespace EssSharp
         public Task<List<IEssMember>> GetAncestorsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fields"></param>
+        public List<IEssMember> GetBottomLevel( EssMemberFields? fields = null );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssMember>> GetBottomLevelAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Gets a list of children.
         /// </summary>
         /// <param name="fields"></param>

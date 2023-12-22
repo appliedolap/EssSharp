@@ -5,6 +5,7 @@ using System.Threading;
 using EssSharp.Model;
 using EssSharp.Api;
 using System.Net;
+using System.Linq;
 
 namespace EssSharp
 {
@@ -150,6 +151,15 @@ namespace EssSharp
                 throw new Exception($@"Unable to get list of ancestors from Member ""{Name}"". {e.Message}", e);
             }
         }
+
+        /// <inheritdoc />
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public List<IEssMember> GetBottomLevel( EssMemberFields? fields = null ) => GetBottomLevelAsync( fields ).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
+        public async Task<List<IEssMember>> GetBottomLevelAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default ) =>
+            (await GetDescendantsAsync( fields ).ConfigureAwait(false)).Where( mem => mem.NumberOfChildren == 0 ).Distinct().ToList();
 
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
