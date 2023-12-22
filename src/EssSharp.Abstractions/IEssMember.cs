@@ -150,14 +150,14 @@ namespace EssSharp
         /// 
         /// </summary>
         /// <param name="fields"></param>
-        public List<IEssMember> GetBottomLevel( EssMemberFields? fields = null );
+        public List<IEssMember> GetBottomLevelDescendants( EssMemberFields? fields = null );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="fields"></param>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssMember>> GetBottomLevelAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
+        public Task<List<IEssMember>> GetBottomLevelDescendantsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets a list of children.
