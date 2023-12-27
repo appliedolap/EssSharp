@@ -51,6 +51,8 @@ namespace EssSharp
         /// <inheritdoc />
         public List<string> Members { get; set; }
 
+        /// <inheritdoc />
+        public EssDimensionType DimensionTag => _cube.GetMember(Name).DimensionType;
         #endregion
 
         /// <inheritdoc />
@@ -75,6 +77,78 @@ namespace EssSharp
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get list of members from dimension ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// inheritdoc />
+        /// <returns></returns>
+        public List<IEssGeneration> GetGenerations() => GetGenerationsAsync().GetAwaiter().GetResult();
+
+        /// inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssGeneration>> GetGenerationsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<DimensionsApi>();
+
+                if ( await api.DimensionsListDimGenerationsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name).ConfigureAwait(false) is not { } generations )
+                    throw new Exception("Cannot get generations"); // TODO: update later
+
+                return generations.ToEssSharpList() ?? new List<IEssGeneration>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get list of generations from dimension ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// inheritdoc />
+        /// <returns></returns>
+        public List<IEssGeneration> GetGenerationLevels() => GetGenerationLevelsAsync().GetAwaiter().GetResult();
+
+        /// inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssGeneration>> GetGenerationLevelsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<DimensionsApi>();
+
+                if ( await api.DimensionsListDimGenerationsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name).ConfigureAwait(false) is not { } generations )
+                    throw new Exception("Cannot get generations"); // TODO: update later
+
+                return generations.ToEssSharpList() ?? new List<IEssGeneration>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get list of generations from dimension ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritDoc />
+        /// <returns></returns>
+        public List<IEssGeneration> GetLevels() => GetLevelsAsync().GetAwaiter().GetResult();
+
+        /// <inheritDoc />
+        /// <returns></returns>
+        public async Task<List<IEssGeneration>> GetLevelsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<DimensionsApi>();
+
+                if ( await api.DimensionsListDimLevelsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name).ConfigureAwait(false) is not { } generations )
+                    throw new Exception("Cannot get generations"); // TODO: update later
+
+                return generations.ToEssSharpList() ?? new List<IEssGeneration>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get list of generations from dimension ""{Name}"". {e.Message}", e);
             }
         }
     }

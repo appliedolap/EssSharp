@@ -28,6 +28,8 @@ namespace EssSharp
         /// </summary>
         public List<string> Members { get; set; }
 
+        public EssDimensionType DimensionTag { get; }
+
         /// <summary>
         /// Get members names.
         /// </summary>
@@ -40,5 +42,27 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<List<IEssMember>> GetChildrenAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<IEssGeneration> GetGenerations();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssGeneration>> GetGenerationsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<IEssGeneration> GetLevels();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssGeneration>> GetLevelsAsync( CancellationToken cancellationToken = default );
     }
 }

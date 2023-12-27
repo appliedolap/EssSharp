@@ -106,6 +106,19 @@ namespace EssSharp
                 .ToList() ?? new List<IEssCube>();
         }
 
+        /// <summary>
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssCube"/> objects associated with the given <see cref="EssApplication"/>.
+        /// </summary>
+        /// <param name="cubeList" />
+        /// <param name="application" />
+        internal static List<IEssGeneration> ToEssSharpList( this GenerationLevelList generationLevelList ) => 
+            generationLevelList
+                .Items?
+                .Where(generationLevel => generationLevel is not null)
+                .Select(generationLevel => new EssGeneration(generationLevel) as IEssGeneration)
+                .ToList() ?? new List<IEssGeneration>();
+        
+
 
         /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssDatasource"/> objects associated with the given <see cref="EssServer"/>.
