@@ -747,11 +747,15 @@ namespace EssSharp.Integration
 
             defaultGrid.Preferences.ZoomIn.Mode = ZoomInMode.BASE;
 
+            defaultGrid.Preferences.RowSupression = new EssGridPreferencesAxisSuppression() { Missing = true };
+
             await defaultGrid.SetGridPreferencesAsync();
 
-            Assert.True(defaultGrid.Preferences.ZoomIn.Ancestor == ZoomInAncestor.BOTTOM);
+            Assert.Equal(ZoomInAncestor.BOTTOM, defaultGrid.Preferences.ZoomIn.Ancestor);
 
-            Assert.True(defaultGrid.Preferences.ZoomIn.Mode == ZoomInMode.BASE);
+            Assert.Equal(ZoomInMode.BASE,       defaultGrid.Preferences.ZoomIn.Mode);
+
+            Assert.True(defaultGrid.Preferences.RowSupression.Missing);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences"), Priority(31)]
@@ -892,16 +896,22 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 33 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperations"), Priority(33)]
         public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperations()
         {
-            // Get the Sample.Basic cube.
-            var cube = await GetEssServer(EssServerRole.User).GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            // Get the Sample.Basic cube (as an end-user).
+            var cube = await GetEssServer(EssServerRole.User)
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
 
+            // Construct a list for grid refresh tasks.
             var refreshTasks = new List<Task<IEssGrid>>();
 
+            // Add 20 tasks that get and refresh the default grid.
             for ( int i = 0; i < 20; i++ )
                 refreshTasks.Add(cube.GetDefaultGridAsync().RefreshAsync());
 
+            // Await the completion of all the refresh tasks.
             var grids = await Task.WhenAll(refreshTasks);
 
+            // Assert that all of the grids have three rows.
             Assert.All(grids, grid => Assert.Equal(3, grid.Slice.Rows));
         }
 
