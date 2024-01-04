@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 using Newtonsoft.Json;
@@ -15,8 +16,9 @@ namespace EssSharp.Model
         /// <remarks>
         /// The server returns "rowSupression" when getting preferences but requires that "rowSuppression" is serialized when setting preferences.
         /// </remarks>
-        [JsonProperty]
         [DataMember(Name = "rowSuppression", EmitDefaultValue = false)]
+        [JsonProperty]
+        [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "This property is not referenced by code but is needed for serialization.")]
         private RowSuppression RowSuppression => RowSupression;
 
         ///// <summary>
