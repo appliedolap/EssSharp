@@ -445,7 +445,7 @@ namespace EssSharp.Integration
             Assert.Equal("Market", dim.Name);
         }
 
-        [Fact(DisplayName = @"GetServerObjectTests - 18 - Essbase_AfterReportCreation_CanGetSameGenerationMembers"), Priority(18)]
+        [Fact(DisplayName = @"GetServerObjectTests - 19 - Essbase_AfterReportCreation_CanGetSameGenerationMembers"), Priority(19)]
         public async Task Essbase_AfterReportCreation_CanGetSameGenerationMembers()
         {
             // Get an unconnected server as a regular user.
@@ -474,7 +474,7 @@ namespace EssSharp.Integration
             });
         }
 
-        [Fact(DisplayName = @"GetServerObjectTests - 17 - Essbase_AfterReportCreation_CanGetDynamicTimeSeriesMembersAsync"), Priority(17)]
+        [Fact(DisplayName = @"GetServerObjectTests - 20 - Essbase_AfterReportCreation_CanGetDynamicTimeSeriesMembersAsync"), Priority(20)]
         public async Task Essbase_AfterReportCreation_CanGetDynamicTimeSeriesMembersAsync()
         {
             // Get an unconnected server as a regular user.
@@ -486,6 +486,121 @@ namespace EssSharp.Integration
                 .GetCubeAsync("Basic");
 
             var dtsMembers = await cube.GetDynamicTimeSeriesMembersAsync();
+
+            Assert.Equal(2, dtsMembers.Count);
+
+            Assert.Equal("H-T-D", dtsMembers[0]?.Name);
+
+            Assert.Equal("Q-T-D", dtsMembers[1]?.Name);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 21 - Essbase_AfterReportCreation_CanGetDimensionsAsync"), Priority(21)]
+        public async Task Essbase_AfterReportCreation_CanGetDimensionsAsync()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer(EssServerRole.User);
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var dimensions = await cube.GetDimensionsAsync();
+
+            Assert.Equal(10, dimensions.Count);
+
+            Assert.Equal("Year", dimensions[0]?.Name);
+            Assert.Equal(EssDimensionType.TIME, dimensions[0].DimensionTag);
+
+            Assert.Equal("Measures", dimensions[1]?.Name);
+            Assert.Equal(EssDimensionType.ACCOUNTS, dimensions[1].DimensionTag);
+
+            Assert.Equal("Product", dimensions[2]?.Name);
+            Assert.Equal(EssDimensionType.Unknown, dimensions[2].DimensionTag);
+
+            Assert.Equal("Caffeinated", dimensions[5]?.Name);
+            Assert.Equal(EssDimensionType.ATTRIBUTE, dimensions[5].DimensionTag);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 22 - Essbase_AfterReportCreation_CanGetDimensionGenerationsAsync"), Priority(22)]
+        public async Task Essbase_AfterReportCreation_CanGetDimensionGenerationsAsync()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer(EssServerRole.User);
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var dimension = (await cube.GetDimensionsAsync())[0];
+
+            var generations = await dimension.GetGenerationsAsync();
+
+            Assert.Equal(3, generations.Count);
+
+            Assert.Equal("History", generations[0].Name);
+            Assert.Equal(1, generations[0].Number);
+
+            Assert.Equal("Quarter", generations[1].Name);
+            Assert.Equal(2, generations[1].Number);
+
+            Assert.Equal("Months", generations[2].Name);
+            Assert.Equal(3, generations[2].Number);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 22 - Essbase_AfterReportCreation_CanGetDimensionLevelsAsync"), Priority(22)]
+        public async Task Essbase_AfterReportCreation_CanGetDimensionLevelsAsync()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer(EssServerRole.User);
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var dimension = (await cube.GetDimensionsAsync())[0];
+
+            var levels = await dimension.GetLevelsAsync();
+
+            Assert.Equal(3, levels.Count);
+
+            Assert.Equal("Lev0", levels[0].Name);
+            Assert.Equal(0, levels[0].Number);
+
+            Assert.Equal("Lev1", levels[1].Name);
+            Assert.Equal(1, levels[1].Number);
+
+            Assert.Equal("Lev2", levels[2].Name);
+            Assert.Equal(2, levels[2].Number);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 23 - Essbase_AfterReportCreation_CanGetBottemLevelDescendants"), Priority(23)]
+        public async Task Essbase_AfterReportCreation_CanGetBottemLevelDescendants()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var bottomLevelMembers = await (await cube.GetMemberAsync("Year")).GetBottomLevelDescendantsAsync();
+
+            Assert.Equal(12, bottomLevelMembers.Count);
+
+            Assert.Equal("Jan", bottomLevelMembers[0].Name);
+            Assert.Equal("Apr", bottomLevelMembers[3].Name);
+            Assert.Equal("Jul", bottomLevelMembers[6].Name);
+            Assert.Equal("Oct", bottomLevelMembers[9].Name);
+
+            Assert.All(bottomLevelMembers, member =>
+            {
+                Assert.Equal(0, member.LevelNumber);
+                Assert.Equal("Year", member.DimensionName);
+            });
         }
     }
 }

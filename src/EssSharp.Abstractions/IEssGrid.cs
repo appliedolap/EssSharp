@@ -44,6 +44,11 @@ namespace EssSharp
         public bool UseAliases { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool UseMissingText { get; set; }
+
+        /// <summary>
         /// Gets grid layout.
         /// </summary>
         public IEssLayout GetGridLayout();

@@ -125,6 +125,8 @@ namespace EssSharp
         /// <inheritdoc />
         public bool UseAliases { get; set; } = true;
 
+        public bool UseMissingText { get; set; } = false;
+
         /// <inheritdoc />
         public EssGridPreferences Preferences { get; set; }
 
@@ -431,6 +433,19 @@ namespace EssSharp
                 if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
                     throw new Exception($@"Could not get a grid via the {action} operation.");
 
+                // If UseMissingText property is set to true...
+                if ( UseMissingText )
+                {
+                    // iterate through entire list...
+                    for ( var i = 0; i <= grid.Slice.Data.Ranges[0].End; i++ )
+                    {
+                        // looking for data cells that contain a null or empty value...
+                        if ( string.Equals("2", grid.Slice.Data.Ranges[0].Types[i]) && string.IsNullOrEmpty(grid.Slice.Data.Ranges[0].Values[i]) )
+
+                            //replace the value with MissingText property from the Preferences object.
+                            grid.Slice.Data.Ranges[0].Values[i] = Preferences.MissingText;
+                    }
+                }
                 _grid = grid;
             }
             catch ( OperationCanceledException ) { throw; }
