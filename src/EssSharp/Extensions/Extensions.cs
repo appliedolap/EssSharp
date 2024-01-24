@@ -738,7 +738,7 @@ namespace EssSharp
             Comments = formulaRetention.Comments,
             Fill = formulaRetention.Fill,
             Focus = formulaRetention.Focus,
-            Retrive = formulaRetention.Retrive,
+            Retrieve = formulaRetention.Retrive,
             Zoom = formulaRetention.Zoom
         };
 
@@ -797,11 +797,11 @@ namespace EssSharp
             Comments = formulaRetention.Comments,
             Fill = formulaRetention.Fill,
             Focus = formulaRetention.Focus,
-            Retrive = formulaRetention.Retrive,
+            Retrive = formulaRetention.Retrieve,
             Zoom = formulaRetention.Zoom
         };
 
-        internal static Preferences ToPreferencesObject( this EssGridPreferences preferences ) => new Preferences()
+        internal static Preferences ToModelObject( this EssGridPreferences preferences ) => new Preferences()
         {
             CellText = preferences.CellText,
             ColumnSupression = preferences.ColumnSupression.ToColumnSuppressionObject(),

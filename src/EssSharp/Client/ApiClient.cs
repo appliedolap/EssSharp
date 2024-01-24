@@ -222,16 +222,20 @@ namespace EssSharp.Client
         /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
-        /// <param name="configuration">A per-request configuration object.</param>
-        partial void InterceptRequest(RestRequest request, IReadableConfiguration configuration);
+        /// <param name="configuration">The per-client configuration.</param>
+        /// <param name="options">The per-request options.</param>
+        /// <param name="cancellationToken" />
+        private partial Task InterceptRequestAsync(RestRequest request, IReadableConfiguration configuration, RequestOptions options, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-        /// <param name="configuration">A per-request configuration object.</param>
-        partial void InterceptResponse(RestRequest request, RestResponse response, IReadableConfiguration configuration);
+        /// <param name="configuration">The per-client configuration.</param>
+        /// <param name="options">The per-request options.</param>
+        /// <param name="cancellationToken" />
+        private partial Task InterceptResponseAsync(RestRequest request, RestResponse response, IReadableConfiguration configuration, RequestOptions options, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" />, defaulting to the global configurations' base url.
@@ -417,6 +421,14 @@ namespace EssSharp.Client
                 }
             }
 
+            if (options.Cookies != null && options.Cookies.Count > 0)
+            {
+                foreach (var cookie in options.Cookies)
+                {
+                    request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
+                }
+            }
+
             return request;
         }
 
@@ -489,7 +501,7 @@ namespace EssSharp.Client
 
             RestClient client = new RestClient(clientOptions, configureSerialization: sc => sc.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration)));
 
-            InterceptRequest(req, configuration);
+            InterceptRequestAsync(req, configuration, options).GetAwaiter().GetResult();
 
             RestResponse<T> response;
             if (RetryConfiguration.RetryPolicy != null)
@@ -558,7 +570,7 @@ namespace EssSharp.Client
                 response.Data ??= (T)(object)response.RawBytes;
             }
 
-            InterceptResponse(req, response, configuration);
+            InterceptResponseAsync(req, response, configuration, options).GetAwaiter().GetResult();
 
             var result = ToApiResponse(response);
             if (response.ErrorMessage != null)
@@ -609,7 +621,7 @@ namespace EssSharp.Client
 
             RestClient client = new RestClient(clientOptions, configureSerialization: sc => sc.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration)));
 
-            InterceptRequest(req, configuration);
+            await InterceptRequestAsync(req, configuration, options, cancellationToken).ConfigureAwait(false);
 
             RestResponse<T> response;
             if (RetryConfiguration.AsyncRetryPolicy != null)
@@ -671,7 +683,7 @@ namespace EssSharp.Client
                 response.Data ??= (T)(object)response.RawBytes;
             }
 
-            InterceptResponse(req, response, configuration);
+            await InterceptResponseAsync(req, response, configuration, options, cancellationToken).ConfigureAwait(false);
 
             var result = ToApiResponse(response);
             if (response.ErrorMessage != null)

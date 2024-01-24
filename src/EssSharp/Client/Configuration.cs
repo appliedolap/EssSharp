@@ -179,6 +179,21 @@ namespace EssSharp.Client
         }
 
         /// <summary>
+        /// Gets or sets the grid preferences for the current server.
+        /// </summary>
+        public virtual EssGridPreferences GridPreferences { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether to apply cached session cookies.
+        /// </summary>
+        public virtual bool ApplyCookies { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets whether to retain cached session cookies.
+        /// </summary>
+        public virtual bool RetainCookies { get; set; } = true;
+
+        /// <summary>
         /// Gets or sets the default header.
         /// </summary>
         [Obsolete("Use DefaultHeaders instead.")]

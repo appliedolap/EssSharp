@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
-
+using EssSharp.Client;
 using Polly;
 using RestSharp;
 
@@ -94,10 +94,17 @@ namespace EssSharp
                     // If the response contains cookies and an absolute Uri can be constructed from the configurations BasePath...
                     if ( response.Cookies?.Count > 0 && Uri.TryCreate(Configuration?.BasePath, UriKind.Absolute, out var baseUri) )
                     {
-                        // Remove all session cookies from the request's CookieCollection by marking it expired.
+                        // Remove all session cookies from the response's CookieCollection by marking them expired.
                         foreach ( Cookie cookie in response.Cookies )
+                        {
                             if ( string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase) )
+                            {
+                                // Mark the cookie expired.
                                 cookie.Expired = true;
+                                // Remove the associated session preferences.
+                                Client.SessionPreferences.TryRemove(cookie?.Value, out _);
+                            }
+                        }
                     }
                 }
 
@@ -105,7 +112,7 @@ namespace EssSharp
             }
 
             // Reset the session.
-            static void resetSession( Context context )
+            void resetSession( Context context )
             {
                 // If the context contains a RestRequest, remove the JSESSIONID and restore the basic auth header from it.
                 if ( context.TryGetValue("request", out var requestValue) && requestValue is RestRequest request )
@@ -116,12 +123,15 @@ namespace EssSharp
                         // If the request contains cookies and an absolute Uri can be constructed from the configurations BasePath...
                         if ( request.CookieContainer?.Count > 0 && Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out var baseUri) )
                         {
+                            // Remove all session cookies from the request's CookieContainer by marking them expired.
                             foreach ( Cookie cookie in request.CookieContainer.GetCookies(baseUri) )
                             {
-                                // Remove the session cookie from the request's CookieContainer by marking it expired.
                                 if ( string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase) )
                                 {
+                                    // Mark the cookie expired.
                                     cookie.Expired = true;
+                                    // Remove the associated session preferences.
+                                    Client.SessionPreferences.TryRemove(cookie?.Value, out _);
                                     break;
                                 }
                             }

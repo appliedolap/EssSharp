@@ -60,16 +60,6 @@ namespace EssSharp
         public Task<IEssLayout> GetGridLayoutAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Gets grid preferences.
-        /// </summary>
-        public EssGridPreferences GetGridPreferences();
-
-        /// <summary>
-        /// Asynchronously gets grid preferences.
-        /// </summary>
-        public Task<EssGridPreferences> GetGridPreferencesAsync( CancellationToken cancellationToken = default );
-
-        /// <summary>
         /// Keeps the dimension or dimensions at current selected cell or cells and removes all else.
         /// </summary>
         /// <remarks>Requires the EssGrid.Selection attribute to be set.</remarks>
@@ -177,19 +167,6 @@ namespace EssSharp
         public Task<IEssGrid> RemoveOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// Sets the values of the grid preferences for this session.
-        /// </summary>
-        /// <param name="gridPreferences"></param>
-        public void SetGridPreferences( EssGridPreferences gridPreferences = null );
-
-        /// <summary>
-        /// Asynchronously sets the values of the grid preferences for this session.
-        /// </summary>
-        /// <param name="gridPreferences"></param>
-        /// <param name="cancellationToken"></param>
-        public Task SetGridPreferencesAsync( EssGridPreferences gridPreferences = null, CancellationToken cancellationToken = default );
-
-        /// <summary>
         /// Submits new value or values to the grid.
         /// </summary>
         /// <param name="gridSelection"></param>
@@ -258,7 +235,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="gridTask" />
         /// <param name="cancellationToken" />
-        public static async Task<IEssGrid> RefreshAsync( this Task<IEssGrid> gridTask, CancellationToken cancellationToken = default ) =>
-            await (await gridTask.ConfigureAwait(false)).RefreshAsync(cancellationToken).ConfigureAwait(false);
+        public static async Task<IEssGrid> RefreshAsync( this Task<IEssGrid> gridTask, EssGridPreferences gridPreferences = null, CancellationToken cancellationToken = default ) =>
+            await (await gridTask.ConfigureAwait(false)).RefreshAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 }

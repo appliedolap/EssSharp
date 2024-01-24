@@ -301,6 +301,17 @@ namespace EssSharp
         public Task<List<IEssApplication>> GetApplicationsAsync( int applicationsLimit, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Gets the default <see cref="EssGridPreferences" /> returned by the server.
+        /// </summary>
+        public EssGridPreferences GetDefaultGridPreferences();
+
+        /// <summary>
+        /// Asynchronously gets the defauls <see cref="EssGridPreferences" /> returned by the server.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task<EssGridPreferences> GetDefaultGridPreferencesAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Returns a list of jobs for this server available to the connected user.
         /// </summary>
         public List<IEssJob> GetJobs();

@@ -43,6 +43,16 @@ namespace EssSharp.Client
         string BasePath { get; }
 
         /// <summary>
+        /// Gets whether to apply cached session cookies.
+        /// </summary>
+        bool ApplyCookies { get; }
+
+        /// <summary>
+        /// Gets whether to retain cached session cookies.
+        /// </summary>
+        bool RetainCookies { get; }
+
+        /// <summary>
         /// Gets the date time format.
         /// </summary>
         /// <value>Date time format.</value>

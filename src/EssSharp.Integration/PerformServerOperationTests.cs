@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
+using EssSharp.Model;
 using Xunit;
 
 namespace EssSharp.Integration
@@ -733,48 +734,24 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 30 - Essbase_AfterDefaultGrid_CanSetGridPreferences"), Priority(30)]
-        public async Task Essbase_AfterDefaultGrid_CanSetGridPreferences()
-        {
-            // Get an unconnected server.
-            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
-
-            var defaultGrid = await cube.GetDefaultGridAsync();
-
-            await defaultGrid.GetGridPreferencesAsync();
-
-            defaultGrid.Preferences.ZoomIn.Ancestor = ZoomInAncestor.BOTTOM;
-
-            defaultGrid.Preferences.ZoomIn.Mode = ZoomInMode.BASE;
-
-            defaultGrid.Preferences.RowSupression = new EssGridPreferencesAxisSuppression() { Missing = true };
-
-            await defaultGrid.SetGridPreferencesAsync();
-
-            Assert.Equal(ZoomInAncestor.BOTTOM, defaultGrid.Preferences.ZoomIn.Ancestor);
-
-            Assert.Equal(ZoomInMode.BASE,       defaultGrid.Preferences.ZoomIn.Mode);
-
-            Assert.True(defaultGrid.Preferences.RowSupression.Missing);
-        }
-
         [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences"), Priority(31)]
         public async Task Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences()
         {
             // Get an unconnected server.
-            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+            var server = GetEssServer();
+
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
-            await defaultGrid.GetGridPreferencesAsync();
+            // Assign the default grid preferences from the server;
+            defaultGrid.Preferences = await server.GetDefaultGridPreferencesAsync();
 
             defaultGrid.Preferences.ZoomIn.Ancestor = ZoomInAncestor.BOTTOM;
 
             defaultGrid.Preferences.ZoomIn.Mode = ZoomInMode.BASE;
 
             defaultGrid.Preferences.RepeatMemberLabels = false;
-
-            await defaultGrid.SetGridPreferencesAsync();
 
             /*
             await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
@@ -913,6 +890,65 @@ namespace EssSharp.Integration
 
             // Assert that all of the grids have three rows.
             Assert.All(grids, grid => Assert.Equal(3, grid.Slice.Rows));
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs"), Priority(33)]
+        public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer(EssServerRole.User);
+
+            // Get the default grid preferences from the server.
+            var preferences = await server.GetDefaultGridPreferencesAsync();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Construct a new random.
+            var random = new Random();
+
+            // Run the sequence twice.
+            for ( int i = 0; i < 2; i++ )
+            {
+                // Construct a list for grid refresh tasks.
+                var tasks = new List<Task<IEssGrid>>();
+
+                // Add 20 tasks that get and refresh the default grid.
+                for ( int j = 0; j < 20; j++ )
+                    tasks.Add(gridTaskAsync());
+
+                async Task<IEssGrid> gridTaskAsync()
+                {
+                    // Get the default grid and set the preferences to navigate
+                    // with or without data on the basis of a random boolean.
+                    var grid  = await cube.GetDefaultGridAsync();
+                    {
+                        grid.Preferences = preferences.Clone() as EssGridPreferences;
+                        grid.Preferences.Navigate = random.NextDouble() < 0.5;
+                    }
+
+                    // Refresh the default grid.
+                    return await grid.RefreshAsync();
+                }
+
+                // Await the completion of all the refresh tasks.
+                var grids = await Task.WhenAll(tasks);
+
+                // Assert that all of the grids have the expected three rows.
+                Assert.All(grids, grid =>
+                {
+                    // Assert that the grid slice has three rows.
+                    Assert.Equal(3, grid.Slice.Rows);
+
+                    // Assert that the grid slice has data when navigate is true.
+                    if ( grid.Preferences.Navigate )
+                        Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
+                    else
+                        Assert.Equal(string.Empty, grid.Slice.Data.Ranges[0].Values[9]);
+                });
+            }
         }
 
         /*

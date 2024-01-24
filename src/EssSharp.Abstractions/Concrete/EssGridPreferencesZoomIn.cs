@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EssSharp
 {
@@ -24,10 +22,45 @@ namespace EssSharp
         BASE = 3
     };
 
-    public class EssGridPreferencesZoomIn
+    public class EssGridPreferencesZoomIn : IEquatable<EssGridPreferencesZoomIn>
     {
-        public ZoomInAncestor Ancestor { get; set; }
+        #region Public Properties
 
-        public ZoomInMode Mode { get; set; }
+        public ZoomInAncestor Ancestor { get; set; } = ZoomInAncestor.TOP;
+
+        public ZoomInMode Mode { get; set; } = ZoomInMode.CHILDREN;
+
+        #endregion
+
+        #region IEquatable Members
+
+        /// <inheritdoc />
+        public bool Equals( EssGridPreferencesZoomIn other ) => Equals(other as object);
+
+        #endregion
+
+        #region IEquatable Member Support
+
+        /// <inheritdoc />
+        public override bool Equals( object obj )
+        {
+            // Return false if the other properties object is null or a different type.
+            if ( obj is not EssGridPreferencesZoomIn other )
+                return false;
+
+            if ( Ancestor != other.Ancestor )
+                return false;
+
+            if ( Mode != other.Mode )
+                return false;
+
+            // Return true if the properties are the same.
+            return true;
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode() => (Ancestor, Mode).GetHashCode();
+
+        #endregion
     }
 }

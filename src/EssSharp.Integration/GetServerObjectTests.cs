@@ -153,28 +153,21 @@ namespace EssSharp.Integration
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.Unauthorized } });
         }
 
-        [Fact(DisplayName = @"GetServerObjectTests - 07 - Essbase_AfterReportCreation_CanGetGridPrefernces"), Priority(07)]
-        public async Task Essbase_AfterReportCreation_CanGetGridPrefernces()
+        [Fact(DisplayName = @"GetServerObjectTests - 07 - Essbase_AfterReportCreation_CanGetDefaultGridPrefernces"), Priority(07)]
+        public async Task Essbase_AfterReportCreation_CanGetDefaultGridPrefernces()
         {
             // Get an unconnected server as a regular user.
             var server = GetEssServer();
 
-            // Get the Sample.Basic cube from the server.
-            var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var preferences = await server.GetDefaultGridPreferencesAsync();
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            Assert.True(preferences != null);
 
-            await defaultGrid.GetGridPreferencesAsync();
+            Assert.True(preferences.RowSupression.NoAccess == false);
 
-            Assert.True(defaultGrid.Preferences != null);
+            Assert.True(preferences.ZoomIn.Ancestor == ZoomInAncestor.TOP);
 
-            Assert.True(defaultGrid.Preferences.RowSupression.NoAccess == false);
-
-            Assert.True(defaultGrid.Preferences.ZoomIn.Ancestor == ZoomInAncestor.TOP);
-
-            Assert.True(defaultGrid.Preferences.CellText == true);
+            Assert.True(preferences.CellText == true);
         }
 
         [Fact(DisplayName = @"GetServerObjectTests - 08 - Essbase_AfterReportCreation_CanGetMembers"), Priority(08)]

@@ -6,6 +6,7 @@
  */
 
 
+using EssSharp.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,6 +61,11 @@ namespace EssSharp.Client
         /// Index associated with the operation.
         /// </summary>
         public int OperationIndex { get; set; }
+
+        /// <summary>
+        /// Grid preferences associated with the operation.
+        /// </summary>
+        public object Preferences { get; set; }
 
         /// <summary>
         /// Any data associated with a request body.

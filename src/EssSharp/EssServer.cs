@@ -532,11 +532,46 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssFile"/> object.</returns>
+        public EssGridPreferences GetDefaultGridPreferences() => GetDefaultGridPreferencesAsync()?.GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssGridPreferences> GetDefaultGridPreferencesAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // Build a configuration that will use basic authentication but retain the new session.
+                var config = new Configuration()
+                {
+                    ApplyCookies  = false,
+                    RetainCookies = true,
+                    // Apply the base configuration settings.
+                    BasePath      = Configuration.BasePath,
+                    Username      = Configuration.Username,
+                    Password      = Configuration.Password,
+                    Timeout       = Configuration.Timeout,
+                    UserAgent     = Configuration.UserAgent,
+                };
+
+                var api = ApiFactory.GetApiAndClient<GridPreferencesApi>(config).Api;
+
+                if ( await api.GridPreferencesGetAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is { } preferences )
+                    return preferences.ToEssGridPreferences();
+
+                throw new Exception("Received an empty or invalid response.");
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the default grid preferences for the server. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssFile"/> object.</returns>
         public IEssFile GetFile(string path) => GetFileAsync(path)?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns>An <see cref="IEssFile"/> object.</returns>
+        /// <returns>An <see cref="EssFile"/> object.</returns>
         public async Task<IEssFile> GetFileAsync(string path, CancellationToken cancellationToken = default)
         {
             try
