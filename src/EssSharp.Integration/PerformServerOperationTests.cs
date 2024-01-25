@@ -70,14 +70,14 @@ namespace EssSharp.Integration
 
             // Assert that the "Market" dimension is the first column dimension member.
             Assert.Equal("Market", grid.Dimensions
-                .Where  (d => d.Column is -1 && d.Row >= 0)
+                .Where(d => d.Column is -1 && d.Row >= 0)
                 .OrderBy(d => d.Row)
                 .FirstOrDefault()
                 .Name);
 
             // Assert that the "Year" dimensions is the first row dimension member.
             Assert.Equal("Year", grid.Dimensions
-                .Where  (d => d.Row is -1 && d.Column >= 0)
+                .Where(d => d.Row is -1 && d.Column >= 0)
                 .OrderBy(d => d.Column)
                 .FirstOrDefault()
                 .Name);
@@ -354,7 +354,7 @@ namespace EssSharp.Integration
 
             Assert.Empty(await group.GetUsersAsync());
 
-            await group.AddUsersAsync(new List<string>() {userConnection.Username });
+            await group.AddUsersAsync(new List<string>() { userConnection.Username });
 
             Assert.NotEmpty(await group.GetUsersAsync());
         }
@@ -400,7 +400,7 @@ namespace EssSharp.Integration
 
             Assert.NotEmpty(await group.GetUsersAsync());
 
-            await group.RemoveUsersAsync(new List<string>() {userConnection.Username });
+            await group.RemoveUsersAsync(new List<string>() { userConnection.Username });
 
             Assert.Empty(await group.GetUsersAsync());
         }
@@ -495,7 +495,7 @@ namespace EssSharp.Integration
             var defaultGrid = await cube.GetDefaultGridAsync();
 
             var refreshGrid = await defaultGrid.RefreshAsync();
-            
+
             Assert.Equal(3, refreshGrid.Slice.Rows);
         }
 
@@ -503,15 +503,25 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterDefaultGrid_CanZoomInGrid()
         {
             // Get an unconnected server.
-            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+            var server = GetEssServer();
+            
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
+            defaultGrid.Preferences = await server.GetDefaultGridPreferencesAsync();
+            {
+                defaultGrid.Preferences.ZoomIn.Ancestor = ZoomInAncestor.BOTTOM;
+                defaultGrid.Preferences.ZoomIn.Mode = ZoomInMode.BASE;
+            }
+
             var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
 
-            Assert.Equal(7, zoomInGrid.Slice.Rows);
+            Assert.Equal(15, zoomInGrid.Slice.Rows);
 
-            Assert.True(string.Equals("27107.0", zoomInGrid.Slice.Data.Ranges[0].Values[13]));
+            Assert.True(string.Equals("8346.0", zoomInGrid.Slice.Data.Ranges[0].Values[13]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 22 - Essbase_AfterDefaultGrid_CanZoomOutGrid"), Priority(22)]
@@ -592,7 +602,7 @@ namespace EssSharp.Integration
             Assert.True(!string.Equals("Scenario", pivotPovGrid.Slice.Data.Ranges[0].Values[8]));
         }
 
-        
+
         [Fact(DisplayName = @"PerformServerFunctionTests - 26 - Essbase_AfterDefaultGrid_CanPivotToPovGrid"), Priority(26)]
         public async Task Essbase_AfterDefaultGrid_CanPivotToPovGrid()
         {
@@ -636,14 +646,14 @@ namespace EssSharp.Integration
 
             defaultGrid.Selection.Clear();
 
-            pivotPovGrid = await defaultGrid.PivotAsync(  new EssGridSelection(1, 2) );
+            pivotPovGrid = await defaultGrid.PivotAsync(new EssGridSelection(1, 2));
 
             Assert.Equal(3, pivotPovGrid.Slice.Rows);
 
             Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[8]));
         }
-        
-        
+
+
         [Fact(DisplayName = @"PerformServerFunctionTests - 27 - Essbase_AfterDefaultGrid_CanSubmitNewValueGrid"), Priority(27)]
         public async Task Essbase_AfterDefaultGrid_CanSubmitNewValueGrid()
         {
@@ -651,15 +661,15 @@ namespace EssSharp.Integration
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
             var defaultGrid = await cube.GetDefaultGridAsync();
-            
+
             // Year > Qtr1 > Jan
-            await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
-            await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
-            
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+
             // Product > Colas > Cola
             await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
             await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
-            
+
             // Market > East > New York 
             await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
             await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
@@ -689,11 +699,11 @@ namespace EssSharp.Integration
 
             defaultGrid.Slice.Data.Ranges[0].Values[11] = "678";
 
-            submitGrid = await defaultGrid.SubmitAsync( );
+            submitGrid = await defaultGrid.SubmitAsync();
 
             await (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).ExecuteAsync();
         }
-        
+
         [Fact(DisplayName = @"PerformServerFunctionTests - 28 - Essbase_AfterDefaultGrid_CanZoomInWithSelectionAttributeGrid"), Priority(28)]
         public async Task Essbase_AfterDefaultGrid_CanZoomInWithSelectionAttributeGrid()
         {
@@ -761,7 +771,7 @@ namespace EssSharp.Integration
             await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0,3));
             */
 
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new List<EssGridSelection>() { new EssGridSelection(0, 1), new EssGridSelection(0, 2), new EssGridSelection(0, 3),  new EssGridSelection(2, 0) /*new EssGridSelection(0, 4)*/ } );
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new List<EssGridSelection>() { new EssGridSelection(0, 1), new EssGridSelection(0, 2), new EssGridSelection(0, 3), new EssGridSelection(2, 0) /*new EssGridSelection(0, 4)*/ });
 
             Assert.Equal(23206, defaultGrid.Slice.Rows);
 
@@ -867,7 +877,7 @@ namespace EssSharp.Integration
 
             await grid.RefreshAsync();
 
-            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[6]);
+            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 33 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperations"), Priority(33)]
@@ -950,6 +960,111 @@ namespace EssSharp.Integration
                 });
             }
         }
+        
+        [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(35)]
+        public async Task Essbase_AfterDefaultGrid_CanRefreshGridUseAliases()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+            
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var grid = new Grid()
+            {
+                Dimensions = new List<GridDimension>()
+                {
+                    new GridDimension()
+                    {
+                        Name = "Year",
+                        Row = -1,
+                        Column = -1,
+                        Pov = "Jan",
+                        Hidden = false,
+                        Expanded = false
+                    },
+                    new GridDimension()
+                    {
+                        Name = "Measures",
+                        Row = -1,
+                        Column = -1,
+                        Pov = "Sales",
+                        Hidden = false,
+                        Expanded = false
+                    },
+                    new GridDimension()
+                    {
+                        Name = "Product",
+                        Row = -1,
+                        Column = 0,
+                        Pov = "",
+                        Hidden = false,
+                        Expanded = false
+                    },
+                    new GridDimension() {
+                        Name = "Market",
+                        Row = -1,
+                        Column = -1,
+                        Pov = "New York",
+                        Hidden = false,
+                        Expanded = false
+                    },
+                    new GridDimension()
+                    {
+                        Name = "Scenario",
+                        Row = -1,
+                        Column = -1,
+                        Pov = "Actual",
+                        Hidden = false,
+                        Expanded = false
+                    }
+                },
+                Slice = new Slice()
+                {
+                    Columns = 5,
+                    Rows = 2,
+                    Data = new Data()
+                    {
+                        Ranges = new List<GridRange>()
+                                    {
+                                        new GridRange()
+                                        {
+                                                Start = 0,
+                                                End = 9,
+                                                Values = new List<string>() { "", "Jan", "Sales", "New York", "Actual", "Colas", "2479.0", "", "", "" },
+                                                Types = new List<string>() { "7", "0", "0", "0", "0", "0", "2", "7", "7", "7" },
+                                                Texts = new List<string>() { null, null, null, null, null, null, null, null, null, null },
+                                                DataFormats = new List<string>() { },
+                                                Statuses = new List<string>() { "0", "16", "134217744", "402653200", "536870928", "268435475", "2", "0", "0", "0" },
+                                                Filters = new List<string>() { },
+                                                EnumIds = new List<string>() { "", "", "", "", "", "", "", "", "", "" }
+                                        }
+                                    }
+                    }
+                }
+            };
+
+            var essGrid = new EssGrid(grid, cube as EssCube);
+
+            var preferences = await server.GetDefaultGridPreferencesAsync();
+
+            //preferences.ColumnSupression.Missing = true;
+            //preferences.RowSupression.Missing = true;
+
+            essGrid.Preferences = preferences;
+
+            essGrid.Selection = new List<EssGridSelection> { new EssGridSelection(1, 0)};
+
+            var zInGrid = await essGrid.ZoomAsync(zoomOption: EssGridZoomType.ZOOMIN);
+
+            var zOutGrid = await essGrid.ZoomAsync(zoomOption: EssGridZoomType.ZOOMOUT);
+
+            var rGrid = await essGrid.RefreshAsync();
+        }
+        
+    }
+
+
+        
 
         /*
         [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions"), Priority(34)]
@@ -1004,5 +1119,4 @@ namespace EssSharp.Integration
             Assert.Single(afterSignOutSessions);
         }
         */
-    }
 }

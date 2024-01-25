@@ -53,6 +53,8 @@ namespace EssSharp
 
         public EssGridPreferencesAxisSuppression RowSupression { get; set; } = new EssGridPreferencesAxisSuppression();
 
+        public bool SendBlanksAsMissing { get; set; } = true;
+
         public bool WithinSelectedGroup { get; set; } = false;
 
         public EssGridPreferencesZoomIn ZoomIn { get; set; } = new EssGridPreferencesZoomIn();
@@ -105,6 +107,7 @@ namespace EssSharp
                 UnderScore          = this.RowSupression.UnderScore,
                 Zero                = this.RowSupression.Zero
             },
+            SendBlanksAsMissing     = this.SendBlanksAsMissing,
             WithinSelectedGroup     = this.WithinSelectedGroup,
             ZoomIn                  = new EssGridPreferencesZoomIn()
             {
@@ -173,6 +176,9 @@ namespace EssSharp
             if ( !RowSupression.Equals(other.RowSupression) )
                 return false;
 
+            if ( SendBlanksAsMissing != other.SendBlanksAsMissing )
+                return false;
+
             if ( WithinSelectedGroup != other.WithinSelectedGroup )
                 return false;
 
@@ -200,6 +206,7 @@ namespace EssSharp
             RemoveUnSelectedGroup, 
             RepeatMemberLabels,
             RowSupression,
+            SendBlanksAsMissing,
             WithinSelectedGroup,
             ZoomIn
         ).GetHashCode();

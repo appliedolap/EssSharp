@@ -1,18 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using EssSharp.Api;
 using EssSharp.Model;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using static System.Collections.Specialized.BitVector32;
 
+using Action = EssSharp.Model.GridOperation.ActionEnum;
 
 namespace EssSharp
 {
+    [Flags]
+    internal enum Status
+    {
+        None        = 0x0,
+        Missing     = 0x2000,    // 8,192
+        Meaningless = 0x10000001 // 268,435,457
+
+    };
+
     /// <summary />
     public class EssGrid : EssObject, IEssGrid
     {
@@ -29,14 +43,14 @@ namespace EssSharp
         #region Constructors
 
         /// <summary />
-        internal EssGrid( EssCube cube ) : base(cube?.Configuration, cube?.Client)
+        public EssGrid( EssCube cube ) : base(cube?.Configuration, cube?.Client)
         {
             _cube = cube ??
                 throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssCube)}.");
         }
 
         /// <summary />
-        internal EssGrid( Grid grid, EssCube cube ) : base(cube?.Configuration, cube?.Client)
+        public EssGrid( Grid grid, EssCube cube ) : base(cube?.Configuration, cube?.Client)
         {
             _grid = grid ??
                 throw new ArgumentNullException(nameof(grid), $"An API model {nameof(grid)} is required to create an {nameof(EssGrid)}.");
@@ -76,7 +90,7 @@ namespace EssSharp
             {
                 if ( _grid is not null )
                     _grid.Alias = value ?? "";
-                else 
+                else
                     _essGridAlias = value ?? "";
             }
         }
@@ -98,7 +112,7 @@ namespace EssSharp
                 else
                     _essGridDimension = value;
             }
-        } 
+        }
 
         /// <inheritdoc />
         public List<EssGridSelection> Selection { get; set; } = new List<EssGridSelection>();
@@ -125,10 +139,12 @@ namespace EssSharp
         /// <inheritdoc />
         public bool UseAliases { get; set; } = true;
 
-        public bool UseMissingText { get; set; } = false;
-
         /// <inheritdoc />
         public EssGridPreferences Preferences { get; set; }
+
+        public bool WriteAllNonNumericValuesOnRetrieve { get; set; } = false;
+
+        public List<string> lastInternalGridUniqueMemberNames { get; set; } = new List<string>();
 
         #endregion
 
@@ -157,36 +173,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public EssGridPreferences GetGridPreferences() => GetGridPreferencesAsync().GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        public async Task<EssGridPreferences> GetGridPreferencesAsync( CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                var api = GetApi<GridPreferencesApi>();
-
-                if ( await api.GridPreferencesGetAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { } preferences )
-                    throw new Exception("Cannot get grid preferences.");
-
-                Preferences = preferences.ToEssGridPreferences();
-
-                return Preferences;
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to get grid preferences for ""{Name}"" grid. {e.Message}", e);
-            }
-        }
-
-        /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
         public IEssGrid KeepOnly() => KeepOnlyAsync(Selection).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public IEssGrid KeepOnly( EssGridSelection gridSelection ) => KeepOnlyAsync( gridSelection ).GetAwaiter().GetResult();
+        public IEssGrid KeepOnly( EssGridSelection gridSelection ) => KeepOnlyAsync(gridSelection).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
@@ -206,7 +198,7 @@ namespace EssSharp
         {
             try
             {
-                await ExecuteGridOperationAsync(action:GridOperation.ActionEnum.Keeponly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Keeponly, gridSelection: gridSelection, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
@@ -259,7 +251,7 @@ namespace EssSharp
         {
             try
             {
-                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Refresh, cancellationToken: cancellationToken).ConfigureAwait( false );
+                await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Refresh, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
@@ -272,7 +264,7 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public IEssGrid RemoveOnly( ) => RemoveOnlyAsync(Selection).GetAwaiter().GetResult();
+        public IEssGrid RemoveOnly() => RemoveOnlyAsync(Selection).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
@@ -288,7 +280,7 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public Task<IEssGrid> RemoveOnlyAsync( EssGridSelection gridSelection, CancellationToken cancellationToken = default ) => RemoveOnlyAsync(new List<EssGridSelection>() { gridSelection }, cancellationToken );
+        public Task<IEssGrid> RemoveOnlyAsync( EssGridSelection gridSelection, CancellationToken cancellationToken = default ) => RemoveOnlyAsync(new List<EssGridSelection>() { gridSelection }, cancellationToken);
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
@@ -300,45 +292,16 @@ namespace EssSharp
 
                 return this;
             }
-            catch (OperationCanceledException) { throw; }
-            catch (Exception e )
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
             {
                 throw new Exception($@"Unable to refresh ""{Name}"" grid. {e.Message}", e);
             }
         }
 
         /// <inheritdoc />
-        public void SetGridPreferences( EssGridPreferences gridPreferences = null ) => SetGridPreferencesAsync( gridPreferences ).GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        public async Task SetGridPreferencesAsync( EssGridPreferences gridPreferences = null, CancellationToken cancellationToken = default )
-        {
-            try
-            {
-                if ( gridPreferences == null )
-                {
-                    if ( Preferences is null )
-                        await GetGridPreferencesAsync();
-                    gridPreferences = Preferences;
-                }
-
-                var api = GetApi<GridPreferencesApi>();
-                
-                await api.GridPreferencesSetAsync(body: gridPreferences.ToPreferencesObject(), cancellationToken: cancellationToken);
-
-                await GetGridPreferencesAsync();
-
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to set grid preferences for ""{Name}"" grid. {e.Message}", e);
-            }
-        }
-
-        /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public IEssGrid Submit( ) => SubmitAsync().GetAwaiter().GetResult();
+        public IEssGrid Submit() => SubmitAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
@@ -346,6 +309,7 @@ namespace EssSharp
         {
             try
             {
+                /*
                 if (_grid is not null)
                     _grid.Slice.DirtyCells = new List<int>();
                 else 
@@ -359,6 +323,9 @@ namespace EssSharp
                         else
                             _essGridSlice.DirtyCells.Add(i);
                 }
+                */
+
+                //SetDirtyCells();
 
                 await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Submit, cancellationToken: cancellationToken).ConfigureAwait(false);
 
@@ -381,7 +348,7 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
-        public IEssGrid Zoom( EssGridZoomType zoomOption, List<EssGridSelection> gridSelection ) => ZoomAsync(zoomOption, gridSelection ).GetAwaiter().GetResult();
+        public IEssGrid Zoom( EssGridZoomType zoomOption, List<EssGridSelection> gridSelection ) => ZoomAsync(zoomOption, gridSelection).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGrid"/> object.</returns>
@@ -422,28 +389,63 @@ namespace EssSharp
                 {
                     // Refresh and submit don't use a grid selection.
                     GridOperation.ActionEnum.Refresh => null,
-                    GridOperation.ActionEnum.Submit  => null,
+                    GridOperation.ActionEnum.Submit => null,
                     // Other operations do; use the given selection, fall back to the current selection, or throw.
                     _ => gridSelection ??= Selection ??
                         throw new ArgumentNullException(nameof(gridSelection), $"At least one {nameof(EssGridSelection)} or a current {nameof(EssGrid)}.{nameof(EssGrid.Selection)} is required to perform {action} on grid.")
                 };
 
+
+
+                //if ( action is not GridOperation.ActionEnum.Submit )
+                //RemoveDataBlock();
+
+                // Get the default grid preferences.
+                Preferences ??= await Cube.Application.Server.GetDefaultGridPreferencesAsync();
+                
+                // Remove the data block for non-submit
+                PrepareSliceForOperation_test(action);
+
+                if ( action == GridOperation.ActionEnum.Submit )
+                    SetDirtyCells();
+                /*
+                for ( int i =0; i < Slice.Data.Ranges[0].End; i++ )
+                {
+                    if ( string.Equals("2", Slice.Data.Ranges[0].Types[i]) && 
+                        (Slice.Data.Ranges[0].Values[i] == Preferences.MissingText ||
+                         Slice.Data.Ranges[0].Values[i] == Preferences.NoAccessText ||
+                         Slice.Data.Ranges[0].Values[i] == Preferences.MeaninglessText) )
+                    {
+                        Slice.Data.Ranges[0].Values[i] = "";
+                    }
+                }
+                */
+
                 var body = GetGridOperation(action, gridSelection, newPosition);
 
-                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, preferences: Preferences, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
                     throw new Exception($@"Could not get a grid via the {action} operation.");
 
-                // If UseMissingText property is set to true...
-                if ( UseMissingText )
+                // If MissingText/NoAccessText is non-empty...
+                if ( !string.IsNullOrEmpty(Preferences.MissingText) || !string.IsNullOrEmpty(Preferences.NoAccessText) )
                 {
-                    // iterate through entire list...
-                    for ( var i = 0; i <= grid.Slice.Data.Ranges[0].End; i++ )
+                    if ( grid.Slice.Data.Ranges[0] is GridRange dataRange )
                     {
-                        // looking for data cells that contain a null or empty value...
-                        if ( string.Equals("2", grid.Slice.Data.Ranges[0].Types[i]) && string.IsNullOrEmpty(grid.Slice.Data.Ranges[0].Values[i]) )
+                        // iterate through entire list...
+                        for ( var i = 0; i <= dataRange.End; i++ )
+                        {
+                            // looking for data cells that contain a null or empty value...
+                            if ( string.Equals("2", dataRange.Types[i]) && string.IsNullOrEmpty(dataRange.Values[i]) )
+                            {
+                                var status = (Status)int.Parse(dataRange.Statuses[i]);
 
-                            //replace the value with MissingText property from the Preferences object.
-                            grid.Slice.Data.Ranges[0].Values[i] = Preferences.MissingText;
+                                //replace the value with appropriate property from the Preferences object.
+                                if ( (status & Status.Missing) == Status.Missing )
+                                    grid.Slice.Data.Ranges[0].Values[i] = Preferences.MissingText;
+                                else
+                                    grid.Slice.Data.Ranges[0].Values[i] = Preferences.NoAccessText;
+                            }
+                        }
                     }
                 }
                 _grid = grid;
@@ -454,6 +456,687 @@ namespace EssSharp
                 throw new Exception($@"Unable to perform grid operation {action} on ""{Name}"" grid. {e.Message}", e);
             }
         }
+
+        private void PrepareSliceForOperation( Action action )
+        {
+            // set a local flag to indicate if this is an "Update" operation
+            bool isUpdate = action is Action.Submit;
+            bool isDataCell = false;
+
+            // for each cell in the internal Values array, add a Cell element
+            //
+            // note: ReadGrid sets the internal start row/column to (1,1)
+            //       even if the first cell of the defined retrieve range is not (1,1),
+            //       so the StartCellRow and StartCellColumn are (1,1).
+            //
+            string cellValue = null;
+            var cellType = "7";
+            string lastCellValue = null;
+            bool appendCell = false;
+
+            // get a local reference to the internal grid's values array.
+            var cellValues = Slice.Data.Ranges[0].Values;
+            var cellTypes = Slice.Data.Ranges[0].Types;
+
+            bool isNumeric = false;
+            bool hasInvalidChar;
+
+            // Used by the SendBlanksAsMissing logic.
+            bool isDataRow = false;
+            bool detectedFirstNonBlankCellInDataRow;
+            bool isBlankCell;
+
+            // The column number is one-based and is relative to the first column in the range, which is 1.
+            int firstColumnNumberWithNonBlankCell = -1;
+
+            // Hardcode these to false for now.
+            bool useUniqueMemberNames = false;
+            bool sendBlanksAsMissing = !string.IsNullOrEmpty(Preferences.MissingText) || !string.IsNullOrEmpty(Preferences.NoAccessText);
+
+            var values = new List<string>(Slice.Data.Ranges[0].Values.Count);
+            var types =  new List<string>(Slice.Data.Ranges[0].Types.Count);
+
+            //bool WriteAllNonNumericValuesOnRetrieve = false;
+            //var lastInternalGridUniqueMemberNames = new List<string>();
+
+            // If sending blanks as missing, find the first column in the send range that contains non-blank values.
+            // Typically, this will be the first column, but allow for the left-most column(s) to contain all blanks.
+            // Set the firstColumnNumberWithNonBlankCells to indicate the number of the column without all blanks.
+            if ( isUpdate && sendBlanksAsMissing )
+            {
+                for ( int index = 0; index < Slice.Data.Ranges[0].End; index++ )
+                {
+                    if ( !string.IsNullOrEmpty(cellValue = Slice.Data.Ranges[0].Values[index]) )
+                    {
+                        firstColumnNumberWithNonBlankCell = index % Slice.Columns + 1;
+                        break;
+                    }
+                }
+
+                /*
+                for ( int colIndex = internalGrid.StartCellColumn - internalGrid.ColumnOffset, colNumber = 1;
+                          colIndex <= internalGrid.EndCellColumn - internalGrid.ColumnOffset;
+                          colIndex++, colNumber++ )
+                {
+                    for ( int rowIndex = internalGrid.StartCellRow - internalGrid.RowOffset;
+                              rowIndex <= internalGrid.EndCellRow - internalGrid.RowOffset;
+                              rowIndex++ )
+                    {
+                        if ( cellValues[rowIndex, colIndex] != null )
+                        {
+                            firstColumnNumberWithNonBlankCell = colNumber;
+
+                            break;
+                        }
+                    }
+
+                    if ( firstColumnNumberWithNonBlankCell > -1 )
+                        break;
+                }
+                */
+            }
+
+            for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
+            {
+                detectedFirstNonBlankCellInDataRow = false;
+
+                cellValue = cellValues[index];
+                cellType = "7";
+
+                isBlankCell = string.IsNullOrEmpty(cellValue);
+
+                // If the cell value is non-null OR the grid is sending blanks as #MISSING and the cell is blank...
+                if ( !isBlankCell || (isUpdate && sendBlanksAsMissing) )
+                {
+                    isNumeric = false;
+
+                    // The isDataCell flag is used when processing an update when unique member names exist.
+                    isDataCell = false;
+
+                    if ( !isBlankCell )
+                    {
+                        // If we have a non-blank cell start by assuming that the cell represents a member.
+                        cellType = "0";
+
+                        // If the cell value does not contain trailing blanks...
+                        // Note: When a cell value contains trailing blanks, both leading and trailing blanks are retained.
+                        //       This approach is consistent with the Classic Add-In.
+                        //
+                        // This code was added to address an incompatibility with the Classic Add-In.
+                        // The GridExcel.ReadGrid was also modified to not trim leading blanks when trailing blankis exist.
+                        // The SpreadsheetGear.ReadGrid was NOT modified, so for the SmartClient, leading blanks will not be retained, but this may change in the future.
+                        if ( !cellValue.EndsWith(" ") )
+                            cellValue = cellValue.TrimStart();
+                    }
+                }
+
+                // If the cell value is non-empty OR the grid is sending blanks as #MISSING and the cell is blank...
+                if ( cellValue.Length > 0 || (isUpdate && sendBlanksAsMissing) )
+                {
+                    // for an update operation, all cells should be included in the request
+                    if ( isUpdate )
+                    {
+                        // When sending blanks as missing...
+                        // Note: Only blank cells to the right of the first non-blank cell on a data row should be sent as #MISSING.
+                        if ( sendBlanksAsMissing )
+                        {
+                            // If the first data row has not been detected...
+                            if ( !isDataRow )
+                            {
+                                // When the column is the first column in the range with a non-blank cell and the current cell is non-blank,
+                                // treat the row and all subsequent rows as data rows.
+                                if ( index % Slice.Columns == firstColumnNumberWithNonBlankCell && !isBlankCell )
+                                    isDataRow = true;
+                            }
+
+                            // If a data row...
+                            if ( isDataRow )
+                            {
+                                // If the first non-blank cell in the row has not been detected...
+                                if ( !detectedFirstNonBlankCellInDataRow )
+                                {
+                                    // If the cell is non-blank, any blank cell to the right of the current cell is sent as #MISSING.
+                                    if ( !isBlankCell )
+                                        detectedFirstNonBlankCellInDataRow = true;
+                                }
+                            }
+                        }
+
+                        // If sending blanks as missing and the cell is blank...
+                        if ( sendBlanksAsMissing && isBlankCell )
+                        {
+                            // If this is a data row and the first non-blank cell in the row has been detected...
+                            if ( isDataRow && detectedFirstNonBlankCellInDataRow )
+                            {
+                                // Set flags to append the cell and to treat the cell as a data cell.
+                                appendCell = true;
+                                isDataCell = true;
+
+                                // Set the value to #MISSING.
+                                cellValue = "#MISSING";
+                            }
+                            /*
+                            else
+                            {
+                                // Skip to the next cell.
+                                continue;
+                            }
+                            */
+                        }
+                        else
+                        {
+                            appendCell = true;                  // append both member and data cells for an update operation
+
+                            isNumeric = int.TryParse(cellValue, out _) || double.TryParse(cellValue, out _);
+
+                            /*
+                            // Determine whether the value is numeric.
+                            isNumeric = this.IsNumeric(cellValue, numberFormatProvider);
+                            */
+
+                            // If unique member names exist, determine whether the cell represents a data cell.
+                            // The isDataCell flag is used to determine whether to check for a unique member name for the current cell.
+                            if ( useUniqueMemberNames )
+                            {
+                                if ( Double.TryParse(cellValue, out var doubleValue) || int.TryParse(cellValue, out var intValue) )
+                                {
+                                    isDataCell = true;
+                                    isNumeric = true;
+                                }
+                                else if ( string.Equals(cellValue, Preferences.MissingText) )
+                                    isDataCell = true;
+                                else if ( string.Equals(cellValue, Preferences.NoAccessText) )
+                                    isDataCell = true;
+                            }
+
+                            if ( isNumeric || isDataCell )
+                                cellType = "2";
+                        }
+                    }
+                    else
+                    {
+                        // for a non-update operation, only member cells should be included in the request.
+                        // if numeric or the value is the missing text string, treat as a data cell, since numeric member names in the Values array
+                        // are prepended with a single quote.
+                        //
+                        if ( Double.TryParse(cellValue, out _) || int.TryParse(cellValue, out _) )
+                        {
+                            appendCell = false;             // do not append numeric cells for a non-update operation unless WriteAllNonNumericValuesOnRetrieve is True
+                            isNumeric = true;
+                        }
+                        else if ( string.Equals(cellValue, Preferences.MissingText) )
+                            appendCell = false;             // treat the missing text string value as a numeric cell - do not append numeric cells for a non-update operation
+                        else if ( string.Equals(cellValue, Preferences.NoAccessText) )
+                            appendCell = false;             // treat the "no access" string value as a numerid cell - do not append numeric cells for a non-update operation
+                        else
+                            appendCell = true;              // append non-numeric cells for a non-update operation
+                    }
+
+                    if ( !appendCell )
+                    {
+                        cellValue = string.Empty;
+                        cellType = "7";
+                    }
+
+                    // If unique names exist...
+                    if ( useUniqueMemberNames )
+                    {
+                        // If not updating OR if updating and the cell is likely a member cell, determine whether to use the actual cell value or the unique member name.
+                        if ( !isUpdate || (isUpdate && !isDataCell) )
+                        {
+                            if ( lastInternalGridUniqueMemberNames[index] != null )
+                            {
+                                // Get the last cell value as a string.
+                                // Note: To ensure that formatted numeric strings are detected as numbers, use the culture-compatible format provider.
+                                lastCellValue = Convert.ToString(cellValues[index]);
+
+                                // Trim leading and trailing blanks.
+                                lastCellValue = lastCellValue.Trim();
+
+                                if ( lastCellValue.Length > 0 )
+                                {
+                                    // If the current cell value and the corresponding last cell value are the same, based on a case-insensitive comparison,
+                                    // use the unique name, if a unique name exists.
+                                    if ( string.Compare(cellValue, lastCellValue, true) == 0 )
+                                    {
+                                        cellValue = lastInternalGridUniqueMemberNames[index];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    /*
+                    if ( isUpdate || !isDataCell )
+                    {
+                        values[index] = cellValue;
+                        types[index] = cellType;
+                    }
+                    else
+                    {
+                        values[index] = "";
+                        types[index] = "7";
+                    }
+                    */
+
+                    /*
+                    // add a Cell element with row and column attributes
+                    this.WriteStartElement(xmlWriter, "Cell");
+                    this.WriteAttributeString(xmlWriter, "r", rowNumber.ToString());
+                    this.WriteAttributeString(xmlWriter, "c", colNumber.ToString());
+
+                    hasInvalidChar = false;
+
+                    if ( !isNumeric )
+                    {
+                        // Determine whether the cell value contains an invalid Xml character.
+                        hasInvalidChar = StringUtility.ContainsInvalidXmlCharacter(cellValue);
+                    }
+
+                    // If the cell value contains an invalid Xml character, base64 encode the value.
+                    if ( hasInvalidChar )
+                    {
+                        // The cell value contains an invalid Xml character.
+                        // Base64 encode the cell value.
+
+                        // Flag the cell value as base64 encoded.
+                        // dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes"
+                        //xmlWriter.WriteAttributeString("dt", "dt", "urn:schemas-microsoft-com:datatypes", "bin.base64");
+                        this.WriteAttributeString(xmlWriter, "dt", "bin.base64", "dt", "urn:schemas-microsoft-com:datatypes");
+
+                        // Convert the cell value to a byte array.
+                        byte[] bytes = Encoding.UTF8.GetBytes(cellValue);
+
+                        // Base64 encode the byte array.
+                        string base64String = Convert.ToBase64String(bytes);
+
+                        // Write the encoded string.
+                        this.WriteString(xmlWriter, base64String);
+                    }
+                    else
+                    {
+                        this.WriteString(xmlWriter, cellValue);
+                    }
+
+                    this.WriteEndElement(xmlWriter);*/
+                }
+
+                // Add the value and type to the collections.
+                values.Add(cellValue);
+                types.Add(cellType);
+            }
+
+            if ( _grid is not null )
+            {
+                _grid.Slice.Data.Ranges[0].Values = values ?? new List<string>();
+                _grid.Slice.Data.Ranges[0].Types = types ?? new List<string>();
+            }
+            else
+            {
+                Slice.Data.Ranges[0].Values = values ?? new List<string>();
+                Slice.Data.Ranges[0].Types = types ?? new List<string>();
+            }
+        }
+
+        private void PrepareSliceForOperation_test( Action action )
+        {
+            var dataGridFirstCell = new EssGridSelection(0, 0);
+
+            var dataBlockStartIndex = default(int);
+            var dataBlockEndIndex = default(int);
+
+            var cellValues = Slice.Data.Ranges[0].Values;
+            var cellTypes = Slice.Data.Ranges[0].Types;
+
+            var values = new List<string>();
+            var types = new List<string>(); 
+            var cellValue = "";
+            var cellType = "7";
+            bool isBlankCell;
+            bool isUpdate = action == GridOperation.ActionEnum.Submit;
+            bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
+            bool isNumeric;
+            bool isDataCell;
+            int firstRowIndex = 0;
+
+            // Find the row the data block starts
+            for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
+            {
+                // Find the first non empty cell at the start of a row...
+                if ( index % Slice.Columns == 0 && !string.IsNullOrEmpty(cellValues[index]) )
+                {
+                    // Retain the index...
+                    firstRowIndex = index;
+                    // And set the data grid start row.
+                    dataGridFirstCell.startRow = index / Slice.Columns;
+                    break;
+                }
+            }
+
+            // Find the column the data block starts by moving 1 row above the start of the data grid.
+            for ( var index = firstRowIndex - Slice.Columns; index < (Slice.Data.Ranges[0].End + 1); index++ )
+            {
+                // search the row for the first non empty cell
+                if ( !string.IsNullOrEmpty(cellValues[index]) )
+                {
+                    // calculate the column index and set the value in the data grid start column.
+                    dataGridFirstCell.startColumn = index % Slice.Columns;
+                    break;
+                }
+            }
+
+            // Find the first index of the data block and the last index of the data block for the first row
+            dataBlockStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
+            dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1 ) * Slice.Columns -1;
+
+            // Loop through entire grid and decide the type of each cell.
+            for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
+            {
+                if (dataBlockStartIndex <= index && dataBlockEndIndex >= index )
+                {
+                    if ( isUpdate )
+                    {
+                        cellValue = cellValues[index];
+
+                        // If string is empty...
+                        if ( string.IsNullOrEmpty(cellValue) )
+                            // and sendBlanksAsMissing is true, send type 2. If false, send type 7.
+                            cellType = sendBlanksAsMissing ? "2" : "7";
+                        else
+                            // Else send type "2"
+                            cellType = "2";
+                    }
+                    else
+                    {
+                        // Alwasys send empty string and type 7 if not an update
+                        cellValue = string.Empty;
+                        cellType = "7";
+                    }
+
+                }
+                // If cell is not in the data block and is empty, send empty string and type 7.
+                else if ( string.IsNullOrEmpty(cellValues[index]) )
+                {
+                    cellValue = string.Empty;
+                    cellType = "7";
+                }
+                // Else, get cell value at index and set type to 0.
+                else
+                {
+                    cellValue = cellValues[index];
+                    cellType = "0";
+                }
+
+                // Set data blocks start and end indexes to next row.
+                if ( index == dataBlockEndIndex )
+                {
+                    dataBlockStartIndex += Slice.Columns;
+                    dataBlockEndIndex += Slice.Columns;
+                }
+
+                // Add type and Value to arrays.
+                values.Add( cellValue );
+                types.Add( cellType );
+            }
+
+            // Update the slice's values and types.
+            if ( _grid is not null )
+            {
+                _grid.Slice.Data.Ranges[0].Values = values ?? new List<string>();
+                _grid.Slice.Data.Ranges[0].Types = types ?? new List<string>();
+            }
+            else
+            {
+                Slice.Data.Ranges[0].Values = values ?? new List<string>();
+                Slice.Data.Ranges[0].Types = types ?? new List<string>();
+            }
+        }
+            
+            /*
+                // loop through the internal values array rows ...
+                // note: the data is serialized with an origin of 1,1 regardless of the actual grid origin or the retrieve range
+                for ( int rowIndex = internalGrid.StartCellRow - internalGrid.RowOffset, rowNumber = 1;
+                      rowIndex <= internalGrid.EndCellRow - internalGrid.RowOffset;
+                      rowIndex++, rowNumber++ )
+            {
+                // Used by the SendBlanksAsMissing logic to flag whether the first non-blank cell has been detected.
+                detectedFirstNonBlankCellInDataRow = false;
+
+                // loop through the internal values array columns ...
+                for ( int colIndex = internalGrid.StartCellColumn - internalGrid.ColumnOffset, colNumber = 1;
+                          colIndex <= internalGrid.EndCellColumn - internalGrid.ColumnOffset;
+                          colIndex++, colNumber++ )
+                {
+                    // If this is an update operation, determine whether the cell is blank.
+                    isBlankCell = cellValues[rowIndex, colIndex] == null;
+
+                    // If the cell value is non-null OR the grid is sending blanks as #MISSING and the cell is blank...
+                    if ( (cellValues[rowIndex, colIndex] != null) || (isUpdate && sendBlanksAsMissing && isBlankCell) )
+                    {
+                        isNumeric = false;
+
+                        // The isDataCell flag is used when processing an update when unique member names exist.
+                        isDataCell = false;
+
+                        // get the cell value as a string
+                        // Note: To ensure that formatted numeric strings are detected as numbers, use the culture-compatible format provider.
+                        cellValue = !isBlankCell ? Convert.ToString(cellValues[rowIndex, colIndex], numberFormatProvider) : null;
+
+                        //// Trim the cell value.
+                        //// Note: The grid implementation inheritor controls whether only leading blanks or both leading and trailing blanks are trimmed.
+                        ////       Refer to the method for additional information.
+                        //cellValue = this.WriteXML_SAX_TrimCellValue(cellValue);
+
+                        //// Trim leading blanks.
+                        //// NOTE: The code originally trimmed both leading and trailing blanks, but PGI requested that trailing blanks be retained.
+                        ////       Apparently, PGI users intentionally add a space to the end of a member name when they do not want the name to be recognized as a member.
+                        //cellValue = cellValue.TrimStart();
+
+                        // If the cell value is non-null...
+                        // Note: A null cell value is only possible when sending blanks as missing.
+                        if ( !isBlankCell )
+                        {
+                            // If the cell value does not contain trailing blanks...
+                            // Note: When a cell value contains trailing blanks, both leading and trailing blanks are retained.
+                            //       This approach is consistent with the Classic Add-In.
+                            //
+                            // This code was added to address an incompatibility with the Classic Add-In.
+                            // The GridExcel.ReadGrid was also modified to not trim leading blanks when trailing blankis exist.
+                            // The SpreadsheetGear.ReadGrid was NOT modified, so for the SmartClient, leading blanks will not be retained, but this may change in the future.
+                            if ( !cellValue.EndsWith(" ") )
+                                cellValue = cellValue.TrimStart();
+                        }
+
+                        // If the cell value is non-empty OR the grid is sending blanks as #MISSING and the cell is blank...
+                        if ( (!isBlankCell && cellValue.Length > 0) || (isBlankCell && isUpdate && sendBlanksAsMissing) )
+                        {
+                            // for an update operation, all cells should be included in the request
+                            if ( isUpdate )
+                            {
+                                // When sending blanks as missing...
+                                // Note: Only blank cells to the right of the first non-blank cell on a data row should be sent as #MISSING.
+                                if ( sendBlanksAsMissing )
+                                {
+                                    // If the first data row has not been detected...
+                                    if ( !isDataRow )
+                                    {
+                                        // When the column is the first column in the range with a non-blank cell and the current cell is non-blank,
+                                        // treat the row and all subsequent rows as data rows.
+                                        if ( colNumber == firstColumnNumberWithNonBlankCell && !isBlankCell )
+                                            isDataRow = true;
+                                    }
+
+                                    // If a data row...
+                                    if ( isDataRow )
+                                    {
+                                        // If the first non-blank cell in the row has not been detected...
+                                        if ( !detectedFirstNonBlankCellInDataRow )
+                                        {
+                                            // If the cell is non-blank, any blank cell to the right of the current cell is sent as #MISSING.
+                                            if ( !isBlankCell )
+                                                detectedFirstNonBlankCellInDataRow = true;
+                                        }
+                                    }
+                                }
+
+                                // If sending blanks as missing and the cell is blank...
+                                if ( sendBlanksAsMissing && isBlankCell )
+                                {
+                                    // If this is a data row and the first non-blank cell in the row has been detected...
+                                    if ( isDataRow && detectedFirstNonBlankCellInDataRow )
+                                    {
+                                        // Set flags to append the cell and to treat the cell as a data cell.
+                                        appendCell = true;
+                                        isDataCell = true;
+
+                                        // Set the value to #MISSING.
+                                        cellValue = "#MISSING";
+                                    }
+                                    else
+                                    {
+                                        // Skip to the next cell.
+                                        continue;
+                                    }
+                                }
+                                else
+                                {
+                                    appendCell = true;                  // append both member and data cells for an update operation
+
+                                    isNumeric = char.IsNumber(cellValue.First());
+
+                                    /*
+                                    // Determine whether the value is numeric.
+                                    isNumeric = this.IsNumeric(cellValue, numberFormatProvider);
+                                    */
+            /*
+                                    // If unique member names exist, determine whether the cell represents a data cell.
+                                    // The isDataCell flag is used to determine whether to check for a unique member name for the current cell.
+                                    if ( useUniqueMemberNames )
+                                    {
+                                        if ( this.IsNumeric(cellValue, numberFormatProvider) )
+                                        {
+                                            isDataCell = true;
+                                            isNumeric = true;
+                                        }
+                                        else if ( string.Compare(cellValue, this.MissingTextString, true) == 0 )
+                                            isDataCell = true;
+                                        else if ( string.Compare(cellValue, this.NoAccessString, true) == 0 )
+                                            isDataCell = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // for a non-update operation, only member cells should be included in the request.
+                                // if numeric or the value is the missing text string, treat as a data cell, since numeric member names in the Values array
+                                // are prepended with a single quote.
+                                //
+                                if ( this.IsNumeric(cellValue, numberFormatProvider) )
+                                {
+                                    appendCell = false;             // do not append numeric cells for a non-update operation unless WriteAllNonNumericValuesOnRetrieve is True
+                                    isNumeric = true;
+                                }
+                                else if ( string.Compare(cellValue, this.MissingTextString, true) == 0 )
+                                    appendCell = false;				// treat the missing text string value as a numeric cell - do not append numeric cells for a non-update operation
+                                else if ( string.Compare(cellValue, this.NoAccessString, true) == 0 )
+                                    appendCell = false;				// treat the "no access" string value as a numerid cell - do not append numeric cells for a non-update operation
+                                else
+                                    appendCell = true;              // append non-numeric cells for a non-update operation
+                            }
+
+                            //// once a cell is encountered that does not need to be appended, we can also skip the rest of the cells in the row
+                            //// Note: The WriteAllNonNumericValuesOnRetrieve property was added to accommodate the Classic Excel Add-In behavior,
+                            ////       which retains non-member values that appear to the right of the Essbase data.
+                            ////       The Dodeca Add-In and the Essbase adhoc view in the Smart Client, when ExcelAddInMode is enabled, set the property to <b>True</b>
+                            ////       in order to replicate the Classic Add-In behavior.  11/2/16, Amy
+                            //if ( !appendCell && !this.WriteAllNonNumericValuesOnRetrieve )
+                            //{
+                            //    break;
+                            //}
+
+                            // Replaces the commented out above in order to eliminate the numeric values from the request, while still maintaining
+                            // any non-numeric values within the retrieve range to the right of the numeric data.  7/23/19, Amelia
+                            if ( !appendCell )
+                            {
+                                // If a retrieve operation, skip a numeric value, but continue to the next cell in the row.
+                                if ( !isUpdate && isNumeric && this.WriteAllNonNumericValuesOnRetrieve )
+                                    continue;
+                                else
+                                    break;
+                            }
+
+                            // If unique names exist...
+                            if ( useUniqueMemberNames )
+                            {
+                                // If not updating OR if updating and the cell is likely a member cell, determine whether to use the actual cell value or the unique member name.
+                                if ( !isUpdate || (isUpdate && !isDataCell) )
+                                {
+                                    if ( lastInternalGridUniqueMemberNames[rowIndex, colIndex] != null )
+                                    {
+                                        // Get the last cell value as a string.
+                                        // Note: To ensure that formatted numeric strings are detected as numbers, use the culture-compatible format provider.
+                                        lastCellValue = Convert.ToString(cellValues[rowIndex, colIndex], numberFormatProvider);
+
+                                        // Trim leading and trailing blanks.
+                                        lastCellValue = lastCellValue.Trim();
+
+                                        if ( lastCellValue.Length > 0 )
+                                        {
+                                            // If the current cell value and the corresponding last cell value are the same, based on a case-insensitive comparison,
+                                            // use the unique name, if a unique name exists.
+                                            if ( string.Compare(cellValue, lastCellValue, true) == 0 )
+                                            {
+                                                cellValue = lastInternalGridUniqueMemberNames[rowIndex, colIndex];
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // add a Cell element with row and column attributes
+                            this.WriteStartElement(xmlWriter, "Cell");
+                            this.WriteAttributeString(xmlWriter, "r", rowNumber.ToString());
+                            this.WriteAttributeString(xmlWriter, "c", colNumber.ToString());
+
+                            hasInvalidChar = false;
+
+                            if ( !isNumeric )
+                            {
+                                // Determine whether the cell value contains an invalid Xml character.
+                                hasInvalidChar = StringUtility.ContainsInvalidXmlCharacter(cellValue);
+                            }
+
+                            // If the cell value contains an invalid Xml character, base64 encode the value.
+                            if ( hasInvalidChar )
+                            {
+                                // The cell value contains an invalid Xml character.
+                                // Base64 encode the cell value.
+
+                                // Flag the cell value as base64 encoded.
+                                // dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes"
+                                //xmlWriter.WriteAttributeString("dt", "dt", "urn:schemas-microsoft-com:datatypes", "bin.base64");
+                                this.WriteAttributeString(xmlWriter, "dt", "bin.base64", "dt", "urn:schemas-microsoft-com:datatypes");
+
+                                // Convert the cell value to a byte array.
+                                byte[] bytes = Encoding.UTF8.GetBytes(cellValue);
+
+                                // Base64 encode the byte array.
+                                string base64String = Convert.ToBase64String(bytes);
+
+                                // Write the encoded string.
+                                this.WriteString(xmlWriter, base64String);
+                            }
+                            else
+                            {
+                                this.WriteString(xmlWriter, cellValue);
+                            }
+
+                            this.WriteEndElement(xmlWriter);
+                        }
+                    }
+                }
+            }
+        }*/
 
         /// <summary>
         /// 
@@ -522,6 +1205,23 @@ namespace EssSharp
         /// <returns></returns>
         private int GetCoordinate(EssGridSelection gridSelection, int columnCount ) =>
             (gridSelection.startRow * columnCount) + gridSelection.startColumn;
+
+        private void SetDirtyCells()
+        {
+            if ( _grid is not null )
+                _grid.Slice.DirtyCells = new List<int>();
+            else
+                _essGridSlice.DirtyCells ??= new List<int>();
+
+            for ( int i = 0; i < Slice.Data.Ranges[0].Types.Count; i++ )
+            {
+                if ( Slice.Data.Ranges[0].Types[i] == "2" )
+                    if ( _grid is not null )
+                        _grid.Slice.DirtyCells.Add(i);
+                    else
+                        _essGridSlice.DirtyCells.Add(i);
+            }
+        }
 
         #endregion
     }
