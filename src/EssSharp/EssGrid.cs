@@ -404,22 +404,10 @@ namespace EssSharp
                 Preferences ??= await Cube.Application.Server.GetDefaultGridPreferencesAsync();
                 
                 // Remove the data block for non-submit
-                PrepareSliceForOperation_test(action);
+                PrepareSliceForOperation(action);
 
                 if ( action == GridOperation.ActionEnum.Submit )
                     SetDirtyCells();
-                /*
-                for ( int i =0; i < Slice.Data.Ranges[0].End; i++ )
-                {
-                    if ( string.Equals("2", Slice.Data.Ranges[0].Types[i]) && 
-                        (Slice.Data.Ranges[0].Values[i] == Preferences.MissingText ||
-                         Slice.Data.Ranges[0].Values[i] == Preferences.NoAccessText ||
-                         Slice.Data.Ranges[0].Values[i] == Preferences.MeaninglessText) )
-                    {
-                        Slice.Data.Ranges[0].Values[i] = "";
-                    }
-                }
-                */
 
                 var body = GetGridOperation(action, gridSelection, newPosition);
 
@@ -457,7 +445,8 @@ namespace EssSharp
             }
         }
 
-        private void PrepareSliceForOperation( Action action )
+        // TODO: drop method
+        private void PrepareSliceForOperation_old( Action action )
         {
             // set a local flag to indicate if this is an "Update" operation
             bool isUpdate = action is Action.Submit;
@@ -778,26 +767,19 @@ namespace EssSharp
             }
         }
 
-        private void PrepareSliceForOperation_test( Action action )
+        private void PrepareSliceForOperation( Action action )
         {
-            var dataGridFirstCell = new EssGridSelection(0, 0);
-
-            var dataBlockStartIndex = default(int);
-            var dataBlockEndIndex = default(int);
-
+            string cellType;
+            string cellValue;
             var cellValues = Slice.Data.Ranges[0].Values;
-            var cellTypes = Slice.Data.Ranges[0].Types;
-
-            var values = new List<string>();
-            var types = new List<string>(); 
-            var cellValue = "";
-            var cellType = "7";
-            bool isBlankCell;
+            int dataBlockStartIndex;
+            int dataBlockEndIndex;
+            var dataGridFirstCell = new EssGridSelection(0, 0);
+            int firstRowIndex = 0;
             bool isUpdate = action == GridOperation.ActionEnum.Submit;
             bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
-            bool isNumeric;
-            bool isDataCell;
-            int firstRowIndex = 0;
+            var types = new List<string>();
+            var values = new List<string>();
 
             // Find the row the data block starts
             for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )

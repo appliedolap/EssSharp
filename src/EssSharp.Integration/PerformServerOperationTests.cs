@@ -902,7 +902,7 @@ namespace EssSharp.Integration
             Assert.All(grids, grid => Assert.Equal(3, grid.Slice.Rows));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs"), Priority(33)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs"), Priority(34)]
         public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs()
         {
             // Get an unconnected server.
