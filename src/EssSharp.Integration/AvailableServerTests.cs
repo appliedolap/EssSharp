@@ -62,11 +62,14 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "AvailableServerTests - 02 - Essbase_AfterStartup_CanConnect"), Priority(02)]
         public async Task Essbase_AfterStartup_CanConnect()
         {
-            // Get a connected user session.
+            // Get a user session (for the service admin).
             var session = await GetEssServer().SignInAsync();
 
-            // Assert that a connected user session is returned.
-            Assert.NotEqual(default, session);
+            // Get the configured username (for the service admin).
+            var username = GetEssConnection().Username;
+
+            // Assert that the configured username matches the session's user ID.
+            Assert.Equal(username, session.UserId);
         }
     }
 }
