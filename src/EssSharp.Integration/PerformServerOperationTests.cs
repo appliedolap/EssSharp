@@ -791,95 +791,6 @@ namespace EssSharp.Integration
             await defaultGrid.GetGridLayoutAsync();
         }
 
-        [Fact(DisplayName = @"CreateServerObjectTests - 32 - Essbase_AfterDefaultGrid_CanBuildAndRefreshGrid"), Priority(32)]
-        public async Task Essbase_AfterCubeCreation_CanBuildAndRefreshGrid()
-        {
-            // Get an unconnected server.
-            var server = GetEssServer();
-
-            // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
-
-            var grid = cube.GetGrid();
-
-            grid.Alias = "Default";
-
-            grid.Dimensions = new List<EssGridDimension>()
-            {
-                new EssGridDimension()
-                {
-                    Name = "Year",
-                    Row = -1,
-                    Column = 0,
-                    Pov = "",
-                    Hidden = false,
-                    Expanded = false
-                },
-                new EssGridDimension()
-                {
-                    Name = "Measures",
-                    Row = 1,
-                    Column = -1,
-                    Pov = "",
-                    Hidden = false,
-                    Expanded = false
-                },
-                new EssGridDimension()
-                {
-                    Name = "Product",
-                    Row = -1,
-                    Column = -1,
-                    Pov = "Product",
-                    Hidden = false,
-                    Expanded = false
-                },
-                new EssGridDimension()
-                {
-                    Name = "Market",
-                    Row = -1,
-                    Column = -1,
-                    Pov = "Market",
-                    Hidden = false,
-                    Expanded = false
-                },
-                new EssGridDimension()
-                {
-                    Name = "Scenario",
-                    Row = -1,
-                    Column = -1,
-                    Pov = "Scenario",
-                    Hidden = false,
-                    Expanded = false
-                }
-            };
-
-            grid.Slice = new EssGridSlice()
-            {
-                Columns = 4,
-                Rows = 3,
-                Data = new EssGridSliceData()
-                {
-                    Ranges = new List<EssGridRange>()
-                    {
-                        new EssGridRange()
-                        {
-                            Start = 0,
-                            End = 11,
-                            Values = new List<string>()
-                            {
-                                "", "Product", "Market", "Scenario", "", "Measures", "", "", "Year", "", "", ""
-                            }
-                        }
-                    }
-                }
-            };
-
-            await grid.RefreshAsync();
-
-            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
-        }
-
         [Fact(DisplayName = @"PerformServerFunctionTests - 33 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperations"), Priority(33)]
         public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperations()
         {
@@ -906,7 +817,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs()
         {
             // Get an unconnected server.
-            var server = GetEssServer(EssServerRole.User);
+            var server = GetEssServer();
 
             // Get the default grid preferences from the server.
             var preferences = await server.GetDefaultGridPreferencesAsync();
@@ -960,7 +871,7 @@ namespace EssSharp.Integration
                 });
             }
         }
-        
+
         [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(35)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshGridUseAliases()
         {
@@ -1060,11 +971,96 @@ namespace EssSharp.Integration
 
             var rGrid = await essGrid.RefreshAsync();
         }
-        
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 36 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(36)]
+        public async Task Essbase_AfterCubeCreation_CanBuildAndRefreshGrid()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var grid = cube.GetGrid();
+
+            grid.Alias = "Default";
+
+            grid.Dimensions = new List<EssGridDimension>()
+            {
+                new EssGridDimension()
+                {
+                    Name = "Year",
+                    Row = -1,
+                    Column = 0,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Measures",
+                    Row = 1,
+                    Column = -1,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Product",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Product",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Market",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Market",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Scenario",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Scenario",
+                    Hidden = false,
+                    Expanded = false
+                }
+            };
+
+            grid.Slice = new EssGridSlice()
+            {
+                Columns = 4,
+                Rows = 3,
+                Data = new EssGridSliceData()
+                {
+                    Ranges = new List<EssGridRange>()
+                    {
+                        new EssGridRange()
+                        {
+                            Start = 0,
+                            End = 11,
+                            Values = new List<string>()
+                            {
+                                "", "Product", "Market", "Scenario", "", "Measures", "", "", "Year", "", "", ""
+                            }
+                        }
+                    }
+                }
+            };
+
+            await grid.RefreshAsync();
+
+            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
+        }
     }
-
-
-        
 
         /*
         [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions"), Priority(34)]
