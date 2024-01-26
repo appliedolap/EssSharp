@@ -445,7 +445,8 @@ namespace EssSharp
             }
         }
 
-        // TODO: drop method
+        // TODO: drop method?
+        /*
         private void PrepareSliceForOperation_old( Action action )
         {
             // set a local flag to indicate if this is an "Update" operation
@@ -522,7 +523,7 @@ namespace EssSharp
                     if ( firstColumnNumberWithNonBlankCell > -1 )
                         break;
                 }
-                */
+                
             }
 
             for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
@@ -610,7 +611,7 @@ namespace EssSharp
                                 // Skip to the next cell.
                                 continue;
                             }
-                            */
+                            
                         }
                         else
                         {
@@ -618,10 +619,10 @@ namespace EssSharp
 
                             isNumeric = int.TryParse(cellValue, out _) || double.TryParse(cellValue, out _);
 
-                            /*
+                            
                             // Determine whether the value is numeric.
                             isNumeric = this.IsNumeric(cellValue, numberFormatProvider);
-                            */
+                            
 
                             // If unique member names exist, determine whether the cell represents a data cell.
                             // The isDataCell flag is used to determine whether to check for a unique member name for the current cell.
@@ -706,9 +707,9 @@ namespace EssSharp
                         values[index] = "";
                         types[index] = "7";
                     }
-                    */
+                   
 
-                    /*
+                    
                     // add a Cell element with row and column attributes
                     this.WriteStartElement(xmlWriter, "Cell");
                     this.WriteAttributeString(xmlWriter, "r", rowNumber.ToString());
@@ -747,7 +748,7 @@ namespace EssSharp
                         this.WriteString(xmlWriter, cellValue);
                     }
 
-                    this.WriteEndElement(xmlWriter);*/
+                    this.WriteEndElement(xmlWriter);
                 }
 
                 // Add the value and type to the collections.
@@ -765,8 +766,12 @@ namespace EssSharp
                 Slice.Data.Ranges[0].Values = values ?? new List<string>();
                 Slice.Data.Ranges[0].Types = types ?? new List<string>();
             }
-        }
+        }*/
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
         private void PrepareSliceForOperation( Action action )
         {
             string cellType;
@@ -873,252 +878,6 @@ namespace EssSharp
                 Slice.Data.Ranges[0].Types = types ?? new List<string>();
             }
         }
-            
-            /*
-                // loop through the internal values array rows ...
-                // note: the data is serialized with an origin of 1,1 regardless of the actual grid origin or the retrieve range
-                for ( int rowIndex = internalGrid.StartCellRow - internalGrid.RowOffset, rowNumber = 1;
-                      rowIndex <= internalGrid.EndCellRow - internalGrid.RowOffset;
-                      rowIndex++, rowNumber++ )
-            {
-                // Used by the SendBlanksAsMissing logic to flag whether the first non-blank cell has been detected.
-                detectedFirstNonBlankCellInDataRow = false;
-
-                // loop through the internal values array columns ...
-                for ( int colIndex = internalGrid.StartCellColumn - internalGrid.ColumnOffset, colNumber = 1;
-                          colIndex <= internalGrid.EndCellColumn - internalGrid.ColumnOffset;
-                          colIndex++, colNumber++ )
-                {
-                    // If this is an update operation, determine whether the cell is blank.
-                    isBlankCell = cellValues[rowIndex, colIndex] == null;
-
-                    // If the cell value is non-null OR the grid is sending blanks as #MISSING and the cell is blank...
-                    if ( (cellValues[rowIndex, colIndex] != null) || (isUpdate && sendBlanksAsMissing && isBlankCell) )
-                    {
-                        isNumeric = false;
-
-                        // The isDataCell flag is used when processing an update when unique member names exist.
-                        isDataCell = false;
-
-                        // get the cell value as a string
-                        // Note: To ensure that formatted numeric strings are detected as numbers, use the culture-compatible format provider.
-                        cellValue = !isBlankCell ? Convert.ToString(cellValues[rowIndex, colIndex], numberFormatProvider) : null;
-
-                        //// Trim the cell value.
-                        //// Note: The grid implementation inheritor controls whether only leading blanks or both leading and trailing blanks are trimmed.
-                        ////       Refer to the method for additional information.
-                        //cellValue = this.WriteXML_SAX_TrimCellValue(cellValue);
-
-                        //// Trim leading blanks.
-                        //// NOTE: The code originally trimmed both leading and trailing blanks, but PGI requested that trailing blanks be retained.
-                        ////       Apparently, PGI users intentionally add a space to the end of a member name when they do not want the name to be recognized as a member.
-                        //cellValue = cellValue.TrimStart();
-
-                        // If the cell value is non-null...
-                        // Note: A null cell value is only possible when sending blanks as missing.
-                        if ( !isBlankCell )
-                        {
-                            // If the cell value does not contain trailing blanks...
-                            // Note: When a cell value contains trailing blanks, both leading and trailing blanks are retained.
-                            //       This approach is consistent with the Classic Add-In.
-                            //
-                            // This code was added to address an incompatibility with the Classic Add-In.
-                            // The GridExcel.ReadGrid was also modified to not trim leading blanks when trailing blankis exist.
-                            // The SpreadsheetGear.ReadGrid was NOT modified, so for the SmartClient, leading blanks will not be retained, but this may change in the future.
-                            if ( !cellValue.EndsWith(" ") )
-                                cellValue = cellValue.TrimStart();
-                        }
-
-                        // If the cell value is non-empty OR the grid is sending blanks as #MISSING and the cell is blank...
-                        if ( (!isBlankCell && cellValue.Length > 0) || (isBlankCell && isUpdate && sendBlanksAsMissing) )
-                        {
-                            // for an update operation, all cells should be included in the request
-                            if ( isUpdate )
-                            {
-                                // When sending blanks as missing...
-                                // Note: Only blank cells to the right of the first non-blank cell on a data row should be sent as #MISSING.
-                                if ( sendBlanksAsMissing )
-                                {
-                                    // If the first data row has not been detected...
-                                    if ( !isDataRow )
-                                    {
-                                        // When the column is the first column in the range with a non-blank cell and the current cell is non-blank,
-                                        // treat the row and all subsequent rows as data rows.
-                                        if ( colNumber == firstColumnNumberWithNonBlankCell && !isBlankCell )
-                                            isDataRow = true;
-                                    }
-
-                                    // If a data row...
-                                    if ( isDataRow )
-                                    {
-                                        // If the first non-blank cell in the row has not been detected...
-                                        if ( !detectedFirstNonBlankCellInDataRow )
-                                        {
-                                            // If the cell is non-blank, any blank cell to the right of the current cell is sent as #MISSING.
-                                            if ( !isBlankCell )
-                                                detectedFirstNonBlankCellInDataRow = true;
-                                        }
-                                    }
-                                }
-
-                                // If sending blanks as missing and the cell is blank...
-                                if ( sendBlanksAsMissing && isBlankCell )
-                                {
-                                    // If this is a data row and the first non-blank cell in the row has been detected...
-                                    if ( isDataRow && detectedFirstNonBlankCellInDataRow )
-                                    {
-                                        // Set flags to append the cell and to treat the cell as a data cell.
-                                        appendCell = true;
-                                        isDataCell = true;
-
-                                        // Set the value to #MISSING.
-                                        cellValue = "#MISSING";
-                                    }
-                                    else
-                                    {
-                                        // Skip to the next cell.
-                                        continue;
-                                    }
-                                }
-                                else
-                                {
-                                    appendCell = true;                  // append both member and data cells for an update operation
-
-                                    isNumeric = char.IsNumber(cellValue.First());
-
-                                    /*
-                                    // Determine whether the value is numeric.
-                                    isNumeric = this.IsNumeric(cellValue, numberFormatProvider);
-                                    */
-            /*
-                                    // If unique member names exist, determine whether the cell represents a data cell.
-                                    // The isDataCell flag is used to determine whether to check for a unique member name for the current cell.
-                                    if ( useUniqueMemberNames )
-                                    {
-                                        if ( this.IsNumeric(cellValue, numberFormatProvider) )
-                                        {
-                                            isDataCell = true;
-                                            isNumeric = true;
-                                        }
-                                        else if ( string.Compare(cellValue, this.MissingTextString, true) == 0 )
-                                            isDataCell = true;
-                                        else if ( string.Compare(cellValue, this.NoAccessString, true) == 0 )
-                                            isDataCell = true;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                // for a non-update operation, only member cells should be included in the request.
-                                // if numeric or the value is the missing text string, treat as a data cell, since numeric member names in the Values array
-                                // are prepended with a single quote.
-                                //
-                                if ( this.IsNumeric(cellValue, numberFormatProvider) )
-                                {
-                                    appendCell = false;             // do not append numeric cells for a non-update operation unless WriteAllNonNumericValuesOnRetrieve is True
-                                    isNumeric = true;
-                                }
-                                else if ( string.Compare(cellValue, this.MissingTextString, true) == 0 )
-                                    appendCell = false;				// treat the missing text string value as a numeric cell - do not append numeric cells for a non-update operation
-                                else if ( string.Compare(cellValue, this.NoAccessString, true) == 0 )
-                                    appendCell = false;				// treat the "no access" string value as a numerid cell - do not append numeric cells for a non-update operation
-                                else
-                                    appendCell = true;              // append non-numeric cells for a non-update operation
-                            }
-
-                            //// once a cell is encountered that does not need to be appended, we can also skip the rest of the cells in the row
-                            //// Note: The WriteAllNonNumericValuesOnRetrieve property was added to accommodate the Classic Excel Add-In behavior,
-                            ////       which retains non-member values that appear to the right of the Essbase data.
-                            ////       The Dodeca Add-In and the Essbase adhoc view in the Smart Client, when ExcelAddInMode is enabled, set the property to <b>True</b>
-                            ////       in order to replicate the Classic Add-In behavior.  11/2/16, Amy
-                            //if ( !appendCell && !this.WriteAllNonNumericValuesOnRetrieve )
-                            //{
-                            //    break;
-                            //}
-
-                            // Replaces the commented out above in order to eliminate the numeric values from the request, while still maintaining
-                            // any non-numeric values within the retrieve range to the right of the numeric data.  7/23/19, Amelia
-                            if ( !appendCell )
-                            {
-                                // If a retrieve operation, skip a numeric value, but continue to the next cell in the row.
-                                if ( !isUpdate && isNumeric && this.WriteAllNonNumericValuesOnRetrieve )
-                                    continue;
-                                else
-                                    break;
-                            }
-
-                            // If unique names exist...
-                            if ( useUniqueMemberNames )
-                            {
-                                // If not updating OR if updating and the cell is likely a member cell, determine whether to use the actual cell value or the unique member name.
-                                if ( !isUpdate || (isUpdate && !isDataCell) )
-                                {
-                                    if ( lastInternalGridUniqueMemberNames[rowIndex, colIndex] != null )
-                                    {
-                                        // Get the last cell value as a string.
-                                        // Note: To ensure that formatted numeric strings are detected as numbers, use the culture-compatible format provider.
-                                        lastCellValue = Convert.ToString(cellValues[rowIndex, colIndex], numberFormatProvider);
-
-                                        // Trim leading and trailing blanks.
-                                        lastCellValue = lastCellValue.Trim();
-
-                                        if ( lastCellValue.Length > 0 )
-                                        {
-                                            // If the current cell value and the corresponding last cell value are the same, based on a case-insensitive comparison,
-                                            // use the unique name, if a unique name exists.
-                                            if ( string.Compare(cellValue, lastCellValue, true) == 0 )
-                                            {
-                                                cellValue = lastInternalGridUniqueMemberNames[rowIndex, colIndex];
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            // add a Cell element with row and column attributes
-                            this.WriteStartElement(xmlWriter, "Cell");
-                            this.WriteAttributeString(xmlWriter, "r", rowNumber.ToString());
-                            this.WriteAttributeString(xmlWriter, "c", colNumber.ToString());
-
-                            hasInvalidChar = false;
-
-                            if ( !isNumeric )
-                            {
-                                // Determine whether the cell value contains an invalid Xml character.
-                                hasInvalidChar = StringUtility.ContainsInvalidXmlCharacter(cellValue);
-                            }
-
-                            // If the cell value contains an invalid Xml character, base64 encode the value.
-                            if ( hasInvalidChar )
-                            {
-                                // The cell value contains an invalid Xml character.
-                                // Base64 encode the cell value.
-
-                                // Flag the cell value as base64 encoded.
-                                // dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes"
-                                //xmlWriter.WriteAttributeString("dt", "dt", "urn:schemas-microsoft-com:datatypes", "bin.base64");
-                                this.WriteAttributeString(xmlWriter, "dt", "bin.base64", "dt", "urn:schemas-microsoft-com:datatypes");
-
-                                // Convert the cell value to a byte array.
-                                byte[] bytes = Encoding.UTF8.GetBytes(cellValue);
-
-                                // Base64 encode the byte array.
-                                string base64String = Convert.ToBase64String(bytes);
-
-                                // Write the encoded string.
-                                this.WriteString(xmlWriter, base64String);
-                            }
-                            else
-                            {
-                                this.WriteString(xmlWriter, cellValue);
-                            }
-
-                            this.WriteEndElement(xmlWriter);
-                        }
-                    }
-                }
-            }
-        }*/
 
         /// <summary>
         /// 
