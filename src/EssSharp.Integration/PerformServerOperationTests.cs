@@ -972,7 +972,31 @@ namespace EssSharp.Integration
             var rGrid = await essGrid.RefreshAsync();
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 36 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(36)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 36 - Essbase_AfterDefaultGrid_CanRefreshEmptyGrid"), Priority(36)]
+        public async Task Essbase_AfterDefaultGrid_CanRefreshEmptyGrid()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var grid = new Grid() { };
+
+            var essGrid = new EssGrid(grid, cube as EssCube);
+
+            var preferences = await server.GetDefaultGridPreferencesAsync();
+
+            //preferences.ColumnSupression.Missing = true;
+            //preferences.RowSupression.Missing = true;
+
+            essGrid.Preferences = preferences;
+
+            essGrid.Selection = new List<EssGridSelection> { new EssGridSelection(1, 0) };
+
+            var rGrid = await essGrid.RefreshAsync();
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(37)]
         public async Task Essbase_AfterCubeCreation_CanBuildAndRefreshGrid()
         {
             // Get an unconnected server.

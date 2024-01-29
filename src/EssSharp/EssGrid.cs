@@ -774,109 +774,121 @@ namespace EssSharp
         /// <param name="action"></param>
         private void PrepareSliceForOperation( Action action )
         {
-            string cellType;
-            string cellValue;
-            var cellValues = Slice.Data.Ranges[0].Values;
-            int dataBlockStartIndex;
-            int dataBlockEndIndex;
-            var dataGridFirstCell = new EssGridSelection(0, 0);
-            int firstRowIndex = 0;
-            bool isUpdate = action == GridOperation.ActionEnum.Submit;
-            bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
-            var types = new List<string>();
-            var values = new List<string>();
 
-            // Find the row the data block starts
-            for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
+
+            if ( Slice.Data.Ranges.FirstOrDefault() is not null )
             {
-                // Find the first non empty cell at the start of a row...
-                if ( index % Slice.Columns == 0 && !string.IsNullOrEmpty(cellValues[index]) )
-                {
-                    // Retain the index...
-                    firstRowIndex = index;
-                    // And set the data grid start row.
-                    dataGridFirstCell.startRow = index / Slice.Columns;
-                    break;
-                }
-            }
+                string cellType;
+                string cellValue;
+                var cellValues = Slice?.Data?.Ranges[0]?.Values;
+                int dataBlockStartIndex;
+                int dataBlockEndIndex;
+                var dataGridFirstCell = new EssGridSelection(0, 0);
+                int firstRowIndex = 0;
+                bool isUpdate = action == GridOperation.ActionEnum.Submit;
+                bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
+                var types = new List<string>();
+                var values = new List<string>();
 
-            // Find the column the data block starts by moving 1 row above the start of the data grid.
-            for ( var index = firstRowIndex - Slice.Columns; index < (Slice.Data.Ranges[0].End + 1); index++ )
-            {
-                // search the row for the first non empty cell
-                if ( !string.IsNullOrEmpty(cellValues[index]) )
+                // Find the row the data block starts
+                for ( int index = 0; index < (Slice?.Data?.Ranges[0]?.End + 1); index++ )
                 {
-                    // calculate the column index and set the value in the data grid start column.
-                    dataGridFirstCell.startColumn = index % Slice.Columns;
-                    break;
-                }
-            }
-
-            // Find the first index of the data block and the last index of the data block for the first row
-            dataBlockStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
-            dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1 ) * Slice.Columns -1;
-
-            // Loop through entire grid and decide the type of each cell.
-            for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
-            {
-                if (dataBlockStartIndex <= index && dataBlockEndIndex >= index )
-                {
-                    if ( isUpdate )
+                    // Find the first non empty cell at the start of a row...
+                    if ( index % Slice.Columns == 0 && !string.IsNullOrEmpty(cellValues[index]) )
                     {
-                        cellValue = cellValues[index];
-
-                        // If string is empty...
-                        if ( string.IsNullOrEmpty(cellValue) )
-                            // and sendBlanksAsMissing is true, send type 2. If false, send type 7.
-                            cellType = sendBlanksAsMissing ? "2" : "7";
-                        else
-                            // Else send type "2"
-                            cellType = "2";
+                        // Retain the index...
+                        firstRowIndex = index;
+                        // And set the data grid start row.
+                        dataGridFirstCell.startRow = index / Slice.Columns;
+                        break;
                     }
-                    else
+                }
+
+                var columnIndex = firstRowIndex - Slice.Columns < 0 ? 0 : firstRowIndex - Slice.Columns;
+                // Find the column the data block starts by moving 1 row above the start of the data grid.
+                for ( var index = columnIndex; index < (Slice.Data.Ranges[0].End + 1); index++ )
+                {
+                    // search the row for the first non empty cell
+                    if ( !string.IsNullOrEmpty(cellValues[index]) )
                     {
-                        // Alwasys send empty string and type 7 if not an update
+                        // calculate the column index and set the value in the data grid start column.
+                        dataGridFirstCell.startColumn = index % Slice.Columns;
+                        break;
+                    }
+                }
+
+                // Find the first index of the data block and the last index of the data block for the first row
+                dataBlockStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
+                dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1) * Slice.Columns - 1;
+
+                // Loop through entire grid and decide the type of each cell.
+                for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
+                {
+                    if ( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
+                    {
+                        if ( isUpdate )
+                        {
+                            cellValue = cellValues[index];
+
+                            // If string is empty...
+                            if ( string.IsNullOrEmpty(cellValue) )
+                                // and sendBlanksAsMissing is true, send type 2. If false, send type 7.
+                                cellType = sendBlanksAsMissing ? "2" : "7";
+                            else
+                                // Else send type "2"
+                                cellType = "2";
+                        }
+                        else
+                        {
+                            // Alwasys send empty string and type 7 if not an update
+                            cellValue = string.Empty;
+                            cellType = "7";
+                        }
+
+                    }
+                    // If cell is not in the data block and is empty, send empty string and type 7.
+                    else if ( string.IsNullOrEmpty(cellValues[index]) )
+                    {
                         cellValue = string.Empty;
                         cellType = "7";
                     }
+                    // Else, get cell value at index and set type to 0.
+                    else
+                    {
+                        cellValue = cellValues[index];
+                        cellType = "0";
+                    }
 
+                    // Set data blocks start and end indexes to next row.
+                    if ( index == dataBlockEndIndex )
+                    {
+                        dataBlockStartIndex += Slice.Columns;
+                        dataBlockEndIndex += Slice.Columns;
+                    }
+
+                    // Add type and Value to arrays.
+                    values.Add(cellValue);
+                    types.Add(cellType);
                 }
-                // If cell is not in the data block and is empty, send empty string and type 7.
-                else if ( string.IsNullOrEmpty(cellValues[index]) )
+
+                // Update the slice's values and types.
+                if ( _grid is not null )
                 {
-                    cellValue = string.Empty;
-                    cellType = "7";
+                    _grid.Slice.Data.Ranges[0].Values = values ?? new List<string>();
+                    _grid.Slice.Data.Ranges[0].Types = types ?? new List<string>();
                 }
-                // Else, get cell value at index and set type to 0.
                 else
                 {
-                    cellValue = cellValues[index];
-                    cellType = "0";
+                    Slice.Data.Ranges[0].Values = values ?? new List<string>();
+                    Slice.Data.Ranges[0].Types = types ?? new List<string>();
                 }
-
-                // Set data blocks start and end indexes to next row.
-                if ( index == dataBlockEndIndex )
-                {
-                    dataBlockStartIndex += Slice.Columns;
-                    dataBlockEndIndex += Slice.Columns;
-                }
-
-                // Add type and Value to arrays.
-                values.Add( cellValue );
-                types.Add( cellType );
-            }
-
-            // Update the slice's values and types.
-            if ( _grid is not null )
-            {
-                _grid.Slice.Data.Ranges[0].Values = values ?? new List<string>();
-                _grid.Slice.Data.Ranges[0].Types = types ?? new List<string>();
             }
             else
             {
-                Slice.Data.Ranges[0].Values = values ?? new List<string>();
-                Slice.Data.Ranges[0].Types = types ?? new List<string>();
+                Slice = new EssGridSlice();
             }
+
+
         }
 
         /// <summary>
