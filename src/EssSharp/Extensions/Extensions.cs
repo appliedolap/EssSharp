@@ -167,7 +167,7 @@ namespace EssSharp
             return dimensionList
                 .Items?
                 .Where(dimension => dimension is not null)
-                .Select(dimension => new EssDimension(dimension, cube) as IEssDimension)
+                .Select((dimension, index) => new EssDimension(dimension, cube) { DimensionNumber = index } as IEssDimension)
                 .ToList() ?? new List<IEssDimension>();
         }
 

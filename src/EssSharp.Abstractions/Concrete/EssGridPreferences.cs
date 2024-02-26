@@ -59,6 +59,8 @@ namespace EssSharp
 
         public EssGridPreferencesZoomIn ZoomIn { get; set; } = new EssGridPreferencesZoomIn();
 
+        public bool UseAuditLog { get; set; } = false;
+
         #endregion
 
         #region ICloneable Members

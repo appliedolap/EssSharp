@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -54,6 +52,9 @@ namespace EssSharp
 
         /// <inheritdoc />
         public EssCubeType CubeType => _cube.Type.HasValue && Enum.IsDefined(typeof(EssCubeType), (int)_cube.Type) ? (EssCubeType)_cube.Type : EssCubeType.Unknown;
+
+        /// <inheritdoc />
+        public List<IEssDimension> Dimensions { get; set; } = new List<IEssDimension>();
 
         #endregion
 
@@ -331,7 +332,7 @@ namespace EssSharp
                 var api = GetApi<DimensionsApi>();
                 var dimensions = await api.DimensionsListDimensionsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false);
 
-                return dimensions?.ToEssSharpList(this) ?? new List<IEssDimension>();
+                return Dimensions = dimensions?.ToEssSharpList(this) ?? new List<IEssDimension>();
             }
             catch ( OperationCanceledException ) { throw; }
             catch (Exception)
@@ -579,7 +580,7 @@ namespace EssSharp
                 throw;
             }
         }
-
+        
         /// <inheritdoc />
         /// <returns>A List of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetDimensionMembers( EssMemberFields? fields = null ) => GetDimensionMembersAsync(fields).GetAwaiter().GetResult();

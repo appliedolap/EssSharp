@@ -37,6 +37,7 @@ namespace EssSharp
         private string _essGridAlias = "";
         private List<EssGridDimension> _essGridDimension = new List<EssGridDimension>();
         private EssGridSlice _essGridSlice = new EssGridSlice();
+        private List<string> _oldValues = new List<string>();
 
         #endregion
 
@@ -57,6 +58,8 @@ namespace EssSharp
 
             _cube = cube ??
                 throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssCube)}.");
+
+            _oldValues = _grid.Slice.Data.Ranges[0].Values.ToList();
         }
 
         #endregion
@@ -96,6 +99,9 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        public EssDataChanges DataChanges { get; set; } = null;
+
+        /// <inheritdoc />
         public List<EssGridDimension> Dimensions //=> _grid.Dimensions.ToEssGridDimension();
         {
             get
@@ -130,9 +136,13 @@ namespace EssSharp
             set
             {
                 if ( _grid is not null )
+                {
                     _grid.Slice = value?.ToModelBean();
+                }
                 else
+                {
                     _essGridSlice = value;
+                }
             }
         }
 
@@ -141,10 +151,6 @@ namespace EssSharp
 
         /// <inheritdoc />
         public EssGridPreferences Preferences { get; set; }
-
-        public bool WriteAllNonNumericValuesOnRetrieve { get; set; } = false;
-
-        public List<string> lastInternalGridUniqueMemberNames { get; set; } = new List<string>();
 
         #endregion
 
@@ -436,7 +442,47 @@ namespace EssSharp
                         }
                     }
                 }
+                
+                this.DataChanges = null;
+
+                // If tracking changes...
+                if ( action == GridOperation.ActionEnum.Submit && Preferences.UseAuditLog )
+                {
+                    /*
+                    var changes = new EssDataChanges();
+                    var valuesCount = Slice.Data.Ranges[0].End;
+                    var oldValues = _grid.Slice.Data.Ranges[0].Values;
+                    var newValues = grid.Slice.Data.Ranges[0].Values;
+
+
+                    for ( int index = 0; index < (valuesCount + 1); index++ )
+                    {
+                        if ( !string.Equals(oldValues[index], newValues[index]) )
+                        {
+                            if ( Cube.Dimensions.Count == 0 )
+                                await Cube.GetDimensionsAsync(cancellationToken);
+
+                            changes.DataChanges.Add(new EssDataChange()
+                            { 
+                                OldValue = double.Parse(oldValues[index]), 
+                                NewValue = double.Parse(newValues[index]),
+                                DataPoints = grid.Dimensions
+                                .Select(gd => new EssDataPoint() 
+                                { 
+                                    DimensionName = gd.Name,
+                                    DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Name)).DimensionNumber,
+                                    Alias = string.Empty, //UseAliases ? cellDimensionMemberWhereDimensionEqualsD.Value : null,
+                                    Member = string.Empty //!UseAliases ? cellDimensionMemberWhereDimensionEqualsD.Value : null
+                                })
+                                .ToList()
+                            });
+                        }
+                    }*/
+                    DataChanges = await DocumentDataChanges(grid, cancellationToken).ConfigureAwait(false);
+                }
+
                 _grid = grid;
+                _oldValues = Slice.Data.Ranges[0].Values.ToList();
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
@@ -771,11 +817,115 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        private async Task<EssDataChanges> DocumentDataChanges( Grid newGrid, CancellationToken cancellationToken )
+        {
+            var changes = new EssDataChanges();
+            var valuesCount = Slice.Data.Ranges[0].End;
+            var oldValues = _oldValues; //_grid.Slice.Data.Ranges[0].Values;
+            var newValues = newGrid.Slice.Data.Ranges[0].Values;
+            int rowIndex;
+            int dataBlockStartIndex;
+            int dataBlockEndIndex;
+            var dataGridFirstCell = GetDataBlockStartIndex(Slice);
+            var dimMemberDict = new Dictionary<string, Tuple<string, string>>();
+
+            rowIndex = dataGridFirstCell.startRow * Slice.Columns;
+            dataBlockStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
+            dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1) * Slice.Columns - 1;
+
+            for ( int index = 0; index < (valuesCount + 1); index++ )
+            {
+                if ( !string.Equals(oldValues[index], newValues[index]) )
+                {
+                    dimMemberDict = await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, index, dimMemberDict, cancellationToken).ConfigureAwait(false);
+                    if ( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
+                    {
+                        if ( Cube.Dimensions.Count == 0 )
+                            await Cube.GetDimensionsAsync(cancellationToken);
+
+                        changes.DataChanges.Add(new EssDataChange()
+                        {
+                            OldValue = double.Parse(oldValues[index]),
+                            NewValue = double.Parse(newValues[index]),
+                            DataPoints = newGrid.Dimensions
+                            .Select(gd => new EssDataPoint()
+                            {
+                                DimensionName = gd.Name,
+                                DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Name)).DimensionNumber,
+                                Alias = UseAliases ? dimMemberDict[gd.Name].Item1 : null,
+                                Member = UseAliases ? dimMemberDict[gd.Name].Item2 : null
+                            })
+                            .ToList()
+                        });
+
+                        // Set data blocks start and end indexes to next row.
+                        if ( index == dataBlockEndIndex && index != Slice.Data.Ranges[0].End )
+                        {
+                            rowIndex += Slice.Columns;
+                            dataBlockStartIndex += Slice.Columns;
+                            dataBlockEndIndex += Slice.Columns;
+                            dimMemberDict = await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, dataBlockStartIndex, dimMemberDict, cancellationToken).ConfigureAwait(false);
+                        }
+                    }
+                }
+            }
+            return changes;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <param name="dataBlockStartIndex"></param>
+        /// <param name="dataCellIndex"></param>
+        /// <param name="dimDataDict"></param>
+        /// <param name="cancellatinToken"></param>
+        /// <returns></returns>
+        private async Task<Dictionary<string, Tuple<string, string>>> GetDimensionMembersForDataCell( int rowIndex, int dataBlockStartIndex, int dataCellIndex, Dictionary<string, Tuple<string, string>> dimDataDict, CancellationToken cancellatinToken = default)
+        {
+            var dimensionMembers = new Dictionary<string, Tuple<string, string>>();
+            /*
+            List<IEssDimension> dimensions = new List<IEssDimension>();
+            Dimensions.ForEach(async dim => dimensions.Add(await Cube.GetDimensionAsync(dim.Name).ConfigureAwait(false)));
+            */
+            var dimMemValues = new List<string>();
+
+            var dbStartRow = dataBlockStartIndex / Slice.Columns;
+            var currentRow = rowIndex / Slice.Columns;
+            var columnMemberIndex = dataCellIndex - (((currentRow + 1) - dbStartRow) * Slice.Columns);
+
+            dimMemValues.Add(Slice.Data.Ranges[0].Values[columnMemberIndex]);
+
+            for ( int i = rowIndex, dimIndex = 0; i < dataBlockStartIndex; i++, dimIndex++ )
+            {
+                dimMemValues.Add(!string.IsNullOrEmpty(Slice.Data.Ranges[0].Values[i]) ? Slice.Data.Ranges[0].Values[i] : dimDataDict[Dimensions[dimIndex].Name].Item2 ?? Dimensions[dimIndex].Name);
+            }
+
+            foreach ( var dim in Dimensions )
+            {
+                var members = Cube.GetMember(dim.Name).GetDescendants();
+                foreach ( var dimMem in dimMemValues )
+                {
+                    foreach ( var mem in members )
+                    {
+                        if ( string.Equals(dimMem, mem.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(dimMem, mem.activeAliasName, StringComparison.OrdinalIgnoreCase) )
+                        {
+                            dimensionMembers[dim.Name] = new Tuple<string, string>(mem.activeAliasName, mem.Name);
+                            break;
+                        }
+                    }
+                }
+
+            }
+            return dimensionMembers;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="action"></param>
         private void PrepareSliceForOperation( Action action )
         {
-
-
             if ( Slice.Data.Ranges.FirstOrDefault() is not null )
             {
                 string cellType;
@@ -783,13 +933,13 @@ namespace EssSharp
                 var cellValues = Slice?.Data?.Ranges[0]?.Values;
                 int dataBlockStartIndex;
                 int dataBlockEndIndex;
-                var dataGridFirstCell = new EssGridSelection(0, 0);
-                int firstRowIndex = 0;
+                var dataGridFirstCell = GetDataBlockStartIndex(Slice);
                 bool isUpdate = action == GridOperation.ActionEnum.Submit;
                 bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
                 var types = new List<string>();
                 var values = new List<string>();
 
+                /*
                 // Find the row the data block starts
                 for ( int index = 0; index < (Slice?.Data?.Ranges[0]?.End + 1); index++ )
                 {
@@ -816,6 +966,7 @@ namespace EssSharp
                         break;
                     }
                 }
+                */
 
                 // Find the first index of the data block and the last index of the data block for the first row
                 dataBlockStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
@@ -887,10 +1038,43 @@ namespace EssSharp
             {
                 Slice = new EssGridSlice();
             }
-
-
         }
 
+        private EssGridSelection GetDataBlockStartIndex( EssGridSlice slice )
+        {
+            List<string> cellValues = slice.Data.Ranges[0].Values;
+            int firstRowIndex = 0;
+            var dataGridFirstCell = new EssGridSelection(0, 0);
+            
+            // Find the row the data block starts
+            for ( int index = 0; index < (slice?.Data?.Ranges[0]?.End + 1); index++ )
+            {
+                // Find the first non empty cell at the start of a row...
+                if ( index % Slice.Columns == 0 && !string.IsNullOrEmpty(cellValues[index]) )
+                {
+                    // Retain the index...
+                    firstRowIndex = index;
+                    // And set the data grid start row.
+                    dataGridFirstCell.startRow = index / Slice.Columns;
+                    break;
+                }
+            }
+
+            var columnIndex = firstRowIndex - Slice.Columns < 0 ? 0 : firstRowIndex - Slice.Columns;
+            // Find the column the data block starts by moving 1 row above the start of the data grid.
+            for ( var index = columnIndex; index < (Slice.Data.Ranges[0].End + 1); index++ )
+            {
+                // search the row for the first non empty cell
+                if ( !string.IsNullOrEmpty(cellValues[index]) )
+                {
+                    // calculate the column index and set the value in the data grid start column.
+                    dataGridFirstCell.startColumn = index % Slice.Columns;
+                    break;
+                }
+            }
+
+            return dataGridFirstCell;
+        }
         /// <summary>
         /// 
         /// </summary>

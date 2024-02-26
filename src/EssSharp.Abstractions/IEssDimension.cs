@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Threading;
-using System;
-using System.Collections.Generic;
 
 namespace EssSharp
 {
@@ -9,9 +8,14 @@ namespace EssSharp
     public interface IEssDimension : IEssObject
     {
         /// <summary>
-        /// Gets the deminsion type.
+        /// Gets the dimension type.
         /// </summary>
         public string DimensionType { get; }
+
+        /// <summary>
+        /// Returns the dimension number.
+        /// </summary>
+        public int DimensionNumber { get; set; }
 
         /// <summary>
         /// Gets dimension members.

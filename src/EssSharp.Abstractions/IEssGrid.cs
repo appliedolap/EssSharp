@@ -19,6 +19,11 @@ namespace EssSharp
         public string Alias { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public EssDataChanges DataChanges { get; set; }
+
+        /// <summary>
         /// Gets grid dimension.
         /// </summary>
         public List<EssGridDimension> Dimensions { get; set; }

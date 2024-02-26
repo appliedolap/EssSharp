@@ -20,6 +20,11 @@ namespace EssSharp
         public EssCubeType CubeType { get; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public List<IEssDimension> Dimensions { get; set; }
+
+        /// <summary>
         /// Clears data from a cube.
         /// </summary>
         /// <param name="options"></param>
