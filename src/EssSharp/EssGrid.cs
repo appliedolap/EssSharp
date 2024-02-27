@@ -817,6 +817,9 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="newGrid"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         private async Task<EssDataChanges> DocumentDataChanges( Grid newGrid, CancellationToken cancellationToken )
         {
             var changes = new EssDataChanges();
@@ -829,42 +832,65 @@ namespace EssSharp
             var dataGridFirstCell = GetDataBlockStartIndex(Slice);
             var dimMemberDict = new Dictionary<string, Tuple<string, string>>();
 
+            // find the start row index. Used to find the Dimension Members.
             rowIndex = dataGridFirstCell.startRow * Slice.Columns;
+            // first cell index of the data block
             dataBlockStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
+            // last cell index, of the first row, of the data block.
             dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1) * Slice.Columns - 1;
 
+            // loop through each cell...
             for ( int index = 0; index < (valuesCount + 1); index++ )
             {
+                // and determine if the value has changed.
                 if ( !string.Equals(oldValues[index], newValues[index]) )
                 {
+                    // TODO: maybe don't call this every time, but the dimension member at the top of the grid (ex: actual in the test case) 
+                    //       might change depending on the cell that is changed even if the row dimension members do not.
+                    //
+                    // Gets the dimension members for the cell that has changed.
+                    // Returns a Dictionary<string, tuple<string, string>.
+                    // The key is the dimension name
+                    // tuple value 1 is the dimension members alias, if there is one.
+                    // tuple value 2 is the dimension members name.
                     dimMemberDict = await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, index, dimMemberDict, cancellationToken).ConfigureAwait(false);
+
+                    // only hit cells within the data block.
                     if ( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
                     {
+                        // if the Dimensions property on the cube is empty, get the dimensions.
                         if ( Cube.Dimensions.Count == 0 )
                             await Cube.GetDimensionsAsync(cancellationToken);
 
+                        // add new EssDataChange object to the EssDataChanges object.
                         changes.DataChanges.Add(new EssDataChange()
                         {
+                            // the grid's original value 
                             OldValue = double.Parse(oldValues[index]),
+                            // the grid's new value
                             NewValue = double.Parse(newValues[index]),
+                            // Grid Dimension and Dimension member information
                             DataPoints = newGrid.Dimensions
                             .Select(gd => new EssDataPoint()
                             {
                                 DimensionName = gd.Name,
                                 DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Name)).DimensionNumber,
+                                // first value of the tuple returned from the GetDimensionMembersForDataCell() method, null if no value.
                                 Alias = UseAliases ? dimMemberDict[gd.Name].Item1 : null,
+                                // second value of the tuple returned from the GetDimensionMembersForDataCell() method, null if no value.
                                 Member = UseAliases ? dimMemberDict[gd.Name].Item2 : null
                             })
                             .ToList()
                         });
 
-                        // Set data blocks start and end indexes to next row.
+                        // Set row index and data blocks start/end indexes to next row.
+                        // TODO: not sure why I was calling GetDimensionMembersForDataCell() again here. Remove or restore.
                         if ( index == dataBlockEndIndex && index != Slice.Data.Ranges[0].End )
                         {
                             rowIndex += Slice.Columns;
                             dataBlockStartIndex += Slice.Columns;
                             dataBlockEndIndex += Slice.Columns;
-                            dimMemberDict = await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, dataBlockStartIndex, dimMemberDict, cancellationToken).ConfigureAwait(false);
+                            //dimMemberDict = await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, dataBlockStartIndex, dimMemberDict, cancellationToken).ConfigureAwait(false);
                         }
                     }
                 }
@@ -890,26 +916,37 @@ namespace EssSharp
             */
             var dimMemValues = new List<string>();
 
+            // Find the row index where the data block starts
             var dbStartRow = dataBlockStartIndex / Slice.Columns;
+            // the current row index 
             var currentRow = rowIndex / Slice.Columns;
+            // and use them to find the index of the current cells dimension member
             var columnMemberIndex = dataCellIndex - (((currentRow + 1) - dbStartRow) * Slice.Columns);
 
+            // add the dimension member at the top of the grid to the list
             dimMemValues.Add(Slice.Data.Ranges[0].Values[columnMemberIndex]);
 
+            // find all row dimension members
             for ( int i = rowIndex, dimIndex = 0; i < dataBlockStartIndex; i++, dimIndex++ )
             {
+                // if the row dimension members are not present, use the previous dimension members, or the dimension itself.
                 dimMemValues.Add(!string.IsNullOrEmpty(Slice.Data.Ranges[0].Values[i]) ? Slice.Data.Ranges[0].Values[i] : dimDataDict[Dimensions[dimIndex].Name].Item2 ?? Dimensions[dimIndex].Name);
             }
 
+            // loop through each dimension
             foreach ( var dim in Dimensions )
             {
+                // get all dimension members
                 var members = Cube.GetMember(dim.Name).GetDescendants();
+                // loop through each member present on the grid
                 foreach ( var dimMem in dimMemValues )
                 {
                     foreach ( var mem in members )
                     {
+                        // and test if it matches any descendants of the current dimension
                         if ( string.Equals(dimMem, mem.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(dimMem, mem.activeAliasName, StringComparison.OrdinalIgnoreCase) )
                         {
+                            // add the alias(if available) and name to the tuple with dimension name as the key
                             dimensionMembers[dim.Name] = new Tuple<string, string>(mem.activeAliasName, mem.Name);
                             break;
                         }
