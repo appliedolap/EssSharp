@@ -38,6 +38,7 @@ namespace EssSharp
         private List<EssGridDimension> _essGridDimension = new List<EssGridDimension>();
         private EssGridSlice _essGridSlice = new EssGridSlice();
         private List<string> _oldValues = new List<string>();
+        private int _dataGridStartIndex;
 
         #endregion
 
@@ -826,7 +827,7 @@ namespace EssSharp
             var valuesCount = Slice.Data.Ranges[0].End;
             var oldValues = _oldValues; //_grid.Slice.Data.Ranges[0].Values;
             var newValues = newGrid.Slice.Data.Ranges[0].Values;
-            int rowIndex;
+            int rowIndex = 0;
             int dataBlockStartIndex;
             int dataBlockEndIndex;
             var dataGridFirstCell = GetDataBlockStartIndex(Slice);
@@ -835,7 +836,7 @@ namespace EssSharp
             // find the start row index. Used to find the Dimension Members.
             rowIndex = dataGridFirstCell.startRow * Slice.Columns;
             // first cell index of the data block
-            dataBlockStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
+            dataBlockStartIndex = _dataGridStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
             // last cell index, of the first row, of the data block.
             dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1) * Slice.Columns - 1;
 
@@ -882,17 +883,14 @@ namespace EssSharp
                             })
                             .ToList()
                         });
-
-                        // Set row index and data blocks start/end indexes to next row.
-                        // TODO: not sure why I was calling GetDimensionMembersForDataCell() again here. Remove or restore.
-                        if ( index == dataBlockEndIndex && index != Slice.Data.Ranges[0].End )
-                        {
-                            rowIndex += Slice.Columns;
-                            dataBlockStartIndex += Slice.Columns;
-                            dataBlockEndIndex += Slice.Columns;
-                            //dimMemberDict = await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, dataBlockStartIndex, dimMemberDict, cancellationToken).ConfigureAwait(false);
-                        }
                     }
+                }
+                // Set row index and data blocks start/end indexes to next row.
+                if ( index == dataBlockEndIndex && index != Slice.Data.Ranges[0].End )
+                {
+                    rowIndex += Slice.Columns;
+                    dataBlockStartIndex += Slice.Columns;
+                    dataBlockEndIndex += Slice.Columns;
                 }
             }
             return changes;
@@ -910,14 +908,10 @@ namespace EssSharp
         private async Task<Dictionary<string, Tuple<string, string>>> GetDimensionMembersForDataCell( int rowIndex, int dataBlockStartIndex, int dataCellIndex, Dictionary<string, Tuple<string, string>> dimDataDict, CancellationToken cancellatinToken = default)
         {
             var dimensionMembers = new Dictionary<string, Tuple<string, string>>();
-            /*
-            List<IEssDimension> dimensions = new List<IEssDimension>();
-            Dimensions.ForEach(async dim => dimensions.Add(await Cube.GetDimensionAsync(dim.Name).ConfigureAwait(false)));
-            */
             var dimMemValues = new List<string>();
 
             // Find the row index where the data block starts
-            var dbStartRow = dataBlockStartIndex / Slice.Columns;
+            var dbStartRow = _dataGridStartIndex / Slice.Columns;
             // the current row index 
             var currentRow = rowIndex / Slice.Columns;
             // and use them to find the index of the current cells dimension member

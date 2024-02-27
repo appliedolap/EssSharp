@@ -1186,6 +1186,113 @@ namespace EssSharp.Integration
 
             Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
         }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid"), Priority(39)]
+        public async Task Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var grid = cube.GetGrid();
+
+            grid.Alias = "Default";
+
+            grid.Dimensions = new List<EssGridDimension>()
+            {
+                new EssGridDimension()
+                {
+                    Name = "Year",
+                    Row = -1,
+                    Column = 3,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Measures",
+                    Row = -1,
+                    Column = 2,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Product",
+                    Row = -1,
+                    Column = 1,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Market",
+                    Row = -1,
+                    Column = 0,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Scenario",
+                    Row = 0,
+                    Column = -1,
+                    Pov = "Scenario",
+                    Hidden = false,
+                    Expanded = false
+                }
+            };
+
+            grid.Slice = new EssGridSlice()
+            {
+                Columns = 6,
+                Rows = 4,
+                Data = new EssGridSliceData()
+                {
+                    Ranges = new List<EssGridRange>()
+                    {
+                        new EssGridRange()
+                        {
+                            Start = 0,
+                            End = 23,
+                            Values = new List<string>()
+                            {
+                                 "", "", "", "", "Actual", "Budget", "New York", "Cola", "Sales", "Jan", "678.0", "675.0", "", "", "", "Feb", "645.0", "610.0", "", "", "", "Mar", "675.0", "640.0"
+                            },
+                            Types = new List<string>()
+                            {
+                                "7", "7", "7", "7", "0", "0", "0", "0", "0", "0", "2", "2", "7", "7", "7", "0", "2", "2", "7", "7", "7", "0", "2", "2"
+                            }
+                        }
+                    }
+                }
+            };
+
+            await grid.RefreshAsync();
+
+            grid.Preferences.UseAuditLog = true;
+
+            if ( string.Equals(grid.Slice.Data.Ranges[0].Values[10], "680.0") )
+                grid.Slice.Data.Ranges[0].Values[10] = "678.0";
+            else
+                grid.Slice.Data.Ranges[0].Values[10] = "680.0";
+
+            if ( string.Equals(grid.Slice.Data.Ranges[0].Values[17], "610.0") )
+                grid.Slice.Data.Ranges[0].Values[17] = "620.0";
+            else
+                grid.Slice.Data.Ranges[0].Values[17] = "610.0";
+
+            await grid.SubmitAsync();
+
+            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
+        }
     }
 }
 
