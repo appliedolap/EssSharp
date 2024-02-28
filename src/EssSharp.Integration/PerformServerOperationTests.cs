@@ -1291,7 +1291,33 @@ namespace EssSharp.Integration
 
             await grid.SubmitAsync();
 
-            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
+            Assert.NotEqual(grid.DataChanges.DataChanges[0].NewValue, grid.DataChanges.DataChanges[0].OldValue);
+
+            Assert.Equal("Year", grid.DataChanges.DataChanges[0].DataPoints[0].DimensionName);
+            Assert.Equal("Measures", grid.DataChanges.DataChanges[0].DataPoints[1].DimensionName);
+            Assert.Equal("Product", grid.DataChanges.DataChanges[0].DataPoints[2].DimensionName);
+            Assert.Equal("Market", grid.DataChanges.DataChanges[0].DataPoints[3].DimensionName);
+            Assert.Equal("Scenario", grid.DataChanges.DataChanges[0].DataPoints[4].DimensionName);
+
+            Assert.Equal("Jan", grid.DataChanges.DataChanges[0].DataPoints[0].Member);
+            Assert.Equal("Sales", grid.DataChanges.DataChanges[0].DataPoints[1].Member);
+            Assert.Equal("Cola", grid.DataChanges.DataChanges[0].DataPoints[2].Member);
+            Assert.Equal("New York", grid.DataChanges.DataChanges[0].DataPoints[3].Member);
+            Assert.Equal("Actual", grid.DataChanges.DataChanges[0].DataPoints[4].Member);
+
+            Assert.NotEqual(grid.DataChanges.DataChanges[0].NewValue, grid.DataChanges.DataChanges[0].OldValue);
+
+            Assert.Equal("Year", grid.DataChanges.DataChanges[0].DataPoints[0].DimensionName);
+            Assert.Equal("Measures", grid.DataChanges.DataChanges[0].DataPoints[1].DimensionName);
+            Assert.Equal("Product", grid.DataChanges.DataChanges[0].DataPoints[2].DimensionName);
+            Assert.Equal("Market", grid.DataChanges.DataChanges[0].DataPoints[3].DimensionName);
+            Assert.Equal("Scenario", grid.DataChanges.DataChanges[0].DataPoints[4].DimensionName);
+
+            Assert.Equal("Feb", grid.DataChanges.DataChanges[1].DataPoints[0].Member);
+            Assert.Equal("Sales", grid.DataChanges.DataChanges[1].DataPoints[1].Member);
+            Assert.Equal("Cola", grid.DataChanges.DataChanges[1].DataPoints[2].Member);
+            Assert.Equal("New York", grid.DataChanges.DataChanges[1].DataPoints[3].Member);
+            Assert.Equal("Budget", grid.DataChanges.DataChanges[1].DataPoints[4].Member);
         }
     }
 }

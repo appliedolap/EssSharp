@@ -91,7 +91,7 @@ namespace EssSharp
         public int GenerationNumber => _memberBean.GenerationNumber == 0 ? 1 : _memberBean.GenerationNumber;
 
         /// <inheritdoc />
-        public string activeAliasName => _memberBean.ActiveAliasName;
+        public string ActiveAliasName => _memberBean.ActiveAliasName;
 
         /// <inheritdoc />
         public bool HasUniqueName => _memberBean.MemberHasUniqueName;

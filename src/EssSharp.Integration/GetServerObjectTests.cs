@@ -221,7 +221,7 @@ namespace EssSharp.Integration
                 .GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic");
 
-            var member = await cube.GetMemberAsync("Year");
+            var member = await cube.GetMemberAsync("New York");
 
             Assert.NotNull(member);
 
@@ -329,7 +329,7 @@ namespace EssSharp.Integration
 
             Assert.NotNull(member.Aliases);
 
-            Assert.Equal("Shared Diet Cola", member.activeAliasName);
+            Assert.Equal("Shared Diet Cola", member.ActiveAliasName);
         }
 
         [Fact(DisplayName = @"GetServerObjectTests - 14 - Essbase_AfterReportCreation_CanGetMember_returnLevelNumber"), Priority(14)]
@@ -349,7 +349,7 @@ namespace EssSharp.Integration
 
             Assert.NotNull(member.Aliases);
 
-            Assert.Equal("Colas", member.activeAliasName);
+            Assert.Equal("Colas", member.ActiveAliasName);
         }
 
         [Fact(DisplayName = @"GetServerObjectTests - 15 - Essbase_AfterReportCreation_CanGetMember_returnGenerationNumber"), Priority(15)]
@@ -369,7 +369,7 @@ namespace EssSharp.Integration
 
             Assert.NotNull(member.Aliases);
 
-            Assert.Null(member.activeAliasName);
+            Assert.Null(member.ActiveAliasName);
         }
 
         [Fact(DisplayName = @"GetServerObjectTests - 16 - Essbase_AfterReportCreation_CanGetMemberByGen"), Priority(16)]

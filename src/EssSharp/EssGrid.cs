@@ -444,7 +444,8 @@ namespace EssSharp
                     }
                 }
                 
-                this.DataChanges = null;
+                // Clear any prior data changes.
+                DataChanges = null;
 
                 // If tracking changes...
                 if ( action == GridOperation.ActionEnum.Submit && Preferences.UseAuditLog )
@@ -479,7 +480,8 @@ namespace EssSharp
                             });
                         }
                     }*/
-                    DataChanges = await DocumentDataChanges(grid, cancellationToken).ConfigureAwait(false);
+
+                    DataChanges = await CaptureDataChanges(grid, cancellationToken).ConfigureAwait(false);
                 }
 
                 _grid = grid;
@@ -821,7 +823,7 @@ namespace EssSharp
         /// <param name="newGrid"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<EssDataChanges> DocumentDataChanges( Grid newGrid, CancellationToken cancellationToken )
+        private async Task<EssDataChanges> CaptureDataChanges( Grid newGrid, CancellationToken cancellationToken )
         {
             var changes = new EssDataChanges();
             var valuesCount = Slice.Data.Ranges[0].End;
@@ -831,7 +833,7 @@ namespace EssSharp
             int dataBlockStartIndex;
             int dataBlockEndIndex;
             var dataGridFirstCell = GetDataBlockStartIndex(Slice);
-            var dimMemberDict = new Dictionary<string, Tuple<string, string>>();
+            var dimMemberDict = new Dictionary<string, string>();
 
             // find the start row index. Used to find the Dimension Members.
             rowIndex = dataGridFirstCell.startRow * Slice.Columns;
@@ -854,7 +856,7 @@ namespace EssSharp
                     // The key is the dimension name
                     // tuple value 1 is the dimension members alias, if there is one.
                     // tuple value 2 is the dimension members name.
-                    dimMemberDict = await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, index, dimMemberDict, cancellationToken).ConfigureAwait(false);
+                    dimMemberDict = GetDimensionMembersForDataCell(index, newGrid);//await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, index, dimMemberDict, cancellationToken).ConfigureAwait(false);
 
                     // only hit cells within the data block.
                     if ( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
@@ -877,9 +879,9 @@ namespace EssSharp
                                 DimensionName = gd.Name,
                                 DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Name)).DimensionNumber,
                                 // first value of the tuple returned from the GetDimensionMembersForDataCell() method, null if no value.
-                                Alias = UseAliases ? dimMemberDict[gd.Name].Item1 : null,
+                                Alias = UseAliases ? string.Empty /*dimMemberDict[gd.Name].Item1*/ : null,
                                 // second value of the tuple returned from the GetDimensionMembersForDataCell() method, null if no value.
-                                Member = UseAliases ? dimMemberDict[gd.Name].Item2 : null
+                                Member = UseAliases ? dimMemberDict[gd.Name]/*dimMemberDict[gd.Name].Item2*/ : null
                             })
                             .ToList()
                         });
@@ -899,13 +901,49 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="dataCellIndex"></param>
+        /// <param name="grid"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> GetDimensionMembersForDataCell( int dataCellIndex, Grid grid)
+        {
+            Dictionary<string, string> memDict = new Dictionary<string, string>();
+            int columnCount = grid.Slice.Columns;
+            var dimensions = grid.Dimensions;
+            var values = grid.Slice.Data.Ranges[0].Values;
+
+            int currRowIndex = (dataCellIndex / columnCount) * columnCount;
+
+            for ( int i = 0; i < (_dataGridStartIndex % columnCount); i++ )
+            {
+                var index = currRowIndex;
+                while ( string.IsNullOrEmpty(values[index]) )
+                    index -= columnCount;
+
+                memDict[dimensions.FirstOrDefault(dim => dim.Column == (currRowIndex % columnCount)).Name] = values[index];
+                currRowIndex++;
+            }
+
+            // Find the row index where the data block starts
+            var dbStartRow = _dataGridStartIndex / columnCount;
+
+            // and use them to find the index of the current cells dimension member
+            var columnMemberIndex = dataCellIndex - (((dataCellIndex / columnCount) + 1 - dbStartRow) * Slice.Columns);
+
+            memDict[dimensions.FirstOrDefault(dim => dim.Column == -1).Name] = values[columnMemberIndex];
+
+            return memDict;
+        }
+        /*
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="rowIndex"></param>
         /// <param name="dataBlockStartIndex"></param>
         /// <param name="dataCellIndex"></param>
         /// <param name="dimDataDict"></param>
-        /// <param name="cancellatinToken"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task<Dictionary<string, Tuple<string, string>>> GetDimensionMembersForDataCell( int rowIndex, int dataBlockStartIndex, int dataCellIndex, Dictionary<string, Tuple<string, string>> dimDataDict, CancellationToken cancellatinToken = default)
+        private async Task<Dictionary<string, Tuple<string, string>>> GetDimensionMembersForDataCell( int rowIndex, int dataBlockStartIndex, int dataCellIndex, Dictionary<string, Tuple<string, string>> dimDataDict, CancellationToken cancellationToken = default)
         {
             var dimensionMembers = new Dictionary<string, Tuple<string, string>>();
             var dimMemValues = new List<string>();
@@ -931,17 +969,20 @@ namespace EssSharp
             foreach ( var dim in Dimensions )
             {
                 // get all dimension members
-                var members = Cube.GetMember(dim.Name).GetDescendants();
+                var members = await Cube
+                    .GetMemberAsync(dim.Name, cancellationToken: cancellationToken)
+                    .GetDescendantsAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+
                 // loop through each member present on the grid
                 foreach ( var dimMem in dimMemValues )
                 {
                     foreach ( var mem in members )
                     {
                         // and test if it matches any descendants of the current dimension
-                        if ( string.Equals(dimMem, mem.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(dimMem, mem.activeAliasName, StringComparison.OrdinalIgnoreCase) )
+                        if ( string.Equals(dimMem, mem.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(dimMem, mem.ActiveAliasName, StringComparison.OrdinalIgnoreCase) )
                         {
                             // add the alias(if available) and name to the tuple with dimension name as the key
-                            dimensionMembers[dim.Name] = new Tuple<string, string>(mem.activeAliasName, mem.Name);
+                            dimensionMembers[dim.Name] = new Tuple<string, string>(mem.ActiveAliasName, mem.Name);
                             break;
                         }
                     }
@@ -950,6 +991,7 @@ namespace EssSharp
             }
             return dimensionMembers;
         }
+        */
 
         /// <summary>
         /// 
