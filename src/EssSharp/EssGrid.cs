@@ -402,11 +402,6 @@ namespace EssSharp
                         throw new ArgumentNullException(nameof(gridSelection), $"At least one {nameof(EssGridSelection)} or a current {nameof(EssGrid)}.{nameof(EssGrid.Selection)} is required to perform {action} on grid.")
                 };
 
-
-
-                //if ( action is not GridOperation.ActionEnum.Submit )
-                //RemoveDataBlock();
-
                 // Get the default grid preferences.
                 Preferences ??= await Cube.Application.Server.GetDefaultGridPreferencesAsync();
                 
@@ -450,37 +445,6 @@ namespace EssSharp
                 // If tracking changes...
                 if ( action == GridOperation.ActionEnum.Submit && Preferences.UseAuditLog )
                 {
-                    /*
-                    var changes = new EssDataChanges();
-                    var valuesCount = Slice.Data.Ranges[0].End;
-                    var oldValues = _grid.Slice.Data.Ranges[0].Values;
-                    var newValues = grid.Slice.Data.Ranges[0].Values;
-
-
-                    for ( int index = 0; index < (valuesCount + 1); index++ )
-                    {
-                        if ( !string.Equals(oldValues[index], newValues[index]) )
-                        {
-                            if ( Cube.Dimensions.Count == 0 )
-                                await Cube.GetDimensionsAsync(cancellationToken);
-
-                            changes.DataChanges.Add(new EssDataChange()
-                            { 
-                                OldValue = double.Parse(oldValues[index]), 
-                                NewValue = double.Parse(newValues[index]),
-                                DataPoints = grid.Dimensions
-                                .Select(gd => new EssDataPoint() 
-                                { 
-                                    DimensionName = gd.Name,
-                                    DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Name)).DimensionNumber,
-                                    Alias = string.Empty, //UseAliases ? cellDimensionMemberWhereDimensionEqualsD.Value : null,
-                                    Member = string.Empty //!UseAliases ? cellDimensionMemberWhereDimensionEqualsD.Value : null
-                                })
-                                .ToList()
-                            });
-                        }
-                    }*/
-
                     DataChanges = await CaptureDataChanges(grid, cancellationToken).ConfigureAwait(false);
                 }
 
@@ -494,329 +458,6 @@ namespace EssSharp
             }
         }
 
-        // TODO: drop method?
-        /*
-        private void PrepareSliceForOperation_old( Action action )
-        {
-            // set a local flag to indicate if this is an "Update" operation
-            bool isUpdate = action is Action.Submit;
-            bool isDataCell = false;
-
-            // for each cell in the internal Values array, add a Cell element
-            //
-            // note: ReadGrid sets the internal start row/column to (1,1)
-            //       even if the first cell of the defined retrieve range is not (1,1),
-            //       so the StartCellRow and StartCellColumn are (1,1).
-            //
-            string cellValue = null;
-            var cellType = "7";
-            string lastCellValue = null;
-            bool appendCell = false;
-
-            // get a local reference to the internal grid's values array.
-            var cellValues = Slice.Data.Ranges[0].Values;
-            var cellTypes = Slice.Data.Ranges[0].Types;
-
-            bool isNumeric = false;
-            bool hasInvalidChar;
-
-            // Used by the SendBlanksAsMissing logic.
-            bool isDataRow = false;
-            bool detectedFirstNonBlankCellInDataRow;
-            bool isBlankCell;
-
-            // The column number is one-based and is relative to the first column in the range, which is 1.
-            int firstColumnNumberWithNonBlankCell = -1;
-
-            // Hardcode these to false for now.
-            bool useUniqueMemberNames = false;
-            bool sendBlanksAsMissing = !string.IsNullOrEmpty(Preferences.MissingText) || !string.IsNullOrEmpty(Preferences.NoAccessText);
-
-            var values = new List<string>(Slice.Data.Ranges[0].Values.Count);
-            var types =  new List<string>(Slice.Data.Ranges[0].Types.Count);
-
-            //bool WriteAllNonNumericValuesOnRetrieve = false;
-            //var lastInternalGridUniqueMemberNames = new List<string>();
-
-            // If sending blanks as missing, find the first column in the send range that contains non-blank values.
-            // Typically, this will be the first column, but allow for the left-most column(s) to contain all blanks.
-            // Set the firstColumnNumberWithNonBlankCells to indicate the number of the column without all blanks.
-            if ( isUpdate && sendBlanksAsMissing )
-            {
-                for ( int index = 0; index < Slice.Data.Ranges[0].End; index++ )
-                {
-                    if ( !string.IsNullOrEmpty(cellValue = Slice.Data.Ranges[0].Values[index]) )
-                    {
-                        firstColumnNumberWithNonBlankCell = index % Slice.Columns + 1;
-                        break;
-                    }
-                }
-
-                /*
-                for ( int colIndex = internalGrid.StartCellColumn - internalGrid.ColumnOffset, colNumber = 1;
-                          colIndex <= internalGrid.EndCellColumn - internalGrid.ColumnOffset;
-                          colIndex++, colNumber++ )
-                {
-                    for ( int rowIndex = internalGrid.StartCellRow - internalGrid.RowOffset;
-                              rowIndex <= internalGrid.EndCellRow - internalGrid.RowOffset;
-                              rowIndex++ )
-                    {
-                        if ( cellValues[rowIndex, colIndex] != null )
-                        {
-                            firstColumnNumberWithNonBlankCell = colNumber;
-
-                            break;
-                        }
-                    }
-
-                    if ( firstColumnNumberWithNonBlankCell > -1 )
-                        break;
-                }
-                
-            }
-
-            for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
-            {
-                detectedFirstNonBlankCellInDataRow = false;
-
-                cellValue = cellValues[index];
-                cellType = "7";
-
-                isBlankCell = string.IsNullOrEmpty(cellValue);
-
-                // If the cell value is non-null OR the grid is sending blanks as #MISSING and the cell is blank...
-                if ( !isBlankCell || (isUpdate && sendBlanksAsMissing) )
-                {
-                    isNumeric = false;
-
-                    // The isDataCell flag is used when processing an update when unique member names exist.
-                    isDataCell = false;
-
-                    if ( !isBlankCell )
-                    {
-                        // If we have a non-blank cell start by assuming that the cell represents a member.
-                        cellType = "0";
-
-                        // If the cell value does not contain trailing blanks...
-                        // Note: When a cell value contains trailing blanks, both leading and trailing blanks are retained.
-                        //       This approach is consistent with the Classic Add-In.
-                        //
-                        // This code was added to address an incompatibility with the Classic Add-In.
-                        // The GridExcel.ReadGrid was also modified to not trim leading blanks when trailing blankis exist.
-                        // The SpreadsheetGear.ReadGrid was NOT modified, so for the SmartClient, leading blanks will not be retained, but this may change in the future.
-                        if ( !cellValue.EndsWith(" ") )
-                            cellValue = cellValue.TrimStart();
-                    }
-                }
-
-                // If the cell value is non-empty OR the grid is sending blanks as #MISSING and the cell is blank...
-                if ( cellValue.Length > 0 || (isUpdate && sendBlanksAsMissing) )
-                {
-                    // for an update operation, all cells should be included in the request
-                    if ( isUpdate )
-                    {
-                        // When sending blanks as missing...
-                        // Note: Only blank cells to the right of the first non-blank cell on a data row should be sent as #MISSING.
-                        if ( sendBlanksAsMissing )
-                        {
-                            // If the first data row has not been detected...
-                            if ( !isDataRow )
-                            {
-                                // When the column is the first column in the range with a non-blank cell and the current cell is non-blank,
-                                // treat the row and all subsequent rows as data rows.
-                                if ( index % Slice.Columns == firstColumnNumberWithNonBlankCell && !isBlankCell )
-                                    isDataRow = true;
-                            }
-
-                            // If a data row...
-                            if ( isDataRow )
-                            {
-                                // If the first non-blank cell in the row has not been detected...
-                                if ( !detectedFirstNonBlankCellInDataRow )
-                                {
-                                    // If the cell is non-blank, any blank cell to the right of the current cell is sent as #MISSING.
-                                    if ( !isBlankCell )
-                                        detectedFirstNonBlankCellInDataRow = true;
-                                }
-                            }
-                        }
-
-                        // If sending blanks as missing and the cell is blank...
-                        if ( sendBlanksAsMissing && isBlankCell )
-                        {
-                            // If this is a data row and the first non-blank cell in the row has been detected...
-                            if ( isDataRow && detectedFirstNonBlankCellInDataRow )
-                            {
-                                // Set flags to append the cell and to treat the cell as a data cell.
-                                appendCell = true;
-                                isDataCell = true;
-
-                                // Set the value to #MISSING.
-                                cellValue = "#MISSING";
-                            }
-                            /*
-                            else
-                            {
-                                // Skip to the next cell.
-                                continue;
-                            }
-                            
-                        }
-                        else
-                        {
-                            appendCell = true;                  // append both member and data cells for an update operation
-
-                            isNumeric = int.TryParse(cellValue, out _) || double.TryParse(cellValue, out _);
-
-                            
-                            // Determine whether the value is numeric.
-                            isNumeric = this.IsNumeric(cellValue, numberFormatProvider);
-                            
-
-                            // If unique member names exist, determine whether the cell represents a data cell.
-                            // The isDataCell flag is used to determine whether to check for a unique member name for the current cell.
-                            if ( useUniqueMemberNames )
-                            {
-                                if ( Double.TryParse(cellValue, out var doubleValue) || int.TryParse(cellValue, out var intValue) )
-                                {
-                                    isDataCell = true;
-                                    isNumeric = true;
-                                }
-                                else if ( string.Equals(cellValue, Preferences.MissingText) )
-                                    isDataCell = true;
-                                else if ( string.Equals(cellValue, Preferences.NoAccessText) )
-                                    isDataCell = true;
-                            }
-
-                            if ( isNumeric || isDataCell )
-                                cellType = "2";
-                        }
-                    }
-                    else
-                    {
-                        // for a non-update operation, only member cells should be included in the request.
-                        // if numeric or the value is the missing text string, treat as a data cell, since numeric member names in the Values array
-                        // are prepended with a single quote.
-                        //
-                        if ( Double.TryParse(cellValue, out _) || int.TryParse(cellValue, out _) )
-                        {
-                            appendCell = false;             // do not append numeric cells for a non-update operation unless WriteAllNonNumericValuesOnRetrieve is True
-                            isNumeric = true;
-                        }
-                        else if ( string.Equals(cellValue, Preferences.MissingText) )
-                            appendCell = false;             // treat the missing text string value as a numeric cell - do not append numeric cells for a non-update operation
-                        else if ( string.Equals(cellValue, Preferences.NoAccessText) )
-                            appendCell = false;             // treat the "no access" string value as a numerid cell - do not append numeric cells for a non-update operation
-                        else
-                            appendCell = true;              // append non-numeric cells for a non-update operation
-                    }
-
-                    if ( !appendCell )
-                    {
-                        cellValue = string.Empty;
-                        cellType = "7";
-                    }
-
-                    // If unique names exist...
-                    if ( useUniqueMemberNames )
-                    {
-                        // If not updating OR if updating and the cell is likely a member cell, determine whether to use the actual cell value or the unique member name.
-                        if ( !isUpdate || (isUpdate && !isDataCell) )
-                        {
-                            if ( lastInternalGridUniqueMemberNames[index] != null )
-                            {
-                                // Get the last cell value as a string.
-                                // Note: To ensure that formatted numeric strings are detected as numbers, use the culture-compatible format provider.
-                                lastCellValue = Convert.ToString(cellValues[index]);
-
-                                // Trim leading and trailing blanks.
-                                lastCellValue = lastCellValue.Trim();
-
-                                if ( lastCellValue.Length > 0 )
-                                {
-                                    // If the current cell value and the corresponding last cell value are the same, based on a case-insensitive comparison,
-                                    // use the unique name, if a unique name exists.
-                                    if ( string.Compare(cellValue, lastCellValue, true) == 0 )
-                                    {
-                                        cellValue = lastInternalGridUniqueMemberNames[index];
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    /*
-                    if ( isUpdate || !isDataCell )
-                    {
-                        values[index] = cellValue;
-                        types[index] = cellType;
-                    }
-                    else
-                    {
-                        values[index] = "";
-                        types[index] = "7";
-                    }
-                   
-
-                    
-                    // add a Cell element with row and column attributes
-                    this.WriteStartElement(xmlWriter, "Cell");
-                    this.WriteAttributeString(xmlWriter, "r", rowNumber.ToString());
-                    this.WriteAttributeString(xmlWriter, "c", colNumber.ToString());
-
-                    hasInvalidChar = false;
-
-                    if ( !isNumeric )
-                    {
-                        // Determine whether the cell value contains an invalid Xml character.
-                        hasInvalidChar = StringUtility.ContainsInvalidXmlCharacter(cellValue);
-                    }
-
-                    // If the cell value contains an invalid Xml character, base64 encode the value.
-                    if ( hasInvalidChar )
-                    {
-                        // The cell value contains an invalid Xml character.
-                        // Base64 encode the cell value.
-
-                        // Flag the cell value as base64 encoded.
-                        // dt:dt="bin.base64" xmlns:dt="urn:schemas-microsoft-com:datatypes"
-                        //xmlWriter.WriteAttributeString("dt", "dt", "urn:schemas-microsoft-com:datatypes", "bin.base64");
-                        this.WriteAttributeString(xmlWriter, "dt", "bin.base64", "dt", "urn:schemas-microsoft-com:datatypes");
-
-                        // Convert the cell value to a byte array.
-                        byte[] bytes = Encoding.UTF8.GetBytes(cellValue);
-
-                        // Base64 encode the byte array.
-                        string base64String = Convert.ToBase64String(bytes);
-
-                        // Write the encoded string.
-                        this.WriteString(xmlWriter, base64String);
-                    }
-                    else
-                    {
-                        this.WriteString(xmlWriter, cellValue);
-                    }
-
-                    this.WriteEndElement(xmlWriter);
-                }
-
-                // Add the value and type to the collections.
-                values.Add(cellValue);
-                types.Add(cellType);
-            }
-
-            if ( _grid is not null )
-            {
-                _grid.Slice.Data.Ranges[0].Values = values ?? new List<string>();
-                _grid.Slice.Data.Ranges[0].Types = types ?? new List<string>();
-            }
-            else
-            {
-                Slice.Data.Ranges[0].Values = values ?? new List<string>();
-                Slice.Data.Ranges[0].Types = types ?? new List<string>();
-            }
-        }*/
-
         /// <summary>
         /// 
         /// </summary>
@@ -829,18 +470,9 @@ namespace EssSharp
             var valuesCount = Slice.Data.Ranges[0].End;
             var oldValues = _oldValues; //_grid.Slice.Data.Ranges[0].Values;
             var newValues = newGrid.Slice.Data.Ranges[0].Values;
-            int rowIndex = 0;
-            int dataBlockStartIndex;
-            int dataBlockEndIndex;
-            var dataGridFirstCell = GetDataBlockStartIndex(Slice);
-            var dimMemberDict = new Dictionary<string, string>();
 
-            // find the start row index. Used to find the Dimension Members.
-            rowIndex = dataGridFirstCell.startRow * Slice.Columns;
-            // first cell index of the data block
-            dataBlockStartIndex = _dataGridStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
-            // last cell index, of the first row, of the data block.
-            dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1) * Slice.Columns - 1;
+            var dataBlockIndexes = GetDataBlock(newGrid);
+            var dimMemberDict = new Dictionary<string, string>();
 
             // loop through each cell...
             for ( int index = 0; index < (valuesCount + 1); index++ )
@@ -848,19 +480,16 @@ namespace EssSharp
                 // and determine if the value has changed.
                 if ( !string.Equals(oldValues[index], newValues[index]) )
                 {
-                    // TODO: maybe don't call this every time, but the dimension member at the top of the grid (ex: actual in the test case) 
-                    //       might change depending on the cell that is changed even if the row dimension members do not.
-                    //
-                    // Gets the dimension members for the cell that has changed.
-                    // Returns a Dictionary<string, tuple<string, string>.
-                    // The key is the dimension name
-                    // tuple value 1 is the dimension members alias, if there is one.
-                    // tuple value 2 is the dimension members name.
-                    dimMemberDict = GetDimensionMembersForDataCell(index, newGrid);//await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, index, dimMemberDict, cancellationToken).ConfigureAwait(false);
-
                     // only hit cells within the data block.
-                    if ( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
+                    if (dataBlockIndexes.Contains(index))//( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
                     {
+                        // Gets the dimension members for the cell that has changed.
+                        // Returns a Dictionary<string, tuple<string, string>.
+                        // The key is the dimension name
+                        // tuple value 1 is the dimension members alias, if there is one.
+                        // tuple value 2 is the dimension members name.
+                        dimMemberDict = GetDimensionMembersForDataCell(index, newGrid);//await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, index, dimMemberDict, cancellationToken).ConfigureAwait(false);
+
                         // if the Dimensions property on the cube is empty, get the dimensions.
                         if ( Cube.Dimensions.Count == 0 )
                             await Cube.GetDimensionsAsync(cancellationToken);
@@ -887,13 +516,6 @@ namespace EssSharp
                         });
                     }
                 }
-                // Set row index and data blocks start/end indexes to next row.
-                if ( index == dataBlockEndIndex && index != Slice.Data.Ranges[0].End )
-                {
-                    rowIndex += Slice.Columns;
-                    dataBlockStartIndex += Slice.Columns;
-                    dataBlockEndIndex += Slice.Columns;
-                }
             }
             return changes;
         }
@@ -904,7 +526,7 @@ namespace EssSharp
         /// <param name="dataCellIndex"></param>
         /// <param name="grid"></param>
         /// <returns></returns>
-        public Dictionary<string, string> GetDimensionMembersForDataCell( int dataCellIndex, Grid grid)
+        private Dictionary<string, string> GetDimensionMembersForDataCell( int dataCellIndex, Grid grid)
         {
             Dictionary<string, string> memDict = new Dictionary<string, string>();
             int columnCount = grid.Slice.Columns;
@@ -928,70 +550,22 @@ namespace EssSharp
 
             // and use them to find the index of the current cells dimension member
             var columnMemberIndex = dataCellIndex - (((dataCellIndex / columnCount) + 1 - dbStartRow) * Slice.Columns);
+            var columnLimiter = (columnMemberIndex / columnCount + 1);
 
-            memDict[dimensions.FirstOrDefault(dim => dim.Column == -1).Name] = values[columnMemberIndex];
-
+            for ( int i = 0; i < columnLimiter; i++ )
+            {
+                var index = columnMemberIndex;
+                if ( string.IsNullOrEmpty(values[index]) )
+                {
+                    index = (columnMemberIndex / columnCount) * columnCount;
+                    while ( string.IsNullOrEmpty(values[index]) )
+                        index += 1;
+                }
+                memDict[dimensions.FirstOrDefault(dim => dim.Row == i).Name] = values[index];
+                columnMemberIndex -= columnCount;
+            }
             return memDict;
         }
-        /*
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="rowIndex"></param>
-        /// <param name="dataBlockStartIndex"></param>
-        /// <param name="dataCellIndex"></param>
-        /// <param name="dimDataDict"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        private async Task<Dictionary<string, Tuple<string, string>>> GetDimensionMembersForDataCell( int rowIndex, int dataBlockStartIndex, int dataCellIndex, Dictionary<string, Tuple<string, string>> dimDataDict, CancellationToken cancellationToken = default)
-        {
-            var dimensionMembers = new Dictionary<string, Tuple<string, string>>();
-            var dimMemValues = new List<string>();
-
-            // Find the row index where the data block starts
-            var dbStartRow = _dataGridStartIndex / Slice.Columns;
-            // the current row index 
-            var currentRow = rowIndex / Slice.Columns;
-            // and use them to find the index of the current cells dimension member
-            var columnMemberIndex = dataCellIndex - (((currentRow + 1) - dbStartRow) * Slice.Columns);
-
-            // add the dimension member at the top of the grid to the list
-            dimMemValues.Add(Slice.Data.Ranges[0].Values[columnMemberIndex]);
-
-            // find all row dimension members
-            for ( int i = rowIndex, dimIndex = 0; i < dataBlockStartIndex; i++, dimIndex++ )
-            {
-                // if the row dimension members are not present, use the previous dimension members, or the dimension itself.
-                dimMemValues.Add(!string.IsNullOrEmpty(Slice.Data.Ranges[0].Values[i]) ? Slice.Data.Ranges[0].Values[i] : dimDataDict[Dimensions[dimIndex].Name].Item2 ?? Dimensions[dimIndex].Name);
-            }
-
-            // loop through each dimension
-            foreach ( var dim in Dimensions )
-            {
-                // get all dimension members
-                var members = await Cube
-                    .GetMemberAsync(dim.Name, cancellationToken: cancellationToken)
-                    .GetDescendantsAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-
-                // loop through each member present on the grid
-                foreach ( var dimMem in dimMemValues )
-                {
-                    foreach ( var mem in members )
-                    {
-                        // and test if it matches any descendants of the current dimension
-                        if ( string.Equals(dimMem, mem.Name, StringComparison.OrdinalIgnoreCase) || string.Equals(dimMem, mem.ActiveAliasName, StringComparison.OrdinalIgnoreCase) )
-                        {
-                            // add the alias(if available) and name to the tuple with dimension name as the key
-                            dimensionMembers[dim.Name] = new Tuple<string, string>(mem.ActiveAliasName, mem.Name);
-                            break;
-                        }
-                    }
-                }
-
-            }
-            return dimensionMembers;
-        }
-        */
 
         /// <summary>
         /// 
@@ -1004,55 +578,20 @@ namespace EssSharp
                 string cellType;
                 string cellValue;
                 var cellValues = Slice?.Data?.Ranges[0]?.Values;
-                int dataBlockStartIndex;
-                int dataBlockEndIndex;
-                var dataGridFirstCell = GetDataBlockStartIndex(Slice);
                 bool isUpdate = action == GridOperation.ActionEnum.Submit;
                 bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
                 var types = new List<string>();
                 var values = new List<string>();
-
-                /*
-                // Find the row the data block starts
-                for ( int index = 0; index < (Slice?.Data?.Ranges[0]?.End + 1); index++ )
-                {
-                    // Find the first non empty cell at the start of a row...
-                    if ( index % Slice.Columns == 0 && !string.IsNullOrEmpty(cellValues[index]) )
-                    {
-                        // Retain the index...
-                        firstRowIndex = index;
-                        // And set the data grid start row.
-                        dataGridFirstCell.startRow = index / Slice.Columns;
-                        break;
-                    }
-                }
-
-                var columnIndex = firstRowIndex - Slice.Columns < 0 ? 0 : firstRowIndex - Slice.Columns;
-                // Find the column the data block starts by moving 1 row above the start of the data grid.
-                for ( var index = columnIndex; index < (Slice.Data.Ranges[0].End + 1); index++ )
-                {
-                    // search the row for the first non empty cell
-                    if ( !string.IsNullOrEmpty(cellValues[index]) )
-                    {
-                        // calculate the column index and set the value in the data grid start column.
-                        dataGridFirstCell.startColumn = index % Slice.Columns;
-                        break;
-                    }
-                }
-                */
-
-                // Find the first index of the data block and the last index of the data block for the first row
-                dataBlockStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
-                dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1) * Slice.Columns - 1;
+                var dataBlockIndexes = GetDataBlock(_grid);
 
                 // Loop through entire grid and decide the type of each cell.
                 for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
                 {
-                    if ( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
+                    if ( dataBlockIndexes.Contains(index) )
                     {
                         if ( isUpdate )
                         {
-                            cellValue = cellValues[index];
+                            cellValue = ( string.Equals(Preferences.MissingText, cellValues[index]) || string.Equals(Preferences.MissingText, cellValues[index]) ) ? string.Empty : cellValues[index];
 
                             // If string is empty...
                             if ( string.IsNullOrEmpty(cellValue) )
@@ -1081,13 +620,6 @@ namespace EssSharp
                     {
                         cellValue = cellValues[index];
                         cellType = "0";
-                    }
-
-                    // Set data blocks start and end indexes to next row.
-                    if ( index == dataBlockEndIndex )
-                    {
-                        dataBlockStartIndex += Slice.Columns;
-                        dataBlockEndIndex += Slice.Columns;
                     }
 
                     // Add type and Value to arrays.
@@ -1148,6 +680,40 @@ namespace EssSharp
 
             return dataGridFirstCell;
         }
+
+        private List<int> GetDataBlock( Grid grid )
+        {
+
+            var indexes = new List<int>();
+
+            var slice = grid?.Slice is not null ? grid?.Slice.ToEssGridSlice() : Slice;
+            var sliceEnd = (grid?.Slice?.Data?.Ranges[0] is null ? Slice?.Data?.Ranges[0]?.End : grid.Slice.Data.Ranges[0].End) + 1;
+
+            var dataGridFirstCell = GetDataBlockStartIndex(slice);
+            // find the start row index. Used to find the Dimension Members.
+            var rowIndex = dataGridFirstCell.startRow * Slice.Columns;
+            // first cell index of the data block
+            var dataBlockStartIndex = _dataGridStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
+            // last cell index, of the first row, of the data block.
+            var dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1) * Slice.Columns - 1;
+
+            // loop through each cell...
+            for ( int index = 0; index < sliceEnd; index++ )
+            {
+                if ( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
+                    indexes.Add(index);
+
+                // Set row index and data blocks start/end indexes to next row.
+                if ( index == dataBlockEndIndex && index != Slice.Data.Ranges[0].End )
+                {
+                    rowIndex += Slice.Columns;
+                    dataBlockStartIndex += Slice.Columns;
+                    dataBlockEndIndex += Slice.Columns;
+                }
+            }
+            return indexes;
+        }
+
         /// <summary>
         /// 
         /// </summary>

@@ -1305,19 +1305,132 @@ namespace EssSharp.Integration
             Assert.Equal("New York", grid.DataChanges.DataChanges[0].DataPoints[3].Member);
             Assert.Equal("Actual", grid.DataChanges.DataChanges[0].DataPoints[4].Member);
 
-            Assert.NotEqual(grid.DataChanges.DataChanges[0].NewValue, grid.DataChanges.DataChanges[0].OldValue);
+            Assert.NotEqual(grid.DataChanges.DataChanges[1].NewValue, grid.DataChanges.DataChanges[1].OldValue);
 
-            Assert.Equal("Year", grid.DataChanges.DataChanges[0].DataPoints[0].DimensionName);
-            Assert.Equal("Measures", grid.DataChanges.DataChanges[0].DataPoints[1].DimensionName);
-            Assert.Equal("Product", grid.DataChanges.DataChanges[0].DataPoints[2].DimensionName);
-            Assert.Equal("Market", grid.DataChanges.DataChanges[0].DataPoints[3].DimensionName);
-            Assert.Equal("Scenario", grid.DataChanges.DataChanges[0].DataPoints[4].DimensionName);
+            Assert.Equal("Year", grid.DataChanges.DataChanges[1].DataPoints[0].DimensionName);
+            Assert.Equal("Measures", grid.DataChanges.DataChanges[1].DataPoints[1].DimensionName);
+            Assert.Equal("Product", grid.DataChanges.DataChanges[1].DataPoints[2].DimensionName);
+            Assert.Equal("Market", grid.DataChanges.DataChanges[1].DataPoints[3].DimensionName);
+            Assert.Equal("Scenario", grid.DataChanges.DataChanges[1].DataPoints[4].DimensionName);
 
             Assert.Equal("Feb", grid.DataChanges.DataChanges[1].DataPoints[0].Member);
             Assert.Equal("Sales", grid.DataChanges.DataChanges[1].DataPoints[1].Member);
             Assert.Equal("Cola", grid.DataChanges.DataChanges[1].DataPoints[2].Member);
             Assert.Equal("New York", grid.DataChanges.DataChanges[1].DataPoints[3].Member);
             Assert.Equal("Budget", grid.DataChanges.DataChanges[1].DataPoints[4].Member);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 40 - Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders"), Priority(40)]
+        public async Task Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var grid = cube.GetGrid();
+
+            grid.Alias = "Default";
+
+            grid.Dimensions = new List<EssGridDimension>()
+            {
+                new EssGridDimension()
+                {
+                    Name = "Year",
+                    Row = 2,
+                    Column = -1,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Measures",
+                    Row = -1,
+                    Column = 0,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Product",
+                    Row = 1,
+                    Column = -1,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Market",
+                    Row = 0,
+                    Column = -1,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Scenario",
+                    Row = 3,
+                    Column = -1,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                }
+            };
+
+            grid.Slice = new EssGridSlice()
+            {
+                Columns = 5,
+                Rows = 12,
+                Data = new EssGridSliceData()
+                {
+                    Ranges = new List<EssGridRange>()
+                    {
+                        new EssGridRange()
+                        {
+                            Start = 0,
+                            End = 59,
+                            Values = new List<string>()
+                            {
+                                 "", "", "New York", "", "", "", "", "Root Beer", "", "", "", "", "Jan", "", "", "", "Actual", "Budget", "Variance", "Variance %", "Sales", "551.0", "530.0", "21.0", "3.9622641509433962", "COGS", "333.0", "310.0", "-23.0", "-7.419354838709677", "     Margin", "218.0", "220.0", "-2.0", "-0.9090909090909091", "Marketing", "158.0", "140.0", "-18.0", "-12.857142857142856", "Payroll", "57.0", "50.0", "-7.0", "-14.000000000000002", "Misc", "0.0", "0.0", "0.0", "", "     Total Expenses", "215.0", "190.0", "-25.0", "-13.157894736842104", "          Profit", "3.0", "30.0", "-27.0", "-90.0"
+                            },
+                            Types = new List<string>()
+                            {
+                                "7", "7", "0", "7", "7", "7", "7", "0", "7", "7", "7", "7", "0", "7", "7", "7", "0", "0", "0", "0", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2"
+                            }
+                        }
+                    }
+                }
+            };
+
+            grid.Preferences = new EssGridPreferences()
+            {
+                UseAuditLog = true,
+                MissingText = "",
+                RepeatMemberLabels = false
+            };
+
+            await grid.RefreshAsync();
+
+            /*
+            if ( string.Equals(grid.Slice.Data.Ranges[0].Values[21], "1778.0") )
+                grid.Slice.Data.Ranges[0].Values[21] = "1887.0";
+            else
+                grid.Slice.Data.Ranges[0].Values[21] = "1778.0";
+            */
+            if ( string.Equals(grid.Slice.Data.Ranges[0].Values[21], "551.0") )
+                grid.Slice.Data.Ranges[0].Values[21] = "570";
+            else
+                grid.Slice.Data.Ranges[0].Values[21] = "551.0";
+
+            await grid.SubmitAsync();
+
+            Assert.NotNull(grid.DataChanges);
         }
     }
 }
