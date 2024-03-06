@@ -1415,6 +1415,8 @@ namespace EssSharp.Integration
                 RepeatMemberLabels = false
             };
 
+            
+
             await grid.RefreshAsync();
 
             /*
@@ -1429,6 +1431,8 @@ namespace EssSharp.Integration
                 grid.Slice.Data.Ranges[0].Values[21] = "551.0";
 
             await grid.SubmitAsync();
+
+
 
             Assert.NotNull(grid.DataChanges);
         }

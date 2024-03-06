@@ -38,6 +38,7 @@ namespace EssSharp
         private List<EssGridDimension> _essGridDimension = new List<EssGridDimension>();
         private EssGridSlice _essGridSlice = new EssGridSlice();
         private List<string> _oldValues = new List<string>();
+
         private int _dataGridStartIndex;
 
         #endregion
@@ -316,24 +317,6 @@ namespace EssSharp
         {
             try
             {
-                /*
-                if (_grid is not null)
-                    _grid.Slice.DirtyCells = new List<int>();
-                else 
-                    _essGridSlice.DirtyCells ??= new List<int>();
-
-                for ( int i = 0; i < Slice.Data.Ranges[0].Types.Count; i++ )
-                {
-                    if ( Slice.Data.Ranges[0].Types[i] == "2" )
-                        if ( _grid is not null )
-                            _grid.Slice.DirtyCells.Add(i);
-                        else
-                            _essGridSlice.DirtyCells.Add(i);
-                }
-                */
-
-                //SetDirtyCells();
-
                 await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Submit, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
@@ -551,20 +534,64 @@ namespace EssSharp
             // and use them to find the index of the current cells dimension member
             var columnMemberIndex = dataCellIndex - (((dataCellIndex / columnCount) + 1 - dbStartRow) * Slice.Columns);
             var columnLimiter = (columnMemberIndex / columnCount + 1);
+            var columnStartIndex = _dataGridStartIndex - grid.Slice.Columns;
+            var columnEndIndex = (columnStartIndex / grid.Slice.Columns + 1) * grid.Slice.Columns - 1;
 
             for ( int i = 0; i < columnLimiter; i++ )
             {
                 var index = columnMemberIndex;
-                if ( string.IsNullOrEmpty(values[index]) )
+                var distance = 1;
+
+                while ( string.IsNullOrEmpty(values[index]) )
                 {
-                    index = (columnMemberIndex / columnCount) * columnCount;
-                    while ( string.IsNullOrEmpty(values[index]) )
-                        index += 1;
+                    if ( !string.IsNullOrEmpty(values[index - distance]) && (index - distance) != columnStartIndex )
+                    {
+                        index -= distance;
+                        break;
+                    }
+                    else if ( !string.IsNullOrEmpty(values[index] + distance) && (index - distance) != columnEndIndex )
+                    {
+                        index += distance;
+                        break;
+                    }
+                    else
+                    {
+                        distance++;
+                    }
                 }
                 memDict[dimensions.FirstOrDefault(dim => dim.Row == i).Name] = values[index];
                 columnMemberIndex -= columnCount;
+                columnEndIndex -= columnCount;
+                columnStartIndex -= columnCount;
             }
             return memDict;
+        }
+
+        private int GetDimensionMemberLength(Grid grid)
+        {
+            var memberHeaderStartIndex = _dataGridStartIndex - grid.Slice.Columns;
+            var memberHeaderEndIndex = (memberHeaderStartIndex / grid.Slice.Columns + 1) * grid.Slice.Columns - 1;
+            var memberHeaderRowCount = memberHeaderStartIndex / grid.Slice.Columns + 1;
+            var loopCount = grid.Slice.Columns - (memberHeaderStartIndex % grid.Slice.Columns);
+            var dataMemberCounts = new List<int>();
+            var values = grid.Slice.Data.Ranges[0].Values;
+
+            for ( var rowCount = 0; rowCount < memberHeaderRowCount; rowCount++ )
+            {
+                var count = 1;
+                for ( var i = 1; i < loopCount; i++ )
+                {
+                    var firstMember = values[memberHeaderStartIndex];
+
+                    if ( !string.IsNullOrEmpty(firstMember) && !string.Equals(firstMember, values[memberHeaderStartIndex + i]) )
+                        count++;
+                }
+                dataMemberCounts.Add(count);
+                memberHeaderStartIndex -= grid.Slice.Columns;
+                memberHeaderEndIndex -= grid.Slice.Columns;
+            }
+
+            return dataMemberCounts.Max();
         }
 
         /// <summary>
