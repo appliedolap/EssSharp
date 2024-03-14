@@ -41,6 +41,55 @@ namespace EssSharp
         /// </summary>
         /// <param name="cubeName" />
         /// <param name="options">Options for creating a cube from a workbook.</param>
+        public IEssCube CreateCubeFromLcm( string cubeName, EssJobImportLcmOptions options );
+
+        /// <summary>
+        /// Asynchronously creates a new cube (and application) from a server file.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="options">Options for creating a cube from a Lcm.</param>
+        /// <param name="cancellationToken" />
+        public Task<IEssCube> CreateCubeFromLcmAsync( string cubeName, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new cube (and application) from a local Lcm file path.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="localWorkbookPath">Local path to workbook.</param>
+        /// <param name="options">Options for creating a cube from a workbook.</param>
+        public IEssCube CreateCubeFromLcm( string cubeName, string localLcmPath, EssJobImportLcmOptions options = null );
+
+        /// <summary>
+        /// Asynchronously creates a new cube (and application) from a local Lcm file path.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="localLcmPath">Local path to Lcm.</param>
+        /// <param name="options">Options for creating a cube from a Lcm.</param>
+        /// <param name="cancellationToken" />
+        public Task<IEssCube> CreateCubeFromLcmAsync( string cubeName, string localLcmPath, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new cube (and application) from a Lcm stream.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="stream">Lcm stream.</param>
+        /// <param name="options">Options for creating a cube from a Lcm.</param>
+        public IEssCube CreateCubeFromLcm( string cubeName, Stream stream, EssJobImportLcmOptions options = null );
+
+        /// <summary>
+        /// Asynchronously creates a new cube (and application) from a Lcm stream.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="stream">Lcm stream.</param>
+        /// <param name="options">Options for creating a cube from a Lcm.</param>
+        /// <param name="cancellationToken" />
+        public Task<IEssCube> CreateCubeFromLcmAsync( string cubeName, Stream stream, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new cube (and application) from an existing server file.
+        /// </summary>
+        /// <param name="cubeName" />
+        /// <param name="options">Options for creating a cube from a workbook.</param>
         public IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options );
 
         /// <summary>
@@ -138,6 +187,23 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<string> DownloadLatestLogFileStringAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public Stream ExportCubeToLcm( string cubeName, EssJobExportLcmOptions options = null );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<Stream> ExportCubeToLcmAsync( string cubeName, EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Exports a cube to an excel workbook.

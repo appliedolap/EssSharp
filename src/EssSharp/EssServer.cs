@@ -120,6 +120,102 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        public IEssApplication CreateApplicationFromLcm( string applicationName, string cubeName, EssJobImportLcmOptions options ) =>
+            CreateApplicationFromLcmAsync(applicationName, cubeName, options, CancellationToken.None).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        public Task<IEssApplication> CreateApplicationFromLcmAsync( string applicationName, string cubeName, EssJobImportLcmOptions options, CancellationToken cancellationToken = default ) =>
+            CreateApplicationFromLcmAsync(applicationName, cubeName, options, null, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns> 
+        public IEssApplication CreateApplicationFromLcm( string applicationName, string cubeName, string localLcmPath, EssJobImportLcmOptions options = null ) =>
+            CreateApplicationFromLcmAsync(applicationName, cubeName, localLcmPath, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        public async Task<IEssApplication> CreateApplicationFromLcmAsync( string applicationName, string cubeName, string localLcmPath, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                if ( !File.Exists(localLcmPath) )
+                    throw new FileNotFoundException("Unable to find the workbook file at the given local path.", localLcmPath);
+
+                using var stream = new FileStream(localLcmPath, FileMode.Open, FileAccess.Read);
+                return await CreateApplicationFromLcmAsync(applicationName, cubeName, options, stream).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the application ""{applicationName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        public IEssApplication CreateApplicationFromLcm( string applicationName, string cubeName, Stream stream, EssJobImportLcmOptions options = null ) =>
+            CreateApplicationFromLcmAsync(applicationName, cubeName, options, stream).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        public Task<IEssApplication> CreateApplicationFromLcmAsync( string applicationName, string cubeName, Stream stream, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default ) =>
+            CreateApplicationFromLcmAsync(applicationName, cubeName, options, stream, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        internal IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, EssJobImportLcmOptions options = null, Stream stream = null ) =>
+            CreateApplicationFromLcmAsync(applicationName, cubeName, options, stream).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
+        internal async Task<IEssApplication> CreateApplicationFromLcmAsync( string applicationName, string cubeName, EssJobImportLcmOptions options = null, Stream stream = null, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(applicationName) )
+                throw new ArgumentException($"An application name is required to create an an {nameof(EssApplication)} from a workbook.", nameof(applicationName));
+
+            if ( string.IsNullOrWhiteSpace(cubeName) )
+                throw new ArgumentException($"A cube name is required to create an an {nameof(EssApplication)} from a workbook.", nameof(cubeName));
+
+            if ( stream is null && string.IsNullOrEmpty(options?.ZipFileName) )
+                throw new ArgumentException($"A local path, stream, or server file is required to create an {nameof(EssApplication)} from a workbook.");
+
+            try
+            {
+                // Construct new options if none were given.
+                options ??= new EssJobImportLcmOptions();
+
+                if ( options.ZipFileName is null )
+                {
+                    var catalogLcmFolder = await GetFolderAsync("/users/admin/", cancellationToken).ConfigureAwait(false);
+
+                    var importExcelFile = string.IsNullOrEmpty(options.ZipFileName) ?
+                    await catalogLcmFolder.UploadFileAsync(stream, $@"{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}.zip", true, cancellationToken).ConfigureAwait(false) :
+                    await catalogLcmFolder.GetFileAsync(options.ZipFileName).ConfigureAwait(false);
+
+                    options.ZipFileName = importExcelFile.Name;
+                    options.TargetApplicationName ??= applicationName;
+                }
+
+                // Set the application and cube names for the job.
+                options.ApplicationName = applicationName;
+                options.CubeName = cubeName;
+
+                // Execute the import job and throw an exception if the job failed.
+                (await CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+
+                // Return the corresponding application.
+                return await GetApplicationAsync(applicationName: applicationName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the application ""{applicationName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
         public IEssApplication CreateApplicationFromWorkbook( string applicationName, string cubeName, EssJobImportExcelOptions options ) => 
             CreateApplicationFromWorkbookAsync(applicationName, cubeName, options, CancellationToken.None).GetAwaiter().GetResult();
 
@@ -232,7 +328,7 @@ namespace EssSharp
                 throw new Exception($@"Unable to create the application ""{applicationName}"". {e.Message}", e);
             }
         }
-
+        
         /// <inheritdoc />
         /// <returns>An <see cref="IEssGroup"/> object.</returns>
         public IEssGroup CreateGroup( string groupName, EssServerRole role = EssServerRole.User, string description = null ) => CreateGroupAsync(groupName, role, description).GetAwaiter().GetResult();

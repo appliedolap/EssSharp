@@ -129,6 +129,19 @@ namespace EssSharp
         public Task ExecuteScriptAsync( EssJobScriptOptions options, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        public Stream ExportToLcm( EssJobExportLcmOptions options = null );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Stream> ExportToLcmAsync( EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Exports a cube to an excel workbook.
         /// </summary>
         /// <param name="options">Export options including Build method, calc, data, and include member IDs.</param>

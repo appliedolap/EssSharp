@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -93,6 +94,79 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssCube"/> object.</returns>
+        public IEssCube CreateCubeFromLcm( string cubeName, EssJobImportLcmOptions options ) =>
+            CreateCubeFromLcmAsync(cubeName, options, CancellationToken.None).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
+        public Task<IEssCube> CreateCubeFromLcmAsync( string cubeName, EssJobImportLcmOptions options, CancellationToken cancellationToken = default ) =>
+            CreateCubeFromLcmAsync(cubeName, options, null, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns> An <see cref="EssCube"/> object. </returns>
+        public IEssCube CreateCubeFromLcm( string cubeName, string localWorkbookPath, EssJobImportLcmOptions options = null ) =>
+            CreateCubeFromLcmAsync(cubeName, localWorkbookPath, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
+        public async Task<IEssCube> CreateCubeFromLcmAsync( string cubeName, string localLcmPath, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                if ( !System.IO.File.Exists(localLcmPath) )
+                    throw new FileNotFoundException("Unable to find the workbook file at the given local path.", localLcmPath);
+
+                using var stream = new FileStream(localLcmPath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                return await CreateCubeFromLcmAsync(cubeName, options, stream, cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the cube ""{cubeName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
+        public IEssCube CreateCubeFromLcm( string cubeName, Stream stream, EssJobImportLcmOptions options = null ) =>
+            CreateCubeFromLcmAsync(cubeName, options, stream).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
+        public Task<IEssCube> CreateCubeFromLcmAsync( string cubeName, Stream stream, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default ) =>
+            CreateCubeFromLcmAsync(cubeName, options, stream, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
+        internal IEssCube CreateCubeFromLcm( string cubeName, EssJobImportLcmOptions options = null, Stream stream = null ) =>
+            CreateCubeFromLcmAsync(cubeName, options, stream).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
+        internal async Task<IEssCube> CreateCubeFromLcmAsync( string cubeName, EssJobImportLcmOptions options = null, Stream stream = null, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(cubeName) )
+                throw new ArgumentException($"A cube name is required to create an an {nameof(EssCube)} from a workbook.", nameof(cubeName));
+
+            if ( stream is null && string.IsNullOrEmpty(options?.ZipFileName) )
+                throw new ArgumentException($"A local path, stream, or server file is required to create an {nameof(EssCube)} from a workbook.");
+
+            try
+            {
+                // Create the cube via the server's create application from workbook method.
+                await Server.CreateApplicationFromLcmAsync(Name, cubeName, stream, options, cancellationToken).ConfigureAwait(false);
+                // Return the cube.
+                return await GetCubeAsync(cubeName, cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to create the cube ""{cubeName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="EssCube"/> object.</returns>
         public IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options ) =>
             CreateCubeFromWorkbookAsync(cubeName, options, CancellationToken.None).GetAwaiter().GetResult();
 
@@ -134,7 +208,7 @@ namespace EssSharp
         /// <returns>An <see cref="EssCube"/> object.</returns>
         public Task<IEssCube> CreateCubeFromWorkbookAsync( string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default ) =>
             CreateCubeFromWorkbookAsync(cubeName, options, stream, cancellationToken);
-
+   
         /// <inheritdoc />
         /// <returns>An <see cref="EssCube"/> object.</returns>
         internal IEssCube CreateCubeFromWorkbook( string cubeName, EssJobImportExcelOptions options = null, Stream stream = null ) =>
@@ -163,7 +237,7 @@ namespace EssSharp
                 throw new Exception($@"Unable to create the cube ""{cubeName}"". {e.Message}", e);
             }
         }
-
+        
         /// <inheritdoc />
         /// <returns>An <see cref="EssApplicationPermission"/> object.</returns>
         public IEssApplicationPermission CreatePermissions( string id, EssApplicationRole applicationRole ) => CreatePermissionsAsync(id, applicationRole).GetAwaiter().GetResult();
@@ -299,6 +373,35 @@ namespace EssSharp
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception )
+            {
+                throw;
+            }
+        }
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Stream ExportCubeToLcm( string cubeName, EssJobExportLcmOptions options = null ) => ExportCubeToLcmAsync(cubeName, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<Stream> ExportCubeToLcmAsync( string cubeName, EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // Construct new options if none were given.
+                options ??= new EssJobExportLcmOptions();
+
+                // Assign the application and cube name to the given options.
+                options.ApplicationName = Name;
+                options.CubeName = cubeName;
+
+                // Execute the export job and throw an exception if the job failed.
+                var job = (await Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+
+                // Return the workbook file stream.
+                return await Server.GetFileAsync($@"{(await Server.GetUserHomeFolderAsync().ConfigureAwait(false)).FullPath}/{options.ZipFileName}", cancellationToken).DownloadAsync(cancellationToken).ConfigureAwait(false);               
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
             {
                 throw;
             }

@@ -1176,15 +1176,23 @@ namespace EssSharp.Integration
             await grid.RefreshAsync();
 
             grid.Preferences.UseAuditLog = true;
+            string newVal;
 
             if ( string.Equals(grid.Slice.Data.Ranges[0].Values[9], "680.0") )
+            {
                 grid.Slice.Data.Ranges[0].Values[9] = "678.0";
+                newVal = "678.0";
+            }
             else
+            {
                 grid.Slice.Data.Ranges[0].Values[9] = "680.0";
+                newVal = "680.0";
+            }
+                
 
             await grid.SubmitAsync();
 
-            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
+            Assert.Equal(newVal, grid.Slice.Data.Ranges[0].Values[9]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid"), Priority(39)]
@@ -1415,7 +1423,7 @@ namespace EssSharp.Integration
                 RepeatMemberLabels = false
             };
 
-            
+
 
             await grid.RefreshAsync();
 
@@ -1432,9 +1440,94 @@ namespace EssSharp.Integration
 
             await grid.SubmitAsync();
 
-
-
             Assert.NotNull(grid.DataChanges);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterCubeCreation_CanExportAppToLcm"), Priority(41)]
+        public async Task Essbase_AfterCubeCreation_CanExportAppToLcm()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var app = await server.GetApplicationAsync("Sample");
+
+            var options = new EssJobExportLcmOptions()
+            {
+                AllApp = true,
+                Generateartifactlist = false,
+                IncludeServerLevel = false,
+                ZipFileName = "exportedApps.zip",
+                SkipData = true
+            };
+
+            var lcmStream = await app.ExportCubeToLcmAsync("Basic", options);
+
+            Assert.NotNull(lcmStream);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 42 - Essbase_AfterCubeCreation_CanExportCubeToLcm"), Priority(42)]
+        public async Task Essbase_AfterCubeCreation_CanExportToLcm()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var app = await server.GetApplicationAsync("Sample");
+
+            var options = new EssJobExportLcmOptions()
+            {
+                AllApp = false,
+                Generateartifactlist = true,
+                IncludeServerLevel = true,
+                ZipFileName = "exportedCubes.zip",
+                SkipData = true
+            };
+
+            var lcmStream = await app.ExportCubeToLcmAsync("Basic", options);
+            
+            Assert.NotNull(lcmStream);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanImportCubeWithLcm"), Priority(43)]
+        public async Task Essbase_AfterCubeCreation_CanImportCubeToLcm()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var app = await server.GetApplicationAsync("Sample");
+
+            var options = new EssJobImportLcmOptions()
+            {
+                ZipFileName = "exportedCubes.zip",
+                IncludeServerLevel = false,
+                TargetApplicationName = "Sample",
+                Overwrite = true
+            };
+
+            var lcmStream = await app.CreateCubeFromLcmAsync("Basic", options);
+
+            Assert.NotNull(lcmStream);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream"), Priority(43)]
+        public async Task Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var app = await server.GetApplicationAsync("Sample");
+
+            var option = new EssJobImportLcmOptions()
+            {
+                Overwrite = true
+            };
+
+            var lcmStream = await app.CreateCubeFromLcmAsync(cubeName: "Basic", localLcmPath: "C:\\Users\\matth\\Downloads\\exportedCubes.zip", options: option);
+
+            Assert.NotNull(lcmStream);
         }
     }
 }

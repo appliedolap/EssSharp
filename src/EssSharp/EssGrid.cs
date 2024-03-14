@@ -61,7 +61,7 @@ namespace EssSharp
             _cube = cube ??
                 throw new ArgumentNullException(nameof(cube), $"An {nameof(EssCube)} {nameof(cube)} is required to create an {nameof(EssCube)}.");
 
-            _oldValues = _grid.Slice.Data.Ranges[0].Values.ToList();
+            _oldValues = _grid?.Slice?.Data?.Ranges[0]?.Values?.ToList() ?? new List<string>();
         }
 
         #endregion

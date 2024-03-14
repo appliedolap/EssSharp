@@ -561,7 +561,17 @@ namespace EssSharp
             // EssJobType.ExecuteReport
             IsScriptContent       = options.IsScriptContent ?? false,
             LockForUpdate         = options.LockForUpdate   ?? false,
-            ReportScriptFilename  = options.ReportScriptFilename
+            ReportScriptFilename  = options.ReportScriptFilename,
+
+            // EssJobType.LCMExport
+            AllApp = options.AllApp.ToString(),
+            GenerateArtifactList = options.Generateartifactlist.ToString(),
+            IncludeServerLevel = options.IncludeServerLevel.ToString(),
+            ZipFileName = options.ZipFileName,
+            Skipdata = options.SkipData.ToString(),
+
+            // EssJobType.LCMImport
+            TargetApplicationName = options.TargetApplicationName
         };
 
         internal static List<EssGridDimension> ToEssGridDimension( this List<GridDimension> gridDimensions )

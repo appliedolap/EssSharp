@@ -26,6 +26,63 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         public Task<IEssApplication> CreateApplicationAsync( string applicationName, string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
 
+        /////////////
+
+        /// <summary>
+        /// Creates a new application (and cube) from an existing server file.
+        /// </summary>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
+        public IEssApplication CreateApplicationFromLcm( string applicationName, string cubeName, EssJobImportLcmOptions options );
+
+        /// <summary>
+        /// Asynchronously creates a new application (and cube) from an existing server file.
+        /// </summary>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
+        /// <param name="cancellationToken" />
+        public Task<IEssApplication> CreateApplicationFromLcmAsync( string applicationName, string cubeName, EssJobImportLcmOptions options, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new application (and cube) from a local workbook file path.
+        /// </summary>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="localWorkbookPath" />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
+        public IEssApplication CreateApplicationFromLcm( string applicationName, string cubeName, string localWorkbookPath, EssJobImportLcmOptions options = null );
+
+        /// <summary>
+        /// Asynchronously creates a new application (and cube) from a local workbook file path.
+        /// </summary>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="localWorkbookPath" />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
+        /// <param name="cancellationToken" />
+        public Task<IEssApplication> CreateApplicationFromLcmAsync( string applicationName, string cubeName, string localWorkbookPath, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Creates a new application (and cube) from a workbook stream.
+        /// </summary>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="stream" />
+        /// <param name="options">Job options for creating an application from a workbook.</param>
+        public IEssApplication CreateApplicationFromLcm( string applicationName, string cubeName, Stream stream, EssJobImportLcmOptions options = null );
+
+        /// <summary>
+        /// Asynchronously creates a new application (and cube) from a workbook stream.
+        /// </summary>
+        /// <param name="applicationName" />
+        /// <param name="cubeName" />
+        /// <param name="stream">Workbook stream</param>
+        /// <param name="options">Job options for creating an application from a workbook.</param>
+        /// <param name="cancellationToken" />
+        public Task<IEssApplication> CreateApplicationFromLcmAsync( string applicationName, string cubeName, Stream stream, EssJobImportLcmOptions options = null, CancellationToken cancellationToken = default );
+
         /// <summary>
         /// Creates a new application (and cube) from an existing server file.
         /// </summary>
@@ -80,7 +137,7 @@ namespace EssSharp
         /// <param name="options">Job options for creating an application from a workbook.</param>
         /// <param name="cancellationToken" />
         public Task<IEssApplication> CreateApplicationFromWorkbookAsync( string applicationName, string cubeName, Stream stream, EssJobImportExcelOptions options = null, CancellationToken cancellationToken = default );
-
+        
         /// <summary>
         /// Create a new group.
         /// </summary>

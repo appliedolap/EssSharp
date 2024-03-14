@@ -239,6 +239,15 @@ namespace EssSharp
             new EssMdxScript(new Script() { Content = query }, this).GetReportAsync(preferences, cancellationToken);
 
         /// <inheritdoc />
+        /// <returns></returns>
+        public Stream ExportToLcm( EssJobExportLcmOptions options = null ) => ExportToLcmAsync(options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public Task<Stream> ExportToLcmAsync( EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default ) =>
+            Application.ExportCubeToLcmAsync(Name, options);
+
+        /// <inheritdoc />
         /// <returns>A <see cref="Stream"/>.</returns>
         public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null ) => ExportCubeToWorkbookAsync( options ).GetAwaiter().GetResult();
 

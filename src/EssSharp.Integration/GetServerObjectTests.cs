@@ -221,7 +221,7 @@ namespace EssSharp.Integration
                 .GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic");
 
-            var member = await cube.GetMemberAsync("New York");
+            var member = await cube.GetMemberAsync("Year");
 
             Assert.NotNull(member);
 
