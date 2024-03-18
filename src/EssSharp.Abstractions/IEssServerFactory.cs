@@ -6,6 +6,11 @@ namespace EssSharp
     public interface IEssServerFactory
     {
         /// <summary>
+        /// Gets or sets the maximum number of concurrent requests by any <see cref="IEssServer"> created by this factory.
+        /// </summary>
+        public int MaxDegreeOfParallelism { get; set; }
+
+        /// <summary>
         /// Creates a new server and, optionally, connects with the given credentials.
         /// </summary>
         /// <param name="server" />

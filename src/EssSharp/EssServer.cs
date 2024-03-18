@@ -74,6 +74,13 @@ namespace EssSharp
 
         #endregion
 
+        #region Private Properties
+
+        /// <summary />
+        private EssGridPreferences DefaultGridPreferences { get; set; } = null;
+
+        #endregion
+
         #region IEssObject Members
 
         /// <inheritdoc />
@@ -539,23 +546,28 @@ namespace EssSharp
         {
             try
             {
-                // Build a configuration that will use basic authentication but retain the new session.
+                // Return the default grid preferences if they've already been captured.
+                if ( DefaultGridPreferences is not null )
+                    return DefaultGridPreferences.Clone() as EssGridPreferences;
+
+                // Otherwise, build a configuration that will use basic authentication but retain the new session.
                 var config = new Configuration()
                 {
-                    ApplyCookies  = false,
-                    RetainCookies = true,
+                    ApplyCookies           = false,
+                    RetainCookies          = true,
                     // Apply the base configuration settings.
-                    BasePath      = Configuration.BasePath,
-                    Username      = Configuration.Username,
-                    Password      = Configuration.Password,
-                    Timeout       = Configuration.Timeout,
-                    UserAgent     = Configuration.UserAgent,
+                    BasePath               = Configuration.BasePath,
+                    MaxDegreeOfParallelism = Configuration.MaxDegreeOfParallelism,
+                    Username               = Configuration.Username,
+                    Password               = Configuration.Password,
+                    Timeout                = Configuration.Timeout,
+                    UserAgent              = Configuration.UserAgent,
                 };
 
-                var api = ApiFactory.GetApiAndClient<GridPreferencesApi>(config).Api;
+                var api = ApiFactory.GetApiAndClient<GridPreferencesApi>(configuration: config, client: Client).Api;
 
                 if ( await api.GridPreferencesGetAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is { } preferences )
-                    return preferences.ToEssGridPreferences();
+                    return (DefaultGridPreferences = preferences.ToEssGridPreferences()).Clone() as EssGridPreferences;
 
                 throw new Exception("Received an empty or invalid response.");
             }
@@ -992,6 +1004,38 @@ namespace EssSharp
             catch ( Exception )
             {
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// Kills all active sessions for the given <paramref name="username"/> (including sessions with active requests).
+        /// </summary>
+        /// <param name="username">The user whose sessions to kill.</param>
+        /// <remarks>Administrative privilege is required in order to perform this operation.</remarks>
+        public void KillSessionsForUser( string username ) => KillSessionsForUserAsync(username).GetAwaiter().GetResult();
+
+        /// <summary>
+        /// Asynchronously kills all active sessions for the given <paramref name="username"/> (including sessions with active requests).
+        /// </summary>
+        /// <param name="username">The user whose sessions to kill.</param>
+        /// <remarks>Administrative privilege is required in order to perform this operation.</remarks>
+        public async Task KillSessionsForUserAsync( string username )
+        {
+            try
+            {
+                if ( string.IsNullOrEmpty(username) )
+                    throw new ArgumentNullException(nameof(username), $"A {nameof(username)} is required to kill active sessions.");
+
+                var api = GetApi<SessionsApi>();
+                await api.SessionsDeleteAllActiveSessionsAsync(userId: username, disconnect: true).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                if ( !string.IsNullOrWhiteSpace(username) )
+                    throw new Exception($@"Unable to kill all active sessions for user ""{username}"". {e.Message}", e);
+                else
+                    throw new Exception($@"Unable to kill all active sessions. {e.Message}", e);
             }
         }
 

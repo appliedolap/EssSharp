@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
 using EssSharp.Model;
+
 using Xunit;
 
 namespace EssSharp.Integration
@@ -872,7 +872,76 @@ namespace EssSharp.Integration
             }
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(35)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanKillRedundantSessions"), Priority(35)]
+        public async Task Essbase_AfterDefaultGrid_CanKillRedundantSessions()
+        {
+            // Get an unconnected server (as the service admin).
+            var server = GetEssServer(EssServerRole.ServiceAdministrator);
+
+            // Get the username of the configured end-user.
+            var username = GetEssConnection(EssServerRole.User).Username;
+
+            // Capture the list of sessions for the end-user.
+            var userSessions = (await server.GetSessionsAsync())
+                .Where(session => string.Equals(session ?.UserId, username)).ToList();
+
+            // DO NOT assert that there is at least one session for the end-user.
+            //Assert.NotEmpty(userSessions);
+
+            // Kill all open sessions for the end-user.
+            await (server as EssServer).KillSessionsForUserAsync(username);
+
+            // Refresh the list of sessions for the end-user.
+            userSessions = (await server.GetSessionsAsync())
+                .Where(session => string.Equals(session?.UserId, username)).ToList();
+
+            // Assert that there are no sessions for the end-user.
+            Assert.Empty(userSessions);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 36 - Essbase_AfterDefaultGrid_CanEnforceMaxDegreeOfParallelism"), Priority(36)]
+        public async Task Essbase_AfterDefaultGrid_CanEnforceMaxDegreeOfParallelism()
+        {
+            // Build a new factory that creates connections that support only a single concurrent operation.
+            var factory = new EssServerFactory() { MaxDegreeOfParallelism = 1 };
+
+            // Get an unconnected server with the configured factory (as an end-user) 
+            var server = GetEssServer(factory: factory, role: EssServerRole.User);
+
+            // Get the default grid preferences for the server.
+            await server.GetDefaultGridPreferencesAsync();
+
+            // Get the Sample.Basic cube (as an end-user).
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            // Construct a list for grid refresh tasks.
+            var refreshTasks = new List<Task<IEssGrid>>();
+
+            // Add 20 tasks that get and refresh the default grid.
+            for ( int i = 0; i < 20; i++ )
+                refreshTasks.Add(cube.GetDefaultGridAsync().RefreshAsync());
+
+            // Await the completion of all the refresh tasks.
+            var grids = await Task.WhenAll(refreshTasks);
+
+            // Assert that all of the grids have three rows.
+            Assert.All(grids, grid => Assert.Equal(3, grid.Slice.Rows));
+
+            // Get the end-user's username.
+            var username = (await server.GetUserSessionAsync()).UserId;
+
+            // Capture the list of sessions for the end-user.
+            var userSessions = (await cube.Application.Server.GetSessionsAsync())
+                .Where(session => string.Equals(session?.UserId, username)).ToList();
+
+            // Assert that there are only two sessions (one for server access and one grid operations).
+            Assert.Equal(factory.MaxDegreeOfParallelism, userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Server).Count());
+            Assert.Equal(factory.MaxDegreeOfParallelism, userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Grid)  .Count());
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(37)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshGridUseAliases()
         {
             // Get an unconnected server.
@@ -972,7 +1041,7 @@ namespace EssSharp.Integration
             var rGrid = await essGrid.RefreshAsync();
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 36 - Essbase_AfterDefaultGrid_CanRefreshEmptyGrid"), Priority(36)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterDefaultGrid_CanRefreshEmptyGrid"), Priority(38)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshEmptyGrid()
         {
             // Get an unconnected server.
@@ -996,7 +1065,7 @@ namespace EssSharp.Integration
             var rGrid = await essGrid.RefreshAsync();
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(37)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(39)]
         public async Task Essbase_AfterCubeCreation_CanBuildAndRefreshGrid()
         {
             // Get an unconnected server.
@@ -1087,7 +1156,7 @@ namespace EssSharp.Integration
     }
 
         /*
-        [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions"), Priority(34)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 40 - Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions"), Priority(40)]
         public async Task Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions()
         {
             // Get an unconnected server.

@@ -2,24 +2,49 @@
 using System.Collections.Concurrent;
 using System.Net;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Threading;
 
 using EssSharp.Api;
 
 using RestSharp;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace EssSharp.Client
 {
     /// <summary />
     public partial class ApiClient
     {
+        #region Private Fields
+
+        private int _maxDegreeOfParallelism = 4;
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary />
         public ConcurrentBag<Cookie> SessionCookies { get; } = new ConcurrentBag<Cookie>();
 
         /// <summary />
         public ConcurrentDictionary<string, EssGridPreferences> SessionPreferences { get; } = new ConcurrentDictionary<string, EssGridPreferences>();
+
+        #endregion
+
+        #region Private Properties
+
+        /// <summary />
+        private int MaxDegreeOfParallelism
+        {
+            set
+            {
+                if ( _maxDegreeOfParallelism != value || value >= 0 && RequestSemaphore is null )
+                     RequestSemaphore = (_maxDegreeOfParallelism = value) >= 0
+                        ? new SemaphoreSlim(_maxDegreeOfParallelism, _maxDegreeOfParallelism) 
+                        : null;
+            }
+        }
+
+        #endregion
 
         #region Partial Methods
 
@@ -47,34 +72,30 @@ namespace EssSharp.Client
                 request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
             }
 
-            // If this is a grid request, compare the configured preferences to those tracked against the JSESSIONID.
-            //if ( request.Resource.Contains("/grid/") || request.Resource.EndsWith("/grid", StringComparison.Ordinal) )
-            //{
-                // If there are no configured preferences, we are finished 
-                if ( (options?.Preferences as EssGridPreferences)?.Clone() is not EssGridPreferences configuredPreferences )
-                    return;
+            // If there are no configured preferences, we are finished 
+            if ( (options?.Preferences as EssGridPreferences)?.Clone() is not EssGridPreferences configuredPreferences )
+                return;
 
-                // If there is a session cookie...
-                if ( cookie is not null )
+            // If there is a session cookie...
+            if ( cookie is not null )
+            {
+                // If there are preferences tracked against the JSESSIONID...
+                if ( SessionPreferences.TryGetValue(cookie.Value, out var sessionPreferences) && sessionPreferences is not null )
                 {
-                    // If there are preferences tracked against the JSESSIONID...
-                    if ( SessionPreferences.TryGetValue(cookie.Value, out var sessionPreferences) && sessionPreferences is not null )
-                    {
-                        // If the preferences for this session match the configured preferences, we are finished.
-                        if ( sessionPreferences.Equals(configuredPreferences) )
-                            return;
-                    }
-
-                    // Set the grid preferences for the session.
-                    await setGridPreferencesAsync(configuredPreferences, cookie);
-
+                    // If the preferences for this session match the configured preferences, we are finished.
+                    if ( sessionPreferences.Equals(configuredPreferences) )
+                        return;
                 }
-                else
-                {
-                    // Set the grid preferences for a new session.
-                    await setGridPreferencesAsync(configuredPreferences);
-                }
-            //}
+
+                // Set the grid preferences for the session.
+                await setGridPreferencesAsync(configuredPreferences, cookie);
+
+            }
+            else
+            {
+                // Set the grid preferences for a new session.
+                await setGridPreferencesAsync(configuredPreferences);
+            }
 
             async Task setGridPreferencesAsync( EssGridPreferences preferences, Cookie cookie = null )
             {
@@ -83,11 +104,12 @@ namespace EssSharp.Client
                     ApplyCookies  = false,
                     RetainCookies = false,
 
-                    BasePath      = configuration.BasePath,
-                    Username      = configuration.Username,
-                    Password      = configuration.Password,
-                    Timeout       = configuration.Timeout,
-                    UserAgent     = configuration.UserAgent,
+                    BasePath               = configuration.BasePath,
+                    MaxDegreeOfParallelism = configuration.MaxDegreeOfParallelism,
+                    Username               = configuration.Username,
+                    Password               = configuration.Password,
+                    Timeout                = configuration.Timeout,
+                    UserAgent              = configuration.UserAgent,
                 };
 
                 var api = ApiFactory.GetApiAndClient<GridPreferencesApi>(config).Api;

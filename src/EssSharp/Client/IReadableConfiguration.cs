@@ -53,6 +53,11 @@ namespace EssSharp.Client
         bool RetainCookies { get; }
 
         /// <summary>
+        /// Gets the maximum number of concurrent requests.
+        /// </summary>
+        int MaxDegreeOfParallelism { get; }
+
+        /// <summary>
         /// Gets the date time format.
         /// </summary>
         /// <value>Date time format.</value>

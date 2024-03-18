@@ -203,11 +203,13 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary />
-        internal static IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator )
+        internal static IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator, EssServerFactory factory = null )
         {
             var connection = GetEssConnection(role);
 
-            return new EssServerFactory().CreateEssServer(connection.Server, connection.Username, connection.Password, connect: false);
+            factory ??= new EssServerFactory();
+
+            return factory.CreateEssServer(connection.Server, connection.Username, connection.Password, connect: false);
         }
 
         /// <summary />

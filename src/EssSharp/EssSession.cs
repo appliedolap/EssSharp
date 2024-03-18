@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,37 +11,57 @@ namespace EssSharp
     public class EssSession : EssObject, IEssSession
     {
         #region Private Data
-        private readonly SessionAttributes  _sessionAttributes;
+
+        private readonly SessionAttributes _session;
+        
         #endregion
 
         #region Constructors
+
         /// <summary />
-        public EssSession(SessionAttributes sessionAttributes )
+        internal EssSession( SessionAttributes session, EssServer server ) : base(server?.Configuration, server?.Client)
         {
-            _sessionAttributes = sessionAttributes;
+            _session = session ??
+                throw new ArgumentNullException(nameof(session), $"An API model {nameof(session)} is required to create an {nameof(EssSession)}.");
+
+            if ( server is null )
+                throw new ArgumentNullException(nameof(server), $"An {nameof(EssServer)} {nameof(server)} is required to create an {nameof(EssSession)}.");
         }
+
         #endregion
 
         #region IEssSession Members
 
         /// <inheritdoc />
-        public string UserId => _sessionAttributes.UserId;
+        public string Application => _session.Application;
 
         /// <inheritdoc />
-        public long SessionId => long.Parse(_sessionAttributes.SessionId);
+        public string ConnectionSource => _session.ConnectionSource;
 
         /// <inheritdoc />
-        public string LoginTimeInSeconds => _sessionAttributes.LoginTimeInSeconds;
-        /// <inheritdoc />
-        public string ConnectionSource => _sessionAttributes.ConnectionSource;
+        public string Database => _session.Database;
 
         /// <inheritdoc />
-        public async Task KillAsync( bool logoff, CancellationToken cancellationToken = default )
+        public string LoginTimeInSeconds => _session.LoginTimeInSeconds;
+
+        /// <inheritdoc />
+        public long SessionId => long.Parse(_session.SessionId);
+
+        /// <inheritdoc />
+        public IEssSession.EssSessionType SessionType => !string.IsNullOrEmpty(Database) 
+            ? IEssSession.EssSessionType.Grid 
+            : IEssSession.EssSessionType.Server;
+
+        /// <inheritdoc />
+        public string UserId => _session.UserId;
+
+        /// <inheritdoc />
+        public async Task KillAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<SessionsApi>();
-                await api.SessionsDeleteSessionWithIdAsync(SessionId, logoff, 0, cancellationToken).ConfigureAwait(false);
+                await api.SessionsDeleteSessionWithIdAsync(SessionId, true, 0, cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception )

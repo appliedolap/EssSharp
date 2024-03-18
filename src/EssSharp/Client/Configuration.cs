@@ -189,6 +189,11 @@ namespace EssSharp.Client
         public virtual bool RetainCookies { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets the maximum number of concurrent requests.
+        /// </summary>
+        public virtual int MaxDegreeOfParallelism { get; set; } = 4;
+
+        /// <summary>
         /// Gets or sets the default header.
         /// </summary>
         [Obsolete("Use DefaultHeaders instead.")]

@@ -221,6 +221,9 @@ namespace {{packageName}}.Client
             }
         };
 
+        /// <summary />
+        private SemaphoreSlim RequestSemaphore { get; set; } = null;
+
         /// <summary>
         /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
         /// </summary>
@@ -657,107 +660,121 @@ namespace {{packageName}}.Client
             }
 
             {{/hasOAuthMethods}}
+            // Assign any configured degree of parallelism.
+            if ( configuration is { MaxDegreeOfParallelism: { } degree } )
+                MaxDegreeOfParallelism = degree;
+
+            // await any request semaphore.
+            await (RequestSemaphore?.WaitAsync(cancellationToken) ?? Task.CompletedTask).ConfigureAwait(false);
+
             await InterceptRequestAsync(req, configuration, options, cancellationToken).ConfigureAwait(false);
 
-            RestResponse<T> response;
-        {{#supportsRetry}}
-            if (RetryConfiguration.AsyncRetryPolicy != null)
+            try
             {
-                var policy = RetryConfiguration.AsyncRetryPolicy;
-                var policyResult = await policy.ExecuteAndCaptureAsync((context, ct) => client.ExecuteAsync(req, ct), new Dictionary<string, object> { ["client"] = this, ["configuration"] = configuration, ["request"] = req }, cancellationToken).ConfigureAwait(false);
-                response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>(req)
+                RestResponse<T> response;
+            {{#supportsRetry}}
+                if (RetryConfiguration.AsyncRetryPolicy != null)
                 {
-                    Content = policyResult.FinalHandledResult?.Content,
-                    ContentEncoding = policyResult.FinalHandledResult?.ContentEncoding,
-                    ContentHeaders = policyResult.FinalHandledResult?.ContentHeaders,
-                    ContentLength = policyResult.FinalHandledResult?.ContentLength,
-                    ContentType = policyResult.FinalHandledResult?.ContentType,
-                    Cookies = policyResult.FinalHandledResult?.Cookies,
-                    ErrorException = policyResult.FinalException ?? policyResult.FinalHandledResult?.ErrorException,
-                    ErrorMessage = policyResult.FinalHandledResult?.ErrorMessage,
-                    IsSuccessStatusCode = policyResult.FinalHandledResult?.IsSuccessStatusCode ?? false,
-                    Headers = policyResult.FinalHandledResult?.Headers,
-                    RawBytes = policyResult.FinalHandledResult?.RawBytes,
-                    Request = policyResult.FinalHandledResult?.Request,
-                    ResponseStatus = policyResult.FinalHandledResult?.ResponseStatus ?? default,
-                    ResponseUri = policyResult.FinalHandledResult?.ResponseUri,
-                    RootElement = policyResult.FinalHandledResult?.RootElement,
-                    Server = policyResult.FinalHandledResult?.Server,
-                    StatusCode = policyResult.FinalHandledResult?.StatusCode ?? default,
-                    StatusDescription = policyResult.FinalHandledResult?.StatusDescription,
-                    Version = policyResult.FinalHandledResult?.Version
-                };
-            }
-            else
-            {
-        {{/supportsRetry}}
-                response = await client.ExecuteAsync<T>(req, cancellationToken).ConfigureAwait(false);
-        {{#supportsRetry}}
-            }
-        {{/supportsRetry}}
-
-            // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
-            if (typeof({{{packageName}}}.{{modelPackage}}.AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
-            {
-                response.Data = (T) typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
-            }
-            else if (typeof(T).Name == "Stream") // for binary response
-            {
-                // if the response data was not already deserialized as a stream, create a MemoryStream from the raw bytes
-                if ( response.Data is not Stream )
-                {
-                    response.Data = (T)(object)new MemoryStream(response.RawBytes);
-                }
-            }
-            else if (typeof(T).Name == "Byte[]") // for byte response
-            {
-                response.Data = (T)(object)response.RawBytes;
-            }
-            else if (typeof(T).Name == "String") // for string response
-            {
-                response.Data = (T)(object)response.Content;
-            }
-            else if (typeof(T).Name == "Object") // for raw object response
-            {
-                // if the response data was not already deserialized, return the raw bytes.
-                response.Data ??= (T)(object)response.RawBytes;
-            }
-
-            await InterceptResponseAsync(req, response, configuration, options, cancellationToken).ConfigureAwait(false);
-
-            var result = ToApiResponse(response);
-            if (response.ErrorMessage != null)
-            {
-                result.ErrorText = response.ErrorMessage;
-            }
-
-            if (response.Cookies != null && response.Cookies.Count > 0)
-            {
-                if (result.Cookies == null) result.Cookies = new List<Cookie>();
-                foreach (var restResponseCookie in response.Cookies.Cast<Cookie>())
-                {
-                    var cookie = new Cookie(
-                        restResponseCookie.Name,
-                        restResponseCookie.Value,
-                        restResponseCookie.Path,
-                        restResponseCookie.Domain
-                    )
+                    var policy = RetryConfiguration.AsyncRetryPolicy;
+                    var policyResult = await policy.ExecuteAndCaptureAsync((context, ct) => client.ExecuteAsync(req, ct), new Dictionary<string, object> { ["client"] = this, ["configuration"] = configuration, ["request"] = req }, cancellationToken).ConfigureAwait(false);
+                    response = (policyResult.Outcome == OutcomeType.Successful) ? client.Deserialize<T>(policyResult.Result) : new RestResponse<T>(req)
                     {
-                        Comment = restResponseCookie.Comment,
-                        CommentUri = restResponseCookie.CommentUri,
-                        Discard = restResponseCookie.Discard,
-                        Expired = restResponseCookie.Expired,
-                        Expires = restResponseCookie.Expires,
-                        HttpOnly = restResponseCookie.HttpOnly,
-                        Port = restResponseCookie.Port,
-                        Secure = restResponseCookie.Secure,
-                        Version = restResponseCookie.Version
+                        Content = policyResult.FinalHandledResult?.Content,
+                        ContentEncoding = policyResult.FinalHandledResult?.ContentEncoding,
+                        ContentHeaders = policyResult.FinalHandledResult?.ContentHeaders,
+                        ContentLength = policyResult.FinalHandledResult?.ContentLength,
+                        ContentType = policyResult.FinalHandledResult?.ContentType,
+                        Cookies = policyResult.FinalHandledResult?.Cookies,
+                        ErrorException = policyResult.FinalException ?? policyResult.FinalHandledResult?.ErrorException,
+                        ErrorMessage = policyResult.FinalHandledResult?.ErrorMessage,
+                        IsSuccessStatusCode = policyResult.FinalHandledResult?.IsSuccessStatusCode ?? false,
+                        Headers = policyResult.FinalHandledResult?.Headers,
+                        RawBytes = policyResult.FinalHandledResult?.RawBytes,
+                        Request = policyResult.FinalHandledResult?.Request,
+                        ResponseStatus = policyResult.FinalHandledResult?.ResponseStatus ?? default,
+                        ResponseUri = policyResult.FinalHandledResult?.ResponseUri,
+                        RootElement = policyResult.FinalHandledResult?.RootElement,
+                        Server = policyResult.FinalHandledResult?.Server,
+                        StatusCode = policyResult.FinalHandledResult?.StatusCode ?? default,
+                        StatusDescription = policyResult.FinalHandledResult?.StatusDescription,
+                        Version = policyResult.FinalHandledResult?.Version
                     };
-
-                    result.Cookies.Add(cookie);
                 }
+                else
+                {
+            {{/supportsRetry}}
+                    response = await client.ExecuteAsync<T>(req, cancellationToken).ConfigureAwait(false);
+            {{#supportsRetry}}
+                }
+            {{/supportsRetry}}
+
+                // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
+                if (typeof({{{packageName}}}.{{modelPackage}}.AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
+                {
+                    response.Data = (T) typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
+                }
+                else if (typeof(T).Name == "Stream") // for binary response
+                {
+                    // if the response data was not already deserialized as a stream, create a MemoryStream from the raw bytes
+                    if ( response.Data is not Stream )
+                    {
+                        response.Data = (T)(object)new MemoryStream(response.RawBytes);
+                    }
+                }
+                else if (typeof(T).Name == "Byte[]") // for byte response
+                {
+                    response.Data = (T)(object)response.RawBytes;
+                }
+                else if (typeof(T).Name == "String") // for string response
+                {
+                    response.Data = (T)(object)response.Content;
+                }
+                else if (typeof(T).Name == "Object") // for raw object response
+                {
+                    // if the response data was not already deserialized, return the raw bytes.
+                    response.Data ??= (T)(object)response.RawBytes;
+                }
+
+                await InterceptResponseAsync(req, response, configuration, options, cancellationToken).ConfigureAwait(false);
+
+                var result = ToApiResponse(response);
+                if (response.ErrorMessage != null)
+                {
+                    result.ErrorText = response.ErrorMessage;
+                }
+
+                if (response.Cookies != null && response.Cookies.Count > 0)
+                {
+                    if (result.Cookies == null) result.Cookies = new List<Cookie>();
+                    foreach (var restResponseCookie in response.Cookies.Cast<Cookie>())
+                    {
+                        var cookie = new Cookie(
+                            restResponseCookie.Name,
+                            restResponseCookie.Value,
+                            restResponseCookie.Path,
+                            restResponseCookie.Domain
+                        )
+                        {
+                            Comment = restResponseCookie.Comment,
+                            CommentUri = restResponseCookie.CommentUri,
+                            Discard = restResponseCookie.Discard,
+                            Expired = restResponseCookie.Expired,
+                            Expires = restResponseCookie.Expires,
+                            HttpOnly = restResponseCookie.HttpOnly,
+                            Port = restResponseCookie.Port,
+                            Secure = restResponseCookie.Secure,
+                            Version = restResponseCookie.Version
+                        };
+
+                        result.Cookies.Add(cookie);
+                    }
+                }
+                return result;
             }
-            return result;
+            finally
+            {
+                try { RequestSemaphore?.Release(); } catch { }
+            }
         }
 
         #region IAsynchronousClient

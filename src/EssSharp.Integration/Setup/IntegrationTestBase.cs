@@ -256,16 +256,12 @@ namespace EssSharp.Integration.Setup
         protected DockerClient GetClient() => IntegrationTestFactory.GetDockerClient();
 
         /// <summary />
-        protected IntegrationTestSettingsConnection GetEssConnection() => GetEssConnection(EssServerRole.ServiceAdministrator);
-
-        /// <summary />
-        protected IntegrationTestSettingsConnection GetEssConnection( EssServerRole role ) => IntegrationTestFactory.GetEssConnection(role);
-
-        /// <summary />
-        protected IEssServer GetEssServer() => GetEssServer(EssServerRole.ServiceAdministrator);
+        /// <param name="role" />
+        protected IntegrationTestSettingsConnection GetEssConnection( EssServerRole role = EssServerRole.ServiceAdministrator ) => IntegrationTestFactory.GetEssConnection(role);
 
         /// <summary />
         /// <param name="role" />
-        protected IEssServer GetEssServer( EssServerRole role ) => IntegrationTestFactory.GetEssServer(role);
+        /// <param name="maxDegreeOfParallelism" />
+        protected IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator, EssServerFactory factory = null ) => IntegrationTestFactory.GetEssServer(role, factory);
     }
 }

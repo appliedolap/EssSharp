@@ -341,7 +341,7 @@ namespace EssSharp
 
             return sessionList
                 .Where(session => session is not null)
-                .Select(session => new EssSession(session) as IEssSession)
+                .Select(session => new EssSession(session, server) as IEssSession)
                 .ToList() ?? new List<IEssSession>();
         }
 

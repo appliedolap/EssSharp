@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
-using System.Threading;
-using System;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace EssSharp
 {
@@ -8,29 +7,59 @@ namespace EssSharp
     public interface IEssSession
     {
         /// <summary>
-        /// Gets or Sets UserId
+        /// Returns the application name.
         /// </summary>
-        public string UserId { get; }
-       
-        /// <summary>
-        /// Gets or Sets SessionId
-        /// </summary>
-        public long SessionId { get; }
+        /// <remarks>
+        /// This property only has a value if this session is a grid session.
+        /// </remarks>
+        public string Application { get; }
 
         /// <summary>
-        /// Gets or Sets LoginTimeInSeconds
-        /// </summary>
-        public string LoginTimeInSeconds { get; }
-
-        /// <summary>
-        /// Gets or Sets ConnectionSource
+        /// Returns the connection source.
         /// </summary>
         public string ConnectionSource { get; }
 
         /// <summary>
-        /// Kill the session.
+        /// Returns the database name.
+        /// </summary>
+        /// <remarks>
+        /// This property only has a value if this session is a grid session.
+        /// </remarks>
+        public string Database { get; }
+        
+        /// <summary>
+        /// Returns the login time in seconds.
+        /// </summary>
+        public string LoginTimeInSeconds { get; }
+
+        /// <summary>
+        /// Returns the session ID.
+        /// </summary>
+        public long SessionId { get; }
+
+        /// <summary>
+        /// Returns the type of this session.
+        /// </summary>
+        public EssSessionType SessionType { get; }
+
+        /// <summary>
+        /// Returns the user ID.
+        /// </summary>
+        public string UserId { get; }
+
+        /// <summary>
+        /// Asynchronously kills the session.
         /// </summary>
         /// <param name="cancellationToken" />
-        public Task KillAsync( bool logoff, CancellationToken cancellationToken = default );
+        public Task KillAsync( CancellationToken cancellationToken = default );
+
+        /// <summary />
+        public enum EssSessionType
+        {
+            /// <summary />
+            Server,
+            /// <summary />
+            Grid
+        }
     }
 }
