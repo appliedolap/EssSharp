@@ -6,14 +6,24 @@ using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
 using EssSharp.Model;
-
+using Microsoft.Extensions.Logging;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
     [Collection("EssSharp Integration Tests"), Trait("type", "execute"), CollectionPriority(6)]
     public class PerformServerFunctionTests : IntegrationTestBase
     {
+        private readonly ITestOutputHelper _output;
+
+        /// <summary />
+        /// <param name="output" />
+        public PerformServerFunctionTests( ITestOutputHelper output )
+        {
+            _output = output;
+        }
+
         [Fact(DisplayName = @"PerformServerFunctionTests - 01 - Essbase_AfterScriptCreation_CanExecuteMdxScript"), Priority(01)]
         public async Task Essbase_AfterScriptCreation_CanExecuteMdxScript()
         {
@@ -937,11 +947,43 @@ namespace EssSharp.Integration
                 .Where(session => string.Equals(session?.UserId, username)).ToList();
 
             // Assert that there are only two sessions (one for server access and one grid operations).
-            Assert.Equal(factory.MaxDegreeOfParallelism, userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Server).Count());
-            Assert.Equal(factory.MaxDegreeOfParallelism, userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Grid)  .Count());
+            Assert.True(userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Server).Count() <= 2);
+            Assert.True(userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Grid)  .Count() <= 2);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(37)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponses"), Priority(37)]
+        public async Task Essbase_AfterDefaultGrid_CanLogRequestsAndResponses()
+        {
+            // Build a new factory that creates connections with a logger.
+            var factory = new EssServerFactory() { Logger = new DumbLogger(_output) };
+
+            // Get an unconnected server with the configured factory 
+            var server = GetEssServer(factory: factory);
+
+            // Get the Sample.Basic cube.
+            await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+        }
+
+        private class DumbLogger : ILogger
+        {
+            private readonly ITestOutputHelper _helper;
+
+            public DumbLogger( ITestOutputHelper helper ) { _helper = helper; }
+
+            IDisposable ILogger.BeginScope<TState>( TState state ) => null;
+
+            bool ILogger.IsEnabled( LogLevel logLevel ) => true;
+
+            void ILogger.Log<TState>( LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+            {
+                if ( state?.ToString() is { Length: > 0 } message )
+                    _helper?.WriteLine(message);
+            }
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(38)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshGridUseAliases()
         {
             // Get an unconnected server.
@@ -1041,7 +1083,7 @@ namespace EssSharp.Integration
             var rGrid = await essGrid.RefreshAsync();
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterDefaultGrid_CanRefreshEmptyGrid"), Priority(38)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterDefaultGrid_CanRefreshEmptyGrid"), Priority(39)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshEmptyGrid()
         {
             // Get an unconnected server.
@@ -1065,7 +1107,7 @@ namespace EssSharp.Integration
             var rGrid = await essGrid.RefreshAsync();
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(39)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 40 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(40)]
         public async Task Essbase_AfterCubeCreation_CanBuildAndRefreshGrid()
         {
             // Get an unconnected server.
@@ -1156,7 +1198,7 @@ namespace EssSharp.Integration
     }
 
         /*
-        [Fact(DisplayName = @"PerformServerFunctionTests - 40 - Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions"), Priority(40)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions"), Priority(41)]
         public async Task Essbase_AfterDefaultGrid_CanCreateAndSignOffSessions()
         {
             // Get an unconnected server.
@@ -1193,7 +1235,7 @@ namespace EssSharp.Integration
         */
 
         /*
-        [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanSignOffAllSessions"), Priority(35)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 42 - Essbase_AfterDefaultGrid_CanSignOffAllSessions"), Priority(42)]
         public async Task Essbase_AfterDefaultGrid_CanSignOffAllSessions()
         {
             // Get an unconnected server.

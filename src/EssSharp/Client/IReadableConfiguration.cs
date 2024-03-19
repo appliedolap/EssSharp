@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.Extensions.Logging;
 
 namespace EssSharp.Client
 {
@@ -51,6 +52,11 @@ namespace EssSharp.Client
         /// Gets whether to retain cached session cookies.
         /// </summary>
         bool RetainCookies { get; }
+
+        /// <summary>
+        /// Gets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
+        /// </summary>
+        public ILogger Logger { get; }
 
         /// <summary>
         /// Gets the maximum number of concurrent requests.

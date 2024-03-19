@@ -1,6 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
+
 namespace EssSharp
 {
     /// <summary>
@@ -8,6 +10,9 @@ namespace EssSharp
     /// </summary>
     public class EssServerFactory : IEssServerFactory
     {
+        /// <inheritdoc />
+        public ILogger Logger { get; set; }
+
         /// <inheritdoc />
         /// <remarks>The default number of concurrent requests is <c>4</c>.</remarks>
         public int MaxDegreeOfParallelism { get; set; } = 4;
@@ -23,6 +28,7 @@ namespace EssSharp
         {
             var essServer = new EssServer(server, username, password);
             {
+                essServer.Configuration.Logger = Logger;
                 essServer.Configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
             }
 

@@ -16,6 +16,7 @@ using System.Net.Http;
 {{#hasOAuthMethods}}using {{packageName}}.Client.Auth;
 {{/hasOAuthMethods}}
 {{/useRestSharp}}
+using Microsoft.Extensions.Logging;
 
 namespace {{packageName}}.Client
 {
@@ -260,6 +261,11 @@ namespace {{packageName}}.Client
         /// Gets or sets whether to retain cached session cookies.
         /// </summary>
         public virtual bool RetainCookies { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
+        /// </summary>
+        public virtual ILogger Logger { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of concurrent requests.

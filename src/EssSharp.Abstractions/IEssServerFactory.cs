@@ -1,12 +1,19 @@
 ﻿using System.Threading.Tasks;
 using System.Threading;
 
+using Microsoft.Extensions.Logging;
+
 namespace EssSharp
 {
     public interface IEssServerFactory
     {
         /// <summary>
-        /// Gets or sets the maximum number of concurrent requests by any <see cref="IEssServer"> created by this factory.
+        /// Gets or sets the <see cref="ILogger"/> used to log information, warnings, and errors from any <see cref="IEssServer"/> created by this factory.
+        /// </summary>
+        public ILogger Logger { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum number of concurrent requests by any <see cref="IEssServer"/> created by this factory.
         /// </summary>
         public int MaxDegreeOfParallelism { get; set; }
 

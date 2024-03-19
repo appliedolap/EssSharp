@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 {{#hasOAuthMethods}}using {{packageName}}.Client.Auth;
 {{/hasOAuthMethods}}
 {{/useRestSharp}}
+using Microsoft.Extensions.Logging;
 
 namespace {{packageName}}.Client
 {
@@ -77,6 +78,11 @@ namespace {{packageName}}.Client
         /// Gets whether to retain cached session cookies.
         /// </summary>
         bool RetainCookies { get; }
+
+        /// <summary>
+        /// Gets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
+        /// </summary>
+        public ILogger Logger { get; }
 
         /// <summary>
         /// Gets the maximum number of concurrent requests.

@@ -8,6 +8,7 @@ using System.Threading;
 using EssSharp.Api;
 
 using RestSharp;
+using Microsoft.Extensions.Logging;
 
 namespace EssSharp.Client
 {
@@ -148,6 +149,12 @@ namespace EssSharp.Client
                 if ( response.Cookies?.Cast<Cookie>().FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) is { Expired: false } cookie )
                     SessionCookies.Add(cookie);
             }
+
+            // Write the request log.
+            configuration.Logger?.LogInformation(response.ResponseUri?.AbsoluteUri);
+
+            // Write the response log.
+            configuration.Logger?.LogInformation($@"{response.ResponseUri?.AbsoluteUri}: {response.Content}");
 
             // If the response was not successful and an exception is available, throw it.
             if ( !response.IsSuccessful() && response.ErrorException is WebException webException )
