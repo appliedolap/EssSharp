@@ -151,10 +151,10 @@ namespace EssSharp.Client
             }
 
             // Write the request log.
-            configuration.Logger?.LogInformation(response.ResponseUri?.AbsoluteUri);
+            configuration.Logger?.LogInformation(request.GetFormattedRequestString(configuration));
 
             // Write the response log.
-            configuration.Logger?.LogInformation($@"{response.ResponseUri?.AbsoluteUri}: {response.Content}");
+            configuration.Logger?.LogInformation(response.GetFormattedResponseString(configuration));
 
             // If the response was not successful and an exception is available, throw it.
             if ( !response.IsSuccessful() && response.ErrorException is WebException webException )

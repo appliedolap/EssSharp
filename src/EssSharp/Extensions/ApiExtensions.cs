@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 
 using EssSharp.Client;
-
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
@@ -106,6 +108,68 @@ namespace EssSharp.Api
             return input + character;
         }
 
+        private static string GetFormattedRestRequest( this RequestOptions request )
+        {
+            if ( request is null )
+                return string.Empty;
+
+            // Initialize the headers dictionary.
+            var headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            if ( request.PathParameters?.Any() is true )
+                foreach ( var kvp in request.PathParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            // Add each header exposed by the standard headers collection to the headers dictionary.
+            if ( request.QueryParameters?.Any() is true )
+                foreach ( var kvp in request.QueryParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            if ( request.HeaderParameters?.Any() is true )
+                foreach ( var kvp in request.HeaderParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            if ( request.FormParameters?.Any() is true )
+                foreach ( var kvp in request.FormParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            if ( request.FileParameters?.Any() is true )
+                foreach ( var kvp in request.FileParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            return string.Join(" ; ", headers.Keys
+                    .OrderBy(key => key)
+                    .Select(key => $@"{$@"{key}:".PadRight(key.Length)} {headers[key]}"));
+
+            //return string.Empty;
+        }
+
+        private static string GetFormattedRestResponse( this IApiResponse response )
+        {
+            if ( response is null )
+                return string.Empty;
+
+            // Initialize the headers dictionary.
+            var headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            // Add each header exposed by the standard headers collection to the headers dictionary.
+            if ( response.Headers?.Any() is true )
+                foreach ( var kvp in response.Headers )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            return string.Join(" ; ", headers.Keys
+                    .OrderBy(key => key)
+                    .Select(key => $@"{$@"{key}:".PadRight(key.Length)} {headers[key]}"));
+
+            //return string.Empty;
+        }
+
         #endregion
     }
 
@@ -121,4 +185,5 @@ namespace EssSharp.Api
         /// <summary />
         public HttpStatusCode? StatusCode => _response?.StatusCode;
     }
+    
 }

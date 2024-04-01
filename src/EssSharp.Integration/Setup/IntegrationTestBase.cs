@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using Docker.DotNet;
 using Docker.DotNet.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -263,5 +265,23 @@ namespace EssSharp.Integration.Setup
         /// <param name="role" />
         /// <param name="maxDegreeOfParallelism" />
         protected IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator, EssServerFactory factory = null ) => IntegrationTestFactory.GetEssServer(role, factory);
+    }
+
+    public class EssLogger : ILogger
+    {
+        public IDisposable BeginScope<TState>( TState state ) where TState : notnull
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsEnabled( Microsoft.Extensions.Logging.LogLevel logLevel )
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Log<TState>( Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+        {
+            throw new NotImplementedException();
+        }
     }
 }

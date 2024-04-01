@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Xml;
 using System.Xml.Linq;
+using EssSharp.Client;
 using EssSharp.Model;
+using Newtonsoft.Json;
+using RestSharp;
 
 namespace EssSharp
 {
@@ -65,7 +71,7 @@ namespace EssSharp
 
             return applicationList
                 .Items?
-                .Where (application => application is not null)
+                .Where(application => application is not null)
                 .Select(application => new EssApplication(application, server) as IEssApplication)
                 .ToList() ?? new List<IEssApplication>();
         }
@@ -77,9 +83,9 @@ namespace EssSharp
         /// <param name="application"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static List<IEssApplicationConfiguration> ToEssSharpList(this ApplicationConfigList configList, EssApplication application)
+        internal static List<IEssApplicationConfiguration> ToEssSharpList( this ApplicationConfigList configList, EssApplication application )
         {
-            if (application is null)
+            if ( application is null )
                 throw new ArgumentNullException(nameof(application), $"The given {nameof(application)} is null.");
 
             return configList
@@ -101,7 +107,7 @@ namespace EssSharp
 
             return cubeList
                 .Items?
-                .Where (cube => cube is not null)
+                .Where(cube => cube is not null)
                 .Select(cube => new EssCube(cube, application) as IEssCube)
                 .ToList() ?? new List<IEssCube>();
         }
@@ -111,13 +117,13 @@ namespace EssSharp
         /// </summary>
         /// <param name="cubeList" />
         /// <param name="application" />
-        internal static List<IEssGeneration> ToEssSharpList( this GenerationLevelList generationLevelList ) => 
+        internal static List<IEssGeneration> ToEssSharpList( this GenerationLevelList generationLevelList ) =>
             generationLevelList
                 .Items?
                 .Where(generationLevel => generationLevel is not null)
                 .Select(generationLevel => new EssGeneration(generationLevel) as IEssGeneration)
                 .ToList() ?? new List<IEssGeneration>();
-        
+
 
 
         /// <summary>
@@ -125,7 +131,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="datasourcesList" />
         /// <param name="server" />
-        internal static List<IEssDatasource> ToEssSharpList(this DatasourcesList datasourcesList, EssServer server)
+        internal static List<IEssDatasource> ToEssSharpList( this DatasourcesList datasourcesList, EssServer server )
         {
             if ( server is null )
                 throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
@@ -159,9 +165,9 @@ namespace EssSharp
         /// </summary>
         /// <param name="dimensionList" />
         /// <param name="cube" />
-        internal static List<IEssDimension> ToEssSharpList(this DimensionList dimensionList, EssCube cube)
+        internal static List<IEssDimension> ToEssSharpList( this DimensionList dimensionList, EssCube cube )
         {
-            if (cube is null)
+            if ( cube is null )
                 throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
 
             return dimensionList
@@ -209,9 +215,9 @@ namespace EssSharp
         /// </summary>
         /// <param name="fileCollectionResponse" />
         /// <param name="server" />
-        internal static List<T> ToEssSharpList<T>(this FileCollectionResponse fileCollectionResponse, EssServer server) where T : class, IEssFile
+        internal static List<T> ToEssSharpList<T>( this FileCollectionResponse fileCollectionResponse, EssServer server ) where T : class, IEssFile
         {
-            if (server is null)
+            if ( server is null )
                 throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
 
             return fileCollectionResponse
@@ -263,15 +269,15 @@ namespace EssSharp
         /// <param name="cube"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static List<IEssLockObject> ToEssSharpList(this LockObjectList lockObjectList, EssCube cube)
+        internal static List<IEssLockObject> ToEssSharpList( this LockObjectList lockObjectList, EssCube cube )
         {
-            if (cube is null)
+            if ( cube is null )
                 throw new ArgumentNullException(nameof(cube), $"The given {nameof(cube)} is null.");
-            
+
             return lockObjectList
                 .Items?
                 .Where(lockObject => lockObject is not null)
-                .Select(lockObject => new EssLockObject(lockObject, cube)  as IEssLockObject)
+                .Select(lockObject => new EssLockObject(lockObject, cube) as IEssLockObject)
                 .ToList() ?? new List<IEssLockObject>();
         }
 
@@ -317,9 +323,9 @@ namespace EssSharp
         /// </summary>
         /// <param name="resourceList" />
         /// <param name="server" />
-        internal static List<IEssUtility> ToEssSharpList(this ResourceList resourceList, EssServer server)
+        internal static List<IEssUtility> ToEssSharpList( this ResourceList resourceList, EssServer server )
         {
-            if (server is null)
+            if ( server is null )
                 throw new ArgumentNullException(nameof(server), $"The given {nameof(server)} is null.");
 
             return resourceList
@@ -369,13 +375,13 @@ namespace EssSharp
                 .ToList() ?? new List<T>();
         }
 
-        internal static T CreateScript<T>(this EssScriptType type, Script script, EssCube cube) where T : class, IEssScript => type switch
+        internal static T CreateScript<T>( this EssScriptType type, Script script, EssCube cube ) where T : class, IEssScript => type switch
         {
-            EssScriptType.Calc   => new EssCalcScript  (script, cube) as T,
-            EssScriptType.MaxL   => new EssMaxlScript  (script, cube) as T, 
-            EssScriptType.MDX    => new EssMdxScript   (script, cube) as T,
+            EssScriptType.Calc => new EssCalcScript(script, cube) as T,
+            EssScriptType.MaxL => new EssMaxlScript(script, cube) as T,
+            EssScriptType.MDX => new EssMdxScript(script, cube) as T,
             EssScriptType.Report => new EssReportScript(script, cube) as T,
-            _                    => new EssScript      (script, cube) as T
+            _ => new EssScript(script, cube) as T
         };
 
         /// <summary>
@@ -436,13 +442,13 @@ namespace EssSharp
 
             return variableList
                 .Items?
-                .Where (variable => variable is not null)
-                .Select(variable => parent switch 
+                .Where(variable => variable is not null)
+                .Select(variable => parent switch
                 {
-                    EssServer      server      => new EssServerVariable     (variable, server),
+                    EssServer server => new EssServerVariable(variable, server),
                     EssApplication application => new EssApplicationVariable(variable, application),
-                    EssCube        cube        => new EssCubeVariable       (variable, cube),
-                                   _           => null 
+                    EssCube cube => new EssCubeVariable(variable, cube),
+                    _ => null
                 } as T)
                 .Where(variable => variable is not null)
                 .ToList() ?? new List<T>();
@@ -512,9 +518,9 @@ namespace EssSharp
         {
             var gridDimensions = new List<GridDimension>();
 
-            gridDimensions.AddRange(metadata.RowDimensionMembers   .Select((rdm, i) => new GridDimension(row: -1, column:  i, name: rdm)));
-            gridDimensions.AddRange(metadata.ColumnDimensionMembers.Select((cdm, i) => new GridDimension(row:  i, column: -1, name: cdm)));
-            gridDimensions.AddRange(metadata.PageDimensionMembers  .Select( pdm     => new GridDimension(row: -1, column: -1, name: pdm)));;
+            gridDimensions.AddRange(metadata.RowDimensionMembers.Select(( rdm, i ) => new GridDimension(row: -1, column: i, name: rdm)));
+            gridDimensions.AddRange(metadata.ColumnDimensionMembers.Select(( cdm, i ) => new GridDimension(row: i, column: -1, name: cdm)));
+            gridDimensions.AddRange(metadata.PageDimensionMembers.Select(pdm => new GridDimension(row: -1, column: -1, name: pdm))); ;
 
             return gridDimensions;
         }
@@ -526,49 +532,49 @@ namespace EssSharp
         internal static ParametersBean ToModelBean( this IEssJobOptions options ) => new ParametersBean()
         {
             // EssJobType.Unknown (Multiple)
-            Script                = options.Script,
+            Script = options.Script,
 
             // EssJobType.Clear
-            Option                = options.Option?.ToString(),
+            Option = options.Option?.ToString(),
             PartialDataExpression = options.PartialDataExpression,
 
             // EssJobType.ExportExcel
-            BuildMethod           = options.BuildMethod.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildMethodEnum), (int)options.BuildMethod) ? (ParametersBean.BuildMethodEnum)options.BuildMethod : null,
-            Calc                  = options.Calc?.ToString().ToLowerInvariant(),
-            Data                  = options.Data?.ToString().ToLowerInvariant(),
-            MemberIds             = options.MemberIds?.ToString().ToLowerInvariant(),
+            BuildMethod = options.BuildMethod.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildMethodEnum), (int)options.BuildMethod) ? (ParametersBean.BuildMethodEnum)options.BuildMethod : null,
+            Calc = options.Calc?.ToString().ToLowerInvariant(),
+            Data = options.Data?.ToString().ToLowerInvariant(),
+            MemberIds = options.MemberIds?.ToString().ToLowerInvariant(),
 
             // EssJobType.ImportExcel
-            BuildOption           = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
-            CatalogExcelPath      = options.CatalogExcelPath,
-            CreateFiles           = options.CreateFiles?.ToString().ToLowerInvariant(),
-            DeleteExcelOnSuccess  = options.DeleteExcelOnSuccess?.ToString().ToLowerInvariant(),
-            ExecuteScript         = options.ExecuteScripts?.ToString().ToLowerInvariant(),
-            ImportExcelFileName   = options.ImportExcelFilename,
-            Loaddata              = options.LoadData?.ToString().ToLowerInvariant(),
-            Overwrite             = options.Overwrite?.ToString().ToLowerInvariant(),
-            RecreateApplication   = options.RecreateApp?.ToString().ToLowerInvariant(),
+            BuildOption = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
+            CatalogExcelPath = options.CatalogExcelPath,
+            CreateFiles = options.CreateFiles?.ToString().ToLowerInvariant(),
+            DeleteExcelOnSuccess = options.DeleteExcelOnSuccess?.ToString().ToLowerInvariant(),
+            ExecuteScript = options.ExecuteScripts?.ToString().ToLowerInvariant(),
+            ImportExcelFileName = options.ImportExcelFilename,
+            Loaddata = options.LoadData?.ToString().ToLowerInvariant(),
+            Overwrite = options.Overwrite?.ToString().ToLowerInvariant(),
+            RecreateApplication = options.RecreateApp?.ToString().ToLowerInvariant(),
 
             // EssJobType.LoadData
-            File                  = options is EssJobLoadDataOptions ?
+            File = options is EssJobLoadDataOptions ?
                                         $@"[""{string.Join(@""",""", options.File ?? new List<string>())}""]" :
                                         options.File?.FirstOrDefault(),
-            AbortOnError          = options.AbortOnError?.ToString().ToLowerInvariant(),
-            Rule                  = options is EssJobLoadDataOptions ?
+            AbortOnError = options.AbortOnError?.ToString().ToLowerInvariant(),
+            Rule = options is EssJobLoadDataOptions ?
                                         $@"[""{string.Join(@""",""", options.Rule ?? new List<string>())}""]" :
                                         options.Rule?.FirstOrDefault(),
 
             // EssJobType.ExecuteReport
-            IsScriptContent       = options.IsScriptContent ?? false,
-            LockForUpdate         = options.LockForUpdate   ?? false,
-            ReportScriptFilename  = options.ReportScriptFilename
+            IsScriptContent = options.IsScriptContent ?? false,
+            LockForUpdate = options.LockForUpdate ?? false,
+            ReportScriptFilename = options.ReportScriptFilename
         };
 
         internal static List<EssGridDimension> ToEssGridDimension( this List<GridDimension> gridDimensions )
         {
             var dimensionList = new List<EssGridDimension>();
 
-            foreach ( var dimension in gridDimensions)
+            foreach ( var dimension in gridDimensions )
             {
                 dimensionList?.Add(
                     new EssGridDimension()
@@ -583,10 +589,10 @@ namespace EssSharp
                     }
                 );
             }
-            return dimensionList;   
+            return dimensionList;
         }
 
-        internal static GridOperation.ActionEnum ToEssGridActionType( this EssGridZoomType actionEnum)
+        internal static GridOperation.ActionEnum ToEssGridActionType( this EssGridZoomType actionEnum )
         {
             if ( Enum.IsDefined(typeof(GridOperation.ActionEnum), (int)actionEnum) )
                 return (GridOperation.ActionEnum)actionEnum;
@@ -597,7 +603,7 @@ namespace EssSharp
         internal static List<GridDimension> ToModelBean( this List<EssGridDimension> dimensionList )
         {
             var dimList = new List<GridDimension>();
-            foreach (var dimension in dimensionList )
+            foreach ( var dimension in dimensionList )
             {
                 dimList.Add(
                     new GridDimension()
@@ -614,11 +620,11 @@ namespace EssSharp
             return dimList;
         }
 
-        internal static List<GridRange> ToModelBean(this List<EssGridRange> essGridRangeList )
+        internal static List<GridRange> ToModelBean( this List<EssGridRange> essGridRangeList )
         {
             var gridRangeList = new List<GridRange>();
 
-            foreach (var range in essGridRangeList )
+            foreach ( var range in essGridRangeList )
             {
                 gridRangeList.Add(
                     new GridRange()
@@ -657,14 +663,14 @@ namespace EssSharp
             Dimensions = grid.Dimensions.ToModelBean(),
             Slice = grid.Slice.ToModelBean(),
             Alias = grid.Alias,
-            
+
         };
 
-        internal static EssGridSliceData ToEssGridSliceData( this Data data)
+        internal static EssGridSliceData ToEssGridSliceData( this Data data )
         {
             var sliceData = new EssGridSliceData();
 
-            foreach (var range in  data?.Ranges )
+            foreach ( var range in data?.Ranges )
             {
                 sliceData.Ranges.Add(
                     new EssGridRange() {
@@ -704,7 +710,7 @@ namespace EssSharp
         };
 
         internal static EssGridPreferencesAxisSuppression ToEssSharpObject( this ColumnSuppression columnSuppression ) => new EssGridPreferencesAxisSuppression()
-        { 
+        {
             Derived = columnSuppression.Derived,
             EmptyBlocks = columnSuppression.EmptyBlocks,
             Error = columnSuppression.Error,
@@ -837,7 +843,7 @@ namespace EssSharp
             MeaninglessCells = queryPreferences.MeaninglessCells,
             TextList = queryPreferences.TextList,
             UrlDrillThrough = queryPreferences.UrlDrillThrough,
-            MemberIdentifierType = Enum.IsDefined(typeof(NamedQueriesPreferences.MemberIdentifierTypeEnum), (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifier) ? (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifier : null 
+            MemberIdentifierType = Enum.IsDefined(typeof(NamedQueriesPreferences.MemberIdentifierTypeEnum), (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifier) ? (NamedQueriesPreferences.MemberIdentifierTypeEnum)queryPreferences.MemberIdentifier : null
         };
 
         /// <summary>
@@ -856,7 +862,7 @@ namespace EssSharp
             Id = options.ID,
             Password = options.Password,
             Groups = options.Groups,
-            Role = options.Role switch{
+            Role = options.Role switch {
                 EssServerRole.ServiceAdministrator => "Service Administrator",
                 EssServerRole.PowerUser => "Power User",
                 EssServerRole.User => "User",
@@ -868,7 +874,7 @@ namespace EssSharp
         {
             var values = new List<string>();
 
-            foreach( EssMemberFields value in Enum.GetValues(typeof(EssMemberFields)) )
+            foreach ( EssMemberFields value in Enum.GetValues(typeof(EssMemberFields)) )
             {
                 if ( filterOption.HasFlag(value) )
                 {
@@ -889,13 +895,13 @@ namespace EssSharp
         /// <summary />
         internal static EssScriptType GetScriptType<T>() where T : class, IEssScript => typeof(T)?.Name switch
         {
-            nameof(IEssCalcScript)   => EssScriptType.Calc,
-            nameof(IEssMdxScript)    => EssScriptType.MDX,
-            nameof(IEssMaxlScript)   => EssScriptType.MaxL,
+            nameof(IEssCalcScript) => EssScriptType.Calc,
+            nameof(IEssMdxScript) => EssScriptType.MDX,
+            nameof(IEssMaxlScript) => EssScriptType.MaxL,
             nameof(IEssReportScript) => EssScriptType.Report,
-            _                        => EssScriptType.Unknown
+            _ => EssScriptType.Unknown
         };
-        
+
         #endregion
 
         #region System.Enum
@@ -963,20 +969,20 @@ namespace EssSharp
 
         internal static EssApplicationRole ToEssApplicationRole( this string role ) => role switch
         {
-            "db_access"   => EssApplicationRole.db_access,
-            "db_update"   => EssApplicationRole.db_update,
-            "db_manager"  => EssApplicationRole.db_manager,
+            "db_access" => EssApplicationRole.db_access,
+            "db_update" => EssApplicationRole.db_update,
+            "db_manager" => EssApplicationRole.db_manager,
             "app_manager" => EssApplicationRole.app_manager,
-            "all"         => EssApplicationRole.All,
-            _             => throw new NotSupportedException()
+            "all" => EssApplicationRole.All,
+            _ => throw new NotSupportedException()
         };
 
         internal static EssServerRole ToEssServerRole( this string role ) => role.ToLowerInvariant() switch
         {
-            "user"                    => EssServerRole.User,
-            "power user"              => EssServerRole.PowerUser,
+            "user" => EssServerRole.User,
+            "power user" => EssServerRole.PowerUser,
             "service admininistrator" => EssServerRole.ServiceAdministrator,
-            _                         => EssServerRole.Unkown
+            _ => EssServerRole.Unkown
         };
 
         internal static string EssServerRoleToString( this EssServerRole role ) => role switch
@@ -1005,5 +1011,260 @@ namespace EssSharp
         };
 
         #endregion
+
+        #region RestSharp Extensions
+
+        internal static string GetFormattedRequestString( this RestRequest request, IReadableConfiguration configuration )
+        {
+            var requestString = string.Empty; //??? 
+
+            try
+            {
+                var requestUrl = new RestClient(configuration.BasePath).BuildUri(request).AbsoluteUri;
+                requestString = $@"# {request.Method.ToString().ToUpperInvariant()} {requestUrl} HTTP/1.1";
+                requestString = $@"{requestString}{Environment.NewLine}# {request.Parameters.GetFormattedHeadersString(delimiter: $@"{Environment.NewLine}# ")}";
+                var requestBody = request.Parameters.GetFormattedBodyString();
+
+                if ( !string.IsNullOrEmpty(requestBody) )
+                    requestString = $@"{requestString}{Environment.NewLine}{requestBody}";
+            }
+            catch
+            {
+
+            }
+
+            return requestString;
+        }
+
+        internal static string GetFormattedBodyString( this RequestParameters parameters, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        {
+            string formattedBody = null;
+
+            if ( parameters.OfType<BodyParameter>().FirstOrDefault() is { Value: { } value } body )
+            {
+                try
+                {
+                    switch ( body.ContentType )
+                    {
+                        case "application/json": // ContentType.Json:
+                            if ( JsonConvert.SerializeObject(value) is { Length: > 0 } jsonString )
+                            {
+                                using ( var reader = new StringReader(jsonString) )
+                                using ( var writer = new StringWriter() )
+                                {
+                                    var jsonReader = new JsonTextReader(reader);
+                                    var jsonWriter = new JsonTextWriter(writer) { Formatting = Newtonsoft.Json.Formatting.Indented };
+                                    jsonWriter.WriteToken(jsonReader);
+
+                                    formattedBody = writer.ToString();
+                                }
+                            }
+                            break;
+                        case "application/octet-stream":
+                            if ( Encoding.UTF8.GetString((byte[])value) is { Length: > 0 } binaryString )
+                                formattedBody = binaryString;
+                            break;
+                        case "application/xml":
+                            if ( value.ToString() is { Length: > 0 } xmlString )
+                            {
+                                // Write the request log.
+                                using var xmlLogWriter = XmlWriter.Create(new StringBuilder(), new XmlWriterSettings() { Encoding = new UTF8Encoding(false), Indent = true });
+
+                                // Load the request body into a new xml document.
+                                var xmlDocument = new XmlDocument();
+                                xmlDocument.LoadXml(xmlString);
+
+                                // Save the request log file.
+                                xmlDocument.Save(xmlLogWriter);
+
+                                formattedBody = xmlLogWriter.ToString();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                catch { }
+                finally
+                {
+                    if ( string.IsNullOrEmpty(formattedBody) )
+                        formattedBody = value.ToString();
+                }
+            }
+
+            return formattedBody;
+        }
+
+        internal static string GetFormattedHeadersString( this RequestParameters parameters, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        {
+            if ( parameters.OfType<HeaderParameter>().ToList() is { Count: > 0 } headers )
+            {
+
+                // Initialize the standard array of sensitive headers, based on the excludeSensitiveHeaders flag.
+                var sensitiveHeadersArray = excludeSensitiveHeaders ? new string[] { "authorization", "username", "password" } : new string[0];
+
+                // Join the standard set of headers to exclude with the specific set of headers to exclude.
+                var prohibitedHeaders = sensitiveHeadersArray.Union(headersToExclude ?? new string[0], StringComparer.OrdinalIgnoreCase);
+
+                // Initialize the headers dictionary.
+                var headerDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                // Add each header exposed by the standard headers collection to the headers dictionary.
+
+                foreach ( var header in headers )
+                    if ( !string.IsNullOrEmpty(header.Name) )
+                    {
+                        if ( headerDictionary.ContainsKey(header.Name) )
+                            headerDictionary[header.Name] = $@"{headerDictionary[header.Name]}; {header.Value?.ToString()}";
+                        else
+                            headerDictionary[header.Name] = header.Value?.ToString();
+                    }
+
+
+                // If no headers could be obtained, return an empty string. 
+                if ( headers.Count is 0 )
+                    return string.Empty;
+
+                // Set the delimiter.
+                delimiter ??= Environment.NewLine;
+
+                // Get the length of the longest header key plus one for the separator character.
+                var keyLength = headerDictionary.Keys.Max(key => key.Length) + 1;
+
+                // Return the formatted header string.
+                return string.Join(delimiter, headerDictionary.Keys
+                        .Where(key => !prohibitedHeaders.Any(header => string.Equals(header, key, StringComparison.OrdinalIgnoreCase)))
+                        .OrderBy(key => key)
+                        .Select(key => $@"{$@"{key}:".PadRight(keyLength)} {headerDictionary[key]}"));
+            }
+            return string.Empty;
+        }
+
+        internal static string GetFormattedResponseString( this RestResponse response, IReadableConfiguration configuration )
+        {
+            var responseString = string.Empty; //??? 
+
+            try
+            {
+                var responseUrl = response.ResponseUri.AbsoluteUri;
+                responseString = $@"# HTTP/1.1 {(int)response.StatusCode} {response.StatusDescription} ";
+                responseString = $@"{responseString}{Environment.NewLine}# {response.Headers.GetFormattedResponseHeadersString(delimiter: $@"{Environment.NewLine}# ")}";
+                responseString = $@"{responseString}{Environment.NewLine}# {response.ContentHeaders.GetFormattedResponseHeadersString(delimiter: $@"{Environment.NewLine}# ")}";
+
+                if ( response.GetFormattedBodyString() is { Length: > 0 } body )
+                    responseString = $@"{responseString}{Environment.NewLine}{body}"; 
+
+                //var requestBody = response.Content.GetFormattedBodyString();
+
+                //if ( !string.IsNullOrEmpty(requestBody) )
+                //    responseString = $@"{responseString}{Environment.NewLine}{requestBody}";
+            }
+            catch
+            {
+
+            }
+
+            return responseString;
+        }
+
+        internal static string GetFormattedBodyString( this RestResponse response, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        {
+            string formattedBody = null;
+
+            if ( response?.Content is { Length: > 0 } body )
+            {
+                try
+                {
+                    switch ( response.ContentType )
+                    {
+                        case "application/json": // ContentType.Json:
+                            using ( var reader = new StringReader(body) )
+                            using ( var writer = new StringWriter() )
+                            {
+                                var jsonReader = new JsonTextReader(reader);
+                                var jsonWriter = new JsonTextWriter(writer) { Formatting = Newtonsoft.Json.Formatting.Indented };
+                                jsonWriter.WriteToken(jsonReader);
+
+                                formattedBody = writer.ToString();
+                            }
+                            break;
+
+                        case "application/xml":
+                            // Write the request log.
+                            using ( var xmlLogWriter = XmlWriter.Create(new StringBuilder(), new XmlWriterSettings() { Encoding = new UTF8Encoding(false), Indent = true }) )
+                            {
+                                // Load the request body into a new xml document.
+                                var xmlDocument = new XmlDocument();
+                                xmlDocument.LoadXml(body);
+
+                                // Save the request log file.
+                                xmlDocument.Save(xmlLogWriter);
+
+                                formattedBody = xmlLogWriter.ToString();
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                catch { }
+                finally
+                {
+                    if ( string.IsNullOrEmpty(formattedBody) )
+                        formattedBody = body;
+                }
+            }
+
+            return formattedBody;
+        }
+
+        internal static string GetFormattedResponseHeadersString( this IReadOnlyCollection<HeaderParameter> parameters, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        {
+            if ( parameters.OfType<HeaderParameter>().ToList() is { Count: > 0 } headers )
+            {
+
+                // Initialize the standard array of sensitive headers, based on the excludeSensitiveHeaders flag.
+                var sensitiveHeadersArray = excludeSensitiveHeaders ? new string[] { "authorization", "username", "password" } : new string[0];
+
+                // Join the standard set of headers to exclude with the specific set of headers to exclude.
+                var prohibitedHeaders = sensitiveHeadersArray.Union(headersToExclude ?? new string[0], StringComparer.OrdinalIgnoreCase);
+
+                // Initialize the headers dictionary.
+                var headerDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+                // Add each header exposed by the standard headers collection to the headers dictionary.
+
+                foreach ( var header in headers )
+                    if ( !string.IsNullOrEmpty(header.Name) )
+                    {
+                        if ( headerDictionary.ContainsKey(header.Name) )
+                            headerDictionary[header.Name] = $@"{headerDictionary[header.Name]}; {header.Value?.ToString()}";
+                        else
+                            headerDictionary[header.Name] = header.Value?.ToString();
+                    }
+
+
+                // If no headers could be obtained, return an empty string. 
+                if ( headers.Count is 0 )
+                    return string.Empty;
+
+                // Set the delimiter.
+                delimiter ??= Environment.NewLine;
+
+                // Get the length of the longest header key plus one for the separator character.
+                var keyLength = headerDictionary.Keys.Max(key => key.Length) + 1;
+
+                // Return the formatted header string.
+                return string.Join(delimiter, headerDictionary.Keys
+                        .Where(key => !prohibitedHeaders.Any(header => string.Equals(header, key, StringComparison.OrdinalIgnoreCase)))
+                        .OrderBy(key => key)
+                        .Select(key => $@"{$@"{key}:".PadRight(keyLength)} {headerDictionary[key]}"));
+            }
+            return string.Empty;
+        }
+
+        #endregion
+
     }
 }

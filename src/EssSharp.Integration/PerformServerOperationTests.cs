@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using EssSharp.Integration.Setup;
 using EssSharp.Model;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -61,7 +63,7 @@ namespace EssSharp.Integration
             // Assert that the "Year" dimensions is the first row dimension member.
             Assert.Equal("Year", report.Metadata.RowDimensionMembers.FirstOrDefault());
             // Assert that the data cell at row 3, column 2 equals "105522.0".
-            Assert.Equal("105522.0", report.Data[2,1]);
+            Assert.Equal("105522.0", report.Data[2, 1]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 03 - Essbase_AfterScriptCreation_CanGetMdxGrid"), Priority(03)]
@@ -514,7 +516,7 @@ namespace EssSharp.Integration
         {
             // Get an unconnected server.
             var server = GetEssServer();
-            
+
             var cube = await server
                 .GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic");
@@ -948,7 +950,7 @@ namespace EssSharp.Integration
 
             // Assert that there are only two sessions (one for server access and one grid operations).
             Assert.True(userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Server).Count() <= 2);
-            Assert.True(userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Grid)  .Count() <= 2);
+            Assert.True(userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Grid).Count() <= 2);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponses"), Priority(37)]
@@ -960,10 +962,12 @@ namespace EssSharp.Integration
             // Get an unconnected server with the configured factory 
             var server = GetEssServer(factory: factory);
 
-            // Get the Sample.Basic cube.
-            await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var homeFolder = await server.GetUserHomeFolderAsync();
+            var file = File.Open($@"C:\Users\matth\Desktop\test.txt", FileMode.Open);
+            var newFolder =  await homeFolder.UploadFileAsync(file);
+
+            await newFolder.DeleteAsync();
+
         }
 
         private class DumbLogger : ILogger
@@ -972,11 +976,11 @@ namespace EssSharp.Integration
 
             public DumbLogger( ITestOutputHelper helper ) { _helper = helper; }
 
-            IDisposable ILogger.BeginScope<TState>( TState state ) => null;
+            public IDisposable BeginScope<TState>( TState state ) => null;
 
-            bool ILogger.IsEnabled( LogLevel logLevel ) => true;
+            public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel ) => true;
 
-            void ILogger.Log<TState>( LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+            void ILogger.Log<TState>(Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
             {
                 if ( state?.ToString() is { Length: > 0 } message )
                     _helper?.WriteLine(message);
@@ -988,7 +992,7 @@ namespace EssSharp.Integration
         {
             // Get an unconnected server.
             var server = GetEssServer();
-            
+
             var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
 
             var grid = new Grid()
@@ -1074,7 +1078,7 @@ namespace EssSharp.Integration
 
             essGrid.Preferences = preferences;
 
-            essGrid.Selection = new List<EssGridSelection> { new EssGridSelection(1, 0)};
+            essGrid.Selection = new List<EssGridSelection> { new EssGridSelection(1, 0) };
 
             var zInGrid = await essGrid.ZoomAsync(zoomOption: EssGridZoomType.ZOOMIN);
 
@@ -1112,6 +1116,97 @@ namespace EssSharp.Integration
         {
             // Get an unconnected server.
             var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+
+            var grid = cube.GetGrid();
+
+            grid.Alias = "Default";
+
+            grid.Dimensions = new List<EssGridDimension>()
+            {
+                new EssGridDimension()
+                {
+                    Name = "Year",
+                    Row = -1,
+                    Column = 0,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Measures",
+                    Row = 1,
+                    Column = -1,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Product",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Product",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Market",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Market",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Scenario",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Scenario",
+                    Hidden = false,
+                    Expanded = false
+                }
+            };
+
+            grid.Slice = new EssGridSlice()
+            {
+                Columns = 4,
+                Rows = 3,
+                Data = new EssGridSliceData()
+                {
+                    Ranges = new List<EssGridRange>()
+                    {
+                        new EssGridRange()
+                        {
+                            Start = 0,
+                            End = 11,
+                            Values = new List<string>()
+                            {
+                                "", "Product", "Market", "Scenario", "", "Measures", "", "", "Year", "", "", ""
+                            }
+                        }
+                    }
+                }
+            };
+
+            await grid.RefreshAsync();
+
+            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterCubeCreation_CanLogBody"), Priority(41)]
+        public async Task Essbase_AfterCubeCreation_CanLogBody()
+        {
+            var factory = new EssServerFactory() { Logger = new DumbLogger(_output) };
+
+            // Get an unconnected server.
+            var server = GetEssServer(factory: factory);
 
             // Get the "CalcAll" script from Sample.Basic.
             var cube = await server.GetApplicationAsync("Sample")

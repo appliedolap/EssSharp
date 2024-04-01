@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.Mime;
 using EssSharp.Client;
 using EssSharp.Model;
+using Newtonsoft.Json;
 
 namespace EssSharp.Api
 {
@@ -1736,8 +1737,14 @@ namespace EssSharp.Api
                 localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
             }
 
+            var rTest = GetFormattedRestRequest(localVarRequestOptions);
+
             // make the HTTP request
             var localVarResponse = await this.AsynchronousClient.GetAsync<MembersList>("/outline/{app}/{cube}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            var contentDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(localVarResponse.RawContent);
+
+            var test = GetFormattedRestResponse(localVarResponse);
 
             if (this.ExceptionFactory != null)
             {
@@ -1951,5 +1958,66 @@ namespace EssSharp.Api
             return localVarResponse;
         }
 
+        private string GetFormattedRestRequest( RequestOptions request )
+        {
+            if ( request is null )
+                return string.Empty;
+
+            // Initialize the headers dictionary.
+            var headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            if ( request.PathParameters?.Any() is true )
+                foreach ( var kvp in request.PathParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            // Add each header exposed by the standard headers collection to the headers dictionary.
+            if ( request.QueryParameters?.Any() is true )
+                foreach ( var kvp in request.QueryParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            if ( request.HeaderParameters?.Any() is true )
+                foreach ( var kvp in request.HeaderParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            if ( request.FormParameters?.Any() is true )
+                foreach ( var kvp in request.FormParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            if ( request.FileParameters?.Any() is true )
+                foreach ( var kvp in request.FileParameters )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            return string.Join(" ; ", headers.Keys
+                    .OrderBy(key => key)
+                    .Select(key => $@"{$@"{key}:".PadRight(key.Length)} {headers[key]}"));
+            
+            //return string.Empty;
+        }
+
+        private string GetFormattedRestResponse( IApiResponse response )
+        {
+            if ( response is null )
+                return string.Empty;
+
+            // Initialize the headers dictionary.
+            var headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            // Add each header exposed by the standard headers collection to the headers dictionary.
+            if ( response.Headers?.Any() is true )
+                foreach ( var kvp in response.Headers )
+                    if ( !string.IsNullOrEmpty(kvp.Key) )
+                        headers[kvp.Key] = string.Join("; ", kvp.Value);
+
+            return string.Join(" ; ", headers.Keys
+                    .OrderBy(key => key)
+                    .Select(key => $@"{$@"{key}:".PadRight(key.Length)} {headers[key]}"));
+
+            //return string.Empty;
+        }
     }
 }
