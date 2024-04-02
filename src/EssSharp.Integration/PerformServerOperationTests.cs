@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
@@ -963,8 +964,10 @@ namespace EssSharp.Integration
             var server = GetEssServer(factory: factory);
 
             var homeFolder = await server.GetUserHomeFolderAsync();
-            var file = File.Open($@"C:\Users\matth\Desktop\test.txt", FileMode.Open);
-            var newFolder =  await homeFolder.UploadFileAsync(file);
+
+            var stream = new MemoryStream(Encoding.UTF8.GetBytes("This is a test."));
+            //var file = File.Open($@"C:\Users\matth\Desktop\test.txt", FileMode.Open);
+            var newFolder =  await homeFolder.UploadFileAsync(stream, "tester.txt");
 
             await newFolder.DeleteAsync();
 
