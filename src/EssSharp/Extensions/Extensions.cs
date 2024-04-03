@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
-using System.Xml.Linq;
+
 using EssSharp.Client;
 using EssSharp.Model;
+
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
