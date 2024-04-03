@@ -957,12 +957,15 @@ namespace EssSharp.Integration
             // Build a new factory that creates connections with a logger.
             var factory = new EssServerFactory() { Logger = new StringLogger(ref builder) };
 
+            // Get the server base url, i.e., http://localhost:9000/essbase.
+            var serverBaseUrl = GetEssConnection().Server.TrimEnd('/');
+
             // Get an unconnected server with the configured factory 
             var server = GetEssServer(factory: factory);
 
             await server.GetApplicationAsync("Sample");
 
-            var requestSummary  = @"# GET http://mattallen:9000/essbase/rest/v1/applications/Sample HTTP/1.1";
+            var requestSummary  = $@"# GET {serverBaseUrl}/rest/v1/applications/Sample HTTP/1.1";
 
             Assert.Equal(requestSummary, builder.ToString().Split(Environment.NewLine)[0]);
 
