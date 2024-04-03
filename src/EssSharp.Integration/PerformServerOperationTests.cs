@@ -971,7 +971,7 @@ namespace EssSharp.Integration
 
             var responseSummary = @"# HTTP/1.1 200 OK";
 
-            Assert.Equal(responseSummary, builder.ToString().Split(Environment.NewLine)[3]);
+            Assert.Equal(responseSummary, builder.ToString().Split(Environment.NewLine)[2]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(38)]

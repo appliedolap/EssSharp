@@ -151,10 +151,10 @@ namespace EssSharp.Client
             }
 
             // Write the request log.
-            configuration.Logger?.LogInformation(request.GetFormattedRequestString(configuration));
+            configuration?.Logger?.Log(logLevel: LogLevel.Information, eventId: request.GetEventId(configuration), message: request.GetFormattedRequestMessage(configuration));
 
             // Write the response log.
-            configuration.Logger?.LogInformation(response.GetFormattedResponseString(configuration));
+            configuration?.Logger?.Log(logLevel: LogLevel.Information, eventId: response.GetEventId(),             message: response.GetFormattedResponseMessage());
 
             // If the response was not successful and an exception is available, throw it.
             if ( !response.IsSuccessful() && response.ErrorException is WebException webException )

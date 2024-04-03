@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using EssSharp.Client;
 using EssSharp.Model;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -1014,257 +1016,242 @@ namespace EssSharp
 
         #region RestSharp Extensions
 
-        internal static string GetFormattedRequestString( this RestRequest request, IReadableConfiguration configuration )
+        /// <summary />
+        /// <param name="request" />
+        /// <param name="configuration" />
+        internal static EventId GetEventId( this RestRequest request, IReadableConfiguration configuration )
         {
-            var requestString = string.Empty; //??? 
+            // Construct a new event identifier with the request event type.
+            var identifier = new EventId(id: (int)EssSharpLogEventType.Request);
+
+            try
+            {
+                // Attempt to fetch the path from the request Uri and rebuild the event identifier.
+                var requestPath = new RestClient(configuration.BasePath).BuildUri(request).GetLeftPart(UriPartial.Path).Trim('/');
+                identifier = new EventId(id: identifier.Id, name: requestPath);
+            }
+            catch
+            {
+                // Swallow any exception here.
+            }
+
+            return identifier;
+        }
+
+        /// <summary />
+        /// <param name="request" />
+        /// <param name="configuration" />
+        internal static string GetFormattedRequestMessage( this RestRequest request, IReadableConfiguration configuration )
+        {
+            var builder = new StringBuilder();
 
             try
             {
                 var requestUrl = new RestClient(configuration.BasePath).BuildUri(request).AbsoluteUri;
-                requestString = $@"# {request.Method.ToString().ToUpperInvariant()} {requestUrl} HTTP/1.1";
-                requestString = $@"{requestString}{Environment.NewLine}# {request.Parameters.GetFormattedHeadersString(delimiter: $@"{Environment.NewLine}# ")}";
-                var requestBody = request.Parameters.GetFormattedBodyString();
 
-                if ( !string.IsNullOrEmpty(requestBody) )
-                    requestString = $@"{requestString}{Environment.NewLine}{requestBody}";
+                builder.AppendLine($@"# {request.Method.ToString().ToUpperInvariant()} {requestUrl} HTTP/1.1");
+                
+                if ( request.GetFormattedHeaders() is { Length: > 0 } headers )
+                    builder.AppendLine($@"# {headers}");
+
+                if ( request.GetFormattedContent() is { Length: > 0 } content )
+                    builder.AppendLine(content);
             }
             catch
             {
-
+                // Swallow any exception here.
             }
 
-            return requestString;
+            return builder.ToString().TrimEnd();
         }
 
-        internal static string GetFormattedBodyString( this RequestParameters parameters, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        /// <summary />
+        /// <param name="response" />
+        internal static EventId GetEventId( this RestResponse response )
         {
-            string formattedBody = null;
+            // Construct a new event identifier with the request event type.
+            var identifier = new EventId(id: (int)EssSharpLogEventType.Response);
 
-            if ( parameters.OfType<BodyParameter>().FirstOrDefault() is { Value: { } value } body )
+            try
             {
-                try
-                {
-                    switch ( body.ContentType )
-                    {
-                        case "application/json": // ContentType.Json:
-                            if ( JsonConvert.SerializeObject(value) is { Length: > 0 } jsonString )
-                            {
-                                using ( var reader = new StringReader(jsonString) )
-                                using ( var writer = new StringWriter() )
-                                {
-                                    var jsonReader = new JsonTextReader(reader);
-                                    var jsonWriter = new JsonTextWriter(writer) { Formatting = Newtonsoft.Json.Formatting.Indented };
-                                    jsonWriter.WriteToken(jsonReader);
-
-                                    formattedBody = writer.ToString();
-                                }
-                            }
-                            break;
-                        case "application/octet-stream":
-                            if ( Encoding.UTF8.GetString((byte[])value) is { Length: > 0 } binaryString )
-                                formattedBody = binaryString;
-                            break;
-                        case "application/xml":
-                            if ( value.ToString() is { Length: > 0 } xmlString )
-                            {
-                                // Write the request log.
-                                using var xmlLogWriter = XmlWriter.Create(new StringBuilder(), new XmlWriterSettings() { Encoding = new UTF8Encoding(false), Indent = true });
-
-                                // Load the request body into a new xml document.
-                                var xmlDocument = new XmlDocument();
-                                xmlDocument.LoadXml(xmlString);
-
-                                // Save the request log file.
-                                xmlDocument.Save(xmlLogWriter);
-
-                                formattedBody = xmlLogWriter.ToString();
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                catch { }
-                finally
-                {
-                    if ( string.IsNullOrEmpty(formattedBody) )
-                        formattedBody = value.ToString();
-                }
+                // Attempt to fetch the path from the response Uri and rebuild the event identifier.
+                var responsePath = response.ResponseUri.GetLeftPart(UriPartial.Path).Trim('/');
+                identifier = new EventId(id: identifier.Id, name: responsePath);
             }
-
-            return formattedBody;
-        }
-
-        internal static string GetFormattedHeadersString( this RequestParameters parameters, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
-        {
-            if ( parameters.OfType<HeaderParameter>().ToList() is { Count: > 0 } headers )
+            catch
             {
-
-                // Initialize the standard array of sensitive headers, based on the excludeSensitiveHeaders flag.
-                var sensitiveHeadersArray = excludeSensitiveHeaders ? new string[] { "authorization", "username", "password" } : new string[0];
-
-                // Join the standard set of headers to exclude with the specific set of headers to exclude.
-                var prohibitedHeaders = sensitiveHeadersArray.Union(headersToExclude ?? new string[0], StringComparer.OrdinalIgnoreCase);
-
-                // Initialize the headers dictionary.
-                var headerDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-                // Add each header exposed by the standard headers collection to the headers dictionary.
-
-                foreach ( var header in headers )
-                    if ( !string.IsNullOrEmpty(header.Name) )
-                    {
-                        if ( headerDictionary.ContainsKey(header.Name) )
-                            headerDictionary[header.Name] = $@"{headerDictionary[header.Name]}; {header.Value?.ToString()}";
-                        else
-                            headerDictionary[header.Name] = header.Value?.ToString();
-                    }
-
-
-                // If no headers could be obtained, return an empty string. 
-                if ( headers.Count is 0 )
-                    return string.Empty;
-
-                // Set the delimiter.
-                delimiter ??= Environment.NewLine;
-
-                // Get the length of the longest header key plus one for the separator character.
-                var keyLength = headerDictionary.Keys.Max(key => key.Length) + 1;
-
-                // Return the formatted header string.
-                return string.Join(delimiter, headerDictionary.Keys
-                        .Where(key => !prohibitedHeaders.Any(header => string.Equals(header, key, StringComparison.OrdinalIgnoreCase)))
-                        .OrderBy(key => key)
-                        .Select(key => $@"{$@"{key}:".PadRight(keyLength)} {headerDictionary[key]}"));
+                // Swallow any exception here.
             }
-            return string.Empty;
+
+            return identifier;
         }
 
-        internal static string GetFormattedResponseString( this RestResponse response, IReadableConfiguration configuration )
+        /// <summary />
+        /// <param name="response" />
+        internal static string GetFormattedResponseMessage( this RestResponse response )
         {
-            var responseString = string.Empty; //??? 
+            var builder = new StringBuilder();
 
             try
             {
                 var responseUrl = response.ResponseUri.AbsoluteUri;
-                responseString = $@"# HTTP/1.1 {(int)response.StatusCode} {response.StatusDescription}";
-                responseString = $@"{responseString}{Environment.NewLine}# {response.Headers.GetFormattedResponseHeadersString(delimiter: $@"{Environment.NewLine}# ")}";
-                responseString = $@"{responseString}{Environment.NewLine}# {response.ContentHeaders.GetFormattedResponseHeadersString(delimiter: $@"{Environment.NewLine}# ")}";
 
-                if ( response.GetFormattedBodyString() is { Length: > 0 } body )
-                    responseString = $@"{responseString}{Environment.NewLine}{body}"; 
+                builder.AppendLine($@"# HTTP/1.1 {(int)response.StatusCode} {response.StatusDescription}");
 
-                //var requestBody = response.Content.GetFormattedBodyString();
+                if ( response.GetFormattedHeaders() is { Length: > 0 } headers )
+                    builder.AppendLine($@"# {headers}");
 
-                //if ( !string.IsNullOrEmpty(requestBody) )
-                //    responseString = $@"{responseString}{Environment.NewLine}{requestBody}";
+                if ( response.GetFormattedContent() is { Length: > 0 } content )
+                    builder.AppendLine(content);
             }
             catch
             {
-
+                // Swallow any exception here.
             }
 
-            return responseString;
+            return builder.ToString().TrimEnd();
         }
 
-        internal static string GetFormattedBodyString( this RestResponse response, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        /// <summary />
+        private static string GetFormattedContent( this RestRequest request )
         {
-            string formattedBody = null;
-
-            if ( response?.Content is { Length: > 0 } body )
-            {
-                try
-                {
-                    switch ( response.ContentType )
-                    {
-                        case "application/json": // ContentType.Json:
-                            using ( var reader = new StringReader(body) )
-                            using ( var writer = new StringWriter() )
-                            {
-                                var jsonReader = new JsonTextReader(reader);
-                                var jsonWriter = new JsonTextWriter(writer) { Formatting = Newtonsoft.Json.Formatting.Indented };
-                                jsonWriter.WriteToken(jsonReader);
-
-                                formattedBody = writer.ToString();
-                            }
-                            break;
-
-                        case "application/xml":
-                            // Write the request log.
-                            using ( var xmlLogWriter = XmlWriter.Create(new StringBuilder(), new XmlWriterSettings() { Encoding = new UTF8Encoding(false), Indent = true }) )
-                            {
-                                // Load the request body into a new xml document.
-                                var xmlDocument = new XmlDocument();
-                                xmlDocument.LoadXml(body);
-
-                                // Save the request log file.
-                                xmlDocument.Save(xmlLogWriter);
-
-                                formattedBody = xmlLogWriter.ToString();
-                            }
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-                catch { }
-                finally
-                {
-                    if ( string.IsNullOrEmpty(formattedBody) )
-                        formattedBody = body;
-                }
-            }
-
-            return formattedBody;
+            return request?.Parameters?.OfType<BodyParameter>().FirstOrDefault() is { Value: { } content } bodyParameter
+                ? GetFormattedContent(bodyParameter.ContentType, content)
+                : null;
         }
 
-        internal static string GetFormattedResponseHeadersString( this IReadOnlyCollection<HeaderParameter> parameters, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        /// <summary />
+        private static string GetFormattedHeaders( this RestRequest request, bool excludeSensitiveHeaders = true, string[] headersToExclude = null, string delimiter = null )
         {
-            if ( parameters.OfType<HeaderParameter>().ToList() is { Count: > 0 } headers )
+            return request?.Parameters?.OfType<HeaderParameter>().ToList() is { Count: > 0 } headers
+                ? GetFormattedHeaders(headers, excludeSensitiveHeaders, headersToExclude, delimiter)
+                : null;
+        }
+
+        /// <summary />
+        private static string GetFormattedContent( this RestResponse response )
+        {
+            return response?.Content is { Length: > 0 } content 
+                ? GetFormattedContent(response.ContentType, content) 
+                : null;
+        }
+
+        /// <summary />
+        private static string GetFormattedHeaders( this RestResponse response, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        {
+            return (response?.Headers?.AsEnumerable() ?? Enumerable.Empty<HeaderParameter>()).Concat(response?.ContentHeaders?.AsEnumerable() ?? Enumerable.Empty<HeaderParameter>()).ToList() is { Count: > 0 } headers
+                ? GetFormattedHeaders(headers, excludeSensitiveHeaders, headersToExclude, delimiter)
+                : null;
+        }
+
+        /// <summary />
+        private static string GetFormattedContent( ContentType contentType, object content )
+        {
+            string formattedContent = null;
+
+            try
             {
-
-                // Initialize the standard array of sensitive headers, based on the excludeSensitiveHeaders flag.
-                var sensitiveHeadersArray = excludeSensitiveHeaders ? new string[] { "authorization", "username", "password" } : new string[0];
-
-                // Join the standard set of headers to exclude with the specific set of headers to exclude.
-                var prohibitedHeaders = sensitiveHeadersArray.Union(headersToExclude ?? new string[0], StringComparer.OrdinalIgnoreCase);
-
-                // Initialize the headers dictionary.
-                var headerDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-                // Add each header exposed by the standard headers collection to the headers dictionary.
-
-                foreach ( var header in headers )
-                    if ( !string.IsNullOrEmpty(header.Name) )
+                switch ( contentType )
+                {
+                    case "application/json": // ContentType.Json:
                     {
-                        if ( headerDictionary.ContainsKey(header.Name) )
-                            headerDictionary[header.Name] = $@"{headerDictionary[header.Name]}; {header.Value?.ToString()}";
-                        else
-                            headerDictionary[header.Name] = header.Value?.ToString();
+                        if ( (content is string cs ? cs : JsonConvert.SerializeObject(content)) is { Length: > 0 } jString )
+                        {
+                            using var sReader = new StringReader  (jString);
+                            using var sWriter = new StringWriter  ();
+                            using var jReader = new JsonTextReader(sReader);
+                            using var jWriter = new JsonTextWriter(sWriter) { Formatting = Newtonsoft.Json.Formatting.Indented };
+                            jWriter.WriteToken(jReader);
+
+                            formattedContent = sWriter.ToString();
+                        }
+                        break;
                     }
 
+                    case "application/octet-stream": // ContentType.Binary
+                    {
+                        if ( (content is string cs ? cs : Encoding.UTF8.GetString((byte[])content)) is { Length: > 0 } bString )
+                        {
+                            formattedContent = bString;
+                        }
+                        break;
+                    }
 
-                // If no headers could be obtained, return an empty string. 
-                if ( headers.Count is 0 )
-                    return string.Empty;
+                    case "application/xml": // ContentType.Xml
+                    {
+                        if ( content.ToString() is { Length: > 0 } xString )
+                        {
+                            using var xWriter = XmlWriter.Create(new StringBuilder(), new XmlWriterSettings() { Encoding = new UTF8Encoding(false), Indent = true });
+                            var xmlDocument = new XmlDocument();
 
-                // Set the delimiter.
-                delimiter ??= Environment.NewLine;
+                            xmlDocument.LoadXml(xString);
+                            xmlDocument.Save(xWriter);
 
-                // Get the length of the longest header key plus one for the separator character.
-                var keyLength = headerDictionary.Keys.Max(key => key.Length) + 1;
+                            formattedContent = xWriter.ToString();
+                        }
+                        break;
+                    }
 
-                // Return the formatted header string.
-                return string.Join(delimiter, headerDictionary.Keys
-                        .Where(key => !prohibitedHeaders.Any(header => string.Equals(header, key, StringComparison.OrdinalIgnoreCase)))
-                        .OrderBy(key => key)
-                        .Select(key => $@"{$@"{key}:".PadRight(keyLength)} {headerDictionary[key]}"));
+                    default:
+                    {
+                        formattedContent = content?.ToString();
+                        break;
+                    }
+                }
             }
-            return string.Empty;
+            catch { }
+            finally
+            {
+                if ( string.IsNullOrEmpty(formattedContent) )
+                    formattedContent = content?.ToString();
+            }
+
+            return formattedContent;
+        }
+
+        /// <summary />
+        private static string GetFormattedHeaders( List<HeaderParameter> headers, bool excludeSensitiveHeaders = true, string[] headersToExclude = null, string delimiter = null )
+        {
+            // Initialize the standard array of sensitive headers, based on the excludeSensitiveHeaders flag.
+            var sensitiveHeadersArray = excludeSensitiveHeaders ? ["authorization", "username", "password"] : new string[0];
+
+            // Join the standard set of headers to exclude with the specific set of headers to exclude.
+            var prohibitedHeaders = sensitiveHeadersArray.Union(headersToExclude ?? [], StringComparer.OrdinalIgnoreCase);
+
+            // Initialize the headers dictionary.
+            var headerDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            // Add each header exposed by the standard headers collection to the headers dictionary.
+            foreach ( var header in headers )
+            {
+                if ( !string.IsNullOrEmpty(header.Name) )
+                {
+                    if ( headerDictionary.ContainsKey(header.Name) )
+                        headerDictionary[header.Name] = $@"{headerDictionary[header.Name]}; {header.Value?.ToString()}";
+                    else
+                        headerDictionary[header.Name] = header.Value?.ToString();
+                }
+            }
+
+            // If no headers could be obtained, return an empty string. 
+            if ( headers.Count is 0 )
+                return string.Empty;
+
+            // Set the delimiter.
+            delimiter ??= $@"{Environment.NewLine}# ";
+
+            // Get the length of the longest header key plus one for the separator character.
+            var keyLength = headerDictionary.Keys
+                .Where(key => !prohibitedHeaders.Any(header => string.Equals(header, key, StringComparison.OrdinalIgnoreCase)))
+                .Max  (key => key.Length) + 1;
+
+            // Return the formatted header string.
+            return string.Join(delimiter, headerDictionary.Keys
+                    .Where  (key => !prohibitedHeaders.Any(header => string.Equals(header, key, StringComparison.OrdinalIgnoreCase)))
+                    .OrderBy(key => key)
+                    .Select (key => $@"{$@"{key}:".PadRight(keyLength)} {headerDictionary[key]}"));
         }
 
         #endregion
-
     }
 }
