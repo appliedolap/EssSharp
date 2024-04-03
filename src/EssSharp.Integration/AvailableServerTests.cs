@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 using EssSharp.Integration.Setup;
 
 using Xunit;
-
+using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
     [Collection("EssSharp Integration Tests"), Trait("type", "server"), CollectionPriority(2)]
     public class AvailableServerTests : IntegrationTestBase
     {
+        /// <summary />
+        /// <param name="output" />
+        public AvailableServerTests( ITestOutputHelper output ) : base(output) { }
+
         [Fact(DisplayName = "AvailableServerTests - 01 - Essbase_AfterStartup_IsRestApiReady"), Priority(01)]
         public async Task Essbase_AfterStartup_IsRestApiReady()
         {

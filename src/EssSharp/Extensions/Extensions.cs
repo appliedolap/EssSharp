@@ -1147,7 +1147,7 @@ namespace EssSharp
             try
             {
                 var responseUrl = response.ResponseUri.AbsoluteUri;
-                responseString = $@"# HTTP/1.1 {(int)response.StatusCode} {response.StatusDescription} ";
+                responseString = $@"# HTTP/1.1 {(int)response.StatusCode} {response.StatusDescription}";
                 responseString = $@"{responseString}{Environment.NewLine}# {response.Headers.GetFormattedResponseHeadersString(delimiter: $@"{Environment.NewLine}# ")}";
                 responseString = $@"{responseString}{Environment.NewLine}# {response.ContentHeaders.GetFormattedResponseHeadersString(delimiter: $@"{Environment.NewLine}# ")}";
 

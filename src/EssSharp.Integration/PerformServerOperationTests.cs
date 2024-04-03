@@ -18,14 +18,9 @@ namespace EssSharp.Integration
     [Collection("EssSharp Integration Tests"), Trait("type", "execute"), CollectionPriority(6)]
     public class PerformServerFunctionTests : IntegrationTestBase
     {
-        private readonly ITestOutputHelper _output;
-
         /// <summary />
         /// <param name="output" />
-        public PerformServerFunctionTests( ITestOutputHelper output )
-        {
-            _output = output;
-        }
+        public PerformServerFunctionTests( ITestOutputHelper output ) : base(output) { }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 01 - Essbase_AfterScriptCreation_CanExecuteMdxScript"), Priority(01)]
         public async Task Essbase_AfterScriptCreation_CanExecuteMdxScript()
@@ -957,37 +952,23 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponses"), Priority(37)]
         public async Task Essbase_AfterDefaultGrid_CanLogRequestsAndResponses()
         {
+            var builder = new StringBuilder();
+
             // Build a new factory that creates connections with a logger.
-            var factory = new EssServerFactory() { Logger = new DumbLogger(_output) };
+            var factory = new EssServerFactory() { Logger = new StringLogger(ref builder) };
 
             // Get an unconnected server with the configured factory 
             var server = GetEssServer(factory: factory);
 
-            var homeFolder = await server.GetUserHomeFolderAsync();
+            await server.GetApplicationAsync("Sample");
 
-            var stream = new MemoryStream(Encoding.UTF8.GetBytes("This is a test."));
-            //var file = File.Open($@"C:\Users\matth\Desktop\test.txt", FileMode.Open);
-            var newFolder =  await homeFolder.UploadFileAsync(stream, "tester.txt");
+            var requestSummary  = @"# GET http://mattallen:9000/essbase/rest/v1/applications/Sample HTTP/1.1";
 
-            await newFolder.DeleteAsync();
+            Assert.Equal(requestSummary, builder.ToString().Split(Environment.NewLine)[0]);
 
-        }
+            var responseSummary = @"# HTTP/1.1 200 OK";
 
-        private class DumbLogger : ILogger
-        {
-            private readonly ITestOutputHelper _helper;
-
-            public DumbLogger( ITestOutputHelper helper ) { _helper = helper; }
-
-            public IDisposable BeginScope<TState>( TState state ) => null;
-
-            public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel ) => true;
-
-            void ILogger.Log<TState>(Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
-            {
-                if ( state?.ToString() is { Length: > 0 } message )
-                    _helper?.WriteLine(message);
-            }
+            Assert.Equal(responseSummary, builder.ToString().Split(Environment.NewLine)[3]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(38)]
@@ -1119,97 +1100,6 @@ namespace EssSharp.Integration
         {
             // Get an unconnected server.
             var server = GetEssServer();
-
-            // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
-
-            var grid = cube.GetGrid();
-
-            grid.Alias = "Default";
-
-            grid.Dimensions = new List<EssGridDimension>()
-            {
-                new EssGridDimension()
-                {
-                    Name = "Year",
-                    Row = -1,
-                    Column = 0,
-                    Pov = "",
-                    Hidden = false,
-                    Expanded = false
-                },
-                new EssGridDimension()
-                {
-                    Name = "Measures",
-                    Row = 1,
-                    Column = -1,
-                    Pov = "",
-                    Hidden = false,
-                    Expanded = false
-                },
-                new EssGridDimension()
-                {
-                    Name = "Product",
-                    Row = -1,
-                    Column = -1,
-                    Pov = "Product",
-                    Hidden = false,
-                    Expanded = false
-                },
-                new EssGridDimension()
-                {
-                    Name = "Market",
-                    Row = -1,
-                    Column = -1,
-                    Pov = "Market",
-                    Hidden = false,
-                    Expanded = false
-                },
-                new EssGridDimension()
-                {
-                    Name = "Scenario",
-                    Row = -1,
-                    Column = -1,
-                    Pov = "Scenario",
-                    Hidden = false,
-                    Expanded = false
-                }
-            };
-
-            grid.Slice = new EssGridSlice()
-            {
-                Columns = 4,
-                Rows = 3,
-                Data = new EssGridSliceData()
-                {
-                    Ranges = new List<EssGridRange>()
-                    {
-                        new EssGridRange()
-                        {
-                            Start = 0,
-                            End = 11,
-                            Values = new List<string>()
-                            {
-                                "", "Product", "Market", "Scenario", "", "Measures", "", "", "Year", "", "", ""
-                            }
-                        }
-                    }
-                }
-            };
-
-            await grid.RefreshAsync();
-
-            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
-        }
-
-        [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterCubeCreation_CanLogBody"), Priority(41)]
-        public async Task Essbase_AfterCubeCreation_CanLogBody()
-        {
-            var factory = new EssServerFactory() { Logger = new DumbLogger(_output) };
-
-            // Get an unconnected server.
-            var server = GetEssServer(factory: factory);
 
             // Get the "CalcAll" script from Sample.Basic.
             var cube = await server.GetApplicationAsync("Sample")

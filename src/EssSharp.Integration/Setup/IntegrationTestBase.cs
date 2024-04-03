@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -222,6 +223,11 @@ namespace EssSharp.Integration.Setup
 
     public class IntegrationTestBase
     {
+        private ITestOutputHelper _outputHelper;
+        private TestOutputLogger  _outputLogger;
+
+        public IntegrationTestBase( ITestOutputHelper outputHelper ) { _outputHelper = outputHelper; }
+
         /// <summary />
         protected string Database => IntegrationTestFactory.DatabaseContainerId;
 
@@ -265,23 +271,42 @@ namespace EssSharp.Integration.Setup
         /// <param name="role" />
         /// <param name="maxDegreeOfParallelism" />
         protected IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator, EssServerFactory factory = null ) => IntegrationTestFactory.GetEssServer(role, factory);
+
+        /// <summary />
+        protected TestOutputLogger OutputLogger => _outputLogger ??= new TestOutputLogger(_outputHelper);
     }
 
-    public class EssLogger : ILogger
+    public class TestOutputLogger : ILogger
     {
-        public IDisposable BeginScope<TState>( TState state ) where TState : notnull
-        {
-            throw new NotImplementedException();
-        }
+        private readonly ITestOutputHelper _helper;
 
-        public bool IsEnabled( Microsoft.Extensions.Logging.LogLevel logLevel )
-        {
-            throw new NotImplementedException();
-        }
+        public TestOutputLogger( ITestOutputHelper helper ) { _helper = helper; }
 
-        public void Log<TState>( Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+        public IDisposable BeginScope<TState>( TState state ) => null;
+
+        public bool IsEnabled( Microsoft.Extensions.Logging.LogLevel logLevel ) => true;
+
+        void ILogger.Log<TState>( Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
         {
-            throw new NotImplementedException();
+            if ( state?.ToString() is { Length: > 0 } message )
+                _helper?.WriteLine(message);
+        }
+    }
+
+    internal class StringLogger : ILogger
+    {
+        private readonly StringBuilder _builder;
+
+        public StringLogger( ref StringBuilder builder ) { _builder = builder; }
+
+        public IDisposable BeginScope<TState>( TState state ) => null;
+
+        public bool IsEnabled( Microsoft.Extensions.Logging.LogLevel logLevel ) => true;
+
+        void ILogger.Log<TState>( Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+        {
+            if ( state?.ToString() is { Length: > 0 } message )
+                _builder?.AppendLine(message);
         }
     }
 }

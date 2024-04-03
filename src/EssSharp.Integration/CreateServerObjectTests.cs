@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 using EssSharp.Integration.Setup;
 
 using Xunit;
-
+using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
     [Collection("EssSharp Integration Tests"), Trait("type", "create"), CollectionPriority(4)]
     public class CreateServerObjectTests : IntegrationTestBase
     {
+
+        /// <summary />
+        /// <param name="output" />
+        public CreateServerObjectTests( ITestOutputHelper output ) : base(output) { }
+
         [Fact(DisplayName = "CreateServerObjectTests - 01 - Essbase_AfterClean_CanCreateSampleApplications"), Priority(01)]
         public async Task Essbase_AfterClean_CanCreateSampleApplications()
         {

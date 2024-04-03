@@ -3,12 +3,17 @@
 using EssSharp.Integration.Setup;
 
 using Xunit;
+using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
     [Collection("EssSharp Integration Tests"), Trait("type", "container"), CollectionPriority(1)]
     public class AvailableContainerTests : IntegrationTestBase
     {
+        /// <summary />
+        /// <param name="output" />
+        public AvailableContainerTests( ITestOutputHelper output ) : base(output) { }
+
         [Fact(DisplayName = "AvailableContainerTests - 01 - DatabaseContainer_AfterInitialization_IsNotNull"), Priority(01)]
         public void DatabaseContainer_AfterInitialization_IsNotNull()
         {

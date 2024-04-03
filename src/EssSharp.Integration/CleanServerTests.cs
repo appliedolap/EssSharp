@@ -4,12 +4,17 @@ using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
     [Collection("EssSharp Integration Tests"), Trait("type", "clean"), CollectionPriority(3)]
     public class CleanServerTests : IntegrationTestBase
     {
+        /// <summary />
+        /// <param name="output" />
+        public CleanServerTests( ITestOutputHelper output ) : base(output) { }
+
         [Fact(DisplayName = "CleanServerTests - 01 - Essbase_AfterConnection_CanRemoveLocks"), Priority(01)]
         public async Task Essbase_AfterConnection_CanRemoveLocks()
         {

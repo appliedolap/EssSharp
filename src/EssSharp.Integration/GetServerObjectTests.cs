@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 using EssSharp.Integration.Setup;
 using EssSharp.Model;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
     [Collection("EssSharp Integration Tests"), Trait("type", "get"), CollectionPriority(5)]
     public class GetServerObjectTests : IntegrationTestBase
     {
+
+        /// <summary />
+        /// <param name="output" />
+        public GetServerObjectTests( ITestOutputHelper output ) : base(output) { }
+
         [Fact(DisplayName = $@"GetServerObjectTests - 01 - Essbase_AfterAppCreation_CanGetAppConfigurations"), Priority(01)]
         public async Task Essbase_AfterAppCreation_CanGetAppConfigurations()
         {
