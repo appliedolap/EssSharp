@@ -1016,10 +1016,43 @@ namespace EssSharp
 
         #region RestSharp Extensions
 
+        /// <summary>
+        /// Log the <see cref="RestRequest" /> to any configured <see cref="ILogger" />.
+        /// </summary>
+        /// <param name="request" />
+        /// <param name="configuration" />
+        internal static void WriteLogMessage( this RestRequest request, IReadableConfiguration configuration ) =>
+            configuration?.Logger?.Log(logLevel: LogLevel.Information, eventId: request.GetEventId(configuration), message: request.GetFormattedRequestMessage(configuration));
+
         /// <summary />
         /// <param name="request" />
         /// <param name="configuration" />
-        internal static EventId GetEventId( this RestRequest request, IReadableConfiguration configuration )
+        internal static string GetFormattedRequestMessage( this RestRequest request, IReadableConfiguration configuration )
+        {
+            var builder = new StringBuilder();
+
+            try
+            {
+                var requestUrl = new RestClient(configuration.BasePath).BuildUri(request).AbsoluteUri;
+
+                builder.AppendLine($@"# {request.Method.ToString().ToUpperInvariant()} {requestUrl} HTTP/1.1");
+
+                if ( request.GetFormattedHeaders() is { Length: > 0 } headers )
+                    builder.AppendLine($@"# {headers}");
+
+                if ( request.GetFormattedContent() is { Length: > 0 } content )
+                    builder.AppendLine(content);
+            }
+            catch
+            {
+                // Swallow any exception here.
+            }
+
+            return builder.ToString().TrimEnd();
+        }
+
+        /// <summary />
+        private static EventId GetEventId( this RestRequest request, IReadableConfiguration configuration )
         {
             // Construct a new event identifier with the request event type.
             var identifier = new EventId(id: (int)EssSharpLogEventType.Request);
@@ -1039,52 +1072,28 @@ namespace EssSharp
         }
 
         /// <summary />
-        /// <param name="request" />
-        /// <param name="configuration" />
-        internal static string GetFormattedRequestMessage( this RestRequest request, IReadableConfiguration configuration )
+        private static string GetFormattedContent( this RestRequest request )
         {
-            var builder = new StringBuilder();
-
-            try
-            {
-                var requestUrl = new RestClient(configuration.BasePath).BuildUri(request).AbsoluteUri;
-
-                builder.AppendLine($@"# {request.Method.ToString().ToUpperInvariant()} {requestUrl} HTTP/1.1");
-                
-                if ( request.GetFormattedHeaders() is { Length: > 0 } headers )
-                    builder.AppendLine($@"# {headers}");
-
-                if ( request.GetFormattedContent() is { Length: > 0 } content )
-                    builder.AppendLine(content);
-            }
-            catch
-            {
-                // Swallow any exception here.
-            }
-
-            return builder.ToString().TrimEnd();
+            return request?.Parameters?.OfType<BodyParameter>().FirstOrDefault() is { Value: { } content } bodyParameter
+                ? GetFormattedContent(bodyParameter.ContentType, content)
+                : null;
         }
 
         /// <summary />
-        /// <param name="response" />
-        internal static EventId GetEventId( this RestResponse response )
+        private static string GetFormattedHeaders( this RestRequest request, bool excludeSensitiveHeaders = true, string[] headersToExclude = null, string delimiter = null )
         {
-            // Construct a new event identifier with the request event type.
-            var identifier = new EventId(id: (int)EssSharpLogEventType.Response);
-
-            try
-            {
-                // Attempt to fetch the path from the response Uri and rebuild the event identifier.
-                var responsePath = response.ResponseUri.GetLeftPart(UriPartial.Path).Trim('/');
-                identifier = new EventId(id: identifier.Id, name: responsePath);
-            }
-            catch
-            {
-                // Swallow any exception here.
-            }
-
-            return identifier;
+            return request?.Parameters?.OfType<HeaderParameter>().ToList() is { Count: > 0 } headers
+                ? GetFormattedHeaders(headers, excludeSensitiveHeaders, headersToExclude, delimiter)
+                : null;
         }
+
+        /// <summary>
+        /// Log the <see cref="RestResponse" /> to any configured <see cref="ILogger" />.
+        /// </summary>
+        /// <param name="response" />
+        /// <param name="configuration" />
+        internal static void WriteLogMessage( this RestResponse response, IReadableConfiguration configuration ) =>
+            configuration?.Logger?.Log(logLevel: LogLevel.Information, eventId: response.GetEventId(), message: response.GetFormattedResponseMessage());
 
         /// <summary />
         /// <param name="response" />
@@ -1113,19 +1122,23 @@ namespace EssSharp
         }
 
         /// <summary />
-        private static string GetFormattedContent( this RestRequest request )
+        private static EventId GetEventId( this RestResponse response )
         {
-            return request?.Parameters?.OfType<BodyParameter>().FirstOrDefault() is { Value: { } content } bodyParameter
-                ? GetFormattedContent(bodyParameter.ContentType, content)
-                : null;
-        }
+            // Construct a new event identifier with the request event type.
+            var identifier = new EventId(id: (int)EssSharpLogEventType.Response);
 
-        /// <summary />
-        private static string GetFormattedHeaders( this RestRequest request, bool excludeSensitiveHeaders = true, string[] headersToExclude = null, string delimiter = null )
-        {
-            return request?.Parameters?.OfType<HeaderParameter>().ToList() is { Count: > 0 } headers
-                ? GetFormattedHeaders(headers, excludeSensitiveHeaders, headersToExclude, delimiter)
-                : null;
+            try
+            {
+                // Attempt to fetch the path from the response Uri and rebuild the event identifier.
+                var responsePath = response.ResponseUri.GetLeftPart(UriPartial.Path).Trim('/');
+                identifier = new EventId(id: identifier.Id, name: responsePath);
+            }
+            catch
+            {
+                // Swallow any exception here.
+            }
+
+            return identifier;
         }
 
         /// <summary />

@@ -150,11 +150,11 @@ namespace EssSharp.Client
                     SessionCookies.Add(cookie);
             }
 
-            // Write the request log.
-            configuration?.Logger?.Log(logLevel: LogLevel.Information, eventId: request.GetEventId(configuration), message: request.GetFormattedRequestMessage(configuration));
+            // Write the request to any configured logger.
+            request?.WriteLogMessage(configuration);
 
-            // Write the response log.
-            configuration?.Logger?.Log(logLevel: LogLevel.Information, eventId: response.GetEventId(),             message: response.GetFormattedResponseMessage());
+            // Write the response to any configured logger.
+            response.WriteLogMessage(configuration);
 
             // If the response was not successful and an exception is available, throw it.
             if ( !response.IsSuccessful() && response.ErrorException is WebException webException )
