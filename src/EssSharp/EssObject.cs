@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
-using EssSharp.Client;
+
+using Microsoft.Extensions.Logging;
 using Polly;
 using RestSharp;
 
@@ -59,6 +60,27 @@ namespace EssSharp
         /// <returns>An <see cref="EssSharp.Client.IApiAccessor"/> (API) from the <see cref="EssSharp.Api"/> namespace.</returns>
         internal T GetApi<T>( [CallerFilePath] string callerPath = null, [CallerMemberName] string callerName = null ) where T : EssSharp.Client.IApiAccessor, new() => 
             ApiFactory.GetApi<T>(Configuration, Client, callerPath, callerName);
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Formats and writes an error log message.
+        /// </summary>
+        /// <param name="exception">The exception to log.</param>
+        /// <param name="message">Format string of the log message in message template format.</param>
+        /// <param name="args">An object array that contains zero or more objects to format.</param>
+        protected void LogError( Exception exception, string message, params object[] args ) => 
+            Configuration?.Logger?.LogError(new EventId(id: (int)EssSharpLogEventType.Error), exception, message, args);
+
+        /// <summary>
+        /// Formats and writes an informational log message.
+        /// </summary>
+        /// <param name="message">Format string of the log message in message template format.</param>
+        /// <param name="args">An object array that contains zero or more objects to format.</param>
+        protected void LogInformation( string message, params object[] args ) =>
+            Configuration?.Logger?.LogInformation(new EventId(id: (int)EssSharpLogEventType.Message), message, args);
 
         #endregion
 
