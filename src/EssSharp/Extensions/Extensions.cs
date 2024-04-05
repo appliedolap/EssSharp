@@ -1236,10 +1236,10 @@ namespace EssSharp
         private static string GetFormattedHeaders( List<HeaderParameter> headers, bool excludeSensitiveHeaders = true, string[] headersToExclude = null, string delimiter = null )
         {
             // Initialize the standard array of sensitive headers, based on the excludeSensitiveHeaders flag.
-            var sensitiveHeadersArray = excludeSensitiveHeaders ? ["authorization", "username", "password"] : new string[0];
+            var sensitiveHeadersArray = excludeSensitiveHeaders ? new string[] { "authorization", "username", "password" } : new string[0];
 
             // Join the standard set of headers to exclude with the specific set of headers to exclude.
-            var prohibitedHeaders = sensitiveHeadersArray.Union(headersToExclude ?? [], StringComparer.OrdinalIgnoreCase);
+            var prohibitedHeaders = sensitiveHeadersArray.Union(headersToExclude ?? new string[0], StringComparer.OrdinalIgnoreCase);
 
             // Initialize the headers dictionary.
             var headerDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);

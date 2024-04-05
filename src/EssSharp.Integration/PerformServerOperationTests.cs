@@ -1187,7 +1187,7 @@ namespace EssSharp.Integration
             Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterCubeCreation_CanTrackDataChanges"), Priority(38)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterCubeCreation_CanTrackDataChanges"), Priority(41)]
         public async Task Essbase_AfterCubeCreation_CanTrackDataChanges()
         {
             // Get an unconnected server.
@@ -1297,7 +1297,7 @@ namespace EssSharp.Integration
             Assert.Equal(newVal, grid.Slice.Data.Ranges[0].Values[9]);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid"), Priority(39)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 42 - Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid"), Priority(42)]
         public async Task Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid()
         {
             // Get an unconnected server.
@@ -1430,7 +1430,7 @@ namespace EssSharp.Integration
             Assert.Equal("Budget", grid.DataChanges.DataChanges[1].DataPoints[4].Member);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 40 - Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders"), Priority(40)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders"), Priority(43)]
         public async Task Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders()
         {
             // Get an unconnected server.
@@ -1545,7 +1545,7 @@ namespace EssSharp.Integration
             Assert.NotNull(grid.DataChanges);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterCubeCreation_CanExportAppToLcm"), Priority(41)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 44 - Essbase_AfterCubeCreation_CanExportAppToLcm"), Priority(44)]
         public async Task Essbase_AfterCubeCreation_CanExportAppToLcm()
         {
             // Get an unconnected server.
@@ -1568,7 +1568,7 @@ namespace EssSharp.Integration
             Assert.NotNull(lcmStream);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 42 - Essbase_AfterCubeCreation_CanExportCubeToLcm"), Priority(42)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 45 - Essbase_AfterCubeCreation_CanExportCubeToLcm"), Priority(45)]
         public async Task Essbase_AfterCubeCreation_CanExportToLcm()
         {
             // Get an unconnected server.
@@ -1591,7 +1591,7 @@ namespace EssSharp.Integration
             Assert.NotNull(lcmStream);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanImportCubeWithLcm"), Priority(43)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 46 - Essbase_AfterCubeCreation_CanImportCubeWithLcm"), Priority(46)]
         public async Task Essbase_AfterCubeCreation_CanImportCubeToLcm()
         {
             // Get an unconnected server.
@@ -1613,7 +1613,7 @@ namespace EssSharp.Integration
             Assert.NotNull(lcmStream);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream"), Priority(43)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 47 - Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream"), Priority(47)]
         public async Task Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream()
         {
             // Get an unconnected server.
