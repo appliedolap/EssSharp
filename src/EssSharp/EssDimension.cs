@@ -39,6 +39,11 @@ namespace EssSharp
         /// <inheritdoc />
         public override EssType Type => EssType.Dimension;
 
+        /// <summary>
+        /// Returns the dimension number.
+        /// </summary>
+        public int DimensionNumber { get; set; }
+
         /// <inheritdoc />
         public string DimensionType => _dimension?.Type;
 

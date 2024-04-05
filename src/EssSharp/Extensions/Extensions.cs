@@ -175,7 +175,7 @@ namespace EssSharp
             return dimensionList
                 .Items?
                 .Where(dimension => dimension is not null)
-                .Select(dimension => new EssDimension(dimension, cube) as IEssDimension)
+                .Select((dimension, index) => new EssDimension(dimension, cube) { DimensionNumber = index } as IEssDimension)
                 .ToList() ?? new List<IEssDimension>();
         }
 
@@ -567,9 +567,19 @@ namespace EssSharp
                                         options.Rule?.FirstOrDefault(),
 
             // EssJobType.ExecuteReport
-            IsScriptContent = options.IsScriptContent ?? false,
-            LockForUpdate = options.LockForUpdate ?? false,
-            ReportScriptFilename = options.ReportScriptFilename
+            IsScriptContent       = options.IsScriptContent ?? false,
+            LockForUpdate         = options.LockForUpdate   ?? false,
+            ReportScriptFilename  = options.ReportScriptFilename,
+
+            // EssJobType.LCMExport
+            AllApp = options.AllApp.ToString(),
+            GenerateArtifactList = options.Generateartifactlist.ToString(),
+            IncludeServerLevel = options.IncludeServerLevel.ToString(),
+            ZipFileName = options.ZipFileName,
+            Skipdata = options.SkipData.ToString(),
+
+            // EssJobType.LCMImport
+            TargetApplicationName = options.TargetApplicationName
         };
 
         internal static List<EssGridDimension> ToEssGridDimension( this List<GridDimension> gridDimensions )

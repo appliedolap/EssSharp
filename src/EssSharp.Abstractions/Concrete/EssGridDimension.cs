@@ -26,6 +26,9 @@ namespace EssSharp
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary />
+        public string Number { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

@@ -86,7 +86,7 @@ namespace EssSharp
         /// <summary>
         /// Current active alias name
         /// </summary>
-        public string activeAliasName { get; }
+        public string ActiveAliasName { get; }
 
         /// <summary>
         /// True if member name is unique.

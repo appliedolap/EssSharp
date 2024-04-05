@@ -119,5 +119,31 @@ namespace EssSharp
         bool? IEssJobOptions.RecreateApp { get; set; }
 
         #endregion
+
+        #region Explicit IEssJobOptions EssJobType.LMCExport Members
+
+        bool? IEssJobOptions.AllApp { get; set; }
+
+        bool? IEssJobOptions.Generateartifactlist { get; set; }
+
+        bool? IEssJobOptions.SkipData { get; set; }
+
+        #endregion
+
+        #region Explicit IEssJobOptions EssJobType.LMCExport Members
+
+        string IEssJobOptions.TargetApplicationName { get; set; }
+
+        //bool? IEssJobOptions.Overwrite { get; set; }
+
+        #endregion
+
+        #region Explicit IEssJobOptions EssJobType.LMCExport/LCMImport Shared Members
+
+        bool? IEssJobOptions.IncludeServerLevel { get; set; }
+
+        string IEssJobOptions.ZipFileName { get; set; }
+
+        #endregion
     }
 }

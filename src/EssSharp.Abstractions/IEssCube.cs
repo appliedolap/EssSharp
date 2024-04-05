@@ -20,6 +20,11 @@ namespace EssSharp
         public EssCubeType CubeType { get; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public List<IEssDimension> Dimensions { get; set; }
+
+        /// <summary>
         /// Clears data from a cube.
         /// </summary>
         /// <param name="options"></param>
@@ -122,6 +127,19 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task ExecuteScriptAsync( EssJobScriptOptions options, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        public Stream ExportToLcm( EssJobExportLcmOptions options = null );
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<Stream> ExportToLcmAsync( EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Exports a cube to an excel workbook.
