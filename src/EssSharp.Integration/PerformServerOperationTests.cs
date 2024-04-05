@@ -752,7 +752,7 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences"), Priority(31)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 30 - Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences"), Priority(30)]
         public async Task Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences()
         {
             // Get an unconnected server.
@@ -788,7 +788,7 @@ namespace EssSharp.Integration
             Assert.True(string.Equals("          Mar", defaultGrid.Slice.Data.Ranges[0].Values[18]));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 32 - Essbase_AfterDefaultGrid_CanGetGridLayout"), Priority(32)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanGetGridLayout"), Priority(31)]
         public async Task Essbase_AfterDefaultGrid_CanGetGridLayout()
         {
             // Get an unconnected server.
@@ -799,7 +799,7 @@ namespace EssSharp.Integration
             await defaultGrid.GetGridLayoutAsync();
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 33 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperations"), Priority(33)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 32 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperations"), Priority(32)]
         public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperations()
         {
             // Get the Sample.Basic cube (as an end-user).
@@ -821,7 +821,7 @@ namespace EssSharp.Integration
             Assert.All(grids, grid => Assert.Equal(3, grid.Slice.Rows));
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs"), Priority(34)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 33 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs"), Priority(33)]
         public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperationsWithPrefs()
         {
             // Get an unconnected server.
@@ -880,7 +880,7 @@ namespace EssSharp.Integration
             }
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanKillRedundantSessions"), Priority(35)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 34 - Essbase_AfterDefaultGrid_CanKillRedundantSessions"), Priority(34)]
         public async Task Essbase_AfterDefaultGrid_CanKillRedundantSessions()
         {
             // Get an unconnected server (as the service admin).
@@ -907,7 +907,7 @@ namespace EssSharp.Integration
             Assert.Empty(userSessions);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 36 - Essbase_AfterDefaultGrid_CanEnforceMaxDegreeOfParallelism"), Priority(36)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 35 - Essbase_AfterDefaultGrid_CanEnforceMaxDegreeOfParallelism"), Priority(35)]
         public async Task Essbase_AfterDefaultGrid_CanEnforceMaxDegreeOfParallelism()
         {
             // Build a new factory that creates connections that support only a single concurrent operation.
@@ -949,7 +949,7 @@ namespace EssSharp.Integration
             Assert.True(userSessions.Where(session => session.SessionType is IEssSession.EssSessionType.Grid).Count() <= 2);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponses"), Priority(37)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 36 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponses"), Priority(36)]
         public async Task Essbase_AfterDefaultGrid_CanLogRequestsAndResponses()
         {
             var builder = new StringBuilder();
@@ -974,7 +974,7 @@ namespace EssSharp.Integration
             Assert.Equal(responseSummary, builder.ToString().Split(Environment.NewLine)[2]);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(38)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(37)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshGridUseAliases()
         {
             // Get an unconnected server.
@@ -1074,7 +1074,7 @@ namespace EssSharp.Integration
             var rGrid = await essGrid.RefreshAsync();
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterDefaultGrid_CanRefreshEmptyGrid"), Priority(39)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterDefaultGrid_CanRefreshEmptyGrid"), Priority(38)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshEmptyGrid()
         {
             // Get an unconnected server.
@@ -1098,7 +1098,7 @@ namespace EssSharp.Integration
             var rGrid = await essGrid.RefreshAsync();
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 40 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(40)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(39)]
         public async Task Essbase_AfterCubeCreation_CanBuildAndRefreshGrid()
         {
             // Get an unconnected server.
@@ -1187,7 +1187,7 @@ namespace EssSharp.Integration
             Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterCubeCreation_CanTrackDataChanges"), Priority(41)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 40 - Essbase_AfterCubeCreation_CanTrackDataChanges"), Priority(40)]
         public async Task Essbase_AfterCubeCreation_CanTrackDataChanges()
         {
             // Get an unconnected server.
@@ -1297,7 +1297,7 @@ namespace EssSharp.Integration
             Assert.Equal(newVal, grid.Slice.Data.Ranges[0].Values[9]);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 42 - Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid"), Priority(42)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid"), Priority(41)]
         public async Task Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid()
         {
             // Get an unconnected server.
@@ -1430,7 +1430,7 @@ namespace EssSharp.Integration
             Assert.Equal("Budget", grid.DataChanges.DataChanges[1].DataPoints[4].Member);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders"), Priority(43)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 42 - Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders"), Priority(42)]
         public async Task Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders()
         {
             // Get an unconnected server.
@@ -1545,7 +1545,7 @@ namespace EssSharp.Integration
             Assert.NotNull(grid.DataChanges);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 44 - Essbase_AfterCubeCreation_CanExportAppToLcm"), Priority(44)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanExportAppToLcm"), Priority(43)]
         public async Task Essbase_AfterCubeCreation_CanExportAppToLcm()
         {
             // Get an unconnected server.
@@ -1568,7 +1568,7 @@ namespace EssSharp.Integration
             Assert.NotNull(lcmStream);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 45 - Essbase_AfterCubeCreation_CanExportCubeToLcm"), Priority(45)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 44 - Essbase_AfterCubeCreation_CanExportCubeToLcm"), Priority(44)]
         public async Task Essbase_AfterCubeCreation_CanExportToLcm()
         {
             // Get an unconnected server.
@@ -1587,11 +1587,16 @@ namespace EssSharp.Integration
             };
 
             var lcmStream = await app.ExportCubeToLcmAsync("Basic", options);
-            
+
+            using ( FileStream output = File.OpenWrite(Path.Combine(Path.GetTempPath(), "exportedCubes.zip")) )
+            {
+                lcmStream.CopyTo(output);
+            }
+
             Assert.NotNull(lcmStream);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 46 - Essbase_AfterCubeCreation_CanImportCubeWithLcm"), Priority(46)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 45 - Essbase_AfterCubeCreation_CanImportCubeWithLcm"), Priority(45)]
         public async Task Essbase_AfterCubeCreation_CanImportCubeToLcm()
         {
             // Get an unconnected server.
@@ -1613,7 +1618,7 @@ namespace EssSharp.Integration
             Assert.NotNull(lcmStream);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 47 - Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream"), Priority(47)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 46 - Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream"), Priority(46)]
         public async Task Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream()
         {
             // Get an unconnected server.
@@ -1627,7 +1632,9 @@ namespace EssSharp.Integration
                 Overwrite = true
             };
 
-            var lcmStream = await app.CreateCubeFromLcmAsync(cubeName: "Basic", localLcmPath: "C:\\Users\\matth\\Downloads\\exportedCubes.zip", options: option);
+            var lcmStream = await app.CreateCubeFromLcmAsync(cubeName: "Basic", localLcmPath: Path.Combine(Path.GetTempPath(), "exportedCubes.zip"), options: option);
+
+            File.Delete(Path.Combine(Path.GetTempPath(), "exportedCubes.zip"));
 
             Assert.NotNull(lcmStream);
         }
