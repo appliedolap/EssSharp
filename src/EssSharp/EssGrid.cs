@@ -130,7 +130,7 @@ namespace EssSharp
         {
             get
             {
-                if ( _grid?.Slice?.ToEssGridSlice() is { } slice )
+                if ( _grid?.Slice?.ToEssGridSlice(_oldValues) is { } slice )
                     return slice;
 
                 return _essGridSlice;
@@ -144,6 +144,7 @@ namespace EssSharp
                 else
                 {
                     _essGridSlice = value;
+                    _oldValues    = value?.Data?.Ranges?.FirstOrDefault()?.LastValues;
                 }
             }
         }
@@ -710,7 +711,6 @@ namespace EssSharp
 
         private List<int> GetDataBlock( Grid grid )
         {
-
             var indexes = new List<int>();
 
             var slice = grid?.Slice is not null ? grid?.Slice.ToEssGridSlice() : Slice;
