@@ -458,6 +458,11 @@ namespace EssSharp
             var dataBlockIndexes = GetDataBlock(newGrid);
             var dimMemberDict = new Dictionary<string, string>();
 
+            changes.Application = Cube.Application.Name;
+            changes.Database = Cube.Name;
+            changes.Server = Cube.Application.Server.Name;
+            changes.User = Configuration.Username;
+            
             // loop through each cell...
             for ( int index = 0; index < (valuesCount + 1); index++ )
             {
