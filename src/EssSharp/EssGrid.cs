@@ -318,11 +318,25 @@ namespace EssSharp
         {
             try
             {
-                var submitValues = Slice.Data.Ranges[0].Values.ToList();
-                await RefreshAsync();
+                // Verify that there is a data slice to send.
+                if ( Slice?.Data?.Ranges?.FirstOrDefault()?.Values?.ToList() is not { } submitValues )
+                    throw new Exception("The data slice contains no ranges or values.");
 
-                _grid.Slice.Data.Ranges[0].Values = submitValues;
+                // A refresh must be performed first if we are tracking data changes.
+                if ( Preferences?.TrackDataChanges is true )
+                {
+                    try
+                    {
+                        await RefreshAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        if ( _grid?.Slice?.Data?.Ranges?.FirstOrDefault()?.Values is not null )
+                            _grid.Slice.Data.Ranges[0].Values = submitValues;
+                    }
+                }
 
+                // Submit the data.
                 await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Submit, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
@@ -330,7 +344,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to submit new value for ""{Name}"" grid. {e.Message}", e);
+                throw new Exception($@"Unable to submit new values for ""{Name}"" grid. {e.Message}", e);
             }
         }
 
@@ -432,7 +446,7 @@ namespace EssSharp
                 DataChanges = null;
 
                 // If tracking changes...
-                if ( action == GridOperation.ActionEnum.Submit && Preferences.UseAuditLog )
+                if ( action == GridOperation.ActionEnum.Submit && Preferences.TrackDataChanges )
                 {
                     DataChanges = await CaptureDataChanges(grid, cancellationToken).ConfigureAwait(false);
                 }

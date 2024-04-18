@@ -55,11 +55,11 @@ namespace EssSharp
 
         public bool SendBlanksAsMissing { get; set; } = true;
 
+        public bool TrackDataChanges { get; set; } = false;
+
         public bool WithinSelectedGroup { get; set; } = false;
 
         public EssGridPreferencesZoomIn ZoomIn { get; set; } = new EssGridPreferencesZoomIn();
-
-        public bool UseAuditLog { get; set; } = false;
 
         #endregion
 
@@ -110,6 +110,7 @@ namespace EssSharp
                 Zero                = this.RowSupression.Zero
             },
             SendBlanksAsMissing     = this.SendBlanksAsMissing,
+            TrackDataChanges        = this.TrackDataChanges,
             WithinSelectedGroup     = this.WithinSelectedGroup,
             ZoomIn                  = new EssGridPreferencesZoomIn()
             {
@@ -181,6 +182,9 @@ namespace EssSharp
             if ( SendBlanksAsMissing != other.SendBlanksAsMissing )
                 return false;
 
+            if ( TrackDataChanges != other.TrackDataChanges ) 
+                return false;
+
             if ( WithinSelectedGroup != other.WithinSelectedGroup )
                 return false;
 
@@ -209,6 +213,7 @@ namespace EssSharp
             RepeatMemberLabels,
             RowSupression,
             SendBlanksAsMissing,
+            TrackDataChanges,
             WithinSelectedGroup,
             ZoomIn
         ).GetHashCode();
