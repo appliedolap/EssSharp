@@ -1072,7 +1072,7 @@ namespace EssSharp
             {
                 // Attempt to fetch the path from the request Uri and rebuild the event identifier.
                 var requestPath = new RestClient(configuration.BasePath).BuildUri(request).GetLeftPart(UriPartial.Path).Trim('/');
-                identifier = new EventId(id: identifier.Id, name: requestPath);
+                identifier = new EventId(id: identifier.Id, name: JsonConvert.SerializeObject(new EssSharpLogEventContext() { Path = requestPath }));
             }
             catch
             {
@@ -1142,7 +1142,7 @@ namespace EssSharp
             {
                 // Attempt to fetch the path from the response Uri and rebuild the event identifier.
                 var responsePath = response.ResponseUri.GetLeftPart(UriPartial.Path).Trim('/');
-                identifier = new EventId(id: identifier.Id, name: responsePath);
+                identifier = new EventId(id: identifier.Id, name: JsonConvert.SerializeObject(new EssSharpLogEventContext() { Path = responsePath }));
             }
             catch
             {
