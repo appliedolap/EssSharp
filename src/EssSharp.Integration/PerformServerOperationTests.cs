@@ -693,7 +693,10 @@ namespace EssSharp.Integration
             defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
             await defaultGrid.KeepOnlyAsync();
 
-            defaultGrid.Slice.Data.Ranges[0].Values[11] = "680";
+            if ( string.Equals(defaultGrid.Slice.Data.Ranges[0].Values[10], "680.0") )
+                defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
+            else
+                defaultGrid.Slice.Data.Ranges[0].Values[11] = "680.0";
 
             var submitGrid = await defaultGrid.SubmitAsync( );
 
@@ -703,13 +706,18 @@ namespace EssSharp.Integration
 
             Assert.Equal(3, submitGrid.Slice.Rows);
 
-            Assert.True(string.Equals("680.0", submitGrid.Slice.Data.Ranges[0].Values[11]));
+            Assert.True(string.Equals("680.0", submitGrid.Slice.Data.Ranges[0].Values[11]) || string.Equals("680.0", submitGrid.Slice.Data.Ranges[0].Values[11]));
 
-            defaultGrid.Slice.Data.Ranges[0].Values[11] = "678";
+            /*
+            if ( string.Equals(defaultGrid.Slice.Data.Ranges[0].Values[10], "680.0") )
+                defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
+            else
+                defaultGrid.Slice.Data.Ranges[0].Values[11] = "680.0";
 
             submitGrid = await defaultGrid.SubmitAsync();
 
             await (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).ExecuteAsync();
+            */
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 28 - Essbase_AfterDefaultGrid_CanZoomInWithSelectionAttributeGrid"), Priority(28)]
@@ -1277,7 +1285,7 @@ namespace EssSharp.Integration
 
             await grid.RefreshAsync();
 
-            grid.Preferences.UseAuditLog = true;
+            grid.Preferences.TrackDataChanges = true;
             string newVal;
 
             if ( string.Equals(grid.Slice.Data.Ranges[0].Values[9], "680.0") )
@@ -1387,7 +1395,7 @@ namespace EssSharp.Integration
 
             await grid.RefreshAsync();
 
-            grid.Preferences.UseAuditLog = true;
+            grid.Preferences.TrackDataChanges = true;
 
             if ( string.Equals(grid.Slice.Data.Ranges[0].Values[10], "680.0") )
                 grid.Slice.Data.Ranges[0].Values[10] = "678.0";
@@ -1520,7 +1528,7 @@ namespace EssSharp.Integration
 
             grid.Preferences = new EssGridPreferences()
             {
-                UseAuditLog = true,
+                TrackDataChanges = true,
                 MissingText = "",
                 RepeatMemberLabels = false
             };
@@ -1637,6 +1645,31 @@ namespace EssSharp.Integration
             File.Delete(Path.Combine(Path.GetTempPath(), "exportedCubes.zip"));
 
             Assert.NotNull(lcmStream);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory"), Priority(37)]
+        public async Task Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory()
+        {
+            var outputDir = new DirectoryInfo(@"C:\Users\matth\Desktop");
+
+            // Build a new factory that creates connections with a logger.
+            var factory = new EssServerFactory() { Logger = new FileOutputLogger(outputDir) };
+
+            // Get the server base url, i.e., http://localhost:9000/essbase.
+            var serverBaseUrl = GetEssConnection().Server.TrimEnd('/');
+
+            // Get an unconnected server with the configured factory 
+            var server = GetEssServer(factory: factory);
+
+            await server.GetApplicationAsync("Sample");
+
+            var requestSummary  = $@"# GET {serverBaseUrl}/rest/v1/applications/Sample HTTP/1.1";
+
+            //Assert.Equal(requestSummary, builder.ToString().Split(Environment.NewLine)[0]);
+
+            var responseSummary = @"# HTTP/1.1 200 OK";
+
+            //Assert.Equal(responseSummary, builder.ToString().Split(Environment.NewLine)[2]);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +10,7 @@ using Docker.DotNet;
 using Docker.DotNet.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -274,6 +274,45 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         protected TestOutputLogger OutputLogger => _outputLogger ??= new TestOutputLogger(_outputHelper);
+    }
+
+    public class FileOutputLogger : ILogger
+    {
+        private readonly DirectoryInfo _outputDirectory;
+
+        public FileOutputLogger( DirectoryInfo outputDirectory ) { _outputDirectory = outputDirectory; }
+
+        public IDisposable BeginScope<TState>( TState state ) => null;
+
+        public bool IsEnabled( Microsoft.Extensions.Logging.LogLevel logLevel ) => true;
+
+        void ILogger.Log<TState>( Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+        {
+            if ( eventId.Id is not ((int)EssSharpLogEventType.Request or (int)EssSharpLogEventType.Response) )
+                return;
+
+            if ( state?.ToString() is not { Length: > 0 } message )
+                return;
+
+
+            EssSharpLogEventContext context = null;
+
+            try { context = JsonConvert.DeserializeObject<EssSharpLogEventContext>(eventId.Name); } catch { }
+
+            context ??= new EssSharpLogEventContext() { Path = "unknown" };
+
+            // create new file with name in _outputDirectory
+
+            var tenant = "EssSharp";
+            var type   = (EssSharpLogEventType)eventId.Id;
+            var time   = context.Time.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+            var extension = "json";
+
+            var fileName = $@"{tenant}.{context.Path}.{type}.{time:0.000}-{1}.request.{extension}";
+
+            using var file = File.Create($@"{_outputDirectory.FullName}\{Path.GetRandomFileName()}.yml");
+            file.Write(Encoding.UTF8.GetBytes(message));
+        }
     }
 
     public class TestOutputLogger : ILogger

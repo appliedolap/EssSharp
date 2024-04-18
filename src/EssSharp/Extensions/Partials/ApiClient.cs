@@ -64,7 +64,11 @@ namespace EssSharp.Client
 
             // Return if cached session cookies will not be applied.
             if ( configuration?.ApplyCookies is false )
+            {
+                // Write the request to any configured logger and return;
+                request?.WriteLogMessage(configuration);
                 return;
+            }
 
             // If we have a free JSESSIONID for the user, remove any authorization headers and use it.
             if ( SessionCookies.TryTake(out Cookie cookie) && cookie is not null )
@@ -75,7 +79,11 @@ namespace EssSharp.Client
 
             // If there are no configured preferences, we are finished 
             if ( (options?.Preferences as EssGridPreferences)?.Clone() is not EssGridPreferences configuredPreferences )
+            {
+                // Write the request to any configured logger and return;
+                request?.WriteLogMessage(configuration);
                 return;
+            }
 
             // If there is a session cookie...
             if ( cookie is not null )
@@ -85,18 +93,24 @@ namespace EssSharp.Client
                 {
                     // If the preferences for this session match the configured preferences, we are finished.
                     if ( sessionPreferences.Equals(configuredPreferences) )
+                    {
+                        // Write the request to any configured logger and return;
+                        request?.WriteLogMessage(configuration);
                         return;
+                    }
                 }
 
                 // Set the grid preferences for the session.
                 await setGridPreferencesAsync(configuredPreferences, cookie);
-
             }
             else
             {
                 // Set the grid preferences for a new session.
                 await setGridPreferencesAsync(configuredPreferences);
             }
+
+            // Write the request to any configured logger.
+            request?.WriteLogMessage(configuration); 
 
             async Task setGridPreferencesAsync( EssGridPreferences preferences, Cookie cookie = null )
             {
@@ -150,8 +164,7 @@ namespace EssSharp.Client
                     SessionCookies.Add(cookie);
             }
 
-            // Write the request to any configured logger.
-            request?.WriteLogMessage(configuration);
+
 
             // Write the response to any configured logger.
             response.WriteLogMessage(configuration);
