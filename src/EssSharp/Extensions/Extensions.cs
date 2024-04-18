@@ -678,7 +678,7 @@ namespace EssSharp
 
         };
 
-        internal static EssGridSliceData ToEssGridSliceData( this Data data, List<string> lastValues = null )
+        internal static EssGridSliceData ToEssGridSliceData( this Data data )
         {
             var sliceData = new EssGridSliceData();
 
@@ -694,7 +694,6 @@ namespace EssSharp
                         Statuses = range.Statuses,
                         Texts = range.Texts,
                         Types = range.Types,
-                        LastValues = lastValues,
                         Values = range.Values
                     }
                 );
@@ -702,10 +701,10 @@ namespace EssSharp
             return sliceData;
         }
 
-        internal static EssGridSlice ToEssGridSlice( this Slice slice, List<string> lastValues = null ) => new EssGridSlice()
+        internal static EssGridSlice ToEssGridSlice( this Slice slice ) => new EssGridSlice()
         {
             Columns = slice.Columns,
-            Data = slice.Data.ToEssGridSliceData(lastValues),
+            Data = slice.Data.ToEssGridSliceData(),
             DirtyCells = slice.DirtyCells ?? new List<int>(),
             DirtyTexts = slice.DirtyTexts,
             Rows = slice.Rows

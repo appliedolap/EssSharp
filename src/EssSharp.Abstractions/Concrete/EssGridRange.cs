@@ -49,11 +49,6 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        public List<string> LastValues { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public List<string> Values { get; set; }
 
     }
