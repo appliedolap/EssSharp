@@ -318,6 +318,11 @@ namespace EssSharp
         {
             try
             {
+                var submitValues = Slice.Data.Ranges[0].Values.ToList();
+                await RefreshAsync();
+
+                _grid.Slice.Data.Ranges[0].Values = submitValues;
+
                 await ExecuteGridOperationAsync(action: GridOperation.ActionEnum.Submit, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
