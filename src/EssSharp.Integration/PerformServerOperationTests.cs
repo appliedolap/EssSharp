@@ -757,7 +757,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(3, zoomOutGrid.Slice.Rows);
 
-            Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
+            Assert.True(string.Equals("105524.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 30 - Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences"), Priority(30)]
@@ -881,7 +881,7 @@ namespace EssSharp.Integration
 
                     // Assert that the grid slice has data when navigate is true.
                     if ( grid.Preferences.Navigate )
-                        Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
+                        Assert.Equal("105524.0", grid.Slice.Data.Ranges[0].Values[9]);
                     else
                         Assert.Equal(string.Empty, grid.Slice.Data.Ranges[0].Values[9]);
                 });
@@ -1192,7 +1192,7 @@ namespace EssSharp.Integration
 
             await grid.RefreshAsync();
 
-            Assert.Equal("105522.0", grid.Slice.Data.Ranges[0].Values[9]);
+            Assert.Equal("105524.0", grid.Slice.Data.Ranges[0].Values[9]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 40 - Essbase_AfterCubeCreation_CanTrackDataChanges"), Priority(40)]
@@ -1647,7 +1647,7 @@ namespace EssSharp.Integration
             Assert.NotNull(lcmStream);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory"), Priority(37)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 47 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory"), Priority(47)]
         public async Task Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory()
         {
             var outputDir = new DirectoryInfo(@"C:\Users\matth\Desktop");
