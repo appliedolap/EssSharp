@@ -1395,7 +1395,7 @@ namespace EssSharp.Integration
 
             grid.Slice.Data.Ranges[0].Values[10] = "680.0";
 
-            grid.Slice.Data.Ranges[0].Values[17] = "610.0";
+            grid.Slice.Data.Ranges[0].Values[17] = "620.0";
 
             await grid.SubmitAsync();
 
@@ -1429,7 +1429,7 @@ namespace EssSharp.Integration
 
             grid.Slice.Data.Ranges[0].Values[10] = "678.0";
 
-            grid.Slice.Data.Ranges[0].Values[17] = "620.0";
+            grid.Slice.Data.Ranges[0].Values[17] = "610.0";
 
             await grid.SubmitAsync();
         }
