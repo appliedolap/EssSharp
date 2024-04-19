@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.Logging;
+
 using EssSharp.Api;
 using EssSharp.Client;
 using EssSharp.Model;
@@ -92,6 +94,17 @@ namespace EssSharp
         #endregion
 
         #region IEssServer Members
+
+        /// <inheritdoc />
+        public ILogger Logger
+        {
+            get => Configuration?.Logger;
+            set
+            {
+                if ( Configuration is { } )
+                    Configuration.Logger = value;
+            }
+        }
 
         /// <inheritdoc />
         /// <returns>An <see cref="IEssApplication"/> object.</returns>

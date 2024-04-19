@@ -693,10 +693,7 @@ namespace EssSharp.Integration
             defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
             await defaultGrid.KeepOnlyAsync();
 
-            if ( string.Equals(defaultGrid.Slice.Data.Ranges[0].Values[10], "680.0") )
-                defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
-            else
-                defaultGrid.Slice.Data.Ranges[0].Values[11] = "680.0";
+            defaultGrid.Slice.Data.Ranges[0].Values[11] = "680.0";
 
             var submitGrid = await defaultGrid.SubmitAsync( );
 
@@ -707,6 +704,10 @@ namespace EssSharp.Integration
             Assert.Equal(3, submitGrid.Slice.Rows);
 
             Assert.True(string.Equals("680.0", submitGrid.Slice.Data.Ranges[0].Values[11]) || string.Equals("680.0", submitGrid.Slice.Data.Ranges[0].Values[11]));
+
+            defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
+
+            submitGrid = await defaultGrid.SubmitAsync( );
 
             /*
             if ( string.Equals(defaultGrid.Slice.Data.Ranges[0].Values[10], "680.0") )
@@ -734,7 +735,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(7, zoomInGrid.Slice.Rows);
 
-            Assert.True(string.Equals("24703.0", zoomInGrid.Slice.Data.Ranges[0].Values[9]));
+            Assert.True(string.Equals("24705.0", zoomInGrid.Slice.Data.Ranges[0].Values[9]));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 29 - Essbase_AfterDefaultGrid_CanZoomOutWithSelectionAttributeGrid"), Priority(29)]
@@ -1286,23 +1287,18 @@ namespace EssSharp.Integration
             await grid.RefreshAsync();
 
             grid.Preferences.TrackDataChanges = true;
-            string newVal;
 
-            if ( string.Equals(grid.Slice.Data.Ranges[0].Values[9], "680.0") )
-            {
-                grid.Slice.Data.Ranges[0].Values[9] = "678.0";
-                newVal = "678.0";
-            }
-            else
-            {
-                grid.Slice.Data.Ranges[0].Values[9] = "680.0";
-                newVal = "680.0";
-            }
+            grid.Slice.Data.Ranges[0].Values[9] = "680.0";
                 
+            await grid.SubmitAsync();
+
+            Assert.Equal("680.0", grid.Slice.Data.Ranges[0].Values[9]);
+
+            grid.Slice.Data.Ranges[0].Values[9] = "678.0";
 
             await grid.SubmitAsync();
 
-            Assert.Equal(newVal, grid.Slice.Data.Ranges[0].Values[9]);
+            Assert.Equal("678.0", grid.Slice.Data.Ranges[0].Values[9]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 41 - Essbase_AfterCubeCreation_CanTrackDataChangesOnBiggerGrid"), Priority(41)]
@@ -1397,15 +1393,9 @@ namespace EssSharp.Integration
 
             grid.Preferences.TrackDataChanges = true;
 
-            if ( string.Equals(grid.Slice.Data.Ranges[0].Values[10], "680.0") )
-                grid.Slice.Data.Ranges[0].Values[10] = "678.0";
-            else
-                grid.Slice.Data.Ranges[0].Values[10] = "680.0";
+            grid.Slice.Data.Ranges[0].Values[10] = "680.0";
 
-            if ( string.Equals(grid.Slice.Data.Ranges[0].Values[17], "610.0") )
-                grid.Slice.Data.Ranges[0].Values[17] = "620.0";
-            else
-                grid.Slice.Data.Ranges[0].Values[17] = "610.0";
+            grid.Slice.Data.Ranges[0].Values[17] = "610.0";
 
             await grid.SubmitAsync();
 
@@ -1436,6 +1426,12 @@ namespace EssSharp.Integration
             Assert.Equal("Cola", grid.DataChanges.DataChanges[1].DataPoints[2].Member);
             Assert.Equal("New York", grid.DataChanges.DataChanges[1].DataPoints[3].Member);
             Assert.Equal("Budget", grid.DataChanges.DataChanges[1].DataPoints[4].Member);
+
+            grid.Slice.Data.Ranges[0].Values[10] = "678.0";
+
+            grid.Slice.Data.Ranges[0].Values[17] = "620.0";
+
+            await grid.SubmitAsync();
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 42 - Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders"), Priority(42)]
@@ -1543,14 +1539,15 @@ namespace EssSharp.Integration
             else
                 grid.Slice.Data.Ranges[0].Values[21] = "1778.0";
             */
-            if ( string.Equals(grid.Slice.Data.Ranges[0].Values[21], "551.0") )
-                grid.Slice.Data.Ranges[0].Values[21] = "570";
-            else
-                grid.Slice.Data.Ranges[0].Values[21] = "551.0";
+            grid.Slice.Data.Ranges[0].Values[21] = "551.0";
 
             await grid.SubmitAsync();
 
             Assert.NotNull(grid.DataChanges);
+
+            grid.Slice.Data.Ranges[0].Values[21] = "570";
+
+            await grid.SubmitAsync();
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanExportAppToLcm"), Priority(43)]

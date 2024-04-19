@@ -4,11 +4,24 @@ using System.Threading;
 using System;
 using System.IO;
 
+using Microsoft.Extensions.Logging;
+
 namespace EssSharp
 {
     /// <summary />
     public interface IEssServer : IEssObject, IDisposable, IAsyncDisposable
     {
+        #region Public Properties
+
+        /// <summary>
+        /// An <see cref="ILogger"/> responsible for logging information about <see cref="EssSharp" /> operations. 
+        /// </summary>
+        public ILogger Logger { get; set; }
+
+        #endregion
+
+        #region Public Methods
+
         /// <summary>
         /// Creates a new Application and database with the given name and options
         /// </summary>
@@ -25,8 +38,6 @@ namespace EssSharp
         /// <param name="options">Options for creating a Database.</param>
         /// <param name="cancellationToken" />
         public Task<IEssApplication> CreateApplicationAsync( string applicationName, string cubeName, EssDatabaseCreationOptions options = null, CancellationToken cancellationToken = default );
-
-        /////////////
 
         /// <summary>
         /// Creates a new application (and cube) from an existing server file.
@@ -520,5 +531,7 @@ namespace EssSharp
         /// <param name="allSessions">Whether to sign out all sessions associated with the <see cref="IEssServer"/> instance.</param>
         /// <param name="cancellationToken" />
         public Task SignOutAsync( bool allSessions = false, CancellationToken cancellationToken = default );
+
+        #endregion
     }
 }
