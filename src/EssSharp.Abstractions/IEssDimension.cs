@@ -23,7 +23,7 @@ namespace EssSharp
         public int MemberCount { get; }
 
         /// <summary>
-        /// Gets stored deminsion members.
+        /// Gets stored Dimesnion members.
         /// </summary>
         public int StoredMemberCount { get; }
 

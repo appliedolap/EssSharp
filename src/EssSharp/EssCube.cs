@@ -61,6 +61,69 @@ namespace EssSharp
         #region IEssCube Methods
 
         /// <inheritdoc />
+        public IEssJob BuildDimensionOnCube( EssJobBuildDimensionOptions options ) => BuildDimensionOnCubeAsync(options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<IEssJob> BuildDimensionOnCubeAsync( EssJobBuildDimensionOptions options, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                // Check that EssJobLoadDataOptions is not null
+                if ( options is null )
+                    throw new ArgumentException($"{nameof(EssJobLoadDataOptions)} is required to load data to a {nameof(EssCube)}.");
+
+                // Add Application and Cube name to options
+                options.ApplicationName = Application.Name;
+                options.CubeName = Name;
+                IEssFolder folder = null;
+
+                // If the data list is null or empty...
+                if ( options.File?.Any() != true )
+                {
+                    if ( !File.Exists(options.LocalDataFilePath) && options.LocalDataFileStream is null )
+                        throw new FileNotFoundException("Unable to find the data file at the given local path.", options.LocalDataFilePath);
+
+                    folder = await Application.Server.GetFolderAsync($@"/applications/{Application.Name}/{Name}").ConfigureAwait(false);
+                    var dataFile = File.Exists(options.LocalDataFilePath) ?
+                        await folder.UploadFileAsync(path: options.LocalDataFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
+                        await folder.UploadFileAsync(stream: options.LocalDataFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                    options.File = new List<string>() { $@"catalog{dataFile.FullPath}" };
+                }
+
+                // If the rule list is null...
+                if ( options.Rule is null )
+                {
+                    if ( !File.Exists(options.LocalRuleFilePath) && options.LocalRuleFileStream is null )
+                    {
+                        options.Rule = new List<string>() { "" };
+                    }
+                    else
+                    {
+                        folder = await Application.Server.GetFolderAsync($@"/applications/{Application.Name}/{Name}").ConfigureAwait(false);
+                        var ruleFile = File.Exists(options.LocalRuleFilePath) ?
+                            await folder.UploadFileAsync(path: options.LocalRuleFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
+                            await folder.UploadFileAsync(stream: options.LocalRuleFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                        options.Rule = new List<string>() { $@"catalog{ruleFile.FullPath}" };
+                    }
+                }
+
+                // Check that options.File is not null - this field holds the file name of the data being loaded and is required
+                if ( options.File?.Any() != true )
+                    throw new Exception($"A server file is required to load data to {Name}.");
+
+                // create and execute the Load Data job
+                return (await Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to load data to cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         public void ClearDataFromCube( EssJobClearDataOptions options = null ) => ClearDataFromCubeAsync(options).GetAwaiter().GetResult();
 
         /// <inheritdoc />

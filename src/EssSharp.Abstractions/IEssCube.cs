@@ -25,6 +25,21 @@ namespace EssSharp
         public List<IEssDimension> Dimensions { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        public IEssJob BuildDimensionOnCube( EssJobBuildDimensionOptions options );
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IEssJob> BuildDimensionOnCubeAsync( EssJobBuildDimensionOptions options, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Clears data from a cube.
         /// </summary>
         /// <param name="options"></param>

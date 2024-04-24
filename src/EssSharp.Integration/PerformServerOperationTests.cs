@@ -707,7 +707,7 @@ namespace EssSharp.Integration
 
             defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
 
-            submitGrid = await defaultGrid.SubmitAsync( );
+            submitGrid = await defaultGrid.SubmitAsync();
 
             /*
             if ( string.Equals(defaultGrid.Slice.Data.Ranges[0].Values[10], "680.0") )
@@ -1289,7 +1289,7 @@ namespace EssSharp.Integration
             grid.Preferences.TrackDataChanges = true;
 
             grid.Slice.Data.Ranges[0].Values[9] = "680.0";
-                
+
             await grid.SubmitAsync();
 
             Assert.Equal("680.0", grid.Slice.Data.Ranges[0].Values[9]);
@@ -1667,6 +1667,26 @@ namespace EssSharp.Integration
             var responseSummary = @"# HTTP/1.1 200 OK";
 
             //Assert.Equal(responseSummary, builder.ToString().Split(Environment.NewLine)[2]);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimenson"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanBuildDimenson()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var ruleFile = await cube.GetFileAsync("buildDimRule.rul");
+
+            var dataFile = await cube.GetFileAsync("buildDimTest.txt");
+
+            var options = new EssJobBuildDimensionOptions(dataFile, ruleFile);
+
+            var job = await cube.BuildDimensionOnCubeAsync(options);
+
+            Assert.Equal(EssJobStatus.Completed, job.JobStatus);
         }
     }
 }
