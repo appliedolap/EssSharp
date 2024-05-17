@@ -1,8 +1,6 @@
 ﻿namespace EssSharp
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary />
     public enum EssLockType
     {
         /// <summary>

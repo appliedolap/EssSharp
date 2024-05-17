@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <summery />
     public class EssDrillthroughDetails
     {
         /// <summary />
@@ -31,28 +31,28 @@ namespace EssSharp
             public int GenerationNumber { get; set; }
         }
 
-        /// <summary />
+        /// <inheritdoc />
         public Dictionary<string, ColumnMapping> ColumnMappings { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public List<string> Columns { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string DataSourceName { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public List<string> DrillableRegions { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string Name { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string Type { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string Url { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public bool UseTempTables { get; set; }
     }
 }

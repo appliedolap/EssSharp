@@ -4,44 +4,31 @@ using System.Text;
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssGridDimension
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public int Column { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public int Row { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public string DisplayName { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public string Name { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string Number { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public string Pov { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public bool Expanded { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public bool Hidden { get; set; }
     }
 }

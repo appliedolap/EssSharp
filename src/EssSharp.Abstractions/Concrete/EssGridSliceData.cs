@@ -4,11 +4,10 @@ using System.Text;
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssGridSliceData
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<EssGridRange> Ranges { get; set; } = new List<EssGridRange>();
     }
 }

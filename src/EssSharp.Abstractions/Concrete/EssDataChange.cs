@@ -3,52 +3,52 @@ using System.Collections.Generic;
 
 namespace EssSharp
 {
-    /// <summary />
+    /// <inheritdoc />
     public class EssDataChanges
     {
-        /// <summary />
+        /// <inheritdoc />
         public string Server { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string Application { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string Database { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string User { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-        /// <summary />
+        /// <inheritdoc />
         public List<EssDataChange> DataChanges = new List<EssDataChange>();
     }
 
     public class EssDataChange
     {
-        /// <summary />
+        /// <inheritdoc />
         public double OldValue { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public double NewValue { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public List<EssDataPoint> DataPoints = new List<EssDataPoint>();
     }
 
     public class EssDataPoint
     {
-        /// <summary />
+        /// <inheritdoc />
         public string DimensionName { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public int DimensionNumber { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string Member { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string Alias { get; set; }
     }
 }

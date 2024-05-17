@@ -4,6 +4,7 @@ using System.IO;
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssJobBuildDimensionOptions : EssJobOptions, IEssJobOptions
     {
         /// <summary />
@@ -53,16 +54,16 @@ namespace EssSharp
 
         #region Public Properties
 
-        /// <summary />
+        /// <inheritdoc />
         public string LocalDataFilePath { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public string LocalRuleFilePath { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public FileStream LocalDataFileStream { get; set; }
 
-        /// <summary />
+        /// <inheritdoc />
         public FileStream LocalRuleFileStream { get; set; }
 
         #endregion

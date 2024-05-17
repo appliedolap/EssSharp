@@ -30,58 +30,58 @@ namespace EssSharp
     public class EssGridPreferences : ICloneable, IEquatable<EssGridPreferences>
     {
         #region Public Properties
-        /// <summary />
+        /// <inheritdoc />
         public bool CellText { get; set; } = true;
 
-        /// <summary />
+        /// <inheritdoc />
         public EssGridPreferencesAxisSuppression ColumnSupression { get; set; } = new EssGridPreferencesAxisSuppression();
 
-        /// <summary />
+        /// <inheritdoc />
         public EssGridPreferencesFormulaRetention FormulaRetention { get; set; } = new EssGridPreferencesFormulaRetention();
 
-        /// <summary />
+        /// <inheritdoc />
         public bool IncludeDescriptionLabel { get; set; } = false;
 
-        /// <summary />
+        /// <inheritdoc />
         public bool IncludeSelection { get; set; } = true;
 
-        /// <summary />
+        /// <inheritdoc />
         public IndentationType Indentation { get; set; } = IndentationType.SUBITEMS;
 
-        /// <summary />
+        /// <inheritdoc />
         public long MaxColumns { get; set; } = 0;
 
-        /// <summary />
+        /// <inheritdoc />
         public long MaxRows { get; set; } = 0;
 
-        /// <summary />
+        /// <inheritdoc />
         public string MissingText { get; set; } = "#Missing";
 
-        /// <summary />
+        /// <inheritdoc />
         public bool Navigate { get; set; } = true;
 
-        /// <summary />
+        /// <inheritdoc />
         public string NoAccessText { get; set; } = "#No Access";
 
-        /// <summary />
+        /// <inheritdoc />
         public bool RemoveUnSelectedGroup { get; set; } = false;
 
-        /// <summary />
+        /// <inheritdoc />
         public bool RepeatMemberLabels { get; set; } = true;
 
-        /// <summary />
+        /// <inheritdoc />
         public EssGridPreferencesAxisSuppression RowSupression { get; set; } = new EssGridPreferencesAxisSuppression();
 
-        /// <summary />
+        /// <inheritdoc />
         public bool SendBlanksAsMissing { get; set; } = true;
 
-        /// <summary />
+        /// <inheritdoc />
         public bool TrackDataChanges { get; set; } = false;
 
-        /// <summary />
+        /// <inheritdoc />
         public bool WithinSelectedGroup { get; set; } = false;
 
-        /// <summary />
+        /// <inheritdoc />
         public EssGridPreferencesZoomIn ZoomIn { get; set; } = new EssGridPreferencesZoomIn();
 
         #endregion

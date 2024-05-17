@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssDrillthroughRange : IEssDrillthroughRange
     {
         #region Constructors
