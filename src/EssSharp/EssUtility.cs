@@ -70,9 +70,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/> object.</returns>
         public Stream Download() => DownloadAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/> object.</returns>
         public async Task<Stream> DownloadAsync(CancellationToken cancellationToken = default)
         {
             try

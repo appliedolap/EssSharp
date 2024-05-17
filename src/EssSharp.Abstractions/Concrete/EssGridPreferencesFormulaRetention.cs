@@ -2,18 +2,23 @@
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssGridPreferencesFormulaRetention : IEquatable<EssGridPreferencesFormulaRetention>
     {
         #region Public Properties
-
+        /// <inheritdoc />
         public bool Comments { get; set; }
 
+        /// <inheritdoc />
         public bool Fill { get; set; }
 
+        /// <inheritdoc />
         public bool Focus { get; set; }
 
+        /// <inheritdoc />
         public bool Retrieve { get; set; }
 
+        /// <inheritdoc />
         public bool Zoom { get; set; }
 
         #endregion

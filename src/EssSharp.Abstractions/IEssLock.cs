@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace EssSharp
@@ -10,7 +9,7 @@ namespace EssSharp
         #region IEssLock Member Properties
 
         /// <summary>
-        /// 
+        /// Returns the lock type.
         /// </summary>
         public EssLockType LockType { get; }
 

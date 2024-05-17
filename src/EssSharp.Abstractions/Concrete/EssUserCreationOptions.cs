@@ -9,9 +9,16 @@ using System.Xml.Linq;
 
 namespace EssSharp
 {
-
+    /// <summary />
     public class EssUserCreationOptions
     {
+        /// <summary />
+        /// <param name="id"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
+        /// <param name="groups"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public EssUserCreationOptions(string id, string password, EssServerRole role = EssServerRole.User, List<string> groups = default )
         {
             ID = id ?? 

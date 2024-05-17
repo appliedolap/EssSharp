@@ -1,13 +1,21 @@
 ﻿namespace EssSharp
 {
-    /// <summary />
+    /// <summary>
+    /// Defines EssApplicationStatus
+    /// </summary>
     public enum EssApplicationStatus
     {
-        /// <summary />
+        /// <summary>
+        /// Enum value for UNKNOWN
+        /// </summary>
         Unknown,
-        /// <summary />
+        /// <summary>
+        /// Enum value for STOPPED
+        /// </summary>
         Stopped,
-        /// <summary />
-        Started,
+        /// <summary>
+        /// Enum value for STARTED
+        /// </summary>
+        Started
     }
 }

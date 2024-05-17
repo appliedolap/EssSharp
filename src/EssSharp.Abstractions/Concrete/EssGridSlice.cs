@@ -4,31 +4,22 @@ using System.Text;
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssGridSlice
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public int Columns { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public EssGridSliceData Data { get; set; } = new EssGridSliceData();
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<int> DirtyCells { get; set; } = new List<int>();
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<int> DirtyTexts { get; set; } = new List<int>();
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public int Rows { get; set; }
 
     }

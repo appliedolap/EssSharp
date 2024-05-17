@@ -34,6 +34,7 @@ namespace EssSharp
 
         #region Internal Members 
 
+        /// <summary />
         internal FileBean FileBean
         { 
             get => _file; 
@@ -62,6 +63,7 @@ namespace EssSharp
         public string FullPath => _file.FullPath;
 
         /// <inheritdoc />
+        /// <returns>A <see cref="string"/>.</returns>
         public string ParentPath
         {
             get

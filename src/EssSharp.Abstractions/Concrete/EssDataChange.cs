@@ -3,18 +3,25 @@ using System.Collections.Generic;
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssDataChanges
     {
+        /// <summary />
         public string Server { get; set; }
 
+        /// <summary />
         public string Application { get; set; }
 
+        /// <summary />
         public string Database { get; set; }
 
+        /// <summary />
         public string User { get; set; }
 
+        /// <summary />
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
+        /// <summary />
         public List<EssDataChange> DataChanges = new List<EssDataChange>();
     }
 

@@ -22,6 +22,7 @@ namespace EssSharp
 
         #region Constructors
 
+        /// <summary />
         internal EssJob( IEssJobOptions options, EssServer server ) : base(server?.Configuration, server?.Client)
         {
             if ( options is not EssJobOptions jobOptions || jobOptions.JobType is EssJobType.Unknown )

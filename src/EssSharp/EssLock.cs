@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using EssSharp.Api;
 using EssSharp.Model;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace EssSharp
 {
@@ -49,9 +48,7 @@ namespace EssSharp
 
         #region IEssLock Members Properties
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public virtual EssLockType LockType { get; } = EssLockType.Unknown;
 
         #endregion

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace EssSharp
 {
+    /// <summary />
     public interface IEssServerFactory
     {
         /// <summary>

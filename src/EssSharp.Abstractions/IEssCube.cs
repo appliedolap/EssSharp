@@ -20,23 +20,22 @@ namespace EssSharp
         public EssCubeType CubeType { get; }
 
         /// <summary>
-        /// 
+        /// Returns the List of dimensions for the cube.
         /// </summary>
         public List<IEssDimension> Dimensions { get; set; }
 
         /// <summary>
-        /// 
+        /// Build new dimension on cube.
         /// </summary>
         /// <param name="options"></param>
         public IEssJob BuildDimensionOnCube( EssJobBuildDimensionOptions options );
 
 
         /// <summary>
-        /// 
+        /// Asyncronously build new dimension on cube.
         /// </summary>
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task<IEssJob> BuildDimensionOnCubeAsync( EssJobBuildDimensionOptions options, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -140,17 +139,16 @@ namespace EssSharp
         /// </summary>
         /// <param name="options">Options include script name or report script name, and lock for update</param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task ExecuteScriptAsync( EssJobScriptOptions options, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Export cube artifacts to a Lifecycle Management (LCM) .zip file
         /// </summary>
         /// <param name="options"></param>
         public Stream ExportToLcm( EssJobExportLcmOptions options = null );
 
         /// <summary>
-        /// 
+        /// Export cube artifacts to a Lifecycle Management (LCM) .zip file
         /// </summary>
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
@@ -160,7 +158,6 @@ namespace EssSharp
         /// Exports a cube to an excel workbook.
         /// </summary>
         /// <param name="options">Export options including Build method, calc, data, and include member IDs.</param>
-        /// <returns></returns>
         public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null );
 
         /// <summary>
@@ -248,7 +245,6 @@ namespace EssSharp
         /// Gets a file with the given file name.
         /// </summary>
         /// <param name="fileName">Name of file on the server.</param>
-        /// <returns></returns>
         public IEssFile GetFile( string fileName );
 
         /// <summary>
@@ -281,19 +277,19 @@ namespace EssSharp
         public Task<IEssFolder> GetFolderAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Get default grid.
         /// </summary>
         /// <param name="grid"></param>
         public IEssGrid GetGrid();
 
         /// <summary>
-        /// 
+        /// Get grid layout.
         /// </summary>
         /// <param name="grid"></param>
         public IEssLayout GetGridLayout( IEssGrid grid );
 
         /// <summary>
-        /// 
+        /// Asynchronously get grid layout.
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="cancellationToken"></param>
@@ -360,16 +356,15 @@ namespace EssSharp
         public Task<List<IEssMember>> GetDimensionMembersAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Get list of cube members.
         /// </summary>
         /// <param name="parentUniqueName"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
-        /// <returns></returns>
         public List<IEssMember> GetMembers( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50 );
 
         /// <summary>
-        /// 
+        /// Asynchronously gets list of cube members.
         /// </summary>
         /// <param name="parentUniqueName"></param>
         /// <param name="fields"></param>
@@ -379,14 +374,14 @@ namespace EssSharp
         public Task<List<IEssMember>> GetMembersAsync( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Gets all dynamic time series members.
         /// </summary>
         /// <param name="fields"></param>
         /// <returns></returns>
         public List<IEssMember> GetDynamicTimeSeriesMembers( EssMemberFields? fields = null );
 
         /// <summary>
-        /// 
+        /// Asynchronously get dynamic time series members.
         /// </summary>
         /// <param name="fields"></param>
         /// <param name="cancellationToken"></param>
@@ -394,7 +389,7 @@ namespace EssSharp
         public Task<List<IEssMember>> GetDynamicTimeSeriesMembersAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Gets all members of specified generation.
         /// </summary>
         /// <param name="dimensionName"></param>
         /// <param name="generationNumber"></param>
@@ -403,7 +398,7 @@ namespace EssSharp
         public List<IEssMember> GetMembersByGeneration( string dimensionName, int generationNumber, EssMemberFields? fields = null, int limit = 50 );
 
         /// <summary>
-        /// 
+        /// Asynchronously gets all members of specified generation.
         /// </summary>
         /// <param name="dimensionName"></param>
         /// <param name="generationNumber"></param>
@@ -413,19 +408,19 @@ namespace EssSharp
         public Task<List<IEssMember>> GetMembersByGenerationAsync( string dimensionName, int generationNumber, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Gets all members of specified level.
         /// </summary>
         /// <param name="dimensionName"></param>
-        /// <param name="generationNumber"></param>
+        /// <param name="levelNumber"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
         public List<IEssMember> GetMembersByLevel( string dimensionName, int levelNumber, EssMemberFields? fields = null, int limit = 50 );
 
         /// <summary>
-        /// 
+        /// Asynchronously gets all members of specified level.
         /// </summary>
         /// <param name="dimensionName"></param>
-        /// <param name="generationNumber"></param>
+        /// <param name="levelNumber"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
@@ -433,7 +428,7 @@ namespace EssSharp
 
 
         /// <summary>
-        /// 
+        /// Get list of members with specified keywork or phrase.
         /// </summary>
         /// <param name="keyword"></param>
         /// <param name="fields"></param>
@@ -441,7 +436,7 @@ namespace EssSharp
         public List<IEssMember> GetMembersSearched( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50 );
 
         /// <summary>
-        /// 
+        /// Asynchronously gets list of members with specified keywork or phrase.
         /// </summary>
         /// <param name="keyword"></param>
         /// <param name="fields"></param>
@@ -477,7 +472,6 @@ namespace EssSharp
         /// </summary>
         /// <param name="lockedList">List of locked objects or blocks to unlock.</param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public Task UnlockAsync<T>( List<T> lockedList, CancellationToken cancellationToken = default ) where T : class, IEssLock;
 
         /// <summary>

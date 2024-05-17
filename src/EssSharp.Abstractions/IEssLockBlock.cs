@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace EssSharp
+﻿namespace EssSharp
 {
     /// <summary />
     public interface IEssLockBlock : IEssLock
     {
 
         /// <summary>
-        /// 
+        /// Returns the number of locked blocks.
         /// </summary>
         public int Count { get; }
 

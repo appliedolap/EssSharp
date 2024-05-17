@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace EssSharp
+﻿namespace EssSharp
 {
     /// <summary />
     public interface IEssMaxlScript : IEssObject, IEssScript

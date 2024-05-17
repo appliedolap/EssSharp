@@ -20,6 +20,7 @@ namespace EssSharp
 
         #region Constructors
 
+        /// <summery />
         internal EssApplicationVariable( Variable variable, EssApplication application ) : base(variable, application?.Server as EssServer)
         {
             _application = application ??
@@ -43,6 +44,7 @@ namespace EssSharp
         #endregion
 
         /// <inheritdoc />
+        /// <returns>A <see cref="string"/>.</returns>
         public override string ToString() =>
             $"{nameof(EssApplicationVariable)} {{ {nameof(Application)} = {Application.Name}, {nameof(Name)} = {Name}, {nameof(Value)} = {Value} }}";
     }

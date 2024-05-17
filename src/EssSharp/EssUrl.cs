@@ -44,6 +44,7 @@ namespace EssSharp
         public string Path => _url?.Url;
 
         /// <inheritdoc />
+        /// <returns>A <see cref="Uri"/> object.</returns>
         public Uri Url
         {
             get

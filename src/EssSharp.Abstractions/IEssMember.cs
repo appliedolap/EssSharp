@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -147,13 +146,13 @@ namespace EssSharp
         public Task<List<IEssMember>> GetAncestorsAsync( EssMemberFields? fields = null, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Returns a list of bottom level members.
         /// </summary>
         /// <param name="fields"></param>
         public List<IEssMember> GetBottomLevelDescendants( EssMemberFields? fields = null );
 
         /// <summary>
-        /// 
+        /// Asynchronously returns a list of bottom level members.
         /// </summary>
         /// <param name="fields"></param>
         /// <param name="cancellationToken"></param>
@@ -201,7 +200,6 @@ namespace EssSharp
         /// <summary>
         /// Gets members of the same generation level.
         /// </summary>
-        /// <param name="levelNumber"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
         public List<IEssMember> GetSameGenerationMembers( EssMemberFields? fields = null, int limit = 50 );
@@ -209,7 +207,6 @@ namespace EssSharp
         /// <summary>
         /// Asynchronously gets members of the same generation level.
         /// </summary>
-        /// <param name="levelNumber"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>

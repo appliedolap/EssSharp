@@ -27,6 +27,7 @@ namespace EssSharp
         #region IEssApplicationDatasource Members 
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssApplication"/> object.</returns>
         public IEssApplication Application => _application;
 
         #endregion 
@@ -36,6 +37,7 @@ namespace EssSharp
         /// <inheritdoc />
         /// <remarks>Provides the name of this datasource in the following format:<br />
         /// <b>&lt;application&gt;.&lt;datasource&gt;</b>.</remarks>
+        /// <returns>A <see cref="string"/>.</returns>
         public override string ToString() => $@"{_application?.Name}.{Name}".Trim('.');
 
         #endregion

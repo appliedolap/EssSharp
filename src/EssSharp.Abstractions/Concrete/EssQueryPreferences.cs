@@ -2,9 +2,7 @@
 {
     public class EssQueryPreferences
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <summary />
         /// <param name="aliasTable" />
         /// <param name="axes" />
         /// <param name="dataless" />

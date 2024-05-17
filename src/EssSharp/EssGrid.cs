@@ -1,23 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 using EssSharp.Api;
 using EssSharp.Model;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using static System.Collections.Specialized.BitVector32;
 
 using Action = EssSharp.Model.GridOperation.ActionEnum;
 
 namespace EssSharp
 {
+    /// <summary />
     [Flags]
     internal enum Status
     {
@@ -159,9 +152,11 @@ namespace EssSharp
         #region IEssGrid Members
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssLayout"/> object.</returns>
         public IEssLayout GetGridLayout() => GetGridLayoutAsync().GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssLayout"/> object.</returns>
         public async Task<IEssLayout> GetGridLayoutAsync( CancellationToken cancellationToken = default )
         {
             try

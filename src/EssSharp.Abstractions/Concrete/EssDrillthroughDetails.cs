@@ -4,8 +4,10 @@ using System.Text;
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssDrillthroughDetails
     {
+        /// <summary />
         public class ColumnMapping
         {
             /// <summary>
@@ -29,20 +31,28 @@ namespace EssSharp
             public int GenerationNumber { get; set; }
         }
 
+        /// <summary />
         public Dictionary<string, ColumnMapping> ColumnMappings { get; set; }
 
+        /// <summary />
         public List<string> Columns { get; set; }
 
+        /// <summary />
         public string DataSourceName { get; set; }
 
+        /// <summary />
         public List<string> DrillableRegions { get; set; }
 
+        /// <summary />
         public string Name { get; set; }
 
+        /// <summary />
         public string Type { get; set; }
 
+        /// <summary />
         public string Url { get; set; }
 
+        /// <summary />
         public bool UseTempTables { get; set; }
     }
 }

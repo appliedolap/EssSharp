@@ -189,7 +189,7 @@ namespace EssSharp
         public Task<string> DownloadLatestLogFileStringAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Exports cube artifacts to a Lifecycle Management (LCM) .zip file
         /// </summary>
         /// <param name="cubeName"></param>
         /// <param name="options"></param>
@@ -197,7 +197,7 @@ namespace EssSharp
         public Stream ExportCubeToLcm( string cubeName, EssJobExportLcmOptions options = null );
 
         /// <summary>
-        /// 
+        /// Asyncronously export cube artifacts to a Lifecycle Management (LCM) .zip file
         /// </summary>
         /// <param name="cubeName"></param>
         /// <param name="options"></param>

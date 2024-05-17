@@ -32,9 +32,11 @@ namespace EssSharp
         #region IEssObject Members
 
         /// <inheritdoc />
+        /// <returns>A <see cref="String"/>.</returns>
         public override string Name => _appConfigEntity.Key;
 
         /// <inheritdoc />
+        /// <returns>A <see cref="EssType"/> object.</returns>
         public override EssType Type => EssType.ApplicationConfiguration;
 
         #endregion
@@ -42,12 +44,15 @@ namespace EssSharp
         #region IEssApplicatonConfiguration Members
 
         /// <inheritdoc />
+        /// <returns>A <see cref="IEssApplication"/> object.</returns>
         public IEssApplication Application => _application;
 
         /// <inheritdoc />
+        /// <returns>A <see cref="string"/>.</returns>
         public string Key => _appConfigEntity.Key;
 
         /// <inheritdoc />
+        /// /// <returns>A <see cref="string"/>.</returns>
         public string Value => _appConfigEntity.Value;
 
         #endregion

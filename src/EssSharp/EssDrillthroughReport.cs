@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -69,15 +67,19 @@ namespace EssSharp
         public EssDrillthroughDetails Details => _definition?.ToEssSharpDetails();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="Object"/> Array and a <see cref="string"/> Array.</returns>
         public (object[,] report, string[] columnTypes) Execute( IEssDrillthroughRange context, IEssDrillthroughOptions options = null ) => Execute(new List<IEssDrillthroughRange>() { context }, options);
 
         /// <inheritdoc />
+        /// /// <returns>An <see cref="Object"/> Array and a <see cref="string"/> Array.</returns>
         public (object[,] report, string[] columnTypes) Execute( IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null ) => ExecuteAsync(context, options)?.GetAwaiter().GetResult() ?? (new string[0, 0], new string[0]);
 
         /// <inheritdoc />
+        /// <returns>An <see cref="Object"/> Array and a <see cref="string"/> Array.</returns>
         public Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEssDrillthroughRange context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default ) => ExecuteAsync(new List<IEssDrillthroughRange>() { context }, options, cancellationToken);
 
         /// <inheritdoc />
+        /// <returns>An <see cref="Object"/> Array and a <see cref="string"/> Array.</returns>
         public async Task<(object[,] report, string[] columnTypes)> ExecuteAsync( IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null, CancellationToken cancellationToken = default )
         {
             if ( context?.Any(dtr => dtr is not null) is not true )
@@ -151,6 +153,7 @@ namespace EssSharp
         /// <param name="source" />
         /// <param name="options" />
         /// <exception cref="InvalidOperationException" />
+        /// <returns>An <see cref="Object"/> Array and a <see cref="string"/> Array.</returns>
         private (object[,] report, string[] columnTypes) To2DReport( JArray source, IEssDrillthroughOptions options = null )
         {
             // Construct a new EssDrillthroughOptions if one is not given.

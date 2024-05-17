@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Threading;
-using System;
 using System.Collections.Generic;
 
 namespace EssSharp

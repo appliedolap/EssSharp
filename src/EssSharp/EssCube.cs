@@ -61,9 +61,11 @@ namespace EssSharp
         #region IEssCube Methods
 
         /// <inheritdoc />
+        /// <returns>A <see cref="IEssJob"/> object.</returns>
         public IEssJob BuildDimensionOnCube( EssJobBuildDimensionOptions options ) => BuildDimensionOnCubeAsync(options).GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>A <see cref="IEssJob"/> object.</returns>
         public async Task<IEssJob> BuildDimensionOnCubeAsync( EssJobBuildDimensionOptions options, CancellationToken cancellationToken = default )
         {
             try
@@ -302,11 +304,11 @@ namespace EssSharp
             new EssMdxScript(new Script() { Content = query }, this).GetReportAsync(preferences, cancellationToken);
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A <see cref="Stream"/>.</returns>
         public Stream ExportToLcm( EssJobExportLcmOptions options = null ) => ExportToLcmAsync(options).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A <see cref="Stream"/>.</returns>
         public Task<Stream> ExportToLcmAsync( EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default ) =>
             Application.ExportCubeToLcmAsync(Name, options);
 
@@ -536,11 +538,12 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssGrid"/> object.</returns>
         public IEssGrid GetGrid() =>
             new EssGrid(this);
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssLayout"/> object.</returns>
         public IEssLayout GetGridLayout( IEssGrid layout ) => GetGridLayoutAsync( layout ).GetAwaiter().GetResult();
 
         /// <inheritdoc />
@@ -550,6 +553,7 @@ namespace EssSharp
         /// change to GetDefaultLayout and use this with no params
         /// => (await GetDefaultGridAsync()).GetLayoutAsync() ??
         /// 
+        /// <returns>An <see cref="IEssLayout"/> object.</returns>
         public Task<IEssLayout> GetGridLayoutAsync( IEssGrid layout, CancellationToken cancellationToken = default ) =>
             layout.GetGridLayoutAsync(cancellationToken: cancellationToken);
 
@@ -605,11 +609,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssMember"/> object.</returns>
         public IEssMember GetMember( string uniqueName, EssMemberFields? fields = null ) => GetMemberAsync(uniqueName, fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>An <see cref="IEssMember"/> object.</returns>
         public async Task<IEssMember> GetMemberAsync( string uniqueName, EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
@@ -633,9 +637,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A <see cref="bool"/> and <see cref="IEssMember"/> object.</returns>
         public (bool result, IEssMember member) TryGetMember( string uniqueName, EssMemberFields? fields = null) => TryGetMemberAsync(uniqueName, fields).GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>A <see cref="bool"/> and <see cref="IEssMember"/> object.</returns>
         public async Task<(bool result, IEssMember member)> TryGetMemberAsync( string uniqueName, EssMemberFields? fields = null, CancellationToken cancellationToken = default )
         {
             try
@@ -682,11 +688,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetMembers( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50 ) => GetMembersAsync(parentUniqueName, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetMembersAsync( string parentUniqueName = null, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
         {
             try
@@ -738,11 +744,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetMembersByGeneration( string dimensionName, int generationNumber, EssMemberFields? fields = null, int limit = 50 ) => GetMembersByGenerationAsync(dimensionName, generationNumber, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetMembersByGenerationAsync( string dimensionName, int generationNumber, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
         {
             try
@@ -758,11 +764,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetMembersByLevel( string dimensionName, int levelNumber, EssMemberFields? fields = null, int limit = 50 ) => GetMembersByLevelAsync(dimensionName, levelNumber, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetMembersByLevelAsync( string dimensionName, int levelNumber, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
         {
             try
@@ -780,11 +786,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
         public List<IEssMember> GetMembersSearched( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSearchedAsync(keyword, matchWholeWord, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
         public async Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default )
         {
             try

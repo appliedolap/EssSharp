@@ -6,78 +6,94 @@ namespace EssSharp
     /// <summary />
     public enum EssJobType
     {
-        /// <summary>Unknown</summary>
-        [Description("Unknown")]
+        /// <summary>
+        /// Unknown
+        /// </summary>
         Unknown = 0,
 
-        /// <summary>Data Load</summary>
-        [Description("Data Load")]
+        /// <summary>
+        /// Data Load
+        /// </summary>
         Dataload = 1,
 
-        /// <summary>Dimension Build</summary>
-        [Description("Dimension Build")]
+        /// <summary>
+        /// Dimension Build
+        /// </summary>
         Dimbuild = 2,
 
-        /// <summary>Calc Execution</summary>
-        [Description("Calc Execution")]
+        /// <summary>
+        /// Calc Execution
+        /// </summary>
         Calc = 3,
 
-        /// <summary>Clear Data</summary>
-        [Description("Clear Data")]
+        /// <summary>
+        /// Clear Data
+        /// </summary>
         Clear = 4,
 
-        /// <summary>Import Excel</summary>
-        [Description("Import Excel")]
+        /// <summary>
+        /// Import Excel
+        /// </summary>
         ImportExcel = 5,
 
-        /// <summary>Export Excel</summary>
-        [Description("Export Excel")]
+        /// <summary>
+        /// Export Excel
+        /// </summary>
         ExportExcel = 6,
 
-        /// <summary>LCM Export</summary>
-        [Description("LCM Export")]
+        /// <summary>
+        /// LCM Export
+        /// </summary>
         LcmExport = 7,
 
-        /// <summary>LCM Import</summary>
-        [Description("LCM Import")]
+        /// <summary>
+        /// LCM Import
+        /// </summary>
         LcmImport = 8,
 
-        /// <summary>Clear Aggregation</summary>
-        [Description("Clear Aggregation")]
+        /// <summary>
+        /// Clear Aggregation
+        /// </summary>
         ClearAggregation = 9,
 
-        /// <summary>Build Aggregation</summary>
-        [Description("Build Aggregation")]
+        /// <summary>
+        /// Build Aggregation
+        /// </summary>
         BuildAggregation = 10,
 
-        /// <summary>ASO Buffer Data Load</summary>
-        [Description("ASO Buffer Data Load")]
-        [EnumMember(Value = "asoBufferDataLoad")]
+        /// <summary>
+        /// ASO Buffer Data Load
+        /// </summary>
         AsoBufferDataLoad = 11,
 
-        /// <summary>ASO Buffer Commit</summary>
-        [Description("ASO Buffer Commit")]
-        [EnumMember(Value = "asoBufferCommit")]
+        /// <summary>
+        /// ASO Buffer Commit
+        /// </summary>
         AsoBufferCommit = 12,
 
-        /// <summary>Export Data</summary>
-        [Description("Export Data")]
+        /// <summary>
+        /// Export Data
+        /// </summary>
         ExportData = 13,
 
-        /// <summary>MDX Script</summary>
-        [Description("MDX Script")]
+        /// <summary>
+        /// MDX Script
+        /// </summary>
         MdxScript = 14,
 
-        /// <summary>Report Script</summary>
-        [Description("Report Script")]
+        /// <summary>
+        /// Report Script
+        /// </summary>
         ExecuteReport = 15,
 
-        /// <summary>MAXL Script</summary>
-        [Description("MAXL Script")]
+        /// <summary>
+        /// MAXL Script
+        /// </summary>
         Maxl = 16,
 
-        /// <summary>Groovy Script</summary>
-        [Description("Groovy Script")]
+        /// <summary>
+        /// Groovy Script
+        /// </summary>
         Groovy = 17
     }
 }

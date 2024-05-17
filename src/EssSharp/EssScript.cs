@@ -100,9 +100,11 @@ namespace EssSharp
         #region IEssScript Methods
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssScript"/> object of type <typeparamref name="T"/>.</returns>
         public T Copy<T>( string newName ) where T : class, IEssScript => CopyAsync<T>(newName).GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssScript"/> object of type <typeparamref name="T"/>.</returns>
         public async Task<T> CopyAsync<T>( string newName, CancellationToken cancellationToken = default ) where T : class, IEssScript
         {
             if ( string.IsNullOrWhiteSpace(newName) || string.Equals(Name, newName, StringComparison.OrdinalIgnoreCase) )

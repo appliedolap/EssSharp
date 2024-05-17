@@ -43,12 +43,15 @@ namespace EssSharp
         #region IEssUserProvisions Member Propeties
 
         /// <inheritdoc />
+        /// <returns>A <see cref="string"/>.</returns>
         public string FullName => _provisionInfo?.Name;
 
         /// <inheritdoc />
+        /// <returns>A <see cref="EssApplicationRole"/> object.</returns>
         public EssApplicationRole Role => _provisionInfo.Role.ToEssApplicationRole();
 
         /// <inheritdoc />
+        /// <returns>A <see cref="EssPermissionType"/> object.</returns>
         public EssPermissionType PermissionType => _provisionInfo.Group ? EssPermissionType.Group : EssPermissionType.User;
 
         #endregion

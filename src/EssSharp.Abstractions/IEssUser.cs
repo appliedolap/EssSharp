@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 
@@ -24,8 +22,14 @@ namespace EssSharp
         /// </summary>
         public string Email { get; }
 
+        /// <summary>
+        /// The role assigned to this user.
+        /// </summary>
         public EssServerRole Role { get; }
 
+        /// <summary>
+        /// List of groups this user belongs to.
+        /// </summary>
         public List<string> GroupNames { get; }
 
         /// <summary>

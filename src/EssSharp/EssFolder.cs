@@ -155,11 +155,19 @@ namespace EssSharp
         /// <returns>A list of <see cref="IEssFile"/> objects.</returns>
         public async Task<List<IEssFile>> GetFilesAsync( string nameFilter = null, CancellationToken cancellationToken = default )
         {
-            var api = GetApi<FilesApi>();
-            var path = FullPath?.TrimStart('/');
-            var files = await api.FilesListFilesAsync(path: path, filter: nameFilter, recursive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
+            try
+            {
+                var api = GetApi<FilesApi>();
+                var path = FullPath?.TrimStart('/');
+                var files = await api.FilesListFilesAsync(path: path, filter: nameFilter, recursive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-            return files?.ToEssSharpList<IEssFile>(Server as EssServer) ?? new List<IEssFile>();
+                return files?.ToEssSharpList<IEssFile>(Server as EssServer) ?? new List<IEssFile>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get the files in {Name}. {e.Message}", e);
+            }
         }
 
         /// <inheritdoc />

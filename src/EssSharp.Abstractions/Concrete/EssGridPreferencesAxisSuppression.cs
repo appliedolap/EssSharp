@@ -2,24 +2,32 @@
 
 namespace EssSharp
 {
+    /// <summary />
     public class EssGridPreferencesAxisSuppression : IEquatable<EssGridPreferencesAxisSuppression>
     {
         #region Public Properties
-
+        /// <summary />
         public bool Derived { get; set; }
 
+        /// <summary />
         public bool EmptyBlocks { get; set; }
 
+        /// <summary />
         public bool Error { get; set; }
 
+        /// <summary />
         public bool Invalid { get; set; }
 
+        /// <summary />
         public bool Missing { get; set; }
 
+        /// <summary />
         public bool NoAccess { get; set; }
 
+        /// <summary />
         public bool UnderScore { get; set; }
 
+        /// <summary />
         public bool Zero { get; set; }
 
         #endregion

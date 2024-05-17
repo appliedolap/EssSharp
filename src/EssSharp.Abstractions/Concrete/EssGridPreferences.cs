@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace EssSharp
 {
@@ -11,54 +7,81 @@ namespace EssSharp
     /// </summary>
     public enum IndentationType
     {
+        /// <summary>
+        /// Enum value for UNKNOWN
+        /// </summary>
         UNKNOWN = 0,
-        
+        /// <summary>
+        /// Enum value for NONE
+        /// </summary>
         NONE = 1,
-
+        /// <summary>
+        /// Enum value for SUBITEMS
+        /// </summary>
         SUBITEMS = 2,
-
+        /// <summary>
+        /// Enum value for TOTALS
+        /// </summary>
         TOTALS = 3
 
     }
 
+    /// <summary />
     public class EssGridPreferences : ICloneable, IEquatable<EssGridPreferences>
     {
         #region Public Properties
-
+        /// <summary />
         public bool CellText { get; set; } = true;
 
+        /// <summary />
         public EssGridPreferencesAxisSuppression ColumnSupression { get; set; } = new EssGridPreferencesAxisSuppression();
 
+        /// <summary />
         public EssGridPreferencesFormulaRetention FormulaRetention { get; set; } = new EssGridPreferencesFormulaRetention();
 
+        /// <summary />
         public bool IncludeDescriptionLabel { get; set; } = false;
 
+        /// <summary />
         public bool IncludeSelection { get; set; } = true;
 
+        /// <summary />
         public IndentationType Indentation { get; set; } = IndentationType.SUBITEMS;
 
+        /// <summary />
         public long MaxColumns { get; set; } = 0;
 
+        /// <summary />
         public long MaxRows { get; set; } = 0;
 
+        /// <summary />
         public string MissingText { get; set; } = "#Missing";
 
+        /// <summary />
         public bool Navigate { get; set; } = true;
 
+        /// <summary />
         public string NoAccessText { get; set; } = "#No Access";
 
+        /// <summary />
         public bool RemoveUnSelectedGroup { get; set; } = false;
 
+        /// <summary />
         public bool RepeatMemberLabels { get; set; } = true;
 
+        /// <summary />
         public EssGridPreferencesAxisSuppression RowSupression { get; set; } = new EssGridPreferencesAxisSuppression();
 
+        /// <summary />
         public bool SendBlanksAsMissing { get; set; } = true;
 
+        /// <summary />
         public bool TrackDataChanges { get; set; } = false;
 
+        /// <summary />
         public bool WithinSelectedGroup { get; set; } = false;
 
+        /// <summary />
         public EssGridPreferencesZoomIn ZoomIn { get; set; } = new EssGridPreferencesZoomIn();
 
         #endregion

@@ -39,9 +39,7 @@ namespace EssSharp
         /// <inheritdoc />
         public override EssType Type => EssType.Dimension;
 
-        /// <summary>
-        /// Returns the dimension number.
-        /// </summary>
+        /// <inheritdoc />
         public int DimensionNumber { get; set; }
 
         /// <inheritdoc />
@@ -86,11 +84,11 @@ namespace EssSharp
         }
 
         /// inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssGeneration"/> objects.</returns>
         public List<IEssGeneration> GetGenerations() => GetGenerationsAsync().GetAwaiter().GetResult();
 
         /// inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssGeneration"/> objects.</returns>
         public async Task<List<IEssGeneration>> GetGenerationsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -110,11 +108,11 @@ namespace EssSharp
         }
 
         /// inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssGeneration"/> objects.</returns>
         public List<IEssGeneration> GetGenerationLevels() => GetGenerationLevelsAsync().GetAwaiter().GetResult();
 
         /// inheritdoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssGeneration"/> objects.</returns>
         public async Task<List<IEssGeneration>> GetGenerationLevelsAsync( CancellationToken cancellationToken = default )
         {
             try
@@ -134,11 +132,11 @@ namespace EssSharp
         }
 
         /// <inheritDoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssGeneration"/> objects.</returns>
         public List<IEssGeneration> GetLevels() => GetLevelsAsync().GetAwaiter().GetResult();
 
         /// <inheritDoc />
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssGeneration"/> objects.returns>
         public async Task<List<IEssGeneration>> GetLevelsAsync( CancellationToken cancellationToken = default )
         {
             try

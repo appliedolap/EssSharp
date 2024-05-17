@@ -16,6 +16,7 @@ using RestSharp;
 
 namespace EssSharp
 {
+    /// <summary />
     internal static class Extensions
     {
         #region Migrations to EssSharp.Abstractions
@@ -66,6 +67,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="applicationList" />
         /// <param name="server" />
+        /// <returns>A list of <see cref="IEssApplication"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssApplication> ToEssSharpList( this ApplicationList applicationList, EssServer server )
         {
             if ( server is null )
@@ -83,7 +86,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="configList"></param>
         /// <param name="application"></param>
-        /// <returns></returns>
+        /// <returns>Returns a list of <see cref="IEssApplicationConfiguration"/> objects.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssApplicationConfiguration> ToEssSharpList( this ApplicationConfigList configList, EssApplication application )
         {
@@ -102,6 +105,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="cubeList" />
         /// <param name="application" />
+        /// <returns>A list of <see cref="IEssCube"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssCube> ToEssSharpList( this CubeList cubeList, EssApplication application )
         {
             if ( application is null )
@@ -117,8 +122,9 @@ namespace EssSharp
         /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssCube"/> objects associated with the given <see cref="EssApplication"/>.
         /// </summary>
-        /// <param name="cubeList" />
-        /// <param name="application" />
+        /// <param name="generationLevelList"></param>
+        /// <returns>A list of <see cref="IEssGeneration"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssGeneration> ToEssSharpList( this GenerationLevelList generationLevelList ) =>
             generationLevelList
                 .Items?
@@ -133,6 +139,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="datasourcesList" />
         /// <param name="server" />
+        /// <returns>A list of <see cref="IEssDatasource"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssDatasource> ToEssSharpList( this DatasourcesList datasourcesList, EssServer server )
         {
             if ( server is null )
@@ -146,10 +154,12 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns a <see cref="List{T}"/> of <see cref="IEssFile"/> or <see cref="IEssFolder"/> objects associated with the given <see cref="EssServer"/>.
+        /// Returns a <see cref="List{T}"/> of <see cref="IEssApplicationDatasource"/> objects associated with the given <see cref="EssApplication"/>.
         /// </summary>
         /// <param name="datasourcesList" />
         /// <param name="application" />
+        /// <returns>A list of <see cref="IEssApplicationDatasource"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssApplicationDatasource> ToEssSharpList( this DatasourcesList datasourcesList, EssApplication application )
         {
             if ( application is null )
@@ -167,6 +177,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="dimensionList" />
         /// <param name="cube" />
+        /// <returns>A list of <see cref="IEssDimension"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssDimension> ToEssSharpList( this DimensionList dimensionList, EssCube cube )
         {
             if ( cube is null )
@@ -184,6 +196,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="memberList" />
         /// <param name="cube" />
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssMember> ToEssSharpList( this MembersList memberList, EssCube cube )
         {
             if ( cube is null )
@@ -201,6 +215,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="memberList" />
         /// <param name="cube" />
+        /// <returns>A list of <see cref="IEssMember"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssMember> ToEssSharpList( this List<MemberBean> memberList, EssCube cube )
         {
             if ( cube is null )
@@ -217,6 +233,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="fileCollectionResponse" />
         /// <param name="server" />
+        /// <returns>Returns a list of <see cref="IEssFile"/> or <see cref="IEssFolder"/> of the specific given type <typeparamref name="T"/>"/></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<T> ToEssSharpList<T>( this FileCollectionResponse fileCollectionResponse, EssServer server ) where T : class, IEssFile
         {
             if ( server is null )
@@ -235,6 +253,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="groups" />
         /// <param name="server" />
+        /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssGroup> ToEssSharpList( this Groups groups, EssServer server )
         {
             if ( server is null )
@@ -252,6 +272,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="jobWrapper" />
         /// <param name="server" />
+        /// <returns>A list of <see cref="IEssJob"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssJob> ToEssSharpList( this JobRecordPaginatedResultWrapper jobWrapper, EssServer server )
         {
             if ( server is null )
@@ -269,7 +291,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="lockObjectList"></param>
         /// <param name="cube"></param>
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssLockObject"/> objects.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssLockObject> ToEssSharpList( this LockObjectList lockObjectList, EssCube cube )
         {
@@ -288,7 +310,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="lockBlockList"></param>
         /// <param name="cube"></param>
-        /// <returns></returns>
+        /// <returns>A list of <see cref="IEssLockBlock"/> objects.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssLockBlock> ToEssSharpList( this LockBlockList lockBlockList, EssCube cube )
         {
@@ -308,6 +330,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="reportList" />
         /// <param name="cube" />
+        /// <returns>A list of <see cref="IEssDrillthroughReport"/> objects.</returns>
+        /// /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssDrillthroughReport> ToEssSharpList( this ReportList reportList, EssCube cube )
         {
             if ( cube is null )
@@ -325,6 +349,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="resourceList" />
         /// <param name="server" />
+        /// <returns>A list of <see cref="IEssUtility"/> objects.</returns>
+        /// /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssUtility> ToEssSharpList( this ResourceList resourceList, EssServer server )
         {
             if ( server is null )
@@ -342,6 +368,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="sessionList" />
         /// <param name="server" />
+        /// <returns>A list of <see cref="IEssSession"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssSession> ToEssSharpList( this List<SessionAttributes> sessionList, EssServer server )
         {
             if ( server is null )
@@ -358,6 +386,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="scriptList" />
         /// <param name="cube" />
+        /// <returns>Returns a list of <see cref="IEssScript"/> of the specific given type <typeparamref name="T"/></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<T> ToEssSharpList<T>( this ScriptList scriptList, EssCube cube ) where T : class, IEssScript
         {
             if ( cube is null )
@@ -377,6 +407,14 @@ namespace EssSharp
                 .ToList() ?? new List<T>();
         }
 
+        /// <summary>
+        /// Creates a new script of type <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type"></param>
+        /// <param name="script"></param>
+        /// <param name="cube"></param>
+        /// <returns>A script of type <typeparamref name="T"/></returns>
         internal static T CreateScript<T>( this EssScriptType type, Script script, EssCube cube ) where T : class, IEssScript => type switch
         {
             EssScriptType.Calc => new EssCalcScript(script, cube) as T,
@@ -391,6 +429,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="urlList" />
         /// <param name="server" />
+        /// <returns>A list of <see cref="IEssUrl"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssUrl> ToEssSharpList( this EssbaseURLList urlList, EssServer server )
         {
             if ( server is null )
@@ -408,6 +448,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="userList" />
         /// <param name="server" />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssUser> ToEssSharpList( this Users userList, EssServer server )
         {
             if ( server is null )
@@ -420,6 +462,13 @@ namespace EssSharp
                 .ToList() ?? new List<IEssUser>();
         }
 
+        /// <summary>
+        /// Returns a list of of <see cref="IEssApplicationPermission"/>
+        /// </summary>
+        /// <param name="permissionsList"></param>
+        /// <param name="application"></param>
+        /// <returns>A list of <see cref="IEssApplicationPermission"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<IEssApplicationPermission> ToEssSharpList( this UserGroupProvisionInfoList permissionsList, EssApplication application )
         {
             if ( application is null )
@@ -437,6 +486,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="variableList" />
         /// <param name="parent" />
+        /// <returns>A list of variables of type <typeparamref name="T"/>.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<T> ToEssSharpList<T>( this VariableList variableList, EssObject parent ) where T : class, IEssServerVariable
         {
             if ( parent is null )
@@ -466,6 +517,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="context" />
         /// <param name="options" />
+        /// <returns>A <see cref="DrillthroughMetadataBean"/> object.</returns>
         internal static DrillthroughMetadataBean ToModelBean( this IEssDrillthroughRange context, IEssDrillthroughOptions options = null )
             => ToModelBean(new List<IEssDrillthroughRange>() { context }, options);
 
@@ -475,6 +527,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="context" />
         /// <param name="options" />
+        /// <returns>A <see cref="DrillthroughMetadataBean"/> object.</returns>
         internal static DrillthroughMetadataBean ToModelBean( this IEnumerable<IEssDrillthroughRange> context, IEssDrillthroughOptions options = null )
         {
             if ( context?.Any(dtr => dtr is not null) is not true )
@@ -490,6 +543,8 @@ namespace EssSharp
         /// Returns a <see cref="Grid" /> object from the given <see cref="EssQueryReport" /> object.
         /// </summary>
         /// <param name="report" />
+        /// <returns>A <see cref="Grid"/> object.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static Grid ToModelGrid( this EssQueryReport report )
         {
             if ( report.Data is null )
@@ -516,6 +571,8 @@ namespace EssSharp
         /// Returns a list of <see cref="GridDimension" /> objects from the given <see cref="EssQueryReport.ReportMetadata" /> object.
         /// </summary>
         /// <param name="metadata" />
+        /// <returns>A list of <see cref="GridDimension"/> objects.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static List<GridDimension> ToModelGridDimensions( this EssQueryReport.ReportMetadata metadata )
         {
             var gridDimensions = new List<GridDimension>();
@@ -531,6 +588,7 @@ namespace EssSharp
         /// Returns a <see cref="ParametersBean"/> from the given <see cref="IEssJobOptions"/> object.
         /// </summary>
         /// <param name="options" />
+        /// <returns>A list of <see cref="ParametersBean"/> objects.</returns>
         internal static ParametersBean ToModelBean( this IEssJobOptions options ) => new ParametersBean()
         {
             // EssJobType.Unknown (Multiple)
@@ -582,6 +640,11 @@ namespace EssSharp
             TargetApplicationName = options.TargetApplicationName
         };
 
+        /// <summary>
+        /// Coverts a list of <see cref="GridDimension"/> objects to a list of <see cref="EssGridDimension"/> objects.
+        /// </summary>
+        /// <param name="gridDimensions"></param>
+        /// <returns>A list of <see cref="EssGridDimension"/> objects.</returns>
         internal static List<EssGridDimension> ToEssGridDimension( this List<GridDimension> gridDimensions )
         {
             var dimensionList = new List<EssGridDimension>();
@@ -604,6 +667,12 @@ namespace EssSharp
             return dimensionList;
         }
 
+        /// <summary>
+        /// Converts <see cref="EssGridZoomType"/> to <see cref="GridOperation.ActionEnum"/>.
+        /// </summary>
+        /// <param name="actionEnum"></param>
+        /// <returns>An <see cref="GridOperation.ActionEnum"/> object.</returns>
+        /// <exception cref="ArgumentException"></exception>
         internal static GridOperation.ActionEnum ToEssGridActionType( this EssGridZoomType actionEnum )
         {
             if ( Enum.IsDefined(typeof(GridOperation.ActionEnum), (int)actionEnum) )
@@ -632,6 +701,11 @@ namespace EssSharp
             return dimList;
         }
 
+        /// <summary>
+        /// Converts a list of <see cref="EssGridRange"/> objects to a list of <see cref="GridRange"/> objects.
+        /// </summary>
+        /// <param name="essGridRangeList"></param>
+        /// <returns>A list of <see cref="GridRange"/> objects.</returns>
         internal static List<GridRange> ToModelBean( this List<EssGridRange> essGridRangeList )
         {
             var gridRangeList = new List<GridRange>();
@@ -656,11 +730,21 @@ namespace EssSharp
             return gridRangeList;
         }
 
+        /// <summary>
+        /// Converts an <see cref="EssGridSliceData"/> object to a <see cref="Data"/> object.
+        /// </summary>
+        /// <param name="essGridSliceData"></param>
+        /// <returns>A <see cref="Data"/> object.</returns>
         internal static Data ToModelBean( this EssGridSliceData essGridSliceData ) => new Data()
         {
             Ranges = essGridSliceData.Ranges.ToModelBean()
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssGridSlice"/> object to a <see cref="Slice"/> object.
+        /// </summary>
+        /// <param name="essGridSlice"></param>
+        /// <returns>A <see cref="Slice"/> object.</returns>
         internal static Slice ToModelBean( this EssGridSlice essGridSlice ) => new Slice()
         {
             Columns = essGridSlice.Columns,
@@ -670,6 +754,11 @@ namespace EssSharp
             DirtyCells = essGridSlice.DirtyCells,
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssGrid"/> object to a <see cref="Grid"/> object.
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns>A <see cref="Grid"/> object.</returns>
         internal static Grid ToModelBean( this EssGrid grid ) => new Grid()
         {
             Dimensions = grid.Dimensions.ToModelBean(),
@@ -678,6 +767,11 @@ namespace EssSharp
 
         };
 
+        /// <summary>
+        /// Converts a <see cref="Data"/> object to an <see cref="EssGridSliceData"/> object.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>An <see cref="EssGridSliceData"/> object.</returns>
         internal static EssGridSliceData ToEssGridSliceData( this Data data )
         {
             var sliceData = new EssGridSliceData();
@@ -701,6 +795,11 @@ namespace EssSharp
             return sliceData;
         }
 
+        /// <summary>
+        /// Converts a <see cref="Slice"/> object to an <see cref="EssGridSlice"/> object.
+        /// </summary>
+        /// <param name="slice"></param>
+        /// <returns>An <see cref="EssGridSlice"/> object.</returns>
         internal static EssGridSlice ToEssGridSlice( this Slice slice ) => new EssGridSlice()
         {
             Columns = slice.Columns,
@@ -710,6 +809,11 @@ namespace EssSharp
             Rows = slice.Rows
         };
 
+        /// <summary>
+        /// Converts a <see cref="LayoutData"/> object to an <see cref="EssGridLayoutData"/> object.
+        /// </summary>
+        /// <param name="layoutData"></param>
+        /// <returns>An <see cref="EssGridLayoutData"/> object.</returns>
         internal static EssGridLayoutData ToEssSharpObject( this LayoutData layoutData ) => new EssGridLayoutData()
         {
             Statuses = layoutData.Statuses,
@@ -721,6 +825,11 @@ namespace EssSharp
             Values = layoutData.Values
         };
 
+        /// <summary>
+        /// Converts a <see cref="ColumnSuppression"/> object to an <see cref="EssGridPreferencesAxisSuppression"/> object.
+        /// </summary>
+        /// <param name="columnSuppression"></param>
+        /// <returns>An <see cref="EssGridPreferencesAxisSuppression"/> object.</returns>
         internal static EssGridPreferencesAxisSuppression ToEssSharpObject( this ColumnSuppression columnSuppression ) => new EssGridPreferencesAxisSuppression()
         {
             Derived = columnSuppression.Derived,
@@ -733,6 +842,11 @@ namespace EssSharp
             Zero = columnSuppression.Zero
         };
 
+        /// <summary>
+        /// Converts a <see cref="RowSuppression"/> object to an <see cref="EssGridPreferencesAxisSuppression"/> object.
+        /// </summary>
+        /// <param name="rowSuppression"></param>
+        /// <returns>An <see cref="EssGridPreferencesAxisSuppression"/> object.</returns>
         internal static EssGridPreferencesAxisSuppression ToEssSharpObject( this RowSuppression rowSuppression ) => new EssGridPreferencesAxisSuppression()
         {
             Derived = rowSuppression.Derived,
@@ -745,12 +859,22 @@ namespace EssSharp
             Zero = rowSuppression.Zero
         };
 
+        /// <summary>
+        /// Converts a <see cref="ZoomIn"/> object to an <see cref="EssGridPreferencesZoomIn"/> object.
+        /// </summary>
+        /// <param name="zoomIn"></param>
+        /// <returns>An <see cref="EssGridPreferencesZoomIn"/> object.</returns>
         internal static EssGridPreferencesZoomIn ToEssSharpObject( this ZoomIn zoomIn ) => new EssGridPreferencesZoomIn()
         {
             Ancestor = Enum.IsDefined(typeof(ZoomInAncestor), (ZoomInAncestor)zoomIn.Ancestor) ? (ZoomInAncestor)zoomIn.Ancestor : ZoomInAncestor.UNKNOWN,
             Mode = Enum.IsDefined(typeof(ZoomInMode), (ZoomInMode)zoomIn.Mode) ? (ZoomInMode)zoomIn.Mode : ZoomInMode.UNKNOWN
         };
 
+        /// <summary>
+        /// Converts a <see cref="FormulaRetention"/> object to an <see cref="EssGridPreferencesFormulaRetention"/> object.
+        /// </summary>
+        /// <param name="formulaRetention"></param>
+        /// <returns>An <see cref="EssGridPreferencesFormulaRetention"/> object.</returns>
         internal static EssGridPreferencesFormulaRetention ToEssSharpObject( this FormulaRetention formulaRetention ) => new EssGridPreferencesFormulaRetention()
         {
             Comments = formulaRetention.Comments,
@@ -760,6 +884,11 @@ namespace EssSharp
             Zoom = formulaRetention.Zoom
         };
 
+        /// <summary>
+        /// Converts a <see cref="Preferences"/> object to a <see cref="EssGridPreferences"/> object.
+        /// </summary>
+        /// <param name="preferences"></param>
+        /// <returns>An <see cref="EssGridPreferences"/> object.</returns>
         internal static EssGridPreferences ToEssGridPreferences( this Preferences preferences ) => new EssGridPreferences()
         {
             CellText = preferences.CellText,
@@ -780,6 +909,11 @@ namespace EssSharp
             ZoomIn = preferences.ZoomIn.ToEssSharpObject()
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssGridPreferencesAxisSuppression"/> object to a <see cref="ColumnSuppression"/> object.
+        /// </summary>
+        /// <param name="columnSuppression"></param>
+        /// <returns>A <see cref="ColumnSuppression"/> object.</returns>
         internal static ColumnSuppression ToColumnSuppressionObject( this EssGridPreferencesAxisSuppression columnSuppression ) => new ColumnSuppression()
         {
             Derived = columnSuppression.Derived,
@@ -792,6 +926,11 @@ namespace EssSharp
             Zero = columnSuppression.Zero
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssGridPreferencesAxisSuppression"/> object to a <see cref="RowSuppression"/> object.
+        /// </summary>
+        /// <param name="rowSuppression"></param>
+        /// <returns>A <see cref="RowSuppression"/> object.</returns>
         internal static RowSuppression ToRowSuppressionObject( this EssGridPreferencesAxisSuppression rowSuppression ) => new RowSuppression()
         {
             Derived = rowSuppression.Derived,
@@ -804,12 +943,23 @@ namespace EssSharp
             Zero = rowSuppression.Zero
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssGridPreferencesZoomIn"/> object to a <see cref="ZoomIn"/> object.
+        /// </summary>
+        /// <param name="zoomIn"></param>
+        /// <returns>A <see cref="ZoomIn"/> object.</returns>
+        /// <exception cref="NotSupportedException"></exception>
         internal static ZoomIn ToZoomInObject( this EssGridPreferencesZoomIn zoomIn ) => new ZoomIn()
         {
             Ancestor = Enum.IsDefined(typeof(ZoomIn.AncestorEnum), (ZoomIn.AncestorEnum)zoomIn.Ancestor) ? (ZoomIn.AncestorEnum)zoomIn.Ancestor : throw new NotSupportedException(),
             Mode = Enum.IsDefined(typeof(ZoomIn.ModeEnum), (ZoomIn.ModeEnum)zoomIn.Mode) ? (ZoomIn.ModeEnum)zoomIn.Mode : throw new NotSupportedException()
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssGridPreferencesFormulaRetention"/> to a <see cref="FormulaRetention"/> object.
+        /// </summary>
+        /// <param name="formulaRetention"></param>
+        /// <returns>A <see cref="FormulaRetention"/> object.</returns>
         internal static FormulaRetention ToFormulaRetentionObject( this EssGridPreferencesFormulaRetention formulaRetention ) => new FormulaRetention()
         {
             Comments = formulaRetention.Comments,
@@ -819,6 +969,12 @@ namespace EssSharp
             Zoom = formulaRetention.Zoom
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssGridPreferences"/> object to a <see cref="Preferences"/> object.
+        /// </summary>
+        /// <param name="preferences"></param>
+        /// <returns>A <see cref="Preferences"/> object.</returns>
+        /// <exception cref="NotSupportedException"></exception>
         internal static Preferences ToModelObject( this EssGridPreferences preferences ) => new Preferences()
         {
             CellText = preferences.CellText,
@@ -839,12 +995,23 @@ namespace EssSharp
             ZoomIn = preferences.ZoomIn.ToZoomInObject()
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssLockObject"/> object to a <see cref="LockObject"/> object.
+        /// </summary>
+        /// <param name="lockOptions"></param>
+        /// <returns>A <see cref="LockObject"/> object.</returns>
+        /// <exception cref="Exception"></exception>
         internal static LockObject ToLockObject( this EssLockOptions lockOptions ) => new LockObject()
         {
             Name = lockOptions.LockObjectName,
             Type = lockOptions.LockedFileType.HasValue && Enum.IsDefined(typeof(LockObject.TypeEnum), (LockObject.TypeEnum)lockOptions.LockedFileType) ? (LockObject.TypeEnum)lockOptions.LockedFileType : throw new Exception($@"{nameof(EssLockedFileType)} is required.")
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssQueryPreferences"/> object to a <see cref="NamedQueriesPreferences"/> object.
+        /// </summary>
+        /// <param name="queryPreferences"></param>
+        /// <returns>A <see cref="NamedQueriesPreferences"/> object.</returns>
         internal static NamedQueriesPreferences ToNamedQueriesPreferences( this EssQueryPreferences queryPreferences ) => new NamedQueriesPreferences()
         {
             Dataless = queryPreferences.Dataless,
@@ -861,6 +1028,9 @@ namespace EssSharp
         /// <summary>
         /// Returns an <see cref="EssJobType" /> from the given <see cref="JobsInputBean.JobtypeEnum" />.
         /// </summary>
+        /// <param name="jobType"></param>
+        /// <returns>A <see cref="JobsInputBean.JobtypeEnum"/>.</returns>
+        /// <exception cref="ArgumentException"></exception>
         internal static JobsInputBean.JobtypeEnum ToModelEnum( this EssJobType jobType )
         {
             if ( Enum.IsDefined(typeof(JobsInputBean.JobtypeEnum), (int)jobType) )
@@ -869,6 +1039,12 @@ namespace EssSharp
             throw new ArgumentException($@"{nameof(EssJobType)}.{jobType} does not map to a model job type.");
         }
 
+        /// <summary>
+        /// Converts an <see cref="EssUserCreationOptions"/> to a <see cref="UserBean"/> object.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns>A <see cref="UserBean"/> object.</returns>
+        /// <exception cref="NotSupportedException"></exception>
         internal static UserBean ToUserBean( this EssUserCreationOptions options ) => new UserBean()
         {
             Id = options.ID,
@@ -882,6 +1058,11 @@ namespace EssSharp
             }
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssMemberFields"/> object to a <see cref="string"/>.
+        /// </summary>
+        /// <param name="filterOption"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         internal static string ToDelimitedString( this EssMemberFields filterOption )
         {
             var values = new List<string>();
@@ -901,10 +1082,20 @@ namespace EssSharp
 
         #region EssScript/EssScriptType Extensions
 
-        /// <summary />
+        /// <summary>
+        /// Returns an <see cref="IEssScript"/> of type <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="script"></param>
+        /// <param name="cube"></param>
+        /// <returns>A <see cref="IEssScript"/> of type <typeparamref name="T"/>.</returns>
         internal static T CreateScript<T>( Script script, EssCube cube ) where T : class, IEssScript => GetScriptType<T>().CreateScript<T>(script, cube);
 
-        /// <summary />
+        /// <summary>
+        /// Returns the <see cref="EssScriptType"/> of the given script.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>A <see cref="EssScriptType"/>.</returns>
         internal static EssScriptType GetScriptType<T>() where T : class, IEssScript => typeof(T)?.Name switch
         {
             nameof(IEssCalcScript) => EssScriptType.Calc,
@@ -922,6 +1113,7 @@ namespace EssSharp
         /// Converts the value of this instance to its equivalent <see cref="DescriptionAttribute" /> value..
         /// </summary>
         /// <param name="value"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         internal static string ToDescription( this Enum value )
         {
             // Get the DescriptionAttribute value for the given enum value.
@@ -941,6 +1133,7 @@ namespace EssSharp
         /// Converts the value of this instance to its equivalent <see cref="EnumMemberAttribute" /> value.
         /// </summary>
         /// <param name="value"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         internal static string ToMemberValue( this Enum value )
         {
             // Get the EnumMemberAttribute value for the given enum value.
@@ -979,6 +1172,12 @@ namespace EssSharp
             return default;
         }
 
+        /// <summary>
+        /// Converts a <see cref="string"/> to an <see cref="EssApplicationRole"/> enumerated value.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns>An <see cref="EssApplicationRole"/>.</returns>
+        /// <exception cref="NotSupportedException"></exception>
         internal static EssApplicationRole ToEssApplicationRole( this string role ) => role switch
         {
             "db_access" => EssApplicationRole.db_access,
@@ -989,6 +1188,11 @@ namespace EssSharp
             _ => throw new NotSupportedException()
         };
 
+        /// <summary>
+        /// Converts a <see cref="string"/> to an <see cref="EssServerRole"/>.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns>An <see cref="EssServerRole"/>.</returns>
         internal static EssServerRole ToEssServerRole( this string role ) => role.ToLowerInvariant() switch
         {
             "user" => EssServerRole.User,
@@ -997,6 +1201,12 @@ namespace EssSharp
             _ => EssServerRole.Unkown
         };
 
+        /// <summary>
+        /// Converts an <see cref="EssServerRole"/> to a <see cref="string"/>.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns>A <see cref="string"/>.</returns>
+        /// <exception cref="NotSupportedException"></exception>
         internal static string EssServerRoleToString( this EssServerRole role ) => role switch
         {
             EssServerRole.User => "user",
@@ -1005,6 +1215,11 @@ namespace EssSharp
             _ => throw new NotSupportedException("Unsupported user role.")
         };
 
+        /// <summary>
+        /// Converts a <see cref="MemberBean.DimStorageTypeEnum"/> to an <see cref="EssDimStorageType"/>.
+        /// </summary>
+        /// <param name="dim"></param>
+        /// <returns>A <see cref="EssDimStorageType"/>.</returns>
         internal static EssDimStorageType ToEssEnum( this MemberBean.DimStorageTypeEnum? dim ) => dim switch
         {
             MemberBean.DimStorageTypeEnum.DENSE => EssDimStorageType.Dense,
@@ -1012,6 +1227,11 @@ namespace EssSharp
             _ => EssDimStorageType.Unknown
         };
 
+        /// <summary>
+        /// Converts a <see cref="MemberBean.DimensionTypeEnum"/> to an <see cref="EssDimStorageType"/>. 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>An <see cref="EssDimStorageType"/>.</returns>
         internal static EssDimensionType ToEssEnum( this MemberBean.DimensionTypeEnum? type ) => type switch
         {
             MemberBean.DimensionTypeEnum.TIME => EssDimensionType.TIME,
@@ -1034,9 +1254,12 @@ namespace EssSharp
         internal static void WriteLogMessage( this RestRequest request, IReadableConfiguration configuration ) =>
             configuration?.Logger?.Log(logLevel: LogLevel.Information, eventId: request.GetEventId(configuration), message: request.GetFormattedRequestMessage(configuration));
 
-        /// <summary />
+        /// <summary>
+        /// Converts a <see cref="RestRequest"/> to a <see cref="string"/>.
+        /// </summary>
         /// <param name="request" />
         /// <param name="configuration" />
+        /// <returns>A <see cref="string"/>.</returns>
         internal static string GetFormattedRequestMessage( this RestRequest request, IReadableConfiguration configuration )
         {
             var builder = new StringBuilder();
@@ -1061,7 +1284,12 @@ namespace EssSharp
             return builder.ToString().TrimEnd();
         }
 
-        /// <summary />
+        /// <summary>
+        /// Returns an <see cref="EventId"/> from a <see cref="RestRequest"/>.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="configuration"></param>
+        /// <returns>An <see cref="EventId"/> object.</returns>
         private static EventId GetEventId( this RestRequest request, IReadableConfiguration configuration )
         {
             // Construct a new event identifier with the request event type.
@@ -1081,7 +1309,11 @@ namespace EssSharp
             return identifier;
         }
 
-        /// <summary />
+        /// <summary>
+        /// Converts a <see cref="RestRequest"/> to a <see cref="string"/>.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         private static string GetFormattedContent( this RestRequest request )
         {
             return request?.Parameters?.OfType<BodyParameter>().FirstOrDefault() is { Value: { } content } bodyParameter
@@ -1089,7 +1321,14 @@ namespace EssSharp
                 : null;
         }
 
-        /// <summary />
+        /// <summary>
+        /// Gets the <see cref="RestRequest"/> headers and returns them as a formattered <see cref="string"/>.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="excludeSensitiveHeaders"></param>
+        /// <param name="headersToExclude"></param>
+        /// <param name="delimiter"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         private static string GetFormattedHeaders( this RestRequest request, bool excludeSensitiveHeaders = true, string[] headersToExclude = null, string delimiter = null )
         {
             return request?.Parameters?.OfType<HeaderParameter>().ToList() is { Count: > 0 } headers
@@ -1105,8 +1344,11 @@ namespace EssSharp
         internal static void WriteLogMessage( this RestResponse response, IReadableConfiguration configuration ) =>
             configuration?.Logger?.Log(logLevel: LogLevel.Information, eventId: response.GetEventId(), message: response.GetFormattedResponseMessage());
 
-        /// <summary />
-        /// <param name="response" />
+        /// <summary>
+        /// Gets the <see cref="RestResponse"/> message.
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         internal static string GetFormattedResponseMessage( this RestResponse response )
         {
             var builder = new StringBuilder();
@@ -1131,7 +1373,11 @@ namespace EssSharp
             return builder.ToString().TrimEnd();
         }
 
-        /// <summary />
+        /// <summary>
+        /// Gets the <see cref="EventId"/> from the <see cref="RestResponse"/>.
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns>A <see cref="EventId"/>.</returns>
         private static EventId GetEventId( this RestResponse response )
         {
             // Construct a new event identifier with the request event type.
@@ -1151,7 +1397,11 @@ namespace EssSharp
             return identifier;
         }
 
-        /// <summary />
+        /// <summary>
+        /// Gets the content from the <see cref="RestResponse"/> and returns it as a formatted <see cref="string"/>.
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns>a <see cref="string"/>.</returns>
         private static string GetFormattedContent( this RestResponse response )
         {
             return response?.Content is { Length: > 0 } content 
@@ -1159,7 +1409,14 @@ namespace EssSharp
                 : null;
         }
 
-        /// <summary />
+        /// <summary>
+        /// Returns the <see cref="RestResponse"/> headers as a formatted <see cref="string"/>.
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="excludeSensitiveHeaders"></param>
+        /// <param name="headersToExclude"></param>
+        /// <param name="delimiter"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         private static string GetFormattedHeaders( this RestResponse response, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
         {
             return (response?.Headers?.AsEnumerable() ?? Enumerable.Empty<HeaderParameter>()).Concat(response?.ContentHeaders?.AsEnumerable() ?? Enumerable.Empty<HeaderParameter>()).ToList() is { Count: > 0 } headers
@@ -1167,7 +1424,12 @@ namespace EssSharp
                 : null;
         }
 
-        /// <summary />
+        /// <summary>
+        /// Returns the <see cref="ContentType"/> as a formatted <see cref="string"/>.
+        /// </summary>
+        /// <param name="contentType"></param>
+        /// <param name="content"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         private static string GetFormattedContent( ContentType contentType, object content )
         {
             string formattedContent = null;
@@ -1232,7 +1494,14 @@ namespace EssSharp
             return formattedContent;
         }
 
-        /// <summary />
+        /// <summary>
+        /// Converts a list of <see cref="HeaderParameter"/> to a formatted <see cref="string"/>.
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <param name="excludeSensitiveHeaders"></param>
+        /// <param name="headersToExclude"></param>
+        /// <param name="delimiter"></param>
+        /// <returns>A <see cref="string"/>.</returns>
         private static string GetFormattedHeaders( List<HeaderParameter> headers, bool excludeSensitiveHeaders = true, string[] headersToExclude = null, string delimiter = null )
         {
             // Initialize the standard array of sensitive headers, based on the excludeSensitiveHeaders flag.

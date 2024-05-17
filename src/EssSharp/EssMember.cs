@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Threading;
 using EssSharp.Model;
 using EssSharp.Api;
-using System.Net;
 using System.Linq;
 
 namespace EssSharp

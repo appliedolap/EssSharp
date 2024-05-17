@@ -20,6 +20,7 @@ namespace EssSharp
 
         #region Constructors
 
+        /// <summary />
         internal EssCubeVariable( Variable variable, EssCube cube ) : base(variable, cube?.Application as EssApplication)
         {
             _cube = cube ??

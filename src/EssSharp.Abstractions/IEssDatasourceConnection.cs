@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Data.Common;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace EssSharp
@@ -70,7 +67,7 @@ namespace EssSharp
         public string Token { get; }
 
         /// <summary>
-        ///
+        /// returns the System ID.
         /// </summary>
         public string Sid { get; }
 
@@ -105,7 +102,7 @@ namespace EssSharp
         public string WalletPath { get; }
 
         /// <summary>
-        /// 
+        /// returns true if you are using an Autonomous Data Warehouse connection
         /// </summary>
         public bool RepoWallet { get; }
 

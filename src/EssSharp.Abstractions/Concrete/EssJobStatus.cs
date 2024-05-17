@@ -5,23 +5,29 @@ namespace EssSharp
     /// <summary />
     public enum EssJobStatus
     {
-        /// <summary>New</summary>
-        [Description("New")]
+        /// <summary>
+        /// New
+        /// </summary>
         New = -1,
-        /// <summary>Unknown</summary>
-        [Description("Unknown")]
+        /// <summary>
+        /// Unknown
+        /// </summary>
         Unknown,
-        /// <summary>Completed</summary>
-        [Description("Completed")]
+        /// <summary>
+        /// Completed
+        /// </summary>
         Completed,
-        /// <summary>Completed With Warnings</summary>
-        [Description("Completed With Warnings")]
+        /// <summary>
+        /// Completed With Warnings
+        /// </summary>
         CompletedWithWarnings,
-        /// <summary>Failed</summary>
-        [Description("Failed")]
+        /// <summary>
+        /// Failed
+        /// </summary>
         Failed,
-        /// <summary>In Progress</summary>
-        [Description("In Progress")]
+        /// <summary>
+        /// In Progress
+        /// </summary>
         InProgress,
     }
 }

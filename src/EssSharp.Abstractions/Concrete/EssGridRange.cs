@@ -3,52 +3,35 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace EssSharp
-{
+ {
+    /// <summary />
     public class EssGridRange
     {
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<string> DataFormats { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public int End { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<string> EnumIds { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<string> Filters { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public int Start { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<string> Statuses { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<string> Texts { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<string> Types { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public List<string> Values { get; set; }
 
     }

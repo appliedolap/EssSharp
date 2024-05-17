@@ -378,11 +378,11 @@ namespace EssSharp
             }
         }
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A <see cref="Stream"/>.</returns>
         public Stream ExportCubeToLcm( string cubeName, EssJobExportLcmOptions options = null ) => ExportCubeToLcmAsync(cubeName, options).GetAwaiter().GetResult();
 
         /// <inheritdoc />
-        /// <returns></returns>
+        /// <returns>A <see cref="Stream"/>.</returns>
         public async Task<Stream> ExportCubeToLcmAsync( string cubeName, EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default )
         {
             try
@@ -668,8 +668,6 @@ namespace EssSharp
         private enum ApplicationAction { Start, Stop }
 
         /// <summary />
-        /// <param name="action" />
-        /// <param name="cancellationToken" />
         private async Task PerformOperationAsync( ApplicationAction action, CancellationToken cancellationToken )
         {
             try

@@ -32,6 +32,9 @@ namespace EssSharp
         /// </summary>
         public List<string> Members { get; set; }
 
+        /// <summary>
+        /// Returns the type of dimensions.
+        /// </summary>
         public EssDimensionType DimensionTag { get; }
 
         /// <summary>
@@ -48,23 +51,23 @@ namespace EssSharp
         public Task<List<IEssMember>> GetChildrenAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// 
+        /// Gets a list of each generation for this dimension.
         /// </summary>
         public List<IEssGeneration> GetGenerations();
 
         /// <summary>
-        /// 
+        /// Asynchronously gets a list of each generation for this dimension.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssGeneration>> GetGenerationsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Gets a list of each level for this generation.
         /// </summary>
         public List<IEssGeneration> GetLevels();
 
         /// <summary>
-        /// 
+        /// Asynchronously gets a list of each level for this dimension.
         /// </summary>
         /// <param name="cancellationToken"></param>
         public Task<List<IEssGeneration>> GetLevelsAsync( CancellationToken cancellationToken = default );

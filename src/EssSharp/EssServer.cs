@@ -43,9 +43,6 @@ namespace EssSharp
         }
 
         /// <summary />
-        /// <param name="server"></param>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
         public EssServer( string server, string username, string password )
         {
             _server = server?.TrimEnd('/') ?? string.Empty;
@@ -648,9 +645,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssGridPreferences"/> object.</returns>
         public EssGridPreferences GetDefaultGridPreferences() => GetDefaultGridPreferencesAsync()?.GetAwaiter().GetResult();
 
         /// <inheritdoc />
+        /// <returns>An <see cref="EssGridPreferences"/> object.</returns>
         public async Task<EssGridPreferences> GetDefaultGridPreferencesAsync( CancellationToken cancellationToken = default )
         {
             try

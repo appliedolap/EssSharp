@@ -1,5 +1,6 @@
 ﻿namespace EssSharp
 {
+    /// <summary />
     public interface IEssAboutInstance
     {
         /// <summary>

@@ -6,8 +6,6 @@ using System.Text;
 namespace EssSharp
 {
     /// <summary />
-    /// 
-    /// Necessary class? should this be in concrete?
     public class EssLayout : EssObject, IEssLayout
     {
         #region Private Data

@@ -19,7 +19,7 @@ namespace EssSharp
         public string Alias { get; set; }
 
         /// <summary>
-        /// 
+        /// Returns the data changes submitted for this grid.
         /// </summary>
         public EssDataChanges DataChanges { get; set; }
 
@@ -99,19 +99,19 @@ namespace EssSharp
         public Task<IEssGrid> KeepOnlyAsync( List<EssGridSelection> gridSelection, CancellationToken cancellationToken = default );
 
         /// <summary>
-        /// 
+        /// Moves columns to rows, or rows to columns.
         /// </summary>
         public IEssGrid Pivot();
 
         /// <summary>
-        /// 
+        /// Moves columns to rows, or rows to columns.
         /// </summary>
         /// <param name="currentPosition"></param>
         /// <param name="newPosition"></param>
         public IEssGrid Pivot( EssGridSelection currentPosition = null, EssGridSelection newPosition = null );
 
         /// <summary>
-        /// 
+        /// Asynchronously moves columns to rows, or rows to columns.
         /// </summary>
         /// <param name="currentPosition"></param>
         /// <param name="newPosition"></param>
@@ -169,15 +169,11 @@ namespace EssSharp
         /// <summary>
         /// Submits new value or values to the grid.
         /// </summary>
-        /// <param name="gridSelection"></param>
-        /// <param name="newValue"></param>
         public IEssGrid Submit();
 
         /// <summary>
         /// Asynchronously submits new value or values to the grid.
         /// </summary>
-        /// <param name="gridSelection"></param>
-        /// <param name="newValue"></param>
         /// <param name="cancellationToken"></param>
         public Task<IEssGrid> SubmitAsync( CancellationToken cancellationToken = default );
 

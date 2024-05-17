@@ -1,6 +1,5 @@
 ﻿using System;
 using EssSharp.Model;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace EssSharp
 {
