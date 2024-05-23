@@ -1392,7 +1392,7 @@ namespace EssSharp.Integration
             await grid.RefreshAsync();
 
             grid.Preferences.TrackDataChanges = true;
-
+            
             grid.Slice.Data.Ranges[0].Values[10] = "680.0";
 
             grid.Slice.Data.Ranges[0].Values[17] = "620.0";
@@ -1401,32 +1401,32 @@ namespace EssSharp.Integration
 
             Assert.NotEqual(grid.DataChanges.DataChanges[0].NewValue, grid.DataChanges.DataChanges[0].OldValue);
 
-            Assert.Equal("Year", grid.DataChanges.DataChanges[0].DataPoints[0].DimensionName);
-            Assert.Equal("Measures", grid.DataChanges.DataChanges[0].DataPoints[1].DimensionName);
-            Assert.Equal("Product", grid.DataChanges.DataChanges[0].DataPoints[2].DimensionName);
-            Assert.Equal("Market", grid.DataChanges.DataChanges[0].DataPoints[3].DimensionName);
+            Assert.Equal("Year", grid.DataChanges.DataChanges[0].DataPoints[3].DimensionName);
+            Assert.Equal("Measures", grid.DataChanges.DataChanges[0].DataPoints[2].DimensionName);
+            Assert.Equal("Product", grid.DataChanges.DataChanges[0].DataPoints[1].DimensionName);
+            Assert.Equal("Market", grid.DataChanges.DataChanges[0].DataPoints[0].DimensionName);
             Assert.Equal("Scenario", grid.DataChanges.DataChanges[0].DataPoints[4].DimensionName);
 
-            Assert.Equal("Jan", grid.DataChanges.DataChanges[0].DataPoints[0].Member);
-            Assert.Equal("Sales", grid.DataChanges.DataChanges[0].DataPoints[1].Member);
-            Assert.Equal("Cola", grid.DataChanges.DataChanges[0].DataPoints[2].Member);
-            Assert.Equal("New York", grid.DataChanges.DataChanges[0].DataPoints[3].Member);
+            Assert.Equal("Jan", grid.DataChanges.DataChanges[0].DataPoints[3].Member);
+            Assert.Equal("Sales", grid.DataChanges.DataChanges[0].DataPoints[2].Member);
+            Assert.Equal("Cola", grid.DataChanges.DataChanges[0].DataPoints[1].Member);
+            Assert.Equal("New York", grid.DataChanges.DataChanges[0].DataPoints[0].Member);
             Assert.Equal("Actual", grid.DataChanges.DataChanges[0].DataPoints[4].Member);
 
             Assert.NotEqual(grid.DataChanges.DataChanges[1].NewValue, grid.DataChanges.DataChanges[1].OldValue);
 
-            Assert.Equal("Year", grid.DataChanges.DataChanges[1].DataPoints[0].DimensionName);
-            Assert.Equal("Measures", grid.DataChanges.DataChanges[1].DataPoints[1].DimensionName);
-            Assert.Equal("Product", grid.DataChanges.DataChanges[1].DataPoints[2].DimensionName);
-            Assert.Equal("Market", grid.DataChanges.DataChanges[1].DataPoints[3].DimensionName);
+            Assert.Equal("Year", grid.DataChanges.DataChanges[1].DataPoints[3].DimensionName);
+            Assert.Equal("Measures", grid.DataChanges.DataChanges[1].DataPoints[2].DimensionName);
+            Assert.Equal("Product", grid.DataChanges.DataChanges[1].DataPoints[1].DimensionName);
+            Assert.Equal("Market", grid.DataChanges.DataChanges[1].DataPoints[0].DimensionName);
             Assert.Equal("Scenario", grid.DataChanges.DataChanges[1].DataPoints[4].DimensionName);
 
-            Assert.Equal("Feb", grid.DataChanges.DataChanges[1].DataPoints[0].Member);
-            Assert.Equal("Sales", grid.DataChanges.DataChanges[1].DataPoints[1].Member);
-            Assert.Equal("Cola", grid.DataChanges.DataChanges[1].DataPoints[2].Member);
-            Assert.Equal("New York", grid.DataChanges.DataChanges[1].DataPoints[3].Member);
+            Assert.Equal("Feb", grid.DataChanges.DataChanges[1].DataPoints[3].Member);
+            Assert.Equal("Sales", grid.DataChanges.DataChanges[1].DataPoints[2].Member);
+            Assert.Equal("Cola", grid.DataChanges.DataChanges[1].DataPoints[1].Member);
+            Assert.Equal("New York", grid.DataChanges.DataChanges[1].DataPoints[0].Member);
             Assert.Equal("Budget", grid.DataChanges.DataChanges[1].DataPoints[4].Member);
-
+            
             grid.Slice.Data.Ranges[0].Values[10] = "678.0";
 
             grid.Slice.Data.Ranges[0].Values[17] = "610.0";
@@ -1513,10 +1513,11 @@ namespace EssSharp.Integration
                             {
                                  "", "", "New York", "", "", "", "", "Root Beer", "", "", "", "", "Jan", "", "", "", "Actual", "Budget", "Variance", "Variance %", "Sales", "551.0", "530.0", "21.0", "3.9622641509433962", "COGS", "333.0", "310.0", "-23.0", "-7.419354838709677", "     Margin", "218.0", "220.0", "-2.0", "-0.9090909090909091", "Marketing", "158.0", "140.0", "-18.0", "-12.857142857142856", "Payroll", "57.0", "50.0", "-7.0", "-14.000000000000002", "Misc", "0.0", "0.0", "0.0", "", "     Total Expenses", "215.0", "190.0", "-25.0", "-13.157894736842104", "          Profit", "3.0", "30.0", "-27.0", "-90.0"
                             },
+                            /*
                             Types = new List<string>()
                             {
                                 "7", "7", "0", "7", "7", "7", "7", "0", "7", "7", "7", "7", "0", "7", "7", "7", "0", "0", "0", "0", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2", "0", "2", "2", "2", "2"
-                            }
+                            }*/
                         }
                     }
                 }
@@ -1687,6 +1688,127 @@ namespace EssSharp.Integration
             var job = await cube.BuildDimensionOnCubeAsync(options);
 
             Assert.Equal(EssJobStatus.Completed, job.JobStatus);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 49 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithTypes"), Priority(49)]
+        public async Task Essbase_AfterScriptCreation_CanGetMdxQueryReportWithTypes()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the test mdx script from the server.
+            var script = await server.GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic")
+                .GetScriptAsync<IEssMdxScript>("test");
+
+            var preferences = new EssQueryPreferences()
+            {
+                CaptureCellTypes = true
+            };
+
+            // Execute the mdx query and capture the report.
+            var report = await script.GetReportAsync(preferences);
+
+            // Assert that the "Market" dimension is the first column dimension member.
+            Assert.Equal("Market", report.Metadata.ColumnDimensionMembers.FirstOrDefault());
+            // Assert that the "Year" dimensions is the first row dimension member.
+            Assert.Equal("Year", report.Metadata.RowDimensionMembers.FirstOrDefault());
+            // Assert that the data cell at row 3, column 2 equals "105522.0".
+            Assert.Equal("105522.0", report.Data [2, 1]);
+            // Assert that the data type at row 3, column 2 equals 2 (for a data cell).
+            Assert.Equal(2,          report.Types[2, 1]);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 50 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithDimensionProperties"), Priority(50)]
+        public async Task Essbase_AfterScriptCreation_CanGetMdxQueryReportWithDimensionProperties()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the test mdx script from the server.
+            var cube = await server.GetApplicationAsync("ASOSamp")
+                .GetCubeAsync("Basic");
+
+            var query = "WITH MEMBER\r\n \t[Measures].[Zip Count] AS 'COUNT(Descendants([Geography].CurrentMember, Geography.Levels(0)))'  \r\nselect {[Measures].[Zip Count]} on COLUMNS,\r\nHierarchize(Descendants([Michigan], Geography.Levels(1), SELF_AND_BEFORE), POST)\r\nDIMENSION PROPERTIES\r\n  GEN_NUMBER,  \r\n  PROPERTY_EXPR(Geography, MEMBER_NAME, AncestOR(CurrentAxisMember(), Geography.Generations(2)),\"Gen2\"),\r\n  PROPERTY_EXPR(Geography, MEMBER_NAME, AncestOR(CurrentAxisMember(), Geography.Generations(3)),\"Gen3\")\r\n   ON ROWS";
+            //var query = "SELECT {} ON COLUMNS,\r\nTOPCOUNT(Filter([Market].Levels(0).Members, NOT Market.CurrentMember.Shared_Flag), 10, [Year].[Year]) ON ROWS\r\nWHERE ([Year], [Colas], [Sales], [Actual])";
+
+            var script = cube.CreateScript<IEssMdxScript>(name: "GeoByTime", content: query, saveToCube: false);
+
+            var preferences = new EssQueryPreferences()
+            {
+                CaptureCellTypes = true,
+                RelocateDimensionPropertyColumnsAndRows = true
+            };
+
+            // Execute the mdx query and capture the report.
+            var report = await script.GetReportAsync(preferences);
+
+            // Assert that the "Market" dimension is the first column dimension member.
+            Assert.Equal("Market", report.Metadata.ColumnDimensionMembers.FirstOrDefault());
+            // Assert that the "Year" dimensions is the first row dimension member.
+            Assert.Equal("Year", report.Metadata.RowDimensionMembers.FirstOrDefault());
+            // Assert that the data cell at row 3, column 2 equals "105522.0".
+            Assert.Equal("105522.0", report.Data[2, 1]);
+            // Assert that the data type at row 3, column 2 equals 2 (for a data cell).
+            Assert.Equal(2, report.Types[2, 1]);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 51 - Essbase_AfterDefaultGrid_CanRefreshGridWithEmptyRow"), Priority(51)]
+        public async Task Essbase_AfterDefaultGrid_CanRefreshGridWithEmptyRow()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var cube = await server.GetApplicationAsync("ASOSamp").GetCubeAsync("Basic");
+
+            var grid = new Grid()
+            {
+                Dimensions = new List<GridDimension>() { },
+                Slice = new Slice()
+                {
+                    Columns = 18,
+                    Rows = 12,
+                    Data = new Data()
+                    {
+                        Ranges = new List<GridRange>()
+                                    {
+                                        new GridRange()
+                                        {
+                                                Start = 0,
+                                                End = 215,
+                                                Types = new List<string>() {"7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                            "7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7",
+                                                                            "0","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7"},
+                                                Values = new List<string>() {"","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118",
+                                                                               "","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras",
+                                                                               "","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level",
+                                                                               "","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age",
+                                                                               "","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions",
+                                                                               "","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type",
+                                                                               "","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale",
+                                                                               "","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price",
+                                                                               "","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year",
+                                                                               "","Jan","Feb","Mar","Qtr1","Apr","May","Jun","Qtr2","Jul","Aug","Sep","Qtr3","Oct","Nov","Dec","Qtr4","MTD",
+                                                                               "","","","","","","","","","","","","","","","","","",
+                                                                               "ADDISON - MI","0","0","0","0","0","0","0","0","","","","","","","","",""}
+                                        }
+                                    }
+                    }
+                }
+            };
+
+            var essGrid = new EssGrid(grid, cube as EssCube);
+
+            await essGrid.RefreshAsync();
         }
     }
 }

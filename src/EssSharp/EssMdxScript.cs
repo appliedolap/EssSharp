@@ -126,6 +126,8 @@ namespace EssSharp
             // Construct new preferences if none were given.
             preferences ??= new EssQueryPreferences();
 
+            bool captureCellTypes  = preferences.CaptureCellTypes;
+
             // Identify which axes to include.
             bool includePageAxis   = preferences.Axes.HasFlag(EssQueryReport.ReportAxes.Pages);
             bool includeColumnAxis = preferences.Axes.HasFlag(EssQueryReport.ReportAxes.Columns);
@@ -140,10 +142,13 @@ namespace EssSharp
             var reportRowCount = sourceRowCount;
 
             object[,] report = null;
+            int   [,] types  = null;
 
             // Identify the first column axis column index using the index of the first source row cell with a value.
             var firstSourceColumnAxisIndex = sourceFirstRow?.TakeWhile(t => string.IsNullOrEmpty(t?.Value<string>()))?.Count() ?? 0;
             var firstColumnAxisIndex       = columnDimensionMembers.Any() ? firstSourceColumnAxisIndex : sourceColumnCount;
+
+            bool hasDimensionProperties = sourceColumnCount > columnDimensionMembers.Length + rowDimensionMembers.Length;
 
             // If the page axis is included and there are page dimension members.
             if ( includePageAxis && pageDimensionMembers.Any() )
@@ -153,14 +158,25 @@ namespace EssSharp
                 reportRowCount += includeColumnAxis ? 1 : 0;
 
                 // Create the report.
-                report = new object[reportRowCount, reportColumnCount];
+                report = new object[reportRowCount, reportColumnCount].WithValue(string.Empty);
+
+                // Create the types array if necessary.
+                if ( preferences.CaptureCellTypes )
+                    types = new int[reportRowCount, reportColumnCount].WithValue(7);
 
                 // Use the the first column axis member index as the first page column index.
                 var pageColumnIndex = Math.Max(firstColumnAxisIndex, rowDimensionMembers.Any() ? 1 : 0);
 
                 // Write the page axis dimension members.
                 foreach ( var pageDimensionMember in pageDimensionMembers )
-                    report[0, pageColumnIndex++] = pageDimensionMember;
+                {
+                    report[0, pageColumnIndex] = pageDimensionMember;
+
+                    if ( preferences.CaptureCellTypes )
+                        types[0, pageColumnIndex] = 0;
+                    
+                    pageColumnIndex++;
+                }
 
                 // Update the first index of the report.
                 reportFirstIndex = 1;
@@ -176,7 +192,8 @@ namespace EssSharp
                             ColumnDimensionMembers = new List<string>(columnDimensionMembers),
                             RowDimensionMembers    = new List<string>(rowDimensionMembers)
                         },
-                        Data = report
+                        Data  = report,
+                        Types = types
                     };
                 }
             }
@@ -204,18 +221,23 @@ namespace EssSharp
                         ColumnDimensionMembers = new List<string>(columnDimensionMembers),
                         RowDimensionMembers    = new List<string>(rowDimensionMembers)
                     },
-                    Data = new object[0, 0]
+                    Data  = new object[0, 0],
+                    Types = new int   [0, 0]
                 };
             }
 
             // Create the report if it has not been created yet.
-            report ??= new object[reportRowCount, reportColumnCount];
+            report ??= new object[reportRowCount, reportColumnCount].WithValue(string.Empty);
+
+            // Allocate the types array if cell types will be captured.
+            if ( preferences.CaptureCellTypes )
+                types ??= new int[reportRowCount, reportColumnCount].WithValue(7);
 
             // Create an array to hold the sequence of source columns.
             var sourceColumnSequence = Enumerable.Range(0, sourceColumnCount).ToArray();
 
             // If dimension property columns and rows should be relocated, do so.
-            if ( preferences.RelocateDimensionPropertyColumnsAndRows && firstColumnAxisIndex > firstSourceColumnAxisIndex )
+            if ( preferences.RelocateDimensionPropertyColumnsAndRows && hasDimensionProperties )
             {
                 // Now, relocate dimension property columns such that they come before column axis member columns and data.
                 int relocatedColumns = 0;
@@ -258,14 +280,55 @@ namespace EssSharp
             }
             else
             {
-                for ( int c = 0; c < sourceColumnCount; c++ )
+                if ( preferences.CaptureCellTypes )
                 {
-                    // Get the report column index for the current source column index.
-                    var rc = sourceColumnSequence[c];
+                    for ( int c = 0; c < sourceColumnCount; c++ )
+                    {
+                        // If there are no data rows OR the current column is to the outside of the data block, prefix numerics.
+                        bool isMemberColumn = c < firstColumnAxisIndex;
 
-                    // Iterate over rows, capturing each cell value as a string.
-                    for ( int ri = reportFirstIndex, si = sourceFirstIndex; si < sourceRowCount; ri++, si++ )
-                        report[ri, rc] = source[si][c].Value<string>();
+                        // Get the report column index for the current source column index.
+                        var rc = sourceColumnSequence[c];
+
+                        if ( isMemberColumn )
+                        {
+                            string value;
+
+                            // Iterate over rows, capturing each cell value as a string.
+                            for ( int ri = reportFirstIndex, si = sourceFirstIndex; si < sourceRowCount; ri++, si++ )
+                            {
+                                report[ri, rc] = (value = source[si][c].Value<string>());
+                                types [ri, rc] = string.IsNullOrEmpty(value) ? 7 : 0;
+                            }
+                        }
+                        else
+                        {
+                            string value;
+
+                            // Capture the first row value.
+                            report[reportFirstIndex, rc] = (value = source[sourceFirstIndex][c].Value<string>());
+                            types [reportFirstIndex, rc] = string.IsNullOrEmpty(value) ? 7 : 0;
+
+                            // Iterate over rows, capturing each cell value as a string.
+                            for ( int ri = reportFirstIndex + 1, si = sourceFirstIndex + 1; si < sourceRowCount; ri++, si++ )
+                            {
+                                report[ri, rc] = (value = source[si][c].Value<string>());
+                                types [ri, rc] = string.IsNullOrEmpty(value) ? 7 : 2;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for ( int c = 0; c < sourceColumnCount; c++ )
+                    {
+                        // Get the report column index for the current source column index.
+                        var rc = sourceColumnSequence[c];
+
+                        // Iterate over rows, capturing each cell value as a string.
+                        for ( int ri = reportFirstIndex, si = sourceFirstIndex; si < sourceRowCount; ri++, si++ )
+                            report[ri, rc] = source[si][c].Value<string>();
+                    }
                 }
             }
 
@@ -277,7 +340,8 @@ namespace EssSharp
                     ColumnDimensionMembers = new List<string>(columnDimensionMembers),
                     RowDimensionMembers    = new List<string>(rowDimensionMembers)
                 },
-                Data = report
+                Data  = report,
+                Types = types
             };
         }
 

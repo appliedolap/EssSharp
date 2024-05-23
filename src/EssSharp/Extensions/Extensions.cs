@@ -916,6 +916,31 @@ namespace EssSharp
 
         #endregion
 
+        #region System.Array
+        
+        /// <summary>
+        /// Fills a 2D array with the given value.
+        /// </summary>
+        public static T[,] WithValue<T>( this T[,] source, T value )
+        {
+            if ( source is null )
+                return source;
+
+            if ( source.Length is 0 )
+                return source;
+
+            var rows = source.GetLength(0);
+            var cols = source.GetLength(1);
+
+            for ( var r = 0; r < rows; r++ )
+                for ( var c = 0; c < cols; c++)
+                    source[r, c] = value;
+
+            return source;
+        }
+
+        #endregion
+
         #region System.Enum
 
         /// <summary>

@@ -473,7 +473,9 @@ namespace EssSharp
             var oldValues = _oldValues; //_grid.Slice.Data.Ranges[0].Values;
             var newValues = newGrid.Slice.Data.Ranges[0].Values;
 
-            var dataBlockIndexes = GetDataBlock(newGrid);
+            //var dataBlockIndexes = GetDataBlock(newGrid);
+            var dataBlockStartAddress = GetDataBlockStartAddress(Slice);
+            _dataGridStartIndex = GetCoordinate(dataBlockStartAddress, Slice.Columns);
             var dimMemberDict = new Dictionary<string, string>();
 
             changes.Application = Cube.Application.Name;
@@ -488,7 +490,7 @@ namespace EssSharp
                 if ( !string.Equals(oldValues[index], newValues[index]) )
                 {
                     // only hit cells within the data block.
-                    if (dataBlockIndexes.Contains(index))//( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
+                    if ( (index % Slice.Columns) >= dataBlockStartAddress.startColumn && (index / Slice.Columns) >= dataBlockStartAddress.startRow )//( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
                     {
                         // Gets the dimension members for the cell that has changed.
                         // Returns a Dictionary<string, tuple<string, string>.
@@ -509,15 +511,15 @@ namespace EssSharp
                             // the grid's new value
                             NewValue = double.Parse(newValues[index]),
                             // Grid Dimension and Dimension member information
-                            DataPoints = newGrid.Dimensions
+                            DataPoints = dimMemberDict//newGrid.Dimensions
                             .Select(gd => new EssDataPoint()
                             {
-                                DimensionName = gd.Name,
-                                DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Name)).DimensionNumber,
+                                DimensionName = gd.Key,
+                                DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Key)).DimensionNumber,
                                 // first value of the tuple returned from the GetDimensionMembersForDataCell() method, null if no value.
                                 Alias = UseAliases ? string.Empty /*dimMemberDict[gd.Name].Item1*/ : null,
                                 // second value of the tuple returned from the GetDimensionMembersForDataCell() method, null if no value.
-                                Member = UseAliases ? dimMemberDict[gd.Name]/*dimMemberDict[gd.Name].Item2*/ : null
+                                Member = UseAliases ? dimMemberDict[gd.Key]/*dimMemberDict[gd.Name].Item2*/ : null
                             })
                             .ToList()
                         });
@@ -633,12 +635,14 @@ namespace EssSharp
                 bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
                 var types = new List<string>();
                 var values = new List<string>();
-                var dataBlockIndexes = GetDataBlock(_grid);
+                //var dataBlockIndexes = GetDataBlock(_grid);
+                var dataBlockStartAddress = GetDataBlockStartAddress(Slice);
+                _dataGridStartIndex = GetCoordinate(dataBlockStartAddress, Slice.Columns);
 
                 // Loop through entire grid and decide the type of each cell.
                 for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
                 {
-                    if ( dataBlockIndexes.Contains(index) )
+                    if ( (index % Slice.Columns) >= dataBlockStartAddress.startColumn && (index / Slice.Columns) >= dataBlockStartAddress.startRow )
                     {
                         if ( isUpdate )
                         {
@@ -658,7 +662,6 @@ namespace EssSharp
                             cellValue = string.Empty;
                             cellType = "7";
                         }
-
                     }
                     // If cell is not in the data block and is empty, send empty string and type 7.
                     else if ( string.IsNullOrEmpty(cellValues[index]) )
@@ -696,7 +699,7 @@ namespace EssSharp
             }
         }
 
-        private EssGridSelection GetDataBlockStartIndex( EssGridSlice slice )
+        private EssGridSelection GetDataBlockStartAddress( EssGridSlice slice )
         {
             List<string> cellValues = slice.Data.Ranges[0].Values;
             int firstRowIndex = 0;
@@ -710,28 +713,41 @@ namespace EssSharp
                 {
                     // Retain the index...
                     firstRowIndex = index;
-                    // And set the data grid start row.
-                    dataGridFirstCell.startRow = index / Slice.Columns;
                     break;
                 }
             }
 
-            var columnIndex = firstRowIndex - Slice.Columns < 0 ? 0 : firstRowIndex - Slice.Columns;
+            //var columnIndex = firstRowIndex - Slice.Columns < 0 ? 0 : firstRowIndex - Slice.Columns;
             // Find the column the data block starts by moving 1 row above the start of the data grid.
-            for ( var index = columnIndex; index < (Slice.Data.Ranges[0].End + 1); index++ )
+            for ( var index = firstRowIndex - 1; index > Slice.Data.Ranges[0].Start; index-- )
             {
                 // search the row for the first non empty cell
                 if ( !string.IsNullOrEmpty(cellValues[index]) )
                 {
-                    // calculate the column index and set the value in the data grid start column.
-                    dataGridFirstCell.startColumn = index % Slice.Columns;
+                    // And set the data grid start row.
+                    dataGridFirstCell.startRow = (index / Slice.Columns) + 1;
+
+                    var columnStartRow = (index / Slice.Columns) * Slice.Columns;
+                    var columnEndRow = columnStartRow + Slice.Columns;
+
+                    for (var i = columnStartRow; i < columnEndRow; i++ )
+                    {
+                        if ( !string.IsNullOrEmpty(cellValues[i]) )
+                        {
+                            // calculate the column index and set the value in the data grid start column.
+                            dataGridFirstCell.startColumn = i % Slice.Columns;
+
+                            break;
+                        }
+                    }
                     break;
                 }
             }
 
             return dataGridFirstCell;
         }
-
+        
+        /*
         private List<int> GetDataBlock( Grid grid )
         {
 
@@ -740,7 +756,7 @@ namespace EssSharp
             var slice = grid?.Slice is not null ? grid?.Slice.ToEssGridSlice() : Slice;
             var sliceEnd = (grid?.Slice?.Data?.Ranges[0] is null ? Slice?.Data?.Ranges[0]?.End : grid.Slice.Data.Ranges[0].End) + 1;
 
-            var dataGridFirstCell = GetDataBlockStartIndex(slice);
+            var dataGridFirstCell = GetDataBlockStartAddress(slice);
             // find the start row index. Used to find the Dimension Members.
             var rowIndex = dataGridFirstCell.startRow * Slice.Columns;
             // first cell index of the data block
@@ -764,6 +780,7 @@ namespace EssSharp
             }
             return indexes;
         }
+        */
 
         /// <summary>
         /// 
