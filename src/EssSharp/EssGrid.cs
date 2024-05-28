@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 using EssSharp.Api;
 using EssSharp.Model;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using static System.Collections.Specialized.BitVector32;
 
 using Action = EssSharp.Model.GridOperation.ActionEnum;
 
@@ -109,12 +101,13 @@ namespace EssSharp
             get
             {
                 if ( _grid?.Dimensions?.ToEssGridDimension() is { } dimensions )
-                    return dimensions;
+                    _essGridDimension = dimensions;
 
                 return _essGridDimension;
             }
             set
             {
+                
                 if ( _grid is not null )
                     _grid.Dimensions = value?.ToModelBean();
                 else
@@ -131,20 +124,16 @@ namespace EssSharp
             get
             {
                 if ( _grid?.Slice?.ToEssGridSlice() is { } slice )
-                    return slice;
+                    _essGridSlice = slice;
 
                 return _essGridSlice;
             }
             set
             {
                 if ( _grid is not null )
-                {
                     _grid.Slice = value?.ToModelBean();
-                }
                 else
-                {
                     _essGridSlice = value;
-                }
             }
         }
 
@@ -387,6 +376,15 @@ namespace EssSharp
 
         #region Private Methods
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="gridSelection"></param>
+        /// <param name="newPosition"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         private async Task ExecuteGridOperationAsync( GridOperation.ActionEnum action, List<EssGridSelection> gridSelection = null, EssGridSelection newPosition = null, CancellationToken cancellationToken = default )
         {
             try
@@ -473,9 +471,9 @@ namespace EssSharp
             var oldValues = _oldValues; //_grid.Slice.Data.Ranges[0].Values;
             var newValues = newGrid.Slice.Data.Ranges[0].Values;
 
-            //var dataBlockIndexes = GetDataBlock(newGrid);
             var dataBlockStartAddress = GetDataBlockStartAddress(Slice);
-            _dataGridStartIndex = GetCoordinate(dataBlockStartAddress, Slice.Columns);
+            var dataGridStartIndex = _dataGridStartIndex != 0 ? _dataGridStartIndex : GetCoordinate(dataBlockStartAddress, Slice.Columns);
+
             var dimMemberDict = new Dictionary<string, string>();
 
             changes.Application = Cube.Application.Name;
@@ -541,10 +539,12 @@ namespace EssSharp
             int columnCount = grid.Slice.Columns;
             var dimensions = grid.Dimensions;
             var values = grid.Slice.Data.Ranges[0].Values;
+            var dataGridStartIndex = _dataGridStartIndex != 0 ? _dataGridStartIndex : GetCoordinate(GetDataBlockStartAddress(Slice), Slice.Columns);
+
 
             int currRowIndex = (dataCellIndex / columnCount) * columnCount;
 
-            for ( int i = 0; i < (_dataGridStartIndex % columnCount); i++ )
+            for ( int i = 0; i < (dataGridStartIndex % columnCount); i++ )
             {
                 var index = currRowIndex;
                 while ( string.IsNullOrEmpty(values[index]) )
@@ -555,12 +555,12 @@ namespace EssSharp
             }
 
             // Find the row index where the data block starts
-            var dbStartRow = _dataGridStartIndex / columnCount;
+            var dbStartRow = dataGridStartIndex / columnCount;
 
             // and use them to find the index of the current cells dimension member
             var columnMemberIndex = dataCellIndex - (((dataCellIndex / columnCount) + 1 - dbStartRow) * Slice.Columns);
             var columnLimiter = (columnMemberIndex / columnCount + 1);
-            var columnStartIndex = _dataGridStartIndex - grid.Slice.Columns;
+            var columnStartIndex = dataGridStartIndex - grid.Slice.Columns;
             var columnEndIndex = (columnStartIndex / grid.Slice.Columns + 1) * grid.Slice.Columns - 1;
 
             for ( int i = 0; i < columnLimiter; i++ )
@@ -593,9 +593,15 @@ namespace EssSharp
             return memDict;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns></returns>
         private int GetDimensionMemberLength(Grid grid)
         {
-            var memberHeaderStartIndex = _dataGridStartIndex - grid.Slice.Columns;
+            var dataGridStartIndex = _dataGridStartIndex != 0 ? _dataGridStartIndex : GetCoordinate(GetDataBlockStartAddress(Slice), Slice.Columns);
+            var memberHeaderStartIndex = dataGridStartIndex - grid.Slice.Columns;
             var memberHeaderEndIndex = (memberHeaderStartIndex / grid.Slice.Columns + 1) * grid.Slice.Columns - 1;
             var memberHeaderRowCount = memberHeaderStartIndex / grid.Slice.Columns + 1;
             var loopCount = grid.Slice.Columns - (memberHeaderStartIndex % grid.Slice.Columns);
@@ -623,7 +629,7 @@ namespace EssSharp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="action"></param>
+        /// <param name="action" />
         private void PrepareSliceForOperation( Action action )
         {
             if ( Slice.Data.Ranges.FirstOrDefault() is not null )
@@ -635,9 +641,8 @@ namespace EssSharp
                 bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
                 var types = new List<string>();
                 var values = new List<string>();
-                //var dataBlockIndexes = GetDataBlock(_grid);
+
                 var dataBlockStartAddress = GetDataBlockStartAddress(Slice);
-                _dataGridStartIndex = GetCoordinate(dataBlockStartAddress, Slice.Columns);
 
                 // Loop through entire grid and decide the type of each cell.
                 for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
@@ -681,17 +686,9 @@ namespace EssSharp
                     types.Add(cellType);
                 }
 
-                // Update the slice's values and types.
-                if ( _grid is not null )
-                {
-                    _grid.Slice.Data.Ranges[0].Values = values ?? new List<string>();
-                    _grid.Slice.Data.Ranges[0].Types = types ?? new List<string>();
-                }
-                else
-                {
-                    Slice.Data.Ranges[0].Values = values ?? new List<string>();
-                    Slice.Data.Ranges[0].Types = types ?? new List<string>();
-                }
+                // Update the slice's values and types
+                Slice.Data.Ranges[0].Values = values ?? new List<string>();
+                Slice.Data.Ranges[0].Types = types ?? new List<string>();
             }
             else
             {
@@ -699,17 +696,22 @@ namespace EssSharp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="slice"></param>
+        /// <returns></returns>
         private EssGridSelection GetDataBlockStartAddress( EssGridSlice slice )
         {
             List<string> cellValues = slice.Data.Ranges[0].Values;
             int firstRowIndex = 0;
             var dataGridFirstCell = new EssGridSelection(0, 0);
-            
+            var cols = Slice.Columns;
             // Find the row the data block starts
-            for ( int index = 0; index < (slice?.Data?.Ranges[0]?.End + 1); index++ )
+            for ( int index = 0; index < (slice?.Data?.Ranges[0]?.End + 1); index += cols )
             {
                 // Find the first non empty cell at the start of a row...
-                if ( index % Slice.Columns == 0 && !string.IsNullOrEmpty(cellValues[index]) )
+                if ( /*index % Slice.Columns == 0 &&*/ !string.IsNullOrEmpty(cellValues[index]) )
                 {
                     // Retain the index...
                     firstRowIndex = index;
@@ -746,41 +748,6 @@ namespace EssSharp
 
             return dataGridFirstCell;
         }
-        
-        /*
-        private List<int> GetDataBlock( Grid grid )
-        {
-
-            var indexes = new List<int>();
-
-            var slice = grid?.Slice is not null ? grid?.Slice.ToEssGridSlice() : Slice;
-            var sliceEnd = (grid?.Slice?.Data?.Ranges[0] is null ? Slice?.Data?.Ranges[0]?.End : grid.Slice.Data.Ranges[0].End) + 1;
-
-            var dataGridFirstCell = GetDataBlockStartAddress(slice);
-            // find the start row index. Used to find the Dimension Members.
-            var rowIndex = dataGridFirstCell.startRow * Slice.Columns;
-            // first cell index of the data block
-            var dataBlockStartIndex = _dataGridStartIndex = GetCoordinate(dataGridFirstCell, Slice.Columns);
-            // last cell index, of the first row, of the data block.
-            var dataBlockEndIndex = (dataBlockStartIndex / Slice.Columns + 1) * Slice.Columns - 1;
-
-            // loop through each cell...
-            for ( int index = 0; index < sliceEnd; index++ )
-            {
-                if ( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
-                    indexes.Add(index);
-
-                // Set row index and data blocks start/end indexes to next row.
-                if ( index == dataBlockEndIndex && index != Slice.Data.Ranges[0].End )
-                {
-                    rowIndex += Slice.Columns;
-                    dataBlockStartIndex += Slice.Columns;
-                    dataBlockEndIndex += Slice.Columns;
-                }
-            }
-            return indexes;
-        }
-        */
 
         /// <summary>
         /// 
@@ -850,6 +817,9 @@ namespace EssSharp
         private int GetCoordinate(EssGridSelection gridSelection, int columnCount ) =>
             (gridSelection.startRow * columnCount) + gridSelection.startColumn;
 
+        /// <summary>
+        /// Add all data cells to DirtyCells list in grid object.
+        /// </summary>
         private void SetDirtyCells()
         {
             if ( _grid is not null )
