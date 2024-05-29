@@ -73,7 +73,7 @@
     ],
     "output": "_site",
     "globalMetadata": {
-      "_appFooter": "Copyright © 2022-2023 Applied OLAP",
+      "_appFooter": "Copyright © 2022-2024 Applied OLAP",
       "_disableBreadcrumb": true,
       "_enableSearch": true
     },

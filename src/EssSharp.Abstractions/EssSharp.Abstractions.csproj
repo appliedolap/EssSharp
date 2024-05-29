@@ -12,7 +12,7 @@
     <Authors>Applied OLAP</Authors>
     <Company>$(Authors)</Company>
     <Description>Abstractions for EssSharp.</Description>
-    <Copyright>© 2023 Applied OLAP, Inc.</Copyright>
+    <Copyright>© $([System.DateTime]::UtcNow.ToString('yyyy')) Applied OLAP, Inc.</Copyright>
     <RepositoryUrl>https://github.com/appliedolap/EssSharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>

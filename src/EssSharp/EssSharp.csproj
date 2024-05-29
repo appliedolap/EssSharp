@@ -13,7 +13,7 @@
     <Authors>Applied OLAP</Authors>
     <Company>$(Authors)</Company>
     <Description>A (partly) auto-generated C# REST client for Essbase.</Description>
-    <Copyright>© 2023 Applied OLAP, Inc.</Copyright>
+    <Copyright>© $([System.DateTime]::UtcNow.ToString('yyyy')) Applied OLAP, Inc.</Copyright>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EssSharp.xml</DocumentationFile>
     <RepositoryUrl>https://github.com/appliedolap/EssSharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
