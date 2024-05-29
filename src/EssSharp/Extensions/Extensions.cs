@@ -939,6 +939,32 @@ namespace EssSharp
             return source;
         }
 
+        /// <summary>
+        /// Fills a 2D array with the given unmanaged value.
+        /// </summary>
+        public unsafe static int[,] WithValue( this int[,] source, int value )
+        {
+            if ( source is null )
+                return source;
+
+            if ( source.Length is 0 )
+                return source;
+
+            var rows = source.GetLength(0);
+            var cols = source.GetLength(1);
+
+            fixed ( int* a = &source[0, 0] )
+            {
+                int* b = a;
+
+                for ( int i = 0; i < rows; i++ )
+                    for ( int j = 0; j < cols; j++ )
+                        *b++ = value;
+            }
+
+            return source;
+        }
+
         #endregion
 
         #region System.Enum
