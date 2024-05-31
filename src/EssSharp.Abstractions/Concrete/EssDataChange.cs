@@ -21,10 +21,10 @@ namespace EssSharp
     public class EssDataChange
     {
         /// <summary />
-        public double OldValue { get; set; }
+        public double? OldValue { get; set; }
 
         /// <summary />
-        public double NewValue { get; set; }
+        public double? NewValue { get; set; }
 
         /// <summary />
         public List<EssDataPoint> DataPoints = new List<EssDataPoint>();

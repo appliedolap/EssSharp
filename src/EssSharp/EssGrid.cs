@@ -505,9 +505,9 @@ namespace EssSharp
                         changes.DataChanges.Add(new EssDataChange()
                         {
                             // the grid's original value 
-                            OldValue = double.Parse(oldValues[index]),
+                            OldValue = double.TryParse(oldValues[index], out var ov) ? ov : null,
                             // the grid's new value
-                            NewValue = double.Parse(newValues[index]),
+                            NewValue = double.TryParse(newValues[index], out var nv) ? nv : null,
                             // Grid Dimension and Dimension member information
                             DataPoints = dimMemberDict//newGrid.Dimensions
                             .Select(gd => new EssDataPoint()
