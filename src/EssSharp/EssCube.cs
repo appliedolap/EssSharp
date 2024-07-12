@@ -308,7 +308,7 @@ namespace EssSharp
         /// <inheritdoc />
         /// <returns></returns>
         public Task<Stream> ExportToLcmAsync( EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default ) =>
-            Application.ExportCubeToLcmAsync(Name, options);
+            Application.ExportCubeToLcmAsync(Name, options, cancellationToken);
 
         /// <inheritdoc />
         /// <returns>A <see cref="Stream"/>.</returns>

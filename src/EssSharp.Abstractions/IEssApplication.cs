@@ -167,6 +167,20 @@ namespace EssSharp
         public Task<IEssApplicationPermission> CreatePermissionsAsync( string id, EssApplicationRole applicationRole, bool isGroup = false, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Delete cube from applicaton.
+        /// </summary>
+        /// <param name="cubeName"></param>
+        public void DeleteCube( string cubeName );
+
+        /// <summary>
+        /// Asyncronously delete cube from application.
+        /// </summary>
+        /// <param name="cubeName"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task DeleteCubeAsync( string cubeName, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Downloads the latest log file for this application.
         /// </summary>
         public Stream DownloadLatestLogFile();

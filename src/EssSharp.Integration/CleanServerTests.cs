@@ -114,7 +114,26 @@ namespace EssSharp.Integration
             }
         }
 
-        [Fact(DisplayName = "CleanServerTests - 04 - Essbase_AfterConnection_CanRemoveApplications"), Priority(03)]
+        
+        [Fact(DisplayName = "CleanServerTests - 04 - Essbase_AfterConnection_CanRemoveCubes"), Priority(04)]
+        public async Task Essbase_AfterConnection_CanRemoveCubes()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get all existing applications.
+            foreach ( var application in await server.GetApplicationsAsync() )
+            {
+                // Get and delete all existing cubes.
+                foreach ( var cube in await application.GetCubesAsync() )
+                    await application.DeleteCubeAsync(cube.Name);
+
+                // Assert that the (refreshed) list of cubes is empty.
+                Assert.Empty(await application.GetCubesAsync());
+            }
+        }
+
+        [Fact(DisplayName = "CleanServerTests - 05 - Essbase_AfterConnection_CanRemoveApplications"), Priority(05)]
         public async Task Essbase_AfterConnection_CanRemoveApplications()
         {
             // Get an unconnected server.
@@ -128,7 +147,7 @@ namespace EssSharp.Integration
             Assert.Empty(await server.GetApplicationsAsync());
         }
 
-        [Fact(DisplayName = "CleanServerTests - 05 - Essbase_AfterConnection_CanRemoveUsers"), Priority(04)]
+        [Fact(DisplayName = "CleanServerTests - 06 - Essbase_AfterConnection_CanRemoveUsers"), Priority(06)]
         public async Task Essbase_AfterConnection_CanRemoveUsers()
         {
             // Get an unconnected server.
@@ -172,7 +191,7 @@ namespace EssSharp.Integration
             Assert.Equal("admin", users.First()?.Name);
         }
 
-        [Fact(DisplayName = "CleanServerTests - 06 - Essbase_AfterConnection_CanRemoveUserPermissions"), Priority(05)]
+        [Fact(DisplayName = "CleanServerTests - 07 - Essbase_AfterConnection_CanRemoveUserPermissions"), Priority(07)]
         public async Task Essbase_AfterConnection_CanRemoveUserPermissions()
         {
             // Get an unconnected server.
@@ -190,7 +209,7 @@ namespace EssSharp.Integration
             }
         }
 
-        [Fact(DisplayName = "CleanServerTests - 07 - Essbase_AfterConnection_CanRemoveGroups"), Priority(06)]
+        [Fact(DisplayName = "CleanServerTests - 08 - Essbase_AfterConnection_CanRemoveGroups"), Priority(08)]
         public async Task Essbase_AfterConnection_CanRemoveGroups()
         {
             // Get an unconnected server.

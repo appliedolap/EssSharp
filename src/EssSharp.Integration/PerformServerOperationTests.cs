@@ -1566,7 +1566,7 @@ namespace EssSharp.Integration
                 Generateartifactlist = false,
                 IncludeServerLevel = false,
                 ZipFileName = "exportedApps.zip",
-                SkipData = true
+                SkipData = false
             };
 
             var lcmStream = await app.ExportCubeToLcmAsync("Basic", options);
@@ -1589,7 +1589,7 @@ namespace EssSharp.Integration
                 Generateartifactlist = true,
                 IncludeServerLevel = true,
                 ZipFileName = "exportedCubes.zip",
-                SkipData = true
+                SkipData = false
             };
 
             var lcmStream = await app.ExportCubeToLcmAsync("Basic", options);
@@ -1627,22 +1627,109 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 46 - Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream"), Priority(46)]
         public async Task Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream()
         {
-            // Get an unconnected server.
-            var server = GetEssServer();
+            // Get Application Sample.
+            var app = await GetEssServer().GetApplicationAsync("Sample");
+            // Get Cube Basic
+            var cube = await app.GetCubeAsync("basic");
+            //change a value in sample.basic
+            var defaultGrid = await cube.GetDefaultGridAsync();
 
-            // Get the "CalcAll" script from Sample.Basic.
-            var app = await server.GetApplicationAsync("Sample");
+            defaultGrid.Preferences = new EssGridPreferences()
+            {
+                ZoomIn = new EssGridPreferencesZoomIn()
+                {
+                    Ancestor = ZoomInAncestor.BOTTOM,
+                    Mode     = ZoomInMode.BASE
+                }
+            };
+            // Year > Jan
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            // Product > Cola
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
+            // Market > New York 
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
+            // Scenario > Actual
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3));
+            // Measures > Sales
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+
+            defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
+            await defaultGrid.KeepOnlyAsync();
+
+            defaultGrid.Slice.Data.Ranges[0].Values[11] = "680.0";
+
+            var submitGrid = await defaultGrid.SubmitAsync( );
+
+            (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).Execute();
+
+            // export cube to lcm.
+            var options = new EssJobExportLcmOptions()
+            {
+                AllApp = false,
+                Generateartifactlist = true,
+                IncludeServerLevel = true,
+                ZipFileName = "exportedCubes.zip",
+                SkipData = false
+            };
+
+            var exportLcmStream = await app.ExportCubeToLcmAsync("Basic", options);
+
+            using ( FileStream output = File.OpenWrite(Path.Combine(Path.GetTempPath(), "exportedCubes.zip")) )
+            {
+                exportLcmStream.CopyTo(output);
+            }
+
+            Assert.NotNull(exportLcmStream);
+
+            // delete cube
+            await app.DeleteCubeAsync("basic");
+
+            // restore cube with lcm.
 
             var option = new EssJobImportLcmOptions()
             {
                 Overwrite = true
             };
 
-            var lcmStream = await app.CreateCubeFromLcmAsync(cubeName: "Basic", localLcmPath: Path.Combine(Path.GetTempPath(), "exportedCubes.zip"), options: option);
+            var importLcmStream = await app.CreateCubeFromLcmAsync(cubeName: "Basic", localLcmPath: Path.Combine(Path.GetTempPath(), "exportedCubes.zip"), options: option);
 
             File.Delete(Path.Combine(Path.GetTempPath(), "exportedCubes.zip"));
 
-            Assert.NotNull(lcmStream);
+            Assert.NotNull(importLcmStream);
+
+            // test value in grid stayed 680.0 and change back to old value (678.0).
+            cube = await app.GetCubeAsync("basic");
+            //change a value in sample.basic
+            defaultGrid = await cube.GetDefaultGridAsync();
+
+            defaultGrid.Preferences = new EssGridPreferences()
+            {
+                ZoomIn = new EssGridPreferencesZoomIn()
+                {
+                    Ancestor = ZoomInAncestor.BOTTOM,
+                    Mode = ZoomInMode.BASE
+                }
+            };
+            // Year > Jan
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            // Product > Cola
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
+            // Market > New York 
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
+            // Scenario > Actual
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3));
+            // Measures > Sales
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+
+            defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
+            await defaultGrid.KeepOnlyAsync();
+
+            Assert.Equal("680.0", defaultGrid.Slice.Data.Ranges[0].Values[11]);
+
+            defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
+            await defaultGrid.SubmitAsync();
+
+            (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).Execute();
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 47 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory"), Priority(47)]

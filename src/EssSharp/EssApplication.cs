@@ -334,6 +334,25 @@ namespace EssSharp
             }
         }
 
+        /// <inheritdoc>
+        public void DeleteCube( string cubeName ) => DeleteCubeAsync(cubeName)?.GetAwaiter().GetResult();
+
+        /// <inheritdoc>
+        public async Task DeleteCubeAsync( string cubeName, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<ApplicationsApi>();
+
+                await api.ApplicationsDeleteDatabaseAsync(applicationName: Name, databaseName: cubeName, cancellationToken: cancellationToken);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($"Unable to delete cube {cubeName}.", e);
+            }
+        }
+
         /// <inheritdoc />
         /// <returns>A <see cref="Stream"/>.</returns>
         public Stream DownloadLatestLogFile() => DownloadLatestLogFileAsync()?.GetAwaiter().GetResult();
