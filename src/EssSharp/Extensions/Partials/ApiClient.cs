@@ -119,6 +119,7 @@ namespace EssSharp.Client
                     ApplyCookies  = false,
                     RetainCookies = false,
 
+                    Logger                 = configuration.Logger,
                     BasePath               = configuration.BasePath,
                     MaxDegreeOfParallelism = configuration.MaxDegreeOfParallelism,
                     Username               = configuration.Username,
