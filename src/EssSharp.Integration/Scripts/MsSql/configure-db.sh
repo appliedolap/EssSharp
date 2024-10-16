@@ -6,6 +6,10 @@
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
+# Add both variants of the microsoft ODBC tools path to the path
+export PATH="${PATH:+${PATH}:}/opt/mssql-tools/bin"
+export PATH="${PATH:+${PATH}:}/opt/mssql-tools18/bin"
+
 # Sleep for 5 seconds to give the database a chance to start up
 sleep 5
 
@@ -21,7 +25,7 @@ i=0
 while [ $DBSTATUS -ne 0 -a $i -lt 60 ]; do
    echo "********** Waiting for the database to start"
    i=$(expr $i + 1)
-   DBSTATUS=$(/opt/mssql-tools/bin/sqlcmd -h -1 -t 1 -U sa -P $SA_PASSWORD -Q "SET NOCOUNT ON; Select SUM(state) from sys.databases")
+   DBSTATUS=$(sqlcmd -C -h -1 -t 1 -U sa -P $SA_PASSWORD -Q "SET NOCOUNT ON; Select SUM(state) from sys.databases")
    sleep 1
    DBSTATUS=${DBSTATUS:-1}
 done
@@ -32,7 +36,7 @@ if [ $DBSTATUS -ne 0 ]; then
 fi
 
 # create the CertDB database
-/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${SA_PASSWORD} -d master -i ${SCRIPT_DIR}/setup.sql &
+sqlcmd -C -S localhost -U sa -P ${SA_PASSWORD} -d master -i ${SCRIPT_DIR}/setup.sql &
 
 # create the samplebasic database
-#/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${SA_PASSWORD} -d master -i ${SCRIPT_DIR}/create.samplebasic.database.sqlserver.sql &
+#sqlcmd -C -S localhost -U sa -P ${SA_PASSWORD} -d master -i ${SCRIPT_DIR}/create.samplebasic.database.sqlserver.sql &
