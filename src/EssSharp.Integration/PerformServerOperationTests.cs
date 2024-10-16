@@ -1735,7 +1735,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 47 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory"), Priority(47)]
         public async Task Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory()
         {
-            var outputDir = new DirectoryInfo(@"C:\Users\matth\Desktop");
+            var outputDir = new DirectoryInfo(Path.GetTempPath());
 
             // Build a new factory that creates connections with a logger.
             var factory = new EssServerFactory() { Logger = new FileOutputLogger(outputDir) };
@@ -1749,12 +1749,22 @@ namespace EssSharp.Integration
             await server.GetApplicationAsync("Sample");
 
             var requestSummary  = $@"# GET {serverBaseUrl}/rest/v1/applications/Sample HTTP/1.1";
-
-            //Assert.Equal(requestSummary, builder.ToString().Split(Environment.NewLine)[0]);
-
             var responseSummary = @"# HTTP/1.1 200 OK";
 
-            //Assert.Equal(responseSummary, builder.ToString().Split(Environment.NewLine)[2]);
+            var requestFile = outputDir.GetFiles().FirstOrDefault(f => f.Name.Contains("Request")).OpenRead();
+            var responseFile = outputDir.GetFiles().FirstOrDefault(f => f.Name.Contains("Response")).OpenRead();
+
+            using (var streamReader = new StreamReader(requestFile) )
+            {
+                var line = streamReader.ReadToEnd().Split(Environment.NewLine)[0];
+                Assert.Equal(requestSummary, line);
+            }
+
+            using ( var streamReader = new StreamReader(responseFile) )
+            {
+                var line = streamReader.ReadToEnd().Split(Environment.NewLine)[0];
+                Assert.Equal(responseSummary, line);
+            }
         }
         /*
         [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimenson"), Priority(48)]
