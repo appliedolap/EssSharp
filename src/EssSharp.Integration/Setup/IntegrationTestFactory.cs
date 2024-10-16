@@ -133,13 +133,13 @@ namespace EssSharp.Integration.Setup
             var hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : "9000";
 
             _essbaseTestContainer = new ContainerBuilder()
-                .WithImage(image)                                                                     // "appliedolap/essbase:21.5-latest"
-                .WithName(containerName)                                                              // "essbase-21-5"
+                .WithImage(image)                                                                     // "appliedolap/essbase:21.6-latest"
+                .WithName(containerName)                                                              // "essbase-21-6"
                 .WithNetwork("standalone")
                 .WithPortBinding(hostPort, "9000")                                                    // "9000"
                 .WithEnvironment("ADMIN_PASSWORD", connection.Password)                               // "welcome1"
                 .WithEnvironment("DATABASE_TYPE", "sqlserver")
-                .WithEnvironment("DATABASE_CONNECT_STRING", $@"{containerName}-database:1433:CertDB") // "essbase-21-5-database:1433:CertDB"
+                .WithEnvironment("DATABASE_CONNECT_STRING", $@"{containerName}-database:1433:CertDB") // "essbase-21-6-database:1433:CertDB"
                 .WithEnvironment("DATABASE_ADMIN_USERNAME", "sa")
                 .WithEnvironment("DATABASE_ADMIN_PASSWORD", "StrongPassw0rd")
                 .WithEnvironment("DATABASE_WAIT_TIMEOUT", "240")
