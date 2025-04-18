@@ -8,9 +8,9 @@ scriptdir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 (cd "$scriptdir" && rm -rf ./src/EssSharp.Test/Api && rm -rf ./src/EssSharp.Test/Model >/dev/null 2>&1)
 
 # Generate the c# code from the processed.json file.
-(cd "$scriptdir" && java -jar openapi-generator-cli-6.6.0.jar generate \
+(cd "$scriptdir" && java -jar openapi-generator-cli-7.12.0.jar generate \
   --input-spec ./processed.json \
-  --generator-name csharp-netcore \
+  --generator-name csharp \
   --template-dir ./templates \
   --additional-properties=packageName=EssSharp,netCoreProjectFile=true,optionalAssemblyInfo=false)
 
