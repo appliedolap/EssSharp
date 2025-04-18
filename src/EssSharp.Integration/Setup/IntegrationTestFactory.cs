@@ -81,7 +81,7 @@ namespace EssSharp.Integration.Setup
                 .WithResourceMapping(new DirectoryInfo(msSqlScriptPath), @"/opt/scripts", UnixFileModes.UserRead | UnixFileModes.UserWrite | UnixFileModes.UserExecute | UnixFileModes.GroupRead | UnixFileModes.GroupExecute | UnixFileModes.OtherRead | UnixFileModes.OtherExecute)
                 .WithCommand(@"/opt/scripts/start-db.sh")
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" })
-                .WithCreateParameterModifier(pm => pm.Healthcheck = new Docker.DotNet.Models.HealthConfig()
+                .WithCreateParameterModifier(pm => pm.Healthcheck = new Docker.DotNet.Models.HealthcheckConfig()
                 {
                     Test = new[] { "CMD", "/opt/scripts/healthcheck.sh" },
                     Interval = TimeSpan.FromSeconds(30),

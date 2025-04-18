@@ -33,7 +33,7 @@ namespace EssSharp
         public EssJobScriptOptions( string fileName, string applicationName = null, string cubeName = null ) : base(EssJobType.Unknown)
         {
             if ( string.IsNullOrEmpty(fileName) )
-                throw new ArgumentNullException($@"The name of a script is required to create an {nameof(EssJobScriptOptions)} with this constructor.", nameof(fileName));
+                throw new ArgumentNullException(nameof(fileName), $@"The name of a script is required to create an {nameof(EssJobScriptOptions)} with this constructor.");
 
             // Throw if a filename without an extension was given.
             if ( !Path.HasExtension(fileName) )
@@ -74,7 +74,7 @@ namespace EssSharp
         public EssJobScriptOptions( IEssScript essScript, string applicationName = null, string cubeName = null ) : base(EssJobType.Unknown)
         {
             if ( essScript is null )
-                throw new ArgumentNullException($@"An {nameof(IEssScript)} object is required to create an {nameof(EssJobScriptOptions)} with this constructor.", nameof(essScript));
+                throw new ArgumentNullException(nameof(essScript), $@"An {nameof(IEssScript)} object is required to create an {nameof(EssJobScriptOptions)} with this constructor.");
 
             if ( essScript.ScriptType is EssScriptType.Unknown )
                 throw new ArgumentException($@"A {nameof(essScript.ScriptType)} must be set on the {nameof(essScript)} given to this constructor.", nameof(essScript));

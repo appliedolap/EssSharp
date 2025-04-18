@@ -225,7 +225,7 @@ namespace EssSharp.Model
         /// <param name="exportpartitions">exportpartitions.</param>
         /// <param name="exportfilters">exportfilters.</param>
         /// <param name="physical">physical.</param>
-        public ParametersBean(string rule = default(string), string file = default(string), string abortOnError = default(string), string restructureOption = default(string), string forceDimBuild = default(string), string script = default(string), string option = default(string), string loaddata = default(string), string useConnection = default(string), string connection = default(string), string user = default(string), string password = default(string), string calc = default(string), BuildMethodEnum? buildMethod = default(BuildMethodEnum?), string data = default(string), string memberIds = default(string), string zipFileName = default(string), string skipdata = default(string), string threads = default(string), string overwrite = default(string), string lcmImportFromStorage = default(string), string analyzeFileName = default(string), string analyzeSheetName = default(string), string deleteExcelOnSuccess = default(string), string catalogExcelPath = default(string), string importExcelFileName = default(string), string recreateApplication = default(string), string createFiles = default(string), string executeScript = default(string), BuildOptionEnum? buildOption = default(BuildOptionEnum?), string copyToStorage = default(string), string filesystemcopy = default(string), DataLevelEnum? dataLevel = default(DataLevelEnum?), string columnFormat = default(string), string targetApplicationName = default(string), string partialDataExpression = default(string), string allApp = default(string), string includeServerLevel = default(string), string enableSandboxing = default(string), string dbType = default(string), string dimDesignationMode = default(string), CompactDesignation unstructuredAnalysis = default(CompactDesignation), string ratioToStop = default(string), string basedOnQueryData = default(string), string enableAlternateRollups = default(string), string compress = default(string), string generateArtifactList = default(string), string artifactList = default(string), string verbose = default(string), string disasterRecovery = default(string), string force = default(string), string backupType = default(string), string appId = default(string), string timestamp = default(string), string maxParallel = default(string), List<string> selectedDimensions = default(List<string>), List<RTSV> rtsv = default(List<RTSV>), int bufferId = default(int), List<int> bufferIds = default(List<int>), string commitOption = default(string), string actionType = default(string), string termOption = default(string), string discoverDimensionTables = default(string), string exportDynamicBlocks = default(string), string shadowAppName = default(string), string primaryAppName = default(string), string timeoutToForceUnloadApp = default(string), string hideShadow = default(string), string waitForOngoingUpdatesInSecs = default(string), string reportScriptFilename = default(string), bool lockForUpdate = default(bool), bool isScriptContent = default(bool), bool useCatalogPath = default(bool), bool exportdata = default(bool), string cube = default(string), string filetype = default(string), bool exportpartitions = default(bool), bool exportfilters = default(bool), bool physical = default(bool))
+        public ParametersBean(string rule = default(string), string file = default(string), string abortOnError = default(string), string restructureOption = default(string), string forceDimBuild = default(string), string script = default(string), string option = default(string), string loaddata = default(string), string useConnection = default(string), string connection = default(string), string user = default(string), string password = default(string), string calc = default(string), BuildMethodEnum? buildMethod = default(BuildMethodEnum?), string data = default(string), string memberIds = default(string), string zipFileName = default(string), string skipdata = default(string), string threads = default(string), string overwrite = default(string), string lcmImportFromStorage = default(string), string analyzeFileName = default(string), string analyzeSheetName = default(string), string deleteExcelOnSuccess = default(string), string catalogExcelPath = default(string), string importExcelFileName = default(string), string recreateApplication = default(string), string createFiles = default(string), string executeScript = default(string), BuildOptionEnum? buildOption = default(BuildOptionEnum?), string copyToStorage = default(string), string filesystemcopy = default(string), DataLevelEnum? dataLevel = default(DataLevelEnum?), string columnFormat = default(string), string targetApplicationName = default(string), string partialDataExpression = default(string), string allApp = default(string), string includeServerLevel = default(string), string enableSandboxing = default(string), string dbType = default(string), string dimDesignationMode = default(string), CompactDesignation unstructuredAnalysis = default(CompactDesignation), string ratioToStop = default(string), string basedOnQueryData = default(string), string enableAlternateRollups = default(string), string compress = default(string), string generateArtifactList = default(string), string artifactList = default(string), string verbose = default(string), string disasterRecovery = default(string), string force = default(string), string backupType = default(string), string appId = default(string), string timestamp = default(string), string maxParallel = default(string), List<string> selectedDimensions = default(List<string>), List<RTSV> rtsv = default(List<RTSV>), int bufferId = default(int), List<int> bufferIds = default(List<int>), string commitOption = default(string), string actionType = default(string), string termOption = default(string), string discoverDimensionTables = default(string), string exportDynamicBlocks = default(string), string shadowAppName = default(string), string primaryAppName = default(string), string timeoutToForceUnloadApp = default(string), string hideShadow = default(string), string waitForOngoingUpdatesInSecs = default(string), string reportScriptFilename = default(string), string lockForUpdate = default(string), string isScriptContent = default(string), string useCatalogPath = default(string), string exportdata = default(string), string cube = default(string), string filetype = default(string), string exportpartitions = default(string), string exportfilters = default(string), string physical = default(string))
         {
             this.Rule = rule;
             this.File = file;
@@ -515,7 +515,7 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets IncludeServerLevel
         /// </summary>
-        [DataMember(Name = "includeServerLevel", EmitDefaultValue = false)]
+        [DataMember(Name = "include-server-level", EmitDefaultValue = false)]
         public string IncludeServerLevel { get; set; }
 
         /// <summary>
@@ -713,26 +713,26 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets LockForUpdate
         /// </summary>
-        [DataMember(Name = "lockForUpdate", EmitDefaultValue = true)]
-        public bool LockForUpdate { get; set; }
+        [DataMember(Name = "lockForUpdate", EmitDefaultValue = false)]
+        public string LockForUpdate { get; set; }
 
         /// <summary>
         /// Gets or Sets IsScriptContent
         /// </summary>
-        [DataMember(Name = "isScriptContent", EmitDefaultValue = true)]
-        public bool IsScriptContent { get; set; }
+        [DataMember(Name = "isScriptContent", EmitDefaultValue = false)]
+        public string IsScriptContent { get; set; }
 
         /// <summary>
         /// Gets or Sets UseCatalogPath
         /// </summary>
-        [DataMember(Name = "useCatalogPath", EmitDefaultValue = true)]
-        public bool UseCatalogPath { get; set; }
+        [DataMember(Name = "useCatalogPath", EmitDefaultValue = false)]
+        public string UseCatalogPath { get; set; }
 
         /// <summary>
         /// Gets or Sets Exportdata
         /// </summary>
-        [DataMember(Name = "exportdata", EmitDefaultValue = true)]
-        public bool Exportdata { get; set; }
+        [DataMember(Name = "exportdata", EmitDefaultValue = false)]
+        public string Exportdata { get; set; }
 
         /// <summary>
         /// Gets or Sets Cube
@@ -749,20 +749,20 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets Exportpartitions
         /// </summary>
-        [DataMember(Name = "exportpartitions", EmitDefaultValue = true)]
-        public bool Exportpartitions { get; set; }
+        [DataMember(Name = "exportpartitions", EmitDefaultValue = false)]
+        public string Exportpartitions { get; set; }
 
         /// <summary>
         /// Gets or Sets Exportfilters
         /// </summary>
-        [DataMember(Name = "exportfilters", EmitDefaultValue = true)]
-        public bool Exportfilters { get; set; }
+        [DataMember(Name = "exportfilters", EmitDefaultValue = false)]
+        public string Exportfilters { get; set; }
 
         /// <summary>
         /// Gets or Sets Physical
         /// </summary>
-        [DataMember(Name = "physical", EmitDefaultValue = true)]
-        public bool Physical { get; set; }
+        [DataMember(Name = "physical", EmitDefaultValue = false)]
+        public string Physical { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -1237,19 +1237,23 @@ namespace EssSharp.Model
                 ) && 
                 (
                     this.LockForUpdate == input.LockForUpdate ||
-                    this.LockForUpdate.Equals(input.LockForUpdate)
+                    (this.LockForUpdate != null &&
+                    this.LockForUpdate.Equals(input.LockForUpdate))
                 ) && 
                 (
                     this.IsScriptContent == input.IsScriptContent ||
-                    this.IsScriptContent.Equals(input.IsScriptContent)
+                    (this.IsScriptContent != null &&
+                    this.IsScriptContent.Equals(input.IsScriptContent))
                 ) && 
                 (
                     this.UseCatalogPath == input.UseCatalogPath ||
-                    this.UseCatalogPath.Equals(input.UseCatalogPath)
+                    (this.UseCatalogPath != null &&
+                    this.UseCatalogPath.Equals(input.UseCatalogPath))
                 ) && 
                 (
                     this.Exportdata == input.Exportdata ||
-                    this.Exportdata.Equals(input.Exportdata)
+                    (this.Exportdata != null &&
+                    this.Exportdata.Equals(input.Exportdata))
                 ) && 
                 (
                     this.Cube == input.Cube ||
@@ -1263,15 +1267,18 @@ namespace EssSharp.Model
                 ) && 
                 (
                     this.Exportpartitions == input.Exportpartitions ||
-                    this.Exportpartitions.Equals(input.Exportpartitions)
+                    (this.Exportpartitions != null &&
+                    this.Exportpartitions.Equals(input.Exportpartitions))
                 ) && 
                 (
                     this.Exportfilters == input.Exportfilters ||
-                    this.Exportfilters.Equals(input.Exportfilters)
+                    (this.Exportfilters != null &&
+                    this.Exportfilters.Equals(input.Exportfilters))
                 ) && 
                 (
                     this.Physical == input.Physical ||
-                    this.Physical.Equals(input.Physical)
+                    (this.Physical != null &&
+                    this.Physical.Equals(input.Physical))
                 );
         }
 
@@ -1552,10 +1559,22 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.ReportScriptFilename.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.LockForUpdate.GetHashCode();
-                hashCode = (hashCode * 59) + this.IsScriptContent.GetHashCode();
-                hashCode = (hashCode * 59) + this.UseCatalogPath.GetHashCode();
-                hashCode = (hashCode * 59) + this.Exportdata.GetHashCode();
+                if (this.LockForUpdate != null)
+                {
+                    hashCode = (hashCode * 59) + this.LockForUpdate.GetHashCode();
+                }
+                if (this.IsScriptContent != null)
+                {
+                    hashCode = (hashCode * 59) + this.IsScriptContent.GetHashCode();
+                }
+                if (this.UseCatalogPath != null)
+                {
+                    hashCode = (hashCode * 59) + this.UseCatalogPath.GetHashCode();
+                }
+                if (this.Exportdata != null)
+                {
+                    hashCode = (hashCode * 59) + this.Exportdata.GetHashCode();
+                }
                 if (this.Cube != null)
                 {
                     hashCode = (hashCode * 59) + this.Cube.GetHashCode();
@@ -1564,9 +1583,18 @@ namespace EssSharp.Model
                 {
                     hashCode = (hashCode * 59) + this.Filetype.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Exportpartitions.GetHashCode();
-                hashCode = (hashCode * 59) + this.Exportfilters.GetHashCode();
-                hashCode = (hashCode * 59) + this.Physical.GetHashCode();
+                if (this.Exportpartitions != null)
+                {
+                    hashCode = (hashCode * 59) + this.Exportpartitions.GetHashCode();
+                }
+                if (this.Exportfilters != null)
+                {
+                    hashCode = (hashCode * 59) + this.Exportfilters.GetHashCode();
+                }
+                if (this.Physical != null)
+                {
+                    hashCode = (hashCode * 59) + this.Physical.GetHashCode();
+                }
                 return hashCode;
             }
         }

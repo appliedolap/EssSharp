@@ -18495,7 +18495,7 @@
         "allApp": {
           "type": "string"
         },
-        "includeServerLevel": {
+        "include-server-level": {
           "type": "string",
           "xml": {
             "name": "include-server-level",
@@ -18614,16 +18614,16 @@
           "type": "string"
         },
         "lockForUpdate": {
-          "type": "boolean"
+          "type": "string"
         },
         "isScriptContent": {
-          "type": "boolean"
+          "type": "string"
         },
         "useCatalogPath": {
-          "type": "boolean"
+          "type": "string"
         },
         "exportdata": {
-          "type": "boolean"
+          "type": "string"
         },
         "cube": {
           "type": "string"
@@ -18632,13 +18632,13 @@
           "type": "string"
         },
         "exportpartitions": {
-          "type": "boolean"
+          "type": "string"
         },
         "exportfilters": {
-          "type": "boolean"
+          "type": "string"
         },
         "physical": {
-          "type": "boolean"
+          "type": "string"
         }
       }
     },

@@ -14,6 +14,12 @@ namespace EssSharp
         public List<string> File { get; set; }
 
         /// <summary>
+        /// Returns or sets the rule file (or files) to use for an <see cref="EssJobType.Dataload" /> 
+        /// (or <inheritdoc cref="EssJobType.Dimbuild" />) job.
+        /// </summary>
+        public List<string> Rule { get; set; }
+
+        /// <summary>
         /// Returns or sets the file to execute for an <see cref="EssJobType.Calc" /> job or 
         /// the file (or files) to load for an <see cref="EssJobType.Dataload" /> job.
         /// </summary>
@@ -43,10 +49,39 @@ namespace EssSharp
         /// </summary>
         public bool? AbortOnError { get; set; }
 
+        #endregion
+
+        #region IEssJobOptions EssJobType.Dimbuild Members
+
         /// <summary>
-        /// Returns or sets the rule file (or files) to use for an <see cref="EssJobType.Dataload" /> job.
+        /// Returns or sets the connection to use for a SQL-based <see cref="EssJobType.Dimbuild" /> job.
         /// </summary>
-        public List<string> Rule { get; set; }
+        public string Connection { get; set; }
+
+        /// <summary>
+        /// Returns or sets the force dimension build option for an <see cref="EssJobType.Dimbuild" /> job.
+        /// </summary>
+        public bool? ForceDimBuild { get; set; }
+
+        /// <summary>
+        /// Returns or sets the password to use for a SQL-based <see cref="EssJobType.Dimbuild" /> job.
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
+        /// Returns or sets the restructure option for an <see cref="EssJobType.Dimbuild" /> job.
+        /// </summary>
+        public EssRestructureOption? RestructureOption { get; set; }
+
+        /// <summary>
+        /// Returns or sets the use connection option for an <see cref="EssJobType.Dimbuild" /> job.
+        /// </summary>
+        public bool? UseConnection { get; set; }
+
+        /// <summary>
+        /// Returns or sets the user to use for a SQL-based <see cref="EssJobType.Dimbuild" /> job.
+        /// </summary>
+        public string User { get; set; }
 
         #endregion
 

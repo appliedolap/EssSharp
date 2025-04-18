@@ -26,7 +26,7 @@ namespace EssSharp
         public EssJobImportExcelOptions( IEssFile essFile, string applicationName = null, EssBuildOption? buildOption = null, bool? createFiles = true, string cubeName = null, bool ? deleteExcelOnSuccess = null, bool? executeScripts = true, bool? loadData = true, bool? overwrite = null, bool? recreateApp = false ) : base( EssJobType.ImportExcel )
         {
             if ( essFile is null )
-                throw new ArgumentNullException($@"An {nameof(IEssFile)} file is required to create an {nameof(EssJobImportExcelOptions)} with this constructor.", nameof(essFile));
+                throw new ArgumentNullException(nameof(essFile), $@"An {nameof(IEssFile)} file is required to create an {nameof(EssJobImportExcelOptions)} with this constructor.");
 
             ApplicationName      = applicationName;
             CubeName             = cubeName;

@@ -117,8 +117,7 @@ namespace EssSharp
         /// <summary>
         /// Returns a <see cref="List{T}"/> of <see cref="IEssCube"/> objects associated with the given <see cref="EssApplication"/>.
         /// </summary>
-        /// <param name="cubeList" />
-        /// <param name="application" />
+        /// <param name="generationLevelList" />
         internal static List<IEssGeneration> ToEssSharpList( this GenerationLevelList generationLevelList ) =>
             generationLevelList
                 .Items?
@@ -537,46 +536,49 @@ namespace EssSharp
             Script = options.Script,
 
             // EssJobType.Clear
-            Option = options.Option?.ToString(),
+            Option                = options.Option?.ToString(),
             PartialDataExpression = options.PartialDataExpression,
+
+            // EssJobType.DimBuild
+            ForceDimBuild = options.ForceDimBuild?.ToString().ToLowerInvariant(),
 
             // EssJobType.ExportExcel
             BuildMethod = options.BuildMethod.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildMethodEnum), (int)options.BuildMethod) ? (ParametersBean.BuildMethodEnum)options.BuildMethod : null,
-            Calc = options.Calc?.ToString().ToLowerInvariant(),
-            Data = options.Data?.ToString().ToLowerInvariant(),
-            MemberIds = options.MemberIds?.ToString().ToLowerInvariant(),
+            Calc        = options.Calc?.ToString().ToLowerInvariant(),
+            Data        = options.Data?.ToString().ToLowerInvariant(),
+            MemberIds   = options.MemberIds?.ToString().ToLowerInvariant(),
 
             // EssJobType.ImportExcel
-            BuildOption = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
-            CatalogExcelPath = options.CatalogExcelPath,
-            CreateFiles = options.CreateFiles?.ToString().ToLowerInvariant(),
+            BuildOption          = options.BuildOption.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildOptionEnum), (int)options.BuildOption) ? (ParametersBean.BuildOptionEnum)options.BuildOption : null,
+            CatalogExcelPath     = options.CatalogExcelPath,
+            CreateFiles          = options.CreateFiles?.ToString().ToLowerInvariant(),
             DeleteExcelOnSuccess = options.DeleteExcelOnSuccess?.ToString().ToLowerInvariant(),
-            ExecuteScript = options.ExecuteScripts?.ToString().ToLowerInvariant(),
-            ImportExcelFileName = options.ImportExcelFilename,
-            Loaddata = options.LoadData?.ToString().ToLowerInvariant(),
-            Overwrite = options.Overwrite?.ToString().ToLowerInvariant(),
-            RecreateApplication = options.RecreateApp?.ToString().ToLowerInvariant(),
+            ExecuteScript        = options.ExecuteScripts?.ToString().ToLowerInvariant(),
+            ImportExcelFileName  = options.ImportExcelFilename,
+            Loaddata             = options.LoadData?.ToString().ToLowerInvariant(),
+            Overwrite            = options.Overwrite?.ToString().ToLowerInvariant(),
+            RecreateApplication  = options.RecreateApp?.ToString().ToLowerInvariant(),
 
             // EssJobType.LoadData
-            File = options is EssJobLoadDataOptions ?
+            File         = options is EssJobLoadDataOptions ?
                                         $@"[""{string.Join(@""",""", options.File ?? new List<string>())}""]" :
                                         options.File?.FirstOrDefault(),
             AbortOnError = options.AbortOnError?.ToString().ToLowerInvariant(),
-            Rule = options is EssJobLoadDataOptions ?
+            Rule         = options is EssJobLoadDataOptions ?
                                         $@"[""{string.Join(@""",""", options.Rule ?? new List<string>())}""]" :
                                         options.Rule?.FirstOrDefault(),
 
             // EssJobType.ExecuteReport
-            IsScriptContent       = options.IsScriptContent ?? false,
-            LockForUpdate         = options.LockForUpdate   ?? false,
-            ReportScriptFilename  = options.ReportScriptFilename,
+            IsScriptContent      = options.IsScriptContent?.ToString().ToLowerInvariant(),
+            LockForUpdate        = options.LockForUpdate?.ToString().ToLowerInvariant(),
+            ReportScriptFilename = options.ReportScriptFilename,
 
             // EssJobType.LCMExport
-            AllApp = options.AllApp.ToString(),
-            GenerateArtifactList = options.Generateartifactlist.ToString(),
-            IncludeServerLevel = options.IncludeServerLevel.ToString(),
-            ZipFileName = options.ZipFileName,
-            Skipdata = options.SkipData.ToString(),
+            AllApp               = options.AllApp?.ToString().ToLowerInvariant(),
+            GenerateArtifactList = options.Generateartifactlist?.ToString().ToLowerInvariant(),
+            IncludeServerLevel   = options.IncludeServerLevel?.ToString().ToLowerInvariant(),
+            ZipFileName          = options.ZipFileName,
+            Skipdata             = options.SkipData?.ToString().ToLowerInvariant(),
 
             // EssJobType.LCMImport
             TargetApplicationName = options.TargetApplicationName

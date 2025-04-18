@@ -205,7 +205,7 @@ namespace EssSharp.Integration
 
             Assert.True(childList.Count == 3);
 
-            Assert.True(string.Equals("Product", memberList[2].Name));
+            Assert.Equal("Product", memberList[2].Name);
 
             Assert.True(memberList[1].DescentantsCount == 16);
 
@@ -273,7 +273,7 @@ namespace EssSharp.Integration
 
             Assert.True(ancestor.Count == 1);
 
-            Assert.True(string.Equals("Year", ancestor[0].Name));
+            Assert.Equal("Year", ancestor[0].Name);
 
             Assert.Equal(EssDimensionType.TIME, member.DimensionType);
 

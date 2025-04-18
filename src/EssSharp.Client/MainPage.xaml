@@ -8,7 +8,7 @@
              x:DataType="vm:EssServerTreeViewModel">
     <ScrollView Margin="5,15,0,0">
         <ScrollView>
-            <material:TreeView  ItemsSource="{Binding Nodes}" Spacing="5" LoadChildrenCommand="{Binding LoadChildrenCommand}" IsExpandedPropertyName="IsExtended" IsLeafPropertyName="IsLeaf" ArrowColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}">
+            <material:TreeView  ItemsSource="{Binding Nodes}" Spacing="5" LoadChildrenCommand="{Binding LoadChildrenCommand}" IsExpandedPropertyName="IsExtended" IsLeafPropertyName="IsLeaf">
                 <material:TreeView.ItemTemplate>
                     <DataTemplate x:DataType="vm:IEssNode">
                         <HorizontalStackLayout Spacing="2" VerticalOptions="Center">

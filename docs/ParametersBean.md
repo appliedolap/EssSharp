@@ -74,15 +74,15 @@ Name | Type | Description | Notes
 **HideShadow** | **string** |  | [optional] 
 **WaitForOngoingUpdatesInSecs** | **string** |  | [optional] 
 **ReportScriptFilename** | **string** |  | [optional] 
-**LockForUpdate** | **bool** |  | [optional] 
-**IsScriptContent** | **bool** |  | [optional] 
-**UseCatalogPath** | **bool** |  | [optional] 
-**Exportdata** | **bool** |  | [optional] 
+**LockForUpdate** | **string** |  | [optional] 
+**IsScriptContent** | **string** |  | [optional] 
+**UseCatalogPath** | **string** |  | [optional] 
+**Exportdata** | **string** |  | [optional] 
 **Cube** | **string** |  | [optional] 
 **Filetype** | **string** |  | [optional] 
-**Exportpartitions** | **bool** |  | [optional] 
-**Exportfilters** | **bool** |  | [optional] 
-**Physical** | **bool** |  | [optional] 
+**Exportpartitions** | **string** |  | [optional] 
+**Exportfilters** | **string** |  | [optional] 
+**Physical** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Net;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace EssSharp
 {
-
+    /// <summary />
     public class EssUserCreationOptions
     {
         public EssUserCreationOptions(string id, string password, EssServerRole role = EssServerRole.User, List<string> groups = default )
         {
             ID = id ?? 
-                throw new ArgumentNullException( $@"The ID of a user is required to create an {nameof(EssUserCreationOptions)}.", nameof(ID) );
+                throw new ArgumentNullException(nameof(id), $@"The ID of a user is required to create an {nameof(EssUserCreationOptions)}.");
 
             Password = !string.IsNullOrEmpty(password) && password.Length >= 8 ? password :
                 throw new ArgumentException($@"Must set a password that is at least 8 characters to create an {nameof(EssUserCreationOptions)}.", nameof(password));

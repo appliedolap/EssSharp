@@ -9,32 +9,31 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssServer  _server;
-        private readonly GenerationLevel _generationLevel;
+        private readonly GenerationLevel _generation;
 
         #endregion
 
         #region Constructors
 
         /// <summary />
-        internal EssGeneration( GenerationLevel generationLevel )
+        internal EssGeneration( GenerationLevel generation )
         {
-            _generationLevel = generationLevel ?? 
-                throw new ArgumentNullException(nameof(generationLevel), $"An API model {nameof(generationLevel)} is required to create an {nameof(EssGeneration)}.");
+            _generation = generation ?? 
+                throw new ArgumentNullException(nameof(generation), $"An API model {nameof(GenerationLevel)} is required to create an {nameof(EssGeneration)}.");
         }
 
         #endregion
 
-        #region IEssUrl Members
+        #region IEssGeneration Members
 
         /// <inheritdoc />
-        public string Name => _generationLevel?.Name;
+        public string Name => _generation?.Name;
 
         /// <inheritdoc />
-        public string ActualName => _generationLevel?.ActualName;
+        public string ActualName => _generation?.ActualName;
 
         /// <inheritdoc />
-        public int Number => _generationLevel.Number;
+        public int Number => _generation.Number;
 
         #endregion
     }

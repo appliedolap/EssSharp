@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-
-namespace EssSharp
+﻿namespace EssSharp
 {
     /// <summary>
     /// Defines BuildOption
@@ -34,6 +29,5 @@ namespace EssSharp
         /// Enum REMOVEALLDATA for value: REMOVE_ALL_DATA
         /// </summary>
         REMOVEALLDATA = 5
-
     }
 }

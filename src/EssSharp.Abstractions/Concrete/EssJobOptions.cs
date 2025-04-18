@@ -60,6 +60,28 @@ namespace EssSharp
 
         #endregion
 
+        #region Explicit IEssJobOptions EssJobType.Dimbuild Members
+
+        /// <inheritdoc />
+        string IEssJobOptions.Connection { get; set; }
+
+        /// <inheritdoc />
+        bool? IEssJobOptions.ForceDimBuild { get; set; }
+
+        /// <inheritdoc />
+        string IEssJobOptions.Password { get; set; }
+
+        /// <inheritdoc />
+        EssRestructureOption? IEssJobOptions.RestructureOption { get; set; }
+
+        /// <inheritdoc />
+        bool? IEssJobOptions.UseConnection { get; set; }
+
+        /// <inheritdoc />
+        string IEssJobOptions.User { get; set; }
+
+        #endregion
+
         #region Explicit IEssJobOptions EssJobType.ExecuteReport Members
 
         /// <inheritdoc />

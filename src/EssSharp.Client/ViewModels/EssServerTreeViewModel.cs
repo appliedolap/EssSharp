@@ -2,6 +2,7 @@
 using System.Windows.Input;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Maui.Controls.PlatformConfiguration;
 using UraniumUI;
 
 namespace EssSharp.Client.ViewModels
@@ -38,7 +39,15 @@ namespace EssSharp.Client.ViewModels
                 }
                 catch ( Exception e )
                 {
-                    try { await Application.Current.MainPage.DisplayAlert("whoops", e.Message, "OK"); } catch { }
+                    try
+                    {
+                        if ( Application.Current?.Windows[0].Page is { } mainPage )
+                            await mainPage.DisplayAlert("whoops", e.Message, "OK");
+                    }
+                    catch
+                    {
+                        // Swallow any exception here.
+                    }
                 }
             });
 
@@ -126,7 +135,15 @@ namespace EssSharp.Client.ViewModels
                 }
                 catch ( Exception e )
                 {
-                    try { await Application.Current.MainPage.DisplayAlert("whoops", e.Message, "OK"); } catch { }
+                    try
+                    {
+                        if ( Application.Current?.Windows[0].Page is { } mainPage )
+                            await mainPage.DisplayAlert("whoops", e.Message, "OK"); 
+                    }
+                    catch
+                    { 
+                        // Swallow any exception here.
+                    }
                 }
 
                 return Children = children;

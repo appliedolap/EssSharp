@@ -31,8 +31,6 @@ namespace EssSharp
         private EssGridSlice _essGridSlice = new EssGridSlice();
         private List<string> _oldValues = new List<string>();
 
-        private int _dataGridStartIndex;
-
         #endregion
 
         #region Constructors
@@ -472,7 +470,7 @@ namespace EssSharp
             var newValues = newGrid.Slice.Data.Ranges[0].Values;
 
             var dataBlockStartAddress = GetDataBlockStartAddress(Slice);
-            var dataGridStartIndex = _dataGridStartIndex != 0 ? _dataGridStartIndex : GetCoordinate(dataBlockStartAddress, Slice.Columns);
+            var dataGridStartIndex = GetCoordinate(dataBlockStartAddress, Slice.Columns);
 
             var dimMemberDict = new Dictionary<string, string>();
 
@@ -539,7 +537,7 @@ namespace EssSharp
             int columnCount = grid.Slice.Columns;
             var dimensions = grid.Dimensions;
             var values = grid.Slice.Data.Ranges[0].Values;
-            var dataGridStartIndex = _dataGridStartIndex != 0 ? _dataGridStartIndex : GetCoordinate(GetDataBlockStartAddress(Slice), Slice.Columns);
+            var dataGridStartIndex = GetCoordinate(GetDataBlockStartAddress(Slice), Slice.Columns);
 
 
             int currRowIndex = (dataCellIndex / columnCount) * columnCount;
@@ -600,7 +598,7 @@ namespace EssSharp
         /// <returns></returns>
         private int GetDimensionMemberLength(Grid grid)
         {
-            var dataGridStartIndex = _dataGridStartIndex != 0 ? _dataGridStartIndex : GetCoordinate(GetDataBlockStartAddress(Slice), Slice.Columns);
+            var dataGridStartIndex = GetCoordinate(GetDataBlockStartAddress(Slice), Slice.Columns);
             var memberHeaderStartIndex = dataGridStartIndex - grid.Slice.Columns;
             var memberHeaderEndIndex = (memberHeaderStartIndex / grid.Slice.Columns + 1) * grid.Slice.Columns - 1;
             var memberHeaderRowCount = memberHeaderStartIndex / grid.Slice.Columns + 1;

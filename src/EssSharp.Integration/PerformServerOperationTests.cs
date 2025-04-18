@@ -529,7 +529,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(15, zoomInGrid.Slice.Rows);
 
-            Assert.True(string.Equals("8346.0", zoomInGrid.Slice.Data.Ranges[0].Values[13]));
+            Assert.Equal("8346.0", zoomInGrid.Slice.Data.Ranges[0].Values[13]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 22 - Essbase_AfterDefaultGrid_CanZoomOutGrid"), Priority(22)]
@@ -546,7 +546,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(3, zoomOutGrid.Slice.Rows);
 
-            Assert.True(string.Equals("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
+            Assert.Equal("105522.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 23 - Essbase_AfterDefaultGrid_CanKeepOnlyGrid"), Priority(23)]
@@ -563,7 +563,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(3, keepOnlyGrid.Slice.Rows);
 
-            Assert.True(string.Equals("27107.0", keepOnlyGrid.Slice.Data.Ranges[0].Values[9]));
+            Assert.Equal("27107.0", keepOnlyGrid.Slice.Data.Ranges[0].Values[9]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 24 - Essbase_AfterDefaultGrid_CanRemoveOnlyGrid"), Priority(24)]
@@ -598,7 +598,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(3, pivotPovGrid.Slice.Rows);
 
-            Assert.True(string.Equals("Scenario", pivotPovGrid.Slice.Data.Ranges[0].Values[8]));
+            Assert.Equal("Scenario", pivotPovGrid.Slice.Data.Ranges[0].Values[8]);
 
             defaultGrid.Selection[0].startRow = 2;
             defaultGrid.Selection[0].startColumn = 0;
@@ -650,7 +650,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(4, pivotPovGrid.Slice.Rows);
 
-            Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[5]));
+            Assert.Equal("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[5]);
 
             defaultGrid.Selection.Clear();
 
@@ -658,7 +658,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(3, pivotPovGrid.Slice.Rows);
 
-            Assert.True(string.Equals("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[8]));
+            Assert.Equal("New York", pivotPovGrid.Slice.Data.Ranges[0].Values[8]);
         }
 
 
@@ -697,7 +697,7 @@ namespace EssSharp.Integration
 
             var submitGrid = await defaultGrid.SubmitAsync( );
 
-            (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).Execute();
+            await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ExecuteAsync();
 
             await submitGrid.RefreshAsync();
 
@@ -735,7 +735,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(7, zoomInGrid.Slice.Rows);
 
-            Assert.True(string.Equals("24705.0", zoomInGrid.Slice.Data.Ranges[0].Values[9]));
+            Assert.Equal("24705.0", zoomInGrid.Slice.Data.Ranges[0].Values[9]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 29 - Essbase_AfterDefaultGrid_CanZoomOutWithSelectionAttributeGrid"), Priority(29)]
@@ -758,7 +758,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(3, zoomOutGrid.Slice.Rows);
 
-            Assert.True(string.Equals("105524.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]));
+            Assert.Equal("105524.0", zoomOutGrid.Slice.Data.Ranges[0].Values[9]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 30 - Essbase_AfterDefaultGrid_CanZoomToBottomWithPreferences"), Priority(30)]
@@ -792,9 +792,9 @@ namespace EssSharp.Integration
 
             Assert.Equal(23206, defaultGrid.Slice.Rows);
 
-            Assert.True(string.Equals("-208.0", defaultGrid.Slice.Data.Ranges[0].Values[214]));
+            Assert.Equal("-208.0", defaultGrid.Slice.Data.Ranges[0].Values[214]);
 
-            Assert.True(string.Equals("          Mar", defaultGrid.Slice.Data.Ranges[0].Values[18]));
+            Assert.Equal("          Mar", defaultGrid.Slice.Data.Ranges[0].Values[18]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanGetGridLayout"), Priority(31)]
@@ -1660,7 +1660,7 @@ namespace EssSharp.Integration
 
             var submitGrid = await defaultGrid.SubmitAsync( );
 
-            (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).Execute();
+            await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ExecuteAsync();
 
             // export cube to lcm.
             var options = new EssJobExportLcmOptions()
@@ -1729,7 +1729,7 @@ namespace EssSharp.Integration
             defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
             await defaultGrid.SubmitAsync();
 
-            (await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ConfigureAwait(false)).Execute();
+            await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ExecuteAsync();
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 47 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory"), Priority(47)]

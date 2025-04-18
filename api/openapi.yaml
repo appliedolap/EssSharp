@@ -16556,7 +16556,7 @@ components:
           filesystemcopy: filesystemcopy
           filetype: filetype
           data: data
-          isScriptContent: true
+          isScriptContent: isScriptContent
           timeoutToForceUnloadApp: timeoutToForceUnloadApp
           analyzeFileName: analyzeFileName
           rtsv:
@@ -16582,17 +16582,17 @@ components:
           waitForOngoingUpdatesInSecs: waitForOngoingUpdatesInSecs
           appId: appId
           loaddata: loaddata
-          exportpartitions: true
+          exportpartitions: exportpartitions
           connection: connection
           cube: cube
           overwrite: overwrite
           restructureOption: restructureOption
-          exportdata: true
+          exportdata: exportdata
           targetApplicationName: targetApplicationName
           compress: compress
           executeScript: executeScript
           buildMethod: PARENT-CHILD
-          exportfilters: true
+          exportfilters: exportfilters
           deleteExcelOnSuccess: deleteExcelOnSuccess
           generateArtifactList: generateArtifactList
           script: script
@@ -16700,9 +16700,8 @@ components:
             - dateDimensionLeaves
           enableSandboxing: enableSandboxing
           catalogExcelPath: catalogExcelPath
-          lockForUpdate: true
+          lockForUpdate: lockForUpdate
           analyzeSheetName: analyzeSheetName
-          includeServerLevel: includeServerLevel
           hideShadow: hideShadow
           force: force
           bufferId: 7
@@ -16727,7 +16726,8 @@ components:
           enableAlternateRollups: enableAlternateRollups
           exportDynamicBlocks: exportDynamicBlocks
           columnFormat: columnFormat
-          physical: true
+          include-server-level: include-server-level
+          physical: physical
           timestamp: timestamp
           abortOnError: abortOnError
           zipFileName: zipFileName
@@ -16743,7 +16743,7 @@ components:
           - selectedDimensions
           - selectedDimensions
           createFiles: createFiles
-          useCatalogPath: true
+          useCatalogPath: useCatalogPath
           artifactList: artifactList
           calc: calc
           user: user
@@ -16790,7 +16790,7 @@ components:
         filesystemcopy: filesystemcopy
         filetype: filetype
         data: data
-        isScriptContent: true
+        isScriptContent: isScriptContent
         timeoutToForceUnloadApp: timeoutToForceUnloadApp
         analyzeFileName: analyzeFileName
         rtsv:
@@ -16816,17 +16816,17 @@ components:
         waitForOngoingUpdatesInSecs: waitForOngoingUpdatesInSecs
         appId: appId
         loaddata: loaddata
-        exportpartitions: true
+        exportpartitions: exportpartitions
         connection: connection
         cube: cube
         overwrite: overwrite
         restructureOption: restructureOption
-        exportdata: true
+        exportdata: exportdata
         targetApplicationName: targetApplicationName
         compress: compress
         executeScript: executeScript
         buildMethod: PARENT-CHILD
-        exportfilters: true
+        exportfilters: exportfilters
         deleteExcelOnSuccess: deleteExcelOnSuccess
         generateArtifactList: generateArtifactList
         script: script
@@ -16934,9 +16934,8 @@ components:
           - dateDimensionLeaves
         enableSandboxing: enableSandboxing
         catalogExcelPath: catalogExcelPath
-        lockForUpdate: true
+        lockForUpdate: lockForUpdate
         analyzeSheetName: analyzeSheetName
-        includeServerLevel: includeServerLevel
         hideShadow: hideShadow
         force: force
         bufferId: 7
@@ -16961,7 +16960,8 @@ components:
         enableAlternateRollups: enableAlternateRollups
         exportDynamicBlocks: exportDynamicBlocks
         columnFormat: columnFormat
-        physical: true
+        include-server-level: include-server-level
+        physical: physical
         timestamp: timestamp
         abortOnError: abortOnError
         zipFileName: zipFileName
@@ -16977,7 +16977,7 @@ components:
         - selectedDimensions
         - selectedDimensions
         createFiles: createFiles
-        useCatalogPath: true
+        useCatalogPath: useCatalogPath
         artifactList: artifactList
         calc: calc
         user: user
@@ -17076,7 +17076,7 @@ components:
           type: string
         allApp:
           type: string
-        includeServerLevel:
+        include-server-level:
           type: string
           xml:
             attribute: true
@@ -17157,23 +17157,23 @@ components:
         reportScriptFilename:
           type: string
         lockForUpdate:
-          type: boolean
+          type: string
         isScriptContent:
-          type: boolean
+          type: string
         useCatalogPath:
-          type: boolean
+          type: string
         exportdata:
-          type: boolean
+          type: string
         cube:
           type: string
         filetype:
           type: string
         exportpartitions:
-          type: boolean
+          type: string
         exportfilters:
-          type: boolean
+          type: string
         physical:
-          type: boolean
+          type: string
       type: object
     RTSV:
       example:

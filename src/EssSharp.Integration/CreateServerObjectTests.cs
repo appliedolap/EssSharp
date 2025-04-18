@@ -49,7 +49,7 @@ namespace EssSharp.Integration
                 .GetCubeAsync("Basic");
 
             // Load the data into the Basic cube.
-            await asoSample.LoadDataToCubeAsync(new EssJobLoadDataOptions(asoSampleDataFile));
+            await asoSample.LoadDataToCubeAsync(new EssJobLoadDataOptions(essDataFile: asoSampleDataFile));
 
             // Get the list of applications.
             applications = await server.GetApplicationsAsync();
@@ -146,7 +146,7 @@ namespace EssSharp.Integration
                 .GetCubeAsync("Basic");
 
             // Assert that the cube does not contain an MDX script called "test" before we create one.
-            Assert.Empty((await cube.GetScriptsAsync<IEssMdxScript>()).Where(mdx => string.Equals(mdx?.Name, "test", StringComparison.Ordinal)));
+            Assert.DoesNotContain(collection: await cube.GetScriptsAsync<IEssMdxScript>(), mdx => string.Equals(mdx?.Name, "test", StringComparison.Ordinal));
 
             // Create some script content.
             var content = @"SELECT {[Market]} ON COLUMNS, {[YEAR]} ON ROWS";
@@ -172,7 +172,7 @@ namespace EssSharp.Integration
                 .GetCubeAsync("Basic");
 
             // Assert that the cube does not contain an report script called "test" before we create one.
-            Assert.Empty((await cube.GetScriptsAsync<IEssReportScript>()).Where(report => string.Equals(report?.Name, "test", StringComparison.Ordinal)));
+            Assert.DoesNotContain(collection: await cube.GetScriptsAsync<IEssReportScript>(), report => string.Equals(report?.Name, "test", StringComparison.Ordinal));
 
             // Create some script content.
             var content = 
@@ -207,7 +207,7 @@ namespace EssSharp.Integration
                 .GetCubeAsync("Basic");
 
             // Assert that the cube does not contain an MaxL script called "test" before we create one.
-            Assert.Empty((await cube.GetScriptsAsync<IEssMaxlScript>()).Where(maxl => string.Equals(maxl?.Name, "test", StringComparison.Ordinal)));
+            Assert.DoesNotContain(collection: await cube.GetScriptsAsync<IEssMaxlScript>(), maxl => string.Equals(maxl?.Name, "test", StringComparison.Ordinal));
 
             // Create some script content.
             var content = @"query database sample.basic get dbstats dimension;";

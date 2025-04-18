@@ -4,22 +4,20 @@ namespace EssSharp.Client
 {
     public partial class App : Application
     {
+        private readonly AppShell _appShell;
+
         public App( AppShell page )
         {
             InitializeComponent();
 
-            MainPage = page;
+            _appShell = page;
         }
 
-        protected override Window CreateWindow( IActivationState activationState )
+
+        protected override Window CreateWindow( IActivationState activationState ) => new Window()
         {
-            if ( base.CreateWindow(activationState) is { } window )
-            {
-                window.Title = Assembly.GetExecutingAssembly().GetName().Name;
-                return window;
-            }
-
-            return null; ;
-        }
+            Page  = _appShell,
+            Title = Assembly.GetExecutingAssembly().GetName().Name 
+        };
     }
 }

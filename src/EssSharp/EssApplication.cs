@@ -417,7 +417,7 @@ namespace EssSharp
                 var job = (await Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
 
                 // Return the workbook file stream.
-                return await Server.GetFileAsync($@"{(await Server.GetUserHomeFolderAsync().ConfigureAwait(false)).FullPath}/{options.ZipFileName}", cancellationToken).DownloadAsync(cancellationToken).ConfigureAwait(false);               
+                return await Server.GetFileAsync($@"{(await Server.GetUserHomeFolderAsync().ConfigureAwait(false)).FullPath}/{options.ZipFileName}", cancellationToken).DownloadAsync(cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )

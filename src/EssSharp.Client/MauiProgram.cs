@@ -13,9 +13,8 @@ namespace EssSharp.Client
     {
         public static MauiApp CreateMauiApp()
         {
-            var builder = MauiApp.CreateBuilder();
-
-            builder.UseMauiApp<App>()
+            var builder = MauiApp.CreateBuilder()
+                .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .UseUraniumUI()
                 .UseUraniumUIMaterial()
