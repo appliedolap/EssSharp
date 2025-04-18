@@ -22,11 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    # Setup .NET 7.0
-    - name: Setup .NET 7.0
+    # Setup .NET 9.0
+    - name: Setup .NET 9.0
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 9.0.x
     
     # The full MAUI Workload with the required target platforms is not supported on Linux.
     # We build and test a solution filter without the MAUI client to workaround this issue.
