@@ -334,10 +334,10 @@ namespace EssSharp
             }
         }
 
-        /// <inheritdoc>
+        /// <inheritdoc />
         public void DeleteCube( string cubeName ) => DeleteCubeAsync(cubeName)?.GetAwaiter().GetResult();
 
-        /// <inheritdoc>
+        /// <inheritdoc />
         public async Task DeleteCubeAsync( string cubeName, CancellationToken cancellationToken = default )
         {
             try
@@ -422,7 +422,7 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw;
+                throw new Exception($@"Unable to export the cube ""{Name}"" to LCM. {e.Message}", e);
             }
         }
 

@@ -15,7 +15,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt;</param>
-        /// <param name="preferences">&lt;p&gt;Preferences with which to perform the operation.&lt;/p&gt;</param></param>
+        /// <param name="preferences">&lt;p&gt;Preferences with which to perform the operation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
