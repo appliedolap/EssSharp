@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// SettingsList
     /// </summary>
     [DataContract(Name = "SettingsList")]
-    public partial class SettingsList : IEquatable<SettingsList>, IValidatableObject
+    public partial class SettingsList : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsList" /> class.
@@ -130,122 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as SettingsList);
-        }
-
-        /// <summary>
-        /// Returns true if SettingsList instances are equal
-        /// </summary>
-        /// <param name="input">Instance of SettingsList to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(SettingsList input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.General == input.General ||
-                    (this.General != null &&
-                    this.General.Equals(input.General))
-                ) && 
-                (
-                    this.Startup == input.Startup ||
-                    (this.Startup != null &&
-                    this.Startup.Equals(input.Startup))
-                ) && 
-                (
-                    this.Calculation == input.Calculation ||
-                    (this.Calculation != null &&
-                    this.Calculation.Equals(input.Calculation))
-                ) && 
-                (
-                    this.Buffers == input.Buffers ||
-                    (this.Buffers != null &&
-                    this.Buffers.Equals(input.Buffers))
-                ) && 
-                (
-                    this.Compression == input.Compression ||
-                    this.Compression != null &&
-                    input.Compression != null &&
-                    this.Compression.SequenceEqual(input.Compression)
-                ) && 
-                (
-                    this.Caches == input.Caches ||
-                    (this.Caches != null &&
-                    this.Caches.Equals(input.Caches))
-                ) && 
-                (
-                    this.Transactions == input.Transactions ||
-                    (this.Transactions != null &&
-                    this.Transactions.Equals(input.Transactions))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.General != null)
-                {
-                    hashCode = (hashCode * 59) + this.General.GetHashCode();
-                }
-                if (this.Startup != null)
-                {
-                    hashCode = (hashCode * 59) + this.Startup.GetHashCode();
-                }
-                if (this.Calculation != null)
-                {
-                    hashCode = (hashCode * 59) + this.Calculation.GetHashCode();
-                }
-                if (this.Buffers != null)
-                {
-                    hashCode = (hashCode * 59) + this.Buffers.GetHashCode();
-                }
-                if (this.Compression != null)
-                {
-                    hashCode = (hashCode * 59) + this.Compression.GetHashCode();
-                }
-                if (this.Caches != null)
-                {
-                    hashCode = (hashCode * 59) + this.Caches.GetHashCode();
-                }
-                if (this.Transactions != null)
-                {
-                    hashCode = (hashCode * 59) + this.Transactions.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

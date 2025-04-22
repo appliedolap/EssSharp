@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<MemberMappingBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'SourceMember'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SourceMember'
         }
+
         /// <summary>
         /// Test the property 'TargetMember'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TargetMember'
         }
-
     }
-
 }

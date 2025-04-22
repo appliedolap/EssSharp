@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CompactDesignation
     /// </summary>
     [DataContract(Name = "CompactDesignation")]
-    public partial class CompactDesignation : IEquatable<CompactDesignation>, IValidatableObject
+    public partial class CompactDesignation : IValidatableObject
     {
         /// <summary>
         /// Defines DimDesignationMode
@@ -82,7 +82,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DIM_DESIGNATION_MODE_ATTRIBS_AS_ATTRIBS")]
             DIMDESIGNATIONMODEATTRIBSASATTRIBS = 8
-
         }
 
 
@@ -114,7 +113,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DIMENSIONS")]
             DIMENSIONS = 3
-
         }
 
 
@@ -338,213 +336,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CompactDesignation);
-        }
-
-        /// <summary>
-        /// Returns true if CompactDesignation instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CompactDesignation to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CompactDesignation input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.File == input.File ||
-                    (this.File != null &&
-                    this.File.Equals(input.File))
-                ) && 
-                (
-                    this.ExcelSheetName == input.ExcelSheetName ||
-                    (this.ExcelSheetName != null &&
-                    this.ExcelSheetName.Equals(input.ExcelSheetName))
-                ) && 
-                (
-                    this.ColumnOffset == input.ColumnOffset ||
-                    this.ColumnOffset.Equals(input.ColumnOffset)
-                ) && 
-                (
-                    this.BadRowListString == input.BadRowListString ||
-                    (this.BadRowListString != null &&
-                    this.BadRowListString.Equals(input.BadRowListString))
-                ) && 
-                (
-                    this.Nr == input.Nr ||
-                    this.Nr.Equals(input.Nr)
-                ) && 
-                (
-                    this.Nrh == input.Nrh ||
-                    this.Nrh.Equals(input.Nrh)
-                ) && 
-                (
-                    this.CompactDesignationColumn == input.CompactDesignationColumn ||
-                    this.CompactDesignationColumn != null &&
-                    input.CompactDesignationColumn != null &&
-                    this.CompactDesignationColumn.SequenceEqual(input.CompactDesignationColumn)
-                ) && 
-                (
-                    this.BsoLimitsExceeded == input.BsoLimitsExceeded ||
-                    this.BsoLimitsExceeded.Equals(input.BsoLimitsExceeded)
-                ) && 
-                (
-                    this.FastAnalysis == input.FastAnalysis ||
-                    this.FastAnalysis.Equals(input.FastAnalysis)
-                ) && 
-                (
-                    this.MeasureDimensionName == input.MeasureDimensionName ||
-                    (this.MeasureDimensionName != null &&
-                    this.MeasureDimensionName.Equals(input.MeasureDimensionName))
-                ) && 
-                (
-                    this.DimDesignationMode == input.DimDesignationMode ||
-                    this.DimDesignationMode.Equals(input.DimDesignationMode)
-                ) && 
-                (
-                    this.NamingPriority == input.NamingPriority ||
-                    this.NamingPriority.Equals(input.NamingPriority)
-                ) && 
-                (
-                    this.DateColumnId == input.DateColumnId ||
-                    this.DateColumnId.Equals(input.DateColumnId)
-                ) && 
-                (
-                    this.DateFormatString == input.DateFormatString ||
-                    (this.DateFormatString != null &&
-                    this.DateFormatString.Equals(input.DateFormatString))
-                ) && 
-                (
-                    this.DateDimString == input.DateDimString ||
-                    (this.DateDimString != null &&
-                    this.DateDimString.Equals(input.DateDimString))
-                ) && 
-                (
-                    this.DateDimensionLeaves == input.DateDimensionLeaves ||
-                    this.DateDimensionLeaves != null &&
-                    input.DateDimensionLeaves != null &&
-                    this.DateDimensionLeaves.SequenceEqual(input.DateDimensionLeaves)
-                ) && 
-                (
-                    this.MaxDate == input.MaxDate ||
-                    (this.MaxDate != null &&
-                    this.MaxDate.Equals(input.MaxDate))
-                ) && 
-                (
-                    this.MinDate == input.MinDate ||
-                    (this.MinDate != null &&
-                    this.MinDate.Equals(input.MinDate))
-                ) && 
-                (
-                    this.TableName == input.TableName ||
-                    (this.TableName != null &&
-                    this.TableName.Equals(input.TableName))
-                ) && 
-                (
-                    this.DimCompactDesignationList == input.DimCompactDesignationList ||
-                    this.DimCompactDesignationList != null &&
-                    input.DimCompactDesignationList != null &&
-                    this.DimCompactDesignationList.SequenceEqual(input.DimCompactDesignationList)
-                ) && 
-                (
-                    this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
-                ) && 
-                (
-                    this.ExcelRowCount == input.ExcelRowCount ||
-                    this.ExcelRowCount.Equals(input.ExcelRowCount)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.File != null)
-                {
-                    hashCode = (hashCode * 59) + this.File.GetHashCode();
-                }
-                if (this.ExcelSheetName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ExcelSheetName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ColumnOffset.GetHashCode();
-                if (this.BadRowListString != null)
-                {
-                    hashCode = (hashCode * 59) + this.BadRowListString.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Nr.GetHashCode();
-                hashCode = (hashCode * 59) + this.Nrh.GetHashCode();
-                if (this.CompactDesignationColumn != null)
-                {
-                    hashCode = (hashCode * 59) + this.CompactDesignationColumn.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.BsoLimitsExceeded.GetHashCode();
-                hashCode = (hashCode * 59) + this.FastAnalysis.GetHashCode();
-                if (this.MeasureDimensionName != null)
-                {
-                    hashCode = (hashCode * 59) + this.MeasureDimensionName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.DimDesignationMode.GetHashCode();
-                hashCode = (hashCode * 59) + this.NamingPriority.GetHashCode();
-                hashCode = (hashCode * 59) + this.DateColumnId.GetHashCode();
-                if (this.DateFormatString != null)
-                {
-                    hashCode = (hashCode * 59) + this.DateFormatString.GetHashCode();
-                }
-                if (this.DateDimString != null)
-                {
-                    hashCode = (hashCode * 59) + this.DateDimString.GetHashCode();
-                }
-                if (this.DateDimensionLeaves != null)
-                {
-                    hashCode = (hashCode * 59) + this.DateDimensionLeaves.GetHashCode();
-                }
-                if (this.MaxDate != null)
-                {
-                    hashCode = (hashCode * 59) + this.MaxDate.GetHashCode();
-                }
-                if (this.MinDate != null)
-                {
-                    hashCode = (hashCode * 59) + this.MinDate.GetHashCode();
-                }
-                if (this.TableName != null)
-                {
-                    hashCode = (hashCode * 59) + this.TableName.GetHashCode();
-                }
-                if (this.DimCompactDesignationList != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimCompactDesignationList.GetHashCode();
-                }
-                if (this.Query != null)
-                {
-                    hashCode = (hashCode * 59) + this.Query.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ExcelRowCount.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

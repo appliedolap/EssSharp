@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<EsbToColMapInfo>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'EssbaseName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EssbaseName'
         }
+
         /// <summary>
         /// Test the property 'ColumnName'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnName'
         }
-
     }
-
 }

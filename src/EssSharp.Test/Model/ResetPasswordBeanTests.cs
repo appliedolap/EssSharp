@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ResetPasswordBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'OldPassword'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OldPassword'
         }
+
         /// <summary>
         /// Test the property 'NewPassword'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NewPassword'
         }
-
     }
-
 }

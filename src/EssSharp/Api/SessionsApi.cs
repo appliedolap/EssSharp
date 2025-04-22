@@ -128,7 +128,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task SessionsDeleteAllActiveSessionsAsync(string application = default(string), string database = default(string), string userId = default(string), bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task SessionsDeleteAllActiveSessionsAsync(string application = default(string), string database = default(string), string userId = default(string), bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete All Sessions
@@ -144,7 +144,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> SessionsDeleteAllActiveSessionsWithHttpInfoAsync(string application = default(string), string database = default(string), string userId = default(string), bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> SessionsDeleteAllActiveSessionsWithHttpInfoAsync(string application = default(string), string database = default(string), string userId = default(string), bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete Session By ID
         /// </summary>
@@ -157,7 +157,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task SessionsDeleteSessionWithIdAsync(long sessionId, bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task SessionsDeleteSessionWithIdAsync(long sessionId, bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete Session By ID
@@ -171,7 +171,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> SessionsDeleteSessionWithIdWithHttpInfoAsync(long sessionId, bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> SessionsDeleteSessionWithIdWithHttpInfoAsync(long sessionId, bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// List Sessions
         /// </summary>
@@ -185,7 +185,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;SessionAttributes&gt;</returns>
-        System.Threading.Tasks.Task<List<SessionAttributes>> SessionsGetAllActiveSessionsAsync(string application = default(string), string database = default(string), string userId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<SessionAttributes>> SessionsGetAllActiveSessionsAsync(string application = default(string), string database = default(string), string userId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// List Sessions
@@ -200,7 +200,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;SessionAttributes&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<SessionAttributes>>> SessionsGetAllActiveSessionsWithHttpInfoAsync(string application = default(string), string database = default(string), string userId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<SessionAttributes>>> SessionsGetAllActiveSessionsWithHttpInfoAsync(string application = default(string), string database = default(string), string userId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -358,6 +358,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -421,7 +422,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task SessionsDeleteAllActiveSessionsAsync(string application = default(string), string database = default(string), string userId = default(string), bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task SessionsDeleteAllActiveSessionsAsync(string application = default(string), string database = default(string), string userId = default(string), bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await SessionsDeleteAllActiveSessionsWithHttpInfoAsync(application, database, userId, disconnect, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -437,7 +438,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> SessionsDeleteAllActiveSessionsWithHttpInfoAsync(string application = default(string), string database = default(string), string userId = default(string), bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> SessionsDeleteAllActiveSessionsWithHttpInfoAsync(string application = default(string), string database = default(string), string userId = default(string), bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -536,6 +537,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -586,7 +588,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task SessionsDeleteSessionWithIdAsync(long sessionId, bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task SessionsDeleteSessionWithIdAsync(long sessionId, bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await SessionsDeleteSessionWithIdWithHttpInfoAsync(sessionId, disconnect, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -600,7 +602,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> SessionsDeleteSessionWithIdWithHttpInfoAsync(long sessionId, bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> SessionsDeleteSessionWithIdWithHttpInfoAsync(long sessionId, bool? disconnect = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -693,6 +695,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -751,7 +754,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;SessionAttributes&gt;</returns>
-        public async System.Threading.Tasks.Task<List<SessionAttributes>> SessionsGetAllActiveSessionsAsync(string application = default(string), string database = default(string), string userId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<SessionAttributes>> SessionsGetAllActiveSessionsAsync(string application = default(string), string database = default(string), string userId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<List<SessionAttributes>> localVarResponse = await SessionsGetAllActiveSessionsWithHttpInfoAsync(application, database, userId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -767,7 +770,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;SessionAttributes&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<SessionAttributes>>> SessionsGetAllActiveSessionsWithHttpInfoAsync(string application = default(string), string database = default(string), string userId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<SessionAttributes>>> SessionsGetAllActiveSessionsWithHttpInfoAsync(string application = default(string), string database = default(string), string userId = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

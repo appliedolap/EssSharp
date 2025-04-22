@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// QName
     /// </summary>
     [DataContract(Name = "QName")]
-    public partial class QName : IEquatable<QName>, IValidatableObject
+    public partial class QName : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QName" /> class.
@@ -85,75 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as QName);
-        }
-
-        /// <summary>
-        /// Returns true if QName instances are equal
-        /// </summary>
-        /// <param name="input">Instance of QName to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(QName input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.NamespaceURI == input.NamespaceURI ||
-                    (this.NamespaceURI != null &&
-                    this.NamespaceURI.Equals(input.NamespaceURI))
-                ) && 
-                (
-                    this.LocalPart == input.LocalPart ||
-                    (this.LocalPart != null &&
-                    this.LocalPart.Equals(input.LocalPart))
-                ) && 
-                (
-                    this.Prefix == input.Prefix ||
-                    (this.Prefix != null &&
-                    this.Prefix.Equals(input.Prefix))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.NamespaceURI != null)
-                {
-                    hashCode = (hashCode * 59) + this.NamespaceURI.GetHashCode();
-                }
-                if (this.LocalPart != null)
-                {
-                    hashCode = (hashCode * 59) + this.LocalPart.GetHashCode();
-                }
-                if (this.Prefix != null)
-                {
-                    hashCode = (hashCode * 59) + this.Prefix.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Connection
     /// </summary>
     [DataContract(Name = "Connection")]
-    public partial class Connection : IEquatable<Connection>, IValidatableObject
+    public partial class Connection : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -58,7 +58,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "BI")]
             BI = 4
-
         }
 
 
@@ -156,7 +155,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "FILE")]
             FILE = 14
-
         }
 
 
@@ -195,8 +193,10 @@ namespace EssSharp.Model
         /// <param name="repoWallet">repoWallet.</param>
         /// <param name="minPoolSize">minPoolSize.</param>
         /// <param name="maxPoolSize">maxPoolSize.</param>
+        /// <param name="hidden">hidden.</param>
+        /// <param name="availability">availability.</param>
         /// <param name="links">links.</param>
-        public Connection(string description = default(string), string name = default(string), TypeEnum type = default(TypeEnum), string path = default(string), bool catalog = default(bool), string host = default(string), int port = default(int), string user = default(string), string password = default(string), bool encrypted = default(bool), string token = default(string), string sid = default(string), string service = default(string), string schema = default(string), string dbURL = default(string), string dbDriver = default(string), string datasource = default(string), SubtypeEnum? subtype = default(SubtypeEnum?), string walletPath = default(string), bool repoWallet = default(bool), int minPoolSize = default(int), int maxPoolSize = default(int), List<Link> links = default(List<Link>))
+        public Connection(string description = default(string), string name = default(string), TypeEnum type = default(TypeEnum), string path = default(string), bool catalog = default(bool), string host = default(string), int port = default(int), string user = default(string), string password = default(string), bool encrypted = default(bool), string token = default(string), string sid = default(string), string service = default(string), string schema = default(string), string dbURL = default(string), string dbDriver = default(string), string datasource = default(string), SubtypeEnum? subtype = default(SubtypeEnum?), string walletPath = default(string), bool repoWallet = default(bool), int minPoolSize = default(int), int maxPoolSize = default(int), bool hidden = default(bool), string availability = default(string), List<Link> links = default(List<Link>))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -225,6 +225,8 @@ namespace EssSharp.Model
             this.RepoWallet = repoWallet;
             this.MinPoolSize = minPoolSize;
             this.MaxPoolSize = maxPoolSize;
+            this.Hidden = hidden;
+            this.Availability = availability;
             this.Links = links;
         }
 
@@ -349,6 +351,18 @@ namespace EssSharp.Model
         public int MaxPoolSize { get; set; }
 
         /// <summary>
+        /// Gets or Sets Hidden
+        /// </summary>
+        [DataMember(Name = "hidden", EmitDefaultValue = true)]
+        public bool Hidden { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Availability
+        /// </summary>
+        [DataMember(Name = "availability", EmitDefaultValue = false)]
+        public string Availability { get; set; }
+
+        /// <summary>
         /// Gets or Sets Links
         /// </summary>
         [DataMember(Name = "links", EmitDefaultValue = false)]
@@ -384,6 +398,8 @@ namespace EssSharp.Model
             sb.Append("  RepoWallet: ").Append(RepoWallet).Append("\n");
             sb.Append("  MinPoolSize: ").Append(MinPoolSize).Append("\n");
             sb.Append("  MaxPoolSize: ").Append(MaxPoolSize).Append("\n");
+            sb.Append("  Hidden: ").Append(Hidden).Append("\n");
+            sb.Append("  Availability: ").Append(Availability).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -399,224 +415,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Connection);
-        }
-
-        /// <summary>
-        /// Returns true if Connection instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Connection to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Connection input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.Path == input.Path ||
-                    (this.Path != null &&
-                    this.Path.Equals(input.Path))
-                ) && 
-                (
-                    this.Catalog == input.Catalog ||
-                    this.Catalog.Equals(input.Catalog)
-                ) && 
-                (
-                    this.Host == input.Host ||
-                    (this.Host != null &&
-                    this.Host.Equals(input.Host))
-                ) && 
-                (
-                    this.Port == input.Port ||
-                    this.Port.Equals(input.Port)
-                ) && 
-                (
-                    this.User == input.User ||
-                    (this.User != null &&
-                    this.User.Equals(input.User))
-                ) && 
-                (
-                    this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
-                ) && 
-                (
-                    this.Encrypted == input.Encrypted ||
-                    this.Encrypted.Equals(input.Encrypted)
-                ) && 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
-                ) && 
-                (
-                    this.Sid == input.Sid ||
-                    (this.Sid != null &&
-                    this.Sid.Equals(input.Sid))
-                ) && 
-                (
-                    this.Service == input.Service ||
-                    (this.Service != null &&
-                    this.Service.Equals(input.Service))
-                ) && 
-                (
-                    this.Schema == input.Schema ||
-                    (this.Schema != null &&
-                    this.Schema.Equals(input.Schema))
-                ) && 
-                (
-                    this.DbURL == input.DbURL ||
-                    (this.DbURL != null &&
-                    this.DbURL.Equals(input.DbURL))
-                ) && 
-                (
-                    this.DbDriver == input.DbDriver ||
-                    (this.DbDriver != null &&
-                    this.DbDriver.Equals(input.DbDriver))
-                ) && 
-                (
-                    this.Datasource == input.Datasource ||
-                    (this.Datasource != null &&
-                    this.Datasource.Equals(input.Datasource))
-                ) && 
-                (
-                    this.Subtype == input.Subtype ||
-                    this.Subtype.Equals(input.Subtype)
-                ) && 
-                (
-                    this.WalletPath == input.WalletPath ||
-                    (this.WalletPath != null &&
-                    this.WalletPath.Equals(input.WalletPath))
-                ) && 
-                (
-                    this.RepoWallet == input.RepoWallet ||
-                    this.RepoWallet.Equals(input.RepoWallet)
-                ) && 
-                (
-                    this.MinPoolSize == input.MinPoolSize ||
-                    this.MinPoolSize.Equals(input.MinPoolSize)
-                ) && 
-                (
-                    this.MaxPoolSize == input.MaxPoolSize ||
-                    this.MaxPoolSize.Equals(input.MaxPoolSize)
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                if (this.Path != null)
-                {
-                    hashCode = (hashCode * 59) + this.Path.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Catalog.GetHashCode();
-                if (this.Host != null)
-                {
-                    hashCode = (hashCode * 59) + this.Host.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Port.GetHashCode();
-                if (this.User != null)
-                {
-                    hashCode = (hashCode * 59) + this.User.GetHashCode();
-                }
-                if (this.Password != null)
-                {
-                    hashCode = (hashCode * 59) + this.Password.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Encrypted.GetHashCode();
-                if (this.Token != null)
-                {
-                    hashCode = (hashCode * 59) + this.Token.GetHashCode();
-                }
-                if (this.Sid != null)
-                {
-                    hashCode = (hashCode * 59) + this.Sid.GetHashCode();
-                }
-                if (this.Service != null)
-                {
-                    hashCode = (hashCode * 59) + this.Service.GetHashCode();
-                }
-                if (this.Schema != null)
-                {
-                    hashCode = (hashCode * 59) + this.Schema.GetHashCode();
-                }
-                if (this.DbURL != null)
-                {
-                    hashCode = (hashCode * 59) + this.DbURL.GetHashCode();
-                }
-                if (this.DbDriver != null)
-                {
-                    hashCode = (hashCode * 59) + this.DbDriver.GetHashCode();
-                }
-                if (this.Datasource != null)
-                {
-                    hashCode = (hashCode * 59) + this.Datasource.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Subtype.GetHashCode();
-                if (this.WalletPath != null)
-                {
-                    hashCode = (hashCode * 59) + this.WalletPath.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.RepoWallet.GetHashCode();
-                hashCode = (hashCode * 59) + this.MinPoolSize.GetHashCode();
-                hashCode = (hashCode * 59) + this.MaxPoolSize.GetHashCode();
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

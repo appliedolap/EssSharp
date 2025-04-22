@@ -4,6 +4,9 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
+| [**ApplicationAppSupportedEncryptionMethods**](ApplicationsApi.md#applicationappsupportedencryptionmethods) | **GET** /applications/{applicationName}/encryptionconfig | Application Encryption supported methods |
+| [**ApplicationDecrypt**](ApplicationsApi.md#applicationdecrypt) | **POST** /applications/{applicationName}/decrypt | Application Encryption |
+| [**ApplicationEncrypt**](ApplicationsApi.md#applicationencrypt) | **POST** /applications/{applicationName}/encrypt | Application Encryption |
 | [**ApplicationsCopyApplication**](ApplicationsApi.md#applicationscopyapplication) | **POST** /applications/actions/copy | Copy Application |
 | [**ApplicationsCopyDatabase**](ApplicationsApi.md#applicationscopydatabase) | **POST** /applications/{applicationName}/databases/actions/copy | Copy Database |
 | [**ApplicationsCreateApplications**](ApplicationsApi.md#applicationscreateapplications) | **POST** /applications | Create Application |
@@ -21,8 +24,9 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationsGetApplicationsTree**](ApplicationsApi.md#applicationsgetapplicationstree) | **GET** /applications/actions/tree | Get Application Tree View |
 | [**ApplicationsGetCube**](ApplicationsApi.md#applicationsgetcube) | **GET** /applications/{applicationName}/databases/{databaseName} | Get Database |
 | [**ApplicationsGetCubes**](ApplicationsApi.md#applicationsgetcubes) | **GET** /applications/{applicationName}/databases | List Databases |
+| [**ApplicationsGetSupportedFederatedTypes**](ApplicationsApi.md#applicationsgetsupportedfederatedtypes) | **GET** /applications/partitions/supportedfederatedtypes | Get Supported Partition Types |
 | [**ApplicationsPerformDbOperation**](ApplicationsApi.md#applicationsperformdboperation) | **PUT** /applications/{applicationName}/databases/{databaseName} | Start or Stop Database |
-| [**ApplicationsPerformOperation**](ApplicationsApi.md#applicationsperformoperation) | **PUT** /applications/{applicationName} | Start or Stop Application |
+| [**ApplicationsPerformOperation**](ApplicationsApi.md#applicationsperformoperation) | **PUT** /applications/{applicationName} | Start, Stop Application |
 | [**ApplicationsPromoteShadowApplication**](ApplicationsApi.md#applicationspromoteshadowapplication) | **POST** /applications/actions/shadowPromote | Promote Shadow Application |
 | [**ApplicationsRenameApplication**](ApplicationsApi.md#applicationsrenameapplication) | **POST** /applications/actions/rename | Rename Application |
 | [**ApplicationsRenameDatabase**](ApplicationsApi.md#applicationsrenamedatabase) | **POST** /applications/{applicationName}/databases/actions/rename | Rename Database |
@@ -32,6 +36,291 @@ All URIs are relative to */essbase/rest/v1*
 | [**DatabasesGetMdxFunctions**](ApplicationsApi.md#databasesgetmdxfunctions) | **GET** /applications/{applicationName}/databases/{databaseName}/mdxFunctions | Get MDX Functions |
 | [**DatabasesSetCurrencySettings**](ApplicationsApi.md#databasessetcurrencysettings) | **POST** /applications/{applicationName}/databases/{databaseName}/currencySettings | Set Currency Settings |
 | [**SetActiveAlias**](ApplicationsApi.md#setactivealias) | **PUT** /applications/{applicationName}/databases/{databaseName}/aliases/setActiveAlias | Set Active Alias |
+
+<a id="applicationappsupportedencryptionmethods"></a>
+# **ApplicationAppSupportedEncryptionMethods**
+> EncryptionConfig ApplicationAppSupportedEncryptionMethods (string applicationName)
+
+Application Encryption supported methods
+
+<p>Enable encryption on application</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class ApplicationAppSupportedEncryptionMethodsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new ApplicationsApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+
+            try
+            {
+                // Application Encryption supported methods
+                EncryptionConfig result = apiInstance.ApplicationAppSupportedEncryptionMethods(applicationName);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ApplicationsApi.ApplicationAppSupportedEncryptionMethods: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ApplicationAppSupportedEncryptionMethodsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Application Encryption supported methods
+    ApiResponse<EncryptionConfig> response = apiInstance.ApplicationAppSupportedEncryptionMethodsWithHttpInfo(applicationName);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ApplicationsApi.ApplicationAppSupportedEncryptionMethodsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+
+### Return type
+
+[**EncryptionConfig**](EncryptionConfig.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/xml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="applicationdecrypt"></a>
+# **ApplicationDecrypt**
+> void ApplicationDecrypt (string applicationName)
+
+Application Encryption
+
+<p>Enable encryption on application</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class ApplicationDecryptExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new ApplicationsApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+
+            try
+            {
+                // Application Encryption
+                apiInstance.ApplicationDecrypt(applicationName);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ApplicationsApi.ApplicationDecrypt: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ApplicationDecryptWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Application Encryption
+    apiInstance.ApplicationDecryptWithHttpInfo(applicationName);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ApplicationsApi.ApplicationDecryptWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;SUCCESS&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Encryption applied on the application.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
+| **415** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="applicationencrypt"></a>
+# **ApplicationEncrypt**
+> void ApplicationEncrypt (string applicationName, AppEncryption body)
+
+Application Encryption
+
+<p>Enable encryption on application</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class ApplicationEncryptExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new ApplicationsApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var body = new AppEncryption(); // AppEncryption | <p>Encryption Key.</p>
+
+            try
+            {
+                // Application Encryption
+                apiInstance.ApplicationEncrypt(applicationName, body);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ApplicationsApi.ApplicationEncrypt: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ApplicationEncryptWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Application Encryption
+    apiInstance.ApplicationEncryptWithHttpInfo(applicationName, body);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ApplicationsApi.ApplicationEncryptWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **body** | [**AppEncryption**](AppEncryption.md) | &lt;p&gt;Encryption Key.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;SUCCESS&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Encryption applied on the application.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
+| **415** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a id="applicationscopyapplication"></a>
 # **ApplicationsCopyApplication**
@@ -1672,6 +1961,94 @@ catch (ApiException e)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="applicationsgetsupportedfederatedtypes"></a>
+# **ApplicationsGetSupportedFederatedTypes**
+> void ApplicationsGetSupportedFederatedTypes ()
+
+Get Supported Partition Types
+
+<p>Returns supported partition types.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class ApplicationsGetSupportedFederatedTypesExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new ApplicationsApi(config);
+
+            try
+            {
+                // Get Supported Partition Types
+                apiInstance.ApplicationsGetSupportedFederatedTypes();
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ApplicationsApi.ApplicationsGetSupportedFederatedTypes: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ApplicationsGetSupportedFederatedTypesWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get Supported Partition Types
+    apiInstance.ApplicationsGetSupportedFederatedTypesWithHttpInfo();
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ApplicationsApi.ApplicationsGetSupportedFederatedTypesWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Returned supported partition types successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to get supported types.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="applicationsperformdboperation"></a>
 # **ApplicationsPerformDbOperation**
 > void ApplicationsPerformDbOperation (string applicationName, string databaseName, string action)
@@ -1773,9 +2150,9 @@ void (empty response body)
 # **ApplicationsPerformOperation**
 > void ApplicationsPerformOperation (string applicationName, string action)
 
-Start or Stop Application
+Start, Stop Application
 
-<p>Performs specified action on the application. Valid actions are <b>Start</b> and <b>Stop</b>.</p>
+<p>Performs specified action on the application. Valid actions are <b>Start</b>, <b>Stop</b> and <b>Stop_no_force</b>.</p>
 
 ### Example
 ```csharp
@@ -1803,7 +2180,7 @@ namespace Example
 
             try
             {
-                // Start or Stop Application
+                // Start, Stop Application
                 apiInstance.ApplicationsPerformOperation(applicationName, action);
             }
             catch (ApiException  e)
@@ -1823,7 +2200,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Start or Stop Application
+    // Start, Stop Application
     apiInstance.ApplicationsPerformOperationWithHttpInfo(applicationName, action);
 }
 catch (ApiException e)
@@ -2633,7 +3010,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Currency settings updated successfully.&lt;/p&gt; |  -  |
+| **204** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Currency settings updated successfully.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

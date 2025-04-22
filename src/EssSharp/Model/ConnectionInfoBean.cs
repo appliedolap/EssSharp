@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ConnectionInfoBean
     /// </summary>
     [DataContract(Name = "ConnectionInfoBean")]
-    public partial class ConnectionInfoBean : IEquatable<ConnectionInfoBean>, IValidatableObject
+    public partial class ConnectionInfoBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConnectionInfoBean" /> class.
@@ -211,185 +211,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ConnectionInfoBean);
-        }
-
-        /// <summary>
-        /// Returns true if ConnectionInfoBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ConnectionInfoBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ConnectionInfoBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.ConnectionName == input.ConnectionName ||
-                    (this.ConnectionName != null &&
-                    this.ConnectionName.Equals(input.ConnectionName))
-                ) && 
-                (
-                    this.ServerName == input.ServerName ||
-                    (this.ServerName != null &&
-                    this.ServerName.Equals(input.ServerName))
-                ) && 
-                (
-                    this.UserName == input.UserName ||
-                    (this.UserName != null &&
-                    this.UserName.Equals(input.UserName))
-                ) && 
-                (
-                    this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.ApplicationName == input.ApplicationName ||
-                    (this.ApplicationName != null &&
-                    this.ApplicationName.Equals(input.ApplicationName))
-                ) && 
-                (
-                    this.DatabaseName == input.DatabaseName ||
-                    (this.DatabaseName != null &&
-                    this.DatabaseName.Equals(input.DatabaseName))
-                ) && 
-                (
-                    this.DatasourceName == input.DatasourceName ||
-                    (this.DatasourceName != null &&
-                    this.DatasourceName.Equals(input.DatasourceName))
-                ) && 
-                (
-                    this.MeasuresDimensionName == input.MeasuresDimensionName ||
-                    (this.MeasuresDimensionName != null &&
-                    this.MeasuresDimensionName.Equals(input.MeasuresDimensionName))
-                ) && 
-                (
-                    this.SchemaName == input.SchemaName ||
-                    (this.SchemaName != null &&
-                    this.SchemaName.Equals(input.SchemaName))
-                ) && 
-                (
-                    this.FactTableName == input.FactTableName ||
-                    (this.FactTableName != null &&
-                    this.FactTableName.Equals(input.FactTableName))
-                ) && 
-                (
-                    this.IsFactManagedByFederatedCube == input.IsFactManagedByFederatedCube ||
-                    this.IsFactManagedByFederatedCube.Equals(input.IsFactManagedByFederatedCube)
-                ) && 
-                (
-                    this.EssbaseToColumnMap == input.EssbaseToColumnMap ||
-                    (this.EssbaseToColumnMap != null &&
-                    this.EssbaseToColumnMap.Equals(input.EssbaseToColumnMap))
-                ) && 
-                (
-                    this.EssbaseToDataSourceMap == input.EssbaseToDataSourceMap ||
-                    (this.EssbaseToDataSourceMap != null &&
-                    this.EssbaseToDataSourceMap.Equals(input.EssbaseToDataSourceMap))
-                ) && 
-                (
-                    this.AlterCredentials == input.AlterCredentials ||
-                    this.AlterCredentials.Equals(input.AlterCredentials)
-                ) && 
-                (
-                    this.ApplicationLevelConnection == input.ApplicationLevelConnection ||
-                    this.ApplicationLevelConnection.Equals(input.ApplicationLevelConnection)
-                ) && 
-                (
-                    this.ApplicationLevelDatasource == input.ApplicationLevelDatasource ||
-                    this.ApplicationLevelDatasource.Equals(input.ApplicationLevelDatasource)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.ConnectionName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ConnectionName.GetHashCode();
-                }
-                if (this.ServerName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ServerName.GetHashCode();
-                }
-                if (this.UserName != null)
-                {
-                    hashCode = (hashCode * 59) + this.UserName.GetHashCode();
-                }
-                if (this.Password != null)
-                {
-                    hashCode = (hashCode * 59) + this.Password.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.ApplicationName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ApplicationName.GetHashCode();
-                }
-                if (this.DatabaseName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DatabaseName.GetHashCode();
-                }
-                if (this.DatasourceName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DatasourceName.GetHashCode();
-                }
-                if (this.MeasuresDimensionName != null)
-                {
-                    hashCode = (hashCode * 59) + this.MeasuresDimensionName.GetHashCode();
-                }
-                if (this.SchemaName != null)
-                {
-                    hashCode = (hashCode * 59) + this.SchemaName.GetHashCode();
-                }
-                if (this.FactTableName != null)
-                {
-                    hashCode = (hashCode * 59) + this.FactTableName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.IsFactManagedByFederatedCube.GetHashCode();
-                if (this.EssbaseToColumnMap != null)
-                {
-                    hashCode = (hashCode * 59) + this.EssbaseToColumnMap.GetHashCode();
-                }
-                if (this.EssbaseToDataSourceMap != null)
-                {
-                    hashCode = (hashCode * 59) + this.EssbaseToDataSourceMap.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.AlterCredentials.GetHashCode();
-                hashCode = (hashCode * 59) + this.ApplicationLevelConnection.GetHashCode();
-                hashCode = (hashCode * 59) + this.ApplicationLevelDatasource.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

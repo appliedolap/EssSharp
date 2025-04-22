@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<BOEOutput>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Messages'
         /// </summary>
@@ -61,7 +60,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Messages'
         }
-
     }
-
 }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ShadowCopyBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'PrimaryAppName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PrimaryAppName'
         }
+
         /// <summary>
         /// Test the property 'ShadowAppName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ShadowAppName'
         }
+
         /// <summary>
         /// Test the property 'HideShadow'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HideShadow'
         }
+
         /// <summary>
         /// Test the property 'WaitForOngoingUpdatesInSecs'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'WaitForOngoingUpdatesInSecs'
         }
+
         /// <summary>
         /// Test the property 'RunInBackground'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RunInBackground'
         }
-
     }
-
 }

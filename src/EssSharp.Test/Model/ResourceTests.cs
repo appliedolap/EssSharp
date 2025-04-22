@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Resource>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Id'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Id'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'Provider'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Provider'
         }
+
         /// <summary>
         /// Test the property 'Path'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Path'
         }
+
         /// <summary>
         /// Test the property 'MimeType'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MimeType'
         }
+
         /// <summary>
         /// Test the property 'Category'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Category'
         }
+
         /// <summary>
         /// Test the property 'Url'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Url'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -125,7 +132,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

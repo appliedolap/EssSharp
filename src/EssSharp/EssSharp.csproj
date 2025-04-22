@@ -1,67 +1,43 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo><!-- setting GenerateAssemblyInfo to false causes this bug https://github.com/dotnet/project-system/issues/3934 -->
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
     <AssemblyName>EssSharp</AssemblyName>
-    <AssemblyTitle>$(AssemblyName)</AssemblyTitle>
+    <PackageId>EssSharp</PackageId>
+    <OutputType>Library</OutputType>
+    <Authors>OpenAPI</Authors>
+    <Company>OpenAPI</Company>
+    <AssemblyTitle>OpenAPI Library</AssemblyTitle>
+    <Description>A library generated from a OpenAPI doc</Description>
+    <Copyright>No Copyright</Copyright>
     <RootNamespace>EssSharp</RootNamespace>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>$(AssemblyName)</PackageId>
-    <Title>$(AssemblyName)</Title>
-    <Authors>Applied OLAP</Authors>
-    <Company>$(Authors)</Company>
-    <Description>A (partly) auto-generated C# REST client for Essbase.</Description>
-    <Copyright>© $([System.DateTime]::UtcNow.ToString('yyyy')) Applied OLAP, Inc.</Copyright>
+    <Version>1.0.0</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\EssSharp.xml</DocumentationFile>
-    <RepositoryUrl>https://github.com/appliedolap/EssSharp.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/GIT_USER_ID/GIT_REPO_ID.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <VersionPrefix>0.3.0</VersionPrefix>
-    <VersionSuffix>beta</VersionSuffix>
-    <!-- Strong Name Signing -->
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>EssSharp.snk</AssemblyOriginatorKeyFile>
-    <!-- NuGet Package Options -->
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <!-- SourceLink Options -->
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <PackageReleaseNotes>Minor update</PackageReleaseNotes>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- NuGet Readme -->
-    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="RestSharp" Version="112.0.0" />
+    <PackageReference Include="Polly" Version="8.1.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Text.Json" Version="9.0.4" />
+    <PackageReference Include="TinyCsvParser" Version="2.7.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Project References -->
-    <ProjectReference Include="..\EssSharp.Abstractions\EssSharp.Abstractions.csproj" />
-    <!-- Package References -->
-    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.4" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="RestSharp" Version="112.1.0" />
-    <PackageReference Include="Polly" Version="8.5.2" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
-    <PackageReference Include="System.Text.Json" Version="9.0.4" />
-    <PackageReference Include="TinyCsvParser" Version="2.7.1" />
-    <!-- Excluded References -->
     <None Remove="System.Web" />
   </ItemGroup>
 
-  <Target Name="SetVersionSuffix" BeforeTargets="Build">
-    <!-- Utilize Semantic Versioning for prereleases, i.e., when there is a VersionSuffix -->
-    <!-- Example: 0.1.0-beta.20230510114220. -->
-    <PropertyGroup Condition="'$(VersionSuffix)' != ''">
-      <VersionSuffix Condition="'$(DesignTimeBuild)' != 'true' OR '$(BuildingProject)' == 'true'">$(VersionSuffix).$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</VersionSuffix>
-      <PackageVersion>$(VersionPrefix)-$(VersionSuffix)</PackageVersion>
-    </PropertyGroup>
-  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\EssSharp.Abstractions\EssSharp.Abstractions.csproj" />
+  </ItemGroup>
 </Project>

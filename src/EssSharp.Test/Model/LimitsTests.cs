@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Limits>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'CoreFileSize'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CoreFileSize'
         }
+
         /// <summary>
         /// Test the property 'DataSegmentSize'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataSegmentSize'
         }
+
         /// <summary>
         /// Test the property 'MaxMemory'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxMemory'
         }
+
         /// <summary>
         /// Test the property 'OpenFiles'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OpenFiles'
         }
+
         /// <summary>
         /// Test the property 'UserMaxProcesses'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UserMaxProcesses'
         }
+
         /// <summary>
         /// Test the property 'VirtualMemorySize'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'VirtualMemorySize'
         }
+
         /// <summary>
         /// Test the property 'WebLogicHeapSize'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'WebLogicHeapSize'
         }
-
     }
-
 }

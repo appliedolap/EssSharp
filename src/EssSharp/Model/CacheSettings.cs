@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CacheSettings
     /// </summary>
     [DataContract(Name = "CacheSettings")]
-    public partial class CacheSettings : IEquatable<CacheSettings>, IValidatableObject
+    public partial class CacheSettings : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CacheSettings" /> class.
@@ -139,93 +139,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CacheSettings);
-        }
-
-        /// <summary>
-        /// Returns true if CacheSettings instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CacheSettings to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CacheSettings input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.CacheMemoryLocking == input.CacheMemoryLocking ||
-                    this.CacheMemoryLocking.Equals(input.CacheMemoryLocking)
-                ) && 
-                (
-                    this.IndexCacheSetting == input.IndexCacheSetting ||
-                    this.IndexCacheSetting.Equals(input.IndexCacheSetting)
-                ) && 
-                (
-                    this.IndexCacheCurrentValue == input.IndexCacheCurrentValue ||
-                    this.IndexCacheCurrentValue.Equals(input.IndexCacheCurrentValue)
-                ) && 
-                (
-                    this.DataFileCacheSetting == input.DataFileCacheSetting ||
-                    this.DataFileCacheSetting.Equals(input.DataFileCacheSetting)
-                ) && 
-                (
-                    this.DataFileCacheCurrentValue == input.DataFileCacheCurrentValue ||
-                    this.DataFileCacheCurrentValue.Equals(input.DataFileCacheCurrentValue)
-                ) && 
-                (
-                    this.DataCacheSetting == input.DataCacheSetting ||
-                    this.DataCacheSetting.Equals(input.DataCacheSetting)
-                ) && 
-                (
-                    this.DataCacheCurrentValue == input.DataCacheCurrentValue ||
-                    this.DataCacheCurrentValue.Equals(input.DataCacheCurrentValue)
-                ) && 
-                (
-                    this.IndexPageSetting == input.IndexPageSetting ||
-                    this.IndexPageSetting.Equals(input.IndexPageSetting)
-                ) && 
-                (
-                    this.IndexPageCurrentValue == input.IndexPageCurrentValue ||
-                    this.IndexPageCurrentValue.Equals(input.IndexPageCurrentValue)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.CacheMemoryLocking.GetHashCode();
-                hashCode = (hashCode * 59) + this.IndexCacheSetting.GetHashCode();
-                hashCode = (hashCode * 59) + this.IndexCacheCurrentValue.GetHashCode();
-                hashCode = (hashCode * 59) + this.DataFileCacheSetting.GetHashCode();
-                hashCode = (hashCode * 59) + this.DataFileCacheCurrentValue.GetHashCode();
-                hashCode = (hashCode * 59) + this.DataCacheSetting.GetHashCode();
-                hashCode = (hashCode * 59) + this.DataCacheCurrentValue.GetHashCode();
-                hashCode = (hashCode * 59) + this.IndexPageSetting.GetHashCode();
-                hashCode = (hashCode * 59) + this.IndexPageCurrentValue.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

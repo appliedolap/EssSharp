@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// PartitionBean
     /// </summary>
     [DataContract(Name = "PartitionBean")]
-    public partial class PartitionBean : IEquatable<PartitionBean>, IValidatableObject
+    public partial class PartitionBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PartitionBean" /> class.
@@ -175,148 +175,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as PartitionBean);
-        }
-
-        /// <summary>
-        /// Returns true if PartitionBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of PartitionBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(PartitionBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Updatable == input.Updatable ||
-                    this.Updatable.Equals(input.Updatable)
-                ) && 
-                (
-                    this.IsNew == input.IsNew ||
-                    this.IsNew.Equals(input.IsNew)
-                ) && 
-                (
-                    this.Locked == input.Locked ||
-                    this.Locked.Equals(input.Locked)
-                ) && 
-                (
-                    this.FederatedTypeCR == input.FederatedTypeCR ||
-                    this.FederatedTypeCR.Equals(input.FederatedTypeCR)
-                ) && 
-                (
-                    this.FederatedTypeAV == input.FederatedTypeAV ||
-                    this.FederatedTypeAV.Equals(input.FederatedTypeAV)
-                ) && 
-                (
-                    this.SourceInfo == input.SourceInfo ||
-                    (this.SourceInfo != null &&
-                    this.SourceInfo.Equals(input.SourceInfo))
-                ) && 
-                (
-                    this.TargetInfo == input.TargetInfo ||
-                    (this.TargetInfo != null &&
-                    this.TargetInfo.Equals(input.TargetInfo))
-                ) && 
-                (
-                    this.Areas == input.Areas ||
-                    this.Areas != null &&
-                    input.Areas != null &&
-                    this.Areas.SequenceEqual(input.Areas)
-                ) && 
-                (
-                    this.Mappings == input.Mappings ||
-                    this.Mappings != null &&
-                    input.Mappings != null &&
-                    this.Mappings.SequenceEqual(input.Mappings)
-                ) && 
-                (
-                    this.ErrorMessage == input.ErrorMessage ||
-                    (this.ErrorMessage != null &&
-                    this.ErrorMessage.Equals(input.ErrorMessage))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Id != null)
-                {
-                    hashCode = (hashCode * 59) + this.Id.GetHashCode();
-                }
-                if (this.Type != null)
-                {
-                    hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Updatable.GetHashCode();
-                hashCode = (hashCode * 59) + this.IsNew.GetHashCode();
-                hashCode = (hashCode * 59) + this.Locked.GetHashCode();
-                hashCode = (hashCode * 59) + this.FederatedTypeCR.GetHashCode();
-                hashCode = (hashCode * 59) + this.FederatedTypeAV.GetHashCode();
-                if (this.SourceInfo != null)
-                {
-                    hashCode = (hashCode * 59) + this.SourceInfo.GetHashCode();
-                }
-                if (this.TargetInfo != null)
-                {
-                    hashCode = (hashCode * 59) + this.TargetInfo.GetHashCode();
-                }
-                if (this.Areas != null)
-                {
-                    hashCode = (hashCode * 59) + this.Areas.GetHashCode();
-                }
-                if (this.Mappings != null)
-                {
-                    hashCode = (hashCode * 59) + this.Mappings.GetHashCode();
-                }
-                if (this.ErrorMessage != null)
-                {
-                    hashCode = (hashCode * 59) + this.ErrorMessage.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Expanded** | **bool** |  | [optional] 
 **Pov** | **string** |  | [optional] 
-**Column** | **int** |  | [optional] 
+**Expanded** | **bool** |  | [optional] 
 **Row** | **int** |  | [optional] 
+**Column** | **int** |  | [optional] 
 **DisplayName** | **string** |  | [optional] 
 **Hidden** | **bool** |  | [optional] 
 **Name** | **string** |  | [optional] 

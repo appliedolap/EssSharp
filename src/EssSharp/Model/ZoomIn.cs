@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ZoomIn
     /// </summary>
     [DataContract(Name = "ZoomIn")]
-    public partial class ZoomIn : IEquatable<ZoomIn>, IValidatableObject
+    public partial class ZoomIn : IValidatableObject
     {
         /// <summary>
         /// Defines Ancestor
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "bottom")]
             Bottom = 2
-
         }
 
 
@@ -78,7 +77,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "base")]
             Base = 3
-
         }
 
 
@@ -122,58 +120,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ZoomIn);
-        }
-
-        /// <summary>
-        /// Returns true if ZoomIn instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ZoomIn to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ZoomIn input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Ancestor == input.Ancestor ||
-                    this.Ancestor.Equals(input.Ancestor)
-                ) && 
-                (
-                    this.Mode == input.Mode ||
-                    this.Mode.Equals(input.Mode)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Ancestor.GetHashCode();
-                hashCode = (hashCode * 59) + this.Mode.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

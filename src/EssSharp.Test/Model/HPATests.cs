@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<HPA>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'MaxFileCount'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxFileCount'
         }
+
         /// <summary>
         /// Test the property 'Interval'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Interval'
         }
+
         /// <summary>
         /// Test the property 'Enabled'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Enabled'
         }
-
     }
-
 }

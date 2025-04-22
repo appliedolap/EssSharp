@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// MeasureOptions
     /// </summary>
     [DataContract(Name = "MeasureOptions")]
-    public partial class MeasureOptions : IEquatable<MeasureOptions>, IValidatableObject
+    public partial class MeasureOptions : IValidatableObject
     {
         /// <summary>
         /// Defines CurrencyConversion
@@ -58,7 +58,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "NO_CONVERSION")]
             NOCONVERSION = 4
-
         }
 
 
@@ -102,7 +101,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "MISSING_ZERO")]
             MISSINGZERO = 5
-
         }
 
 
@@ -146,7 +144,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "AVERAGE")]
             AVERAGE = 5
-
         }
 
 
@@ -178,7 +175,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "EXPENSE")]
             EXPENSE = 3
-
         }
 
 
@@ -255,91 +251,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as MeasureOptions);
-        }
-
-        /// <summary>
-        /// Returns true if MeasureOptions instances are equal
-        /// </summary>
-        /// <param name="input">Instance of MeasureOptions to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(MeasureOptions input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.CurrencyCategory == input.CurrencyCategory ||
-                    (this.CurrencyCategory != null &&
-                    this.CurrencyCategory.Equals(input.CurrencyCategory))
-                ) && 
-                (
-                    this.CurrencyName == input.CurrencyName ||
-                    (this.CurrencyName != null &&
-                    this.CurrencyName.Equals(input.CurrencyName))
-                ) && 
-                (
-                    this.CurrencyConversion == input.CurrencyConversion ||
-                    this.CurrencyConversion.Equals(input.CurrencyConversion)
-                ) && 
-                (
-                    this.Skip == input.Skip ||
-                    this.Skip.Equals(input.Skip)
-                ) && 
-                (
-                    this.TimeBalanceOption == input.TimeBalanceOption ||
-                    this.TimeBalanceOption.Equals(input.TimeBalanceOption)
-                ) && 
-                (
-                    this.VarianceReporting == input.VarianceReporting ||
-                    this.VarianceReporting.Equals(input.VarianceReporting)
-                ) && 
-                (
-                    this.TwoPass == input.TwoPass ||
-                    this.TwoPass.Equals(input.TwoPass)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.CurrencyCategory != null)
-                {
-                    hashCode = (hashCode * 59) + this.CurrencyCategory.GetHashCode();
-                }
-                if (this.CurrencyName != null)
-                {
-                    hashCode = (hashCode * 59) + this.CurrencyName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.CurrencyConversion.GetHashCode();
-                hashCode = (hashCode * 59) + this.Skip.GetHashCode();
-                hashCode = (hashCode * 59) + this.TimeBalanceOption.GetHashCode();
-                hashCode = (hashCode * 59) + this.VarianceReporting.GetHashCode();
-                hashCode = (hashCode * 59) + this.TwoPass.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

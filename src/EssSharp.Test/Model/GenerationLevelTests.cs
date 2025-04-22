@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GenerationLevel>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'ActualName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ActualName'
         }
+
         /// <summary>
         /// Test the property 'Number'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Number'
         }
+
         /// <summary>
         /// Test the property 'Unique'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Unique'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// AttributeOutlineSettings
     /// </summary>
     [DataContract(Name = "AttributeOutlineSettings")]
-    public partial class AttributeOutlineSettings : IEquatable<AttributeOutlineSettings>, IValidatableObject
+    public partial class AttributeOutlineSettings : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AttributeOutlineSettings" /> class.
@@ -175,165 +175,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as AttributeOutlineSettings);
-        }
-
-        /// <summary>
-        /// Returns true if AttributeOutlineSettings instances are equal
-        /// </summary>
-        /// <param name="input">Instance of AttributeOutlineSettings to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(AttributeOutlineSettings input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.PrefixSuffixValue == input.PrefixSuffixValue ||
-                    (this.PrefixSuffixValue != null &&
-                    this.PrefixSuffixValue.Equals(input.PrefixSuffixValue))
-                ) && 
-                (
-                    this.PrefixSuffixSeparator == input.PrefixSuffixSeparator ||
-                    (this.PrefixSuffixSeparator != null &&
-                    this.PrefixSuffixSeparator.Equals(input.PrefixSuffixSeparator))
-                ) && 
-                (
-                    this.PrefixSuffixFormat == input.PrefixSuffixFormat ||
-                    (this.PrefixSuffixFormat != null &&
-                    this.PrefixSuffixFormat.Equals(input.PrefixSuffixFormat))
-                ) && 
-                (
-                    this.TrueMemberName == input.TrueMemberName ||
-                    (this.TrueMemberName != null &&
-                    this.TrueMemberName.Equals(input.TrueMemberName))
-                ) && 
-                (
-                    this.FalseMemberName == input.FalseMemberName ||
-                    (this.FalseMemberName != null &&
-                    this.FalseMemberName.Equals(input.FalseMemberName))
-                ) && 
-                (
-                    this.DateMemberNames == input.DateMemberNames ||
-                    (this.DateMemberNames != null &&
-                    this.DateMemberNames.Equals(input.DateMemberNames))
-                ) && 
-                (
-                    this.NumericRangesRepresent == input.NumericRangesRepresent ||
-                    (this.NumericRangesRepresent != null &&
-                    this.NumericRangesRepresent.Equals(input.NumericRangesRepresent))
-                ) && 
-                (
-                    this.CalcDimensionName == input.CalcDimensionName ||
-                    (this.CalcDimensionName != null &&
-                    this.CalcDimensionName.Equals(input.CalcDimensionName))
-                ) && 
-                (
-                    this.CalcSumMember == input.CalcSumMember ||
-                    (this.CalcSumMember != null &&
-                    this.CalcSumMember.Equals(input.CalcSumMember))
-                ) && 
-                (
-                    this.CalcCountMember == input.CalcCountMember ||
-                    (this.CalcCountMember != null &&
-                    this.CalcCountMember.Equals(input.CalcCountMember))
-                ) && 
-                (
-                    this.CalcMinimumMember == input.CalcMinimumMember ||
-                    (this.CalcMinimumMember != null &&
-                    this.CalcMinimumMember.Equals(input.CalcMinimumMember))
-                ) && 
-                (
-                    this.CalcMaximumMember == input.CalcMaximumMember ||
-                    (this.CalcMaximumMember != null &&
-                    this.CalcMaximumMember.Equals(input.CalcMaximumMember))
-                ) && 
-                (
-                    this.CalcAverageMember == input.CalcAverageMember ||
-                    (this.CalcAverageMember != null &&
-                    this.CalcAverageMember.Equals(input.CalcAverageMember))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.PrefixSuffixValue != null)
-                {
-                    hashCode = (hashCode * 59) + this.PrefixSuffixValue.GetHashCode();
-                }
-                if (this.PrefixSuffixSeparator != null)
-                {
-                    hashCode = (hashCode * 59) + this.PrefixSuffixSeparator.GetHashCode();
-                }
-                if (this.PrefixSuffixFormat != null)
-                {
-                    hashCode = (hashCode * 59) + this.PrefixSuffixFormat.GetHashCode();
-                }
-                if (this.TrueMemberName != null)
-                {
-                    hashCode = (hashCode * 59) + this.TrueMemberName.GetHashCode();
-                }
-                if (this.FalseMemberName != null)
-                {
-                    hashCode = (hashCode * 59) + this.FalseMemberName.GetHashCode();
-                }
-                if (this.DateMemberNames != null)
-                {
-                    hashCode = (hashCode * 59) + this.DateMemberNames.GetHashCode();
-                }
-                if (this.NumericRangesRepresent != null)
-                {
-                    hashCode = (hashCode * 59) + this.NumericRangesRepresent.GetHashCode();
-                }
-                if (this.CalcDimensionName != null)
-                {
-                    hashCode = (hashCode * 59) + this.CalcDimensionName.GetHashCode();
-                }
-                if (this.CalcSumMember != null)
-                {
-                    hashCode = (hashCode * 59) + this.CalcSumMember.GetHashCode();
-                }
-                if (this.CalcCountMember != null)
-                {
-                    hashCode = (hashCode * 59) + this.CalcCountMember.GetHashCode();
-                }
-                if (this.CalcMinimumMember != null)
-                {
-                    hashCode = (hashCode * 59) + this.CalcMinimumMember.GetHashCode();
-                }
-                if (this.CalcMaximumMember != null)
-                {
-                    hashCode = (hashCode * 59) + this.CalcMaximumMember.GetHashCode();
-                }
-                if (this.CalcAverageMember != null)
-                {
-                    hashCode = (hashCode * 59) + this.CalcAverageMember.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

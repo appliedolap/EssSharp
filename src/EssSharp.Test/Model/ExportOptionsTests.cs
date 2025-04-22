@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ExportOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'AliasTable'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AliasTable'
         }
+
         /// <summary>
         /// Test the property 'Dimensions'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dimensions'
         }
+
         /// <summary>
         /// Test the property 'Tree'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Tree'
         }
-
     }
-
 }

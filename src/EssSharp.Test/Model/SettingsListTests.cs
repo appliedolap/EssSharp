@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<SettingsList>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'General'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'General'
         }
+
         /// <summary>
         /// Test the property 'Startup'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Startup'
         }
+
         /// <summary>
         /// Test the property 'Calculation'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Calculation'
         }
+
         /// <summary>
         /// Test the property 'Buffers'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Buffers'
         }
+
         /// <summary>
         /// Test the property 'Compression'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Compression'
         }
+
         /// <summary>
         /// Test the property 'Caches'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Caches'
         }
+
         /// <summary>
         /// Test the property 'Transactions'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Transactions'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -117,7 +123,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

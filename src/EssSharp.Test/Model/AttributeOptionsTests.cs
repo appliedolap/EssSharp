@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AttributeOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'IndepDimensions'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IndepDimensions'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'BaseDimension'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BaseDimension'
         }
+
         /// <summary>
         /// Test the property 'Modified'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Modified'
         }
+
         /// <summary>
         /// Test the property 'ScadisAssociationMode'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ScadisAssociationMode'
         }
+
         /// <summary>
         /// Test the property 'ScaassociationMode'
         /// </summary>
@@ -101,7 +105,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ScaassociationMode'
         }
-
     }
-
 }

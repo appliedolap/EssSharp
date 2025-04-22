@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<MeasureOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'CurrencyCategory'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CurrencyCategory'
         }
+
         /// <summary>
         /// Test the property 'CurrencyName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CurrencyName'
         }
+
         /// <summary>
         /// Test the property 'CurrencyConversion'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CurrencyConversion'
         }
+
         /// <summary>
         /// Test the property 'Skip'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Skip'
         }
+
         /// <summary>
         /// Test the property 'TimeBalanceOption'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TimeBalanceOption'
         }
+
         /// <summary>
         /// Test the property 'VarianceReporting'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'VarianceReporting'
         }
+
         /// <summary>
         /// Test the property 'TwoPass'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TwoPass'
         }
-
     }
-
 }

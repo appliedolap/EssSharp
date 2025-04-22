@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Groups
     /// </summary>
     [DataContract(Name = "Groups")]
-    public partial class Groups : IEquatable<Groups>, IValidatableObject
+    public partial class Groups : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Groups" /> class.
@@ -121,93 +121,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Groups);
-        }
-
-        /// <summary>
-        /// Returns true if Groups instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Groups to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Groups input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.TotalResults == input.TotalResults ||
-                    this.TotalResults.Equals(input.TotalResults)
-                ) && 
-                (
-                    this.Count == input.Count ||
-                    this.Count.Equals(input.Count)
-                ) && 
-                (
-                    this.Limit == input.Limit ||
-                    this.Limit.Equals(input.Limit)
-                ) && 
-                (
-                    this.Offset == input.Offset ||
-                    this.Offset.Equals(input.Offset)
-                ) && 
-                (
-                    this.Items == input.Items ||
-                    this.Items != null &&
-                    input.Items != null &&
-                    this.Items.SequenceEqual(input.Items)
-                ) && 
-                (
-                    this.HasMore == input.HasMore ||
-                    this.HasMore.Equals(input.HasMore)
-                ) && 
-                (
-                    this.Properties == input.Properties ||
-                    this.Properties != null &&
-                    input.Properties != null &&
-                    this.Properties.SequenceEqual(input.Properties)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.TotalResults.GetHashCode();
-                hashCode = (hashCode * 59) + this.Count.GetHashCode();
-                hashCode = (hashCode * 59) + this.Limit.GetHashCode();
-                hashCode = (hashCode * 59) + this.Offset.GetHashCode();
-                if (this.Items != null)
-                {
-                    hashCode = (hashCode * 59) + this.Items.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.HasMore.GetHashCode();
-                if (this.Properties != null)
-                {
-                    hashCode = (hashCode * 59) + this.Properties.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

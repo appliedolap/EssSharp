@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CreateApplication>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ApplicationName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ApplicationName'
         }
+
         /// <summary>
         /// Test the property 'DatabaseName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DatabaseName'
         }
+
         /// <summary>
         /// Test the property 'AllowDuplicates'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowDuplicates'
         }
+
         /// <summary>
         /// Test the property 'EnableScenario'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EnableScenario'
         }
+
         /// <summary>
         /// Test the property 'MemberCount'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MemberCount'
         }
+
         /// <summary>
         /// Test the property 'DatabaseType'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DatabaseType'
         }
+
         /// <summary>
         /// Test the property 'AppType'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AppType'
         }
+
         /// <summary>
         /// Test the property 'MemberPrefix'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MemberPrefix'
         }
+
         /// <summary>
         /// Test the property 'DbType'
         /// </summary>
@@ -125,7 +132,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DbType'
         }
-
     }
-
 }

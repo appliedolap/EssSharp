@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Limit
     /// </summary>
     [DataContract(Name = "Limit")]
-    public partial class Limit : IEquatable<Limit>, IValidatableObject
+    public partial class Limit : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Limit" /> class.
@@ -130,104 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Limit);
-        }
-
-        /// <summary>
-        /// Returns true if Limit instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Limit to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Limit input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Unlimited == input.Unlimited ||
-                    this.Unlimited.Equals(input.Unlimited)
-                ) && 
-                (
-                    this.ShowUnlimited == input.ShowUnlimited ||
-                    this.ShowUnlimited.Equals(input.ShowUnlimited)
-                ) && 
-                (
-                    this.Minimum == input.Minimum ||
-                    this.Minimum.Equals(input.Minimum)
-                ) && 
-                (
-                    this.Maximum == input.Maximum ||
-                    this.Maximum.Equals(input.Maximum)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Id != null)
-                {
-                    hashCode = (hashCode * 59) + this.Id.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.Value != null)
-                {
-                    hashCode = (hashCode * 59) + this.Value.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Unlimited.GetHashCode();
-                hashCode = (hashCode * 59) + this.ShowUnlimited.GetHashCode();
-                hashCode = (hashCode * 59) + this.Minimum.GetHashCode();
-                hashCode = (hashCode * 59) + this.Maximum.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

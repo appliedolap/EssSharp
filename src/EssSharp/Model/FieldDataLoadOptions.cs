@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// FieldDataLoadOptions
     /// </summary>
     [DataContract(Name = "FieldDataLoadOptions")]
-    public partial class FieldDataLoadOptions : IEquatable<FieldDataLoadOptions>, IValidatableObject
+    public partial class FieldDataLoadOptions : IValidatableObject
     {
         /// <summary>
         /// Defines StoreType
@@ -64,7 +64,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "COUNT")]
             COUNT = 5
-
         }
 
 
@@ -186,102 +185,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as FieldDataLoadOptions);
-        }
-
-        /// <summary>
-        /// Returns true if FieldDataLoadOptions instances are equal
-        /// </summary>
-        /// <param name="input">Instance of FieldDataLoadOptions to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(FieldDataLoadOptions input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.ReferDimension == input.ReferDimension ||
-                    (this.ReferDimension != null &&
-                    this.ReferDimension.Equals(input.ReferDimension))
-                ) && 
-                (
-                    this.ReferNumber == input.ReferNumber ||
-                    this.ReferNumber.Equals(input.ReferNumber)
-                ) && 
-                (
-                    this.ReferOption == input.ReferOption ||
-                    this.ReferOption.Equals(input.ReferOption)
-                ) && 
-                (
-                    this.Ignore == input.Ignore ||
-                    this.Ignore.Equals(input.Ignore)
-                ) && 
-                (
-                    this.Scale == input.Scale ||
-                    this.Scale.Equals(input.Scale)
-                ) && 
-                (
-                    this.UseReference == input.UseReference ||
-                    this.UseReference.Equals(input.UseReference)
-                ) && 
-                (
-                    this.Data == input.Data ||
-                    this.Data.Equals(input.Data)
-                ) && 
-                (
-                    this.Scalingfactor == input.Scalingfactor ||
-                    this.Scalingfactor.Equals(input.Scalingfactor)
-                ) && 
-                (
-                    this.StoreType == input.StoreType ||
-                    this.StoreType.Equals(input.StoreType)
-                ) && 
-                (
-                    this.StoreTypeCountMissing == input.StoreTypeCountMissing ||
-                    this.StoreTypeCountMissing.Equals(input.StoreTypeCountMissing)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.ReferDimension != null)
-                {
-                    hashCode = (hashCode * 59) + this.ReferDimension.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ReferNumber.GetHashCode();
-                hashCode = (hashCode * 59) + this.ReferOption.GetHashCode();
-                hashCode = (hashCode * 59) + this.Ignore.GetHashCode();
-                hashCode = (hashCode * 59) + this.Scale.GetHashCode();
-                hashCode = (hashCode * 59) + this.UseReference.GetHashCode();
-                hashCode = (hashCode * 59) + this.Data.GetHashCode();
-                hashCode = (hashCode * 59) + this.Scalingfactor.GetHashCode();
-                hashCode = (hashCode * 59) + this.StoreType.GetHashCode();
-                hashCode = (hashCode * 59) + this.StoreTypeCountMissing.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

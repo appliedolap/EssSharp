@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<StreamProcessStartResponse>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'StreamId'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StreamId'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

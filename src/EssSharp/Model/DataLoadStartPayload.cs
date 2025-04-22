@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// DataLoadStartPayload
     /// </summary>
     [DataContract(Name = "DataLoadStartPayload")]
-    public partial class DataLoadStartPayload : IEquatable<DataLoadStartPayload>, IValidatableObject
+    public partial class DataLoadStartPayload : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DataLoadStartPayload" /> class.
@@ -77,66 +77,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DataLoadStartPayload);
-        }
-
-        /// <summary>
-        /// Returns true if DataLoadStartPayload instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DataLoadStartPayload to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DataLoadStartPayload input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.RuleFileName == input.RuleFileName ||
-                    (this.RuleFileName != null &&
-                    this.RuleFileName.Equals(input.RuleFileName))
-                ) && 
-                (
-                    this.Delimiter == input.Delimiter ||
-                    (this.Delimiter != null &&
-                    this.Delimiter.Equals(input.Delimiter))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.RuleFileName != null)
-                {
-                    hashCode = (hashCode * 59) + this.RuleFileName.GetHashCode();
-                }
-                if (this.Delimiter != null)
-                {
-                    hashCode = (hashCode * 59) + this.Delimiter.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

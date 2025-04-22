@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<MDXInput>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Query'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Query'
         }
+
         /// <summary>
         /// Test the property 'Preferences'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Preferences'
         }
-
     }
-
 }

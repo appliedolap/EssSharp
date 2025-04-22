@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ZoomIn>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Ancestor'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Ancestor'
         }
+
         /// <summary>
         /// Test the property 'Mode'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Mode'
         }
-
     }
-
 }

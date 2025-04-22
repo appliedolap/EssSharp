@@ -12,7 +12,7 @@ scriptdir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
   --input-spec ./processed.json \
   --generator-name csharp \
   --template-dir ./templates \
-  --additional-properties=packageName=EssSharp,netCoreProjectFile=true,optionalAssemblyInfo=false)
+  --additional-properties=library=restsharp,packageName=EssSharp,netCoreProjectFile=true,optionalAssemblyInfo=false,targetFramework=netstandard2.0)
 
 # When it's more mature, let's switch to the httpclient library.
 #  --library httpclient \

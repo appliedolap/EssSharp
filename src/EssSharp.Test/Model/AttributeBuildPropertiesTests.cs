@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AttributeBuildProperties>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'RangeIncrementValue'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RangeIncrementValue'
         }
+
         /// <summary>
         /// Test the property 'RangeStartValue'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RangeStartValue'
         }
+
         /// <summary>
         /// Test the property 'RemoveAll'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RemoveAll'
         }
+
         /// <summary>
         /// Test the property 'UseRanges'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UseRanges'
         }
-
     }
-
 }

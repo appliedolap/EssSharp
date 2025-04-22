@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Application>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Owner'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Owner'
         }
+
         /// <summary>
         /// Test the property 'CreationTime'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CreationTime'
         }
+
         /// <summary>
         /// Test the property 'ModifiedBy'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ModifiedBy'
         }
+
         /// <summary>
         /// Test the property 'ModifiedTime'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ModifiedTime'
         }
+
         /// <summary>
         /// Test the property 'Status'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Status'
         }
+
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'StartTime'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartTime'
         }
+
         /// <summary>
         /// Test the property 'ConnectedUsersCount'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConnectedUsersCount'
         }
+
         /// <summary>
         /// Test the property 'Role'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Role'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
+
         /// <summary>
         /// Test the property 'EasManagedApp'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EasManagedApp'
         }
+
         /// <summary>
         /// Test the property 'StartStopAppAllowed'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartStopAppAllowed'
         }
+
         /// <summary>
         /// Test the property 'InspectAppAllowed'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'InspectAppAllowed'
         }
+
         /// <summary>
         /// Test the property 'AppVariablesSetting'
         /// </summary>
@@ -182,6 +196,13 @@ namespace EssSharp.Test.Model
             // TODO unit test for the property 'AppVariablesSetting'
         }
 
+        /// <summary>
+        /// Test the property 'Encrypted'
+        /// </summary>
+        [Fact]
+        public void EncryptedTest()
+        {
+            // TODO unit test for the property 'Encrypted'
+        }
     }
-
 }

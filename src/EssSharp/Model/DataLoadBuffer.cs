@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// DataLoadBuffer
     /// </summary>
     [DataContract(Name = "DataLoadBuffer")]
-    public partial class DataLoadBuffer : IEquatable<DataLoadBuffer>, IValidatableObject
+    public partial class DataLoadBuffer : IValidatableObject
     {
         /// <summary>
         /// Defines DuplicateAggregationMethod
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "USE_LAST")]
             USELAST = 3
-
         }
 
 
@@ -68,29 +67,28 @@ namespace EssSharp.Model
         public enum LoadBufferOptionsEnum
         {
             /// <summary>
-            /// Enum NONE for value: IGNORE_NONE
+            /// Enum IGNORENONE for value: IGNORE_NONE
             /// </summary>
             [EnumMember(Value = "IGNORE_NONE")]
-            NONE = 1,
+            IGNORENONE = 1,
 
             /// <summary>
-            /// Enum MISSINGVALUES for value: IGNORE_MISSING_VALUES
+            /// Enum IGNOREMISSINGVALUES for value: IGNORE_MISSING_VALUES
             /// </summary>
             [EnumMember(Value = "IGNORE_MISSING_VALUES")]
-            MISSINGVALUES = 2,
+            IGNOREMISSINGVALUES = 2,
 
             /// <summary>
-            /// Enum ZEROVALUES for value: IGNORE_ZERO_VALUES
+            /// Enum IGNOREZEROVALUES for value: IGNORE_ZERO_VALUES
             /// </summary>
             [EnumMember(Value = "IGNORE_ZERO_VALUES")]
-            ZEROVALUES = 3,
+            IGNOREZEROVALUES = 3,
 
             /// <summary>
-            /// Enum MISSINGANDZEROVALUES for value: IGNORE_MISSING_AND_ZERO_VALUES
+            /// Enum IGNOREMISSINGANDZEROVALUES for value: IGNORE_MISSING_AND_ZERO_VALUES
             /// </summary>
             [EnumMember(Value = "IGNORE_MISSING_AND_ZERO_VALUES")]
-            MISSINGANDZEROVALUES = 4
-
+            IGNOREMISSINGANDZEROVALUES = 4
         }
 
 
@@ -153,68 +151,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DataLoadBuffer);
-        }
-
-        /// <summary>
-        /// Returns true if DataLoadBuffer instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DataLoadBuffer to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DataLoadBuffer input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.BufferId == input.BufferId ||
-                    this.BufferId.Equals(input.BufferId)
-                ) && 
-                (
-                    this.DuplicateAggregationMethod == input.DuplicateAggregationMethod ||
-                    this.DuplicateAggregationMethod.Equals(input.DuplicateAggregationMethod)
-                ) && 
-                (
-                    this.LoadBufferOptions == input.LoadBufferOptions ||
-                    this.LoadBufferOptions.Equals(input.LoadBufferOptions)
-                ) && 
-                (
-                    this.ResourceUsage == input.ResourceUsage ||
-                    this.ResourceUsage.Equals(input.ResourceUsage)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.BufferId.GetHashCode();
-                hashCode = (hashCode * 59) + this.DuplicateAggregationMethod.GetHashCode();
-                hashCode = (hashCode * 59) + this.LoadBufferOptions.GetHashCode();
-                hashCode = (hashCode * 59) + this.ResourceUsage.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

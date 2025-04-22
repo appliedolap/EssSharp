@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// LockObject
     /// </summary>
     [DataContract(Name = "LockObject")]
-    public partial class LockObject : IEquatable<LockObject>, IValidatableObject
+    public partial class LockObject : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -244,7 +244,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "MDX")]
             MDX = 35
-
         }
 
 
@@ -321,86 +320,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as LockObject);
-        }
-
-        /// <summary>
-        /// Returns true if LockObject instances are equal
-        /// </summary>
-        /// <param name="input">Instance of LockObject to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(LockObject input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.User == input.User ||
-                    (this.User != null &&
-                    this.User.Equals(input.User))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.Time == input.Time ||
-                    this.Time.Equals(input.Time)
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                if (this.User != null)
-                {
-                    hashCode = (hashCode * 59) + this.User.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                hashCode = (hashCode * 59) + this.Time.GetHashCode();
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

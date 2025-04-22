@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ParametersBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Rule'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Rule'
         }
+
         /// <summary>
         /// Test the property 'File'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'File'
         }
+
         /// <summary>
         /// Test the property 'AbortOnError'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AbortOnError'
         }
+
         /// <summary>
         /// Test the property 'RestructureOption'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RestructureOption'
         }
+
         /// <summary>
         /// Test the property 'ForceDimBuild'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ForceDimBuild'
         }
+
         /// <summary>
         /// Test the property 'Script'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Script'
         }
+
         /// <summary>
         /// Test the property 'Option'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Option'
         }
+
         /// <summary>
         /// Test the property 'Loaddata'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Loaddata'
         }
+
         /// <summary>
         /// Test the property 'UseConnection'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UseConnection'
         }
+
         /// <summary>
         /// Test the property 'Connection'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Connection'
         }
+
         /// <summary>
         /// Test the property 'User'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'User'
         }
+
         /// <summary>
         /// Test the property 'Password'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Password'
         }
+
         /// <summary>
         /// Test the property 'Calc'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Calc'
         }
+
         /// <summary>
         /// Test the property 'BuildMethod'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BuildMethod'
         }
+
         /// <summary>
         /// Test the property 'Data'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Data'
         }
+
         /// <summary>
         /// Test the property 'MemberIds'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MemberIds'
         }
+
         /// <summary>
         /// Test the property 'ZipFileName'
         /// </summary>
@@ -189,6 +204,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ZipFileName'
         }
+
         /// <summary>
         /// Test the property 'Skipdata'
         /// </summary>
@@ -197,6 +213,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Skipdata'
         }
+
         /// <summary>
         /// Test the property 'Threads'
         /// </summary>
@@ -205,6 +222,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Threads'
         }
+
         /// <summary>
         /// Test the property 'Overwrite'
         /// </summary>
@@ -213,6 +231,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Overwrite'
         }
+
         /// <summary>
         /// Test the property 'LcmImportFromStorage'
         /// </summary>
@@ -221,6 +240,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LcmImportFromStorage'
         }
+
         /// <summary>
         /// Test the property 'AnalyzeFileName'
         /// </summary>
@@ -229,6 +249,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AnalyzeFileName'
         }
+
         /// <summary>
         /// Test the property 'AnalyzeSheetName'
         /// </summary>
@@ -237,6 +258,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AnalyzeSheetName'
         }
+
         /// <summary>
         /// Test the property 'DeleteExcelOnSuccess'
         /// </summary>
@@ -245,6 +267,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DeleteExcelOnSuccess'
         }
+
         /// <summary>
         /// Test the property 'CatalogExcelPath'
         /// </summary>
@@ -253,6 +276,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CatalogExcelPath'
         }
+
         /// <summary>
         /// Test the property 'ImportExcelFileName'
         /// </summary>
@@ -261,6 +285,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ImportExcelFileName'
         }
+
         /// <summary>
         /// Test the property 'RecreateApplication'
         /// </summary>
@@ -269,6 +294,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RecreateApplication'
         }
+
         /// <summary>
         /// Test the property 'CreateFiles'
         /// </summary>
@@ -277,6 +303,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CreateFiles'
         }
+
         /// <summary>
         /// Test the property 'ExecuteScript'
         /// </summary>
@@ -285,6 +312,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ExecuteScript'
         }
+
         /// <summary>
         /// Test the property 'BuildOption'
         /// </summary>
@@ -293,6 +321,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BuildOption'
         }
+
         /// <summary>
         /// Test the property 'CopyToStorage'
         /// </summary>
@@ -301,6 +330,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CopyToStorage'
         }
+
         /// <summary>
         /// Test the property 'Filesystemcopy'
         /// </summary>
@@ -309,6 +339,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Filesystemcopy'
         }
+
         /// <summary>
         /// Test the property 'DataLevel'
         /// </summary>
@@ -317,6 +348,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataLevel'
         }
+
         /// <summary>
         /// Test the property 'ColumnFormat'
         /// </summary>
@@ -325,6 +357,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnFormat'
         }
+
         /// <summary>
         /// Test the property 'TargetApplicationName'
         /// </summary>
@@ -333,6 +366,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TargetApplicationName'
         }
+
         /// <summary>
         /// Test the property 'PartialDataExpression'
         /// </summary>
@@ -341,6 +375,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PartialDataExpression'
         }
+
         /// <summary>
         /// Test the property 'AllApp'
         /// </summary>
@@ -349,6 +384,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllApp'
         }
+
         /// <summary>
         /// Test the property 'IncludeServerLevel'
         /// </summary>
@@ -357,6 +393,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IncludeServerLevel'
         }
+
         /// <summary>
         /// Test the property 'EnableSandboxing'
         /// </summary>
@@ -365,6 +402,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EnableSandboxing'
         }
+
         /// <summary>
         /// Test the property 'DbType'
         /// </summary>
@@ -373,6 +411,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DbType'
         }
+
         /// <summary>
         /// Test the property 'DimDesignationMode'
         /// </summary>
@@ -381,6 +420,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimDesignationMode'
         }
+
         /// <summary>
         /// Test the property 'UnstructuredAnalysis'
         /// </summary>
@@ -389,6 +429,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UnstructuredAnalysis'
         }
+
         /// <summary>
         /// Test the property 'RatioToStop'
         /// </summary>
@@ -397,6 +438,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RatioToStop'
         }
+
         /// <summary>
         /// Test the property 'BasedOnQueryData'
         /// </summary>
@@ -405,6 +447,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BasedOnQueryData'
         }
+
         /// <summary>
         /// Test the property 'EnableAlternateRollups'
         /// </summary>
@@ -413,6 +456,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EnableAlternateRollups'
         }
+
         /// <summary>
         /// Test the property 'Compress'
         /// </summary>
@@ -421,6 +465,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Compress'
         }
+
         /// <summary>
         /// Test the property 'GenerateArtifactList'
         /// </summary>
@@ -429,6 +474,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'GenerateArtifactList'
         }
+
         /// <summary>
         /// Test the property 'ArtifactList'
         /// </summary>
@@ -437,6 +483,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ArtifactList'
         }
+
         /// <summary>
         /// Test the property 'Verbose'
         /// </summary>
@@ -445,6 +492,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Verbose'
         }
+
         /// <summary>
         /// Test the property 'DisasterRecovery'
         /// </summary>
@@ -453,6 +501,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DisasterRecovery'
         }
+
         /// <summary>
         /// Test the property 'Force'
         /// </summary>
@@ -461,6 +510,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Force'
         }
+
         /// <summary>
         /// Test the property 'BackupType'
         /// </summary>
@@ -469,6 +519,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BackupType'
         }
+
         /// <summary>
         /// Test the property 'AppId'
         /// </summary>
@@ -477,6 +528,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AppId'
         }
+
         /// <summary>
         /// Test the property 'Timestamp'
         /// </summary>
@@ -485,6 +537,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Timestamp'
         }
+
         /// <summary>
         /// Test the property 'MaxParallel'
         /// </summary>
@@ -493,6 +546,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxParallel'
         }
+
         /// <summary>
         /// Test the property 'SelectedDimensions'
         /// </summary>
@@ -501,6 +555,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SelectedDimensions'
         }
+
         /// <summary>
         /// Test the property 'Rtsv'
         /// </summary>
@@ -509,6 +564,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Rtsv'
         }
+
         /// <summary>
         /// Test the property 'BufferId'
         /// </summary>
@@ -517,6 +573,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BufferId'
         }
+
         /// <summary>
         /// Test the property 'BufferIds'
         /// </summary>
@@ -525,6 +582,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BufferIds'
         }
+
         /// <summary>
         /// Test the property 'CommitOption'
         /// </summary>
@@ -533,6 +591,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CommitOption'
         }
+
         /// <summary>
         /// Test the property 'ActionType'
         /// </summary>
@@ -541,6 +600,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ActionType'
         }
+
         /// <summary>
         /// Test the property 'TermOption'
         /// </summary>
@@ -549,6 +609,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TermOption'
         }
+
         /// <summary>
         /// Test the property 'DiscoverDimensionTables'
         /// </summary>
@@ -557,6 +618,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DiscoverDimensionTables'
         }
+
         /// <summary>
         /// Test the property 'ExportDynamicBlocks'
         /// </summary>
@@ -565,6 +627,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ExportDynamicBlocks'
         }
+
         /// <summary>
         /// Test the property 'ShadowAppName'
         /// </summary>
@@ -573,6 +636,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ShadowAppName'
         }
+
         /// <summary>
         /// Test the property 'PrimaryAppName'
         /// </summary>
@@ -581,6 +645,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PrimaryAppName'
         }
+
         /// <summary>
         /// Test the property 'TimeoutToForceUnloadApp'
         /// </summary>
@@ -589,6 +654,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TimeoutToForceUnloadApp'
         }
+
         /// <summary>
         /// Test the property 'HideShadow'
         /// </summary>
@@ -597,6 +663,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HideShadow'
         }
+
         /// <summary>
         /// Test the property 'WaitForOngoingUpdatesInSecs'
         /// </summary>
@@ -605,6 +672,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'WaitForOngoingUpdatesInSecs'
         }
+
         /// <summary>
         /// Test the property 'ReportScriptFilename'
         /// </summary>
@@ -613,6 +681,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ReportScriptFilename'
         }
+
         /// <summary>
         /// Test the property 'LockForUpdate'
         /// </summary>
@@ -621,6 +690,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LockForUpdate'
         }
+
         /// <summary>
         /// Test the property 'IsScriptContent'
         /// </summary>
@@ -629,6 +699,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IsScriptContent'
         }
+
         /// <summary>
         /// Test the property 'UseCatalogPath'
         /// </summary>
@@ -637,6 +708,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UseCatalogPath'
         }
+
         /// <summary>
         /// Test the property 'Exportdata'
         /// </summary>
@@ -645,6 +717,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Exportdata'
         }
+
         /// <summary>
         /// Test the property 'Cube'
         /// </summary>
@@ -653,6 +726,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Cube'
         }
+
         /// <summary>
         /// Test the property 'Filetype'
         /// </summary>
@@ -661,6 +735,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Filetype'
         }
+
         /// <summary>
         /// Test the property 'Exportpartitions'
         /// </summary>
@@ -669,6 +744,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Exportpartitions'
         }
+
         /// <summary>
         /// Test the property 'Exportfilters'
         /// </summary>
@@ -677,6 +753,25 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Exportfilters'
         }
+
+        /// <summary>
+        /// Test the property 'RestEncryPassword'
+        /// </summary>
+        [Fact]
+        public void RestEncryPasswordTest()
+        {
+            // TODO unit test for the property 'RestEncryPassword'
+        }
+
+        /// <summary>
+        /// Test the property 'CatalogZipPath'
+        /// </summary>
+        [Fact]
+        public void CatalogZipPathTest()
+        {
+            // TODO unit test for the property 'CatalogZipPath'
+        }
+
         /// <summary>
         /// Test the property 'Physical'
         /// </summary>
@@ -685,7 +780,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Physical'
         }
-
     }
-
 }

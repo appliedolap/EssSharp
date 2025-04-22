@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ColumnType>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'Nullable'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Nullable'
         }
+
         /// <summary>
         /// Test the property 'Format'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Format'
         }
+
         /// <summary>
         /// Test the property 'Index'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Index'
         }
+
         /// <summary>
         /// Test the property 'System'
         /// </summary>
@@ -101,7 +105,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'System'
         }
-
     }
-
 }

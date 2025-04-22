@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ScenarioEditBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'DueDate'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DueDate'
         }
+
         /// <summary>
         /// Test the property 'Priority'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Priority'
         }
+
         /// <summary>
         /// Test the property 'Owner'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Owner'
         }
+
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
-
     }
-
 }

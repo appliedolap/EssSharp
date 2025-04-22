@@ -168,7 +168,8 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
-            //var response = instance.VariablesListAppVariables(applicationName);
+            //bool? includeDatabaseVariables = null;
+            //var response = instance.VariablesListAppVariables(applicationName, includeDatabaseVariables);
             //Assert.IsType<VariableList>(response);
         }
 

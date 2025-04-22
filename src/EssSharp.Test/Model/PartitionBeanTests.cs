@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<PartitionBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Id'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Id'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'Updatable'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Updatable'
         }
+
         /// <summary>
         /// Test the property 'IsNew'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IsNew'
         }
+
         /// <summary>
         /// Test the property 'Locked'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Locked'
         }
+
         /// <summary>
         /// Test the property 'FederatedTypeCR'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FederatedTypeCR'
         }
+
         /// <summary>
         /// Test the property 'FederatedTypeAV'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FederatedTypeAV'
         }
+
         /// <summary>
         /// Test the property 'SourceInfo'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SourceInfo'
         }
+
         /// <summary>
         /// Test the property 'TargetInfo'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TargetInfo'
         }
+
         /// <summary>
         /// Test the property 'Areas'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Areas'
         }
+
         /// <summary>
         /// Test the property 'Mappings'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Mappings'
         }
+
         /// <summary>
         /// Test the property 'ErrorMessage'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ErrorMessage'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -157,7 +168,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

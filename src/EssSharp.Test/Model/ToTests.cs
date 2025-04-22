@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<To>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Database'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Database'
         }
+
         /// <summary>
         /// Test the property 'Application'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Application'
         }
-
     }
-
 }

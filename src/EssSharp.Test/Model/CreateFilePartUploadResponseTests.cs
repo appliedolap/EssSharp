@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CreateFilePartUploadResponse>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'UploadId'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UploadId'
         }
+
         /// <summary>
         /// Test the property 'Namespace'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Namespace'
         }
+
         /// <summary>
         /// Test the property 'Object'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Object'
         }
+
         /// <summary>
         /// Test the property 'TimeCreated'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TimeCreated'
         }
+
         /// <summary>
         /// Test the property 'Bucket'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Bucket'
         }
-
     }
-
 }

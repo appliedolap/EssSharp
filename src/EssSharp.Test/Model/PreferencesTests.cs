@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Preferences>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Indentation'
         /// </summary>
@@ -61,54 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Indentation'
         }
-        /// <summary>
-        /// Test the property 'RemoveUnSelectedGroup'
-        /// </summary>
-        [Fact]
-        public void RemoveUnSelectedGroupTest()
-        {
-            // TODO unit test for the property 'RemoveUnSelectedGroup'
-        }
-        /// <summary>
-        /// Test the property 'IncludeDescriptionLabel'
-        /// </summary>
-        [Fact]
-        public void IncludeDescriptionLabelTest()
-        {
-            // TODO unit test for the property 'IncludeDescriptionLabel'
-        }
-        /// <summary>
-        /// Test the property 'MissingText'
-        /// </summary>
-        [Fact]
-        public void MissingTextTest()
-        {
-            // TODO unit test for the property 'MissingText'
-        }
-        /// <summary>
-        /// Test the property 'NoAccessText'
-        /// </summary>
-        [Fact]
-        public void NoAccessTextTest()
-        {
-            // TODO unit test for the property 'NoAccessText'
-        }
-        /// <summary>
-        /// Test the property 'FormulaRetention'
-        /// </summary>
-        [Fact]
-        public void FormulaRetentionTest()
-        {
-            // TODO unit test for the property 'FormulaRetention'
-        }
-        /// <summary>
-        /// Test the property 'MaxColumns'
-        /// </summary>
-        [Fact]
-        public void MaxColumnsTest()
-        {
-            // TODO unit test for the property 'MaxColumns'
-        }
+
         /// <summary>
         /// Test the property 'RowSupression'
         /// </summary>
@@ -117,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RowSupression'
         }
+
         /// <summary>
         /// Test the property 'ColumnSupression'
         /// </summary>
@@ -125,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnSupression'
         }
+
         /// <summary>
         /// Test the property 'CellText'
         /// </summary>
@@ -133,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CellText'
         }
+
         /// <summary>
         /// Test the property 'ZoomIn'
         /// </summary>
@@ -141,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ZoomIn'
         }
+
         /// <summary>
         /// Test the property 'Navigate'
         /// </summary>
@@ -149,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Navigate'
         }
+
         /// <summary>
         /// Test the property 'IncludeSelection'
         /// </summary>
@@ -157,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IncludeSelection'
         }
+
         /// <summary>
         /// Test the property 'RepeatMemberLabels'
         /// </summary>
@@ -165,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RepeatMemberLabels'
         }
+
         /// <summary>
         /// Test the property 'WithinSelectedGroup'
         /// </summary>
@@ -173,6 +132,61 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'WithinSelectedGroup'
         }
+
+        /// <summary>
+        /// Test the property 'RemoveUnSelectedGroup'
+        /// </summary>
+        [Fact]
+        public void RemoveUnSelectedGroupTest()
+        {
+            // TODO unit test for the property 'RemoveUnSelectedGroup'
+        }
+
+        /// <summary>
+        /// Test the property 'IncludeDescriptionLabel'
+        /// </summary>
+        [Fact]
+        public void IncludeDescriptionLabelTest()
+        {
+            // TODO unit test for the property 'IncludeDescriptionLabel'
+        }
+
+        /// <summary>
+        /// Test the property 'MissingText'
+        /// </summary>
+        [Fact]
+        public void MissingTextTest()
+        {
+            // TODO unit test for the property 'MissingText'
+        }
+
+        /// <summary>
+        /// Test the property 'NoAccessText'
+        /// </summary>
+        [Fact]
+        public void NoAccessTextTest()
+        {
+            // TODO unit test for the property 'NoAccessText'
+        }
+
+        /// <summary>
+        /// Test the property 'FormulaRetention'
+        /// </summary>
+        [Fact]
+        public void FormulaRetentionTest()
+        {
+            // TODO unit test for the property 'FormulaRetention'
+        }
+
+        /// <summary>
+        /// Test the property 'MaxColumns'
+        /// </summary>
+        [Fact]
+        public void MaxColumnsTest()
+        {
+            // TODO unit test for the property 'MaxColumns'
+        }
+
         /// <summary>
         /// Test the property 'MaxRows'
         /// </summary>
@@ -181,7 +195,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxRows'
         }
-
     }
-
 }

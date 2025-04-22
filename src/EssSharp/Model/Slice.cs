@@ -27,22 +27,22 @@ namespace EssSharp.Model
     /// Slice
     /// </summary>
     [DataContract(Name = "Slice")]
-    public partial class Slice : IEquatable<Slice>, IValidatableObject
+    public partial class Slice : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Slice" /> class.
         /// </summary>
         /// <param name="dirtyCells">dirtyCells.</param>
         /// <param name="dirtyTexts">dirtyTexts.</param>
-        /// <param name="columns">columns.</param>
         /// <param name="rows">rows.</param>
+        /// <param name="columns">columns.</param>
         /// <param name="data">data.</param>
-        public Slice(List<int> dirtyCells = default(List<int>), List<int> dirtyTexts = default(List<int>), int columns = default(int), int rows = default(int), Data data = default(Data))
+        public Slice(List<int> dirtyCells = default(List<int>), List<int> dirtyTexts = default(List<int>), int rows = default(int), int columns = default(int), Data data = default(Data))
         {
             this.DirtyCells = dirtyCells;
             this.DirtyTexts = dirtyTexts;
-            this.Columns = columns;
             this.Rows = rows;
+            this.Columns = columns;
             this.Data = data;
         }
 
@@ -59,16 +59,16 @@ namespace EssSharp.Model
         public List<int> DirtyTexts { get; set; }
 
         /// <summary>
-        /// Gets or Sets Columns
-        /// </summary>
-        [DataMember(Name = "columns", EmitDefaultValue = false)]
-        public int Columns { get; set; }
-
-        /// <summary>
         /// Gets or Sets Rows
         /// </summary>
         [DataMember(Name = "rows", EmitDefaultValue = false)]
         public int Rows { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Columns
+        /// </summary>
+        [DataMember(Name = "columns", EmitDefaultValue = false)]
+        public int Columns { get; set; }
 
         /// <summary>
         /// Gets or Sets Data
@@ -86,8 +86,8 @@ namespace EssSharp.Model
             sb.Append("class Slice {\n");
             sb.Append("  DirtyCells: ").Append(DirtyCells).Append("\n");
             sb.Append("  DirtyTexts: ").Append(DirtyTexts).Append("\n");
-            sb.Append("  Columns: ").Append(Columns).Append("\n");
             sb.Append("  Rows: ").Append(Rows).Append("\n");
+            sb.Append("  Columns: ").Append(Columns).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -103,87 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Slice);
-        }
-
-        /// <summary>
-        /// Returns true if Slice instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Slice to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Slice input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.DirtyCells == input.DirtyCells ||
-                    this.DirtyCells != null &&
-                    input.DirtyCells != null &&
-                    this.DirtyCells.SequenceEqual(input.DirtyCells)
-                ) && 
-                (
-                    this.DirtyTexts == input.DirtyTexts ||
-                    this.DirtyTexts != null &&
-                    input.DirtyTexts != null &&
-                    this.DirtyTexts.SequenceEqual(input.DirtyTexts)
-                ) && 
-                (
-                    this.Columns == input.Columns ||
-                    this.Columns.Equals(input.Columns)
-                ) && 
-                (
-                    this.Rows == input.Rows ||
-                    this.Rows.Equals(input.Rows)
-                ) && 
-                (
-                    this.Data == input.Data ||
-                    (this.Data != null &&
-                    this.Data.Equals(input.Data))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.DirtyCells != null)
-                {
-                    hashCode = (hashCode * 59) + this.DirtyCells.GetHashCode();
-                }
-                if (this.DirtyTexts != null)
-                {
-                    hashCode = (hashCode * 59) + this.DirtyTexts.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Columns.GetHashCode();
-                hashCode = (hashCode * 59) + this.Rows.GetHashCode();
-                if (this.Data != null)
-                {
-                    hashCode = (hashCode * 59) + this.Data.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

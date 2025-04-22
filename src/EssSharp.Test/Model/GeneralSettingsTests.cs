@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GeneralSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'QueryTracking'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'QueryTracking'
         }
-
     }
-
 }

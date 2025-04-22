@@ -413,7 +413,7 @@ catch (ApiException e)
 
 <a id="drillthroughreportsgetreports"></a>
 # **DrillThroughReportsGetReports**
-> ReportList DrillThroughReportsGetReports (string applicationName, string databaseName)
+> ReportList DrillThroughReportsGetReports (string applicationName, string databaseName, string keyword = null)
 
 Get Drill Through Reports
 
@@ -442,11 +442,12 @@ namespace Example
             var apiInstance = new DrillThroughReportsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var keyword = "keyword_example";  // string | <p>Filter the list of drill-through reports using a keyword.<p> (optional) 
 
             try
             {
                 // Get Drill Through Reports
-                ReportList result = apiInstance.DrillThroughReportsGetReports(applicationName, databaseName);
+                ReportList result = apiInstance.DrillThroughReportsGetReports(applicationName, databaseName, keyword);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -467,7 +468,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Drill Through Reports
-    ApiResponse<ReportList> response = apiInstance.DrillThroughReportsGetReportsWithHttpInfo(applicationName, databaseName);
+    ApiResponse<ReportList> response = apiInstance.DrillThroughReportsGetReportsWithHttpInfo(applicationName, databaseName, keyword);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -486,6 +487,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **keyword** | **string** | &lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; | [optional]  |
 
 ### Return type
 

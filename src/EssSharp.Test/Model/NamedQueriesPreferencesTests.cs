@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<NamedQueriesPreferences>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Dataless'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dataless'
         }
+
         /// <summary>
         /// Test the property 'HideRestrictedData'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HideRestrictedData'
         }
+
         /// <summary>
         /// Test the property 'CellAttributes'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CellAttributes'
         }
+
         /// <summary>
         /// Test the property 'FormatString'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FormatString'
         }
+
         /// <summary>
         /// Test the property 'FormatValues'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FormatValues'
         }
+
         /// <summary>
         /// Test the property 'MeaninglessCells'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MeaninglessCells'
         }
+
         /// <summary>
         /// Test the property 'TextList'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TextList'
         }
+
         /// <summary>
         /// Test the property 'UrlDrillThrough'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UrlDrillThrough'
         }
+
         /// <summary>
         /// Test the property 'MemberIdentifierType'
         /// </summary>
@@ -125,7 +132,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MemberIdentifierType'
         }
-
     }
-
 }

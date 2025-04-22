@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<LockBlock>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
+
         /// <summary>
         /// Test the property 'Duration'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Duration'
         }
+
         /// <summary>
         /// Test the property 'User'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'User'
         }
+
         /// <summary>
         /// Test the property 'Count'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Count'
         }
-
     }
-
 }

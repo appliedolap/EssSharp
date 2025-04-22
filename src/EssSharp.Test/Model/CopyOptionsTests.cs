@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CopyOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Properties'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Properties'
         }
+
         /// <summary>
         /// Test the property 'Comments'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Comments'
         }
+
         /// <summary>
         /// Test the property 'Data'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Data'
         }
+
         /// <summary>
         /// Test the property 'Tasks'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Tasks'
         }
+
         /// <summary>
         /// Test the property 'KeyMetrics'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'KeyMetrics'
         }
+
         /// <summary>
         /// Test the property 'Slice'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Slice'
         }
+
         /// <summary>
         /// Test the property 'Layouts'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Layouts'
         }
+
         /// <summary>
         /// Test the property 'Approvers'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Approvers'
         }
+
         /// <summary>
         /// Test the property 'Participants'
         /// </summary>
@@ -125,7 +132,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Participants'
         }
-
     }
-
 }

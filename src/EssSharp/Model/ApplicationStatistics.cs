@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ApplicationStatistics
     /// </summary>
     [DataContract(Name = "ApplicationStatistics")]
-    public partial class ApplicationStatistics : IEquatable<ApplicationStatistics>, IValidatableObject
+    public partial class ApplicationStatistics : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationStatistics" /> class.
@@ -94,76 +94,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ApplicationStatistics);
-        }
-
-        /// <summary>
-        /// Returns true if ApplicationStatistics instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ApplicationStatistics to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ApplicationStatistics input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.ApplicationStartTime == input.ApplicationStartTime ||
-                    this.ApplicationStartTime.Equals(input.ApplicationStartTime)
-                ) && 
-                (
-                    this.ApplicationElapsedTime == input.ApplicationElapsedTime ||
-                    (this.ApplicationElapsedTime != null &&
-                    this.ApplicationElapsedTime.Equals(input.ApplicationElapsedTime))
-                ) && 
-                (
-                    this.NumberOfConnections == input.NumberOfConnections ||
-                    this.NumberOfConnections.Equals(input.NumberOfConnections)
-                ) && 
-                (
-                    this.LoadStatus == input.LoadStatus ||
-                    (this.LoadStatus != null &&
-                    this.LoadStatus.Equals(input.LoadStatus))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.ApplicationStartTime.GetHashCode();
-                if (this.ApplicationElapsedTime != null)
-                {
-                    hashCode = (hashCode * 59) + this.ApplicationElapsedTime.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.NumberOfConnections.GetHashCode();
-                if (this.LoadStatus != null)
-                {
-                    hashCode = (hashCode * 59) + this.LoadStatus.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

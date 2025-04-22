@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** |  | [optional] 
-**_Version** | **string** |  | [optional] 
+**VarVersion** | **string** |  | [optional] 
 **Build** | **string** |  | [optional] 
 **Description** | **string** |  | [optional] 
 **ListingVersion** | **string** |  | [optional] 

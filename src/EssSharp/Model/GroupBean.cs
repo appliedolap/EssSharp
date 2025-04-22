@@ -27,22 +27,22 @@ namespace EssSharp.Model
     /// GroupBean
     /// </summary>
     [DataContract(Name = "GroupBean")]
-    public partial class GroupBean : IEquatable<GroupBean>, IValidatableObject
+    public partial class GroupBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GroupBean" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        /// <param name="role">role.</param>
-        /// <param name="description">description.</param>
         /// <param name="groups">groups.</param>
+        /// <param name="description">description.</param>
+        /// <param name="role">role.</param>
         /// <param name="name">name.</param>
-        public GroupBean(List<Link> links = default(List<Link>), string role = default(string), string description = default(string), List<string> groups = default(List<string>), string name = default(string))
+        public GroupBean(List<Link> links = default(List<Link>), List<string> groups = default(List<string>), string description = default(string), string role = default(string), string name = default(string))
         {
             this.Links = links;
-            this.Role = role;
-            this.Description = description;
             this.Groups = groups;
+            this.Description = description;
+            this.Role = role;
             this.Name = name;
         }
 
@@ -53,10 +53,10 @@ namespace EssSharp.Model
         public List<Link> Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets Role
+        /// Gets or Sets Groups
         /// </summary>
-        [DataMember(Name = "role", EmitDefaultValue = false)]
-        public string Role { get; set; }
+        [DataMember(Name = "groups", EmitDefaultValue = false)]
+        public List<string> Groups { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
@@ -65,10 +65,10 @@ namespace EssSharp.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets Groups
+        /// Gets or Sets Role
         /// </summary>
-        [DataMember(Name = "groups", EmitDefaultValue = false)]
-        public List<string> Groups { get; set; }
+        [DataMember(Name = "role", EmitDefaultValue = false)]
+        public string Role { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -85,9 +85,9 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GroupBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
-            sb.Append("  Role: ").Append(Role).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Groups: ").Append(Groups).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Role: ").Append(Role).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -103,95 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as GroupBean);
-        }
-
-        /// <summary>
-        /// Returns true if GroupBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of GroupBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(GroupBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.Role == input.Role ||
-                    (this.Role != null &&
-                    this.Role.Equals(input.Role))
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Groups == input.Groups ||
-                    this.Groups != null &&
-                    input.Groups != null &&
-                    this.Groups.SequenceEqual(input.Groups)
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                if (this.Role != null)
-                {
-                    hashCode = (hashCode * 59) + this.Role.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.Groups != null)
-                {
-                    hashCode = (hashCode * 59) + this.Groups.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

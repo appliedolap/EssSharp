@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GridLayout>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Data'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Data'
         }
+
         /// <summary>
         /// Test the property 'Alias'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Alias'
         }
+
         /// <summary>
         /// Test the property 'Dimensions'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dimensions'
         }
-
     }
-
 }

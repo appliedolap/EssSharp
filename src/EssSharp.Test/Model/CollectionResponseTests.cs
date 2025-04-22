@@ -52,6 +52,14 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CollectionResponse>(instance);
         }
 
+        /// <summary>
+        /// Test the property 'HasMore'
+        /// </summary>
+        [Fact]
+        public void HasMoreTest()
+        {
+            // TODO unit test for the property 'HasMore'
+        }
 
         /// <summary>
         /// Test the property 'TotalResults'
@@ -61,22 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TotalResults'
         }
-        /// <summary>
-        /// Test the property 'HasMore'
-        /// </summary>
-        [Fact]
-        public void HasMoreTest()
-        {
-            // TODO unit test for the property 'HasMore'
-        }
-        /// <summary>
-        /// Test the property 'Count'
-        /// </summary>
-        [Fact]
-        public void CountTest()
-        {
-            // TODO unit test for the property 'Count'
-        }
+
         /// <summary>
         /// Test the property 'Items'
         /// </summary>
@@ -85,6 +78,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Items'
         }
+
+        /// <summary>
+        /// Test the property 'Count'
+        /// </summary>
+        [Fact]
+        public void CountTest()
+        {
+            // TODO unit test for the property 'Count'
+        }
+
         /// <summary>
         /// Test the property 'Limit'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Limit'
         }
+
         /// <summary>
         /// Test the property 'Properties'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Properties'
         }
+
         /// <summary>
         /// Test the property 'Offset'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Offset'
         }
-
     }
-
 }

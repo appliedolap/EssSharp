@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Owner>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Id'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Id'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
-
     }
-
 }

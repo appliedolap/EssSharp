@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Rules>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Dimensions'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dimensions'
         }
+
         /// <summary>
         /// Test the property 'Fields'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Fields'
         }
+
         /// <summary>
         /// Test the property 'TimeStamp'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TimeStamp'
         }
+
         /// <summary>
         /// Test the property 'DataSource'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataSource'
         }
+
         /// <summary>
         /// Test the property 'DimensionBuildOptions'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimensionBuildOptions'
         }
+
         /// <summary>
         /// Test the property 'DataLoadOptions'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataLoadOptions'
         }
+
         /// <summary>
         /// Test the property 'EditorOptions'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EditorOptions'
         }
+
         /// <summary>
         /// Test the property 'Encoding'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Encoding'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Locale'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Locale'
         }
+
         /// <summary>
         /// Test the property 'Studio'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Studio'
         }
+
         /// <summary>
         /// Test the property 'Bibpm'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Bibpm'
         }
+
         /// <summary>
         /// Test the property 'Xolap'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Xolap'
         }
+
         /// <summary>
         /// Test the property 'FlatFileBased'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FlatFileBased'
         }
+
         /// <summary>
         /// Test the property 'EssbaseInfo'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EssbaseInfo'
         }
+
         /// <summary>
         /// Test the property 'ColumnOperations'
         /// </summary>
@@ -181,7 +195,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnOperations'
         }
-
     }
-
 }

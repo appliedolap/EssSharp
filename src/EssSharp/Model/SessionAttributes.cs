@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// SessionAttributes
     /// </summary>
     [DataContract(Name = "SessionAttributes")]
-    public partial class SessionAttributes : IEquatable<SessionAttributes>, IValidatableObject
+    public partial class SessionAttributes : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionAttributes" /> class.
@@ -148,138 +148,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as SessionAttributes);
-        }
-
-        /// <summary>
-        /// Returns true if SessionAttributes instances are equal
-        /// </summary>
-        /// <param name="input">Instance of SessionAttributes to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(SessionAttributes input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.UserId == input.UserId ||
-                    (this.UserId != null &&
-                    this.UserId.Equals(input.UserId))
-                ) && 
-                (
-                    this.SessionId == input.SessionId ||
-                    (this.SessionId != null &&
-                    this.SessionId.Equals(input.SessionId))
-                ) && 
-                (
-                    this.LoginTimeInSeconds == input.LoginTimeInSeconds ||
-                    (this.LoginTimeInSeconds != null &&
-                    this.LoginTimeInSeconds.Equals(input.LoginTimeInSeconds))
-                ) && 
-                (
-                    this.Application == input.Application ||
-                    (this.Application != null &&
-                    this.Application.Equals(input.Application))
-                ) && 
-                (
-                    this.Database == input.Database ||
-                    (this.Database != null &&
-                    this.Database.Equals(input.Database))
-                ) && 
-                (
-                    this.DbConnectTimeInSeconds == input.DbConnectTimeInSeconds ||
-                    (this.DbConnectTimeInSeconds != null &&
-                    this.DbConnectTimeInSeconds.Equals(input.DbConnectTimeInSeconds))
-                ) && 
-                (
-                    this.Request == input.Request ||
-                    (this.Request != null &&
-                    this.Request.Equals(input.Request))
-                ) && 
-                (
-                    this.RequestTimeInSeconds == input.RequestTimeInSeconds ||
-                    (this.RequestTimeInSeconds != null &&
-                    this.RequestTimeInSeconds.Equals(input.RequestTimeInSeconds))
-                ) && 
-                (
-                    this.ConnectionSource == input.ConnectionSource ||
-                    (this.ConnectionSource != null &&
-                    this.ConnectionSource.Equals(input.ConnectionSource))
-                ) && 
-                (
-                    this.RequestState == input.RequestState ||
-                    (this.RequestState != null &&
-                    this.RequestState.Equals(input.RequestState))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.UserId != null)
-                {
-                    hashCode = (hashCode * 59) + this.UserId.GetHashCode();
-                }
-                if (this.SessionId != null)
-                {
-                    hashCode = (hashCode * 59) + this.SessionId.GetHashCode();
-                }
-                if (this.LoginTimeInSeconds != null)
-                {
-                    hashCode = (hashCode * 59) + this.LoginTimeInSeconds.GetHashCode();
-                }
-                if (this.Application != null)
-                {
-                    hashCode = (hashCode * 59) + this.Application.GetHashCode();
-                }
-                if (this.Database != null)
-                {
-                    hashCode = (hashCode * 59) + this.Database.GetHashCode();
-                }
-                if (this.DbConnectTimeInSeconds != null)
-                {
-                    hashCode = (hashCode * 59) + this.DbConnectTimeInSeconds.GetHashCode();
-                }
-                if (this.Request != null)
-                {
-                    hashCode = (hashCode * 59) + this.Request.GetHashCode();
-                }
-                if (this.RequestTimeInSeconds != null)
-                {
-                    hashCode = (hashCode * 59) + this.RequestTimeInSeconds.GetHashCode();
-                }
-                if (this.ConnectionSource != null)
-                {
-                    hashCode = (hashCode * 59) + this.ConnectionSource.GetHashCode();
-                }
-                if (this.RequestState != null)
-                {
-                    hashCode = (hashCode * 59) + this.RequestState.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CompactDesignation>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'File'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'File'
         }
+
         /// <summary>
         /// Test the property 'ExcelSheetName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ExcelSheetName'
         }
+
         /// <summary>
         /// Test the property 'ColumnOffset'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnOffset'
         }
+
         /// <summary>
         /// Test the property 'BadRowListString'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BadRowListString'
         }
+
         /// <summary>
         /// Test the property 'Nr'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Nr'
         }
+
         /// <summary>
         /// Test the property 'Nrh'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Nrh'
         }
+
         /// <summary>
         /// Test the property 'CompactDesignationColumn'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CompactDesignationColumn'
         }
+
         /// <summary>
         /// Test the property 'BsoLimitsExceeded'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BsoLimitsExceeded'
         }
+
         /// <summary>
         /// Test the property 'FastAnalysis'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FastAnalysis'
         }
+
         /// <summary>
         /// Test the property 'MeasureDimensionName'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MeasureDimensionName'
         }
+
         /// <summary>
         /// Test the property 'DimDesignationMode'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimDesignationMode'
         }
+
         /// <summary>
         /// Test the property 'NamingPriority'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NamingPriority'
         }
+
         /// <summary>
         /// Test the property 'DateColumnId'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DateColumnId'
         }
+
         /// <summary>
         /// Test the property 'DateFormatString'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DateFormatString'
         }
+
         /// <summary>
         /// Test the property 'DateDimString'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DateDimString'
         }
+
         /// <summary>
         /// Test the property 'DateDimensionLeaves'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DateDimensionLeaves'
         }
+
         /// <summary>
         /// Test the property 'MaxDate'
         /// </summary>
@@ -189,6 +204,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxDate'
         }
+
         /// <summary>
         /// Test the property 'MinDate'
         /// </summary>
@@ -197,6 +213,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MinDate'
         }
+
         /// <summary>
         /// Test the property 'TableName'
         /// </summary>
@@ -205,6 +222,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TableName'
         }
+
         /// <summary>
         /// Test the property 'DimCompactDesignationList'
         /// </summary>
@@ -213,6 +231,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimCompactDesignationList'
         }
+
         /// <summary>
         /// Test the property 'Query'
         /// </summary>
@@ -221,6 +240,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Query'
         }
+
         /// <summary>
         /// Test the property 'ExcelRowCount'
         /// </summary>
@@ -229,7 +249,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ExcelRowCount'
         }
-
     }
-
 }

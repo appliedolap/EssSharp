@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ReportBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
+
         /// <summary>
         /// Test the property 'LockedTime'
         /// </summary>
@@ -69,14 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LockedTime'
         }
-        /// <summary>
-        /// Test the property 'ModifiedTime'
-        /// </summary>
-        [Fact]
-        public void ModifiedTimeTest()
-        {
-            // TODO unit test for the property 'ModifiedTime'
-        }
+
         /// <summary>
         /// Test the property 'Locked'
         /// </summary>
@@ -85,14 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Locked'
         }
-        /// <summary>
-        /// Test the property 'LockedBy'
-        /// </summary>
-        [Fact]
-        public void LockedByTest()
-        {
-            // TODO unit test for the property 'LockedBy'
-        }
+
         /// <summary>
         /// Test the property 'SizeInBytes'
         /// </summary>
@@ -101,6 +87,25 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SizeInBytes'
         }
+
+        /// <summary>
+        /// Test the property 'LockedBy'
+        /// </summary>
+        [Fact]
+        public void LockedByTest()
+        {
+            // TODO unit test for the property 'LockedBy'
+        }
+
+        /// <summary>
+        /// Test the property 'ModifiedTime'
+        /// </summary>
+        [Fact]
+        public void ModifiedTimeTest()
+        {
+            // TODO unit test for the property 'ModifiedTime'
+        }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
-
     }
-
 }

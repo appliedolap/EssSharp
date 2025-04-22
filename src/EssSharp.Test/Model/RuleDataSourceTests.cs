@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<RuleDataSource>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Header'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Header'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Tokens'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Tokens'
         }
+
         /// <summary>
         /// Test the property 'TokensCombineOption'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TokensCombineOption'
         }
+
         /// <summary>
         /// Test the property 'SqlProperties'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SqlProperties'
         }
+
         /// <summary>
         /// Test the property 'FileProperties'
         /// </summary>
@@ -101,7 +105,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FileProperties'
         }
-
     }
-
 }

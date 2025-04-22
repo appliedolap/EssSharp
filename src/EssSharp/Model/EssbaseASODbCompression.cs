@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// EssbaseASODbCompression
     /// </summary>
     [DataContract(Name = "EssbaseASODbCompression")]
-    public partial class EssbaseASODbCompression : IEquatable<EssbaseASODbCompression>, IValidatableObject
+    public partial class EssbaseASODbCompression : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EssbaseASODbCompression" /> class.
@@ -175,137 +175,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as EssbaseASODbCompression);
-        }
-
-        /// <summary>
-        /// Returns true if EssbaseASODbCompression instances are equal
-        /// </summary>
-        /// <param name="input">Instance of EssbaseASODbCompression to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(EssbaseASODbCompression input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.ArtifactType == input.ArtifactType ||
-                    this.ArtifactType.Equals(input.ArtifactType)
-                ) && 
-                (
-                    this.NodeName == input.NodeName ||
-                    (this.NodeName != null &&
-                    this.NodeName.Equals(input.NodeName))
-                ) && 
-                (
-                    this.AppName == input.AppName ||
-                    (this.AppName != null &&
-                    this.AppName.Equals(input.AppName))
-                ) && 
-                (
-                    this.DbName == input.DbName ||
-                    (this.DbName != null &&
-                    this.DbName.Equals(input.DbName))
-                ) && 
-                (
-                    this.Locked == input.Locked ||
-                    this.Locked.Equals(input.Locked)
-                ) && 
-                (
-                    this.LockedByUser == input.LockedByUser ||
-                    (this.LockedByUser != null &&
-                    this.LockedByUser.Equals(input.LockedByUser))
-                ) && 
-                (
-                    this.DimensionName == input.DimensionName ||
-                    (this.DimensionName != null &&
-                    this.DimensionName.Equals(input.DimensionName))
-                ) && 
-                (
-                    this.IsCompression == input.IsCompression ||
-                    this.IsCompression.Equals(input.IsCompression)
-                ) && 
-                (
-                    this.StoredLevel0Members == input.StoredLevel0Members ||
-                    this.StoredLevel0Members.Equals(input.StoredLevel0Members)
-                ) && 
-                (
-                    this.AverageBundleFill == input.AverageBundleFill ||
-                    this.AverageBundleFill.Equals(input.AverageBundleFill)
-                ) && 
-                (
-                    this.AverageValueLength == input.AverageValueLength ||
-                    this.AverageValueLength.Equals(input.AverageValueLength)
-                ) && 
-                (
-                    this.Level0MB == input.Level0MB ||
-                    this.Level0MB.Equals(input.Level0MB)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ArtifactType.GetHashCode();
-                if (this.NodeName != null)
-                {
-                    hashCode = (hashCode * 59) + this.NodeName.GetHashCode();
-                }
-                if (this.AppName != null)
-                {
-                    hashCode = (hashCode * 59) + this.AppName.GetHashCode();
-                }
-                if (this.DbName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DbName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Locked.GetHashCode();
-                if (this.LockedByUser != null)
-                {
-                    hashCode = (hashCode * 59) + this.LockedByUser.GetHashCode();
-                }
-                if (this.DimensionName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimensionName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.IsCompression.GetHashCode();
-                hashCode = (hashCode * 59) + this.StoredLevel0Members.GetHashCode();
-                hashCode = (hashCode * 59) + this.AverageBundleFill.GetHashCode();
-                hashCode = (hashCode * 59) + this.AverageValueLength.GetHashCode();
-                hashCode = (hashCode * 59) + this.Level0MB.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Connection>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'Path'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Path'
         }
+
         /// <summary>
         /// Test the property 'Catalog'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Catalog'
         }
+
         /// <summary>
         /// Test the property 'Host'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Host'
         }
+
         /// <summary>
         /// Test the property 'Port'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Port'
         }
+
         /// <summary>
         /// Test the property 'User'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'User'
         }
+
         /// <summary>
         /// Test the property 'Password'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Password'
         }
+
         /// <summary>
         /// Test the property 'Encrypted'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Encrypted'
         }
+
         /// <summary>
         /// Test the property 'Token'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Token'
         }
+
         /// <summary>
         /// Test the property 'Sid'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Sid'
         }
+
         /// <summary>
         /// Test the property 'Service'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Service'
         }
+
         /// <summary>
         /// Test the property 'Schema'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Schema'
         }
+
         /// <summary>
         /// Test the property 'DbURL'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DbURL'
         }
+
         /// <summary>
         /// Test the property 'DbDriver'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DbDriver'
         }
+
         /// <summary>
         /// Test the property 'Datasource'
         /// </summary>
@@ -189,6 +204,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Datasource'
         }
+
         /// <summary>
         /// Test the property 'Subtype'
         /// </summary>
@@ -197,6 +213,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Subtype'
         }
+
         /// <summary>
         /// Test the property 'WalletPath'
         /// </summary>
@@ -205,6 +222,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'WalletPath'
         }
+
         /// <summary>
         /// Test the property 'RepoWallet'
         /// </summary>
@@ -213,6 +231,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RepoWallet'
         }
+
         /// <summary>
         /// Test the property 'MinPoolSize'
         /// </summary>
@@ -221,6 +240,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MinPoolSize'
         }
+
         /// <summary>
         /// Test the property 'MaxPoolSize'
         /// </summary>
@@ -229,6 +249,25 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxPoolSize'
         }
+
+        /// <summary>
+        /// Test the property 'Hidden'
+        /// </summary>
+        [Fact]
+        public void HiddenTest()
+        {
+            // TODO unit test for the property 'Hidden'
+        }
+
+        /// <summary>
+        /// Test the property 'Availability'
+        /// </summary>
+        [Fact]
+        public void AvailabilityTest()
+        {
+            // TODO unit test for the property 'Availability'
+        }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -237,7 +276,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// MemberBean
     /// </summary>
     [DataContract(Name = "MemberBean")]
-    public partial class MemberBean : IEquatable<MemberBean>, IValidatableObject
+    public partial class MemberBean : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -58,7 +58,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DATE")]
             DATE = 4
-
         }
 
 
@@ -102,7 +101,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "ATTRIBUTECALC")]
             ATTRIBUTECALC = 5
-
         }
 
 
@@ -128,7 +126,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "SPARSE")]
             SPARSE = 2
-
         }
 
 
@@ -391,238 +388,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as MemberBean);
-        }
-
-        /// <summary>
-        /// Returns true if MemberBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of MemberBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(MemberBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.DimensionName == input.DimensionName ||
-                    (this.DimensionName != null &&
-                    this.DimensionName.Equals(input.DimensionName))
-                ) && 
-                (
-                    this.NumberOfChildren == input.NumberOfChildren ||
-                    this.NumberOfChildren.Equals(input.NumberOfChildren)
-                ) && 
-                (
-                    this.LevelNumber == input.LevelNumber ||
-                    this.LevelNumber.Equals(input.LevelNumber)
-                ) && 
-                (
-                    this.GenerationNumber == input.GenerationNumber ||
-                    this.GenerationNumber.Equals(input.GenerationNumber)
-                ) && 
-                (
-                    this.Aliases == input.Aliases ||
-                    this.Aliases != null &&
-                    input.Aliases != null &&
-                    this.Aliases.SequenceEqual(input.Aliases)
-                ) && 
-                (
-                    this.ActiveAliasName == input.ActiveAliasName ||
-                    (this.ActiveAliasName != null &&
-                    this.ActiveAliasName.Equals(input.ActiveAliasName))
-                ) && 
-                (
-                    this.MemberHasUniqueName == input.MemberHasUniqueName ||
-                    this.MemberHasUniqueName.Equals(input.MemberHasUniqueName)
-                ) && 
-                (
-                    this.UniqueName == input.UniqueName ||
-                    (this.UniqueName != null &&
-                    this.UniqueName.Equals(input.UniqueName))
-                ) && 
-                (
-                    this.MemberId == input.MemberId ||
-                    (this.MemberId != null &&
-                    this.MemberId.Equals(input.MemberId))
-                ) && 
-                (
-                    this.UniqueId == input.UniqueId ||
-                    (this.UniqueId != null &&
-                    this.UniqueId.Equals(input.UniqueId))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.MemberSolveOrder == input.MemberSolveOrder ||
-                    this.MemberSolveOrder.Equals(input.MemberSolveOrder)
-                ) && 
-                (
-                    this.DescendantsCount == input.DescendantsCount ||
-                    this.DescendantsCount.Equals(input.DescendantsCount)
-                ) && 
-                (
-                    this.PreviousSiblingsCount == input.PreviousSiblingsCount ||
-                    this.PreviousSiblingsCount.Equals(input.PreviousSiblingsCount)
-                ) && 
-                (
-                    this.Dimension == input.Dimension ||
-                    this.Dimension.Equals(input.Dimension)
-                ) && 
-                (
-                    this.Attribute == input.Attribute ||
-                    this.Attribute.Equals(input.Attribute)
-                ) && 
-                (
-                    this.Account == input.Account ||
-                    this.Account.Equals(input.Account)
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.DimSolveOrder == input.DimSolveOrder ||
-                    this.DimSolveOrder.Equals(input.DimSolveOrder)
-                ) && 
-                (
-                    this.DimensionType == input.DimensionType ||
-                    this.DimensionType.Equals(input.DimensionType)
-                ) && 
-                (
-                    this.FormatString == input.FormatString ||
-                    (this.FormatString != null &&
-                    this.FormatString.Equals(input.FormatString))
-                ) && 
-                (
-                    this.DimStorageType == input.DimStorageType ||
-                    this.DimStorageType.Equals(input.DimStorageType)
-                ) && 
-                (
-                    this.CurrencyConversionCategory == input.CurrencyConversionCategory ||
-                    (this.CurrencyConversionCategory != null &&
-                    this.CurrencyConversionCategory.Equals(input.CurrencyConversionCategory))
-                ) && 
-                (
-                    this.Uda == input.Uda ||
-                    this.Uda != null &&
-                    input.Uda != null &&
-                    this.Uda.SequenceEqual(input.Uda)
-                ) && 
-                (
-                    this.DataStorageType == input.DataStorageType ||
-                    (this.DataStorageType != null &&
-                    this.DataStorageType.Equals(input.DataStorageType))
-                ) && 
-                (
-                    this.ParentName == input.ParentName ||
-                    (this.ParentName != null &&
-                    this.ParentName.Equals(input.ParentName))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.DimensionName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimensionName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.NumberOfChildren.GetHashCode();
-                hashCode = (hashCode * 59) + this.LevelNumber.GetHashCode();
-                hashCode = (hashCode * 59) + this.GenerationNumber.GetHashCode();
-                if (this.Aliases != null)
-                {
-                    hashCode = (hashCode * 59) + this.Aliases.GetHashCode();
-                }
-                if (this.ActiveAliasName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ActiveAliasName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.MemberHasUniqueName.GetHashCode();
-                if (this.UniqueName != null)
-                {
-                    hashCode = (hashCode * 59) + this.UniqueName.GetHashCode();
-                }
-                if (this.MemberId != null)
-                {
-                    hashCode = (hashCode * 59) + this.MemberId.GetHashCode();
-                }
-                if (this.UniqueId != null)
-                {
-                    hashCode = (hashCode * 59) + this.UniqueId.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                hashCode = (hashCode * 59) + this.MemberSolveOrder.GetHashCode();
-                hashCode = (hashCode * 59) + this.DescendantsCount.GetHashCode();
-                hashCode = (hashCode * 59) + this.PreviousSiblingsCount.GetHashCode();
-                hashCode = (hashCode * 59) + this.Dimension.GetHashCode();
-                hashCode = (hashCode * 59) + this.Attribute.GetHashCode();
-                hashCode = (hashCode * 59) + this.Account.GetHashCode();
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.DimSolveOrder.GetHashCode();
-                hashCode = (hashCode * 59) + this.DimensionType.GetHashCode();
-                if (this.FormatString != null)
-                {
-                    hashCode = (hashCode * 59) + this.FormatString.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.DimStorageType.GetHashCode();
-                if (this.CurrencyConversionCategory != null)
-                {
-                    hashCode = (hashCode * 59) + this.CurrencyConversionCategory.GetHashCode();
-                }
-                if (this.Uda != null)
-                {
-                    hashCode = (hashCode * 59) + this.Uda.GetHashCode();
-                }
-                if (this.DataStorageType != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataStorageType.GetHashCode();
-                }
-                if (this.ParentName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ParentName.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

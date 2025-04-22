@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<FieldDimBuildOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Parent'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Parent'
         }
+
         /// <summary>
         /// Test the property 'GenerationType'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'GenerationType'
         }
+
         /// <summary>
         /// Test the property 'Refer'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Refer'
         }
+
         /// <summary>
         /// Test the property 'ReferIndex'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ReferIndex'
         }
+
         /// <summary>
         /// Test the property 'Shared'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Shared'
         }
+
         /// <summary>
         /// Test the property 'AttributeBuildProperties'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AttributeBuildProperties'
         }
+
         /// <summary>
         /// Test the property 'Dimension'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dimension'
         }
+
         /// <summary>
         /// Test the property 'AttributeDimension'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AttributeDimension'
         }
+
         /// <summary>
         /// Test the property 'Alias'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Alias'
         }
+
         /// <summary>
         /// Test the property 'EndIndepColumns'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EndIndepColumns'
         }
+
         /// <summary>
         /// Test the property 'StartIndepColumns'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartIndepColumns'
         }
+
         /// <summary>
         /// Test the property 'GenerationProperty'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'GenerationProperty'
         }
+
         /// <summary>
         /// Test the property 'Generation'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Generation'
         }
+
         /// <summary>
         /// Test the property 'Ignore'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Ignore'
         }
+
         /// <summary>
         /// Test the property 'StaticField'
         /// </summary>
@@ -173,7 +186,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StaticField'
         }
-
     }
-
 }

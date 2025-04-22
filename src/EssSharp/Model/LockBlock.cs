@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// LockBlock
     /// </summary>
     [DataContract(Name = "LockBlock")]
-    public partial class LockBlock : IEquatable<LockBlock>, IValidatableObject
+    public partial class LockBlock : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LockBlock" /> class.
@@ -94,77 +94,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as LockBlock);
-        }
-
-        /// <summary>
-        /// Returns true if LockBlock instances are equal
-        /// </summary>
-        /// <param name="input">Instance of LockBlock to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(LockBlock input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.Duration == input.Duration ||
-                    this.Duration.Equals(input.Duration)
-                ) && 
-                (
-                    this.User == input.User ||
-                    (this.User != null &&
-                    this.User.Equals(input.User))
-                ) && 
-                (
-                    this.Count == input.Count ||
-                    this.Count.Equals(input.Count)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Duration.GetHashCode();
-                if (this.User != null)
-                {
-                    hashCode = (hashCode * 59) + this.User.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Count.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

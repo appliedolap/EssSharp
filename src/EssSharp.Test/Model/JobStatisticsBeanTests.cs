@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<JobStatisticsBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ErrCt'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ErrCt'
         }
+
         /// <summary>
         /// Test the property 'SuccesCt'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SuccesCt'
         }
+
         /// <summary>
         /// Test the property 'WarningCt'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'WarningCt'
         }
+
         /// <summary>
         /// Test the property 'RunningCt'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RunningCt'
         }
-
     }
-
 }

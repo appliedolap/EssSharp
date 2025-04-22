@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// JobsInputBean
     /// </summary>
     [DataContract(Name = "JobsInputBean")]
-    public partial class JobsInputBean : IEquatable<JobsInputBean>, IValidatableObject
+    public partial class JobsInputBean : IValidatableObject
     {
         /// <summary>
         /// Defines Jobtype
@@ -136,7 +136,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "groovy")]
             Groovy = 17
-
         }
 
 
@@ -219,80 +218,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as JobsInputBean);
-        }
-
-        /// <summary>
-        /// Returns true if JobsInputBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of JobsInputBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(JobsInputBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Application == input.Application ||
-                    (this.Application != null &&
-                    this.Application.Equals(input.Application))
-                ) && 
-                (
-                    this.Db == input.Db ||
-                    (this.Db != null &&
-                    this.Db.Equals(input.Db))
-                ) && 
-                (
-                    this.Jobtype == input.Jobtype ||
-                    this.Jobtype.Equals(input.Jobtype)
-                ) && 
-                (
-                    this.Parameters == input.Parameters ||
-                    (this.Parameters != null &&
-                    this.Parameters.Equals(input.Parameters))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Application != null)
-                {
-                    hashCode = (hashCode * 59) + this.Application.GetHashCode();
-                }
-                if (this.Db != null)
-                {
-                    hashCode = (hashCode * 59) + this.Db.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Jobtype.GetHashCode();
-                if (this.Parameters != null)
-                {
-                    hashCode = (hashCode * 59) + this.Parameters.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

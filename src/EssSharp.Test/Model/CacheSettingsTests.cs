@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CacheSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'CacheMemoryLocking'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CacheMemoryLocking'
         }
+
         /// <summary>
         /// Test the property 'IndexCacheSetting'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IndexCacheSetting'
         }
+
         /// <summary>
         /// Test the property 'IndexCacheCurrentValue'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IndexCacheCurrentValue'
         }
+
         /// <summary>
         /// Test the property 'DataFileCacheSetting'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFileCacheSetting'
         }
+
         /// <summary>
         /// Test the property 'DataFileCacheCurrentValue'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFileCacheCurrentValue'
         }
+
         /// <summary>
         /// Test the property 'DataCacheSetting'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataCacheSetting'
         }
+
         /// <summary>
         /// Test the property 'DataCacheCurrentValue'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataCacheCurrentValue'
         }
+
         /// <summary>
         /// Test the property 'IndexPageSetting'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IndexPageSetting'
         }
+
         /// <summary>
         /// Test the property 'IndexPageCurrentValue'
         /// </summary>
@@ -125,7 +132,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IndexPageCurrentValue'
         }
-
     }
-
 }

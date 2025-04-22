@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// StatisticsList
     /// </summary>
     [DataContract(Name = "StatisticsList")]
-    public partial class StatisticsList : IEquatable<StatisticsList>, IValidatableObject
+    public partial class StatisticsList : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StatisticsList" /> class.
@@ -94,85 +94,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as StatisticsList);
-        }
-
-        /// <summary>
-        /// Returns true if StatisticsList instances are equal
-        /// </summary>
-        /// <param name="input">Instance of StatisticsList to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(StatisticsList input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.General == input.General ||
-                    (this.General != null &&
-                    this.General.Equals(input.General))
-                ) && 
-                (
-                    this.Storage == input.Storage ||
-                    (this.Storage != null &&
-                    this.Storage.Equals(input.Storage))
-                ) && 
-                (
-                    this.Runtime == input.Runtime ||
-                    (this.Runtime != null &&
-                    this.Runtime.Equals(input.Runtime))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.General != null)
-                {
-                    hashCode = (hashCode * 59) + this.General.GetHashCode();
-                }
-                if (this.Storage != null)
-                {
-                    hashCode = (hashCode * 59) + this.Storage.GetHashCode();
-                }
-                if (this.Runtime != null)
-                {
-                    hashCode = (hashCode * 59) + this.Runtime.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

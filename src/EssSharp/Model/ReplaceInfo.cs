@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ReplaceInfo
     /// </summary>
     [DataContract(Name = "ReplaceInfo")]
-    public partial class ReplaceInfo : IEquatable<ReplaceInfo>, IValidatableObject
+    public partial class ReplaceInfo : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplaceInfo" /> class.
@@ -103,81 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ReplaceInfo);
-        }
-
-        /// <summary>
-        /// Returns true if ReplaceInfo instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ReplaceInfo to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ReplaceInfo input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Find == input.Find ||
-                    (this.Find != null &&
-                    this.Find.Equals(input.Find))
-                ) && 
-                (
-                    this.Replace == input.Replace ||
-                    (this.Replace != null &&
-                    this.Replace.Equals(input.Replace))
-                ) && 
-                (
-                    this.MatchWholeWord == input.MatchWholeWord ||
-                    this.MatchWholeWord.Equals(input.MatchWholeWord)
-                ) && 
-                (
-                    this.ReplaceAll == input.ReplaceAll ||
-                    this.ReplaceAll.Equals(input.ReplaceAll)
-                ) && 
-                (
-                    this.CaseSensitive == input.CaseSensitive ||
-                    this.CaseSensitive.Equals(input.CaseSensitive)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Find != null)
-                {
-                    hashCode = (hashCode * 59) + this.Find.GetHashCode();
-                }
-                if (this.Replace != null)
-                {
-                    hashCode = (hashCode * 59) + this.Replace.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.MatchWholeWord.GetHashCode();
-                hashCode = (hashCode * 59) + this.ReplaceAll.GetHashCode();
-                hashCode = (hashCode * 59) + this.CaseSensitive.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

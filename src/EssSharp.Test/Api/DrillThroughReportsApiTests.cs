@@ -116,7 +116,8 @@ namespace EssSharp.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
             //string databaseName = null;
-            //var response = instance.DrillThroughReportsGetReports(applicationName, databaseName);
+            //string keyword = null;
+            //var response = instance.DrillThroughReportsGetReports(applicationName, databaseName, keyword);
             //Assert.IsType<ReportList>(response);
         }
 

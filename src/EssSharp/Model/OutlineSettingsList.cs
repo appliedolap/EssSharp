@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// OutlineSettingsList
     /// </summary>
     [DataContract(Name = "OutlineSettingsList")]
-    public partial class OutlineSettingsList : IEquatable<OutlineSettingsList>, IValidatableObject
+    public partial class OutlineSettingsList : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OutlineSettingsList" /> class.
@@ -85,76 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as OutlineSettingsList);
-        }
-
-        /// <summary>
-        /// Returns true if OutlineSettingsList instances are equal
-        /// </summary>
-        /// <param name="input">Instance of OutlineSettingsList to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(OutlineSettingsList input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.General == input.General ||
-                    (this.General != null &&
-                    this.General.Equals(input.General))
-                ) && 
-                (
-                    this.Attributes == input.Attributes ||
-                    (this.Attributes != null &&
-                    this.Attributes.Equals(input.Attributes))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.General != null)
-                {
-                    hashCode = (hashCode * 59) + this.General.GetHashCode();
-                }
-                if (this.Attributes != null)
-                {
-                    hashCode = (hashCode * 59) + this.Attributes.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

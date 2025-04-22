@@ -452,7 +452,7 @@ namespace EssSharp
             try
             {
                 var api = GetApi<DrillThroughReportsApi>();
-                var reports = (await api.DrillThroughReportsGetReportsAsync(_application?.Name, _cube?.Name, 0, cancellationToken).ConfigureAwait(false))?
+                var reports = (await api.DrillThroughReportsGetReportsAsync(applicationName: _application?.Name, databaseName: _cube?.Name, cancellationToken: cancellationToken).ConfigureAwait(false))?
                     .ToEssSharpList(this) ?? new List<IEssDrillthroughReport>();
 
                 if ( getDetails )

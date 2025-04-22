@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Field>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'RejectFilters'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RejectFilters'
         }
+
         /// <summary>
         /// Test the property 'SelectFilters'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SelectFilters'
         }
+
         /// <summary>
         /// Test the property 'ReplaceInformation'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ReplaceInformation'
         }
+
         /// <summary>
         /// Test the property 'SelectFilterJoinOption'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SelectFilterJoinOption'
         }
+
         /// <summary>
         /// Test the property 'RejectFilterJoinOption'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RejectFilterJoinOption'
         }
+
         /// <summary>
         /// Test the property 'DateFormat'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DateFormat'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Prefix'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Prefix'
         }
+
         /// <summary>
         /// Test the property 'Suffix'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Suffix'
         }
+
         /// <summary>
         /// Test the property 'Option'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Option'
         }
+
         /// <summary>
         /// Test the property 'ConvertSpaceToUnderScore'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConvertSpaceToUnderScore'
         }
+
         /// <summary>
         /// Test the property 'Trim'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Trim'
         }
+
         /// <summary>
         /// Test the property 'Width'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Width'
         }
+
         /// <summary>
         /// Test the property 'SmartList'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SmartList'
         }
+
         /// <summary>
         /// Test the property 'DimensionBuildOptions'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimensionBuildOptions'
         }
+
         /// <summary>
         /// Test the property 'DataloadOptions'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataloadOptions'
         }
+
         /// <summary>
         /// Test the property 'Transform'
         /// </summary>
@@ -189,6 +204,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Transform'
         }
+
         /// <summary>
         /// Test the property 'Case'
         /// </summary>
@@ -197,7 +213,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Case'
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// JAXBElementObject
     /// </summary>
     [DataContract(Name = "JAXBElementObject")]
-    public partial class JAXBElementObject : IEquatable<JAXBElementObject>, IValidatableObject
+    public partial class JAXBElementObject : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JAXBElementObject" /> class.
@@ -103,81 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as JAXBElementObject);
-        }
-
-        /// <summary>
-        /// Returns true if JAXBElementObject instances are equal
-        /// </summary>
-        /// <param name="input">Instance of JAXBElementObject to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(JAXBElementObject input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
-                ) && 
-                (
-                    this.Nil == input.Nil ||
-                    this.Nil.Equals(input.Nil)
-                ) && 
-                (
-                    this.GlobalScope == input.GlobalScope ||
-                    this.GlobalScope.Equals(input.GlobalScope)
-                ) && 
-                (
-                    this.TypeSubstituted == input.TypeSubstituted ||
-                    this.TypeSubstituted.Equals(input.TypeSubstituted)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.Value != null)
-                {
-                    hashCode = (hashCode * 59) + this.Value.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Nil.GetHashCode();
-                hashCode = (hashCode * 59) + this.GlobalScope.GetHashCode();
-                hashCode = (hashCode * 59) + this.TypeSubstituted.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DatasourceQueryInfo>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Query'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Query'
         }
+
         /// <summary>
         /// Test the property 'Delimiter'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Delimiter'
         }
+
         /// <summary>
         /// Test the property 'Params'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Params'
         }
-
     }
-
 }

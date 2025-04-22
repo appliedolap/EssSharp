@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<QueryParamsInfo>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Index'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Index'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'DefaultValue'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DefaultValue'
         }
+
         /// <summary>
         /// Test the property 'Required'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Required'
         }
+
         /// <summary>
         /// Test the property 'UseSubVariable'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UseSubVariable'
         }
+
         /// <summary>
         /// Test the property 'SubVariableName'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SubVariableName'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
-
     }
-
 }

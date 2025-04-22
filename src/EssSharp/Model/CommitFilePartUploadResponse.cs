@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CommitFilePartUploadResponse
     /// </summary>
     [DataContract(Name = "CommitFilePartUploadResponse")]
-    public partial class CommitFilePartUploadResponse : IEquatable<CommitFilePartUploadResponse>, IValidatableObject
+    public partial class CommitFilePartUploadResponse : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommitFilePartUploadResponse" /> class.
@@ -103,93 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CommitFilePartUploadResponse);
-        }
-
-        /// <summary>
-        /// Returns true if CommitFilePartUploadResponse instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CommitFilePartUploadResponse to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CommitFilePartUploadResponse input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.OpcRequestId == input.OpcRequestId ||
-                    (this.OpcRequestId != null &&
-                    this.OpcRequestId.Equals(input.OpcRequestId))
-                ) && 
-                (
-                    this.OpcMultipartMd5 == input.OpcMultipartMd5 ||
-                    (this.OpcMultipartMd5 != null &&
-                    this.OpcMultipartMd5.Equals(input.OpcMultipartMd5))
-                ) && 
-                (
-                    this.VersionId == input.VersionId ||
-                    (this.VersionId != null &&
-                    this.VersionId.Equals(input.VersionId))
-                ) && 
-                (
-                    this.Etag == input.Etag ||
-                    (this.Etag != null &&
-                    this.Etag.Equals(input.Etag))
-                ) && 
-                (
-                    this.LastModified == input.LastModified ||
-                    (this.LastModified != null &&
-                    this.LastModified.Equals(input.LastModified))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.OpcRequestId != null)
-                {
-                    hashCode = (hashCode * 59) + this.OpcRequestId.GetHashCode();
-                }
-                if (this.OpcMultipartMd5 != null)
-                {
-                    hashCode = (hashCode * 59) + this.OpcMultipartMd5.GetHashCode();
-                }
-                if (this.VersionId != null)
-                {
-                    hashCode = (hashCode * 59) + this.VersionId.GetHashCode();
-                }
-                if (this.Etag != null)
-                {
-                    hashCode = (hashCode * 59) + this.Etag.GetHashCode();
-                }
-                if (this.LastModified != null)
-                {
-                    hashCode = (hashCode * 59) + this.LastModified.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

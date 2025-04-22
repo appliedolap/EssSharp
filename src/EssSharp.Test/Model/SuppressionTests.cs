@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Suppression>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Missing'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Missing'
         }
+
         /// <summary>
         /// Test the property 'Invalid'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Invalid'
         }
+
         /// <summary>
         /// Test the property 'Derived'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Derived'
         }
+
         /// <summary>
         /// Test the property 'Zero'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Zero'
         }
+
         /// <summary>
         /// Test the property 'UnderScore'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UnderScore'
         }
+
         /// <summary>
         /// Test the property 'NoAccess'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NoAccess'
         }
+
         /// <summary>
         /// Test the property 'EmptyBlocks'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EmptyBlocks'
         }
+
         /// <summary>
         /// Test the property 'Error'
         /// </summary>
@@ -117,7 +123,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Error'
         }
-
     }
-
 }

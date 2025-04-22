@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ColumnType
     /// </summary>
     [DataContract(Name = "ColumnType")]
-    public partial class ColumnType : IEquatable<ColumnType>, IValidatableObject
+    public partial class ColumnType : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -64,7 +64,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "LONG")]
             LONG = 5
-
         }
 
 
@@ -81,15 +80,15 @@ namespace EssSharp.Model
         /// <param name="nullable">nullable.</param>
         /// <param name="format">format.</param>
         /// <param name="index">index.</param>
-        /// <param name="system">system.</param>
-        public ColumnType(string name = default(string), TypeEnum? type = default(TypeEnum?), bool nullable = default(bool), string format = default(string), int index = default(int), bool system = default(bool))
+        /// <param name="varSystem">varSystem.</param>
+        public ColumnType(string name = default(string), TypeEnum? type = default(TypeEnum?), bool nullable = default(bool), string format = default(string), int index = default(int), bool varSystem = default(bool))
         {
             this.Name = name;
             this.Type = type;
             this.Nullable = nullable;
             this.Format = format;
             this.Index = index;
-            this.System = system;
+            this.System = varSystem;
         }
 
         /// <summary>
@@ -150,86 +149,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ColumnType);
-        }
-
-        /// <summary>
-        /// Returns true if ColumnType instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ColumnType to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ColumnType input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.Nullable == input.Nullable ||
-                    this.Nullable.Equals(input.Nullable)
-                ) && 
-                (
-                    this.Format == input.Format ||
-                    (this.Format != null &&
-                    this.Format.Equals(input.Format))
-                ) && 
-                (
-                    this.Index == input.Index ||
-                    this.Index.Equals(input.Index)
-                ) && 
-                (
-                    this.System == input.System ||
-                    this.System.Equals(input.System)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                hashCode = (hashCode * 59) + this.Nullable.GetHashCode();
-                if (this.Format != null)
-                {
-                    hashCode = (hashCode * 59) + this.Format.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Index.GetHashCode();
-                hashCode = (hashCode * 59) + this.System.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

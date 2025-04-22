@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<FormulaRetention>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Comments'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Comments'
         }
+
         /// <summary>
         /// Test the property 'Zoom'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Zoom'
         }
+
         /// <summary>
         /// Test the property 'Focus'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Focus'
         }
+
         /// <summary>
         /// Test the property 'Retrive'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Retrive'
         }
+
         /// <summary>
         /// Test the property 'Fill'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Fill'
         }
-
     }
-
 }

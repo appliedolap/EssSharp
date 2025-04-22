@@ -362,13 +362,15 @@ namespace EssSharp
         /// <summary>
         /// Gets the list of application-scoped variables available to the connected user.
         /// </summary>
-        public List<IEssApplicationVariable> GetVariables();
+        /// <param name="includeDatabaseVariables">Whether to include database variables in the list of variables.</param>
+        public List<IEssApplicationVariable> GetVariables( bool includeDatabaseVariables = false );
 
         /// <summary>
         /// Asynchronously gets the list of application-scoped variables available to the connected user.
         /// </summary>
+        /// <param name="includeDatabaseVariables">Whether to include database variables in the list of variables.</param>
         /// <param name="cancellationToken" />
-        public Task<List<IEssApplicationVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
+        public Task<List<IEssApplicationVariable>> GetVariablesAsync( bool includeDatabaseVariables = false, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Copy The Application.

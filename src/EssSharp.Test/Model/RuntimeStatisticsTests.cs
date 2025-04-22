@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<RuntimeStatistics>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'CacheHitRatio'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CacheHitRatio'
         }
+
         /// <summary>
         /// Test the property 'CurrentCacheSize'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CurrentCacheSize'
         }
+
         /// <summary>
         /// Test the property 'CurrentCacheSizeLimit'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CurrentCacheSizeLimit'
         }
+
         /// <summary>
         /// Test the property 'PageReadsSinceLastStartup'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PageReadsSinceLastStartup'
         }
+
         /// <summary>
         /// Test the property 'PageWritesSinceLastStartup'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PageWritesSinceLastStartup'
         }
+
         /// <summary>
         /// Test the property 'PageSize'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PageSize'
         }
+
         /// <summary>
         /// Test the property 'DiskSpaceAllocatedForData'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DiskSpaceAllocatedForData'
         }
+
         /// <summary>
         /// Test the property 'DiskSpaceUsedByData'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DiskSpaceUsedByData'
         }
+
         /// <summary>
         /// Test the property 'TemporaryDiskSpaceAllocated'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TemporaryDiskSpaceAllocated'
         }
+
         /// <summary>
         /// Test the property 'TemporaryDiskSpaceUsed'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TemporaryDiskSpaceUsed'
         }
+
         /// <summary>
         /// Test the property 'HitRatioOnIndexCache'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HitRatioOnIndexCache'
         }
+
         /// <summary>
         /// Test the property 'HitRatioOnDataCache'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HitRatioOnDataCache'
         }
+
         /// <summary>
         /// Test the property 'NumberOfIndexPageReads'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfIndexPageReads'
         }
+
         /// <summary>
         /// Test the property 'NumberOfIndexPageWrites'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfIndexPageWrites'
         }
+
         /// <summary>
         /// Test the property 'NumberOfDataBlockReads'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfDataBlockReads'
         }
+
         /// <summary>
         /// Test the property 'NumberOfDataBlockWrites'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfDataBlockWrites'
         }
+
         /// <summary>
         /// Test the property 'HitRatioOnDataFileCache'
         /// </summary>
@@ -189,7 +204,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HitRatioOnDataFileCache'
         }
-
     }
-
 }

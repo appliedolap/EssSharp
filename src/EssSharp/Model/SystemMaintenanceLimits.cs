@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// SystemMaintenanceLimits
     /// </summary>
     [DataContract(Name = "SystemMaintenanceLimits")]
-    public partial class SystemMaintenanceLimits : IEquatable<SystemMaintenanceLimits>, IValidatableObject
+    public partial class SystemMaintenanceLimits : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SystemMaintenanceLimits" /> class.
@@ -76,66 +76,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as SystemMaintenanceLimits);
-        }
-
-        /// <summary>
-        /// Returns true if SystemMaintenanceLimits instances are equal
-        /// </summary>
-        /// <param name="input">Instance of SystemMaintenanceLimits to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(SystemMaintenanceLimits input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Disk == input.Disk ||
-                    (this.Disk != null &&
-                    this.Disk.Equals(input.Disk))
-                ) && 
-                (
-                    this.Ram == input.Ram ||
-                    (this.Ram != null &&
-                    this.Ram.Equals(input.Ram))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Disk != null)
-                {
-                    hashCode = (hashCode * 59) + this.Disk.GetHashCode();
-                }
-                if (this.Ram != null)
-                {
-                    hashCode = (hashCode * 59) + this.Ram.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

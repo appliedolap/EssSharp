@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// RoleBean
     /// </summary>
     [DataContract(Name = "RoleBean")]
-    public partial class RoleBean : IEquatable<RoleBean>, IValidatableObject
+    public partial class RoleBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoleBean" /> class.
@@ -85,76 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as RoleBean);
-        }
-
-        /// <summary>
-        /// Returns true if RoleBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of RoleBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(RoleBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Roles == input.Roles ||
-                    this.Roles != null &&
-                    input.Roles != null &&
-                    this.Roles.SequenceEqual(input.Roles)
-                ) && 
-                (
-                    this.DefaultRole == input.DefaultRole ||
-                    (this.DefaultRole != null &&
-                    this.DefaultRole.Equals(input.DefaultRole))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Type != null)
-                {
-                    hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                }
-                if (this.Roles != null)
-                {
-                    hashCode = (hashCode * 59) + this.Roles.GetHashCode();
-                }
-                if (this.DefaultRole != null)
-                {
-                    hashCode = (hashCode * 59) + this.DefaultRole.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

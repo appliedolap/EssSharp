@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GeneralStatistics>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'DatabaseStartTime'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DatabaseStartTime'
         }
+
         /// <summary>
         /// Test the property 'DatabaseElapsedTime'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DatabaseElapsedTime'
         }
+
         /// <summary>
         /// Test the property 'NumberOfConnections'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfConnections'
         }
+
         /// <summary>
         /// Test the property 'NumberOfDimensions'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfDimensions'
         }
+
         /// <summary>
         /// Test the property 'LoadStatus'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LoadStatus'
         }
-
     }
-
 }

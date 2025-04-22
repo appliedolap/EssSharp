@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Datasource>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'Connection'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Connection'
         }
+
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'Columns'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Columns'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'IgnoreErrorRecords'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IgnoreErrorRecords'
         }
+
         /// <summary>
         /// Test the property 'Delimeter'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Delimeter'
         }
+
         /// <summary>
         /// Test the property 'CustomDelimiter'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CustomDelimiter'
         }
+
         /// <summary>
         /// Test the property 'Query'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Query'
         }
+
         /// <summary>
         /// Test the property 'Application'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Application'
         }
+
         /// <summary>
         /// Test the property 'Cube'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Cube'
         }
+
         /// <summary>
         /// Test the property 'StartRow'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartRow'
         }
+
         /// <summary>
         /// Test the property 'EndRow'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EndRow'
         }
+
         /// <summary>
         /// Test the property 'HeaderRow'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HeaderRow'
         }
+
         /// <summary>
         /// Test the property 'Sheet'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Sheet'
         }
+
         /// <summary>
         /// Test the property 'SkipHiddenRows'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SkipHiddenRows'
         }
+
         /// <summary>
         /// Test the property 'Widths'
         /// </summary>
@@ -189,6 +204,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Widths'
         }
+
         /// <summary>
         /// Test the property 'QueryParameters'
         /// </summary>
@@ -197,6 +213,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'QueryParameters'
         }
+
         /// <summary>
         /// Test the property 'Headers'
         /// </summary>
@@ -205,6 +222,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Headers'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -213,7 +231,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CurrencySettings
     /// </summary>
     [DataContract(Name = "CurrencySettings")]
-    public partial class CurrencySettings : IEquatable<CurrencySettings>, IValidatableObject
+    public partial class CurrencySettings : IValidatableObject
     {
         /// <summary>
         /// Defines ConversionType
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "multiplication")]
             Multiplication = 2
-
         }
 
 
@@ -141,107 +140,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CurrencySettings);
-        }
-
-        /// <summary>
-        /// Returns true if CurrencySettings instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CurrencySettings to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CurrencySettings input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.CurrencyDatabase == input.CurrencyDatabase ||
-                    (this.CurrencyDatabase != null &&
-                    this.CurrencyDatabase.Equals(input.CurrencyDatabase))
-                ) && 
-                (
-                    this.ConversionType == input.ConversionType ||
-                    this.ConversionType.Equals(input.ConversionType)
-                ) && 
-                (
-                    this.ConversionTypeMemberName == input.ConversionTypeMemberName ||
-                    (this.ConversionTypeMemberName != null &&
-                    this.ConversionTypeMemberName.Equals(input.ConversionTypeMemberName))
-                ) && 
-                (
-                    this.CountryMemberName == input.CountryMemberName ||
-                    (this.CountryMemberName != null &&
-                    this.CountryMemberName.Equals(input.CountryMemberName))
-                ) && 
-                (
-                    this.TimeMemberName == input.TimeMemberName ||
-                    (this.TimeMemberName != null &&
-                    this.TimeMemberName.Equals(input.TimeMemberName))
-                ) && 
-                (
-                    this.CategoryMemberName == input.CategoryMemberName ||
-                    (this.CategoryMemberName != null &&
-                    this.CategoryMemberName.Equals(input.CategoryMemberName))
-                ) && 
-                (
-                    this.PartitionMemberName == input.PartitionMemberName ||
-                    (this.PartitionMemberName != null &&
-                    this.PartitionMemberName.Equals(input.PartitionMemberName))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.CurrencyDatabase != null)
-                {
-                    hashCode = (hashCode * 59) + this.CurrencyDatabase.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ConversionType.GetHashCode();
-                if (this.ConversionTypeMemberName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ConversionTypeMemberName.GetHashCode();
-                }
-                if (this.CountryMemberName != null)
-                {
-                    hashCode = (hashCode * 59) + this.CountryMemberName.GetHashCode();
-                }
-                if (this.TimeMemberName != null)
-                {
-                    hashCode = (hashCode * 59) + this.TimeMemberName.GetHashCode();
-                }
-                if (this.CategoryMemberName != null)
-                {
-                    hashCode = (hashCode * 59) + this.CategoryMemberName.GetHashCode();
-                }
-                if (this.PartitionMemberName != null)
-                {
-                    hashCode = (hashCode * 59) + this.PartitionMemberName.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

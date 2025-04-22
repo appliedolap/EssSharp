@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// AttributeOptions
     /// </summary>
     [DataContract(Name = "AttributeOptions")]
-    public partial class AttributeOptions : IEquatable<AttributeOptions>, IValidatableObject
+    public partial class AttributeOptions : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -64,7 +64,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "EXISTING")]
             EXISTING = 5
-
         }
 
 
@@ -96,7 +95,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "EXTEND")]
             EXTEND = 3
-
         }
 
 
@@ -122,7 +120,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "OVERWRITE")]
             OVERWRITE = 2
-
         }
 
 
@@ -196,87 +193,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as AttributeOptions);
-        }
-
-        /// <summary>
-        /// Returns true if AttributeOptions instances are equal
-        /// </summary>
-        /// <param name="input">Instance of AttributeOptions to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(AttributeOptions input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.IndepDimensions == input.IndepDimensions ||
-                    this.IndepDimensions != null &&
-                    input.IndepDimensions != null &&
-                    this.IndepDimensions.SequenceEqual(input.IndepDimensions)
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.BaseDimension == input.BaseDimension ||
-                    (this.BaseDimension != null &&
-                    this.BaseDimension.Equals(input.BaseDimension))
-                ) && 
-                (
-                    this.Modified == input.Modified ||
-                    this.Modified.Equals(input.Modified)
-                ) && 
-                (
-                    this.ScadisAssociationMode == input.ScadisAssociationMode ||
-                    this.ScadisAssociationMode.Equals(input.ScadisAssociationMode)
-                ) && 
-                (
-                    this.ScaassociationMode == input.ScaassociationMode ||
-                    this.ScaassociationMode.Equals(input.ScaassociationMode)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.IndepDimensions != null)
-                {
-                    hashCode = (hashCode * 59) + this.IndepDimensions.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                if (this.BaseDimension != null)
-                {
-                    hashCode = (hashCode * 59) + this.BaseDimension.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Modified.GetHashCode();
-                hashCode = (hashCode * 59) + this.ScadisAssociationMode.GetHashCode();
-                hashCode = (hashCode * 59) + this.ScaassociationMode.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

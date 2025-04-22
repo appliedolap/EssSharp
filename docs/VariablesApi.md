@@ -817,7 +817,7 @@ catch (ApiException e)
 
 <a id="variableslistappvariables"></a>
 # **VariablesListAppVariables**
-> VariableList VariablesListAppVariables (string applicationName)
+> VariableList VariablesListAppVariables (string applicationName, bool? includeDatabaseVariables = null)
 
 Get Application Variables
 
@@ -845,11 +845,12 @@ namespace Example
 
             var apiInstance = new VariablesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var includeDatabaseVariables = false;  // bool? | <P>Include database variables in application variables result</P> (optional)  (default to false)
 
             try
             {
                 // Get Application Variables
-                VariableList result = apiInstance.VariablesListAppVariables(applicationName);
+                VariableList result = apiInstance.VariablesListAppVariables(applicationName, includeDatabaseVariables);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -870,7 +871,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Application Variables
-    ApiResponse<VariableList> response = apiInstance.VariablesListAppVariablesWithHttpInfo(applicationName);
+    ApiResponse<VariableList> response = apiInstance.VariablesListAppVariablesWithHttpInfo(applicationName, includeDatabaseVariables);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -888,6 +889,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **includeDatabaseVariables** | **bool?** | &lt;P&gt;Include database variables in application variables result&lt;/P&gt; | [optional] [default to false] |
 
 ### Return type
 

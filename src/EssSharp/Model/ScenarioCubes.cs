@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ScenarioCubes
     /// </summary>
     [DataContract(Name = "ScenarioCubes")]
-    public partial class ScenarioCubes : IEquatable<ScenarioCubes>, IValidatableObject
+    public partial class ScenarioCubes : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScenarioCubes" /> class.
@@ -112,87 +112,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ScenarioCubes);
-        }
-
-        /// <summary>
-        /// Returns true if ScenarioCubes instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ScenarioCubes to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ScenarioCubes input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Application == input.Application ||
-                    (this.Application != null &&
-                    this.Application.Equals(input.Application))
-                ) && 
-                (
-                    this.Databases == input.Databases ||
-                    this.Databases != null &&
-                    input.Databases != null &&
-                    this.Databases.SequenceEqual(input.Databases)
-                ) && 
-                (
-                    this.CreateScenario == input.CreateScenario ||
-                    this.CreateScenario.Equals(input.CreateScenario)
-                ) && 
-                (
-                    this.ParticipateInScenario == input.ParticipateInScenario ||
-                    this.ParticipateInScenario.Equals(input.ParticipateInScenario)
-                ) && 
-                (
-                    this.DatabaseAdmin == input.DatabaseAdmin ||
-                    this.DatabaseAdmin.Equals(input.DatabaseAdmin)
-                ) && 
-                (
-                    this.EasManagedApp == input.EasManagedApp ||
-                    this.EasManagedApp.Equals(input.EasManagedApp)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Application != null)
-                {
-                    hashCode = (hashCode * 59) + this.Application.GetHashCode();
-                }
-                if (this.Databases != null)
-                {
-                    hashCode = (hashCode * 59) + this.Databases.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.CreateScenario.GetHashCode();
-                hashCode = (hashCode * 59) + this.ParticipateInScenario.GetHashCode();
-                hashCode = (hashCode * 59) + this.DatabaseAdmin.GetHashCode();
-                hashCode = (hashCode * 59) + this.EasManagedApp.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

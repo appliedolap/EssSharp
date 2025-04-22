@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// FileProperties
     /// </summary>
     [DataContract(Name = "FileProperties")]
-    public partial class FileProperties : IEquatable<FileProperties>, IValidatableObject
+    public partial class FileProperties : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FileProperties" /> class.
@@ -112,82 +112,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as FileProperties);
-        }
-
-        /// <summary>
-        /// Returns true if FileProperties instances are equal
-        /// </summary>
-        /// <param name="input">Instance of FileProperties to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(FileProperties input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Delimiter == input.Delimiter ||
-                    (this.Delimiter != null &&
-                    this.Delimiter.Equals(input.Delimiter))
-                ) && 
-                (
-                    this.Width == input.Width ||
-                    this.Width.Equals(input.Width)
-                ) && 
-                (
-                    this.DataloadRecordNumber == input.DataloadRecordNumber ||
-                    this.DataloadRecordNumber.Equals(input.DataloadRecordNumber)
-                ) && 
-                (
-                    this.DimensionBuildRecordNumber == input.DimensionBuildRecordNumber ||
-                    this.DimensionBuildRecordNumber.Equals(input.DimensionBuildRecordNumber)
-                ) && 
-                (
-                    this.HeaderRecordNumber == input.HeaderRecordNumber ||
-                    this.HeaderRecordNumber.Equals(input.HeaderRecordNumber)
-                ) && 
-                (
-                    this.LineSkipCount == input.LineSkipCount ||
-                    this.LineSkipCount.Equals(input.LineSkipCount)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Delimiter != null)
-                {
-                    hashCode = (hashCode * 59) + this.Delimiter.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Width.GetHashCode();
-                hashCode = (hashCode * 59) + this.DataloadRecordNumber.GetHashCode();
-                hashCode = (hashCode * 59) + this.DimensionBuildRecordNumber.GetHashCode();
-                hashCode = (hashCode * 59) + this.HeaderRecordNumber.GetHashCode();
-                hashCode = (hashCode * 59) + this.LineSkipCount.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

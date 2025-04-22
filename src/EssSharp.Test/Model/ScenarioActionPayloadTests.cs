@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ScenarioActionPayload>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Comment'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Comment'
         }
+
         /// <summary>
         /// Test the property 'To'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'To'
         }
+
         /// <summary>
         /// Test the property 'CopyOptions'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CopyOptions'
         }
-
     }
-
 }

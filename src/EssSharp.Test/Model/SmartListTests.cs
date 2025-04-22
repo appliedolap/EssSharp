@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<SmartList>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'IncrementalNumber'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IncrementalNumber'
         }
+
         /// <summary>
         /// Test the property 'StartNumber'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartNumber'
         }
+
         /// <summary>
         /// Test the property 'MissingName'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MissingName'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'OutOfRangeName'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OutOfRangeName'
         }
+
         /// <summary>
         /// Test the property 'RemoveUnspecified'
         /// </summary>
@@ -101,7 +105,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RemoveUnspecified'
         }
-
     }
-
 }

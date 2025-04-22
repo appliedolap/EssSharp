@@ -10,6 +10,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**FilesCreateUpload**](FilesApi.md#filescreateupload) | **POST** /files/upload-create/{path} | Create Multipart File Upload |
 | [**FilesDeleteFile**](FilesApi.md#filesdeletefile) | **DELETE** /files/{path} | Delete File or Folder |
 | [**FilesExtract**](FilesApi.md#filesextract) | **POST** /files/actions/extract | Extract Zip File |
+| [**FilesExtractJob**](FilesApi.md#filesextractjob) | **POST** /files/actions/extractJob | Extract Zip File Using a Job |
 | [**FilesGetSharedPath**](FilesApi.md#filesgetsharedpath) | **GET** /files/sharedpath | Get Shared Path |
 | [**FilesGetUserHomePath**](FilesApi.md#filesgetuserhomepath) | **GET** /files/homepath | Get Home Path |
 | [**FilesListFiles**](FilesApi.md#fileslistfiles) | **GET** /files/{path} | List or Download Files |
@@ -596,6 +597,101 @@ void (empty response body)
 |-------------|-------------|------------------|
 | **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The file operation completed successfully.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Contains an invalid special character.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="filesextractjob"></a>
+# **FilesExtractJob**
+> void FilesExtractJob (ZipFileDetails body, bool? overwrite = null)
+
+Extract Zip File Using a Job
+
+<p>Extract a zip file on same location. Supported for applications, users and shared folders.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class FilesExtractJobExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new FilesApi(config);
+            var body = new ZipFileDetails(); // ZipFileDetails | <p>Zip file path details.</p>
+            var overwrite = false;  // bool? | <p>Overwrite existing file. Not applicable for folder.</p> (optional)  (default to false)
+
+            try
+            {
+                // Extract Zip File Using a Job
+                apiInstance.FilesExtractJob(body, overwrite);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling FilesApi.FilesExtractJob: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the FilesExtractJobWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Extract Zip File Using a Job
+    apiInstance.FilesExtractJobWithHttpInfo(body, overwrite);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling FilesApi.FilesExtractJobWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **body** | [**ZipFileDetails**](ZipFileDetails.md) | &lt;p&gt;Zip file path details.&lt;/p&gt; |  |
+| **overwrite** | **bool?** | &lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; | [optional] [default to false] |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/xml
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The zip file extractor job is submitted successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The submission of zip file extractor job failed.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

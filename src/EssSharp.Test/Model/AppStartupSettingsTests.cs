@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AppStartupSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'AllowUsersToStartApplication'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowUsersToStartApplication'
         }
+
         /// <summary>
         /// Test the property 'StartApplicationWhenServerStarts'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartApplicationWhenServerStarts'
         }
-
     }
-
 }

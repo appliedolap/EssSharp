@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<UserBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
+
         /// <summary>
         /// Test the property 'Token'
         /// </summary>
@@ -69,22 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Token'
         }
-        /// <summary>
-        /// Test the property 'Email'
-        /// </summary>
-        [Fact]
-        public void EmailTest()
-        {
-            // TODO unit test for the property 'Email'
-        }
-        /// <summary>
-        /// Test the property 'Role'
-        /// </summary>
-        [Fact]
-        public void RoleTest()
-        {
-            // TODO unit test for the property 'Role'
-        }
+
         /// <summary>
         /// Test the property 'Groups'
         /// </summary>
@@ -93,6 +78,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Groups'
         }
+
+        /// <summary>
+        /// Test the property 'Email'
+        /// </summary>
+        [Fact]
+        public void EmailTest()
+        {
+            // TODO unit test for the property 'Email'
+        }
+
         /// <summary>
         /// Test the property 'Password'
         /// </summary>
@@ -101,6 +96,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Password'
         }
+
+        /// <summary>
+        /// Test the property 'Role'
+        /// </summary>
+        [Fact]
+        public void RoleTest()
+        {
+            // TODO unit test for the property 'Role'
+        }
+
         /// <summary>
         /// Test the property 'Id'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Id'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -117,7 +123,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
-
     }
-
 }

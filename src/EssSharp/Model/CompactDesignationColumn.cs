@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CompactDesignationColumn
     /// </summary>
     [DataContract(Name = "CompactDesignationColumn")]
-    public partial class CompactDesignationColumn : IEquatable<CompactDesignationColumn>, IValidatableObject
+    public partial class CompactDesignationColumn : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CompactDesignationColumn" /> class.
@@ -130,116 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CompactDesignationColumn);
-        }
-
-        /// <summary>
-        /// Returns true if CompactDesignationColumn instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CompactDesignationColumn to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CompactDesignationColumn input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.OriginalHeaderName == input.OriginalHeaderName ||
-                    (this.OriginalHeaderName != null &&
-                    this.OriginalHeaderName.Equals(input.OriginalHeaderName))
-                ) && 
-                (
-                    this.ObjectName == input.ObjectName ||
-                    (this.ObjectName != null &&
-                    this.ObjectName.Equals(input.ObjectName))
-                ) && 
-                (
-                    this.ReferenceObjectName == input.ReferenceObjectName ||
-                    (this.ReferenceObjectName != null &&
-                    this.ReferenceObjectName.Equals(input.ReferenceObjectName))
-                ) && 
-                (
-                    this.ObjectType == input.ObjectType ||
-                    (this.ObjectType != null &&
-                    this.ObjectType.Equals(input.ObjectType))
-                ) && 
-                (
-                    this.Formula == input.Formula ||
-                    (this.Formula != null &&
-                    this.Formula.Equals(input.Formula))
-                ) && 
-                (
-                    this.DimensionAlias == input.DimensionAlias ||
-                    (this.DimensionAlias != null &&
-                    this.DimensionAlias.Equals(input.DimensionAlias))
-                ) && 
-                (
-                    this.ExternalDimName == input.ExternalDimName ||
-                    (this.ExternalDimName != null &&
-                    this.ExternalDimName.Equals(input.ExternalDimName))
-                ) && 
-                (
-                    this.SolveOrder == input.SolveOrder ||
-                    this.SolveOrder.Equals(input.SolveOrder)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.OriginalHeaderName != null)
-                {
-                    hashCode = (hashCode * 59) + this.OriginalHeaderName.GetHashCode();
-                }
-                if (this.ObjectName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ObjectName.GetHashCode();
-                }
-                if (this.ReferenceObjectName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ReferenceObjectName.GetHashCode();
-                }
-                if (this.ObjectType != null)
-                {
-                    hashCode = (hashCode * 59) + this.ObjectType.GetHashCode();
-                }
-                if (this.Formula != null)
-                {
-                    hashCode = (hashCode * 59) + this.Formula.GetHashCode();
-                }
-                if (this.DimensionAlias != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimensionAlias.GetHashCode();
-                }
-                if (this.ExternalDimName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ExternalDimName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.SolveOrder.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

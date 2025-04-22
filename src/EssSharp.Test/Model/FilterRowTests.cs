@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<FilterRow>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Access'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Access'
         }
+
         /// <summary>
         /// Test the property 'MbrSpec'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MbrSpec'
         }
-
     }
-
 }

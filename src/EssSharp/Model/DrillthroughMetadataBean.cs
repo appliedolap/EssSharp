@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// DrillthroughMetadataBean
     /// </summary>
     [DataContract(Name = "DrillthroughMetadataBean")]
-    public partial class DrillthroughMetadataBean : IEquatable<DrillthroughMetadataBean>, IValidatableObject
+    public partial class DrillthroughMetadataBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DrillthroughMetadataBean" /> class.
@@ -85,76 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DrillthroughMetadataBean);
-        }
-
-        /// <summary>
-        /// Returns true if DrillthroughMetadataBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DrillthroughMetadataBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DrillthroughMetadataBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.DtrContext == input.DtrContext ||
-                    this.DtrContext != null &&
-                    input.DtrContext != null &&
-                    this.DtrContext.SequenceEqual(input.DtrContext)
-                ) && 
-                (
-                    this.AliasTable == input.AliasTable ||
-                    (this.AliasTable != null &&
-                    this.AliasTable.Equals(input.AliasTable))
-                ) && 
-                (
-                    this.SessionId == input.SessionId ||
-                    (this.SessionId != null &&
-                    this.SessionId.Equals(input.SessionId))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.DtrContext != null)
-                {
-                    hashCode = (hashCode * 59) + this.DtrContext.GetHashCode();
-                }
-                if (this.AliasTable != null)
-                {
-                    hashCode = (hashCode * 59) + this.AliasTable.GetHashCode();
-                }
-                if (this.SessionId != null)
-                {
-                    hashCode = (hashCode * 59) + this.SessionId.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

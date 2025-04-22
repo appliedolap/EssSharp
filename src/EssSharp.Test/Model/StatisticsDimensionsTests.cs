@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<StatisticsDimensions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Levels'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Levels'
         }
+
         /// <summary>
         /// Test the property 'Bits'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Bits'
         }
-
     }
-
 }

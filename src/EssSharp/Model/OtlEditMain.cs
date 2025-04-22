@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// OtlEditMain
     /// </summary>
     [DataContract(Name = "OtlEditMain")]
-    public partial class OtlEditMain : IEquatable<OtlEditMain>, IValidatableObject
+    public partial class OtlEditMain : IValidatableObject
     {
         /// <summary>
         /// Defines RestructOption
@@ -58,7 +58,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "IN_DATA")]
             INDATA = 4
-
         }
 
 
@@ -153,88 +152,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as OtlEditMain);
-        }
-
-        /// <summary>
-        /// Returns true if OtlEditMain instances are equal
-        /// </summary>
-        /// <param name="input">Instance of OtlEditMain to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(OtlEditMain input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.EditActions == input.EditActions ||
-                    this.EditActions != null &&
-                    input.EditActions != null &&
-                    this.EditActions.SequenceEqual(input.EditActions)
-                ) && 
-                (
-                    this.OtlVersion == input.OtlVersion ||
-                    this.OtlVersion.Equals(input.OtlVersion)
-                ) && 
-                (
-                    this.Validate == input.Validate ||
-                    this.Validate.Equals(input.Validate)
-                ) && 
-                (
-                    this.ValidateFormulas == input.ValidateFormulas ||
-                    this.ValidateFormulas.Equals(input.ValidateFormulas)
-                ) && 
-                (
-                    this.KeepTransaction == input.KeepTransaction ||
-                    this.KeepTransaction.Equals(input.KeepTransaction)
-                ) && 
-                (
-                    this.RestructOption == input.RestructOption ||
-                    this.RestructOption.Equals(input.RestructOption)
-                ) && 
-                (
-                    this.JsonformatLog == input.JsonformatLog ||
-                    this.JsonformatLog.Equals(input.JsonformatLog)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.EditActions != null)
-                {
-                    hashCode = (hashCode * 59) + this.EditActions.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.OtlVersion.GetHashCode();
-                hashCode = (hashCode * 59) + this.Validate.GetHashCode();
-                hashCode = (hashCode * 59) + this.ValidateFormulas.GetHashCode();
-                hashCode = (hashCode * 59) + this.KeepTransaction.GetHashCode();
-                hashCode = (hashCode * 59) + this.RestructOption.GetHashCode();
-                hashCode = (hashCode * 59) + this.JsonformatLog.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

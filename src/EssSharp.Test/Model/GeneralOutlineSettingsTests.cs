@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GeneralOutlineSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'CaseSensitiveMembers'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CaseSensitiveMembers'
         }
+
         /// <summary>
         /// Test the property 'OutlineType'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OutlineType'
         }
+
         /// <summary>
         /// Test the property 'AllowDuplicateMemberNames'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowDuplicateMemberNames'
         }
+
         /// <summary>
         /// Test the property 'TypeMeasuresEnabled'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TypeMeasuresEnabled'
         }
+
         /// <summary>
         /// Test the property 'DateFormat'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DateFormat'
         }
+
         /// <summary>
         /// Test the property 'VaryingAttributesEnabled'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'VaryingAttributesEnabled'
         }
+
         /// <summary>
         /// Test the property 'TimeModified'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TimeModified'
         }
+
         /// <summary>
         /// Test the property 'AutoConfigure'
         /// </summary>
@@ -117,7 +123,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AutoConfigure'
         }
-
     }
-
 }

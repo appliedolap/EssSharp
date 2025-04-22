@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DestroyBuffer>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'BufferIds'
         /// </summary>
@@ -61,7 +60,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BufferIds'
         }
-
     }
-
 }

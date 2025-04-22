@@ -27,27 +27,27 @@ namespace EssSharp.Model
     /// UserBean
     /// </summary>
     [DataContract(Name = "UserBean")]
-    public partial class UserBean : IEquatable<UserBean>, IValidatableObject
+    public partial class UserBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserBean" /> class.
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="token">token.</param>
-        /// <param name="email">email.</param>
-        /// <param name="role">role.</param>
         /// <param name="groups">groups.</param>
+        /// <param name="email">email.</param>
         /// <param name="password">password.</param>
+        /// <param name="role">role.</param>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public UserBean(List<Link> links = default(List<Link>), string token = default(string), string email = default(string), string role = default(string), List<string> groups = default(List<string>), string password = default(string), string id = default(string), string name = default(string))
+        public UserBean(List<Link> links = default(List<Link>), string token = default(string), List<string> groups = default(List<string>), string email = default(string), string password = default(string), string role = default(string), string id = default(string), string name = default(string))
         {
             this.Links = links;
             this.Token = token;
-            this.Email = email;
-            this.Role = role;
             this.Groups = groups;
+            this.Email = email;
             this.Password = password;
+            this.Role = role;
             this.Id = id;
             this.Name = name;
         }
@@ -65,28 +65,28 @@ namespace EssSharp.Model
         public string Token { get; set; }
 
         /// <summary>
-        /// Gets or Sets Email
-        /// </summary>
-        [DataMember(Name = "email", EmitDefaultValue = false)]
-        public string Email { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Role
-        /// </summary>
-        [DataMember(Name = "role", EmitDefaultValue = false)]
-        public string Role { get; set; }
-
-        /// <summary>
         /// Gets or Sets Groups
         /// </summary>
         [DataMember(Name = "groups", EmitDefaultValue = false)]
         public List<string> Groups { get; set; }
 
         /// <summary>
+        /// Gets or Sets Email
+        /// </summary>
+        [DataMember(Name = "email", EmitDefaultValue = false)]
+        public string Email { get; set; }
+
+        /// <summary>
         /// Gets or Sets Password
         /// </summary>
         [DataMember(Name = "password", EmitDefaultValue = false)]
         public string Password { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Role
+        /// </summary>
+        [DataMember(Name = "role", EmitDefaultValue = false)]
+        public string Role { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -110,10 +110,10 @@ namespace EssSharp.Model
             sb.Append("class UserBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
-            sb.Append("  Email: ").Append(Email).Append("\n");
-            sb.Append("  Role: ").Append(Role).Append("\n");
             sb.Append("  Groups: ").Append(Groups).Append("\n");
+            sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("  Password: ").Append(Password).Append("\n");
+            sb.Append("  Role: ").Append(Role).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
@@ -130,122 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as UserBean);
-        }
-
-        /// <summary>
-        /// Returns true if UserBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of UserBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(UserBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.Token == input.Token ||
-                    (this.Token != null &&
-                    this.Token.Equals(input.Token))
-                ) && 
-                (
-                    this.Email == input.Email ||
-                    (this.Email != null &&
-                    this.Email.Equals(input.Email))
-                ) && 
-                (
-                    this.Role == input.Role ||
-                    (this.Role != null &&
-                    this.Role.Equals(input.Role))
-                ) && 
-                (
-                    this.Groups == input.Groups ||
-                    this.Groups != null &&
-                    input.Groups != null &&
-                    this.Groups.SequenceEqual(input.Groups)
-                ) && 
-                (
-                    this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
-                ) && 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                if (this.Token != null)
-                {
-                    hashCode = (hashCode * 59) + this.Token.GetHashCode();
-                }
-                if (this.Email != null)
-                {
-                    hashCode = (hashCode * 59) + this.Email.GetHashCode();
-                }
-                if (this.Role != null)
-                {
-                    hashCode = (hashCode * 59) + this.Role.GetHashCode();
-                }
-                if (this.Groups != null)
-                {
-                    hashCode = (hashCode * 59) + this.Groups.GetHashCode();
-                }
-                if (this.Password != null)
-                {
-                    hashCode = (hashCode * 59) + this.Password.GetHashCode();
-                }
-                if (this.Id != null)
-                {
-                    hashCode = (hashCode * 59) + this.Id.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

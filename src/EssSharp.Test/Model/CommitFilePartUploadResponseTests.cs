@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CommitFilePartUploadResponse>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'OpcRequestId'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OpcRequestId'
         }
+
         /// <summary>
         /// Test the property 'OpcMultipartMd5'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OpcMultipartMd5'
         }
+
         /// <summary>
         /// Test the property 'VersionId'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'VersionId'
         }
+
         /// <summary>
         /// Test the property 'Etag'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Etag'
         }
+
         /// <summary>
         /// Test the property 'LastModified'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LastModified'
         }
-
     }
-
 }

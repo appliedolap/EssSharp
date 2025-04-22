@@ -52,6 +52,32 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GridRange>(instance);
         }
 
+        /// <summary>
+        /// Test the property 'Types'
+        /// </summary>
+        [Fact]
+        public void TypesTest()
+        {
+            // TODO unit test for the property 'Types'
+        }
+
+        /// <summary>
+        /// Test the property 'Start'
+        /// </summary>
+        [Fact]
+        public void StartTest()
+        {
+            // TODO unit test for the property 'Start'
+        }
+
+        /// <summary>
+        /// Test the property 'Filters'
+        /// </summary>
+        [Fact]
+        public void FiltersTest()
+        {
+            // TODO unit test for the property 'Filters'
+        }
 
         /// <summary>
         /// Test the property 'Statuses'
@@ -61,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Statuses'
         }
+
         /// <summary>
         /// Test the property 'Texts'
         /// </summary>
@@ -69,14 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Texts'
         }
-        /// <summary>
-        /// Test the property 'EnumIds'
-        /// </summary>
-        [Fact]
-        public void EnumIdsTest()
-        {
-            // TODO unit test for the property 'EnumIds'
-        }
+
         /// <summary>
         /// Test the property 'DataFormats'
         /// </summary>
@@ -85,30 +105,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFormats'
         }
+
         /// <summary>
-        /// Test the property 'Start'
+        /// Test the property 'EnumIds'
         /// </summary>
         [Fact]
-        public void StartTest()
+        public void EnumIdsTest()
         {
-            // TODO unit test for the property 'Start'
+            // TODO unit test for the property 'EnumIds'
         }
-        /// <summary>
-        /// Test the property 'Types'
-        /// </summary>
-        [Fact]
-        public void TypesTest()
-        {
-            // TODO unit test for the property 'Types'
-        }
-        /// <summary>
-        /// Test the property 'Filters'
-        /// </summary>
-        [Fact]
-        public void FiltersTest()
-        {
-            // TODO unit test for the property 'Filters'
-        }
+
         /// <summary>
         /// Test the property 'Values'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Values'
         }
+
         /// <summary>
         /// Test the property 'End'
         /// </summary>
@@ -125,7 +132,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'End'
         }
-
     }
-
 }

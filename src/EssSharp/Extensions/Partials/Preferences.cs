@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 using Newtonsoft.Json;
@@ -8,7 +6,7 @@ using Newtonsoft.Json;
 namespace EssSharp.Model
 {
     /// <summary />
-    public partial class Preferences : IEquatable<Preferences>, IValidatableObject
+    public partial class Preferences
     {
         /// <summary>
         /// A serialization-only <see cref="RowSupression"/> property.

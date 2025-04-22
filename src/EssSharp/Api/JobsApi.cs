@@ -79,13 +79,14 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="keyword">&lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; (optional)</param>
         /// <param name="fullAppName">&lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; (optional)</param>
+        /// <param name="fullDatabaseName">&lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; (optional)</param>
         /// <param name="orderBy">&lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; (optional, default to &quot;job_ID:desc&quot;)</param>
         /// <param name="offset">&lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; (optional, default to 50)</param>
         /// <param name="systemjobs">&lt;p&gt;Include backup jobs in jobs records.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>JobRecordPaginatedResultWrapper</returns>
-        JobRecordPaginatedResultWrapper JobsGetAllJobRecords(string keyword = default(string), string fullAppName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0);
+        JobRecordPaginatedResultWrapper JobsGetAllJobRecords(string keyword = default(string), string fullAppName = default(string), string fullDatabaseName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0);
 
         /// <summary>
         /// Get Job List
@@ -96,13 +97,14 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="keyword">&lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; (optional)</param>
         /// <param name="fullAppName">&lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; (optional)</param>
+        /// <param name="fullDatabaseName">&lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; (optional)</param>
         /// <param name="orderBy">&lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; (optional, default to &quot;job_ID:desc&quot;)</param>
         /// <param name="offset">&lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; (optional, default to 50)</param>
         /// <param name="systemjobs">&lt;p&gt;Include backup jobs in jobs records.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of JobRecordPaginatedResultWrapper</returns>
-        ApiResponse<JobRecordPaginatedResultWrapper> JobsGetAllJobRecordsWithHttpInfo(string keyword = default(string), string fullAppName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0);
+        ApiResponse<JobRecordPaginatedResultWrapper> JobsGetAllJobRecordsWithHttpInfo(string keyword = default(string), string fullAppName = default(string), string fullDatabaseName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0);
         /// <summary>
         /// Get Job
         /// </summary>
@@ -204,7 +206,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordBean</returns>
-        System.Threading.Tasks.Task<JobRecordBean> JobsExecuteByJobIdAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<JobRecordBean> JobsExecuteByJobIdAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Rerun Job
@@ -217,7 +219,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<JobRecordBean>> JobsExecuteByJobIdWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<JobRecordBean>> JobsExecuteByJobIdWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Execute Job
         /// </summary>
@@ -229,7 +231,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordBean</returns>
-        System.Threading.Tasks.Task<JobRecordBean> JobsExecuteJobAsync(JobsInputBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<JobRecordBean> JobsExecuteJobAsync(JobsInputBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Execute Job
@@ -242,7 +244,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<JobRecordBean>> JobsExecuteJobWithHttpInfoAsync(JobsInputBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<JobRecordBean>> JobsExecuteJobWithHttpInfoAsync(JobsInputBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Job List
         /// </summary>
@@ -252,6 +254,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="keyword">&lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; (optional)</param>
         /// <param name="fullAppName">&lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; (optional)</param>
+        /// <param name="fullDatabaseName">&lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; (optional)</param>
         /// <param name="orderBy">&lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; (optional, default to &quot;job_ID:desc&quot;)</param>
         /// <param name="offset">&lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; (optional, default to 50)</param>
@@ -259,7 +262,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordPaginatedResultWrapper</returns>
-        System.Threading.Tasks.Task<JobRecordPaginatedResultWrapper> JobsGetAllJobRecordsAsync(string keyword = default(string), string fullAppName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<JobRecordPaginatedResultWrapper> JobsGetAllJobRecordsAsync(string keyword = default(string), string fullAppName = default(string), string fullDatabaseName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Job List
@@ -270,6 +273,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="keyword">&lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; (optional)</param>
         /// <param name="fullAppName">&lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; (optional)</param>
+        /// <param name="fullDatabaseName">&lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; (optional)</param>
         /// <param name="orderBy">&lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; (optional, default to &quot;job_ID:desc&quot;)</param>
         /// <param name="offset">&lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; (optional, default to 50)</param>
@@ -277,7 +281,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordPaginatedResultWrapper)</returns>
-        System.Threading.Tasks.Task<ApiResponse<JobRecordPaginatedResultWrapper>> JobsGetAllJobRecordsWithHttpInfoAsync(string keyword = default(string), string fullAppName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<JobRecordPaginatedResultWrapper>> JobsGetAllJobRecordsWithHttpInfoAsync(string keyword = default(string), string fullAppName = default(string), string fullDatabaseName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Job
         /// </summary>
@@ -289,7 +293,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordBean</returns>
-        System.Threading.Tasks.Task<JobRecordBean> JobsGetJobInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<JobRecordBean> JobsGetJobInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Job
@@ -302,7 +306,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<JobRecordBean>> JobsGetJobInfoWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<JobRecordBean>> JobsGetJobInfoWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Job Statistics
         /// </summary>
@@ -314,7 +318,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobStatisticsBean</returns>
-        System.Threading.Tasks.Task<JobStatisticsBean> JobsGetJobStatisticsAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<JobStatisticsBean> JobsGetJobStatisticsAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Job Statistics
@@ -327,7 +331,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobStatisticsBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<JobStatisticsBean>> JobsGetJobStatisticsWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<JobStatisticsBean>> JobsGetJobStatisticsWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete jobs
         /// </summary>
@@ -345,7 +349,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task JobsPurgeAsync(long? olderthan = default(long?), long? rangeStartTime = default(long?), long? rangeEndTime = default(long?), string application = default(string), string database = default(string), string jobtype = default(string), int? jobstatus = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task JobsPurgeAsync(long? olderthan = default(long?), long? rangeStartTime = default(long?), long? rangeEndTime = default(long?), string application = default(string), string database = default(string), string jobtype = default(string), int? jobstatus = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete jobs
@@ -364,7 +368,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> JobsPurgeWithHttpInfoAsync(long? olderthan = default(long?), long? rangeStartTime = default(long?), long? rangeEndTime = default(long?), string application = default(string), string database = default(string), string jobtype = default(string), int? jobstatus = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> JobsPurgeWithHttpInfoAsync(long? olderthan = default(long?), long? rangeStartTime = default(long?), long? rangeEndTime = default(long?), string application = default(string), string database = default(string), string jobtype = default(string), int? jobstatus = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -519,6 +523,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -564,7 +569,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordBean</returns>
-        public async System.Threading.Tasks.Task<JobRecordBean> JobsExecuteByJobIdAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<JobRecordBean> JobsExecuteByJobIdAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<JobRecordBean> localVarResponse = await JobsExecuteByJobIdWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -578,7 +583,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobRecordBean>> JobsExecuteByJobIdWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobRecordBean>> JobsExecuteByJobIdWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -671,6 +676,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -716,7 +722,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordBean</returns>
-        public async System.Threading.Tasks.Task<JobRecordBean> JobsExecuteJobAsync(JobsInputBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<JobRecordBean> JobsExecuteJobAsync(JobsInputBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<JobRecordBean> localVarResponse = await JobsExecuteJobWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -730,7 +736,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobRecordBean>> JobsExecuteJobWithHttpInfoAsync(JobsInputBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobRecordBean>> JobsExecuteJobWithHttpInfoAsync(JobsInputBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -795,15 +801,16 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="keyword">&lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; (optional)</param>
         /// <param name="fullAppName">&lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; (optional)</param>
+        /// <param name="fullDatabaseName">&lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; (optional)</param>
         /// <param name="orderBy">&lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; (optional, default to &quot;job_ID:desc&quot;)</param>
         /// <param name="offset">&lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; (optional, default to 50)</param>
         /// <param name="systemjobs">&lt;p&gt;Include backup jobs in jobs records.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>JobRecordPaginatedResultWrapper</returns>
-        public JobRecordPaginatedResultWrapper JobsGetAllJobRecords(string keyword = default(string), string fullAppName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0)
+        public JobRecordPaginatedResultWrapper JobsGetAllJobRecords(string keyword = default(string), string fullAppName = default(string), string fullDatabaseName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<JobRecordPaginatedResultWrapper> localVarResponse = JobsGetAllJobRecordsWithHttpInfo(keyword, fullAppName, orderBy, offset, limit, systemjobs);
+            EssSharp.Client.ApiResponse<JobRecordPaginatedResultWrapper> localVarResponse = JobsGetAllJobRecordsWithHttpInfo(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs);
             return localVarResponse.Data;
         }
 
@@ -813,13 +820,14 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="keyword">&lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; (optional)</param>
         /// <param name="fullAppName">&lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; (optional)</param>
+        /// <param name="fullDatabaseName">&lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; (optional)</param>
         /// <param name="orderBy">&lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; (optional, default to &quot;job_ID:desc&quot;)</param>
         /// <param name="offset">&lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; (optional, default to 50)</param>
         /// <param name="systemjobs">&lt;p&gt;Include backup jobs in jobs records.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of JobRecordPaginatedResultWrapper</returns>
-        public EssSharp.Client.ApiResponse<JobRecordPaginatedResultWrapper> JobsGetAllJobRecordsWithHttpInfo(string keyword = default(string), string fullAppName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<JobRecordPaginatedResultWrapper> JobsGetAllJobRecordsWithHttpInfo(string keyword = default(string), string fullAppName = default(string), string fullDatabaseName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -833,6 +841,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -851,6 +860,10 @@ namespace EssSharp.Api
             if (fullAppName != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "fullAppName", fullAppName));
+            }
+            if (fullDatabaseName != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "fullDatabaseName", fullDatabaseName));
             }
             if (orderBy != null)
             {
@@ -899,6 +912,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="keyword">&lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; (optional)</param>
         /// <param name="fullAppName">&lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; (optional)</param>
+        /// <param name="fullDatabaseName">&lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; (optional)</param>
         /// <param name="orderBy">&lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; (optional, default to &quot;job_ID:desc&quot;)</param>
         /// <param name="offset">&lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; (optional, default to 50)</param>
@@ -906,9 +920,9 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordPaginatedResultWrapper</returns>
-        public async System.Threading.Tasks.Task<JobRecordPaginatedResultWrapper> JobsGetAllJobRecordsAsync(string keyword = default(string), string fullAppName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<JobRecordPaginatedResultWrapper> JobsGetAllJobRecordsAsync(string keyword = default(string), string fullAppName = default(string), string fullDatabaseName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<JobRecordPaginatedResultWrapper> localVarResponse = await JobsGetAllJobRecordsWithHttpInfoAsync(keyword, fullAppName, orderBy, offset, limit, systemjobs, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<JobRecordPaginatedResultWrapper> localVarResponse = await JobsGetAllJobRecordsWithHttpInfoAsync(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -918,6 +932,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="keyword">&lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; (optional)</param>
         /// <param name="fullAppName">&lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; (optional)</param>
+        /// <param name="fullDatabaseName">&lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; (optional)</param>
         /// <param name="orderBy">&lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; (optional, default to &quot;job_ID:desc&quot;)</param>
         /// <param name="offset">&lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; (optional, default to 50)</param>
@@ -925,7 +940,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordPaginatedResultWrapper)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobRecordPaginatedResultWrapper>> JobsGetAllJobRecordsWithHttpInfoAsync(string keyword = default(string), string fullAppName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobRecordPaginatedResultWrapper>> JobsGetAllJobRecordsWithHttpInfoAsync(string keyword = default(string), string fullAppName = default(string), string fullDatabaseName = default(string), string orderBy = default(string), long? offset = default(long?), long? limit = default(long?), bool? systemjobs = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -958,6 +973,10 @@ namespace EssSharp.Api
             if (fullAppName != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "fullAppName", fullAppName));
+            }
+            if (fullDatabaseName != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "fullDatabaseName", fullDatabaseName));
             }
             if (orderBy != null)
             {
@@ -1040,6 +1059,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1085,7 +1105,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordBean</returns>
-        public async System.Threading.Tasks.Task<JobRecordBean> JobsGetJobInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<JobRecordBean> JobsGetJobInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<JobRecordBean> localVarResponse = await JobsGetJobInfoWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1099,7 +1119,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobRecordBean>> JobsGetJobInfoWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobRecordBean>> JobsGetJobInfoWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1196,6 +1216,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1241,7 +1262,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobStatisticsBean</returns>
-        public async System.Threading.Tasks.Task<JobStatisticsBean> JobsGetJobStatisticsAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<JobStatisticsBean> JobsGetJobStatisticsAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<JobStatisticsBean> localVarResponse = await JobsGetJobStatisticsWithHttpInfoAsync(userId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1255,7 +1276,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobStatisticsBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobStatisticsBean>> JobsGetJobStatisticsWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<JobStatisticsBean>> JobsGetJobStatisticsWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1356,6 +1377,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1434,7 +1456,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task JobsPurgeAsync(long? olderthan = default(long?), long? rangeStartTime = default(long?), long? rangeEndTime = default(long?), string application = default(string), string database = default(string), string jobtype = default(string), int? jobstatus = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task JobsPurgeAsync(long? olderthan = default(long?), long? rangeStartTime = default(long?), long? rangeEndTime = default(long?), string application = default(string), string database = default(string), string jobtype = default(string), int? jobstatus = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await JobsPurgeWithHttpInfoAsync(olderthan, rangeStartTime, rangeEndTime, application, database, jobtype, jobstatus, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1453,7 +1475,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> JobsPurgeWithHttpInfoAsync(long? olderthan = default(long?), long? rangeStartTime = default(long?), long? rangeEndTime = default(long?), string application = default(string), string database = default(string), string jobtype = default(string), int? jobstatus = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> JobsPurgeWithHttpInfoAsync(long? olderthan = default(long?), long? rangeStartTime = default(long?), long? rangeEndTime = default(long?), string application = default(string), string database = default(string), string jobtype = default(string), int? jobstatus = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ShadowCopyBean
     /// </summary>
     [DataContract(Name = "ShadowCopyBean")]
-    public partial class ShadowCopyBean : IEquatable<ShadowCopyBean>, IValidatableObject
+    public partial class ShadowCopyBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShadowCopyBean" /> class.
@@ -118,81 +118,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ShadowCopyBean);
-        }
-
-        /// <summary>
-        /// Returns true if ShadowCopyBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ShadowCopyBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ShadowCopyBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.PrimaryAppName == input.PrimaryAppName ||
-                    (this.PrimaryAppName != null &&
-                    this.PrimaryAppName.Equals(input.PrimaryAppName))
-                ) && 
-                (
-                    this.ShadowAppName == input.ShadowAppName ||
-                    (this.ShadowAppName != null &&
-                    this.ShadowAppName.Equals(input.ShadowAppName))
-                ) && 
-                (
-                    this.HideShadow == input.HideShadow ||
-                    this.HideShadow.Equals(input.HideShadow)
-                ) && 
-                (
-                    this.WaitForOngoingUpdatesInSecs == input.WaitForOngoingUpdatesInSecs ||
-                    this.WaitForOngoingUpdatesInSecs.Equals(input.WaitForOngoingUpdatesInSecs)
-                ) && 
-                (
-                    this.RunInBackground == input.RunInBackground ||
-                    this.RunInBackground.Equals(input.RunInBackground)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.PrimaryAppName != null)
-                {
-                    hashCode = (hashCode * 59) + this.PrimaryAppName.GetHashCode();
-                }
-                if (this.ShadowAppName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ShadowAppName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.HideShadow.GetHashCode();
-                hashCode = (hashCode * 59) + this.WaitForOngoingUpdatesInSecs.GetHashCode();
-                hashCode = (hashCode * 59) + this.RunInBackground.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

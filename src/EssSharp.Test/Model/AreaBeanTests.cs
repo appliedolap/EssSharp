@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AreaBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'SourceArea'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SourceArea'
         }
+
         /// <summary>
         /// Test the property 'TargetArea'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TargetArea'
         }
+
         /// <summary>
         /// Test the property 'SourceCellCount'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SourceCellCount'
         }
+
         /// <summary>
         /// Test the property 'TargetCellCount'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TargetCellCount'
         }
+
         /// <summary>
         /// Test the property 'Slices'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Slices'
         }
-
     }
-
 }

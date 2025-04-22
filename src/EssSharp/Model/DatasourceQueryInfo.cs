@@ -27,19 +27,19 @@ namespace EssSharp.Model
     /// DatasourceQueryInfo
     /// </summary>
     [DataContract(Name = "DatasourceQueryInfo")]
-    public partial class DatasourceQueryInfo : IEquatable<DatasourceQueryInfo>, IValidatableObject
+    public partial class DatasourceQueryInfo : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DatasourceQueryInfo" /> class.
         /// </summary>
         /// <param name="query">query.</param>
         /// <param name="delimiter">delimiter.</param>
-        /// <param name="_params">_params.</param>
-        public DatasourceQueryInfo(string query = default(string), string delimiter = default(string), Dictionary<string, Object> _params = default(Dictionary<string, Object>))
+        /// <param name="varParams">varParams.</param>
+        public DatasourceQueryInfo(string query = default(string), string delimiter = default(string), Dictionary<string, Object> varParams = default(Dictionary<string, Object>))
         {
             this.Query = query;
             this.Delimiter = delimiter;
-            this.Params = _params;
+            this.Params = varParams;
         }
 
         /// <summary>
@@ -85,76 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DatasourceQueryInfo);
-        }
-
-        /// <summary>
-        /// Returns true if DatasourceQueryInfo instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DatasourceQueryInfo to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DatasourceQueryInfo input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
-                ) && 
-                (
-                    this.Delimiter == input.Delimiter ||
-                    (this.Delimiter != null &&
-                    this.Delimiter.Equals(input.Delimiter))
-                ) && 
-                (
-                    this.Params == input.Params ||
-                    this.Params != null &&
-                    input.Params != null &&
-                    this.Params.SequenceEqual(input.Params)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Query != null)
-                {
-                    hashCode = (hashCode * 59) + this.Query.GetHashCode();
-                }
-                if (this.Delimiter != null)
-                {
-                    hashCode = (hashCode * 59) + this.Delimiter.GetHashCode();
-                }
-                if (this.Params != null)
-                {
-                    hashCode = (hashCode * 59) + this.Params.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

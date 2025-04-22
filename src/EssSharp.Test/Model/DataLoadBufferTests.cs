@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DataLoadBuffer>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'BufferId'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BufferId'
         }
+
         /// <summary>
         /// Test the property 'DuplicateAggregationMethod'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DuplicateAggregationMethod'
         }
+
         /// <summary>
         /// Test the property 'LoadBufferOptions'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LoadBufferOptions'
         }
+
         /// <summary>
         /// Test the property 'ResourceUsage'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ResourceUsage'
         }
-
     }
-
 }

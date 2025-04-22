@@ -181,7 +181,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task NamedqueriesDeleteNamedQueryAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task NamedqueriesDeleteNamedQueryAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete MDX Report
@@ -196,7 +196,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> NamedqueriesDeleteNamedQueryWithHttpInfoAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> NamedqueriesDeleteNamedQueryWithHttpInfoAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update MDX Report
         /// </summary>
@@ -211,7 +211,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of NamedQuery</returns>
-        System.Threading.Tasks.Task<NamedQuery> NamedqueriesEditNamedQueryAsync(string application, string database, string query, Query body = default(Query), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<NamedQuery> NamedqueriesEditNamedQueryAsync(string application, string database, string query, Query body = default(Query), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update MDX Report
@@ -227,7 +227,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (NamedQuery)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NamedQuery>> NamedqueriesEditNamedQueryWithHttpInfoAsync(string application, string database, string query, Query body = default(Query), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<NamedQuery>> NamedqueriesEditNamedQueryWithHttpInfoAsync(string application, string database, string query, Query body = default(Query), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// List MDX Reports
         /// </summary>
@@ -240,7 +240,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Queries</returns>
-        System.Threading.Tasks.Task<Queries> NamedqueriesGetNamedQueriesAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Queries> NamedqueriesGetNamedQueriesAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// List MDX Reports
@@ -254,7 +254,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Queries)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Queries>> NamedqueriesGetNamedQueriesWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Queries>> NamedqueriesGetNamedQueriesWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get MDX Report Details
         /// </summary>
@@ -268,7 +268,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of NamedQuery</returns>
-        System.Threading.Tasks.Task<NamedQuery> NamedqueriesGetNamedQueryDetailsAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<NamedQuery> NamedqueriesGetNamedQueryDetailsAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get MDX Report Details
@@ -283,7 +283,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (NamedQuery)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NamedQuery>> NamedqueriesGetNamedQueryDetailsWithHttpInfoAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<NamedQuery>> NamedqueriesGetNamedQueryDetailsWithHttpInfoAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Save MDX Report
         /// </summary>
@@ -297,7 +297,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of NamedQuery</returns>
-        System.Threading.Tasks.Task<NamedQuery> NamedqueriesSaveNamedQueryAsync(string application, string database, NamedQuery body = default(NamedQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<NamedQuery> NamedqueriesSaveNamedQueryAsync(string application, string database, NamedQuery body = default(NamedQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Save MDX Report
@@ -312,7 +312,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (NamedQuery)</returns>
-        System.Threading.Tasks.Task<ApiResponse<NamedQuery>> NamedqueriesSaveNamedQueryWithHttpInfoAsync(string application, string database, NamedQuery body = default(NamedQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<NamedQuery>> NamedqueriesSaveNamedQueryWithHttpInfoAsync(string application, string database, NamedQuery body = default(NamedQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -486,6 +486,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -535,7 +536,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task NamedqueriesDeleteNamedQueryAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task NamedqueriesDeleteNamedQueryAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await NamedqueriesDeleteNamedQueryWithHttpInfoAsync(application, database, query, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -550,7 +551,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> NamedqueriesDeleteNamedQueryWithHttpInfoAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> NamedqueriesDeleteNamedQueryWithHttpInfoAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -681,6 +682,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -732,7 +734,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of NamedQuery</returns>
-        public async System.Threading.Tasks.Task<NamedQuery> NamedqueriesEditNamedQueryAsync(string application, string database, string query, Query body = default(Query), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<NamedQuery> NamedqueriesEditNamedQueryAsync(string application, string database, string query, Query body = default(Query), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<NamedQuery> localVarResponse = await NamedqueriesEditNamedQueryWithHttpInfoAsync(application, database, query, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -749,7 +751,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (NamedQuery)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<NamedQuery>> NamedqueriesEditNamedQueryWithHttpInfoAsync(string application, string database, string query, Query body = default(Query), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<NamedQuery>> NamedqueriesEditNamedQueryWithHttpInfoAsync(string application, string database, string query, Query body = default(Query), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -873,6 +875,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -920,7 +923,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Queries</returns>
-        public async System.Threading.Tasks.Task<Queries> NamedqueriesGetNamedQueriesAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Queries> NamedqueriesGetNamedQueriesAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<Queries> localVarResponse = await NamedqueriesGetNamedQueriesWithHttpInfoAsync(application, database, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -935,7 +938,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Queries)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Queries>> NamedqueriesGetNamedQueriesWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Queries>> NamedqueriesGetNamedQueriesWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1057,6 +1060,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1106,7 +1110,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of NamedQuery</returns>
-        public async System.Threading.Tasks.Task<NamedQuery> NamedqueriesGetNamedQueryDetailsAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<NamedQuery> NamedqueriesGetNamedQueryDetailsAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<NamedQuery> localVarResponse = await NamedqueriesGetNamedQueryDetailsWithHttpInfoAsync(application, database, query, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1122,7 +1126,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (NamedQuery)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<NamedQuery>> NamedqueriesGetNamedQueryDetailsWithHttpInfoAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<NamedQuery>> NamedqueriesGetNamedQueryDetailsWithHttpInfoAsync(string application, string database, string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1247,6 +1251,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1296,7 +1301,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of NamedQuery</returns>
-        public async System.Threading.Tasks.Task<NamedQuery> NamedqueriesSaveNamedQueryAsync(string application, string database, NamedQuery body = default(NamedQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<NamedQuery> NamedqueriesSaveNamedQueryAsync(string application, string database, NamedQuery body = default(NamedQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<NamedQuery> localVarResponse = await NamedqueriesSaveNamedQueryWithHttpInfoAsync(application, database, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1312,7 +1317,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (NamedQuery)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<NamedQuery>> NamedqueriesSaveNamedQueryWithHttpInfoAsync(string application, string database, NamedQuery body = default(NamedQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<NamedQuery>> NamedqueriesSaveNamedQueryWithHttpInfoAsync(string application, string database, NamedQuery body = default(NamedQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'application' is set
             if (application == null)

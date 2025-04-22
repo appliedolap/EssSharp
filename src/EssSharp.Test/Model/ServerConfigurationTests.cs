@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ServerConfiguration>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Host'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Host'
         }
+
         /// <summary>
         /// Test the property 'Port'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Port'
         }
+
         /// <summary>
         /// Test the property 'User'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'User'
         }
+
         /// <summary>
         /// Test the property 'Password'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Password'
         }
+
         /// <summary>
         /// Test the property 'Folder'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Folder'
         }
+
         /// <summary>
         /// Test the property 'MessageAction'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MessageAction'
         }
+
         /// <summary>
         /// Test the property 'MessageLocation'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MessageLocation'
         }
-
     }
-
 }

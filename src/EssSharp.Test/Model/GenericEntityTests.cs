@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GenericEntity>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'Entity'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Entity'
         }
-
     }
-
 }

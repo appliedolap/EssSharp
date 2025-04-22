@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// IndepDimension
     /// </summary>
     [DataContract(Name = "IndepDimension")]
-    public partial class IndepDimension : IEquatable<IndepDimension>, IValidatableObject
+    public partial class IndepDimension : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DISCRETE")]
             DISCRETE = 2
-
         }
 
 
@@ -96,62 +95,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as IndepDimension);
-        }
-
-        /// <summary>
-        /// Returns true if IndepDimension instances are equal
-        /// </summary>
-        /// <param name="input">Instance of IndepDimension to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(IndepDimension input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

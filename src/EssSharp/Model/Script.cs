@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Script
     /// </summary>
     [DataContract(Name = "Script")]
-    public partial class Script : IEquatable<Script>, IValidatableObject
+    public partial class Script : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Script" /> class.
@@ -35,20 +35,20 @@ namespace EssSharp.Model
         /// <param name="content">content.</param>
         /// <param name="links">links.</param>
         /// <param name="lockedTime">lockedTime.</param>
-        /// <param name="modifiedTime">modifiedTime.</param>
         /// <param name="locked">locked.</param>
-        /// <param name="lockedBy">lockedBy.</param>
         /// <param name="sizeInBytes">sizeInBytes.</param>
+        /// <param name="lockedBy">lockedBy.</param>
+        /// <param name="modifiedTime">modifiedTime.</param>
         /// <param name="name">name.</param>
-        public Script(string content = default(string), List<Link> links = default(List<Link>), long lockedTime = default(long), long modifiedTime = default(long), bool locked = default(bool), string lockedBy = default(string), long sizeInBytes = default(long), string name = default(string))
+        public Script(string content = default(string), List<Link> links = default(List<Link>), long lockedTime = default(long), bool locked = default(bool), long sizeInBytes = default(long), string lockedBy = default(string), long modifiedTime = default(long), string name = default(string))
         {
             this.Content = content;
             this.Links = links;
             this.LockedTime = lockedTime;
-            this.ModifiedTime = modifiedTime;
             this.Locked = locked;
-            this.LockedBy = lockedBy;
             this.SizeInBytes = sizeInBytes;
+            this.LockedBy = lockedBy;
+            this.ModifiedTime = modifiedTime;
             this.Name = name;
         }
 
@@ -71,16 +71,16 @@ namespace EssSharp.Model
         public long LockedTime { get; set; }
 
         /// <summary>
-        /// Gets or Sets ModifiedTime
-        /// </summary>
-        [DataMember(Name = "modifiedTime", EmitDefaultValue = false)]
-        public long ModifiedTime { get; set; }
-
-        /// <summary>
         /// Gets or Sets Locked
         /// </summary>
         [DataMember(Name = "locked", EmitDefaultValue = true)]
         public bool Locked { get; set; }
+
+        /// <summary>
+        /// Gets or Sets SizeInBytes
+        /// </summary>
+        [DataMember(Name = "sizeInBytes", EmitDefaultValue = false)]
+        public long SizeInBytes { get; set; }
 
         /// <summary>
         /// Gets or Sets LockedBy
@@ -89,10 +89,10 @@ namespace EssSharp.Model
         public string LockedBy { get; set; }
 
         /// <summary>
-        /// Gets or Sets SizeInBytes
+        /// Gets or Sets ModifiedTime
         /// </summary>
-        [DataMember(Name = "sizeInBytes", EmitDefaultValue = false)]
-        public long SizeInBytes { get; set; }
+        [DataMember(Name = "modifiedTime", EmitDefaultValue = false)]
+        public long ModifiedTime { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -111,10 +111,10 @@ namespace EssSharp.Model
             sb.Append("  Content: ").Append(Content).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  LockedTime: ").Append(LockedTime).Append("\n");
-            sb.Append("  ModifiedTime: ").Append(ModifiedTime).Append("\n");
             sb.Append("  Locked: ").Append(Locked).Append("\n");
-            sb.Append("  LockedBy: ").Append(LockedBy).Append("\n");
             sb.Append("  SizeInBytes: ").Append(SizeInBytes).Append("\n");
+            sb.Append("  LockedBy: ").Append(LockedBy).Append("\n");
+            sb.Append("  ModifiedTime: ").Append(ModifiedTime).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -130,105 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Script);
-        }
-
-        /// <summary>
-        /// Returns true if Script instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Script to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Script input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Content == input.Content ||
-                    (this.Content != null &&
-                    this.Content.Equals(input.Content))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.LockedTime == input.LockedTime ||
-                    this.LockedTime.Equals(input.LockedTime)
-                ) && 
-                (
-                    this.ModifiedTime == input.ModifiedTime ||
-                    this.ModifiedTime.Equals(input.ModifiedTime)
-                ) && 
-                (
-                    this.Locked == input.Locked ||
-                    this.Locked.Equals(input.Locked)
-                ) && 
-                (
-                    this.LockedBy == input.LockedBy ||
-                    (this.LockedBy != null &&
-                    this.LockedBy.Equals(input.LockedBy))
-                ) && 
-                (
-                    this.SizeInBytes == input.SizeInBytes ||
-                    this.SizeInBytes.Equals(input.SizeInBytes)
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Content != null)
-                {
-                    hashCode = (hashCode * 59) + this.Content.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.LockedTime.GetHashCode();
-                hashCode = (hashCode * 59) + this.ModifiedTime.GetHashCode();
-                hashCode = (hashCode * 59) + this.Locked.GetHashCode();
-                if (this.LockedBy != null)
-                {
-                    hashCode = (hashCode * 59) + this.LockedBy.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.SizeInBytes.GetHashCode();
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

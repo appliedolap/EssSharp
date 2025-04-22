@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<JobsInputBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Application'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Application'
         }
+
         /// <summary>
         /// Test the property 'Db'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Db'
         }
+
         /// <summary>
         /// Test the property 'Jobtype'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Jobtype'
         }
+
         /// <summary>
         /// Test the property 'Parameters'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Parameters'
         }
-
     }
-
 }

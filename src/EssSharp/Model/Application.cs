@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Application
     /// </summary>
     [DataContract(Name = "Application")]
-    public partial class Application : IEquatable<Application>, IValidatableObject
+    public partial class Application : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "CURRENCY")]
             CURRENCY = 3
-
         }
 
 
@@ -80,7 +79,8 @@ namespace EssSharp.Model
         /// <param name="startStopAppAllowed">startStopAppAllowed.</param>
         /// <param name="inspectAppAllowed">inspectAppAllowed.</param>
         /// <param name="appVariablesSetting">appVariablesSetting.</param>
-        public Application(string name = default(string), string owner = default(string), long creationTime = default(long), string modifiedBy = default(string), long modifiedTime = default(long), string status = default(string), string description = default(string), TypeEnum? type = default(TypeEnum?), long startTime = default(long), int connectedUsersCount = default(int), string role = default(string), List<Link> links = default(List<Link>), bool easManagedApp = default(bool), bool startStopAppAllowed = default(bool), bool inspectAppAllowed = default(bool), VariablesSetting appVariablesSetting = default(VariablesSetting))
+        /// <param name="encrypted">encrypted.</param>
+        public Application(string name = default(string), string owner = default(string), long creationTime = default(long), string modifiedBy = default(string), long modifiedTime = default(long), string status = default(string), string description = default(string), TypeEnum? type = default(TypeEnum?), long startTime = default(long), int connectedUsersCount = default(int), string role = default(string), List<Link> links = default(List<Link>), bool easManagedApp = default(bool), bool startStopAppAllowed = default(bool), bool inspectAppAllowed = default(bool), VariablesSetting appVariablesSetting = default(VariablesSetting), bool encrypted = default(bool))
         {
             this.Name = name;
             this.Owner = owner;
@@ -98,6 +98,7 @@ namespace EssSharp.Model
             this.StartStopAppAllowed = startStopAppAllowed;
             this.InspectAppAllowed = inspectAppAllowed;
             this.AppVariablesSetting = appVariablesSetting;
+            this.Encrypted = encrypted;
         }
 
         /// <summary>
@@ -191,6 +192,12 @@ namespace EssSharp.Model
         public VariablesSetting AppVariablesSetting { get; set; }
 
         /// <summary>
+        /// Gets or Sets Encrypted
+        /// </summary>
+        [DataMember(Name = "encrypted", EmitDefaultValue = true)]
+        public bool Encrypted { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -214,6 +221,7 @@ namespace EssSharp.Model
             sb.Append("  StartStopAppAllowed: ").Append(StartStopAppAllowed).Append("\n");
             sb.Append("  InspectAppAllowed: ").Append(InspectAppAllowed).Append("\n");
             sb.Append("  AppVariablesSetting: ").Append(AppVariablesSetting).Append("\n");
+            sb.Append("  Encrypted: ").Append(Encrypted).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -228,161 +236,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Application);
-        }
-
-        /// <summary>
-        /// Returns true if Application instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Application to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Application input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Owner == input.Owner ||
-                    (this.Owner != null &&
-                    this.Owner.Equals(input.Owner))
-                ) && 
-                (
-                    this.CreationTime == input.CreationTime ||
-                    this.CreationTime.Equals(input.CreationTime)
-                ) && 
-                (
-                    this.ModifiedBy == input.ModifiedBy ||
-                    (this.ModifiedBy != null &&
-                    this.ModifiedBy.Equals(input.ModifiedBy))
-                ) && 
-                (
-                    this.ModifiedTime == input.ModifiedTime ||
-                    this.ModifiedTime.Equals(input.ModifiedTime)
-                ) && 
-                (
-                    this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.StartTime == input.StartTime ||
-                    this.StartTime.Equals(input.StartTime)
-                ) && 
-                (
-                    this.ConnectedUsersCount == input.ConnectedUsersCount ||
-                    this.ConnectedUsersCount.Equals(input.ConnectedUsersCount)
-                ) && 
-                (
-                    this.Role == input.Role ||
-                    (this.Role != null &&
-                    this.Role.Equals(input.Role))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.EasManagedApp == input.EasManagedApp ||
-                    this.EasManagedApp.Equals(input.EasManagedApp)
-                ) && 
-                (
-                    this.StartStopAppAllowed == input.StartStopAppAllowed ||
-                    this.StartStopAppAllowed.Equals(input.StartStopAppAllowed)
-                ) && 
-                (
-                    this.InspectAppAllowed == input.InspectAppAllowed ||
-                    this.InspectAppAllowed.Equals(input.InspectAppAllowed)
-                ) && 
-                (
-                    this.AppVariablesSetting == input.AppVariablesSetting ||
-                    (this.AppVariablesSetting != null &&
-                    this.AppVariablesSetting.Equals(input.AppVariablesSetting))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.Owner != null)
-                {
-                    hashCode = (hashCode * 59) + this.Owner.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.CreationTime.GetHashCode();
-                if (this.ModifiedBy != null)
-                {
-                    hashCode = (hashCode * 59) + this.ModifiedBy.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ModifiedTime.GetHashCode();
-                if (this.Status != null)
-                {
-                    hashCode = (hashCode * 59) + this.Status.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                hashCode = (hashCode * 59) + this.StartTime.GetHashCode();
-                hashCode = (hashCode * 59) + this.ConnectedUsersCount.GetHashCode();
-                if (this.Role != null)
-                {
-                    hashCode = (hashCode * 59) + this.Role.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.EasManagedApp.GetHashCode();
-                hashCode = (hashCode * 59) + this.StartStopAppAllowed.GetHashCode();
-                hashCode = (hashCode * 59) + this.InspectAppAllowed.GetHashCode();
-                if (this.AppVariablesSetting != null)
-                {
-                    hashCode = (hashCode * 59) + this.AppVariablesSetting.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Suppression
     /// </summary>
     [DataContract(Name = "Suppression")]
-    public partial class Suppression : IEquatable<Suppression>, IValidatableObject
+    public partial class Suppression : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Suppression" /> class.
@@ -130,88 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Suppression);
-        }
-
-        /// <summary>
-        /// Returns true if Suppression instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Suppression to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Suppression input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Missing == input.Missing ||
-                    this.Missing.Equals(input.Missing)
-                ) && 
-                (
-                    this.Invalid == input.Invalid ||
-                    this.Invalid.Equals(input.Invalid)
-                ) && 
-                (
-                    this.Derived == input.Derived ||
-                    this.Derived.Equals(input.Derived)
-                ) && 
-                (
-                    this.Zero == input.Zero ||
-                    this.Zero.Equals(input.Zero)
-                ) && 
-                (
-                    this.UnderScore == input.UnderScore ||
-                    this.UnderScore.Equals(input.UnderScore)
-                ) && 
-                (
-                    this.NoAccess == input.NoAccess ||
-                    this.NoAccess.Equals(input.NoAccess)
-                ) && 
-                (
-                    this.EmptyBlocks == input.EmptyBlocks ||
-                    this.EmptyBlocks.Equals(input.EmptyBlocks)
-                ) && 
-                (
-                    this.Error == input.Error ||
-                    this.Error.Equals(input.Error)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Missing.GetHashCode();
-                hashCode = (hashCode * 59) + this.Invalid.GetHashCode();
-                hashCode = (hashCode * 59) + this.Derived.GetHashCode();
-                hashCode = (hashCode * 59) + this.Zero.GetHashCode();
-                hashCode = (hashCode * 59) + this.UnderScore.GetHashCode();
-                hashCode = (hashCode * 59) + this.NoAccess.GetHashCode();
-                hashCode = (hashCode * 59) + this.EmptyBlocks.GetHashCode();
-                hashCode = (hashCode * 59) + this.Error.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

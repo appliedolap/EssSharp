@@ -183,7 +183,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        System.Threading.Tasks.Task<Grid> GridExecuteAsync(string applicationName, string databaseName, GridOperation body = default(GridOperation), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Grid> GridExecuteAsync(string applicationName, string databaseName, GridOperation body = default(GridOperation), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Execute Grid Operation
@@ -198,7 +198,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Grid>> GridExecuteWithHttpInfoAsync(string applicationName, string databaseName, GridOperation body = default(GridOperation), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Grid>> GridExecuteWithHttpInfoAsync(string applicationName, string databaseName, GridOperation body = default(GridOperation), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Execute Grid Layout
         /// </summary>
@@ -213,7 +213,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        System.Threading.Tasks.Task<Grid> GridExecuteLayoutAsync(string applicationName, string databaseName, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Grid> GridExecuteLayoutAsync(string applicationName, string databaseName, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Execute Grid Layout
@@ -229,7 +229,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Grid>> GridExecuteLayoutWithHttpInfoAsync(string applicationName, string databaseName, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Grid>> GridExecuteLayoutWithHttpInfoAsync(string applicationName, string databaseName, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Execute MDX Report
         /// </summary>
@@ -243,7 +243,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        System.Threading.Tasks.Task<Grid> GridExecuteMDXAsync(string applicationName, string databaseName, MDXOperation body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Grid> GridExecuteMDXAsync(string applicationName, string databaseName, MDXOperation body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Execute MDX Report
@@ -258,7 +258,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Grid>> GridExecuteMDXWithHttpInfoAsync(string applicationName, string databaseName, MDXOperation body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Grid>> GridExecuteMDXWithHttpInfoAsync(string applicationName, string databaseName, MDXOperation body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Default Grid
         /// </summary>
@@ -272,7 +272,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        System.Threading.Tasks.Task<Grid> GridGetDefaultAsync(string applicationName, string databaseName, bool? reset = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Grid> GridGetDefaultAsync(string applicationName, string databaseName, bool? reset = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Default Grid
@@ -287,7 +287,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Grid>> GridGetDefaultWithHttpInfoAsync(string applicationName, string databaseName, bool? reset = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Grid>> GridGetDefaultWithHttpInfoAsync(string applicationName, string databaseName, bool? reset = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Layout Grid
         /// </summary>
@@ -301,7 +301,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GridLayout</returns>
-        System.Threading.Tasks.Task<GridLayout> GridGetLayoutGridAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GridLayout> GridGetLayoutGridAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Layout Grid
@@ -316,7 +316,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GridLayout)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GridLayout>> GridGetLayoutGridWithHttpInfoAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GridLayout>> GridGetLayoutGridWithHttpInfoAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -488,6 +488,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -537,7 +538,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        public async System.Threading.Tasks.Task<Grid> GridExecuteAsync(string applicationName, string databaseName, GridOperation body = default(GridOperation), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Grid> GridExecuteAsync(string applicationName, string databaseName, GridOperation body = default(GridOperation), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<Grid> localVarResponse = await GridExecuteWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -553,7 +554,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridExecuteWithHttpInfoAsync(string applicationName, string databaseName, GridOperation body = default(GridOperation), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridExecuteWithHttpInfoAsync(string applicationName, string databaseName, GridOperation body = default(GridOperation), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -679,6 +680,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -733,7 +735,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        public async System.Threading.Tasks.Task<Grid> GridExecuteLayoutAsync(string applicationName, string databaseName, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Grid> GridExecuteLayoutAsync(string applicationName, string databaseName, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<Grid> localVarResponse = await GridExecuteLayoutWithHttpInfoAsync(applicationName, databaseName, layout, user, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -750,7 +752,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridExecuteLayoutWithHttpInfoAsync(string applicationName, string databaseName, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridExecuteLayoutWithHttpInfoAsync(string applicationName, string databaseName, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -884,6 +886,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -933,7 +936,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        public async System.Threading.Tasks.Task<Grid> GridExecuteMDXAsync(string applicationName, string databaseName, MDXOperation body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Grid> GridExecuteMDXAsync(string applicationName, string databaseName, MDXOperation body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<Grid> localVarResponse = await GridExecuteMDXWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -949,7 +952,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridExecuteMDXWithHttpInfoAsync(string applicationName, string databaseName, MDXOperation body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridExecuteMDXWithHttpInfoAsync(string applicationName, string databaseName, MDXOperation body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1073,6 +1076,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1125,7 +1129,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        public async System.Threading.Tasks.Task<Grid> GridGetDefaultAsync(string applicationName, string databaseName, bool? reset = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Grid> GridGetDefaultAsync(string applicationName, string databaseName, bool? reset = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<Grid> localVarResponse = await GridGetDefaultWithHttpInfoAsync(applicationName, databaseName, reset, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1141,7 +1145,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridGetDefaultWithHttpInfoAsync(string applicationName, string databaseName, bool? reset = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridGetDefaultWithHttpInfoAsync(string applicationName, string databaseName, bool? reset = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1268,6 +1272,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1317,7 +1322,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GridLayout</returns>
-        public async System.Threading.Tasks.Task<GridLayout> GridGetLayoutGridAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GridLayout> GridGetLayoutGridAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<GridLayout> localVarResponse = await GridGetLayoutGridWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1333,7 +1338,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GridLayout)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GridLayout>> GridGetLayoutGridWithHttpInfoAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GridLayout>> GridGetLayoutGridWithHttpInfoAsync(string applicationName, string databaseName, Grid body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

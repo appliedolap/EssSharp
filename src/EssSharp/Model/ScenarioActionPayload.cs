@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ScenarioActionPayload
     /// </summary>
     [DataContract(Name = "ScenarioActionPayload")]
-    public partial class ScenarioActionPayload : IEquatable<ScenarioActionPayload>, IValidatableObject
+    public partial class ScenarioActionPayload : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScenarioActionPayload" /> class.
@@ -85,75 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ScenarioActionPayload);
-        }
-
-        /// <summary>
-        /// Returns true if ScenarioActionPayload instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ScenarioActionPayload to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ScenarioActionPayload input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Comment == input.Comment ||
-                    (this.Comment != null &&
-                    this.Comment.Equals(input.Comment))
-                ) && 
-                (
-                    this.To == input.To ||
-                    (this.To != null &&
-                    this.To.Equals(input.To))
-                ) && 
-                (
-                    this.CopyOptions == input.CopyOptions ||
-                    (this.CopyOptions != null &&
-                    this.CopyOptions.Equals(input.CopyOptions))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Comment != null)
-                {
-                    hashCode = (hashCode * 59) + this.Comment.GetHashCode();
-                }
-                if (this.To != null)
-                {
-                    hashCode = (hashCode * 59) + this.To.GetHashCode();
-                }
-                if (this.CopyOptions != null)
-                {
-                    hashCode = (hashCode * 59) + this.CopyOptions.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AppSecuritySettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'AllowCommands'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowCommands'
         }
+
         /// <summary>
         /// Test the property 'AllowConnects'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowConnects'
         }
+
         /// <summary>
         /// Test the property 'AllowUpdates'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowUpdates'
         }
-
     }
-
 }

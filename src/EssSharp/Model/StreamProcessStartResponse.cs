@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// StreamProcessStartResponse
     /// </summary>
     [DataContract(Name = "StreamProcessStartResponse")]
-    public partial class StreamProcessStartResponse : IEquatable<StreamProcessStartResponse>, IValidatableObject
+    public partial class StreamProcessStartResponse : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StreamProcessStartResponse" /> class.
@@ -76,67 +76,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as StreamProcessStartResponse);
-        }
-
-        /// <summary>
-        /// Returns true if StreamProcessStartResponse instances are equal
-        /// </summary>
-        /// <param name="input">Instance of StreamProcessStartResponse to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(StreamProcessStartResponse input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.StreamId == input.StreamId ||
-                    (this.StreamId != null &&
-                    this.StreamId.Equals(input.StreamId))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.StreamId != null)
-                {
-                    hashCode = (hashCode * 59) + this.StreamId.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

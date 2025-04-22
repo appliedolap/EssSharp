@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Filter>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'StringFilter'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StringFilter'
         }
+
         /// <summary>
         /// Test the property 'Value'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Value'
         }
+
         /// <summary>
         /// Test the property 'Condition'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Condition'
         }
+
         /// <summary>
         /// Test the property 'CaseSensitive'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CaseSensitive'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
-
     }
-
 }

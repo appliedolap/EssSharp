@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ShadowPromoteBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ShadowAppName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ShadowAppName'
         }
+
         /// <summary>
         /// Test the property 'PrimaryAppName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PrimaryAppName'
         }
+
         /// <summary>
         /// Test the property 'TimeoutToForceUnloadApp'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TimeoutToForceUnloadApp'
         }
+
         /// <summary>
         /// Test the property 'RunInBackground'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RunInBackground'
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// EssbaseInfo
     /// </summary>
     [DataContract(Name = "EssbaseInfo")]
-    public partial class EssbaseInfo : IEquatable<EssbaseInfo>, IValidatableObject
+    public partial class EssbaseInfo : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EssbaseInfo" /> class.
@@ -103,93 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as EssbaseInfo);
-        }
-
-        /// <summary>
-        /// Returns true if EssbaseInfo instances are equal
-        /// </summary>
-        /// <param name="input">Instance of EssbaseInfo to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(EssbaseInfo input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Server == input.Server ||
-                    (this.Server != null &&
-                    this.Server.Equals(input.Server))
-                ) && 
-                (
-                    this.Application == input.Application ||
-                    (this.Application != null &&
-                    this.Application.Equals(input.Application))
-                ) && 
-                (
-                    this.Database == input.Database ||
-                    (this.Database != null &&
-                    this.Database.Equals(input.Database))
-                ) && 
-                (
-                    this.User == input.User ||
-                    (this.User != null &&
-                    this.User.Equals(input.User))
-                ) && 
-                (
-                    this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Server != null)
-                {
-                    hashCode = (hashCode * 59) + this.Server.GetHashCode();
-                }
-                if (this.Application != null)
-                {
-                    hashCode = (hashCode * 59) + this.Application.GetHashCode();
-                }
-                if (this.Database != null)
-                {
-                    hashCode = (hashCode * 59) + this.Database.GetHashCode();
-                }
-                if (this.User != null)
-                {
-                    hashCode = (hashCode * 59) + this.User.GetHashCode();
-                }
-                if (this.Password != null)
-                {
-                    hashCode = (hashCode * 59) + this.Password.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

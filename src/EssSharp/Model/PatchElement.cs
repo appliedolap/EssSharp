@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// PatchElement
     /// </summary>
     [DataContract(Name = "PatchElement")]
-    public partial class PatchElement : IEquatable<PatchElement>, IValidatableObject
+    public partial class PatchElement : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PatchElement" /> class.
@@ -94,84 +94,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as PatchElement);
-        }
-
-        /// <summary>
-        /// Returns true if PatchElement instances are equal
-        /// </summary>
-        /// <param name="input">Instance of PatchElement to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(PatchElement input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Op == input.Op ||
-                    (this.Op != null &&
-                    this.Op.Equals(input.Op))
-                ) && 
-                (
-                    this.Path == input.Path ||
-                    (this.Path != null &&
-                    this.Path.Equals(input.Path))
-                ) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
-                ) && 
-                (
-                    this.From == input.From ||
-                    (this.From != null &&
-                    this.From.Equals(input.From))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Op != null)
-                {
-                    hashCode = (hashCode * 59) + this.Op.GetHashCode();
-                }
-                if (this.Path != null)
-                {
-                    hashCode = (hashCode * 59) + this.Path.GetHashCode();
-                }
-                if (this.Value != null)
-                {
-                    hashCode = (hashCode * 59) + this.Value.GetHashCode();
-                }
-                if (this.From != null)
-                {
-                    hashCode = (hashCode * 59) + this.From.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

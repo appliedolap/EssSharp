@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CalculationSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'AggregateMissingValues'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AggregateMissingValues'
         }
+
         /// <summary>
         /// Test the property 'CreateBlocksOnEquations'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CreateBlocksOnEquations'
         }
+
         /// <summary>
         /// Test the property 'TwoPassCalculation'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TwoPassCalculation'
         }
-
     }
-
 }

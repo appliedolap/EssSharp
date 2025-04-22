@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ParametersBean
     /// </summary>
     [DataContract(Name = "ParametersBean")]
-    public partial class ParametersBean : IEquatable<ParametersBean>, IValidatableObject
+    public partial class ParametersBean : IValidatableObject
     {
         /// <summary>
         /// Defines BuildMethod
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "GENERATION")]
             GENERATION = 2
-
         }
 
 
@@ -90,7 +89,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "REMOVE_ALL_DATA")]
             REMOVEALLDATA = 5
-
         }
 
 
@@ -134,7 +132,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "INPUT_LEVEL_DATA_BLOCKS")]
             INPUTLEVELDATABLOCKS = 5
-
         }
 
 
@@ -224,8 +221,10 @@ namespace EssSharp.Model
         /// <param name="filetype">filetype.</param>
         /// <param name="exportpartitions">exportpartitions.</param>
         /// <param name="exportfilters">exportfilters.</param>
+        /// <param name="restEncryPassword">restEncryPassword.</param>
+        /// <param name="catalogZipPath">catalogZipPath.</param>
         /// <param name="physical">physical.</param>
-        public ParametersBean(string rule = default(string), string file = default(string), string abortOnError = default(string), string restructureOption = default(string), string forceDimBuild = default(string), string script = default(string), string option = default(string), string loaddata = default(string), string useConnection = default(string), string connection = default(string), string user = default(string), string password = default(string), string calc = default(string), BuildMethodEnum? buildMethod = default(BuildMethodEnum?), string data = default(string), string memberIds = default(string), string zipFileName = default(string), string skipdata = default(string), string threads = default(string), string overwrite = default(string), string lcmImportFromStorage = default(string), string analyzeFileName = default(string), string analyzeSheetName = default(string), string deleteExcelOnSuccess = default(string), string catalogExcelPath = default(string), string importExcelFileName = default(string), string recreateApplication = default(string), string createFiles = default(string), string executeScript = default(string), BuildOptionEnum? buildOption = default(BuildOptionEnum?), string copyToStorage = default(string), string filesystemcopy = default(string), DataLevelEnum? dataLevel = default(DataLevelEnum?), string columnFormat = default(string), string targetApplicationName = default(string), string partialDataExpression = default(string), string allApp = default(string), string includeServerLevel = default(string), string enableSandboxing = default(string), string dbType = default(string), string dimDesignationMode = default(string), CompactDesignation unstructuredAnalysis = default(CompactDesignation), string ratioToStop = default(string), string basedOnQueryData = default(string), string enableAlternateRollups = default(string), string compress = default(string), string generateArtifactList = default(string), string artifactList = default(string), string verbose = default(string), string disasterRecovery = default(string), string force = default(string), string backupType = default(string), string appId = default(string), string timestamp = default(string), string maxParallel = default(string), List<string> selectedDimensions = default(List<string>), List<RTSV> rtsv = default(List<RTSV>), int bufferId = default(int), List<int> bufferIds = default(List<int>), string commitOption = default(string), string actionType = default(string), string termOption = default(string), string discoverDimensionTables = default(string), string exportDynamicBlocks = default(string), string shadowAppName = default(string), string primaryAppName = default(string), string timeoutToForceUnloadApp = default(string), string hideShadow = default(string), string waitForOngoingUpdatesInSecs = default(string), string reportScriptFilename = default(string), string lockForUpdate = default(string), string isScriptContent = default(string), string useCatalogPath = default(string), string exportdata = default(string), string cube = default(string), string filetype = default(string), string exportpartitions = default(string), string exportfilters = default(string), string physical = default(string))
+        public ParametersBean(string rule = default(string), string file = default(string), string abortOnError = default(string), string restructureOption = default(string), string forceDimBuild = default(string), string script = default(string), string option = default(string), string loaddata = default(string), string useConnection = default(string), string connection = default(string), string user = default(string), string password = default(string), string calc = default(string), BuildMethodEnum? buildMethod = default(BuildMethodEnum?), string data = default(string), string memberIds = default(string), string zipFileName = default(string), string skipdata = default(string), string threads = default(string), string overwrite = default(string), string lcmImportFromStorage = default(string), string analyzeFileName = default(string), string analyzeSheetName = default(string), string deleteExcelOnSuccess = default(string), string catalogExcelPath = default(string), string importExcelFileName = default(string), string recreateApplication = default(string), string createFiles = default(string), string executeScript = default(string), BuildOptionEnum? buildOption = default(BuildOptionEnum?), string copyToStorage = default(string), string filesystemcopy = default(string), DataLevelEnum? dataLevel = default(DataLevelEnum?), string columnFormat = default(string), string targetApplicationName = default(string), string partialDataExpression = default(string), string allApp = default(string), string includeServerLevel = default(string), string enableSandboxing = default(string), string dbType = default(string), string dimDesignationMode = default(string), CompactDesignation unstructuredAnalysis = default(CompactDesignation), string ratioToStop = default(string), string basedOnQueryData = default(string), string enableAlternateRollups = default(string), string compress = default(string), string generateArtifactList = default(string), string artifactList = default(string), string verbose = default(string), string disasterRecovery = default(string), string force = default(string), string backupType = default(string), string appId = default(string), string timestamp = default(string), string maxParallel = default(string), List<string> selectedDimensions = default(List<string>), List<RTSV> rtsv = default(List<RTSV>), int bufferId = default(int), List<int> bufferIds = default(List<int>), string commitOption = default(string), string actionType = default(string), string termOption = default(string), string discoverDimensionTables = default(string), string exportDynamicBlocks = default(string), string shadowAppName = default(string), string primaryAppName = default(string), string timeoutToForceUnloadApp = default(string), string hideShadow = default(string), string waitForOngoingUpdatesInSecs = default(string), string reportScriptFilename = default(string), string lockForUpdate = default(string), string isScriptContent = default(string), bool useCatalogPath = default(bool), bool exportdata = default(bool), string cube = default(string), string filetype = default(string), bool exportpartitions = default(bool), bool exportfilters = default(bool), string restEncryPassword = default(string), string catalogZipPath = default(string), bool physical = default(bool))
         {
             this.Rule = rule;
             this.File = file;
@@ -305,6 +304,8 @@ namespace EssSharp.Model
             this.Filetype = filetype;
             this.Exportpartitions = exportpartitions;
             this.Exportfilters = exportfilters;
+            this.RestEncryPassword = restEncryPassword;
+            this.CatalogZipPath = catalogZipPath;
             this.Physical = physical;
         }
 
@@ -515,7 +516,7 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets IncludeServerLevel
         /// </summary>
-        [DataMember(Name = "include-server-level", EmitDefaultValue = false)]
+        [DataMember(Name = "includeServerLevel", EmitDefaultValue = false)]
         public string IncludeServerLevel { get; set; }
 
         /// <summary>
@@ -725,14 +726,14 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets UseCatalogPath
         /// </summary>
-        [DataMember(Name = "useCatalogPath", EmitDefaultValue = false)]
-        public string UseCatalogPath { get; set; }
+        [DataMember(Name = "useCatalogPath", EmitDefaultValue = true)]
+        public bool UseCatalogPath { get; set; }
 
         /// <summary>
         /// Gets or Sets Exportdata
         /// </summary>
-        [DataMember(Name = "exportdata", EmitDefaultValue = false)]
-        public string Exportdata { get; set; }
+        [DataMember(Name = "exportdata", EmitDefaultValue = true)]
+        public bool Exportdata { get; set; }
 
         /// <summary>
         /// Gets or Sets Cube
@@ -749,20 +750,32 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets Exportpartitions
         /// </summary>
-        [DataMember(Name = "exportpartitions", EmitDefaultValue = false)]
-        public string Exportpartitions { get; set; }
+        [DataMember(Name = "exportpartitions", EmitDefaultValue = true)]
+        public bool Exportpartitions { get; set; }
 
         /// <summary>
         /// Gets or Sets Exportfilters
         /// </summary>
-        [DataMember(Name = "exportfilters", EmitDefaultValue = false)]
-        public string Exportfilters { get; set; }
+        [DataMember(Name = "exportfilters", EmitDefaultValue = true)]
+        public bool Exportfilters { get; set; }
+
+        /// <summary>
+        /// Gets or Sets RestEncryPassword
+        /// </summary>
+        [DataMember(Name = "restEncryPassword", EmitDefaultValue = false)]
+        public string RestEncryPassword { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CatalogZipPath
+        /// </summary>
+        [DataMember(Name = "catalogZipPath", EmitDefaultValue = false)]
+        public string CatalogZipPath { get; set; }
 
         /// <summary>
         /// Gets or Sets Physical
         /// </summary>
-        [DataMember(Name = "physical", EmitDefaultValue = false)]
-        public string Physical { get; set; }
+        [DataMember(Name = "physical", EmitDefaultValue = true)]
+        public bool Physical { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -850,6 +863,8 @@ namespace EssSharp.Model
             sb.Append("  Filetype: ").Append(Filetype).Append("\n");
             sb.Append("  Exportpartitions: ").Append(Exportpartitions).Append("\n");
             sb.Append("  Exportfilters: ").Append(Exportfilters).Append("\n");
+            sb.Append("  RestEncryPassword: ").Append(RestEncryPassword).Append("\n");
+            sb.Append("  CatalogZipPath: ").Append(CatalogZipPath).Append("\n");
             sb.Append("  Physical: ").Append(Physical).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -865,746 +880,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ParametersBean);
-        }
-
-        /// <summary>
-        /// Returns true if ParametersBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ParametersBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ParametersBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Rule == input.Rule ||
-                    (this.Rule != null &&
-                    this.Rule.Equals(input.Rule))
-                ) && 
-                (
-                    this.File == input.File ||
-                    (this.File != null &&
-                    this.File.Equals(input.File))
-                ) && 
-                (
-                    this.AbortOnError == input.AbortOnError ||
-                    (this.AbortOnError != null &&
-                    this.AbortOnError.Equals(input.AbortOnError))
-                ) && 
-                (
-                    this.RestructureOption == input.RestructureOption ||
-                    (this.RestructureOption != null &&
-                    this.RestructureOption.Equals(input.RestructureOption))
-                ) && 
-                (
-                    this.ForceDimBuild == input.ForceDimBuild ||
-                    (this.ForceDimBuild != null &&
-                    this.ForceDimBuild.Equals(input.ForceDimBuild))
-                ) && 
-                (
-                    this.Script == input.Script ||
-                    (this.Script != null &&
-                    this.Script.Equals(input.Script))
-                ) && 
-                (
-                    this.Option == input.Option ||
-                    (this.Option != null &&
-                    this.Option.Equals(input.Option))
-                ) && 
-                (
-                    this.Loaddata == input.Loaddata ||
-                    (this.Loaddata != null &&
-                    this.Loaddata.Equals(input.Loaddata))
-                ) && 
-                (
-                    this.UseConnection == input.UseConnection ||
-                    (this.UseConnection != null &&
-                    this.UseConnection.Equals(input.UseConnection))
-                ) && 
-                (
-                    this.Connection == input.Connection ||
-                    (this.Connection != null &&
-                    this.Connection.Equals(input.Connection))
-                ) && 
-                (
-                    this.User == input.User ||
-                    (this.User != null &&
-                    this.User.Equals(input.User))
-                ) && 
-                (
-                    this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
-                ) && 
-                (
-                    this.Calc == input.Calc ||
-                    (this.Calc != null &&
-                    this.Calc.Equals(input.Calc))
-                ) && 
-                (
-                    this.BuildMethod == input.BuildMethod ||
-                    this.BuildMethod.Equals(input.BuildMethod)
-                ) && 
-                (
-                    this.Data == input.Data ||
-                    (this.Data != null &&
-                    this.Data.Equals(input.Data))
-                ) && 
-                (
-                    this.MemberIds == input.MemberIds ||
-                    (this.MemberIds != null &&
-                    this.MemberIds.Equals(input.MemberIds))
-                ) && 
-                (
-                    this.ZipFileName == input.ZipFileName ||
-                    (this.ZipFileName != null &&
-                    this.ZipFileName.Equals(input.ZipFileName))
-                ) && 
-                (
-                    this.Skipdata == input.Skipdata ||
-                    (this.Skipdata != null &&
-                    this.Skipdata.Equals(input.Skipdata))
-                ) && 
-                (
-                    this.Threads == input.Threads ||
-                    (this.Threads != null &&
-                    this.Threads.Equals(input.Threads))
-                ) && 
-                (
-                    this.Overwrite == input.Overwrite ||
-                    (this.Overwrite != null &&
-                    this.Overwrite.Equals(input.Overwrite))
-                ) && 
-                (
-                    this.LcmImportFromStorage == input.LcmImportFromStorage ||
-                    (this.LcmImportFromStorage != null &&
-                    this.LcmImportFromStorage.Equals(input.LcmImportFromStorage))
-                ) && 
-                (
-                    this.AnalyzeFileName == input.AnalyzeFileName ||
-                    (this.AnalyzeFileName != null &&
-                    this.AnalyzeFileName.Equals(input.AnalyzeFileName))
-                ) && 
-                (
-                    this.AnalyzeSheetName == input.AnalyzeSheetName ||
-                    (this.AnalyzeSheetName != null &&
-                    this.AnalyzeSheetName.Equals(input.AnalyzeSheetName))
-                ) && 
-                (
-                    this.DeleteExcelOnSuccess == input.DeleteExcelOnSuccess ||
-                    (this.DeleteExcelOnSuccess != null &&
-                    this.DeleteExcelOnSuccess.Equals(input.DeleteExcelOnSuccess))
-                ) && 
-                (
-                    this.CatalogExcelPath == input.CatalogExcelPath ||
-                    (this.CatalogExcelPath != null &&
-                    this.CatalogExcelPath.Equals(input.CatalogExcelPath))
-                ) && 
-                (
-                    this.ImportExcelFileName == input.ImportExcelFileName ||
-                    (this.ImportExcelFileName != null &&
-                    this.ImportExcelFileName.Equals(input.ImportExcelFileName))
-                ) && 
-                (
-                    this.RecreateApplication == input.RecreateApplication ||
-                    (this.RecreateApplication != null &&
-                    this.RecreateApplication.Equals(input.RecreateApplication))
-                ) && 
-                (
-                    this.CreateFiles == input.CreateFiles ||
-                    (this.CreateFiles != null &&
-                    this.CreateFiles.Equals(input.CreateFiles))
-                ) && 
-                (
-                    this.ExecuteScript == input.ExecuteScript ||
-                    (this.ExecuteScript != null &&
-                    this.ExecuteScript.Equals(input.ExecuteScript))
-                ) && 
-                (
-                    this.BuildOption == input.BuildOption ||
-                    this.BuildOption.Equals(input.BuildOption)
-                ) && 
-                (
-                    this.CopyToStorage == input.CopyToStorage ||
-                    (this.CopyToStorage != null &&
-                    this.CopyToStorage.Equals(input.CopyToStorage))
-                ) && 
-                (
-                    this.Filesystemcopy == input.Filesystemcopy ||
-                    (this.Filesystemcopy != null &&
-                    this.Filesystemcopy.Equals(input.Filesystemcopy))
-                ) && 
-                (
-                    this.DataLevel == input.DataLevel ||
-                    this.DataLevel.Equals(input.DataLevel)
-                ) && 
-                (
-                    this.ColumnFormat == input.ColumnFormat ||
-                    (this.ColumnFormat != null &&
-                    this.ColumnFormat.Equals(input.ColumnFormat))
-                ) && 
-                (
-                    this.TargetApplicationName == input.TargetApplicationName ||
-                    (this.TargetApplicationName != null &&
-                    this.TargetApplicationName.Equals(input.TargetApplicationName))
-                ) && 
-                (
-                    this.PartialDataExpression == input.PartialDataExpression ||
-                    (this.PartialDataExpression != null &&
-                    this.PartialDataExpression.Equals(input.PartialDataExpression))
-                ) && 
-                (
-                    this.AllApp == input.AllApp ||
-                    (this.AllApp != null &&
-                    this.AllApp.Equals(input.AllApp))
-                ) && 
-                (
-                    this.IncludeServerLevel == input.IncludeServerLevel ||
-                    (this.IncludeServerLevel != null &&
-                    this.IncludeServerLevel.Equals(input.IncludeServerLevel))
-                ) && 
-                (
-                    this.EnableSandboxing == input.EnableSandboxing ||
-                    (this.EnableSandboxing != null &&
-                    this.EnableSandboxing.Equals(input.EnableSandboxing))
-                ) && 
-                (
-                    this.DbType == input.DbType ||
-                    (this.DbType != null &&
-                    this.DbType.Equals(input.DbType))
-                ) && 
-                (
-                    this.DimDesignationMode == input.DimDesignationMode ||
-                    (this.DimDesignationMode != null &&
-                    this.DimDesignationMode.Equals(input.DimDesignationMode))
-                ) && 
-                (
-                    this.UnstructuredAnalysis == input.UnstructuredAnalysis ||
-                    (this.UnstructuredAnalysis != null &&
-                    this.UnstructuredAnalysis.Equals(input.UnstructuredAnalysis))
-                ) && 
-                (
-                    this.RatioToStop == input.RatioToStop ||
-                    (this.RatioToStop != null &&
-                    this.RatioToStop.Equals(input.RatioToStop))
-                ) && 
-                (
-                    this.BasedOnQueryData == input.BasedOnQueryData ||
-                    (this.BasedOnQueryData != null &&
-                    this.BasedOnQueryData.Equals(input.BasedOnQueryData))
-                ) && 
-                (
-                    this.EnableAlternateRollups == input.EnableAlternateRollups ||
-                    (this.EnableAlternateRollups != null &&
-                    this.EnableAlternateRollups.Equals(input.EnableAlternateRollups))
-                ) && 
-                (
-                    this.Compress == input.Compress ||
-                    (this.Compress != null &&
-                    this.Compress.Equals(input.Compress))
-                ) && 
-                (
-                    this.GenerateArtifactList == input.GenerateArtifactList ||
-                    (this.GenerateArtifactList != null &&
-                    this.GenerateArtifactList.Equals(input.GenerateArtifactList))
-                ) && 
-                (
-                    this.ArtifactList == input.ArtifactList ||
-                    (this.ArtifactList != null &&
-                    this.ArtifactList.Equals(input.ArtifactList))
-                ) && 
-                (
-                    this.Verbose == input.Verbose ||
-                    (this.Verbose != null &&
-                    this.Verbose.Equals(input.Verbose))
-                ) && 
-                (
-                    this.DisasterRecovery == input.DisasterRecovery ||
-                    (this.DisasterRecovery != null &&
-                    this.DisasterRecovery.Equals(input.DisasterRecovery))
-                ) && 
-                (
-                    this.Force == input.Force ||
-                    (this.Force != null &&
-                    this.Force.Equals(input.Force))
-                ) && 
-                (
-                    this.BackupType == input.BackupType ||
-                    (this.BackupType != null &&
-                    this.BackupType.Equals(input.BackupType))
-                ) && 
-                (
-                    this.AppId == input.AppId ||
-                    (this.AppId != null &&
-                    this.AppId.Equals(input.AppId))
-                ) && 
-                (
-                    this.Timestamp == input.Timestamp ||
-                    (this.Timestamp != null &&
-                    this.Timestamp.Equals(input.Timestamp))
-                ) && 
-                (
-                    this.MaxParallel == input.MaxParallel ||
-                    (this.MaxParallel != null &&
-                    this.MaxParallel.Equals(input.MaxParallel))
-                ) && 
-                (
-                    this.SelectedDimensions == input.SelectedDimensions ||
-                    this.SelectedDimensions != null &&
-                    input.SelectedDimensions != null &&
-                    this.SelectedDimensions.SequenceEqual(input.SelectedDimensions)
-                ) && 
-                (
-                    this.Rtsv == input.Rtsv ||
-                    this.Rtsv != null &&
-                    input.Rtsv != null &&
-                    this.Rtsv.SequenceEqual(input.Rtsv)
-                ) && 
-                (
-                    this.BufferId == input.BufferId ||
-                    this.BufferId.Equals(input.BufferId)
-                ) && 
-                (
-                    this.BufferIds == input.BufferIds ||
-                    this.BufferIds != null &&
-                    input.BufferIds != null &&
-                    this.BufferIds.SequenceEqual(input.BufferIds)
-                ) && 
-                (
-                    this.CommitOption == input.CommitOption ||
-                    (this.CommitOption != null &&
-                    this.CommitOption.Equals(input.CommitOption))
-                ) && 
-                (
-                    this.ActionType == input.ActionType ||
-                    (this.ActionType != null &&
-                    this.ActionType.Equals(input.ActionType))
-                ) && 
-                (
-                    this.TermOption == input.TermOption ||
-                    (this.TermOption != null &&
-                    this.TermOption.Equals(input.TermOption))
-                ) && 
-                (
-                    this.DiscoverDimensionTables == input.DiscoverDimensionTables ||
-                    (this.DiscoverDimensionTables != null &&
-                    this.DiscoverDimensionTables.Equals(input.DiscoverDimensionTables))
-                ) && 
-                (
-                    this.ExportDynamicBlocks == input.ExportDynamicBlocks ||
-                    (this.ExportDynamicBlocks != null &&
-                    this.ExportDynamicBlocks.Equals(input.ExportDynamicBlocks))
-                ) && 
-                (
-                    this.ShadowAppName == input.ShadowAppName ||
-                    (this.ShadowAppName != null &&
-                    this.ShadowAppName.Equals(input.ShadowAppName))
-                ) && 
-                (
-                    this.PrimaryAppName == input.PrimaryAppName ||
-                    (this.PrimaryAppName != null &&
-                    this.PrimaryAppName.Equals(input.PrimaryAppName))
-                ) && 
-                (
-                    this.TimeoutToForceUnloadApp == input.TimeoutToForceUnloadApp ||
-                    (this.TimeoutToForceUnloadApp != null &&
-                    this.TimeoutToForceUnloadApp.Equals(input.TimeoutToForceUnloadApp))
-                ) && 
-                (
-                    this.HideShadow == input.HideShadow ||
-                    (this.HideShadow != null &&
-                    this.HideShadow.Equals(input.HideShadow))
-                ) && 
-                (
-                    this.WaitForOngoingUpdatesInSecs == input.WaitForOngoingUpdatesInSecs ||
-                    (this.WaitForOngoingUpdatesInSecs != null &&
-                    this.WaitForOngoingUpdatesInSecs.Equals(input.WaitForOngoingUpdatesInSecs))
-                ) && 
-                (
-                    this.ReportScriptFilename == input.ReportScriptFilename ||
-                    (this.ReportScriptFilename != null &&
-                    this.ReportScriptFilename.Equals(input.ReportScriptFilename))
-                ) && 
-                (
-                    this.LockForUpdate == input.LockForUpdate ||
-                    (this.LockForUpdate != null &&
-                    this.LockForUpdate.Equals(input.LockForUpdate))
-                ) && 
-                (
-                    this.IsScriptContent == input.IsScriptContent ||
-                    (this.IsScriptContent != null &&
-                    this.IsScriptContent.Equals(input.IsScriptContent))
-                ) && 
-                (
-                    this.UseCatalogPath == input.UseCatalogPath ||
-                    (this.UseCatalogPath != null &&
-                    this.UseCatalogPath.Equals(input.UseCatalogPath))
-                ) && 
-                (
-                    this.Exportdata == input.Exportdata ||
-                    (this.Exportdata != null &&
-                    this.Exportdata.Equals(input.Exportdata))
-                ) && 
-                (
-                    this.Cube == input.Cube ||
-                    (this.Cube != null &&
-                    this.Cube.Equals(input.Cube))
-                ) && 
-                (
-                    this.Filetype == input.Filetype ||
-                    (this.Filetype != null &&
-                    this.Filetype.Equals(input.Filetype))
-                ) && 
-                (
-                    this.Exportpartitions == input.Exportpartitions ||
-                    (this.Exportpartitions != null &&
-                    this.Exportpartitions.Equals(input.Exportpartitions))
-                ) && 
-                (
-                    this.Exportfilters == input.Exportfilters ||
-                    (this.Exportfilters != null &&
-                    this.Exportfilters.Equals(input.Exportfilters))
-                ) && 
-                (
-                    this.Physical == input.Physical ||
-                    (this.Physical != null &&
-                    this.Physical.Equals(input.Physical))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Rule != null)
-                {
-                    hashCode = (hashCode * 59) + this.Rule.GetHashCode();
-                }
-                if (this.File != null)
-                {
-                    hashCode = (hashCode * 59) + this.File.GetHashCode();
-                }
-                if (this.AbortOnError != null)
-                {
-                    hashCode = (hashCode * 59) + this.AbortOnError.GetHashCode();
-                }
-                if (this.RestructureOption != null)
-                {
-                    hashCode = (hashCode * 59) + this.RestructureOption.GetHashCode();
-                }
-                if (this.ForceDimBuild != null)
-                {
-                    hashCode = (hashCode * 59) + this.ForceDimBuild.GetHashCode();
-                }
-                if (this.Script != null)
-                {
-                    hashCode = (hashCode * 59) + this.Script.GetHashCode();
-                }
-                if (this.Option != null)
-                {
-                    hashCode = (hashCode * 59) + this.Option.GetHashCode();
-                }
-                if (this.Loaddata != null)
-                {
-                    hashCode = (hashCode * 59) + this.Loaddata.GetHashCode();
-                }
-                if (this.UseConnection != null)
-                {
-                    hashCode = (hashCode * 59) + this.UseConnection.GetHashCode();
-                }
-                if (this.Connection != null)
-                {
-                    hashCode = (hashCode * 59) + this.Connection.GetHashCode();
-                }
-                if (this.User != null)
-                {
-                    hashCode = (hashCode * 59) + this.User.GetHashCode();
-                }
-                if (this.Password != null)
-                {
-                    hashCode = (hashCode * 59) + this.Password.GetHashCode();
-                }
-                if (this.Calc != null)
-                {
-                    hashCode = (hashCode * 59) + this.Calc.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.BuildMethod.GetHashCode();
-                if (this.Data != null)
-                {
-                    hashCode = (hashCode * 59) + this.Data.GetHashCode();
-                }
-                if (this.MemberIds != null)
-                {
-                    hashCode = (hashCode * 59) + this.MemberIds.GetHashCode();
-                }
-                if (this.ZipFileName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ZipFileName.GetHashCode();
-                }
-                if (this.Skipdata != null)
-                {
-                    hashCode = (hashCode * 59) + this.Skipdata.GetHashCode();
-                }
-                if (this.Threads != null)
-                {
-                    hashCode = (hashCode * 59) + this.Threads.GetHashCode();
-                }
-                if (this.Overwrite != null)
-                {
-                    hashCode = (hashCode * 59) + this.Overwrite.GetHashCode();
-                }
-                if (this.LcmImportFromStorage != null)
-                {
-                    hashCode = (hashCode * 59) + this.LcmImportFromStorage.GetHashCode();
-                }
-                if (this.AnalyzeFileName != null)
-                {
-                    hashCode = (hashCode * 59) + this.AnalyzeFileName.GetHashCode();
-                }
-                if (this.AnalyzeSheetName != null)
-                {
-                    hashCode = (hashCode * 59) + this.AnalyzeSheetName.GetHashCode();
-                }
-                if (this.DeleteExcelOnSuccess != null)
-                {
-                    hashCode = (hashCode * 59) + this.DeleteExcelOnSuccess.GetHashCode();
-                }
-                if (this.CatalogExcelPath != null)
-                {
-                    hashCode = (hashCode * 59) + this.CatalogExcelPath.GetHashCode();
-                }
-                if (this.ImportExcelFileName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ImportExcelFileName.GetHashCode();
-                }
-                if (this.RecreateApplication != null)
-                {
-                    hashCode = (hashCode * 59) + this.RecreateApplication.GetHashCode();
-                }
-                if (this.CreateFiles != null)
-                {
-                    hashCode = (hashCode * 59) + this.CreateFiles.GetHashCode();
-                }
-                if (this.ExecuteScript != null)
-                {
-                    hashCode = (hashCode * 59) + this.ExecuteScript.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.BuildOption.GetHashCode();
-                if (this.CopyToStorage != null)
-                {
-                    hashCode = (hashCode * 59) + this.CopyToStorage.GetHashCode();
-                }
-                if (this.Filesystemcopy != null)
-                {
-                    hashCode = (hashCode * 59) + this.Filesystemcopy.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.DataLevel.GetHashCode();
-                if (this.ColumnFormat != null)
-                {
-                    hashCode = (hashCode * 59) + this.ColumnFormat.GetHashCode();
-                }
-                if (this.TargetApplicationName != null)
-                {
-                    hashCode = (hashCode * 59) + this.TargetApplicationName.GetHashCode();
-                }
-                if (this.PartialDataExpression != null)
-                {
-                    hashCode = (hashCode * 59) + this.PartialDataExpression.GetHashCode();
-                }
-                if (this.AllApp != null)
-                {
-                    hashCode = (hashCode * 59) + this.AllApp.GetHashCode();
-                }
-                if (this.IncludeServerLevel != null)
-                {
-                    hashCode = (hashCode * 59) + this.IncludeServerLevel.GetHashCode();
-                }
-                if (this.EnableSandboxing != null)
-                {
-                    hashCode = (hashCode * 59) + this.EnableSandboxing.GetHashCode();
-                }
-                if (this.DbType != null)
-                {
-                    hashCode = (hashCode * 59) + this.DbType.GetHashCode();
-                }
-                if (this.DimDesignationMode != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimDesignationMode.GetHashCode();
-                }
-                if (this.UnstructuredAnalysis != null)
-                {
-                    hashCode = (hashCode * 59) + this.UnstructuredAnalysis.GetHashCode();
-                }
-                if (this.RatioToStop != null)
-                {
-                    hashCode = (hashCode * 59) + this.RatioToStop.GetHashCode();
-                }
-                if (this.BasedOnQueryData != null)
-                {
-                    hashCode = (hashCode * 59) + this.BasedOnQueryData.GetHashCode();
-                }
-                if (this.EnableAlternateRollups != null)
-                {
-                    hashCode = (hashCode * 59) + this.EnableAlternateRollups.GetHashCode();
-                }
-                if (this.Compress != null)
-                {
-                    hashCode = (hashCode * 59) + this.Compress.GetHashCode();
-                }
-                if (this.GenerateArtifactList != null)
-                {
-                    hashCode = (hashCode * 59) + this.GenerateArtifactList.GetHashCode();
-                }
-                if (this.ArtifactList != null)
-                {
-                    hashCode = (hashCode * 59) + this.ArtifactList.GetHashCode();
-                }
-                if (this.Verbose != null)
-                {
-                    hashCode = (hashCode * 59) + this.Verbose.GetHashCode();
-                }
-                if (this.DisasterRecovery != null)
-                {
-                    hashCode = (hashCode * 59) + this.DisasterRecovery.GetHashCode();
-                }
-                if (this.Force != null)
-                {
-                    hashCode = (hashCode * 59) + this.Force.GetHashCode();
-                }
-                if (this.BackupType != null)
-                {
-                    hashCode = (hashCode * 59) + this.BackupType.GetHashCode();
-                }
-                if (this.AppId != null)
-                {
-                    hashCode = (hashCode * 59) + this.AppId.GetHashCode();
-                }
-                if (this.Timestamp != null)
-                {
-                    hashCode = (hashCode * 59) + this.Timestamp.GetHashCode();
-                }
-                if (this.MaxParallel != null)
-                {
-                    hashCode = (hashCode * 59) + this.MaxParallel.GetHashCode();
-                }
-                if (this.SelectedDimensions != null)
-                {
-                    hashCode = (hashCode * 59) + this.SelectedDimensions.GetHashCode();
-                }
-                if (this.Rtsv != null)
-                {
-                    hashCode = (hashCode * 59) + this.Rtsv.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.BufferId.GetHashCode();
-                if (this.BufferIds != null)
-                {
-                    hashCode = (hashCode * 59) + this.BufferIds.GetHashCode();
-                }
-                if (this.CommitOption != null)
-                {
-                    hashCode = (hashCode * 59) + this.CommitOption.GetHashCode();
-                }
-                if (this.ActionType != null)
-                {
-                    hashCode = (hashCode * 59) + this.ActionType.GetHashCode();
-                }
-                if (this.TermOption != null)
-                {
-                    hashCode = (hashCode * 59) + this.TermOption.GetHashCode();
-                }
-                if (this.DiscoverDimensionTables != null)
-                {
-                    hashCode = (hashCode * 59) + this.DiscoverDimensionTables.GetHashCode();
-                }
-                if (this.ExportDynamicBlocks != null)
-                {
-                    hashCode = (hashCode * 59) + this.ExportDynamicBlocks.GetHashCode();
-                }
-                if (this.ShadowAppName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ShadowAppName.GetHashCode();
-                }
-                if (this.PrimaryAppName != null)
-                {
-                    hashCode = (hashCode * 59) + this.PrimaryAppName.GetHashCode();
-                }
-                if (this.TimeoutToForceUnloadApp != null)
-                {
-                    hashCode = (hashCode * 59) + this.TimeoutToForceUnloadApp.GetHashCode();
-                }
-                if (this.HideShadow != null)
-                {
-                    hashCode = (hashCode * 59) + this.HideShadow.GetHashCode();
-                }
-                if (this.WaitForOngoingUpdatesInSecs != null)
-                {
-                    hashCode = (hashCode * 59) + this.WaitForOngoingUpdatesInSecs.GetHashCode();
-                }
-                if (this.ReportScriptFilename != null)
-                {
-                    hashCode = (hashCode * 59) + this.ReportScriptFilename.GetHashCode();
-                }
-                if (this.LockForUpdate != null)
-                {
-                    hashCode = (hashCode * 59) + this.LockForUpdate.GetHashCode();
-                }
-                if (this.IsScriptContent != null)
-                {
-                    hashCode = (hashCode * 59) + this.IsScriptContent.GetHashCode();
-                }
-                if (this.UseCatalogPath != null)
-                {
-                    hashCode = (hashCode * 59) + this.UseCatalogPath.GetHashCode();
-                }
-                if (this.Exportdata != null)
-                {
-                    hashCode = (hashCode * 59) + this.Exportdata.GetHashCode();
-                }
-                if (this.Cube != null)
-                {
-                    hashCode = (hashCode * 59) + this.Cube.GetHashCode();
-                }
-                if (this.Filetype != null)
-                {
-                    hashCode = (hashCode * 59) + this.Filetype.GetHashCode();
-                }
-                if (this.Exportpartitions != null)
-                {
-                    hashCode = (hashCode * 59) + this.Exportpartitions.GetHashCode();
-                }
-                if (this.Exportfilters != null)
-                {
-                    hashCode = (hashCode * 59) + this.Exportfilters.GetHashCode();
-                }
-                if (this.Physical != null)
-                {
-                    hashCode = (hashCode * 59) + this.Physical.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

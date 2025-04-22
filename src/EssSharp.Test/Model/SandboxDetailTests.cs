@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<SandboxDetail>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Total'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Total'
         }
+
         /// <summary>
         /// Test the property 'Available'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Available'
         }
+
         /// <summary>
         /// Test the property 'Assigned'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Assigned'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

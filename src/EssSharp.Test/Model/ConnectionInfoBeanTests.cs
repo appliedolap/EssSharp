@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ConnectionInfoBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ConnectionName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConnectionName'
         }
+
         /// <summary>
         /// Test the property 'ServerName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ServerName'
         }
+
         /// <summary>
         /// Test the property 'UserName'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UserName'
         }
+
         /// <summary>
         /// Test the property 'Password'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Password'
         }
+
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'ApplicationName'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ApplicationName'
         }
+
         /// <summary>
         /// Test the property 'DatabaseName'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DatabaseName'
         }
+
         /// <summary>
         /// Test the property 'DatasourceName'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DatasourceName'
         }
+
         /// <summary>
         /// Test the property 'MeasuresDimensionName'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MeasuresDimensionName'
         }
+
         /// <summary>
         /// Test the property 'SchemaName'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SchemaName'
         }
+
         /// <summary>
         /// Test the property 'FactTableName'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FactTableName'
         }
+
         /// <summary>
         /// Test the property 'IsFactManagedByFederatedCube'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IsFactManagedByFederatedCube'
         }
+
         /// <summary>
         /// Test the property 'EssbaseToColumnMap'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EssbaseToColumnMap'
         }
+
         /// <summary>
         /// Test the property 'EssbaseToDataSourceMap'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EssbaseToDataSourceMap'
         }
+
         /// <summary>
         /// Test the property 'AlterCredentials'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AlterCredentials'
         }
+
         /// <summary>
         /// Test the property 'ApplicationLevelConnection'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ApplicationLevelConnection'
         }
+
         /// <summary>
         /// Test the property 'ApplicationLevelDatasource'
         /// </summary>
@@ -189,7 +204,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ApplicationLevelDatasource'
         }
-
     }
-
 }

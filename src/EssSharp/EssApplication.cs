@@ -647,23 +647,23 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssApplicationVariable"/> object.</returns>
-        public List<IEssApplicationVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssApplicationVariable>();
+        public List<IEssApplicationVariable> GetVariables( bool includeDatabaseVariables = false ) => GetVariablesAsync(includeDatabaseVariables).GetAwaiter().GetResult() ?? new List<IEssApplicationVariable>();
 
         /// <inheritdoc />
         /// <returns>An <see cref="EssApplicationVariable"/> object.</returns>
-        public async Task<List<IEssApplicationVariable>> GetVariablesAsync( CancellationToken cancellationToken = default )
+        public async Task<List<IEssApplicationVariable>> GetVariablesAsync( bool includeDatabaseVariables = false, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<VariablesApi>();
-                var variables = await api.VariablesListAppVariablesAsync(_application.Name, 0, cancellationToken).ConfigureAwait(false);
+                var variables = await api.VariablesListAppVariablesAsync(applicationName: _application.Name, includeDatabaseVariables: false, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return variables?.ToEssSharpList<IEssApplicationVariable>(this) ?? new List<IEssApplicationVariable>();
             }
             catch ( OperationCanceledException ) { throw; }
-            catch ( Exception )
+            catch ( Exception e )
             {
-                throw;
+                throw new Exception($@"Unable to get variables for application ""{Name}"". {e.Message}", e);
             }
         }
 

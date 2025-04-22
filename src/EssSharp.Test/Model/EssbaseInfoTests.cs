@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<EssbaseInfo>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Server'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Server'
         }
+
         /// <summary>
         /// Test the property 'Application'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Application'
         }
+
         /// <summary>
         /// Test the property 'Database'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Database'
         }
+
         /// <summary>
         /// Test the property 'User'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'User'
         }
+
         /// <summary>
         /// Test the property 'Password'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Password'
         }
-
     }
-
 }

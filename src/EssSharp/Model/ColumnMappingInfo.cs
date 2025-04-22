@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ColumnMappingInfo
     /// </summary>
     [DataContract(Name = "ColumnMappingInfo")]
-    public partial class ColumnMappingInfo : IEquatable<ColumnMappingInfo>, IValidatableObject
+    public partial class ColumnMappingInfo : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -58,7 +58,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "PARENT_CHILD")]
             PARENTCHILD = 4
-
         }
 
 
@@ -135,85 +134,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ColumnMappingInfo);
-        }
-
-        /// <summary>
-        /// Returns true if ColumnMappingInfo instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ColumnMappingInfo to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ColumnMappingInfo input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Dimension == input.Dimension ||
-                    (this.Dimension != null &&
-                    this.Dimension.Equals(input.Dimension))
-                ) && 
-                (
-                    this.Generation == input.Generation ||
-                    (this.Generation != null &&
-                    this.Generation.Equals(input.Generation))
-                ) && 
-                (
-                    this.Level == input.Level ||
-                    (this.Level != null &&
-                    this.Level.Equals(input.Level))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.GenerationNumber == input.GenerationNumber ||
-                    this.GenerationNumber.Equals(input.GenerationNumber)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Dimension != null)
-                {
-                    hashCode = (hashCode * 59) + this.Dimension.GetHashCode();
-                }
-                if (this.Generation != null)
-                {
-                    hashCode = (hashCode * 59) + this.Generation.GetHashCode();
-                }
-                if (this.Level != null)
-                {
-                    hashCode = (hashCode * 59) + this.Level.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                hashCode = (hashCode * 59) + this.GenerationNumber.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

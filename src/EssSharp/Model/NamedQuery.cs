@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// NamedQuery
     /// </summary>
     [DataContract(Name = "NamedQuery")]
-    public partial class NamedQuery : IEquatable<NamedQuery>, IValidatableObject
+    public partial class NamedQuery : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DATA_SOURCE")]
             DATASOURCE = 2
-
         }
 
 
@@ -105,71 +104,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as NamedQuery);
-        }
-
-        /// <summary>
-        /// Returns true if NamedQuery instances are equal
-        /// </summary>
-        /// <param name="input">Instance of NamedQuery to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(NamedQuery input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                if (this.Query != null)
-                {
-                    hashCode = (hashCode * 59) + this.Query.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

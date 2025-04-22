@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ScenarioEditBean
     /// </summary>
     [DataContract(Name = "ScenarioEditBean")]
-    public partial class ScenarioEditBean : IEquatable<ScenarioEditBean>, IValidatableObject
+    public partial class ScenarioEditBean : IValidatableObject
     {
         /// <summary>
         /// Defines Priority
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "HIGH")]
             HIGH = 3
-
         }
 
 
@@ -120,76 +119,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ScenarioEditBean);
-        }
-
-        /// <summary>
-        /// Returns true if ScenarioEditBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ScenarioEditBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ScenarioEditBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.DueDate == input.DueDate ||
-                    this.DueDate.Equals(input.DueDate)
-                ) && 
-                (
-                    this.Priority == input.Priority ||
-                    this.Priority.Equals(input.Priority)
-                ) && 
-                (
-                    this.Owner == input.Owner ||
-                    (this.Owner != null &&
-                    this.Owner.Equals(input.Owner))
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.DueDate.GetHashCode();
-                hashCode = (hashCode * 59) + this.Priority.GetHashCode();
-                if (this.Owner != null)
-                {
-                    hashCode = (hashCode * 59) + this.Owner.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

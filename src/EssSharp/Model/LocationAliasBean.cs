@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// LocationAliasBean
     /// </summary>
     [DataContract(Name = "LocationAliasBean")]
-    public partial class LocationAliasBean : IEquatable<LocationAliasBean>, IValidatableObject
+    public partial class LocationAliasBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationAliasBean" /> class.
@@ -130,117 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as LocationAliasBean);
-        }
-
-        /// <summary>
-        /// Returns true if LocationAliasBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of LocationAliasBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(LocationAliasBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.AliasName == input.AliasName ||
-                    (this.AliasName != null &&
-                    this.AliasName.Equals(input.AliasName))
-                ) && 
-                (
-                    this.ConnectionName == input.ConnectionName ||
-                    (this.ConnectionName != null &&
-                    this.ConnectionName.Equals(input.ConnectionName))
-                ) && 
-                (
-                    this.ServerName == input.ServerName ||
-                    (this.ServerName != null &&
-                    this.ServerName.Equals(input.ServerName))
-                ) && 
-                (
-                    this.UserName == input.UserName ||
-                    (this.UserName != null &&
-                    this.UserName.Equals(input.UserName))
-                ) && 
-                (
-                    this.ApplicationName == input.ApplicationName ||
-                    (this.ApplicationName != null &&
-                    this.ApplicationName.Equals(input.ApplicationName))
-                ) && 
-                (
-                    this.DatabaseName == input.DatabaseName ||
-                    (this.DatabaseName != null &&
-                    this.DatabaseName.Equals(input.DatabaseName))
-                ) && 
-                (
-                    this.ApplicationLevelConnection == input.ApplicationLevelConnection ||
-                    this.ApplicationLevelConnection.Equals(input.ApplicationLevelConnection)
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.AliasName != null)
-                {
-                    hashCode = (hashCode * 59) + this.AliasName.GetHashCode();
-                }
-                if (this.ConnectionName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ConnectionName.GetHashCode();
-                }
-                if (this.ServerName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ServerName.GetHashCode();
-                }
-                if (this.UserName != null)
-                {
-                    hashCode = (hashCode * 59) + this.UserName.GetHashCode();
-                }
-                if (this.ApplicationName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ApplicationName.GetHashCode();
-                }
-                if (this.DatabaseName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DatabaseName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ApplicationLevelConnection.GetHashCode();
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

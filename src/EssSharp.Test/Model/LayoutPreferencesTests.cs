@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<LayoutPreferences>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Indentation'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Indentation'
         }
+
         /// <summary>
         /// Test the property 'RowSuppression'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RowSuppression'
         }
+
         /// <summary>
         /// Test the property 'ColumnSuppression'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnSuppression'
         }
+
         /// <summary>
         /// Test the property 'CellText'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CellText'
         }
+
         /// <summary>
         /// Test the property 'ZoomIn'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ZoomIn'
         }
+
         /// <summary>
         /// Test the property 'Navigate'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Navigate'
         }
+
         /// <summary>
         /// Test the property 'IncludeSelection'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IncludeSelection'
         }
+
         /// <summary>
         /// Test the property 'RepeatMemberLabels'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RepeatMemberLabels'
         }
+
         /// <summary>
         /// Test the property 'WithinSelectedGroup'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'WithinSelectedGroup'
         }
+
         /// <summary>
         /// Test the property 'RemoveUnSelectedGroup'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RemoveUnSelectedGroup'
         }
+
         /// <summary>
         /// Test the property 'IncludeDescriptionLabel'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IncludeDescriptionLabel'
         }
+
         /// <summary>
         /// Test the property 'MissingText'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MissingText'
         }
+
         /// <summary>
         /// Test the property 'NoAccessText'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NoAccessText'
         }
+
         /// <summary>
         /// Test the property 'MaxRows'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxRows'
         }
+
         /// <summary>
         /// Test the property 'FormulaRetention'
         /// </summary>
@@ -173,7 +186,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FormulaRetention'
         }
-
     }
-
 }

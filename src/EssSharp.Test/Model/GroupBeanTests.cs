@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GroupBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -61,22 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-        /// <summary>
-        /// Test the property 'Role'
-        /// </summary>
-        [Fact]
-        public void RoleTest()
-        {
-            // TODO unit test for the property 'Role'
-        }
-        /// <summary>
-        /// Test the property 'Description'
-        /// </summary>
-        [Fact]
-        public void DescriptionTest()
-        {
-            // TODO unit test for the property 'Description'
-        }
+
         /// <summary>
         /// Test the property 'Groups'
         /// </summary>
@@ -85,6 +69,25 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Groups'
         }
+
+        /// <summary>
+        /// Test the property 'Description'
+        /// </summary>
+        [Fact]
+        public void DescriptionTest()
+        {
+            // TODO unit test for the property 'Description'
+        }
+
+        /// <summary>
+        /// Test the property 'Role'
+        /// </summary>
+        [Fact]
+        public void RoleTest()
+        {
+            // TODO unit test for the property 'Role'
+        }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
-
     }
-
 }

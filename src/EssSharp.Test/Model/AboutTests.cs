@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<About>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -61,14 +60,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
-        /// Test the property '_Version'
+        /// Test the property 'VarVersion'
         /// </summary>
         [Fact]
-        public void _VersionTest()
+        public void VarVersionTest()
         {
-            // TODO unit test for the property '_Version'
+            // TODO unit test for the property 'VarVersion'
         }
+
         /// <summary>
         /// Test the property 'Build'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Build'
         }
+
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'ListingVersion'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ListingVersion'
         }
-
     }
-
 }

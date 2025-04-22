@@ -1,14 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.4.33205.214
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EssSharp", "src\EssSharp\EssSharp.csproj", "{71DF2ED9-A61A-41DC-9230-AE6B0E8A89DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssSharp", "src\EssSharp\EssSharp.csproj", "{2C23F8EA-658F-404F-B99E-C01BC90C078C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EssSharp.Test", "src\EssSharp.Test\EssSharp.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssSharp.Test", "src\EssSharp.Test\EssSharp.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EssSharp.Abstractions", "src\EssSharp.Abstractions\EssSharp.Abstractions.csproj", "{838FC343-2F11-49AF-BBB0-1F03C10D1925}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssSharp.Abstractions", "src\EssSharp.Abstractions\EssSharp.Abstractions.csproj", "{181013AB-0160-5372-B279-F2E0F7558AFF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EssSharp.Integration", "src\EssSharp.Integration\EssSharp.Integration.csproj", "{59B08B32-962C-4009-BB70-A06E767148B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssSharp.Integration", "src\EssSharp.Integration\EssSharp.Integration.csproj", "{89726D5E-D31C-6827-D5F3-E91F578C7026}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,27 +16,24 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{71DF2ED9-A61A-41DC-9230-AE6B0E8A89DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71DF2ED9-A61A-41DC-9230-AE6B0E8A89DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71DF2ED9-A61A-41DC-9230-AE6B0E8A89DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71DF2ED9-A61A-41DC-9230-AE6B0E8A89DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C23F8EA-658F-404F-B99E-C01BC90C078C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C23F8EA-658F-404F-B99E-C01BC90C078C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C23F8EA-658F-404F-B99E-C01BC90C078C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C23F8EA-658F-404F-B99E-C01BC90C078C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
-		{838FC343-2F11-49AF-BBB0-1F03C10D1925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{838FC343-2F11-49AF-BBB0-1F03C10D1925}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{838FC343-2F11-49AF-BBB0-1F03C10D1925}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{838FC343-2F11-49AF-BBB0-1F03C10D1925}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59B08B32-962C-4009-BB70-A06E767148B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59B08B32-962C-4009-BB70-A06E767148B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59B08B32-962C-4009-BB70-A06E767148B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59B08B32-962C-4009-BB70-A06E767148B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{181013AB-0160-5372-B279-F2E0F7558AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{181013AB-0160-5372-B279-F2E0F7558AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{181013AB-0160-5372-B279-F2E0F7558AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{181013AB-0160-5372-B279-F2E0F7558AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89726D5E-D31C-6827-D5F3-E91F578C7026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89726D5E-D31C-6827-D5F3-E91F578C7026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89726D5E-D31C-6827-D5F3-E91F578C7026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89726D5E-D31C-6827-D5F3-E91F578C7026}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8B91FA36-881A-4415-BC92-BA02CD1A1E01}
 	EndGlobalSection
 EndGlobal

@@ -76,13 +76,15 @@ Name | Type | Description | Notes
 **ReportScriptFilename** | **string** |  | [optional] 
 **LockForUpdate** | **string** |  | [optional] 
 **IsScriptContent** | **string** |  | [optional] 
-**UseCatalogPath** | **string** |  | [optional] 
-**Exportdata** | **string** |  | [optional] 
+**UseCatalogPath** | **bool** |  | [optional] 
+**Exportdata** | **bool** |  | [optional] 
 **Cube** | **string** |  | [optional] 
 **Filetype** | **string** |  | [optional] 
-**Exportpartitions** | **string** |  | [optional] 
-**Exportfilters** | **string** |  | [optional] 
-**Physical** | **string** |  | [optional] 
+**Exportpartitions** | **bool** |  | [optional] 
+**Exportfilters** | **bool** |  | [optional] 
+**RestEncryPassword** | **string** |  | [optional] 
+**CatalogZipPath** | **string** |  | [optional] 
+**Physical** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

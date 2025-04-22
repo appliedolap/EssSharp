@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AttributeOutlineSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'PrefixSuffixValue'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PrefixSuffixValue'
         }
+
         /// <summary>
         /// Test the property 'PrefixSuffixSeparator'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PrefixSuffixSeparator'
         }
+
         /// <summary>
         /// Test the property 'PrefixSuffixFormat'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PrefixSuffixFormat'
         }
+
         /// <summary>
         /// Test the property 'TrueMemberName'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TrueMemberName'
         }
+
         /// <summary>
         /// Test the property 'FalseMemberName'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FalseMemberName'
         }
+
         /// <summary>
         /// Test the property 'DateMemberNames'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DateMemberNames'
         }
+
         /// <summary>
         /// Test the property 'NumericRangesRepresent'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumericRangesRepresent'
         }
+
         /// <summary>
         /// Test the property 'CalcDimensionName'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CalcDimensionName'
         }
+
         /// <summary>
         /// Test the property 'CalcSumMember'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CalcSumMember'
         }
+
         /// <summary>
         /// Test the property 'CalcCountMember'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CalcCountMember'
         }
+
         /// <summary>
         /// Test the property 'CalcMinimumMember'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CalcMinimumMember'
         }
+
         /// <summary>
         /// Test the property 'CalcMaximumMember'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CalcMaximumMember'
         }
+
         /// <summary>
         /// Test the property 'CalcAverageMember'
         /// </summary>
@@ -157,7 +168,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CalcAverageMember'
         }
-
     }
-
 }

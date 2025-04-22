@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// NamedQueriesPreferences
     /// </summary>
     [DataContract(Name = "NamedQueriesPreferences")]
-    public partial class NamedQueriesPreferences : IEquatable<NamedQueriesPreferences>, IValidatableObject
+    public partial class NamedQueriesPreferences : IValidatableObject
     {
         /// <summary>
         /// Defines MemberIdentifierType
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "UNIQUE_NAME")]
             UNIQUENAME = 3
-
         }
 
 
@@ -165,93 +164,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as NamedQueriesPreferences);
-        }
-
-        /// <summary>
-        /// Returns true if NamedQueriesPreferences instances are equal
-        /// </summary>
-        /// <param name="input">Instance of NamedQueriesPreferences to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(NamedQueriesPreferences input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Dataless == input.Dataless ||
-                    this.Dataless.Equals(input.Dataless)
-                ) && 
-                (
-                    this.HideRestrictedData == input.HideRestrictedData ||
-                    this.HideRestrictedData.Equals(input.HideRestrictedData)
-                ) && 
-                (
-                    this.CellAttributes == input.CellAttributes ||
-                    this.CellAttributes.Equals(input.CellAttributes)
-                ) && 
-                (
-                    this.FormatString == input.FormatString ||
-                    this.FormatString.Equals(input.FormatString)
-                ) && 
-                (
-                    this.FormatValues == input.FormatValues ||
-                    this.FormatValues.Equals(input.FormatValues)
-                ) && 
-                (
-                    this.MeaninglessCells == input.MeaninglessCells ||
-                    this.MeaninglessCells.Equals(input.MeaninglessCells)
-                ) && 
-                (
-                    this.TextList == input.TextList ||
-                    this.TextList.Equals(input.TextList)
-                ) && 
-                (
-                    this.UrlDrillThrough == input.UrlDrillThrough ||
-                    this.UrlDrillThrough.Equals(input.UrlDrillThrough)
-                ) && 
-                (
-                    this.MemberIdentifierType == input.MemberIdentifierType ||
-                    this.MemberIdentifierType.Equals(input.MemberIdentifierType)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Dataless.GetHashCode();
-                hashCode = (hashCode * 59) + this.HideRestrictedData.GetHashCode();
-                hashCode = (hashCode * 59) + this.CellAttributes.GetHashCode();
-                hashCode = (hashCode * 59) + this.FormatString.GetHashCode();
-                hashCode = (hashCode * 59) + this.FormatValues.GetHashCode();
-                hashCode = (hashCode * 59) + this.MeaninglessCells.GetHashCode();
-                hashCode = (hashCode * 59) + this.TextList.GetHashCode();
-                hashCode = (hashCode * 59) + this.UrlDrillThrough.GetHashCode();
-                hashCode = (hashCode * 59) + this.MemberIdentifierType.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

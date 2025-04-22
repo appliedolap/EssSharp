@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Cube
     /// </summary>
     [DataContract(Name = "Cube")]
-    public partial class Cube : IEquatable<Cube>, IValidatableObject
+    public partial class Cube : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "CURRENCY")]
             CURRENCY = 3
-
         }
 
 
@@ -228,165 +227,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Cube);
-        }
-
-        /// <summary>
-        /// Returns true if Cube instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Cube to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Cube input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Application == input.Application ||
-                    (this.Application != null &&
-                    this.Application.Equals(input.Application))
-                ) && 
-                (
-                    this.Owner == input.Owner ||
-                    (this.Owner != null &&
-                    this.Owner.Equals(input.Owner))
-                ) && 
-                (
-                    this.CreationTime == input.CreationTime ||
-                    this.CreationTime.Equals(input.CreationTime)
-                ) && 
-                (
-                    this.ModifiedBy == input.ModifiedBy ||
-                    (this.ModifiedBy != null &&
-                    this.ModifiedBy.Equals(input.ModifiedBy))
-                ) && 
-                (
-                    this.ModifiedTime == input.ModifiedTime ||
-                    this.ModifiedTime.Equals(input.ModifiedTime)
-                ) && 
-                (
-                    this.Status == input.Status ||
-                    (this.Status != null &&
-                    this.Status.Equals(input.Status))
-                ) && 
-                (
-                    this.StartTime == input.StartTime ||
-                    this.StartTime.Equals(input.StartTime)
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.ApplicationRole == input.ApplicationRole ||
-                    (this.ApplicationRole != null &&
-                    this.ApplicationRole.Equals(input.ApplicationRole))
-                ) && 
-                (
-                    this.EasManagedApp == input.EasManagedApp ||
-                    this.EasManagedApp.Equals(input.EasManagedApp)
-                ) && 
-                (
-                    this.StartStopDBAllowed == input.StartStopDBAllowed ||
-                    this.StartStopDBAllowed.Equals(input.StartStopDBAllowed)
-                ) && 
-                (
-                    this.InspectDBAllowed == input.InspectDBAllowed ||
-                    this.InspectDBAllowed.Equals(input.InspectDBAllowed)
-                ) && 
-                (
-                    this.DbVariablesSetting == input.DbVariablesSetting ||
-                    (this.DbVariablesSetting != null &&
-                    this.DbVariablesSetting.Equals(input.DbVariablesSetting))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.Application != null)
-                {
-                    hashCode = (hashCode * 59) + this.Application.GetHashCode();
-                }
-                if (this.Owner != null)
-                {
-                    hashCode = (hashCode * 59) + this.Owner.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.CreationTime.GetHashCode();
-                if (this.ModifiedBy != null)
-                {
-                    hashCode = (hashCode * 59) + this.ModifiedBy.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ModifiedTime.GetHashCode();
-                if (this.Status != null)
-                {
-                    hashCode = (hashCode * 59) + this.Status.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.StartTime.GetHashCode();
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                if (this.ApplicationRole != null)
-                {
-                    hashCode = (hashCode * 59) + this.ApplicationRole.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.EasManagedApp.GetHashCode();
-                hashCode = (hashCode * 59) + this.StartStopDBAllowed.GetHashCode();
-                hashCode = (hashCode * 59) + this.InspectDBAllowed.GetHashCode();
-                if (this.DbVariablesSetting != null)
-                {
-                    hashCode = (hashCode * 59) + this.DbVariablesSetting.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

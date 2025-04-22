@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ServerConfiguration
     /// </summary>
     [DataContract(Name = "ServerConfiguration")]
-    public partial class ServerConfiguration : IEquatable<ServerConfiguration>, IValidatableObject
+    public partial class ServerConfiguration : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ServerConfiguration" /> class.
@@ -121,107 +121,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ServerConfiguration);
-        }
-
-        /// <summary>
-        /// Returns true if ServerConfiguration instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ServerConfiguration to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ServerConfiguration input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Host == input.Host ||
-                    (this.Host != null &&
-                    this.Host.Equals(input.Host))
-                ) && 
-                (
-                    this.Port == input.Port ||
-                    this.Port.Equals(input.Port)
-                ) && 
-                (
-                    this.User == input.User ||
-                    (this.User != null &&
-                    this.User.Equals(input.User))
-                ) && 
-                (
-                    this.Password == input.Password ||
-                    (this.Password != null &&
-                    this.Password.Equals(input.Password))
-                ) && 
-                (
-                    this.Folder == input.Folder ||
-                    (this.Folder != null &&
-                    this.Folder.Equals(input.Folder))
-                ) && 
-                (
-                    this.MessageAction == input.MessageAction ||
-                    (this.MessageAction != null &&
-                    this.MessageAction.Equals(input.MessageAction))
-                ) && 
-                (
-                    this.MessageLocation == input.MessageLocation ||
-                    (this.MessageLocation != null &&
-                    this.MessageLocation.Equals(input.MessageLocation))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Host != null)
-                {
-                    hashCode = (hashCode * 59) + this.Host.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Port.GetHashCode();
-                if (this.User != null)
-                {
-                    hashCode = (hashCode * 59) + this.User.GetHashCode();
-                }
-                if (this.Password != null)
-                {
-                    hashCode = (hashCode * 59) + this.Password.GetHashCode();
-                }
-                if (this.Folder != null)
-                {
-                    hashCode = (hashCode * 59) + this.Folder.GetHashCode();
-                }
-                if (this.MessageAction != null)
-                {
-                    hashCode = (hashCode * 59) + this.MessageAction.GetHashCode();
-                }
-                if (this.MessageLocation != null)
-                {
-                    hashCode = (hashCode * 59) + this.MessageLocation.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

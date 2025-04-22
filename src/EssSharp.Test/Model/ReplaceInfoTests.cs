@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ReplaceInfo>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Find'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Find'
         }
+
         /// <summary>
         /// Test the property 'Replace'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Replace'
         }
+
         /// <summary>
         /// Test the property 'MatchWholeWord'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MatchWholeWord'
         }
+
         /// <summary>
         /// Test the property 'ReplaceAll'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ReplaceAll'
         }
+
         /// <summary>
         /// Test the property 'CaseSensitive'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CaseSensitive'
         }
-
     }
-
 }

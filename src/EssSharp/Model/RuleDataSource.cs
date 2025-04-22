@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// RuleDataSource
     /// </summary>
     [DataContract(Name = "RuleDataSource")]
-    public partial class RuleDataSource : IEquatable<RuleDataSource>, IValidatableObject
+    public partial class RuleDataSource : IValidatableObject
     {
         /// <summary>
         /// Defines TokensCombineOption
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "OR")]
             OR = 2
-
         }
 
 
@@ -132,99 +131,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as RuleDataSource);
-        }
-
-        /// <summary>
-        /// Returns true if RuleDataSource instances are equal
-        /// </summary>
-        /// <param name="input">Instance of RuleDataSource to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(RuleDataSource input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Header == input.Header ||
-                    (this.Header != null &&
-                    this.Header.Equals(input.Header))
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Tokens == input.Tokens ||
-                    this.Tokens != null &&
-                    input.Tokens != null &&
-                    this.Tokens.SequenceEqual(input.Tokens)
-                ) && 
-                (
-                    this.TokensCombineOption == input.TokensCombineOption ||
-                    this.TokensCombineOption.Equals(input.TokensCombineOption)
-                ) && 
-                (
-                    this.SqlProperties == input.SqlProperties ||
-                    (this.SqlProperties != null &&
-                    this.SqlProperties.Equals(input.SqlProperties))
-                ) && 
-                (
-                    this.FileProperties == input.FileProperties ||
-                    (this.FileProperties != null &&
-                    this.FileProperties.Equals(input.FileProperties))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Header != null)
-                {
-                    hashCode = (hashCode * 59) + this.Header.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.Tokens != null)
-                {
-                    hashCode = (hashCode * 59) + this.Tokens.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.TokensCombineOption.GetHashCode();
-                if (this.SqlProperties != null)
-                {
-                    hashCode = (hashCode * 59) + this.SqlProperties.GetHashCode();
-                }
-                if (this.FileProperties != null)
-                {
-                    hashCode = (hashCode * 59) + this.FileProperties.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<QName>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'NamespaceURI'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NamespaceURI'
         }
+
         /// <summary>
         /// Test the property 'LocalPart'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LocalPart'
         }
+
         /// <summary>
         /// Test the property 'Prefix'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Prefix'
         }
-
     }
-
 }

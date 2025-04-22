@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// SmartList
     /// </summary>
     [DataContract(Name = "SmartList")]
-    public partial class SmartList : IEquatable<SmartList>, IValidatableObject
+    public partial class SmartList : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SmartList" /> class.
@@ -112,90 +112,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as SmartList);
-        }
-
-        /// <summary>
-        /// Returns true if SmartList instances are equal
-        /// </summary>
-        /// <param name="input">Instance of SmartList to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(SmartList input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.IncrementalNumber == input.IncrementalNumber ||
-                    this.IncrementalNumber.Equals(input.IncrementalNumber)
-                ) && 
-                (
-                    this.StartNumber == input.StartNumber ||
-                    this.StartNumber.Equals(input.StartNumber)
-                ) && 
-                (
-                    this.MissingName == input.MissingName ||
-                    (this.MissingName != null &&
-                    this.MissingName.Equals(input.MissingName))
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.OutOfRangeName == input.OutOfRangeName ||
-                    (this.OutOfRangeName != null &&
-                    this.OutOfRangeName.Equals(input.OutOfRangeName))
-                ) && 
-                (
-                    this.RemoveUnspecified == input.RemoveUnspecified ||
-                    this.RemoveUnspecified.Equals(input.RemoveUnspecified)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.IncrementalNumber.GetHashCode();
-                hashCode = (hashCode * 59) + this.StartNumber.GetHashCode();
-                if (this.MissingName != null)
-                {
-                    hashCode = (hashCode * 59) + this.MissingName.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.OutOfRangeName != null)
-                {
-                    hashCode = (hashCode * 59) + this.OutOfRangeName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.RemoveUnspecified.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// DataLoadOptions
     /// </summary>
     [DataContract(Name = "DataLoadOptions")]
-    public partial class DataLoadOptions : IEquatable<DataLoadOptions>, IValidatableObject
+    public partial class DataLoadOptions : IValidatableObject
     {
         /// <summary>
         /// Defines Option
@@ -58,7 +58,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "SUBTRACT")]
             SUBTRACT = 4
-
         }
 
 
@@ -135,86 +134,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DataLoadOptions);
-        }
-
-        /// <summary>
-        /// Returns true if DataLoadOptions instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DataLoadOptions to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DataLoadOptions input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.ClearCombinations == input.ClearCombinations ||
-                    this.ClearCombinations != null &&
-                    input.ClearCombinations != null &&
-                    this.ClearCombinations.SequenceEqual(input.ClearCombinations)
-                ) && 
-                (
-                    this.Option == input.Option ||
-                    this.Option.Equals(input.Option)
-                ) && 
-                (
-                    this.RemoveAll == input.RemoveAll ||
-                    this.RemoveAll.Equals(input.RemoveAll)
-                ) && 
-                (
-                    this.SignFlipDimension == input.SignFlipDimension ||
-                    (this.SignFlipDimension != null &&
-                    this.SignFlipDimension.Equals(input.SignFlipDimension))
-                ) && 
-                (
-                    this.SignFlipUDA == input.SignFlipUDA ||
-                    (this.SignFlipUDA != null &&
-                    this.SignFlipUDA.Equals(input.SignFlipUDA))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.ClearCombinations != null)
-                {
-                    hashCode = (hashCode * 59) + this.ClearCombinations.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Option.GetHashCode();
-                hashCode = (hashCode * 59) + this.RemoveAll.GetHashCode();
-                if (this.SignFlipDimension != null)
-                {
-                    hashCode = (hashCode * 59) + this.SignFlipDimension.GetHashCode();
-                }
-                if (this.SignFlipUDA != null)
-                {
-                    hashCode = (hashCode * 59) + this.SignFlipUDA.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

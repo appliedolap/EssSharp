@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// RuntimeStatistics
     /// </summary>
     [DataContract(Name = "RuntimeStatistics")]
-    public partial class RuntimeStatistics : IEquatable<RuntimeStatistics>, IValidatableObject
+    public partial class RuntimeStatistics : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RuntimeStatistics" /> class.
@@ -211,133 +211,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as RuntimeStatistics);
-        }
-
-        /// <summary>
-        /// Returns true if RuntimeStatistics instances are equal
-        /// </summary>
-        /// <param name="input">Instance of RuntimeStatistics to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(RuntimeStatistics input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.CacheHitRatio == input.CacheHitRatio ||
-                    this.CacheHitRatio.Equals(input.CacheHitRatio)
-                ) && 
-                (
-                    this.CurrentCacheSize == input.CurrentCacheSize ||
-                    this.CurrentCacheSize.Equals(input.CurrentCacheSize)
-                ) && 
-                (
-                    this.CurrentCacheSizeLimit == input.CurrentCacheSizeLimit ||
-                    this.CurrentCacheSizeLimit.Equals(input.CurrentCacheSizeLimit)
-                ) && 
-                (
-                    this.PageReadsSinceLastStartup == input.PageReadsSinceLastStartup ||
-                    this.PageReadsSinceLastStartup.Equals(input.PageReadsSinceLastStartup)
-                ) && 
-                (
-                    this.PageWritesSinceLastStartup == input.PageWritesSinceLastStartup ||
-                    this.PageWritesSinceLastStartup.Equals(input.PageWritesSinceLastStartup)
-                ) && 
-                (
-                    this.PageSize == input.PageSize ||
-                    this.PageSize.Equals(input.PageSize)
-                ) && 
-                (
-                    this.DiskSpaceAllocatedForData == input.DiskSpaceAllocatedForData ||
-                    this.DiskSpaceAllocatedForData.Equals(input.DiskSpaceAllocatedForData)
-                ) && 
-                (
-                    this.DiskSpaceUsedByData == input.DiskSpaceUsedByData ||
-                    this.DiskSpaceUsedByData.Equals(input.DiskSpaceUsedByData)
-                ) && 
-                (
-                    this.TemporaryDiskSpaceAllocated == input.TemporaryDiskSpaceAllocated ||
-                    this.TemporaryDiskSpaceAllocated.Equals(input.TemporaryDiskSpaceAllocated)
-                ) && 
-                (
-                    this.TemporaryDiskSpaceUsed == input.TemporaryDiskSpaceUsed ||
-                    this.TemporaryDiskSpaceUsed.Equals(input.TemporaryDiskSpaceUsed)
-                ) && 
-                (
-                    this.HitRatioOnIndexCache == input.HitRatioOnIndexCache ||
-                    this.HitRatioOnIndexCache.Equals(input.HitRatioOnIndexCache)
-                ) && 
-                (
-                    this.HitRatioOnDataCache == input.HitRatioOnDataCache ||
-                    this.HitRatioOnDataCache.Equals(input.HitRatioOnDataCache)
-                ) && 
-                (
-                    this.NumberOfIndexPageReads == input.NumberOfIndexPageReads ||
-                    this.NumberOfIndexPageReads.Equals(input.NumberOfIndexPageReads)
-                ) && 
-                (
-                    this.NumberOfIndexPageWrites == input.NumberOfIndexPageWrites ||
-                    this.NumberOfIndexPageWrites.Equals(input.NumberOfIndexPageWrites)
-                ) && 
-                (
-                    this.NumberOfDataBlockReads == input.NumberOfDataBlockReads ||
-                    this.NumberOfDataBlockReads.Equals(input.NumberOfDataBlockReads)
-                ) && 
-                (
-                    this.NumberOfDataBlockWrites == input.NumberOfDataBlockWrites ||
-                    this.NumberOfDataBlockWrites.Equals(input.NumberOfDataBlockWrites)
-                ) && 
-                (
-                    this.HitRatioOnDataFileCache == input.HitRatioOnDataFileCache ||
-                    this.HitRatioOnDataFileCache.Equals(input.HitRatioOnDataFileCache)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.CacheHitRatio.GetHashCode();
-                hashCode = (hashCode * 59) + this.CurrentCacheSize.GetHashCode();
-                hashCode = (hashCode * 59) + this.CurrentCacheSizeLimit.GetHashCode();
-                hashCode = (hashCode * 59) + this.PageReadsSinceLastStartup.GetHashCode();
-                hashCode = (hashCode * 59) + this.PageWritesSinceLastStartup.GetHashCode();
-                hashCode = (hashCode * 59) + this.PageSize.GetHashCode();
-                hashCode = (hashCode * 59) + this.DiskSpaceAllocatedForData.GetHashCode();
-                hashCode = (hashCode * 59) + this.DiskSpaceUsedByData.GetHashCode();
-                hashCode = (hashCode * 59) + this.TemporaryDiskSpaceAllocated.GetHashCode();
-                hashCode = (hashCode * 59) + this.TemporaryDiskSpaceUsed.GetHashCode();
-                hashCode = (hashCode * 59) + this.HitRatioOnIndexCache.GetHashCode();
-                hashCode = (hashCode * 59) + this.HitRatioOnDataCache.GetHashCode();
-                hashCode = (hashCode * 59) + this.NumberOfIndexPageReads.GetHashCode();
-                hashCode = (hashCode * 59) + this.NumberOfIndexPageWrites.GetHashCode();
-                hashCode = (hashCode * 59) + this.NumberOfDataBlockReads.GetHashCode();
-                hashCode = (hashCode * 59) + this.NumberOfDataBlockWrites.GetHashCode();
-                hashCode = (hashCode * 59) + this.HitRatioOnDataFileCache.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// JobStatisticsBean
     /// </summary>
     [DataContract(Name = "JobStatisticsBean")]
-    public partial class JobStatisticsBean : IEquatable<JobStatisticsBean>, IValidatableObject
+    public partial class JobStatisticsBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobStatisticsBean" /> class.
@@ -94,68 +94,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as JobStatisticsBean);
-        }
-
-        /// <summary>
-        /// Returns true if JobStatisticsBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of JobStatisticsBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(JobStatisticsBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.ErrCt == input.ErrCt ||
-                    this.ErrCt.Equals(input.ErrCt)
-                ) && 
-                (
-                    this.SuccesCt == input.SuccesCt ||
-                    this.SuccesCt.Equals(input.SuccesCt)
-                ) && 
-                (
-                    this.WarningCt == input.WarningCt ||
-                    this.WarningCt.Equals(input.WarningCt)
-                ) && 
-                (
-                    this.RunningCt == input.RunningCt ||
-                    this.RunningCt.Equals(input.RunningCt)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.ErrCt.GetHashCode();
-                hashCode = (hashCode * 59) + this.SuccesCt.GetHashCode();
-                hashCode = (hashCode * 59) + this.WarningCt.GetHashCode();
-                hashCode = (hashCode * 59) + this.RunningCt.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

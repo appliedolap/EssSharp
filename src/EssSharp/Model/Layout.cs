@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Layout
     /// </summary>
     [DataContract(Name = "Layout")]
-    public partial class Layout : IEquatable<Layout>, IValidatableObject
+    public partial class Layout : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Layout" /> class.
@@ -76,66 +76,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Layout);
-        }
-
-        /// <summary>
-        /// Returns true if Layout instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Layout to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Layout input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Header == input.Header ||
-                    (this.Header != null &&
-                    this.Header.Equals(input.Header))
-                ) && 
-                (
-                    this.Spec == input.Spec ||
-                    (this.Spec != null &&
-                    this.Spec.Equals(input.Spec))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Header != null)
-                {
-                    hashCode = (hashCode * 59) + this.Header.GetHashCode();
-                }
-                if (this.Spec != null)
-                {
-                    hashCode = (hashCode * 59) + this.Spec.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Slice>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'DirtyCells'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DirtyCells'
         }
+
         /// <summary>
         /// Test the property 'DirtyTexts'
         /// </summary>
@@ -69,14 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DirtyTexts'
         }
-        /// <summary>
-        /// Test the property 'Columns'
-        /// </summary>
-        [Fact]
-        public void ColumnsTest()
-        {
-            // TODO unit test for the property 'Columns'
-        }
+
         /// <summary>
         /// Test the property 'Rows'
         /// </summary>
@@ -85,6 +78,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Rows'
         }
+
+        /// <summary>
+        /// Test the property 'Columns'
+        /// </summary>
+        [Fact]
+        public void ColumnsTest()
+        {
+            // TODO unit test for the property 'Columns'
+        }
+
         /// <summary>
         /// Test the property 'Data'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Data'
         }
-
     }
-
 }

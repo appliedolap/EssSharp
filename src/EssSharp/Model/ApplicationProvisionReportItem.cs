@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ApplicationProvisionReportItem
     /// </summary>
     [DataContract(Name = "ApplicationProvisionReportItem")]
-    public partial class ApplicationProvisionReportItem : IEquatable<ApplicationProvisionReportItem>, IValidatableObject
+    public partial class ApplicationProvisionReportItem : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationProvisionReportItem" /> class.
@@ -94,84 +94,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ApplicationProvisionReportItem);
-        }
-
-        /// <summary>
-        /// Returns true if ApplicationProvisionReportItem instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ApplicationProvisionReportItem to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ApplicationProvisionReportItem input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Roles == input.Roles ||
-                    (this.Roles != null &&
-                    this.Roles.Equals(input.Roles))
-                ) && 
-                (
-                    this.Filters == input.Filters ||
-                    (this.Filters != null &&
-                    this.Filters.Equals(input.Filters))
-                ) && 
-                (
-                    this.Scripts == input.Scripts ||
-                    (this.Scripts != null &&
-                    this.Scripts.Equals(input.Scripts))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.Roles != null)
-                {
-                    hashCode = (hashCode * 59) + this.Roles.GetHashCode();
-                }
-                if (this.Filters != null)
-                {
-                    hashCode = (hashCode * 59) + this.Filters.GetHashCode();
-                }
-                if (this.Scripts != null)
-                {
-                    hashCode = (hashCode * 59) + this.Scripts.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Limits
     /// </summary>
     [DataContract(Name = "Limits")]
-    public partial class Limits : IEquatable<Limits>, IValidatableObject
+    public partial class Limits : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Limits" /> class.
@@ -121,111 +121,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Limits);
-        }
-
-        /// <summary>
-        /// Returns true if Limits instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Limits to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Limits input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.CoreFileSize == input.CoreFileSize ||
-                    (this.CoreFileSize != null &&
-                    this.CoreFileSize.Equals(input.CoreFileSize))
-                ) && 
-                (
-                    this.DataSegmentSize == input.DataSegmentSize ||
-                    (this.DataSegmentSize != null &&
-                    this.DataSegmentSize.Equals(input.DataSegmentSize))
-                ) && 
-                (
-                    this.MaxMemory == input.MaxMemory ||
-                    (this.MaxMemory != null &&
-                    this.MaxMemory.Equals(input.MaxMemory))
-                ) && 
-                (
-                    this.OpenFiles == input.OpenFiles ||
-                    (this.OpenFiles != null &&
-                    this.OpenFiles.Equals(input.OpenFiles))
-                ) && 
-                (
-                    this.UserMaxProcesses == input.UserMaxProcesses ||
-                    (this.UserMaxProcesses != null &&
-                    this.UserMaxProcesses.Equals(input.UserMaxProcesses))
-                ) && 
-                (
-                    this.VirtualMemorySize == input.VirtualMemorySize ||
-                    (this.VirtualMemorySize != null &&
-                    this.VirtualMemorySize.Equals(input.VirtualMemorySize))
-                ) && 
-                (
-                    this.WebLogicHeapSize == input.WebLogicHeapSize ||
-                    (this.WebLogicHeapSize != null &&
-                    this.WebLogicHeapSize.Equals(input.WebLogicHeapSize))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.CoreFileSize != null)
-                {
-                    hashCode = (hashCode * 59) + this.CoreFileSize.GetHashCode();
-                }
-                if (this.DataSegmentSize != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataSegmentSize.GetHashCode();
-                }
-                if (this.MaxMemory != null)
-                {
-                    hashCode = (hashCode * 59) + this.MaxMemory.GetHashCode();
-                }
-                if (this.OpenFiles != null)
-                {
-                    hashCode = (hashCode * 59) + this.OpenFiles.GetHashCode();
-                }
-                if (this.UserMaxProcesses != null)
-                {
-                    hashCode = (hashCode * 59) + this.UserMaxProcesses.GetHashCode();
-                }
-                if (this.VirtualMemorySize != null)
-                {
-                    hashCode = (hashCode * 59) + this.VirtualMemorySize.GetHashCode();
-                }
-                if (this.WebLogicHeapSize != null)
-                {
-                    hashCode = (hashCode * 59) + this.WebLogicHeapSize.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

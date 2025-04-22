@@ -19282,10 +19282,10 @@
           "type": "string"
         },
         "lockForUpdate": {
-          "type": "boolean"
+          "type": "string"
         },
         "isScriptContent": {
-          "type": "boolean"
+          "type": "string"
         },
         "useCatalogPath": {
           "type": "boolean"

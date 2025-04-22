@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<SystemMaintainableResource>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Available'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Available'
         }
+
         /// <summary>
         /// Test the property 'Limit'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Limit'
         }
+
         /// <summary>
         /// Test the property 'Id'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Id'
         }
-
     }
-
 }

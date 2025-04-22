@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ApplicationConfigEntry>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Key'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Key'
         }
+
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'Syntax'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Syntax'
         }
+
         /// <summary>
         /// Test the property 'Example'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Example'
         }
+
         /// <summary>
         /// Test the property 'Value'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Value'
         }
+
         /// <summary>
         /// Test the property 'Configured'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Configured'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

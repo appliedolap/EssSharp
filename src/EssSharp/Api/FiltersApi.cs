@@ -406,7 +406,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersAddFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersAddFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Add Permissions
@@ -422,7 +422,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> FiltersAddFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> FiltersAddFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Copy Filter
         /// </summary>
@@ -436,7 +436,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        System.Threading.Tasks.Task<FilterBean> FiltersCopyFilterAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FilterBean> FiltersCopyFilterAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Copy Filter
@@ -451,7 +451,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersCopyFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersCopyFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Create Filter
         /// </summary>
@@ -465,7 +465,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        System.Threading.Tasks.Task<FilterBean> FiltersCreateFilterAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FilterBean> FiltersCreateFilterAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Create Filter
@@ -480,7 +480,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersCreateFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersCreateFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete Filter
         /// </summary>
@@ -494,7 +494,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FiltersDeleteFilterAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FiltersDeleteFilterAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete Filter
@@ -509,7 +509,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FiltersDeleteFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FiltersDeleteFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Filter
         /// </summary>
@@ -524,7 +524,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        System.Threading.Tasks.Task<FilterBean> FiltersEditFilterAsync(string applicationName, string databaseName, string filterName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FilterBean> FiltersEditFilterAsync(string applicationName, string databaseName, string filterName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Filter
@@ -540,7 +540,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersEditFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersEditFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Filter
         /// </summary>
@@ -554,7 +554,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        System.Threading.Tasks.Task<FilterBean> FiltersGetFilterAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FilterBean> FiltersGetFilterAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Filter
@@ -569,7 +569,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersGetFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersGetFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Permissions
         /// </summary>
@@ -583,7 +583,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;UserGroupProvisionInfoList&gt;</returns>
-        System.Threading.Tasks.Task<List<UserGroupProvisionInfoList>> FiltersGetFilterPermissionsAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<UserGroupProvisionInfoList>> FiltersGetFilterPermissionsAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Permissions
@@ -598,7 +598,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;UserGroupProvisionInfoList&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<UserGroupProvisionInfoList>>> FiltersGetFilterPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<UserGroupProvisionInfoList>>> FiltersGetFilterPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Filter Rows
         /// </summary>
@@ -612,7 +612,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterRowList</returns>
-        System.Threading.Tasks.Task<FilterRowList> FiltersGetFilterRowsAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FilterRowList> FiltersGetFilterRowsAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Filter Rows
@@ -627,7 +627,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterRowList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FilterRowList>> FiltersGetFilterRowsWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<FilterRowList>> FiltersGetFilterRowsWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Filters
         /// </summary>
@@ -640,7 +640,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;FilterList&gt;</returns>
-        System.Threading.Tasks.Task<List<FilterList>> FiltersListFiltersAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<FilterList>> FiltersListFiltersAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Filters
@@ -654,7 +654,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;FilterList&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<FilterList>>> FiltersListFiltersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<FilterList>>> FiltersListFiltersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete Permission
         /// </summary>
@@ -670,7 +670,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FiltersRemoveFilterPermissionAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FiltersRemoveFilterPermissionAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete Permission
@@ -687,7 +687,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FiltersRemoveFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FiltersRemoveFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Rename Filter
         /// </summary>
@@ -701,7 +701,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        System.Threading.Tasks.Task<FilterBean> FiltersRenameFilterAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FilterBean> FiltersRenameFilterAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Rename Filter
@@ -716,7 +716,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersRenameFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersRenameFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Edit Permissions
         /// </summary>
@@ -731,7 +731,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersReplaceFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersReplaceFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Edit Permissions
@@ -747,7 +747,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> FiltersReplaceFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> FiltersReplaceFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Validate Filter
         /// </summary>
@@ -761,7 +761,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FiltersValidateFilterAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FiltersValidateFilterAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Validate Filter
@@ -776,7 +776,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FiltersValidateFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FiltersValidateFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -963,6 +963,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1014,7 +1015,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersAddFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersAddFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfo> localVarResponse = await FiltersAddFilterPermissionWithHttpInfoAsync(applicationName, databaseName, filterName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1031,7 +1032,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> FiltersAddFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> FiltersAddFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1171,6 +1172,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1220,7 +1222,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        public async System.Threading.Tasks.Task<FilterBean> FiltersCopyFilterAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FilterBean> FiltersCopyFilterAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<FilterBean> localVarResponse = await FiltersCopyFilterWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1236,7 +1238,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersCopyFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersCopyFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1369,6 +1371,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1418,7 +1421,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        public async System.Threading.Tasks.Task<FilterBean> FiltersCreateFilterAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FilterBean> FiltersCreateFilterAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<FilterBean> localVarResponse = await FiltersCreateFilterWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1434,7 +1437,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersCreateFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersCreateFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1562,6 +1565,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1611,7 +1615,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FiltersDeleteFilterAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FiltersDeleteFilterAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await FiltersDeleteFilterWithHttpInfoAsync(applicationName, databaseName, filterName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1626,7 +1630,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FiltersDeleteFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FiltersDeleteFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1763,6 +1767,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1814,7 +1819,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        public async System.Threading.Tasks.Task<FilterBean> FiltersEditFilterAsync(string applicationName, string databaseName, string filterName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FilterBean> FiltersEditFilterAsync(string applicationName, string databaseName, string filterName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<FilterBean> localVarResponse = await FiltersEditFilterWithHttpInfoAsync(applicationName, databaseName, filterName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1831,7 +1836,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersEditFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersEditFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1969,6 +1974,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2018,7 +2024,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        public async System.Threading.Tasks.Task<FilterBean> FiltersGetFilterAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FilterBean> FiltersGetFilterAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<FilterBean> localVarResponse = await FiltersGetFilterWithHttpInfoAsync(applicationName, databaseName, filterName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2034,7 +2040,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersGetFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersGetFilterWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2163,6 +2169,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2212,7 +2219,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;UserGroupProvisionInfoList&gt;</returns>
-        public async System.Threading.Tasks.Task<List<UserGroupProvisionInfoList>> FiltersGetFilterPermissionsAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<UserGroupProvisionInfoList>> FiltersGetFilterPermissionsAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<List<UserGroupProvisionInfoList>> localVarResponse = await FiltersGetFilterPermissionsWithHttpInfoAsync(applicationName, databaseName, filterName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2228,7 +2235,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;UserGroupProvisionInfoList&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<UserGroupProvisionInfoList>>> FiltersGetFilterPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<UserGroupProvisionInfoList>>> FiltersGetFilterPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2357,6 +2364,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2406,7 +2414,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterRowList</returns>
-        public async System.Threading.Tasks.Task<FilterRowList> FiltersGetFilterRowsAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FilterRowList> FiltersGetFilterRowsAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<FilterRowList> localVarResponse = await FiltersGetFilterRowsWithHttpInfoAsync(applicationName, databaseName, filterName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2422,7 +2430,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterRowList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterRowList>> FiltersGetFilterRowsWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterRowList>> FiltersGetFilterRowsWithHttpInfoAsync(string applicationName, string databaseName, string filterName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2543,6 +2551,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2590,7 +2599,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;FilterList&gt;</returns>
-        public async System.Threading.Tasks.Task<List<FilterList>> FiltersListFiltersAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<FilterList>> FiltersListFiltersAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<List<FilterList>> localVarResponse = await FiltersListFiltersWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2605,7 +2614,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;FilterList&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<FilterList>>> FiltersListFiltersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<FilterList>>> FiltersListFiltersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2734,6 +2743,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2787,7 +2797,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FiltersRemoveFilterPermissionAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FiltersRemoveFilterPermissionAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await FiltersRemoveFilterPermissionWithHttpInfoAsync(applicationName, databaseName, filterName, userGroupId, group, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2804,7 +2814,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FiltersRemoveFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FiltersRemoveFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2941,6 +2951,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2990,7 +3001,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
-        public async System.Threading.Tasks.Task<FilterBean> FiltersRenameFilterAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FilterBean> FiltersRenameFilterAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<FilterBean> localVarResponse = await FiltersRenameFilterWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3006,7 +3017,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersRenameFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilterBean>> FiltersRenameFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3147,6 +3158,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3198,7 +3210,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersReplaceFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersReplaceFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfo> localVarResponse = await FiltersReplaceFilterPermissionWithHttpInfoAsync(applicationName, databaseName, filterName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3215,7 +3227,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> FiltersReplaceFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> FiltersReplaceFilterPermissionWithHttpInfoAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3352,6 +3364,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3401,7 +3414,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FiltersValidateFilterAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FiltersValidateFilterAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await FiltersValidateFilterWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -3416,7 +3429,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FiltersValidateFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FiltersValidateFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

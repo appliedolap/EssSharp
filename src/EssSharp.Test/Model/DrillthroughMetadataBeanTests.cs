@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DrillthroughMetadataBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'DtrContext'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DtrContext'
         }
+
         /// <summary>
         /// Test the property 'AliasTable'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AliasTable'
         }
+
         /// <summary>
         /// Test the property 'SessionId'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SessionId'
         }
-
     }
-
 }

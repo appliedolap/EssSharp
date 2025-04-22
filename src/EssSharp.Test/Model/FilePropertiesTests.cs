@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<FileProperties>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Delimiter'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Delimiter'
         }
+
         /// <summary>
         /// Test the property 'Width'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Width'
         }
+
         /// <summary>
         /// Test the property 'DataloadRecordNumber'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataloadRecordNumber'
         }
+
         /// <summary>
         /// Test the property 'DimensionBuildRecordNumber'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimensionBuildRecordNumber'
         }
+
         /// <summary>
         /// Test the property 'HeaderRecordNumber'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HeaderRecordNumber'
         }
+
         /// <summary>
         /// Test the property 'LineSkipCount'
         /// </summary>
@@ -101,7 +105,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LineSkipCount'
         }
-
     }
-
 }

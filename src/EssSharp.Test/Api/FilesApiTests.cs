@@ -129,6 +129,18 @@ namespace EssSharp.Test.Api
         }
 
         /// <summary>
+        /// Test FilesExtractJob
+        /// </summary>
+        [Fact]
+        public void FilesExtractJobTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //ZipFileDetails body = null;
+            //bool? overwrite = null;
+            //instance.FilesExtractJob(body, overwrite);
+        }
+
+        /// <summary>
         /// Test FilesGetSharedPath
         /// </summary>
         [Fact]

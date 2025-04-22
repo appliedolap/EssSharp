@@ -183,7 +183,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationRoleProvisioningDeprovisionAsync(string app, string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationRoleProvisioningDeprovisionAsync(string app, string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Deprovision User or Group
@@ -198,7 +198,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningDeprovisionWithHttpInfoAsync(string app, string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningDeprovisionWithHttpInfoAsync(string app, string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Provision
         /// </summary>
@@ -213,7 +213,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        System.Threading.Tasks.Task<UserGroupProvisionInfo> ApplicationRoleProvisioningGetProvisionAsync(string app, string id, bool? group = default(bool?), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserGroupProvisionInfo> ApplicationRoleProvisioningGetProvisionAsync(string app, string id, bool? group = default(bool?), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Provision
@@ -229,7 +229,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ApplicationRoleProvisioningGetProvisionWithHttpInfoAsync(string app, string id, bool? group = default(bool?), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ApplicationRoleProvisioningGetProvisionWithHttpInfoAsync(string app, string id, bool? group = default(bool?), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Import Provision
         /// </summary>
@@ -241,7 +241,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationRoleProvisioningImportProvisionAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationRoleProvisioningImportProvisionAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Import Provision
@@ -254,7 +254,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningImportProvisionWithHttpInfoAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningImportProvisionWithHttpInfoAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Provision User or Group
         /// </summary>
@@ -268,7 +268,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationRoleProvisioningProvisionAsync(string app, string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationRoleProvisioningProvisionAsync(string app, string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Provision User or Group
@@ -283,7 +283,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningProvisionWithHttpInfoAsync(string app, string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningProvisionWithHttpInfoAsync(string app, string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Search Application Provisioning
         /// </summary>
@@ -299,7 +299,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfoList</returns>
-        System.Threading.Tasks.Task<UserGroupProvisionInfoList> ApplicationRoleProvisioningSearchProvisionAsync(string app, string id = default(string), string role = default(string), string filter = default(string), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserGroupProvisionInfoList> ApplicationRoleProvisioningSearchProvisionAsync(string app, string id = default(string), string role = default(string), string filter = default(string), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Search Application Provisioning
@@ -316,7 +316,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfoList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfoList>> ApplicationRoleProvisioningSearchProvisionWithHttpInfoAsync(string app, string id = default(string), string role = default(string), string filter = default(string), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfoList>> ApplicationRoleProvisioningSearchProvisionWithHttpInfoAsync(string app, string id = default(string), string role = default(string), string filter = default(string), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -484,6 +484,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -536,7 +537,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationRoleProvisioningDeprovisionAsync(string app, string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationRoleProvisioningDeprovisionAsync(string app, string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ApplicationRoleProvisioningDeprovisionWithHttpInfoAsync(app, id, group, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -551,7 +552,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationRoleProvisioningDeprovisionWithHttpInfoAsync(string app, string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationRoleProvisioningDeprovisionWithHttpInfoAsync(string app, string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -671,6 +672,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -728,7 +730,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> ApplicationRoleProvisioningGetProvisionAsync(string app, string id, bool? group = default(bool?), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> ApplicationRoleProvisioningGetProvisionAsync(string app, string id, bool? group = default(bool?), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfo> localVarResponse = await ApplicationRoleProvisioningGetProvisionWithHttpInfoAsync(app, id, group, inherited, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -745,7 +747,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> ApplicationRoleProvisioningGetProvisionWithHttpInfoAsync(string app, string id, bool? group = default(bool?), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> ApplicationRoleProvisioningGetProvisionWithHttpInfoAsync(string app, string id, bool? group = default(bool?), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -856,6 +858,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -901,7 +904,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationRoleProvisioningImportProvisionAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationRoleProvisioningImportProvisionAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ApplicationRoleProvisioningImportProvisionWithHttpInfoAsync(app, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -914,7 +917,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationRoleProvisioningImportProvisionWithHttpInfoAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationRoleProvisioningImportProvisionWithHttpInfoAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1020,6 +1023,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1069,7 +1073,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationRoleProvisioningProvisionAsync(string app, string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationRoleProvisioningProvisionAsync(string app, string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ApplicationRoleProvisioningProvisionWithHttpInfoAsync(app, id, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1084,7 +1088,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationRoleProvisioningProvisionWithHttpInfoAsync(string app, string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationRoleProvisioningProvisionWithHttpInfoAsync(string app, string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1199,6 +1203,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1264,7 +1269,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfoList</returns>
-        public async System.Threading.Tasks.Task<UserGroupProvisionInfoList> ApplicationRoleProvisioningSearchProvisionAsync(string app, string id = default(string), string role = default(string), string filter = default(string), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserGroupProvisionInfoList> ApplicationRoleProvisioningSearchProvisionAsync(string app, string id = default(string), string role = default(string), string filter = default(string), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfoList> localVarResponse = await ApplicationRoleProvisioningSearchProvisionWithHttpInfoAsync(app, id, role, filter, inherited, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1282,7 +1287,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfoList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfoList>> ApplicationRoleProvisioningSearchProvisionWithHttpInfoAsync(string app, string id = default(string), string role = default(string), string filter = default(string), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfoList>> ApplicationRoleProvisioningSearchProvisionWithHttpInfoAsync(string app, string id = default(string), string role = default(string), string filter = default(string), bool? inherited = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'app' is set
             if (app == null)

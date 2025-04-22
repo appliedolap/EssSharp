@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// SystemMaintainableResource
     /// </summary>
     [DataContract(Name = "SystemMaintainableResource")]
-    public partial class SystemMaintainableResource : IEquatable<SystemMaintainableResource>, IValidatableObject
+    public partial class SystemMaintainableResource : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SystemMaintainableResource" /> class.
@@ -85,67 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as SystemMaintainableResource);
-        }
-
-        /// <summary>
-        /// Returns true if SystemMaintainableResource instances are equal
-        /// </summary>
-        /// <param name="input">Instance of SystemMaintainableResource to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(SystemMaintainableResource input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Available == input.Available ||
-                    this.Available.Equals(input.Available)
-                ) && 
-                (
-                    this.Limit == input.Limit ||
-                    this.Limit.Equals(input.Limit)
-                ) && 
-                (
-                    this.Id == input.Id ||
-                    (this.Id != null &&
-                    this.Id.Equals(input.Id))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Available.GetHashCode();
-                hashCode = (hashCode * 59) + this.Limit.GetHashCode();
-                if (this.Id != null)
-                {
-                    hashCode = (hashCode * 59) + this.Id.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

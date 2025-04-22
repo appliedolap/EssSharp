@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ParticipantBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Email'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Email'
         }
+
         /// <summary>
         /// Test the property 'Id'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Id'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
-
     }
-
 }

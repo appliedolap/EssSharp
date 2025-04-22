@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// DimBuildOptions
     /// </summary>
     [DataContract(Name = "DimBuildOptions")]
-    public partial class DimBuildOptions : IEquatable<DimBuildOptions>, IValidatableObject
+    public partial class DimBuildOptions : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DimBuildOptions" /> class.
@@ -94,77 +94,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DimBuildOptions);
-        }
-
-        /// <summary>
-        /// Returns true if DimBuildOptions instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DimBuildOptions to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DimBuildOptions input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.AutoConfig == input.AutoConfig ||
-                    this.AutoConfig.Equals(input.AutoConfig)
-                ) && 
-                (
-                    this.ArrangeDimensions == input.ArrangeDimensions ||
-                    this.ArrangeDimensions.Equals(input.ArrangeDimensions)
-                ) && 
-                (
-                    this.AliasTable == input.AliasTable ||
-                    (this.AliasTable != null &&
-                    this.AliasTable.Equals(input.AliasTable))
-                ) && 
-                (
-                    this.SmartLists == input.SmartLists ||
-                    this.SmartLists != null &&
-                    input.SmartLists != null &&
-                    this.SmartLists.SequenceEqual(input.SmartLists)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.AutoConfig.GetHashCode();
-                hashCode = (hashCode * 59) + this.ArrangeDimensions.GetHashCode();
-                if (this.AliasTable != null)
-                {
-                    hashCode = (hashCode * 59) + this.AliasTable.GetHashCode();
-                }
-                if (this.SmartLists != null)
-                {
-                    hashCode = (hashCode * 59) + this.SmartLists.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

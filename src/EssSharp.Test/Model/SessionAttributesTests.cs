@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<SessionAttributes>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'UserId'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UserId'
         }
+
         /// <summary>
         /// Test the property 'SessionId'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SessionId'
         }
+
         /// <summary>
         /// Test the property 'LoginTimeInSeconds'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LoginTimeInSeconds'
         }
+
         /// <summary>
         /// Test the property 'Application'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Application'
         }
+
         /// <summary>
         /// Test the property 'Database'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Database'
         }
+
         /// <summary>
         /// Test the property 'DbConnectTimeInSeconds'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DbConnectTimeInSeconds'
         }
+
         /// <summary>
         /// Test the property 'Request'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Request'
         }
+
         /// <summary>
         /// Test the property 'RequestTimeInSeconds'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RequestTimeInSeconds'
         }
+
         /// <summary>
         /// Test the property 'ConnectionSource'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConnectionSource'
         }
+
         /// <summary>
         /// Test the property 'RequestState'
         /// </summary>
@@ -133,7 +141,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RequestState'
         }
-
     }
-
 }

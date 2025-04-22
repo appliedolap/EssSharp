@@ -27,32 +27,50 @@ namespace EssSharp.Model
     /// GridRange
     /// </summary>
     [DataContract(Name = "GridRange")]
-    public partial class GridRange : IEquatable<GridRange>, IValidatableObject
+    public partial class GridRange : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GridRange" /> class.
         /// </summary>
+        /// <param name="types">types.</param>
+        /// <param name="start">start.</param>
+        /// <param name="filters">filters.</param>
         /// <param name="statuses">statuses.</param>
         /// <param name="texts">texts.</param>
-        /// <param name="enumIds">enumIds.</param>
         /// <param name="dataFormats">dataFormats.</param>
-        /// <param name="start">start.</param>
-        /// <param name="types">types.</param>
-        /// <param name="filters">filters.</param>
+        /// <param name="enumIds">enumIds.</param>
         /// <param name="values">values.</param>
         /// <param name="end">end.</param>
-        public GridRange(List<string> statuses = default(List<string>), List<string> texts = default(List<string>), List<string> enumIds = default(List<string>), List<string> dataFormats = default(List<string>), int start = default(int), List<string> types = default(List<string>), List<string> filters = default(List<string>), List<string> values = default(List<string>), int end = default(int))
+        public GridRange(List<string> types = default(List<string>), int start = default(int), List<string> filters = default(List<string>), List<string> statuses = default(List<string>), List<string> texts = default(List<string>), List<string> dataFormats = default(List<string>), List<string> enumIds = default(List<string>), List<string> values = default(List<string>), int end = default(int))
         {
+            this.Types = types;
+            this.Start = start;
+            this.Filters = filters;
             this.Statuses = statuses;
             this.Texts = texts;
-            this.EnumIds = enumIds;
             this.DataFormats = dataFormats;
-            this.Start = start;
-            this.Types = types;
-            this.Filters = filters;
+            this.EnumIds = enumIds;
             this.Values = values;
             this.End = end;
         }
+
+        /// <summary>
+        /// Gets or Sets Types
+        /// </summary>
+        [DataMember(Name = "types", EmitDefaultValue = false)]
+        public List<string> Types { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Start
+        /// </summary>
+        [DataMember(Name = "start", EmitDefaultValue = false)]
+        public int Start { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Filters
+        /// </summary>
+        [DataMember(Name = "filters", EmitDefaultValue = false)]
+        public List<string> Filters { get; set; }
 
         /// <summary>
         /// Gets or Sets Statuses
@@ -67,34 +85,16 @@ namespace EssSharp.Model
         public List<string> Texts { get; set; }
 
         /// <summary>
-        /// Gets or Sets EnumIds
-        /// </summary>
-        [DataMember(Name = "enumIds", EmitDefaultValue = false)]
-        public List<string> EnumIds { get; set; }
-
-        /// <summary>
         /// Gets or Sets DataFormats
         /// </summary>
         [DataMember(Name = "dataFormats", EmitDefaultValue = false)]
         public List<string> DataFormats { get; set; }
 
         /// <summary>
-        /// Gets or Sets Start
+        /// Gets or Sets EnumIds
         /// </summary>
-        [DataMember(Name = "start", EmitDefaultValue = false)]
-        public int Start { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Types
-        /// </summary>
-        [DataMember(Name = "types", EmitDefaultValue = false)]
-        public List<string> Types { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Filters
-        /// </summary>
-        [DataMember(Name = "filters", EmitDefaultValue = false)]
-        public List<string> Filters { get; set; }
+        [DataMember(Name = "enumIds", EmitDefaultValue = false)]
+        public List<string> EnumIds { get; set; }
 
         /// <summary>
         /// Gets or Sets Values
@@ -116,13 +116,13 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GridRange {\n");
+            sb.Append("  Types: ").Append(Types).Append("\n");
+            sb.Append("  Start: ").Append(Start).Append("\n");
+            sb.Append("  Filters: ").Append(Filters).Append("\n");
             sb.Append("  Statuses: ").Append(Statuses).Append("\n");
             sb.Append("  Texts: ").Append(Texts).Append("\n");
-            sb.Append("  EnumIds: ").Append(EnumIds).Append("\n");
             sb.Append("  DataFormats: ").Append(DataFormats).Append("\n");
-            sb.Append("  Start: ").Append(Start).Append("\n");
-            sb.Append("  Types: ").Append(Types).Append("\n");
-            sb.Append("  Filters: ").Append(Filters).Append("\n");
+            sb.Append("  EnumIds: ").Append(EnumIds).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("  End: ").Append(End).Append("\n");
             sb.Append("}\n");
@@ -139,128 +139,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as GridRange);
-        }
-
-        /// <summary>
-        /// Returns true if GridRange instances are equal
-        /// </summary>
-        /// <param name="input">Instance of GridRange to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(GridRange input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Statuses == input.Statuses ||
-                    this.Statuses != null &&
-                    input.Statuses != null &&
-                    this.Statuses.SequenceEqual(input.Statuses)
-                ) && 
-                (
-                    this.Texts == input.Texts ||
-                    this.Texts != null &&
-                    input.Texts != null &&
-                    this.Texts.SequenceEqual(input.Texts)
-                ) && 
-                (
-                    this.EnumIds == input.EnumIds ||
-                    this.EnumIds != null &&
-                    input.EnumIds != null &&
-                    this.EnumIds.SequenceEqual(input.EnumIds)
-                ) && 
-                (
-                    this.DataFormats == input.DataFormats ||
-                    this.DataFormats != null &&
-                    input.DataFormats != null &&
-                    this.DataFormats.SequenceEqual(input.DataFormats)
-                ) && 
-                (
-                    this.Start == input.Start ||
-                    this.Start.Equals(input.Start)
-                ) && 
-                (
-                    this.Types == input.Types ||
-                    this.Types != null &&
-                    input.Types != null &&
-                    this.Types.SequenceEqual(input.Types)
-                ) && 
-                (
-                    this.Filters == input.Filters ||
-                    this.Filters != null &&
-                    input.Filters != null &&
-                    this.Filters.SequenceEqual(input.Filters)
-                ) && 
-                (
-                    this.Values == input.Values ||
-                    this.Values != null &&
-                    input.Values != null &&
-                    this.Values.SequenceEqual(input.Values)
-                ) && 
-                (
-                    this.End == input.End ||
-                    this.End.Equals(input.End)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Statuses != null)
-                {
-                    hashCode = (hashCode * 59) + this.Statuses.GetHashCode();
-                }
-                if (this.Texts != null)
-                {
-                    hashCode = (hashCode * 59) + this.Texts.GetHashCode();
-                }
-                if (this.EnumIds != null)
-                {
-                    hashCode = (hashCode * 59) + this.EnumIds.GetHashCode();
-                }
-                if (this.DataFormats != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataFormats.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Start.GetHashCode();
-                if (this.Types != null)
-                {
-                    hashCode = (hashCode * 59) + this.Types.GetHashCode();
-                }
-                if (this.Filters != null)
-                {
-                    hashCode = (hashCode * 59) + this.Filters.GetHashCode();
-                }
-                if (this.Values != null)
-                {
-                    hashCode = (hashCode * 59) + this.Values.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.End.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

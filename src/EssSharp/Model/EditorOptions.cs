@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// EditorOptions
     /// </summary>
     [DataContract(Name = "EditorOptions")]
-    public partial class EditorOptions : IEquatable<EditorOptions>, IValidatableObject
+    public partial class EditorOptions : IValidatableObject
     {
         /// <summary>
         /// Defines ViewMode
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DATALOAD")]
             DATALOAD = 2
-
         }
 
 
@@ -96,7 +95,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "TEXT")]
             TEXT = 6
-
         }
 
 
@@ -111,7 +109,7 @@ namespace EssSharp.Model
         /// <param name="application">application.</param>
         /// <param name="database">database.</param>
         /// <param name="server">server.</param>
-        /// <param name="_object">_object.</param>
+        /// <param name="varObject">varObject.</param>
         /// <param name="dataFile">dataFile.</param>
         /// <param name="dataFileApplication">dataFileApplication.</param>
         /// <param name="dataFileDatabase">dataFileDatabase.</param>
@@ -124,12 +122,12 @@ namespace EssSharp.Model
         /// <param name="viewToolbar">viewToolbar.</param>
         /// <param name="viewMode">viewMode.</param>
         /// <param name="dataFileType">dataFileType.</param>
-        public EditorOptions(string application = default(string), string database = default(string), string server = default(string), string _object = default(string), string dataFile = default(string), string dataFileApplication = default(string), string dataFileDatabase = default(string), string dataFileServer = default(string), int startRecord = default(int), int viewCount = default(int), bool viewGridLines = default(bool), bool viewIgnored = default(bool), bool viewRawData = default(bool), bool viewToolbar = default(bool), ViewModeEnum? viewMode = default(ViewModeEnum?), DataFileTypeEnum? dataFileType = default(DataFileTypeEnum?))
+        public EditorOptions(string application = default(string), string database = default(string), string server = default(string), string varObject = default(string), string dataFile = default(string), string dataFileApplication = default(string), string dataFileDatabase = default(string), string dataFileServer = default(string), int startRecord = default(int), int viewCount = default(int), bool viewGridLines = default(bool), bool viewIgnored = default(bool), bool viewRawData = default(bool), bool viewToolbar = default(bool), ViewModeEnum? viewMode = default(ViewModeEnum?), DataFileTypeEnum? dataFileType = default(DataFileTypeEnum?))
         {
             this.Application = application;
             this.Database = database;
             this.Server = server;
-            this.Object = _object;
+            this.Object = varObject;
             this.DataFile = dataFile;
             this.DataFileApplication = dataFileApplication;
             this.DataFileDatabase = dataFileDatabase;
@@ -266,160 +264,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as EditorOptions);
-        }
-
-        /// <summary>
-        /// Returns true if EditorOptions instances are equal
-        /// </summary>
-        /// <param name="input">Instance of EditorOptions to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(EditorOptions input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Application == input.Application ||
-                    (this.Application != null &&
-                    this.Application.Equals(input.Application))
-                ) && 
-                (
-                    this.Database == input.Database ||
-                    (this.Database != null &&
-                    this.Database.Equals(input.Database))
-                ) && 
-                (
-                    this.Server == input.Server ||
-                    (this.Server != null &&
-                    this.Server.Equals(input.Server))
-                ) && 
-                (
-                    this.Object == input.Object ||
-                    (this.Object != null &&
-                    this.Object.Equals(input.Object))
-                ) && 
-                (
-                    this.DataFile == input.DataFile ||
-                    (this.DataFile != null &&
-                    this.DataFile.Equals(input.DataFile))
-                ) && 
-                (
-                    this.DataFileApplication == input.DataFileApplication ||
-                    (this.DataFileApplication != null &&
-                    this.DataFileApplication.Equals(input.DataFileApplication))
-                ) && 
-                (
-                    this.DataFileDatabase == input.DataFileDatabase ||
-                    (this.DataFileDatabase != null &&
-                    this.DataFileDatabase.Equals(input.DataFileDatabase))
-                ) && 
-                (
-                    this.DataFileServer == input.DataFileServer ||
-                    (this.DataFileServer != null &&
-                    this.DataFileServer.Equals(input.DataFileServer))
-                ) && 
-                (
-                    this.StartRecord == input.StartRecord ||
-                    this.StartRecord.Equals(input.StartRecord)
-                ) && 
-                (
-                    this.ViewCount == input.ViewCount ||
-                    this.ViewCount.Equals(input.ViewCount)
-                ) && 
-                (
-                    this.ViewGridLines == input.ViewGridLines ||
-                    this.ViewGridLines.Equals(input.ViewGridLines)
-                ) && 
-                (
-                    this.ViewIgnored == input.ViewIgnored ||
-                    this.ViewIgnored.Equals(input.ViewIgnored)
-                ) && 
-                (
-                    this.ViewRawData == input.ViewRawData ||
-                    this.ViewRawData.Equals(input.ViewRawData)
-                ) && 
-                (
-                    this.ViewToolbar == input.ViewToolbar ||
-                    this.ViewToolbar.Equals(input.ViewToolbar)
-                ) && 
-                (
-                    this.ViewMode == input.ViewMode ||
-                    this.ViewMode.Equals(input.ViewMode)
-                ) && 
-                (
-                    this.DataFileType == input.DataFileType ||
-                    this.DataFileType.Equals(input.DataFileType)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Application != null)
-                {
-                    hashCode = (hashCode * 59) + this.Application.GetHashCode();
-                }
-                if (this.Database != null)
-                {
-                    hashCode = (hashCode * 59) + this.Database.GetHashCode();
-                }
-                if (this.Server != null)
-                {
-                    hashCode = (hashCode * 59) + this.Server.GetHashCode();
-                }
-                if (this.Object != null)
-                {
-                    hashCode = (hashCode * 59) + this.Object.GetHashCode();
-                }
-                if (this.DataFile != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataFile.GetHashCode();
-                }
-                if (this.DataFileApplication != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataFileApplication.GetHashCode();
-                }
-                if (this.DataFileDatabase != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataFileDatabase.GetHashCode();
-                }
-                if (this.DataFileServer != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataFileServer.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.StartRecord.GetHashCode();
-                hashCode = (hashCode * 59) + this.ViewCount.GetHashCode();
-                hashCode = (hashCode * 59) + this.ViewGridLines.GetHashCode();
-                hashCode = (hashCode * 59) + this.ViewIgnored.GetHashCode();
-                hashCode = (hashCode * 59) + this.ViewRawData.GetHashCode();
-                hashCode = (hashCode * 59) + this.ViewToolbar.GetHashCode();
-                hashCode = (hashCode * 59) + this.ViewMode.GetHashCode();
-                hashCode = (hashCode * 59) + this.DataFileType.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

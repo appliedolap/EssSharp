@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<OutlineSettingsList>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'General'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'General'
         }
+
         /// <summary>
         /// Test the property 'Attributes'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Attributes'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

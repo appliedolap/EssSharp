@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<JAXBElement>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Value'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Value'
         }
+
         /// <summary>
         /// Test the property 'Nil'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Nil'
         }
+
         /// <summary>
         /// Test the property 'GlobalScope'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'GlobalScope'
         }
+
         /// <summary>
         /// Test the property 'TypeSubstituted'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TypeSubstituted'
         }
-
     }
-
 }

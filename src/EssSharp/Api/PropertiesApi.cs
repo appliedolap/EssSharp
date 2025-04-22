@@ -182,7 +182,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        System.Threading.Tasks.Task<PropertyEntry> PropertiesAddPropertyAsync(PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PropertyEntry> PropertiesAddPropertyAsync(PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Create Server Property
@@ -195,7 +195,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesAddPropertyWithHttpInfoAsync(PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesAddPropertyWithHttpInfoAsync(PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete Server Property
         /// </summary>
@@ -207,7 +207,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        System.Threading.Tasks.Task<PropertyEntry> PropertiesDeletePropertyAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PropertyEntry> PropertiesDeletePropertyAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete Server Property
@@ -220,7 +220,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesDeletePropertyWithHttpInfoAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesDeletePropertyWithHttpInfoAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Server Properties
         /// </summary>
@@ -231,7 +231,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;PropertyList&gt;</returns>
-        System.Threading.Tasks.Task<List<PropertyList>> PropertiesGetPropertiesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<PropertyList>> PropertiesGetPropertiesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Server Properties
@@ -243,7 +243,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;PropertyList&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<PropertyList>>> PropertiesGetPropertiesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<PropertyList>>> PropertiesGetPropertiesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Server Property
         /// </summary>
@@ -255,7 +255,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        System.Threading.Tasks.Task<PropertyEntry> PropertiesGetPropertyAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PropertyEntry> PropertiesGetPropertyAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Server Property
@@ -268,7 +268,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesGetPropertyWithHttpInfoAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesGetPropertyWithHttpInfoAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Property Values
         /// </summary>
@@ -280,7 +280,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        System.Threading.Tasks.Task<PropertyEntry> PropertiesSetPropertiesAsync(List<PropertyEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PropertyEntry> PropertiesSetPropertiesAsync(List<PropertyEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Property Values
@@ -293,7 +293,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesSetPropertiesWithHttpInfoAsync(List<PropertyEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesSetPropertiesWithHttpInfoAsync(List<PropertyEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Server Property
         /// </summary>
@@ -306,7 +306,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        System.Threading.Tasks.Task<PropertyEntry> PropertiesSetPropertyAsync(string propertyName, PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PropertyEntry> PropertiesSetPropertyAsync(string propertyName, PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Server Property
@@ -320,7 +320,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesSetPropertyWithHttpInfoAsync(string propertyName, PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<PropertyEntry>> PropertiesSetPropertyWithHttpInfoAsync(string propertyName, PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -483,6 +483,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -528,7 +529,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesAddPropertyAsync(PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesAddPropertyAsync(PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<PropertyEntry> localVarResponse = await PropertiesAddPropertyWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -542,7 +543,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesAddPropertyWithHttpInfoAsync(PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesAddPropertyWithHttpInfoAsync(PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -643,6 +644,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -688,7 +690,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesDeletePropertyAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesDeletePropertyAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<PropertyEntry> localVarResponse = await PropertiesDeletePropertyWithHttpInfoAsync(propertyName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -702,7 +704,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesDeletePropertyWithHttpInfoAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesDeletePropertyWithHttpInfoAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'propertyName' is set
             if (propertyName == null)
@@ -793,6 +795,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -836,7 +839,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;PropertyList&gt;</returns>
-        public async System.Threading.Tasks.Task<List<PropertyList>> PropertiesGetPropertiesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<PropertyList>> PropertiesGetPropertiesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<List<PropertyList>> localVarResponse = await PropertiesGetPropertiesWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -849,7 +852,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;PropertyList&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<PropertyList>>> PropertiesGetPropertiesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<PropertyList>>> PropertiesGetPropertiesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -941,6 +944,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -986,7 +990,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesGetPropertyAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesGetPropertyAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<PropertyEntry> localVarResponse = await PropertiesGetPropertyWithHttpInfoAsync(propertyName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1000,7 +1004,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesGetPropertyWithHttpInfoAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesGetPropertyWithHttpInfoAsync(string propertyName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'propertyName' is set
             if (propertyName == null)
@@ -1101,6 +1105,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1146,7 +1151,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesSetPropertiesAsync(List<PropertyEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesSetPropertiesAsync(List<PropertyEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<PropertyEntry> localVarResponse = await PropertiesSetPropertiesWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1160,7 +1165,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesSetPropertiesWithHttpInfoAsync(List<PropertyEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesSetPropertiesWithHttpInfoAsync(List<PropertyEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1271,6 +1276,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1318,7 +1324,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PropertyEntry</returns>
-        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesSetPropertyAsync(string propertyName, PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PropertyEntry> PropertiesSetPropertyAsync(string propertyName, PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<PropertyEntry> localVarResponse = await PropertiesSetPropertyWithHttpInfoAsync(propertyName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1333,7 +1339,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PropertyEntry)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesSetPropertyWithHttpInfoAsync(string propertyName, PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PropertyEntry>> PropertiesSetPropertyWithHttpInfoAsync(string propertyName, PropertyEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'propertyName' is set
             if (propertyName == null)

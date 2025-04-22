@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ApplicationProvisionReportItemList>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Items'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Items'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -69,14 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-        /// <summary>
-        /// Test the property 'TotalResults'
-        /// </summary>
-        [Fact]
-        public void TotalResultsTest()
-        {
-            // TODO unit test for the property 'TotalResults'
-        }
+
         /// <summary>
         /// Test the property 'HasMore'
         /// </summary>
@@ -85,6 +78,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HasMore'
         }
+
+        /// <summary>
+        /// Test the property 'TotalResults'
+        /// </summary>
+        [Fact]
+        public void TotalResultsTest()
+        {
+            // TODO unit test for the property 'TotalResults'
+        }
+
         /// <summary>
         /// Test the property 'Count'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Count'
         }
+
         /// <summary>
         /// Test the property 'Limit'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Limit'
         }
+
         /// <summary>
         /// Test the property 'Properties'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Properties'
         }
+
         /// <summary>
         /// Test the property 'Offset'
         /// </summary>
@@ -117,7 +123,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Offset'
         }
-
     }
-
 }

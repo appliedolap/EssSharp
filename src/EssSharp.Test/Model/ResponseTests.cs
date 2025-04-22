@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Response>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'OpRequestId'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OpRequestId'
         }
+
         /// <summary>
         /// Test the property 'OpcContentMd5'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OpcContentMd5'
         }
+
         /// <summary>
         /// Test the property 'Etag'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Etag'
         }
-
     }
-
 }

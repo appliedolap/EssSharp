@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Datasource
     /// </summary>
     [DataContract(Name = "Datasource")]
-    public partial class Datasource : IEquatable<Datasource>, IValidatableObject
+    public partial class Datasource : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -118,7 +118,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "FILE")]
             FILE = 14
-
         }
 
 
@@ -340,208 +339,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Datasource);
-        }
-
-        /// <summary>
-        /// Returns true if Datasource instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Datasource to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Datasource input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.Connection == input.Connection ||
-                    (this.Connection != null &&
-                    this.Connection.Equals(input.Connection))
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Columns == input.Columns ||
-                    (this.Columns != null &&
-                    this.Columns.Equals(input.Columns))
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.IgnoreErrorRecords == input.IgnoreErrorRecords ||
-                    this.IgnoreErrorRecords.Equals(input.IgnoreErrorRecords)
-                ) && 
-                (
-                    this.Delimeter == input.Delimeter ||
-                    (this.Delimeter != null &&
-                    this.Delimeter.Equals(input.Delimeter))
-                ) && 
-                (
-                    this.CustomDelimiter == input.CustomDelimiter ||
-                    (this.CustomDelimiter != null &&
-                    this.CustomDelimiter.Equals(input.CustomDelimiter))
-                ) && 
-                (
-                    this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
-                ) && 
-                (
-                    this.Application == input.Application ||
-                    (this.Application != null &&
-                    this.Application.Equals(input.Application))
-                ) && 
-                (
-                    this.Cube == input.Cube ||
-                    (this.Cube != null &&
-                    this.Cube.Equals(input.Cube))
-                ) && 
-                (
-                    this.StartRow == input.StartRow ||
-                    this.StartRow.Equals(input.StartRow)
-                ) && 
-                (
-                    this.EndRow == input.EndRow ||
-                    this.EndRow.Equals(input.EndRow)
-                ) && 
-                (
-                    this.HeaderRow == input.HeaderRow ||
-                    this.HeaderRow.Equals(input.HeaderRow)
-                ) && 
-                (
-                    this.Sheet == input.Sheet ||
-                    (this.Sheet != null &&
-                    this.Sheet.Equals(input.Sheet))
-                ) && 
-                (
-                    this.SkipHiddenRows == input.SkipHiddenRows ||
-                    this.SkipHiddenRows.Equals(input.SkipHiddenRows)
-                ) && 
-                (
-                    this.Widths == input.Widths ||
-                    this.Widths != null &&
-                    input.Widths != null &&
-                    this.Widths.SequenceEqual(input.Widths)
-                ) && 
-                (
-                    this.QueryParameters == input.QueryParameters ||
-                    this.QueryParameters != null &&
-                    input.QueryParameters != null &&
-                    this.QueryParameters.SequenceEqual(input.QueryParameters)
-                ) && 
-                (
-                    this.Headers == input.Headers ||
-                    this.Headers != null &&
-                    input.Headers != null &&
-                    this.Headers.SequenceEqual(input.Headers)
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                if (this.Connection != null)
-                {
-                    hashCode = (hashCode * 59) + this.Connection.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.Columns != null)
-                {
-                    hashCode = (hashCode * 59) + this.Columns.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.IgnoreErrorRecords.GetHashCode();
-                if (this.Delimeter != null)
-                {
-                    hashCode = (hashCode * 59) + this.Delimeter.GetHashCode();
-                }
-                if (this.CustomDelimiter != null)
-                {
-                    hashCode = (hashCode * 59) + this.CustomDelimiter.GetHashCode();
-                }
-                if (this.Query != null)
-                {
-                    hashCode = (hashCode * 59) + this.Query.GetHashCode();
-                }
-                if (this.Application != null)
-                {
-                    hashCode = (hashCode * 59) + this.Application.GetHashCode();
-                }
-                if (this.Cube != null)
-                {
-                    hashCode = (hashCode * 59) + this.Cube.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.StartRow.GetHashCode();
-                hashCode = (hashCode * 59) + this.EndRow.GetHashCode();
-                hashCode = (hashCode * 59) + this.HeaderRow.GetHashCode();
-                if (this.Sheet != null)
-                {
-                    hashCode = (hashCode * 59) + this.Sheet.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.SkipHiddenRows.GetHashCode();
-                if (this.Widths != null)
-                {
-                    hashCode = (hashCode * 59) + this.Widths.GetHashCode();
-                }
-                if (this.QueryParameters != null)
-                {
-                    hashCode = (hashCode * 59) + this.QueryParameters.GetHashCode();
-                }
-                if (this.Headers != null)
-                {
-                    hashCode = (hashCode * 59) + this.Headers.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

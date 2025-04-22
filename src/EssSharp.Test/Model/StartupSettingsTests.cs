@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<StartupSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'AllowUsersToStartDatabase'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowUsersToStartDatabase'
         }
+
         /// <summary>
         /// Test the property 'StartDatabaseWhenApplicationStarts'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartDatabaseWhenApplicationStarts'
         }
-
     }
-
 }

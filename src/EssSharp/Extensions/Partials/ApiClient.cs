@@ -165,8 +165,6 @@ namespace EssSharp.Client
                     SessionCookies.Add(cookie);
             }
 
-
-
             // Write the response to any configured logger.
             response.WriteLogMessage(configuration);
 

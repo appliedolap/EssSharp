@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<EditorOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Application'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Application'
         }
+
         /// <summary>
         /// Test the property 'Database'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Database'
         }
+
         /// <summary>
         /// Test the property 'Server'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Server'
         }
+
         /// <summary>
         /// Test the property 'Object'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Object'
         }
+
         /// <summary>
         /// Test the property 'DataFile'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFile'
         }
+
         /// <summary>
         /// Test the property 'DataFileApplication'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFileApplication'
         }
+
         /// <summary>
         /// Test the property 'DataFileDatabase'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFileDatabase'
         }
+
         /// <summary>
         /// Test the property 'DataFileServer'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFileServer'
         }
+
         /// <summary>
         /// Test the property 'StartRecord'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartRecord'
         }
+
         /// <summary>
         /// Test the property 'ViewCount'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ViewCount'
         }
+
         /// <summary>
         /// Test the property 'ViewGridLines'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ViewGridLines'
         }
+
         /// <summary>
         /// Test the property 'ViewIgnored'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ViewIgnored'
         }
+
         /// <summary>
         /// Test the property 'ViewRawData'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ViewRawData'
         }
+
         /// <summary>
         /// Test the property 'ViewToolbar'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ViewToolbar'
         }
+
         /// <summary>
         /// Test the property 'ViewMode'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ViewMode'
         }
+
         /// <summary>
         /// Test the property 'DataFileType'
         /// </summary>
@@ -181,7 +195,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFileType'
         }
-
     }
-
 }

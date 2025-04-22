@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// HPA
     /// </summary>
     [DataContract(Name = "HPA")]
-    public partial class HPA : IEquatable<HPA>, IValidatableObject
+    public partial class HPA : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HPA" /> class.
@@ -85,63 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as HPA);
-        }
-
-        /// <summary>
-        /// Returns true if HPA instances are equal
-        /// </summary>
-        /// <param name="input">Instance of HPA to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(HPA input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.MaxFileCount == input.MaxFileCount ||
-                    this.MaxFileCount.Equals(input.MaxFileCount)
-                ) && 
-                (
-                    this.Interval == input.Interval ||
-                    this.Interval.Equals(input.Interval)
-                ) && 
-                (
-                    this.Enabled == input.Enabled ||
-                    this.Enabled.Equals(input.Enabled)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.MaxFileCount.GetHashCode();
-                hashCode = (hashCode * 59) + this.Interval.GetHashCode();
-                hashCode = (hashCode * 59) + this.Enabled.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

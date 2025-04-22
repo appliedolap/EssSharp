@@ -53,6 +53,41 @@ namespace EssSharp.Test.Api
         }
 
         /// <summary>
+        /// Test ApplicationAppSupportedEncryptionMethods
+        /// </summary>
+        [Fact]
+        public void ApplicationAppSupportedEncryptionMethodsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string applicationName = null;
+            //var response = instance.ApplicationAppSupportedEncryptionMethods(applicationName);
+            //Assert.IsType<EncryptionConfig>(response);
+        }
+
+        /// <summary>
+        /// Test ApplicationDecrypt
+        /// </summary>
+        [Fact]
+        public void ApplicationDecryptTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string applicationName = null;
+            //instance.ApplicationDecrypt(applicationName);
+        }
+
+        /// <summary>
+        /// Test ApplicationEncrypt
+        /// </summary>
+        [Fact]
+        public void ApplicationEncryptTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string applicationName = null;
+            //AppEncryption body = null;
+            //instance.ApplicationEncrypt(applicationName, body);
+        }
+
+        /// <summary>
         /// Test ApplicationsCopyApplication
         /// </summary>
         [Fact]
@@ -260,6 +295,16 @@ namespace EssSharp.Test.Api
             //string applicationNameForConnection = null;
             //var response = instance.ApplicationsGetCubes(applicationName, connectionName, applicationNameForConnection);
             //Assert.IsType<CubeList>(response);
+        }
+
+        /// <summary>
+        /// Test ApplicationsGetSupportedFederatedTypes
+        /// </summary>
+        [Fact]
+        public void ApplicationsGetSupportedFederatedTypesTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //instance.ApplicationsGetSupportedFederatedTypes();
         }
 
         /// <summary>

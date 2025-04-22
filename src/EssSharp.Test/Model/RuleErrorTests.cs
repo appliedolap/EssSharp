@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<RuleError>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Field'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Field'
         }
+
         /// <summary>
         /// Test the property 'Error'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Error'
         }
-
     }
-
 }

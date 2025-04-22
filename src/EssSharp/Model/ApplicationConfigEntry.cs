@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ApplicationConfigEntry
     /// </summary>
     [DataContract(Name = "ApplicationConfigEntry")]
-    public partial class ApplicationConfigEntry : IEquatable<ApplicationConfigEntry>, IValidatableObject
+    public partial class ApplicationConfigEntry : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationConfigEntry" /> class.
@@ -121,108 +121,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ApplicationConfigEntry);
-        }
-
-        /// <summary>
-        /// Returns true if ApplicationConfigEntry instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ApplicationConfigEntry to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ApplicationConfigEntry input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Key == input.Key ||
-                    (this.Key != null &&
-                    this.Key.Equals(input.Key))
-                ) && 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Syntax == input.Syntax ||
-                    (this.Syntax != null &&
-                    this.Syntax.Equals(input.Syntax))
-                ) && 
-                (
-                    this.Example == input.Example ||
-                    (this.Example != null &&
-                    this.Example.Equals(input.Example))
-                ) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
-                ) && 
-                (
-                    this.Configured == input.Configured ||
-                    this.Configured.Equals(input.Configured)
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Key != null)
-                {
-                    hashCode = (hashCode * 59) + this.Key.GetHashCode();
-                }
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.Syntax != null)
-                {
-                    hashCode = (hashCode * 59) + this.Syntax.GetHashCode();
-                }
-                if (this.Example != null)
-                {
-                    hashCode = (hashCode * 59) + this.Example.GetHashCode();
-                }
-                if (this.Value != null)
-                {
-                    hashCode = (hashCode * 59) + this.Value.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Configured.GetHashCode();
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

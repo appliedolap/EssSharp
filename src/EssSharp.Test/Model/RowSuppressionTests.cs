@@ -52,6 +52,32 @@ namespace EssSharp.Test.Model
             //Assert.IsType<RowSuppression>(instance);
         }
 
+        /// <summary>
+        /// Test the property 'Invalid'
+        /// </summary>
+        [Fact]
+        public void InvalidTest()
+        {
+            // TODO unit test for the property 'Invalid'
+        }
+
+        /// <summary>
+        /// Test the property 'Zero'
+        /// </summary>
+        [Fact]
+        public void ZeroTest()
+        {
+            // TODO unit test for the property 'Zero'
+        }
+
+        /// <summary>
+        /// Test the property 'Missing'
+        /// </summary>
+        [Fact]
+        public void MissingTest()
+        {
+            // TODO unit test for the property 'Missing'
+        }
 
         /// <summary>
         /// Test the property 'UnderScore'
@@ -61,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UnderScore'
         }
+
         /// <summary>
         /// Test the property 'Derived'
         /// </summary>
@@ -69,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Derived'
         }
+
         /// <summary>
         /// Test the property 'NoAccess'
         /// </summary>
@@ -77,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NoAccess'
         }
+
         /// <summary>
         /// Test the property 'EmptyBlocks'
         /// </summary>
@@ -85,30 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EmptyBlocks'
         }
-        /// <summary>
-        /// Test the property 'Zero'
-        /// </summary>
-        [Fact]
-        public void ZeroTest()
-        {
-            // TODO unit test for the property 'Zero'
-        }
-        /// <summary>
-        /// Test the property 'Missing'
-        /// </summary>
-        [Fact]
-        public void MissingTest()
-        {
-            // TODO unit test for the property 'Missing'
-        }
-        /// <summary>
-        /// Test the property 'Invalid'
-        /// </summary>
-        [Fact]
-        public void InvalidTest()
-        {
-            // TODO unit test for the property 'Invalid'
-        }
+
         /// <summary>
         /// Test the property 'Error'
         /// </summary>
@@ -117,7 +123,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Error'
         }
-
     }
-
 }

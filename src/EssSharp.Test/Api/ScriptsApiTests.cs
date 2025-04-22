@@ -194,7 +194,8 @@ namespace EssSharp.Test.Api
             //string applicationName = null;
             //string databaseName = null;
             //string file = null;
-            //var response = instance.ScriptsListScripts(applicationName, databaseName, file);
+            //string keyword = null;
+            //var response = instance.ScriptsListScripts(applicationName, databaseName, file, keyword);
             //Assert.IsType<ScriptList>(response);
         }
 

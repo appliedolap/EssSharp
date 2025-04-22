@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ApplicationProvisionReportItem>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Roles'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Roles'
         }
+
         /// <summary>
         /// Test the property 'Filters'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Filters'
         }
+
         /// <summary>
         /// Test the property 'Scripts'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Scripts'
         }
-
     }
-
 }

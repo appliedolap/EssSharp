@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// LayoutDimension
     /// </summary>
     [DataContract(Name = "LayoutDimension")]
-    public partial class LayoutDimension : IEquatable<LayoutDimension>, IValidatableObject
+    public partial class LayoutDimension : IValidatableObject
     {
         /// <summary>
         /// Defines Axis
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "POV")]
             POV = 3
-
         }
 
 
@@ -147,91 +146,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as LayoutDimension);
-        }
-
-        /// <summary>
-        /// Returns true if LayoutDimension instances are equal
-        /// </summary>
-        /// <param name="input">Instance of LayoutDimension to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(LayoutDimension input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
-                (
-                    this.Page == input.Page ||
-                    this.Page.Equals(input.Page)
-                ) && 
-                (
-                    this.Hidden == input.Hidden ||
-                    this.Hidden.Equals(input.Hidden)
-                ) && 
-                (
-                    this.Expanded == input.Expanded ||
-                    this.Expanded.Equals(input.Expanded)
-                ) && 
-                (
-                    this.Axis == input.Axis ||
-                    this.Axis.Equals(input.Axis)
-                ) && 
-                (
-                    this.Position == input.Position ||
-                    this.Position.Equals(input.Position)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.DisplayName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DisplayName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Page.GetHashCode();
-                hashCode = (hashCode * 59) + this.Hidden.GetHashCode();
-                hashCode = (hashCode * 59) + this.Expanded.GetHashCode();
-                hashCode = (hashCode * 59) + this.Axis.GetHashCode();
-                hashCode = (hashCode * 59) + this.Position.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

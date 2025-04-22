@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CurrencySettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'CurrencyDatabase'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CurrencyDatabase'
         }
+
         /// <summary>
         /// Test the property 'ConversionType'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConversionType'
         }
+
         /// <summary>
         /// Test the property 'ConversionTypeMemberName'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConversionTypeMemberName'
         }
+
         /// <summary>
         /// Test the property 'CountryMemberName'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CountryMemberName'
         }
+
         /// <summary>
         /// Test the property 'TimeMemberName'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TimeMemberName'
         }
+
         /// <summary>
         /// Test the property 'CategoryMemberName'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CategoryMemberName'
         }
+
         /// <summary>
         /// Test the property 'PartitionMemberName'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PartitionMemberName'
         }
-
     }
-
 }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DimBuildOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'AutoConfig'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AutoConfig'
         }
+
         /// <summary>
         /// Test the property 'ArrangeDimensions'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ArrangeDimensions'
         }
+
         /// <summary>
         /// Test the property 'AliasTable'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AliasTable'
         }
+
         /// <summary>
         /// Test the property 'SmartLists'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SmartLists'
         }
-
     }
-
 }

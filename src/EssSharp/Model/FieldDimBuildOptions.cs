@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// FieldDimBuildOptions
     /// </summary>
     [DataContract(Name = "FieldDimBuildOptions")]
-    public partial class FieldDimBuildOptions : IEquatable<FieldDimBuildOptions>, IValidatableObject
+    public partial class FieldDimBuildOptions : IValidatableObject
     {
         /// <summary>
         /// Defines GenerationType
@@ -262,7 +262,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "PROTOTYPE")]
             PROTOTYPE = 38
-
         }
 
 
@@ -324,7 +323,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "HIERARCHYTYPE")]
             HIERARCHYTYPE = 8
-
         }
 
 
@@ -485,149 +483,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as FieldDimBuildOptions);
-        }
-
-        /// <summary>
-        /// Returns true if FieldDimBuildOptions instances are equal
-        /// </summary>
-        /// <param name="input">Instance of FieldDimBuildOptions to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(FieldDimBuildOptions input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Parent == input.Parent ||
-                    this.Parent.Equals(input.Parent)
-                ) && 
-                (
-                    this.GenerationType == input.GenerationType ||
-                    this.GenerationType.Equals(input.GenerationType)
-                ) && 
-                (
-                    this.Refer == input.Refer ||
-                    this.Refer.Equals(input.Refer)
-                ) && 
-                (
-                    this.ReferIndex == input.ReferIndex ||
-                    this.ReferIndex.Equals(input.ReferIndex)
-                ) && 
-                (
-                    this.Shared == input.Shared ||
-                    this.Shared.Equals(input.Shared)
-                ) && 
-                (
-                    this.AttributeBuildProperties == input.AttributeBuildProperties ||
-                    (this.AttributeBuildProperties != null &&
-                    this.AttributeBuildProperties.Equals(input.AttributeBuildProperties))
-                ) && 
-                (
-                    this.Dimension == input.Dimension ||
-                    (this.Dimension != null &&
-                    this.Dimension.Equals(input.Dimension))
-                ) && 
-                (
-                    this.AttributeDimension == input.AttributeDimension ||
-                    (this.AttributeDimension != null &&
-                    this.AttributeDimension.Equals(input.AttributeDimension))
-                ) && 
-                (
-                    this.Alias == input.Alias ||
-                    (this.Alias != null &&
-                    this.Alias.Equals(input.Alias))
-                ) && 
-                (
-                    this.EndIndepColumns == input.EndIndepColumns ||
-                    this.EndIndepColumns != null &&
-                    input.EndIndepColumns != null &&
-                    this.EndIndepColumns.SequenceEqual(input.EndIndepColumns)
-                ) && 
-                (
-                    this.StartIndepColumns == input.StartIndepColumns ||
-                    this.StartIndepColumns != null &&
-                    input.StartIndepColumns != null &&
-                    this.StartIndepColumns.SequenceEqual(input.StartIndepColumns)
-                ) && 
-                (
-                    this.GenerationProperty == input.GenerationProperty ||
-                    this.GenerationProperty.Equals(input.GenerationProperty)
-                ) && 
-                (
-                    this.Generation == input.Generation ||
-                    this.Generation.Equals(input.Generation)
-                ) && 
-                (
-                    this.Ignore == input.Ignore ||
-                    this.Ignore.Equals(input.Ignore)
-                ) && 
-                (
-                    this.StaticField == input.StaticField ||
-                    this.StaticField.Equals(input.StaticField)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Parent.GetHashCode();
-                hashCode = (hashCode * 59) + this.GenerationType.GetHashCode();
-                hashCode = (hashCode * 59) + this.Refer.GetHashCode();
-                hashCode = (hashCode * 59) + this.ReferIndex.GetHashCode();
-                hashCode = (hashCode * 59) + this.Shared.GetHashCode();
-                if (this.AttributeBuildProperties != null)
-                {
-                    hashCode = (hashCode * 59) + this.AttributeBuildProperties.GetHashCode();
-                }
-                if (this.Dimension != null)
-                {
-                    hashCode = (hashCode * 59) + this.Dimension.GetHashCode();
-                }
-                if (this.AttributeDimension != null)
-                {
-                    hashCode = (hashCode * 59) + this.AttributeDimension.GetHashCode();
-                }
-                if (this.Alias != null)
-                {
-                    hashCode = (hashCode * 59) + this.Alias.GetHashCode();
-                }
-                if (this.EndIndepColumns != null)
-                {
-                    hashCode = (hashCode * 59) + this.EndIndepColumns.GetHashCode();
-                }
-                if (this.StartIndepColumns != null)
-                {
-                    hashCode = (hashCode * 59) + this.StartIndepColumns.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.GenerationProperty.GetHashCode();
-                hashCode = (hashCode * 59) + this.Generation.GetHashCode();
-                hashCode = (hashCode * 59) + this.Ignore.GetHashCode();
-                hashCode = (hashCode * 59) + this.StaticField.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

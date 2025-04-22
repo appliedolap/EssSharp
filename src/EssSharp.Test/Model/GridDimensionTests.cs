@@ -52,6 +52,14 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GridDimension>(instance);
         }
 
+        /// <summary>
+        /// Test the property 'Pov'
+        /// </summary>
+        [Fact]
+        public void PovTest()
+        {
+            // TODO unit test for the property 'Pov'
+        }
 
         /// <summary>
         /// Test the property 'Expanded'
@@ -61,22 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Expanded'
         }
-        /// <summary>
-        /// Test the property 'Pov'
-        /// </summary>
-        [Fact]
-        public void PovTest()
-        {
-            // TODO unit test for the property 'Pov'
-        }
-        /// <summary>
-        /// Test the property 'Column'
-        /// </summary>
-        [Fact]
-        public void ColumnTest()
-        {
-            // TODO unit test for the property 'Column'
-        }
+
         /// <summary>
         /// Test the property 'Row'
         /// </summary>
@@ -85,6 +78,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Row'
         }
+
+        /// <summary>
+        /// Test the property 'Column'
+        /// </summary>
+        [Fact]
+        public void ColumnTest()
+        {
+            // TODO unit test for the property 'Column'
+        }
+
         /// <summary>
         /// Test the property 'DisplayName'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DisplayName'
         }
+
         /// <summary>
         /// Test the property 'Hidden'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Hidden'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// DimCompactDesignation
     /// </summary>
     [DataContract(Name = "DimCompactDesignation")]
-    public partial class DimCompactDesignation : IEquatable<DimCompactDesignation>, IValidatableObject
+    public partial class DimCompactDesignation : IValidatableObject
     {
         /// <summary>
         /// Defines ColumnTypes
@@ -88,7 +88,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "OUT_OF_RANGE")]
             OUTOFRANGE = 9
-
         }
 
         /// <summary>
@@ -246,174 +245,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DimCompactDesignation);
-        }
-
-        /// <summary>
-        /// Returns true if DimCompactDesignation instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DimCompactDesignation to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DimCompactDesignation input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
-                ) && 
-                (
-                    this.EssbaseConnection == input.EssbaseConnection ||
-                    (this.EssbaseConnection != null &&
-                    this.EssbaseConnection.Equals(input.EssbaseConnection))
-                ) && 
-                (
-                    this.GenNames == input.GenNames ||
-                    this.GenNames != null &&
-                    input.GenNames != null &&
-                    this.GenNames.SequenceEqual(input.GenNames)
-                ) && 
-                (
-                    this.ColNames == input.ColNames ||
-                    this.ColNames != null &&
-                    input.ColNames != null &&
-                    this.ColNames.SequenceEqual(input.ColNames)
-                ) && 
-                (
-                    this.DimGenColumns == input.DimGenColumns ||
-                    this.DimGenColumns != null &&
-                    input.DimGenColumns != null &&
-                    this.DimGenColumns.SequenceEqual(input.DimGenColumns)
-                ) && 
-                (
-                    this.Attribute == input.Attribute ||
-                    this.Attribute != null &&
-                    input.Attribute != null &&
-                    this.Attribute.SequenceEqual(input.Attribute)
-                ) && 
-                (
-                    this.DimJoin == input.DimJoin ||
-                    (this.DimJoin != null &&
-                    this.DimJoin.Equals(input.DimJoin))
-                ) && 
-                (
-                    this.DimName == input.DimName ||
-                    (this.DimName != null &&
-                    this.DimName.Equals(input.DimName))
-                ) && 
-                (
-                    this.AttNames == input.AttNames ||
-                    this.AttNames != null &&
-                    input.AttNames != null &&
-                    this.AttNames.SequenceEqual(input.AttNames)
-                ) && 
-                (
-                    this.ColumnTypes == input.ColumnTypes ||
-                    this.ColumnTypes != null &&
-                    input.ColumnTypes != null &&
-                    this.ColumnTypes.SequenceEqual(input.ColumnTypes)
-                ) && 
-                (
-                    this.UniqCount == input.UniqCount ||
-                    this.UniqCount != null &&
-                    input.UniqCount != null &&
-                    this.UniqCount.SequenceEqual(input.UniqCount)
-                ) && 
-                (
-                    this.HeaderText == input.HeaderText ||
-                    this.HeaderText != null &&
-                    input.HeaderText != null &&
-                    this.HeaderText.SequenceEqual(input.HeaderText)
-                ) && 
-                (
-                    this.ParentColumnId == input.ParentColumnId ||
-                    this.ParentColumnId.Equals(input.ParentColumnId)
-                ) && 
-                (
-                    this.FkcolumnNumber == input.FkcolumnNumber ||
-                    this.FkcolumnNumber.Equals(input.FkcolumnNumber)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Query != null)
-                {
-                    hashCode = (hashCode * 59) + this.Query.GetHashCode();
-                }
-                if (this.EssbaseConnection != null)
-                {
-                    hashCode = (hashCode * 59) + this.EssbaseConnection.GetHashCode();
-                }
-                if (this.GenNames != null)
-                {
-                    hashCode = (hashCode * 59) + this.GenNames.GetHashCode();
-                }
-                if (this.ColNames != null)
-                {
-                    hashCode = (hashCode * 59) + this.ColNames.GetHashCode();
-                }
-                if (this.DimGenColumns != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimGenColumns.GetHashCode();
-                }
-                if (this.Attribute != null)
-                {
-                    hashCode = (hashCode * 59) + this.Attribute.GetHashCode();
-                }
-                if (this.DimJoin != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimJoin.GetHashCode();
-                }
-                if (this.DimName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimName.GetHashCode();
-                }
-                if (this.AttNames != null)
-                {
-                    hashCode = (hashCode * 59) + this.AttNames.GetHashCode();
-                }
-                if (this.ColumnTypes != null)
-                {
-                    hashCode = (hashCode * 59) + this.ColumnTypes.GetHashCode();
-                }
-                if (this.UniqCount != null)
-                {
-                    hashCode = (hashCode * 59) + this.UniqCount.GetHashCode();
-                }
-                if (this.HeaderText != null)
-                {
-                    hashCode = (hashCode * 59) + this.HeaderText.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ParentColumnId.GetHashCode();
-                hashCode = (hashCode * 59) + this.FkcolumnNumber.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

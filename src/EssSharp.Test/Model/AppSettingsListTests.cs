@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AppSettingsList>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'General'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'General'
         }
+
         /// <summary>
         /// Test the property 'Startup'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Startup'
         }
+
         /// <summary>
         /// Test the property 'Security'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Security'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

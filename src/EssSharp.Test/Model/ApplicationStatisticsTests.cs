@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ApplicationStatistics>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ApplicationStartTime'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ApplicationStartTime'
         }
+
         /// <summary>
         /// Test the property 'ApplicationElapsedTime'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ApplicationElapsedTime'
         }
+
         /// <summary>
         /// Test the property 'NumberOfConnections'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfConnections'
         }
+
         /// <summary>
         /// Test the property 'LoadStatus'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LoadStatus'
         }
-
     }
-
 }

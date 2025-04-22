@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CommentBean
     /// </summary>
     [DataContract(Name = "CommentBean")]
-    public partial class CommentBean : IEquatable<CommentBean>, IValidatableObject
+    public partial class CommentBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommentBean" /> class.
@@ -103,86 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CommentBean);
-        }
-
-        /// <summary>
-        /// Returns true if CommentBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CommentBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CommentBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.Owner == input.Owner ||
-                    (this.Owner != null &&
-                    this.Owner.Equals(input.Owner))
-                ) && 
-                (
-                    this.Time == input.Time ||
-                    this.Time.Equals(input.Time)
-                ) && 
-                (
-                    this.Id == input.Id ||
-                    this.Id.Equals(input.Id)
-                ) && 
-                (
-                    this.Message == input.Message ||
-                    (this.Message != null &&
-                    this.Message.Equals(input.Message))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                if (this.Owner != null)
-                {
-                    hashCode = (hashCode * 59) + this.Owner.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Time.GetHashCode();
-                hashCode = (hashCode * 59) + this.Id.GetHashCode();
-                if (this.Message != null)
-                {
-                    hashCode = (hashCode * 59) + this.Message.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

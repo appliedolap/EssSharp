@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<SQLProperties>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Server'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Server'
         }
+
         /// <summary>
         /// Test the property 'Application'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Application'
         }
+
         /// <summary>
         /// Test the property 'Database'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Database'
         }
+
         /// <summary>
         /// Test the property 'Dictionary'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dictionary'
         }
+
         /// <summary>
         /// Test the property 'Select'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Select'
         }
+
         /// <summary>
         /// Test the property 'From'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'From'
         }
+
         /// <summary>
         /// Test the property 'Where'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Where'
         }
-
     }
-
 }

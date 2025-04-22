@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Filter
     /// </summary>
     [DataContract(Name = "Filter")]
-    public partial class Filter : IEquatable<Filter>, IValidatableObject
+    public partial class Filter : IValidatableObject
     {
         /// <summary>
         /// Defines Condition
@@ -82,7 +82,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DOES_NOT_CONTAIN")]
             DOESNOTCONTAIN = 8
-
         }
 
 
@@ -108,7 +107,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "SELECT")]
             SELECT = 2
-
         }
 
 
@@ -179,77 +177,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Filter);
-        }
-
-        /// <summary>
-        /// Returns true if Filter instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Filter to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Filter input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.StringFilter == input.StringFilter ||
-                    this.StringFilter.Equals(input.StringFilter)
-                ) && 
-                (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
-                ) && 
-                (
-                    this.Condition == input.Condition ||
-                    this.Condition.Equals(input.Condition)
-                ) && 
-                (
-                    this.CaseSensitive == input.CaseSensitive ||
-                    this.CaseSensitive.Equals(input.CaseSensitive)
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.StringFilter.GetHashCode();
-                if (this.Value != null)
-                {
-                    hashCode = (hashCode * 59) + this.Value.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Condition.GetHashCode();
-                hashCode = (hashCode * 59) + this.CaseSensitive.GetHashCode();
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

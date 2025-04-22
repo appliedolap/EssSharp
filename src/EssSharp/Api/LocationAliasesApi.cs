@@ -191,7 +191,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task LocationAliasesCreateAsync(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task LocationAliasesCreateAsync(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Create Location Alias
@@ -206,7 +206,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> LocationAliasesCreateWithHttpInfoAsync(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> LocationAliasesCreateWithHttpInfoAsync(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete Location Alias
         /// </summary>
@@ -220,7 +220,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task LocationAliasesDeleteAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task LocationAliasesDeleteAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete Location Alias
@@ -235,7 +235,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> LocationAliasesDeleteWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> LocationAliasesDeleteWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Location Alias
         /// </summary>
@@ -249,7 +249,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LocationAliasBean</returns>
-        System.Threading.Tasks.Task<LocationAliasBean> LocationAliasesGetLocationAliasAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<LocationAliasBean> LocationAliasesGetLocationAliasAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Location Alias
@@ -264,7 +264,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LocationAliasBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LocationAliasBean>> LocationAliasesGetLocationAliasWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<LocationAliasBean>> LocationAliasesGetLocationAliasWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Location Alias
         /// </summary>
@@ -282,7 +282,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LocationAliasList</returns>
-        System.Threading.Tasks.Task<LocationAliasList> LocationAliasesGetLocationAliasesAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<LocationAliasList> LocationAliasesGetLocationAliasesAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Location Alias
@@ -301,7 +301,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LocationAliasList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LocationAliasList>> LocationAliasesGetLocationAliasesWithHttpInfoAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<LocationAliasList>> LocationAliasesGetLocationAliasesWithHttpInfoAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Location Alias
         /// </summary>
@@ -316,7 +316,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task LocationAliasesUpdateAsync(string applicationName, string databaseName, string aliasName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task LocationAliasesUpdateAsync(string applicationName, string databaseName, string aliasName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Location Alias
@@ -332,7 +332,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> LocationAliasesUpdateWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> LocationAliasesUpdateWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -508,6 +508,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -557,7 +558,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task LocationAliasesCreateAsync(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task LocationAliasesCreateAsync(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await LocationAliasesCreateWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -572,7 +573,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> LocationAliasesCreateWithHttpInfoAsync(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> LocationAliasesCreateWithHttpInfoAsync(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -698,6 +699,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -747,7 +749,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task LocationAliasesDeleteAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task LocationAliasesDeleteAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await LocationAliasesDeleteWithHttpInfoAsync(applicationName, databaseName, aliasName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -762,7 +764,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> LocationAliasesDeleteWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> LocationAliasesDeleteWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -889,6 +891,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -938,7 +941,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LocationAliasBean</returns>
-        public async System.Threading.Tasks.Task<LocationAliasBean> LocationAliasesGetLocationAliasAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<LocationAliasBean> LocationAliasesGetLocationAliasAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<LocationAliasBean> localVarResponse = await LocationAliasesGetLocationAliasWithHttpInfoAsync(applicationName, databaseName, aliasName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -954,7 +957,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LocationAliasBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<LocationAliasBean>> LocationAliasesGetLocationAliasWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<LocationAliasBean>> LocationAliasesGetLocationAliasWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1085,6 +1088,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1157,7 +1161,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LocationAliasList</returns>
-        public async System.Threading.Tasks.Task<LocationAliasList> LocationAliasesGetLocationAliasesAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<LocationAliasList> LocationAliasesGetLocationAliasesAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<LocationAliasList> localVarResponse = await LocationAliasesGetLocationAliasesWithHttpInfoAsync(applicationName, databaseName, offset, limit, serverName, applicationName2, databaseName2, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1177,7 +1181,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LocationAliasList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<LocationAliasList>> LocationAliasesGetLocationAliasesWithHttpInfoAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<LocationAliasList>> LocationAliasesGetLocationAliasesWithHttpInfoAsync(string applicationName, string databaseName, int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1326,6 +1330,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1377,7 +1382,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task LocationAliasesUpdateAsync(string applicationName, string databaseName, string aliasName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task LocationAliasesUpdateAsync(string applicationName, string databaseName, string aliasName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await LocationAliasesUpdateWithHttpInfoAsync(applicationName, databaseName, aliasName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1393,7 +1398,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> LocationAliasesUpdateWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> LocationAliasesUpdateWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, LocationAliasBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

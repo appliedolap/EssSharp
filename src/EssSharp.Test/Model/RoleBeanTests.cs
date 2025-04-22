@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<RoleBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'Roles'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Roles'
         }
+
         /// <summary>
         /// Test the property 'DefaultRole'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DefaultRole'
         }
-
     }
-
 }

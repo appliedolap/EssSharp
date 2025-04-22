@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<GridOperation>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Grid'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Grid'
         }
+
         /// <summary>
         /// Test the property 'Action'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Action'
         }
+
         /// <summary>
         /// Test the property 'Alias'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Alias'
         }
+
         /// <summary>
         /// Test the property 'Coordinates'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Coordinates'
         }
+
         /// <summary>
         /// Test the property 'Ranges'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Ranges'
         }
-
     }
-
 }

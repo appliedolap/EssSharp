@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ScenarioCubes>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Application'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Application'
         }
+
         /// <summary>
         /// Test the property 'Databases'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Databases'
         }
+
         /// <summary>
         /// Test the property 'CreateScenario'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CreateScenario'
         }
+
         /// <summary>
         /// Test the property 'ParticipateInScenario'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ParticipateInScenario'
         }
+
         /// <summary>
         /// Test the property 'DatabaseAdmin'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DatabaseAdmin'
         }
+
         /// <summary>
         /// Test the property 'EasManagedApp'
         /// </summary>
@@ -101,7 +105,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EasManagedApp'
         }
-
     }
-
 }

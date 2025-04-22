@@ -27,34 +27,28 @@ namespace EssSharp.Model
     /// GridDimension
     /// </summary>
     [DataContract(Name = "GridDimension")]
-    public partial class GridDimension : IEquatable<GridDimension>, IValidatableObject
+    public partial class GridDimension : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GridDimension" /> class.
         /// </summary>
-        /// <param name="expanded">expanded.</param>
         /// <param name="pov">pov.</param>
-        /// <param name="column">column.</param>
+        /// <param name="expanded">expanded.</param>
         /// <param name="row">row.</param>
+        /// <param name="column">column.</param>
         /// <param name="displayName">displayName.</param>
         /// <param name="hidden">hidden.</param>
         /// <param name="name">name.</param>
-        public GridDimension(bool expanded = default(bool), string pov = default(string), int column = default(int), int row = default(int), string displayName = default(string), bool hidden = default(bool), string name = default(string))
+        public GridDimension(string pov = default(string), bool expanded = default(bool), int row = default(int), int column = default(int), string displayName = default(string), bool hidden = default(bool), string name = default(string))
         {
-            this.Expanded = expanded;
             this.Pov = pov;
-            this.Column = column;
+            this.Expanded = expanded;
             this.Row = row;
+            this.Column = column;
             this.DisplayName = displayName;
             this.Hidden = hidden;
             this.Name = name;
         }
-
-        /// <summary>
-        /// Gets or Sets Expanded
-        /// </summary>
-        [DataMember(Name = "expanded", EmitDefaultValue = true)]
-        public bool Expanded { get; set; }
 
         /// <summary>
         /// Gets or Sets Pov
@@ -63,16 +57,22 @@ namespace EssSharp.Model
         public string Pov { get; set; }
 
         /// <summary>
-        /// Gets or Sets Column
+        /// Gets or Sets Expanded
         /// </summary>
-        [DataMember(Name = "column", EmitDefaultValue = false)]
-        public int Column { get; set; }
+        [DataMember(Name = "expanded", EmitDefaultValue = true)]
+        public bool Expanded { get; set; }
 
         /// <summary>
         /// Gets or Sets Row
         /// </summary>
         [DataMember(Name = "row", EmitDefaultValue = false)]
         public int Row { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Column
+        /// </summary>
+        [DataMember(Name = "column", EmitDefaultValue = false)]
+        public int Column { get; set; }
 
         /// <summary>
         /// Gets or Sets DisplayName
@@ -100,10 +100,10 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class GridDimension {\n");
-            sb.Append("  Expanded: ").Append(Expanded).Append("\n");
             sb.Append("  Pov: ").Append(Pov).Append("\n");
-            sb.Append("  Column: ").Append(Column).Append("\n");
+            sb.Append("  Expanded: ").Append(Expanded).Append("\n");
             sb.Append("  Row: ").Append(Row).Append("\n");
+            sb.Append("  Column: ").Append(Column).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Hidden: ").Append(Hidden).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
@@ -121,95 +121,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as GridDimension);
-        }
-
-        /// <summary>
-        /// Returns true if GridDimension instances are equal
-        /// </summary>
-        /// <param name="input">Instance of GridDimension to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(GridDimension input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Expanded == input.Expanded ||
-                    this.Expanded.Equals(input.Expanded)
-                ) && 
-                (
-                    this.Pov == input.Pov ||
-                    (this.Pov != null &&
-                    this.Pov.Equals(input.Pov))
-                ) && 
-                (
-                    this.Column == input.Column ||
-                    this.Column.Equals(input.Column)
-                ) && 
-                (
-                    this.Row == input.Row ||
-                    this.Row.Equals(input.Row)
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
-                (
-                    this.Hidden == input.Hidden ||
-                    this.Hidden.Equals(input.Hidden)
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Expanded.GetHashCode();
-                if (this.Pov != null)
-                {
-                    hashCode = (hashCode * 59) + this.Pov.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Column.GetHashCode();
-                hashCode = (hashCode * 59) + this.Row.GetHashCode();
-                if (this.DisplayName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DisplayName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Hidden.GetHashCode();
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

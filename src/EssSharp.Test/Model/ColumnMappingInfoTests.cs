@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ColumnMappingInfo>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Dimension'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dimension'
         }
+
         /// <summary>
         /// Test the property 'Generation'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Generation'
         }
+
         /// <summary>
         /// Test the property 'Level'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Level'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'GenerationNumber'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'GenerationNumber'
         }
-
     }
-
 }

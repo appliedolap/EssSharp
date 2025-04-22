@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DimCompactDesignation>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Query'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Query'
         }
+
         /// <summary>
         /// Test the property 'EssbaseConnection'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EssbaseConnection'
         }
+
         /// <summary>
         /// Test the property 'GenNames'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'GenNames'
         }
+
         /// <summary>
         /// Test the property 'ColNames'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColNames'
         }
+
         /// <summary>
         /// Test the property 'DimGenColumns'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimGenColumns'
         }
+
         /// <summary>
         /// Test the property 'Attribute'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Attribute'
         }
+
         /// <summary>
         /// Test the property 'DimJoin'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimJoin'
         }
+
         /// <summary>
         /// Test the property 'DimName'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimName'
         }
+
         /// <summary>
         /// Test the property 'AttNames'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AttNames'
         }
+
         /// <summary>
         /// Test the property 'ColumnTypes'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnTypes'
         }
+
         /// <summary>
         /// Test the property 'UniqCount'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UniqCount'
         }
+
         /// <summary>
         /// Test the property 'HeaderText'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HeaderText'
         }
+
         /// <summary>
         /// Test the property 'ParentColumnId'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ParentColumnId'
         }
+
         /// <summary>
         /// Test the property 'FkcolumnNumber'
         /// </summary>
@@ -165,7 +177,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'FkcolumnNumber'
         }
-
     }
-
 }

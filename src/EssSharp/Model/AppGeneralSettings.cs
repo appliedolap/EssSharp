@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// AppGeneralSettings
     /// </summary>
     [DataContract(Name = "AppGeneralSettings")]
-    public partial class AppGeneralSettings : IEquatable<AppGeneralSettings>, IValidatableObject
+    public partial class AppGeneralSettings : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AppGeneralSettings" /> class.
@@ -112,86 +112,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as AppGeneralSettings);
-        }
-
-        /// <summary>
-        /// Returns true if AppGeneralSettings instances are equal
-        /// </summary>
-        /// <param name="input">Instance of AppGeneralSettings to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(AppGeneralSettings input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.LogLevelAsString == input.LogLevelAsString ||
-                    (this.LogLevelAsString != null &&
-                    this.LogLevelAsString.Equals(input.LogLevelAsString))
-                ) && 
-                (
-                    this.EasManagedApp == input.EasManagedApp ||
-                    this.EasManagedApp.Equals(input.EasManagedApp)
-                ) && 
-                (
-                    this.TimeoutOnDataBlockLocks == input.TimeoutOnDataBlockLocks ||
-                    this.TimeoutOnDataBlockLocks.Equals(input.TimeoutOnDataBlockLocks)
-                ) && 
-                (
-                    this.MaxAttachmentFileSizeInKbs == input.MaxAttachmentFileSizeInKbs ||
-                    this.MaxAttachmentFileSizeInKbs.Equals(input.MaxAttachmentFileSizeInKbs)
-                ) && 
-                (
-                    this.PendingCacheSizeLimitInMbs == input.PendingCacheSizeLimitInMbs ||
-                    this.PendingCacheSizeLimitInMbs.Equals(input.PendingCacheSizeLimitInMbs)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.LogLevelAsString != null)
-                {
-                    hashCode = (hashCode * 59) + this.LogLevelAsString.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.EasManagedApp.GetHashCode();
-                hashCode = (hashCode * 59) + this.TimeoutOnDataBlockLocks.GetHashCode();
-                hashCode = (hashCode * 59) + this.MaxAttachmentFileSizeInKbs.GetHashCode();
-                hashCode = (hashCode * 59) + this.PendingCacheSizeLimitInMbs.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

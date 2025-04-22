@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CompressionSettings
     /// </summary>
     [DataContract(Name = "CompressionSettings")]
-    public partial class CompressionSettings : IEquatable<CompressionSettings>, IValidatableObject
+    public partial class CompressionSettings : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CompressionSettings" /> class.
@@ -112,82 +112,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CompressionSettings);
-        }
-
-        /// <summary>
-        /// Returns true if CompressionSettings instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CompressionSettings to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CompressionSettings input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.DimensionName == input.DimensionName ||
-                    (this.DimensionName != null &&
-                    this.DimensionName.Equals(input.DimensionName))
-                ) && 
-                (
-                    this.IsCompression == input.IsCompression ||
-                    this.IsCompression.Equals(input.IsCompression)
-                ) && 
-                (
-                    this.StoredLevel0Members == input.StoredLevel0Members ||
-                    this.StoredLevel0Members.Equals(input.StoredLevel0Members)
-                ) && 
-                (
-                    this.AverageBundleFill == input.AverageBundleFill ||
-                    this.AverageBundleFill.Equals(input.AverageBundleFill)
-                ) && 
-                (
-                    this.AverageValueLength == input.AverageValueLength ||
-                    this.AverageValueLength.Equals(input.AverageValueLength)
-                ) && 
-                (
-                    this.Level0MB == input.Level0MB ||
-                    this.Level0MB.Equals(input.Level0MB)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.DimensionName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimensionName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.IsCompression.GetHashCode();
-                hashCode = (hashCode * 59) + this.StoredLevel0Members.GetHashCode();
-                hashCode = (hashCode * 59) + this.AverageBundleFill.GetHashCode();
-                hashCode = (hashCode * 59) + this.AverageValueLength.GetHashCode();
-                hashCode = (hashCode * 59) + this.Level0MB.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

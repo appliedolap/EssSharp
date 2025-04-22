@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<BufferSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'DataRetrievalBufferSize'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataRetrievalBufferSize'
         }
+
         /// <summary>
         /// Test the property 'DataRetrievalSortBufferSize'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataRetrievalSortBufferSize'
         }
-
     }
-
 }

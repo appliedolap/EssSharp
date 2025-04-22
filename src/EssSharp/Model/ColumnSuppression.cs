@@ -27,30 +27,48 @@ namespace EssSharp.Model
     /// ColumnSuppression
     /// </summary>
     [DataContract(Name = "ColumnSuppression")]
-    public partial class ColumnSuppression : IEquatable<ColumnSuppression>, IValidatableObject
+    public partial class ColumnSuppression : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ColumnSuppression" /> class.
         /// </summary>
+        /// <param name="invalid">invalid.</param>
+        /// <param name="zero">zero.</param>
+        /// <param name="missing">missing.</param>
         /// <param name="underScore">underScore.</param>
         /// <param name="derived">derived.</param>
         /// <param name="noAccess">noAccess.</param>
         /// <param name="emptyBlocks">emptyBlocks.</param>
-        /// <param name="zero">zero.</param>
-        /// <param name="missing">missing.</param>
-        /// <param name="invalid">invalid.</param>
         /// <param name="error">error.</param>
-        public ColumnSuppression(bool underScore = default(bool), bool derived = default(bool), bool noAccess = default(bool), bool emptyBlocks = default(bool), bool zero = default(bool), bool missing = default(bool), bool invalid = default(bool), bool error = default(bool))
+        public ColumnSuppression(bool invalid = default(bool), bool zero = default(bool), bool missing = default(bool), bool underScore = default(bool), bool derived = default(bool), bool noAccess = default(bool), bool emptyBlocks = default(bool), bool error = default(bool))
         {
+            this.Invalid = invalid;
+            this.Zero = zero;
+            this.Missing = missing;
             this.UnderScore = underScore;
             this.Derived = derived;
             this.NoAccess = noAccess;
             this.EmptyBlocks = emptyBlocks;
-            this.Zero = zero;
-            this.Missing = missing;
-            this.Invalid = invalid;
             this.Error = error;
         }
+
+        /// <summary>
+        /// Gets or Sets Invalid
+        /// </summary>
+        [DataMember(Name = "invalid", EmitDefaultValue = true)]
+        public bool Invalid { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Zero
+        /// </summary>
+        [DataMember(Name = "zero", EmitDefaultValue = true)]
+        public bool Zero { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Missing
+        /// </summary>
+        [DataMember(Name = "missing", EmitDefaultValue = true)]
+        public bool Missing { get; set; }
 
         /// <summary>
         /// Gets or Sets UnderScore
@@ -77,24 +95,6 @@ namespace EssSharp.Model
         public bool EmptyBlocks { get; set; }
 
         /// <summary>
-        /// Gets or Sets Zero
-        /// </summary>
-        [DataMember(Name = "zero", EmitDefaultValue = true)]
-        public bool Zero { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Missing
-        /// </summary>
-        [DataMember(Name = "missing", EmitDefaultValue = true)]
-        public bool Missing { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Invalid
-        /// </summary>
-        [DataMember(Name = "invalid", EmitDefaultValue = true)]
-        public bool Invalid { get; set; }
-
-        /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = true)]
@@ -108,13 +108,13 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ColumnSuppression {\n");
+            sb.Append("  Invalid: ").Append(Invalid).Append("\n");
+            sb.Append("  Zero: ").Append(Zero).Append("\n");
+            sb.Append("  Missing: ").Append(Missing).Append("\n");
             sb.Append("  UnderScore: ").Append(UnderScore).Append("\n");
             sb.Append("  Derived: ").Append(Derived).Append("\n");
             sb.Append("  NoAccess: ").Append(NoAccess).Append("\n");
             sb.Append("  EmptyBlocks: ").Append(EmptyBlocks).Append("\n");
-            sb.Append("  Zero: ").Append(Zero).Append("\n");
-            sb.Append("  Missing: ").Append(Missing).Append("\n");
-            sb.Append("  Invalid: ").Append(Invalid).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -130,88 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ColumnSuppression);
-        }
-
-        /// <summary>
-        /// Returns true if ColumnSuppression instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ColumnSuppression to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ColumnSuppression input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.UnderScore == input.UnderScore ||
-                    this.UnderScore.Equals(input.UnderScore)
-                ) && 
-                (
-                    this.Derived == input.Derived ||
-                    this.Derived.Equals(input.Derived)
-                ) && 
-                (
-                    this.NoAccess == input.NoAccess ||
-                    this.NoAccess.Equals(input.NoAccess)
-                ) && 
-                (
-                    this.EmptyBlocks == input.EmptyBlocks ||
-                    this.EmptyBlocks.Equals(input.EmptyBlocks)
-                ) && 
-                (
-                    this.Zero == input.Zero ||
-                    this.Zero.Equals(input.Zero)
-                ) && 
-                (
-                    this.Missing == input.Missing ||
-                    this.Missing.Equals(input.Missing)
-                ) && 
-                (
-                    this.Invalid == input.Invalid ||
-                    this.Invalid.Equals(input.Invalid)
-                ) && 
-                (
-                    this.Error == input.Error ||
-                    this.Error.Equals(input.Error)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.UnderScore.GetHashCode();
-                hashCode = (hashCode * 59) + this.Derived.GetHashCode();
-                hashCode = (hashCode * 59) + this.NoAccess.GetHashCode();
-                hashCode = (hashCode * 59) + this.EmptyBlocks.GetHashCode();
-                hashCode = (hashCode * 59) + this.Zero.GetHashCode();
-                hashCode = (hashCode * 59) + this.Missing.GetHashCode();
-                hashCode = (hashCode * 59) + this.Invalid.GetHashCode();
-                hashCode = (hashCode * 59) + this.Error.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

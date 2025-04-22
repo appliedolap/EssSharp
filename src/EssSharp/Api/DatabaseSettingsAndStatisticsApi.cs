@@ -520,7 +520,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DatabaseSettingsStatisticsExportQueryDataAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task DatabaseSettingsStatisticsExportQueryDataAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Export Query Tracking
@@ -535,7 +535,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DatabaseSettingsStatisticsExportQueryDataWithHttpInfoAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> DatabaseSettingsStatisticsExportQueryDataWithHttpInfoAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Buffer Settings
         /// </summary>
@@ -548,7 +548,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of BufferSettings</returns>
-        System.Threading.Tasks.Task<BufferSettings> DatabaseSettingsStatisticsGetBuffersSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<BufferSettings> DatabaseSettingsStatisticsGetBuffersSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Buffer Settings
@@ -562,7 +562,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BufferSettings)</returns>
-        System.Threading.Tasks.Task<ApiResponse<BufferSettings>> DatabaseSettingsStatisticsGetBuffersSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<BufferSettings>> DatabaseSettingsStatisticsGetBuffersSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Cache Settings
         /// </summary>
@@ -575,7 +575,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CacheSettings</returns>
-        System.Threading.Tasks.Task<CacheSettings> DatabaseSettingsStatisticsGetCachesSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CacheSettings> DatabaseSettingsStatisticsGetCachesSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Cache Settings
@@ -589,7 +589,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CacheSettings)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CacheSettings>> DatabaseSettingsStatisticsGetCachesSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CacheSettings>> DatabaseSettingsStatisticsGetCachesSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Calculation Settings
         /// </summary>
@@ -602,7 +602,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CalculationSettings</returns>
-        System.Threading.Tasks.Task<CalculationSettings> DatabaseSettingsStatisticsGetCalculationSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CalculationSettings> DatabaseSettingsStatisticsGetCalculationSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Calculation Settings
@@ -616,7 +616,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CalculationSettings)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CalculationSettings>> DatabaseSettingsStatisticsGetCalculationSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CalculationSettings>> DatabaseSettingsStatisticsGetCalculationSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Compression Settings
         /// </summary>
@@ -629,7 +629,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CompressionSettings</returns>
-        System.Threading.Tasks.Task<CompressionSettings> DatabaseSettingsStatisticsGetCompressSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CompressionSettings> DatabaseSettingsStatisticsGetCompressSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Compression Settings
@@ -643,7 +643,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CompressionSettings)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CompressionSettings>> DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CompressionSettings>> DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Compression Settings
         /// </summary>
@@ -657,7 +657,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CompressionInfoOutput</returns>
-        System.Threading.Tasks.Task<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Compression Settings
@@ -672,7 +672,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CompressionInfoOutput)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CompressionInfoOutput>> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfoAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CompressionInfoOutput>> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfoAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Attribute Settings
         /// </summary>
@@ -687,7 +687,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AttributeOutlineSettings</returns>
-        System.Threading.Tasks.Task<AttributeOutlineSettings> DatabaseSettingsStatisticsGetOutlineAttributesSettingsAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AttributeOutlineSettings> DatabaseSettingsStatisticsGetOutlineAttributesSettingsAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Attribute Settings
@@ -703,7 +703,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AttributeOutlineSettings)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AttributeOutlineSettings>> DatabaseSettingsStatisticsGetOutlineAttributesSettingsWithHttpInfoAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AttributeOutlineSettings>> DatabaseSettingsStatisticsGetOutlineAttributesSettingsWithHttpInfoAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Outline Settings
         /// </summary>
@@ -719,7 +719,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of OutlineSettingsList</returns>
-        System.Threading.Tasks.Task<OutlineSettingsList> DatabaseSettingsStatisticsGetOutlineSettingsAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<OutlineSettingsList> DatabaseSettingsStatisticsGetOutlineSettingsAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Outline Settings
@@ -736,7 +736,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OutlineSettingsList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OutlineSettingsList>> DatabaseSettingsStatisticsGetOutlineSettingsWithHttpInfoAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<OutlineSettingsList>> DatabaseSettingsStatisticsGetOutlineSettingsWithHttpInfoAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Date Formats
         /// </summary>
@@ -749,7 +749,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of OutlineDateFormat</returns>
-        System.Threading.Tasks.Task<OutlineDateFormat> DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<OutlineDateFormat> DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Date Formats
@@ -763,7 +763,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OutlineDateFormat)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OutlineDateFormat>> DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<OutlineDateFormat>> DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Runtime Statistics
         /// </summary>
@@ -776,7 +776,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RuntimeStatistics</returns>
-        System.Threading.Tasks.Task<RuntimeStatistics> DatabaseSettingsStatisticsGetRuntimeStatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<RuntimeStatistics> DatabaseSettingsStatisticsGetRuntimeStatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Runtime Statistics
@@ -790,7 +790,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RuntimeStatistics)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RuntimeStatistics>> DatabaseSettingsStatisticsGetRuntimeStatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<RuntimeStatistics>> DatabaseSettingsStatisticsGetRuntimeStatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get General Settings
         /// </summary>
@@ -804,7 +804,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SettingsList</returns>
-        System.Threading.Tasks.Task<SettingsList> DatabaseSettingsStatisticsGetSettingsAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SettingsList> DatabaseSettingsStatisticsGetSettingsAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get General Settings
@@ -819,7 +819,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SettingsList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SettingsList>> DatabaseSettingsStatisticsGetSettingsWithHttpInfoAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<SettingsList>> DatabaseSettingsStatisticsGetSettingsWithHttpInfoAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Startup Settings
         /// </summary>
@@ -832,7 +832,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StartupSettings</returns>
-        System.Threading.Tasks.Task<StartupSettings> DatabaseSettingsStatisticsGetStartupSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StartupSettings> DatabaseSettingsStatisticsGetStartupSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Startup Settings
@@ -846,7 +846,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StartupSettings)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StartupSettings>> DatabaseSettingsStatisticsGetStartupSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StartupSettings>> DatabaseSettingsStatisticsGetStartupSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get General Statistics
         /// </summary>
@@ -860,7 +860,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StatisticsList</returns>
-        System.Threading.Tasks.Task<StatisticsList> DatabaseSettingsStatisticsGetStatisticsAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StatisticsList> DatabaseSettingsStatisticsGetStatisticsAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get General Statistics
@@ -875,7 +875,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StatisticsList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StatisticsList>> DatabaseSettingsStatisticsGetStatisticsWithHttpInfoAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StatisticsList>> DatabaseSettingsStatisticsGetStatisticsWithHttpInfoAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Storage Statistics
         /// </summary>
@@ -888,7 +888,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StorageStatistics</returns>
-        System.Threading.Tasks.Task<StorageStatistics> DatabaseSettingsStatisticsGetStorageStatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StorageStatistics> DatabaseSettingsStatisticsGetStorageStatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Storage Statistics
@@ -902,7 +902,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StorageStatistics)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StorageStatistics>> DatabaseSettingsStatisticsGetStorageStatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StorageStatistics>> DatabaseSettingsStatisticsGetStorageStatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Transaction Settings
         /// </summary>
@@ -915,7 +915,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of TransactionSettings</returns>
-        System.Threading.Tasks.Task<TransactionSettings> DatabaseSettingsStatisticsGetTransSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<TransactionSettings> DatabaseSettingsStatisticsGetTransSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Transaction Settings
@@ -929,7 +929,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (TransactionSettings)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TransactionSettings>> DatabaseSettingsStatisticsGetTransSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<TransactionSettings>> DatabaseSettingsStatisticsGetTransSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Import Query Tracking
         /// </summary>
@@ -943,7 +943,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DatabaseSettingsStatisticsImportQueryDataAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task DatabaseSettingsStatisticsImportQueryDataAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Import Query Tracking
@@ -958,7 +958,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DatabaseSettingsStatisticsImportQueryDataWithHttpInfoAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> DatabaseSettingsStatisticsImportQueryDataWithHttpInfoAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Outline Settings
         /// </summary>
@@ -972,7 +972,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DatabaseSettingsStatisticsUpdateOutlineSettingsAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task DatabaseSettingsStatisticsUpdateOutlineSettingsAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Outline Settings
@@ -987,7 +987,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DatabaseSettingsStatisticsUpdateOutlineSettingsWithHttpInfoAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> DatabaseSettingsStatisticsUpdateOutlineSettingsWithHttpInfoAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Settings
         /// </summary>
@@ -1001,7 +1001,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DatabaseSettingsStatisticsUpdateSettingsAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task DatabaseSettingsStatisticsUpdateSettingsAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Settings
@@ -1016,7 +1016,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DatabaseSettingsStatisticsUpdateSettingsWithHttpInfoAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> DatabaseSettingsStatisticsUpdateSettingsWithHttpInfoAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -1190,6 +1190,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1239,7 +1240,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DatabaseSettingsStatisticsExportQueryDataAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task DatabaseSettingsStatisticsExportQueryDataAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await DatabaseSettingsStatisticsExportQueryDataWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1254,7 +1255,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DatabaseSettingsStatisticsExportQueryDataWithHttpInfoAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DatabaseSettingsStatisticsExportQueryDataWithHttpInfoAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1373,6 +1374,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1420,7 +1422,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of BufferSettings</returns>
-        public async System.Threading.Tasks.Task<BufferSettings> DatabaseSettingsStatisticsGetBuffersSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<BufferSettings> DatabaseSettingsStatisticsGetBuffersSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<BufferSettings> localVarResponse = await DatabaseSettingsStatisticsGetBuffersSettingsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1435,7 +1437,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BufferSettings)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<BufferSettings>> DatabaseSettingsStatisticsGetBuffersSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<BufferSettings>> DatabaseSettingsStatisticsGetBuffersSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1549,6 +1551,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1596,7 +1599,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CacheSettings</returns>
-        public async System.Threading.Tasks.Task<CacheSettings> DatabaseSettingsStatisticsGetCachesSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CacheSettings> DatabaseSettingsStatisticsGetCachesSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<CacheSettings> localVarResponse = await DatabaseSettingsStatisticsGetCachesSettingsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1611,7 +1614,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CacheSettings)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CacheSettings>> DatabaseSettingsStatisticsGetCachesSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CacheSettings>> DatabaseSettingsStatisticsGetCachesSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1725,6 +1728,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1772,7 +1776,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CalculationSettings</returns>
-        public async System.Threading.Tasks.Task<CalculationSettings> DatabaseSettingsStatisticsGetCalculationSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CalculationSettings> DatabaseSettingsStatisticsGetCalculationSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<CalculationSettings> localVarResponse = await DatabaseSettingsStatisticsGetCalculationSettingsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1787,7 +1791,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CalculationSettings)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CalculationSettings>> DatabaseSettingsStatisticsGetCalculationSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CalculationSettings>> DatabaseSettingsStatisticsGetCalculationSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1901,6 +1905,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1948,7 +1953,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CompressionSettings</returns>
-        public async System.Threading.Tasks.Task<CompressionSettings> DatabaseSettingsStatisticsGetCompressSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CompressionSettings> DatabaseSettingsStatisticsGetCompressSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<CompressionSettings> localVarResponse = await DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1963,7 +1968,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CompressionSettings)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CompressionSettings>> DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CompressionSettings>> DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2079,6 +2084,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2131,7 +2137,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CompressionInfoOutput</returns>
-        public async System.Threading.Tasks.Task<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<CompressionInfoOutput> localVarResponse = await DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfoAsync(applicationName, databaseName, fetch, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2147,7 +2153,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CompressionInfoOutput)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CompressionInfoOutput>> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfoAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CompressionInfoOutput>> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfoAsync(string applicationName, string databaseName, bool? fetch = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2269,6 +2275,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2326,7 +2333,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AttributeOutlineSettings</returns>
-        public async System.Threading.Tasks.Task<AttributeOutlineSettings> DatabaseSettingsStatisticsGetOutlineAttributesSettingsAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AttributeOutlineSettings> DatabaseSettingsStatisticsGetOutlineAttributesSettingsAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<AttributeOutlineSettings> localVarResponse = await DatabaseSettingsStatisticsGetOutlineAttributesSettingsWithHttpInfoAsync(applicationName, databaseName, connectionName, applicationNameForConnection, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2343,7 +2350,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AttributeOutlineSettings)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<AttributeOutlineSettings>> DatabaseSettingsStatisticsGetOutlineAttributesSettingsWithHttpInfoAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<AttributeOutlineSettings>> DatabaseSettingsStatisticsGetOutlineAttributesSettingsWithHttpInfoAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2471,6 +2478,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2533,7 +2541,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of OutlineSettingsList</returns>
-        public async System.Threading.Tasks.Task<OutlineSettingsList> DatabaseSettingsStatisticsGetOutlineSettingsAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<OutlineSettingsList> DatabaseSettingsStatisticsGetOutlineSettingsAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<OutlineSettingsList> localVarResponse = await DatabaseSettingsStatisticsGetOutlineSettingsWithHttpInfoAsync(applicationName, databaseName, connectionName, applicationNameForConnection, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2551,7 +2559,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OutlineSettingsList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<OutlineSettingsList>> DatabaseSettingsStatisticsGetOutlineSettingsWithHttpInfoAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<OutlineSettingsList>> DatabaseSettingsStatisticsGetOutlineSettingsWithHttpInfoAsync(string applicationName, string databaseName, string connectionName = default(string), string applicationNameForConnection = default(string), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2677,6 +2685,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2724,7 +2733,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of OutlineDateFormat</returns>
-        public async System.Threading.Tasks.Task<OutlineDateFormat> DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<OutlineDateFormat> DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<OutlineDateFormat> localVarResponse = await DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2739,7 +2748,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OutlineDateFormat)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<OutlineDateFormat>> DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<OutlineDateFormat>> DatabaseSettingsStatisticsGetOutlineSettingsDateFormatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2853,6 +2862,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2900,7 +2910,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RuntimeStatistics</returns>
-        public async System.Threading.Tasks.Task<RuntimeStatistics> DatabaseSettingsStatisticsGetRuntimeStatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<RuntimeStatistics> DatabaseSettingsStatisticsGetRuntimeStatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<RuntimeStatistics> localVarResponse = await DatabaseSettingsStatisticsGetRuntimeStatsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2915,7 +2925,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RuntimeStatistics)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<RuntimeStatistics>> DatabaseSettingsStatisticsGetRuntimeStatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<RuntimeStatistics>> DatabaseSettingsStatisticsGetRuntimeStatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3031,6 +3041,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3083,7 +3094,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SettingsList</returns>
-        public async System.Threading.Tasks.Task<SettingsList> DatabaseSettingsStatisticsGetSettingsAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SettingsList> DatabaseSettingsStatisticsGetSettingsAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<SettingsList> localVarResponse = await DatabaseSettingsStatisticsGetSettingsWithHttpInfoAsync(applicationName, databaseName, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3099,7 +3110,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SettingsList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<SettingsList>> DatabaseSettingsStatisticsGetSettingsWithHttpInfoAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<SettingsList>> DatabaseSettingsStatisticsGetSettingsWithHttpInfoAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3217,6 +3228,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3264,7 +3276,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StartupSettings</returns>
-        public async System.Threading.Tasks.Task<StartupSettings> DatabaseSettingsStatisticsGetStartupSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StartupSettings> DatabaseSettingsStatisticsGetStartupSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<StartupSettings> localVarResponse = await DatabaseSettingsStatisticsGetStartupSettingsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3279,7 +3291,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StartupSettings)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StartupSettings>> DatabaseSettingsStatisticsGetStartupSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StartupSettings>> DatabaseSettingsStatisticsGetStartupSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3395,6 +3407,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3447,7 +3460,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StatisticsList</returns>
-        public async System.Threading.Tasks.Task<StatisticsList> DatabaseSettingsStatisticsGetStatisticsAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StatisticsList> DatabaseSettingsStatisticsGetStatisticsAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<StatisticsList> localVarResponse = await DatabaseSettingsStatisticsGetStatisticsWithHttpInfoAsync(applicationName, databaseName, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3463,7 +3476,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StatisticsList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StatisticsList>> DatabaseSettingsStatisticsGetStatisticsWithHttpInfoAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StatisticsList>> DatabaseSettingsStatisticsGetStatisticsWithHttpInfoAsync(string applicationName, string databaseName, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3581,6 +3594,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3628,7 +3642,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StorageStatistics</returns>
-        public async System.Threading.Tasks.Task<StorageStatistics> DatabaseSettingsStatisticsGetStorageStatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StorageStatistics> DatabaseSettingsStatisticsGetStorageStatsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<StorageStatistics> localVarResponse = await DatabaseSettingsStatisticsGetStorageStatsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3643,7 +3657,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StorageStatistics)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StorageStatistics>> DatabaseSettingsStatisticsGetStorageStatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StorageStatistics>> DatabaseSettingsStatisticsGetStorageStatsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3757,6 +3771,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3804,7 +3819,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of TransactionSettings</returns>
-        public async System.Threading.Tasks.Task<TransactionSettings> DatabaseSettingsStatisticsGetTransSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<TransactionSettings> DatabaseSettingsStatisticsGetTransSettingsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<TransactionSettings> localVarResponse = await DatabaseSettingsStatisticsGetTransSettingsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3819,7 +3834,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (TransactionSettings)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<TransactionSettings>> DatabaseSettingsStatisticsGetTransSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<TransactionSettings>> DatabaseSettingsStatisticsGetTransSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3938,6 +3953,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3987,7 +4003,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DatabaseSettingsStatisticsImportQueryDataAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task DatabaseSettingsStatisticsImportQueryDataAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await DatabaseSettingsStatisticsImportQueryDataWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -4002,7 +4018,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DatabaseSettingsStatisticsImportQueryDataWithHttpInfoAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DatabaseSettingsStatisticsImportQueryDataWithHttpInfoAsync(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -4128,6 +4144,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -4177,7 +4194,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DatabaseSettingsStatisticsUpdateOutlineSettingsAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task DatabaseSettingsStatisticsUpdateOutlineSettingsAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await DatabaseSettingsStatisticsUpdateOutlineSettingsWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -4192,7 +4209,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DatabaseSettingsStatisticsUpdateOutlineSettingsWithHttpInfoAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DatabaseSettingsStatisticsUpdateOutlineSettingsWithHttpInfoAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -4320,6 +4337,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -4369,7 +4387,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DatabaseSettingsStatisticsUpdateSettingsAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task DatabaseSettingsStatisticsUpdateSettingsAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await DatabaseSettingsStatisticsUpdateSettingsWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -4384,7 +4402,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DatabaseSettingsStatisticsUpdateSettingsWithHttpInfoAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DatabaseSettingsStatisticsUpdateSettingsWithHttpInfoAsync(string applicationName, string databaseName, List<PatchElement> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

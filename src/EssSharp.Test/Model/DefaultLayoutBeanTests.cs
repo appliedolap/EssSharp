@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DefaultLayoutBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'UserDefault'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UserDefault'
         }
+
         /// <summary>
         /// Test the property 'DatabaseDefault'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DatabaseDefault'
         }
-
     }
-
 }

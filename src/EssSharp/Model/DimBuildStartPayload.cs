@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// DimBuildStartPayload
     /// </summary>
     [DataContract(Name = "DimBuildStartPayload")]
-    public partial class DimBuildStartPayload : IEquatable<DimBuildStartPayload>, IValidatableObject
+    public partial class DimBuildStartPayload : IValidatableObject
     {
         /// <summary>
         /// Defines RestructureOption
@@ -36,29 +36,28 @@ namespace EssSharp.Model
         public enum RestructureOptionEnum
         {
             /// <summary>
-            /// Enum ALLDATA for value: PRESERVE_ALL_DATA
+            /// Enum PRESERVEALLDATA for value: PRESERVE_ALL_DATA
             /// </summary>
             [EnumMember(Value = "PRESERVE_ALL_DATA")]
-            ALLDATA = 1,
+            PRESERVEALLDATA = 1,
 
             /// <summary>
-            /// Enum LEAFLEVELDATA for value: PRESERVE_LEAFLEVEL_DATA
+            /// Enum PRESERVELEAFLEVELDATA for value: PRESERVE_LEAFLEVEL_DATA
             /// </summary>
             [EnumMember(Value = "PRESERVE_LEAFLEVEL_DATA")]
-            LEAFLEVELDATA = 2,
+            PRESERVELEAFLEVELDATA = 2,
 
             /// <summary>
-            /// Enum INPUTDATA for value: PRESERVE_INPUT_DATA
+            /// Enum PRESERVEINPUTDATA for value: PRESERVE_INPUT_DATA
             /// </summary>
             [EnumMember(Value = "PRESERVE_INPUT_DATA")]
-            INPUTDATA = 3,
+            PRESERVEINPUTDATA = 3,
 
             /// <summary>
-            /// Enum NODATA for value: PRESERVE_NO_DATA
+            /// Enum PRESERVENODATA for value: PRESERVE_NO_DATA
             /// </summary>
             [EnumMember(Value = "PRESERVE_NO_DATA")]
-            NODATA = 4
-
+            PRESERVENODATA = 4
         }
 
 
@@ -99,53 +98,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DimBuildStartPayload);
-        }
-
-        /// <summary>
-        /// Returns true if DimBuildStartPayload instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DimBuildStartPayload to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DimBuildStartPayload input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.RestructureOption == input.RestructureOption ||
-                    this.RestructureOption.Equals(input.RestructureOption)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.RestructureOption.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ColumnOperation
     /// </summary>
     [DataContract(Name = "ColumnOperation")]
-    public partial class ColumnOperation : IEquatable<ColumnOperation>, IValidatableObject
+    public partial class ColumnOperation : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -70,7 +70,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "SUBSTRING")]
             SUBSTRING = 6
-
         }
 
 
@@ -129,63 +128,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ColumnOperation);
-        }
-
-        /// <summary>
-        /// Returns true if ColumnOperation instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ColumnOperation to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ColumnOperation input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.UpdateColumns == input.UpdateColumns ||
-                    this.UpdateColumns.Equals(input.UpdateColumns)
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.Position == input.Position ||
-                    this.Position.Equals(input.Position)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.UpdateColumns.GetHashCode();
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                hashCode = (hashCode * 59) + this.Position.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

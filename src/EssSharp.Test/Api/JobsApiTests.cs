@@ -85,11 +85,12 @@ namespace EssSharp.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string keyword = null;
             //string fullAppName = null;
+            //string fullDatabaseName = null;
             //string orderBy = null;
             //long? offset = null;
             //long? limit = null;
             //bool? systemjobs = null;
-            //var response = instance.JobsGetAllJobRecords(keyword, fullAppName, orderBy, offset, limit, systemjobs);
+            //var response = instance.JobsGetAllJobRecords(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs);
             //Assert.IsType<JobRecordPaginatedResultWrapper>(response);
         }
 

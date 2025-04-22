@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<RulePreviewInput>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Data'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Data'
         }
+
         /// <summary>
         /// Test the property 'Rules'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Rules'
         }
-
     }
-
 }

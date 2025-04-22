@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ODLLogHandlerSetting
     /// </summary>
     [DataContract(Name = "ODLLogHandlerSetting")]
-    public partial class ODLLogHandlerSetting : IEquatable<ODLLogHandlerSetting>, IValidatableObject
+    public partial class ODLLogHandlerSetting : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ODLLogHandlerSetting" /> class.
@@ -139,130 +139,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ODLLogHandlerSetting);
-        }
-
-        /// <summary>
-        /// Returns true if ODLLogHandlerSetting instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ODLLogHandlerSetting to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ODLLogHandlerSetting input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.HandlerName == input.HandlerName ||
-                    (this.HandlerName != null &&
-                    this.HandlerName.Equals(input.HandlerName))
-                ) && 
-                (
-                    this.LogType == input.LogType ||
-                    (this.LogType != null &&
-                    this.LogType.Equals(input.LogType))
-                ) && 
-                (
-                    this.MaxLogSize == input.MaxLogSize ||
-                    (this.MaxLogSize != null &&
-                    this.MaxLogSize.Equals(input.MaxLogSize))
-                ) && 
-                (
-                    this.MaxAllLogSize == input.MaxAllLogSize ||
-                    (this.MaxAllLogSize != null &&
-                    this.MaxAllLogSize.Equals(input.MaxAllLogSize))
-                ) && 
-                (
-                    this.RotationPeriod == input.RotationPeriod ||
-                    (this.RotationPeriod != null &&
-                    this.RotationPeriod.Equals(input.RotationPeriod))
-                ) && 
-                (
-                    this.RotationPeriodCustom == input.RotationPeriodCustom ||
-                    (this.RotationPeriodCustom != null &&
-                    this.RotationPeriodCustom.Equals(input.RotationPeriodCustom))
-                ) && 
-                (
-                    this.RetentionPeriod == input.RetentionPeriod ||
-                    (this.RetentionPeriod != null &&
-                    this.RetentionPeriod.Equals(input.RetentionPeriod))
-                ) && 
-                (
-                    this.RetentionPeriodCustom == input.RetentionPeriodCustom ||
-                    (this.RetentionPeriodCustom != null &&
-                    this.RetentionPeriodCustom.Equals(input.RetentionPeriodCustom))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.HandlerName != null)
-                {
-                    hashCode = (hashCode * 59) + this.HandlerName.GetHashCode();
-                }
-                if (this.LogType != null)
-                {
-                    hashCode = (hashCode * 59) + this.LogType.GetHashCode();
-                }
-                if (this.MaxLogSize != null)
-                {
-                    hashCode = (hashCode * 59) + this.MaxLogSize.GetHashCode();
-                }
-                if (this.MaxAllLogSize != null)
-                {
-                    hashCode = (hashCode * 59) + this.MaxAllLogSize.GetHashCode();
-                }
-                if (this.RotationPeriod != null)
-                {
-                    hashCode = (hashCode * 59) + this.RotationPeriod.GetHashCode();
-                }
-                if (this.RotationPeriodCustom != null)
-                {
-                    hashCode = (hashCode * 59) + this.RotationPeriodCustom.GetHashCode();
-                }
-                if (this.RetentionPeriod != null)
-                {
-                    hashCode = (hashCode * 59) + this.RetentionPeriod.GetHashCode();
-                }
-                if (this.RetentionPeriodCustom != null)
-                {
-                    hashCode = (hashCode * 59) + this.RetentionPeriodCustom.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

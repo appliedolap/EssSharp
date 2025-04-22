@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Link>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Rel'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Rel'
         }
+
         /// <summary>
         /// Test the property 'Href'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Href'
         }
+
         /// <summary>
         /// Test the property 'Method'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Method'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
-
     }
-
 }

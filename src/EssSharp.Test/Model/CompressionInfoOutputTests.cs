@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CompressionInfoOutput>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Message'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Message'
         }
+
         /// <summary>
         /// Test the property 'CompressionInfo'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CompressionInfo'
         }
-
     }
-
 }

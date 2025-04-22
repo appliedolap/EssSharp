@@ -208,7 +208,7 @@ catch (ApiException e)
 
 <a id="jobsgetalljobrecords"></a>
 # **JobsGetAllJobRecords**
-> JobRecordPaginatedResultWrapper JobsGetAllJobRecords (string keyword = null, string fullAppName = null, string orderBy = null, long? offset = null, long? limit = null, bool? systemjobs = null)
+> JobRecordPaginatedResultWrapper JobsGetAllJobRecords (string keyword = null, string fullAppName = null, string fullDatabaseName = null, string orderBy = null, long? offset = null, long? limit = null, bool? systemjobs = null)
 
 Get Job List
 
@@ -237,6 +237,7 @@ namespace Example
             var apiInstance = new JobsApi(config);
             var keyword = "keyword_example";  // string | <p>Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.</p> (optional) 
             var fullAppName = "fullAppName_example";  // string | <p>Application name for which to retrieve job records.</p> (optional) 
+            var fullDatabaseName = "fullDatabaseName_example";  // string | <p>Database name for which to retrieve job records.</p> (optional) 
             var orderBy = "\"job_ID:desc\"";  // string | <p>Order By specification. By default, jobs records are returned by job IDs in descending order.</p> (optional)  (default to "job_ID:desc")
             var offset = 0L;  // long? | <p>Number of jobs to omit from the start of the result set.</p> (optional)  (default to 0)
             var limit = 50L;  // long? | <p>Maximum number of jobs to fetch. </p> (optional)  (default to 50)
@@ -245,7 +246,7 @@ namespace Example
             try
             {
                 // Get Job List
-                JobRecordPaginatedResultWrapper result = apiInstance.JobsGetAllJobRecords(keyword, fullAppName, orderBy, offset, limit, systemjobs);
+                JobRecordPaginatedResultWrapper result = apiInstance.JobsGetAllJobRecords(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -266,7 +267,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Job List
-    ApiResponse<JobRecordPaginatedResultWrapper> response = apiInstance.JobsGetAllJobRecordsWithHttpInfo(keyword, fullAppName, orderBy, offset, limit, systemjobs);
+    ApiResponse<JobRecordPaginatedResultWrapper> response = apiInstance.JobsGetAllJobRecordsWithHttpInfo(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -285,6 +286,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **keyword** | **string** | &lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; | [optional]  |
 | **fullAppName** | **string** | &lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; | [optional]  |
+| **fullDatabaseName** | **string** | &lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; | [optional]  |
 | **orderBy** | **string** | &lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; | [optional] [default to &quot;job_ID:desc&quot;] |
 | **offset** | **long?** | &lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; | [optional] [default to 0] |
 | **limit** | **long?** | &lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; | [optional] [default to 50] |
@@ -606,7 +608,9 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **0** | successful operation |  -  |
+| **200** | &lt;p&gt;Purge request executed successfully.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
+| **503** | &lt;p&gt;&lt;strong&gt;Service Unavailable&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Naming exception or server exception.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

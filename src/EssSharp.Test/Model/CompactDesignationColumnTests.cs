@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CompactDesignationColumn>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'OriginalHeaderName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OriginalHeaderName'
         }
+
         /// <summary>
         /// Test the property 'ObjectName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ObjectName'
         }
+
         /// <summary>
         /// Test the property 'ReferenceObjectName'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ReferenceObjectName'
         }
+
         /// <summary>
         /// Test the property 'ObjectType'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ObjectType'
         }
+
         /// <summary>
         /// Test the property 'Formula'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Formula'
         }
+
         /// <summary>
         /// Test the property 'DimensionAlias'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimensionAlias'
         }
+
         /// <summary>
         /// Test the property 'ExternalDimName'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ExternalDimName'
         }
+
         /// <summary>
         /// Test the property 'SolveOrder'
         /// </summary>
@@ -117,7 +123,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SolveOrder'
         }
-
     }
-
 }

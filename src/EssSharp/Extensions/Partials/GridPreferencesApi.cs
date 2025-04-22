@@ -62,10 +62,6 @@ namespace EssSharp.Api
             {
                 localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
             }
-            else
-            {
-                cookie = cookie;
-            }
 
             // make the HTTP request
             var localVarResponse = await this.AsynchronousClient.PutAsync<Object>("/preferences/grid", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);

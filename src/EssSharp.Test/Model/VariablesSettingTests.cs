@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<VariablesSetting>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ShowVariables'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ShowVariables'
         }
+
         /// <summary>
         /// Test the property 'UpdateVariables'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UpdateVariables'
         }
-
     }
-
 }

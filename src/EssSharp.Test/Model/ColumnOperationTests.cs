@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ColumnOperation>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'UpdateColumns'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UpdateColumns'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'Position'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Position'
         }
-
     }
-
 }

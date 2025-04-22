@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// JobRecordBean
     /// </summary>
     [DataContract(Name = "JobRecordBean")]
-    public partial class JobRecordBean : IEquatable<JobRecordBean>, IValidatableObject
+    public partial class JobRecordBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobRecordBean" /> class.
@@ -175,152 +175,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as JobRecordBean);
-        }
-
-        /// <summary>
-        /// Returns true if JobRecordBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of JobRecordBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(JobRecordBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.JobID == input.JobID ||
-                    this.JobID.Equals(input.JobID)
-                ) && 
-                (
-                    this.AppName == input.AppName ||
-                    (this.AppName != null &&
-                    this.AppName.Equals(input.AppName))
-                ) && 
-                (
-                    this.DbName == input.DbName ||
-                    (this.DbName != null &&
-                    this.DbName.Equals(input.DbName))
-                ) && 
-                (
-                    this.JobType == input.JobType ||
-                    (this.JobType != null &&
-                    this.JobType.Equals(input.JobType))
-                ) && 
-                (
-                    this.JobfileName == input.JobfileName ||
-                    (this.JobfileName != null &&
-                    this.JobfileName.Equals(input.JobfileName))
-                ) && 
-                (
-                    this.UserName == input.UserName ||
-                    (this.UserName != null &&
-                    this.UserName.Equals(input.UserName))
-                ) && 
-                (
-                    this.StartTime == input.StartTime ||
-                    this.StartTime.Equals(input.StartTime)
-                ) && 
-                (
-                    this.EndTime == input.EndTime ||
-                    this.EndTime.Equals(input.EndTime)
-                ) && 
-                (
-                    this.StatusCode == input.StatusCode ||
-                    this.StatusCode.Equals(input.StatusCode)
-                ) && 
-                (
-                    this.StatusMessage == input.StatusMessage ||
-                    (this.StatusMessage != null &&
-                    this.StatusMessage.Equals(input.StatusMessage))
-                ) && 
-                (
-                    this.JobInputInfo == input.JobInputInfo ||
-                    this.JobInputInfo != null &&
-                    input.JobInputInfo != null &&
-                    this.JobInputInfo.SequenceEqual(input.JobInputInfo)
-                ) && 
-                (
-                    this.JobOutputInfo == input.JobOutputInfo ||
-                    this.JobOutputInfo != null &&
-                    input.JobOutputInfo != null &&
-                    this.JobOutputInfo.SequenceEqual(input.JobOutputInfo)
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.JobID.GetHashCode();
-                if (this.AppName != null)
-                {
-                    hashCode = (hashCode * 59) + this.AppName.GetHashCode();
-                }
-                if (this.DbName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DbName.GetHashCode();
-                }
-                if (this.JobType != null)
-                {
-                    hashCode = (hashCode * 59) + this.JobType.GetHashCode();
-                }
-                if (this.JobfileName != null)
-                {
-                    hashCode = (hashCode * 59) + this.JobfileName.GetHashCode();
-                }
-                if (this.UserName != null)
-                {
-                    hashCode = (hashCode * 59) + this.UserName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.StartTime.GetHashCode();
-                hashCode = (hashCode * 59) + this.EndTime.GetHashCode();
-                hashCode = (hashCode * 59) + this.StatusCode.GetHashCode();
-                if (this.StatusMessage != null)
-                {
-                    hashCode = (hashCode * 59) + this.StatusMessage.GetHashCode();
-                }
-                if (this.JobInputInfo != null)
-                {
-                    hashCode = (hashCode * 59) + this.JobInputInfo.GetHashCode();
-                }
-                if (this.JobOutputInfo != null)
-                {
-                    hashCode = (hashCode * 59) + this.JobOutputInfo.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

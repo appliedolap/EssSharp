@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<LayoutData>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Statuses'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Statuses'
         }
+
         /// <summary>
         /// Test the property 'Texts'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Texts'
         }
+
         /// <summary>
         /// Test the property 'EnumIds'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EnumIds'
         }
+
         /// <summary>
         /// Test the property 'DataFormats'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataFormats'
         }
+
         /// <summary>
         /// Test the property 'Types'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Types'
         }
+
         /// <summary>
         /// Test the property 'Filters'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Filters'
         }
+
         /// <summary>
         /// Test the property 'Values'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Values'
         }
-
     }
-
 }

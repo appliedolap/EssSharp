@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ScenarioBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
+
         /// <summary>
         /// Test the property 'ScenarioUser'
         /// </summary>
@@ -69,94 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ScenarioUser'
         }
-        /// <summary>
-        /// Test the property 'Scripts'
-        /// </summary>
-        [Fact]
-        public void ScriptsTest()
-        {
-            // TODO unit test for the property 'Scripts'
-        }
-        /// <summary>
-        /// Test the property 'Approvers'
-        /// </summary>
-        [Fact]
-        public void ApproversTest()
-        {
-            // TODO unit test for the property 'Approvers'
-        }
-        /// <summary>
-        /// Test the property 'Sandbox'
-        /// </summary>
-        [Fact]
-        public void SandboxTest()
-        {
-            // TODO unit test for the property 'Sandbox'
-        }
-        /// <summary>
-        /// Test the property 'DueDate'
-        /// </summary>
-        [Fact]
-        public void DueDateTest()
-        {
-            // TODO unit test for the property 'DueDate'
-        }
-        /// <summary>
-        /// Test the property 'Overdue'
-        /// </summary>
-        [Fact]
-        public void OverdueTest()
-        {
-            // TODO unit test for the property 'Overdue'
-        }
-        /// <summary>
-        /// Test the property 'CreatedTime'
-        /// </summary>
-        [Fact]
-        public void CreatedTimeTest()
-        {
-            // TODO unit test for the property 'CreatedTime'
-        }
-        /// <summary>
-        /// Test the property 'SubmittedTime'
-        /// </summary>
-        [Fact]
-        public void SubmittedTimeTest()
-        {
-            // TODO unit test for the property 'SubmittedTime'
-        }
-        /// <summary>
-        /// Test the property 'AppliedTime'
-        /// </summary>
-        [Fact]
-        public void AppliedTimeTest()
-        {
-            // TODO unit test for the property 'AppliedTime'
-        }
-        /// <summary>
-        /// Test the property 'RefreshedTime'
-        /// </summary>
-        [Fact]
-        public void RefreshedTimeTest()
-        {
-            // TODO unit test for the property 'RefreshedTime'
-        }
-        /// <summary>
-        /// Test the property 'UseCalculatedValues'
-        /// </summary>
-        [Fact]
-        public void UseCalculatedValuesTest()
-        {
-            // TODO unit test for the property 'UseCalculatedValues'
-        }
-        /// <summary>
-        /// Test the property 'CommentsCount'
-        /// </summary>
-        [Fact]
-        public void CommentsCountTest()
-        {
-            // TODO unit test for the property 'CommentsCount'
-        }
+
         /// <summary>
         /// Test the property 'Database'
         /// </summary>
@@ -165,22 +78,43 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Database'
         }
+
         /// <summary>
-        /// Test the property 'Application'
+        /// Test the property 'Sandbox'
         /// </summary>
         [Fact]
-        public void ApplicationTest()
+        public void SandboxTest()
         {
-            // TODO unit test for the property 'Application'
+            // TODO unit test for the property 'Sandbox'
         }
+
         /// <summary>
-        /// Test the property 'Description'
+        /// Test the property 'DueDate'
         /// </summary>
         [Fact]
-        public void DescriptionTest()
+        public void DueDateTest()
         {
-            // TODO unit test for the property 'Description'
+            // TODO unit test for the property 'DueDate'
         }
+
+        /// <summary>
+        /// Test the property 'Scripts'
+        /// </summary>
+        [Fact]
+        public void ScriptsTest()
+        {
+            // TODO unit test for the property 'Scripts'
+        }
+
+        /// <summary>
+        /// Test the property 'Approvers'
+        /// </summary>
+        [Fact]
+        public void ApproversTest()
+        {
+            // TODO unit test for the property 'Approvers'
+        }
+
         /// <summary>
         /// Test the property 'Participants'
         /// </summary>
@@ -189,6 +123,88 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Participants'
         }
+
+        /// <summary>
+        /// Test the property 'Overdue'
+        /// </summary>
+        [Fact]
+        public void OverdueTest()
+        {
+            // TODO unit test for the property 'Overdue'
+        }
+
+        /// <summary>
+        /// Test the property 'CreatedTime'
+        /// </summary>
+        [Fact]
+        public void CreatedTimeTest()
+        {
+            // TODO unit test for the property 'CreatedTime'
+        }
+
+        /// <summary>
+        /// Test the property 'SubmittedTime'
+        /// </summary>
+        [Fact]
+        public void SubmittedTimeTest()
+        {
+            // TODO unit test for the property 'SubmittedTime'
+        }
+
+        /// <summary>
+        /// Test the property 'AppliedTime'
+        /// </summary>
+        [Fact]
+        public void AppliedTimeTest()
+        {
+            // TODO unit test for the property 'AppliedTime'
+        }
+
+        /// <summary>
+        /// Test the property 'RefreshedTime'
+        /// </summary>
+        [Fact]
+        public void RefreshedTimeTest()
+        {
+            // TODO unit test for the property 'RefreshedTime'
+        }
+
+        /// <summary>
+        /// Test the property 'UseCalculatedValues'
+        /// </summary>
+        [Fact]
+        public void UseCalculatedValuesTest()
+        {
+            // TODO unit test for the property 'UseCalculatedValues'
+        }
+
+        /// <summary>
+        /// Test the property 'CommentsCount'
+        /// </summary>
+        [Fact]
+        public void CommentsCountTest()
+        {
+            // TODO unit test for the property 'CommentsCount'
+        }
+
+        /// <summary>
+        /// Test the property 'Description'
+        /// </summary>
+        [Fact]
+        public void DescriptionTest()
+        {
+            // TODO unit test for the property 'Description'
+        }
+
+        /// <summary>
+        /// Test the property 'Application'
+        /// </summary>
+        [Fact]
+        public void ApplicationTest()
+        {
+            // TODO unit test for the property 'Application'
+        }
+
         /// <summary>
         /// Test the property 'Owner'
         /// </summary>
@@ -197,6 +213,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Owner'
         }
+
         /// <summary>
         /// Test the property 'State'
         /// </summary>
@@ -205,6 +222,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'State'
         }
+
         /// <summary>
         /// Test the property 'Id'
         /// </summary>
@@ -213,6 +231,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Id'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -221,6 +240,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'Priority'
         /// </summary>
@@ -229,7 +249,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Priority'
         }
-
     }
-
 }

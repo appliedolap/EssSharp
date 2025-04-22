@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Dimension
     /// </summary>
     [DataContract(Name = "Dimension")]
-    public partial class Dimension : IEquatable<Dimension>, IValidatableObject
+    public partial class Dimension : IValidatableObject
     {
         /// <summary>
         /// Defines AddMemberOption
@@ -82,7 +82,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "LEVEL_NULLS")]
             LEVELNULLS = 8
-
         }
 
 
@@ -114,7 +113,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "SPARSE")]
             SPARSE = 3
-
         }
 
 
@@ -152,7 +150,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "NONE")]
             NONE = 4
-
         }
 
 
@@ -190,7 +187,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DYNAMIC")]
             DYNAMIC = 4
-
         }
 
 
@@ -222,7 +218,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DESCENDING")]
             DESCENDING = 3
-
         }
 
 
@@ -272,7 +267,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "DYNAMIC_CALC")]
             DYNAMICCALC = 6
-
         }
 
 
@@ -322,7 +316,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "ATTRIBUTES")]
             ATTRIBUTES = 6
-
         }
 
 
@@ -354,7 +347,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "RESET_DIMENSION")]
             RESETDIMENSION = 3
-
         }
 
 
@@ -398,7 +390,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "NOTGEN2")]
             NOTGEN2 = 5
-
         }
 
 
@@ -634,214 +625,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Dimension);
-        }
-
-        /// <summary>
-        /// Returns true if Dimension instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Dimension to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Dimension input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Generations == input.Generations ||
-                    this.Generations != null &&
-                    input.Generations != null &&
-                    this.Generations.SequenceEqual(input.Generations)
-                ) && 
-                (
-                    this.Levels == input.Levels ||
-                    this.Levels != null &&
-                    input.Levels != null &&
-                    this.Levels.SequenceEqual(input.Levels)
-                ) && 
-                (
-                    this.AllowassociationChanges == input.AllowassociationChanges ||
-                    this.AllowassociationChanges.Equals(input.AllowassociationChanges)
-                ) && 
-                (
-                    this.AllowFormulaChanges == input.AllowFormulaChanges ||
-                    this.AllowFormulaChanges.Equals(input.AllowFormulaChanges)
-                ) && 
-                (
-                    this.AllowPropertyChanges == input.AllowPropertyChanges ||
-                    this.AllowPropertyChanges.Equals(input.AllowPropertyChanges)
-                ) && 
-                (
-                    this.AllowUDAChanges == input.AllowUDAChanges ||
-                    this.AllowUDAChanges.Equals(input.AllowUDAChanges)
-                ) && 
-                (
-                    this.MeasureOptions == input.MeasureOptions ||
-                    (this.MeasureOptions != null &&
-                    this.MeasureOptions.Equals(input.MeasureOptions))
-                ) && 
-                (
-                    this.AggregateLevelUsage == input.AggregateLevelUsage ||
-                    this.AggregateLevelUsage.Equals(input.AggregateLevelUsage)
-                ) && 
-                (
-                    this.AddMemberOption == input.AddMemberOption ||
-                    this.AddMemberOption.Equals(input.AddMemberOption)
-                ) && 
-                (
-                    this.AttributeOptions == input.AttributeOptions ||
-                    (this.AttributeOptions != null &&
-                    this.AttributeOptions.Equals(input.AttributeOptions))
-                ) && 
-                (
-                    this.ConfigOption == input.ConfigOption ||
-                    this.ConfigOption.Equals(input.ConfigOption)
-                ) && 
-                (
-                    this.Unique == input.Unique ||
-                    this.Unique.Equals(input.Unique)
-                ) && 
-                (
-                    this.HierarchyType == input.HierarchyType ||
-                    this.HierarchyType.Equals(input.HierarchyType)
-                ) && 
-                (
-                    this.SortOption == input.SortOption ||
-                    this.SortOption.Equals(input.SortOption)
-                ) && 
-                (
-                    this.StorageType == input.StorageType ||
-                    this.StorageType.Equals(input.StorageType)
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                ) && 
-                (
-                    this.UpdateOption == input.UpdateOption ||
-                    this.UpdateOption.Equals(input.UpdateOption)
-                ) && 
-                (
-                    this.AllowMoves == input.AllowMoves ||
-                    this.AllowMoves.Equals(input.AllowMoves)
-                ) && 
-                (
-                    this.SolveOrder == input.SolveOrder ||
-                    this.SolveOrder.Equals(input.SolveOrder)
-                ) && 
-                (
-                    this.CreateAttributeMembers == input.CreateAttributeMembers ||
-                    this.CreateAttributeMembers.Equals(input.CreateAttributeMembers)
-                ) && 
-                (
-                    this.Share == input.Share ||
-                    this.Share.Equals(input.Share)
-                ) && 
-                (
-                    this.IncrementalSort == input.IncrementalSort ||
-                    this.IncrementalSort.Equals(input.IncrementalSort)
-                ) && 
-                (
-                    this.AutoFixSharedMember == input.AutoFixSharedMember ||
-                    this.AutoFixSharedMember.Equals(input.AutoFixSharedMember)
-                ) && 
-                (
-                    this.Flexible == input.Flexible ||
-                    this.Flexible.Equals(input.Flexible)
-                ) && 
-                (
-                    this.MemberName == input.MemberName ||
-                    (this.MemberName != null &&
-                    this.MemberName.Equals(input.MemberName))
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.DimensionSolveOrder == input.DimensionSolveOrder ||
-                    this.DimensionSolveOrder.Equals(input.DimensionSolveOrder)
-                ) && 
-                (
-                    this.Added == input.Added ||
-                    this.Added.Equals(input.Added)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Generations != null)
-                {
-                    hashCode = (hashCode * 59) + this.Generations.GetHashCode();
-                }
-                if (this.Levels != null)
-                {
-                    hashCode = (hashCode * 59) + this.Levels.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.AllowassociationChanges.GetHashCode();
-                hashCode = (hashCode * 59) + this.AllowFormulaChanges.GetHashCode();
-                hashCode = (hashCode * 59) + this.AllowPropertyChanges.GetHashCode();
-                hashCode = (hashCode * 59) + this.AllowUDAChanges.GetHashCode();
-                if (this.MeasureOptions != null)
-                {
-                    hashCode = (hashCode * 59) + this.MeasureOptions.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.AggregateLevelUsage.GetHashCode();
-                hashCode = (hashCode * 59) + this.AddMemberOption.GetHashCode();
-                if (this.AttributeOptions != null)
-                {
-                    hashCode = (hashCode * 59) + this.AttributeOptions.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ConfigOption.GetHashCode();
-                hashCode = (hashCode * 59) + this.Unique.GetHashCode();
-                hashCode = (hashCode * 59) + this.HierarchyType.GetHashCode();
-                hashCode = (hashCode * 59) + this.SortOption.GetHashCode();
-                hashCode = (hashCode * 59) + this.StorageType.GetHashCode();
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                hashCode = (hashCode * 59) + this.UpdateOption.GetHashCode();
-                hashCode = (hashCode * 59) + this.AllowMoves.GetHashCode();
-                hashCode = (hashCode * 59) + this.SolveOrder.GetHashCode();
-                hashCode = (hashCode * 59) + this.CreateAttributeMembers.GetHashCode();
-                hashCode = (hashCode * 59) + this.Share.GetHashCode();
-                hashCode = (hashCode * 59) + this.IncrementalSort.GetHashCode();
-                hashCode = (hashCode * 59) + this.AutoFixSharedMember.GetHashCode();
-                hashCode = (hashCode * 59) + this.Flexible.GetHashCode();
-                if (this.MemberName != null)
-                {
-                    hashCode = (hashCode * 59) + this.MemberName.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.DimensionSolveOrder.GetHashCode();
-                hashCode = (hashCode * 59) + this.Added.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

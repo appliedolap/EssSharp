@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 
@@ -56,7 +57,7 @@ namespace EssSharp.Client
         /// <summary>
         /// Gets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
         /// </summary>
-        public ILogger Logger { get; }
+        ILogger Logger { get; }
 
         /// <summary>
         /// Gets the maximum number of concurrent requests.
@@ -89,10 +90,10 @@ namespace EssSharp.Client
         string TempFolderPath { get; }
 
         /// <summary>
-        /// Gets the HTTP connection timeout (in milliseconds)
+        /// Gets the HTTP connection timeout.
         /// </summary>
         /// <value>HTTP connection timeout.</value>
-        int Timeout { get; }
+        TimeSpan Timeout { get; }
 
         /// <summary>
         /// Gets the proxy.
@@ -117,6 +118,11 @@ namespace EssSharp.Client
         /// </summary>
         /// <value>Password.</value>
         string Password { get; }
+
+        /// <summary>
+        /// Determine whether or not the "default credentials" (e.g. the user account under which the current process is running) will be sent along to the server. The default is false.
+        /// </summary>
+        bool UseDefaultCredentials { get; }
 
         /// <summary>
         /// Get the servers associated with the operation.
@@ -144,5 +150,11 @@ namespace EssSharp.Client
         /// </summary>
         /// <value>X509 Certificate collection.</value>
         X509CertificateCollection ClientCertificates { get; }
+
+        /// <summary>
+        /// Callback function for handling the validation of remote certificates. Useful for certificate pinning and
+        /// overriding certificate errors in the scope of a request.
+        /// </summary>
+        RemoteCertificateValidationCallback RemoteCertificateValidationCallback { get; }
     }
 }

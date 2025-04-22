@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CopyOptions
     /// </summary>
     [DataContract(Name = "CopyOptions")]
-    public partial class CopyOptions : IEquatable<CopyOptions>, IValidatableObject
+    public partial class CopyOptions : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CopyOptions" /> class.
@@ -139,93 +139,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CopyOptions);
-        }
-
-        /// <summary>
-        /// Returns true if CopyOptions instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CopyOptions to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CopyOptions input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Properties == input.Properties ||
-                    this.Properties.Equals(input.Properties)
-                ) && 
-                (
-                    this.Comments == input.Comments ||
-                    this.Comments.Equals(input.Comments)
-                ) && 
-                (
-                    this.Data == input.Data ||
-                    this.Data.Equals(input.Data)
-                ) && 
-                (
-                    this.Tasks == input.Tasks ||
-                    this.Tasks.Equals(input.Tasks)
-                ) && 
-                (
-                    this.KeyMetrics == input.KeyMetrics ||
-                    this.KeyMetrics.Equals(input.KeyMetrics)
-                ) && 
-                (
-                    this.Slice == input.Slice ||
-                    this.Slice.Equals(input.Slice)
-                ) && 
-                (
-                    this.Layouts == input.Layouts ||
-                    this.Layouts.Equals(input.Layouts)
-                ) && 
-                (
-                    this.Approvers == input.Approvers ||
-                    this.Approvers.Equals(input.Approvers)
-                ) && 
-                (
-                    this.Participants == input.Participants ||
-                    this.Participants.Equals(input.Participants)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Properties.GetHashCode();
-                hashCode = (hashCode * 59) + this.Comments.GetHashCode();
-                hashCode = (hashCode * 59) + this.Data.GetHashCode();
-                hashCode = (hashCode * 59) + this.Tasks.GetHashCode();
-                hashCode = (hashCode * 59) + this.KeyMetrics.GetHashCode();
-                hashCode = (hashCode * 59) + this.Slice.GetHashCode();
-                hashCode = (hashCode * 59) + this.Layouts.GetHashCode();
-                hashCode = (hashCode * 59) + this.Approvers.GetHashCode();
-                hashCode = (hashCode * 59) + this.Participants.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

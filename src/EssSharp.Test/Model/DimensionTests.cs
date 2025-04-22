@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Dimension>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Generations'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Generations'
         }
+
         /// <summary>
         /// Test the property 'Levels'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Levels'
         }
+
         /// <summary>
         /// Test the property 'AllowassociationChanges'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowassociationChanges'
         }
+
         /// <summary>
         /// Test the property 'AllowFormulaChanges'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowFormulaChanges'
         }
+
         /// <summary>
         /// Test the property 'AllowPropertyChanges'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowPropertyChanges'
         }
+
         /// <summary>
         /// Test the property 'AllowUDAChanges'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowUDAChanges'
         }
+
         /// <summary>
         /// Test the property 'MeasureOptions'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MeasureOptions'
         }
+
         /// <summary>
         /// Test the property 'AggregateLevelUsage'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AggregateLevelUsage'
         }
+
         /// <summary>
         /// Test the property 'AddMemberOption'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AddMemberOption'
         }
+
         /// <summary>
         /// Test the property 'AttributeOptions'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AttributeOptions'
         }
+
         /// <summary>
         /// Test the property 'ConfigOption'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConfigOption'
         }
+
         /// <summary>
         /// Test the property 'Unique'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Unique'
         }
+
         /// <summary>
         /// Test the property 'HierarchyType'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HierarchyType'
         }
+
         /// <summary>
         /// Test the property 'SortOption'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SortOption'
         }
+
         /// <summary>
         /// Test the property 'StorageType'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StorageType'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'UpdateOption'
         /// </summary>
@@ -189,6 +204,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UpdateOption'
         }
+
         /// <summary>
         /// Test the property 'AllowMoves'
         /// </summary>
@@ -197,6 +213,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AllowMoves'
         }
+
         /// <summary>
         /// Test the property 'SolveOrder'
         /// </summary>
@@ -205,6 +222,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SolveOrder'
         }
+
         /// <summary>
         /// Test the property 'CreateAttributeMembers'
         /// </summary>
@@ -213,6 +231,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CreateAttributeMembers'
         }
+
         /// <summary>
         /// Test the property 'Share'
         /// </summary>
@@ -221,6 +240,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Share'
         }
+
         /// <summary>
         /// Test the property 'IncrementalSort'
         /// </summary>
@@ -229,6 +249,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IncrementalSort'
         }
+
         /// <summary>
         /// Test the property 'AutoFixSharedMember'
         /// </summary>
@@ -237,6 +258,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AutoFixSharedMember'
         }
+
         /// <summary>
         /// Test the property 'Flexible'
         /// </summary>
@@ -245,6 +267,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Flexible'
         }
+
         /// <summary>
         /// Test the property 'MemberName'
         /// </summary>
@@ -253,6 +276,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MemberName'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -261,6 +285,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'DimensionSolveOrder'
         /// </summary>
@@ -269,6 +294,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimensionSolveOrder'
         }
+
         /// <summary>
         /// Test the property 'Added'
         /// </summary>
@@ -277,7 +303,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Added'
         }
-
     }
-
 }

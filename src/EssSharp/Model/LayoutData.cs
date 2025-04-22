@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// LayoutData
     /// </summary>
     [DataContract(Name = "LayoutData")]
-    public partial class LayoutData : IEquatable<LayoutData>, IValidatableObject
+    public partial class LayoutData : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LayoutData" /> class.
@@ -121,118 +121,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as LayoutData);
-        }
-
-        /// <summary>
-        /// Returns true if LayoutData instances are equal
-        /// </summary>
-        /// <param name="input">Instance of LayoutData to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(LayoutData input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Statuses == input.Statuses ||
-                    this.Statuses != null &&
-                    input.Statuses != null &&
-                    this.Statuses.SequenceEqual(input.Statuses)
-                ) && 
-                (
-                    this.Texts == input.Texts ||
-                    this.Texts != null &&
-                    input.Texts != null &&
-                    this.Texts.SequenceEqual(input.Texts)
-                ) && 
-                (
-                    this.EnumIds == input.EnumIds ||
-                    this.EnumIds != null &&
-                    input.EnumIds != null &&
-                    this.EnumIds.SequenceEqual(input.EnumIds)
-                ) && 
-                (
-                    this.DataFormats == input.DataFormats ||
-                    this.DataFormats != null &&
-                    input.DataFormats != null &&
-                    this.DataFormats.SequenceEqual(input.DataFormats)
-                ) && 
-                (
-                    this.Types == input.Types ||
-                    this.Types != null &&
-                    input.Types != null &&
-                    this.Types.SequenceEqual(input.Types)
-                ) && 
-                (
-                    this.Filters == input.Filters ||
-                    this.Filters != null &&
-                    input.Filters != null &&
-                    this.Filters.SequenceEqual(input.Filters)
-                ) && 
-                (
-                    this.Values == input.Values ||
-                    this.Values != null &&
-                    input.Values != null &&
-                    this.Values.SequenceEqual(input.Values)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Statuses != null)
-                {
-                    hashCode = (hashCode * 59) + this.Statuses.GetHashCode();
-                }
-                if (this.Texts != null)
-                {
-                    hashCode = (hashCode * 59) + this.Texts.GetHashCode();
-                }
-                if (this.EnumIds != null)
-                {
-                    hashCode = (hashCode * 59) + this.EnumIds.GetHashCode();
-                }
-                if (this.DataFormats != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataFormats.GetHashCode();
-                }
-                if (this.Types != null)
-                {
-                    hashCode = (hashCode * 59) + this.Types.GetHashCode();
-                }
-                if (this.Filters != null)
-                {
-                    hashCode = (hashCode * 59) + this.Filters.GetHashCode();
-                }
-                if (this.Values != null)
-                {
-                    hashCode = (hashCode * 59) + this.Values.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

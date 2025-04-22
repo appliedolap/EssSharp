@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// AVClientInfo
     /// </summary>
     [DataContract(Name = "AVClientInfo")]
-    public partial class AVClientInfo : IEquatable<AVClientInfo>, IValidatableObject
+    public partial class AVClientInfo : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AVClientInfo" /> class.
@@ -85,67 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as AVClientInfo);
-        }
-
-        /// <summary>
-        /// Returns true if AVClientInfo instances are equal
-        /// </summary>
-        /// <param name="input">Instance of AVClientInfo to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(AVClientInfo input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Enabled == input.Enabled ||
-                    this.Enabled.Equals(input.Enabled)
-                ) && 
-                (
-                    this.Host == input.Host ||
-                    (this.Host != null &&
-                    this.Host.Equals(input.Host))
-                ) && 
-                (
-                    this.Port == input.Port ||
-                    this.Port.Equals(input.Port)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Enabled.GetHashCode();
-                if (this.Host != null)
-                {
-                    hashCode = (hashCode * 59) + this.Host.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Port.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

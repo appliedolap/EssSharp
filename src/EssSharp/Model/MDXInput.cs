@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// MDXInput
     /// </summary>
     [DataContract(Name = "MDXInput")]
-    public partial class MDXInput : IEquatable<MDXInput>, IValidatableObject
+    public partial class MDXInput : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MDXInput" /> class.
@@ -76,66 +76,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as MDXInput);
-        }
-
-        /// <summary>
-        /// Returns true if MDXInput instances are equal
-        /// </summary>
-        /// <param name="input">Instance of MDXInput to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(MDXInput input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Query == input.Query ||
-                    (this.Query != null &&
-                    this.Query.Equals(input.Query))
-                ) && 
-                (
-                    this.Preferences == input.Preferences ||
-                    (this.Preferences != null &&
-                    this.Preferences.Equals(input.Preferences))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Query != null)
-                {
-                    hashCode = (hashCode * 59) + this.Query.GetHashCode();
-                }
-                if (this.Preferences != null)
-                {
-                    hashCode = (hashCode * 59) + this.Preferences.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

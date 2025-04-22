@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// MemberMappingBean
     /// </summary>
     [DataContract(Name = "MemberMappingBean")]
-    public partial class MemberMappingBean : IEquatable<MemberMappingBean>, IValidatableObject
+    public partial class MemberMappingBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberMappingBean" /> class.
@@ -76,66 +76,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as MemberMappingBean);
-        }
-
-        /// <summary>
-        /// Returns true if MemberMappingBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of MemberMappingBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(MemberMappingBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.SourceMember == input.SourceMember ||
-                    (this.SourceMember != null &&
-                    this.SourceMember.Equals(input.SourceMember))
-                ) && 
-                (
-                    this.TargetMember == input.TargetMember ||
-                    (this.TargetMember != null &&
-                    this.TargetMember.Equals(input.TargetMember))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.SourceMember != null)
-                {
-                    hashCode = (hashCode * 59) + this.SourceMember.GetHashCode();
-                }
-                if (this.TargetMember != null)
-                {
-                    hashCode = (hashCode * 59) + this.TargetMember.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

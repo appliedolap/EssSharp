@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<FieldDataLoadOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ReferDimension'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ReferDimension'
         }
+
         /// <summary>
         /// Test the property 'ReferNumber'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ReferNumber'
         }
+
         /// <summary>
         /// Test the property 'ReferOption'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ReferOption'
         }
+
         /// <summary>
         /// Test the property 'Ignore'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Ignore'
         }
+
         /// <summary>
         /// Test the property 'Scale'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Scale'
         }
+
         /// <summary>
         /// Test the property 'UseReference'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UseReference'
         }
+
         /// <summary>
         /// Test the property 'Data'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Data'
         }
+
         /// <summary>
         /// Test the property 'Scalingfactor'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Scalingfactor'
         }
+
         /// <summary>
         /// Test the property 'StoreType'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StoreType'
         }
+
         /// <summary>
         /// Test the property 'StoreTypeCountMissing'
         /// </summary>
@@ -133,7 +141,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StoreTypeCountMissing'
         }
-
     }
-
 }

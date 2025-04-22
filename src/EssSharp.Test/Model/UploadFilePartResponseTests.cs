@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<UploadFilePartResponse>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'PartNum'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PartNum'
         }
+
         /// <summary>
         /// Test the property 'Response'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Response'
         }
-
     }
-
 }

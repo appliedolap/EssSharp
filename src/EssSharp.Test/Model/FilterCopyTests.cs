@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<FilterCopy>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'From'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'From'
         }
+
         /// <summary>
         /// Test the property 'To'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'To'
         }
-
     }
-
 }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DataLoadStartPayload>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'RuleFileName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RuleFileName'
         }
+
         /// <summary>
         /// Test the property 'Delimiter'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Delimiter'
         }
-
     }
-
 }

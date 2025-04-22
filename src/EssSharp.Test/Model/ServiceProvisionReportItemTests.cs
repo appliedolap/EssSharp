@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ServiceProvisionReportItem>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Roles'
         /// </summary>
@@ -61,7 +60,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Roles'
         }
-
     }
-
 }

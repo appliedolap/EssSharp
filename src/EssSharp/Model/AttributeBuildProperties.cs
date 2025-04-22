@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// AttributeBuildProperties
     /// </summary>
     [DataContract(Name = "AttributeBuildProperties")]
-    public partial class AttributeBuildProperties : IEquatable<AttributeBuildProperties>, IValidatableObject
+    public partial class AttributeBuildProperties : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AttributeBuildProperties" /> class.
@@ -94,68 +94,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as AttributeBuildProperties);
-        }
-
-        /// <summary>
-        /// Returns true if AttributeBuildProperties instances are equal
-        /// </summary>
-        /// <param name="input">Instance of AttributeBuildProperties to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(AttributeBuildProperties input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.RangeIncrementValue == input.RangeIncrementValue ||
-                    this.RangeIncrementValue.Equals(input.RangeIncrementValue)
-                ) && 
-                (
-                    this.RangeStartValue == input.RangeStartValue ||
-                    this.RangeStartValue.Equals(input.RangeStartValue)
-                ) && 
-                (
-                    this.RemoveAll == input.RemoveAll ||
-                    this.RemoveAll.Equals(input.RemoveAll)
-                ) && 
-                (
-                    this.UseRanges == input.UseRanges ||
-                    this.UseRanges.Equals(input.UseRanges)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.RangeIncrementValue.GetHashCode();
-                hashCode = (hashCode * 59) + this.RangeStartValue.GetHashCode();
-                hashCode = (hashCode * 59) + this.RemoveAll.GetHashCode();
-                hashCode = (hashCode * 59) + this.UseRanges.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

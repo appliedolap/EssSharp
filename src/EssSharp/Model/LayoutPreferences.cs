@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// LayoutPreferences
     /// </summary>
     [DataContract(Name = "LayoutPreferences")]
-    public partial class LayoutPreferences : IEquatable<LayoutPreferences>, IValidatableObject
+    public partial class LayoutPreferences : IValidatableObject
     {
         /// <summary>
         /// Defines Indentation
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "TOTALS")]
             TOTALS = 3
-
         }
 
 
@@ -219,147 +218,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as LayoutPreferences);
-        }
-
-        /// <summary>
-        /// Returns true if LayoutPreferences instances are equal
-        /// </summary>
-        /// <param name="input">Instance of LayoutPreferences to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(LayoutPreferences input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Indentation == input.Indentation ||
-                    this.Indentation.Equals(input.Indentation)
-                ) && 
-                (
-                    this.RowSuppression == input.RowSuppression ||
-                    (this.RowSuppression != null &&
-                    this.RowSuppression.Equals(input.RowSuppression))
-                ) && 
-                (
-                    this.ColumnSuppression == input.ColumnSuppression ||
-                    (this.ColumnSuppression != null &&
-                    this.ColumnSuppression.Equals(input.ColumnSuppression))
-                ) && 
-                (
-                    this.CellText == input.CellText ||
-                    this.CellText.Equals(input.CellText)
-                ) && 
-                (
-                    this.ZoomIn == input.ZoomIn ||
-                    (this.ZoomIn != null &&
-                    this.ZoomIn.Equals(input.ZoomIn))
-                ) && 
-                (
-                    this.Navigate == input.Navigate ||
-                    this.Navigate.Equals(input.Navigate)
-                ) && 
-                (
-                    this.IncludeSelection == input.IncludeSelection ||
-                    this.IncludeSelection.Equals(input.IncludeSelection)
-                ) && 
-                (
-                    this.RepeatMemberLabels == input.RepeatMemberLabels ||
-                    this.RepeatMemberLabels.Equals(input.RepeatMemberLabels)
-                ) && 
-                (
-                    this.WithinSelectedGroup == input.WithinSelectedGroup ||
-                    this.WithinSelectedGroup.Equals(input.WithinSelectedGroup)
-                ) && 
-                (
-                    this.RemoveUnSelectedGroup == input.RemoveUnSelectedGroup ||
-                    this.RemoveUnSelectedGroup.Equals(input.RemoveUnSelectedGroup)
-                ) && 
-                (
-                    this.IncludeDescriptionLabel == input.IncludeDescriptionLabel ||
-                    this.IncludeDescriptionLabel.Equals(input.IncludeDescriptionLabel)
-                ) && 
-                (
-                    this.MissingText == input.MissingText ||
-                    (this.MissingText != null &&
-                    this.MissingText.Equals(input.MissingText))
-                ) && 
-                (
-                    this.NoAccessText == input.NoAccessText ||
-                    (this.NoAccessText != null &&
-                    this.NoAccessText.Equals(input.NoAccessText))
-                ) && 
-                (
-                    this.MaxRows == input.MaxRows ||
-                    this.MaxRows.Equals(input.MaxRows)
-                ) && 
-                (
-                    this.FormulaRetention == input.FormulaRetention ||
-                    (this.FormulaRetention != null &&
-                    this.FormulaRetention.Equals(input.FormulaRetention))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Indentation.GetHashCode();
-                if (this.RowSuppression != null)
-                {
-                    hashCode = (hashCode * 59) + this.RowSuppression.GetHashCode();
-                }
-                if (this.ColumnSuppression != null)
-                {
-                    hashCode = (hashCode * 59) + this.ColumnSuppression.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.CellText.GetHashCode();
-                if (this.ZoomIn != null)
-                {
-                    hashCode = (hashCode * 59) + this.ZoomIn.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Navigate.GetHashCode();
-                hashCode = (hashCode * 59) + this.IncludeSelection.GetHashCode();
-                hashCode = (hashCode * 59) + this.RepeatMemberLabels.GetHashCode();
-                hashCode = (hashCode * 59) + this.WithinSelectedGroup.GetHashCode();
-                hashCode = (hashCode * 59) + this.RemoveUnSelectedGroup.GetHashCode();
-                hashCode = (hashCode * 59) + this.IncludeDescriptionLabel.GetHashCode();
-                if (this.MissingText != null)
-                {
-                    hashCode = (hashCode * 59) + this.MissingText.GetHashCode();
-                }
-                if (this.NoAccessText != null)
-                {
-                    hashCode = (hashCode * 59) + this.NoAccessText.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.MaxRows.GetHashCode();
-                if (this.FormulaRetention != null)
-                {
-                    hashCode = (hashCode * 59) + this.FormulaRetention.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ScriptContent
     /// </summary>
     [DataContract(Name = "ScriptContent")]
-    public partial class ScriptContent : IEquatable<ScriptContent>, IValidatableObject
+    public partial class ScriptContent : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScriptContent" /> class.
@@ -67,57 +67,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ScriptContent);
-        }
-
-        /// <summary>
-        /// Returns true if ScriptContent instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ScriptContent to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ScriptContent input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Content == input.Content ||
-                    (this.Content != null &&
-                    this.Content.Equals(input.Content))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Content != null)
-                {
-                    hashCode = (hashCode * 59) + this.Content.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

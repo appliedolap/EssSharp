@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<FilePathDetail>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'To'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'To'
         }
+
         /// <summary>
         /// Test the property 'From'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'From'
         }
-
     }
-
 }

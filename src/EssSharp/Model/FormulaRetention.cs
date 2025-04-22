@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// FormulaRetention
     /// </summary>
     [DataContract(Name = "FormulaRetention")]
-    public partial class FormulaRetention : IEquatable<FormulaRetention>, IValidatableObject
+    public partial class FormulaRetention : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FormulaRetention" /> class.
@@ -103,73 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as FormulaRetention);
-        }
-
-        /// <summary>
-        /// Returns true if FormulaRetention instances are equal
-        /// </summary>
-        /// <param name="input">Instance of FormulaRetention to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(FormulaRetention input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Comments == input.Comments ||
-                    this.Comments.Equals(input.Comments)
-                ) && 
-                (
-                    this.Zoom == input.Zoom ||
-                    this.Zoom.Equals(input.Zoom)
-                ) && 
-                (
-                    this.Focus == input.Focus ||
-                    this.Focus.Equals(input.Focus)
-                ) && 
-                (
-                    this.Retrive == input.Retrive ||
-                    this.Retrive.Equals(input.Retrive)
-                ) && 
-                (
-                    this.Fill == input.Fill ||
-                    this.Fill.Equals(input.Fill)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Comments.GetHashCode();
-                hashCode = (hashCode * 59) + this.Zoom.GetHashCode();
-                hashCode = (hashCode * 59) + this.Focus.GetHashCode();
-                hashCode = (hashCode * 59) + this.Retrive.GetHashCode();
-                hashCode = (hashCode * 59) + this.Fill.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

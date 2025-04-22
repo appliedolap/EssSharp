@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<TransactionSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'CommittedAccess'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CommittedAccess'
         }
+
         /// <summary>
         /// Test the property 'ConcurrencyWaitSeconds'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConcurrencyWaitSeconds'
         }
+
         /// <summary>
         /// Test the property 'ConcurrencyPreImageAccess'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ConcurrencyPreImageAccess'
         }
+
         /// <summary>
         /// Test the property 'CommitBlocks'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CommitBlocks'
         }
+
         /// <summary>
         /// Test the property 'CommitRows'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CommitRows'
         }
-
     }
-
 }

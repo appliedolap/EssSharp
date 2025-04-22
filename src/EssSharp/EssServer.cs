@@ -68,7 +68,7 @@ namespace EssSharp
                 BasePath  = basePath,
                 Username  = username,
                 Password  = password,
-                Timeout   = int.MaxValue,
+                Timeout   = TimeSpan.FromMilliseconds(int.MaxValue),
                 UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}",
                 //Proxy = new WebProxy("localhost", 8070)
             };
@@ -880,7 +880,7 @@ namespace EssSharp
             try
             {
                 var api = GetApi<JobsApi>();
-                var jobs = await api.JobsGetAllJobRecordsAsync(null, null, "job_ID:desc", null, jobsLimit, null, 0, cancellationToken).ConfigureAwait(false);
+                var jobs = await api.JobsGetAllJobRecordsAsync(orderBy: "job_ID:desc", limit: jobsLimit, systemjobs: false, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return jobs?.ToEssSharpList(this) ?? new List<IEssJob>();
             }

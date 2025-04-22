@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<PatchElement>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Op'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Op'
         }
+
         /// <summary>
         /// Test the property 'Path'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Path'
         }
+
         /// <summary>
         /// Test the property 'Value'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Value'
         }
+
         /// <summary>
         /// Test the property 'From'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'From'
         }
-
     }
-
 }

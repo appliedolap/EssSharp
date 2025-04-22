@@ -943,7 +943,7 @@ catch (ApiException e)
 
 <a id="scriptslistscripts"></a>
 # **ScriptsListScripts**
-> ScriptList ScriptsListScripts (string applicationName, string databaseName, string file = null)
+> ScriptList ScriptsListScripts (string applicationName, string databaseName, string file = null, string keyword = null)
 
 List Essbase Scripts
 
@@ -973,11 +973,12 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
             var file = "\"calc\"";  // string | <p>Type of script file.</p> (optional)  (default to "calc")
+            var keyword = "keyword_example";  // string | <p>Filter the list of scripts using a keyword.</p> (optional) 
 
             try
             {
                 // List Essbase Scripts
-                ScriptList result = apiInstance.ScriptsListScripts(applicationName, databaseName, file);
+                ScriptList result = apiInstance.ScriptsListScripts(applicationName, databaseName, file, keyword);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -998,7 +999,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List Essbase Scripts
-    ApiResponse<ScriptList> response = apiInstance.ScriptsListScriptsWithHttpInfo(applicationName, databaseName, file);
+    ApiResponse<ScriptList> response = apiInstance.ScriptsListScriptsWithHttpInfo(applicationName, databaseName, file, keyword);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1018,6 +1019,7 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **file** | **string** | &lt;p&gt;Type of script file.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
+| **keyword** | **string** | &lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; | [optional]  |
 
 ### Return type
 

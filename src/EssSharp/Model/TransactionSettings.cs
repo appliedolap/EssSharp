@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// TransactionSettings
     /// </summary>
     [DataContract(Name = "TransactionSettings")]
-    public partial class TransactionSettings : IEquatable<TransactionSettings>, IValidatableObject
+    public partial class TransactionSettings : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionSettings" /> class.
@@ -103,73 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as TransactionSettings);
-        }
-
-        /// <summary>
-        /// Returns true if TransactionSettings instances are equal
-        /// </summary>
-        /// <param name="input">Instance of TransactionSettings to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(TransactionSettings input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.CommittedAccess == input.CommittedAccess ||
-                    this.CommittedAccess.Equals(input.CommittedAccess)
-                ) && 
-                (
-                    this.ConcurrencyWaitSeconds == input.ConcurrencyWaitSeconds ||
-                    this.ConcurrencyWaitSeconds.Equals(input.ConcurrencyWaitSeconds)
-                ) && 
-                (
-                    this.ConcurrencyPreImageAccess == input.ConcurrencyPreImageAccess ||
-                    this.ConcurrencyPreImageAccess.Equals(input.ConcurrencyPreImageAccess)
-                ) && 
-                (
-                    this.CommitBlocks == input.CommitBlocks ||
-                    this.CommitBlocks.Equals(input.CommitBlocks)
-                ) && 
-                (
-                    this.CommitRows == input.CommitRows ||
-                    this.CommitRows.Equals(input.CommitRows)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.CommittedAccess.GetHashCode();
-                hashCode = (hashCode * 59) + this.ConcurrencyWaitSeconds.GetHashCode();
-                hashCode = (hashCode * 59) + this.ConcurrencyPreImageAccess.GetHashCode();
-                hashCode = (hashCode * 59) + this.CommitBlocks.GetHashCode();
-                hashCode = (hashCode * 59) + this.CommitRows.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

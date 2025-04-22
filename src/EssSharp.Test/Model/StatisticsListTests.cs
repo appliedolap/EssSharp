@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<StatisticsList>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'General'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'General'
         }
+
         /// <summary>
         /// Test the property 'Storage'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Storage'
         }
+
         /// <summary>
         /// Test the property 'Runtime'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Runtime'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -85,7 +87,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

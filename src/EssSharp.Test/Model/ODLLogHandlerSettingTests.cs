@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ODLLogHandlerSetting>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'HandlerName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'HandlerName'
         }
+
         /// <summary>
         /// Test the property 'LogType'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LogType'
         }
+
         /// <summary>
         /// Test the property 'MaxLogSize'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxLogSize'
         }
+
         /// <summary>
         /// Test the property 'MaxAllLogSize'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxAllLogSize'
         }
+
         /// <summary>
         /// Test the property 'RotationPeriod'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RotationPeriod'
         }
+
         /// <summary>
         /// Test the property 'RotationPeriodCustom'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RotationPeriodCustom'
         }
+
         /// <summary>
         /// Test the property 'RetentionPeriod'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RetentionPeriod'
         }
+
         /// <summary>
         /// Test the property 'RetentionPeriodCustom'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RetentionPeriodCustom'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -125,7 +132,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

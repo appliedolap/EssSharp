@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AboutInstance>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ProvisioningSupported'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ProvisioningSupported'
         }
+
         /// <summary>
         /// Test the property 'ResetPasswordSupported'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ResetPasswordSupported'
         }
+
         /// <summary>
         /// Test the property 'EasInstalled'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EasInstalled'
         }
-
     }
-
 }

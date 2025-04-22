@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DataLoadOptions>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'ClearCombinations'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ClearCombinations'
         }
+
         /// <summary>
         /// Test the property 'Option'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Option'
         }
+
         /// <summary>
         /// Test the property 'RemoveAll'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RemoveAll'
         }
+
         /// <summary>
         /// Test the property 'SignFlipDimension'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SignFlipDimension'
         }
+
         /// <summary>
         /// Test the property 'SignFlipUDA'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'SignFlipUDA'
         }
-
     }
-
 }

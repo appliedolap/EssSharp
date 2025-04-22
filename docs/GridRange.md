@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Types** | **List&lt;string&gt;** |  | [optional] 
+**Start** | **int** |  | [optional] 
+**Filters** | **List&lt;string&gt;** |  | [optional] 
 **Statuses** | **List&lt;string&gt;** |  | [optional] 
 **Texts** | **List&lt;string&gt;** |  | [optional] 
-**EnumIds** | **List&lt;string&gt;** |  | [optional] 
 **DataFormats** | **List&lt;string&gt;** |  | [optional] 
-**Start** | **int** |  | [optional] 
-**Types** | **List&lt;string&gt;** |  | [optional] 
-**Filters** | **List&lt;string&gt;** |  | [optional] 
+**EnumIds** | **List&lt;string&gt;** |  | [optional] 
 **Values** | **List&lt;string&gt;** |  | [optional] 
 **End** | **int** |  | [optional] 
 

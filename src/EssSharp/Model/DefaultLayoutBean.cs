@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// DefaultLayoutBean
     /// </summary>
     [DataContract(Name = "DefaultLayoutBean")]
-    public partial class DefaultLayoutBean : IEquatable<DefaultLayoutBean>, IValidatableObject
+    public partial class DefaultLayoutBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultLayoutBean" /> class.
@@ -76,58 +76,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as DefaultLayoutBean);
-        }
-
-        /// <summary>
-        /// Returns true if DefaultLayoutBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of DefaultLayoutBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(DefaultLayoutBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.UserDefault == input.UserDefault ||
-                    this.UserDefault.Equals(input.UserDefault)
-                ) && 
-                (
-                    this.DatabaseDefault == input.DatabaseDefault ||
-                    this.DatabaseDefault.Equals(input.DatabaseDefault)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.UserDefault.GetHashCode();
-                hashCode = (hashCode * 59) + this.DatabaseDefault.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

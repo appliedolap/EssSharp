@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AVClientInfo>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Enabled'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Enabled'
         }
+
         /// <summary>
         /// Test the property 'Host'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Host'
         }
+
         /// <summary>
         /// Test the property 'Port'
         /// </summary>
@@ -77,7 +78,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Port'
         }
-
     }
-
 }

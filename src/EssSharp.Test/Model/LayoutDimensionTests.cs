@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<LayoutDimension>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+
         /// <summary>
         /// Test the property 'DisplayName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DisplayName'
         }
+
         /// <summary>
         /// Test the property 'Page'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Page'
         }
+
         /// <summary>
         /// Test the property 'Hidden'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Hidden'
         }
+
         /// <summary>
         /// Test the property 'Expanded'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Expanded'
         }
+
         /// <summary>
         /// Test the property 'Axis'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Axis'
         }
+
         /// <summary>
         /// Test the property 'Position'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Position'
         }
-
     }
-
 }

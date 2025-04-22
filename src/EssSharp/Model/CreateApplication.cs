@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// CreateApplication
     /// </summary>
     [DataContract(Name = "CreateApplication")]
-    public partial class CreateApplication : IEquatable<CreateApplication>, IValidatableObject
+    public partial class CreateApplication : IValidatableObject
     {
         /// <summary>
         /// Defines AppType
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "UTF8")]
             UTF8 = 2
-
         }
 
 
@@ -78,7 +77,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "ASO")]
             ASO = 3
-
         }
 
 
@@ -185,109 +183,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as CreateApplication);
-        }
-
-        /// <summary>
-        /// Returns true if CreateApplication instances are equal
-        /// </summary>
-        /// <param name="input">Instance of CreateApplication to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(CreateApplication input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.ApplicationName == input.ApplicationName ||
-                    (this.ApplicationName != null &&
-                    this.ApplicationName.Equals(input.ApplicationName))
-                ) && 
-                (
-                    this.DatabaseName == input.DatabaseName ||
-                    (this.DatabaseName != null &&
-                    this.DatabaseName.Equals(input.DatabaseName))
-                ) && 
-                (
-                    this.AllowDuplicates == input.AllowDuplicates ||
-                    this.AllowDuplicates.Equals(input.AllowDuplicates)
-                ) && 
-                (
-                    this.EnableScenario == input.EnableScenario ||
-                    this.EnableScenario.Equals(input.EnableScenario)
-                ) && 
-                (
-                    this.MemberCount == input.MemberCount ||
-                    this.MemberCount.Equals(input.MemberCount)
-                ) && 
-                (
-                    this.DatabaseType == input.DatabaseType ||
-                    (this.DatabaseType != null &&
-                    this.DatabaseType.Equals(input.DatabaseType))
-                ) && 
-                (
-                    this.AppType == input.AppType ||
-                    this.AppType.Equals(input.AppType)
-                ) && 
-                (
-                    this.MemberPrefix == input.MemberPrefix ||
-                    (this.MemberPrefix != null &&
-                    this.MemberPrefix.Equals(input.MemberPrefix))
-                ) && 
-                (
-                    this.DbType == input.DbType ||
-                    this.DbType.Equals(input.DbType)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.ApplicationName != null)
-                {
-                    hashCode = (hashCode * 59) + this.ApplicationName.GetHashCode();
-                }
-                if (this.DatabaseName != null)
-                {
-                    hashCode = (hashCode * 59) + this.DatabaseName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.AllowDuplicates.GetHashCode();
-                hashCode = (hashCode * 59) + this.EnableScenario.GetHashCode();
-                hashCode = (hashCode * 59) + this.MemberCount.GetHashCode();
-                if (this.DatabaseType != null)
-                {
-                    hashCode = (hashCode * 59) + this.DatabaseType.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.AppType.GetHashCode();
-                if (this.MemberPrefix != null)
-                {
-                    hashCode = (hashCode * 59) + this.MemberPrefix.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.DbType.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

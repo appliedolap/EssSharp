@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<DrillthroughBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -61,22 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-        /// <summary>
-        /// Test the property 'UseTempTables'
-        /// </summary>
-        [Fact]
-        public void UseTempTablesTest()
-        {
-            // TODO unit test for the property 'UseTempTables'
-        }
-        /// <summary>
-        /// Test the property 'ParameterMapping'
-        /// </summary>
-        [Fact]
-        public void ParameterMappingTest()
-        {
-            // TODO unit test for the property 'ParameterMapping'
-        }
+
         /// <summary>
         /// Test the property 'ColumnMapping'
         /// </summary>
@@ -85,6 +69,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnMapping'
         }
+
+        /// <summary>
+        /// Test the property 'ParameterMapping'
+        /// </summary>
+        [Fact]
+        public void ParameterMappingTest()
+        {
+            // TODO unit test for the property 'ParameterMapping'
+        }
+
         /// <summary>
         /// Test the property 'DrillableRegions'
         /// </summary>
@@ -93,6 +87,16 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DrillableRegions'
         }
+
+        /// <summary>
+        /// Test the property 'UseTempTables'
+        /// </summary>
+        [Fact]
+        public void UseTempTablesTest()
+        {
+            // TODO unit test for the property 'UseTempTables'
+        }
+
         /// <summary>
         /// Test the property 'Columns'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Columns'
         }
+
         /// <summary>
         /// Test the property 'DataSourceName'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DataSourceName'
         }
+
         /// <summary>
         /// Test the property 'Url'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Url'
         }
+
         /// <summary>
         /// Test the property 'Type'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Type'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -133,7 +141,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// ResultBean
     /// </summary>
     [DataContract(Name = "ResultBean")]
-    public partial class ResultBean : IEquatable<ResultBean>, IValidatableObject
+    public partial class ResultBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ResultBean" /> class.
@@ -76,68 +76,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as ResultBean);
-        }
-
-        /// <summary>
-        /// Returns true if ResultBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of ResultBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ResultBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                ) && 
-                (
-                    this.Columns == input.Columns ||
-                    this.Columns != null &&
-                    input.Columns != null &&
-                    this.Columns.SequenceEqual(input.Columns)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                if (this.Columns != null)
-                {
-                    hashCode = (hashCode * 59) + this.Columns.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

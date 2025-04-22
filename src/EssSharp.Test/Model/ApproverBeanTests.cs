@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<ApproverBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Email'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Email'
         }
+
         /// <summary>
         /// Test the property 'Approved'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Approved'
         }
+
         /// <summary>
         /// Test the property 'Time'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Time'
         }
+
         /// <summary>
         /// Test the property 'Id'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Id'
         }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>
@@ -93,7 +96,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
-
     }
-
 }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// GridOperation
     /// </summary>
     [DataContract(Name = "GridOperation")]
-    public partial class GridOperation : IEquatable<GridOperation>, IValidatableObject
+    public partial class GridOperation : IValidatableObject
     {
         /// <summary>
         /// Defines Action
@@ -82,7 +82,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "submit")]
             Submit = 8
-
         }
 
 
@@ -159,91 +158,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as GridOperation);
-        }
-
-        /// <summary>
-        /// Returns true if GridOperation instances are equal
-        /// </summary>
-        /// <param name="input">Instance of GridOperation to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(GridOperation input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Grid == input.Grid ||
-                    (this.Grid != null &&
-                    this.Grid.Equals(input.Grid))
-                ) && 
-                (
-                    this.Action == input.Action ||
-                    this.Action.Equals(input.Action)
-                ) && 
-                (
-                    this.Alias == input.Alias ||
-                    (this.Alias != null &&
-                    this.Alias.Equals(input.Alias))
-                ) && 
-                (
-                    this.Coordinates == input.Coordinates ||
-                    this.Coordinates != null &&
-                    input.Coordinates != null &&
-                    this.Coordinates.SequenceEqual(input.Coordinates)
-                ) && 
-                (
-                    this.Ranges == input.Ranges ||
-                    this.Ranges != null &&
-                    input.Ranges != null &&
-                    this.Ranges.SequenceEqual(input.Ranges)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Grid != null)
-                {
-                    hashCode = (hashCode * 59) + this.Grid.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Action.GetHashCode();
-                if (this.Alias != null)
-                {
-                    hashCode = (hashCode * 59) + this.Alias.GetHashCode();
-                }
-                if (this.Coordinates != null)
-                {
-                    hashCode = (hashCode * 59) + this.Coordinates.GetHashCode();
-                }
-                if (this.Ranges != null)
-                {
-                    hashCode = (hashCode * 59) + this.Ranges.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

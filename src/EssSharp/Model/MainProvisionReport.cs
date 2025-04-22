@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// MainProvisionReport
     /// </summary>
     [DataContract(Name = "MainProvisionReport")]
-    public partial class MainProvisionReport : IEquatable<MainProvisionReport>, IValidatableObject
+    public partial class MainProvisionReport : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainProvisionReport" /> class.
@@ -85,76 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as MainProvisionReport);
-        }
-
-        /// <summary>
-        /// Returns true if MainProvisionReport instances are equal
-        /// </summary>
-        /// <param name="input">Instance of MainProvisionReport to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(MainProvisionReport input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Service == input.Service ||
-                    (this.Service != null &&
-                    this.Service.Equals(input.Service))
-                ) && 
-                (
-                    this.Applications == input.Applications ||
-                    (this.Applications != null &&
-                    this.Applications.Equals(input.Applications))
-                ) && 
-                (
-                    this.Links == input.Links ||
-                    this.Links != null &&
-                    input.Links != null &&
-                    this.Links.SequenceEqual(input.Links)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Service != null)
-                {
-                    hashCode = (hashCode * 59) + this.Service.GetHashCode();
-                }
-                if (this.Applications != null)
-                {
-                    hashCode = (hashCode * 59) + this.Applications.GetHashCode();
-                }
-                if (this.Links != null)
-                {
-                    hashCode = (hashCode * 59) + this.Links.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<AppGeneralSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Description'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Description'
         }
+
         /// <summary>
         /// Test the property 'LogLevelAsString'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'LogLevelAsString'
         }
+
         /// <summary>
         /// Test the property 'EasManagedApp'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EasManagedApp'
         }
+
         /// <summary>
         /// Test the property 'TimeoutOnDataBlockLocks'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'TimeoutOnDataBlockLocks'
         }
+
         /// <summary>
         /// Test the property 'MaxAttachmentFileSizeInKbs'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxAttachmentFileSizeInKbs'
         }
+
         /// <summary>
         /// Test the property 'PendingCacheSizeLimitInMbs'
         /// </summary>
@@ -101,7 +105,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PendingCacheSizeLimitInMbs'
         }
-
     }
-
 }

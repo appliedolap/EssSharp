@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// AreaBean
     /// </summary>
     [DataContract(Name = "AreaBean")]
-    public partial class AreaBean : IEquatable<AreaBean>, IValidatableObject
+    public partial class AreaBean : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AreaBean" /> class.
@@ -103,86 +103,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as AreaBean);
-        }
-
-        /// <summary>
-        /// Returns true if AreaBean instances are equal
-        /// </summary>
-        /// <param name="input">Instance of AreaBean to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(AreaBean input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.SourceArea == input.SourceArea ||
-                    (this.SourceArea != null &&
-                    this.SourceArea.Equals(input.SourceArea))
-                ) && 
-                (
-                    this.TargetArea == input.TargetArea ||
-                    (this.TargetArea != null &&
-                    this.TargetArea.Equals(input.TargetArea))
-                ) && 
-                (
-                    this.SourceCellCount == input.SourceCellCount ||
-                    this.SourceCellCount.Equals(input.SourceCellCount)
-                ) && 
-                (
-                    this.TargetCellCount == input.TargetCellCount ||
-                    this.TargetCellCount.Equals(input.TargetCellCount)
-                ) && 
-                (
-                    this.Slices == input.Slices ||
-                    this.Slices != null &&
-                    input.Slices != null &&
-                    this.Slices.SequenceEqual(input.Slices)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.SourceArea != null)
-                {
-                    hashCode = (hashCode * 59) + this.SourceArea.GetHashCode();
-                }
-                if (this.TargetArea != null)
-                {
-                    hashCode = (hashCode * 59) + this.TargetArea.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.SourceCellCount.GetHashCode();
-                hashCode = (hashCode * 59) + this.TargetCellCount.GetHashCode();
-                if (this.Slices != null)
-                {
-                    hashCode = (hashCode * 59) + this.Slices.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

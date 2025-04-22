@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// QueryParamsInfo
     /// </summary>
     [DataContract(Name = "QueryParamsInfo")]
-    public partial class QueryParamsInfo : IEquatable<QueryParamsInfo>, IValidatableObject
+    public partial class QueryParamsInfo : IValidatableObject
     {
         /// <summary>
         /// Defines Type
@@ -64,7 +64,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "LONG")]
             LONG = 5
-
         }
 
 
@@ -159,95 +158,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as QueryParamsInfo);
-        }
-
-        /// <summary>
-        /// Returns true if QueryParamsInfo instances are equal
-        /// </summary>
-        /// <param name="input">Instance of QueryParamsInfo to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(QueryParamsInfo input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Index == input.Index ||
-                    this.Index.Equals(input.Index)
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.DefaultValue == input.DefaultValue ||
-                    (this.DefaultValue != null &&
-                    this.DefaultValue.Equals(input.DefaultValue))
-                ) && 
-                (
-                    this.Required == input.Required ||
-                    this.Required.Equals(input.Required)
-                ) && 
-                (
-                    this.UseSubVariable == input.UseSubVariable ||
-                    this.UseSubVariable.Equals(input.UseSubVariable)
-                ) && 
-                (
-                    this.SubVariableName == input.SubVariableName ||
-                    (this.SubVariableName != null &&
-                    this.SubVariableName.Equals(input.SubVariableName))
-                ) && 
-                (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Index.GetHashCode();
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.DefaultValue != null)
-                {
-                    hashCode = (hashCode * 59) + this.DefaultValue.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Required.GetHashCode();
-                hashCode = (hashCode * 59) + this.UseSubVariable.GetHashCode();
-                if (this.SubVariableName != null)
-                {
-                    hashCode = (hashCode * 59) + this.SubVariableName.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

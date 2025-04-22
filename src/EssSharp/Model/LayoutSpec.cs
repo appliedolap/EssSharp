@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// LayoutSpec
     /// </summary>
     [DataContract(Name = "LayoutSpec")]
-    public partial class LayoutSpec : IEquatable<LayoutSpec>, IValidatableObject
+    public partial class LayoutSpec : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LayoutSpec" /> class.
@@ -85,75 +85,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as LayoutSpec);
-        }
-
-        /// <summary>
-        /// Returns true if LayoutSpec instances are equal
-        /// </summary>
-        /// <param name="input">Instance of LayoutSpec to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(LayoutSpec input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Description == input.Description ||
-                    (this.Description != null &&
-                    this.Description.Equals(input.Description))
-                ) && 
-                (
-                    this.Grid == input.Grid ||
-                    (this.Grid != null &&
-                    this.Grid.Equals(input.Grid))
-                ) && 
-                (
-                    this.Preferences == input.Preferences ||
-                    (this.Preferences != null &&
-                    this.Preferences.Equals(input.Preferences))
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Description != null)
-                {
-                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.Grid != null)
-                {
-                    hashCode = (hashCode * 59) + this.Grid.GetHashCode();
-                }
-                if (this.Preferences != null)
-                {
-                    hashCode = (hashCode * 59) + this.Preferences.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// GeneralOutlineSettings
     /// </summary>
     [DataContract(Name = "GeneralOutlineSettings")]
-    public partial class GeneralOutlineSettings : IEquatable<GeneralOutlineSettings>, IValidatableObject
+    public partial class GeneralOutlineSettings : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GeneralOutlineSettings" /> class.
@@ -130,96 +130,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as GeneralOutlineSettings);
-        }
-
-        /// <summary>
-        /// Returns true if GeneralOutlineSettings instances are equal
-        /// </summary>
-        /// <param name="input">Instance of GeneralOutlineSettings to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(GeneralOutlineSettings input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.CaseSensitiveMembers == input.CaseSensitiveMembers ||
-                    this.CaseSensitiveMembers.Equals(input.CaseSensitiveMembers)
-                ) && 
-                (
-                    this.OutlineType == input.OutlineType ||
-                    (this.OutlineType != null &&
-                    this.OutlineType.Equals(input.OutlineType))
-                ) && 
-                (
-                    this.AllowDuplicateMemberNames == input.AllowDuplicateMemberNames ||
-                    this.AllowDuplicateMemberNames.Equals(input.AllowDuplicateMemberNames)
-                ) && 
-                (
-                    this.TypeMeasuresEnabled == input.TypeMeasuresEnabled ||
-                    this.TypeMeasuresEnabled.Equals(input.TypeMeasuresEnabled)
-                ) && 
-                (
-                    this.DateFormat == input.DateFormat ||
-                    (this.DateFormat != null &&
-                    this.DateFormat.Equals(input.DateFormat))
-                ) && 
-                (
-                    this.VaryingAttributesEnabled == input.VaryingAttributesEnabled ||
-                    this.VaryingAttributesEnabled.Equals(input.VaryingAttributesEnabled)
-                ) && 
-                (
-                    this.TimeModified == input.TimeModified ||
-                    this.TimeModified.Equals(input.TimeModified)
-                ) && 
-                (
-                    this.AutoConfigure == input.AutoConfigure ||
-                    this.AutoConfigure.Equals(input.AutoConfigure)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.CaseSensitiveMembers.GetHashCode();
-                if (this.OutlineType != null)
-                {
-                    hashCode = (hashCode * 59) + this.OutlineType.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.AllowDuplicateMemberNames.GetHashCode();
-                hashCode = (hashCode * 59) + this.TypeMeasuresEnabled.GetHashCode();
-                if (this.DateFormat != null)
-                {
-                    hashCode = (hashCode * 59) + this.DateFormat.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.VaryingAttributesEnabled.GetHashCode();
-                hashCode = (hashCode * 59) + this.TimeModified.GetHashCode();
-                hashCode = (hashCode * 59) + this.AutoConfigure.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

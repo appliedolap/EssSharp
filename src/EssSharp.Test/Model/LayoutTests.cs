@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Layout>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Header'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Header'
         }
+
         /// <summary>
         /// Test the property 'Spec'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Spec'
         }
-
     }
-
 }

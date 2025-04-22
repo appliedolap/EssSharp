@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<JobRecordBean>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'JobID'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'JobID'
         }
+
         /// <summary>
         /// Test the property 'AppName'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AppName'
         }
+
         /// <summary>
         /// Test the property 'DbName'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DbName'
         }
+
         /// <summary>
         /// Test the property 'JobType'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'JobType'
         }
+
         /// <summary>
         /// Test the property 'JobfileName'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'JobfileName'
         }
+
         /// <summary>
         /// Test the property 'UserName'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'UserName'
         }
+
         /// <summary>
         /// Test the property 'StartTime'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StartTime'
         }
+
         /// <summary>
         /// Test the property 'EndTime'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EndTime'
         }
+
         /// <summary>
         /// Test the property 'StatusCode'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StatusCode'
         }
+
         /// <summary>
         /// Test the property 'StatusMessage'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StatusMessage'
         }
+
         /// <summary>
         /// Test the property 'JobInputInfo'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'JobInputInfo'
         }
+
         /// <summary>
         /// Test the property 'JobOutputInfo'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'JobOutputInfo'
         }
+
         /// <summary>
         /// Test the property 'Links'
         /// </summary>
@@ -157,7 +168,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
-
     }
-
 }

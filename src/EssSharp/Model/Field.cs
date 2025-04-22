@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Field
     /// </summary>
     [DataContract(Name = "Field")]
-    public partial class Field : IEquatable<Field>, IValidatableObject
+    public partial class Field : IValidatableObject
     {
         /// <summary>
         /// Defines SelectFilterJoinOption
@@ -46,7 +46,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "OR")]
             OR = 2
-
         }
 
 
@@ -72,7 +71,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "OR")]
             OR = 2
-
         }
 
 
@@ -110,7 +108,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "FIRST_CAPITAL_CASE")]
             FIRSTCAPITALCASE = 4
-
         }
 
 
@@ -139,8 +136,8 @@ namespace EssSharp.Model
         /// <param name="dimensionBuildOptions">dimensionBuildOptions.</param>
         /// <param name="dataloadOptions">dataloadOptions.</param>
         /// <param name="transform">transform.</param>
-        /// <param name="_case">_case.</param>
-        public Field(List<Filter> rejectFilters = default(List<Filter>), List<Filter> selectFilters = default(List<Filter>), List<ReplaceInfo> replaceInformation = default(List<ReplaceInfo>), SelectFilterJoinOptionEnum? selectFilterJoinOption = default(SelectFilterJoinOptionEnum?), RejectFilterJoinOptionEnum? rejectFilterJoinOption = default(RejectFilterJoinOptionEnum?), string dateFormat = default(string), string name = default(string), string prefix = default(string), string suffix = default(string), byte[] option = default(byte[]), bool convertSpaceToUnderScore = default(bool), bool trim = default(bool), double width = default(double), string smartList = default(string), FieldDimBuildOptions dimensionBuildOptions = default(FieldDimBuildOptions), FieldDataLoadOptions dataloadOptions = default(FieldDataLoadOptions), Transform transform = default(Transform), CaseEnum? _case = default(CaseEnum?))
+        /// <param name="varCase">varCase.</param>
+        public Field(List<Filter> rejectFilters = default(List<Filter>), List<Filter> selectFilters = default(List<Filter>), List<ReplaceInfo> replaceInformation = default(List<ReplaceInfo>), SelectFilterJoinOptionEnum? selectFilterJoinOption = default(SelectFilterJoinOptionEnum?), RejectFilterJoinOptionEnum? rejectFilterJoinOption = default(RejectFilterJoinOptionEnum?), string dateFormat = default(string), string name = default(string), string prefix = default(string), string suffix = default(string), byte[] option = default(byte[]), bool convertSpaceToUnderScore = default(bool), bool trim = default(bool), double width = default(double), string smartList = default(string), FieldDimBuildOptions dimensionBuildOptions = default(FieldDimBuildOptions), FieldDataLoadOptions dataloadOptions = default(FieldDataLoadOptions), Transform transform = default(Transform), CaseEnum? varCase = default(CaseEnum?))
         {
             this.RejectFilters = rejectFilters;
             this.SelectFilters = selectFilters;
@@ -159,7 +156,7 @@ namespace EssSharp.Model
             this.DimensionBuildOptions = dimensionBuildOptions;
             this.DataloadOptions = dataloadOptions;
             this.Transform = transform;
-            this.Case = _case;
+            this.Case = varCase;
         }
 
         /// <summary>
@@ -292,189 +289,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Field);
-        }
-
-        /// <summary>
-        /// Returns true if Field instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Field to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Field input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.RejectFilters == input.RejectFilters ||
-                    this.RejectFilters != null &&
-                    input.RejectFilters != null &&
-                    this.RejectFilters.SequenceEqual(input.RejectFilters)
-                ) && 
-                (
-                    this.SelectFilters == input.SelectFilters ||
-                    this.SelectFilters != null &&
-                    input.SelectFilters != null &&
-                    this.SelectFilters.SequenceEqual(input.SelectFilters)
-                ) && 
-                (
-                    this.ReplaceInformation == input.ReplaceInformation ||
-                    this.ReplaceInformation != null &&
-                    input.ReplaceInformation != null &&
-                    this.ReplaceInformation.SequenceEqual(input.ReplaceInformation)
-                ) && 
-                (
-                    this.SelectFilterJoinOption == input.SelectFilterJoinOption ||
-                    this.SelectFilterJoinOption.Equals(input.SelectFilterJoinOption)
-                ) && 
-                (
-                    this.RejectFilterJoinOption == input.RejectFilterJoinOption ||
-                    this.RejectFilterJoinOption.Equals(input.RejectFilterJoinOption)
-                ) && 
-                (
-                    this.DateFormat == input.DateFormat ||
-                    (this.DateFormat != null &&
-                    this.DateFormat.Equals(input.DateFormat))
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Prefix == input.Prefix ||
-                    (this.Prefix != null &&
-                    this.Prefix.Equals(input.Prefix))
-                ) && 
-                (
-                    this.Suffix == input.Suffix ||
-                    (this.Suffix != null &&
-                    this.Suffix.Equals(input.Suffix))
-                ) && 
-                (
-                    this.Option == input.Option ||
-                    (this.Option != null &&
-                    this.Option.Equals(input.Option))
-                ) && 
-                (
-                    this.ConvertSpaceToUnderScore == input.ConvertSpaceToUnderScore ||
-                    this.ConvertSpaceToUnderScore.Equals(input.ConvertSpaceToUnderScore)
-                ) && 
-                (
-                    this.Trim == input.Trim ||
-                    this.Trim.Equals(input.Trim)
-                ) && 
-                (
-                    this.Width == input.Width ||
-                    this.Width.Equals(input.Width)
-                ) && 
-                (
-                    this.SmartList == input.SmartList ||
-                    (this.SmartList != null &&
-                    this.SmartList.Equals(input.SmartList))
-                ) && 
-                (
-                    this.DimensionBuildOptions == input.DimensionBuildOptions ||
-                    (this.DimensionBuildOptions != null &&
-                    this.DimensionBuildOptions.Equals(input.DimensionBuildOptions))
-                ) && 
-                (
-                    this.DataloadOptions == input.DataloadOptions ||
-                    (this.DataloadOptions != null &&
-                    this.DataloadOptions.Equals(input.DataloadOptions))
-                ) && 
-                (
-                    this.Transform == input.Transform ||
-                    (this.Transform != null &&
-                    this.Transform.Equals(input.Transform))
-                ) && 
-                (
-                    this.Case == input.Case ||
-                    this.Case.Equals(input.Case)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.RejectFilters != null)
-                {
-                    hashCode = (hashCode * 59) + this.RejectFilters.GetHashCode();
-                }
-                if (this.SelectFilters != null)
-                {
-                    hashCode = (hashCode * 59) + this.SelectFilters.GetHashCode();
-                }
-                if (this.ReplaceInformation != null)
-                {
-                    hashCode = (hashCode * 59) + this.ReplaceInformation.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.SelectFilterJoinOption.GetHashCode();
-                hashCode = (hashCode * 59) + this.RejectFilterJoinOption.GetHashCode();
-                if (this.DateFormat != null)
-                {
-                    hashCode = (hashCode * 59) + this.DateFormat.GetHashCode();
-                }
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.Prefix != null)
-                {
-                    hashCode = (hashCode * 59) + this.Prefix.GetHashCode();
-                }
-                if (this.Suffix != null)
-                {
-                    hashCode = (hashCode * 59) + this.Suffix.GetHashCode();
-                }
-                if (this.Option != null)
-                {
-                    hashCode = (hashCode * 59) + this.Option.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.ConvertSpaceToUnderScore.GetHashCode();
-                hashCode = (hashCode * 59) + this.Trim.GetHashCode();
-                hashCode = (hashCode * 59) + this.Width.GetHashCode();
-                if (this.SmartList != null)
-                {
-                    hashCode = (hashCode * 59) + this.SmartList.GetHashCode();
-                }
-                if (this.DimensionBuildOptions != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimensionBuildOptions.GetHashCode();
-                }
-                if (this.DataloadOptions != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataloadOptions.GetHashCode();
-                }
-                if (this.Transform != null)
-                {
-                    hashCode = (hashCode * 59) + this.Transform.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Case.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

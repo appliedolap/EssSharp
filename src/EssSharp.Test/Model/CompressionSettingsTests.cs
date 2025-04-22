@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<CompressionSettings>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'DimensionName'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'DimensionName'
         }
+
         /// <summary>
         /// Test the property 'IsCompression'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IsCompression'
         }
+
         /// <summary>
         /// Test the property 'StoredLevel0Members'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'StoredLevel0Members'
         }
+
         /// <summary>
         /// Test the property 'AverageBundleFill'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AverageBundleFill'
         }
+
         /// <summary>
         /// Test the property 'AverageValueLength'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AverageValueLength'
         }
+
         /// <summary>
         /// Test the property 'Level0MB'
         /// </summary>
@@ -101,7 +105,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Level0MB'
         }
-
     }
-
 }

@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<StorageStatistics>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'Dimensions'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dimensions'
         }
+
         /// <summary>
         /// Test the property 'MaxKeyLengthBits'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxKeyLengthBits'
         }
+
         /// <summary>
         /// Test the property 'MaxKeyLengthBytes'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxKeyLengthBytes'
         }
+
         /// <summary>
         /// Test the property 'NumberOfInputLevelCells'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfInputLevelCells'
         }
+
         /// <summary>
         /// Test the property 'NumberOfIncrementalDataSlices'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfIncrementalDataSlices'
         }
+
         /// <summary>
         /// Test the property 'NumberOfIncrementalInputCells'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfIncrementalInputCells'
         }
+
         /// <summary>
         /// Test the property 'NumberOfAggregateViews'
         /// </summary>
@@ -109,6 +114,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfAggregateViews'
         }
+
         /// <summary>
         /// Test the property 'NumberOfAggregateCells'
         /// </summary>
@@ -117,6 +123,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfAggregateCells'
         }
+
         /// <summary>
         /// Test the property 'NumberOfIncrementalAggregateCells'
         /// </summary>
@@ -125,6 +132,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfIncrementalAggregateCells'
         }
+
         /// <summary>
         /// Test the property 'CostOfQueryingIncrementalData'
         /// </summary>
@@ -133,6 +141,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CostOfQueryingIncrementalData'
         }
+
         /// <summary>
         /// Test the property 'InputLevelDataSize'
         /// </summary>
@@ -141,6 +150,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'InputLevelDataSize'
         }
+
         /// <summary>
         /// Test the property 'AggregateDataSize'
         /// </summary>
@@ -149,6 +159,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AggregateDataSize'
         }
+
         /// <summary>
         /// Test the property 'NumberOfExistingBlocks'
         /// </summary>
@@ -157,6 +168,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'NumberOfExistingBlocks'
         }
+
         /// <summary>
         /// Test the property 'BlockSize'
         /// </summary>
@@ -165,6 +177,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BlockSize'
         }
+
         /// <summary>
         /// Test the property 'PotentialNumberOfBlocks'
         /// </summary>
@@ -173,6 +186,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PotentialNumberOfBlocks'
         }
+
         /// <summary>
         /// Test the property 'ExistingLevelZeroBlocks'
         /// </summary>
@@ -181,6 +195,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ExistingLevelZeroBlocks'
         }
+
         /// <summary>
         /// Test the property 'ExistingUpperLevelBlocks'
         /// </summary>
@@ -189,6 +204,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ExistingUpperLevelBlocks'
         }
+
         /// <summary>
         /// Test the property 'BlockDensity'
         /// </summary>
@@ -197,6 +213,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'BlockDensity'
         }
+
         /// <summary>
         /// Test the property 'PercentageOfMaximumBlocksExisting'
         /// </summary>
@@ -205,6 +222,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PercentageOfMaximumBlocksExisting'
         }
+
         /// <summary>
         /// Test the property 'CompressionRatio'
         /// </summary>
@@ -213,6 +231,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'CompressionRatio'
         }
+
         /// <summary>
         /// Test the property 'AverageClusteringRatio'
         /// </summary>
@@ -221,6 +240,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AverageClusteringRatio'
         }
+
         /// <summary>
         /// Test the property 'PageFileSize'
         /// </summary>
@@ -229,6 +249,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'PageFileSize'
         }
+
         /// <summary>
         /// Test the property 'IndexFileSize'
         /// </summary>
@@ -237,7 +258,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'IndexFileSize'
         }
-
     }
-
 }

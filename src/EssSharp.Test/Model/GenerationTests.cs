@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<Generation>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'GenerationNumber'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'GenerationNumber'
         }
+
         /// <summary>
         /// Test the property 'ColumnName'
         /// </summary>
@@ -69,7 +69,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ColumnName'
         }
-
     }
-
 }

@@ -603,7 +603,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScenariosAddApproverAsync(long scenarioId, ApproverBean body = default(ApproverBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScenariosAddApproverAsync(long scenarioId, ApproverBean body = default(ApproverBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Add Approver
@@ -617,7 +617,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosAddApproverWithHttpInfoAsync(long scenarioId, ApproverBean body = default(ApproverBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosAddApproverWithHttpInfoAsync(long scenarioId, ApproverBean body = default(ApproverBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Add Comment
         /// </summary>
@@ -630,7 +630,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommentBean</returns>
-        System.Threading.Tasks.Task<CommentBean> ScenariosAddCommentAsync(long scenarioId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CommentBean> ScenariosAddCommentAsync(long scenarioId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Add Comment
@@ -644,7 +644,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommentBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommentBean>> ScenariosAddCommentWithHttpInfoAsync(long scenarioId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CommentBean>> ScenariosAddCommentWithHttpInfoAsync(long scenarioId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Add Participant
         /// </summary>
@@ -657,7 +657,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScenariosAddParticipantAsync(long scenarioId, ParticipantBean body = default(ParticipantBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScenariosAddParticipantAsync(long scenarioId, ParticipantBean body = default(ParticipantBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Add Participant
@@ -671,7 +671,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosAddParticipantWithHttpInfoAsync(long scenarioId, ParticipantBean body = default(ParticipantBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosAddParticipantWithHttpInfoAsync(long scenarioId, ParticipantBean body = default(ParticipantBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Create Scenario
         /// </summary>
@@ -683,7 +683,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        System.Threading.Tasks.Task<ScenarioBean> ScenariosCreateAsync(ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScenarioBean> ScenariosCreateAsync(ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Create Scenario
@@ -696,7 +696,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosCreateWithHttpInfoAsync(ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosCreateWithHttpInfoAsync(ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
         /// </summary>
@@ -708,7 +708,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScenariosDeleteAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScenariosDeleteAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
@@ -721,7 +721,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosDeleteWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosDeleteWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete Approver
         /// </summary>
@@ -734,7 +734,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScenariosDeleteApproverAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScenariosDeleteApproverAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete Approver
@@ -748,7 +748,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosDeleteApproverWithHttpInfoAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosDeleteApproverWithHttpInfoAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete Comment
         /// </summary>
@@ -761,7 +761,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScenariosDeleteCommentAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScenariosDeleteCommentAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete Comment
@@ -775,7 +775,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosDeleteCommentWithHttpInfoAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosDeleteCommentWithHttpInfoAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Delete Participant
         /// </summary>
@@ -788,7 +788,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScenariosDeleteParticipantAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScenariosDeleteParticipantAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Delete Participant
@@ -802,7 +802,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosDeleteParticipantWithHttpInfoAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosDeleteParticipantWithHttpInfoAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Scenario
         /// </summary>
@@ -815,7 +815,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        System.Threading.Tasks.Task<ScenarioBean> ScenariosGetAsync(long id, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScenarioBean> ScenariosGetAsync(long id, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Scenario
@@ -829,7 +829,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosGetWithHttpInfoAsync(long id, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosGetWithHttpInfoAsync(long id, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Approvers
         /// </summary>
@@ -841,7 +841,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApproverListResponse</returns>
-        System.Threading.Tasks.Task<ApproverListResponse> ScenariosGetApproversAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApproverListResponse> ScenariosGetApproversAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Approvers
@@ -854,7 +854,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApproverListResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApproverListResponse>> ScenariosGetApproversWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApproverListResponse>> ScenariosGetApproversWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Changes
         /// </summary>
@@ -866,7 +866,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioChangesListResponse</returns>
-        System.Threading.Tasks.Task<ScenarioChangesListResponse> ScenariosGetChangeDataAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScenarioChangesListResponse> ScenariosGetChangeDataAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Changes
@@ -879,7 +879,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioChangesListResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScenarioChangesListResponse>> ScenariosGetChangeDataWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScenarioChangesListResponse>> ScenariosGetChangeDataWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Comment
         /// </summary>
@@ -892,7 +892,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommentBean</returns>
-        System.Threading.Tasks.Task<CommentBean> ScenariosGetCommentAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CommentBean> ScenariosGetCommentAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Comment
@@ -906,7 +906,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommentBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommentBean>> ScenariosGetCommentWithHttpInfoAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CommentBean>> ScenariosGetCommentWithHttpInfoAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Comments
         /// </summary>
@@ -918,7 +918,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommentListResponse</returns>
-        System.Threading.Tasks.Task<CommentListResponse> ScenariosGetCommentsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CommentListResponse> ScenariosGetCommentsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Comments
@@ -931,7 +931,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommentListResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommentListResponse>> ScenariosGetCommentsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CommentListResponse>> ScenariosGetCommentsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Participants
         /// </summary>
@@ -943,7 +943,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ParticipantListResponse</returns>
-        System.Threading.Tasks.Task<ParticipantListResponse> ScenariosGetParticipantsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ParticipantListResponse> ScenariosGetParticipantsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Participants
@@ -956,7 +956,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ParticipantListResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ParticipantListResponse>> ScenariosGetParticipantsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ParticipantListResponse>> ScenariosGetParticipantsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Scenario-Enabled Cubes
         /// </summary>
@@ -967,7 +967,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioCubesList</returns>
-        System.Threading.Tasks.Task<ScenarioCubesList> ScenariosGetRegisteredCubesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScenarioCubesList> ScenariosGetRegisteredCubesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Scenario-Enabled Cubes
@@ -979,7 +979,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioCubesList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScenarioCubesList>> ScenariosGetRegisteredCubesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScenarioCubesList>> ScenariosGetRegisteredCubesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Scenarios
         /// </summary>
@@ -1001,7 +1001,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioCollectionResponse</returns>
-        System.Threading.Tasks.Task<ScenarioCollectionResponse> ScenariosGetScenariosAsync(string filter = default(string), string role = default(string), bool? overdue = default(bool?), string state = default(string), string application = default(string), string database = default(string), bool? approvalPending = default(bool?), long? offset = default(long?), long? limit = default(long?), string orderBy = default(string), bool? count = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScenarioCollectionResponse> ScenariosGetScenariosAsync(string filter = default(string), string role = default(string), bool? overdue = default(bool?), string state = default(string), string application = default(string), string database = default(string), bool? approvalPending = default(bool?), long? offset = default(long?), long? limit = default(long?), string orderBy = default(string), bool? count = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Scenarios
@@ -1024,7 +1024,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioCollectionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScenarioCollectionResponse>> ScenariosGetScenariosWithHttpInfoAsync(string filter = default(string), string role = default(string), bool? overdue = default(bool?), string state = default(string), string application = default(string), string database = default(string), bool? approvalPending = default(bool?), long? offset = default(long?), long? limit = default(long?), string orderBy = default(string), bool? count = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScenarioCollectionResponse>> ScenariosGetScenariosWithHttpInfoAsync(string filter = default(string), string role = default(string), bool? overdue = default(bool?), string state = default(string), string application = default(string), string database = default(string), bool? approvalPending = default(bool?), long? offset = default(long?), long? limit = default(long?), string orderBy = default(string), bool? count = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Get Scenario Scripts
         /// </summary>
@@ -1036,7 +1036,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptListResponse</returns>
-        System.Threading.Tasks.Task<ScriptListResponse> ScenariosGetScriptsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScriptListResponse> ScenariosGetScriptsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Get Scenario Scripts
@@ -1049,7 +1049,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptListResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScriptListResponse>> ScenariosGetScriptsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScriptListResponse>> ScenariosGetScriptsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Scenario Partially
         /// </summary>
@@ -1062,7 +1062,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        System.Threading.Tasks.Task<ScenarioBean> ScenariosPatchAsync(long id, ScenarioEditBean body = default(ScenarioEditBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScenarioBean> ScenariosPatchAsync(long id, ScenarioEditBean body = default(ScenarioEditBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Scenario Partially
@@ -1076,7 +1076,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosPatchWithHttpInfoAsync(long id, ScenarioEditBean body = default(ScenarioEditBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosPatchWithHttpInfoAsync(long id, ScenarioEditBean body = default(ScenarioEditBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Perform Scenario Action
         /// </summary>
@@ -1091,7 +1091,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        System.Threading.Tasks.Task<ScenarioBean> ScenariosPerformActionAsync(long id, string action = default(string), bool? overwrite = default(bool?), ScenarioActionPayload body = default(ScenarioActionPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScenarioBean> ScenariosPerformActionAsync(long id, string action = default(string), bool? overwrite = default(bool?), ScenarioActionPayload body = default(ScenarioActionPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Perform Scenario Action
@@ -1107,7 +1107,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosPerformActionWithHttpInfoAsync(long id, string action = default(string), bool? overwrite = default(bool?), ScenarioActionPayload body = default(ScenarioActionPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosPerformActionWithHttpInfoAsync(long id, string action = default(string), bool? overwrite = default(bool?), ScenarioActionPayload body = default(ScenarioActionPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Scenario Fully
         /// </summary>
@@ -1120,7 +1120,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        System.Threading.Tasks.Task<ScenarioBean> ScenariosUpdateAsync(long id, ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScenarioBean> ScenariosUpdateAsync(long id, ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Scenario Fully
@@ -1134,7 +1134,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosUpdateWithHttpInfoAsync(long id, ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosUpdateWithHttpInfoAsync(long id, ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Comment
         /// </summary>
@@ -1148,7 +1148,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScenariosUpdateCommentAsync(long scenarioId, long commentId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScenariosUpdateCommentAsync(long scenarioId, long commentId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Comment
@@ -1163,7 +1163,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosUpdateCommentWithHttpInfoAsync(long scenarioId, long commentId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosUpdateCommentWithHttpInfoAsync(long scenarioId, long commentId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// Update Scenario with Script
         /// </summary>
@@ -1177,7 +1177,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScenariosUpdateScriptAsync(long scenarioId, string scriptType, ScriptBean body = default(ScriptBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScenariosUpdateScriptAsync(long scenarioId, string scriptType, ScriptBean body = default(ScriptBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// Update Scenario with Script
@@ -1192,7 +1192,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosUpdateScriptWithHttpInfoAsync(long scenarioId, string scriptType, ScriptBean body = default(ScriptBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScenariosUpdateScriptWithHttpInfoAsync(long scenarioId, string scriptType, ScriptBean body = default(ScriptBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -1348,6 +1348,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1395,7 +1396,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScenariosAddApproverAsync(long scenarioId, ApproverBean body = default(ApproverBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScenariosAddApproverAsync(long scenarioId, ApproverBean body = default(ApproverBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ScenariosAddApproverWithHttpInfoAsync(scenarioId, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1409,7 +1410,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosAddApproverWithHttpInfoAsync(long scenarioId, ApproverBean body = default(ApproverBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosAddApproverWithHttpInfoAsync(long scenarioId, ApproverBean body = default(ApproverBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1501,6 +1502,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1548,7 +1550,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommentBean</returns>
-        public async System.Threading.Tasks.Task<CommentBean> ScenariosAddCommentAsync(long scenarioId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CommentBean> ScenariosAddCommentAsync(long scenarioId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<CommentBean> localVarResponse = await ScenariosAddCommentWithHttpInfoAsync(scenarioId, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1563,7 +1565,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommentBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommentBean>> ScenariosAddCommentWithHttpInfoAsync(long scenarioId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommentBean>> ScenariosAddCommentWithHttpInfoAsync(long scenarioId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1654,6 +1656,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1701,7 +1704,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScenariosAddParticipantAsync(long scenarioId, ParticipantBean body = default(ParticipantBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScenariosAddParticipantAsync(long scenarioId, ParticipantBean body = default(ParticipantBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ScenariosAddParticipantWithHttpInfoAsync(scenarioId, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1715,7 +1718,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosAddParticipantWithHttpInfoAsync(long scenarioId, ParticipantBean body = default(ParticipantBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosAddParticipantWithHttpInfoAsync(long scenarioId, ParticipantBean body = default(ParticipantBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1805,6 +1808,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1850,7 +1854,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosCreateAsync(ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosCreateAsync(ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScenarioBean> localVarResponse = await ScenariosCreateWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1864,7 +1868,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosCreateWithHttpInfoAsync(ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosCreateWithHttpInfoAsync(ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1950,6 +1954,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -1995,7 +2000,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScenariosDeleteAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScenariosDeleteAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ScenariosDeleteWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2008,7 +2013,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosDeleteWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosDeleteWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2098,6 +2103,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2145,7 +2151,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScenariosDeleteApproverAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScenariosDeleteApproverAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ScenariosDeleteApproverWithHttpInfoAsync(scenarioId, userId, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2159,7 +2165,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosDeleteApproverWithHttpInfoAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosDeleteApproverWithHttpInfoAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -2250,6 +2256,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2297,7 +2304,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScenariosDeleteCommentAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScenariosDeleteCommentAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ScenariosDeleteCommentWithHttpInfoAsync(scenarioId, commentId, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2311,7 +2318,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosDeleteCommentWithHttpInfoAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosDeleteCommentWithHttpInfoAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2402,6 +2409,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2449,7 +2457,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScenariosDeleteParticipantAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScenariosDeleteParticipantAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ScenariosDeleteParticipantWithHttpInfoAsync(scenarioId, userId, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2463,7 +2471,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosDeleteParticipantWithHttpInfoAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosDeleteParticipantWithHttpInfoAsync(long scenarioId, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -2557,6 +2565,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2607,7 +2616,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosGetAsync(long id, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosGetAsync(long id, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScenarioBean> localVarResponse = await ScenariosGetWithHttpInfoAsync(id, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2622,7 +2631,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosGetWithHttpInfoAsync(long id, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosGetWithHttpInfoAsync(long id, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2713,6 +2722,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2758,7 +2768,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApproverListResponse</returns>
-        public async System.Threading.Tasks.Task<ApproverListResponse> ScenariosGetApproversAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApproverListResponse> ScenariosGetApproversAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ApproverListResponse> localVarResponse = await ScenariosGetApproversWithHttpInfoAsync(scenarioId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2772,7 +2782,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApproverListResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApproverListResponse>> ScenariosGetApproversWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApproverListResponse>> ScenariosGetApproversWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2859,6 +2869,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -2904,7 +2915,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioChangesListResponse</returns>
-        public async System.Threading.Tasks.Task<ScenarioChangesListResponse> ScenariosGetChangeDataAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScenarioChangesListResponse> ScenariosGetChangeDataAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScenarioChangesListResponse> localVarResponse = await ScenariosGetChangeDataWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2918,7 +2929,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioChangesListResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioChangesListResponse>> ScenariosGetChangeDataWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioChangesListResponse>> ScenariosGetChangeDataWithHttpInfoAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -3007,6 +3018,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3054,7 +3066,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommentBean</returns>
-        public async System.Threading.Tasks.Task<CommentBean> ScenariosGetCommentAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CommentBean> ScenariosGetCommentAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<CommentBean> localVarResponse = await ScenariosGetCommentWithHttpInfoAsync(scenarioId, commentId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3069,7 +3081,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommentBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommentBean>> ScenariosGetCommentWithHttpInfoAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommentBean>> ScenariosGetCommentWithHttpInfoAsync(long scenarioId, long commentId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -3157,6 +3169,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3202,7 +3215,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommentListResponse</returns>
-        public async System.Threading.Tasks.Task<CommentListResponse> ScenariosGetCommentsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CommentListResponse> ScenariosGetCommentsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<CommentListResponse> localVarResponse = await ScenariosGetCommentsWithHttpInfoAsync(scenarioId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3216,7 +3229,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommentListResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommentListResponse>> ScenariosGetCommentsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommentListResponse>> ScenariosGetCommentsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -3303,6 +3316,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3348,7 +3362,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ParticipantListResponse</returns>
-        public async System.Threading.Tasks.Task<ParticipantListResponse> ScenariosGetParticipantsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ParticipantListResponse> ScenariosGetParticipantsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ParticipantListResponse> localVarResponse = await ScenariosGetParticipantsWithHttpInfoAsync(scenarioId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3362,7 +3376,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ParticipantListResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ParticipantListResponse>> ScenariosGetParticipantsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ParticipantListResponse>> ScenariosGetParticipantsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -3447,6 +3461,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3490,7 +3505,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioCubesList</returns>
-        public async System.Threading.Tasks.Task<ScenarioCubesList> ScenariosGetRegisteredCubesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScenarioCubesList> ScenariosGetRegisteredCubesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScenarioCubesList> localVarResponse = await ScenariosGetRegisteredCubesWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3503,7 +3518,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioCubesList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioCubesList>> ScenariosGetRegisteredCubesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioCubesList>> ScenariosGetRegisteredCubesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -3609,6 +3624,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3707,7 +3723,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioCollectionResponse</returns>
-        public async System.Threading.Tasks.Task<ScenarioCollectionResponse> ScenariosGetScenariosAsync(string filter = default(string), string role = default(string), bool? overdue = default(bool?), string state = default(string), string application = default(string), string database = default(string), bool? approvalPending = default(bool?), long? offset = default(long?), long? limit = default(long?), string orderBy = default(string), bool? count = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScenarioCollectionResponse> ScenariosGetScenariosAsync(string filter = default(string), string role = default(string), bool? overdue = default(bool?), string state = default(string), string application = default(string), string database = default(string), bool? approvalPending = default(bool?), long? offset = default(long?), long? limit = default(long?), string orderBy = default(string), bool? count = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScenarioCollectionResponse> localVarResponse = await ScenariosGetScenariosWithHttpInfoAsync(filter, role, overdue, state, application, database, approvalPending, offset, limit, orderBy, count, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3731,7 +3747,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioCollectionResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioCollectionResponse>> ScenariosGetScenariosWithHttpInfoAsync(string filter = default(string), string role = default(string), bool? overdue = default(bool?), string state = default(string), string application = default(string), string database = default(string), bool? approvalPending = default(bool?), long? offset = default(long?), long? limit = default(long?), string orderBy = default(string), bool? count = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioCollectionResponse>> ScenariosGetScenariosWithHttpInfoAsync(string filter = default(string), string role = default(string), bool? overdue = default(bool?), string state = default(string), string application = default(string), string database = default(string), bool? approvalPending = default(bool?), long? offset = default(long?), long? limit = default(long?), string orderBy = default(string), bool? count = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -3861,6 +3877,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -3906,7 +3923,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptListResponse</returns>
-        public async System.Threading.Tasks.Task<ScriptListResponse> ScenariosGetScriptsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScriptListResponse> ScenariosGetScriptsAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScriptListResponse> localVarResponse = await ScenariosGetScriptsWithHttpInfoAsync(scenarioId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3920,7 +3937,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptListResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptListResponse>> ScenariosGetScriptsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptListResponse>> ScenariosGetScriptsWithHttpInfoAsync(long scenarioId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -4011,6 +4028,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -4058,7 +4076,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosPatchAsync(long id, ScenarioEditBean body = default(ScenarioEditBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosPatchAsync(long id, ScenarioEditBean body = default(ScenarioEditBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScenarioBean> localVarResponse = await ScenariosPatchWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -4073,7 +4091,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosPatchWithHttpInfoAsync(long id, ScenarioEditBean body = default(ScenarioEditBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosPatchWithHttpInfoAsync(long id, ScenarioEditBean body = default(ScenarioEditBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -4171,6 +4189,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -4228,7 +4247,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosPerformActionAsync(long id, string action = default(string), bool? overwrite = default(bool?), ScenarioActionPayload body = default(ScenarioActionPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosPerformActionAsync(long id, string action = default(string), bool? overwrite = default(bool?), ScenarioActionPayload body = default(ScenarioActionPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScenarioBean> localVarResponse = await ScenariosPerformActionWithHttpInfoAsync(id, action, overwrite, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -4245,7 +4264,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosPerformActionWithHttpInfoAsync(long id, string action = default(string), bool? overwrite = default(bool?), ScenarioActionPayload body = default(ScenarioActionPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosPerformActionWithHttpInfoAsync(long id, string action = default(string), bool? overwrite = default(bool?), ScenarioActionPayload body = default(ScenarioActionPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -4347,6 +4366,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -4394,7 +4414,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScenarioBean</returns>
-        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosUpdateAsync(long id, ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScenarioBean> ScenariosUpdateAsync(long id, ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             EssSharp.Client.ApiResponse<ScenarioBean> localVarResponse = await ScenariosUpdateWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -4409,7 +4429,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosUpdateWithHttpInfoAsync(long id, ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScenarioBean>> ScenariosUpdateWithHttpInfoAsync(long id, ScenarioBean body = default(ScenarioBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -4502,6 +4522,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -4551,7 +4572,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScenariosUpdateCommentAsync(long scenarioId, long commentId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScenariosUpdateCommentAsync(long scenarioId, long commentId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ScenariosUpdateCommentWithHttpInfoAsync(scenarioId, commentId, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -4566,7 +4587,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosUpdateCommentWithHttpInfoAsync(long scenarioId, long commentId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosUpdateCommentWithHttpInfoAsync(long scenarioId, long commentId, CommentBean body = default(CommentBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -4664,6 +4685,7 @@ namespace EssSharp.Api
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
             if (localVarContentType != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
@@ -4713,7 +4735,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScenariosUpdateScriptAsync(long scenarioId, string scriptType, ScriptBean body = default(ScriptBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScenariosUpdateScriptAsync(long scenarioId, string scriptType, ScriptBean body = default(ScriptBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             await ScenariosUpdateScriptWithHttpInfoAsync(scenarioId, scriptType, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -4728,7 +4750,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosUpdateScriptWithHttpInfoAsync(long scenarioId, string scriptType, ScriptBean body = default(ScriptBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScenariosUpdateScriptWithHttpInfoAsync(long scenarioId, string scriptType, ScriptBean body = default(ScriptBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'scriptType' is set
             if (scriptType == null)

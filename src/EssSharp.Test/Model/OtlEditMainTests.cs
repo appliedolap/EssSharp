@@ -52,7 +52,6 @@ namespace EssSharp.Test.Model
             //Assert.IsType<OtlEditMain>(instance);
         }
 
-
         /// <summary>
         /// Test the property 'EditActions'
         /// </summary>
@@ -61,6 +60,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'EditActions'
         }
+
         /// <summary>
         /// Test the property 'OtlVersion'
         /// </summary>
@@ -69,6 +69,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'OtlVersion'
         }
+
         /// <summary>
         /// Test the property 'Validate'
         /// </summary>
@@ -77,6 +78,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Validate'
         }
+
         /// <summary>
         /// Test the property 'ValidateFormulas'
         /// </summary>
@@ -85,6 +87,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ValidateFormulas'
         }
+
         /// <summary>
         /// Test the property 'KeepTransaction'
         /// </summary>
@@ -93,6 +96,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'KeepTransaction'
         }
+
         /// <summary>
         /// Test the property 'RestructOption'
         /// </summary>
@@ -101,6 +105,7 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'RestructOption'
         }
+
         /// <summary>
         /// Test the property 'JsonformatLog'
         /// </summary>
@@ -109,7 +114,5 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'JsonformatLog'
         }
-
     }
-
 }

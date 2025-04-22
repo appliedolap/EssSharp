@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Rules
     /// </summary>
     [DataContract(Name = "Rules")]
-    public partial class Rules : IEquatable<Rules>, IValidatableObject
+    public partial class Rules : IValidatableObject
     {
         /// <summary>
         /// Defines Encoding
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "UTF8")]
             UTF8 = 3
-
         }
 
 
@@ -228,171 +227,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Rules);
-        }
-
-        /// <summary>
-        /// Returns true if Rules instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Rules to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Rules input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Dimensions == input.Dimensions ||
-                    this.Dimensions != null &&
-                    input.Dimensions != null &&
-                    this.Dimensions.SequenceEqual(input.Dimensions)
-                ) && 
-                (
-                    this.Fields == input.Fields ||
-                    this.Fields != null &&
-                    input.Fields != null &&
-                    this.Fields.SequenceEqual(input.Fields)
-                ) && 
-                (
-                    this.TimeStamp == input.TimeStamp ||
-                    this.TimeStamp.Equals(input.TimeStamp)
-                ) && 
-                (
-                    this.DataSource == input.DataSource ||
-                    (this.DataSource != null &&
-                    this.DataSource.Equals(input.DataSource))
-                ) && 
-                (
-                    this.DimensionBuildOptions == input.DimensionBuildOptions ||
-                    (this.DimensionBuildOptions != null &&
-                    this.DimensionBuildOptions.Equals(input.DimensionBuildOptions))
-                ) && 
-                (
-                    this.DataLoadOptions == input.DataLoadOptions ||
-                    (this.DataLoadOptions != null &&
-                    this.DataLoadOptions.Equals(input.DataLoadOptions))
-                ) && 
-                (
-                    this.EditorOptions == input.EditorOptions ||
-                    (this.EditorOptions != null &&
-                    this.EditorOptions.Equals(input.EditorOptions))
-                ) && 
-                (
-                    this.Encoding == input.Encoding ||
-                    this.Encoding.Equals(input.Encoding)
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Locale == input.Locale ||
-                    (this.Locale != null &&
-                    this.Locale.Equals(input.Locale))
-                ) && 
-                (
-                    this.Studio == input.Studio ||
-                    this.Studio.Equals(input.Studio)
-                ) && 
-                (
-                    this.Bibpm == input.Bibpm ||
-                    this.Bibpm.Equals(input.Bibpm)
-                ) && 
-                (
-                    this.Xolap == input.Xolap ||
-                    this.Xolap.Equals(input.Xolap)
-                ) && 
-                (
-                    this.FlatFileBased == input.FlatFileBased ||
-                    this.FlatFileBased.Equals(input.FlatFileBased)
-                ) && 
-                (
-                    this.EssbaseInfo == input.EssbaseInfo ||
-                    (this.EssbaseInfo != null &&
-                    this.EssbaseInfo.Equals(input.EssbaseInfo))
-                ) && 
-                (
-                    this.ColumnOperations == input.ColumnOperations ||
-                    this.ColumnOperations != null &&
-                    input.ColumnOperations != null &&
-                    this.ColumnOperations.SequenceEqual(input.ColumnOperations)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                if (this.Dimensions != null)
-                {
-                    hashCode = (hashCode * 59) + this.Dimensions.GetHashCode();
-                }
-                if (this.Fields != null)
-                {
-                    hashCode = (hashCode * 59) + this.Fields.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.TimeStamp.GetHashCode();
-                if (this.DataSource != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataSource.GetHashCode();
-                }
-                if (this.DimensionBuildOptions != null)
-                {
-                    hashCode = (hashCode * 59) + this.DimensionBuildOptions.GetHashCode();
-                }
-                if (this.DataLoadOptions != null)
-                {
-                    hashCode = (hashCode * 59) + this.DataLoadOptions.GetHashCode();
-                }
-                if (this.EditorOptions != null)
-                {
-                    hashCode = (hashCode * 59) + this.EditorOptions.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Encoding.GetHashCode();
-                if (this.Name != null)
-                {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
-                }
-                if (this.Locale != null)
-                {
-                    hashCode = (hashCode * 59) + this.Locale.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Studio.GetHashCode();
-                hashCode = (hashCode * 59) + this.Bibpm.GetHashCode();
-                hashCode = (hashCode * 59) + this.Xolap.GetHashCode();
-                hashCode = (hashCode * 59) + this.FlatFileBased.GetHashCode();
-                if (this.EssbaseInfo != null)
-                {
-                    hashCode = (hashCode * 59) + this.EssbaseInfo.GetHashCode();
-                }
-                if (this.ColumnOperations != null)
-                {
-                    hashCode = (hashCode * 59) + this.ColumnOperations.GetHashCode();
-                }
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }

@@ -27,7 +27,7 @@ namespace EssSharp.Model
     /// Preferences
     /// </summary>
     [DataContract(Name = "Preferences")]
-    public partial class Preferences : IEquatable<Preferences>, IValidatableObject
+    public partial class Preferences : IValidatableObject
     {
         /// <summary>
         /// Defines Indentation
@@ -52,7 +52,6 @@ namespace EssSharp.Model
             /// </summary>
             [EnumMember(Value = "TOTALS")]
             TOTALS = 3
-
         }
 
 
@@ -65,12 +64,6 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="Preferences" /> class.
         /// </summary>
         /// <param name="indentation">indentation.</param>
-        /// <param name="removeUnSelectedGroup">removeUnSelectedGroup.</param>
-        /// <param name="includeDescriptionLabel">includeDescriptionLabel.</param>
-        /// <param name="missingText">missingText.</param>
-        /// <param name="noAccessText">noAccessText.</param>
-        /// <param name="formulaRetention">formulaRetention.</param>
-        /// <param name="maxColumns">maxColumns.</param>
         /// <param name="rowSupression">rowSupression.</param>
         /// <param name="columnSupression">columnSupression.</param>
         /// <param name="cellText">cellText.</param>
@@ -79,16 +72,16 @@ namespace EssSharp.Model
         /// <param name="includeSelection">includeSelection.</param>
         /// <param name="repeatMemberLabels">repeatMemberLabels.</param>
         /// <param name="withinSelectedGroup">withinSelectedGroup.</param>
+        /// <param name="removeUnSelectedGroup">removeUnSelectedGroup.</param>
+        /// <param name="includeDescriptionLabel">includeDescriptionLabel.</param>
+        /// <param name="missingText">missingText.</param>
+        /// <param name="noAccessText">noAccessText.</param>
+        /// <param name="formulaRetention">formulaRetention.</param>
+        /// <param name="maxColumns">maxColumns.</param>
         /// <param name="maxRows">maxRows.</param>
-        public Preferences(IndentationEnum? indentation = default(IndentationEnum?), bool removeUnSelectedGroup = default(bool), bool includeDescriptionLabel = default(bool), string missingText = default(string), string noAccessText = default(string), FormulaRetention formulaRetention = default(FormulaRetention), long maxColumns = default(long), RowSuppression rowSupression = default(RowSuppression), ColumnSuppression columnSupression = default(ColumnSuppression), bool cellText = default(bool), ZoomIn zoomIn = default(ZoomIn), bool navigate = default(bool), bool includeSelection = default(bool), bool repeatMemberLabels = default(bool), bool withinSelectedGroup = default(bool), long maxRows = default(long))
+        public Preferences(IndentationEnum? indentation = default(IndentationEnum?), RowSuppression rowSupression = default(RowSuppression), ColumnSuppression columnSupression = default(ColumnSuppression), bool cellText = default(bool), ZoomIn zoomIn = default(ZoomIn), bool navigate = default(bool), bool includeSelection = default(bool), bool repeatMemberLabels = default(bool), bool withinSelectedGroup = default(bool), bool removeUnSelectedGroup = default(bool), bool includeDescriptionLabel = default(bool), string missingText = default(string), string noAccessText = default(string), FormulaRetention formulaRetention = default(FormulaRetention), long maxColumns = default(long), long maxRows = default(long))
         {
             this.Indentation = indentation;
-            this.RemoveUnSelectedGroup = removeUnSelectedGroup;
-            this.IncludeDescriptionLabel = includeDescriptionLabel;
-            this.MissingText = missingText;
-            this.NoAccessText = noAccessText;
-            this.FormulaRetention = formulaRetention;
-            this.MaxColumns = maxColumns;
             this.RowSupression = rowSupression;
             this.ColumnSupression = columnSupression;
             this.CellText = cellText;
@@ -97,44 +90,14 @@ namespace EssSharp.Model
             this.IncludeSelection = includeSelection;
             this.RepeatMemberLabels = repeatMemberLabels;
             this.WithinSelectedGroup = withinSelectedGroup;
+            this.RemoveUnSelectedGroup = removeUnSelectedGroup;
+            this.IncludeDescriptionLabel = includeDescriptionLabel;
+            this.MissingText = missingText;
+            this.NoAccessText = noAccessText;
+            this.FormulaRetention = formulaRetention;
+            this.MaxColumns = maxColumns;
             this.MaxRows = maxRows;
         }
-
-        /// <summary>
-        /// Gets or Sets RemoveUnSelectedGroup
-        /// </summary>
-        [DataMember(Name = "removeUnSelectedGroup", EmitDefaultValue = true)]
-        public bool RemoveUnSelectedGroup { get; set; }
-
-        /// <summary>
-        /// Gets or Sets IncludeDescriptionLabel
-        /// </summary>
-        [DataMember(Name = "includeDescriptionLabel", EmitDefaultValue = true)]
-        public bool IncludeDescriptionLabel { get; set; }
-
-        /// <summary>
-        /// Gets or Sets MissingText
-        /// </summary>
-        [DataMember(Name = "missingText", EmitDefaultValue = false)]
-        public string MissingText { get; set; }
-
-        /// <summary>
-        /// Gets or Sets NoAccessText
-        /// </summary>
-        [DataMember(Name = "noAccessText", EmitDefaultValue = false)]
-        public string NoAccessText { get; set; }
-
-        /// <summary>
-        /// Gets or Sets FormulaRetention
-        /// </summary>
-        [DataMember(Name = "formulaRetention", EmitDefaultValue = false)]
-        public FormulaRetention FormulaRetention { get; set; }
-
-        /// <summary>
-        /// Gets or Sets MaxColumns
-        /// </summary>
-        [DataMember(Name = "maxColumns", EmitDefaultValue = false)]
-        public long MaxColumns { get; set; }
 
         /// <summary>
         /// Gets or Sets RowSupression
@@ -185,6 +148,42 @@ namespace EssSharp.Model
         public bool WithinSelectedGroup { get; set; }
 
         /// <summary>
+        /// Gets or Sets RemoveUnSelectedGroup
+        /// </summary>
+        [DataMember(Name = "removeUnSelectedGroup", EmitDefaultValue = true)]
+        public bool RemoveUnSelectedGroup { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IncludeDescriptionLabel
+        /// </summary>
+        [DataMember(Name = "includeDescriptionLabel", EmitDefaultValue = true)]
+        public bool IncludeDescriptionLabel { get; set; }
+
+        /// <summary>
+        /// Gets or Sets MissingText
+        /// </summary>
+        [DataMember(Name = "missingText", EmitDefaultValue = false)]
+        public string MissingText { get; set; }
+
+        /// <summary>
+        /// Gets or Sets NoAccessText
+        /// </summary>
+        [DataMember(Name = "noAccessText", EmitDefaultValue = false)]
+        public string NoAccessText { get; set; }
+
+        /// <summary>
+        /// Gets or Sets FormulaRetention
+        /// </summary>
+        [DataMember(Name = "formulaRetention", EmitDefaultValue = false)]
+        public FormulaRetention FormulaRetention { get; set; }
+
+        /// <summary>
+        /// Gets or Sets MaxColumns
+        /// </summary>
+        [DataMember(Name = "maxColumns", EmitDefaultValue = false)]
+        public long MaxColumns { get; set; }
+
+        /// <summary>
         /// Gets or Sets MaxRows
         /// </summary>
         [DataMember(Name = "maxRows", EmitDefaultValue = false)]
@@ -199,12 +198,6 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class Preferences {\n");
             sb.Append("  Indentation: ").Append(Indentation).Append("\n");
-            sb.Append("  RemoveUnSelectedGroup: ").Append(RemoveUnSelectedGroup).Append("\n");
-            sb.Append("  IncludeDescriptionLabel: ").Append(IncludeDescriptionLabel).Append("\n");
-            sb.Append("  MissingText: ").Append(MissingText).Append("\n");
-            sb.Append("  NoAccessText: ").Append(NoAccessText).Append("\n");
-            sb.Append("  FormulaRetention: ").Append(FormulaRetention).Append("\n");
-            sb.Append("  MaxColumns: ").Append(MaxColumns).Append("\n");
             sb.Append("  RowSupression: ").Append(RowSupression).Append("\n");
             sb.Append("  ColumnSupression: ").Append(ColumnSupression).Append("\n");
             sb.Append("  CellText: ").Append(CellText).Append("\n");
@@ -213,6 +206,12 @@ namespace EssSharp.Model
             sb.Append("  IncludeSelection: ").Append(IncludeSelection).Append("\n");
             sb.Append("  RepeatMemberLabels: ").Append(RepeatMemberLabels).Append("\n");
             sb.Append("  WithinSelectedGroup: ").Append(WithinSelectedGroup).Append("\n");
+            sb.Append("  RemoveUnSelectedGroup: ").Append(RemoveUnSelectedGroup).Append("\n");
+            sb.Append("  IncludeDescriptionLabel: ").Append(IncludeDescriptionLabel).Append("\n");
+            sb.Append("  MissingText: ").Append(MissingText).Append("\n");
+            sb.Append("  NoAccessText: ").Append(NoAccessText).Append("\n");
+            sb.Append("  FormulaRetention: ").Append(FormulaRetention).Append("\n");
+            sb.Append("  MaxColumns: ").Append(MaxColumns).Append("\n");
             sb.Append("  MaxRows: ").Append(MaxRows).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -228,152 +227,11 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="input">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object input)
-        {
-            return this.Equals(input as Preferences);
-        }
-
-        /// <summary>
-        /// Returns true if Preferences instances are equal
-        /// </summary>
-        /// <param name="input">Instance of Preferences to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Preferences input)
-        {
-            if (input == null)
-            {
-                return false;
-            }
-            return 
-                (
-                    this.Indentation == input.Indentation ||
-                    this.Indentation.Equals(input.Indentation)
-                ) && 
-                (
-                    this.RemoveUnSelectedGroup == input.RemoveUnSelectedGroup ||
-                    this.RemoveUnSelectedGroup.Equals(input.RemoveUnSelectedGroup)
-                ) && 
-                (
-                    this.IncludeDescriptionLabel == input.IncludeDescriptionLabel ||
-                    this.IncludeDescriptionLabel.Equals(input.IncludeDescriptionLabel)
-                ) && 
-                (
-                    this.MissingText == input.MissingText ||
-                    (this.MissingText != null &&
-                    this.MissingText.Equals(input.MissingText))
-                ) && 
-                (
-                    this.NoAccessText == input.NoAccessText ||
-                    (this.NoAccessText != null &&
-                    this.NoAccessText.Equals(input.NoAccessText))
-                ) && 
-                (
-                    this.FormulaRetention == input.FormulaRetention ||
-                    (this.FormulaRetention != null &&
-                    this.FormulaRetention.Equals(input.FormulaRetention))
-                ) && 
-                (
-                    this.MaxColumns == input.MaxColumns ||
-                    this.MaxColumns.Equals(input.MaxColumns)
-                ) && 
-                (
-                    this.RowSupression == input.RowSupression ||
-                    (this.RowSupression != null &&
-                    this.RowSupression.Equals(input.RowSupression))
-                ) && 
-                (
-                    this.ColumnSupression == input.ColumnSupression ||
-                    (this.ColumnSupression != null &&
-                    this.ColumnSupression.Equals(input.ColumnSupression))
-                ) && 
-                (
-                    this.CellText == input.CellText ||
-                    this.CellText.Equals(input.CellText)
-                ) && 
-                (
-                    this.ZoomIn == input.ZoomIn ||
-                    (this.ZoomIn != null &&
-                    this.ZoomIn.Equals(input.ZoomIn))
-                ) && 
-                (
-                    this.Navigate == input.Navigate ||
-                    this.Navigate.Equals(input.Navigate)
-                ) && 
-                (
-                    this.IncludeSelection == input.IncludeSelection ||
-                    this.IncludeSelection.Equals(input.IncludeSelection)
-                ) && 
-                (
-                    this.RepeatMemberLabels == input.RepeatMemberLabels ||
-                    this.RepeatMemberLabels.Equals(input.RepeatMemberLabels)
-                ) && 
-                (
-                    this.WithinSelectedGroup == input.WithinSelectedGroup ||
-                    this.WithinSelectedGroup.Equals(input.WithinSelectedGroup)
-                ) && 
-                (
-                    this.MaxRows == input.MaxRows ||
-                    this.MaxRows.Equals(input.MaxRows)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Indentation.GetHashCode();
-                hashCode = (hashCode * 59) + this.RemoveUnSelectedGroup.GetHashCode();
-                hashCode = (hashCode * 59) + this.IncludeDescriptionLabel.GetHashCode();
-                if (this.MissingText != null)
-                {
-                    hashCode = (hashCode * 59) + this.MissingText.GetHashCode();
-                }
-                if (this.NoAccessText != null)
-                {
-                    hashCode = (hashCode * 59) + this.NoAccessText.GetHashCode();
-                }
-                if (this.FormulaRetention != null)
-                {
-                    hashCode = (hashCode * 59) + this.FormulaRetention.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.MaxColumns.GetHashCode();
-                if (this.RowSupression != null)
-                {
-                    hashCode = (hashCode * 59) + this.RowSupression.GetHashCode();
-                }
-                if (this.ColumnSupression != null)
-                {
-                    hashCode = (hashCode * 59) + this.ColumnSupression.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.CellText.GetHashCode();
-                if (this.ZoomIn != null)
-                {
-                    hashCode = (hashCode * 59) + this.ZoomIn.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.Navigate.GetHashCode();
-                hashCode = (hashCode * 59) + this.IncludeSelection.GetHashCode();
-                hashCode = (hashCode * 59) + this.RepeatMemberLabels.GetHashCode();
-                hashCode = (hashCode * 59) + this.WithinSelectedGroup.GetHashCode();
-                hashCode = (hashCode * 59) + this.MaxRows.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        /// <summary>
         /// To validate all properties of the instance
         /// </summary>
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             yield break;
         }
