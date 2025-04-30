@@ -399,6 +399,15 @@ namespace EssSharp.Client
                 }
             }
 
+            // EssSharp Template Modification
+            if ( options.Cookies != null && options.Cookies.Count > 0 )
+            {
+                foreach ( var cookie in options.Cookies )
+                {
+                    request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
+                }
+            }
+
             return request;
         }
 
