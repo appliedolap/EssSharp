@@ -73,7 +73,7 @@ namespace EssSharp.Integration.Setup
             // Build the database container.
             _databaseTestContainer = new MsSqlBuilder()
                 .WithImage(image)                                 // "mcr.microsoft.com/mssql/server:2022-latest"
-                .WithName(containerName)                          // "essbase-21-5-database"
+                .WithName(containerName)                          // "essbase-21-7-database"
                 .WithNetwork("standalone")
                 .WithEnvironment("ACCEPT_EULA", "Y")
                 .WithEnvironment("SA_PASSWORD", "StrongPassw0rd")
@@ -133,13 +133,13 @@ namespace EssSharp.Integration.Setup
             var hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : "9000";
 
             _essbaseTestContainer = new ContainerBuilder()
-                .WithImage(image)                                                                     // "appliedolap/essbase:21.6-latest"
-                .WithName(containerName)                                                              // "essbase-21-6"
+                .WithImage(image)                                                                     // "appliedolap/essbase:21.7-latest"
+                .WithName(containerName)                                                              // "essbase-21-7"
                 .WithNetwork("standalone")
                 .WithPortBinding(hostPort, "9000")                                                    // "9000"
                 .WithEnvironment("ADMIN_PASSWORD", connection.Password)                               // "welcome1"
                 .WithEnvironment("DATABASE_TYPE", "sqlserver")
-                .WithEnvironment("DATABASE_CONNECT_STRING", $@"{containerName}-database:1433:CertDB") // "essbase-21-6-database:1433:CertDB"
+                .WithEnvironment("DATABASE_CONNECT_STRING", $@"{containerName}-database:1433:CertDB") // "essbase-21-7-database:1433:CertDB"
                 .WithEnvironment("DATABASE_ADMIN_USERNAME", "sa")
                 .WithEnvironment("DATABASE_ADMIN_PASSWORD", "StrongPassw0rd")
                 .WithEnvironment("DATABASE_WAIT_TIMEOUT", "240")
