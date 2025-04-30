@@ -137,6 +137,7 @@ namespace EssSharp.Integration.Setup
                 .WithName(containerName)                                                              // "essbase-21-7"
                 .WithNetwork("standalone")
                 .WithPortBinding(hostPort, "9000")                                                    // "9000"
+                .WithEnvironment("ADMIN_USERNAME", connection.Username)                               // "admin"
                 .WithEnvironment("ADMIN_PASSWORD", connection.Password)                               // "welcome1"
                 .WithEnvironment("DATABASE_TYPE", "sqlserver")
                 .WithEnvironment("DATABASE_CONNECT_STRING", $@"{containerName}-database:1433:CertDB") // "essbase-21-7-database:1433:CertDB"
