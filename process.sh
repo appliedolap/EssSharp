@@ -562,10 +562,16 @@ cat temp.json | jq '.definitions.ParametersBean.properties.buildMethod.enum = ["
 cat temp.json | jq '.definitions.ParametersBean.properties.buildOption.enum = ["NONE", "RETAIN_ALL_DATA", "RETAIN_INPUT_DATA", "RETAIN_LEAF_DATA", "REMOVE_ALL_DATA"]' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.definitions.ParametersBean.properties.dataLevel.enum = ["ALL_DATA", "UPPER_LEVEL_BLOCKS", "NON_INPUT_BLOCKS", "LEVEL_ZERO_BLOCKS", "INPUT_LEVEL_DATA_BLOCKS"]' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.definitions.ParametersBean.properties.isScriptContent.type = "string"' > json.tmp && mv json.tmp temp.json
-cat temp.json | jq '.definitions.ParametersBean.properties.lockForUpdate.type = "string"' > json.tmp && mv json.tmp temp.jsonS
-cat temp.json | jq '.definitions.ParametersBean.properties.useConnection.type = "boolean"' > json.tmp && mv json.tmp temp.json
-cat temp.json | jq '.definitions.ParametersBean.properties.useConnection.nullable = true' > json.tmp && mv json.tmp temp.json
-cat temp.json | jq '.definitions.ParametersBean.properties.forceDimBuild.type = "boolean"' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.lockForUpdate.type = "string"' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.useCatalogPath.type = "string"' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.lockForUpdate.type = "string"' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.exportdata.type = "string"' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.exportpartitions.type = "string"' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.exportfilters.type = "string"' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.definitions.ParametersBean.properties.physical.type = "string"' > json.tmp && mv json.tmp temp.json
+
+
+
 
 
 # fixing casing of action enum - causes problems

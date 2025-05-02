@@ -19047,7 +19047,7 @@
           "type": "string"
         },
         "forceDimBuild": {
-          "type": "boolean"
+          "type": "string"
         },
         "script": {
           "type": "string"
@@ -19059,8 +19059,7 @@
           "type": "string"
         },
         "useConnection": {
-          "type": "boolean",
-          "nullable": true
+          "type": "string"
         },
         "connection": {
           "type": "string"
@@ -19283,16 +19282,16 @@
           "type": "string"
         },
         "lockForUpdate": {
-          "type": "boolean"
+          "type": "string"
         },
         "isScriptContent": {
           "type": "string"
         },
         "useCatalogPath": {
-          "type": "boolean"
+          "type": "string"
         },
         "exportdata": {
-          "type": "boolean"
+          "type": "string"
         },
         "cube": {
           "type": "string"
@@ -19301,10 +19300,10 @@
           "type": "string"
         },
         "exportpartitions": {
-          "type": "boolean"
+          "type": "string"
         },
         "exportfilters": {
-          "type": "boolean"
+          "type": "string"
         },
         "restEncryPassword": {
           "type": "string"
@@ -19313,7 +19312,7 @@
           "type": "string"
         },
         "physical": {
-          "type": "boolean"
+          "type": "string"
         }
       }
     },

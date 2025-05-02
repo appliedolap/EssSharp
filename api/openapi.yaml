@@ -17154,18 +17154,18 @@ components:
           waitForOngoingUpdatesInSecs: waitForOngoingUpdatesInSecs
           appId: appId
           loaddata: loaddata
-          exportpartitions: true
+          exportpartitions: exportpartitions
           connection: connection
           cube: cube
           overwrite: overwrite
           restructureOption: restructureOption
-          exportdata: true
+          exportdata: exportdata
           restEncryPassword: restEncryPassword
           targetApplicationName: targetApplicationName
           compress: compress
           executeScript: executeScript
           buildMethod: PARENT-CHILD
-          exportfilters: true
+          exportfilters: exportfilters
           deleteExcelOnSuccess: deleteExcelOnSuccess
           generateArtifactList: generateArtifactList
           script: script
@@ -17273,7 +17273,7 @@ components:
             - dateDimensionLeaves
           enableSandboxing: enableSandboxing
           catalogExcelPath: catalogExcelPath
-          lockForUpdate: true
+          lockForUpdate: lockForUpdate
           catalogZipPath: catalogZipPath
           analyzeSheetName: analyzeSheetName
           includeServerLevel: includeServerLevel
@@ -17284,9 +17284,9 @@ components:
           dataLevel: ALL_DATA
           option: option
           discoverDimensionTables: discoverDimensionTables
-          forceDimBuild: true
+          forceDimBuild: forceDimBuild
           termOption: termOption
-          useConnection: true
+          useConnection: useConnection
           rule: rule
           dimDesignationMode: dimDesignationMode
           basedOnQueryData: basedOnQueryData
@@ -17301,7 +17301,7 @@ components:
           enableAlternateRollups: enableAlternateRollups
           exportDynamicBlocks: exportDynamicBlocks
           columnFormat: columnFormat
-          physical: true
+          physical: physical
           timestamp: timestamp
           abortOnError: abortOnError
           zipFileName: zipFileName
@@ -17317,7 +17317,7 @@ components:
           - selectedDimensions
           - selectedDimensions
           createFiles: createFiles
-          useCatalogPath: true
+          useCatalogPath: useCatalogPath
           artifactList: artifactList
           calc: calc
           user: user
@@ -17390,18 +17390,18 @@ components:
         waitForOngoingUpdatesInSecs: waitForOngoingUpdatesInSecs
         appId: appId
         loaddata: loaddata
-        exportpartitions: true
+        exportpartitions: exportpartitions
         connection: connection
         cube: cube
         overwrite: overwrite
         restructureOption: restructureOption
-        exportdata: true
+        exportdata: exportdata
         restEncryPassword: restEncryPassword
         targetApplicationName: targetApplicationName
         compress: compress
         executeScript: executeScript
         buildMethod: PARENT-CHILD
-        exportfilters: true
+        exportfilters: exportfilters
         deleteExcelOnSuccess: deleteExcelOnSuccess
         generateArtifactList: generateArtifactList
         script: script
@@ -17509,7 +17509,7 @@ components:
           - dateDimensionLeaves
         enableSandboxing: enableSandboxing
         catalogExcelPath: catalogExcelPath
-        lockForUpdate: true
+        lockForUpdate: lockForUpdate
         catalogZipPath: catalogZipPath
         analyzeSheetName: analyzeSheetName
         includeServerLevel: includeServerLevel
@@ -17520,9 +17520,9 @@ components:
         dataLevel: ALL_DATA
         option: option
         discoverDimensionTables: discoverDimensionTables
-        forceDimBuild: true
+        forceDimBuild: forceDimBuild
         termOption: termOption
-        useConnection: true
+        useConnection: useConnection
         rule: rule
         dimDesignationMode: dimDesignationMode
         basedOnQueryData: basedOnQueryData
@@ -17537,7 +17537,7 @@ components:
         enableAlternateRollups: enableAlternateRollups
         exportDynamicBlocks: exportDynamicBlocks
         columnFormat: columnFormat
-        physical: true
+        physical: physical
         timestamp: timestamp
         abortOnError: abortOnError
         zipFileName: zipFileName
@@ -17553,7 +17553,7 @@ components:
         - selectedDimensions
         - selectedDimensions
         createFiles: createFiles
-        useCatalogPath: true
+        useCatalogPath: useCatalogPath
         artifactList: artifactList
         calc: calc
         user: user
@@ -17572,7 +17572,7 @@ components:
         restructureOption:
           type: string
         forceDimBuild:
-          type: boolean
+          type: string
         script:
           type: string
         option:
@@ -17580,7 +17580,7 @@ components:
         loaddata:
           type: string
         useConnection:
-          type: boolean
+          type: string
         connection:
           type: string
         user:
@@ -17733,27 +17733,27 @@ components:
         reportScriptFilename:
           type: string
         lockForUpdate:
-          type: boolean
+          type: string
         isScriptContent:
           type: string
         useCatalogPath:
-          type: boolean
+          type: string
         exportdata:
-          type: boolean
+          type: string
         cube:
           type: string
         filetype:
           type: string
         exportpartitions:
-          type: boolean
+          type: string
         exportfilters:
-          type: boolean
+          type: string
         restEncryPassword:
           type: string
         catalogZipPath:
           type: string
         physical:
-          type: boolean
+          type: string
       type: object
     RTSV:
       example:

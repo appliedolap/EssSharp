@@ -224,7 +224,7 @@ namespace EssSharp.Model
         /// <param name="restEncryPassword">restEncryPassword.</param>
         /// <param name="catalogZipPath">catalogZipPath.</param>
         /// <param name="physical">physical.</param>
-        public ParametersBean(string rule = default(string), string file = default(string), string abortOnError = default(string), string restructureOption = default(string), bool forceDimBuild = default(bool), string script = default(string), string option = default(string), string loaddata = default(string), bool useConnection = default(bool), string connection = default(string), string user = default(string), string password = default(string), string calc = default(string), BuildMethodEnum? buildMethod = default(BuildMethodEnum?), string data = default(string), string memberIds = default(string), string zipFileName = default(string), string skipdata = default(string), string threads = default(string), string overwrite = default(string), string lcmImportFromStorage = default(string), string analyzeFileName = default(string), string analyzeSheetName = default(string), string deleteExcelOnSuccess = default(string), string catalogExcelPath = default(string), string importExcelFileName = default(string), string recreateApplication = default(string), string createFiles = default(string), string executeScript = default(string), BuildOptionEnum? buildOption = default(BuildOptionEnum?), string copyToStorage = default(string), string filesystemcopy = default(string), DataLevelEnum? dataLevel = default(DataLevelEnum?), string columnFormat = default(string), string targetApplicationName = default(string), string partialDataExpression = default(string), string allApp = default(string), string includeServerLevel = default(string), string enableSandboxing = default(string), string dbType = default(string), string dimDesignationMode = default(string), CompactDesignation unstructuredAnalysis = default(CompactDesignation), string ratioToStop = default(string), string basedOnQueryData = default(string), string enableAlternateRollups = default(string), string compress = default(string), string generateArtifactList = default(string), string artifactList = default(string), string verbose = default(string), string disasterRecovery = default(string), string force = default(string), string backupType = default(string), string appId = default(string), string timestamp = default(string), string maxParallel = default(string), List<string> selectedDimensions = default(List<string>), List<RTSV> rtsv = default(List<RTSV>), int bufferId = default(int), List<int> bufferIds = default(List<int>), string commitOption = default(string), string actionType = default(string), string termOption = default(string), string discoverDimensionTables = default(string), string exportDynamicBlocks = default(string), string shadowAppName = default(string), string primaryAppName = default(string), string timeoutToForceUnloadApp = default(string), string hideShadow = default(string), string waitForOngoingUpdatesInSecs = default(string), string reportScriptFilename = default(string), bool lockForUpdate = default(bool), string isScriptContent = default(string), bool useCatalogPath = default(bool), bool exportdata = default(bool), string cube = default(string), string filetype = default(string), bool exportpartitions = default(bool), bool exportfilters = default(bool), string restEncryPassword = default(string), string catalogZipPath = default(string), bool physical = default(bool))
+        public ParametersBean(string rule = default(string), string file = default(string), string abortOnError = default(string), string restructureOption = default(string), string forceDimBuild = default(string), string script = default(string), string option = default(string), string loaddata = default(string), string useConnection = default(string), string connection = default(string), string user = default(string), string password = default(string), string calc = default(string), BuildMethodEnum? buildMethod = default(BuildMethodEnum?), string data = default(string), string memberIds = default(string), string zipFileName = default(string), string skipdata = default(string), string threads = default(string), string overwrite = default(string), string lcmImportFromStorage = default(string), string analyzeFileName = default(string), string analyzeSheetName = default(string), string deleteExcelOnSuccess = default(string), string catalogExcelPath = default(string), string importExcelFileName = default(string), string recreateApplication = default(string), string createFiles = default(string), string executeScript = default(string), BuildOptionEnum? buildOption = default(BuildOptionEnum?), string copyToStorage = default(string), string filesystemcopy = default(string), DataLevelEnum? dataLevel = default(DataLevelEnum?), string columnFormat = default(string), string targetApplicationName = default(string), string partialDataExpression = default(string), string allApp = default(string), string includeServerLevel = default(string), string enableSandboxing = default(string), string dbType = default(string), string dimDesignationMode = default(string), CompactDesignation unstructuredAnalysis = default(CompactDesignation), string ratioToStop = default(string), string basedOnQueryData = default(string), string enableAlternateRollups = default(string), string compress = default(string), string generateArtifactList = default(string), string artifactList = default(string), string verbose = default(string), string disasterRecovery = default(string), string force = default(string), string backupType = default(string), string appId = default(string), string timestamp = default(string), string maxParallel = default(string), List<string> selectedDimensions = default(List<string>), List<RTSV> rtsv = default(List<RTSV>), int bufferId = default(int), List<int> bufferIds = default(List<int>), string commitOption = default(string), string actionType = default(string), string termOption = default(string), string discoverDimensionTables = default(string), string exportDynamicBlocks = default(string), string shadowAppName = default(string), string primaryAppName = default(string), string timeoutToForceUnloadApp = default(string), string hideShadow = default(string), string waitForOngoingUpdatesInSecs = default(string), string reportScriptFilename = default(string), string lockForUpdate = default(string), string isScriptContent = default(string), string useCatalogPath = default(string), string exportdata = default(string), string cube = default(string), string filetype = default(string), string exportpartitions = default(string), string exportfilters = default(string), string restEncryPassword = default(string), string catalogZipPath = default(string), string physical = default(string))
         {
             this.Rule = rule;
             this.File = file;
@@ -336,8 +336,8 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets ForceDimBuild
         /// </summary>
-        [DataMember(Name = "forceDimBuild", EmitDefaultValue = true)]
-        public bool ForceDimBuild { get; set; }
+        [DataMember(Name = "forceDimBuild", EmitDefaultValue = false)]
+        public string ForceDimBuild { get; set; }
 
         /// <summary>
         /// Gets or Sets Script
@@ -360,8 +360,8 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets UseConnection
         /// </summary>
-        [DataMember(Name = "useConnection", EmitDefaultValue = true)]
-        public bool UseConnection { get; set; }
+        [DataMember(Name = "useConnection", EmitDefaultValue = false)]
+        public string UseConnection { get; set; }
 
         /// <summary>
         /// Gets or Sets Connection
@@ -714,8 +714,8 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets LockForUpdate
         /// </summary>
-        [DataMember(Name = "lockForUpdate", EmitDefaultValue = true)]
-        public bool LockForUpdate { get; set; }
+        [DataMember(Name = "lockForUpdate", EmitDefaultValue = false)]
+        public string LockForUpdate { get; set; }
 
         /// <summary>
         /// Gets or Sets IsScriptContent
@@ -726,14 +726,14 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets UseCatalogPath
         /// </summary>
-        [DataMember(Name = "useCatalogPath", EmitDefaultValue = true)]
-        public bool UseCatalogPath { get; set; }
+        [DataMember(Name = "useCatalogPath", EmitDefaultValue = false)]
+        public string UseCatalogPath { get; set; }
 
         /// <summary>
         /// Gets or Sets Exportdata
         /// </summary>
-        [DataMember(Name = "exportdata", EmitDefaultValue = true)]
-        public bool Exportdata { get; set; }
+        [DataMember(Name = "exportdata", EmitDefaultValue = false)]
+        public string Exportdata { get; set; }
 
         /// <summary>
         /// Gets or Sets Cube
@@ -750,14 +750,14 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets Exportpartitions
         /// </summary>
-        [DataMember(Name = "exportpartitions", EmitDefaultValue = true)]
-        public bool Exportpartitions { get; set; }
+        [DataMember(Name = "exportpartitions", EmitDefaultValue = false)]
+        public string Exportpartitions { get; set; }
 
         /// <summary>
         /// Gets or Sets Exportfilters
         /// </summary>
-        [DataMember(Name = "exportfilters", EmitDefaultValue = true)]
-        public bool Exportfilters { get; set; }
+        [DataMember(Name = "exportfilters", EmitDefaultValue = false)]
+        public string Exportfilters { get; set; }
 
         /// <summary>
         /// Gets or Sets RestEncryPassword
@@ -774,8 +774,8 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets Physical
         /// </summary>
-        [DataMember(Name = "physical", EmitDefaultValue = true)]
-        public bool Physical { get; set; }
+        [DataMember(Name = "physical", EmitDefaultValue = false)]
+        public string Physical { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -540,9 +540,9 @@ namespace EssSharp
             PartialDataExpression = options.PartialDataExpression,
 
             // EssJobType.DimBuild
-            ForceDimBuild = options.ForceDimBuild ?? false,
+            ForceDimBuild = options.ForceDimBuild?.ToString().ToLowerInvariant(),
             RestructureOption = options?.RestructureOption?.ToString().ToUpperInvariant() /*.HasValue && Enum.IsDefined(typeof(ParametersBean.RestructureOptionEnum), (int)options.RestructureOption) ? (ParametersBean.RestructureOptionEnum)options.RestructureOption : null*/,
-            UseConnection = options.UseConnection ?? false,
+            UseConnection = options.UseConnection?.ToString().ToLowerInvariant(),
             Connection = options.Connection,
             User = options.User,
             Password = options.Password,
@@ -575,7 +575,7 @@ namespace EssSharp
 
             // EssJobType.ExecuteReport
             IsScriptContent      = options?.IsScriptContent?.ToString().ToLowerInvariant(),
-            LockForUpdate        = options.LockForUpdate ?? false,
+            LockForUpdate        = options.LockForUpdate?.ToString().ToLowerInvariant(),
             ReportScriptFilename = options.ReportScriptFilename,
 
             // EssJobType.LCMExport
