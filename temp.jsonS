@@ -19047,7 +19047,7 @@
           "type": "string"
         },
         "forceDimBuild": {
-          "type": "boolean"
+          "type": "string"
         },
         "script": {
           "type": "string"
@@ -19059,8 +19059,7 @@
           "type": "string"
         },
         "useConnection": {
-          "type": "boolean",
-          "nullable": true
+          "type": "string"
         },
         "connection": {
           "type": "string"
@@ -19283,7 +19282,7 @@
           "type": "string"
         },
         "lockForUpdate": {
-          "type": "boolean"
+          "type": "string"
         },
         "isScriptContent": {
           "type": "string"
@@ -20731,16 +20730,16 @@
         "ancestor": {
           "type": "string",
           "enum": [
-            "top",
-            "bottom"
+            "TOP",
+            "BOTTOM"
           ]
         },
         "mode": {
           "type": "string",
           "enum": [
-            "children",
-            "descendents",
-            "base"
+            "CHILDREN",
+            "DESCENDENTS",
+            "BASE"
           ]
         }
       }
@@ -23781,7 +23780,7 @@
           "format": "int64"
         },
         "dataSource": {
-          "$ref": "#/definitions/RuleDataSource"
+          "$ref": "#/definitions/DataSource"
         },
         "dimensionBuildOptions": {
           "$ref": "#/definitions/DimBuildOptions"
@@ -25189,15 +25188,5 @@
         }
       }
     }
-  },
-  "securityDefinitions": {
-    "basicAuth": {
-      "type": "basic"
-    }
-  },
-  "security": [
-    {
-      "basicAuth": []
-    }
-  ]
+  }
 }

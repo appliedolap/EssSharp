@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
 using EssSharp.Model;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
 using Xunit;
 using Xunit.Abstractions;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EssSharp.Integration
 {
@@ -1766,9 +1769,9 @@ namespace EssSharp.Integration
                 Assert.Equal(responseSummary, line);
             }
         }
-        /*
-        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimenson"), Priority(48)]
-        public async Task Essbase_AfterDefaultGrid_CanBuildDimenson()
+        
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimension_File"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanBuildDimension_File()
         {
             // Get an unconnected server.
             var server = GetEssServer();
@@ -1776,17 +1779,174 @@ namespace EssSharp.Integration
             // Get the "CalcAll" script from Sample.Basic.
             var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
 
-            var ruleFile = await cube.GetFileAsync("buildDimRule.rul");
+            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul");
 
-            var dataFile = await cube.GetFileAsync("buildDimTest.txt");
+            var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
 
-            var options = new EssJobBuildDimensionOptions(dataFile, ruleFile);
+            var options = new EssJobBuildDimensionOptions(dataFile, ruleFile, forceDimBuild: true, restructureOption: EssRestructureOption.PRESERVE_ALL_DATA);
 
             var job = await cube.BuildDimensionOnCubeAsync(options);
 
             Assert.Equal(EssJobStatus.Completed, job.JobStatus);
         }
-        */
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimension_Datasource"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanBuildDimension_Datasource()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var ruleFile = await cube.GetFileAsync("Data.rul");
+
+            //var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
+
+            var options = new EssJobBuildDimensionOptions(essRuleFile: ruleFile, forceDimBuild: true, restructureOption: EssRestructureOption.PRESERVE_ALL_DATA);
+
+            // Assert that an Exception is thrown when we try to build dimension with Datasource,
+            // and capture the base exception, since this is not supported by the server.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options))).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
+            Assert.Equal("Unable to successfully execute dimension build job.", exception.Message);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimension_SQL_NamedConnection"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanBuildDimension_SQL_NamedConnection()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul");
+
+            //var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
+
+            var options = new EssJobBuildDimensionOptions(essRuleFile: ruleFile, connection: @"connection_samplebasic", forceDimBuild: true, restructureOption: EssRestructureOption.PRESERVE_ALL_DATA);
+
+            // Assert that an Exception is thrown when we try to build dimension with named SQL connection,
+            // and capture the base exception, since this is not supported by the server.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options))).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
+            Assert.Equal("Unable to successfully execute dimension build job.", exception.Message);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimension_SQL"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanBuildDimension_SQL()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul");
+
+            //var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
+
+            var options = new EssJobBuildDimensionOptions(essRuleFile: ruleFile, forceDimBuild: true, password: "password1", restructureOption: EssRestructureOption.PRESERVE_ALL_DATA, username: "sa");
+
+            // Assert that an Exception is thrown when we try to build dimension with SQL server credentials,
+            // and capture the base exception, since this is not supported by the server.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options))).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
+            Assert.Equal("Unable to successfully execute dimension build job.", exception.Message);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanLoadDimension_File"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanLoadDimension_File()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            
+            var ruleFile = await cube.GetFileAsync("Data.rul");
+
+            var dataFile = await cube.GetFileAsync("Data_Basic.txt");
+
+            var options = new EssJobLoadDataOptions(essDataFile: dataFile, essRuleFile: ruleFile, abortOnError: true);
+
+            var job = await cube.LoadDataToCubeAsync(options);
+
+            // Assert that the job was successful.
+            Assert.Equal(EssJobStatus.Completed, job.JobStatus);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanLoadDimension_Datasource"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanLoadDimension_Datasource()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var ruleFile = await cube.GetFileAsync("Data.rul");
+
+            //var dataFile = await cube.GetFileAsync("Data_Basic.txt");
+
+            var options = new EssJobLoadDataOptions(essRuleFile: ruleFile, abortOnError: true);
+
+            // Assert that an Exception is thrown when we try to load data using a Datasource,
+            // and capture the base exception, since this is not supported by the server.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options))).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
+            Assert.Equal("Unable to successfully execute data load job. Cannot async import to cube. null", exception.Message);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanLoadData_SQL_NamedConnection"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanloadData_SQL_NamedConnection()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var ruleFile = await cube.GetFileAsync("Data.rul");
+
+            var options = new EssJobLoadDataOptions(essRuleFile: ruleFile, abortOnError: true, connection: "connection_samplebasic");
+
+            // Assert that an Exception is thrown when we try to load data using a named SQL connection,
+            // and capture the base exception, since this is not supported by the server.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options))).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
+            Assert.Equal("Unable to successfully execute data load job. Failed to Establish Connection With SQL Database Server.  See log for more information", exception.Message);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanLoadData_SQL"), Priority(48)]
+        public async Task Essbase_AfterDefaultGrid_CanLoadData_SQL()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the "CalcAll" script from Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var ruleFile = await cube.GetFileAsync("Data.rul");
+
+            //var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
+
+            var options = new EssJobLoadDataOptions(essRuleFile: ruleFile, abortOnError: true, password: "password1", username: "sa");
+
+
+            // Assert that an Exception is thrown when we try to load data using SQL Server credentials,
+            // and capture the base exception, since this is not supported by the server.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options))).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
+            Assert.Equal("Unable to successfully execute data load job. Failed to Establish Connection With SQL Database Server.  See log for more information", exception.Message);
+        }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 49 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithTypes"), Priority(49)]
         public async Task Essbase_AfterScriptCreation_CanGetMdxQueryReportWithTypes()

@@ -68,28 +68,14 @@ namespace EssSharp
         {
             try
             {
-                // Check that EssJobLoadDataOptions is not null
+                // Check that EssJobBuildDimensionOptions is not null
                 if ( options is null )
-                    throw new ArgumentException($"{nameof(EssJobLoadDataOptions)} is required to load data to a {nameof(EssCube)}.");
+                    throw new ArgumentException($"{nameof(EssJobBuildDimensionOptions)} is required to build dimension to a {nameof(EssCube)}.");
 
                 // Add Application and Cube name to options
                 options.ApplicationName = Application.Name;
                 options.CubeName = Name;
                 IEssFolder folder = null;
-
-                // If the data list is null or empty...
-                if ( options.File?.Any() != true )
-                {
-                    if ( !File.Exists(options.LocalDataFilePath) && options.LocalDataFileStream is null )
-                        throw new FileNotFoundException("Unable to find the data file at the given local path.", options.LocalDataFilePath);
-
-                    folder = await Application.Server.GetFolderAsync($@"/applications/{Application.Name}/{Name}").ConfigureAwait(false);
-                    var dataFile = File.Exists(options.LocalDataFilePath) ?
-                        await folder.UploadFileAsync(path: options.LocalDataFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
-                        await folder.UploadFileAsync(stream: options.LocalDataFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-                    options.File = new List<string>() { $@"catalog{dataFile.FullPath}" };
-                }
 
                 // If the rule list is null...
                 if ( options.Rule is null )
@@ -109,17 +95,35 @@ namespace EssSharp
                     }
                 }
 
-                // Check that options.File is not null - this field holds the file name of the data being loaded and is required
+                // If the data list is null or empty...
                 if ( options.File?.Any() != true )
-                    throw new Exception($"A server file is required to load data to {Name}.");
+                {
+                    if ( File.Exists(options.LocalDataFilePath) || options.LocalDataFileStream is not null )
+                    {
+                        folder = await Application.Server.GetFolderAsync($@"/applications/{Application.Name}/{Name}").ConfigureAwait(false);
+                        var dataFile = File.Exists(options.LocalDataFilePath) ?
+                            await folder.UploadFileAsync(path: options.LocalDataFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
+                            await folder.UploadFileAsync(stream: options.LocalDataFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
 
+                        options.File = new List<string>() { $@"catalog{dataFile.FullPath}" };
+                    }
+
+                    if ( options.Rule is null)
+                        throw new FileNotFoundException("Unable to find the data file at the given local path.", options.LocalDataFilePath);
+                }
+
+                // Check that options.File OR options.Rule is not null - If there is no data file, there needs to be a rule file.
+                if ( options.File?.Any() != true && options.Rule?.Any() != true )
+                    throw new Exception($"A server file is required to load data to {Name}.");
+                
+                
                 // create and execute the Load Data job
                 return (await Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to load data to cube ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to build dimension on cube ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -995,11 +999,11 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public void LoadDataToCube( EssJobLoadDataOptions options ) => LoadDataToCubeAsync(options).GetAwaiter().GetResult();
+        public IEssJob LoadDataToCube( EssJobLoadDataOptions options ) => LoadDataToCubeAsync(options).GetAwaiter().GetResult();
 
 
         /// <inheritdoc />
-        public async Task LoadDataToCubeAsync( EssJobLoadDataOptions options, CancellationToken cancellationToken = default )
+        public async Task<IEssJob> LoadDataToCubeAsync( EssJobLoadDataOptions options, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -1011,20 +1015,6 @@ namespace EssSharp
                 options.ApplicationName = Application.Name;
                 options.CubeName = Name;
                 IEssFolder folder = null;
-
-                // If the data list is null or empty...
-                if ( options.File?.Any() != true )
-                {
-                    if ( !File.Exists(options.LocalDataFilePath) && options.LocalDataFileStream is null ) 
-                        throw new FileNotFoundException("Unable to find the data file at the given local path.", options.LocalDataFilePath);
-
-                    folder = await Application.Server.GetFolderAsync($@"/applications/{Application.Name}/{Name}").ConfigureAwait(false);
-                    var dataFile = File.Exists(options.LocalDataFilePath) ?
-                        await folder.UploadFileAsync(path: options.LocalDataFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
-                        await folder.UploadFileAsync(stream: options.LocalDataFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
-
-                    options.File = new List<string>() { $@"catalog{dataFile.FullPath}" };
-                }
 
                 // If the rule list is null...
                 if ( options.Rule is null )
@@ -1044,12 +1034,30 @@ namespace EssSharp
                     }
                 }
 
-                // Check that options.File is not null - this field holds the file name of the data being loaded and is required
-                if ( options.File?.Any() != true)
+                // If the data list is null or empty...
+                if ( options.File?.Any() != true )
+                {
+                    if ( File.Exists(options.LocalDataFilePath) || options.LocalDataFileStream is not null )
+                    {
+                        folder = await Application.Server.GetFolderAsync($@"/applications/{Application.Name}/{Name}").ConfigureAwait(false);
+                        var dataFile = File.Exists(options.LocalDataFilePath) ?
+                            await folder.UploadFileAsync(path: options.LocalDataFilePath, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false) :
+                            await folder.UploadFileAsync(stream: options.LocalDataFileStream, overwrite: true, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                        options.File = new List<string>() { $@"catalog{dataFile.FullPath}" };
+                    }
+
+                    if ( options.Rule is null )
+                        throw new FileNotFoundException("Unable to find the data file at the given local path.", options.LocalDataFilePath);
+                }
+
+                // Check that options.File OR options.Rule is not null - If there is no data file, there needs to be a rule file.
+                if ( options.File?.Any() != true && options.Rule?.Any() != true )
                   throw new Exception($"A server file is required to load data to {Name}.");
+                
 
                 // create and execute the Load Data job
-                (await Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
+                return (await Application.Server.CreateJob(options).ExecuteAsync(cancellationToken).ConfigureAwait(false)).ThrowIfFailed();
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )

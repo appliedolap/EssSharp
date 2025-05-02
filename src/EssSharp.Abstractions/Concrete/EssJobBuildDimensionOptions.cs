@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace EssSharp
 {
     public class EssJobBuildDimensionOptions : EssJobOptions, IEssJobOptions
     {
         /// <summary />
-        public EssJobBuildDimensionOptions( string dataFilePath = null, string ruleFilePath = null, string applicationName = null, string connection = null, string cubeName = null, bool? forceDimBuild = null, EssRestructureOption? restructureOption = null ) : base(EssJobType.Dimbuild)
+        public EssJobBuildDimensionOptions( string dataFilePath = null, string ruleFilePath = null, string applicationName = null, string connection = null, string cubeName = null, bool? forceDimBuild = null, string password = null, EssRestructureOption? restructureOption = null, string username = null ) : base(EssJobType.Dimbuild)
         {
             if ( !string.IsNullOrEmpty(dataFilePath) && System.IO.File.Exists(dataFilePath) )
                 throw new ArgumentException($@"A server data file path must be given to this constructor. Use the {nameof(LocalDataFilePath)} or {nameof(LocalDataFileStream)} property to load data from a local file.");
@@ -20,6 +21,7 @@ namespace EssSharp
 
             ApplicationName = applicationName;
             CubeName = cubeName;
+            UseConnection = false;
 
             if ( !string.IsNullOrEmpty(dataFilePath) )
             {
@@ -36,12 +38,14 @@ namespace EssSharp
             if ( !string.IsNullOrEmpty(connection) )
                 UseConnection = true;
 
+            User = username;
+            Password = password;
             ForceDimBuild = forceDimBuild;
             RestructureOption = restructureOption;
         }
 
         /// <summary />
-        public EssJobBuildDimensionOptions( IEssFile essDataFile = null, IEssFile essRuleFile = null, string applicationName = null, string connection = null, string cubeName = null, bool? forceDimBuild = null, EssRestructureOption? restructureOption = null ) : base(EssJobType.Dimbuild)
+        public EssJobBuildDimensionOptions( IEssFile essDataFile = null, IEssFile essRuleFile = null, string applicationName = null, string connection = null, string cubeName = null, bool? forceDimBuild = null, string password = null, EssRestructureOption? restructureOption = null, string username = null ) : base(EssJobType.Dimbuild)
         {
             if ( essDataFile is null && essRuleFile is null )
                 throw new ArgumentException($@"A server data and/or rule {nameof(IEssFile)} must be given to this constructor.");
@@ -64,12 +68,14 @@ namespace EssSharp
             if ( !string.IsNullOrEmpty(connection) )
                 UseConnection = true;
 
+            User = username;
+            Password = password;
             ForceDimBuild = forceDimBuild;
             RestructureOption = restructureOption;
         }
 
         /// <summary />
-        public EssJobBuildDimensionOptions( FileStream localDataFileStream = null, FileStream localRuleFileStream = null, string applicationName = null, string connection = null, string cubeName = null, bool? forceDimBuild = null, EssRestructureOption? restructureOption = null ) : base(EssJobType.Dimbuild)
+        public EssJobBuildDimensionOptions( FileStream localDataFileStream = null, FileStream localRuleFileStream = null, string applicationName = null, string connection = null, string cubeName = null, bool? forceDimBuild = null, string password = null, EssRestructureOption? restructureOption = null, string username = null ) : base(EssJobType.Dimbuild)
         {
             if ( localDataFileStream is null && LocalRuleFileStream is null )
                 throw new ArgumentException($@"A local data and/or rule {nameof(FileStream)} must be given to this constructor.");
@@ -85,6 +91,8 @@ namespace EssSharp
             if ( !string.IsNullOrEmpty(connection) )
                 UseConnection = true;
 
+            User = username;
+            Password = password;
             ForceDimBuild = forceDimBuild;
             RestructureOption = restructureOption;
         }

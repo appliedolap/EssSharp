@@ -537,14 +537,14 @@ namespace EssSharp
         /// Loads data to a cube from a file on the Server.
         /// </summary>
         /// <param name="options">Options for loading data, includes data file, rule file, and whether to abort on error</param>
-        public void LoadDataToCube( EssJobLoadDataOptions options );
+        public IEssJob LoadDataToCube( EssJobLoadDataOptions options );
 
         /// <summary>
         /// Asynchronously loads data to a cube from a file on the Server.
         /// </summary>
         /// <param name="options">Options for loading data, includes data file, rule file, and whether to abort on error</param>
         /// <param name="cancellationToken"></param>
-        public Task LoadDataToCubeAsync( EssJobLoadDataOptions options, CancellationToken cancellationToken = default );
+        public Task<IEssJob> LoadDataToCubeAsync( EssJobLoadDataOptions options, CancellationToken cancellationToken = default );
 
     }
 

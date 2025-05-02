@@ -33,7 +33,7 @@ namespace EssSharp
             Name = dtb.Name,
             Type = dtb.Type,
             Url = dtb.Url,
-            UseTempTables = dtb.UseTempTables
+            UseTempTables = dtb?.UseTempTables ?? false
         };
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace EssSharp
                     Dimension = mappingInfo[key].Dimension,
                     Generation = mappingInfo[key].Generation,
                     Level = mappingInfo[key].Level,
-                    GenerationNumber = mappingInfo[key].GenerationNumber
+                    GenerationNumber = mappingInfo[key]?.GenerationNumber ?? 0,
                 };
             }
 
@@ -540,7 +540,12 @@ namespace EssSharp
             PartialDataExpression = options.PartialDataExpression,
 
             // EssJobType.DimBuild
-            ForceDimBuild = options.ForceDimBuild?.ToString().ToLowerInvariant(),
+            ForceDimBuild = options.ForceDimBuild ?? false,
+            RestructureOption = options?.RestructureOption?.ToString().ToUpperInvariant() /*.HasValue && Enum.IsDefined(typeof(ParametersBean.RestructureOptionEnum), (int)options.RestructureOption) ? (ParametersBean.RestructureOptionEnum)options.RestructureOption : null*/,
+            UseConnection = options.UseConnection ?? false,
+            Connection = options.Connection,
+            User = options.User,
+            Password = options.Password,
 
             // EssJobType.ExportExcel
             BuildMethod = options.BuildMethod.HasValue && Enum.IsDefined(typeof(ParametersBean.BuildMethodEnum), (int)options.BuildMethod) ? (ParametersBean.BuildMethodEnum)options.BuildMethod : null,
@@ -569,8 +574,8 @@ namespace EssSharp
                                         options.Rule?.FirstOrDefault(),
 
             // EssJobType.ExecuteReport
-            IsScriptContent      = options.IsScriptContent?.ToString().ToLowerInvariant(),
-            LockForUpdate        = options.LockForUpdate?.ToString().ToLowerInvariant(),
+            IsScriptContent      = options?.IsScriptContent?.ToString().ToLowerInvariant(),
+            LockForUpdate        = options.LockForUpdate ?? false,
             ReportScriptFilename = options.ReportScriptFilename,
 
             // EssJobType.LCMExport
@@ -593,8 +598,8 @@ namespace EssSharp
                 dimensionList?.Add(
                     new EssGridDimension()
                     {
-                        Column = dimension.Column,
-                        Row = dimension.Row,
+                        Column = dimension?.Column ?? 0,
+                        Row = dimension?.Row ?? 0,
                         DisplayName = dimension.DisplayName,
                         Name = dimension.Name,
                         Pov = dimension.Pov,
@@ -689,10 +694,10 @@ namespace EssSharp
                 sliceData.Ranges.Add(
                     new EssGridRange() {
                         DataFormats = range.DataFormats,
-                        End = range.End,
+                        End = range?.End ?? 0,
                         EnumIds = range.EnumIds,
                         Filters = range.Filters,
-                        Start = range.Start,
+                        Start = range?.Start ?? 0,
                         Statuses = range.Statuses,
                         Texts = range.Texts,
                         Types = range.Types,
@@ -705,11 +710,11 @@ namespace EssSharp
 
         internal static EssGridSlice ToEssGridSlice( this Slice slice ) => new EssGridSlice()
         {
-            Columns = slice.Columns,
+            Columns = slice?.Columns ?? 0,
             Data = slice.Data.ToEssGridSliceData(),
             DirtyCells = slice.DirtyCells ?? new List<int>(),
             DirtyTexts = slice.DirtyTexts,
-            Rows = slice.Rows
+            Rows = slice?.Rows ?? 0 
         };
 
         internal static EssGridLayoutData ToEssSharpObject( this LayoutData layoutData ) => new EssGridLayoutData()
@@ -771,7 +776,6 @@ namespace EssSharp
             IncludeSelection = preferences.IncludeSelection,
             Indentation = Enum.IsDefined(typeof(IndentationType), (IndentationType)preferences.Indentation) ? (IndentationType)preferences.Indentation : IndentationType.UNKNOWN,
             MaxColumns = preferences.MaxColumns,
-            MaxRows = preferences.MaxRows,
             MissingText = preferences.MissingText,
             Navigate = preferences.Navigate,
             NoAccessText = preferences.NoAccessText,

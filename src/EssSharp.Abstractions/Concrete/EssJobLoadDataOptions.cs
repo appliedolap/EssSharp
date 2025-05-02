@@ -8,7 +8,7 @@ namespace EssSharp
     public class EssJobLoadDataOptions : EssJobOptions, IEssJobOptions
     {
         /// <summary />
-        public EssJobLoadDataOptions( string dataFilePath = null, string ruleFilePath = null, string applicationName = null, string cubeName = null, bool? abortOnError = false ) : base(EssJobType.Dataload)
+        public EssJobLoadDataOptions(string dataFilePath = null, string ruleFilePath = null, string applicationName = null, string cubeName = null, bool? abortOnError = false, string connection = null, string password = null, string username = null ) : base(EssJobType.Dataload)
         {
             if ( !string.IsNullOrEmpty(dataFilePath) && System.IO.File.Exists(dataFilePath) )
                 throw new ArgumentException($@"A server data file path must be given to this constructor. Use the {nameof(LocalDataFilePath)} or {nameof(LocalDataFileStream)} property to load data from a local file.");
@@ -26,24 +26,40 @@ namespace EssSharp
             }
 
             AbortOnError = abortOnError;
+
+            Connection = connection;
+
+            if ( !string.IsNullOrEmpty(connection) )
+                UseConnection = true;
+
+            User = username;
+            Password = password;
         }
 
         /// <summary />
-        public EssJobLoadDataOptions( IEssFile essDataFile, IEssFile essRuleFile = null, string applicationName = null, string cubeName = null, bool? abortOnError = false ): base( EssJobType.Dataload )
+        public EssJobLoadDataOptions(IEssFile essDataFile = null, IEssFile essRuleFile = null, string applicationName = null, string cubeName = null, bool? abortOnError = false, string connection = null, string password = null, string username = null ): base( EssJobType.Dataload )
         {
-            if ( essDataFile is null )
+            if ( essDataFile is null && essRuleFile is null )
                 throw new ArgumentNullException(nameof(essDataFile), $@"A server data {nameof(IEssFile)} must be given to this constructor.");
 
             ApplicationName = applicationName;
             CubeName        = cubeName;
 
-            File            = new List<string>() { $@"catalog{essDataFile.FullPath}" };
-            Rule            = new List<string>() { essRuleFile is not null ? $@"catalog{essRuleFile.FullPath}" : "" };
+            File            = essDataFile is not null ? new List<string>() { $@"catalog{essDataFile.FullPath}" } : null;
+            Rule            = essRuleFile is not null ? new List<string>() { $@"catalog{essRuleFile.FullPath}" } : null;
             AbortOnError    = abortOnError;
+
+            Connection = connection;
+
+            if ( !string.IsNullOrEmpty(connection) )    
+                UseConnection = true;
+
+            User = username;
+            Password = password;
         }
 
         /// <summary />
-        public EssJobLoadDataOptions( FileStream localDataFileStream, FileStream localRuleFileStream = null, string applicationName = null, string cubeName = null, bool? abortOnError = false ) : base(EssJobType.Dataload)
+        public EssJobLoadDataOptions( FileStream localDataFileStream, FileStream localRuleFileStream = null, string applicationName = null, string cubeName = null, bool? abortOnError = false, string connection = null, string password = null, string username = null ) : base(EssJobType.Dataload)
         {
             if ( localDataFileStream is null )
                 throw new ArgumentNullException(nameof(localDataFileStream), $@"A local data {nameof(FileStream)} must be given to this constructor.");
@@ -54,6 +70,14 @@ namespace EssSharp
             LocalDataFileStream = localDataFileStream;
             LocalRuleFileStream = localRuleFileStream;
             AbortOnError        = abortOnError;
+
+            Connection = connection;
+
+            if ( !string.IsNullOrEmpty(connection) )
+                UseConnection = true;
+
+            User = username;
+            Password = password;
         }
 
         #region Public Properties
@@ -82,6 +106,22 @@ namespace EssSharp
 
         /// <inheritdoc />
         public List<string> Rule { get; set; }
+
+        #endregion
+
+        #region IEssJobOptions EssJobType.Dimbuild Members
+
+        /// <inheritdoc />
+        public string Connection { get; set; }
+
+        /// <inheritdoc />
+        public string Password { get; set; }
+
+        /// <inheritdoc />
+        public bool? UseConnection { get; set; }
+
+        /// <inheritdoc />
+        public string User { get; set; }
 
         #endregion
     }

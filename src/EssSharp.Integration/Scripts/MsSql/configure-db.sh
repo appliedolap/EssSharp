@@ -7,7 +7,7 @@
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
 # Add both variants of the microsoft ODBC tools path to the path
-export PATH="${PATH:+${PATH}:}/opt/mssql-tools/bin"
+#export PATH="${PATH:+${PATH}:}/opt/mssql-tools/bin"
 export PATH="${PATH:+${PATH}:}/opt/mssql-tools18/bin"
 
 # Sleep for 5 seconds to give the database a chance to start up
