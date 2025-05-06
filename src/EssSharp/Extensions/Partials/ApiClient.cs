@@ -101,12 +101,12 @@ namespace EssSharp.Client
                 }
 
                 // Set the grid preferences for the session.
-                await setGridPreferencesAsync(configuredPreferences, cookie);
+                await setGridPreferencesAsync(configuredPreferences, cookie).ConfigureAwait(false);
             }
             else
             {
                 // Set the grid preferences for a new session.
-                await setGridPreferencesAsync(configuredPreferences);
+                await setGridPreferencesAsync(configuredPreferences).ConfigureAwait(false);
             }
 
             // Write the request to any configured logger.
@@ -130,7 +130,7 @@ namespace EssSharp.Client
 
                 var api = ApiFactory.GetApiAndClient<GridPreferencesApi>(config).Api;
 
-                var sessionID = (await api.GridPreferencesSetForSessionAsync(preferences.ToModelObject(), cookie)).Cookies.FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase) && !cookie.Expired )?.Value;
+                var sessionID = (await api.GridPreferencesSetForSessionAsync(preferences.ToModelObject(), cookie, cancellationToken: cancellationToken).ConfigureAwait(false)).Cookies.FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase) && !cookie.Expired )?.Value;
 
                 if ( !string.IsNullOrEmpty(sessionID) )
                 {

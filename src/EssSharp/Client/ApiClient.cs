@@ -536,7 +536,7 @@ namespace EssSharp.Client
                     }
 
                     // Allow any custom extensions to process the response after dispatch.
-                    InterceptResponseAsync(request, response, configuration, options).GetAwaiter().GetResult();
+                    await InterceptResponseAsync(request, response, configuration, options, cancellationToken).ConfigureAwait(false);
 
                     var result = ToApiResponse(response);
                     if (response.ErrorMessage != null)

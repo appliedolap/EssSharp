@@ -23,7 +23,7 @@ namespace EssSharp
         public int MemberCount { get; }
 
         /// <summary>
-        /// Gets stored Dimesnion members.
+        /// Gets the stored dimension members count.
         /// </summary>
         public int StoredMemberCount { get; }
 
@@ -32,6 +32,9 @@ namespace EssSharp
         /// </summary>
         public List<string> Members { get; set; }
 
+        /// <summary>
+        /// Returns the dimension tag.
+        /// </summary>
         public EssDimensionType DimensionTag { get; }
 
         /// <summary>
@@ -46,6 +49,17 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<List<IEssMember>> GetChildrenAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Gets the dimension tag for the current dimension.
+        /// </summary>
+        public EssDimensionType GetDimensionTag();
+
+        /// <summary>
+        /// Asynchronously gets the dimension tag for the current dimension.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        public Task<EssDimensionType> GetDimensionTagAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// 

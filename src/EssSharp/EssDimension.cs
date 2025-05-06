@@ -12,8 +12,9 @@ namespace EssSharp
     {
         #region Private Data
 
-        private readonly EssCube       _cube;
-        private readonly DimensionBean _dimension;
+        private readonly EssCube           _cube;
+        private readonly DimensionBean     _dimension;
+        private          EssDimensionType? _dimensionTag;
 
         #endregion
 
@@ -57,7 +58,8 @@ namespace EssSharp
         public List<string> Members { get; set; }
 
         /// <inheritdoc />
-        public EssDimensionType DimensionTag => _cube.GetMember(Name).DimensionType;
+        public EssDimensionType DimensionTag => GetDimensionTag();
+
         #endregion
 
         /// <inheritdoc />
@@ -73,7 +75,7 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parent: Name).ConfigureAwait(false) is not { } members )
+                if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parent: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } members )
                     throw new Exception("Cannot get members"); // TODO: update later
 
                 return members.ToEssSharpList(_cube) ?? new List<IEssMember>();
@@ -85,19 +87,40 @@ namespace EssSharp
             }
         }
 
-        /// inheritdoc />
-        /// <returns></returns>
+        /// <inheritdoc />
+        public EssDimensionType GetDimensionTag() => GetDimensionTagAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssDimensionType> GetDimensionTagAsync(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                if ( _dimensionTag.HasValue )
+                    return _dimensionTag.Value;
+
+                if ( await _cube.GetMemberAsync(Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } member )
+                    throw new Exception("Cannot get dimension member.");
+
+                return (_dimensionTag = member.DimensionType).Value;
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to get the dimension tag for dimension ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         public List<IEssGeneration> GetGenerations() => GetGenerationsAsync().GetAwaiter().GetResult();
 
-        /// inheritdoc />
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<List<IEssGeneration>> GetGenerationsAsync( CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<DimensionsApi>();
 
-                if ( await api.DimensionsListDimGenerationsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name).ConfigureAwait(false) is not { } generations )
+                if ( await api.DimensionsListDimGenerationsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } generations )
                     throw new Exception("Cannot get generations"); // TODO: update later
 
                 return generations.ToEssSharpList() ?? new List<IEssGeneration>();
@@ -121,7 +144,7 @@ namespace EssSharp
             {
                 var api = GetApi<DimensionsApi>();
 
-                if ( await api.DimensionsListDimGenerationsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name).ConfigureAwait(false) is not { } generations )
+                if ( await api.DimensionsListDimGenerationsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } generations )
                     throw new Exception("Cannot get generations"); // TODO: update later
 
                 return generations.ToEssSharpList() ?? new List<IEssGeneration>();
@@ -145,7 +168,7 @@ namespace EssSharp
             {
                 var api = GetApi<DimensionsApi>();
 
-                if ( await api.DimensionsListDimLevelsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name).ConfigureAwait(false) is not { } generations )
+                if ( await api.DimensionsListDimLevelsAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, dimensionName: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } generations )
                     throw new Exception("Cannot get generations"); // TODO: update later
 
                 return generations.ToEssSharpList() ?? new List<IEssGeneration>();
