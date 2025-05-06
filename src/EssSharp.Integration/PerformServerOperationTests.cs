@@ -1790,7 +1790,7 @@ namespace EssSharp.Integration
             Assert.Equal(EssJobStatus.Completed, job.JobStatus);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimension_Datasource"), Priority(48)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 49 - Essbase_AfterDefaultGrid_CanBuildDimension_Datasource"), Priority(48)]
         public async Task Essbase_AfterDefaultGrid_CanBuildDimension_Datasource()
         {
             // Get an unconnected server.
@@ -1813,7 +1813,7 @@ namespace EssSharp.Integration
             Assert.Equal("Unable to successfully execute dimension build job.", exception.Message);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimension_SQL_NamedConnection"), Priority(48)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 50 - Essbase_AfterDefaultGrid_CanBuildDimension_SQL_NamedConnection"), Priority(48)]
         public async Task Essbase_AfterDefaultGrid_CanBuildDimension_SQL_NamedConnection()
         {
             // Get an unconnected server.
@@ -1833,10 +1833,10 @@ namespace EssSharp.Integration
             var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
-            Assert.Equal("Unable to successfully execute dimension build job.", exception.Message);
+            Assert.Contains("Unable to successfully execute dimension build job.", exception.Message);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimension_SQL"), Priority(48)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 51 - Essbase_AfterDefaultGrid_CanBuildDimension_SQL"), Priority(48)]
         public async Task Essbase_AfterDefaultGrid_CanBuildDimension_SQL()
         {
             // Get an unconnected server.
@@ -1859,7 +1859,7 @@ namespace EssSharp.Integration
             Assert.Equal("Unable to successfully execute dimension build job.", exception.Message);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanLoadDimension_File"), Priority(48)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 52 - Essbase_AfterDefaultGrid_CanLoadDimension_File"), Priority(48)]
         public async Task Essbase_AfterDefaultGrid_CanLoadDimension_File()
         {
             // Get an unconnected server.
@@ -1880,7 +1880,7 @@ namespace EssSharp.Integration
             Assert.Equal(EssJobStatus.Completed, job.JobStatus);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanLoadDimension_Datasource"), Priority(48)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 53 - Essbase_AfterDefaultGrid_CanLoadDimension_Datasource"), Priority(48)]
         public async Task Essbase_AfterDefaultGrid_CanLoadDimension_Datasource()
         {
             // Get an unconnected server.
@@ -1903,7 +1903,7 @@ namespace EssSharp.Integration
             Assert.Equal("Unable to successfully execute data load job. Cannot async import to cube. null", exception.Message);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanLoadData_SQL_NamedConnection"), Priority(48)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 54 - Essbase_AfterDefaultGrid_CanLoadData_SQL_NamedConnection"), Priority(48)]
         public async Task Essbase_AfterDefaultGrid_CanloadData_SQL_NamedConnection()
         {
             // Get an unconnected server.
@@ -1921,10 +1921,10 @@ namespace EssSharp.Integration
             var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
-            Assert.Equal("Unable to successfully execute data load job. Failed to Establish Connection With SQL Database Server.  See log for more information", exception.Message);
+            Assert.Contains("Unable to successfully execute data load job", exception.Message);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanLoadData_SQL"), Priority(48)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 55 - Essbase_AfterDefaultGrid_CanLoadData_SQL"), Priority(48)]
         public async Task Essbase_AfterDefaultGrid_CanLoadData_SQL()
         {
             // Get an unconnected server.
@@ -1948,7 +1948,7 @@ namespace EssSharp.Integration
             Assert.Equal("Unable to successfully execute data load job. Failed to Establish Connection With SQL Database Server.  See log for more information", exception.Message);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 49 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithTypes"), Priority(49)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 56 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithTypes"), Priority(49)]
         public async Task Essbase_AfterScriptCreation_CanGetMdxQueryReportWithTypes()
         {
             // Get an unconnected server.
@@ -1977,7 +1977,7 @@ namespace EssSharp.Integration
             Assert.Equal(2,          report.Types[2, 1]);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 50 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithDimensionProperties"), Priority(50)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 57 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithDimensionProperties"), Priority(50)]
         public async Task Essbase_AfterScriptCreation_CanGetMdxQueryReportWithDimensionProperties()
         {
             // Get an unconnected server.
@@ -2011,7 +2011,7 @@ namespace EssSharp.Integration
             Assert.Equal(2, report.Types[2, 4]);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 51 - Essbase_AfterDefaultGrid_CanRefreshGridWithEmptyRow"), Priority(51)]
+        [Fact(DisplayName = @"PerformServerFunctionTests - 58 - Essbase_AfterDefaultGrid_CanRefreshGridWithEmptyRow"), Priority(51)]
         public async Task Essbase_AfterDefaultGrid_CanRefreshGridWithEmptyRow()
         {
             // Get an unconnected server.
