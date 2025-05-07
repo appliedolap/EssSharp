@@ -8,11 +8,6 @@ namespace EssSharp
     public class EssJobBuildDimensionOptions : EssJobOptions, IEssJobOptions
     {
         /// <summary />
-        public EssJobBuildDimensionOptions() : base(EssJobType.Dimbuild)
-        {
-        }
-
-        /// <summary />
         public EssJobBuildDimensionOptions( string dataFilePath = null, string ruleFilePath = null, string applicationName = null, string connection = null, string cubeName = null, bool? forceDimBuild = null, string password = null, EssRestructureOption? restructureOption = null, string username = null ) : base(EssJobType.Dimbuild)
         {
             if ( !string.IsNullOrEmpty(dataFilePath) && System.IO.File.Exists(dataFilePath) )

@@ -503,7 +503,7 @@ namespace EssSharp.Client
                     // Allow any custom extensions to process the request before dispatch.
                     await InterceptRequestAsync(request, configuration, options, cancellationToken).ConfigureAwait(false);
 
-                    RestResponse<T> response = await getResponse(client);
+                    RestResponse<T> response = await getResponse(client).ConfigureAwait(false);
 
                     // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
                     if (typeof(AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
@@ -583,7 +583,7 @@ namespace EssSharp.Client
         {
             if (policyResult.Outcome == OutcomeType.Successful) 
             {
-                return await client.Deserialize<T>(policyResult.Result, cancellationToken);
+                return await client.Deserialize<T>(policyResult.Result, cancellationToken).ConfigureAwait(false);
             }
             else
             {
@@ -640,7 +640,7 @@ namespace EssSharp.Client
                 {
                     var policy = RetryConfiguration.AsyncRetryPolicy;
                     var policyResult = await policy.ExecuteAndCaptureAsync((ct) => client.ExecuteAsync(request, ct), cancellationToken).ConfigureAwait(false);
-                    return await DeserializeRestResponseFromPolicyAsync<T>(client, request, policyResult, cancellationToken);
+                    return await DeserializeRestResponseFromPolicyAsync<T>(client, request, policyResult, cancellationToken).ConfigureAwait(false);
                 }
                 else
                 {

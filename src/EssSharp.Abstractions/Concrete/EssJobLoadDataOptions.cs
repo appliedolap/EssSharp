@@ -8,12 +8,6 @@ namespace EssSharp
     public class EssJobLoadDataOptions : EssJobOptions, IEssJobOptions
     {
         /// <summary />
-        public EssJobLoadDataOptions() : base(EssJobType.Dataload)
-        {
-
-        }
-
-        /// <summary />
         public EssJobLoadDataOptions(string dataFilePath = null, string ruleFilePath = null, string applicationName = null, string cubeName = null, bool? abortOnError = false, string connection = null, string password = null, string username = null ) : base(EssJobType.Dataload)
         {
             if ( !string.IsNullOrEmpty(dataFilePath) && System.IO.File.Exists(dataFilePath) )
