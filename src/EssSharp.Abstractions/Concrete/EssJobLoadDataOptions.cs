@@ -19,12 +19,9 @@ namespace EssSharp
             ApplicationName = applicationName;
             CubeName = cubeName;
 
-            if ( !string.IsNullOrEmpty(dataFilePath) )
-            {
-                File = new List<string>() { $@"catalog/{dataFilePath.TrimStart('/')}" };
-                Rule = new List<string>() { !string.IsNullOrEmpty(ruleFilePath) ? $@"catalog/{ruleFilePath.TrimStart('/')}" : "" };
-            }
-
+            File = string.IsNullOrEmpty(dataFilePath) ? null : new List<string>() { $@"catalog/{dataFilePath.TrimStart('/')}" };
+            Rule = string.IsNullOrEmpty(ruleFilePath) ? null : new List<string>() { !string.IsNullOrEmpty(ruleFilePath) ? $@"catalog/{ruleFilePath.TrimStart('/')}" : "" } ;
+            
             AbortOnError = abortOnError;
 
             Connection = connection;

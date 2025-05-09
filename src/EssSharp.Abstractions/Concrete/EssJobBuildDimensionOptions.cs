@@ -16,22 +16,12 @@ namespace EssSharp
             if ( !string.IsNullOrEmpty(ruleFilePath) && System.IO.File.Exists(ruleFilePath) )
                 throw new ArgumentException($@"A server rule file path must be given to this constructor. Use the {nameof(LocalRuleFilePath)} or {nameof(LocalRuleFileStream)} property to load rules from a local file.");
 
-            if ( string.IsNullOrEmpty(dataFilePath) && string.IsNullOrEmpty(ruleFilePath) )
-                throw new ArgumentException($@"A server data and/or rule file path must be given to this constructor.");
-
             ApplicationName = applicationName;
             CubeName = cubeName;
             UseConnection = false;
 
-            if ( !string.IsNullOrEmpty(dataFilePath) )
-            {
-                File = new List<string>() { $@"catalog/{dataFilePath.TrimStart('/')}" };
-                Rule = new List<string>() { !string.IsNullOrEmpty(ruleFilePath) ? $@"catalog/{ruleFilePath.TrimStart('/')}" : "" };
-            }
-            else if ( !string.IsNullOrEmpty(ruleFilePath) )
-            {
-                Rule = new List<string>() { $@"catalog/{ruleFilePath.TrimStart('/')}" };
-            }
+            File = string.IsNullOrEmpty(dataFilePath) ? null : new List<string>() { $@"catalog/{dataFilePath.TrimStart('/')}" };
+            Rule = string.IsNullOrEmpty(ruleFilePath) ? null : new List<string>() { $@"catalog/{ruleFilePath.TrimStart('/')}" };
 
             Connection = connection;
 
