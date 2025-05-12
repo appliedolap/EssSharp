@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
@@ -13,7 +11,6 @@ namespace EssSharp.Integration
     [Collection("EssSharp Integration Tests"), Trait("type", "create"), CollectionPriority(4)]
     public class CreateServerObjectTests : IntegrationTestBase
     {
-
         /// <summary />
         /// <param name="output" />
         public CreateServerObjectTests( ITestOutputHelper output ) : base(output) { }

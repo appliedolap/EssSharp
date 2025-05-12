@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
 using EssSharp.Model;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
+
 using Xunit;
 using Xunit.Abstractions;
-using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EssSharp.Integration
 {

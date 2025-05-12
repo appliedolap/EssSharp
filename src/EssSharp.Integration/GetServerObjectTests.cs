@@ -1,11 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
-using EssSharp.Model;
+
 using Xunit;
 using Xunit.Abstractions;
 
