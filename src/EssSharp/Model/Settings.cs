@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="Settings" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        public Settings(List<Link> links = default(List<Link>))
+        public Settings(List<Link> links = default)
         {
             this.Links = links;
         }

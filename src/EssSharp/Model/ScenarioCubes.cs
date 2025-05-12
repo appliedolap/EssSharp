@@ -38,7 +38,7 @@ namespace EssSharp.Model
         /// <param name="participateInScenario">participateInScenario.</param>
         /// <param name="databaseAdmin">databaseAdmin.</param>
         /// <param name="easManagedApp">easManagedApp.</param>
-        public ScenarioCubes(string application = default(string), List<string> databases = default(List<string>), bool createScenario = default(bool), bool participateInScenario = default(bool), bool databaseAdmin = default(bool), bool easManagedApp = default(bool))
+        public ScenarioCubes(string application = default, List<string> databases = default, bool createScenario = default, bool participateInScenario = default, bool databaseAdmin = default, bool easManagedApp = default)
         {
             this.Application = application;
             this.Databases = databases;

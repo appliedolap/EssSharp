@@ -260,7 +260,7 @@ namespace EssSharp.Model
         /// <param name="type">type.</param>
         /// <param name="time">time.</param>
         /// <param name="name">name.</param>
-        public LockObject(List<Link> links = default(List<Link>), string user = default(string), TypeEnum? type = default(TypeEnum?), long time = default(long), string name = default(string))
+        public LockObject(List<Link> links = default, string user = default, TypeEnum? type = default, long time = default, string name = default)
         {
             this.Links = links;
             this.User = user;

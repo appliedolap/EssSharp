@@ -37,7 +37,7 @@ namespace EssSharp.Api
         /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void PartitionCreatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0);
+        void PartitionCreatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0);
 
         /// <summary>
         /// Create Partition
@@ -52,7 +52,7 @@ namespace EssSharp.Api
         /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PartitionCreatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> PartitionCreatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0);
         /// <summary>
         /// Delete Partition
         /// </summary>
@@ -71,7 +71,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void PartitionDeletePartition(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0);
+        void PartitionDeletePartition(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0);
 
         /// <summary>
         /// Delete Partition
@@ -91,7 +91,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PartitionDeletePartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> PartitionDeletePartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0);
         /// <summary>
         /// Get Partition Cell Count
         /// </summary>
@@ -139,7 +139,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PartitionList</returns>
-        PartitionList PartitionGetPartitions(string applicationName, string databaseName, List<string> type = default(List<string>), int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0);
+        PartitionList PartitionGetPartitions(string applicationName, string databaseName, List<string> type = default, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Partitions
@@ -161,7 +161,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of PartitionList</returns>
-        ApiResponse<PartitionList> PartitionGetPartitionsWithHttpInfo(string applicationName, string databaseName, List<string> type = default(List<string>), int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0);
+        ApiResponse<PartitionList> PartitionGetPartitionsWithHttpInfo(string applicationName, string databaseName, List<string> type = default, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0);
         /// <summary>
         /// Get Supported Partition Types
         /// </summary>
@@ -205,7 +205,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void PartitionLockPartition(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0);
+        void PartitionLockPartition(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0);
 
         /// <summary>
         /// Lock Partition
@@ -225,7 +225,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PartitionLockPartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> PartitionLockPartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0);
         /// <summary>
         /// Replicate Data
         /// </summary>
@@ -241,7 +241,7 @@ namespace EssSharp.Api
         /// <param name="replicateOption">&lt;p&gt;Replicate data options.&lt;/p&gt; (optional, default to UPDATED_CELLS)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void PartitionReplicateDataFromSource(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default(string), string replicateOption = default(string), int operationIndex = 0);
+        void PartitionReplicateDataFromSource(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default, string replicateOption = default, int operationIndex = 0);
 
         /// <summary>
         /// Replicate Data
@@ -258,7 +258,7 @@ namespace EssSharp.Api
         /// <param name="replicateOption">&lt;p&gt;Replicate data options.&lt;/p&gt; (optional, default to UPDATED_CELLS)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PartitionReplicateDataFromSourceWithHttpInfo(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default(string), string replicateOption = default(string), int operationIndex = 0);
+        ApiResponse<Object> PartitionReplicateDataFromSourceWithHttpInfo(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default, string replicateOption = default, int operationIndex = 0);
         /// <summary>
         /// Unlock Partition
         /// </summary>
@@ -277,7 +277,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void PartitionUnlockPartition(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0);
+        void PartitionUnlockPartition(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0);
 
         /// <summary>
         /// Unlock Partition
@@ -297,7 +297,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PartitionUnlockPartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> PartitionUnlockPartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0);
         /// <summary>
         /// Update Partition
         /// </summary>
@@ -311,7 +311,7 @@ namespace EssSharp.Api
         /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void PartitionUpdatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0);
+        void PartitionUpdatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0);
 
         /// <summary>
         /// Update Partition
@@ -326,7 +326,7 @@ namespace EssSharp.Api
         /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PartitionUpdatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> PartitionUpdatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0);
         /// <summary>
         /// Validate Partition
         /// </summary>
@@ -377,7 +377,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PartitionCreatePartitionAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task PartitionCreatePartitionAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Partition
@@ -393,7 +393,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionCreatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionCreatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Partition
         /// </summary>
@@ -413,7 +413,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PartitionDeletePartitionAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task PartitionDeletePartitionAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Partition
@@ -434,7 +434,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionDeletePartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionDeletePartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Partition Cell Count
         /// </summary>
@@ -448,7 +448,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PartitionBean</returns>
-        System.Threading.Tasks.Task<PartitionBean> PartitionGetPartitionCellCountAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PartitionBean> PartitionGetPartitionCellCountAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Partition Cell Count
@@ -463,7 +463,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PartitionBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PartitionBean>> PartitionGetPartitionCellCountWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<PartitionBean>> PartitionGetPartitionCellCountWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Partitions
         /// </summary>
@@ -485,7 +485,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PartitionList</returns>
-        System.Threading.Tasks.Task<PartitionList> PartitionGetPartitionsAsync(string applicationName, string databaseName, List<string> type = default(List<string>), int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<PartitionList> PartitionGetPartitionsAsync(string applicationName, string databaseName, List<string> type = default, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Partitions
@@ -508,7 +508,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PartitionList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PartitionList>> PartitionGetPartitionsWithHttpInfoAsync(string applicationName, string databaseName, List<string> type = default(List<string>), int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<PartitionList>> PartitionGetPartitionsWithHttpInfoAsync(string applicationName, string databaseName, List<string> type = default, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Supported Partition Types
         /// </summary>
@@ -521,7 +521,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PartitionGetSupportedFederatedTypesAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task PartitionGetSupportedFederatedTypesAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Supported Partition Types
@@ -535,7 +535,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionGetSupportedFederatedTypesWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionGetSupportedFederatedTypesWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Lock Partition
         /// </summary>
@@ -555,7 +555,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PartitionLockPartitionAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task PartitionLockPartitionAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Lock Partition
@@ -576,7 +576,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionLockPartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionLockPartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Replicate Data
         /// </summary>
@@ -593,7 +593,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PartitionReplicateDataFromSourceAsync(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default(string), string replicateOption = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task PartitionReplicateDataFromSourceAsync(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default, string replicateOption = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Replicate Data
@@ -611,7 +611,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionReplicateDataFromSourceWithHttpInfoAsync(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default(string), string replicateOption = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionReplicateDataFromSourceWithHttpInfoAsync(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default, string replicateOption = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Unlock Partition
         /// </summary>
@@ -631,7 +631,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PartitionUnlockPartitionAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task PartitionUnlockPartitionAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Unlock Partition
@@ -652,7 +652,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionUnlockPartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionUnlockPartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Partition
         /// </summary>
@@ -667,7 +667,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PartitionUpdatePartitionAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task PartitionUpdatePartitionAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Partition
@@ -683,7 +683,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionUpdatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionUpdatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Validate Partition
         /// </summary>
@@ -697,7 +697,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PartitionValidatePartitionAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task PartitionValidatePartitionAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate Partition
@@ -712,7 +712,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionValidatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> PartitionValidatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -843,7 +843,7 @@ namespace EssSharp.Api
         /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void PartitionCreatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0)
+        public void PartitionCreatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0)
         {
             PartitionCreatePartitionWithHttpInfo(applicationName, databaseName, body, executeInBackground);
         }
@@ -858,7 +858,7 @@ namespace EssSharp.Api
         /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> PartitionCreatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> PartitionCreatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -945,7 +945,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PartitionCreatePartitionAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task PartitionCreatePartitionAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await PartitionCreatePartitionWithHttpInfoAsync(applicationName, databaseName, body, executeInBackground, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -961,7 +961,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionCreatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionCreatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1053,7 +1053,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void PartitionDeletePartition(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0)
+        public void PartitionDeletePartition(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0)
         {
             PartitionDeletePartitionWithHttpInfo(applicationName, databaseName, type, serverName, applicationName2, databaseName2, datasourceName, measuresDimensionName, applicationLevelDatasource);
         }
@@ -1073,7 +1073,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> PartitionDeletePartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> PartitionDeletePartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1183,7 +1183,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PartitionDeletePartitionAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task PartitionDeletePartitionAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await PartitionDeletePartitionWithHttpInfoAsync(applicationName, databaseName, type, serverName, applicationName2, databaseName2, datasourceName, measuresDimensionName, applicationLevelDatasource, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1204,7 +1204,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionDeletePartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionDeletePartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1407,7 +1407,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PartitionBean</returns>
-        public async System.Threading.Tasks.Task<PartitionBean> PartitionGetPartitionCellCountAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PartitionBean> PartitionGetPartitionCellCountAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<PartitionBean> localVarResponse = await PartitionGetPartitionCellCountWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1423,7 +1423,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PartitionBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PartitionBean>> PartitionGetPartitionCellCountWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PartitionBean>> PartitionGetPartitionCellCountWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1515,7 +1515,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PartitionList</returns>
-        public PartitionList PartitionGetPartitions(string applicationName, string databaseName, List<string> type = default(List<string>), int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0)
+        public PartitionList PartitionGetPartitions(string applicationName, string databaseName, List<string> type = default, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<PartitionList> localVarResponse = PartitionGetPartitionsWithHttpInfo(applicationName, databaseName, type, offset, limit, serverName, applicationName2, databaseName2, datasourceName, measuresDimensionName, applicationLevelDatasource);
             return localVarResponse.Data;
@@ -1538,7 +1538,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of PartitionList</returns>
-        public EssSharp.Client.ApiResponse<PartitionList> PartitionGetPartitionsWithHttpInfo(string applicationName, string databaseName, List<string> type = default(List<string>), int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<PartitionList> PartitionGetPartitionsWithHttpInfo(string applicationName, string databaseName, List<string> type = default, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1657,7 +1657,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PartitionList</returns>
-        public async System.Threading.Tasks.Task<PartitionList> PartitionGetPartitionsAsync(string applicationName, string databaseName, List<string> type = default(List<string>), int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<PartitionList> PartitionGetPartitionsAsync(string applicationName, string databaseName, List<string> type = default, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<PartitionList> localVarResponse = await PartitionGetPartitionsWithHttpInfoAsync(applicationName, databaseName, type, offset, limit, serverName, applicationName2, databaseName2, datasourceName, measuresDimensionName, applicationLevelDatasource, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1681,7 +1681,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PartitionList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PartitionList>> PartitionGetPartitionsWithHttpInfoAsync(string applicationName, string databaseName, List<string> type = default(List<string>), int? offset = default(int?), int? limit = default(int?), string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<PartitionList>> PartitionGetPartitionsWithHttpInfoAsync(string applicationName, string databaseName, List<string> type = default, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1876,7 +1876,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PartitionGetSupportedFederatedTypesAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task PartitionGetSupportedFederatedTypesAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await PartitionGetSupportedFederatedTypesWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1890,7 +1890,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionGetSupportedFederatedTypesWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionGetSupportedFederatedTypesWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1969,7 +1969,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void PartitionLockPartition(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0)
+        public void PartitionLockPartition(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0)
         {
             PartitionLockPartitionWithHttpInfo(applicationName, databaseName, type, serverName, applicationName2, databaseName2, datasourceName, measuresDimensionName, applicationLevelDatasource);
         }
@@ -1989,7 +1989,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> PartitionLockPartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> PartitionLockPartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2099,7 +2099,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PartitionLockPartitionAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task PartitionLockPartitionAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await PartitionLockPartitionWithHttpInfoAsync(applicationName, databaseName, type, serverName, applicationName2, databaseName2, datasourceName, measuresDimensionName, applicationLevelDatasource, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2120,7 +2120,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionLockPartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionLockPartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2227,7 +2227,7 @@ namespace EssSharp.Api
         /// <param name="replicateOption">&lt;p&gt;Replicate data options.&lt;/p&gt; (optional, default to UPDATED_CELLS)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void PartitionReplicateDataFromSource(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default(string), string replicateOption = default(string), int operationIndex = 0)
+        public void PartitionReplicateDataFromSource(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default, string replicateOption = default, int operationIndex = 0)
         {
             PartitionReplicateDataFromSourceWithHttpInfo(applicationName, databaseName, applicationName2, databaseName2, serverName, replicateOption);
         }
@@ -2244,7 +2244,7 @@ namespace EssSharp.Api
         /// <param name="replicateOption">&lt;p&gt;Replicate data options.&lt;/p&gt; (optional, default to UPDATED_CELLS)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> PartitionReplicateDataFromSourceWithHttpInfo(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default(string), string replicateOption = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> PartitionReplicateDataFromSourceWithHttpInfo(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default, string replicateOption = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2342,7 +2342,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PartitionReplicateDataFromSourceAsync(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default(string), string replicateOption = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task PartitionReplicateDataFromSourceAsync(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default, string replicateOption = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await PartitionReplicateDataFromSourceWithHttpInfoAsync(applicationName, databaseName, applicationName2, databaseName2, serverName, replicateOption, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2360,7 +2360,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionReplicateDataFromSourceWithHttpInfoAsync(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default(string), string replicateOption = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionReplicateDataFromSourceWithHttpInfoAsync(string applicationName, string databaseName, string applicationName2, string databaseName2, string serverName = default, string replicateOption = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2461,7 +2461,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void PartitionUnlockPartition(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0)
+        public void PartitionUnlockPartition(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0)
         {
             PartitionUnlockPartitionWithHttpInfo(applicationName, databaseName, type, serverName, applicationName2, databaseName2, datasourceName, measuresDimensionName, applicationLevelDatasource);
         }
@@ -2481,7 +2481,7 @@ namespace EssSharp.Api
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> PartitionUnlockPartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> PartitionUnlockPartitionWithHttpInfo(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2591,7 +2591,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PartitionUnlockPartitionAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task PartitionUnlockPartitionAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await PartitionUnlockPartitionWithHttpInfoAsync(applicationName, databaseName, type, serverName, applicationName2, databaseName2, datasourceName, measuresDimensionName, applicationLevelDatasource, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2612,7 +2612,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionUnlockPartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default(string), string applicationName2 = default(string), string databaseName2 = default(string), string datasourceName = default(string), string measuresDimensionName = default(string), bool? applicationLevelDatasource = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionUnlockPartitionWithHttpInfoAsync(string applicationName, string databaseName, string type, string serverName = default, string applicationName2 = default, string databaseName2 = default, string datasourceName = default, string measuresDimensionName = default, bool? applicationLevelDatasource = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2717,7 +2717,7 @@ namespace EssSharp.Api
         /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void PartitionUpdatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0)
+        public void PartitionUpdatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0)
         {
             PartitionUpdatePartitionWithHttpInfo(applicationName, databaseName, body, executeInBackground);
         }
@@ -2732,7 +2732,7 @@ namespace EssSharp.Api
         /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> PartitionUpdatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> PartitionUpdatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2819,7 +2819,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PartitionUpdatePartitionAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task PartitionUpdatePartitionAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await PartitionUpdatePartitionWithHttpInfoAsync(applicationName, databaseName, body, executeInBackground, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2835,7 +2835,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionUpdatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionUpdatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3017,7 +3017,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PartitionValidatePartitionAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task PartitionValidatePartitionAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await PartitionValidatePartitionWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -3032,7 +3032,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionValidatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> PartitionValidatePartitionWithHttpInfoAsync(string applicationName, string databaseName, PartitionBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

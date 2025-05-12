@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="message">message.</param>
         /// <param name="compressionInfo">compressionInfo.</param>
-        public CompressionInfoOutput(string message = default(string), List<EssbaseASODbCompression> compressionInfo = default(List<EssbaseASODbCompression>))
+        public CompressionInfoOutput(string message = default, List<EssbaseASODbCompression> compressionInfo = default)
         {
             this.Message = message;
             this.CompressionInfo = compressionInfo;

@@ -62,24 +62,6 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Start'
-        /// </summary>
-        [Fact]
-        public void StartTest()
-        {
-            // TODO unit test for the property 'Start'
-        }
-
-        /// <summary>
-        /// Test the property 'Filters'
-        /// </summary>
-        [Fact]
-        public void FiltersTest()
-        {
-            // TODO unit test for the property 'Filters'
-        }
-
-        /// <summary>
         /// Test the property 'Statuses'
         /// </summary>
         [Fact]
@@ -98,15 +80,6 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'DataFormats'
-        /// </summary>
-        [Fact]
-        public void DataFormatsTest()
-        {
-            // TODO unit test for the property 'DataFormats'
-        }
-
-        /// <summary>
         /// Test the property 'EnumIds'
         /// </summary>
         [Fact]
@@ -116,12 +89,30 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Values'
+        /// Test the property 'DataFormats'
         /// </summary>
         [Fact]
-        public void ValuesTest()
+        public void DataFormatsTest()
         {
-            // TODO unit test for the property 'Values'
+            // TODO unit test for the property 'DataFormats'
+        }
+
+        /// <summary>
+        /// Test the property 'Filters'
+        /// </summary>
+        [Fact]
+        public void FiltersTest()
+        {
+            // TODO unit test for the property 'Filters'
+        }
+
+        /// <summary>
+        /// Test the property 'Start'
+        /// </summary>
+        [Fact]
+        public void StartTest()
+        {
+            // TODO unit test for the property 'Start'
         }
 
         /// <summary>
@@ -131,6 +122,15 @@ namespace EssSharp.Test.Model
         public void EndTest()
         {
             // TODO unit test for the property 'End'
+        }
+
+        /// <summary>
+        /// Test the property 'Values'
+        /// </summary>
+        [Fact]
+        public void ValuesTest()
+        {
+            // TODO unit test for the property 'Values'
         }
     }
 }

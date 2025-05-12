@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="folder">folder.</param>
         /// <param name="messageAction">messageAction.</param>
         /// <param name="messageLocation">messageLocation.</param>
-        public ServerConfiguration(string host = default(string), int port = default(int), string user = default(string), string password = default(string), string folder = default(string), string messageAction = default(string), string messageLocation = default(string))
+        public ServerConfiguration(string host = default, int port = default, string user = default, string password = default, string folder = default, string messageAction = default, string messageLocation = default)
         {
             this.Host = host;
             this.Port = port;

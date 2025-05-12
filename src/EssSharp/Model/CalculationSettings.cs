@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="aggregateMissingValues">aggregateMissingValues.</param>
         /// <param name="createBlocksOnEquations">createBlocksOnEquations.</param>
         /// <param name="twoPassCalculation">twoPassCalculation.</param>
-        public CalculationSettings(bool aggregateMissingValues = default(bool), bool createBlocksOnEquations = default(bool), bool twoPassCalculation = default(bool))
+        public CalculationSettings(bool aggregateMissingValues = default, bool createBlocksOnEquations = default, bool twoPassCalculation = default)
         {
             this.AggregateMissingValues = aggregateMissingValues;
             this.CreateBlocksOnEquations = createBlocksOnEquations;

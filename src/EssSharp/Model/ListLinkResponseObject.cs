@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="ListLinkResponseObject" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        public ListLinkResponseObject(List<Link> links = default(List<Link>))
+        public ListLinkResponseObject(List<Link> links = default)
         {
             this.Links = links;
         }

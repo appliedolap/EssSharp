@@ -118,7 +118,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Limits</returns>
-        Limits PSMSettingsSetDatabaseSettings(DatabaseSettings body = default(DatabaseSettings), int operationIndex = 0);
+        Limits PSMSettingsSetDatabaseSettings(DatabaseSettings body = default, int operationIndex = 0);
 
         /// <summary>
         /// Store Database Settings
@@ -130,7 +130,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Limits</returns>
-        ApiResponse<Limits> PSMSettingsSetDatabaseSettingsWithHttpInfo(DatabaseSettings body = default(DatabaseSettings), int operationIndex = 0);
+        ApiResponse<Limits> PSMSettingsSetDatabaseSettingsWithHttpInfo(DatabaseSettings body = default, int operationIndex = 0);
         /// <summary>
         /// Set Diagnostic Log Settings
         /// </summary>
@@ -141,7 +141,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void Setodllogsettings(List<ODLLogHandlerSetting> body = default(List<ODLLogHandlerSetting>), int operationIndex = 0);
+        void Setodllogsettings(List<ODLLogHandlerSetting> body = default, int operationIndex = 0);
 
         /// <summary>
         /// Set Diagnostic Log Settings
@@ -153,7 +153,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> SetodllogsettingsWithHttpInfo(List<ODLLogHandlerSetting> body = default(List<ODLLogHandlerSetting>), int operationIndex = 0);
+        ApiResponse<Object> SetodllogsettingsWithHttpInfo(List<ODLLogHandlerSetting> body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -173,7 +173,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task GetodllogsettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task GetodllogsettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Diagnostic Log Settings
@@ -185,7 +185,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> GetodllogsettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> GetodllogsettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Available Platform Service Settings
         /// </summary>
@@ -196,7 +196,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Settings</returns>
-        System.Threading.Tasks.Task<Settings> PSMSettingsGetAllAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Settings> PSMSettingsGetAllAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Available Platform Service Settings
@@ -208,7 +208,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Settings)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Settings>> PSMSettingsGetAllWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Settings>> PSMSettingsGetAllWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Database Settings
         /// </summary>
@@ -219,7 +219,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Limits</returns>
-        System.Threading.Tasks.Task<Limits> PSMSettingsGetDatabaseSettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Limits> PSMSettingsGetDatabaseSettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Database Settings
@@ -231,7 +231,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Limits)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Limits>> PSMSettingsGetDatabaseSettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Limits>> PSMSettingsGetDatabaseSettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Maintenance Settings
         /// </summary>
@@ -242,7 +242,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Limits</returns>
-        System.Threading.Tasks.Task<Limits> PSMSettingsGetSystemMaintenanceLimitsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Limits> PSMSettingsGetSystemMaintenanceLimitsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Maintenance Settings
@@ -254,7 +254,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Limits)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Limits>> PSMSettingsGetSystemMaintenanceLimitsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Limits>> PSMSettingsGetSystemMaintenanceLimitsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Store Database Settings
         /// </summary>
@@ -266,7 +266,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Limits</returns>
-        System.Threading.Tasks.Task<Limits> PSMSettingsSetDatabaseSettingsAsync(DatabaseSettings body = default(DatabaseSettings), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Limits> PSMSettingsSetDatabaseSettingsAsync(DatabaseSettings body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Store Database Settings
@@ -279,7 +279,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Limits)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Limits>> PSMSettingsSetDatabaseSettingsWithHttpInfoAsync(DatabaseSettings body = default(DatabaseSettings), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Limits>> PSMSettingsSetDatabaseSettingsWithHttpInfoAsync(DatabaseSettings body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Set Diagnostic Log Settings
         /// </summary>
@@ -291,7 +291,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task SetodllogsettingsAsync(List<ODLLogHandlerSetting> body = default(List<ODLLogHandlerSetting>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task SetodllogsettingsAsync(List<ODLLogHandlerSetting> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Set Diagnostic Log Settings
@@ -304,7 +304,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> SetodllogsettingsWithHttpInfoAsync(List<ODLLogHandlerSetting> body = default(List<ODLLogHandlerSetting>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> SetodllogsettingsWithHttpInfoAsync(List<ODLLogHandlerSetting> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -498,7 +498,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task GetodllogsettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task GetodllogsettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await GetodllogsettingsWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -510,7 +510,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GetodllogsettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GetodllogsettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -636,7 +636,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Settings</returns>
-        public async System.Threading.Tasks.Task<Settings> PSMSettingsGetAllAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Settings> PSMSettingsGetAllAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Settings> localVarResponse = await PSMSettingsGetAllWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -649,7 +649,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Settings)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Settings>> PSMSettingsGetAllWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Settings>> PSMSettingsGetAllWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -777,7 +777,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Limits</returns>
-        public async System.Threading.Tasks.Task<Limits> PSMSettingsGetDatabaseSettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Limits> PSMSettingsGetDatabaseSettingsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Limits> localVarResponse = await PSMSettingsGetDatabaseSettingsWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -790,7 +790,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Limits)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Limits>> PSMSettingsGetDatabaseSettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Limits>> PSMSettingsGetDatabaseSettingsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -918,7 +918,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Limits</returns>
-        public async System.Threading.Tasks.Task<Limits> PSMSettingsGetSystemMaintenanceLimitsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Limits> PSMSettingsGetSystemMaintenanceLimitsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Limits> localVarResponse = await PSMSettingsGetSystemMaintenanceLimitsWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -931,7 +931,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Limits)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Limits>> PSMSettingsGetSystemMaintenanceLimitsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Limits>> PSMSettingsGetSystemMaintenanceLimitsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -990,7 +990,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Limits</returns>
-        public Limits PSMSettingsSetDatabaseSettings(DatabaseSettings body = default(DatabaseSettings), int operationIndex = 0)
+        public Limits PSMSettingsSetDatabaseSettings(DatabaseSettings body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Limits> localVarResponse = PSMSettingsSetDatabaseSettingsWithHttpInfo(body);
             return localVarResponse.Data;
@@ -1003,7 +1003,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Limits</returns>
-        public EssSharp.Client.ApiResponse<Limits> PSMSettingsSetDatabaseSettingsWithHttpInfo(DatabaseSettings body = default(DatabaseSettings), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Limits> PSMSettingsSetDatabaseSettingsWithHttpInfo(DatabaseSettings body = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -1065,7 +1065,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Limits</returns>
-        public async System.Threading.Tasks.Task<Limits> PSMSettingsSetDatabaseSettingsAsync(DatabaseSettings body = default(DatabaseSettings), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Limits> PSMSettingsSetDatabaseSettingsAsync(DatabaseSettings body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Limits> localVarResponse = await PSMSettingsSetDatabaseSettingsWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1079,7 +1079,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Limits)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Limits>> PSMSettingsSetDatabaseSettingsWithHttpInfoAsync(DatabaseSettings body = default(DatabaseSettings), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Limits>> PSMSettingsSetDatabaseSettingsWithHttpInfoAsync(DatabaseSettings body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1141,7 +1141,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void Setodllogsettings(List<ODLLogHandlerSetting> body = default(List<ODLLogHandlerSetting>), int operationIndex = 0)
+        public void Setodllogsettings(List<ODLLogHandlerSetting> body = default, int operationIndex = 0)
         {
             SetodllogsettingsWithHttpInfo(body);
         }
@@ -1153,7 +1153,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> SetodllogsettingsWithHttpInfo(List<ODLLogHandlerSetting> body = default(List<ODLLogHandlerSetting>), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> SetodllogsettingsWithHttpInfo(List<ODLLogHandlerSetting> body = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -1213,7 +1213,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task SetodllogsettingsAsync(List<ODLLogHandlerSetting> body = default(List<ODLLogHandlerSetting>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task SetodllogsettingsAsync(List<ODLLogHandlerSetting> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await SetodllogsettingsWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1226,7 +1226,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> SetodllogsettingsWithHttpInfoAsync(List<ODLLogHandlerSetting> body = default(List<ODLLogHandlerSetting>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> SetodllogsettingsWithHttpInfoAsync(List<ODLLogHandlerSetting> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

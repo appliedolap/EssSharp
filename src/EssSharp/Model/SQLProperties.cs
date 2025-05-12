@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="select">select.</param>
         /// <param name="from">from.</param>
         /// <param name="where">where.</param>
-        public SQLProperties(string server = default(string), string application = default(string), string database = default(string), string dictionary = default(string), string select = default(string), string from = default(string), string where = default(string))
+        public SQLProperties(string server = default, string application = default, string database = default, string dictionary = default, string select = default, string from = default, string where = default)
         {
             this.Server = server;
             this.Application = application;

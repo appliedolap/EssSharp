@@ -79,7 +79,7 @@ namespace EssSharp.Model
         /// <param name="flatFileBased">flatFileBased.</param>
         /// <param name="essbaseInfo">essbaseInfo.</param>
         /// <param name="columnOperations">columnOperations.</param>
-        public Rules(List<Dimension> dimensions = default(List<Dimension>), List<Field> fields = default(List<Field>), long timeStamp = default(long), RuleDataSource dataSource = default(RuleDataSource), DimBuildOptions dimensionBuildOptions = default(DimBuildOptions), DataLoadOptions dataLoadOptions = default(DataLoadOptions), EditorOptions editorOptions = default(EditorOptions), EncodingEnum? encoding = default(EncodingEnum?), string name = default(string), string locale = default(string), bool studio = default(bool), bool bibpm = default(bool), bool xolap = default(bool), bool flatFileBased = default(bool), EssbaseInfo essbaseInfo = default(EssbaseInfo), List<ColumnOperation> columnOperations = default(List<ColumnOperation>))
+        public Rules(List<Dimension> dimensions = default, List<Field> fields = default, long timeStamp = default, RuleDataSource dataSource = default, DimBuildOptions dimensionBuildOptions = default, DataLoadOptions dataLoadOptions = default, EditorOptions editorOptions = default, EncodingEnum? encoding = default, string name = default, string locale = default, bool studio = default, bool bibpm = default, bool xolap = default, bool flatFileBased = default, EssbaseInfo essbaseInfo = default, List<ColumnOperation> columnOperations = default)
         {
             this.Dimensions = dimensions;
             this.Fields = fields;

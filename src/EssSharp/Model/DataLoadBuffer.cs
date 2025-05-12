@@ -104,7 +104,7 @@ namespace EssSharp.Model
         /// <param name="duplicateAggregationMethod">duplicateAggregationMethod.</param>
         /// <param name="loadBufferOptions">loadBufferOptions.</param>
         /// <param name="resourceUsage">Percentage of the total load buffer resources that the load buffer will be allowed to use; must be within [0, 100], and the value of 0 is interpreted as default, which is currently 100..</param>
-        public DataLoadBuffer(long bufferId = default(long), DuplicateAggregationMethodEnum? duplicateAggregationMethod = default(DuplicateAggregationMethodEnum?), LoadBufferOptionsEnum? loadBufferOptions = default(LoadBufferOptionsEnum?), long resourceUsage = default(long))
+        public DataLoadBuffer(long bufferId = default, DuplicateAggregationMethodEnum? duplicateAggregationMethod = default, LoadBufferOptionsEnum? loadBufferOptions = default, long resourceUsage = default)
         {
             this.BufferId = bufferId;
             this.DuplicateAggregationMethod = duplicateAggregationMethod;

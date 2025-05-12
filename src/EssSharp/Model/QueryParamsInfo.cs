@@ -82,7 +82,7 @@ namespace EssSharp.Model
         /// <param name="useSubVariable">useSubVariable.</param>
         /// <param name="subVariableName">subVariableName.</param>
         /// <param name="type">type.</param>
-        public QueryParamsInfo(int index = default(int), string name = default(string), string defaultValue = default(string), bool required = default(bool), bool useSubVariable = default(bool), string subVariableName = default(string), TypeEnum? type = default(TypeEnum?))
+        public QueryParamsInfo(int index = default, string name = default, string defaultValue = default, bool required = default, bool useSubVariable = default, string subVariableName = default, TypeEnum? type = default)
         {
             this.Index = index;
             this.Name = name;

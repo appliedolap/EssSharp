@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="value">value.</param>
         /// <param name="configured">configured.</param>
         /// <param name="links">links.</param>
-        public ApplicationConfigEntry(string key = default(string), string description = default(string), string syntax = default(string), string example = default(string), string value = default(string), bool configured = default(bool), List<Link> links = default(List<Link>))
+        public ApplicationConfigEntry(string key = default, string description = default, string syntax = default, string example = default, string value = default, bool configured = default, List<Link> links = default)
         {
             this.Key = key;
             this.Description = description;

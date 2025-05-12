@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="sourceMember">sourceMember.</param>
         /// <param name="targetMember">targetMember.</param>
-        public MemberMappingBean(string sourceMember = default(string), string targetMember = default(string))
+        public MemberMappingBean(string sourceMember = default, string targetMember = default)
         {
             this.SourceMember = sourceMember;
             this.TargetMember = targetMember;

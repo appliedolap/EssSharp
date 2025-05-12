@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="startup">startup.</param>
         /// <param name="security">security.</param>
         /// <param name="links">links.</param>
-        public AppSettingsList(AppGeneralSettings general = default(AppGeneralSettings), AppStartupSettings startup = default(AppStartupSettings), AppSecuritySettings security = default(AppSecuritySettings), List<Link> links = default(List<Link>))
+        public AppSettingsList(AppGeneralSettings general = default, AppStartupSettings startup = default, AppSecuritySettings security = default, List<Link> links = default)
         {
             this.General = general;
             this.Startup = startup;

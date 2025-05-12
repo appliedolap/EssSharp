@@ -41,7 +41,7 @@ namespace EssSharp.Model
         /// <param name="category">category.</param>
         /// <param name="url">url.</param>
         /// <param name="links">links.</param>
-        public Resource(string id = default(string), string name = default(string), string description = default(string), string provider = default(string), string path = default(string), string mimeType = default(string), string category = default(string), string url = default(string), List<Link> links = default(List<Link>))
+        public Resource(string id = default, string name = default, string description = default, string provider = default, string path = default, string mimeType = default, string category = default, string url = default, List<Link> links = default)
         {
             this.Id = id;
             this.Name = name;

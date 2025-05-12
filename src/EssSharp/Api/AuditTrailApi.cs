@@ -35,7 +35,7 @@ namespace EssSharp.Api
         /// <param name="fetchCount">&lt;p&gt;Number of records to be fetched.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>string</returns>
-        string AuditTrailGetDataAudit(string application, string database, long? fetchCount = default(long?), int operationIndex = 0);
+        string AuditTrailGetDataAudit(string application, string database, long? fetchCount = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Audit Data
@@ -49,7 +49,7 @@ namespace EssSharp.Api
         /// <param name="fetchCount">&lt;p&gt;Number of records to be fetched.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> AuditTrailGetDataAuditWithHttpInfo(string application, string database, long? fetchCount = default(long?), int operationIndex = 0);
+        ApiResponse<string> AuditTrailGetDataAuditWithHttpInfo(string application, string database, long? fetchCount = default, int operationIndex = 0);
         /// <summary>
         /// Delete Audit Data
         /// </summary>
@@ -62,7 +62,7 @@ namespace EssSharp.Api
         /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void AuditTrailPurge(string application, string database, long? olderthan = default(long?), int operationIndex = 0);
+        void AuditTrailPurge(string application, string database, long? olderthan = default, int operationIndex = 0);
 
         /// <summary>
         /// Delete Audit Data
@@ -76,7 +76,7 @@ namespace EssSharp.Api
         /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> AuditTrailPurgeWithHttpInfo(string application, string database, long? olderthan = default(long?), int operationIndex = 0);
+        ApiResponse<Object> AuditTrailPurgeWithHttpInfo(string application, string database, long? olderthan = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -99,7 +99,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> AuditTrailGetDataAuditAsync(string application, string database, long? fetchCount = default(long?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<string> AuditTrailGetDataAuditAsync(string application, string database, long? fetchCount = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Audit Data
@@ -114,7 +114,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> AuditTrailGetDataAuditWithHttpInfoAsync(string application, string database, long? fetchCount = default(long?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<string>> AuditTrailGetDataAuditWithHttpInfoAsync(string application, string database, long? fetchCount = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Audit Data
         /// </summary>
@@ -128,7 +128,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task AuditTrailPurgeAsync(string application, string database, long? olderthan = default(long?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task AuditTrailPurgeAsync(string application, string database, long? olderthan = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Audit Data
@@ -143,7 +143,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> AuditTrailPurgeWithHttpInfoAsync(string application, string database, long? olderthan = default(long?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> AuditTrailPurgeWithHttpInfoAsync(string application, string database, long? olderthan = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -273,7 +273,7 @@ namespace EssSharp.Api
         /// <param name="fetchCount">&lt;p&gt;Number of records to be fetched.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>string</returns>
-        public string AuditTrailGetDataAudit(string application, string database, long? fetchCount = default(long?), int operationIndex = 0)
+        public string AuditTrailGetDataAudit(string application, string database, long? fetchCount = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<string> localVarResponse = AuditTrailGetDataAuditWithHttpInfo(application, database, fetchCount);
             return localVarResponse.Data;
@@ -288,7 +288,7 @@ namespace EssSharp.Api
         /// <param name="fetchCount">&lt;p&gt;Number of records to be fetched.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of string</returns>
-        public EssSharp.Client.ApiResponse<string> AuditTrailGetDataAuditWithHttpInfo(string application, string database, long? fetchCount = default(long?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<string> AuditTrailGetDataAuditWithHttpInfo(string application, string database, long? fetchCount = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -367,7 +367,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> AuditTrailGetDataAuditAsync(string application, string database, long? fetchCount = default(long?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<string> AuditTrailGetDataAuditAsync(string application, string database, long? fetchCount = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<string> localVarResponse = await AuditTrailGetDataAuditWithHttpInfoAsync(application, database, fetchCount, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -383,7 +383,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<string>> AuditTrailGetDataAuditWithHttpInfoAsync(string application, string database, long? fetchCount = default(long?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<string>> AuditTrailGetDataAuditWithHttpInfoAsync(string application, string database, long? fetchCount = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -462,7 +462,7 @@ namespace EssSharp.Api
         /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void AuditTrailPurge(string application, string database, long? olderthan = default(long?), int operationIndex = 0)
+        public void AuditTrailPurge(string application, string database, long? olderthan = default, int operationIndex = 0)
         {
             AuditTrailPurgeWithHttpInfo(application, database, olderthan);
         }
@@ -476,7 +476,7 @@ namespace EssSharp.Api
         /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> AuditTrailPurgeWithHttpInfo(string application, string database, long? olderthan = default(long?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> AuditTrailPurgeWithHttpInfo(string application, string database, long? olderthan = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -553,7 +553,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task AuditTrailPurgeAsync(string application, string database, long? olderthan = default(long?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task AuditTrailPurgeAsync(string application, string database, long? olderthan = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await AuditTrailPurgeWithHttpInfoAsync(application, database, olderthan, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -568,7 +568,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> AuditTrailPurgeWithHttpInfoAsync(string application, string database, long? olderthan = default(long?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> AuditTrailPurgeWithHttpInfoAsync(string application, string database, long? olderthan = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)

@@ -63,7 +63,9 @@ cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseN
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/aliases/setActiveAlias".put.description = "Sets the active alias table associated with the specified application and database."' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/aliases/setActiveAlias".put.operationId = "setActiveAlias"' > json.tmp && mv json.tmp temp.json
 
+# Fix schema issue with drillthrough reports and replace duplicate operationId for the list reports for intersections endpoint
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/reports".get.responses."200".schema = {"$ref": "#/definitions/ReportList"}' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/dtreports/list".post.operationId = "DrillThroughReports.getReportsForIntersections"' > json.tmp && mv json.tmp temp.json
 
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/dimensions".get.responses."200".schema = {"$ref": "#/definitions/DimensionList"}' > json.tmp && mv json.tmp temp.json
 
@@ -569,10 +571,6 @@ cat temp.json | jq '.definitions.ParametersBean.properties.exportdata.type = "st
 cat temp.json | jq '.definitions.ParametersBean.properties.exportpartitions.type = "string"' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.definitions.ParametersBean.properties.exportfilters.type = "string"' > json.tmp && mv json.tmp temp.json
 cat temp.json | jq '.definitions.ParametersBean.properties.physical.type = "string"' > json.tmp && mv json.tmp temp.json
-
-
-
-
 
 # fixing casing of action enum - causes problems
 # cat temp.json | jq '.definitions.GridOperation.properties.action.enum = ["ZoomIn", "ZoomOut", "KeepOnly", "RemoveOnly", "Refresh", "Pivot", "PivotToPOV", "Submit"]' > json.tmp && mv json.tmp temp.json

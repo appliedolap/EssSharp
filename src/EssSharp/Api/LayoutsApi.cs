@@ -37,7 +37,7 @@ namespace EssSharp.Api
         /// <param name="user">&lt;p&gt;User name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void LayoutsDeleteLayout(string application, string database, string layout, string user = default(string), int operationIndex = 0);
+        void LayoutsDeleteLayout(string application, string database, string layout, string user = default, int operationIndex = 0);
 
         /// <summary>
         /// Delete Layout
@@ -52,7 +52,7 @@ namespace EssSharp.Api
         /// <param name="user">&lt;p&gt;User name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> LayoutsDeleteLayoutWithHttpInfo(string application, string database, string layout, string user = default(string), int operationIndex = 0);
+        ApiResponse<Object> LayoutsDeleteLayoutWithHttpInfo(string application, string database, string layout, string user = default, int operationIndex = 0);
         /// <summary>
         /// Update Layout
         /// </summary>
@@ -67,7 +67,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Layout details to be updated.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Layout</returns>
-        Layout LayoutsEditLayout(string application, string database, string layout, string user = default(string), Layout body = default(Layout), int operationIndex = 0);
+        Layout LayoutsEditLayout(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0);
 
         /// <summary>
         /// Update Layout
@@ -83,7 +83,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Layout details to be updated.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Layout</returns>
-        ApiResponse<Layout> LayoutsEditLayoutWithHttpInfo(string application, string database, string layout, string user = default(string), Layout body = default(Layout), int operationIndex = 0);
+        ApiResponse<Layout> LayoutsEditLayoutWithHttpInfo(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0);
         /// <summary>
         /// Get Layout Details
         /// </summary>
@@ -97,7 +97,7 @@ namespace EssSharp.Api
         /// <param name="user">&lt;p&gt;User name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Layout</returns>
-        Layout LayoutsGetLayoutDetails(string application, string database, string layout, string user = default(string), int operationIndex = 0);
+        Layout LayoutsGetLayoutDetails(string application, string database, string layout, string user = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Layout Details
@@ -112,7 +112,7 @@ namespace EssSharp.Api
         /// <param name="user">&lt;p&gt;User name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Layout</returns>
-        ApiResponse<Layout> LayoutsGetLayoutDetailsWithHttpInfo(string application, string database, string layout, string user = default(string), int operationIndex = 0);
+        ApiResponse<Layout> LayoutsGetLayoutDetailsWithHttpInfo(string application, string database, string layout, string user = default, int operationIndex = 0);
         /// <summary>
         /// List Layouts
         /// </summary>
@@ -151,7 +151,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;User default or database default details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Layout</returns>
-        Layout LayoutsMarkDefaultLayout(string application, string database, string layout, DefaultLayoutBean body = default(DefaultLayoutBean), int operationIndex = 0);
+        Layout LayoutsMarkDefaultLayout(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0);
 
         /// <summary>
         /// Mark Layout as Default
@@ -166,7 +166,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;User default or database default details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Layout</returns>
-        ApiResponse<Layout> LayoutsMarkDefaultLayoutWithHttpInfo(string application, string database, string layout, DefaultLayoutBean body = default(DefaultLayoutBean), int operationIndex = 0);
+        ApiResponse<Layout> LayoutsMarkDefaultLayoutWithHttpInfo(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0);
         /// <summary>
         /// Save Layout
         /// </summary>
@@ -179,7 +179,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Grid to be saved as a layout.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Layout</returns>
-        Layout LayoutsSaveLayout(string application, string database, Layout body = default(Layout), int operationIndex = 0);
+        Layout LayoutsSaveLayout(string application, string database, Layout body = default, int operationIndex = 0);
 
         /// <summary>
         /// Save Layout
@@ -193,7 +193,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Grid to be saved as a layout.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Layout</returns>
-        ApiResponse<Layout> LayoutsSaveLayoutWithHttpInfo(string application, string database, Layout body = default(Layout), int operationIndex = 0);
+        ApiResponse<Layout> LayoutsSaveLayoutWithHttpInfo(string application, string database, Layout body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -217,7 +217,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task LayoutsDeleteLayoutAsync(string application, string database, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task LayoutsDeleteLayoutAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Layout
@@ -233,7 +233,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> LayoutsDeleteLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> LayoutsDeleteLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Layout
         /// </summary>
@@ -249,7 +249,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layout</returns>
-        System.Threading.Tasks.Task<Layout> LayoutsEditLayoutAsync(string application, string database, string layout, string user = default(string), Layout body = default(Layout), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Layout> LayoutsEditLayoutAsync(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Layout
@@ -266,7 +266,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layout)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsEditLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default(string), Layout body = default(Layout), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsEditLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Layout Details
         /// </summary>
@@ -281,7 +281,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layout</returns>
-        System.Threading.Tasks.Task<Layout> LayoutsGetLayoutDetailsAsync(string application, string database, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Layout> LayoutsGetLayoutDetailsAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Layout Details
@@ -297,7 +297,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layout)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsGetLayoutDetailsWithHttpInfoAsync(string application, string database, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsGetLayoutDetailsWithHttpInfoAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Layouts
         /// </summary>
@@ -310,7 +310,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layouts</returns>
-        System.Threading.Tasks.Task<Layouts> LayoutsGetLayoutsAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Layouts> LayoutsGetLayoutsAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Layouts
@@ -324,7 +324,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layouts)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Layouts>> LayoutsGetLayoutsWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Layouts>> LayoutsGetLayoutsWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Mark Layout as Default
         /// </summary>
@@ -339,7 +339,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layout</returns>
-        System.Threading.Tasks.Task<Layout> LayoutsMarkDefaultLayoutAsync(string application, string database, string layout, DefaultLayoutBean body = default(DefaultLayoutBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Layout> LayoutsMarkDefaultLayoutAsync(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Mark Layout as Default
@@ -355,7 +355,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layout)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsMarkDefaultLayoutWithHttpInfoAsync(string application, string database, string layout, DefaultLayoutBean body = default(DefaultLayoutBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsMarkDefaultLayoutWithHttpInfoAsync(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Save Layout
         /// </summary>
@@ -369,7 +369,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layout</returns>
-        System.Threading.Tasks.Task<Layout> LayoutsSaveLayoutAsync(string application, string database, Layout body = default(Layout), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Layout> LayoutsSaveLayoutAsync(string application, string database, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Save Layout
@@ -384,7 +384,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layout)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsSaveLayoutWithHttpInfoAsync(string application, string database, Layout body = default(Layout), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsSaveLayoutWithHttpInfoAsync(string application, string database, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -515,7 +515,7 @@ namespace EssSharp.Api
         /// <param name="user">&lt;p&gt;User name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void LayoutsDeleteLayout(string application, string database, string layout, string user = default(string), int operationIndex = 0)
+        public void LayoutsDeleteLayout(string application, string database, string layout, string user = default, int operationIndex = 0)
         {
             LayoutsDeleteLayoutWithHttpInfo(application, database, layout, user);
         }
@@ -530,7 +530,7 @@ namespace EssSharp.Api
         /// <param name="user">&lt;p&gt;User name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> LayoutsDeleteLayoutWithHttpInfo(string application, string database, string layout, string user = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> LayoutsDeleteLayoutWithHttpInfo(string application, string database, string layout, string user = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -615,7 +615,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task LayoutsDeleteLayoutAsync(string application, string database, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task LayoutsDeleteLayoutAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await LayoutsDeleteLayoutWithHttpInfoAsync(application, database, layout, user, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -631,7 +631,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> LayoutsDeleteLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> LayoutsDeleteLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -717,7 +717,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Layout details to be updated.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Layout</returns>
-        public Layout LayoutsEditLayout(string application, string database, string layout, string user = default(string), Layout body = default(Layout), int operationIndex = 0)
+        public Layout LayoutsEditLayout(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Layout> localVarResponse = LayoutsEditLayoutWithHttpInfo(application, database, layout, user, body);
             return localVarResponse.Data;
@@ -734,7 +734,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Layout details to be updated.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Layout</returns>
-        public EssSharp.Client.ApiResponse<Layout> LayoutsEditLayoutWithHttpInfo(string application, string database, string layout, string user = default(string), Layout body = default(Layout), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Layout> LayoutsEditLayoutWithHttpInfo(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -825,7 +825,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layout</returns>
-        public async System.Threading.Tasks.Task<Layout> LayoutsEditLayoutAsync(string application, string database, string layout, string user = default(string), Layout body = default(Layout), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Layout> LayoutsEditLayoutAsync(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Layout> localVarResponse = await LayoutsEditLayoutWithHttpInfoAsync(application, database, layout, user, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -843,7 +843,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layout)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layout>> LayoutsEditLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default(string), Layout body = default(Layout), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layout>> LayoutsEditLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -933,7 +933,7 @@ namespace EssSharp.Api
         /// <param name="user">&lt;p&gt;User name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Layout</returns>
-        public Layout LayoutsGetLayoutDetails(string application, string database, string layout, string user = default(string), int operationIndex = 0)
+        public Layout LayoutsGetLayoutDetails(string application, string database, string layout, string user = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Layout> localVarResponse = LayoutsGetLayoutDetailsWithHttpInfo(application, database, layout, user);
             return localVarResponse.Data;
@@ -949,7 +949,7 @@ namespace EssSharp.Api
         /// <param name="user">&lt;p&gt;User name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Layout</returns>
-        public EssSharp.Client.ApiResponse<Layout> LayoutsGetLayoutDetailsWithHttpInfo(string application, string database, string layout, string user = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Layout> LayoutsGetLayoutDetailsWithHttpInfo(string application, string database, string layout, string user = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1036,7 +1036,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layout</returns>
-        public async System.Threading.Tasks.Task<Layout> LayoutsGetLayoutDetailsAsync(string application, string database, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Layout> LayoutsGetLayoutDetailsAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Layout> localVarResponse = await LayoutsGetLayoutDetailsWithHttpInfoAsync(application, database, layout, user, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1053,7 +1053,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layout)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layout>> LayoutsGetLayoutDetailsWithHttpInfoAsync(string application, string database, string layout, string user = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layout>> LayoutsGetLayoutDetailsWithHttpInfoAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1226,7 +1226,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layouts</returns>
-        public async System.Threading.Tasks.Task<Layouts> LayoutsGetLayoutsAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Layouts> LayoutsGetLayoutsAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Layouts> localVarResponse = await LayoutsGetLayoutsWithHttpInfoAsync(application, database, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1241,7 +1241,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layouts)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layouts>> LayoutsGetLayoutsWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layouts>> LayoutsGetLayoutsWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1317,7 +1317,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;User default or database default details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Layout</returns>
-        public Layout LayoutsMarkDefaultLayout(string application, string database, string layout, DefaultLayoutBean body = default(DefaultLayoutBean), int operationIndex = 0)
+        public Layout LayoutsMarkDefaultLayout(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Layout> localVarResponse = LayoutsMarkDefaultLayoutWithHttpInfo(application, database, layout, body);
             return localVarResponse.Data;
@@ -1333,7 +1333,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;User default or database default details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Layout</returns>
-        public EssSharp.Client.ApiResponse<Layout> LayoutsMarkDefaultLayoutWithHttpInfo(string application, string database, string layout, DefaultLayoutBean body = default(DefaultLayoutBean), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Layout> LayoutsMarkDefaultLayoutWithHttpInfo(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1419,7 +1419,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layout</returns>
-        public async System.Threading.Tasks.Task<Layout> LayoutsMarkDefaultLayoutAsync(string application, string database, string layout, DefaultLayoutBean body = default(DefaultLayoutBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Layout> LayoutsMarkDefaultLayoutAsync(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Layout> localVarResponse = await LayoutsMarkDefaultLayoutWithHttpInfoAsync(application, database, layout, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1436,7 +1436,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layout)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layout>> LayoutsMarkDefaultLayoutWithHttpInfoAsync(string application, string database, string layout, DefaultLayoutBean body = default(DefaultLayoutBean), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layout>> LayoutsMarkDefaultLayoutWithHttpInfoAsync(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1521,7 +1521,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Grid to be saved as a layout.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Layout</returns>
-        public Layout LayoutsSaveLayout(string application, string database, Layout body = default(Layout), int operationIndex = 0)
+        public Layout LayoutsSaveLayout(string application, string database, Layout body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Layout> localVarResponse = LayoutsSaveLayoutWithHttpInfo(application, database, body);
             return localVarResponse.Data;
@@ -1536,7 +1536,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Grid to be saved as a layout.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Layout</returns>
-        public EssSharp.Client.ApiResponse<Layout> LayoutsSaveLayoutWithHttpInfo(string application, string database, Layout body = default(Layout), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Layout> LayoutsSaveLayoutWithHttpInfo(string application, string database, Layout body = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1614,7 +1614,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Layout</returns>
-        public async System.Threading.Tasks.Task<Layout> LayoutsSaveLayoutAsync(string application, string database, Layout body = default(Layout), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Layout> LayoutsSaveLayoutAsync(string application, string database, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Layout> localVarResponse = await LayoutsSaveLayoutWithHttpInfoAsync(application, database, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1630,7 +1630,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Layout)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layout>> LayoutsSaveLayoutWithHttpInfoAsync(string application, string database, Layout body = default(Layout), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Layout>> LayoutsSaveLayoutWithHttpInfoAsync(string application, string database, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)

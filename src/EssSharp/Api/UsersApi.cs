@@ -151,7 +151,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and groups are returned for each user. If &lt;code&gt;none&lt;/code&gt; is specified, service role and groups are not returned.&lt;/p&gt; (optional, default to &quot;all&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Users</returns>
-        Users UsersSearch(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0);
+        Users UsersSearch(string filter = default, int? limit = default, string expand = default, int operationIndex = 0);
 
         /// <summary>
         /// Search or Export Users
@@ -165,7 +165,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and groups are returned for each user. If &lt;code&gt;none&lt;/code&gt; is specified, service role and groups are not returned.&lt;/p&gt; (optional, default to &quot;all&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Users</returns>
-        ApiResponse<Users> UsersSearchWithHttpInfo(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0);
+        ApiResponse<Users> UsersSearchWithHttpInfo(string filter = default, int? limit = default, string expand = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -186,7 +186,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> UsersAddAsync(UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserBean> UsersAddAsync(UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add or Import User(s)
@@ -199,7 +199,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> UsersAddWithHttpInfoAsync(UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserBean>> UsersAddWithHttpInfoAsync(UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete User
         /// </summary>
@@ -211,7 +211,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task UsersDeleteAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task UsersDeleteAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete User
@@ -224,7 +224,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> UsersDeleteWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> UsersDeleteWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Users
         /// </summary>
@@ -235,7 +235,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> UsersDeleteUsersAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Object> UsersDeleteUsersAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Users
@@ -247,7 +247,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> UsersDeleteUsersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> UsersDeleteUsersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get User
         /// </summary>
@@ -259,7 +259,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> UsersGetAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserBean> UsersGetAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get User
@@ -272,7 +272,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> UsersGetWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserBean>> UsersGetWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update User
         /// </summary>
@@ -285,7 +285,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> UsersPUTAsync(string id, UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserBean> UsersPUTAsync(string id, UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update User
@@ -299,7 +299,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> UsersPUTWithHttpInfoAsync(string id, UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserBean>> UsersPUTWithHttpInfoAsync(string id, UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Search or Export Users
         /// </summary>
@@ -313,7 +313,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Users</returns>
-        System.Threading.Tasks.Task<Users> UsersSearchAsync(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Users> UsersSearchAsync(string filter = default, int? limit = default, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search or Export Users
@@ -328,7 +328,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Users)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Users>> UsersSearchWithHttpInfoAsync(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Users>> UsersSearchWithHttpInfoAsync(string filter = default, int? limit = default, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -537,7 +537,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> UsersAddAsync(UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserBean> UsersAddAsync(UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserBean> localVarResponse = await UsersAddWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -551,7 +551,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> UsersAddWithHttpInfoAsync(UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> UsersAddWithHttpInfoAsync(UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -695,7 +695,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task UsersDeleteAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task UsersDeleteAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await UsersDeleteWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -708,7 +708,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UsersDeleteWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UsersDeleteWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -840,7 +840,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> UsersDeleteUsersAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Object> UsersDeleteUsersAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Object> localVarResponse = await UsersDeleteUsersWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -853,7 +853,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UsersDeleteUsersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UsersDeleteUsersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -990,7 +990,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> UsersGetAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserBean> UsersGetAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserBean> localVarResponse = await UsersGetWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1004,7 +1004,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> UsersGetWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> UsersGetWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1161,7 +1161,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> UsersPUTAsync(string id, UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserBean> UsersPUTAsync(string id, UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserBean> localVarResponse = await UsersPUTWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1176,7 +1176,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> UsersPUTWithHttpInfoAsync(string id, UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> UsersPUTWithHttpInfoAsync(string id, UserBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1253,7 +1253,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and groups are returned for each user. If &lt;code&gt;none&lt;/code&gt; is specified, service role and groups are not returned.&lt;/p&gt; (optional, default to &quot;all&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Users</returns>
-        public Users UsersSearch(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0)
+        public Users UsersSearch(string filter = default, int? limit = default, string expand = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Users> localVarResponse = UsersSearchWithHttpInfo(filter, limit, expand);
             return localVarResponse.Data;
@@ -1268,7 +1268,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and groups are returned for each user. If &lt;code&gt;none&lt;/code&gt; is specified, service role and groups are not returned.&lt;/p&gt; (optional, default to &quot;all&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Users</returns>
-        public EssSharp.Client.ApiResponse<Users> UsersSearchWithHttpInfo(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Users> UsersSearchWithHttpInfo(string filter = default, int? limit = default, string expand = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -1341,7 +1341,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Users</returns>
-        public async System.Threading.Tasks.Task<Users> UsersSearchAsync(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Users> UsersSearchAsync(string filter = default, int? limit = default, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Users> localVarResponse = await UsersSearchWithHttpInfoAsync(filter, limit, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1357,7 +1357,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Users)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Users>> UsersSearchWithHttpInfoAsync(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Users>> UsersSearchWithHttpInfoAsync(string filter = default, int? limit = default, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

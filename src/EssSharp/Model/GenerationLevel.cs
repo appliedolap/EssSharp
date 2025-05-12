@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="number">number.</param>
         /// <param name="unique">unique.</param>
         /// <param name="links">links.</param>
-        public GenerationLevel(string name = default(string), string actualName = default(string), int number = default(int), bool unique = default(bool), List<Link> links = default(List<Link>))
+        public GenerationLevel(string name = default, string actualName = default, int number = default, bool unique = default, List<Link> links = default)
         {
             this.Name = name;
             this.ActualName = actualName;

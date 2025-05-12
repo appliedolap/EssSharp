@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **ParameterMapping** | [**Dictionary&lt;string, RunTimeParametersInfo&gt;**](RunTimeParametersInfo.md) |  | [optional] 
 **DrillableRegions** | **List&lt;string&gt;** |  | [optional] 
 **UseTempTables** | **bool** |  | [optional] 
-**Columns** | **List&lt;string&gt;** |  | [optional] 
 **DataSourceName** | **string** |  | [optional] 
 **Url** | **string** |  | [optional] 
+**Columns** | **List&lt;string&gt;** |  | [optional] 
 **Type** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 

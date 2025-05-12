@@ -111,7 +111,7 @@ namespace EssSharp.Api
         /// <param name="configured">&lt;p&gt;Specify &lt;code&gt;all&lt;/code&gt; to return all configured properties. Specify &lt;code&gt;true&lt;/code&gt; to return enabled configuration properties. Specify &lt;code&gt;false&lt;/code&gt; to return configuration properties that are turned off.&lt;/p&gt; (optional, default to all)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;ApplicationConfigList&gt;</returns>
-        List<ApplicationConfigList> ApplicationConfigurationGetConfigurationKeys(string applicationName, string key = default(string), string configured = default(string), int operationIndex = 0);
+        List<ApplicationConfigList> ApplicationConfigurationGetConfigurationKeys(string applicationName, string key = default, string configured = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Application Configuration (Filtered)
@@ -125,7 +125,7 @@ namespace EssSharp.Api
         /// <param name="configured">&lt;p&gt;Specify &lt;code&gt;all&lt;/code&gt; to return all configured properties. Specify &lt;code&gt;true&lt;/code&gt; to return enabled configuration properties. Specify &lt;code&gt;false&lt;/code&gt; to return configuration properties that are turned off.&lt;/p&gt; (optional, default to all)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;ApplicationConfigList&gt;</returns>
-        ApiResponse<List<ApplicationConfigList>> ApplicationConfigurationGetConfigurationKeysWithHttpInfo(string applicationName, string key = default(string), string configured = default(string), int operationIndex = 0);
+        ApiResponse<List<ApplicationConfigList>> ApplicationConfigurationGetConfigurationKeysWithHttpInfo(string applicationName, string key = default, string configured = default, int operationIndex = 0);
         /// <summary>
         /// Get Application Configuration
         /// </summary>
@@ -222,7 +222,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigEntry</returns>
-        System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationAddConfigurationAsync(string applicationName, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationAddConfigurationAsync(string applicationName, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add Application Configuration
@@ -236,7 +236,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigEntry)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationAddConfigurationWithHttpInfoAsync(string applicationName, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationAddConfigurationWithHttpInfoAsync(string applicationName, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Application Configuration
         /// </summary>
@@ -249,7 +249,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationConfigurationDeleteConfigurationAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationConfigurationDeleteConfigurationAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Application Configuration
@@ -263,7 +263,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConfigurationDeleteConfigurationWithHttpInfoAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConfigurationDeleteConfigurationWithHttpInfoAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Configuration Property
         /// </summary>
@@ -276,7 +276,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigEntry</returns>
-        System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationGetConfigurationAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationGetConfigurationAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Configuration Property
@@ -290,7 +290,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigEntry)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationGetConfigurationWithHttpInfoAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationGetConfigurationWithHttpInfoAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Configuration (Filtered)
         /// </summary>
@@ -304,7 +304,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ApplicationConfigList&gt;</returns>
-        System.Threading.Tasks.Task<List<ApplicationConfigList>> ApplicationConfigurationGetConfigurationKeysAsync(string applicationName, string key = default(string), string configured = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<ApplicationConfigList>> ApplicationConfigurationGetConfigurationKeysAsync(string applicationName, string key = default, string configured = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Configuration (Filtered)
@@ -319,7 +319,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ApplicationConfigList&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<ApplicationConfigList>>> ApplicationConfigurationGetConfigurationKeysWithHttpInfoAsync(string applicationName, string key = default(string), string configured = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<ApplicationConfigList>>> ApplicationConfigurationGetConfigurationKeysWithHttpInfoAsync(string applicationName, string key = default, string configured = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Configuration
         /// </summary>
@@ -331,7 +331,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigList</returns>
-        System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationGetConfigurationsAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationGetConfigurationsAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Configuration
@@ -344,7 +344,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigList>> ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigList>> ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Application Configuration
         /// </summary>
@@ -358,7 +358,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigEntry</returns>
-        System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationSetConfigurationAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationSetConfigurationAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Application Configuration
@@ -373,7 +373,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigEntry)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationSetConfigurationWithHttpInfoAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationSetConfigurationWithHttpInfoAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Updates Application Configurations
         /// </summary>
@@ -386,7 +386,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigList</returns>
-        System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationSetConfigurationsAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationSetConfigurationsAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Updates Application Configurations
@@ -400,7 +400,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigList>> ApplicationConfigurationSetConfigurationsWithHttpInfoAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigList>> ApplicationConfigurationSetConfigurationsWithHttpInfoAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -619,7 +619,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigEntry</returns>
-        public async System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationAddConfigurationAsync(string applicationName, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationAddConfigurationAsync(string applicationName, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ApplicationConfigEntry> localVarResponse = await ApplicationConfigurationAddConfigurationWithHttpInfoAsync(applicationName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -634,7 +634,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigEntry)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationAddConfigurationWithHttpInfoAsync(string applicationName, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationAddConfigurationWithHttpInfoAsync(string applicationName, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -795,7 +795,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationConfigurationDeleteConfigurationAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationConfigurationDeleteConfigurationAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ApplicationConfigurationDeleteConfigurationWithHttpInfoAsync(applicationName, configId, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -809,7 +809,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConfigurationDeleteConfigurationWithHttpInfoAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConfigurationDeleteConfigurationWithHttpInfoAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -969,7 +969,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigEntry</returns>
-        public async System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationGetConfigurationAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationGetConfigurationAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ApplicationConfigEntry> localVarResponse = await ApplicationConfigurationGetConfigurationWithHttpInfoAsync(applicationName, configId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -984,7 +984,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigEntry)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationGetConfigurationWithHttpInfoAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationGetConfigurationWithHttpInfoAsync(string applicationName, string configId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1059,7 +1059,7 @@ namespace EssSharp.Api
         /// <param name="configured">&lt;p&gt;Specify &lt;code&gt;all&lt;/code&gt; to return all configured properties. Specify &lt;code&gt;true&lt;/code&gt; to return enabled configuration properties. Specify &lt;code&gt;false&lt;/code&gt; to return configuration properties that are turned off.&lt;/p&gt; (optional, default to all)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;ApplicationConfigList&gt;</returns>
-        public List<ApplicationConfigList> ApplicationConfigurationGetConfigurationKeys(string applicationName, string key = default(string), string configured = default(string), int operationIndex = 0)
+        public List<ApplicationConfigList> ApplicationConfigurationGetConfigurationKeys(string applicationName, string key = default, string configured = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<List<ApplicationConfigList>> localVarResponse = ApplicationConfigurationGetConfigurationKeysWithHttpInfo(applicationName, key, configured);
             return localVarResponse.Data;
@@ -1074,7 +1074,7 @@ namespace EssSharp.Api
         /// <param name="configured">&lt;p&gt;Specify &lt;code&gt;all&lt;/code&gt; to return all configured properties. Specify &lt;code&gt;true&lt;/code&gt; to return enabled configuration properties. Specify &lt;code&gt;false&lt;/code&gt; to return configuration properties that are turned off.&lt;/p&gt; (optional, default to all)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;ApplicationConfigList&gt;</returns>
-        public EssSharp.Client.ApiResponse<List<ApplicationConfigList>> ApplicationConfigurationGetConfigurationKeysWithHttpInfo(string applicationName, string key = default(string), string configured = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<List<ApplicationConfigList>> ApplicationConfigurationGetConfigurationKeysWithHttpInfo(string applicationName, string key = default, string configured = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1150,7 +1150,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ApplicationConfigList&gt;</returns>
-        public async System.Threading.Tasks.Task<List<ApplicationConfigList>> ApplicationConfigurationGetConfigurationKeysAsync(string applicationName, string key = default(string), string configured = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<ApplicationConfigList>> ApplicationConfigurationGetConfigurationKeysAsync(string applicationName, string key = default, string configured = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<List<ApplicationConfigList>> localVarResponse = await ApplicationConfigurationGetConfigurationKeysWithHttpInfoAsync(applicationName, key, configured, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1166,7 +1166,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ApplicationConfigList&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<ApplicationConfigList>>> ApplicationConfigurationGetConfigurationKeysWithHttpInfoAsync(string applicationName, string key = default(string), string configured = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<ApplicationConfigList>>> ApplicationConfigurationGetConfigurationKeysWithHttpInfoAsync(string applicationName, string key = default, string configured = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1319,7 +1319,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigList</returns>
-        public async System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationGetConfigurationsAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationGetConfigurationsAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ApplicationConfigList> localVarResponse = await ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(applicationName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1333,7 +1333,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigList>> ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigList>> ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1500,7 +1500,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigEntry</returns>
-        public async System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationSetConfigurationAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApplicationConfigEntry> ApplicationConfigurationSetConfigurationAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ApplicationConfigEntry> localVarResponse = await ApplicationConfigurationSetConfigurationWithHttpInfoAsync(applicationName, configId, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1516,7 +1516,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigEntry)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationSetConfigurationWithHttpInfoAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationSetConfigurationWithHttpInfoAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1689,7 +1689,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigList</returns>
-        public async System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationSetConfigurationsAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationSetConfigurationsAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ApplicationConfigList> localVarResponse = await ApplicationConfigurationSetConfigurationsWithHttpInfoAsync(applicationName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1704,7 +1704,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigList>> ApplicationConfigurationSetConfigurationsWithHttpInfoAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigList>> ApplicationConfigurationSetConfigurationsWithHttpInfoAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

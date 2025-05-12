@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="dimensionAlias">dimensionAlias.</param>
         /// <param name="externalDimName">externalDimName.</param>
         /// <param name="solveOrder">solveOrder.</param>
-        public CompactDesignationColumn(string originalHeaderName = default(string), string objectName = default(string), string referenceObjectName = default(string), string objectType = default(string), string formula = default(string), string dimensionAlias = default(string), string externalDimName = default(string), int solveOrder = default(int))
+        public CompactDesignationColumn(string originalHeaderName = default, string objectName = default, string referenceObjectName = default, string objectType = default, string formula = default, string dimensionAlias = default, string externalDimName = default, int solveOrder = default)
         {
             this.OriginalHeaderName = originalHeaderName;
             this.ObjectName = objectName;

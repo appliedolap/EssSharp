@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="name">name.</param>
         /// <param name="inheritedFromGroups">inheritedFromGroups.</param>
-        public ProvisionReportItem(string name = default(string), List<string> inheritedFromGroups = default(List<string>))
+        public ProvisionReportItem(string name = default, List<string> inheritedFromGroups = default)
         {
             this.Name = name;
             this.InheritedFromGroups = inheritedFromGroups;

@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="dtrContext">dtrContext.</param>
         /// <param name="aliasTable">aliasTable.</param>
         /// <param name="sessionId">sessionId.</param>
-        public DrillthroughMetadataBean(List<DrillThroughRange> dtrContext = default(List<DrillThroughRange>), string aliasTable = default(string), string sessionId = default(string))
+        public DrillthroughMetadataBean(List<DrillThroughRange> dtrContext = default, string aliasTable = default, string sessionId = default)
         {
             this.DtrContext = dtrContext;
             this.AliasTable = aliasTable;

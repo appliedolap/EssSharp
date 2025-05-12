@@ -35,7 +35,7 @@ namespace EssSharp.Api
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ServiceRoleProvisioningDeprovision(string id, bool? group = default(bool?), int operationIndex = 0);
+        void ServiceRoleProvisioningDeprovision(string id, bool? group = default, int operationIndex = 0);
 
         /// <summary>
         /// Deprovision
@@ -48,7 +48,7 @@ namespace EssSharp.Api
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ServiceRoleProvisioningDeprovisionWithHttpInfo(string id, bool? group = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> ServiceRoleProvisioningDeprovisionWithHttpInfo(string id, bool? group = default, int operationIndex = 0);
         /// <summary>
         /// Get Provision
         /// </summary>
@@ -60,7 +60,7 @@ namespace EssSharp.Api
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UserGroupProvisionInfo</returns>
-        UserGroupProvisionInfo ServiceRoleProvisioningGetProvision(string id, bool? group = default(bool?), int operationIndex = 0);
+        UserGroupProvisionInfo ServiceRoleProvisioningGetProvision(string id, bool? group = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Provision
@@ -73,7 +73,7 @@ namespace EssSharp.Api
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserGroupProvisionInfo</returns>
-        ApiResponse<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionWithHttpInfo(string id, bool? group = default(bool?), int operationIndex = 0);
+        ApiResponse<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionWithHttpInfo(string id, bool? group = default, int operationIndex = 0);
         /// <summary>
         /// Provision User or Group
         /// </summary>
@@ -85,7 +85,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;User or group provisioning information.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ServiceRoleProvisioningProvision(string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0);
+        void ServiceRoleProvisioningProvision(string id, UserGroupProvisionInfo body = default, int operationIndex = 0);
 
         /// <summary>
         /// Provision User or Group
@@ -98,7 +98,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;User or group provisioning information.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ServiceRoleProvisioningProvisionWithHttpInfo(string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0);
+        ApiResponse<Object> ServiceRoleProvisioningProvisionWithHttpInfo(string id, UserGroupProvisionInfo body = default, int operationIndex = 0);
         /// <summary>
         /// Search Provision
         /// </summary>
@@ -112,7 +112,7 @@ namespace EssSharp.Api
         /// <param name="page">&lt;p&gt;This is used to get the list of users/groups having no service roles in paginated manner. Page number starts with 0&lt;/p&gt; (optional, default to -1)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UserGroupProvisionInfoList</returns>
-        UserGroupProvisionInfoList ServiceRoleProvisioningSearchProvision(string id = default(string), string role = default(string), string filter = default(string), int? page = default(int?), int operationIndex = 0);
+        UserGroupProvisionInfoList ServiceRoleProvisioningSearchProvision(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0);
 
         /// <summary>
         /// Search Provision
@@ -127,7 +127,7 @@ namespace EssSharp.Api
         /// <param name="page">&lt;p&gt;This is used to get the list of users/groups having no service roles in paginated manner. Page number starts with 0&lt;/p&gt; (optional, default to -1)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserGroupProvisionInfoList</returns>
-        ApiResponse<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionWithHttpInfo(string id = default(string), string role = default(string), string filter = default(string), int? page = default(int?), int operationIndex = 0);
+        ApiResponse<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionWithHttpInfo(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -149,7 +149,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ServiceRoleProvisioningDeprovisionAsync(string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ServiceRoleProvisioningDeprovisionAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Deprovision
@@ -163,7 +163,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ServiceRoleProvisioningDeprovisionWithHttpInfoAsync(string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ServiceRoleProvisioningDeprovisionWithHttpInfoAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Provision
         /// </summary>
@@ -176,7 +176,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        System.Threading.Tasks.Task<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionAsync(string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Provision
@@ -190,7 +190,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ServiceRoleProvisioningGetProvisionWithHttpInfoAsync(string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ServiceRoleProvisioningGetProvisionWithHttpInfoAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Provision User or Group
         /// </summary>
@@ -203,7 +203,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ServiceRoleProvisioningProvisionAsync(string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ServiceRoleProvisioningProvisionAsync(string id, UserGroupProvisionInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Provision User or Group
@@ -217,7 +217,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ServiceRoleProvisioningProvisionWithHttpInfoAsync(string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ServiceRoleProvisioningProvisionWithHttpInfoAsync(string id, UserGroupProvisionInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Search Provision
         /// </summary>
@@ -232,7 +232,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfoList</returns>
-        System.Threading.Tasks.Task<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionAsync(string id = default(string), string role = default(string), string filter = default(string), int? page = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionAsync(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search Provision
@@ -248,7 +248,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfoList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfoList>> ServiceRoleProvisioningSearchProvisionWithHttpInfoAsync(string id = default(string), string role = default(string), string filter = default(string), int? page = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfoList>> ServiceRoleProvisioningSearchProvisionWithHttpInfoAsync(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -377,7 +377,7 @@ namespace EssSharp.Api
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ServiceRoleProvisioningDeprovision(string id, bool? group = default(bool?), int operationIndex = 0)
+        public void ServiceRoleProvisioningDeprovision(string id, bool? group = default, int operationIndex = 0)
         {
             ServiceRoleProvisioningDeprovisionWithHttpInfo(id, group);
         }
@@ -390,7 +390,7 @@ namespace EssSharp.Api
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ServiceRoleProvisioningDeprovisionWithHttpInfo(string id, bool? group = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ServiceRoleProvisioningDeprovisionWithHttpInfo(string id, bool? group = default, int operationIndex = 0)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -459,7 +459,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ServiceRoleProvisioningDeprovisionAsync(string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ServiceRoleProvisioningDeprovisionAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ServiceRoleProvisioningDeprovisionWithHttpInfoAsync(id, group, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -473,7 +473,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ServiceRoleProvisioningDeprovisionWithHttpInfoAsync(string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ServiceRoleProvisioningDeprovisionWithHttpInfoAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -542,7 +542,7 @@ namespace EssSharp.Api
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UserGroupProvisionInfo</returns>
-        public UserGroupProvisionInfo ServiceRoleProvisioningGetProvision(string id, bool? group = default(bool?), int operationIndex = 0)
+        public UserGroupProvisionInfo ServiceRoleProvisioningGetProvision(string id, bool? group = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfo> localVarResponse = ServiceRoleProvisioningGetProvisionWithHttpInfo(id, group);
             return localVarResponse.Data;
@@ -556,7 +556,7 @@ namespace EssSharp.Api
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserGroupProvisionInfo</returns>
-        public EssSharp.Client.ApiResponse<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionWithHttpInfo(string id, bool? group = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionWithHttpInfo(string id, bool? group = default, int operationIndex = 0)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -627,7 +627,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionAsync(string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfo> localVarResponse = await ServiceRoleProvisioningGetProvisionWithHttpInfoAsync(id, group, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -642,7 +642,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> ServiceRoleProvisioningGetProvisionWithHttpInfoAsync(string id, bool? group = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> ServiceRoleProvisioningGetProvisionWithHttpInfoAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -713,7 +713,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;User or group provisioning information.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ServiceRoleProvisioningProvision(string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0)
+        public void ServiceRoleProvisioningProvision(string id, UserGroupProvisionInfo body = default, int operationIndex = 0)
         {
             ServiceRoleProvisioningProvisionWithHttpInfo(id, body);
         }
@@ -726,7 +726,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;User or group provisioning information.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ServiceRoleProvisioningProvisionWithHttpInfo(string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ServiceRoleProvisioningProvisionWithHttpInfo(string id, UserGroupProvisionInfo body = default, int operationIndex = 0)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -794,7 +794,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ServiceRoleProvisioningProvisionAsync(string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ServiceRoleProvisioningProvisionAsync(string id, UserGroupProvisionInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ServiceRoleProvisioningProvisionWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -808,7 +808,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ServiceRoleProvisioningProvisionWithHttpInfoAsync(string id, UserGroupProvisionInfo body = default(UserGroupProvisionInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ServiceRoleProvisioningProvisionWithHttpInfoAsync(string id, UserGroupProvisionInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -878,7 +878,7 @@ namespace EssSharp.Api
         /// <param name="page">&lt;p&gt;This is used to get the list of users/groups having no service roles in paginated manner. Page number starts with 0&lt;/p&gt; (optional, default to -1)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UserGroupProvisionInfoList</returns>
-        public UserGroupProvisionInfoList ServiceRoleProvisioningSearchProvision(string id = default(string), string role = default(string), string filter = default(string), int? page = default(int?), int operationIndex = 0)
+        public UserGroupProvisionInfoList ServiceRoleProvisioningSearchProvision(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfoList> localVarResponse = ServiceRoleProvisioningSearchProvisionWithHttpInfo(id, role, filter, page);
             return localVarResponse.Data;
@@ -894,7 +894,7 @@ namespace EssSharp.Api
         /// <param name="page">&lt;p&gt;This is used to get the list of users/groups having no service roles in paginated manner. Page number starts with 0&lt;/p&gt; (optional, default to -1)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserGroupProvisionInfoList</returns>
-        public EssSharp.Client.ApiResponse<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionWithHttpInfo(string id = default(string), string role = default(string), string filter = default(string), int? page = default(int?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionWithHttpInfo(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -972,7 +972,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfoList</returns>
-        public async System.Threading.Tasks.Task<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionAsync(string id = default(string), string role = default(string), string filter = default(string), int? page = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionAsync(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfoList> localVarResponse = await ServiceRoleProvisioningSearchProvisionWithHttpInfoAsync(id, role, filter, page, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -989,7 +989,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfoList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfoList>> ServiceRoleProvisioningSearchProvisionWithHttpInfoAsync(string id = default(string), string role = default(string), string filter = default(string), int? page = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfoList>> ServiceRoleProvisioningSearchProvisionWithHttpInfoAsync(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

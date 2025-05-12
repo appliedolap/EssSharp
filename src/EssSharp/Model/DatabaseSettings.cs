@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="user">user.</param>
         /// <param name="password">password.</param>
-        public DatabaseSettings(string user = default(string), string password = default(string))
+        public DatabaseSettings(string user = default, string password = default)
         {
             this.User = user;
             this.Password = password;

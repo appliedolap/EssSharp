@@ -156,7 +156,7 @@ namespace EssSharp.Model
         /// <param name="db">db (required).</param>
         /// <param name="jobtype">jobtype (required).</param>
         /// <param name="parameters">parameters.</param>
-        public JobsInputBean(string application = default(string), string db = default(string), JobtypeEnum jobtype = default(JobtypeEnum), ParametersBean parameters = default(ParametersBean))
+        public JobsInputBean(string application = default, string db = default, JobtypeEnum jobtype = default, ParametersBean parameters = default)
         {
             // to ensure "application" is required (not null)
             if (application == null)

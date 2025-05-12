@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="pageSize">pageSize.</param>
         /// <param name="indexSize">indexSize.</param>
-        public DatabaseSizeStatistics(string name = default(string), long pageSize = default(long), long indexSize = default(long))
+        public DatabaseSizeStatistics(string name = default, long pageSize = default, long indexSize = default)
         {
             this.Name = name;
             this.PageSize = pageSize;

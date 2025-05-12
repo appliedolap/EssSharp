@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="limit">limit.</param>
         /// <param name="properties">properties.</param>
         /// <param name="offset">offset.</param>
-        public FileCollectionResponse(long count = default(long), List<FileBean> items = default(List<FileBean>), long totalResults = default(long), bool hasMore = default(bool), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
+        public FileCollectionResponse(long count = default, List<FileBean> items = default, long totalResults = default, bool hasMore = default, long limit = default, Dictionary<string, string> properties = default, long offset = default)
         {
             this.Count = count;
             this.Items = items;

@@ -34,7 +34,7 @@ namespace EssSharp.Api
         /// <param name="filter"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;CentralizedURLRes&gt;</returns>
-        List<CentralizedURLRes> CentraliazedurlGetSingleURLList(string filter = default(string), int operationIndex = 0);
+        List<CentralizedURLRes> CentraliazedurlGetSingleURLList(string filter = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Essbase Server list
@@ -46,7 +46,7 @@ namespace EssSharp.Api
         /// <param name="filter"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;CentralizedURLRes&gt;</returns>
-        ApiResponse<List<CentralizedURLRes>> CentraliazedurlGetSingleURLListWithHttpInfo(string filter = default(string), int operationIndex = 0);
+        ApiResponse<List<CentralizedURLRes>> CentraliazedurlGetSingleURLListWithHttpInfo(string filter = default, int operationIndex = 0);
         /// <summary>
         /// Add Essbase server to Centralized URL List 
         /// </summary>
@@ -80,7 +80,7 @@ namespace EssSharp.Api
         /// <param name="aliasName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;CentralizedURL&gt;</returns>
-        List<CentralizedURL> CentralizedUrlDeletSingleURLProperties(string aliasName = default(string), int operationIndex = 0);
+        List<CentralizedURL> CentralizedUrlDeletSingleURLProperties(string aliasName = default, int operationIndex = 0);
 
         /// <summary>
         /// Delete Essbase server from Centralized URL 
@@ -92,7 +92,7 @@ namespace EssSharp.Api
         /// <param name="aliasName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;CentralizedURL&gt;</returns>
-        ApiResponse<List<CentralizedURL>> CentralizedUrlDeletSingleURLPropertiesWithHttpInfo(string aliasName = default(string), int operationIndex = 0);
+        ApiResponse<List<CentralizedURL>> CentralizedUrlDeletSingleURLPropertiesWithHttpInfo(string aliasName = default, int operationIndex = 0);
         /// <summary>
         /// Update Essbase URL of Centralized URL List
         /// </summary>
@@ -136,7 +136,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;CentralizedURLRes&gt;</returns>
-        System.Threading.Tasks.Task<List<CentralizedURLRes>> CentraliazedurlGetSingleURLListAsync(string filter = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<CentralizedURLRes>> CentraliazedurlGetSingleURLListAsync(string filter = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Essbase Server list
@@ -149,7 +149,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;CentralizedURLRes&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<CentralizedURLRes>>> CentraliazedurlGetSingleURLListWithHttpInfoAsync(string filter = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<CentralizedURLRes>>> CentraliazedurlGetSingleURLListWithHttpInfoAsync(string filter = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Add Essbase server to Centralized URL List 
         /// </summary>
@@ -161,7 +161,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;CentralizedURL&gt;</returns>
-        System.Threading.Tasks.Task<List<CentralizedURL>> CentralizedUrlAddHostSingleURLAsync(CentralizedURL body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<CentralizedURL>> CentralizedUrlAddHostSingleURLAsync(CentralizedURL body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add Essbase server to Centralized URL List 
@@ -174,7 +174,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;CentralizedURL&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<CentralizedURL>>> CentralizedUrlAddHostSingleURLWithHttpInfoAsync(CentralizedURL body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<CentralizedURL>>> CentralizedUrlAddHostSingleURLWithHttpInfoAsync(CentralizedURL body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Essbase server from Centralized URL 
         /// </summary>
@@ -186,7 +186,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;CentralizedURL&gt;</returns>
-        System.Threading.Tasks.Task<List<CentralizedURL>> CentralizedUrlDeletSingleURLPropertiesAsync(string aliasName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<CentralizedURL>> CentralizedUrlDeletSingleURLPropertiesAsync(string aliasName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Essbase server from Centralized URL 
@@ -199,7 +199,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;CentralizedURL&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<CentralizedURL>>> CentralizedUrlDeletSingleURLPropertiesWithHttpInfoAsync(string aliasName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<CentralizedURL>>> CentralizedUrlDeletSingleURLPropertiesWithHttpInfoAsync(string aliasName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Essbase URL of Centralized URL List
         /// </summary>
@@ -211,7 +211,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CentralizedURL</returns>
-        System.Threading.Tasks.Task<CentralizedURL> CentralizedUrlUpdateSingleURLPropertiesAsync(List<CentralizedURL> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CentralizedURL> CentralizedUrlUpdateSingleURLPropertiesAsync(List<CentralizedURL> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Essbase URL of Centralized URL List
@@ -224,7 +224,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CentralizedURL)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CentralizedURL>> CentralizedUrlUpdateSingleURLPropertiesWithHttpInfoAsync(List<CentralizedURL> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CentralizedURL>> CentralizedUrlUpdateSingleURLPropertiesWithHttpInfoAsync(List<CentralizedURL> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -352,7 +352,7 @@ namespace EssSharp.Api
         /// <param name="filter"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;CentralizedURLRes&gt;</returns>
-        public List<CentralizedURLRes> CentraliazedurlGetSingleURLList(string filter = default(string), int operationIndex = 0)
+        public List<CentralizedURLRes> CentraliazedurlGetSingleURLList(string filter = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<List<CentralizedURLRes>> localVarResponse = CentraliazedurlGetSingleURLListWithHttpInfo(filter);
             return localVarResponse.Data;
@@ -365,7 +365,7 @@ namespace EssSharp.Api
         /// <param name="filter"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;CentralizedURLRes&gt;</returns>
-        public EssSharp.Client.ApiResponse<List<CentralizedURLRes>> CentraliazedurlGetSingleURLListWithHttpInfo(string filter = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<List<CentralizedURLRes>> CentraliazedurlGetSingleURLListWithHttpInfo(string filter = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -428,7 +428,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;CentralizedURLRes&gt;</returns>
-        public async System.Threading.Tasks.Task<List<CentralizedURLRes>> CentraliazedurlGetSingleURLListAsync(string filter = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<CentralizedURLRes>> CentraliazedurlGetSingleURLListAsync(string filter = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<List<CentralizedURLRes>> localVarResponse = await CentraliazedurlGetSingleURLListWithHttpInfoAsync(filter, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -442,7 +442,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;CentralizedURLRes&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<CentralizedURLRes>>> CentraliazedurlGetSingleURLListWithHttpInfoAsync(string filter = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<CentralizedURLRes>>> CentraliazedurlGetSingleURLListWithHttpInfoAsync(string filter = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -584,7 +584,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;CentralizedURL&gt;</returns>
-        public async System.Threading.Tasks.Task<List<CentralizedURL>> CentralizedUrlAddHostSingleURLAsync(CentralizedURL body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<CentralizedURL>> CentralizedUrlAddHostSingleURLAsync(CentralizedURL body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<List<CentralizedURL>> localVarResponse = await CentralizedUrlAddHostSingleURLWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -598,7 +598,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;CentralizedURL&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<CentralizedURL>>> CentralizedUrlAddHostSingleURLWithHttpInfoAsync(CentralizedURL body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<CentralizedURL>>> CentralizedUrlAddHostSingleURLWithHttpInfoAsync(CentralizedURL body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -664,7 +664,7 @@ namespace EssSharp.Api
         /// <param name="aliasName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;CentralizedURL&gt;</returns>
-        public List<CentralizedURL> CentralizedUrlDeletSingleURLProperties(string aliasName = default(string), int operationIndex = 0)
+        public List<CentralizedURL> CentralizedUrlDeletSingleURLProperties(string aliasName = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<List<CentralizedURL>> localVarResponse = CentralizedUrlDeletSingleURLPropertiesWithHttpInfo(aliasName);
             return localVarResponse.Data;
@@ -677,7 +677,7 @@ namespace EssSharp.Api
         /// <param name="aliasName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;CentralizedURL&gt;</returns>
-        public EssSharp.Client.ApiResponse<List<CentralizedURL>> CentralizedUrlDeletSingleURLPropertiesWithHttpInfo(string aliasName = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<List<CentralizedURL>> CentralizedUrlDeletSingleURLPropertiesWithHttpInfo(string aliasName = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -740,7 +740,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;CentralizedURL&gt;</returns>
-        public async System.Threading.Tasks.Task<List<CentralizedURL>> CentralizedUrlDeletSingleURLPropertiesAsync(string aliasName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<CentralizedURL>> CentralizedUrlDeletSingleURLPropertiesAsync(string aliasName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<List<CentralizedURL>> localVarResponse = await CentralizedUrlDeletSingleURLPropertiesWithHttpInfoAsync(aliasName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -754,7 +754,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;CentralizedURL&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<CentralizedURL>>> CentralizedUrlDeletSingleURLPropertiesWithHttpInfoAsync(string aliasName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<CentralizedURL>>> CentralizedUrlDeletSingleURLPropertiesWithHttpInfoAsync(string aliasName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -896,7 +896,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CentralizedURL</returns>
-        public async System.Threading.Tasks.Task<CentralizedURL> CentralizedUrlUpdateSingleURLPropertiesAsync(List<CentralizedURL> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CentralizedURL> CentralizedUrlUpdateSingleURLPropertiesAsync(List<CentralizedURL> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<CentralizedURL> localVarResponse = await CentralizedUrlUpdateSingleURLPropertiesWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -910,7 +910,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CentralizedURL)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CentralizedURL>> CentralizedUrlUpdateSingleURLPropertiesWithHttpInfoAsync(List<CentralizedURL> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CentralizedURL>> CentralizedUrlUpdateSingleURLPropertiesWithHttpInfoAsync(List<CentralizedURL> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)

@@ -37,7 +37,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Object</returns>
-        Object MDXExecuteMDX(string application, string database, string format = default(string), MDXInput body = default(MDXInput), int operationIndex = 0);
+        Object MDXExecuteMDX(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0);
 
         /// <summary>
         /// Run MDX Query
@@ -52,7 +52,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> MDXExecuteMDXWithHttpInfo(string application, string database, string format = default(string), MDXInput body = default(MDXInput), int operationIndex = 0);
+        ApiResponse<Object> MDXExecuteMDXWithHttpInfo(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0);
         /// <summary>
         /// Run MDX Report
         /// </summary>
@@ -66,7 +66,7 @@ namespace EssSharp.Api
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Object</returns>
-        Object MDXExecutenq(string application, string database, string name, string format = default(string), int operationIndex = 0);
+        Object MDXExecutenq(string application, string database, string name, string format = default, int operationIndex = 0);
 
         /// <summary>
         /// Run MDX Report
@@ -81,7 +81,7 @@ namespace EssSharp.Api
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> MDXExecutenqWithHttpInfo(string application, string database, string name, string format = default(string), int operationIndex = 0);
+        ApiResponse<Object> MDXExecutenqWithHttpInfo(string application, string database, string name, string format = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -105,7 +105,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> MDXExecuteMDXAsync(string application, string database, string format = default(string), MDXInput body = default(MDXInput), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Object> MDXExecuteMDXAsync(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Run MDX Query
@@ -121,7 +121,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> MDXExecuteMDXWithHttpInfoAsync(string application, string database, string format = default(string), MDXInput body = default(MDXInput), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> MDXExecuteMDXWithHttpInfoAsync(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Run MDX Report
         /// </summary>
@@ -136,7 +136,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> MDXExecutenqAsync(string application, string database, string name, string format = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Object> MDXExecutenqAsync(string application, string database, string name, string format = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Run MDX Report
@@ -152,7 +152,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> MDXExecutenqWithHttpInfoAsync(string application, string database, string name, string format = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> MDXExecutenqWithHttpInfoAsync(string application, string database, string name, string format = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -283,7 +283,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Object</returns>
-        public Object MDXExecuteMDX(string application, string database, string format = default(string), MDXInput body = default(MDXInput), int operationIndex = 0)
+        public Object MDXExecuteMDX(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Object> localVarResponse = MDXExecuteMDXWithHttpInfo(application, database, format, body);
             return localVarResponse.Data;
@@ -299,7 +299,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object</returns>
-        public EssSharp.Client.ApiResponse<Object> MDXExecuteMDXWithHttpInfo(string application, string database, string format = default(string), MDXInput body = default(MDXInput), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> MDXExecuteMDXWithHttpInfo(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -381,7 +381,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> MDXExecuteMDXAsync(string application, string database, string format = default(string), MDXInput body = default(MDXInput), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Object> MDXExecuteMDXAsync(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Object> localVarResponse = await MDXExecuteMDXWithHttpInfoAsync(application, database, format, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -398,7 +398,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> MDXExecuteMDXWithHttpInfoAsync(string application, string database, string format = default(string), MDXInput body = default(MDXInput), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> MDXExecuteMDXWithHttpInfoAsync(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -480,7 +480,7 @@ namespace EssSharp.Api
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Object</returns>
-        public Object MDXExecutenq(string application, string database, string name, string format = default(string), int operationIndex = 0)
+        public Object MDXExecutenq(string application, string database, string name, string format = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Object> localVarResponse = MDXExecutenqWithHttpInfo(application, database, name, format);
             return localVarResponse.Data;
@@ -496,7 +496,7 @@ namespace EssSharp.Api
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object</returns>
-        public EssSharp.Client.ApiResponse<Object> MDXExecutenqWithHttpInfo(string application, string database, string name, string format = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> MDXExecutenqWithHttpInfo(string application, string database, string name, string format = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -582,7 +582,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> MDXExecutenqAsync(string application, string database, string name, string format = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Object> MDXExecutenqAsync(string application, string database, string name, string format = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Object> localVarResponse = await MDXExecutenqWithHttpInfoAsync(application, database, name, format, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -599,7 +599,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> MDXExecutenqWithHttpInfoAsync(string application, string database, string name, string format = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> MDXExecutenqWithHttpInfoAsync(string application, string database, string name, string format = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)

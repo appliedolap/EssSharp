@@ -98,15 +98,6 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Columns'
-        /// </summary>
-        [Fact]
-        public void ColumnsTest()
-        {
-            // TODO unit test for the property 'Columns'
-        }
-
-        /// <summary>
         /// Test the property 'DataSourceName'
         /// </summary>
         [Fact]
@@ -122,6 +113,15 @@ namespace EssSharp.Test.Model
         public void UrlTest()
         {
             // TODO unit test for the property 'Url'
+        }
+
+        /// <summary>
+        /// Test the property 'Columns'
+        /// </summary>
+        [Fact]
+        public void ColumnsTest()
+        {
+            // TODO unit test for the property 'Columns'
         }
 
         /// <summary>

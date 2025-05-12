@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="header">header.</param>
         /// <param name="spec">spec.</param>
-        public Layout(LayoutHeader header = default(LayoutHeader), LayoutSpec spec = default(LayoutSpec))
+        public Layout(LayoutHeader header = default, LayoutSpec spec = default)
         {
             this.Header = header;
             this.Spec = spec;

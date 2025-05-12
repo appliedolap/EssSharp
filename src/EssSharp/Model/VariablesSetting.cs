@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="showVariables">showVariables.</param>
         /// <param name="updateVariables">updateVariables.</param>
-        public VariablesSetting(bool showVariables = default(bool), bool updateVariables = default(bool))
+        public VariablesSetting(bool showVariables = default, bool updateVariables = default)
         {
             this.ShowVariables = showVariables;
             this.UpdateVariables = updateVariables;

@@ -57,7 +57,7 @@ namespace EssSharp.Api
         /// <param name="clusterName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ROClusterDeleteROCluster(string clusterName = default(string), int operationIndex = 0);
+        void ROClusterDeleteROCluster(string clusterName = default, int operationIndex = 0);
 
         /// <summary>
         /// Delete ReadOnly Cluster
@@ -69,7 +69,7 @@ namespace EssSharp.Api
         /// <param name="clusterName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ROClusterDeleteROClusterWithHttpInfo(string clusterName = default(string), int operationIndex = 0);
+        ApiResponse<Object> ROClusterDeleteROClusterWithHttpInfo(string clusterName = default, int operationIndex = 0);
         /// <summary>
         /// ReadOnly Cluster Change Status 
         /// </summary>
@@ -147,7 +147,7 @@ namespace EssSharp.Api
         /// <param name="clusterName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ROCluster</returns>
-        ROCluster ROClusterGetROCluster(string clusterName = default(string), int operationIndex = 0);
+        ROCluster ROClusterGetROCluster(string clusterName = default, int operationIndex = 0);
 
         /// <summary>
         /// Find ReadOnly Cluster By Name
@@ -159,7 +159,7 @@ namespace EssSharp.Api
         /// <param name="clusterName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ROCluster</returns>
-        ApiResponse<ROCluster> ROClusterGetROClusterWithHttpInfo(string clusterName = default(string), int operationIndex = 0);
+        ApiResponse<ROCluster> ROClusterGetROClusterWithHttpInfo(string clusterName = default, int operationIndex = 0);
         /// <summary>
         /// Update ReadOnly Cluster
         /// </summary>
@@ -203,7 +203,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ROClusterCreateROClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ROClusterCreateROClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create ReadOnly Cluster
@@ -216,7 +216,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ROClusterCreateROClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ROClusterCreateROClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete ReadOnly Cluster
         /// </summary>
@@ -228,7 +228,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ROClusterDeleteROClusterAsync(string clusterName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ROClusterDeleteROClusterAsync(string clusterName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete ReadOnly Cluster
@@ -241,7 +241,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ROClusterDeleteROClusterWithHttpInfoAsync(string clusterName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ROClusterDeleteROClusterWithHttpInfoAsync(string clusterName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// ReadOnly Cluster Change Status 
         /// </summary>
@@ -253,7 +253,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ROCluster</returns>
-        System.Threading.Tasks.Task<ROCluster> ROClusterEnableClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ROCluster> ROClusterEnableClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// ReadOnly Cluster Change Status 
@@ -266,7 +266,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ROCluster)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ROCluster>> ROClusterEnableClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ROCluster>> ROClusterEnableClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get App Cube List
         /// </summary>
@@ -278,7 +278,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Dictionary&lt;string, Object&gt;</returns>
-        System.Threading.Tasks.Task<Dictionary<string, Object>> ROClusterGetAppAndCubeListByServerNameAsync(string svrName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Dictionary<string, Object>> ROClusterGetAppAndCubeListByServerNameAsync(string svrName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get App Cube List
@@ -291,7 +291,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Dictionary&lt;string, Object&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Dictionary<string, Object>>> ROClusterGetAppAndCubeListByServerNameWithHttpInfoAsync(string svrName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Dictionary<string, Object>>> ROClusterGetAppAndCubeListByServerNameWithHttpInfoAsync(string svrName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get ReadOnly Cluster List
         /// </summary>
@@ -302,7 +302,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ROCluster&gt;</returns>
-        System.Threading.Tasks.Task<List<ROCluster>> ROClusterGetClusterListAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<ROCluster>> ROClusterGetClusterListAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get ReadOnly Cluster List
@@ -314,7 +314,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ROCluster&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<ROCluster>>> ROClusterGetClusterListWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<ROCluster>>> ROClusterGetClusterListWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Find ReadOnly Cluster By Name
         /// </summary>
@@ -326,7 +326,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ROCluster</returns>
-        System.Threading.Tasks.Task<ROCluster> ROClusterGetROClusterAsync(string clusterName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ROCluster> ROClusterGetROClusterAsync(string clusterName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find ReadOnly Cluster By Name
@@ -339,7 +339,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ROCluster)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ROCluster>> ROClusterGetROClusterWithHttpInfoAsync(string clusterName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ROCluster>> ROClusterGetROClusterWithHttpInfoAsync(string clusterName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update ReadOnly Cluster
         /// </summary>
@@ -351,7 +351,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ROClusterUpdateROClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ROClusterUpdateROClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update ReadOnly Cluster
@@ -364,7 +364,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ROClusterUpdateROClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ROClusterUpdateROClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -568,7 +568,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ROClusterCreateROClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ROClusterCreateROClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ROClusterCreateROClusterWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -581,7 +581,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ROClusterCreateROClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ROClusterCreateROClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -645,7 +645,7 @@ namespace EssSharp.Api
         /// <param name="clusterName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ROClusterDeleteROCluster(string clusterName = default(string), int operationIndex = 0)
+        public void ROClusterDeleteROCluster(string clusterName = default, int operationIndex = 0)
         {
             ROClusterDeleteROClusterWithHttpInfo(clusterName);
         }
@@ -657,7 +657,7 @@ namespace EssSharp.Api
         /// <param name="clusterName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ROClusterDeleteROClusterWithHttpInfo(string clusterName = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ROClusterDeleteROClusterWithHttpInfo(string clusterName = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -718,7 +718,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ROClusterDeleteROClusterAsync(string clusterName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ROClusterDeleteROClusterAsync(string clusterName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ROClusterDeleteROClusterWithHttpInfoAsync(clusterName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -731,7 +731,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ROClusterDeleteROClusterWithHttpInfoAsync(string clusterName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ROClusterDeleteROClusterWithHttpInfoAsync(string clusterName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -871,7 +871,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ROCluster</returns>
-        public async System.Threading.Tasks.Task<ROCluster> ROClusterEnableClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ROCluster> ROClusterEnableClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ROCluster> localVarResponse = await ROClusterEnableClusterWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -885,7 +885,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ROCluster)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ROCluster>> ROClusterEnableClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ROCluster>> ROClusterEnableClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1030,7 +1030,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Dictionary&lt;string, Object&gt;</returns>
-        public async System.Threading.Tasks.Task<Dictionary<string, Object>> ROClusterGetAppAndCubeListByServerNameAsync(string svrName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Dictionary<string, Object>> ROClusterGetAppAndCubeListByServerNameAsync(string svrName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Dictionary<string, Object>> localVarResponse = await ROClusterGetAppAndCubeListByServerNameWithHttpInfoAsync(svrName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1044,7 +1044,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Dictionary&lt;string, Object&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Dictionary<string, Object>>> ROClusterGetAppAndCubeListByServerNameWithHttpInfoAsync(string svrName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Dictionary<string, Object>>> ROClusterGetAppAndCubeListByServerNameWithHttpInfoAsync(string svrName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'svrName' is set
             if (svrName == null)
@@ -1179,7 +1179,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ROCluster&gt;</returns>
-        public async System.Threading.Tasks.Task<List<ROCluster>> ROClusterGetClusterListAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<ROCluster>> ROClusterGetClusterListAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<List<ROCluster>> localVarResponse = await ROClusterGetClusterListWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1192,7 +1192,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ROCluster&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<ROCluster>>> ROClusterGetClusterListWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<ROCluster>>> ROClusterGetClusterListWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1251,7 +1251,7 @@ namespace EssSharp.Api
         /// <param name="clusterName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ROCluster</returns>
-        public ROCluster ROClusterGetROCluster(string clusterName = default(string), int operationIndex = 0)
+        public ROCluster ROClusterGetROCluster(string clusterName = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<ROCluster> localVarResponse = ROClusterGetROClusterWithHttpInfo(clusterName);
             return localVarResponse.Data;
@@ -1264,7 +1264,7 @@ namespace EssSharp.Api
         /// <param name="clusterName"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ROCluster</returns>
-        public EssSharp.Client.ApiResponse<ROCluster> ROClusterGetROClusterWithHttpInfo(string clusterName = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ROCluster> ROClusterGetROClusterWithHttpInfo(string clusterName = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -1327,7 +1327,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ROCluster</returns>
-        public async System.Threading.Tasks.Task<ROCluster> ROClusterGetROClusterAsync(string clusterName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ROCluster> ROClusterGetROClusterAsync(string clusterName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ROCluster> localVarResponse = await ROClusterGetROClusterWithHttpInfoAsync(clusterName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1341,7 +1341,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ROCluster)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ROCluster>> ROClusterGetROClusterWithHttpInfoAsync(string clusterName = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ROCluster>> ROClusterGetROClusterWithHttpInfoAsync(string clusterName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1480,7 +1480,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ROClusterUpdateROClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ROClusterUpdateROClusterAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ROClusterUpdateROClusterWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1493,7 +1493,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ROClusterUpdateROClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ROClusterUpdateROClusterWithHttpInfoAsync(ROCluster body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)

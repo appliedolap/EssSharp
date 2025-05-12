@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="number">number.</param>
         /// <param name="unique">unique.</param>
-        public Level(string name = default(string), int number = default(int), bool unique = default(bool))
+        public Level(string name = default, int number = default, bool unique = default)
         {
             this.Name = name;
             this.Number = number;

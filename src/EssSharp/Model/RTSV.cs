@@ -77,7 +77,7 @@ namespace EssSharp.Model
         /// <param name="type">type.</param>
         /// <param name="value">value.</param>
         /// <param name="limit">limit.</param>
-        public RTSV(string name = default(string), string description = default(string), bool allowMissing = default(bool), string dimension = default(string), bool singleChoice = default(bool), TypeEnum? type = default(TypeEnum?), Object value = default(Object), string limit = default(string))
+        public RTSV(string name = default, string description = default, bool allowMissing = default, string dimension = default, bool singleChoice = default, TypeEnum? type = default, Object value = default, string limit = default)
         {
             this.Name = name;
             this.Description = description;

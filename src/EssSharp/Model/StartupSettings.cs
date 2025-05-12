@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="allowUsersToStartDatabase">allowUsersToStartDatabase.</param>
         /// <param name="startDatabaseWhenApplicationStarts">startDatabaseWhenApplicationStarts.</param>
-        public StartupSettings(bool allowUsersToStartDatabase = default(bool), bool startDatabaseWhenApplicationStarts = default(bool))
+        public StartupSettings(bool allowUsersToStartDatabase = default, bool startDatabaseWhenApplicationStarts = default)
         {
             this.AllowUsersToStartDatabase = allowUsersToStartDatabase;
             this.StartDatabaseWhenApplicationStarts = startDatabaseWhenApplicationStarts;

@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="DestroyBuffer" /> class.
         /// </summary>
         /// <param name="bufferIds">bufferIds.</param>
-        public DestroyBuffer(List<long> bufferIds = default(List<long>))
+        public DestroyBuffer(List<long> bufferIds = default)
         {
             this.BufferIds = bufferIds;
         }

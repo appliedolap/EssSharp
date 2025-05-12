@@ -60,7 +60,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="type">type.</param>
         /// <param name="query">query.</param>
-        public NamedQuery(string name = default(string), TypeEnum? type = default(TypeEnum?), Query query = default(Query))
+        public NamedQuery(string name = default, TypeEnum? type = default, Query query = default)
         {
             this.Name = name;
             this.Type = type;

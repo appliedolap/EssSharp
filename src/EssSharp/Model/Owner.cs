@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public Owner(string id = default(string), string name = default(string))
+        public Owner(string id = default, string name = default)
         {
             this.Id = id;
             this.Name = name;

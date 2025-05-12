@@ -74,7 +74,7 @@ namespace EssSharp.Model
         /// <param name="removeAll">removeAll.</param>
         /// <param name="signFlipDimension">signFlipDimension.</param>
         /// <param name="signFlipUDA">signFlipUDA.</param>
-        public DataLoadOptions(List<string> clearCombinations = default(List<string>), OptionEnum? option = default(OptionEnum?), int removeAll = default(int), string signFlipDimension = default(string), string signFlipUDA = default(string))
+        public DataLoadOptions(List<string> clearCombinations = default, OptionEnum? option = default, int removeAll = default, string signFlipDimension = default, string signFlipUDA = default)
         {
             this.ClearCombinations = clearCombinations;
             this.Option = option;

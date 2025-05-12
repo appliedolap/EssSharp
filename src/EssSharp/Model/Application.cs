@@ -80,7 +80,7 @@ namespace EssSharp.Model
         /// <param name="inspectAppAllowed">inspectAppAllowed.</param>
         /// <param name="appVariablesSetting">appVariablesSetting.</param>
         /// <param name="encrypted">encrypted.</param>
-        public Application(string name = default(string), string owner = default(string), long creationTime = default(long), string modifiedBy = default(string), long modifiedTime = default(long), string status = default(string), string description = default(string), TypeEnum? type = default(TypeEnum?), long startTime = default(long), int connectedUsersCount = default(int), string role = default(string), List<Link> links = default(List<Link>), bool easManagedApp = default(bool), bool startStopAppAllowed = default(bool), bool inspectAppAllowed = default(bool), VariablesSetting appVariablesSetting = default(VariablesSetting), bool encrypted = default(bool))
+        public Application(string name = default, string owner = default, long creationTime = default, string modifiedBy = default, long modifiedTime = default, string status = default, string description = default, TypeEnum? type = default, long startTime = default, int connectedUsersCount = default, string role = default, List<Link> links = default, bool easManagedApp = default, bool startStopAppAllowed = default, bool inspectAppAllowed = default, VariablesSetting appVariablesSetting = default, bool encrypted = default)
         {
             this.Name = name;
             this.Owner = owner;

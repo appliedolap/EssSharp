@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="data">data.</param>
         /// <param name="rules">rules.</param>
-        public RulePreviewInput(List<List<string>> data = default(List<List<string>>), Rules rules = default(Rules))
+        public RulePreviewInput(List<List<string>> data = default, Rules rules = default)
         {
             this.Data = data;
             this.Rules = rules;

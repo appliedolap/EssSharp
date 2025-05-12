@@ -98,7 +98,7 @@ namespace EssSharp.Model
         /// <param name="alias">alias.</param>
         /// <param name="coordinates">coordinates.</param>
         /// <param name="ranges">ranges.</param>
-        public GridOperation(Grid grid = default(Grid), ActionEnum? action = default(ActionEnum?), string alias = default(string), List<int> coordinates = default(List<int>), List<List<int>> ranges = default(List<List<int>>))
+        public GridOperation(Grid grid = default, ActionEnum? action = default, string alias = default, List<int> coordinates = default, List<List<int>> ranges = default)
         {
             this.Grid = grid;
             this.Action = action;

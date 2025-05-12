@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="EssbaseURLList" /> class.
         /// </summary>
         /// <param name="items">items.</param>
-        public EssbaseURLList(List<EssbaseURL> items = default(List<EssbaseURL>))
+        public EssbaseURLList(List<EssbaseURL> items = default)
         {
             this.Items = items;
         }

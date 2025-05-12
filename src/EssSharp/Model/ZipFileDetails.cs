@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="ZipFileDetails" /> class.
         /// </summary>
         /// <param name="path">path.</param>
-        public ZipFileDetails(string path = default(string))
+        public ZipFileDetails(string path = default)
         {
             this.Path = path;
         }

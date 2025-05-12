@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="mode">mode.</param>
         /// <param name="items">items.</param>
-        public CentralizedURLRes(string mode = default(string), List<CentralizedURL> items = default(List<CentralizedURL>))
+        public CentralizedURLRes(string mode = default, List<CentralizedURL> items = default)
         {
             this.Mode = mode;
             this.Items = items;

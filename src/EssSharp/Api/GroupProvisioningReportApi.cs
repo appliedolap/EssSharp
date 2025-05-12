@@ -60,7 +60,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Use &lt;code&gt;all&lt;/code&gt; to get provisioning information for all applications.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>MainProvisionReport</returns>
-        MainProvisionReport GroupProvisioningReportGetFullReport(string groupId, string expand = default(string), int operationIndex = 0);
+        MainProvisionReport GroupProvisioningReportGetFullReport(string groupId, string expand = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Full Provisioning Report
@@ -73,7 +73,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Use &lt;code&gt;all&lt;/code&gt; to get provisioning information for all applications.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of MainProvisionReport</returns>
-        ApiResponse<MainProvisionReport> GroupProvisioningReportGetFullReportWithHttpInfo(string groupId, string expand = default(string), int operationIndex = 0);
+        ApiResponse<MainProvisionReport> GroupProvisioningReportGetFullReportWithHttpInfo(string groupId, string expand = default, int operationIndex = 0);
         /// <summary>
         /// Get All Applications Provisioning Report
         /// </summary>
@@ -85,7 +85,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Use &lt;code&gt;all&lt;/code&gt; to get provisioning information for all applications.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApplicationProvisionReportItemList</returns>
-        ApplicationProvisionReportItemList GroupProvisioningReportGetReportForAllApplications(string groupId, string expand = default(string), int operationIndex = 0);
+        ApplicationProvisionReportItemList GroupProvisioningReportGetReportForAllApplications(string groupId, string expand = default, int operationIndex = 0);
 
         /// <summary>
         /// Get All Applications Provisioning Report
@@ -98,7 +98,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Use &lt;code&gt;all&lt;/code&gt; to get provisioning information for all applications.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApplicationProvisionReportItemList</returns>
-        ApiResponse<ApplicationProvisionReportItemList> GroupProvisioningReportGetReportForAllApplicationsWithHttpInfo(string groupId, string expand = default(string), int operationIndex = 0);
+        ApiResponse<ApplicationProvisionReportItemList> GroupProvisioningReportGetReportForAllApplicationsWithHttpInfo(string groupId, string expand = default, int operationIndex = 0);
         /// <summary>
         /// Get Application Provisioning Report
         /// </summary>
@@ -111,7 +111,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;none&lt;/code&gt;. When value is &lt;code&gt;none&lt;/code&gt;, only links to roles, filters and scripts will be returned. When value is &lt;code&gt;all&lt;/code&gt;, provisioning information for roles, filters, and scripts are returned.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApplicationProvisionReportItem</returns>
-        ApplicationProvisionReportItem GroupProvisioningReportGetReportForApplication(string application, string groupId, string expand = default(string), int operationIndex = 0);
+        ApplicationProvisionReportItem GroupProvisioningReportGetReportForApplication(string application, string groupId, string expand = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Application Provisioning Report
@@ -125,7 +125,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;none&lt;/code&gt;. When value is &lt;code&gt;none&lt;/code&gt;, only links to roles, filters and scripts will be returned. When value is &lt;code&gt;all&lt;/code&gt;, provisioning information for roles, filters, and scripts are returned.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApplicationProvisionReportItem</returns>
-        ApiResponse<ApplicationProvisionReportItem> GroupProvisioningReportGetReportForApplicationWithHttpInfo(string application, string groupId, string expand = default(string), int operationIndex = 0);
+        ApiResponse<ApplicationProvisionReportItem> GroupProvisioningReportGetReportForApplicationWithHttpInfo(string application, string groupId, string expand = default, int operationIndex = 0);
         /// <summary>
         /// Get Application Roles Provisioning Report
         /// </summary>
@@ -197,7 +197,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DatabaseProvisionReportItemList</returns>
-        System.Threading.Tasks.Task<DatabaseProvisionReportItemList> GroupProvisioningReportGetFiltersAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DatabaseProvisionReportItemList> GroupProvisioningReportGetFiltersAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Filters Provisioning Report
@@ -211,7 +211,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DatabaseProvisionReportItemList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DatabaseProvisionReportItemList>> GroupProvisioningReportGetFiltersWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<DatabaseProvisionReportItemList>> GroupProvisioningReportGetFiltersWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Full Provisioning Report
         /// </summary>
@@ -224,7 +224,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of MainProvisionReport</returns>
-        System.Threading.Tasks.Task<MainProvisionReport> GroupProvisioningReportGetFullReportAsync(string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<MainProvisionReport> GroupProvisioningReportGetFullReportAsync(string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Full Provisioning Report
@@ -238,7 +238,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MainProvisionReport)</returns>
-        System.Threading.Tasks.Task<ApiResponse<MainProvisionReport>> GroupProvisioningReportGetFullReportWithHttpInfoAsync(string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<MainProvisionReport>> GroupProvisioningReportGetFullReportWithHttpInfoAsync(string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get All Applications Provisioning Report
         /// </summary>
@@ -251,7 +251,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationProvisionReportItemList</returns>
-        System.Threading.Tasks.Task<ApplicationProvisionReportItemList> GroupProvisioningReportGetReportForAllApplicationsAsync(string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApplicationProvisionReportItemList> GroupProvisioningReportGetReportForAllApplicationsAsync(string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get All Applications Provisioning Report
@@ -265,7 +265,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationProvisionReportItemList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationProvisionReportItemList>> GroupProvisioningReportGetReportForAllApplicationsWithHttpInfoAsync(string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApplicationProvisionReportItemList>> GroupProvisioningReportGetReportForAllApplicationsWithHttpInfoAsync(string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Provisioning Report
         /// </summary>
@@ -279,7 +279,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationProvisionReportItem</returns>
-        System.Threading.Tasks.Task<ApplicationProvisionReportItem> GroupProvisioningReportGetReportForApplicationAsync(string application, string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApplicationProvisionReportItem> GroupProvisioningReportGetReportForApplicationAsync(string application, string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Provisioning Report
@@ -294,7 +294,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationProvisionReportItem)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationProvisionReportItem>> GroupProvisioningReportGetReportForApplicationWithHttpInfoAsync(string application, string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ApplicationProvisionReportItem>> GroupProvisioningReportGetReportForApplicationWithHttpInfoAsync(string application, string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Roles Provisioning Report
         /// </summary>
@@ -307,7 +307,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ProvisionReportItemList</returns>
-        System.Threading.Tasks.Task<ProvisionReportItemList> GroupProvisioningReportGetRolesAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ProvisionReportItemList> GroupProvisioningReportGetRolesAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Roles Provisioning Report
@@ -321,7 +321,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ProvisionReportItemList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ProvisionReportItemList>> GroupProvisioningReportGetRolesWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ProvisionReportItemList>> GroupProvisioningReportGetRolesWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Scripts Provisioning Report
         /// </summary>
@@ -334,7 +334,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DatabaseProvisionReportItemList</returns>
-        System.Threading.Tasks.Task<DatabaseProvisionReportItemList> GroupProvisioningReportGetScriptsAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DatabaseProvisionReportItemList> GroupProvisioningReportGetScriptsAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Scripts Provisioning Report
@@ -348,7 +348,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DatabaseProvisionReportItemList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DatabaseProvisionReportItemList>> GroupProvisioningReportGetScriptsWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<DatabaseProvisionReportItemList>> GroupProvisioningReportGetScriptsWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -565,7 +565,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DatabaseProvisionReportItemList</returns>
-        public async System.Threading.Tasks.Task<DatabaseProvisionReportItemList> GroupProvisioningReportGetFiltersAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<DatabaseProvisionReportItemList> GroupProvisioningReportGetFiltersAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<DatabaseProvisionReportItemList> localVarResponse = await GroupProvisioningReportGetFiltersWithHttpInfoAsync(application, groupId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -580,7 +580,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DatabaseProvisionReportItemList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DatabaseProvisionReportItemList>> GroupProvisioningReportGetFiltersWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DatabaseProvisionReportItemList>> GroupProvisioningReportGetFiltersWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -654,7 +654,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Use &lt;code&gt;all&lt;/code&gt; to get provisioning information for all applications.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>MainProvisionReport</returns>
-        public MainProvisionReport GroupProvisioningReportGetFullReport(string groupId, string expand = default(string), int operationIndex = 0)
+        public MainProvisionReport GroupProvisioningReportGetFullReport(string groupId, string expand = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<MainProvisionReport> localVarResponse = GroupProvisioningReportGetFullReportWithHttpInfo(groupId, expand);
             return localVarResponse.Data;
@@ -668,7 +668,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Use &lt;code&gt;all&lt;/code&gt; to get provisioning information for all applications.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of MainProvisionReport</returns>
-        public EssSharp.Client.ApiResponse<MainProvisionReport> GroupProvisioningReportGetFullReportWithHttpInfo(string groupId, string expand = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<MainProvisionReport> GroupProvisioningReportGetFullReportWithHttpInfo(string groupId, string expand = default, int operationIndex = 0)
         {
             // verify the required parameter 'groupId' is set
             if (groupId == null)
@@ -739,7 +739,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of MainProvisionReport</returns>
-        public async System.Threading.Tasks.Task<MainProvisionReport> GroupProvisioningReportGetFullReportAsync(string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<MainProvisionReport> GroupProvisioningReportGetFullReportAsync(string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<MainProvisionReport> localVarResponse = await GroupProvisioningReportGetFullReportWithHttpInfoAsync(groupId, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -754,7 +754,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MainProvisionReport)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<MainProvisionReport>> GroupProvisioningReportGetFullReportWithHttpInfoAsync(string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<MainProvisionReport>> GroupProvisioningReportGetFullReportWithHttpInfoAsync(string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'groupId' is set
             if (groupId == null)
@@ -825,7 +825,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Use &lt;code&gt;all&lt;/code&gt; to get provisioning information for all applications.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApplicationProvisionReportItemList</returns>
-        public ApplicationProvisionReportItemList GroupProvisioningReportGetReportForAllApplications(string groupId, string expand = default(string), int operationIndex = 0)
+        public ApplicationProvisionReportItemList GroupProvisioningReportGetReportForAllApplications(string groupId, string expand = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<ApplicationProvisionReportItemList> localVarResponse = GroupProvisioningReportGetReportForAllApplicationsWithHttpInfo(groupId, expand);
             return localVarResponse.Data;
@@ -839,7 +839,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Use &lt;code&gt;all&lt;/code&gt; to get provisioning information for all applications.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApplicationProvisionReportItemList</returns>
-        public EssSharp.Client.ApiResponse<ApplicationProvisionReportItemList> GroupProvisioningReportGetReportForAllApplicationsWithHttpInfo(string groupId, string expand = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ApplicationProvisionReportItemList> GroupProvisioningReportGetReportForAllApplicationsWithHttpInfo(string groupId, string expand = default, int operationIndex = 0)
         {
             // verify the required parameter 'groupId' is set
             if (groupId == null)
@@ -910,7 +910,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationProvisionReportItemList</returns>
-        public async System.Threading.Tasks.Task<ApplicationProvisionReportItemList> GroupProvisioningReportGetReportForAllApplicationsAsync(string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApplicationProvisionReportItemList> GroupProvisioningReportGetReportForAllApplicationsAsync(string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ApplicationProvisionReportItemList> localVarResponse = await GroupProvisioningReportGetReportForAllApplicationsWithHttpInfoAsync(groupId, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -925,7 +925,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationProvisionReportItemList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationProvisionReportItemList>> GroupProvisioningReportGetReportForAllApplicationsWithHttpInfoAsync(string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationProvisionReportItemList>> GroupProvisioningReportGetReportForAllApplicationsWithHttpInfoAsync(string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'groupId' is set
             if (groupId == null)
@@ -997,7 +997,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;none&lt;/code&gt;. When value is &lt;code&gt;none&lt;/code&gt;, only links to roles, filters and scripts will be returned. When value is &lt;code&gt;all&lt;/code&gt;, provisioning information for roles, filters, and scripts are returned.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApplicationProvisionReportItem</returns>
-        public ApplicationProvisionReportItem GroupProvisioningReportGetReportForApplication(string application, string groupId, string expand = default(string), int operationIndex = 0)
+        public ApplicationProvisionReportItem GroupProvisioningReportGetReportForApplication(string application, string groupId, string expand = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<ApplicationProvisionReportItem> localVarResponse = GroupProvisioningReportGetReportForApplicationWithHttpInfo(application, groupId, expand);
             return localVarResponse.Data;
@@ -1012,7 +1012,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;none&lt;/code&gt;. When value is &lt;code&gt;none&lt;/code&gt;, only links to roles, filters and scripts will be returned. When value is &lt;code&gt;all&lt;/code&gt;, provisioning information for roles, filters, and scripts are returned.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApplicationProvisionReportItem</returns>
-        public EssSharp.Client.ApiResponse<ApplicationProvisionReportItem> GroupProvisioningReportGetReportForApplicationWithHttpInfo(string application, string groupId, string expand = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ApplicationProvisionReportItem> GroupProvisioningReportGetReportForApplicationWithHttpInfo(string application, string groupId, string expand = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1091,7 +1091,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationProvisionReportItem</returns>
-        public async System.Threading.Tasks.Task<ApplicationProvisionReportItem> GroupProvisioningReportGetReportForApplicationAsync(string application, string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ApplicationProvisionReportItem> GroupProvisioningReportGetReportForApplicationAsync(string application, string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ApplicationProvisionReportItem> localVarResponse = await GroupProvisioningReportGetReportForApplicationWithHttpInfoAsync(application, groupId, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1107,7 +1107,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationProvisionReportItem)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationProvisionReportItem>> GroupProvisioningReportGetReportForApplicationWithHttpInfoAsync(string application, string groupId, string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationProvisionReportItem>> GroupProvisioningReportGetReportForApplicationWithHttpInfoAsync(string application, string groupId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1273,7 +1273,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ProvisionReportItemList</returns>
-        public async System.Threading.Tasks.Task<ProvisionReportItemList> GroupProvisioningReportGetRolesAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ProvisionReportItemList> GroupProvisioningReportGetRolesAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ProvisionReportItemList> localVarResponse = await GroupProvisioningReportGetRolesWithHttpInfoAsync(application, groupId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1288,7 +1288,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ProvisionReportItemList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ProvisionReportItemList>> GroupProvisioningReportGetRolesWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ProvisionReportItemList>> GroupProvisioningReportGetRolesWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -1450,7 +1450,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DatabaseProvisionReportItemList</returns>
-        public async System.Threading.Tasks.Task<DatabaseProvisionReportItemList> GroupProvisioningReportGetScriptsAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<DatabaseProvisionReportItemList> GroupProvisioningReportGetScriptsAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<DatabaseProvisionReportItemList> localVarResponse = await GroupProvisioningReportGetScriptsWithHttpInfoAsync(application, groupId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1465,7 +1465,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DatabaseProvisionReportItemList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DatabaseProvisionReportItemList>> GroupProvisioningReportGetScriptsWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DatabaseProvisionReportItemList>> GroupProvisioningReportGetScriptsWithHttpInfoAsync(string application, string groupId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)

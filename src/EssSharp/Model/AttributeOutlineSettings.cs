@@ -45,7 +45,7 @@ namespace EssSharp.Model
         /// <param name="calcMinimumMember">calcMinimumMember.</param>
         /// <param name="calcMaximumMember">calcMaximumMember.</param>
         /// <param name="calcAverageMember">calcAverageMember.</param>
-        public AttributeOutlineSettings(string prefixSuffixValue = default(string), string prefixSuffixSeparator = default(string), string prefixSuffixFormat = default(string), string trueMemberName = default(string), string falseMemberName = default(string), string dateMemberNames = default(string), string numericRangesRepresent = default(string), string calcDimensionName = default(string), string calcSumMember = default(string), string calcCountMember = default(string), string calcMinimumMember = default(string), string calcMaximumMember = default(string), string calcAverageMember = default(string))
+        public AttributeOutlineSettings(string prefixSuffixValue = default, string prefixSuffixSeparator = default, string prefixSuffixFormat = default, string trueMemberName = default, string falseMemberName = default, string dateMemberNames = default, string numericRangesRepresent = default, string calcDimensionName = default, string calcSumMember = default, string calcCountMember = default, string calcMinimumMember = default, string calcMaximumMember = default, string calcAverageMember = default)
         {
             this.PrefixSuffixValue = prefixSuffixValue;
             this.PrefixSuffixSeparator = prefixSuffixSeparator;

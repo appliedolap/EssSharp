@@ -106,7 +106,7 @@ namespace EssSharp.Integration.Setup
             {
                 IntegrationTestFactory.Images = new []
                 {
-                    "appliedolap/essbase:21.6-latest"
+                    "appliedolap/essbase:21.7.0"
                 };
             }
 
@@ -294,7 +294,6 @@ namespace EssSharp.Integration.Setup
             if ( state?.ToString() is not { Length: > 0 } message )
                 return;
 
-
             EssSharpLogEventContext context = null;
 
             try { context = JsonConvert.DeserializeObject<EssSharpLogEventContext>(eventId.Name); } catch { }
@@ -302,17 +301,21 @@ namespace EssSharp.Integration.Setup
             context ??= new EssSharpLogEventContext() { Path = "unknown" };
 
             // create new file with name in _outputDirectory
-            var tenant = "EssSharp";
-            var type   = (EssSharpLogEventType)eventId.Id;
-            var time   = context.Time.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-            var path   = string.Join('_', context.Path
-                                            .Split('/')
-                                            .ToList()
-                                            .Where(e => !string.IsNullOrEmpty(e) && !e.Contains(":"))
-                                            .ToList()).Replace(":", "");
+            var tenant    = "EssSharp";
+            var type      = (EssSharpLogEventType)eventId.Id;
+            var time      = context.Time.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+            var path      = string.Join('_', context.Path
+                                  .Split('/')
+                                  .ToList()
+                                  .Where(e => !string.IsNullOrEmpty(e) && !e.Contains(":"))
+                                  .ToList()).Replace(":", "");
+            var suffix    = string.Empty;
             var extension = "json";
 
-            var fileName = $@"{tenant}.{path}.{type}.{time:0.000}-{1}.request.{extension}";
+            if ( type is EssSharpLogEventType.Request or EssSharpLogEventType.Response )
+                suffix = $@".{type}".ToLowerInvariant().TrimEnd('.');
+
+            var fileName = $@"{tenant}.{path}.{type}.{time:0.000}-{1}{suffix}.{extension}";
 
             using var file = File.Create($@"{_outputDirectory.FullName}\{fileName}");
             file.Write(Encoding.UTF8.GetBytes(message));

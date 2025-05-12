@@ -27,6 +27,8 @@ using RestSharp;
 using RestSharp.Serializers;
 using RestSharpMethod = RestSharp.Method;
 using FileIO = System.IO.File;
+// EssSharp Template Modification
+using Type = System.Type;
 using Polly;
 using EssSharp.Model;
 
@@ -94,7 +96,7 @@ namespace EssSharp.Client
         /// <param name="response">The HTTP response.</param>
         /// <param name="type">Object type.</param>
         /// <returns>Object representation of the JSON string.</returns>
-        internal object Deserialize(RestResponse response, System.Type type)
+        internal object Deserialize(RestResponse response, Type type)
         {
             if (type == typeof(byte[])) // return byte array
             {
@@ -186,6 +188,7 @@ namespace EssSharp.Client
         };
 
         /// <summary />
+        /// <remarks>EssSharp Template Modification</remarks>
         private SemaphoreSlim RequestSemaphore { get; set; } = null;
 
         /// <summary>
@@ -195,6 +198,7 @@ namespace EssSharp.Client
         /// <param name="configuration">The per-client configuration.</param>
         /// <param name="options">The per-request options.</param>
         /// <param name="cancellationToken" />
+        /// <remarks>EssSharp Template Modification</remarks>
         private partial Task InterceptRequestAsync(RestRequest request, IReadableConfiguration configuration, RequestOptions options, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -202,9 +206,10 @@ namespace EssSharp.Client
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-/// <param name="configuration">The per-client configuration.</param>
+        /// <param name="configuration">The per-client configuration.</param>
         /// <param name="options">The per-request options.</param>
         /// <param name="cancellationToken" />
+        /// <remarks>EssSharp Template Modification</remarks>
         private partial Task InterceptResponseAsync(RestRequest request, RestResponse response, IReadableConfiguration configuration, RequestOptions options, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -400,9 +405,9 @@ namespace EssSharp.Client
             }
 
             // EssSharp Template Modification
-            if ( options.Cookies != null && options.Cookies.Count > 0 )
+            if (options.Cookies != null && options.Cookies.Count > 0)
             {
-                foreach ( var cookie in options.Cookies )
+                foreach (var cookie in options.Cookies)
                 {
                     request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
                 }
@@ -474,6 +479,7 @@ namespace EssSharp.Client
         /// It is assumed that any merge with GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken" />
         /// <returns>A new ApiResponse instance.</returns>
+        /// <remarks>EssSharp Template Modification</remarks>
         private async Task<ApiResponse<T>> ExecClientAsync<T>(Func<RestClient, Task<RestResponse<T>>> getResponse, Action<RestClientOptions> setOptions, RestRequest request, RequestOptions options, IReadableConfiguration configuration, CancellationToken cancellationToken = default)
         {
             var baseUrl = configuration.GetOperationServerUrl(options.Operation, options.OperationIndex) ?? _baseUrl;
@@ -491,6 +497,7 @@ namespace EssSharp.Client
             using (RestClient client = new RestClient(clientOptions,
                 configureSerialization: serializerConfig => serializerConfig.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration))))
             {
+                // EssSharp Template Modification
                 try
                 {
                     // Assign any configured degree of parallelism.
@@ -529,6 +536,7 @@ namespace EssSharp.Client
                     {
                         response.Data = (T)(object)response.Content;
                     }
+                    // EssSharp Template Modification
                     else if (typeof(T).Name == "Object") // for raw object response
                     {
                         // if the response data was not already deserialized, return the raw bytes.
@@ -574,6 +582,7 @@ namespace EssSharp.Client
                 }
                 finally
                 {
+                    // EssSharp Template Modification
                     try { RequestSemaphore?.Release(); } catch { }
                 }
             }
@@ -627,7 +636,7 @@ namespace EssSharp.Client
             return ExecClientAsync(getResponse, setOptions, request, options, configuration).GetAwaiter().GetResult();
         }
 
-        private Task<ApiResponse<T>> ExecAsync<T>(RestRequest request, RequestOptions options, IReadableConfiguration configuration, CancellationToken cancellationToken = default(CancellationToken))
+        private Task<ApiResponse<T>> ExecAsync<T>(RestRequest request, RequestOptions options, IReadableConfiguration configuration, CancellationToken cancellationToken = default)
         {
             Action<RestClientOptions> setOptions = (clientOptions) =>
             {
@@ -648,6 +657,7 @@ namespace EssSharp.Client
                 }
             };
 
+            // EssSharp Template Modification
             return ExecClientAsync(getResponse, setOptions, request, options, configuration, cancellationToken);
         }
 

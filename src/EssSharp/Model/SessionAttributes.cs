@@ -42,7 +42,7 @@ namespace EssSharp.Model
         /// <param name="requestTimeInSeconds">requestTimeInSeconds.</param>
         /// <param name="connectionSource">connectionSource.</param>
         /// <param name="requestState">requestState.</param>
-        public SessionAttributes(string userId = default(string), string sessionId = default(string), string loginTimeInSeconds = default(string), string application = default(string), string database = default(string), string dbConnectTimeInSeconds = default(string), string request = default(string), string requestTimeInSeconds = default(string), string connectionSource = default(string), string requestState = default(string))
+        public SessionAttributes(string userId = default, string sessionId = default, string loginTimeInSeconds = default, string application = default, string database = default, string dbConnectTimeInSeconds = default, string request = default, string requestTimeInSeconds = default, string connectionSource = default, string requestState = default)
         {
             this.UserId = userId;
             this.SessionId = sessionId;

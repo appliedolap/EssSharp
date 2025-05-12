@@ -32,19 +32,25 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Slice" /> class.
         /// </summary>
+        /// <param name="rows">rows.</param>
         /// <param name="dirtyCells">dirtyCells.</param>
         /// <param name="dirtyTexts">dirtyTexts.</param>
-        /// <param name="rows">rows.</param>
         /// <param name="columns">columns.</param>
         /// <param name="data">data.</param>
-        public Slice(List<int> dirtyCells = default(List<int>), List<int> dirtyTexts = default(List<int>), int rows = default(int), int columns = default(int), Data data = default(Data))
+        public Slice(int rows = default, List<int> dirtyCells = default, List<int> dirtyTexts = default, int columns = default, Data data = default)
         {
+            this.Rows = rows;
             this.DirtyCells = dirtyCells;
             this.DirtyTexts = dirtyTexts;
-            this.Rows = rows;
             this.Columns = columns;
             this.Data = data;
         }
+
+        /// <summary>
+        /// Gets or Sets Rows
+        /// </summary>
+        [DataMember(Name = "rows", EmitDefaultValue = false)]
+        public int Rows { get; set; }
 
         /// <summary>
         /// Gets or Sets DirtyCells
@@ -57,12 +63,6 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "dirtyTexts", EmitDefaultValue = false)]
         public List<int> DirtyTexts { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Rows
-        /// </summary>
-        [DataMember(Name = "rows", EmitDefaultValue = false)]
-        public int Rows { get; set; }
 
         /// <summary>
         /// Gets or Sets Columns
@@ -84,9 +84,9 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Slice {\n");
+            sb.Append("  Rows: ").Append(Rows).Append("\n");
             sb.Append("  DirtyCells: ").Append(DirtyCells).Append("\n");
             sb.Append("  DirtyTexts: ").Append(DirtyTexts).Append("\n");
-            sb.Append("  Rows: ").Append(Rows).Append("\n");
             sb.Append("  Columns: ").Append(Columns).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("}\n");

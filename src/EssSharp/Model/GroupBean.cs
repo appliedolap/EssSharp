@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="description">description.</param>
         /// <param name="role">role.</param>
         /// <param name="name">name.</param>
-        public GroupBean(List<Link> links = default(List<Link>), List<string> groups = default(List<string>), string description = default(string), string role = default(string), string name = default(string))
+        public GroupBean(List<Link> links = default, List<string> groups = default, string description = default, string role = default, string name = default)
         {
             this.Links = links;
             this.Groups = groups;

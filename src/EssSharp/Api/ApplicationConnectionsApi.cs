@@ -86,7 +86,7 @@ namespace EssSharp.Api
         /// <param name="password">&lt;p&gt;If set to true, the encrypted password is returned in the result.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Connection</returns>
-        Connection ApplicationConnectionsGetConnectionDetails(string applicationName, string connectionName, bool? password = default(bool?), int operationIndex = 0);
+        Connection ApplicationConnectionsGetConnectionDetails(string applicationName, string connectionName, bool? password = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Application Connection
@@ -100,7 +100,7 @@ namespace EssSharp.Api
         /// <param name="password">&lt;p&gt;If set to true, the encrypted password is returned in the result.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Connection</returns>
-        ApiResponse<Connection> ApplicationConnectionsGetConnectionDetailsWithHttpInfo(string applicationName, string connectionName, bool? password = default(bool?), int operationIndex = 0);
+        ApiResponse<Connection> ApplicationConnectionsGetConnectionDetailsWithHttpInfo(string applicationName, string connectionName, bool? password = default, int operationIndex = 0);
         /// <summary>
         /// List Application Connections
         /// </summary>
@@ -116,7 +116,7 @@ namespace EssSharp.Api
         /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ConnectionsList</returns>
-        ConnectionsList ApplicationConnectionsGetConnections(string applicationName, int? offset = default(int?), int? limit = default(int?), string connType = default(string), bool? repoConn = default(bool?), bool? walletConn = default(bool?), int operationIndex = 0);
+        ConnectionsList ApplicationConnectionsGetConnections(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0);
 
         /// <summary>
         /// List Application Connections
@@ -133,7 +133,7 @@ namespace EssSharp.Api
         /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ConnectionsList</returns>
-        ApiResponse<ConnectionsList> ApplicationConnectionsGetConnectionsWithHttpInfo(string applicationName, int? offset = default(int?), int? limit = default(int?), string connType = default(string), bool? repoConn = default(bool?), bool? walletConn = default(bool?), int operationIndex = 0);
+        ApiResponse<ConnectionsList> ApplicationConnectionsGetConnectionsWithHttpInfo(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0);
         /// <summary>
         /// Test New Application Connection
         /// </summary>
@@ -257,7 +257,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationConnectionsCreateConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationConnectionsCreateConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Application Connection
@@ -271,7 +271,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsCreateConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsCreateConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Application Connection
         /// </summary>
@@ -284,7 +284,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationConnectionsDeleteConnectionAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationConnectionsDeleteConnectionAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Application Connection
@@ -298,7 +298,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsDeleteConnectionWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsDeleteConnectionWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Connection
         /// </summary>
@@ -312,7 +312,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Connection</returns>
-        System.Threading.Tasks.Task<Connection> ApplicationConnectionsGetConnectionDetailsAsync(string applicationName, string connectionName, bool? password = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Connection> ApplicationConnectionsGetConnectionDetailsAsync(string applicationName, string connectionName, bool? password = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Connection
@@ -327,7 +327,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Connection)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Connection>> ApplicationConnectionsGetConnectionDetailsWithHttpInfoAsync(string applicationName, string connectionName, bool? password = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Connection>> ApplicationConnectionsGetConnectionDetailsWithHttpInfoAsync(string applicationName, string connectionName, bool? password = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Application Connections
         /// </summary>
@@ -344,7 +344,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ConnectionsList</returns>
-        System.Threading.Tasks.Task<ConnectionsList> ApplicationConnectionsGetConnectionsAsync(string applicationName, int? offset = default(int?), int? limit = default(int?), string connType = default(string), bool? repoConn = default(bool?), bool? walletConn = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ConnectionsList> ApplicationConnectionsGetConnectionsAsync(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Application Connections
@@ -362,7 +362,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ConnectionsList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ConnectionsList>> ApplicationConnectionsGetConnectionsWithHttpInfoAsync(string applicationName, int? offset = default(int?), int? limit = default(int?), string connType = default(string), bool? repoConn = default(bool?), bool? walletConn = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ConnectionsList>> ApplicationConnectionsGetConnectionsWithHttpInfoAsync(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Test New Application Connection
         /// </summary>
@@ -375,7 +375,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationConnectionsTestConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationConnectionsTestConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Test New Application Connection
@@ -389,7 +389,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsTestConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsTestConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Test Saved Application Connection
         /// </summary>
@@ -402,7 +402,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationConnectionsTestConnectionExistingAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationConnectionsTestConnectionExistingAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Test Saved Application Connection
@@ -416,7 +416,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsTestConnectionExistingWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsTestConnectionExistingWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Application Connection
         /// </summary>
@@ -430,7 +430,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Connection</returns>
-        System.Threading.Tasks.Task<Connection> ApplicationConnectionsUpdateConnectionAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Connection> ApplicationConnectionsUpdateConnectionAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Application Connection
@@ -445,7 +445,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Connection)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Connection>> ApplicationConnectionsUpdateConnectionWithHttpInfoAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Connection>> ApplicationConnectionsUpdateConnectionWithHttpInfoAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Upload Application Connection Wallet File
         /// </summary>
@@ -458,7 +458,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of WalletLocation</returns>
-        System.Threading.Tasks.Task<WalletLocation> ApplicationConnectionsWalletsAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<WalletLocation> ApplicationConnectionsWalletsAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload Application Connection Wallet File
@@ -472,7 +472,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (WalletLocation)</returns>
-        System.Threading.Tasks.Task<ApiResponse<WalletLocation>> ApplicationConnectionsWalletsWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<WalletLocation>> ApplicationConnectionsWalletsWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -688,7 +688,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationConnectionsCreateConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationConnectionsCreateConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ApplicationConnectionsCreateConnectionWithHttpInfoAsync(applicationName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -702,7 +702,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsCreateConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsCreateConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -861,7 +861,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationConnectionsDeleteConnectionAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationConnectionsDeleteConnectionAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ApplicationConnectionsDeleteConnectionWithHttpInfoAsync(applicationName, connectionName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -875,7 +875,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsDeleteConnectionWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsDeleteConnectionWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -948,7 +948,7 @@ namespace EssSharp.Api
         /// <param name="password">&lt;p&gt;If set to true, the encrypted password is returned in the result.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Connection</returns>
-        public Connection ApplicationConnectionsGetConnectionDetails(string applicationName, string connectionName, bool? password = default(bool?), int operationIndex = 0)
+        public Connection ApplicationConnectionsGetConnectionDetails(string applicationName, string connectionName, bool? password = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Connection> localVarResponse = ApplicationConnectionsGetConnectionDetailsWithHttpInfo(applicationName, connectionName, password);
             return localVarResponse.Data;
@@ -963,7 +963,7 @@ namespace EssSharp.Api
         /// <param name="password">&lt;p&gt;If set to true, the encrypted password is returned in the result.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Connection</returns>
-        public EssSharp.Client.ApiResponse<Connection> ApplicationConnectionsGetConnectionDetailsWithHttpInfo(string applicationName, string connectionName, bool? password = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Connection> ApplicationConnectionsGetConnectionDetailsWithHttpInfo(string applicationName, string connectionName, bool? password = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1042,7 +1042,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Connection</returns>
-        public async System.Threading.Tasks.Task<Connection> ApplicationConnectionsGetConnectionDetailsAsync(string applicationName, string connectionName, bool? password = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Connection> ApplicationConnectionsGetConnectionDetailsAsync(string applicationName, string connectionName, bool? password = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Connection> localVarResponse = await ApplicationConnectionsGetConnectionDetailsWithHttpInfoAsync(applicationName, connectionName, password, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1058,7 +1058,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Connection)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Connection>> ApplicationConnectionsGetConnectionDetailsWithHttpInfoAsync(string applicationName, string connectionName, bool? password = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Connection>> ApplicationConnectionsGetConnectionDetailsWithHttpInfoAsync(string applicationName, string connectionName, bool? password = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1140,7 +1140,7 @@ namespace EssSharp.Api
         /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ConnectionsList</returns>
-        public ConnectionsList ApplicationConnectionsGetConnections(string applicationName, int? offset = default(int?), int? limit = default(int?), string connType = default(string), bool? repoConn = default(bool?), bool? walletConn = default(bool?), int operationIndex = 0)
+        public ConnectionsList ApplicationConnectionsGetConnections(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<ConnectionsList> localVarResponse = ApplicationConnectionsGetConnectionsWithHttpInfo(applicationName, offset, limit, connType, repoConn, walletConn);
             return localVarResponse.Data;
@@ -1158,7 +1158,7 @@ namespace EssSharp.Api
         /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ConnectionsList</returns>
-        public EssSharp.Client.ApiResponse<ConnectionsList> ApplicationConnectionsGetConnectionsWithHttpInfo(string applicationName, int? offset = default(int?), int? limit = default(int?), string connType = default(string), bool? repoConn = default(bool?), bool? walletConn = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ConnectionsList> ApplicationConnectionsGetConnectionsWithHttpInfo(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1249,7 +1249,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ConnectionsList</returns>
-        public async System.Threading.Tasks.Task<ConnectionsList> ApplicationConnectionsGetConnectionsAsync(string applicationName, int? offset = default(int?), int? limit = default(int?), string connType = default(string), bool? repoConn = default(bool?), bool? walletConn = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ConnectionsList> ApplicationConnectionsGetConnectionsAsync(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ConnectionsList> localVarResponse = await ApplicationConnectionsGetConnectionsWithHttpInfoAsync(applicationName, offset, limit, connType, repoConn, walletConn, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1268,7 +1268,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ConnectionsList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ConnectionsList>> ApplicationConnectionsGetConnectionsWithHttpInfoAsync(string applicationName, int? offset = default(int?), int? limit = default(int?), string connType = default(string), bool? repoConn = default(bool?), bool? walletConn = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ConnectionsList>> ApplicationConnectionsGetConnectionsWithHttpInfoAsync(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1442,7 +1442,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationConnectionsTestConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationConnectionsTestConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ApplicationConnectionsTestConnectionWithHttpInfoAsync(applicationName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1456,7 +1456,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsTestConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsTestConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1615,7 +1615,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationConnectionsTestConnectionExistingAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationConnectionsTestConnectionExistingAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ApplicationConnectionsTestConnectionExistingWithHttpInfoAsync(applicationName, connectionName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1629,7 +1629,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsTestConnectionExistingWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsTestConnectionExistingWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1801,7 +1801,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Connection</returns>
-        public async System.Threading.Tasks.Task<Connection> ApplicationConnectionsUpdateConnectionAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Connection> ApplicationConnectionsUpdateConnectionAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Connection> localVarResponse = await ApplicationConnectionsUpdateConnectionWithHttpInfoAsync(applicationName, connectionName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1817,7 +1817,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Connection)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Connection>> ApplicationConnectionsUpdateConnectionWithHttpInfoAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Connection>> ApplicationConnectionsUpdateConnectionWithHttpInfoAsync(string applicationName, string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1988,7 +1988,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of WalletLocation</returns>
-        public async System.Threading.Tasks.Task<WalletLocation> ApplicationConnectionsWalletsAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<WalletLocation> ApplicationConnectionsWalletsAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<WalletLocation> localVarResponse = await ApplicationConnectionsWalletsWithHttpInfoAsync(applicationName, connectionName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2003,7 +2003,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (WalletLocation)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<WalletLocation>> ApplicationConnectionsWalletsWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<WalletLocation>> ApplicationConnectionsWalletsWithHttpInfoAsync(string applicationName, string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

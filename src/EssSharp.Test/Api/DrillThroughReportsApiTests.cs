@@ -122,6 +122,19 @@ namespace EssSharp.Test.Api
         }
 
         /// <summary>
+        /// Test DrillThroughReportsGetReportsForIntersections
+        /// </summary>
+        [Fact]
+        public void DrillThroughReportsGetReportsForIntersectionsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string applicationName = null;
+            //string databaseName = null;
+            //DrillthroughMetadataBean body = null;
+            //instance.DrillThroughReportsGetReportsForIntersections(applicationName, databaseName, body);
+        }
+
+        /// <summary>
         /// Test DrillThroughReportsUpdateReport
         /// </summary>
         [Fact]

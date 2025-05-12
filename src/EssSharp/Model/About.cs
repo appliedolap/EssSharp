@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="build">build.</param>
         /// <param name="description">description.</param>
         /// <param name="listingVersion">listingVersion.</param>
-        public About(string name = default(string), string varVersion = default(string), string build = default(string), string description = default(string), string listingVersion = default(string))
+        public About(string name = default, string varVersion = default, string build = default, string description = default, string listingVersion = default)
         {
             this.Name = name;
             this.VarVersion = varVersion;

@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="ScriptContent" /> class.
         /// </summary>
         /// <param name="content">content.</param>
-        public ScriptContent(string content = default(string))
+        public ScriptContent(string content = default)
         {
             this.Content = content;
         }

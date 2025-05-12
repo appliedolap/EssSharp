@@ -62,21 +62,12 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'LockedTime'
+        /// Test the property 'ModifiedTime'
         /// </summary>
         [Fact]
-        public void LockedTimeTest()
+        public void ModifiedTimeTest()
         {
-            // TODO unit test for the property 'LockedTime'
-        }
-
-        /// <summary>
-        /// Test the property 'Locked'
-        /// </summary>
-        [Fact]
-        public void LockedTest()
-        {
-            // TODO unit test for the property 'Locked'
+            // TODO unit test for the property 'ModifiedTime'
         }
 
         /// <summary>
@@ -98,12 +89,21 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'ModifiedTime'
+        /// Test the property 'LockedTime'
         /// </summary>
         [Fact]
-        public void ModifiedTimeTest()
+        public void LockedTimeTest()
         {
-            // TODO unit test for the property 'ModifiedTime'
+            // TODO unit test for the property 'LockedTime'
+        }
+
+        /// <summary>
+        /// Test the property 'Locked'
+        /// </summary>
+        [Fact]
+        public void LockedTest()
+        {
+            // TODO unit test for the property 'Locked'
         }
 
         /// <summary>

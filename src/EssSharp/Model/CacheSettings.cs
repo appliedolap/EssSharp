@@ -41,7 +41,7 @@ namespace EssSharp.Model
         /// <param name="dataCacheCurrentValue">dataCacheCurrentValue.</param>
         /// <param name="indexPageSetting">indexPageSetting.</param>
         /// <param name="indexPageCurrentValue">indexPageCurrentValue.</param>
-        public CacheSettings(bool cacheMemoryLocking = default(bool), long indexCacheSetting = default(long), long indexCacheCurrentValue = default(long), long dataFileCacheSetting = default(long), long dataFileCacheCurrentValue = default(long), long dataCacheSetting = default(long), long dataCacheCurrentValue = default(long), int indexPageSetting = default(int), int indexPageCurrentValue = default(int))
+        public CacheSettings(bool cacheMemoryLocking = default, long indexCacheSetting = default, long indexCacheCurrentValue = default, long dataFileCacheSetting = default, long dataFileCacheCurrentValue = default, long dataCacheSetting = default, long dataCacheCurrentValue = default, int indexPageSetting = default, int indexPageCurrentValue = default)
         {
             this.CacheMemoryLocking = cacheMemoryLocking;
             this.IndexCacheSetting = indexCacheSetting;

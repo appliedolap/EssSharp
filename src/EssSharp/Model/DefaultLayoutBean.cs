@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="userDefault">userDefault.</param>
         /// <param name="databaseDefault">databaseDefault.</param>
-        public DefaultLayoutBean(bool userDefault = default(bool), bool databaseDefault = default(bool))
+        public DefaultLayoutBean(bool userDefault = default, bool databaseDefault = default)
         {
             this.UserDefault = userDefault;
             this.DatabaseDefault = databaseDefault;

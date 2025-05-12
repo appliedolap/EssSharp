@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="service">service.</param>
         /// <param name="applications">applications.</param>
         /// <param name="links">links.</param>
-        public MainProvisionReport(ServiceProvisionReportItem service = default(ServiceProvisionReportItem), ApplicationProvisionReportItemList applications = default(ApplicationProvisionReportItemList), List<Link> links = default(List<Link>))
+        public MainProvisionReport(ServiceProvisionReportItem service = default, ApplicationProvisionReportItemList applications = default, List<Link> links = default)
         {
             this.Service = service;
             this.Applications = applications;

@@ -45,7 +45,7 @@ namespace EssSharp.Model
         /// <param name="mappings">mappings.</param>
         /// <param name="errorMessage">errorMessage.</param>
         /// <param name="links">links.</param>
-        public PartitionBean(string id = default(string), string type = default(string), bool updatable = default(bool), bool isNew = default(bool), bool locked = default(bool), bool federatedTypeCR = default(bool), bool federatedTypeAV = default(bool), ConnectionInfoBean sourceInfo = default(ConnectionInfoBean), ConnectionInfoBean targetInfo = default(ConnectionInfoBean), List<AreaBean> areas = default(List<AreaBean>), List<MemberMappingBean> mappings = default(List<MemberMappingBean>), string errorMessage = default(string), List<Link> links = default(List<Link>))
+        public PartitionBean(string id = default, string type = default, bool updatable = default, bool isNew = default, bool locked = default, bool federatedTypeCR = default, bool federatedTypeAV = default, ConnectionInfoBean sourceInfo = default, ConnectionInfoBean targetInfo = default, List<AreaBean> areas = default, List<MemberMappingBean> mappings = default, string errorMessage = default, List<Link> links = default)
         {
             this.Id = id;
             this.Type = type;

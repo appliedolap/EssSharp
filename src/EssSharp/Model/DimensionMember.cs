@@ -49,7 +49,7 @@ namespace EssSharp.Model
         /// <param name="formatString">formatString.</param>
         /// <param name="dimStorageType">dimStorageType.</param>
         /// <param name="currencyConversionCategory">currencyConversionCategory.</param>
-        public DimensionMember(string name = default(string), int numberOfChildren = default(int), int levelNumber = default(int), Dictionary<string, string> aliases = default(Dictionary<string, string>), string uniqueName = default(string), string memberId = default(string), int previousSiblingsCount = default(int), int memberSolveOrder = default(int), int descendantsCount = default(int), bool dimension = default(bool), List<Link> links = default(List<Link>), int dimSolveOrder = default(int), string dimensionType = default(string), string dataStorageType = default(string), string formatString = default(string), string dimStorageType = default(string), string currencyConversionCategory = default(string))
+        public DimensionMember(string name = default, int numberOfChildren = default, int levelNumber = default, Dictionary<string, string> aliases = default, string uniqueName = default, string memberId = default, int previousSiblingsCount = default, int memberSolveOrder = default, int descendantsCount = default, bool dimension = default, List<Link> links = default, int dimSolveOrder = default, string dimensionType = default, string dataStorageType = default, string formatString = default, string dimStorageType = default, string currencyConversionCategory = default)
         {
             this.Name = name;
             this.NumberOfChildren = numberOfChildren;

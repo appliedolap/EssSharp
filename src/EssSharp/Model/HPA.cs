@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="maxFileCount">maxFileCount.</param>
         /// <param name="interval">interval.</param>
         /// <param name="enabled">enabled.</param>
-        public HPA(long maxFileCount = default(long), long interval = default(long), bool enabled = default(bool))
+        public HPA(long maxFileCount = default, long interval = default, bool enabled = default)
         {
             this.MaxFileCount = maxFileCount;
             this.Interval = interval;

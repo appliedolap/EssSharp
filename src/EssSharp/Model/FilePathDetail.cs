@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="to">to.</param>
         /// <param name="from">from.</param>
-        public FilePathDetail(string to = default(string), string from = default(string))
+        public FilePathDetail(string to = default, string from = default)
         {
             this.To = to;
             this.From = from;

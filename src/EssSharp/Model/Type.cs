@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="Type" /> class.
         /// </summary>
         /// <param name="typeName">typeName.</param>
-        public Type(string typeName = default(string))
+        public Type(string typeName = default)
         {
             this.TypeName = typeName;
         }

@@ -37,21 +37,21 @@ namespace EssSharp.Model
         /// <param name="parameterMapping">parameterMapping.</param>
         /// <param name="drillableRegions">drillableRegions.</param>
         /// <param name="useTempTables">useTempTables.</param>
-        /// <param name="columns">columns.</param>
         /// <param name="dataSourceName">dataSourceName.</param>
         /// <param name="url">url.</param>
+        /// <param name="columns">columns.</param>
         /// <param name="type">type.</param>
         /// <param name="name">name.</param>
-        public DrillthroughBean(List<Link> links = default(List<Link>), Dictionary<string, ColumnMappingInfo> columnMapping = default(Dictionary<string, ColumnMappingInfo>), Dictionary<string, RunTimeParametersInfo> parameterMapping = default(Dictionary<string, RunTimeParametersInfo>), List<string> drillableRegions = default(List<string>), bool useTempTables = default(bool), List<string> columns = default(List<string>), string dataSourceName = default(string), string url = default(string), string type = default(string), string name = default(string))
+        public DrillthroughBean(List<Link> links = default, Dictionary<string, ColumnMappingInfo> columnMapping = default, Dictionary<string, RunTimeParametersInfo> parameterMapping = default, List<string> drillableRegions = default, bool useTempTables = default, string dataSourceName = default, string url = default, List<string> columns = default, string type = default, string name = default)
         {
             this.Links = links;
             this.ColumnMapping = columnMapping;
             this.ParameterMapping = parameterMapping;
             this.DrillableRegions = drillableRegions;
             this.UseTempTables = useTempTables;
-            this.Columns = columns;
             this.DataSourceName = dataSourceName;
             this.Url = url;
+            this.Columns = columns;
             this.Type = type;
             this.Name = name;
         }
@@ -87,12 +87,6 @@ namespace EssSharp.Model
         public bool UseTempTables { get; set; }
 
         /// <summary>
-        /// Gets or Sets Columns
-        /// </summary>
-        [DataMember(Name = "columns", EmitDefaultValue = false)]
-        public List<string> Columns { get; set; }
-
-        /// <summary>
         /// Gets or Sets DataSourceName
         /// </summary>
         [DataMember(Name = "dataSourceName", EmitDefaultValue = false)]
@@ -103,6 +97,12 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "url", EmitDefaultValue = false)]
         public string Url { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Columns
+        /// </summary>
+        [DataMember(Name = "columns", EmitDefaultValue = false)]
+        public List<string> Columns { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -129,9 +129,9 @@ namespace EssSharp.Model
             sb.Append("  ParameterMapping: ").Append(ParameterMapping).Append("\n");
             sb.Append("  DrillableRegions: ").Append(DrillableRegions).Append("\n");
             sb.Append("  UseTempTables: ").Append(UseTempTables).Append("\n");
-            sb.Append("  Columns: ").Append(Columns).Append("\n");
             sb.Append("  DataSourceName: ").Append(DataSourceName).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("  Columns: ").Append(Columns).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");

@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="addFolder">addFolder.</param>
         /// <param name="addFile">addFile.</param>
-        public FileBeanPermissions(bool addFolder = default(bool), bool addFile = default(bool))
+        public FileBeanPermissions(bool addFolder = default, bool addFile = default)
         {
             this.AddFolder = addFolder;
             this.AddFile = addFile;

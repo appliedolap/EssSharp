@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="aliasTable">aliasTable.</param>
         /// <param name="dimensions">dimensions.</param>
         /// <param name="tree">tree.</param>
-        public ExportOptions(string aliasTable = default(string), List<string> dimensions = default(List<string>), bool tree = default(bool))
+        public ExportOptions(string aliasTable = default, List<string> dimensions = default, bool tree = default)
         {
             this.AliasTable = aliasTable;
             this.Dimensions = dimensions;

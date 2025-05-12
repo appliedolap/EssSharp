@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="items">items.</param>
         /// <param name="hasMore">hasMore.</param>
         /// <param name="properties">properties.</param>
-        public UserGroupProvisionInfoList(long totalResults = default(long), long count = default(long), long limit = default(long), long offset = default(long), List<UserGroupProvisionInfo> items = default(List<UserGroupProvisionInfo>), bool hasMore = default(bool), Dictionary<string, string> properties = default(Dictionary<string, string>))
+        public UserGroupProvisionInfoList(long totalResults = default, long count = default, long limit = default, long offset = default, List<UserGroupProvisionInfo> items = default, bool hasMore = default, Dictionary<string, string> properties = default)
         {
             this.TotalResults = totalResults;
             this.Count = count;

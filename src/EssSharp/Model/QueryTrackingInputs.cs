@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="QueryTrackingInputs" /> class.
         /// </summary>
         /// <param name="fileName">fileName.</param>
-        public QueryTrackingInputs(string fileName = default(string))
+        public QueryTrackingInputs(string fileName = default)
         {
             this.FileName = fileName;
         }

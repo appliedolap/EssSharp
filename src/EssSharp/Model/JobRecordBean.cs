@@ -45,7 +45,7 @@ namespace EssSharp.Model
         /// <param name="jobInputInfo">jobInputInfo.</param>
         /// <param name="jobOutputInfo">jobOutputInfo.</param>
         /// <param name="links">links.</param>
-        public JobRecordBean(long jobID = default(long), string appName = default(string), string dbName = default(string), string jobType = default(string), string jobfileName = default(string), string userName = default(string), long startTime = default(long), long endTime = default(long), int statusCode = default(int), string statusMessage = default(string), Dictionary<string, Object> jobInputInfo = default(Dictionary<string, Object>), Dictionary<string, Object> jobOutputInfo = default(Dictionary<string, Object>), List<Link> links = default(List<Link>))
+        public JobRecordBean(long jobID = default, string appName = default, string dbName = default, string jobType = default, string jobfileName = default, string userName = default, long startTime = default, long endTime = default, int statusCode = default, string statusMessage = default, Dictionary<string, Object> jobInputInfo = default, Dictionary<string, Object> jobOutputInfo = default, List<Link> links = default)
         {
             this.JobID = jobID;
             this.AppName = appName;

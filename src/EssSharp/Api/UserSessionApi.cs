@@ -35,7 +35,7 @@ namespace EssSharp.Api
         /// <param name="includeGroups">&lt;p&gt;Specify whether to include groups in response. Default is true.&lt;/p&gt; (optional, default to true)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UserBean</returns>
-        UserBean UserSessionGetSession(bool? token = default(bool?), bool? includeGroups = default(bool?), int operationIndex = 0);
+        UserBean UserSessionGetSession(bool? token = default, bool? includeGroups = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Session
@@ -48,7 +48,7 @@ namespace EssSharp.Api
         /// <param name="includeGroups">&lt;p&gt;Specify whether to include groups in response. Default is true.&lt;/p&gt; (optional, default to true)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserBean</returns>
-        ApiResponse<UserBean> UserSessionGetSessionWithHttpInfo(bool? token = default(bool?), bool? includeGroups = default(bool?), int operationIndex = 0);
+        ApiResponse<UserBean> UserSessionGetSessionWithHttpInfo(bool? token = default, bool? includeGroups = default, int operationIndex = 0);
         /// <summary>
         /// Reset Password
         /// </summary>
@@ -114,7 +114,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> UserSessionGetSessionAsync(bool? token = default(bool?), bool? includeGroups = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserBean> UserSessionGetSessionAsync(bool? token = default, bool? includeGroups = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Session
@@ -128,7 +128,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> UserSessionGetSessionWithHttpInfoAsync(bool? token = default(bool?), bool? includeGroups = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserBean>> UserSessionGetSessionWithHttpInfoAsync(bool? token = default, bool? includeGroups = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Reset Password
         /// </summary>
@@ -140,7 +140,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task UserSessionResetPasswordAsync(ResetPasswordBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task UserSessionResetPasswordAsync(ResetPasswordBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Reset Password
@@ -153,7 +153,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> UserSessionResetPasswordWithHttpInfoAsync(ResetPasswordBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> UserSessionResetPasswordWithHttpInfoAsync(ResetPasswordBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Logout Session
         /// </summary>
@@ -164,7 +164,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task UserSessionSignoffAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task UserSessionSignoffAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Logout Session
@@ -176,7 +176,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> UserSessionSignoffWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> UserSessionSignoffWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -305,7 +305,7 @@ namespace EssSharp.Api
         /// <param name="includeGroups">&lt;p&gt;Specify whether to include groups in response. Default is true.&lt;/p&gt; (optional, default to true)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UserBean</returns>
-        public UserBean UserSessionGetSession(bool? token = default(bool?), bool? includeGroups = default(bool?), int operationIndex = 0)
+        public UserBean UserSessionGetSession(bool? token = default, bool? includeGroups = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<UserBean> localVarResponse = UserSessionGetSessionWithHttpInfo(token, includeGroups);
             return localVarResponse.Data;
@@ -319,7 +319,7 @@ namespace EssSharp.Api
         /// <param name="includeGroups">&lt;p&gt;Specify whether to include groups in response. Default is true.&lt;/p&gt; (optional, default to true)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserBean</returns>
-        public EssSharp.Client.ApiResponse<UserBean> UserSessionGetSessionWithHttpInfo(bool? token = default(bool?), bool? includeGroups = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<UserBean> UserSessionGetSessionWithHttpInfo(bool? token = default, bool? includeGroups = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -387,7 +387,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> UserSessionGetSessionAsync(bool? token = default(bool?), bool? includeGroups = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserBean> UserSessionGetSessionAsync(bool? token = default, bool? includeGroups = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserBean> localVarResponse = await UserSessionGetSessionWithHttpInfoAsync(token, includeGroups, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -402,7 +402,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> UserSessionGetSessionWithHttpInfoAsync(bool? token = default(bool?), bool? includeGroups = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> UserSessionGetSessionWithHttpInfoAsync(bool? token = default, bool? includeGroups = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -547,7 +547,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task UserSessionResetPasswordAsync(ResetPasswordBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task UserSessionResetPasswordAsync(ResetPasswordBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await UserSessionResetPasswordWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -560,7 +560,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UserSessionResetPasswordWithHttpInfoAsync(ResetPasswordBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UserSessionResetPasswordWithHttpInfoAsync(ResetPasswordBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -692,7 +692,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task UserSessionSignoffAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task UserSessionSignoffAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await UserSessionSignoffWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -704,7 +704,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UserSessionSignoffWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UserSessionSignoffWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

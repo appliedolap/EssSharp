@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="available">available.</param>
         /// <param name="assigned">assigned.</param>
         /// <param name="links">links.</param>
-        public SandboxDetail(int total = default(int), int available = default(int), int assigned = default(int), List<Link> links = default(List<Link>))
+        public SandboxDetail(int total = default, int available = default, int assigned = default, List<Link> links = default)
         {
             this.Total = total;
             this.Available = available;

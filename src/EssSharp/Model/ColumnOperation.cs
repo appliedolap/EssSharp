@@ -84,7 +84,7 @@ namespace EssSharp.Model
         /// <param name="updateColumns">updateColumns.</param>
         /// <param name="type">type.</param>
         /// <param name="position">position.</param>
-        public ColumnOperation(bool updateColumns = default(bool), TypeEnum? type = default(TypeEnum?), int position = default(int))
+        public ColumnOperation(bool updateColumns = default, TypeEnum? type = default, int position = default)
         {
             this.UpdateColumns = updateColumns;
             this.Type = type;

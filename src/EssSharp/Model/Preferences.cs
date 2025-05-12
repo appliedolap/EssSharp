@@ -79,7 +79,7 @@ namespace EssSharp.Model
         /// <param name="formulaRetention">formulaRetention.</param>
         /// <param name="maxColumns">maxColumns.</param>
         /// <param name="maxRows">maxRows.</param>
-        public Preferences(IndentationEnum? indentation = default(IndentationEnum?), RowSuppression rowSupression = default(RowSuppression), ColumnSuppression columnSupression = default(ColumnSuppression), bool cellText = default(bool), ZoomIn zoomIn = default(ZoomIn), bool navigate = default(bool), bool includeSelection = default(bool), bool repeatMemberLabels = default(bool), bool withinSelectedGroup = default(bool), bool removeUnSelectedGroup = default(bool), bool includeDescriptionLabel = default(bool), string missingText = default(string), string noAccessText = default(string), FormulaRetention formulaRetention = default(FormulaRetention), long maxColumns = default(long), long maxRows = default(long))
+        public Preferences(IndentationEnum? indentation = default, RowSuppression rowSupression = default, ColumnSuppression columnSupression = default, bool cellText = default, ZoomIn zoomIn = default, bool navigate = default, bool includeSelection = default, bool repeatMemberLabels = default, bool withinSelectedGroup = default, bool removeUnSelectedGroup = default, bool includeDescriptionLabel = default, string missingText = default, string noAccessText = default, FormulaRetention formulaRetention = default, long maxColumns = default, long maxRows = default)
         {
             this.Indentation = indentation;
             this.RowSupression = rowSupression;

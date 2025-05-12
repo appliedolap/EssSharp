@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="desc">desc.</param>
         /// <param name="items">items.</param>
-        public ROCluster(string name = default(string), string desc = default(string), List<ClusterNode> items = default(List<ClusterNode>))
+        public ROCluster(string name = default, string desc = default, List<ClusterNode> items = default)
         {
             this.Name = name;
             this.Desc = desc;

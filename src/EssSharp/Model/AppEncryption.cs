@@ -41,7 +41,7 @@ namespace EssSharp.Model
         /// <param name="key">key.</param>
         /// <param name="vaultId">vaultId.</param>
         /// <param name="masterKeyId">masterKeyId.</param>
-        public AppEncryption(string type = default(string), List<byte[]> key = default(List<byte[]>), string vaultId = default(string), string masterKeyId = default(string))
+        public AppEncryption(string type = default, List<byte[]> key = default, string vaultId = default, string masterKeyId = default)
         {
             // to ensure "type" is required (not null)
             if (type == null)

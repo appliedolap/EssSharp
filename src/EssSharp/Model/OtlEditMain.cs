@@ -76,7 +76,7 @@ namespace EssSharp.Model
         /// <param name="keepTransaction">keepTransaction.</param>
         /// <param name="restructOption">restructOption.</param>
         /// <param name="jsonformatLog">jsonformatLog.</param>
-        public OtlEditMain(List<JAXBElementObject> editActions = default(List<JAXBElementObject>), int otlVersion = default(int), bool validate = default(bool), bool validateFormulas = default(bool), bool keepTransaction = default(bool), RestructOptionEnum? restructOption = default(RestructOptionEnum?), bool jsonformatLog = default(bool))
+        public OtlEditMain(List<JAXBElementObject> editActions = default, int otlVersion = default, bool validate = default, bool validateFormulas = default, bool keepTransaction = default, RestructOptionEnum? restructOption = default, bool jsonformatLog = default)
         {
             this.EditActions = editActions;
             this.OtlVersion = otlVersion;

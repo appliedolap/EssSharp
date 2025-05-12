@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="from">from (required).</param>
         /// <param name="to">to (required).</param>
-        public FilterCopy(string from = default(string), string to = default(string))
+        public FilterCopy(string from = default, string to = default)
         {
             // to ensure "from" is required (not null)
             if (from == null)

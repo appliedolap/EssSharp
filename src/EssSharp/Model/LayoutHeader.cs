@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="databaseDefault">databaseDefault.</param>
         /// <param name="userDefault">userDefault.</param>
         /// <param name="session">session.</param>
-        public LayoutHeader(string name = default(string), string user = default(string), bool databaseDefault = default(bool), bool userDefault = default(bool), bool session = default(bool))
+        public LayoutHeader(string name = default, string user = default, bool databaseDefault = default, bool userDefault = default, bool session = default)
         {
             this.Name = name;
             this.User = user;

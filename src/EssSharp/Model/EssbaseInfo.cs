@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="database">database.</param>
         /// <param name="user">user.</param>
         /// <param name="password">password.</param>
-        public EssbaseInfo(string server = default(string), string application = default(string), string database = default(string), string user = default(string), string password = default(string))
+        public EssbaseInfo(string server = default, string application = default, string database = default, string user = default, string password = default)
         {
             this.Server = server;
             this.Application = application;

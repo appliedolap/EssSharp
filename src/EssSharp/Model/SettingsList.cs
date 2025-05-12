@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="caches">caches.</param>
         /// <param name="transactions">transactions.</param>
         /// <param name="links">links.</param>
-        public SettingsList(GeneralSettings general = default(GeneralSettings), StartupSettings startup = default(StartupSettings), CalculationSettings calculation = default(CalculationSettings), BufferSettings buffers = default(BufferSettings), List<CompressionSettings> compression = default(List<CompressionSettings>), CacheSettings caches = default(CacheSettings), TransactionSettings transactions = default(TransactionSettings), List<Link> links = default(List<Link>))
+        public SettingsList(GeneralSettings general = default, StartupSettings startup = default, CalculationSettings calculation = default, BufferSettings buffers = default, List<CompressionSettings> compression = default, CacheSettings caches = default, TransactionSettings transactions = default, List<Link> links = default)
         {
             this.General = general;
             this.Startup = startup;

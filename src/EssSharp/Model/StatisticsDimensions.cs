@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="levels">levels.</param>
         /// <param name="bits">bits.</param>
-        public StatisticsDimensions(string name = default(string), string levels = default(string), double bits = default(double))
+        public StatisticsDimensions(string name = default, string levels = default, double bits = default)
         {
             this.Name = name;
             this.Levels = levels;

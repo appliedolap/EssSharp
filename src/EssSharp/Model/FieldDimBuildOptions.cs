@@ -349,7 +349,7 @@ namespace EssSharp.Model
         /// <param name="generation">generation.</param>
         /// <param name="ignore">ignore.</param>
         /// <param name="staticField">staticField.</param>
-        public FieldDimBuildOptions(int parent = default(int), GenerationTypeEnum? generationType = default(GenerationTypeEnum?), int refer = default(int), int referIndex = default(int), int shared = default(int), AttributeBuildProperties attributeBuildProperties = default(AttributeBuildProperties), string dimension = default(string), string attributeDimension = default(string), string alias = default(string), List<int> endIndepColumns = default(List<int>), List<int> startIndepColumns = default(List<int>), GenerationPropertyEnum? generationProperty = default(GenerationPropertyEnum?), int generation = default(int), bool ignore = default(bool), bool staticField = default(bool))
+        public FieldDimBuildOptions(int parent = default, GenerationTypeEnum? generationType = default, int refer = default, int referIndex = default, int shared = default, AttributeBuildProperties attributeBuildProperties = default, string dimension = default, string attributeDimension = default, string alias = default, List<int> endIndepColumns = default, List<int> startIndepColumns = default, GenerationPropertyEnum? generationProperty = default, int generation = default, bool ignore = default, bool staticField = default)
         {
             this.Parent = parent;
             this.GenerationType = generationType;

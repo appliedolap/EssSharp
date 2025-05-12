@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="WalletLocation" /> class.
         /// </summary>
         /// <param name="path">path.</param>
-        public WalletLocation(string path = default(string))
+        public WalletLocation(string path = default)
         {
             this.Path = path;
         }

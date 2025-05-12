@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="path">path.</param>
         /// <param name="value">value.</param>
         /// <param name="from">from.</param>
-        public PatchElement(string op = default(string), string path = default(string), Object value = default(Object), string from = default(string))
+        public PatchElement(string op = default, string path = default, Object value = default, string from = default)
         {
             this.Op = op;
             this.Path = path;

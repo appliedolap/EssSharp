@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="type">type.</param>
         /// <param name="roles">roles.</param>
         /// <param name="defaultRole">defaultRole.</param>
-        public RoleBean(string type = default(string), List<string> roles = default(List<string>), string defaultRole = default(string))
+        public RoleBean(string type = default, List<string> roles = default, string defaultRole = default)
         {
             this.Type = type;
             this.Roles = roles;

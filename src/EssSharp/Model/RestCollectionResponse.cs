@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="count">count.</param>
         /// <param name="offset">offset.</param>
         /// <param name="links">links.</param>
-        public RestCollectionResponse(List<Object> items = default(List<Object>), bool hasMore = default(bool), int totalResults = default(int), int limit = default(int), int count = default(int), int offset = default(int), List<Link> links = default(List<Link>))
+        public RestCollectionResponse(List<Object> items = default, bool hasMore = default, int totalResults = default, int limit = default, int count = default, int offset = default, List<Link> links = default)
         {
             this.Items = items;
             this.HasMore = hasMore;

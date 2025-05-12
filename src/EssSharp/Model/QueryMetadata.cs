@@ -60,7 +60,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="type">type.</param>
         /// <param name="links">links.</param>
-        public QueryMetadata(string name = default(string), TypeEnum? type = default(TypeEnum?), List<Link> links = default(List<Link>))
+        public QueryMetadata(string name = default, TypeEnum? type = default, List<Link> links = default)
         {
             this.Name = name;
             this.Type = type;

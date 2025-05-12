@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="enabled">enabled.</param>
         /// <param name="host">host.</param>
         /// <param name="port">port.</param>
-        public AVClientInfo(bool enabled = default(bool), string host = default(string), int port = default(int))
+        public AVClientInfo(bool enabled = default, string host = default, int port = default)
         {
             this.Enabled = enabled;
             this.Host = host;

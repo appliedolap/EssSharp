@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="role">role.</param>
         /// <param name="group">group.</param>
-        public UserGroupProvisionInfo(List<Link> links = default(List<Link>), string id = default(string), string name = default(string), string role = default(string), bool group = default(bool))
+        public UserGroupProvisionInfo(List<Link> links = default, string id = default, string name = default, string role = default, bool group = default)
         {
             this.Links = links;
             this.Id = id;

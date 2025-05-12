@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="types">types.</param>
         /// <param name="filters">filters.</param>
         /// <param name="values">values.</param>
-        public LayoutData(List<List<string>> statuses = default(List<List<string>>), List<List<string>> texts = default(List<List<string>>), List<List<string>> enumIds = default(List<List<string>>), List<List<string>> dataFormats = default(List<List<string>>), List<List<string>> types = default(List<List<string>>), List<List<string>> filters = default(List<List<string>>), List<List<string>> values = default(List<List<string>>))
+        public LayoutData(List<List<string>> statuses = default, List<List<string>> texts = default, List<List<string>> enumIds = default, List<List<string>> dataFormats = default, List<List<string>> types = default, List<List<string>> filters = default, List<List<string>> values = default)
         {
             this.Statuses = statuses;
             this.Texts = texts;

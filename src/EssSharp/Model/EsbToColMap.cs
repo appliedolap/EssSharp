@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="EsbToColMap" /> class.
         /// </summary>
         /// <param name="arr">arr.</param>
-        public EsbToColMap(List<EsbToColMapInfo> arr = default(List<EsbToColMapInfo>))
+        public EsbToColMap(List<EsbToColMapInfo> arr = default)
         {
             this.Arr = arr;
         }

@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="userDefault">userDefault.</param>
         /// <param name="dbDefault">dbDefault.</param>
         /// <param name="links">links.</param>
-        public LayoutMetadata(string name = default(string), string user = default(string), bool userDefault = default(bool), bool dbDefault = default(bool), List<Link> links = default(List<Link>))
+        public LayoutMetadata(string name = default, string user = default, bool userDefault = default, bool dbDefault = default, List<Link> links = default)
         {
             this.Name = name;
             this.User = user;

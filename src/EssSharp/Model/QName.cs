@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="namespaceURI">namespaceURI.</param>
         /// <param name="localPart">localPart.</param>
         /// <param name="prefix">prefix.</param>
-        public QName(string namespaceURI = default(string), string localPart = default(string), string prefix = default(string))
+        public QName(string namespaceURI = default, string localPart = default, string prefix = default)
         {
             this.NamespaceURI = namespaceURI;
             this.LocalPart = localPart;

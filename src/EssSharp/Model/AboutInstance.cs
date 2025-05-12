@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="provisioningSupported">provisioningSupported.</param>
         /// <param name="resetPasswordSupported">resetPasswordSupported.</param>
         /// <param name="easInstalled">easInstalled.</param>
-        public AboutInstance(bool provisioningSupported = default(bool), bool resetPasswordSupported = default(bool), bool easInstalled = default(bool))
+        public AboutInstance(bool provisioningSupported = default, bool resetPasswordSupported = default, bool easInstalled = default)
         {
             this.ProvisioningSupported = provisioningSupported;
             this.ResetPasswordSupported = resetPasswordSupported;

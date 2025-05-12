@@ -81,7 +81,7 @@ namespace EssSharp.Model
         /// <param name="format">format.</param>
         /// <param name="index">index.</param>
         /// <param name="varSystem">varSystem.</param>
-        public ColumnType(string name = default(string), TypeEnum? type = default(TypeEnum?), bool nullable = default(bool), string format = default(string), int index = default(int), bool varSystem = default(bool))
+        public ColumnType(string name = default, TypeEnum? type = default, bool nullable = default, string format = default, int index = default, bool varSystem = default)
         {
             this.Name = name;
             this.Type = type;

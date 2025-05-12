@@ -85,7 +85,7 @@ namespace EssSharp.Model
         /// <param name="scalingfactor">scalingfactor.</param>
         /// <param name="storeType">storeType.</param>
         /// <param name="storeTypeCountMissing">storeTypeCountMissing.</param>
-        public FieldDataLoadOptions(string referDimension = default(string), int referNumber = default(int), int referOption = default(int), bool ignore = default(bool), bool scale = default(bool), bool useReference = default(bool), bool data = default(bool), double scalingfactor = default(double), StoreTypeEnum? storeType = default(StoreTypeEnum?), bool storeTypeCountMissing = default(bool))
+        public FieldDataLoadOptions(string referDimension = default, int referNumber = default, int referOption = default, bool ignore = default, bool scale = default, bool useReference = default, bool data = default, double scalingfactor = default, StoreTypeEnum? storeType = default, bool storeTypeCountMissing = default)
         {
             this.ReferDimension = referDimension;
             this.ReferNumber = referNumber;

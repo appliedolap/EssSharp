@@ -36,7 +36,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ASOLoadBuffersCreateBuffer(string applicationName, string databaseName, DataLoadBuffer body = default(DataLoadBuffer), int operationIndex = 0);
+        void ASOLoadBuffersCreateBuffer(string applicationName, string databaseName, DataLoadBuffer body = default, int operationIndex = 0);
 
         /// <summary>
         /// Create Buffer
@@ -50,7 +50,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ASOLoadBuffersCreateBufferWithHttpInfo(string applicationName, string databaseName, DataLoadBuffer body = default(DataLoadBuffer), int operationIndex = 0);
+        ApiResponse<Object> ASOLoadBuffersCreateBufferWithHttpInfo(string applicationName, string databaseName, DataLoadBuffer body = default, int operationIndex = 0);
         /// <summary>
         /// Destroy Dataload Buffer
         /// </summary>
@@ -63,7 +63,7 @@ namespace EssSharp.Api
         /// <param name="body">Buffer Ids (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ASOLoadBuffersDestroyBuffers(string applicationName, string databaseName, DestroyBuffer body = default(DestroyBuffer), int operationIndex = 0);
+        void ASOLoadBuffersDestroyBuffers(string applicationName, string databaseName, DestroyBuffer body = default, int operationIndex = 0);
 
         /// <summary>
         /// Destroy Dataload Buffer
@@ -77,7 +77,7 @@ namespace EssSharp.Api
         /// <param name="body">Buffer Ids (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ASOLoadBuffersDestroyBuffersWithHttpInfo(string applicationName, string databaseName, DestroyBuffer body = default(DestroyBuffer), int operationIndex = 0);
+        ApiResponse<Object> ASOLoadBuffersDestroyBuffersWithHttpInfo(string applicationName, string databaseName, DestroyBuffer body = default, int operationIndex = 0);
         /// <summary>
         /// List Buffers
         /// </summary>
@@ -115,7 +115,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ASOLoadBuffersMerge(string applicationName, string databaseName, MergeSilceOption body = default(MergeSilceOption), int operationIndex = 0);
+        void ASOLoadBuffersMerge(string applicationName, string databaseName, MergeSilceOption body = default, int operationIndex = 0);
 
         /// <summary>
         /// Merge Data
@@ -129,7 +129,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ASOLoadBuffersMergeWithHttpInfo(string applicationName, string databaseName, MergeSilceOption body = default(MergeSilceOption), int operationIndex = 0);
+        ApiResponse<Object> ASOLoadBuffersMergeWithHttpInfo(string applicationName, string databaseName, MergeSilceOption body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -152,7 +152,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ASOLoadBuffersCreateBufferAsync(string applicationName, string databaseName, DataLoadBuffer body = default(DataLoadBuffer), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ASOLoadBuffersCreateBufferAsync(string applicationName, string databaseName, DataLoadBuffer body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Buffer
@@ -167,7 +167,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ASOLoadBuffersCreateBufferWithHttpInfoAsync(string applicationName, string databaseName, DataLoadBuffer body = default(DataLoadBuffer), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ASOLoadBuffersCreateBufferWithHttpInfoAsync(string applicationName, string databaseName, DataLoadBuffer body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Destroy Dataload Buffer
         /// </summary>
@@ -181,7 +181,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ASOLoadBuffersDestroyBuffersAsync(string applicationName, string databaseName, DestroyBuffer body = default(DestroyBuffer), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ASOLoadBuffersDestroyBuffersAsync(string applicationName, string databaseName, DestroyBuffer body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Destroy Dataload Buffer
@@ -196,7 +196,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ASOLoadBuffersDestroyBuffersWithHttpInfoAsync(string applicationName, string databaseName, DestroyBuffer body = default(DestroyBuffer), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ASOLoadBuffersDestroyBuffersWithHttpInfoAsync(string applicationName, string databaseName, DestroyBuffer body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Buffers
         /// </summary>
@@ -209,7 +209,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LoadBuffersList</returns>
-        System.Threading.Tasks.Task<LoadBuffersList> ASOLoadBuffersListBuffersAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<LoadBuffersList> ASOLoadBuffersListBuffersAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Buffers
@@ -223,7 +223,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LoadBuffersList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<LoadBuffersList>> ASOLoadBuffersListBuffersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<LoadBuffersList>> ASOLoadBuffersListBuffersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Merge Data
         /// </summary>
@@ -237,7 +237,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ASOLoadBuffersMergeAsync(string applicationName, string databaseName, MergeSilceOption body = default(MergeSilceOption), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ASOLoadBuffersMergeAsync(string applicationName, string databaseName, MergeSilceOption body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Merge Data
@@ -252,7 +252,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ASOLoadBuffersMergeWithHttpInfoAsync(string applicationName, string databaseName, MergeSilceOption body = default(MergeSilceOption), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ASOLoadBuffersMergeWithHttpInfoAsync(string applicationName, string databaseName, MergeSilceOption body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -382,7 +382,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ASOLoadBuffersCreateBuffer(string applicationName, string databaseName, DataLoadBuffer body = default(DataLoadBuffer), int operationIndex = 0)
+        public void ASOLoadBuffersCreateBuffer(string applicationName, string databaseName, DataLoadBuffer body = default, int operationIndex = 0)
         {
             ASOLoadBuffersCreateBufferWithHttpInfo(applicationName, databaseName, body);
         }
@@ -396,7 +396,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ASOLoadBuffersCreateBufferWithHttpInfo(string applicationName, string databaseName, DataLoadBuffer body = default(DataLoadBuffer), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ASOLoadBuffersCreateBufferWithHttpInfo(string applicationName, string databaseName, DataLoadBuffer body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -472,7 +472,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ASOLoadBuffersCreateBufferAsync(string applicationName, string databaseName, DataLoadBuffer body = default(DataLoadBuffer), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ASOLoadBuffersCreateBufferAsync(string applicationName, string databaseName, DataLoadBuffer body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ASOLoadBuffersCreateBufferWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -487,7 +487,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ASOLoadBuffersCreateBufferWithHttpInfoAsync(string applicationName, string databaseName, DataLoadBuffer body = default(DataLoadBuffer), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ASOLoadBuffersCreateBufferWithHttpInfoAsync(string applicationName, string databaseName, DataLoadBuffer body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -563,7 +563,7 @@ namespace EssSharp.Api
         /// <param name="body">Buffer Ids (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ASOLoadBuffersDestroyBuffers(string applicationName, string databaseName, DestroyBuffer body = default(DestroyBuffer), int operationIndex = 0)
+        public void ASOLoadBuffersDestroyBuffers(string applicationName, string databaseName, DestroyBuffer body = default, int operationIndex = 0)
         {
             ASOLoadBuffersDestroyBuffersWithHttpInfo(applicationName, databaseName, body);
         }
@@ -577,7 +577,7 @@ namespace EssSharp.Api
         /// <param name="body">Buffer Ids (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ASOLoadBuffersDestroyBuffersWithHttpInfo(string applicationName, string databaseName, DestroyBuffer body = default(DestroyBuffer), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ASOLoadBuffersDestroyBuffersWithHttpInfo(string applicationName, string databaseName, DestroyBuffer body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -653,7 +653,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ASOLoadBuffersDestroyBuffersAsync(string applicationName, string databaseName, DestroyBuffer body = default(DestroyBuffer), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ASOLoadBuffersDestroyBuffersAsync(string applicationName, string databaseName, DestroyBuffer body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ASOLoadBuffersDestroyBuffersWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -668,7 +668,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ASOLoadBuffersDestroyBuffersWithHttpInfoAsync(string applicationName, string databaseName, DestroyBuffer body = default(DestroyBuffer), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ASOLoadBuffersDestroyBuffersWithHttpInfoAsync(string applicationName, string databaseName, DestroyBuffer body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -831,7 +831,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of LoadBuffersList</returns>
-        public async System.Threading.Tasks.Task<LoadBuffersList> ASOLoadBuffersListBuffersAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<LoadBuffersList> ASOLoadBuffersListBuffersAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<LoadBuffersList> localVarResponse = await ASOLoadBuffersListBuffersWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -846,7 +846,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (LoadBuffersList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<LoadBuffersList>> ASOLoadBuffersListBuffersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<LoadBuffersList>> ASOLoadBuffersListBuffersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -921,7 +921,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ASOLoadBuffersMerge(string applicationName, string databaseName, MergeSilceOption body = default(MergeSilceOption), int operationIndex = 0)
+        public void ASOLoadBuffersMerge(string applicationName, string databaseName, MergeSilceOption body = default, int operationIndex = 0)
         {
             ASOLoadBuffersMergeWithHttpInfo(applicationName, databaseName, body);
         }
@@ -935,7 +935,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ASOLoadBuffersMergeWithHttpInfo(string applicationName, string databaseName, MergeSilceOption body = default(MergeSilceOption), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ASOLoadBuffersMergeWithHttpInfo(string applicationName, string databaseName, MergeSilceOption body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1011,7 +1011,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ASOLoadBuffersMergeAsync(string applicationName, string databaseName, MergeSilceOption body = default(MergeSilceOption), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ASOLoadBuffersMergeAsync(string applicationName, string databaseName, MergeSilceOption body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ASOLoadBuffersMergeWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1026,7 +1026,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ASOLoadBuffersMergeWithHttpInfoAsync(string applicationName, string databaseName, MergeSilceOption body = default(MergeSilceOption), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ASOLoadBuffersMergeWithHttpInfoAsync(string applicationName, string databaseName, MergeSilceOption body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

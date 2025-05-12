@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="time">time.</param>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public ApproverBean(string email = default(string), bool approved = default(bool), long time = default(long), string id = default(string), string name = default(string))
+        public ApproverBean(string email = default, bool approved = default, long time = default, string id = default, string name = default)
         {
             this.Email = email;
             this.Approved = approved;

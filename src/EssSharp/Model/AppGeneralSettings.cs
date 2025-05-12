@@ -38,7 +38,7 @@ namespace EssSharp.Model
         /// <param name="timeoutOnDataBlockLocks">timeoutOnDataBlockLocks.</param>
         /// <param name="maxAttachmentFileSizeInKbs">maxAttachmentFileSizeInKbs.</param>
         /// <param name="pendingCacheSizeLimitInMbs">pendingCacheSizeLimitInMbs.</param>
-        public AppGeneralSettings(string description = default(string), string logLevelAsString = default(string), bool easManagedApp = default(bool), long timeoutOnDataBlockLocks = default(long), long maxAttachmentFileSizeInKbs = default(long), long pendingCacheSizeLimitInMbs = default(long))
+        public AppGeneralSettings(string description = default, string logLevelAsString = default, bool easManagedApp = default, long timeoutOnDataBlockLocks = default, long maxAttachmentFileSizeInKbs = default, long pendingCacheSizeLimitInMbs = default)
         {
             this.Description = description;
             this.LogLevelAsString = logLevelAsString;

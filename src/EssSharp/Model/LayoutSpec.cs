@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="description">description.</param>
         /// <param name="grid">grid.</param>
         /// <param name="preferences">preferences.</param>
-        public LayoutSpec(string description = default(string), LayoutGrid grid = default(LayoutGrid), LayoutPreferences preferences = default(LayoutPreferences))
+        public LayoutSpec(string description = default, LayoutGrid grid = default, LayoutPreferences preferences = default)
         {
             this.Description = description;
             this.Grid = grid;

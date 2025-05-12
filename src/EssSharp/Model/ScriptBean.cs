@@ -65,7 +65,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="content">content.</param>
         /// <param name="type">type.</param>
-        public ScriptBean(string content = default(string), TypeEnum? type = default(TypeEnum?))
+        public ScriptBean(string content = default, TypeEnum? type = default)
         {
             this.Content = content;
             this.Type = type;

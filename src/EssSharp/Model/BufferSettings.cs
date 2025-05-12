@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="dataRetrievalBufferSize">dataRetrievalBufferSize.</param>
         /// <param name="dataRetrievalSortBufferSize">dataRetrievalSortBufferSize.</param>
-        public BufferSettings(long dataRetrievalBufferSize = default(long), long dataRetrievalSortBufferSize = default(long))
+        public BufferSettings(long dataRetrievalBufferSize = default, long dataRetrievalSortBufferSize = default)
         {
             this.DataRetrievalBufferSize = dataRetrievalBufferSize;
             this.DataRetrievalSortBufferSize = dataRetrievalSortBufferSize;

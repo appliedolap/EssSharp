@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="RulePreviewOutput" /> class.
         /// </summary>
         /// <param name="data">data.</param>
-        public RulePreviewOutput(List<List<string>> data = default(List<List<string>>))
+        public RulePreviewOutput(List<List<string>> data = default)
         {
             this.Data = data;
         }

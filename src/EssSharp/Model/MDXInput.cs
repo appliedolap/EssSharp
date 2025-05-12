@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="query">query.</param>
         /// <param name="preferences">preferences.</param>
-        public MDXInput(string query = default(string), NamedQueriesPreferences preferences = default(NamedQueriesPreferences))
+        public MDXInput(string query = default, NamedQueriesPreferences preferences = default)
         {
             this.Query = query;
             this.Preferences = preferences;

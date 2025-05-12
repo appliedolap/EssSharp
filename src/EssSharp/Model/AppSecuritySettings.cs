@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="allowCommands">allowCommands.</param>
         /// <param name="allowConnects">allowConnects.</param>
         /// <param name="allowUpdates">allowUpdates.</param>
-        public AppSecuritySettings(bool allowCommands = default(bool), bool allowConnects = default(bool), bool allowUpdates = default(bool))
+        public AppSecuritySettings(bool allowCommands = default, bool allowConnects = default, bool allowUpdates = default)
         {
             this.AllowCommands = allowCommands;
             this.AllowConnects = allowConnects;

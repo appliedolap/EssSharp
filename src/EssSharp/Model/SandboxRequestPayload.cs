@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="SandboxRequestPayload" /> class.
         /// </summary>
         /// <param name="size">size.</param>
-        public SandboxRequestPayload(int size = default(int))
+        public SandboxRequestPayload(int size = default)
         {
             this.Size = size;
         }

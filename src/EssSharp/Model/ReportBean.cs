@@ -33,20 +33,20 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="ReportBean" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        /// <param name="lockedTime">lockedTime.</param>
-        /// <param name="locked">locked.</param>
+        /// <param name="modifiedTime">modifiedTime.</param>
         /// <param name="sizeInBytes">sizeInBytes.</param>
         /// <param name="lockedBy">lockedBy.</param>
-        /// <param name="modifiedTime">modifiedTime.</param>
+        /// <param name="lockedTime">lockedTime.</param>
+        /// <param name="locked">locked.</param>
         /// <param name="name">name.</param>
-        public ReportBean(List<Link> links = default(List<Link>), long lockedTime = default(long), bool locked = default(bool), long sizeInBytes = default(long), string lockedBy = default(string), long modifiedTime = default(long), string name = default(string))
+        public ReportBean(List<Link> links = default, long modifiedTime = default, long sizeInBytes = default, string lockedBy = default, long lockedTime = default, bool locked = default, string name = default)
         {
             this.Links = links;
-            this.LockedTime = lockedTime;
-            this.Locked = locked;
+            this.ModifiedTime = modifiedTime;
             this.SizeInBytes = sizeInBytes;
             this.LockedBy = lockedBy;
-            this.ModifiedTime = modifiedTime;
+            this.LockedTime = lockedTime;
+            this.Locked = locked;
             this.Name = name;
         }
 
@@ -57,16 +57,10 @@ namespace EssSharp.Model
         public List<Link> Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets LockedTime
+        /// Gets or Sets ModifiedTime
         /// </summary>
-        [DataMember(Name = "lockedTime", EmitDefaultValue = false)]
-        public long LockedTime { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Locked
-        /// </summary>
-        [DataMember(Name = "locked", EmitDefaultValue = true)]
-        public bool Locked { get; set; }
+        [DataMember(Name = "modifiedTime", EmitDefaultValue = false)]
+        public long ModifiedTime { get; set; }
 
         /// <summary>
         /// Gets or Sets SizeInBytes
@@ -81,10 +75,16 @@ namespace EssSharp.Model
         public string LockedBy { get; set; }
 
         /// <summary>
-        /// Gets or Sets ModifiedTime
+        /// Gets or Sets LockedTime
         /// </summary>
-        [DataMember(Name = "modifiedTime", EmitDefaultValue = false)]
-        public long ModifiedTime { get; set; }
+        [DataMember(Name = "lockedTime", EmitDefaultValue = false)]
+        public long LockedTime { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Locked
+        /// </summary>
+        [DataMember(Name = "locked", EmitDefaultValue = true)]
+        public bool Locked { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -101,11 +101,11 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ReportBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
-            sb.Append("  LockedTime: ").Append(LockedTime).Append("\n");
-            sb.Append("  Locked: ").Append(Locked).Append("\n");
+            sb.Append("  ModifiedTime: ").Append(ModifiedTime).Append("\n");
             sb.Append("  SizeInBytes: ").Append(SizeInBytes).Append("\n");
             sb.Append("  LockedBy: ").Append(LockedBy).Append("\n");
-            sb.Append("  ModifiedTime: ").Append(ModifiedTime).Append("\n");
+            sb.Append("  LockedTime: ").Append(LockedTime).Append("\n");
+            sb.Append("  Locked: ").Append(Locked).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

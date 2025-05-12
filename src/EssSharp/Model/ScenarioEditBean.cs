@@ -67,7 +67,7 @@ namespace EssSharp.Model
         /// <param name="priority">priority.</param>
         /// <param name="owner">owner.</param>
         /// <param name="description">description.</param>
-        public ScenarioEditBean(long dueDate = default(long), PriorityEnum? priority = default(PriorityEnum?), string owner = default(string), string description = default(string))
+        public ScenarioEditBean(long dueDate = default, PriorityEnum? priority = default, string owner = default, string description = default)
         {
             this.DueDate = dueDate;
             this.Priority = priority;

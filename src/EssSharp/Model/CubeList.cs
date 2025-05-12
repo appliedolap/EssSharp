@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="limit">limit.</param>
         /// <param name="properties">properties.</param>
         /// <param name="offset">offset.</param>
-        public CubeList(List<Cube> items = default(List<Cube>), bool hasMore = default(bool), long totalResults = default(long), long count = default(long), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
+        public CubeList(List<Cube> items = default, bool hasMore = default, long totalResults = default, long count = default, long limit = default, Dictionary<string, string> properties = default, long offset = default)
         {
             this.Items = items;
             this.HasMore = hasMore;

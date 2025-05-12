@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="name">name.</param>
         /// <param name="value">value.</param>
-        public CentralizedURL(string name = default(string), string value = default(string))
+        public CentralizedURL(string name = default, string value = default)
         {
             this.Name = name;
             this.Value = value;

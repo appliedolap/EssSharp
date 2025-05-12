@@ -38,7 +38,7 @@ namespace EssSharp.Model
         /// <param name="dimensionBuildRecordNumber">dimensionBuildRecordNumber.</param>
         /// <param name="headerRecordNumber">headerRecordNumber.</param>
         /// <param name="lineSkipCount">lineSkipCount.</param>
-        public FileProperties(string delimiter = default(string), int width = default(int), int dataloadRecordNumber = default(int), int dimensionBuildRecordNumber = default(int), int headerRecordNumber = default(int), int lineSkipCount = default(int))
+        public FileProperties(string delimiter = default, int width = default, int dataloadRecordNumber = default, int dimensionBuildRecordNumber = default, int headerRecordNumber = default, int lineSkipCount = default)
         {
             this.Delimiter = delimiter;
             this.Width = width;

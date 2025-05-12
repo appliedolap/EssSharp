@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="displayName">displayName.</param>
         /// <param name="hidden">hidden.</param>
         /// <param name="name">name.</param>
-        public GridDimension(string pov = default(string), bool expanded = default(bool), int row = default(int), int column = default(int), string displayName = default(string), bool hidden = default(bool), string name = default(string))
+        public GridDimension(string pov = default, bool expanded = default, int row = default, int column = default, string displayName = default, bool hidden = default, string name = default)
         {
             this.Pov = pov;
             this.Expanded = expanded;

@@ -38,7 +38,7 @@ namespace EssSharp.Model
         /// <param name="averageBundleFill">averageBundleFill.</param>
         /// <param name="averageValueLength">averageValueLength.</param>
         /// <param name="level0MB">level0MB.</param>
-        public CompressionSettings(string dimensionName = default(string), bool isCompression = default(bool), double storedLevel0Members = default(double), double averageBundleFill = default(double), double averageValueLength = default(double), double level0MB = default(double))
+        public CompressionSettings(string dimensionName = default, bool isCompression = default, double storedLevel0Members = default, double averageBundleFill = default, double averageValueLength = default, double level0MB = default)
         {
             this.DimensionName = dimensionName;
             this.IsCompression = isCompression;

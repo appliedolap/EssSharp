@@ -72,7 +72,7 @@ namespace EssSharp.Model
         /// <param name="textList">textList.</param>
         /// <param name="urlDrillThrough">urlDrillThrough.</param>
         /// <param name="memberIdentifierType">memberIdentifierType.</param>
-        public NamedQueriesPreferences(bool dataless = default(bool), bool hideRestrictedData = default(bool), bool cellAttributes = default(bool), bool formatString = default(bool), bool formatValues = default(bool), bool meaninglessCells = default(bool), bool textList = default(bool), bool urlDrillThrough = default(bool), MemberIdentifierTypeEnum? memberIdentifierType = default(MemberIdentifierTypeEnum?))
+        public NamedQueriesPreferences(bool dataless = default, bool hideRestrictedData = default, bool cellAttributes = default, bool formatString = default, bool formatValues = default, bool meaninglessCells = default, bool textList = default, bool urlDrillThrough = default, MemberIdentifierTypeEnum? memberIdentifierType = default)
         {
             this.Dataless = dataless;
             this.HideRestrictedData = hideRestrictedData;

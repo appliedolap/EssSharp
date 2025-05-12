@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="access">access (required).</param>
         /// <param name="mbrSpec">mbrSpec (required).</param>
-        public FilterRow(string access = default(string), string mbrSpec = default(string))
+        public FilterRow(string access = default, string mbrSpec = default)
         {
             // to ensure "access" is required (not null)
             if (access == null)

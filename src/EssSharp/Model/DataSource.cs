@@ -154,7 +154,7 @@ namespace EssSharp.Model
         /// <param name="queryParameters">queryParameters.</param>
         /// <param name="headers">headers.</param>
         /// <param name="links">links.</param>
-        public Datasource(TypeEnum type = default(TypeEnum), string connection = default(string), string description = default(string), ColumnsType columns = default(ColumnsType), string name = default(string), bool ignoreErrorRecords = default(bool), string delimeter = default(string), string customDelimiter = default(string), string query = default(string), string application = default(string), string cube = default(string), long startRow = default(long), long endRow = default(long), long headerRow = default(long), string sheet = default(string), bool skipHiddenRows = default(bool), List<long> widths = default(List<long>), List<QueryParamsInfo> queryParameters = default(List<QueryParamsInfo>), List<HeaderType> headers = default(List<HeaderType>), List<Link> links = default(List<Link>))
+        public Datasource(TypeEnum type = default, string connection = default, string description = default, ColumnsType columns = default, string name = default, bool ignoreErrorRecords = default, string delimeter = default, string customDelimiter = default, string query = default, string application = default, string cube = default, long startRow = default, long endRow = default, long headerRow = default, string sheet = default, bool skipHiddenRows = default, List<long> widths = default, List<QueryParamsInfo> queryParameters = default, List<HeaderType> headers = default, List<Link> links = default)
         {
             this.Type = type;
             // to ensure "connection" is required (not null)

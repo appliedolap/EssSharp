@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="showUnlimited">showUnlimited.</param>
         /// <param name="minimum">minimum.</param>
         /// <param name="maximum">maximum.</param>
-        public Limit(string id = default(string), string name = default(string), string value = default(string), string description = default(string), bool unlimited = default(bool), bool showUnlimited = default(bool), long minimum = default(long), long maximum = default(long))
+        public Limit(string id = default, string name = default, string value = default, string description = default, bool unlimited = default, bool showUnlimited = default, long minimum = default, long maximum = default)
         {
             this.Id = id;
             this.Name = name;

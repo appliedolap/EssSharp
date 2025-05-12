@@ -59,7 +59,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="name">name.</param>
         /// <param name="type">type.</param>
-        public IndepDimension(string name = default(string), TypeEnum? type = default(TypeEnum?))
+        public IndepDimension(string name = default, TypeEnum? type = default)
         {
             this.Name = name;
             this.Type = type;

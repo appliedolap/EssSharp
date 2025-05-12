@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="partNum">partNum.</param>
         /// <param name="response">response.</param>
-        public UploadFilePartResponse(int partNum = default(int), Response response = default(Response))
+        public UploadFilePartResponse(int partNum = default, Response response = default)
         {
             this.PartNum = partNum;
             this.Response = response;

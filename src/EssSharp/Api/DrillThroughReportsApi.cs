@@ -146,7 +146,7 @@ namespace EssSharp.Api
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ReportList</returns>
-        ReportList DrillThroughReportsGetReports(string applicationName, string databaseName, string keyword = default(string), int operationIndex = 0);
+        ReportList DrillThroughReportsGetReports(string applicationName, string databaseName, string keyword = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Drill Through Reports
@@ -160,7 +160,34 @@ namespace EssSharp.Api
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ReportList</returns>
-        ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, string keyword = default(string), int operationIndex = 0);
+        ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, string keyword = default, int operationIndex = 0);
+        /// <summary>
+        /// List Drill Through Reports For Given Cell Intersections
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Get a list of allowed drill through reports for provided cell intersections.&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        void DrillThroughReportsGetReportsForIntersections(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0);
+
+        /// <summary>
+        /// List Drill Through Reports For Given Cell Intersections
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Get a list of allowed drill through reports for provided cell intersections.&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0);
         /// <summary>
         /// Update Drill Through Report
         /// </summary>
@@ -212,7 +239,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DrillthroughBean</returns>
-        System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsCreateAsync(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsCreateAsync(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Drill Through Report
@@ -227,7 +254,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DrillthroughBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DrillthroughBean>> DrillThroughReportsCreateWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<DrillthroughBean>> DrillThroughReportsCreateWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Drill Through Report
         /// </summary>
@@ -241,7 +268,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DrillThroughReportsDeleteAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task DrillThroughReportsDeleteAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Drill Through Report
@@ -256,7 +283,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DrillThroughReportsDeleteWithHttpInfoAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> DrillThroughReportsDeleteWithHttpInfoAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Execute Drill Through Report
         /// </summary>
@@ -271,7 +298,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DrillThroughReportsExecuteAsync(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task DrillThroughReportsExecuteAsync(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute Drill Through Report
@@ -287,7 +314,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DrillThroughReportsExecuteWithHttpInfoAsync(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> DrillThroughReportsExecuteWithHttpInfoAsync(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Drill Through Report
         /// </summary>
@@ -301,7 +328,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DrillthroughBean</returns>
-        System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsGetReportAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsGetReportAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Drill Through Report
@@ -316,7 +343,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DrillthroughBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DrillthroughBean>> DrillThroughReportsGetReportWithHttpInfoAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<DrillthroughBean>> DrillThroughReportsGetReportWithHttpInfoAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Drill Through Reports
         /// </summary>
@@ -330,7 +357,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ReportList</returns>
-        System.Threading.Tasks.Task<ReportList> DrillThroughReportsGetReportsAsync(string applicationName, string databaseName, string keyword = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ReportList> DrillThroughReportsGetReportsAsync(string applicationName, string databaseName, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Drill Through Reports
@@ -345,7 +372,36 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ReportList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, string keyword = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// List Drill Through Reports For Given Cell Intersections
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Get a list of allowed drill through reports for provided cell intersections.&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task DrillThroughReportsGetReportsForIntersectionsAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List Drill Through Reports For Given Cell Intersections
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Get a list of allowed drill through reports for provided cell intersections.&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Drill Through Report
         /// </summary>
@@ -360,7 +416,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DrillthroughBean</returns>
-        System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsUpdateReportAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsUpdateReportAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Drill Through Report
@@ -376,7 +432,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DrillthroughBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DrillthroughBean>> DrillThroughReportsUpdateReportWithHttpInfoAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<DrillthroughBean>> DrillThroughReportsUpdateReportWithHttpInfoAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -605,7 +661,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DrillthroughBean</returns>
-        public async System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsCreateAsync(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsCreateAsync(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<DrillthroughBean> localVarResponse = await DrillThroughReportsCreateWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -621,7 +677,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DrillthroughBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DrillthroughBean>> DrillThroughReportsCreateWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DrillthroughBean>> DrillThroughReportsCreateWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -799,7 +855,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DrillThroughReportsDeleteAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task DrillThroughReportsDeleteAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await DrillThroughReportsDeleteWithHttpInfoAsync(applicationName, databaseName, name, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -814,7 +870,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DrillThroughReportsDeleteWithHttpInfoAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DrillThroughReportsDeleteWithHttpInfoAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -999,7 +1055,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DrillThroughReportsExecuteAsync(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task DrillThroughReportsExecuteAsync(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await DrillThroughReportsExecuteWithHttpInfoAsync(applicationName, databaseName, name, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1015,7 +1071,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DrillThroughReportsExecuteWithHttpInfoAsync(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DrillThroughReportsExecuteWithHttpInfoAsync(string applicationName, string databaseName, string name, DrillthroughMetadataBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1200,7 +1256,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DrillthroughBean</returns>
-        public async System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsGetReportAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsGetReportAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<DrillthroughBean> localVarResponse = await DrillThroughReportsGetReportWithHttpInfoAsync(applicationName, databaseName, name, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1216,7 +1272,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DrillthroughBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DrillthroughBean>> DrillThroughReportsGetReportWithHttpInfoAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DrillthroughBean>> DrillThroughReportsGetReportWithHttpInfoAsync(string applicationName, string databaseName, string name, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1298,7 +1354,7 @@ namespace EssSharp.Api
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ReportList</returns>
-        public ReportList DrillThroughReportsGetReports(string applicationName, string databaseName, string keyword = default(string), int operationIndex = 0)
+        public ReportList DrillThroughReportsGetReports(string applicationName, string databaseName, string keyword = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<ReportList> localVarResponse = DrillThroughReportsGetReportsWithHttpInfo(applicationName, databaseName, keyword);
             return localVarResponse.Data;
@@ -1313,7 +1369,7 @@ namespace EssSharp.Api
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ReportList</returns>
-        public EssSharp.Client.ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, string keyword = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, string keyword = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1392,7 +1448,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ReportList</returns>
-        public async System.Threading.Tasks.Task<ReportList> DrillThroughReportsGetReportsAsync(string applicationName, string databaseName, string keyword = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ReportList> DrillThroughReportsGetReportsAsync(string applicationName, string databaseName, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ReportList> localVarResponse = await DrillThroughReportsGetReportsWithHttpInfoAsync(applicationName, databaseName, keyword, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1408,7 +1464,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ReportList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, string keyword = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1469,6 +1525,185 @@ namespace EssSharp.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DrillThroughReportsGetReports", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List Drill Through Reports For Given Cell Intersections &lt;p&gt;Get a list of allowed drill through reports for provided cell intersections.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        public void DrillThroughReportsGetReportsForIntersections(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0)
+        {
+            DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(applicationName, databaseName, body);
+        }
+
+        /// <summary>
+        /// List Drill Through Reports For Given Cell Intersections &lt;p&gt;Get a list of allowed drill through reports for provided cell intersections.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public EssSharp.Client.ApiResponse<Object> DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0)
+        {
+            // verify the required parameter 'applicationName' is set
+            if (applicationName == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationName' when calling DrillThroughReportsApi->DrillThroughReportsGetReportsForIntersections");
+            }
+
+            // verify the required parameter 'databaseName' is set
+            if (databaseName == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'databaseName' when calling DrillThroughReportsApi->DrillThroughReportsGetReportsForIntersections");
+            }
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            localVarRequestOptions.Data = body;
+
+            localVarRequestOptions.Operation = "DrillThroughReportsApi.DrillThroughReportsGetReportsForIntersections";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Object>("/applications/{applicationName}/databases/{databaseName}/dtreports/list", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DrillThroughReportsGetReportsForIntersections", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List Drill Through Reports For Given Cell Intersections &lt;p&gt;Get a list of allowed drill through reports for provided cell intersections.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task DrillThroughReportsGetReportsForIntersectionsAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        {
+            await DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// List Drill Through Reports For Given Cell Intersections &lt;p&gt;Get a list of allowed drill through reports for provided cell intersections.&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'applicationName' is set
+            if (applicationName == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationName' when calling DrillThroughReportsApi->DrillThroughReportsGetReportsForIntersections");
+            }
+
+            // verify the required parameter 'databaseName' is set
+            if (databaseName == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'databaseName' when calling DrillThroughReportsApi->DrillThroughReportsGetReportsForIntersections");
+            }
+
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            localVarRequestOptions.Data = body;
+
+            localVarRequestOptions.Operation = "DrillThroughReportsApi.DrillThroughReportsGetReportsForIntersections";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/applications/{applicationName}/databases/{databaseName}/dtreports/list", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DrillThroughReportsGetReportsForIntersections", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
@@ -1596,7 +1831,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DrillthroughBean</returns>
-        public async System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsUpdateReportAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<DrillthroughBean> DrillThroughReportsUpdateReportAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<DrillthroughBean> localVarResponse = await DrillThroughReportsUpdateReportWithHttpInfoAsync(applicationName, databaseName, name, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1613,7 +1848,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DrillthroughBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DrillthroughBean>> DrillThroughReportsUpdateReportWithHttpInfoAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DrillthroughBean>> DrillThroughReportsUpdateReportWithHttpInfoAsync(string applicationName, string databaseName, string name, DrillthroughBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

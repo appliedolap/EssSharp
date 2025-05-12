@@ -35,15 +35,15 @@ namespace EssSharp.Model
         /// <param name="links">links.</param>
         /// <param name="owner">owner.</param>
         /// <param name="time">time.</param>
-        /// <param name="id">id.</param>
         /// <param name="message">message.</param>
-        public CommentBean(List<Link> links = default(List<Link>), Owner owner = default(Owner), long time = default(long), long id = default(long), string message = default(string))
+        /// <param name="id">id.</param>
+        public CommentBean(List<Link> links = default, Owner owner = default, long time = default, string message = default, long id = default)
         {
             this.Links = links;
             this.Owner = owner;
             this.Time = time;
-            this.Id = id;
             this.Message = message;
+            this.Id = id;
         }
 
         /// <summary>
@@ -65,16 +65,16 @@ namespace EssSharp.Model
         public long Time { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public long Id { get; set; }
-
-        /// <summary>
         /// Gets or Sets Message
         /// </summary>
         [DataMember(Name = "message", EmitDefaultValue = false)]
         public string Message { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public long Id { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -87,8 +87,8 @@ namespace EssSharp.Model
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Owner: ").Append(Owner).Append("\n");
             sb.Append("  Time: ").Append(Time).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

@@ -11,11 +11,11 @@ cd "%~dp0"
 rmdir /S /Q .\src\EssSharp.Test >nul 2>&1
 
 :: Generate the c# code from the processed.json file.
-java -jar openapi-generator-cli-7.12.0.jar generate ^
+java -jar openapi-generator-cli-7.13.0.jar generate ^
   --input-spec .\processed.json ^
   --generator-name csharp ^
   --template-dir .\templates ^
-  --additional-properties=packageName=EssSharp,netCoreProjectFile=true,optionalAssemblyInfo=false
+  --additional-properties=library=restsharp,packageName=EssSharp,netCoreProjectFile=true,optionalAssemblyInfo=false,targetFramework=netstandard2.0
 
 :: When it's more mature, let's switch to the httpclient library.
 ::  --library httpclient ^

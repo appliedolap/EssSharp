@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="columns">columns.</param>
-        public ResultBean(List<Link> links = default(List<Link>), List<DSColumn> columns = default(List<DSColumn>))
+        public ResultBean(List<Link> links = default, List<DSColumn> columns = default)
         {
             this.Links = links;
             this.Columns = columns;

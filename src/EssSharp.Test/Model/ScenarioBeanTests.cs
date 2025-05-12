@@ -80,24 +80,6 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Sandbox'
-        /// </summary>
-        [Fact]
-        public void SandboxTest()
-        {
-            // TODO unit test for the property 'Sandbox'
-        }
-
-        /// <summary>
-        /// Test the property 'DueDate'
-        /// </summary>
-        [Fact]
-        public void DueDateTest()
-        {
-            // TODO unit test for the property 'DueDate'
-        }
-
-        /// <summary>
         /// Test the property 'Scripts'
         /// </summary>
         [Fact]
@@ -116,12 +98,21 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Participants'
+        /// Test the property 'Sandbox'
         /// </summary>
         [Fact]
-        public void ParticipantsTest()
+        public void SandboxTest()
         {
-            // TODO unit test for the property 'Participants'
+            // TODO unit test for the property 'Sandbox'
+        }
+
+        /// <summary>
+        /// Test the property 'DueDate'
+        /// </summary>
+        [Fact]
+        public void DueDateTest()
+        {
+            // TODO unit test for the property 'DueDate'
         }
 
         /// <summary>
@@ -203,6 +194,15 @@ namespace EssSharp.Test.Model
         public void ApplicationTest()
         {
             // TODO unit test for the property 'Application'
+        }
+
+        /// <summary>
+        /// Test the property 'Participants'
+        /// </summary>
+        [Fact]
+        public void ParticipantsTest()
+        {
+            // TODO unit test for the property 'Participants'
         }
 
         /// <summary>

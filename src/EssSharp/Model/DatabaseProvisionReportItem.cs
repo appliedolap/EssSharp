@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="database">database.</param>
         /// <param name="items">items.</param>
-        public DatabaseProvisionReportItem(string database = default(string), List<ProvisionReportItem> items = default(List<ProvisionReportItem>))
+        public DatabaseProvisionReportItem(string database = default, List<ProvisionReportItem> items = default)
         {
             this.Database = database;
             this.Items = items;

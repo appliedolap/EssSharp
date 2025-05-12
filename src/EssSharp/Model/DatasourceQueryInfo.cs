@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="query">query.</param>
         /// <param name="delimiter">delimiter.</param>
         /// <param name="varParams">varParams.</param>
-        public DatasourceQueryInfo(string query = default(string), string delimiter = default(string), Dictionary<string, Object> varParams = default(Dictionary<string, Object>))
+        public DatasourceQueryInfo(string query = default, string delimiter = default, Dictionary<string, Object> varParams = default)
         {
             this.Query = query;
             this.Delimiter = delimiter;

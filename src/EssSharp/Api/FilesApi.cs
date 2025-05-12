@@ -62,7 +62,7 @@ namespace EssSharp.Api
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>GenericEntity</returns>
-        GenericEntity FilesAddFile(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0);
+        GenericEntity FilesAddFile(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0);
 
         /// <summary>
         /// Upload File or Create Folder
@@ -77,7 +77,7 @@ namespace EssSharp.Api
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of GenericEntity</returns>
-        ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0);
+        ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0);
         /// <summary>
         /// Copy File
         /// </summary>
@@ -89,7 +89,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void FilesCopyResource(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0);
+        void FilesCopyResource(FilePathDetail body, bool? overwrite = default, int operationIndex = 0);
 
         /// <summary>
         /// Copy File
@@ -102,7 +102,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> FilesCopyResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> FilesCopyResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default, int operationIndex = 0);
         /// <summary>
         /// Create Multipart File Upload
         /// </summary>
@@ -164,7 +164,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void FilesExtract(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0);
+        void FilesExtract(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0);
 
         /// <summary>
         /// Extract Zip File
@@ -177,7 +177,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> FilesExtractWithHttpInfo(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> FilesExtractWithHttpInfo(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0);
         /// <summary>
         /// Extract Zip File Using a Job
         /// </summary>
@@ -189,7 +189,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void FilesExtractJob(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0);
+        void FilesExtractJob(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0);
 
         /// <summary>
         /// Extract Zip File Using a Job
@@ -202,7 +202,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> FilesExtractJobWithHttpInfo(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> FilesExtractJobWithHttpInfo(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0);
         /// <summary>
         /// Get Shared Path
         /// </summary>
@@ -263,7 +263,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Recursive param to get search result as recursive.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>FileCollectionResponse</returns>
-        FileCollectionResponse FilesListFiles(string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0);
+        FileCollectionResponse FilesListFiles(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0);
 
         /// <summary>
         /// List or Download Files
@@ -283,7 +283,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Recursive param to get search result as recursive.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of FileCollectionResponse</returns>
-        ApiResponse<FileCollectionResponse> FilesListFilesWithHttpInfo(string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0);
+        ApiResponse<FileCollectionResponse> FilesListFilesWithHttpInfo(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0);
         /// <summary>
         /// List Root Folders
         /// </summary>
@@ -295,7 +295,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>FileCollectionResponse</returns>
-        FileCollectionResponse FilesListRootFolders(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0);
+        FileCollectionResponse FilesListRootFolders(string filter = default, bool? recursive = default, int operationIndex = 0);
 
         /// <summary>
         /// List Root Folders
@@ -308,7 +308,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of FileCollectionResponse</returns>
-        ApiResponse<FileCollectionResponse> FilesListRootFoldersWithHttpInfo(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0);
+        ApiResponse<FileCollectionResponse> FilesListRootFoldersWithHttpInfo(string filter = default, bool? recursive = default, int operationIndex = 0);
         /// <summary>
         /// Move or Rename File
         /// </summary>
@@ -320,7 +320,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Only applicable for moving or renaming a file.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void FilesMoveResource(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0);
+        void FilesMoveResource(FilePathDetail body, bool? overwrite = default, int operationIndex = 0);
 
         /// <summary>
         /// Move or Rename File
@@ -333,7 +333,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Only applicable for moving or renaming a file.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> FilesMoveResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0);
+        ApiResponse<Object> FilesMoveResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default, int operationIndex = 0);
         /// <summary>
         /// Commit Partial File Upload
         /// </summary>
@@ -346,7 +346,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CommitFilePartUploadResponse</returns>
-        CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0);
+        CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0);
 
         /// <summary>
         /// Commit Partial File Upload
@@ -360,7 +360,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CommitFilePartUploadResponse</returns>
-        ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0);
+        ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0);
         /// <summary>
         /// Upload File Part
         /// </summary>
@@ -427,7 +427,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FilesAbortUploadAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FilesAbortUploadAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Abort Multipart File Upload
@@ -441,7 +441,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FilesAbortUploadWithHttpInfoAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FilesAbortUploadWithHttpInfoAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Upload File or Create Folder
         /// </summary>
@@ -456,7 +456,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenericEntity</returns>
-        System.Threading.Tasks.Task<GenericEntity> FilesAddFileAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GenericEntity> FilesAddFileAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload File or Create Folder
@@ -472,7 +472,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenericEntity)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenericEntity>> FilesAddFileWithHttpInfoAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GenericEntity>> FilesAddFileWithHttpInfoAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Copy File
         /// </summary>
@@ -485,7 +485,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FilesCopyResourceAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FilesCopyResourceAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Copy File
@@ -499,7 +499,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FilesCopyResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FilesCopyResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create Multipart File Upload
         /// </summary>
@@ -513,7 +513,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CreateFilePartUploadResponse</returns>
-        System.Threading.Tasks.Task<CreateFilePartUploadResponse> FilesCreateUploadAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CreateFilePartUploadResponse> FilesCreateUploadAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Multipart File Upload
@@ -528,7 +528,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CreateFilePartUploadResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CreateFilePartUploadResponse>> FilesCreateUploadWithHttpInfoAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CreateFilePartUploadResponse>> FilesCreateUploadWithHttpInfoAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete File or Folder
         /// </summary>
@@ -540,7 +540,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FilesDeleteFileAsync(string path, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FilesDeleteFileAsync(string path, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete File or Folder
@@ -553,7 +553,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FilesDeleteFileWithHttpInfoAsync(string path, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FilesDeleteFileWithHttpInfoAsync(string path, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Extract Zip File
         /// </summary>
@@ -566,7 +566,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FilesExtractAsync(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FilesExtractAsync(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Extract Zip File
@@ -580,7 +580,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FilesExtractWithHttpInfoAsync(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FilesExtractWithHttpInfoAsync(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Extract Zip File Using a Job
         /// </summary>
@@ -593,7 +593,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FilesExtractJobAsync(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FilesExtractJobAsync(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Extract Zip File Using a Job
@@ -607,7 +607,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FilesExtractJobWithHttpInfoAsync(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FilesExtractJobWithHttpInfoAsync(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Shared Path
         /// </summary>
@@ -618,7 +618,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> FilesGetSharedPathAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<string> FilesGetSharedPathAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Shared Path
@@ -630,7 +630,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> FilesGetSharedPathWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<string>> FilesGetSharedPathWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Home Path
         /// </summary>
@@ -641,7 +641,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> FilesGetUserHomePathAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<string> FilesGetUserHomePathAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Home Path
@@ -653,7 +653,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> FilesGetUserHomePathWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<string>> FilesGetUserHomePathWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List or Download Files
         /// </summary>
@@ -673,7 +673,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FileCollectionResponse</returns>
-        System.Threading.Tasks.Task<FileCollectionResponse> FilesListFilesAsync(string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileCollectionResponse> FilesListFilesAsync(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List or Download Files
@@ -694,7 +694,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FileCollectionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FileCollectionResponse>> FilesListFilesWithHttpInfoAsync(string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<FileCollectionResponse>> FilesListFilesWithHttpInfoAsync(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Root Folders
         /// </summary>
@@ -707,7 +707,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FileCollectionResponse</returns>
-        System.Threading.Tasks.Task<FileCollectionResponse> FilesListRootFoldersAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<FileCollectionResponse> FilesListRootFoldersAsync(string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Root Folders
@@ -721,7 +721,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FileCollectionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FileCollectionResponse>> FilesListRootFoldersWithHttpInfoAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<FileCollectionResponse>> FilesListRootFoldersWithHttpInfoAsync(string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Move or Rename File
         /// </summary>
@@ -734,7 +734,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task FilesMoveResourceAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task FilesMoveResourceAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Move or Rename File
@@ -748,7 +748,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> FilesMoveResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> FilesMoveResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Commit Partial File Upload
         /// </summary>
@@ -762,7 +762,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommitFilePartUploadResponse</returns>
-        System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Commit Partial File Upload
@@ -777,7 +777,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommitFilePartUploadResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Upload File Part
         /// </summary>
@@ -791,7 +791,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UploadFilePartResponse</returns>
-        System.Threading.Tasks.Task<UploadFilePartResponse> FilesUploadPartAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UploadFilePartResponse> FilesUploadPartAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Upload File Part
@@ -806,7 +806,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UploadFilePartResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UploadFilePartResponse>> FilesUploadPartWithHttpInfoAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UploadFilePartResponse>> FilesUploadPartWithHttpInfoAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -817,7 +817,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task GetUploadConfigAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task GetUploadConfigAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 
@@ -829,7 +829,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> GetUploadConfigWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> GetUploadConfigWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -1043,7 +1043,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FilesAbortUploadAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FilesAbortUploadAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await FilesAbortUploadWithHttpInfoAsync(path, uploadId, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1057,7 +1057,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesAbortUploadWithHttpInfoAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesAbortUploadWithHttpInfoAsync(string path, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -1131,7 +1131,7 @@ namespace EssSharp.Api
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>GenericEntity</returns>
-        public GenericEntity FilesAddFile(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0)
+        public GenericEntity FilesAddFile(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = FilesAddFileWithHttpInfo(path, overwrite, stream, append);
             return localVarResponse.Data;
@@ -1147,7 +1147,7 @@ namespace EssSharp.Api
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of GenericEntity</returns>
-        public EssSharp.Client.ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -1229,7 +1229,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenericEntity</returns>
-        public async System.Threading.Tasks.Task<GenericEntity> FilesAddFileAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GenericEntity> FilesAddFileAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = await FilesAddFileWithHttpInfoAsync(path, overwrite, stream, append, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1246,7 +1246,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenericEntity)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenericEntity>> FilesAddFileWithHttpInfoAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenericEntity>> FilesAddFileWithHttpInfoAsync(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -1326,7 +1326,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void FilesCopyResource(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0)
+        public void FilesCopyResource(FilePathDetail body, bool? overwrite = default, int operationIndex = 0)
         {
             FilesCopyResourceWithHttpInfo(body, overwrite);
         }
@@ -1339,7 +1339,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> FilesCopyResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> FilesCopyResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default, int operationIndex = 0)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1410,7 +1410,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FilesCopyResourceAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FilesCopyResourceAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await FilesCopyResourceWithHttpInfoAsync(body, overwrite, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1424,7 +1424,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesCopyResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesCopyResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1581,7 +1581,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CreateFilePartUploadResponse</returns>
-        public async System.Threading.Tasks.Task<CreateFilePartUploadResponse> FilesCreateUploadAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CreateFilePartUploadResponse> FilesCreateUploadAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<CreateFilePartUploadResponse> localVarResponse = await FilesCreateUploadWithHttpInfoAsync(path, overwrite, append, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1597,7 +1597,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CreateFilePartUploadResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CreateFilePartUploadResponse>> FilesCreateUploadWithHttpInfoAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CreateFilePartUploadResponse>> FilesCreateUploadWithHttpInfoAsync(string path, bool overwrite, bool append, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -1741,7 +1741,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FilesDeleteFileAsync(string path, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FilesDeleteFileAsync(string path, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await FilesDeleteFileWithHttpInfoAsync(path, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1754,7 +1754,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesDeleteFileWithHttpInfoAsync(string path, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesDeleteFileWithHttpInfoAsync(string path, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -1819,7 +1819,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void FilesExtract(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0)
+        public void FilesExtract(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0)
         {
             FilesExtractWithHttpInfo(body, overwrite);
         }
@@ -1832,7 +1832,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> FilesExtractWithHttpInfo(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> FilesExtractWithHttpInfo(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1903,7 +1903,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FilesExtractAsync(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FilesExtractAsync(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await FilesExtractWithHttpInfoAsync(body, overwrite, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1917,7 +1917,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesExtractWithHttpInfoAsync(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesExtractWithHttpInfoAsync(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1988,7 +1988,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void FilesExtractJob(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0)
+        public void FilesExtractJob(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0)
         {
             FilesExtractJobWithHttpInfo(body, overwrite);
         }
@@ -2001,7 +2001,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Not applicable for folder.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> FilesExtractJobWithHttpInfo(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> FilesExtractJobWithHttpInfo(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -2072,7 +2072,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FilesExtractJobAsync(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FilesExtractJobAsync(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await FilesExtractJobWithHttpInfoAsync(body, overwrite, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2086,7 +2086,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesExtractJobWithHttpInfoAsync(ZipFileDetails body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesExtractJobWithHttpInfoAsync(ZipFileDetails body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -2225,7 +2225,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> FilesGetSharedPathAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<string> FilesGetSharedPathAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<string> localVarResponse = await FilesGetSharedPathWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2238,7 +2238,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<string>> FilesGetSharedPathWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<string>> FilesGetSharedPathWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2366,7 +2366,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> FilesGetUserHomePathAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<string> FilesGetUserHomePathAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<string> localVarResponse = await FilesGetUserHomePathWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2379,7 +2379,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<string>> FilesGetUserHomePathWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<string>> FilesGetUserHomePathWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2446,7 +2446,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Recursive param to get search result as recursive.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>FileCollectionResponse</returns>
-        public FileCollectionResponse FilesListFiles(string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0)
+        public FileCollectionResponse FilesListFiles(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = FilesListFilesWithHttpInfo(path, offset, limit, type, overwrite, action, fileSize, filter, recursive);
             return localVarResponse.Data;
@@ -2467,7 +2467,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Recursive param to get search result as recursive.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of FileCollectionResponse</returns>
-        public EssSharp.Client.ApiResponse<FileCollectionResponse> FilesListFilesWithHttpInfo(string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<FileCollectionResponse> FilesListFilesWithHttpInfo(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -2573,7 +2573,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FileCollectionResponse</returns>
-        public async System.Threading.Tasks.Task<FileCollectionResponse> FilesListFilesAsync(string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileCollectionResponse> FilesListFilesAsync(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = await FilesListFilesWithHttpInfoAsync(path, offset, limit, type, overwrite, action, fileSize, filter, recursive, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2595,7 +2595,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FileCollectionResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FileCollectionResponse>> FilesListFilesWithHttpInfoAsync(string path, int? offset = default(int?), int? limit = default(int?), string type = default(string), bool? overwrite = default(bool?), string action = default(string), long? fileSize = default(long?), string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FileCollectionResponse>> FilesListFilesWithHttpInfoAsync(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -2694,7 +2694,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>FileCollectionResponse</returns>
-        public FileCollectionResponse FilesListRootFolders(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0)
+        public FileCollectionResponse FilesListRootFolders(string filter = default, bool? recursive = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = FilesListRootFoldersWithHttpInfo(filter, recursive);
             return localVarResponse.Data;
@@ -2708,7 +2708,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Return search results recursively.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of FileCollectionResponse</returns>
-        public EssSharp.Client.ApiResponse<FileCollectionResponse> FilesListRootFoldersWithHttpInfo(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<FileCollectionResponse> FilesListRootFoldersWithHttpInfo(string filter = default, bool? recursive = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -2776,7 +2776,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FileCollectionResponse</returns>
-        public async System.Threading.Tasks.Task<FileCollectionResponse> FilesListRootFoldersAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<FileCollectionResponse> FilesListRootFoldersAsync(string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = await FilesListRootFoldersWithHttpInfoAsync(filter, recursive, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2791,7 +2791,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FileCollectionResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FileCollectionResponse>> FilesListRootFoldersWithHttpInfoAsync(string filter = default(string), bool? recursive = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FileCollectionResponse>> FilesListRootFoldersWithHttpInfoAsync(string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2859,7 +2859,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Only applicable for moving or renaming a file.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void FilesMoveResource(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0)
+        public void FilesMoveResource(FilePathDetail body, bool? overwrite = default, int operationIndex = 0)
         {
             FilesMoveResourceWithHttpInfo(body, overwrite);
         }
@@ -2872,7 +2872,7 @@ namespace EssSharp.Api
         /// <param name="overwrite">&lt;p&gt;Overwrite existing file. Only applicable for moving or renaming a file.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> FilesMoveResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> FilesMoveResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default, int operationIndex = 0)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -2943,7 +2943,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task FilesMoveResourceAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task FilesMoveResourceAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await FilesMoveResourceWithHttpInfoAsync(body, overwrite, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -2957,7 +2957,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesMoveResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> FilesMoveResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -3029,7 +3029,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CommitFilePartUploadResponse</returns>
-        public CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0)
+        public CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<CommitFilePartUploadResponse> localVarResponse = FilesUploadCommitWithHttpInfo(path, uploadId, body);
             return localVarResponse.Data;
@@ -3044,7 +3044,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CommitFilePartUploadResponse</returns>
-        public EssSharp.Client.ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -3119,7 +3119,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommitFilePartUploadResponse</returns>
-        public async System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<CommitFilePartUploadResponse> localVarResponse = await FilesUploadCommitWithHttpInfoAsync(path, uploadId, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3135,7 +3135,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommitFilePartUploadResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId = default(string), Dictionary<string, string> body = default(Dictionary<string, string>), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -3301,7 +3301,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UploadFilePartResponse</returns>
-        public async System.Threading.Tasks.Task<UploadFilePartResponse> FilesUploadPartAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UploadFilePartResponse> FilesUploadPartAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UploadFilePartResponse> localVarResponse = await FilesUploadPartWithHttpInfoAsync(path, partNum, uploadId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3317,7 +3317,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UploadFilePartResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UploadFilePartResponse>> FilesUploadPartWithHttpInfoAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UploadFilePartResponse>> FilesUploadPartWithHttpInfoAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -3457,7 +3457,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task GetUploadConfigAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task GetUploadConfigAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await GetUploadConfigWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -3469,7 +3469,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GetUploadConfigWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GetUploadConfigWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

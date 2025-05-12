@@ -299,7 +299,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and parent groups are returned for each group. If &lt;code&gt;none&lt;/code&gt; is specified, service role and parent groups are not returned.&lt;/p&gt; (optional, default to &quot;all&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Groups</returns>
-        Groups GroupsSearch(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0);
+        Groups GroupsSearch(string filter = default, int? limit = default, string expand = default, int operationIndex = 0);
 
         /// <summary>
         /// Search or Export Groups
@@ -313,7 +313,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and parent groups are returned for each group. If &lt;code&gt;none&lt;/code&gt; is specified, service role and parent groups are not returned.&lt;/p&gt; (optional, default to &quot;all&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Groups</returns>
-        ApiResponse<Groups> GroupsSearchWithHttpInfo(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0);
+        ApiResponse<Groups> GroupsSearchWithHttpInfo(string filter = default, int? limit = default, string expand = default, int operationIndex = 0);
         /// <summary>
         /// Delete Groups in File
         /// </summary>
@@ -355,7 +355,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GroupBean</returns>
-        System.Threading.Tasks.Task<GroupBean> GroupsAddAsync(GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GroupBean> GroupsAddAsync(GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add or Import Group(s)
@@ -368,7 +368,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GroupBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GroupBean>> GroupsAddWithHttpInfoAsync(GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GroupBean>> GroupsAddWithHttpInfoAsync(GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Add Groups to Group
         /// </summary>
@@ -381,7 +381,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Groups</returns>
-        System.Threading.Tasks.Task<Groups> GroupsAddGroupMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Groups> GroupsAddGroupMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add Groups to Group
@@ -395,7 +395,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Groups)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Groups>> GroupsAddGroupMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Groups>> GroupsAddGroupMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Add Group Users
         /// </summary>
@@ -408,7 +408,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Users</returns>
-        System.Threading.Tasks.Task<Users> GroupsAddUserMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Users> GroupsAddUserMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add Group Users
@@ -422,7 +422,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Users)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Users>> GroupsAddUserMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Users>> GroupsAddUserMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Group
         /// </summary>
@@ -434,7 +434,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task GroupsDeleteAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task GroupsDeleteAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Group
@@ -447,7 +447,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> GroupsDeleteWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> GroupsDeleteWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Group
         /// </summary>
@@ -460,7 +460,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GroupBean</returns>
-        System.Threading.Tasks.Task<GroupBean> GroupsEditAsync(string id, GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GroupBean> GroupsEditAsync(string id, GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Group
@@ -474,7 +474,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GroupBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GroupBean>> GroupsEditWithHttpInfoAsync(string id, GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GroupBean>> GroupsEditWithHttpInfoAsync(string id, GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Group
         /// </summary>
@@ -486,7 +486,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GroupBean</returns>
-        System.Threading.Tasks.Task<GroupBean> GroupsGetAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GroupBean> GroupsGetAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Group
@@ -499,7 +499,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GroupBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GroupBean>> GroupsGetWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GroupBean>> GroupsGetWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Groups in Group
         /// </summary>
@@ -511,7 +511,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Groups</returns>
-        System.Threading.Tasks.Task<Groups> GroupsGetGroupMembersOfGroupAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Groups> GroupsGetGroupMembersOfGroupAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Groups in Group
@@ -524,7 +524,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Groups)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Groups>> GroupsGetGroupMembersOfGroupWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Groups>> GroupsGetGroupMembersOfGroupWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Group Members
         /// </summary>
@@ -536,7 +536,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> GroupsGetMembersAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserBean> GroupsGetMembersAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Group Members
@@ -549,7 +549,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> GroupsGetMembersWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserBean>> GroupsGetMembersWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Group Users
         /// </summary>
@@ -561,7 +561,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Users</returns>
-        System.Threading.Tasks.Task<Users> GroupsGetUserMembersOfGroupAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Users> GroupsGetUserMembersOfGroupAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Group Users
@@ -574,7 +574,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Users)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Users>> GroupsGetUserMembersOfGroupWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Users>> GroupsGetUserMembersOfGroupWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove Groups From Group
         /// </summary>
@@ -587,7 +587,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> GroupsRemoveGroupMembersFromGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserBean> GroupsRemoveGroupMembersFromGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove Groups From Group
@@ -601,7 +601,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> GroupsRemoveGroupMembersFromGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserBean>> GroupsRemoveGroupMembersFromGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove Group Users
         /// </summary>
@@ -614,7 +614,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        System.Threading.Tasks.Task<UserBean> GroupsRemoveUserMembersFromGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserBean> GroupsRemoveUserMembersFromGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove Group Users
@@ -628,7 +628,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserBean>> GroupsRemoveUserMembersFromGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserBean>> GroupsRemoveUserMembersFromGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Search or Export Groups
         /// </summary>
@@ -642,7 +642,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Groups</returns>
-        System.Threading.Tasks.Task<Groups> GroupsSearchAsync(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Groups> GroupsSearchAsync(string filter = default, int? limit = default, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search or Export Groups
@@ -657,7 +657,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Groups)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Groups>> GroupsSearchWithHttpInfoAsync(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Groups>> GroupsSearchWithHttpInfoAsync(string filter = default, int? limit = default, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Groups in File
         /// </summary>
@@ -668,7 +668,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> UsersDeleteGroupsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Object> UsersDeleteGroupsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Groups in File
@@ -680,7 +680,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> UsersDeleteGroupsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> UsersDeleteGroupsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -889,7 +889,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GroupBean</returns>
-        public async System.Threading.Tasks.Task<GroupBean> GroupsAddAsync(GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GroupBean> GroupsAddAsync(GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GroupBean> localVarResponse = await GroupsAddWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -903,7 +903,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GroupBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GroupBean>> GroupsAddWithHttpInfoAsync(GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GroupBean>> GroupsAddWithHttpInfoAsync(GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1062,7 +1062,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Groups</returns>
-        public async System.Threading.Tasks.Task<Groups> GroupsAddGroupMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Groups> GroupsAddGroupMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Groups> localVarResponse = await GroupsAddGroupMembersToGroupWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1077,7 +1077,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Groups)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Groups>> GroupsAddGroupMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Groups>> GroupsAddGroupMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1243,7 +1243,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Users</returns>
-        public async System.Threading.Tasks.Task<Users> GroupsAddUserMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Users> GroupsAddUserMembersToGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Users> localVarResponse = await GroupsAddUserMembersToGroupWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1258,7 +1258,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Users)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Users>> GroupsAddUserMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Users>> GroupsAddUserMembersToGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1409,7 +1409,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task GroupsDeleteAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task GroupsDeleteAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await GroupsDeleteWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1422,7 +1422,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GroupsDeleteWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GroupsDeleteWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1577,7 +1577,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GroupBean</returns>
-        public async System.Threading.Tasks.Task<GroupBean> GroupsEditAsync(string id, GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GroupBean> GroupsEditAsync(string id, GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GroupBean> localVarResponse = await GroupsEditWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1592,7 +1592,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GroupBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GroupBean>> GroupsEditWithHttpInfoAsync(string id, GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GroupBean>> GroupsEditWithHttpInfoAsync(string id, GroupBean body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1746,7 +1746,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GroupBean</returns>
-        public async System.Threading.Tasks.Task<GroupBean> GroupsGetAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GroupBean> GroupsGetAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GroupBean> localVarResponse = await GroupsGetWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1760,7 +1760,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GroupBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GroupBean>> GroupsGetWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GroupBean>> GroupsGetWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1905,7 +1905,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Groups</returns>
-        public async System.Threading.Tasks.Task<Groups> GroupsGetGroupMembersOfGroupAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Groups> GroupsGetGroupMembersOfGroupAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Groups> localVarResponse = await GroupsGetGroupMembersOfGroupWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1919,7 +1919,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Groups)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Groups>> GroupsGetGroupMembersOfGroupWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Groups>> GroupsGetGroupMembersOfGroupWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -2064,7 +2064,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> GroupsGetMembersAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserBean> GroupsGetMembersAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserBean> localVarResponse = await GroupsGetMembersWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2078,7 +2078,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> GroupsGetMembersWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> GroupsGetMembersWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -2223,7 +2223,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Users</returns>
-        public async System.Threading.Tasks.Task<Users> GroupsGetUserMembersOfGroupAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Users> GroupsGetUserMembersOfGroupAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Users> localVarResponse = await GroupsGetUserMembersOfGroupWithHttpInfoAsync(id, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2237,7 +2237,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Users)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Users>> GroupsGetUserMembersOfGroupWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Users>> GroupsGetUserMembersOfGroupWithHttpInfoAsync(string id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -2394,7 +2394,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> GroupsRemoveGroupMembersFromGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserBean> GroupsRemoveGroupMembersFromGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserBean> localVarResponse = await GroupsRemoveGroupMembersFromGroupWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2409,7 +2409,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> GroupsRemoveGroupMembersFromGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> GroupsRemoveGroupMembersFromGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -2575,7 +2575,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
-        public async System.Threading.Tasks.Task<UserBean> GroupsRemoveUserMembersFromGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserBean> GroupsRemoveUserMembersFromGroupAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserBean> localVarResponse = await GroupsRemoveUserMembersFromGroupWithHttpInfoAsync(id, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2590,7 +2590,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> GroupsRemoveUserMembersFromGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserBean>> GroupsRemoveUserMembersFromGroupWithHttpInfoAsync(string id, List<string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -2667,7 +2667,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and parent groups are returned for each group. If &lt;code&gt;none&lt;/code&gt; is specified, service role and parent groups are not returned.&lt;/p&gt; (optional, default to &quot;all&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Groups</returns>
-        public Groups GroupsSearch(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0)
+        public Groups GroupsSearch(string filter = default, int? limit = default, string expand = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Groups> localVarResponse = GroupsSearchWithHttpInfo(filter, limit, expand);
             return localVarResponse.Data;
@@ -2682,7 +2682,7 @@ namespace EssSharp.Api
         /// <param name="expand">&lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and parent groups are returned for each group. If &lt;code&gt;none&lt;/code&gt; is specified, service role and parent groups are not returned.&lt;/p&gt; (optional, default to &quot;all&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Groups</returns>
-        public EssSharp.Client.ApiResponse<Groups> GroupsSearchWithHttpInfo(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Groups> GroupsSearchWithHttpInfo(string filter = default, int? limit = default, string expand = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -2755,7 +2755,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Groups</returns>
-        public async System.Threading.Tasks.Task<Groups> GroupsSearchAsync(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Groups> GroupsSearchAsync(string filter = default, int? limit = default, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Groups> localVarResponse = await GroupsSearchWithHttpInfoAsync(filter, limit, expand, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2771,7 +2771,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Groups)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Groups>> GroupsSearchWithHttpInfoAsync(string filter = default(string), int? limit = default(int?), string expand = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Groups>> GroupsSearchWithHttpInfoAsync(string filter = default, int? limit = default, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2910,7 +2910,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> UsersDeleteGroupsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Object> UsersDeleteGroupsAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Object> localVarResponse = await UsersDeleteGroupsWithHttpInfoAsync(operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2923,7 +2923,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UsersDeleteGroupsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> UsersDeleteGroupsWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

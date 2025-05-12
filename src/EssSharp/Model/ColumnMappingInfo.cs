@@ -74,7 +74,7 @@ namespace EssSharp.Model
         /// <param name="level">level.</param>
         /// <param name="type">type.</param>
         /// <param name="generationNumber">generationNumber.</param>
-        public ColumnMappingInfo(string dimension = default(string), string generation = default(string), string level = default(string), TypeEnum? type = default(TypeEnum?), int generationNumber = default(int))
+        public ColumnMappingInfo(string dimension = default, string generation = default, string level = default, TypeEnum? type = default, int generationNumber = default)
         {
             this.Dimension = dimension;
             this.Generation = generation;

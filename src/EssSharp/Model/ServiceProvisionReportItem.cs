@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="ServiceProvisionReportItem" /> class.
         /// </summary>
         /// <param name="roles">roles.</param>
-        public ServiceProvisionReportItem(ProvisionReportItemList roles = default(ProvisionReportItemList))
+        public ServiceProvisionReportItem(ProvisionReportItemList roles = default)
         {
             this.Roles = roles;
         }

@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="type">type.</param>
         /// <param name="entity">entity.</param>
-        public GenericEntity(Type type = default(Type), Object entity = default(Object))
+        public GenericEntity(Type type = default, Object entity = default)
         {
             this.Type = type;
             this.Entity = entity;

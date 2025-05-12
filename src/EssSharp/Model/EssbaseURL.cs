@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="application">application.</param>
         /// <param name="url">url.</param>
-        public EssbaseURL(string application = default(string), string url = default(string))
+        public EssbaseURL(string application = default, string url = default)
         {
             this.Application = application;
             this.Url = url;

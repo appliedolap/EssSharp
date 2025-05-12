@@ -247,7 +247,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevel</returns>
-        System.Threading.Tasks.Task<GenerationLevel> DimensionsEditDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GenerationLevel> DimensionsEditDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Generation
@@ -264,7 +264,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevel)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerationLevel>> DimensionsEditDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GenerationLevel>> DimensionsEditDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Level
         /// </summary>
@@ -280,7 +280,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevel</returns>
-        System.Threading.Tasks.Task<GenerationLevel> DimensionsEditDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GenerationLevel> DimensionsEditDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Level
@@ -297,7 +297,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevel)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerationLevel>> DimensionsEditDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GenerationLevel>> DimensionsEditDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Generation
         /// </summary>
@@ -312,7 +312,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevel</returns>
-        System.Threading.Tasks.Task<GenerationLevel> DimensionsGetDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GenerationLevel> DimensionsGetDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Generation
@@ -328,7 +328,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevel)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerationLevel>> DimensionsGetDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GenerationLevel>> DimensionsGetDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Level
         /// </summary>
@@ -343,7 +343,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevel</returns>
-        System.Threading.Tasks.Task<GenerationLevel> DimensionsGetDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GenerationLevel> DimensionsGetDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Level
@@ -359,7 +359,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevel)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerationLevel>> DimensionsGetDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GenerationLevel>> DimensionsGetDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Generations
         /// </summary>
@@ -373,7 +373,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevelList</returns>
-        System.Threading.Tasks.Task<GenerationLevelList> DimensionsListDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GenerationLevelList> DimensionsListDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Generations
@@ -388,7 +388,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevelList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerationLevelList>> DimensionsListDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GenerationLevelList>> DimensionsListDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Levels
         /// </summary>
@@ -402,7 +402,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevelList</returns>
-        System.Threading.Tasks.Task<GenerationLevelList> DimensionsListDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<GenerationLevelList> DimensionsListDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Levels
@@ -417,7 +417,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevelList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerationLevelList>> DimensionsListDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<GenerationLevelList>> DimensionsListDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Dimensions
         /// </summary>
@@ -430,7 +430,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DimensionList</returns>
-        System.Threading.Tasks.Task<DimensionList> DimensionsListDimensionsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DimensionList> DimensionsListDimensionsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Dimensions
@@ -444,7 +444,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DimensionList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DimensionList>> DimensionsListDimensionsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<DimensionList>> DimensionsListDimensionsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -685,7 +685,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevel</returns>
-        public async System.Threading.Tasks.Task<GenerationLevel> DimensionsEditDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GenerationLevel> DimensionsEditDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GenerationLevel> localVarResponse = await DimensionsEditDimGenerationsWithHttpInfoAsync(applicationName, databaseName, dimensionName, generationNumber, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -703,7 +703,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevel)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevel>> DimensionsEditDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevel>> DimensionsEditDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -904,7 +904,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevel</returns>
-        public async System.Threading.Tasks.Task<GenerationLevel> DimensionsEditDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GenerationLevel> DimensionsEditDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GenerationLevel> localVarResponse = await DimensionsEditDimLevelsWithHttpInfoAsync(applicationName, databaseName, dimensionName, levelNumber, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -922,7 +922,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevel)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevel>> DimensionsEditDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevel>> DimensionsEditDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, GenerationLevel body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1113,7 +1113,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevel</returns>
-        public async System.Threading.Tasks.Task<GenerationLevel> DimensionsGetDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GenerationLevel> DimensionsGetDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GenerationLevel> localVarResponse = await DimensionsGetDimGenerationsWithHttpInfoAsync(applicationName, databaseName, dimensionName, generationNumber, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1130,7 +1130,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevel)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevel>> DimensionsGetDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevel>> DimensionsGetDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int generationNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1314,7 +1314,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevel</returns>
-        public async System.Threading.Tasks.Task<GenerationLevel> DimensionsGetDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GenerationLevel> DimensionsGetDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GenerationLevel> localVarResponse = await DimensionsGetDimLevelsWithHttpInfoAsync(applicationName, databaseName, dimensionName, levelNumber, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1331,7 +1331,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevel)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevel>> DimensionsGetDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevel>> DimensionsGetDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int levelNumber, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1511,7 +1511,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevelList</returns>
-        public async System.Threading.Tasks.Task<GenerationLevelList> DimensionsListDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GenerationLevelList> DimensionsListDimGenerationsAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GenerationLevelList> localVarResponse = await DimensionsListDimGenerationsWithHttpInfoAsync(applicationName, databaseName, dimensionName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1527,7 +1527,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevelList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevelList>> DimensionsListDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevelList>> DimensionsListDimGenerationsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1706,7 +1706,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenerationLevelList</returns>
-        public async System.Threading.Tasks.Task<GenerationLevelList> DimensionsListDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<GenerationLevelList> DimensionsListDimLevelsAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<GenerationLevelList> localVarResponse = await DimensionsListDimLevelsWithHttpInfoAsync(applicationName, databaseName, dimensionName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1722,7 +1722,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenerationLevelList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevelList>> DimensionsListDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenerationLevelList>> DimensionsListDimLevelsWithHttpInfoAsync(string applicationName, string databaseName, string dimensionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1891,7 +1891,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DimensionList</returns>
-        public async System.Threading.Tasks.Task<DimensionList> DimensionsListDimensionsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<DimensionList> DimensionsListDimensionsAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<DimensionList> localVarResponse = await DimensionsListDimensionsWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1906,7 +1906,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DimensionList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DimensionList>> DimensionsListDimensionsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DimensionList>> DimensionsListDimensionsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

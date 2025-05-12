@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="Preference" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        public Preference(List<Link> links = default(List<Link>))
+        public Preference(List<Link> links = default)
         {
             this.Links = links;
         }

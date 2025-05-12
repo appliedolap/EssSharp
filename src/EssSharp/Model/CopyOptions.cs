@@ -41,7 +41,7 @@ namespace EssSharp.Model
         /// <param name="layouts">layouts.</param>
         /// <param name="approvers">approvers.</param>
         /// <param name="participants">participants.</param>
-        public CopyOptions(bool properties = default(bool), bool comments = default(bool), bool data = default(bool), bool tasks = default(bool), bool keyMetrics = default(bool), bool slice = default(bool), bool layouts = default(bool), bool approvers = default(bool), bool participants = default(bool))
+        public CopyOptions(bool properties = default, bool comments = default, bool data = default, bool tasks = default, bool keyMetrics = default, bool slice = default, bool layouts = default, bool approvers = default, bool participants = default)
         {
             this.Properties = properties;
             this.Comments = comments;

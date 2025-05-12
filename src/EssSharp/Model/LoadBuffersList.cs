@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="limit">limit.</param>
         /// <param name="properties">properties.</param>
         /// <param name="offset">offset.</param>
-        public LoadBuffersList(List<DataLoadBuffer> items = default(List<DataLoadBuffer>), long totalResults = default(long), bool hasMore = default(bool), long count = default(long), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
+        public LoadBuffersList(List<DataLoadBuffer> items = default, long totalResults = default, bool hasMore = default, long count = default, long limit = default, Dictionary<string, string> properties = default, long offset = default)
         {
             this.Items = items;
             this.TotalResults = totalResults;

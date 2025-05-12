@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="oldPassword">oldPassword.</param>
         /// <param name="newPassword">newPassword.</param>
-        public ResetPasswordBean(string oldPassword = default(string), string newPassword = default(string))
+        public ResetPasswordBean(string oldPassword = default, string newPassword = default)
         {
             this.OldPassword = oldPassword;
             this.NewPassword = newPassword;

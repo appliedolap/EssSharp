@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="roles">roles.</param>
         /// <param name="filters">filters.</param>
         /// <param name="scripts">scripts.</param>
-        public ApplicationProvisionReportItem(string name = default(string), ProvisionReportItemList roles = default(ProvisionReportItemList), DatabaseProvisionReportItemList filters = default(DatabaseProvisionReportItemList), DatabaseProvisionReportItemList scripts = default(DatabaseProvisionReportItemList))
+        public ApplicationProvisionReportItem(string name = default, ProvisionReportItemList roles = default, DatabaseProvisionReportItemList filters = default, DatabaseProvisionReportItemList scripts = default)
         {
             this.Name = name;
             this.Roles = roles;

@@ -33,15 +33,15 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="LockBlock" /> class.
         /// </summary>
         /// <param name="links">links.</param>
-        /// <param name="duration">duration.</param>
         /// <param name="user">user.</param>
         /// <param name="count">count.</param>
-        public LockBlock(List<Link> links = default(List<Link>), int duration = default(int), string user = default(string), int count = default(int))
+        /// <param name="duration">duration.</param>
+        public LockBlock(List<Link> links = default, string user = default, int count = default, int duration = default)
         {
             this.Links = links;
-            this.Duration = duration;
             this.User = user;
             this.Count = count;
+            this.Duration = duration;
         }
 
         /// <summary>
@@ -49,12 +49,6 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "links", EmitDefaultValue = false)]
         public List<Link> Links { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Duration
-        /// </summary>
-        [DataMember(Name = "duration", EmitDefaultValue = false)]
-        public int Duration { get; set; }
 
         /// <summary>
         /// Gets or Sets User
@@ -69,6 +63,12 @@ namespace EssSharp.Model
         public int Count { get; set; }
 
         /// <summary>
+        /// Gets or Sets Duration
+        /// </summary>
+        [DataMember(Name = "duration", EmitDefaultValue = false)]
+        public int Duration { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -77,9 +77,9 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class LockBlock {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
-            sb.Append("  Duration: ").Append(Duration).Append("\n");
             sb.Append("  User: ").Append(User).Append("\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
+            sb.Append("  Duration: ").Append(Duration).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

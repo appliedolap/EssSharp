@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="ruleFileName">ruleFileName.</param>
         /// <param name="delimiter">Currently only Comma is supported as delimiter.</param>
-        public DataLoadStartPayload(string ruleFileName = default(string), string delimiter = default(string))
+        public DataLoadStartPayload(string ruleFileName = default, string delimiter = default)
         {
             this.RuleFileName = ruleFileName;
             this.Delimiter = delimiter;

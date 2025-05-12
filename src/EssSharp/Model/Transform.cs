@@ -77,7 +77,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="nodes">nodes.</param>
         /// <param name="type">type.</param>
-        public Transform(List<Transform> nodes = default(List<Transform>), TypeEnum? type = default(TypeEnum?))
+        public Transform(List<Transform> nodes = default, TypeEnum? type = default)
         {
             this.Nodes = nodes;
             this.Type = type;

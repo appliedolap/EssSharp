@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="rows">rows.</param>
         /// <param name="links">links.</param>
-        public FilterBean(string name = default(string), List<FilterRow> rows = default(List<FilterRow>), List<Link> links = default(List<Link>))
+        public FilterBean(string name = default, List<FilterRow> rows = default, List<Link> links = default)
         {
             this.Name = name;
             this.Rows = rows;

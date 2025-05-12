@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public DSColumn(int id = default(int), string name = default(string))
+        public DSColumn(int id = default, string name = default)
         {
             this.Id = id;
             this.Name = name;

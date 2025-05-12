@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="limit">limit.</param>
         /// <param name="properties">properties.</param>
         /// <param name="offset">offset.</param>
-        public ProvisionReportItemList(List<ProvisionReportItem> items = default(List<ProvisionReportItem>), List<Link> links = default(List<Link>), bool hasMore = default(bool), long totalResults = default(long), long count = default(long), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
+        public ProvisionReportItemList(List<ProvisionReportItem> items = default, List<Link> links = default, bool hasMore = default, long totalResults = default, long count = default, long limit = default, Dictionary<string, string> properties = default, long offset = default)
         {
             this.Items = items;
             this.Links = links;

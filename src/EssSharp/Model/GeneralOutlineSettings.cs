@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="varyingAttributesEnabled">varyingAttributesEnabled.</param>
         /// <param name="timeModified">timeModified.</param>
         /// <param name="autoConfigure">autoConfigure.</param>
-        public GeneralOutlineSettings(bool caseSensitiveMembers = default(bool), string outlineType = default(string), bool allowDuplicateMemberNames = default(bool), bool typeMeasuresEnabled = default(bool), string dateFormat = default(string), bool varyingAttributesEnabled = default(bool), long timeModified = default(long), bool autoConfigure = default(bool))
+        public GeneralOutlineSettings(bool caseSensitiveMembers = default, string outlineType = default, bool allowDuplicateMemberNames = default, bool typeMeasuresEnabled = default, string dateFormat = default, bool varyingAttributesEnabled = default, long timeModified = default, bool autoConfigure = default)
         {
             this.CaseSensitiveMembers = caseSensitiveMembers;
             this.OutlineType = outlineType;

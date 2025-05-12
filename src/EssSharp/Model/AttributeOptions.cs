@@ -137,7 +137,7 @@ namespace EssSharp.Model
         /// <param name="modified">modified.</param>
         /// <param name="scadisAssociationMode">scadisAssociationMode.</param>
         /// <param name="scaassociationMode">scaassociationMode.</param>
-        public AttributeOptions(List<IndepDimension> indepDimensions = default(List<IndepDimension>), TypeEnum? type = default(TypeEnum?), string baseDimension = default(string), bool modified = default(bool), ScadisAssociationModeEnum? scadisAssociationMode = default(ScadisAssociationModeEnum?), ScaassociationModeEnum? scaassociationMode = default(ScaassociationModeEnum?))
+        public AttributeOptions(List<IndepDimension> indepDimensions = default, TypeEnum? type = default, string baseDimension = default, bool modified = default, ScadisAssociationModeEnum? scadisAssociationMode = default, ScaassociationModeEnum? scaassociationMode = default)
         {
             this.IndepDimensions = indepDimensions;
             this.Type = type;

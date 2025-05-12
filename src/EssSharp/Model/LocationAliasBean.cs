@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="databaseName">databaseName.</param>
         /// <param name="applicationLevelConnection">applicationLevelConnection.</param>
         /// <param name="links">links.</param>
-        public LocationAliasBean(string aliasName = default(string), string connectionName = default(string), string serverName = default(string), string userName = default(string), string applicationName = default(string), string databaseName = default(string), bool applicationLevelConnection = default(bool), List<Link> links = default(List<Link>))
+        public LocationAliasBean(string aliasName = default, string connectionName = default, string serverName = default, string userName = default, string applicationName = default, string databaseName = default, bool applicationLevelConnection = default, List<Link> links = default)
         {
             this.AliasName = aliasName;
             this.ConnectionName = connectionName;

@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="rangeStartValue">rangeStartValue.</param>
         /// <param name="removeAll">removeAll.</param>
         /// <param name="useRanges">useRanges.</param>
-        public AttributeBuildProperties(double rangeIncrementValue = default(double), double rangeStartValue = default(double), bool removeAll = default(bool), bool useRanges = default(bool))
+        public AttributeBuildProperties(double rangeIncrementValue = default, double rangeStartValue = default, bool removeAll = default, bool useRanges = default)
         {
             this.RangeIncrementValue = rangeIncrementValue;
             this.RangeStartValue = rangeStartValue;

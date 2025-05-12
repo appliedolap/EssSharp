@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="sourceCellCount">sourceCellCount.</param>
         /// <param name="targetCellCount">targetCellCount.</param>
         /// <param name="slices">slices.</param>
-        public AreaBean(string sourceArea = default(string), string targetArea = default(string), long sourceCellCount = default(long), long targetCellCount = default(long), List<MemberMappingBean> slices = default(List<MemberMappingBean>))
+        public AreaBean(string sourceArea = default, string targetArea = default, long sourceCellCount = default, long targetCellCount = default, List<MemberMappingBean> slices = default)
         {
             this.SourceArea = sourceArea;
             this.TargetArea = targetArea;

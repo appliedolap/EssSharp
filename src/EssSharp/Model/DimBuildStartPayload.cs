@@ -70,7 +70,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="DimBuildStartPayload" /> class.
         /// </summary>
         /// <param name="restructureOption">restructureOption.</param>
-        public DimBuildStartPayload(RestructureOptionEnum? restructureOption = default(RestructureOptionEnum?))
+        public DimBuildStartPayload(RestructureOptionEnum? restructureOption = default)
         {
             this.RestructureOption = restructureOption;
         }

@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="essbaseName">essbaseName.</param>
         /// <param name="columnName">columnName.</param>
-        public EsbToColMapInfo(string essbaseName = default(string), string columnName = default(string))
+        public EsbToColMapInfo(string essbaseName = default, string columnName = default)
         {
             this.EssbaseName = essbaseName;
             this.ColumnName = columnName;

@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="dbName">dbName.</param>
         /// <param name="state">state.</param>
         /// <param name="agentUrl">agentUrl.</param>
-        public ClusterNode(string machineName = default(string), string appName = default(string), string dbName = default(string), int state = default(int), string agentUrl = default(string))
+        public ClusterNode(string machineName = default, string appName = default, string dbName = default, int state = default, string agentUrl = default)
         {
             this.MachineName = machineName;
             this.AppName = appName;

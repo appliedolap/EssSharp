@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="disk">disk.</param>
         /// <param name="ram">ram.</param>
-        public SystemMaintenanceLimits(SystemMaintainableResource disk = default(SystemMaintainableResource), SystemMaintainableResource ram = default(SystemMaintainableResource))
+        public SystemMaintenanceLimits(SystemMaintainableResource disk = default, SystemMaintainableResource ram = default)
         {
             this.Disk = disk;
             this.Ram = ram;

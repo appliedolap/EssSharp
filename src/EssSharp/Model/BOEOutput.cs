@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="BOEOutput" /> class.
         /// </summary>
         /// <param name="messages">messages.</param>
-        public BOEOutput(string messages = default(string))
+        public BOEOutput(string messages = default)
         {
             this.Messages = messages;
         }

@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="versionId">versionId.</param>
         /// <param name="etag">etag.</param>
         /// <param name="lastModified">lastModified.</param>
-        public CommitFilePartUploadResponse(string opcRequestId = default(string), string opcMultipartMd5 = default(string), string versionId = default(string), string etag = default(string), DateTime lastModified = default(DateTime))
+        public CommitFilePartUploadResponse(string opcRequestId = default, string opcMultipartMd5 = default, string versionId = default, string etag = default, DateTime lastModified = default)
         {
             this.OpcRequestId = opcRequestId;
             this.OpcMultipartMd5 = opcMultipartMd5;

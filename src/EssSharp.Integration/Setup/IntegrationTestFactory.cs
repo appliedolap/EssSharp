@@ -133,7 +133,7 @@ namespace EssSharp.Integration.Setup
             var hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : "9000";
 
             _essbaseTestContainer = new ContainerBuilder()
-                .WithImage(image)                                                                     // "appliedolap/essbase:21.7-latest"
+                .WithImage(image)                                                                     // "appliedolap/essbase:21.7.0"
                 .WithName(containerName)                                                              // "essbase-21-7"
                 .WithNetwork("standalone")
                 .WithPortBinding(hostPort, "9000")                                                    // "9000"
@@ -190,6 +190,9 @@ namespace EssSharp.Integration.Setup
 
             if ( repoAndTag.EndsWith("-latest", StringComparison.OrdinalIgnoreCase) )
                 repoAndTag = repoAndTag.Substring(0, repoAndTag.Length - "-latest".Length);
+
+            if ( repoAndTag.Count(c => c == '.') == 2 )
+                repoAndTag = repoAndTag.Substring(0, repoAndTag.LastIndexOf('.'));
 
             return new string(repoAndTag.Select(c => char.IsLetterOrDigit(c) ? c : '-').ToArray());
         }

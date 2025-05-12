@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="hasMore">hasMore.</param>
         /// <param name="count">count.</param>
         /// <param name="properties">properties.</param>
-        public PartitionList(List<PartitionBean> items = default(List<PartitionBean>), long offset = default(long), long limit = default(long), long totalResults = default(long), bool hasMore = default(bool), long count = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>))
+        public PartitionList(List<PartitionBean> items = default, long offset = default, long limit = default, long totalResults = default, bool hasMore = default, long count = default, Dictionary<string, string> properties = default)
         {
             this.Items = items;
             this.Offset = offset;

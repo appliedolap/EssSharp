@@ -64,7 +64,7 @@ namespace EssSharp.Model
         /// <param name="timeMemberName">timeMemberName.</param>
         /// <param name="categoryMemberName">categoryMemberName.</param>
         /// <param name="partitionMemberName">partitionMemberName.</param>
-        public CurrencySettings(string currencyDatabase = default(string), ConversionTypeEnum? conversionType = default(ConversionTypeEnum?), string conversionTypeMemberName = default(string), string countryMemberName = default(string), string timeMemberName = default(string), string categoryMemberName = default(string), string partitionMemberName = default(string))
+        public CurrencySettings(string currencyDatabase = default, ConversionTypeEnum? conversionType = default, string conversionTypeMemberName = default, string countryMemberName = default, string timeMemberName = default, string categoryMemberName = default, string partitionMemberName = default)
         {
             this.CurrencyDatabase = currencyDatabase;
             this.ConversionType = conversionType;

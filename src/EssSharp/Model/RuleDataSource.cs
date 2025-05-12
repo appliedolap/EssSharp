@@ -63,7 +63,7 @@ namespace EssSharp.Model
         /// <param name="tokensCombineOption">tokensCombineOption.</param>
         /// <param name="sqlProperties">sqlProperties.</param>
         /// <param name="fileProperties">fileProperties.</param>
-        public RuleDataSource(string header = default(string), string name = default(string), List<string> tokens = default(List<string>), TokensCombineOptionEnum? tokensCombineOption = default(TokensCombineOptionEnum?), SQLProperties sqlProperties = default(SQLProperties), FileProperties fileProperties = default(FileProperties))
+        public RuleDataSource(string header = default, string name = default, List<string> tokens = default, TokensCombineOptionEnum? tokensCombineOption = default, SQLProperties sqlProperties = default, FileProperties fileProperties = default)
         {
             this.Header = header;
             this.Name = name;

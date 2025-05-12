@@ -9,6 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DrillThroughReportsExecute**](DrillThroughReportsApi.md#drillthroughreportsexecute) | **POST** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Execute Drill Through Report |
 | [**DrillThroughReportsGetReport**](DrillThroughReportsApi.md#drillthroughreportsgetreport) | **GET** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Get Drill Through Report |
 | [**DrillThroughReportsGetReports**](DrillThroughReportsApi.md#drillthroughreportsgetreports) | **GET** /applications/{applicationName}/databases/{databaseName}/reports | Get Drill Through Reports |
+| [**DrillThroughReportsGetReportsForIntersections**](DrillThroughReportsApi.md#drillthroughreportsgetreportsforintersections) | **POST** /applications/{applicationName}/databases/{databaseName}/dtreports/list | List Drill Through Reports For Given Cell Intersections |
 | [**DrillThroughReportsUpdateReport**](DrillThroughReportsApi.md#drillthroughreportsupdatereport) | **PUT** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Update Drill Through Report |
 
 <a id="drillthroughreportscreate"></a>
@@ -508,6 +509,103 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The drill through reports were retrieved successfully. Returns the links to get, edit, or delete the reports.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to get the drill through reports. The application or database name may be incorrect.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="drillthroughreportsgetreportsforintersections"></a>
+# **DrillThroughReportsGetReportsForIntersections**
+> void DrillThroughReportsGetReportsForIntersections (string applicationName, string databaseName, DrillthroughMetadataBean body = null)
+
+List Drill Through Reports For Given Cell Intersections
+
+<p>Get a list of allowed drill through reports for provided cell intersections.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class DrillThroughReportsGetReportsForIntersectionsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new DrillThroughReportsApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var body = new DrillthroughMetadataBean(); // DrillthroughMetadataBean |  (optional) 
+
+            try
+            {
+                // List Drill Through Reports For Given Cell Intersections
+                apiInstance.DrillThroughReportsGetReportsForIntersections(applicationName, databaseName, body);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DrillThroughReportsApi.DrillThroughReportsGetReportsForIntersections: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the DrillThroughReportsGetReportsForIntersectionsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List Drill Through Reports For Given Cell Intersections
+    apiInstance.DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(applicationName, databaseName, body);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling DrillThroughReportsApi.DrillThroughReportsGetReportsForIntersectionsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **body** | [**DrillthroughMetadataBean**](DrillthroughMetadataBean.md) |  | [optional]  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The list of allowed drill through reports, for specified cell intersections, are fetched successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to fetch the drill through reports for specified cell intersections.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

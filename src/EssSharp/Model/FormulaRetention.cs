@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="focus">focus.</param>
         /// <param name="retrive">retrive.</param>
         /// <param name="fill">fill.</param>
-        public FormulaRetention(bool comments = default(bool), bool zoom = default(bool), bool focus = default(bool), bool retrive = default(bool), bool fill = default(bool))
+        public FormulaRetention(bool comments = default, bool zoom = default, bool focus = default, bool retrive = default, bool fill = default)
         {
             this.Comments = comments;
             this.Zoom = zoom;

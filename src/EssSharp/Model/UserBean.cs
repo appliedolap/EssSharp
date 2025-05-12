@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="role">role.</param>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public UserBean(List<Link> links = default(List<Link>), string token = default(string), List<string> groups = default(List<string>), string email = default(string), string password = default(string), string role = default(string), string id = default(string), string name = default(string))
+        public UserBean(List<Link> links = default, string token = default, List<string> groups = default, string email = default, string password = default, string role = default, string id = default, string name = default)
         {
             this.Links = links;
             this.Token = token;

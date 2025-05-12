@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="description">description.</param>
         /// <param name="queryTracking">queryTracking.</param>
-        public GeneralSettings(string description = default(string), bool queryTracking = default(bool))
+        public GeneralSettings(string description = default, bool queryTracking = default)
         {
             this.Description = description;
             this.QueryTracking = queryTracking;

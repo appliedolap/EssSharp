@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="streamId">streamId.</param>
         /// <param name="links">links.</param>
-        public StreamProcessStartResponse(string streamId = default(string), List<Link> links = default(List<Link>))
+        public StreamProcessStartResponse(string streamId = default, List<Link> links = default)
         {
             this.StreamId = streamId;
             this.Links = links;

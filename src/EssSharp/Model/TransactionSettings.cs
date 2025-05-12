@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="concurrencyPreImageAccess">concurrencyPreImageAccess.</param>
         /// <param name="commitBlocks">commitBlocks.</param>
         /// <param name="commitRows">commitRows.</param>
-        public TransactionSettings(bool committedAccess = default(bool), int concurrencyWaitSeconds = default(int), bool concurrencyPreImageAccess = default(bool), long commitBlocks = default(long), long commitRows = default(long))
+        public TransactionSettings(bool committedAccess = default, int concurrencyWaitSeconds = default, bool concurrencyPreImageAccess = default, long commitBlocks = default, long commitRows = default)
         {
             this.CommittedAccess = committedAccess;
             this.ConcurrencyWaitSeconds = concurrencyWaitSeconds;

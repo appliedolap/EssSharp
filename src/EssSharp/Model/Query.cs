@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="description">description.</param>
         /// <param name="spec">spec.</param>
         /// <param name="preferences">preferences.</param>
-        public Query(string description = default(string), string spec = default(string), NamedQueriesPreferences preferences = default(NamedQueriesPreferences))
+        public Query(string description = default, string spec = default, NamedQueriesPreferences preferences = default)
         {
             this.Description = description;
             this.Spec = spec;

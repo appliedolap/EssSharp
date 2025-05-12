@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="applicationElapsedTime">applicationElapsedTime.</param>
         /// <param name="numberOfConnections">numberOfConnections.</param>
         /// <param name="loadStatus">loadStatus.</param>
-        public ApplicationStatistics(long applicationStartTime = default(long), string applicationElapsedTime = default(string), int numberOfConnections = default(int), string loadStatus = default(string))
+        public ApplicationStatistics(long applicationStartTime = default, string applicationElapsedTime = default, int numberOfConnections = default, string loadStatus = default)
         {
             this.ApplicationStartTime = applicationStartTime;
             this.ApplicationElapsedTime = applicationElapsedTime;

@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="varObject">varObject.</param>
         /// <param name="timeCreated">timeCreated.</param>
         /// <param name="bucket">bucket.</param>
-        public CreateFilePartUploadResponse(string uploadId = default(string), string varNamespace = default(string), string varObject = default(string), string timeCreated = default(string), string bucket = default(string))
+        public CreateFilePartUploadResponse(string uploadId = default, string varNamespace = default, string varObject = default, string timeCreated = default, string bucket = default)
         {
             this.UploadId = uploadId;
             this.Namespace = varNamespace;

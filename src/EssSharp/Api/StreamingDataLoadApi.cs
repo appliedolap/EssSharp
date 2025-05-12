@@ -63,7 +63,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
-        StreamProcessStartResponse DataloadStart(string applicationName, string databaseName, DataLoadStartPayload body = default(DataLoadStartPayload), int operationIndex = 0);
+        StreamProcessStartResponse DataloadStart(string applicationName, string databaseName, DataLoadStartPayload body = default, int operationIndex = 0);
 
         /// <summary>
         /// Start Data Load
@@ -77,7 +77,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
-        ApiResponse<StreamProcessStartResponse> DataloadStartWithHttpInfo(string applicationName, string databaseName, DataLoadStartPayload body = default(DataLoadStartPayload), int operationIndex = 0);
+        ApiResponse<StreamProcessStartResponse> DataloadStartWithHttpInfo(string applicationName, string databaseName, DataLoadStartPayload body = default, int operationIndex = 0);
         /// <summary>
         /// Push Data
         /// </summary>
@@ -91,7 +91,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
-        StreamProcessStartResponse DataloadStreamData(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0);
+        StreamProcessStartResponse DataloadStreamData(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0);
 
         /// <summary>
         /// Push Data
@@ -106,7 +106,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
-        ApiResponse<StreamProcessStartResponse> DataloadStreamDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0);
+        ApiResponse<StreamProcessStartResponse> DataloadStreamDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -129,7 +129,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessEndResponse</returns>
-        System.Threading.Tasks.Task<StreamProcessEndResponse> DataloadEndAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StreamProcessEndResponse> DataloadEndAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// End Data Load
@@ -144,7 +144,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessEndResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StreamProcessEndResponse>> DataloadEndWithHttpInfoAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StreamProcessEndResponse>> DataloadEndWithHttpInfoAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Start Data Load
         /// </summary>
@@ -158,7 +158,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        System.Threading.Tasks.Task<StreamProcessStartResponse> DataloadStartAsync(string applicationName, string databaseName, DataLoadStartPayload body = default(DataLoadStartPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StreamProcessStartResponse> DataloadStartAsync(string applicationName, string databaseName, DataLoadStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Start Data Load
@@ -173,7 +173,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DataloadStartWithHttpInfoAsync(string applicationName, string databaseName, DataLoadStartPayload body = default(DataLoadStartPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DataloadStartWithHttpInfoAsync(string applicationName, string databaseName, DataLoadStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Push Data
         /// </summary>
@@ -188,7 +188,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        System.Threading.Tasks.Task<StreamProcessStartResponse> DataloadStreamDataAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StreamProcessStartResponse> DataloadStreamDataAsync(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Push Data
@@ -204,7 +204,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DataloadStreamDataWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DataloadStreamDataWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -431,7 +431,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessEndResponse</returns>
-        public async System.Threading.Tasks.Task<StreamProcessEndResponse> DataloadEndAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StreamProcessEndResponse> DataloadEndAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<StreamProcessEndResponse> localVarResponse = await DataloadEndWithHttpInfoAsync(applicationName, databaseName, streamId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -447,7 +447,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessEndResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessEndResponse>> DataloadEndWithHttpInfoAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessEndResponse>> DataloadEndWithHttpInfoAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -529,7 +529,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
-        public StreamProcessStartResponse DataloadStart(string applicationName, string databaseName, DataLoadStartPayload body = default(DataLoadStartPayload), int operationIndex = 0)
+        public StreamProcessStartResponse DataloadStart(string applicationName, string databaseName, DataLoadStartPayload body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = DataloadStartWithHttpInfo(applicationName, databaseName, body);
             return localVarResponse.Data;
@@ -544,7 +544,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
-        public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DataloadStartWithHttpInfo(string applicationName, string databaseName, DataLoadStartPayload body = default(DataLoadStartPayload), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DataloadStartWithHttpInfo(string applicationName, string databaseName, DataLoadStartPayload body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -622,7 +622,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DataloadStartAsync(string applicationName, string databaseName, DataLoadStartPayload body = default(DataLoadStartPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DataloadStartAsync(string applicationName, string databaseName, DataLoadStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = await DataloadStartWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -638,7 +638,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DataloadStartWithHttpInfoAsync(string applicationName, string databaseName, DataLoadStartPayload body = default(DataLoadStartPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DataloadStartWithHttpInfoAsync(string applicationName, string databaseName, DataLoadStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -717,7 +717,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
-        public StreamProcessStartResponse DataloadStreamData(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0)
+        public StreamProcessStartResponse DataloadStreamData(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = DataloadStreamDataWithHttpInfo(applicationName, databaseName, streamId, body);
             return localVarResponse.Data;
@@ -733,7 +733,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
-        public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DataloadStreamDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DataloadStreamDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -819,7 +819,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DataloadStreamDataAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DataloadStreamDataAsync(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = await DataloadStreamDataWithHttpInfoAsync(applicationName, databaseName, streamId, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -836,7 +836,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DataloadStreamDataWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DataloadStreamDataWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

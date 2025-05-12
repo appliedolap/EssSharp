@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="MembersList" /> class.
         /// </summary>
         /// <param name="items">items.</param>
-        public MembersList(List<MemberBean> items = default(List<MemberBean>))
+        public MembersList(List<MemberBean> items = default)
         {
             this.Items = items;
         }

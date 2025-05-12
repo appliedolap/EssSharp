@@ -36,7 +36,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Size of sandbox dimension members. Default is 100 if body is empty.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SandboxDetail</returns>
-        SandboxDetail SandboxDimensionAddMembers(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0);
+        SandboxDetail SandboxDimensionAddMembers(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0);
 
         /// <summary>
         /// Add Sandbox Members
@@ -50,7 +50,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Size of sandbox dimension members. Default is 100 if body is empty.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SandboxDetail</returns>
-        ApiResponse<SandboxDetail> SandboxDimensionAddMembersWithHttpInfo(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0);
+        ApiResponse<SandboxDetail> SandboxDimensionAddMembersWithHttpInfo(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0);
         /// <summary>
         /// Create Sandbox
         /// </summary>
@@ -63,7 +63,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Maximum count of sandbox dimension members. Default is 100 if body is empty.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SandboxDetail</returns>
-        SandboxDetail SandboxDimensionCreate(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0);
+        SandboxDetail SandboxDimensionCreate(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0);
 
         /// <summary>
         /// Create Sandbox
@@ -77,7 +77,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Maximum count of sandbox dimension members. Default is 100 if body is empty.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SandboxDetail</returns>
-        ApiResponse<SandboxDetail> SandboxDimensionCreateWithHttpInfo(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0);
+        ApiResponse<SandboxDetail> SandboxDimensionCreateWithHttpInfo(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0);
         /// <summary>
         /// Delete Sandbox
         /// </summary>
@@ -150,7 +150,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SandboxDetail</returns>
-        System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionAddMembersAsync(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionAddMembersAsync(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add Sandbox Members
@@ -165,7 +165,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SandboxDetail)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SandboxDetail>> SandboxDimensionAddMembersWithHttpInfoAsync(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<SandboxDetail>> SandboxDimensionAddMembersWithHttpInfoAsync(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create Sandbox
         /// </summary>
@@ -179,7 +179,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SandboxDetail</returns>
-        System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionCreateAsync(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionCreateAsync(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Sandbox
@@ -194,7 +194,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SandboxDetail)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SandboxDetail>> SandboxDimensionCreateWithHttpInfoAsync(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<SandboxDetail>> SandboxDimensionCreateWithHttpInfoAsync(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Sandbox
         /// </summary>
@@ -207,7 +207,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task SandboxDimensionDeleteAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task SandboxDimensionDeleteAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Sandbox
@@ -221,7 +221,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> SandboxDimensionDeleteWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> SandboxDimensionDeleteWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Sandbox Details
         /// </summary>
@@ -234,7 +234,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SandboxDetail</returns>
-        System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionGetAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionGetAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Sandbox Details
@@ -248,7 +248,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SandboxDetail)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SandboxDetail>> SandboxDimensionGetWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<SandboxDetail>> SandboxDimensionGetWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -378,7 +378,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Size of sandbox dimension members. Default is 100 if body is empty.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SandboxDetail</returns>
-        public SandboxDetail SandboxDimensionAddMembers(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0)
+        public SandboxDetail SandboxDimensionAddMembers(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<SandboxDetail> localVarResponse = SandboxDimensionAddMembersWithHttpInfo(applicationName, databaseName, body);
             return localVarResponse.Data;
@@ -393,7 +393,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Size of sandbox dimension members. Default is 100 if body is empty.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SandboxDetail</returns>
-        public EssSharp.Client.ApiResponse<SandboxDetail> SandboxDimensionAddMembersWithHttpInfo(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<SandboxDetail> SandboxDimensionAddMembersWithHttpInfo(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -471,7 +471,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SandboxDetail</returns>
-        public async System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionAddMembersAsync(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionAddMembersAsync(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<SandboxDetail> localVarResponse = await SandboxDimensionAddMembersWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -487,7 +487,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SandboxDetail)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<SandboxDetail>> SandboxDimensionAddMembersWithHttpInfoAsync(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<SandboxDetail>> SandboxDimensionAddMembersWithHttpInfoAsync(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -565,7 +565,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Maximum count of sandbox dimension members. Default is 100 if body is empty.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SandboxDetail</returns>
-        public SandboxDetail SandboxDimensionCreate(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0)
+        public SandboxDetail SandboxDimensionCreate(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<SandboxDetail> localVarResponse = SandboxDimensionCreateWithHttpInfo(applicationName, databaseName, body);
             return localVarResponse.Data;
@@ -580,7 +580,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Maximum count of sandbox dimension members. Default is 100 if body is empty.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SandboxDetail</returns>
-        public EssSharp.Client.ApiResponse<SandboxDetail> SandboxDimensionCreateWithHttpInfo(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<SandboxDetail> SandboxDimensionCreateWithHttpInfo(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -658,7 +658,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SandboxDetail</returns>
-        public async System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionCreateAsync(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionCreateAsync(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<SandboxDetail> localVarResponse = await SandboxDimensionCreateWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -674,7 +674,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SandboxDetail)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<SandboxDetail>> SandboxDimensionCreateWithHttpInfoAsync(string applicationName, string databaseName, SandboxRequestPayload body = default(SandboxRequestPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<SandboxDetail>> SandboxDimensionCreateWithHttpInfoAsync(string applicationName, string databaseName, SandboxRequestPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -836,7 +836,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task SandboxDimensionDeleteAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task SandboxDimensionDeleteAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await SandboxDimensionDeleteWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -850,7 +850,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> SandboxDimensionDeleteWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> SandboxDimensionDeleteWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1010,7 +1010,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SandboxDetail</returns>
-        public async System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionGetAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SandboxDetail> SandboxDimensionGetAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<SandboxDetail> localVarResponse = await SandboxDimensionGetWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1025,7 +1025,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SandboxDetail)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<SandboxDetail>> SandboxDimensionGetWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<SandboxDetail>> SandboxDimensionGetWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="value">value.</param>
         /// <param name="links">links.</param>
-        public PropertyEntry(string name = default(string), string value = default(string), List<Link> links = default(List<Link>))
+        public PropertyEntry(string name = default, string value = default, List<Link> links = default)
         {
             this.Name = name;
             this.Value = value;

@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="Data" /> class.
         /// </summary>
         /// <param name="ranges">ranges.</param>
-        public Data(List<GridRange> ranges = default(List<GridRange>))
+        public Data(List<GridRange> ranges = default)
         {
             this.Ranges = ranges;
         }

@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="MDXOperation" /> class.
         /// </summary>
         /// <param name="query">query.</param>
-        public MDXOperation(string query = default(string))
+        public MDXOperation(string query = default)
         {
             this.Query = query;
         }

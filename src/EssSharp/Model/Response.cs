@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="opRequestId">opRequestId.</param>
         /// <param name="opcContentMd5">opcContentMd5.</param>
         /// <param name="etag">etag.</param>
-        public Response(string opRequestId = default(string), string opcContentMd5 = default(string), string etag = default(string))
+        public Response(string opRequestId = default, string opcContentMd5 = default, string etag = default)
         {
             this.OpRequestId = opRequestId;
             this.OpcContentMd5 = opcContentMd5;

@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="name">name.</param>
         /// <param name="cell">cell.</param>
-        public HeaderType(string name = default(string), string cell = default(string))
+        public HeaderType(string name = default, string cell = default)
         {
             this.Name = name;
             this.Cell = cell;

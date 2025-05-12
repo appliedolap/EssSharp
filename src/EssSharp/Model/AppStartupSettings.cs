@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="allowUsersToStartApplication">allowUsersToStartApplication.</param>
         /// <param name="startApplicationWhenServerStarts">startApplicationWhenServerStarts.</param>
-        public AppStartupSettings(bool allowUsersToStartApplication = default(bool), bool startApplicationWhenServerStarts = default(bool))
+        public AppStartupSettings(bool allowUsersToStartApplication = default, bool startApplicationWhenServerStarts = default)
         {
             this.AllowUsersToStartApplication = allowUsersToStartApplication;
             this.StartApplicationWhenServerStarts = startApplicationWhenServerStarts;

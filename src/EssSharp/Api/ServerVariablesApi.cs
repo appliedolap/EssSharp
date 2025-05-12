@@ -128,7 +128,7 @@ namespace EssSharp.Api
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>VariableList</returns>
-        VariableList VariablesListServerVariables(string all = default(string), int operationIndex = 0);
+        VariableList VariablesListServerVariables(string all = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Server Variables
@@ -140,7 +140,7 @@ namespace EssSharp.Api
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of VariableList</returns>
-        ApiResponse<VariableList> VariablesListServerVariablesWithHttpInfo(string all = default(string), int operationIndex = 0);
+        ApiResponse<VariableList> VariablesListServerVariablesWithHttpInfo(string all = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -161,7 +161,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Variable</returns>
-        System.Threading.Tasks.Task<Variable> VariablesCreateServerVariableAsync(Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Variable> VariablesCreateServerVariableAsync(Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Server Variable
@@ -174,7 +174,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Variable>> VariablesCreateServerVariableWithHttpInfoAsync(Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Variable>> VariablesCreateServerVariableWithHttpInfoAsync(Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Server Variable
         /// </summary>
@@ -186,7 +186,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task VariablesDeleteServerVariableAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task VariablesDeleteServerVariableAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Server Variable
@@ -199,7 +199,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> VariablesDeleteServerVariableWithHttpInfoAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> VariablesDeleteServerVariableWithHttpInfoAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Server Variable
         /// </summary>
@@ -212,7 +212,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Variable</returns>
-        System.Threading.Tasks.Task<Variable> VariablesEditServerVariableAsync(string variableName, Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Variable> VariablesEditServerVariableAsync(string variableName, Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Server Variable
@@ -226,7 +226,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Variable>> VariablesEditServerVariableWithHttpInfoAsync(string variableName, Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Variable>> VariablesEditServerVariableWithHttpInfoAsync(string variableName, Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Server Variable
         /// </summary>
@@ -238,7 +238,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Variable</returns>
-        System.Threading.Tasks.Task<Variable> VariablesGetServerVariableAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Variable> VariablesGetServerVariableAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Server Variable
@@ -251,7 +251,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Variable>> VariablesGetServerVariableWithHttpInfoAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Variable>> VariablesGetServerVariableWithHttpInfoAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Server Variables
         /// </summary>
@@ -263,7 +263,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of VariableList</returns>
-        System.Threading.Tasks.Task<VariableList> VariablesListServerVariablesAsync(string all = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<VariableList> VariablesListServerVariablesAsync(string all = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Server Variables
@@ -276,7 +276,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (VariableList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VariableList>> VariablesListServerVariablesWithHttpInfoAsync(string all = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<VariableList>> VariablesListServerVariablesWithHttpInfoAsync(string all = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -485,7 +485,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Variable</returns>
-        public async System.Threading.Tasks.Task<Variable> VariablesCreateServerVariableAsync(Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Variable> VariablesCreateServerVariableAsync(Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Variable> localVarResponse = await VariablesCreateServerVariableWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -499,7 +499,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Variable>> VariablesCreateServerVariableWithHttpInfoAsync(Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Variable>> VariablesCreateServerVariableWithHttpInfoAsync(Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -643,7 +643,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task VariablesDeleteServerVariableAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task VariablesDeleteServerVariableAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await VariablesDeleteServerVariableWithHttpInfoAsync(variableName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -656,7 +656,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> VariablesDeleteServerVariableWithHttpInfoAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> VariablesDeleteServerVariableWithHttpInfoAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'variableName' is set
             if (variableName == null)
@@ -811,7 +811,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Variable</returns>
-        public async System.Threading.Tasks.Task<Variable> VariablesEditServerVariableAsync(string variableName, Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Variable> VariablesEditServerVariableAsync(string variableName, Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Variable> localVarResponse = await VariablesEditServerVariableWithHttpInfoAsync(variableName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -826,7 +826,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Variable>> VariablesEditServerVariableWithHttpInfoAsync(string variableName, Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Variable>> VariablesEditServerVariableWithHttpInfoAsync(string variableName, Variable body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'variableName' is set
             if (variableName == null)
@@ -980,7 +980,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Variable</returns>
-        public async System.Threading.Tasks.Task<Variable> VariablesGetServerVariableAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Variable> VariablesGetServerVariableAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Variable> localVarResponse = await VariablesGetServerVariableWithHttpInfoAsync(variableName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -994,7 +994,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Variable)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Variable>> VariablesGetServerVariableWithHttpInfoAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Variable>> VariablesGetServerVariableWithHttpInfoAsync(string variableName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'variableName' is set
             if (variableName == null)
@@ -1060,7 +1060,7 @@ namespace EssSharp.Api
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>VariableList</returns>
-        public VariableList VariablesListServerVariables(string all = default(string), int operationIndex = 0)
+        public VariableList VariablesListServerVariables(string all = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<VariableList> localVarResponse = VariablesListServerVariablesWithHttpInfo(all);
             return localVarResponse.Data;
@@ -1073,7 +1073,7 @@ namespace EssSharp.Api
         /// <param name="all"> (optional, default to &quot;false&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of VariableList</returns>
-        public EssSharp.Client.ApiResponse<VariableList> VariablesListServerVariablesWithHttpInfo(string all = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<VariableList> VariablesListServerVariablesWithHttpInfo(string all = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -1136,7 +1136,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of VariableList</returns>
-        public async System.Threading.Tasks.Task<VariableList> VariablesListServerVariablesAsync(string all = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<VariableList> VariablesListServerVariablesAsync(string all = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<VariableList> localVarResponse = await VariablesListServerVariablesWithHttpInfoAsync(all, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1150,7 +1150,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (VariableList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<VariableList>> VariablesListServerVariablesWithHttpInfoAsync(string all = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<VariableList>> VariablesListServerVariablesWithHttpInfoAsync(string all = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

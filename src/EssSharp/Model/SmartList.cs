@@ -38,7 +38,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="outOfRangeName">outOfRangeName.</param>
         /// <param name="removeUnspecified">removeUnspecified.</param>
-        public SmartList(int incrementalNumber = default(int), int startNumber = default(int), string missingName = default(string), string name = default(string), string outOfRangeName = default(string), int removeUnspecified = default(int))
+        public SmartList(int incrementalNumber = default, int startNumber = default, string missingName = default, string name = default, string outOfRangeName = default, int removeUnspecified = default)
         {
             this.IncrementalNumber = incrementalNumber;
             this.StartNumber = startNumber;

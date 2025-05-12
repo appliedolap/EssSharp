@@ -79,7 +79,7 @@ namespace EssSharp.Model
         /// <param name="inspectDBAllowed">inspectDBAllowed.</param>
         /// <param name="dbVariablesSetting">dbVariablesSetting.</param>
         /// <param name="links">links.</param>
-        public Cube(string name = default(string), string application = default(string), string owner = default(string), long creationTime = default(long), string modifiedBy = default(string), long modifiedTime = default(long), string status = default(string), long startTime = default(long), string description = default(string), TypeEnum? type = default(TypeEnum?), string applicationRole = default(string), bool easManagedApp = default(bool), bool startStopDBAllowed = default(bool), bool inspectDBAllowed = default(bool), VariablesSetting dbVariablesSetting = default(VariablesSetting), List<Link> links = default(List<Link>))
+        public Cube(string name = default, string application = default, string owner = default, long creationTime = default, string modifiedBy = default, long modifiedTime = default, string status = default, long startTime = default, string description = default, TypeEnum? type = default, string applicationRole = default, bool easManagedApp = default, bool startStopDBAllowed = default, bool inspectDBAllowed = default, VariablesSetting dbVariablesSetting = default, List<Link> links = default)
         {
             this.Name = name;
             this.Application = application;

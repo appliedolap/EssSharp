@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="database">database (required).</param>
         /// <param name="application">application.</param>
-        public To(string database = default(string), string application = default(string))
+        public To(string database = default, string application = default)
         {
             // to ensure "database" is required (not null)
             if (database == null)

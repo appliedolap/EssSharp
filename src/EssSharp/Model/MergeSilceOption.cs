@@ -58,7 +58,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="MergeSilceOption" /> class.
         /// </summary>
         /// <param name="mergeOption">mergeOption.</param>
-        public MergeSilceOption(MergeOptionEnum? mergeOption = default(MergeOptionEnum?))
+        public MergeSilceOption(MergeOptionEnum? mergeOption = default)
         {
             this.MergeOption = mergeOption;
         }

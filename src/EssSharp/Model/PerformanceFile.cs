@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="lastmodifiedMillis">lastmodifiedMillis.</param>
         /// <param name="size">size.</param>
-        public PerformanceFile(string name = default(string), long lastmodifiedMillis = default(long), long size = default(long))
+        public PerformanceFile(string name = default, long lastmodifiedMillis = default, long size = default)
         {
             this.Name = name;
             this.LastmodifiedMillis = lastmodifiedMillis;

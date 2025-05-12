@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="hasMore">hasMore.</param>
         /// <param name="count">count.</param>
         /// <param name="properties">properties.</param>
-        public ReportList(List<ReportBean> items = default(List<ReportBean>), long totalResults = default(long), long limit = default(long), long offset = default(long), bool hasMore = default(bool), long count = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>))
+        public ReportList(List<ReportBean> items = default, long totalResults = default, long limit = default, long offset = default, bool hasMore = default, long count = default, Dictionary<string, string> properties = default)
         {
             this.Items = items;
             this.TotalResults = totalResults;

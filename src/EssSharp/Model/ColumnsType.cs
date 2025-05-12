@@ -38,7 +38,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="ColumnsType" /> class.
         /// </summary>
         /// <param name="column">column (required).</param>
-        public ColumnsType(List<ColumnType> column = default(List<ColumnType>))
+        public ColumnsType(List<ColumnType> column = default)
         {
             // to ensure "column" is required (not null)
             if (column == null)

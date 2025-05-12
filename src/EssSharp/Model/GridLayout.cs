@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="data">data.</param>
         /// <param name="alias">alias.</param>
         /// <param name="dimensions">dimensions.</param>
-        public GridLayout(LayoutData data = default(LayoutData), string alias = default(string), List<GridDimension> dimensions = default(List<GridDimension>))
+        public GridLayout(LayoutData data = default, string alias = default, List<GridDimension> dimensions = default)
         {
             this.Data = data;
             this.Alias = alias;

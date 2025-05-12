@@ -1754,22 +1754,27 @@ namespace EssSharp.Integration
             var requestSummary  = $@"# GET {serverBaseUrl}/rest/v1/applications/Sample HTTP/1.1";
             var responseSummary = @"# HTTP/1.1 200 OK";
 
-            var requestFile = outputDir.GetFiles().FirstOrDefault(f => f.Name.Contains("Request")).OpenRead();
-            var responseFile = outputDir.GetFiles().FirstOrDefault(f => f.Name.Contains("Response")).OpenRead();
+            var requestFile  = outputDir.GetFiles().LastOrDefault(f => f.Name.Contains("Request"));
 
-            using (var streamReader = new StreamReader(requestFile) )
+            Assert.NotNull(requestFile);
+
+            using ( var streamReader = new StreamReader(path: requestFile.FullName, options: new FileStreamOptions() { Options = FileOptions.DeleteOnClose }) )
             {
                 var line = streamReader.ReadToEnd().Split(Environment.NewLine)[0];
                 Assert.Equal(requestSummary, line);
             }
 
-            using ( var streamReader = new StreamReader(responseFile) )
+            var responseFile = outputDir.GetFiles().LastOrDefault(f => f.Name.Contains("Response"));
+
+            Assert.NotNull(responseFile);
+
+            using ( var streamReader = new StreamReader(path: responseFile.FullName, options: new FileStreamOptions() { Options = FileOptions.DeleteOnClose }) )
             {
                 var line = streamReader.ReadToEnd().Split(Environment.NewLine)[0];
                 Assert.Equal(responseSummary, line);
             }
         }
-        
+
         [Fact(DisplayName = @"PerformServerFunctionTests - 48 - Essbase_AfterDefaultGrid_CanBuildDimension_File"), Priority(48)]
         public async Task Essbase_AfterDefaultGrid_CanBuildDimension_File()
         {

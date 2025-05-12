@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="type">type.</param>
         /// <param name="permissions">permissions.</param>
         /// <param name="links">links.</param>
-        public FileBean(string name = default(string), string fullPath = default(string), string type = default(string), FileBeanPermissions permissions = default(FileBeanPermissions), List<Link> links = default(List<Link>))
+        public FileBean(string name = default, string fullPath = default, string type = default, FileBeanPermissions permissions = default, List<Link> links = default)
         {
             this.Name = name;
             this.FullPath = fullPath;

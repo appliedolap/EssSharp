@@ -107,7 +107,7 @@ namespace EssSharp.Model
         /// <param name="headerText">headerText.</param>
         /// <param name="parentColumnId">parentColumnId.</param>
         /// <param name="fkcolumnNumber">fkcolumnNumber.</param>
-        public DimCompactDesignation(string query = default(string), string essbaseConnection = default(string), List<string> genNames = default(List<string>), List<string> colNames = default(List<string>), List<int> dimGenColumns = default(List<int>), List<int> attribute = default(List<int>), string dimJoin = default(string), string dimName = default(string), List<string> attNames = default(List<string>), List<ColumnTypesEnum> columnTypes = default(List<ColumnTypesEnum>), List<int> uniqCount = default(List<int>), List<string> headerText = default(List<string>), int parentColumnId = default(int), int fkcolumnNumber = default(int))
+        public DimCompactDesignation(string query = default, string essbaseConnection = default, List<string> genNames = default, List<string> colNames = default, List<int> dimGenColumns = default, List<int> attribute = default, string dimJoin = default, string dimName = default, List<string> attNames = default, List<ColumnTypesEnum> columnTypes = default, List<int> uniqCount = default, List<string> headerText = default, int parentColumnId = default, int fkcolumnNumber = default)
         {
             this.Query = query;
             this.EssbaseConnection = essbaseConnection;

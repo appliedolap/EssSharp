@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="essEncryptionMode">essEncryptionMode.</param>
         /// <param name="types">types.</param>
-        public EncryptionConfig(int essEncryptionMode = default(int), List<string> types = default(List<string>))
+        public EncryptionConfig(int essEncryptionMode = default, List<string> types = default)
         {
             this.EssEncryptionMode = essEncryptionMode;
             this.Types = types;

@@ -35,7 +35,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ApplicationDatasourcesCreateDatasource(string applicationName, Datasource body = default(Datasource), int operationIndex = 0);
+        void ApplicationDatasourcesCreateDatasource(string applicationName, Datasource body = default, int operationIndex = 0);
 
         /// <summary>
         /// Create Application Datasource
@@ -48,7 +48,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApplicationDatasourcesCreateDatasourceWithHttpInfo(string applicationName, Datasource body = default(Datasource), int operationIndex = 0);
+        ApiResponse<Object> ApplicationDatasourcesCreateDatasourceWithHttpInfo(string applicationName, Datasource body = default, int operationIndex = 0);
         /// <summary>
         /// Delete Application Datasource
         /// </summary>
@@ -87,7 +87,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ApplicationDatasourcesGetDataStream(string applicationName, bool? includeHeaders = default(bool?), bool? metaDataOnly = default(bool?), DatasourceQueryInfo body = default(DatasourceQueryInfo), int operationIndex = 0);
+        void ApplicationDatasourcesGetDataStream(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Streamed Datasource Results
@@ -102,7 +102,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApplicationDatasourcesGetDataStreamWithHttpInfo(string applicationName, bool? includeHeaders = default(bool?), bool? metaDataOnly = default(bool?), DatasourceQueryInfo body = default(DatasourceQueryInfo), int operationIndex = 0);
+        ApiResponse<Object> ApplicationDatasourcesGetDataStreamWithHttpInfo(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0);
         /// <summary>
         /// Get Application Datasource
         /// </summary>
@@ -140,7 +140,7 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of Datasources to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>DatasourcesList</returns>
-        DatasourcesList ApplicationDatasourcesGetDatasources(string applicationName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        DatasourcesList ApplicationDatasourcesGetDatasources(string applicationName, int? offset = default, int? limit = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Application Datasources
@@ -154,7 +154,7 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of Datasources to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of DatasourcesList</returns>
-        ApiResponse<DatasourcesList> ApplicationDatasourcesGetDatasourcesWithHttpInfo(string applicationName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        ApiResponse<DatasourcesList> ApplicationDatasourcesGetDatasourcesWithHttpInfo(string applicationName, int? offset = default, int? limit = default, int operationIndex = 0);
         /// <summary>
         /// Update Application Datasource
         /// </summary>
@@ -167,7 +167,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        Datasource ApplicationDatasourcesUpdateDatasource(string applicationName, string datasouceName, Datasource body = default(Datasource), int operationIndex = 0);
+        Datasource ApplicationDatasourcesUpdateDatasource(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0);
 
         /// <summary>
         /// Update Application Datasource
@@ -181,7 +181,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        ApiResponse<Datasource> ApplicationDatasourcesUpdateDatasourceWithHttpInfo(string applicationName, string datasouceName, Datasource body = default(Datasource), int operationIndex = 0);
+        ApiResponse<Datasource> ApplicationDatasourcesUpdateDatasourceWithHttpInfo(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -203,7 +203,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationDatasourcesCreateDatasourceAsync(string applicationName, Datasource body = default(Datasource), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationDatasourcesCreateDatasourceAsync(string applicationName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Application Datasource
@@ -217,7 +217,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationDatasourcesCreateDatasourceWithHttpInfoAsync(string applicationName, Datasource body = default(Datasource), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationDatasourcesCreateDatasourceWithHttpInfoAsync(string applicationName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Application Datasource
         /// </summary>
@@ -230,7 +230,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationDatasourcesDeleteDatasourceAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationDatasourcesDeleteDatasourceAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Application Datasource
@@ -244,7 +244,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationDatasourcesDeleteDatasourceWithHttpInfoAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationDatasourcesDeleteDatasourceWithHttpInfoAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Streamed Datasource Results
         /// </summary>
@@ -259,7 +259,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationDatasourcesGetDataStreamAsync(string applicationName, bool? includeHeaders = default(bool?), bool? metaDataOnly = default(bool?), DatasourceQueryInfo body = default(DatasourceQueryInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ApplicationDatasourcesGetDataStreamAsync(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Streamed Datasource Results
@@ -275,7 +275,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationDatasourcesGetDataStreamWithHttpInfoAsync(string applicationName, bool? includeHeaders = default(bool?), bool? metaDataOnly = default(bool?), DatasourceQueryInfo body = default(DatasourceQueryInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationDatasourcesGetDataStreamWithHttpInfoAsync(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Datasource
         /// </summary>
@@ -288,7 +288,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesGetDatasourceDetailsAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesGetDatasourceDetailsAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Datasource
@@ -302,7 +302,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Datasource>> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Datasource>> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Datasources
         /// </summary>
@@ -316,7 +316,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DatasourcesList</returns>
-        System.Threading.Tasks.Task<DatasourcesList> ApplicationDatasourcesGetDatasourcesAsync(string applicationName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<DatasourcesList> ApplicationDatasourcesGetDatasourcesAsync(string applicationName, int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Datasources
@@ -331,7 +331,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DatasourcesList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<DatasourcesList>> ApplicationDatasourcesGetDatasourcesWithHttpInfoAsync(string applicationName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<DatasourcesList>> ApplicationDatasourcesGetDatasourcesWithHttpInfoAsync(string applicationName, int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Application Datasource
         /// </summary>
@@ -345,7 +345,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesUpdateDatasourceAsync(string applicationName, string datasouceName, Datasource body = default(Datasource), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesUpdateDatasourceAsync(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Application Datasource
@@ -360,7 +360,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Datasource>> ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(string applicationName, string datasouceName, Datasource body = default(Datasource), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Datasource>> ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -489,7 +489,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ApplicationDatasourcesCreateDatasource(string applicationName, Datasource body = default(Datasource), int operationIndex = 0)
+        public void ApplicationDatasourcesCreateDatasource(string applicationName, Datasource body = default, int operationIndex = 0)
         {
             ApplicationDatasourcesCreateDatasourceWithHttpInfo(applicationName, body);
         }
@@ -502,7 +502,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ApplicationDatasourcesCreateDatasourceWithHttpInfo(string applicationName, Datasource body = default(Datasource), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ApplicationDatasourcesCreateDatasourceWithHttpInfo(string applicationName, Datasource body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -570,7 +570,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationDatasourcesCreateDatasourceAsync(string applicationName, Datasource body = default(Datasource), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationDatasourcesCreateDatasourceAsync(string applicationName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ApplicationDatasourcesCreateDatasourceWithHttpInfoAsync(applicationName, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -584,7 +584,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationDatasourcesCreateDatasourceWithHttpInfoAsync(string applicationName, Datasource body = default(Datasource), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationDatasourcesCreateDatasourceWithHttpInfoAsync(string applicationName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -737,7 +737,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationDatasourcesDeleteDatasourceAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationDatasourcesDeleteDatasourceAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ApplicationDatasourcesDeleteDatasourceWithHttpInfoAsync(applicationName, datasourceName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -751,7 +751,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationDatasourcesDeleteDatasourceWithHttpInfoAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationDatasourcesDeleteDatasourceWithHttpInfoAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -825,7 +825,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ApplicationDatasourcesGetDataStream(string applicationName, bool? includeHeaders = default(bool?), bool? metaDataOnly = default(bool?), DatasourceQueryInfo body = default(DatasourceQueryInfo), int operationIndex = 0)
+        public void ApplicationDatasourcesGetDataStream(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0)
         {
             ApplicationDatasourcesGetDataStreamWithHttpInfo(applicationName, includeHeaders, metaDataOnly, body);
         }
@@ -840,7 +840,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ApplicationDatasourcesGetDataStreamWithHttpInfo(string applicationName, bool? includeHeaders = default(bool?), bool? metaDataOnly = default(bool?), DatasourceQueryInfo body = default(DatasourceQueryInfo), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ApplicationDatasourcesGetDataStreamWithHttpInfo(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -917,7 +917,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationDatasourcesGetDataStreamAsync(string applicationName, bool? includeHeaders = default(bool?), bool? metaDataOnly = default(bool?), DatasourceQueryInfo body = default(DatasourceQueryInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ApplicationDatasourcesGetDataStreamAsync(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ApplicationDatasourcesGetDataStreamWithHttpInfoAsync(applicationName, includeHeaders, metaDataOnly, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -933,7 +933,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationDatasourcesGetDataStreamWithHttpInfoAsync(string applicationName, bool? includeHeaders = default(bool?), bool? metaDataOnly = default(bool?), DatasourceQueryInfo body = default(DatasourceQueryInfo), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationDatasourcesGetDataStreamWithHttpInfoAsync(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1096,7 +1096,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        public async System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesGetDatasourceDetailsAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesGetDatasourceDetailsAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Datasource> localVarResponse = await ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(applicationName, datasouceName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1111,7 +1111,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1186,7 +1186,7 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of Datasources to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>DatasourcesList</returns>
-        public DatasourcesList ApplicationDatasourcesGetDatasources(string applicationName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        public DatasourcesList ApplicationDatasourcesGetDatasources(string applicationName, int? offset = default, int? limit = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<DatasourcesList> localVarResponse = ApplicationDatasourcesGetDatasourcesWithHttpInfo(applicationName, offset, limit);
             return localVarResponse.Data;
@@ -1201,7 +1201,7 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of Datasources to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of DatasourcesList</returns>
-        public EssSharp.Client.ApiResponse<DatasourcesList> ApplicationDatasourcesGetDatasourcesWithHttpInfo(string applicationName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<DatasourcesList> ApplicationDatasourcesGetDatasourcesWithHttpInfo(string applicationName, int? offset = default, int? limit = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1277,7 +1277,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DatasourcesList</returns>
-        public async System.Threading.Tasks.Task<DatasourcesList> ApplicationDatasourcesGetDatasourcesAsync(string applicationName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<DatasourcesList> ApplicationDatasourcesGetDatasourcesAsync(string applicationName, int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<DatasourcesList> localVarResponse = await ApplicationDatasourcesGetDatasourcesWithHttpInfoAsync(applicationName, offset, limit, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1293,7 +1293,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DatasourcesList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DatasourcesList>> ApplicationDatasourcesGetDatasourcesWithHttpInfoAsync(string applicationName, int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<DatasourcesList>> ApplicationDatasourcesGetDatasourcesWithHttpInfoAsync(string applicationName, int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1369,7 +1369,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        public Datasource ApplicationDatasourcesUpdateDatasource(string applicationName, string datasouceName, Datasource body = default(Datasource), int operationIndex = 0)
+        public Datasource ApplicationDatasourcesUpdateDatasource(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Datasource> localVarResponse = ApplicationDatasourcesUpdateDatasourceWithHttpInfo(applicationName, datasouceName, body);
             return localVarResponse.Data;
@@ -1384,7 +1384,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        public EssSharp.Client.ApiResponse<Datasource> ApplicationDatasourcesUpdateDatasourceWithHttpInfo(string applicationName, string datasouceName, Datasource body = default(Datasource), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Datasource> ApplicationDatasourcesUpdateDatasourceWithHttpInfo(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1462,7 +1462,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        public async System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesUpdateDatasourceAsync(string applicationName, string datasouceName, Datasource body = default(Datasource), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesUpdateDatasourceAsync(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Datasource> localVarResponse = await ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(applicationName, datasouceName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1478,7 +1478,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(string applicationName, string datasouceName, Datasource body = default(Datasource), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

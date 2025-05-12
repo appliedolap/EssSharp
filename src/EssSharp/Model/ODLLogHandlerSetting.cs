@@ -41,7 +41,7 @@ namespace EssSharp.Model
         /// <param name="retentionPeriod">retentionPeriod.</param>
         /// <param name="retentionPeriodCustom">retentionPeriodCustom.</param>
         /// <param name="links">links.</param>
-        public ODLLogHandlerSetting(string handlerName = default(string), string logType = default(string), string maxLogSize = default(string), string maxAllLogSize = default(string), string rotationPeriod = default(string), string rotationPeriodCustom = default(string), string retentionPeriod = default(string), string retentionPeriodCustom = default(string), List<Link> links = default(List<Link>))
+        public ODLLogHandlerSetting(string handlerName = default, string logType = default, string maxLogSize = default, string maxAllLogSize = default, string rotationPeriod = default, string rotationPeriodCustom = default, string retentionPeriod = default, string retentionPeriodCustom = default, List<Link> links = default)
         {
             this.HandlerName = handlerName;
             this.LogType = logType;

@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="comment">comment.</param>
         /// <param name="to">to.</param>
         /// <param name="copyOptions">copyOptions.</param>
-        public ScenarioActionPayload(string comment = default(string), string to = default(string), CopyOptions copyOptions = default(CopyOptions))
+        public ScenarioActionPayload(string comment = default, string to = default, CopyOptions copyOptions = default)
         {
             this.Comment = comment;
             this.To = to;

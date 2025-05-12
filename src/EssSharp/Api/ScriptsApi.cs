@@ -93,7 +93,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Script</returns>
-        Script ScriptsCreateScript(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0);
+        Script ScriptsCreateScript(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0);
 
         /// <summary>
         /// Create Essbase Script
@@ -108,7 +108,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Script</returns>
-        ApiResponse<Script> ScriptsCreateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0);
+        ApiResponse<Script> ScriptsCreateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0);
         /// <summary>
         /// Delete Essbase Script
         /// </summary>
@@ -122,7 +122,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ScriptsDeleteScript(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
+        void ScriptsDeleteScript(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
 
         /// <summary>
         /// Delete Essbase Script
@@ -137,7 +137,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ScriptsDeleteScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
+        ApiResponse<Object> ScriptsDeleteScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
         /// <summary>
         /// Update Essbase Script
         /// </summary>
@@ -152,7 +152,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Script</returns>
-        Script ScriptsEditScript(string applicationName, string databaseName, string scriptName, Script body, string file = default(string), int operationIndex = 0);
+        Script ScriptsEditScript(string applicationName, string databaseName, string scriptName, Script body, string file = default, int operationIndex = 0);
 
         /// <summary>
         /// Update Essbase Script
@@ -168,7 +168,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Script</returns>
-        ApiResponse<Script> ScriptsEditScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, Script body, string file = default(string), int operationIndex = 0);
+        ApiResponse<Script> ScriptsEditScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, Script body, string file = default, int operationIndex = 0);
         /// <summary>
         /// Get Essbase Script RTSVs
         /// </summary>
@@ -209,7 +209,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Script</returns>
-        Script ScriptsGetScript(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
+        Script ScriptsGetScript(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Essbase Script
@@ -224,7 +224,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Script</returns>
-        ApiResponse<Script> ScriptsGetScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
+        ApiResponse<Script> ScriptsGetScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
         /// <summary>
         /// Get Essbase Script Contents
         /// </summary>
@@ -238,7 +238,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ScriptContent</returns>
-        ScriptContent ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
+        ScriptContent ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Essbase Script Contents
@@ -253,7 +253,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ScriptContent</returns>
-        ApiResponse<ScriptContent> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0);
+        ApiResponse<ScriptContent> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
         /// <summary>
         /// Get Essbase Script Permissions
         /// </summary>
@@ -294,7 +294,7 @@ namespace EssSharp.Api
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ScriptList</returns>
-        ScriptList ScriptsListScripts(string applicationName, string databaseName, string file = default(string), string keyword = default(string), int operationIndex = 0);
+        ScriptList ScriptsListScripts(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0);
 
         /// <summary>
         /// List Essbase Scripts
@@ -309,7 +309,7 @@ namespace EssSharp.Api
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ScriptList</returns>
-        ApiResponse<ScriptList> ScriptsListScriptsWithHttpInfo(string applicationName, string databaseName, string file = default(string), string keyword = default(string), int operationIndex = 0);
+        ApiResponse<ScriptList> ScriptsListScriptsWithHttpInfo(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0);
         /// <summary>
         /// Remove Essbase Script Permissions
         /// </summary>
@@ -381,7 +381,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;File.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ScriptsValidateScript(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0);
+        void ScriptsValidateScript(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0);
 
         /// <summary>
         /// Validate Essbase Script
@@ -396,7 +396,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;File.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ScriptsValidateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0);
+        ApiResponse<Object> ScriptsValidateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -420,7 +420,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        System.Threading.Tasks.Task<UserGroupProvisionInfo> ScriptsAddScriptPermissionAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<UserGroupProvisionInfo> ScriptsAddScriptPermissionAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Add Essbase Script Permissions
@@ -436,7 +436,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ScriptsAddScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ScriptsAddScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Copy Essbase Script
         /// </summary>
@@ -450,7 +450,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        System.Threading.Tasks.Task<Script> ScriptsCopyScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Script> ScriptsCopyScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Copy Essbase Script
@@ -465,7 +465,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsCopyScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsCopyScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create Essbase Script
         /// </summary>
@@ -480,7 +480,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        System.Threading.Tasks.Task<Script> ScriptsCreateScriptAsync(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Script> ScriptsCreateScriptAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Essbase Script
@@ -496,7 +496,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsCreateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsCreateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Delete Essbase Script
         /// </summary>
@@ -511,7 +511,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScriptsDeleteScriptAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScriptsDeleteScriptAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete Essbase Script
@@ -527,7 +527,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScriptsDeleteScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScriptsDeleteScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Essbase Script
         /// </summary>
@@ -543,7 +543,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        System.Threading.Tasks.Task<Script> ScriptsEditScriptAsync(string applicationName, string databaseName, string scriptName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Script> ScriptsEditScriptAsync(string applicationName, string databaseName, string scriptName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Essbase Script
@@ -560,7 +560,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsEditScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsEditScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Essbase Script RTSVs
         /// </summary>
@@ -574,7 +574,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;RTSVList&gt;</returns>
-        System.Threading.Tasks.Task<List<RTSVList>> ScriptsGetRTSVsForScriptsAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<RTSVList>> ScriptsGetRTSVsForScriptsAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Essbase Script RTSVs
@@ -589,7 +589,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;RTSVList&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<RTSVList>>> ScriptsGetRTSVsForScriptsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<RTSVList>>> ScriptsGetRTSVsForScriptsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Essbase Script
         /// </summary>
@@ -604,7 +604,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        System.Threading.Tasks.Task<Script> ScriptsGetScriptAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Script> ScriptsGetScriptAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Essbase Script
@@ -620,7 +620,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsGetScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsGetScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Essbase Script Contents
         /// </summary>
@@ -635,7 +635,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptContent</returns>
-        System.Threading.Tasks.Task<ScriptContent> ScriptsGetScriptContentAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScriptContent> ScriptsGetScriptContentAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Essbase Script Contents
@@ -651,7 +651,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptContent)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScriptContent>> ScriptsGetScriptContentWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScriptContent>> ScriptsGetScriptContentWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Essbase Script Permissions
         /// </summary>
@@ -665,7 +665,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;UserGroupProvisionInfoList&gt;</returns>
-        System.Threading.Tasks.Task<List<UserGroupProvisionInfoList>> ScriptsGetScriptPermissionsAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<UserGroupProvisionInfoList>> ScriptsGetScriptPermissionsAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Essbase Script Permissions
@@ -680,7 +680,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;UserGroupProvisionInfoList&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<UserGroupProvisionInfoList>>> ScriptsGetScriptPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<UserGroupProvisionInfoList>>> ScriptsGetScriptPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Essbase Scripts
         /// </summary>
@@ -695,7 +695,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptList</returns>
-        System.Threading.Tasks.Task<ScriptList> ScriptsListScriptsAsync(string applicationName, string databaseName, string file = default(string), string keyword = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ScriptList> ScriptsListScriptsAsync(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Essbase Scripts
@@ -711,7 +711,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScriptList>> ScriptsListScriptsWithHttpInfoAsync(string applicationName, string databaseName, string file = default(string), string keyword = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<ScriptList>> ScriptsListScriptsWithHttpInfoAsync(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Remove Essbase Script Permissions
         /// </summary>
@@ -727,7 +727,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScriptsRemoveScriptPermissionAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScriptsRemoveScriptPermissionAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Remove Essbase Script Permissions
@@ -744,7 +744,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScriptsRemoveScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScriptsRemoveScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Rename Essbase Script
         /// </summary>
@@ -758,7 +758,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        System.Threading.Tasks.Task<Script> ScriptsRenameScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Script> ScriptsRenameScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Rename Essbase Script
@@ -773,7 +773,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsRenameScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsRenameScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Validate Essbase Script
         /// </summary>
@@ -788,7 +788,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ScriptsValidateScriptAsync(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task ScriptsValidateScriptAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate Essbase Script
@@ -804,7 +804,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ScriptsValidateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> ScriptsValidateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -1043,7 +1043,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserGroupProvisionInfo</returns>
-        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> ScriptsAddScriptPermissionAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<UserGroupProvisionInfo> ScriptsAddScriptPermissionAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<UserGroupProvisionInfo> localVarResponse = await ScriptsAddScriptPermissionWithHttpInfoAsync(applicationName, databaseName, scriptName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1060,7 +1060,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> ScriptsAddScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<UserGroupProvisionInfo>> ScriptsAddScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1250,7 +1250,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        public async System.Threading.Tasks.Task<Script> ScriptsCopyScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Script> ScriptsCopyScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Script> localVarResponse = await ScriptsCopyScriptWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1266,7 +1266,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsCopyScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsCopyScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1351,7 +1351,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Script</returns>
-        public Script ScriptsCreateScript(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0)
+        public Script ScriptsCreateScript(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Script> localVarResponse = ScriptsCreateScriptWithHttpInfo(applicationName, databaseName, body, file);
             return localVarResponse.Data;
@@ -1367,7 +1367,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Script</returns>
-        public EssSharp.Client.ApiResponse<Script> ScriptsCreateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Script> ScriptsCreateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1454,7 +1454,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        public async System.Threading.Tasks.Task<Script> ScriptsCreateScriptAsync(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Script> ScriptsCreateScriptAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Script> localVarResponse = await ScriptsCreateScriptWithHttpInfoAsync(applicationName, databaseName, body, file, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1471,7 +1471,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsCreateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsCreateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1558,7 +1558,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ScriptsDeleteScript(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
+        public void ScriptsDeleteScript(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
         {
             ScriptsDeleteScriptWithHttpInfo(applicationName, databaseName, scriptName, file);
         }
@@ -1573,7 +1573,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ScriptsDeleteScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ScriptsDeleteScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1658,7 +1658,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScriptsDeleteScriptAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScriptsDeleteScriptAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ScriptsDeleteScriptWithHttpInfoAsync(applicationName, databaseName, scriptName, file, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1674,7 +1674,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScriptsDeleteScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScriptsDeleteScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1760,7 +1760,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Script</returns>
-        public Script ScriptsEditScript(string applicationName, string databaseName, string scriptName, Script body, string file = default(string), int operationIndex = 0)
+        public Script ScriptsEditScript(string applicationName, string databaseName, string scriptName, Script body, string file = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Script> localVarResponse = ScriptsEditScriptWithHttpInfo(applicationName, databaseName, scriptName, body, file);
             return localVarResponse.Data;
@@ -1777,7 +1777,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Script</returns>
-        public EssSharp.Client.ApiResponse<Script> ScriptsEditScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, Script body, string file = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Script> ScriptsEditScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, Script body, string file = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1872,7 +1872,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        public async System.Threading.Tasks.Task<Script> ScriptsEditScriptAsync(string applicationName, string databaseName, string scriptName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Script> ScriptsEditScriptAsync(string applicationName, string databaseName, string scriptName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Script> localVarResponse = await ScriptsEditScriptWithHttpInfoAsync(applicationName, databaseName, scriptName, body, file, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1890,7 +1890,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsEditScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsEditScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2080,7 +2080,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;RTSVList&gt;</returns>
-        public async System.Threading.Tasks.Task<List<RTSVList>> ScriptsGetRTSVsForScriptsAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<RTSVList>> ScriptsGetRTSVsForScriptsAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<List<RTSVList>> localVarResponse = await ScriptsGetRTSVsForScriptsWithHttpInfoAsync(applicationName, databaseName, scriptName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2096,7 +2096,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;RTSVList&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<RTSVList>>> ScriptsGetRTSVsForScriptsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<RTSVList>>> ScriptsGetRTSVsForScriptsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2179,7 +2179,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Script</returns>
-        public Script ScriptsGetScript(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
+        public Script ScriptsGetScript(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Script> localVarResponse = ScriptsGetScriptWithHttpInfo(applicationName, databaseName, scriptName, file);
             return localVarResponse.Data;
@@ -2195,7 +2195,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Script</returns>
-        public EssSharp.Client.ApiResponse<Script> ScriptsGetScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Script> ScriptsGetScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2282,7 +2282,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        public async System.Threading.Tasks.Task<Script> ScriptsGetScriptAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Script> ScriptsGetScriptAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Script> localVarResponse = await ScriptsGetScriptWithHttpInfoAsync(applicationName, databaseName, scriptName, file, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2299,7 +2299,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsGetScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsGetScriptWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2386,7 +2386,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ScriptContent</returns>
-        public ScriptContent ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
+        public ScriptContent ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<ScriptContent> localVarResponse = ScriptsGetScriptContentWithHttpInfo(applicationName, databaseName, scriptName, file);
             return localVarResponse.Data;
@@ -2402,7 +2402,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ScriptContent</returns>
-        public EssSharp.Client.ApiResponse<ScriptContent> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ScriptContent> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2489,7 +2489,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptContent</returns>
-        public async System.Threading.Tasks.Task<ScriptContent> ScriptsGetScriptContentAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScriptContent> ScriptsGetScriptContentAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ScriptContent> localVarResponse = await ScriptsGetScriptContentWithHttpInfoAsync(applicationName, databaseName, scriptName, file, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2506,7 +2506,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptContent)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptContent>> ScriptsGetScriptContentWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptContent>> ScriptsGetScriptContentWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2689,7 +2689,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;UserGroupProvisionInfoList&gt;</returns>
-        public async System.Threading.Tasks.Task<List<UserGroupProvisionInfoList>> ScriptsGetScriptPermissionsAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<UserGroupProvisionInfoList>> ScriptsGetScriptPermissionsAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<List<UserGroupProvisionInfoList>> localVarResponse = await ScriptsGetScriptPermissionsWithHttpInfoAsync(applicationName, databaseName, scriptName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2705,7 +2705,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;UserGroupProvisionInfoList&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<UserGroupProvisionInfoList>>> ScriptsGetScriptPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<UserGroupProvisionInfoList>>> ScriptsGetScriptPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2788,7 +2788,7 @@ namespace EssSharp.Api
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ScriptList</returns>
-        public ScriptList ScriptsListScripts(string applicationName, string databaseName, string file = default(string), string keyword = default(string), int operationIndex = 0)
+        public ScriptList ScriptsListScripts(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<ScriptList> localVarResponse = ScriptsListScriptsWithHttpInfo(applicationName, databaseName, file, keyword);
             return localVarResponse.Data;
@@ -2804,7 +2804,7 @@ namespace EssSharp.Api
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ScriptList</returns>
-        public EssSharp.Client.ApiResponse<ScriptList> ScriptsListScriptsWithHttpInfo(string applicationName, string databaseName, string file = default(string), string keyword = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ScriptList> ScriptsListScriptsWithHttpInfo(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2888,7 +2888,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptList</returns>
-        public async System.Threading.Tasks.Task<ScriptList> ScriptsListScriptsAsync(string applicationName, string databaseName, string file = default(string), string keyword = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<ScriptList> ScriptsListScriptsAsync(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<ScriptList> localVarResponse = await ScriptsListScriptsWithHttpInfoAsync(applicationName, databaseName, file, keyword, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -2905,7 +2905,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptList>> ScriptsListScriptsWithHttpInfoAsync(string applicationName, string databaseName, string file = default(string), string keyword = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptList>> ScriptsListScriptsWithHttpInfoAsync(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3096,7 +3096,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScriptsRemoveScriptPermissionAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScriptsRemoveScriptPermissionAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ScriptsRemoveScriptPermissionWithHttpInfoAsync(applicationName, databaseName, scriptName, userGroupId, group, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -3113,7 +3113,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScriptsRemoveScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScriptsRemoveScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3300,7 +3300,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Script</returns>
-        public async System.Threading.Tasks.Task<Script> ScriptsRenameScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Script> ScriptsRenameScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Script> localVarResponse = await ScriptsRenameScriptWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -3316,7 +3316,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Script)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsRenameScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Script>> ScriptsRenameScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3401,7 +3401,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;File.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ScriptsValidateScript(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0)
+        public void ScriptsValidateScript(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0)
         {
             ScriptsValidateScriptWithHttpInfo(applicationName, databaseName, body, file);
         }
@@ -3416,7 +3416,7 @@ namespace EssSharp.Api
         /// <param name="file">&lt;p&gt;File.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ScriptsValidateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ScriptsValidateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3503,7 +3503,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ScriptsValidateScriptAsync(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task ScriptsValidateScriptAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await ScriptsValidateScriptWithHttpInfoAsync(applicationName, databaseName, body, file, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -3519,7 +3519,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScriptsValidateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ScriptsValidateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

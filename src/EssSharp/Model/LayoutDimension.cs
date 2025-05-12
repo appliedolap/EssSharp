@@ -70,7 +70,7 @@ namespace EssSharp.Model
         /// <param name="expanded">expanded.</param>
         /// <param name="axis">axis.</param>
         /// <param name="position">position.</param>
-        public LayoutDimension(string name = default(string), string displayName = default(string), int page = default(int), bool hidden = default(bool), bool expanded = default(bool), AxisEnum? axis = default(AxisEnum?), int position = default(int))
+        public LayoutDimension(string name = default, string displayName = default, int page = default, bool hidden = default, bool expanded = default, AxisEnum? axis = default, int position = default)
         {
             this.Name = name;
             this.DisplayName = displayName;

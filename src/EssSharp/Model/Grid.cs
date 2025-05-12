@@ -32,15 +32,21 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Grid" /> class.
         /// </summary>
+        /// <param name="dimensions">dimensions.</param>
         /// <param name="slice">slice.</param>
         /// <param name="alias">alias.</param>
-        /// <param name="dimensions">dimensions.</param>
-        public Grid(Slice slice = default(Slice), string alias = default(string), List<GridDimension> dimensions = default(List<GridDimension>))
+        public Grid(List<GridDimension> dimensions = default, Slice slice = default, string alias = default)
         {
+            this.Dimensions = dimensions;
             this.Slice = slice;
             this.Alias = alias;
-            this.Dimensions = dimensions;
         }
+
+        /// <summary>
+        /// Gets or Sets Dimensions
+        /// </summary>
+        [DataMember(Name = "dimensions", EmitDefaultValue = false)]
+        public List<GridDimension> Dimensions { get; set; }
 
         /// <summary>
         /// Gets or Sets Slice
@@ -55,12 +61,6 @@ namespace EssSharp.Model
         public string Alias { get; set; }
 
         /// <summary>
-        /// Gets or Sets Dimensions
-        /// </summary>
-        [DataMember(Name = "dimensions", EmitDefaultValue = false)]
-        public List<GridDimension> Dimensions { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -68,9 +68,9 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Grid {\n");
+            sb.Append("  Dimensions: ").Append(Dimensions).Append("\n");
             sb.Append("  Slice: ").Append(Slice).Append("\n");
             sb.Append("  Alias: ").Append(Alias).Append("\n");
-            sb.Append("  Dimensions: ").Append(Dimensions).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

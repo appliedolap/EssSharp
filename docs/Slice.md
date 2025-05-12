@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Rows** | **int** |  | [optional] 
 **DirtyCells** | **List&lt;int&gt;** |  | [optional] 
 **DirtyTexts** | **List&lt;int&gt;** |  | [optional] 
-**Rows** | **int** |  | [optional] 
 **Columns** | **int** |  | [optional] 
 **Data** | [**Data**](Data.md) |  | [optional] 
 

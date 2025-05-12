@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="available">available.</param>
         /// <param name="limit">limit.</param>
         /// <param name="id">id.</param>
-        public SystemMaintainableResource(int available = default(int), int limit = default(int), string id = default(string))
+        public SystemMaintainableResource(int available = default, int limit = default, string id = default)
         {
             this.Available = available;
             this.Limit = limit;

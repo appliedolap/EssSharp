@@ -41,7 +41,7 @@ namespace EssSharp.Model
         /// <param name="primaryAppName">primaryAppName (required).</param>
         /// <param name="timeoutToForceUnloadApp">timeoutToForceUnloadApp (required).</param>
         /// <param name="runInBackground">runInBackground.</param>
-        public ShadowPromoteBean(string shadowAppName = default(string), string primaryAppName = default(string), int timeoutToForceUnloadApp = default(int), bool runInBackground = default(bool))
+        public ShadowPromoteBean(string shadowAppName = default, string primaryAppName = default, int timeoutToForceUnloadApp = default, bool runInBackground = default)
         {
             // to ensure "shadowAppName" is required (not null)
             if (shadowAppName == null)

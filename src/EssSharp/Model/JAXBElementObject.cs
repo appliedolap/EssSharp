@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="nil">nil.</param>
         /// <param name="globalScope">globalScope.</param>
         /// <param name="typeSubstituted">typeSubstituted.</param>
-        public JAXBElementObject(QName name = default(QName), Object value = default(Object), bool nil = default(bool), bool globalScope = default(bool), bool typeSubstituted = default(bool))
+        public JAXBElementObject(QName name = default, Object value = default, bool nil = default, bool globalScope = default, bool typeSubstituted = default)
         {
             this.Name = name;
             this.Value = value;

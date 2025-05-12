@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="members">members.</param>
         /// <param name="storedMembers">storedMembers.</param>
         /// <param name="links">links.</param>
-        public DimensionBean(string name = default(string), string type = default(string), int members = default(int), int storedMembers = default(int), List<Link> links = default(List<Link>))
+        public DimensionBean(string name = default, string type = default, int members = default, int storedMembers = default, List<Link> links = default)
         {
             this.Name = name;
             this.Type = type;

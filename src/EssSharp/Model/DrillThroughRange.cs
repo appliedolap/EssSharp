@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="DrillThroughRange" /> class.
         /// </summary>
         /// <param name="cells">cells.</param>
-        public DrillThroughRange(Dictionary<string, List<string>> cells = default(Dictionary<string, List<string>>))
+        public DrillThroughRange(Dictionary<string, List<string>> cells = default)
         {
             this.Cells = cells;
         }

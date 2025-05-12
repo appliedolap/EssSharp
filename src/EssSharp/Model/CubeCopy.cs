@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="from">from (required).</param>
         /// <param name="to">to (required).</param>
-        public CubeCopy(string from = default(string), To to = default(To))
+        public CubeCopy(string from = default, To to = default)
         {
             // to ensure "from" is required (not null)
             if (from == null)

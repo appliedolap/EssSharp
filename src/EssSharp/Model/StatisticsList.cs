@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="storage">storage.</param>
         /// <param name="runtime">runtime.</param>
         /// <param name="links">links.</param>
-        public StatisticsList(GeneralStatistics general = default(GeneralStatistics), StorageStatistics storage = default(StorageStatistics), RuntimeStatistics runtime = default(RuntimeStatistics), List<Link> links = default(List<Link>))
+        public StatisticsList(GeneralStatistics general = default, StorageStatistics storage = default, RuntimeStatistics runtime = default, List<Link> links = default)
         {
             this.General = general;
             this.Storage = storage;

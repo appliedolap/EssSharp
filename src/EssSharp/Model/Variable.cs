@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="appName">appName.</param>
         /// <param name="dbName">dbName.</param>
         /// <param name="links">links.</param>
-        public Variable(string name = default(string), string value = default(string), string appName = default(string), string dbName = default(string), List<Link> links = default(List<Link>))
+        public Variable(string name = default, string value = default, string appName = default, string dbName = default, List<Link> links = default)
         {
             this.Name = name;
             this.Value = value;

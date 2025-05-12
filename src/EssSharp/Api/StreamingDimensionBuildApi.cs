@@ -92,7 +92,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Dimension build attributes, such as the restructure option. If empty, the default value for restructure option is  &lt;code&gt;PRESERVE_ALL_DATA&lt;/code&gt;. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
-        StreamProcessStartResponse DimensionBuildStart(string applicationName, string databaseName, DimBuildStartPayload body = default(DimBuildStartPayload), int operationIndex = 0);
+        StreamProcessStartResponse DimensionBuildStart(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0);
 
         /// <summary>
         /// Start Streaming Dimension Build
@@ -106,7 +106,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Dimension build attributes, such as the restructure option. If empty, the default value for restructure option is  &lt;code&gt;PRESERVE_ALL_DATA&lt;/code&gt;. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
-        ApiResponse<StreamProcessStartResponse> DimensionBuildStartWithHttpInfo(string applicationName, string databaseName, DimBuildStartPayload body = default(DimBuildStartPayload), int operationIndex = 0);
+        ApiResponse<StreamProcessStartResponse> DimensionBuildStartWithHttpInfo(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0);
         /// <summary>
         /// Start Dimension Build&lt;/p&gt;
         /// </summary>
@@ -149,7 +149,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
-        StreamProcessStartResponse DimensionBuildStreamDimBuildData(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0);
+        StreamProcessStartResponse DimensionBuildStreamDimBuildData(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0);
 
         /// <summary>
         /// Push Dimensions
@@ -164,7 +164,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
-        ApiResponse<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0);
+        ApiResponse<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -187,7 +187,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessEndResponse</returns>
-        System.Threading.Tasks.Task<StreamProcessEndResponse> DimensionBuildEndAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StreamProcessEndResponse> DimensionBuildEndAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// End Streaming Dimension Build
@@ -202,7 +202,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessEndResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StreamProcessEndResponse>> DimensionBuildEndWithHttpInfoAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StreamProcessEndResponse>> DimensionBuildEndWithHttpInfoAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// End Dimension Build
         /// </summary>
@@ -217,7 +217,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessEndResponse</returns>
-        System.Threading.Tasks.Task<StreamProcessEndResponse> DimensionBuildEndDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StreamProcessEndResponse> DimensionBuildEndDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// End Dimension Build
@@ -233,7 +233,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessEndResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StreamProcessEndResponse>> DimensionBuildEndDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StreamProcessEndResponse>> DimensionBuildEndDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Start Streaming Dimension Build
         /// </summary>
@@ -247,7 +247,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartAsync(string applicationName, string databaseName, DimBuildStartPayload body = default(DimBuildStartPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartAsync(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Start Streaming Dimension Build
@@ -262,7 +262,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DimensionBuildStartWithHttpInfoAsync(string applicationName, string databaseName, DimBuildStartPayload body = default(DimBuildStartPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DimensionBuildStartWithHttpInfoAsync(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Start Dimension Build&lt;/p&gt;
         /// </summary>
@@ -277,7 +277,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Start Dimension Build&lt;/p&gt;
@@ -293,7 +293,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DimensionBuildStartDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DimensionBuildStartDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Push Dimensions
         /// </summary>
@@ -308,7 +308,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataAsync(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Push Dimensions
@@ -324,7 +324,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DimensionBuildStreamDimBuildDataWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DimensionBuildStreamDimBuildDataWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -551,7 +551,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessEndResponse</returns>
-        public async System.Threading.Tasks.Task<StreamProcessEndResponse> DimensionBuildEndAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StreamProcessEndResponse> DimensionBuildEndAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<StreamProcessEndResponse> localVarResponse = await DimensionBuildEndWithHttpInfoAsync(applicationName, databaseName, streamId, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -567,7 +567,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessEndResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessEndResponse>> DimensionBuildEndWithHttpInfoAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessEndResponse>> DimensionBuildEndWithHttpInfoAsync(string applicationName, string databaseName, string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -756,7 +756,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessEndResponse</returns>
-        public async System.Threading.Tasks.Task<StreamProcessEndResponse> DimensionBuildEndDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StreamProcessEndResponse> DimensionBuildEndDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<StreamProcessEndResponse> localVarResponse = await DimensionBuildEndDimBuildWithHttpInfoAsync(applicationName, databaseName, streamId, ruleFileName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -773,7 +773,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessEndResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessEndResponse>> DimensionBuildEndDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessEndResponse>> DimensionBuildEndDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -862,7 +862,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Dimension build attributes, such as the restructure option. If empty, the default value for restructure option is  &lt;code&gt;PRESERVE_ALL_DATA&lt;/code&gt;. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
-        public StreamProcessStartResponse DimensionBuildStart(string applicationName, string databaseName, DimBuildStartPayload body = default(DimBuildStartPayload), int operationIndex = 0)
+        public StreamProcessStartResponse DimensionBuildStart(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = DimensionBuildStartWithHttpInfo(applicationName, databaseName, body);
             return localVarResponse.Data;
@@ -877,7 +877,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Dimension build attributes, such as the restructure option. If empty, the default value for restructure option is  &lt;code&gt;PRESERVE_ALL_DATA&lt;/code&gt;. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
-        public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DimensionBuildStartWithHttpInfo(string applicationName, string databaseName, DimBuildStartPayload body = default(DimBuildStartPayload), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DimensionBuildStartWithHttpInfo(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -955,7 +955,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartAsync(string applicationName, string databaseName, DimBuildStartPayload body = default(DimBuildStartPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartAsync(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = await DimensionBuildStartWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -971,7 +971,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DimensionBuildStartWithHttpInfoAsync(string applicationName, string databaseName, DimBuildStartPayload body = default(DimBuildStartPayload), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DimensionBuildStartWithHttpInfoAsync(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1156,7 +1156,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = await DimensionBuildStartDimBuildWithHttpInfoAsync(applicationName, databaseName, streamId, ruleFileName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1173,7 +1173,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DimensionBuildStartDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DimensionBuildStartDimBuildWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1263,7 +1263,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
-        public StreamProcessStartResponse DimensionBuildStreamDimBuildData(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0)
+        public StreamProcessStartResponse DimensionBuildStreamDimBuildData(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = DimensionBuildStreamDimBuildDataWithHttpInfo(applicationName, databaseName, streamId, body);
             return localVarResponse.Data;
@@ -1279,7 +1279,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
-        public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1365,7 +1365,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
-        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStreamDimBuildDataAsync(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<StreamProcessStartResponse> localVarResponse = await DimensionBuildStreamDimBuildDataWithHttpInfoAsync(applicationName, databaseName, streamId, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1382,7 +1382,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DimensionBuildStreamDimBuildDataWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string body = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<StreamProcessStartResponse>> DimensionBuildStreamDimBuildDataWithHttpInfoAsync(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)

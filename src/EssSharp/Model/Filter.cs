@@ -123,7 +123,7 @@ namespace EssSharp.Model
         /// <param name="condition">condition.</param>
         /// <param name="caseSensitive">caseSensitive.</param>
         /// <param name="type">type.</param>
-        public Filter(bool stringFilter = default(bool), string value = default(string), ConditionEnum? condition = default(ConditionEnum?), bool caseSensitive = default(bool), TypeEnum? type = default(TypeEnum?))
+        public Filter(bool stringFilter = default, string value = default, ConditionEnum? condition = default, bool caseSensitive = default, TypeEnum? type = default)
         {
             this.StringFilter = stringFilter;
             this.Value = value;

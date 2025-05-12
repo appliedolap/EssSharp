@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="status">status.</param>
         /// <param name="links">links.</param>
-        public StreamProcessEndResponse(string status = default(string), List<Link> links = default(List<Link>))
+        public StreamProcessEndResponse(string status = default, List<Link> links = default)
         {
             this.Status = status;
             this.Links = links;

@@ -90,7 +90,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="ancestor">ancestor.</param>
         /// <param name="mode">mode.</param>
-        public ZoomIn(AncestorEnum? ancestor = default(AncestorEnum?), ModeEnum? mode = default(ModeEnum?))
+        public ZoomIn(AncestorEnum? ancestor = default, ModeEnum? mode = default)
         {
             this.Ancestor = ancestor;
             this.Mode = mode;

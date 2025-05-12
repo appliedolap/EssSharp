@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="limit">limit.</param>
         /// <param name="properties">properties.</param>
         /// <param name="offset">offset.</param>
-        public Layouts(bool hasMore = default(bool), long totalResults = default(long), List<LayoutMetadata> items = default(List<LayoutMetadata>), long count = default(long), long limit = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>), long offset = default(long))
+        public Layouts(bool hasMore = default, long totalResults = default, List<LayoutMetadata> items = default, long count = default, long limit = default, Dictionary<string, string> properties = default, long offset = default)
         {
             this.HasMore = hasMore;
             this.TotalResults = totalResults;

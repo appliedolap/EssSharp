@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="generationNumber">generationNumber (required).</param>
         /// <param name="columnName">columnName (required).</param>
-        public Generation(int generationNumber = default(int), string columnName = default(string))
+        public Generation(int generationNumber = default, string columnName = default)
         {
             this.GenerationNumber = generationNumber;
             // to ensure "columnName" is required (not null)

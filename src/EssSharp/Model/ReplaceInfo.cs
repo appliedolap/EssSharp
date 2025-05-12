@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="matchWholeWord">matchWholeWord.</param>
         /// <param name="replaceAll">replaceAll.</param>
         /// <param name="caseSensitive">caseSensitive.</param>
-        public ReplaceInfo(string find = default(string), string replace = default(string), bool matchWholeWord = default(bool), bool replaceAll = default(bool), bool caseSensitive = default(bool))
+        public ReplaceInfo(string find = default, string replace = default, bool matchWholeWord = default, bool replaceAll = default, bool caseSensitive = default)
         {
             this.Find = find;
             this.Replace = replace;

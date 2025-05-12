@@ -122,7 +122,7 @@ namespace EssSharp.Model
         /// <param name="viewToolbar">viewToolbar.</param>
         /// <param name="viewMode">viewMode.</param>
         /// <param name="dataFileType">dataFileType.</param>
-        public EditorOptions(string application = default(string), string database = default(string), string server = default(string), string varObject = default(string), string dataFile = default(string), string dataFileApplication = default(string), string dataFileDatabase = default(string), string dataFileServer = default(string), int startRecord = default(int), int viewCount = default(int), bool viewGridLines = default(bool), bool viewIgnored = default(bool), bool viewRawData = default(bool), bool viewToolbar = default(bool), ViewModeEnum? viewMode = default(ViewModeEnum?), DataFileTypeEnum? dataFileType = default(DataFileTypeEnum?))
+        public EditorOptions(string application = default, string database = default, string server = default, string varObject = default, string dataFile = default, string dataFileApplication = default, string dataFileDatabase = default, string dataFileServer = default, int startRecord = default, int viewCount = default, bool viewGridLines = default, bool viewIgnored = default, bool viewRawData = default, bool viewToolbar = default, ViewModeEnum? viewMode = default, DataFileTypeEnum? dataFileType = default)
         {
             this.Application = application;
             this.Database = database;

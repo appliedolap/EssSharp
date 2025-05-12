@@ -193,7 +193,7 @@ namespace EssSharp.Model
         /// <param name="timeBalanceOption">timeBalanceOption.</param>
         /// <param name="varianceReporting">varianceReporting.</param>
         /// <param name="twoPass">twoPass.</param>
-        public MeasureOptions(string currencyCategory = default(string), string currencyName = default(string), CurrencyConversionEnum? currencyConversion = default(CurrencyConversionEnum?), SkipEnum? skip = default(SkipEnum?), TimeBalanceOptionEnum? timeBalanceOption = default(TimeBalanceOptionEnum?), VarianceReportingEnum? varianceReporting = default(VarianceReportingEnum?), bool twoPass = default(bool))
+        public MeasureOptions(string currencyCategory = default, string currencyName = default, CurrencyConversionEnum? currencyConversion = default, SkipEnum? skip = default, TimeBalanceOptionEnum? timeBalanceOption = default, VarianceReportingEnum? varianceReporting = default, bool twoPass = default)
         {
             this.CurrencyCategory = currencyCategory;
             this.CurrencyName = currencyName;

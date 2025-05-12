@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="email">email.</param>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public ParticipantBean(string email = default(string), string id = default(string), string name = default(string))
+        public ParticipantBean(string email = default, string id = default, string name = default)
         {
             this.Email = email;
             this.Id = id;

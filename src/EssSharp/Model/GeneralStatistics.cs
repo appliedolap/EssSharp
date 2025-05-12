@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="numberOfConnections">numberOfConnections.</param>
         /// <param name="numberOfDimensions">numberOfDimensions.</param>
         /// <param name="loadStatus">loadStatus.</param>
-        public GeneralStatistics(long databaseStartTime = default(long), string databaseElapsedTime = default(string), int numberOfConnections = default(int), int numberOfDimensions = default(int), string loadStatus = default(string))
+        public GeneralStatistics(long databaseStartTime = default, string databaseElapsedTime = default, int numberOfConnections = default, int numberOfDimensions = default, string loadStatus = default)
         {
             this.DatabaseStartTime = databaseStartTime;
             this.DatabaseElapsedTime = databaseElapsedTime;

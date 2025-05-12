@@ -35,7 +35,7 @@ namespace EssSharp.Model
         /// <param name="general">general.</param>
         /// <param name="attributes">attributes.</param>
         /// <param name="links">links.</param>
-        public OutlineSettingsList(GeneralOutlineSettings general = default(GeneralOutlineSettings), AttributeOutlineSettings attributes = default(AttributeOutlineSettings), List<Link> links = default(List<Link>))
+        public OutlineSettingsList(GeneralOutlineSettings general = default, AttributeOutlineSettings attributes = default, List<Link> links = default)
         {
             this.General = general;
             this.Attributes = attributes;

@@ -42,7 +42,7 @@ namespace EssSharp.Model
         /// <param name="hideShadow">hideShadow (required).</param>
         /// <param name="waitForOngoingUpdatesInSecs">waitForOngoingUpdatesInSecs (required).</param>
         /// <param name="runInBackground">runInBackground.</param>
-        public ShadowCopyBean(string primaryAppName = default(string), string shadowAppName = default(string), bool hideShadow = default(bool), int waitForOngoingUpdatesInSecs = default(int), bool runInBackground = default(bool))
+        public ShadowCopyBean(string primaryAppName = default, string shadowAppName = default, bool hideShadow = default, int waitForOngoingUpdatesInSecs = default, bool runInBackground = default)
         {
             // to ensure "primaryAppName" is required (not null)
             if (primaryAppName == null)

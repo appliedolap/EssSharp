@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="href">href.</param>
         /// <param name="method">method.</param>
         /// <param name="type">type.</param>
-        public Link(string rel = default(string), string href = default(string), string method = default(string), string type = default(string))
+        public Link(string rel = default, string href = default, string method = default, string type = default)
         {
             this.Rel = rel;
             this.Href = href;

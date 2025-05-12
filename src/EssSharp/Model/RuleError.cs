@@ -34,7 +34,7 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="field">field.</param>
         /// <param name="error">error.</param>
-        public RuleError(string field = default(string), string error = default(string))
+        public RuleError(string field = default, string error = default)
         {
             this.Field = field;
             this.Error = error;

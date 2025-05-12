@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="arrangeDimensions">arrangeDimensions.</param>
         /// <param name="aliasTable">aliasTable.</param>
         /// <param name="smartLists">smartLists.</param>
-        public DimBuildOptions(bool autoConfig = default(bool), bool arrangeDimensions = default(bool), string aliasTable = default(string), List<SmartList> smartLists = default(List<SmartList>))
+        public DimBuildOptions(bool autoConfig = default, bool arrangeDimensions = default, string aliasTable = default, List<SmartList> smartLists = default)
         {
             this.AutoConfig = autoConfig;
             this.ArrangeDimensions = arrangeDimensions;

@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="noAccess">noAccess.</param>
         /// <param name="emptyBlocks">emptyBlocks.</param>
         /// <param name="error">error.</param>
-        public Suppression(bool missing = default(bool), bool invalid = default(bool), bool derived = default(bool), bool zero = default(bool), bool underScore = default(bool), bool noAccess = default(bool), bool emptyBlocks = default(bool), bool error = default(bool))
+        public Suppression(bool missing = default, bool invalid = default, bool derived = default, bool zero = default, bool underScore = default, bool noAccess = default, bool emptyBlocks = default, bool error = default)
         {
             this.Missing = missing;
             this.Invalid = invalid;

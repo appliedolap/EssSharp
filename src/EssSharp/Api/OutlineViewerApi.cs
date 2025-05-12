@@ -38,7 +38,7 @@ namespace EssSharp.Api
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void OutlineGetAllSmartList(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string accept = default(string), int operationIndex = 0);
+        void OutlineGetAllSmartList(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Text Lists
@@ -54,7 +54,7 @@ namespace EssSharp.Api
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> OutlineGetAllSmartListWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string accept = default(string), int operationIndex = 0);
+        ApiResponse<Object> OutlineGetAllSmartListWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0);
         /// <summary>
         /// Get Member Ancestors
         /// </summary>
@@ -70,7 +70,7 @@ namespace EssSharp.Api
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;MemberBean&gt;</returns>
-        List<MemberBean> OutlineGetAncestorsMemberInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0);
+        List<MemberBean> OutlineGetAncestorsMemberInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Member Ancestors
@@ -87,7 +87,7 @@ namespace EssSharp.Api
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;MemberBean&gt;</returns>
-        ApiResponse<List<MemberBean>> OutlineGetAncestorsMemberInfoWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0);
+        ApiResponse<List<MemberBean>> OutlineGetAncestorsMemberInfoWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0);
         /// <summary>
         /// Get Descendants Count
         /// </summary>
@@ -102,7 +102,7 @@ namespace EssSharp.Api
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>int</returns>
-        int OutlineGetDescendantsCount(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), int operationIndex = 0);
+        int OutlineGetDescendantsCount(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Descendants Count
@@ -118,7 +118,7 @@ namespace EssSharp.Api
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of int</returns>
-        ApiResponse<int> OutlineGetDescendantsCountWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), int operationIndex = 0);
+        ApiResponse<int> OutlineGetDescendantsCountWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, int operationIndex = 0);
         /// <summary>
         /// Get Member Info
         /// </summary>
@@ -134,7 +134,7 @@ namespace EssSharp.Api
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>MemberBean</returns>
-        MemberBean OutlineGetMemberInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0);
+        MemberBean OutlineGetMemberInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Member Info
@@ -151,7 +151,7 @@ namespace EssSharp.Api
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of MemberBean</returns>
-        ApiResponse<MemberBean> OutlineGetMemberInfoWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0);
+        ApiResponse<MemberBean> OutlineGetMemberInfoWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0);
         /// <summary>
         /// Get Dimensions, Children, or Search
         /// </summary>
@@ -173,7 +173,7 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>MembersList</returns>
-        MembersList OutlineGetMembers(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        MembersList OutlineGetMembers(string app, string cube, string connection = default, string applicationNameForConnection = default, string keyword = default, bool? matchWholeWord = default, string parent = default, string parentUniqueName = default, string isMbrId = default, string fields = default, int? offset = default, int? limit = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Dimensions, Children, or Search
@@ -196,7 +196,7 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of MembersList</returns>
-        ApiResponse<MembersList> OutlineGetMembersWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0);
+        ApiResponse<MembersList> OutlineGetMembersWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, string keyword = default, bool? matchWholeWord = default, string parent = default, string parentUniqueName = default, string isMbrId = default, string fields = default, int? offset = default, int? limit = default, int operationIndex = 0);
         /// <summary>
         /// Export Outline to XML
         /// </summary>
@@ -211,7 +211,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void OutlineGetOutlineXML(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), ExportOptions body = default(ExportOptions), int operationIndex = 0);
+        void OutlineGetOutlineXML(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0);
 
         /// <summary>
         /// Export Outline to XML
@@ -227,7 +227,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), ExportOptions body = default(ExportOptions), int operationIndex = 0);
+        ApiResponse<Object> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -252,7 +252,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task OutlineGetAllSmartListAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string accept = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task OutlineGetAllSmartListAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Text Lists
@@ -269,7 +269,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> OutlineGetAllSmartListWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string accept = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> OutlineGetAllSmartListWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Member Ancestors
         /// </summary>
@@ -286,7 +286,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;MemberBean&gt;</returns>
-        System.Threading.Tasks.Task<List<MemberBean>> OutlineGetAncestorsMemberInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<List<MemberBean>> OutlineGetAncestorsMemberInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Member Ancestors
@@ -304,7 +304,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;MemberBean&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<MemberBean>>> OutlineGetAncestorsMemberInfoWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<List<MemberBean>>> OutlineGetAncestorsMemberInfoWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Descendants Count
         /// </summary>
@@ -320,7 +320,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of int</returns>
-        System.Threading.Tasks.Task<int> OutlineGetDescendantsCountAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<int> OutlineGetDescendantsCountAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Descendants Count
@@ -337,7 +337,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (int)</returns>
-        System.Threading.Tasks.Task<ApiResponse<int>> OutlineGetDescendantsCountWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<int>> OutlineGetDescendantsCountWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Member Info
         /// </summary>
@@ -354,7 +354,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of MemberBean</returns>
-        System.Threading.Tasks.Task<MemberBean> OutlineGetMemberInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<MemberBean> OutlineGetMemberInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Member Info
@@ -372,7 +372,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MemberBean)</returns>
-        System.Threading.Tasks.Task<ApiResponse<MemberBean>> OutlineGetMemberInfoWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<MemberBean>> OutlineGetMemberInfoWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Dimensions, Children, or Search
         /// </summary>
@@ -395,7 +395,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of MembersList</returns>
-        System.Threading.Tasks.Task<MembersList> OutlineGetMembersAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<MembersList> OutlineGetMembersAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string keyword = default, bool? matchWholeWord = default, string parent = default, string parentUniqueName = default, string isMbrId = default, string fields = default, int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Dimensions, Children, or Search
@@ -419,7 +419,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MembersList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<MembersList>> OutlineGetMembersWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<MembersList>> OutlineGetMembersWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string keyword = default, bool? matchWholeWord = default, string parent = default, string parentUniqueName = default, string isMbrId = default, string fields = default, int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Export Outline to XML
         /// </summary>
@@ -435,7 +435,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task OutlineGetOutlineXMLAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), ExportOptions body = default(ExportOptions), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task OutlineGetOutlineXMLAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Export Outline to XML
@@ -452,7 +452,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), ExportOptions body = default(ExportOptions), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -584,7 +584,7 @@ namespace EssSharp.Api
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void OutlineGetAllSmartList(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string accept = default(string), int operationIndex = 0)
+        public void OutlineGetAllSmartList(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0)
         {
             OutlineGetAllSmartListWithHttpInfo(app, cube, connection, applicationNameForConnection, accept);
         }
@@ -600,7 +600,7 @@ namespace EssSharp.Api
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> OutlineGetAllSmartListWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string accept = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> OutlineGetAllSmartListWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -687,7 +687,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task OutlineGetAllSmartListAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string accept = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task OutlineGetAllSmartListAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await OutlineGetAllSmartListWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, accept, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -704,7 +704,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> OutlineGetAllSmartListWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string accept = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> OutlineGetAllSmartListWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -792,7 +792,7 @@ namespace EssSharp.Api
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;MemberBean&gt;</returns>
-        public List<MemberBean> OutlineGetAncestorsMemberInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0)
+        public List<MemberBean> OutlineGetAncestorsMemberInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<List<MemberBean>> localVarResponse = OutlineGetAncestorsMemberInfoWithHttpInfo(app, cube, memberUniqueName, connection, applicationNameForConnection, fields);
             return localVarResponse.Data;
@@ -810,7 +810,7 @@ namespace EssSharp.Api
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;MemberBean&gt;</returns>
-        public EssSharp.Client.ApiResponse<List<MemberBean>> OutlineGetAncestorsMemberInfoWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<List<MemberBean>> OutlineGetAncestorsMemberInfoWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -907,7 +907,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;MemberBean&gt;</returns>
-        public async System.Threading.Tasks.Task<List<MemberBean>> OutlineGetAncestorsMemberInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<List<MemberBean>> OutlineGetAncestorsMemberInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<List<MemberBean>> localVarResponse = await OutlineGetAncestorsMemberInfoWithHttpInfoAsync(app, cube, memberUniqueName, connection, applicationNameForConnection, fields, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -926,7 +926,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;MemberBean&gt;)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<MemberBean>>> OutlineGetAncestorsMemberInfoWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<MemberBean>>> OutlineGetAncestorsMemberInfoWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1022,7 +1022,7 @@ namespace EssSharp.Api
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>int</returns>
-        public int OutlineGetDescendantsCount(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), int operationIndex = 0)
+        public int OutlineGetDescendantsCount(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<int> localVarResponse = OutlineGetDescendantsCountWithHttpInfo(app, cube, memberUniqueName, connection, applicationNameForConnection);
             return localVarResponse.Data;
@@ -1039,7 +1039,7 @@ namespace EssSharp.Api
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of int</returns>
-        public EssSharp.Client.ApiResponse<int> OutlineGetDescendantsCountWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<int> OutlineGetDescendantsCountWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1130,7 +1130,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of int</returns>
-        public async System.Threading.Tasks.Task<int> OutlineGetDescendantsCountAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<int> OutlineGetDescendantsCountAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<int> localVarResponse = await OutlineGetDescendantsCountWithHttpInfoAsync(app, cube, memberUniqueName, connection, applicationNameForConnection, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1148,7 +1148,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (int)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<int>> OutlineGetDescendantsCountWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<int>> OutlineGetDescendantsCountWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1240,7 +1240,7 @@ namespace EssSharp.Api
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>MemberBean</returns>
-        public MemberBean OutlineGetMemberInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0)
+        public MemberBean OutlineGetMemberInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<MemberBean> localVarResponse = OutlineGetMemberInfoWithHttpInfo(app, cube, memberUniqueName, connection, applicationNameForConnection, fields);
             return localVarResponse.Data;
@@ -1258,7 +1258,7 @@ namespace EssSharp.Api
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of MemberBean</returns>
-        public EssSharp.Client.ApiResponse<MemberBean> OutlineGetMemberInfoWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<MemberBean> OutlineGetMemberInfoWithHttpInfo(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1355,7 +1355,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of MemberBean</returns>
-        public async System.Threading.Tasks.Task<MemberBean> OutlineGetMemberInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<MemberBean> OutlineGetMemberInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<MemberBean> localVarResponse = await OutlineGetMemberInfoWithHttpInfoAsync(app, cube, memberUniqueName, connection, applicationNameForConnection, fields, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1374,7 +1374,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MemberBean)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<MemberBean>> OutlineGetMemberInfoWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default(string), string applicationNameForConnection = default(string), string fields = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<MemberBean>> OutlineGetMemberInfoWithHttpInfoAsync(string app, string cube, string memberUniqueName, string connection = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1477,7 +1477,7 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>MembersList</returns>
-        public MembersList OutlineGetMembers(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        public MembersList OutlineGetMembers(string app, string cube, string connection = default, string applicationNameForConnection = default, string keyword = default, bool? matchWholeWord = default, string parent = default, string parentUniqueName = default, string isMbrId = default, string fields = default, int? offset = default, int? limit = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<MembersList> localVarResponse = OutlineGetMembersWithHttpInfo(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
             return localVarResponse.Data;
@@ -1501,7 +1501,7 @@ namespace EssSharp.Api
         /// <param name="limit">&lt;p&gt;Maximum number of members to return.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of MembersList</returns>
-        public EssSharp.Client.ApiResponse<MembersList> OutlineGetMembersWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<MembersList> OutlineGetMembersWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, string keyword = default, bool? matchWholeWord = default, string parent = default, string parentUniqueName = default, string isMbrId = default, string fields = default, int? offset = default, int? limit = default, int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1625,7 +1625,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of MembersList</returns>
-        public async System.Threading.Tasks.Task<MembersList> OutlineGetMembersAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<MembersList> OutlineGetMembersAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string keyword = default, bool? matchWholeWord = default, string parent = default, string parentUniqueName = default, string isMbrId = default, string fields = default, int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<MembersList> localVarResponse = await OutlineGetMembersWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -1650,7 +1650,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MembersList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<MembersList>> OutlineGetMembersWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), string keyword = default(string), bool? matchWholeWord = default(bool?), string parent = default(string), string parentUniqueName = default(string), string isMbrId = default(string), string fields = default(string), int? offset = default(int?), int? limit = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<MembersList>> OutlineGetMembersWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string keyword = default, bool? matchWholeWord = default, string parent = default, string parentUniqueName = default, string isMbrId = default, string fields = default, int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1767,7 +1767,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void OutlineGetOutlineXML(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), ExportOptions body = default(ExportOptions), int operationIndex = 0)
+        public void OutlineGetOutlineXML(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0)
         {
             OutlineGetOutlineXMLWithHttpInfo(app, cube, connection, applicationNameForConnection, body);
         }
@@ -1783,7 +1783,7 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), ExportOptions body = default(ExportOptions), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -1867,7 +1867,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task OutlineGetOutlineXMLAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), ExportOptions body = default(ExportOptions), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task OutlineGetOutlineXMLAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await OutlineGetOutlineXMLWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1884,7 +1884,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default(string), string applicationNameForConnection = default(string), ExportOptions body = default(ExportOptions), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'app' is set
             if (app == null)

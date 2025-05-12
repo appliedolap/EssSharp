@@ -33,25 +33,25 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="GridRange" /> class.
         /// </summary>
         /// <param name="types">types.</param>
-        /// <param name="start">start.</param>
-        /// <param name="filters">filters.</param>
         /// <param name="statuses">statuses.</param>
         /// <param name="texts">texts.</param>
-        /// <param name="dataFormats">dataFormats.</param>
         /// <param name="enumIds">enumIds.</param>
-        /// <param name="values">values.</param>
+        /// <param name="dataFormats">dataFormats.</param>
+        /// <param name="filters">filters.</param>
+        /// <param name="start">start.</param>
         /// <param name="end">end.</param>
-        public GridRange(List<string> types = default(List<string>), int start = default(int), List<string> filters = default(List<string>), List<string> statuses = default(List<string>), List<string> texts = default(List<string>), List<string> dataFormats = default(List<string>), List<string> enumIds = default(List<string>), List<string> values = default(List<string>), int end = default(int))
+        /// <param name="values">values.</param>
+        public GridRange(List<string> types = default, List<string> statuses = default, List<string> texts = default, List<string> enumIds = default, List<string> dataFormats = default, List<string> filters = default, int start = default, int end = default, List<string> values = default)
         {
             this.Types = types;
-            this.Start = start;
-            this.Filters = filters;
             this.Statuses = statuses;
             this.Texts = texts;
-            this.DataFormats = dataFormats;
             this.EnumIds = enumIds;
-            this.Values = values;
+            this.DataFormats = dataFormats;
+            this.Filters = filters;
+            this.Start = start;
             this.End = end;
+            this.Values = values;
         }
 
         /// <summary>
@@ -59,18 +59,6 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "types", EmitDefaultValue = false)]
         public List<string> Types { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Start
-        /// </summary>
-        [DataMember(Name = "start", EmitDefaultValue = false)]
-        public int Start { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Filters
-        /// </summary>
-        [DataMember(Name = "filters", EmitDefaultValue = false)]
-        public List<string> Filters { get; set; }
 
         /// <summary>
         /// Gets or Sets Statuses
@@ -85,28 +73,40 @@ namespace EssSharp.Model
         public List<string> Texts { get; set; }
 
         /// <summary>
-        /// Gets or Sets DataFormats
-        /// </summary>
-        [DataMember(Name = "dataFormats", EmitDefaultValue = false)]
-        public List<string> DataFormats { get; set; }
-
-        /// <summary>
         /// Gets or Sets EnumIds
         /// </summary>
         [DataMember(Name = "enumIds", EmitDefaultValue = false)]
         public List<string> EnumIds { get; set; }
 
         /// <summary>
-        /// Gets or Sets Values
+        /// Gets or Sets DataFormats
         /// </summary>
-        [DataMember(Name = "values", EmitDefaultValue = false)]
-        public List<string> Values { get; set; }
+        [DataMember(Name = "dataFormats", EmitDefaultValue = false)]
+        public List<string> DataFormats { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Filters
+        /// </summary>
+        [DataMember(Name = "filters", EmitDefaultValue = false)]
+        public List<string> Filters { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Start
+        /// </summary>
+        [DataMember(Name = "start", EmitDefaultValue = false)]
+        public int Start { get; set; }
 
         /// <summary>
         /// Gets or Sets End
         /// </summary>
         [DataMember(Name = "end", EmitDefaultValue = false)]
         public int End { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Values
+        /// </summary>
+        [DataMember(Name = "values", EmitDefaultValue = false)]
+        public List<string> Values { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -117,14 +117,14 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class GridRange {\n");
             sb.Append("  Types: ").Append(Types).Append("\n");
-            sb.Append("  Start: ").Append(Start).Append("\n");
-            sb.Append("  Filters: ").Append(Filters).Append("\n");
             sb.Append("  Statuses: ").Append(Statuses).Append("\n");
             sb.Append("  Texts: ").Append(Texts).Append("\n");
-            sb.Append("  DataFormats: ").Append(DataFormats).Append("\n");
             sb.Append("  EnumIds: ").Append(EnumIds).Append("\n");
-            sb.Append("  Values: ").Append(Values).Append("\n");
+            sb.Append("  DataFormats: ").Append(DataFormats).Append("\n");
+            sb.Append("  Filters: ").Append(Filters).Append("\n");
+            sb.Append("  Start: ").Append(Start).Append("\n");
             sb.Append("  End: ").Append(End).Append("\n");
+            sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

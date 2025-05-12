@@ -36,7 +36,7 @@ namespace EssSharp.Model
         /// <param name="succesCt">succesCt.</param>
         /// <param name="warningCt">warningCt.</param>
         /// <param name="runningCt">runningCt.</param>
-        public JobStatisticsBean(long errCt = default(long), long succesCt = default(long), long warningCt = default(long), long runningCt = default(long))
+        public JobStatisticsBean(long errCt = default, long succesCt = default, long warningCt = default, long runningCt = default)
         {
             this.ErrCt = errCt;
             this.SuccesCt = succesCt;

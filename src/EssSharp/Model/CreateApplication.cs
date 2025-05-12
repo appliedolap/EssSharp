@@ -30,31 +30,6 @@ namespace EssSharp.Model
     public partial class CreateApplication : IValidatableObject
     {
         /// <summary>
-        /// Defines AppType
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum AppTypeEnum
-        {
-            /// <summary>
-            /// Enum NATIVE for value: NATIVE
-            /// </summary>
-            [EnumMember(Value = "NATIVE")]
-            NATIVE = 1,
-
-            /// <summary>
-            /// Enum UTF8 for value: UTF8
-            /// </summary>
-            [EnumMember(Value = "UTF8")]
-            UTF8 = 2
-        }
-
-
-        /// <summary>
-        /// Gets or Sets AppType
-        /// </summary>
-        [DataMember(Name = "appType", EmitDefaultValue = false)]
-        public AppTypeEnum? AppType { get; set; }
-        /// <summary>
         /// Defines DbType
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -86,6 +61,31 @@ namespace EssSharp.Model
         [DataMember(Name = "dbType", EmitDefaultValue = false)]
         public DbTypeEnum? DbType { get; set; }
         /// <summary>
+        /// Defines AppType
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AppTypeEnum
+        {
+            /// <summary>
+            /// Enum NATIVE for value: NATIVE
+            /// </summary>
+            [EnumMember(Value = "NATIVE")]
+            NATIVE = 1,
+
+            /// <summary>
+            /// Enum UTF8 for value: UTF8
+            /// </summary>
+            [EnumMember(Value = "UTF8")]
+            UTF8 = 2
+        }
+
+
+        /// <summary>
+        /// Gets or Sets AppType
+        /// </summary>
+        [DataMember(Name = "appType", EmitDefaultValue = false)]
+        public AppTypeEnum? AppType { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="CreateApplication" /> class.
         /// </summary>
         /// <param name="applicationName">applicationName.</param>
@@ -94,10 +94,10 @@ namespace EssSharp.Model
         /// <param name="enableScenario">enableScenario.</param>
         /// <param name="memberCount">memberCount.</param>
         /// <param name="databaseType">databaseType.</param>
+        /// <param name="dbType">dbType.</param>
         /// <param name="appType">appType.</param>
         /// <param name="memberPrefix">memberPrefix.</param>
-        /// <param name="dbType">dbType.</param>
-        public CreateApplication(string applicationName = default(string), string databaseName = default(string), bool allowDuplicates = default(bool), bool enableScenario = default(bool), int memberCount = default(int), string databaseType = default(string), AppTypeEnum? appType = default(AppTypeEnum?), string memberPrefix = default(string), DbTypeEnum? dbType = default(DbTypeEnum?))
+        public CreateApplication(string applicationName = default, string databaseName = default, bool allowDuplicates = default, bool enableScenario = default, int memberCount = default, string databaseType = default, DbTypeEnum? dbType = default, AppTypeEnum? appType = default, string memberPrefix = default)
         {
             this.ApplicationName = applicationName;
             this.DatabaseName = databaseName;
@@ -105,9 +105,9 @@ namespace EssSharp.Model
             this.EnableScenario = enableScenario;
             this.MemberCount = memberCount;
             this.DatabaseType = databaseType;
+            this.DbType = dbType;
             this.AppType = appType;
             this.MemberPrefix = memberPrefix;
-            this.DbType = dbType;
         }
 
         /// <summary>
@@ -166,9 +166,9 @@ namespace EssSharp.Model
             sb.Append("  EnableScenario: ").Append(EnableScenario).Append("\n");
             sb.Append("  MemberCount: ").Append(MemberCount).Append("\n");
             sb.Append("  DatabaseType: ").Append(DatabaseType).Append("\n");
+            sb.Append("  DbType: ").Append(DbType).Append("\n");
             sb.Append("  AppType: ").Append(AppType).Append("\n");
             sb.Append("  MemberPrefix: ").Append(MemberPrefix).Append("\n");
-            sb.Append("  DbType: ").Append(DbType).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

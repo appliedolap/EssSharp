@@ -33,7 +33,7 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="EssToDsMapDTO" /> class.
         /// </summary>
         /// <param name="dimensions">dimensions.</param>
-        public EssToDsMapDTO(List<Dimension> dimensions = default(List<Dimension>))
+        public EssToDsMapDTO(List<Dimension> dimensions = default)
         {
             this.Dimensions = dimensions;
         }

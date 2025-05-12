@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="items">items.</param>
         /// <param name="hasMore">hasMore.</param>
         /// <param name="properties">properties.</param>
-        public Groups(long totalResults = default(long), long count = default(long), long limit = default(long), long offset = default(long), List<GroupBean> items = default(List<GroupBean>), bool hasMore = default(bool), Dictionary<string, string> properties = default(Dictionary<string, string>))
+        public Groups(long totalResults = default, long count = default, long limit = default, long offset = default, List<GroupBean> items = default, bool hasMore = default, Dictionary<string, string> properties = default)
         {
             this.TotalResults = totalResults;
             this.Count = count;

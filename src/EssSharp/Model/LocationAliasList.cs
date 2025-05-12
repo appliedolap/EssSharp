@@ -40,7 +40,7 @@ namespace EssSharp.Model
         /// <param name="hasMore">hasMore.</param>
         /// <param name="count">count.</param>
         /// <param name="properties">properties.</param>
-        public LocationAliasList(List<LocationAliasBean> items = default(List<LocationAliasBean>), long offset = default(long), long limit = default(long), long totalResults = default(long), List<Link> links = default(List<Link>), bool hasMore = default(bool), long count = default(long), Dictionary<string, string> properties = default(Dictionary<string, string>))
+        public LocationAliasList(List<LocationAliasBean> items = default, long offset = default, long limit = default, long totalResults = default, List<Link> links = default, bool hasMore = default, long count = default, Dictionary<string, string> properties = default)
         {
             this.Items = items;
             this.Offset = offset;

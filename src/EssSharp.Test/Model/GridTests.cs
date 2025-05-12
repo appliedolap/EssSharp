@@ -53,6 +53,15 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Dimensions'
+        /// </summary>
+        [Fact]
+        public void DimensionsTest()
+        {
+            // TODO unit test for the property 'Dimensions'
+        }
+
+        /// <summary>
         /// Test the property 'Slice'
         /// </summary>
         [Fact]
@@ -68,15 +77,6 @@ namespace EssSharp.Test.Model
         public void AliasTest()
         {
             // TODO unit test for the property 'Alias'
-        }
-
-        /// <summary>
-        /// Test the property 'Dimensions'
-        /// </summary>
-        [Fact]
-        public void DimensionsTest()
-        {
-            // TODO unit test for the property 'Dimensions'
         }
     }
 }

@@ -45,7 +45,7 @@ namespace EssSharp.Model
         /// <param name="averageBundleFill">averageBundleFill.</param>
         /// <param name="averageValueLength">averageValueLength.</param>
         /// <param name="level0MB">level0MB.</param>
-        public EssbaseASODbCompression(string name = default(string), int artifactType = default(int), string nodeName = default(string), string appName = default(string), string dbName = default(string), bool locked = default(bool), string lockedByUser = default(string), string dimensionName = default(string), bool isCompression = default(bool), double storedLevel0Members = default(double), double averageBundleFill = default(double), double averageValueLength = default(double), double level0MB = default(double))
+        public EssbaseASODbCompression(string name = default, int artifactType = default, string nodeName = default, string appName = default, string dbName = default, bool locked = default, string lockedByUser = default, string dimensionName = default, bool isCompression = default, double storedLevel0Members = default, double averageBundleFill = default, double averageValueLength = default, double level0MB = default)
         {
             this.Name = name;
             this.ArtifactType = artifactType;

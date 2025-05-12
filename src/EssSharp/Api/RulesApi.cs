@@ -34,7 +34,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Rules</returns>
-        Rules RulesGet(string path = default(string), int operationIndex = 0);
+        Rules RulesGet(string path = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Rules
@@ -46,7 +46,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Rules</returns>
-        ApiResponse<Rules> RulesGetWithHttpInfo(string path = default(string), int operationIndex = 0);
+        ApiResponse<Rules> RulesGetWithHttpInfo(string path = default, int operationIndex = 0);
         /// <summary>
         /// Preview Rules Data
         /// </summary>
@@ -57,7 +57,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>RulePreviewOutput</returns>
-        RulePreviewOutput RulesGetPreviewData(RulePreviewInput body = default(RulePreviewInput), int operationIndex = 0);
+        RulePreviewOutput RulesGetPreviewData(RulePreviewInput body = default, int operationIndex = 0);
 
         /// <summary>
         /// Preview Rules Data
@@ -69,7 +69,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of RulePreviewOutput</returns>
-        ApiResponse<RulePreviewOutput> RulesGetPreviewDataWithHttpInfo(RulePreviewInput body = default(RulePreviewInput), int operationIndex = 0);
+        ApiResponse<RulePreviewOutput> RulesGetPreviewDataWithHttpInfo(RulePreviewInput body = default, int operationIndex = 0);
         /// <summary>
         /// Import Rules
         /// </summary>
@@ -81,7 +81,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;File path information: source and destination catalog paths.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void RulesImportRule(bool? overwrite = default(bool?), FilePathDetail body = default(FilePathDetail), int operationIndex = 0);
+        void RulesImportRule(bool? overwrite = default, FilePathDetail body = default, int operationIndex = 0);
 
         /// <summary>
         /// Import Rules
@@ -94,7 +94,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;File path information: source and destination catalog paths.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> RulesImportRuleWithHttpInfo(bool? overwrite = default(bool?), FilePathDetail body = default(FilePathDetail), int operationIndex = 0);
+        ApiResponse<Object> RulesImportRuleWithHttpInfo(bool? overwrite = default, FilePathDetail body = default, int operationIndex = 0);
         /// <summary>
         /// Create Rules
         /// </summary>
@@ -107,7 +107,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void RulesSave(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0);
+        void RulesSave(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0);
 
         /// <summary>
         /// Create Rules
@@ -121,7 +121,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> RulesSaveWithHttpInfo(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0);
+        ApiResponse<Object> RulesSaveWithHttpInfo(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0);
         /// <summary>
         /// Verify Rules (Deprecated)
         /// </summary>
@@ -132,7 +132,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void RulesVerify(Rules body = default(Rules), int operationIndex = 0);
+        void RulesVerify(Rules body = default, int operationIndex = 0);
 
         /// <summary>
         /// Verify Rules (Deprecated)
@@ -144,7 +144,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> RulesVerifyWithHttpInfo(Rules body = default(Rules), int operationIndex = 0);
+        ApiResponse<Object> RulesVerifyWithHttpInfo(Rules body = default, int operationIndex = 0);
         /// <summary>
         /// Verify Rules
         /// </summary>
@@ -157,7 +157,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void RulesVerifyRule(string application = default(string), string database = default(string), Rules body = default(Rules), int operationIndex = 0);
+        void RulesVerifyRule(string application = default, string database = default, Rules body = default, int operationIndex = 0);
 
         /// <summary>
         /// Verify Rules
@@ -171,7 +171,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> RulesVerifyRuleWithHttpInfo(string application = default(string), string database = default(string), Rules body = default(Rules), int operationIndex = 0);
+        ApiResponse<Object> RulesVerifyRuleWithHttpInfo(string application = default, string database = default, Rules body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -192,7 +192,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Rules</returns>
-        System.Threading.Tasks.Task<Rules> RulesGetAsync(string path = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Rules> RulesGetAsync(string path = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Rules
@@ -205,7 +205,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Rules)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Rules>> RulesGetWithHttpInfoAsync(string path = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Rules>> RulesGetWithHttpInfoAsync(string path = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Preview Rules Data
         /// </summary>
@@ -217,7 +217,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RulePreviewOutput</returns>
-        System.Threading.Tasks.Task<RulePreviewOutput> RulesGetPreviewDataAsync(RulePreviewInput body = default(RulePreviewInput), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<RulePreviewOutput> RulesGetPreviewDataAsync(RulePreviewInput body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Preview Rules Data
@@ -230,7 +230,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RulePreviewOutput)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RulePreviewOutput>> RulesGetPreviewDataWithHttpInfoAsync(RulePreviewInput body = default(RulePreviewInput), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<RulePreviewOutput>> RulesGetPreviewDataWithHttpInfoAsync(RulePreviewInput body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Import Rules
         /// </summary>
@@ -243,7 +243,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task RulesImportRuleAsync(bool? overwrite = default(bool?), FilePathDetail body = default(FilePathDetail), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task RulesImportRuleAsync(bool? overwrite = default, FilePathDetail body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Import Rules
@@ -257,7 +257,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> RulesImportRuleWithHttpInfoAsync(bool? overwrite = default(bool?), FilePathDetail body = default(FilePathDetail), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> RulesImportRuleWithHttpInfoAsync(bool? overwrite = default, FilePathDetail body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Create Rules
         /// </summary>
@@ -271,7 +271,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task RulesSaveAsync(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task RulesSaveAsync(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create Rules
@@ -286,7 +286,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> RulesSaveWithHttpInfoAsync(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> RulesSaveWithHttpInfoAsync(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Verify Rules (Deprecated)
         /// </summary>
@@ -298,7 +298,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task RulesVerifyAsync(Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task RulesVerifyAsync(Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Verify Rules (Deprecated)
@@ -311,7 +311,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> RulesVerifyWithHttpInfoAsync(Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> RulesVerifyWithHttpInfoAsync(Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Verify Rules
         /// </summary>
@@ -325,7 +325,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task RulesVerifyRuleAsync(string application = default(string), string database = default(string), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task RulesVerifyRuleAsync(string application = default, string database = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Verify Rules
@@ -340,7 +340,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> RulesVerifyRuleWithHttpInfoAsync(string application = default(string), string database = default(string), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> RulesVerifyRuleWithHttpInfoAsync(string application = default, string database = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -468,7 +468,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Rules</returns>
-        public Rules RulesGet(string path = default(string), int operationIndex = 0)
+        public Rules RulesGet(string path = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<Rules> localVarResponse = RulesGetWithHttpInfo(path);
             return localVarResponse.Data;
@@ -481,7 +481,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Rules</returns>
-        public EssSharp.Client.ApiResponse<Rules> RulesGetWithHttpInfo(string path = default(string), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Rules> RulesGetWithHttpInfo(string path = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -544,7 +544,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Rules</returns>
-        public async System.Threading.Tasks.Task<Rules> RulesGetAsync(string path = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Rules> RulesGetAsync(string path = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<Rules> localVarResponse = await RulesGetWithHttpInfoAsync(path, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -558,7 +558,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Rules)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Rules>> RulesGetWithHttpInfoAsync(string path = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Rules>> RulesGetWithHttpInfoAsync(string path = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -621,7 +621,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>RulePreviewOutput</returns>
-        public RulePreviewOutput RulesGetPreviewData(RulePreviewInput body = default(RulePreviewInput), int operationIndex = 0)
+        public RulePreviewOutput RulesGetPreviewData(RulePreviewInput body = default, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<RulePreviewOutput> localVarResponse = RulesGetPreviewDataWithHttpInfo(body);
             return localVarResponse.Data;
@@ -634,7 +634,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of RulePreviewOutput</returns>
-        public EssSharp.Client.ApiResponse<RulePreviewOutput> RulesGetPreviewDataWithHttpInfo(RulePreviewInput body = default(RulePreviewInput), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<RulePreviewOutput> RulesGetPreviewDataWithHttpInfo(RulePreviewInput body = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -696,7 +696,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RulePreviewOutput</returns>
-        public async System.Threading.Tasks.Task<RulePreviewOutput> RulesGetPreviewDataAsync(RulePreviewInput body = default(RulePreviewInput), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<RulePreviewOutput> RulesGetPreviewDataAsync(RulePreviewInput body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<RulePreviewOutput> localVarResponse = await RulesGetPreviewDataWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
@@ -710,7 +710,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RulePreviewOutput)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<RulePreviewOutput>> RulesGetPreviewDataWithHttpInfoAsync(RulePreviewInput body = default(RulePreviewInput), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<RulePreviewOutput>> RulesGetPreviewDataWithHttpInfoAsync(RulePreviewInput body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -773,7 +773,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;File path information: source and destination catalog paths.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void RulesImportRule(bool? overwrite = default(bool?), FilePathDetail body = default(FilePathDetail), int operationIndex = 0)
+        public void RulesImportRule(bool? overwrite = default, FilePathDetail body = default, int operationIndex = 0)
         {
             RulesImportRuleWithHttpInfo(overwrite, body);
         }
@@ -786,7 +786,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;File path information: source and destination catalog paths.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> RulesImportRuleWithHttpInfo(bool? overwrite = default(bool?), FilePathDetail body = default(FilePathDetail), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> RulesImportRuleWithHttpInfo(bool? overwrite = default, FilePathDetail body = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -851,7 +851,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task RulesImportRuleAsync(bool? overwrite = default(bool?), FilePathDetail body = default(FilePathDetail), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task RulesImportRuleAsync(bool? overwrite = default, FilePathDetail body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await RulesImportRuleWithHttpInfoAsync(overwrite, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -865,7 +865,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> RulesImportRuleWithHttpInfoAsync(bool? overwrite = default(bool?), FilePathDetail body = default(FilePathDetail), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> RulesImportRuleWithHttpInfoAsync(bool? overwrite = default, FilePathDetail body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -931,7 +931,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void RulesSave(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0)
+        public void RulesSave(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0)
         {
             RulesSaveWithHttpInfo(path, overwrite, body);
         }
@@ -945,7 +945,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> RulesSaveWithHttpInfo(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> RulesSaveWithHttpInfo(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -1015,7 +1015,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task RulesSaveAsync(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task RulesSaveAsync(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await RulesSaveWithHttpInfoAsync(path, overwrite, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1030,7 +1030,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> RulesSaveWithHttpInfoAsync(string path = default(string), bool? overwrite = default(bool?), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> RulesSaveWithHttpInfoAsync(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1098,7 +1098,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void RulesVerify(Rules body = default(Rules), int operationIndex = 0)
+        public void RulesVerify(Rules body = default, int operationIndex = 0)
         {
             RulesVerifyWithHttpInfo(body);
         }
@@ -1110,7 +1110,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> RulesVerifyWithHttpInfo(Rules body = default(Rules), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> RulesVerifyWithHttpInfo(Rules body = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -1172,7 +1172,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task RulesVerifyAsync(Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task RulesVerifyAsync(Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await RulesVerifyWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1185,7 +1185,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> RulesVerifyWithHttpInfoAsync(Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> RulesVerifyWithHttpInfoAsync(Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1249,7 +1249,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void RulesVerifyRule(string application = default(string), string database = default(string), Rules body = default(Rules), int operationIndex = 0)
+        public void RulesVerifyRule(string application = default, string database = default, Rules body = default, int operationIndex = 0)
         {
             RulesVerifyRuleWithHttpInfo(application, database, body);
         }
@@ -1263,7 +1263,7 @@ namespace EssSharp.Api
         /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> RulesVerifyRuleWithHttpInfo(string application = default(string), string database = default(string), Rules body = default(Rules), int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> RulesVerifyRuleWithHttpInfo(string application = default, string database = default, Rules body = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -1335,7 +1335,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task RulesVerifyRuleAsync(string application = default(string), string database = default(string), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task RulesVerifyRuleAsync(string application = default, string database = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await RulesVerifyRuleWithHttpInfoAsync(application, database, body, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -1350,7 +1350,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> RulesVerifyRuleWithHttpInfoAsync(string application = default(string), string database = default(string), Rules body = default(Rules), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> RulesVerifyRuleWithHttpInfoAsync(string application = default, string database = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();

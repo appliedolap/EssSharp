@@ -39,7 +39,7 @@ namespace EssSharp.Model
         /// <param name="userMaxProcesses">userMaxProcesses.</param>
         /// <param name="virtualMemorySize">virtualMemorySize.</param>
         /// <param name="webLogicHeapSize">webLogicHeapSize.</param>
-        public Limits(Limit coreFileSize = default(Limit), Limit dataSegmentSize = default(Limit), Limit maxMemory = default(Limit), Limit openFiles = default(Limit), Limit userMaxProcesses = default(Limit), Limit virtualMemorySize = default(Limit), Limit webLogicHeapSize = default(Limit))
+        public Limits(Limit coreFileSize = default, Limit dataSegmentSize = default, Limit maxMemory = default, Limit openFiles = default, Limit userMaxProcesses = default, Limit virtualMemorySize = default, Limit webLogicHeapSize = default)
         {
             this.CoreFileSize = coreFileSize;
             this.DataSegmentSize = dataSegmentSize;
