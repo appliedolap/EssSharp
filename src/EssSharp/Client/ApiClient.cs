@@ -30,6 +30,7 @@ using FileIO = System.IO.File;
 // EssSharp Template Modification
 using Type = System.Type;
 using Polly;
+using EssSharp.Client.Auth;
 using EssSharp.Model;
 
 namespace EssSharp.Client
@@ -494,6 +495,21 @@ namespace EssSharp.Client
             };
             setOptions(clientOptions);
             
+            if (!string.IsNullOrEmpty(configuration.OAuthTokenUrl) &&
+                !string.IsNullOrEmpty(configuration.OAuthClientId) &&
+                !string.IsNullOrEmpty(configuration.OAuthClientSecret) &&
+                configuration.OAuthFlow != null)
+            {
+                clientOptions.Authenticator = new OAuthAuthenticator(
+                    configuration.OAuthTokenUrl,
+                    configuration.OAuthClientId,
+                    configuration.OAuthClientSecret,
+                    configuration.OAuthScope,
+                    configuration.OAuthFlow,
+                    SerializerSettings,
+                    configuration);
+            }
+
             using (RestClient client = new RestClient(clientOptions,
                 configureSerialization: serializerConfig => serializerConfig.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration))))
             {

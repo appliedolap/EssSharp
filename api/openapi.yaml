@@ -9,6 +9,7 @@ servers:
 - url: /essbase/rest/v1
 security:
 - basicAuth: []
+  OAuth2: []
 tags:
 - name: Roles
 - name: Files
@@ -27760,5 +27761,10 @@ components:
     basicAuth:
       scheme: basic
       type: http
+    OAuth2:
+      flows:
+        authorizationCode:
+          scopes: {}
+      type: oauth2
 x-original-swagger-version: "2.0"
 

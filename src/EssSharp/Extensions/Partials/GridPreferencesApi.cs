@@ -57,6 +57,12 @@ namespace EssSharp.Api
             {
                 localVarRequestOptions.Cookies.Add(cookie);
             }
+            // authentication (OAuth2) required
+            // oauth required
+            else if ( !string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization") )
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
             // Otherwise, use http basic authentication
             else if ( !string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization") )
             {

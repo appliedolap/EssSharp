@@ -43,6 +43,35 @@ namespace EssSharp
         }
 
         /// <summary />
+        /// <param name="server" />
+        /// <param name="oauthToken" />
+        public EssServer( string server, string oauthToken )
+        {
+            _server = server?.TrimEnd('/') ?? string.Empty;
+
+            var basePath = _server;
+
+            // If necessary, append the default REST API path if necessary.
+            if ( !_server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
+                basePath = $"{_server}{_defaultRestApiPath}";
+
+            if ( !Uri.TryCreate(basePath, UriKind.Absolute, out _) )
+                throw new ArgumentException("A fully qualified server URL is required.", nameof(server));
+
+            if ( string.IsNullOrEmpty(oauthToken) )
+                throw new ArgumentException("An OAuth2 access token is required.", nameof(oauthToken));
+
+            Client = new ApiClient(basePath);
+            Configuration = new Configuration()
+            {
+                BasePath = basePath,
+                AccessToken = oauthToken,
+                Timeout = TimeSpan.FromMilliseconds(int.MaxValue),
+                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}"
+            };
+        }
+
+        /// <summary />
         /// <param name="server"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -53,8 +82,8 @@ namespace EssSharp
             var basePath = _server;
 
             // If necessary, append the default REST API path if necessary.
-            if ( !server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
-                basePath = $@"{_server}{_defaultRestApiPath}";
+            if ( !_server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
+                basePath = $"{_server}{_defaultRestApiPath}";
 
             if ( !Uri.TryCreate(basePath, UriKind.Absolute, out _) )
                 throw new ArgumentException("A fully qualified server URL is required.", nameof(server));
@@ -69,8 +98,7 @@ namespace EssSharp
                 Username  = username,
                 Password  = password,
                 Timeout   = TimeSpan.FromMilliseconds(int.MaxValue),
-                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}",
-                //Proxy = new WebProxy("localhost", 8070)
+                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}"
             };
         }
 

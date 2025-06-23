@@ -42,6 +42,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -104,7 +106,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -146,6 +148,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -206,7 +210,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -248,6 +252,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -310,7 +316,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -352,6 +358,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -410,7 +418,7 @@ void (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -451,6 +459,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -515,7 +525,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -557,6 +567,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -617,7 +629,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -658,6 +670,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -720,7 +734,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -761,6 +775,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -823,7 +839,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -864,6 +880,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -924,7 +942,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -965,6 +983,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -1027,7 +1047,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1068,6 +1088,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -1128,7 +1150,7 @@ void (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1169,6 +1191,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -1229,7 +1253,7 @@ catch (ApiException e)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 
@@ -1271,6 +1295,8 @@ namespace Example
         {
             Configuration config = new Configuration();
             config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
             // Configure HTTP basic authorization: basicAuth
             config.Username = "YOUR_USERNAME";
             config.Password = "YOUR_PASSWORD";
@@ -1329,7 +1355,7 @@ void (empty response body)
 
 ### Authorization
 
-[basicAuth](../README.md#basicAuth)
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
 
 ### HTTP request headers
 

@@ -586,7 +586,7 @@ cat temp.json | jq '.definitions.ZoomIn.properties.mode.enum = ["children", "des
 #### securityDefinitions ####
 
 # Add securityDefinitions and security for basic auth by default.
-cat temp.json | jq '. += ({securityDefinitions: {basicAuth: {type: "basic"}}, security: [{"basicAuth": []}]})' > json.tmp && mv json.tmp temp.json
+cat temp.json | jq '. += ({securityDefinitions: {basicAuth: {type: "basic"}, "OAuth2": {"type": "oauth2", "flow": "accessCode"}}, security: [{"basicAuth": [],"OAuth2": []}]})' > json.tmp && mv json.tmp temp.json
 
 # save the processed json
 cp temp.json processed.json
