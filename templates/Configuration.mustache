@@ -17,6 +17,8 @@ using System.Net.Security;
 {{#hasOAuthMethods}}using {{packageName}}.Client.Auth;
 {{/hasOAuthMethods}}
 {{/useRestSharp}}
+// Applied OLAP Modification
+using Microsoft.Extensions.Logging;
 
 namespace {{packageName}}.Client
 {
@@ -245,6 +247,30 @@ namespace {{packageName}}.Client
         #endregion Constructors
 
         #region Properties
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets whether to apply cached session cookies.
+        /// </summary>
+        public virtual bool ApplyCookies { get; set; } = true;
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets whether to retain cached session cookies.
+        /// </summary>
+        public virtual bool RetainCookies { get; set; } = true;
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
+        /// </summary>
+        public virtual ILogger Logger { get; set; }
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets the maximum number of concurrent requests.
+        /// </summary>
+        public virtual int MaxDegreeOfParallelism { get; set; } = 4;
 
         /// <summary>
         /// Gets or sets the base path for API access.
@@ -702,6 +728,14 @@ namespace {{packageName}}.Client
 
             var config = new Configuration
             {
+                // Applied OLAP Modification
+                ApplyCookies = second.ApplyCookies,
+                // Applied OLAP Modification
+                RetainCookies = second.RetainCookies,
+                // Applied OLAP Modification
+                Logger = second.Logger ?? first.Logger,
+                // Applied OLAP Modification
+                MaxDegreeOfParallelism = second.MaxDegreeOfParallelism,
                 ApiKey = apiKey,
                 ApiKeyPrefix = apiKeyPrefix,
                 DefaultHeaders = defaultHeaders,
