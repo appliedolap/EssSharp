@@ -34,6 +34,9 @@ namespace EssSharp.Client
         #region Private Properties
 
         /// <summary />
+        private SemaphoreSlim RequestSemaphore { get; set; } = null;
+
+        /// <summary />
         private int MaxDegreeOfParallelism
         {
             set
