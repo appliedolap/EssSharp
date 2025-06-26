@@ -23,8 +23,6 @@ using RestSharp;
 using RestSharp.Serializers;
 using RestSharpMethod = RestSharp.Method;
 using FileIO = System.IO.File;
-// EssSharp Template Modification
-using Type = System.Type;
 {{#supportsRetry}}
 using Polly;
 {{/supportsRetry}}
@@ -189,30 +187,18 @@ namespace {{packageName}}.Client
             }
         };
 
-        /// <summary />
-        /// <remarks>EssSharp Template Modification</remarks>
-        private SemaphoreSlim RequestSemaphore { get; set; } = null;
-
         /// <summary>
         /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
-        /// <param name="configuration">The per-client configuration.</param>
-        /// <param name="options">The per-request options.</param>
-        /// <param name="cancellationToken" />
-        /// <remarks>EssSharp Template Modification</remarks>
-        {{#useVirtualForHooks}}public virtual{{/useVirtualForHooks}}{{^useVirtualForHooks}}private partial{{/useVirtualForHooks}} Task InterceptRequestAsync(RestRequest request, IReadableConfiguration configuration, RequestOptions options, CancellationToken cancellationToken = default){{#useVirtualForHooks}} { }{{/useVirtualForHooks}}{{^useVirtualForHooks}};{{/useVirtualForHooks}}
+        {{#useVirtualForHooks}}public virtual{{/useVirtualForHooks}}{{^useVirtualForHooks}}partial{{/useVirtualForHooks}} void InterceptRequest(RestRequest request){{#useVirtualForHooks}} { }{{/useVirtualForHooks}}{{^useVirtualForHooks}};{{/useVirtualForHooks}}
 
         /// <summary>
         /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-        /// <param name="configuration">The per-client configuration.</param>
-        /// <param name="options">The per-request options.</param>
-        /// <param name="cancellationToken" />
-        /// <remarks>EssSharp Template Modification</remarks>
-        {{#useVirtualForHooks}}public virtual{{/useVirtualForHooks}}{{^useVirtualForHooks}}private partial{{/useVirtualForHooks}} Task InterceptResponseAsync(RestRequest request, RestResponse response, IReadableConfiguration configuration, RequestOptions options, CancellationToken cancellationToken = default){{#useVirtualForHooks}} { }{{/useVirtualForHooks}}{{^useVirtualForHooks}};{{/useVirtualForHooks}}
+        {{#useVirtualForHooks}}public virtual{{/useVirtualForHooks}}{{^useVirtualForHooks}}partial{{/useVirtualForHooks}} void InterceptResponse(RestRequest request, RestResponse response){{#useVirtualForHooks}} { }{{/useVirtualForHooks}}{{^useVirtualForHooks}};{{/useVirtualForHooks}}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" />, defaulting to the global configurations' base url.
@@ -406,15 +392,6 @@ namespace {{packageName}}.Client
                 }
             }
 
-            // EssSharp Template Modification
-            if (options.Cookies != null && options.Cookies.Count > 0)
-            {
-                foreach (var cookie in options.Cookies)
-                {
-                    request.AddCookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain);
-                }
-            }
-
             return request;
         }
 
@@ -479,10 +456,8 @@ namespace {{packageName}}.Client
         /// <param name="options">The RestSharp options object</param>
         /// <param name="configuration">A per-request configuration object.
         /// It is assumed that any merge with GlobalConfiguration has been done before calling this method.</param>
-        /// <param name="cancellationToken" />
         /// <returns>A new ApiResponse instance.</returns>
-        /// <remarks>EssSharp Template Modification</remarks>
-        private async Task<ApiResponse<T>> ExecClientAsync<T>(Func<RestClient, Task<RestResponse<T>>> getResponse, Action<RestClientOptions> setOptions, RestRequest request, RequestOptions options, IReadableConfiguration configuration, CancellationToken cancellationToken = default)
+        private async Task<ApiResponse<T>> ExecClientAsync<T>(Func<RestClient, Task<RestResponse<T>>> getResponse, Action<RestClientOptions> setOptions, RestRequest request, RequestOptions options, IReadableConfiguration configuration)
         {
             var baseUrl = configuration.GetOperationServerUrl(options.Operation, options.OperationIndex) ?? _baseUrl;
             var clientOptions = new RestClientOptions(baseUrl)
@@ -516,94 +491,70 @@ namespace {{packageName}}.Client
             using (RestClient client = new RestClient(clientOptions,
                 configureSerialization: serializerConfig => serializerConfig.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration))))
             {
-                // EssSharp Template Modification
-                try
+                InterceptRequest(request);
+
+                RestResponse<T> response = await getResponse(client).ConfigureAwait(false);
+
+                // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
+                if (typeof(AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
                 {
-                    // Assign any configured degree of parallelism.
-                    if ( configuration is { MaxDegreeOfParallelism: { } degree } )
-                        MaxDegreeOfParallelism = degree;
-
-                    // Await any request semaphore.
-                    await (RequestSemaphore?.WaitAsync(cancellationToken) ?? Task.CompletedTask).ConfigureAwait(false);
-
-                    // Allow any custom extensions to process the request before dispatch.
-                    await InterceptRequestAsync(request, configuration, options, cancellationToken).ConfigureAwait(false);
-
-                    RestResponse<T> response = await getResponse(client).ConfigureAwait(false);
-
-                    // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
-                    if (typeof(AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
+                    try
                     {
-                        try
-                        {
-                            response.Data = (T)typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex.InnerException != null ? ex.InnerException : ex;
-                        }
+                        response.Data = (T)typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
                     }
-                    else if (typeof(T).Name == "Stream") // for binary response
+                    catch (Exception ex)
                     {
-                        response.Data = (T)(object)new MemoryStream(response.RawBytes);
+                        throw ex.InnerException != null ? ex.InnerException : ex;
                     }
-                    else if (typeof(T).Name == "Byte[]") // for byte response
-                    {
-                        response.Data = (T)(object)response.RawBytes;
-                    }
-                    else if (typeof(T).Name == "String") // for string response
-                    {
-                        response.Data = (T)(object)response.Content;
-                    }
-                    // EssSharp Template Modification
-                    else if (typeof(T).Name == "Object") // for raw object response
-                    {
-                        // if the response data was not already deserialized, return the raw bytes.
-                        response.Data ??= (T)(object)response.RawBytes;
-                    }
-
-                    // Allow any custom extensions to process the response after dispatch.
-                    await InterceptResponseAsync(request, response, configuration, options, cancellationToken).ConfigureAwait(false);
-
-                    var result = ToApiResponse(response);
-                    if (response.ErrorMessage != null)
-                    {
-                        result.ErrorText = response.ErrorMessage;
-                    }
-
-                    if (response.Cookies != null && response.Cookies.Count > 0)
-                    {
-                        if (result.Cookies == null) result.Cookies = new List<Cookie>();
-                        foreach (var restResponseCookie in response.Cookies.Cast<Cookie>())
-                        {
-                            var cookie = new Cookie(
-                                restResponseCookie.Name,
-                                restResponseCookie.Value,
-                                restResponseCookie.Path,
-                                restResponseCookie.Domain
-                            )
-                            {
-                                Comment = restResponseCookie.Comment,
-                                CommentUri = restResponseCookie.CommentUri,
-                                Discard = restResponseCookie.Discard,
-                                Expired = restResponseCookie.Expired,
-                                Expires = restResponseCookie.Expires,
-                                HttpOnly = restResponseCookie.HttpOnly,
-                                Port = restResponseCookie.Port,
-                                Secure = restResponseCookie.Secure,
-                                Version = restResponseCookie.Version
-                            };
-
-                            result.Cookies.Add(cookie);
-                        }
-                    }
-                    return result;
                 }
-                finally
+                else if (typeof(T).Name == "Stream") // for binary response
                 {
-                    // EssSharp Template Modification
-                    try { RequestSemaphore?.Release(); } catch { }
+                    response.Data = (T)(object)new MemoryStream(response.RawBytes);
                 }
+                else if (typeof(T).Name == "Byte[]") // for byte response
+                {
+                    response.Data = (T)(object)response.RawBytes;
+                }
+                else if (typeof(T).Name == "String") // for string response
+                {
+                    response.Data = (T)(object)response.Content;
+                }
+
+                InterceptResponse(request, response);
+
+                var result = ToApiResponse(response);
+                if (response.ErrorMessage != null)
+                {
+                    result.ErrorText = response.ErrorMessage;
+                }
+
+                if (response.Cookies != null && response.Cookies.Count > 0)
+                {
+                    if (result.Cookies == null) result.Cookies = new List<Cookie>();
+                    foreach (var restResponseCookie in response.Cookies.Cast<Cookie>())
+                    {
+                        var cookie = new Cookie(
+                            restResponseCookie.Name,
+                            restResponseCookie.Value,
+                            restResponseCookie.Path,
+                            restResponseCookie.Domain
+                        )
+                        {
+                            Comment = restResponseCookie.Comment,
+                            CommentUri = restResponseCookie.CommentUri,
+                            Discard = restResponseCookie.Discard,
+                            Expired = restResponseCookie.Expired,
+                            Expires = restResponseCookie.Expires,
+                            HttpOnly = restResponseCookie.HttpOnly,
+                            Port = restResponseCookie.Port,
+                            Secure = restResponseCookie.Secure,
+                            Version = restResponseCookie.Version
+                        };
+
+                        result.Cookies.Add(cookie);
+                    }
+                }
+                return result;
             }
         }
 
@@ -681,8 +632,7 @@ namespace {{packageName}}.Client
                 {{/supportsRetry}}
             };
 
-            // EssSharp Template Modification
-            return ExecClientAsync(getResponse, setOptions, request, options, configuration, cancellationToken);
+            return ExecClientAsync(getResponse, setOptions, request, options, configuration);
         }
 
         #region IAsynchronousClient

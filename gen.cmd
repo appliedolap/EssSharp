@@ -11,7 +11,7 @@ cd "%~dp0"
 rmdir /S /Q .\src\EssSharp.Test >nul 2>&1
 
 :: Generate the c# code from the processed.json file.
-java -jar openapi-generator-cli-7.13.0.jar generate ^
+java -jar openapi-generator-cli-7.14.0.jar generate ^
   --input-spec .\processed.json ^
   --generator-name csharp ^
   --template-dir .\templates ^

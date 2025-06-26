@@ -13,7 +13,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Net.Http;
 using System.Net.Security;
-using Microsoft.Extensions.Logging;
 {{#useRestSharp}}
 {{#hasOAuthMethods}}using {{packageName}}.Client.Auth;
 {{/hasOAuthMethods}}
@@ -257,24 +256,13 @@ namespace {{packageName}}.Client
         }
 
         /// <summary>
-        /// Gets or sets whether to apply cached session cookies.
+        /// Determine whether or not the "default credentials" (e.g. the user account under which the current process is running) will be sent along to the server. The default is false.
         /// </summary>
-        public virtual bool ApplyCookies { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets whether to retain cached session cookies.
-        /// </summary>
-        public virtual bool RetainCookies { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
-        /// </summary>
-        public virtual ILogger Logger { get; set; }
-
-        /// <summary>
-        /// Gets or sets the maximum number of concurrent requests.
-        /// </summary>
-        public virtual int MaxDegreeOfParallelism { get; set; } = 4;
+        public virtual bool UseDefaultCredentials
+        {
+            get { return _useDefaultCredentials; }
+            set { _useDefaultCredentials = value; }
+        }
 
         /// <summary>
         /// Gets or sets the default header.
@@ -313,15 +301,6 @@ namespace {{packageName}}.Client
         /// </summary>
         /// <value>Http user agent.</value>
         public virtual string UserAgent { get; set; }
-
-        /// <summary>
-        /// Determine whether or not the "default credentials" (e.g. the user account under which the current process is running) will be sent along to the server. The default is false.
-        /// </summary>
-        public virtual bool UseDefaultCredentials
-        {
-            get { return _useDefaultCredentials; }
-            set { _useDefaultCredentials = value; }
-        }
 
         /// <summary>
         /// Gets or sets the username (HTTP basic authentication).
@@ -727,10 +706,6 @@ namespace {{packageName}}.Client
                 ApiKeyPrefix = apiKeyPrefix,
                 DefaultHeaders = defaultHeaders,
                 BasePath = second.BasePath ?? first.BasePath,
-                ApplyCookies = second.ApplyCookies,
-                RetainCookies = second.RetainCookies,
-                Logger = second.Logger ?? first.Logger,
-                MaxDegreeOfParallelism = second.MaxDegreeOfParallelism,
                 Timeout = second.Timeout,
                 Proxy = second.Proxy ?? first.Proxy,
                 UserAgent = second.UserAgent ?? first.UserAgent,
