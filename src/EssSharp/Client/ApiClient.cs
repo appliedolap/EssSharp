@@ -27,11 +27,11 @@ using RestSharp;
 using RestSharp.Serializers;
 using RestSharpMethod = RestSharp.Method;
 using FileIO = System.IO.File;
-// EssSharp Template Modification
-using Type = System.Type;
 using Polly;
 using EssSharp.Client.Auth;
 using EssSharp.Model;
+// Applied OLAP Modification (for EssSharp)
+using Type = System.Type;
 
 namespace EssSharp.Client
 {
@@ -188,10 +188,7 @@ namespace EssSharp.Client
             }
         };
 
-        /// <summary />
-        /// <remarks>EssSharp Template Modification</remarks>
-        private SemaphoreSlim RequestSemaphore { get; set; } = null;
-
+        // Applied OLAP Modification
         /// <summary>
         /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
         /// </summary>
@@ -199,9 +196,9 @@ namespace EssSharp.Client
         /// <param name="configuration">The per-client configuration.</param>
         /// <param name="options">The per-request options.</param>
         /// <param name="cancellationToken" />
-        /// <remarks>EssSharp Template Modification</remarks>
         private partial Task InterceptRequestAsync(RestRequest request, IReadableConfiguration configuration, RequestOptions options, CancellationToken cancellationToken = default);
 
+        // Applied OLAP Modification
         /// <summary>
         /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
         /// </summary>
@@ -210,7 +207,6 @@ namespace EssSharp.Client
         /// <param name="configuration">The per-client configuration.</param>
         /// <param name="options">The per-request options.</param>
         /// <param name="cancellationToken" />
-        /// <remarks>EssSharp Template Modification</remarks>
         private partial Task InterceptResponseAsync(RestRequest request, RestResponse response, IReadableConfiguration configuration, RequestOptions options, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -405,7 +401,7 @@ namespace EssSharp.Client
                 }
             }
 
-            // EssSharp Template Modification
+            // Applied OLAP Modification
             if (options.Cookies != null && options.Cookies.Count > 0)
             {
                 foreach (var cookie in options.Cookies)
@@ -468,6 +464,7 @@ namespace EssSharp.Client
             return transformed;
         }
 
+        // Applied OLAP Modification
         /// <summary>
         /// Executes the HTTP request for the current service.
         /// Based on functions received it can be async or sync.
@@ -480,7 +477,6 @@ namespace EssSharp.Client
         /// It is assumed that any merge with GlobalConfiguration has been done before calling this method.</param>
         /// <param name="cancellationToken" />
         /// <returns>A new ApiResponse instance.</returns>
-        /// <remarks>EssSharp Template Modification</remarks>
         private async Task<ApiResponse<T>> ExecClientAsync<T>(Func<RestClient, Task<RestResponse<T>>> getResponse, Action<RestClientOptions> setOptions, RestRequest request, RequestOptions options, IReadableConfiguration configuration, CancellationToken cancellationToken = default)
         {
             var baseUrl = configuration.GetOperationServerUrl(options.Operation, options.OperationIndex) ?? _baseUrl;
@@ -513,92 +509,94 @@ namespace EssSharp.Client
             using (RestClient client = new RestClient(clientOptions,
                 configureSerialization: serializerConfig => serializerConfig.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration))))
             {
-                // EssSharp Template Modification
+                // Applied OLAP Modification - START
                 try
                 {
-                    // Assign any configured degree of parallelism.
-                    if ( configuration is { MaxDegreeOfParallelism: { } degree } )
-                        MaxDegreeOfParallelism = degree;
+                // Assign any configured degree of parallelism.
+                if ( configuration is { MaxDegreeOfParallelism: { } degree } )
+                    MaxDegreeOfParallelism = degree;
 
-                    // Await any request semaphore.
-                    await (RequestSemaphore?.WaitAsync(cancellationToken) ?? Task.CompletedTask).ConfigureAwait(false);
+                // Await any request semaphore.
+                await (RequestSemaphore?.WaitAsync(cancellationToken) ?? Task.CompletedTask).ConfigureAwait(false);
 
-                    // Allow any custom extensions to process the request before dispatch.
-                    await InterceptRequestAsync(request, configuration, options, cancellationToken).ConfigureAwait(false);
+                // Allow any custom extensions to process the request before dispatch.
+                await InterceptRequestAsync(request, configuration, options, cancellationToken).ConfigureAwait(false);
+                // Applied OLAP Modification - END
 
-                    RestResponse<T> response = await getResponse(client).ConfigureAwait(false);
+                RestResponse<T> response = await getResponse(client).ConfigureAwait(false);
 
-                    // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
-                    if (typeof(AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
+                // if the response type is oneOf/anyOf, call FromJSON to deserialize the data
+                if (typeof(AbstractOpenAPISchema).IsAssignableFrom(typeof(T)))
+                {
+                    try
                     {
-                        try
+                        response.Data = (T)typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex.InnerException != null ? ex.InnerException : ex;
+                    }
+                }
+                else if (typeof(T).Name == "Stream") // for binary response
+                {
+                    response.Data = (T)(object)new MemoryStream(response.RawBytes);
+                }
+                else if (typeof(T).Name == "Byte[]") // for byte response
+                {
+                    response.Data = (T)(object)response.RawBytes;
+                }
+                else if (typeof(T).Name == "String") // for string response
+                {
+                    response.Data = (T)(object)response.Content;
+                }
+                // Applied OLAP Modification
+                else if (typeof(T).Name == "Object") // for raw object response
+                {
+                    // if the response data was not already deserialized, return the raw bytes.
+                    response.Data ??= (T)(object)response.RawBytes;
+                }
+
+                // Applied OLAP Modification
+                // Allow any custom extensions to process the response after dispatch.
+                await InterceptResponseAsync(request, response, configuration, options, cancellationToken).ConfigureAwait(false);
+
+                var result = ToApiResponse(response);
+                if (response.ErrorMessage != null)
+                {
+                    result.ErrorText = response.ErrorMessage;
+                }
+
+                if (response.Cookies != null && response.Cookies.Count > 0)
+                {
+                    if (result.Cookies == null) result.Cookies = new List<Cookie>();
+                    foreach (var restResponseCookie in response.Cookies.Cast<Cookie>())
+                    {
+                        var cookie = new Cookie(
+                            restResponseCookie.Name,
+                            restResponseCookie.Value,
+                            restResponseCookie.Path,
+                            restResponseCookie.Domain
+                        )
                         {
-                            response.Data = (T)typeof(T).GetMethod("FromJson").Invoke(null, new object[] { response.Content });
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex.InnerException != null ? ex.InnerException : ex;
-                        }
-                    }
-                    else if (typeof(T).Name == "Stream") // for binary response
-                    {
-                        response.Data = (T)(object)new MemoryStream(response.RawBytes);
-                    }
-                    else if (typeof(T).Name == "Byte[]") // for byte response
-                    {
-                        response.Data = (T)(object)response.RawBytes;
-                    }
-                    else if (typeof(T).Name == "String") // for string response
-                    {
-                        response.Data = (T)(object)response.Content;
-                    }
-                    // EssSharp Template Modification
-                    else if (typeof(T).Name == "Object") // for raw object response
-                    {
-                        // if the response data was not already deserialized, return the raw bytes.
-                        response.Data ??= (T)(object)response.RawBytes;
-                    }
+                            Comment = restResponseCookie.Comment,
+                            CommentUri = restResponseCookie.CommentUri,
+                            Discard = restResponseCookie.Discard,
+                            Expired = restResponseCookie.Expired,
+                            Expires = restResponseCookie.Expires,
+                            HttpOnly = restResponseCookie.HttpOnly,
+                            Port = restResponseCookie.Port,
+                            Secure = restResponseCookie.Secure,
+                            Version = restResponseCookie.Version
+                        };
 
-                    // Allow any custom extensions to process the response after dispatch.
-                    await InterceptResponseAsync(request, response, configuration, options, cancellationToken).ConfigureAwait(false);
-
-                    var result = ToApiResponse(response);
-                    if (response.ErrorMessage != null)
-                    {
-                        result.ErrorText = response.ErrorMessage;
+                        result.Cookies.Add(cookie);
                     }
-
-                    if (response.Cookies != null && response.Cookies.Count > 0)
-                    {
-                        if (result.Cookies == null) result.Cookies = new List<Cookie>();
-                        foreach (var restResponseCookie in response.Cookies.Cast<Cookie>())
-                        {
-                            var cookie = new Cookie(
-                                restResponseCookie.Name,
-                                restResponseCookie.Value,
-                                restResponseCookie.Path,
-                                restResponseCookie.Domain
-                            )
-                            {
-                                Comment = restResponseCookie.Comment,
-                                CommentUri = restResponseCookie.CommentUri,
-                                Discard = restResponseCookie.Discard,
-                                Expired = restResponseCookie.Expired,
-                                Expires = restResponseCookie.Expires,
-                                HttpOnly = restResponseCookie.HttpOnly,
-                                Port = restResponseCookie.Port,
-                                Secure = restResponseCookie.Secure,
-                                Version = restResponseCookie.Version
-                            };
-
-                            result.Cookies.Add(cookie);
-                        }
-                    }
-                    return result;
+                }
+                return result;
+                // Applied OLAP Modification
                 }
                 finally
                 {
-                    // EssSharp Template Modification
                     try { RequestSemaphore?.Release(); } catch { }
                 }
             }
@@ -673,7 +671,7 @@ namespace EssSharp.Client
                 }
             };
 
-            // EssSharp Template Modification
+            // Applied OLAP Modification
             return ExecClientAsync(getResponse, setOptions, request, options, configuration, cancellationToken);
         }
 

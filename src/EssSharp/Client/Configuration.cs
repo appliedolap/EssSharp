@@ -17,8 +17,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Net.Http;
 using System.Net.Security;
-using Microsoft.Extensions.Logging;
 using EssSharp.Client.Auth;
+// Applied OLAP Modification
+using Microsoft.Extensions.Logging;
 
 namespace EssSharp.Client
 {
@@ -175,6 +176,30 @@ namespace EssSharp.Client
 
         #region Properties
 
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets whether to apply cached session cookies.
+        /// </summary>
+        public virtual bool ApplyCookies { get; set; } = true;
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets whether to retain cached session cookies.
+        /// </summary>
+        public virtual bool RetainCookies { get; set; } = true;
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
+        /// </summary>
+        public virtual ILogger Logger { get; set; }
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets the maximum number of concurrent requests.
+        /// </summary>
+        public virtual int MaxDegreeOfParallelism { get; set; } = 4;
+
         /// <summary>
         /// Gets or sets the base path for API access.
         /// </summary>
@@ -185,24 +210,13 @@ namespace EssSharp.Client
         }
 
         /// <summary>
-        /// Gets or sets whether to apply cached session cookies.
+        /// Determine whether or not the "default credentials" (e.g. the user account under which the current process is running) will be sent along to the server. The default is false.
         /// </summary>
-        public virtual bool ApplyCookies { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets whether to retain cached session cookies.
-        /// </summary>
-        public virtual bool RetainCookies { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
-        /// </summary>
-        public virtual ILogger Logger { get; set; }
-
-        /// <summary>
-        /// Gets or sets the maximum number of concurrent requests.
-        /// </summary>
-        public virtual int MaxDegreeOfParallelism { get; set; } = 4;
+        public virtual bool UseDefaultCredentials
+        {
+            get { return _useDefaultCredentials; }
+            set { _useDefaultCredentials = value; }
+        }
 
         /// <summary>
         /// Gets or sets the default header.
@@ -241,15 +255,6 @@ namespace EssSharp.Client
         /// </summary>
         /// <value>Http user agent.</value>
         public virtual string UserAgent { get; set; }
-
-        /// <summary>
-        /// Determine whether or not the "default credentials" (e.g. the user account under which the current process is running) will be sent along to the server. The default is false.
-        /// </summary>
-        public virtual bool UseDefaultCredentials
-        {
-            get { return _useDefaultCredentials; }
-            set { _useDefaultCredentials = value; }
-        }
 
         /// <summary>
         /// Gets or sets the username (HTTP basic authentication).
@@ -634,14 +639,18 @@ namespace EssSharp.Client
 
             var config = new Configuration
             {
+                // Applied OLAP Modification
+                ApplyCookies = second.ApplyCookies,
+                // Applied OLAP Modification
+                RetainCookies = second.RetainCookies,
+                // Applied OLAP Modification
+                Logger = second.Logger ?? first.Logger,
+                // Applied OLAP Modification
+                MaxDegreeOfParallelism = second.MaxDegreeOfParallelism,
                 ApiKey = apiKey,
                 ApiKeyPrefix = apiKeyPrefix,
                 DefaultHeaders = defaultHeaders,
                 BasePath = second.BasePath ?? first.BasePath,
-                ApplyCookies = second.ApplyCookies,
-                RetainCookies = second.RetainCookies,
-                Logger = second.Logger ?? first.Logger,
-                MaxDegreeOfParallelism = second.MaxDegreeOfParallelism,
                 Timeout = second.Timeout,
                 Proxy = second.Proxy ?? first.Proxy,
                 UserAgent = second.UserAgent ?? first.UserAgent,

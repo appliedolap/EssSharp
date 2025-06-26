@@ -11,8 +11,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using Microsoft.Extensions.Logging;
 using EssSharp.Client.Auth;
+// Applied OLAP Modification
+using Microsoft.Extensions.Logging;
 
 namespace EssSharp.Client
 {
@@ -21,6 +22,30 @@ namespace EssSharp.Client
     /// </summary>
     public interface IReadableConfiguration
     {
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets whether to apply cached session cookies.
+        /// </summary>
+        bool ApplyCookies { get; }
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets whether to retain cached session cookies.
+        /// </summary>
+        bool RetainCookies { get; }
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
+        /// </summary>
+        ILogger Logger { get; }
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets the maximum number of concurrent requests.
+        /// </summary>
+        int MaxDegreeOfParallelism { get; }
+
         /// <summary>
         /// Gets the access token.
         /// </summary>
@@ -74,26 +99,6 @@ namespace EssSharp.Client
         /// </summary>
         /// <value>Base path.</value>
         string BasePath { get; }
-
-        /// <summary>
-        /// Gets whether to apply cached session cookies.
-        /// </summary>
-        bool ApplyCookies { get; }
-
-        /// <summary>
-        /// Gets whether to retain cached session cookies.
-        /// </summary>
-        bool RetainCookies { get; }
-
-        /// <summary>
-        /// Gets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
-        /// </summary>
-        ILogger Logger { get; }
-
-        /// <summary>
-        /// Gets the maximum number of concurrent requests.
-        /// </summary>
-        int MaxDegreeOfParallelism { get; }
 
         /// <summary>
         /// Gets the date time format.
