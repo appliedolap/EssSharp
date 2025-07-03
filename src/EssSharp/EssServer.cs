@@ -33,13 +33,16 @@ namespace EssSharp
         /// <summary />
         internal EssServer( Configuration configuration, ApiClient client ) : base(configuration, client) 
         {
-            if ( !Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out _) )
-                throw new ArgumentException("A fully qualified server REST endpoint must be set on the configuration.", nameof(configuration));
+            if ( configuration is null )
+                throw new ArgumentNullException(paramName: nameof(configuration), message: "A client configuration is required.");
 
-            int defaultRestApiPathIndex = configuration.BasePath.ToLowerInvariant().LastIndexOf(_defaultRestApiPath);
+            if (  configuration is not { BasePath: { Length: > 0 } basePath } || !Uri.TryCreate(basePath, UriKind.Absolute, out _) )
+                throw new ArgumentException(paramName: nameof(configuration), message: "A fully qualified server REST endpoint must be set on the configuration.");
+
+            int defaultRestApiPathIndex = basePath.ToLowerInvariant().LastIndexOf(_defaultRestApiPath, StringComparison.Ordinal);
 
             if ( defaultRestApiPathIndex >= 0 )
-                _server = configuration.BasePath.Substring(0, defaultRestApiPathIndex);
+                _server = basePath.Substring(0, defaultRestApiPathIndex);
         }
 
         /// <summary />
