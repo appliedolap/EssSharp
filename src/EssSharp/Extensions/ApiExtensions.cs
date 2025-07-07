@@ -39,8 +39,9 @@ namespace EssSharp.Api
         /// reasonably thrown for an <see cref="RestResponse"/>.
         /// </summary>
         /// <param name="response" />
-        internal static bool IsSuccessful( this RestResponse response ) 
-            => response.ErrorException switch
+        internal static bool IsSuccessful(this RestResponse response)
+        {
+            var successful = response.ErrorException switch
             {
                 OperationCanceledException  oce => throw oce,
                 XmlException                    => throw new WebException($@"The request failed with status code {(int)response.StatusCode} ({response.StatusCode}).", response.ErrorException),
@@ -55,6 +56,12 @@ namespace EssSharp.Api
                 },
                 _                               => response.StatusCode.IsSuccessful()
             };
+
+            if ( response.StatusCode is HttpStatusCode.Unauthorized )
+                throw new WebException($@"The request failed with status code {(int)response.StatusCode} ({response.StatusCode}). Verify that the credentials are valid and the user is authorized to access this resource.", response.ErrorException?.InnerException, WebExceptionStatus.UnknownError, new WebExceptionRestResponse(response));
+
+            return successful;
+        }
 
         /// <summary />
         /// <param name="statusCode" />

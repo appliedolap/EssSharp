@@ -91,7 +91,7 @@ namespace EssSharp
             // Assign a RetryPolicy if one has not already been assigned.
             EssSharp.Client.RetryConfiguration.RetryPolicy ??= Policy<RestResponse>
                 .HandleResult(processResponse)
-                .Retry(1, ( _, _, context ) => resetSession(context));
+                .Retry(1, (_, _, context) => resetSession(context));
 
             // Assign an AsyncRetryPolicy if one has not already been assigned.
             EssSharp.Client.RetryConfiguration.AsyncRetryPolicy ??= Policy<RestResponse>
@@ -102,8 +102,8 @@ namespace EssSharp
             bool processResponse( RestResponse response )
             {
                 // If a request with a session cookie is unauthorized, retry the request using basic authorization.
-                if ( response.StatusCode is HttpStatusCode.Unauthorized &&
-                     response.Request.Parameters.GetParameters(ParameterType.HttpHeader).Any(h => string.Equals(h?.Name, "Authorization") is false) )
+                if ( response.StatusCode is HttpStatusCode.Unauthorized && 
+                     response.Request.Parameters.GetParameters(ParameterType.HttpHeader).Any(h => string.Equals(h?.Name, "Authorization")) is false )
                 {
                     return true;
                 }
@@ -129,6 +129,9 @@ namespace EssSharp
                         }
                     }
                 }
+
+                // If the response error message is null, forward the error exception message.
+                response.ErrorMessage ??= response.ErrorException?.Message;
 
                 return false;
             }
@@ -159,8 +162,16 @@ namespace EssSharp
                             }
                         }
 
-                        // Reapply the basic authorization header.
-                        request.AddHeader(@"Authorization", $@"Basic {EssSharp.Client.ClientUtils.Base64Encode($@"{configuration.Username}:{configuration.Password}")}");
+                        if ( !string.IsNullOrEmpty(configuration.AccessToken) )
+                        {
+                            // Reapply the bearer authorization header.
+                            request.AddHeader(@"Authorization", $@"Bearer {configuration.AccessToken}");
+                        }
+                        else
+                        {
+                            // Reapply the basic authorization header.
+                            request.AddHeader(@"Authorization", $@"Basic {EssSharp.Client.ClientUtils.Base64Encode($@"{configuration.Username}:{configuration.Password}")}");
+                        }
                     }
                 }
             }
