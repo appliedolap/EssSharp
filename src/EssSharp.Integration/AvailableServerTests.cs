@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Docker.DotNet;
+using EssSharp.Api;
+using EssSharp.Integration.Setup;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-
-using EssSharp.Integration.Setup;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -74,6 +74,38 @@ namespace EssSharp.Integration
 
             // Assert that the configured username matches the session's user ID.
             Assert.Equal(username, session.UserId);
+        }
+
+        [Fact(DisplayName = "AvailableServerTests - 03 - Essbase_AfterStartup_CannotConnectWithBadCredentials"), Priority(02)]
+        public async Task Essbase_AfterStartup_CannotConnectWithBadCredentials()
+        {
+            // Get a connection (and invalidate the credentials).
+            var connection = GetEssConnection();
+            {
+                connection.Username = "badmin";
+                connection.Password = "badword";
+            }
+
+            // Assert that the sign in attempt throws an exception.
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+            {
+                // Attempt to sign in with bad credentials.
+                await new EssServerFactory()
+                    .CreateEssServer(connection.Server, connection.Username, connection.Password, connect: false)
+                    .SignInAsync();
+            });
+
+            // Assert that the message is appropriate.
+            Assert.Contains(@"Verify that the credentials are valid", exception.Message);
+
+            // Assert that the inner exception is a WebException.
+            var webException = Assert.IsType<WebException>(exception.InnerException);
+
+            // Assert that the response is a WebExceptionRestResponse.
+            var response = Assert.IsType<WebExceptionRestResponse>(webException.Response);
+
+            // Assert that the status code was 401/unauthorized.
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
     }
 }

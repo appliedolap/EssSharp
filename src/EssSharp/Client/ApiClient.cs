@@ -604,7 +604,8 @@ namespace EssSharp.Client
 
         private async Task<RestResponse<T>> DeserializeRestResponseFromPolicyAsync<T>(RestClient client, RestRequest request, PolicyResult<RestResponse> policyResult, CancellationToken cancellationToken = default)
         {
-            if (policyResult.Outcome == OutcomeType.Successful) 
+            // Applied OLAP Modification
+            if (policyResult.Outcome == OutcomeType.Successful || policyResult.Result != null)
             {
                 return await client.Deserialize<T>(policyResult.Result, cancellationToken).ConfigureAwait(false);
             }
@@ -612,7 +613,10 @@ namespace EssSharp.Client
             {
                 return new RestResponse<T>(request)
                 {
-                    ErrorException = policyResult.FinalException
+                    // Applied OLAP Modification
+                    StatusCode = policyResult.Result?.StatusCode ?? 0,
+                    ErrorMessage = policyResult.Result?.ErrorMessage,
+                    ErrorException = policyResult.FinalException ?? policyResult.Result?.ErrorException ?? policyResult.FinalHandledResult?.ErrorException
                 };
             }
         }

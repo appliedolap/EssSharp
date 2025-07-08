@@ -8,7 +8,6 @@ using System.Threading;
 using EssSharp.Api;
 
 using RestSharp;
-using Microsoft.Extensions.Logging;
 
 namespace EssSharp.Client
 {
