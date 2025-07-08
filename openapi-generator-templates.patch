@@ -1,18 +1,5 @@
-From 166d0a112cabbcc103bae3cd3ddedbeea6aa8ddd Mon Sep 17 00:00:00 2001
-From: Billy Booth <billy@appliedolap.com>
-Date: Thu, 26 Jun 2025 16:29:10 -0500
-Subject: [PATCH] Apply OpenAPI template modifications
-
----
- templates/ApiClient.mustache              | 60 ++++++++++++++++++++---
- templates/Configuration.mustache          | 34 +++++++++++++
- templates/IApiAccessor.mustache           | 12 +++++
- templates/IReadableConfiguration.mustache | 26 ++++++++++
- templates/RequestOptions.mustache         |  6 +++
- 5 files changed, 132 insertions(+), 6 deletions(-)
-
 diff --git a/templates/ApiClient.mustache b/templates/ApiClient.mustache
-index 3e77467..bea10f9 100644
+index 3e77467..a39c718 100644
 --- a/templates/ApiClient.mustache
 +++ b/templates/ApiClient.mustache
 @@ -30,6 +30,8 @@ using Polly;
@@ -127,7 +114,7 @@ index 3e77467..bea10f9 100644
  
                  var result = ToApiResponse(response);
                  if (response.ErrorMessage != null)
-@@ -555,6 +596,12 @@ namespace {{packageName}}.Client
+@@ -555,12 +596,19 @@ namespace {{packageName}}.Client
                      }
                  }
                  return result;
@@ -140,7 +127,27 @@ index 3e77467..bea10f9 100644
              }
          }
  
-@@ -632,7 +679,8 @@ namespace {{packageName}}.Client
+         private async Task<RestResponse<T>> DeserializeRestResponseFromPolicyAsync<T>(RestClient client, RestRequest request, PolicyResult<RestResponse> policyResult, CancellationToken cancellationToken = default)
+         {
+-            if (policyResult.Outcome == OutcomeType.Successful) 
++            // Applied OLAP Modification
++            if (policyResult.Outcome == OutcomeType.Successful || policyResult.Result != null)
+             {
+                 return await client.Deserialize<T>(policyResult.Result, cancellationToken).ConfigureAwait(false);
+             }
+@@ -568,7 +616,10 @@ namespace {{packageName}}.Client
+             {
+                 return new RestResponse<T>(request)
+                 {
+-                    ErrorException = policyResult.FinalException
++                    // Applied OLAP Modification
++                    StatusCode = policyResult.Result?.StatusCode ?? 0,
++                    ErrorMessage = policyResult.Result?.ErrorMessage,
++                    ErrorException = policyResult.FinalException ?? policyResult.Result?.ErrorException ?? policyResult.FinalHandledResult?.ErrorException
+                 };
+             }
+         }
+@@ -632,7 +683,8 @@ namespace {{packageName}}.Client
                  {{/supportsRetry}}
              };
  
@@ -293,6 +300,3 @@ index cfc1469..d4b4df7 100644
          /// <summary>
          /// Parameters to be bound to path parts of the Request's URL
          /// </summary>
--- 
-2.48.1.windows.1
-
