@@ -250,9 +250,9 @@ namespace EssSharp.Integration.Setup
             using var client = GetClient();
 
             // Create the exec instance, it is not started yet.
-            var exec = await client.Exec.ExecCreateContainerAsync(id, execParams, cancellationToken);
+            var exec = await client.Exec.CreateContainerExecAsync(id, execParams, cancellationToken);
             // Start the exec instance and capture the output stream.
-            using var stream = await client.Exec.StartAndAttachContainerExecAsync(exec.ID, false, cancellationToken);
+            using var stream = await client.Exec.StartContainerExecAsync(exec.ID, new ContainerExecStartParameters { Detach = false }, cancellationToken);
             var (stdout, stderr) = await stream.ReadOutputToEndAsync(cancellationToken);
 
             var details = await client.Exec.InspectContainerExecAsync(exec.ID, cancellationToken);
