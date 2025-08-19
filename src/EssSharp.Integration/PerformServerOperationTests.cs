@@ -451,7 +451,7 @@ namespace EssSharp.Integration
                 return;
 
             // Capture the (x.x) server version.
-            var version = new Version(string.Join('.', (await server.GetAboutAsync()).Version.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
+            var version = new Version(string.Join('.', (await server.GetAboutAsync())?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
 
             // If the server version is 21.4 or higher, execute the drillthrough report and validate the data.
             if ( version.CompareTo(new Version(major: 21, minor: 4)) >= 0 )
@@ -491,6 +491,30 @@ namespace EssSharp.Integration
                 // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 405 (method not allowed).
                 Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.MethodNotAllowed } });
             }
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanGetDrillthroughReportbyIntersection"), Priority(20)]
+        public async Task Essbase_AfterDefaultGrid_CanGetDrillthroughReportbyIntersection()
+        {
+            // Get an unconnected server.
+            var cube = await GetEssServer().GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var defaultGrid = await cube.GetDefaultGridAsync();
+
+            var reports = await defaultGrid.GetDrillThroughReportForCellsAsync(new List<EssDrillthroughRange>()
+                    {
+                        new EssDrillthroughRange(
+                            dimensionMemberSets: new()
+                            {
+                                ["Year"    ] = new() { "Year",     "Year"       },
+                                ["Product" ] = new() { "Cola",     "Cola"       },
+                                ["Measures"] = new() { "Sales",    "Sales"      },
+                                ["Market"  ] = new() { "New York", "California" },
+                                ["Scenario"] = new() { "Actual",   "Actual"     }
+                            })
+                    }, true);
+
+            Assert.NotEmpty(reports);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanRefreshGrid"), Priority(20)]

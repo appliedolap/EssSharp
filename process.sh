@@ -31,6 +31,9 @@ cp formatted.json temp.json >/dev/null 2>&1 || { echo "Unable to copy formatted.
 
 cat temp.json | jq '.paths."/about/instance".get.responses = {"200": {"description": "successful operation", "schema": { "$ref": "#/definitions/AboutInstance" }}}' > json.tmp && mv json.tmp temp.json 
 
+#fix return type of GetDrillthroughReportforInteraction
+cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/dtreports/list".post.responses."200".schema = { "type":"array", "items":{"type": "string"} }' > json.tmp && mv json.tmp temp.json 
+
 # Fix the consumes for the create application method
 cat temp.json | jq '.paths."/applications".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 

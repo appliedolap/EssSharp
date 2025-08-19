@@ -2503,7 +2503,12 @@ paths:
         required: false
       responses:
         "200":
-          content: {}
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
           description: "<p><strong>OK</strong></p><p>The list of allowed drill through\
             \ reports, for specified cell intersections, are fetched successfully.</p>"
         "400":

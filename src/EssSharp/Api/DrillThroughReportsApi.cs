@@ -172,8 +172,8 @@ namespace EssSharp.Api
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        void DrillThroughReportsGetReportsForIntersections(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0);
+        /// <returns>List&lt;string&gt;</returns>
+        List<string> DrillThroughReportsGetReportsForIntersections(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0);
 
         /// <summary>
         /// List Drill Through Reports For Given Cell Intersections
@@ -186,8 +186,8 @@ namespace EssSharp.Api
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0);
+        /// <returns>ApiResponse of List&lt;string&gt;</returns>
+        ApiResponse<List<string>> DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0);
         /// <summary>
         /// Update Drill Through Report
         /// </summary>
@@ -385,8 +385,8 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DrillThroughReportsGetReportsForIntersectionsAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of List&lt;string&gt;</returns>
+        System.Threading.Tasks.Task<List<string>> DrillThroughReportsGetReportsForIntersectionsAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Drill Through Reports For Given Cell Intersections
@@ -400,8 +400,8 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of ApiResponse (List&lt;string&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<string>>> DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Drill Through Report
         /// </summary>
@@ -1542,10 +1542,11 @@ namespace EssSharp.Api
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        public void DrillThroughReportsGetReportsForIntersections(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0)
+        /// <returns>List&lt;string&gt;</returns>
+        public List<string> DrillThroughReportsGetReportsForIntersections(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0)
         {
-            DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(applicationName, databaseName, body);
+            EssSharp.Client.ApiResponse<List<string>> localVarResponse = DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(applicationName, databaseName, body);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1556,8 +1557,8 @@ namespace EssSharp.Api
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0)
+        /// <returns>ApiResponse of List&lt;string&gt;</returns>
+        public EssSharp.Client.ApiResponse<List<string>> DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1579,6 +1580,7 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/json"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -1609,7 +1611,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Object>("/applications/{applicationName}/databases/{databaseName}/dtreports/list", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<List<string>>("/applications/{applicationName}/databases/{databaseName}/dtreports/list", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DrillThroughReportsGetReportsForIntersections", localVarResponse);
@@ -1631,10 +1633,11 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DrillThroughReportsGetReportsForIntersectionsAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of List&lt;string&gt;</returns>
+        public async System.Threading.Tasks.Task<List<string>> DrillThroughReportsGetReportsForIntersectionsAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            await DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<List<string>> localVarResponse = await DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -1646,8 +1649,8 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of ApiResponse (List&lt;string&gt;)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<List<string>>> DrillThroughReportsGetReportsForIntersectionsWithHttpInfoAsync(string applicationName, string databaseName, DrillthroughMetadataBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1670,6 +1673,7 @@ namespace EssSharp.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
+                "application/json"
             };
 
             var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -1699,7 +1703,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/applications/{applicationName}/databases/{databaseName}/dtreports/list", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<List<string>>("/applications/{applicationName}/databases/{databaseName}/dtreports/list", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

@@ -33,7 +33,7 @@ namespace EssSharp
         public string Description => _about?.Description;
 
         /// <inheritdoc />
-        public string Version     => _about?.ListingVersion;
+        public string Version     => _about?.ListingVersion ?? _about?.VarVersion;
 
         #endregion
 

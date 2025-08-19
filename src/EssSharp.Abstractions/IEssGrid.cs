@@ -49,6 +49,23 @@ namespace EssSharp
         public bool UseAliases { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtr"></param>
+        /// <param name="getDetails"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public List<IEssDrillthroughReport> GetDrillThroughReportForCells(List<EssDrillthroughRange> dtr, bool getDetails = false);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtr"></param>
+        /// <param name="getDetails"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssDrillthroughReport>> GetDrillThroughReportForCellsAsync(List<EssDrillthroughRange> dtr, bool getDetails = false, CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Gets grid layout.
         /// </summary>
         public IEssLayout GetGridLayout();

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using EssSharp.Api;
+using EssSharp.Client;
 using EssSharp.Model;
 
 using Action = EssSharp.Model.GridOperation.ActionEnum;
@@ -145,6 +147,37 @@ namespace EssSharp
 
         #region IEssGrid Members
 
+        /// <inheritdoc />
+        public List<IEssDrillthroughReport> GetDrillThroughReportForCells(List<EssDrillthroughRange> dtr, bool getDetails = false) => GetDrillThroughReportForCellsAsync(dtr, getDetails).GetAwaiter().GetResult();
+        
+        /// <inheritdoc />
+        public async Task<List<IEssDrillthroughReport>> GetDrillThroughReportForCellsAsync( List<EssDrillthroughRange> dtr , bool getDetails = false, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                if (dtr is not { } cells)
+                    throw new ArgumentException("An EssDrillthroughRange is required.");
+
+                List<IEssDrillthroughReport> dtrs = new List<IEssDrillthroughReport>();
+
+                var api = GetApi<DrillThroughReportsApi>();
+
+                var reports = (await api.DrillThroughReportsGetReportsForIntersectionsAsync(applicationName: Cube.Application.Name, databaseName: Cube.Name, body: dtr.ToModelBean(new EssDrillthroughOptions(aliasTable: Alias)), cancellationToken: cancellationToken).ConfigureAwait(false));
+                
+                foreach( var report in reports)
+                    dtrs.Add(await Cube.GetDrillthroughReportAsync(report, getDetails, cancellationToken));
+
+                return dtrs;
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                if ( e is ApiException { ErrorCode: 404 } )
+                    throw new NotSupportedException($@"Getting Drillthrough reports by intersection is not supported by this server version. Must use 21.7 or higher. {e.Message}", e);
+
+                throw new Exception($@"Unable to get drill through reports for specified interaction for ""{Name}"" grid. {e.Message}", e);
+            }
+        }
         /// <inheritdoc />
         public IEssLayout GetGridLayout() => GetGridLayoutAsync().GetAwaiter().GetResult();
 

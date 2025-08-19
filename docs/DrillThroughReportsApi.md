@@ -515,7 +515,7 @@ catch (ApiException e)
 
 <a id="drillthroughreportsgetreportsforintersections"></a>
 # **DrillThroughReportsGetReportsForIntersections**
-> void DrillThroughReportsGetReportsForIntersections (string applicationName, string databaseName, DrillthroughMetadataBean body = null)
+> List&lt;string&gt; DrillThroughReportsGetReportsForIntersections (string applicationName, string databaseName, DrillthroughMetadataBean body = null)
 
 List Drill Through Reports For Given Cell Intersections
 
@@ -549,7 +549,8 @@ namespace Example
             try
             {
                 // List Drill Through Reports For Given Cell Intersections
-                apiInstance.DrillThroughReportsGetReportsForIntersections(applicationName, databaseName, body);
+                List<string> result = apiInstance.DrillThroughReportsGetReportsForIntersections(applicationName, databaseName, body);
+                Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
@@ -569,7 +570,10 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List Drill Through Reports For Given Cell Intersections
-    apiInstance.DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(applicationName, databaseName, body);
+    ApiResponse<List<string>> response = apiInstance.DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(applicationName, databaseName, body);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
@@ -589,7 +593,7 @@ catch (ApiException e)
 
 ### Return type
 
-void (empty response body)
+**List<string>**
 
 ### Authorization
 
@@ -598,7 +602,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details

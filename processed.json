@@ -3060,7 +3060,13 @@
         ],
         "responses": {
           "200": {
-            "description": "<p><strong>OK</strong></p><p>The list of allowed drill through reports, for specified cell intersections, are fetched successfully.</p>"
+            "description": "<p><strong>OK</strong></p><p>The list of allowed drill through reports, for specified cell intersections, are fetched successfully.</p>",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           },
           "400": {
             "description": "<p><strong>Bad Request</strong></p><p>Failed to fetch the drill through reports for specified cell intersections.</p>"

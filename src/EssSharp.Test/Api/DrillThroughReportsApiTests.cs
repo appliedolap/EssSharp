@@ -131,7 +131,8 @@ namespace EssSharp.Test.Api
             //string applicationName = null;
             //string databaseName = null;
             //DrillthroughMetadataBean body = null;
-            //instance.DrillThroughReportsGetReportsForIntersections(applicationName, databaseName, body);
+            //var response = instance.DrillThroughReportsGetReportsForIntersections(applicationName, databaseName, body);
+            //Assert.IsType<List<string>>(response);
         }
 
         /// <summary>
