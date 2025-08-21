@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-
 using EssSharp.Integration.Setup;
 using EssSharp.Model;
 
@@ -496,25 +495,50 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanGetDrillthroughReportbyIntersection"), Priority(20)]
         public async Task Essbase_AfterDefaultGrid_CanGetDrillthroughReportbyIntersection()
         {
+            var server = GetEssServer();
             // Get an unconnected server.
-            var cube = await GetEssServer().GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
-            var reports = await defaultGrid.GetDrillThroughReportForCellsAsync(new List<EssDrillthroughRange>()
-                    {
-                        new EssDrillthroughRange(
-                            dimensionMemberSets: new()
-                            {
-                                ["Year"    ] = new() { "Year",     "Year"       },
-                                ["Product" ] = new() { "Cola",     "Cola"       },
-                                ["Measures"] = new() { "Sales",    "Sales"      },
-                                ["Market"  ] = new() { "New York", "California" },
-                                ["Scenario"] = new() { "Actual",   "Actual"     }
-                            })
-                    }, true);
+            // Capture the (x.x) server version.
+            var version = new Version(string.Join('.', (await server.GetAboutAsync())?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
 
-            Assert.NotEmpty(reports);
+            // If the server version is 21.4 or higher, execute the drillthrough report and validate the data.
+            if (version.CompareTo(new Version(major: 21, minor: 7)) >= 0)
+            {
+                var reports = await defaultGrid.GetDrillThroughReportForCellsAsync(new List<EssDrillthroughRange>()
+                {
+                    new EssDrillthroughRange(
+                        dimensionMemberSets: new()
+                        {
+                            ["Year"] = new() { "Year", "Year" },
+                            ["Product"] = new() { "Cola", "Cola" },
+                            ["Measures"] = new() { "Sales", "Sales" },
+                            ["Market"] = new() { "New York", "California" },
+                            ["Scenario"] = new() { "Actual", "Actual" }
+                        })
+                }, true);
+
+                Assert.NotEmpty(reports);
+            }
+            else
+            {
+                var exception = (await Assert.ThrowsAsync<NotSupportedException>(async () => await defaultGrid.GetDrillThroughReportForCellsAsync(new List<EssDrillthroughRange>()
+                {
+                    new EssDrillthroughRange(
+                        dimensionMemberSets: new()
+                        {
+                            ["Year"] = new() { "Year", "Year" },
+                            ["Product"] = new() { "Cola", "Cola" },
+                            ["Measures"] = new() { "Sales", "Sales" },
+                            ["Market"] = new() { "New York", "California" },
+                            ["Scenario"] = new() { "Actual", "Actual" }
+                        })
+                }, true))).InnerException;
+
+                Assert.True(exception is ApiException {ErrorCode: 404});
+            }
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanRefreshGrid"), Priority(20)]
