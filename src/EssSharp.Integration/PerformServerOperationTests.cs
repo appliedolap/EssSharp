@@ -493,8 +493,8 @@ namespace EssSharp.Integration
             }
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanGetDrillthroughReportbyIntersection"), Priority(20)]
-        public async Task Essbase_AfterDefaultGrid_CanGetDrillthroughReportbyIntersection()
+        [Fact(DisplayName = @"PerformServerFunctionTests - 20 - Essbase_AfterDefaultGrid_CanGetDrillthroughReportByIntersection"), Priority(20)]
+        public async Task Essbase_AfterDefaultGrid_CanGetDrillthroughReportByIntersection()
         {
             var server = GetEssServer();
             // Get an unconnected server.
@@ -505,7 +505,7 @@ namespace EssSharp.Integration
             // Capture the (x.x) server version.
             var version = new Version(string.Join('.', (await server.GetAboutAsync())?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
 
-            // If the server version is 21.4 or higher, execute the drillthrough report and validate the data.
+            // If the server version is 21.7 or higher, execute the drillthrough report and validate the data.
             if (version.CompareTo(new Version(major: 21, minor: 7)) >= 0)
             {
                 var reports = await defaultGrid.GetDrillThroughReportForCellsAsync(new List<EssDrillthroughRange>()
@@ -521,7 +521,24 @@ namespace EssSharp.Integration
                         })
                 }, true);
 
+                IEssDrillthroughReport drillthroughReport = null;
+
+                // Find the "drillthrough_samplebasic" report (if available).
+                foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+                    if ( string.Equals(dtr.Name, @"drillthrough_samplebasic", StringComparison.Ordinal) )
+                        drillthroughReport = dtr;
+
+                // If the report is not available, return.
+                if ( drillthroughReport is null )
+                {
+                    Assert.Empty(reports);
+                    return;
+                }
+
+                // Assert that at least one report was found.
                 Assert.NotEmpty(reports);
+                // Assert that the "drillthrough_samplebasic" report is in the reports collection.
+                Assert.Contains(reports, report => string.Equals(report?.Name, @"drillthrough_samplebasic", StringComparison.Ordinal));
             }
             else
             {
