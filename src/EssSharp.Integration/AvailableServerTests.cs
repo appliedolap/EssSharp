@@ -76,7 +76,7 @@ namespace EssSharp.Integration
             Assert.Equal(username, session.UserId);
         }
 
-        [Fact(DisplayName = "AvailableServerTests - 03 - Essbase_AfterStartup_CannotConnectWithBadCredentials"), Priority(02)]
+        [Fact(DisplayName = "AvailableServerTests - 03 - Essbase_AfterStartup_CannotConnectWithBadCredentials"), Priority(03)]
         public async Task Essbase_AfterStartup_CannotConnectWithBadCredentials()
         {
             // Get a connection (and invalidate the credentials).
