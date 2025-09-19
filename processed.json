@@ -25249,11 +25249,16 @@
   "securityDefinitions": {
     "basicAuth": {
       "type": "basic"
+    },
+    "OAuth2": {
+      "type": "oauth2",
+      "flow": "accessCode"
     }
   },
   "security": [
     {
-      "basicAuth": []
+      "basicAuth": [],
+      "OAuth2": []
     }
   ]
 }

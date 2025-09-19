@@ -133,7 +133,7 @@ namespace EssSharp.Integration.Setup
             var hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : "9000";
 
             _essbaseTestContainer = new ContainerBuilder()
-                .WithImage(image)                                                                     // "appliedolap/essbase:21.7.0"
+                .WithImage(image)                                                                     // "appliedolap/essbase:21.7-latest"
                 .WithName(containerName)                                                              // "essbase-21-7"
                 .WithNetwork("standalone")
                 .WithPortBinding(hostPort, "9000")                                                    // "9000"

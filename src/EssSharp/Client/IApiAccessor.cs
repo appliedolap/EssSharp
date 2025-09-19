@@ -15,11 +15,13 @@ namespace EssSharp.Client
     /// </summary>
     public interface IApiAccessor
     {
+        // Applied OLAP Modification
         /// <summary>
         /// Gets or sets the client for accessing the underlying API asynchronously.
         /// </summary>
         IAsynchronousClient AsynchronousClient { get; set; }
 
+        // Applied OLAP Modification
         /// <summary>
         /// Gets or sets the client for accessing the underlying API synchronously.
         /// </summary>

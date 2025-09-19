@@ -33,13 +33,45 @@ namespace EssSharp
         /// <summary />
         internal EssServer( Configuration configuration, ApiClient client ) : base(configuration, client) 
         {
-            if ( !Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out _) )
-                throw new ArgumentException("A fully qualified server REST endpoint must be set on the configuration.", nameof(configuration));
+            if ( configuration is null )
+                throw new ArgumentNullException(paramName: nameof(configuration), message: "A client configuration is required.");
 
-            int defaultRestApiPathIndex = configuration.BasePath.ToLowerInvariant().LastIndexOf(_defaultRestApiPath);
+            if (  configuration is not { BasePath: { Length: > 0 } basePath } || !Uri.TryCreate(basePath, UriKind.Absolute, out _) )
+                throw new ArgumentException(paramName: nameof(configuration), message: "A fully qualified server REST endpoint must be set on the configuration.");
+
+            int defaultRestApiPathIndex = basePath.ToLowerInvariant().LastIndexOf(_defaultRestApiPath, StringComparison.Ordinal);
 
             if ( defaultRestApiPathIndex >= 0 )
-                _server = configuration.BasePath.Substring(0, defaultRestApiPathIndex);
+                _server = basePath.Substring(0, defaultRestApiPathIndex);
+        }
+
+        /// <summary />
+        /// <param name="server" />
+        /// <param name="oauthToken" />
+        public EssServer( string server, string oauthToken )
+        {
+            _server = server?.TrimEnd('/') ?? string.Empty;
+
+            var basePath = _server;
+
+            // If necessary, append the default REST API path if necessary.
+            if ( !_server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
+                basePath = $"{_server}{_defaultRestApiPath}";
+
+            if ( !Uri.TryCreate(basePath, UriKind.Absolute, out _) )
+                throw new ArgumentException("A fully qualified server URL is required.", nameof(server));
+
+            if ( string.IsNullOrEmpty(oauthToken) )
+                throw new ArgumentException("An OAuth2 access token is required.", nameof(oauthToken));
+
+            Client = new ApiClient(basePath);
+            Configuration = new Configuration()
+            {
+                BasePath = basePath,
+                AccessToken = oauthToken,
+                Timeout = TimeSpan.FromMilliseconds(int.MaxValue),
+                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}"
+            };
         }
 
         /// <summary />
@@ -53,8 +85,8 @@ namespace EssSharp
             var basePath = _server;
 
             // If necessary, append the default REST API path if necessary.
-            if ( !server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
-                basePath = $@"{_server}{_defaultRestApiPath}";
+            if ( !_server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
+                basePath = $"{_server}{_defaultRestApiPath}";
 
             if ( !Uri.TryCreate(basePath, UriKind.Absolute, out _) )
                 throw new ArgumentException("A fully qualified server URL is required.", nameof(server));
@@ -69,8 +101,7 @@ namespace EssSharp
                 Username  = username,
                 Password  = password,
                 Timeout   = TimeSpan.FromMilliseconds(int.MaxValue),
-                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}",
-                //Proxy = new WebProxy("localhost", 8070)
+                UserAgent = $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}"
             };
         }
 

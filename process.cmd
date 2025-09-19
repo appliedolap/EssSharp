@@ -146,7 +146,7 @@ type temp.json | jq ".definitions.ZoomIn.properties.mode.enum = [\"children\", \
 :::: securityDefinitions ::::
 
 :: Add securityDefinitions and security for basic auth by default.
-type temp.json | jq ". += ({securityDefinitions: {basicAuth: {type: \"basic\"}}, security: [{\"basicAuth\": []}]})" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
+type temp.json | jq ". += ({securityDefinitions: {basicAuth: {type: \"basic\"}, \"OAuth2\": {\"type\": \"oauth2\", \"flow\": \"accessCode\"}}, security: [{\"basicAuth\": []}, {\"OAuth2\": []}]})" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
 :: save the processed json
 copy /Y temp.json processed.json >nul 2>&1 || ( echo "Unable to copy temp.json to processed.json, processing failed." & exit /B 1 )

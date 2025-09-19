@@ -19,6 +19,12 @@ namespace EssSharp.Client
     /// </summary>
     public class RequestOptions
     {
+        // Applied OLAP Modification
+        /// <summary>
+        /// Arbitrary preferences associated with the operation.
+        /// </summary>
+        public object Preferences { get; set; }
+
         /// <summary>
         /// Parameters to be bound to path parts of the Request's URL
         /// </summary>
@@ -62,14 +68,14 @@ namespace EssSharp.Client
         public int OperationIndex { get; set; }
 
         /// <summary>
-        /// Grid preferences associated with the operation.
-        /// </summary>
-        public object Preferences { get; set; }
-
-        /// <summary>
         /// Any data associated with a request body.
         /// </summary>
         public Object Data { get; set; }
+
+        /// <summary>
+        /// If request should be authenticated with OAuth.
+        /// </summary>
+        public bool OAuth { get; set; }
 
         /// <summary>
         /// Constructs a new instance of <see cref="RequestOptions"/>

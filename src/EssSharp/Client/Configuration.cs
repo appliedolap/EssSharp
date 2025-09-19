@@ -17,6 +17,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Net.Http;
 using System.Net.Security;
+using EssSharp.Client.Auth;
+// Applied OLAP Modification
 using Microsoft.Extensions.Logging;
 
 namespace EssSharp.Client
@@ -174,6 +176,30 @@ namespace EssSharp.Client
 
         #region Properties
 
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets whether to apply cached session cookies.
+        /// </summary>
+        public virtual bool ApplyCookies { get; set; } = true;
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets whether to retain cached session cookies.
+        /// </summary>
+        public virtual bool RetainCookies { get; set; } = true;
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
+        /// </summary>
+        public virtual ILogger Logger { get; set; }
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets or sets the maximum number of concurrent requests.
+        /// </summary>
+        public virtual int MaxDegreeOfParallelism { get; set; } = 4;
+
         /// <summary>
         /// Gets or sets the base path for API access.
         /// </summary>
@@ -184,24 +210,13 @@ namespace EssSharp.Client
         }
 
         /// <summary>
-        /// Gets or sets whether to apply cached session cookies.
+        /// Determine whether or not the "default credentials" (e.g. the user account under which the current process is running) will be sent along to the server. The default is false.
         /// </summary>
-        public virtual bool ApplyCookies { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets whether to retain cached session cookies.
-        /// </summary>
-        public virtual bool RetainCookies { get; set; } = true;
-
-        /// <summary>
-        /// Gets or sets the <see cref="ILogger"/> used to log information, warnings, and errors during requests.
-        /// </summary>
-        public virtual ILogger Logger { get; set; }
-
-        /// <summary>
-        /// Gets or sets the maximum number of concurrent requests.
-        /// </summary>
-        public virtual int MaxDegreeOfParallelism { get; set; } = 4;
+        public virtual bool UseDefaultCredentials
+        {
+            get { return _useDefaultCredentials; }
+            set { _useDefaultCredentials = value; }
+        }
 
         /// <summary>
         /// Gets or sets the default header.
@@ -240,15 +255,6 @@ namespace EssSharp.Client
         /// </summary>
         /// <value>Http user agent.</value>
         public virtual string UserAgent { get; set; }
-
-        /// <summary>
-        /// Determine whether or not the "default credentials" (e.g. the user account under which the current process is running) will be sent along to the server. The default is false.
-        /// </summary>
-        public virtual bool UseDefaultCredentials
-        {
-            get { return _useDefaultCredentials; }
-            set { _useDefaultCredentials = value; }
-        }
 
         /// <summary>
         /// Gets or sets the username (HTTP basic authentication).
@@ -293,6 +299,36 @@ namespace EssSharp.Client
         /// </summary>
         /// <value>The access token.</value>
         public virtual string AccessToken { get; set; }
+
+        /// <summary>
+        /// Gets or sets the token URL for OAuth2 authentication.
+        /// </summary>
+        /// <value>The OAuth Token URL.</value>
+        public virtual string OAuthTokenUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the client ID for OAuth2 authentication.
+        /// </summary>
+        /// <value>The OAuth Client ID.</value>
+        public virtual string OAuthClientId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the client secret for OAuth2 authentication.
+        /// </summary>
+        /// <value>The OAuth Client Secret.</value>
+        public virtual string OAuthClientSecret { get; set; }
+
+        /// <summary>
+        /// Gets or sets the client scope for OAuth2 authentication.
+        /// </summary>
+        /// <value>The OAuth Client Scope.</value>
+        public virtual string OAuthScope { get; set; }
+
+        /// <summary>
+        /// Gets or sets the flow for OAuth2 authentication.
+        /// </summary>
+        /// <value>The OAuth Flow.</value>
+        public virtual OAuthFlow? OAuthFlow { get; set; }
 
         /// <summary>
         /// Gets or sets the temporary folder path to store the files downloaded from the server.
@@ -603,20 +639,29 @@ namespace EssSharp.Client
 
             var config = new Configuration
             {
+                // Applied OLAP Modification
+                ApplyCookies = second.ApplyCookies,
+                // Applied OLAP Modification
+                RetainCookies = second.RetainCookies,
+                // Applied OLAP Modification
+                Logger = second.Logger ?? first.Logger,
+                // Applied OLAP Modification
+                MaxDegreeOfParallelism = second.MaxDegreeOfParallelism,
                 ApiKey = apiKey,
                 ApiKeyPrefix = apiKeyPrefix,
                 DefaultHeaders = defaultHeaders,
                 BasePath = second.BasePath ?? first.BasePath,
-                ApplyCookies = second.ApplyCookies,
-                RetainCookies = second.RetainCookies,
-                Logger = second.Logger ?? first.Logger,
-                MaxDegreeOfParallelism = second.MaxDegreeOfParallelism,
                 Timeout = second.Timeout,
                 Proxy = second.Proxy ?? first.Proxy,
                 UserAgent = second.UserAgent ?? first.UserAgent,
                 Username = second.Username ?? first.Username,
                 Password = second.Password ?? first.Password,
                 AccessToken = second.AccessToken ?? first.AccessToken,
+                OAuthTokenUrl = second.OAuthTokenUrl ?? first.OAuthTokenUrl,
+                OAuthClientId = second.OAuthClientId ?? first.OAuthClientId,
+                OAuthClientSecret = second.OAuthClientSecret ?? first.OAuthClientSecret,
+                OAuthScope = second.OAuthScope ?? first.OAuthScope,
+                OAuthFlow = second.OAuthFlow ?? first.OAuthFlow,
                 TempFolderPath = second.TempFolderPath ?? first.TempFolderPath,
                 DateTimeFormat = second.DateTimeFormat ?? first.DateTimeFormat,
                 ClientCertificates = second.ClientCertificates ?? first.ClientCertificates,
