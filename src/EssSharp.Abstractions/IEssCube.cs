@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
-using EssSharp.Concrete;
+using EssSharp;
 
 namespace EssSharp
 {
@@ -437,21 +437,21 @@ namespace EssSharp
         /// </summary>
         /// <param name="search"></param>
         /// <param name="isCaseSensitive"></param>
-        /// <param name="queryOptions"></param>
+        /// <param name="searchOptions"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
-        public List<IEssMember> GetMembersSelected(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType queryType = EssMemberSearchType.SEARCH, EssMemberSearchOptions queryOptions = EssMemberSearchOptions.MEMBERSONLY, EssMemberFields? fields = null, int limit = 50);
+        public List<IEssMember> GetMembersSelected(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="search"></param>
         /// <param name="isCaseSensitive"></param>
-        /// <param name="queryOptions"></param>
+        /// <param name="searchOptions"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssMember>> GetMembersSelectedAsync(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType queryType = EssMemberSearchType.SEARCH, EssMemberSearchOptions queryOptions = EssMemberSearchOptions.MEMBERSONLY, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default);
+        public Task<List<IEssMember>> GetMembersSelectedAsync(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using EssSharp.Api;
-using EssSharp.Concrete;
+using EssSharp;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -786,11 +786,11 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public List<IEssMember> GetMembersSelected( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType queryType = EssMemberSearchType.SEARCH, EssMemberSearchOptions queryOptions = EssMemberSearchOptions.MEMBERSONLY, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSelectedAsync(search, dimensionName, aliasName, isCaseSensitive, queryType, queryOptions, fields, limit).GetAwaiter().GetResult();
+        public List<IEssMember> GetMembersSelected( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSelectedAsync(search, dimensionName, aliasName, isCaseSensitive, searchType, searchOptions, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetMembersSelectedAsync( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType queryType = EssMemberSearchType.SEARCH, EssMemberSearchOptions queryOptions = EssMemberSearchOptions.MEMBERSONLY, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
+        public async Task<List<IEssMember>> GetMembersSelectedAsync( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
         {
             try
             {
@@ -800,13 +800,13 @@ namespace EssSharp
                 if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
                     fields |= EssMemberFields.dataStorageType;
 
-                if (queryType == EssMemberSearchType.WILDSEARCH)
-                    search = $@"*{search}*";
+                if (searchType == EssMemberSearchType.wildSearch)
+                    search = $@"*{search?.Trim('*')}*";
 
                 if ( isCaseSensitive )
-                    queryOptions |= EssMemberSearchOptions.FORCECASESENSITIVE;
+                    searchOptions |= EssMemberSearchOptions.forceCaseSensitive;
 
-                if ( await api.OutlineGetMembersSelectedAsync(app: _application?.Name, cube: _cube?.Name, queryType: queryType.ToString(), queryOptions: queryOptions.ToDelimitedString(), search: search, dimensionName: dimensionName, aliasName: aliasName, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } membersList )
+                if ( await api.OutlineGetMembersSelectedAsync(app: _application?.Name, cube: _cube?.Name, queryType: searchType.ToString().ToUpperInvariant(), queryOptions: searchOptions.ToDelimitedString(), search: search, dimensionName: dimensionName, aliasName: aliasName, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
 
                 return membersList.ToEssSharpList(this) ?? new List<IEssMember>();

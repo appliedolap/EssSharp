@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using EssSharp.Concrete;
 using EssSharp.Integration.Setup;
 
 using Xunit;
@@ -226,10 +225,10 @@ namespace EssSharp.Integration
                 .GetCubeAsync("Basic");
             
             //Get all members that contain "100" in name.
-            var queryType = EssMemberSearchType.WILDSEARCH;
-            var queryOptions = EssMemberSearchOptions.MEMBERSONLY;
+            var searchType = EssMemberSearchType.wildSearch;
+            var queryOptions = EssMemberSearchOptions.membersOnly;
 
-            var members = await cube.GetMembersSelectedAsync(search: "100", isCaseSensitive: false, queryType: queryType, queryOptions: queryOptions, fields: null, limit:500);
+            var members = await cube.GetMembersSelectedAsync(search: "100", isCaseSensitive: false, searchType: searchType, searchOptions: queryOptions, fields: null, limit:500);
 
             Assert.Equal(6, members.Count);
             Assert.Equal("100-30", members[2].Name);
@@ -238,26 +237,26 @@ namespace EssSharp.Integration
                 members.ForEach(mem => mem.Name.Contains("100"));
             });
 
-            queryType = EssMemberSearchType.DTSMEMBERS;
-            queryOptions = EssMemberSearchOptions.MEMBERSANDALIASES;
+            searchType = EssMemberSearchType.dtsMembers;
+            queryOptions = EssMemberSearchOptions.membersAndAliases;
 
-            var dtsFromMembersSelected = await cube.GetMembersSelectedAsync(queryType: queryType, queryOptions: queryOptions);
+            var dtsFromMembersSelected = await cube.GetMembersSelectedAsync(searchType: searchType, searchOptions: queryOptions);
             var dtsFromDTSMethod = await cube.GetDynamicTimeSeriesMembersAsync();
 
             Assert.Equal(2, dtsFromMembersSelected.Count);
             Assert.Equal(dtsFromDTSMethod[0].Name, dtsFromMembersSelected[0].Name);
 
-            queryType = EssMemberSearchType.SEARCH;
-            queryOptions = EssMemberSearchOptions.MEMBERSANDALIASES;
+            searchType = EssMemberSearchType.search;
+            queryOptions = EssMemberSearchOptions.membersAndAliases;
 
-            var memberByAlias = await cube.GetMembersSelectedAsync(search: "Cola", queryType: queryType, queryOptions: queryOptions);
+            var memberByAlias = await cube.GetMembersSelectedAsync(search: "Cola", searchType: searchType, searchOptions: queryOptions);
 
             Assert.Single(memberByAlias);
             Assert.Equal("Cola", memberByAlias[0].ActiveAliasName);
 
-            queryType = EssMemberSearchType.WILDSEARCH;
+            searchType = EssMemberSearchType.wildSearch;
 
-            var memberByAliasCaseSensitive = await cube.GetMembersSelectedAsync(search: "cola", isCaseSensitive: true, queryType: queryType, queryOptions: queryOptions);
+            var memberByAliasCaseSensitive = await cube.GetMembersSelectedAsync(search: "cola", isCaseSensitive: true, searchType: searchType, searchOptions: queryOptions);
 
             Assert.Empty(memberByAliasCaseSensitive);
         }

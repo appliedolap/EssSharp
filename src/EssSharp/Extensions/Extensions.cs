@@ -911,7 +911,7 @@ namespace EssSharp
             {
                 if ( queryOption.HasFlag(value) )
                 {
-                    values.Add(value.ToString());
+                    values.Add(value.ToString().ToUpperInvariant());
                 }
             }
 

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EssSharp.Concrete
+﻿namespace EssSharp
 {
     public enum EssMemberSearchType
     {
-        SEARCH,
-        WILDSEARCH,
-        DTSMEMBERS
+        search,
+        wildSearch,
+        dtsMembers
     }
 }
