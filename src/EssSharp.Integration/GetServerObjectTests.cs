@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-
+using EssSharp.Concrete;
 using EssSharp.Integration.Setup;
 
 using Xunit;
@@ -212,6 +212,54 @@ namespace EssSharp.Integration
             Assert.NotNull(memList);
 
             Assert.Equal(3, memList.Count);
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 08 - Essbase_AfterReportCreation_CanGetMembersSelected"), Priority(08)]
+        public async Task Essbase_AfterReportCreation_CanGetMembersByAlias()
+        {
+            // Get an unconnected server as a regular user.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
+            
+            //Get all members that contain "100" in name.
+            var queryType = EssMemberSearchType.WILDSEARCH;
+            var queryOptions = EssMemberSearchOptions.MEMBERSONLY;
+
+            var members = await cube.GetMembersSelectedAsync(search: "100", isCaseSensitive: false, queryType: queryType, queryOptions: queryOptions, fields: null, limit:500);
+
+            Assert.Equal(6, members.Count);
+            Assert.Equal("100-30", members[2].Name);
+            Assert.All([members], members =>
+            {
+                members.ForEach(mem => mem.Name.Contains("100"));
+            });
+
+            queryType = EssMemberSearchType.DTSMEMBERS;
+            queryOptions = EssMemberSearchOptions.MEMBERSANDALIASES;
+
+            var dtsFromMembersSelected = await cube.GetMembersSelectedAsync(queryType: queryType, queryOptions: queryOptions);
+            var dtsFromDTSMethod = await cube.GetDynamicTimeSeriesMembersAsync();
+
+            Assert.Equal(2, dtsFromMembersSelected.Count);
+            Assert.Equal(dtsFromDTSMethod[0].Name, dtsFromMembersSelected[0].Name);
+
+            queryType = EssMemberSearchType.SEARCH;
+            queryOptions = EssMemberSearchOptions.MEMBERSANDALIASES;
+
+            var memberByAlias = await cube.GetMembersSelectedAsync(search: "Cola", queryType: queryType, queryOptions: queryOptions);
+
+            Assert.Single(memberByAlias);
+            Assert.Equal("Cola", memberByAlias[0].ActiveAliasName);
+
+            queryType = EssMemberSearchType.WILDSEARCH;
+
+            var memberByAliasCaseSensitive = await cube.GetMembersSelectedAsync(search: "cola", isCaseSensitive: true, queryType: queryType, queryOptions: queryOptions);
+
+            Assert.Empty(memberByAliasCaseSensitive);
         }
 
         [Fact(DisplayName = @"GetServerObjectTests - 09 - Essbase_AfterReportCreation_CanGetMember"), Priority(09)]

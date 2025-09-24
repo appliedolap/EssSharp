@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
+using EssSharp.Concrete;
 
 namespace EssSharp
 {
@@ -431,6 +432,26 @@ namespace EssSharp
         /// <param name="cancellationToken"></param>
         public Task<List<IEssMember>> GetMembersByLevelAsync( string dimensionName, int levelNumber, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="isCaseSensitive"></param>
+        /// <param name="queryOptions"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        public List<IEssMember> GetMembersSelected(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType queryType = EssMemberSearchType.SEARCH, EssMemberSearchOptions queryOptions = EssMemberSearchOptions.MEMBERSONLY, EssMemberFields? fields = null, int limit = 50);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="isCaseSensitive"></param>
+        /// <param name="queryOptions"></param>
+        /// <param name="fields"></param>
+        /// <param name="limit"></param>
+        /// <param name="cancellationToken"></param>
+        public Task<List<IEssMember>> GetMembersSelectedAsync(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType queryType = EssMemberSearchType.SEARCH, EssMemberSearchOptions queryOptions = EssMemberSearchOptions.MEMBERSONLY, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 

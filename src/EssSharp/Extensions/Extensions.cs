@@ -903,6 +903,21 @@ namespace EssSharp
             return string.Join(",", values) ?? string.Empty;
         }
 
+        internal static string ToDelimitedString( this EssMemberSearchOptions queryOption )
+        {
+            var values = new List<string>();
+
+            foreach ( EssMemberSearchOptions value in Enum.GetValues(typeof(EssMemberSearchOptions)) )
+            {
+                if ( queryOption.HasFlag(value) )
+                {
+                    values.Add(value.ToString());
+                }
+            }
+
+            return string.Join("|", values) ?? string.Empty;
+        }
+
         #endregion
 
         #region EssScript/EssScriptType Extensions

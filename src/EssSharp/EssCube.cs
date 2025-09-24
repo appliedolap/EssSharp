@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using EssSharp.Api;
+using EssSharp.Concrete;
 using EssSharp.Model;
 
 namespace EssSharp
@@ -780,6 +781,40 @@ namespace EssSharp
             catch ( Exception e )
             {
                 throw new Exception($@"{e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public List<IEssMember> GetMembersSelected( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType queryType = EssMemberSearchType.SEARCH, EssMemberSearchOptions queryOptions = EssMemberSearchOptions.MEMBERSONLY, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSelectedAsync(search, dimensionName, aliasName, isCaseSensitive, queryType, queryOptions, fields, limit).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns></returns>
+        public async Task<List<IEssMember>> GetMembersSelectedAsync( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType queryType = EssMemberSearchType.SEARCH, EssMemberSearchOptions queryOptions = EssMemberSearchOptions.MEMBERSONLY, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<OutlineViewerApi>();
+
+                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
+                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
+                    fields |= EssMemberFields.dataStorageType;
+
+                if (queryType == EssMemberSearchType.WILDSEARCH)
+                    search = $@"*{search}*";
+
+                if ( isCaseSensitive )
+                    queryOptions |= EssMemberSearchOptions.FORCECASESENSITIVE;
+
+                if ( await api.OutlineGetMembersSelectedAsync(app: _application?.Name, cube: _cube?.Name, queryType: queryType.ToString(), queryOptions: queryOptions.ToDelimitedString(), search: search, dimensionName: dimensionName, aliasName: aliasName, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } membersList )
+                    throw new Exception("Cannot get Members.");
+
+                return membersList.ToEssSharpList(this) ?? new List<IEssMember>();
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                throw new Exception($@"Unable to get members from cube ""{Name}"". {e.Message}", e);
             }
         }
 
