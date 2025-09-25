@@ -1,16 +1,26 @@
-﻿using Docker.DotNet;
-using EssSharp.Api;
-using EssSharp.Integration.Setup;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+
+using EssSharp.Api;
+using EssSharp.Integration.Setup;
+
 using Xunit;
 using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
-    [Collection("EssSharp Integration Tests"), Trait("type", "server"), CollectionPriority(2)]
+    /// <summary>
+    /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
+    /// </summary>
+    [CollectionDefinition(nameof(AvailableServerTests)), CollectionPriority(2)]
+    public class AvailableServerTestsCollection : ICollectionFixture<CollectionFixture> { }
+
+    /// <summary>
+    /// Tests for server availability.
+    /// </summary>
+    [Collection(nameof(AvailableServerTests)), Trait("type", "server")]
     public class AvailableServerTests : IntegrationTestBase
     {
         /// <summary />

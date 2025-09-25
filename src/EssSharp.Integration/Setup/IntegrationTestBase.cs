@@ -26,9 +26,6 @@ using Xunit.Sdk;
 
 namespace EssSharp.Integration.Setup
 {
-    [CollectionDefinition("EssSharp Integration Tests")]
-    public class TestsCollection : ICollectionFixture<CollectionFixture> { }
-
     public class CollectionFixture : IDisposable
     {
         public CollectionFixture( IMessageSink sink )

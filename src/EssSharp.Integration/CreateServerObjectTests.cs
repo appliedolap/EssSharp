@@ -8,7 +8,16 @@ using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
-    [Collection("EssSharp Integration Tests"), Trait("type", "create"), CollectionPriority(4)]
+    /// <summary>
+    /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
+    /// </summary>
+    [CollectionDefinition(nameof(CreateServerObjectTests)), CollectionPriority(4)]
+    public class CreateServerObjectTestsCollection : ICollectionFixture<CollectionFixture> { }
+
+    /// <summary>
+    /// Tests for ability to create server objects/stand up a server for subsequent testing.
+    /// </summary>
+    [Collection(nameof(CreateServerObjectTests)), Trait("type", "create")]
     public class CreateServerObjectTests : IntegrationTestBase
     {
         /// <summary />

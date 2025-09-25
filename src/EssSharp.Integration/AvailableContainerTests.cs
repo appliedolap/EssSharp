@@ -7,7 +7,16 @@ using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
-    [Collection("EssSharp Integration Tests"), Trait("type", "container"), CollectionPriority(1)]
+    /// <summary>
+    /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
+    /// </summary>
+    [CollectionDefinition(nameof(AvailableContainerTests)), CollectionPriority(1)]
+    public class AvailableContainerTestsCollection : ICollectionFixture<CollectionFixture> { }
+
+    /// <summary>
+    /// Tests for container availability.
+    /// </summary>
+    [Collection(nameof(AvailableContainerTests)), Trait("type", "container")]
     public class AvailableContainerTests : IntegrationTestBase
     {
         /// <summary />

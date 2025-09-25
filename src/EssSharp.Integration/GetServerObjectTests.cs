@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+
 using EssSharp.Integration.Setup;
 
 using Xunit;
@@ -8,10 +9,18 @@ using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
-    [Collection("EssSharp Integration Tests"), Trait("type", "get"), CollectionPriority(5)]
+    /// <summary>
+    /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
+    /// </summary>
+    [CollectionDefinition(nameof(GetServerObjectTests)), CollectionPriority(5)]
+    public class GetServerObjectTestsCollection : ICollectionFixture<CollectionFixture> { }
+
+    /// <summary>
+    /// Tests for ability to get/validate server objects created by the prior collection.
+    /// </summary>
+    [Collection(nameof(GetServerObjectTests)), Trait("type", "get")]
     public class GetServerObjectTests : IntegrationTestBase
     {
-
         /// <summary />
         /// <param name="output" />
         public GetServerObjectTests( ITestOutputHelper output ) : base(output) { }

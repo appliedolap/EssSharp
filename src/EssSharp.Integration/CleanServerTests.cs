@@ -9,7 +9,16 @@ using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
-    [Collection("EssSharp Integration Tests"), Trait("type", "clean"), CollectionPriority(3)]
+    /// <summary>
+    /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
+    /// </summary>
+    [CollectionDefinition(nameof(CleanServerTests)), CollectionPriority(3)]
+    public class CleanServerTestsCollection : ICollectionFixture<CollectionFixture> { }
+
+    /// <summary>
+    /// Tests for ability to delete server objects/reset a server for subsequent testing.
+    /// </summary>
+    [Collection(nameof(CleanServerTests)), Trait("type", "clean")]
     public class CleanServerTests : IntegrationTestBase
     {
         /// <summary />

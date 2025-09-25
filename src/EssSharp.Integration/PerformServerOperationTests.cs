@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+
 using EssSharp.Client;
 using EssSharp.Integration.Setup;
 using EssSharp.Model;
@@ -14,7 +15,16 @@ using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
-    [Collection("EssSharp Integration Tests"), Trait("type", "execute"), CollectionPriority(6)]
+    /// <summary>
+    /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
+    /// </summary>
+    [CollectionDefinition(nameof(PerformServerFunctionTests)), CollectionPriority(6)]
+    public class PerformServerFunctionTestsCollection : ICollectionFixture<CollectionFixture> { }
+
+    /// <summary>
+    /// Tests for ability to perform server functions on a previously configured server.
+    /// </summary>
+    [Collection(nameof(PerformServerFunctionTests)), Trait("type", "execute")]
     public class PerformServerFunctionTests : IntegrationTestBase
     {
         /// <summary />
