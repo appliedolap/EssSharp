@@ -203,7 +203,7 @@ namespace EssSharp.Integration.Setup
             if ( Connections?.FirstOrDefault(conn => conn?.Role == role) is not IntegrationTestSettingsConnection connection )
                 throw new Exception($@"A connection with the {role} role is not available");
 
-            return connection;
+            return connection.Clone() as IntegrationTestSettingsConnection;
         }
 
         /// <summary />
