@@ -13,7 +13,11 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
+using Xunit.Extensions.AssemblyFixture;
 using Xunit.Sdk;
+
+// Include support for assembly fixtures.
+[assembly: TestFramework(AssemblyFixtureFramework.TypeName, AssemblyFixtureFramework.AssemblyName)]
 
 // Set the default collection orderer.
 [assembly: TestCollectionOrderer("EssSharp.Integration.Setup.TestCollectionOrderer", "EssSharp.Integration")]
@@ -26,9 +30,14 @@ using Xunit.Sdk;
 
 namespace EssSharp.Integration.Setup
 {
-    public class CollectionFixture : IDisposable
+    /// <summary />
+    /// <param name="messageSink" />
+    public class AssemblyFixture(IMessageSink messageSink) : IAsyncLifetime
     {
-        public CollectionFixture( IMessageSink sink )
+        private readonly IMessageSink _messageSink = messageSink;
+
+        /// <inheritdoc />
+        public async Task InitializeAsync()
         {
             var localSettings   = default(IntegrationTestSettings);
             var defaultSettings = default(IntegrationTestSettings);
@@ -42,7 +51,7 @@ namespace EssSharp.Integration.Setup
                     .GetSection("Settings")
                     .Get<IntegrationTestSettings>();
             }
-            catch ( FileNotFoundException )
+            catch (FileNotFoundException)
             {
                 // Swallow a FileNotFoundException, which occurs when a local configuration does not exist.
             }
@@ -56,15 +65,15 @@ namespace EssSharp.Integration.Setup
                     .GetSection("Settings")
                     .Get<IntegrationTestSettings>();
             }
-            catch ( FileNotFoundException )
+            catch (FileNotFoundException)
             {
                 // Swallow a FileNotFoundException, which occurs when the default settings file does not exist.
             }
 
             // If connections could be obtained from either configuration, make them available to the EssServerFactory.
-            if ( localSettings?.Connections is { Length: > 0 } localConnections )
+            if (localSettings?.Connections is { Length: > 0 } localConnections)
                 IntegrationTestFactory.Connections = localConnections;
-            else if ( defaultSettings?.Connections is { Length: > 0 } defaultConnections )
+            else if (defaultSettings?.Connections is { Length: > 0 } defaultConnections)
                 IntegrationTestFactory.Connections = defaultConnections;
             else
             {
@@ -95,56 +104,73 @@ namespace EssSharp.Integration.Setup
             }
 
             // If an images list could be obtained from either configuration, make them available to the EssServerFactory.
-            if ( localSettings?.Images is { Length: > 0 } localImages )
+            if (localSettings?.Images is { Length: > 0 } localImages)
                 IntegrationTestFactory.Images = localImages;
-            else if ( defaultSettings?.Images is { Length: > 0 } defaultImages )
+            else if (defaultSettings?.Images is { Length: > 0 } defaultImages)
                 IntegrationTestFactory.Images = defaultImages;
             else
             {
-                IntegrationTestFactory.Images = new []
+                IntegrationTestFactory.Images = new[]
                 {
                     "appliedolap/essbase:21.7.0"
                 };
             }
 
             // Do "global" initialization here; Only called once.
-            var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync(sink);
-            var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync(sink);
+            var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync(_messageSink);
+            var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync(_messageSink);
 
-            Task.WhenAll(databaseTask, essbaseTask).GetAwaiter().GetResult();
+            await Task.WhenAll(databaseTask, essbaseTask).ConfigureAwait(false);
         }
 
-        public void Dispose()
-        {
-            // Do "global" teardown here; Only called once.
-            IntegrationTestFactory.DisposeAsync().GetAwaiter().GetResult();
-        }
+        /// <summary>
+        /// Do "global" teardown here; Only called once.
+        /// </summary>
+        public async Task DisposeAsync() => await IntegrationTestFactory.DisposeAsync().ConfigureAwait(false);
+
+        /// <summary>
+        /// Do "global" teardown here; Only called once.
+        /// </summary>
+        //public void Dispose() => DisposeAsync().GetAwaiter().GetResult();
     }
 
+
+    /// <summary />
+    /// <param name="messageSink" />
+    public class CollectionFixture(IMessageSink messageSink) : IAsyncLifetime
+    {
+        /// <summary />
+        private readonly IMessageSink _messageSink = messageSink;
+
+        /// <inheritdoc />
+        public Task DisposeAsync() => Task.CompletedTask;
+
+        /// <inheritdoc />
+        public Task InitializeAsync() => Task.CompletedTask;
+    }
+
+    /// <summary />
+    /// <param name="priority" />
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class CollectionPriorityAttribute : Attribute
+    public class CollectionPriorityAttribute( int priority ) : Attribute
     {
-        public CollectionPriorityAttribute( int priority )
-        {
-            Priority = priority;
-        }
-
-        public int Priority { get; private set; }
+        /// <summary />
+        public int Priority { get; private set; } = priority;
     }
 
+    /// <summary />
+    /// <param name="priority" />
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    public class PriorityAttribute : Attribute
+    public class PriorityAttribute( int priority ) : Attribute
     {
-        public PriorityAttribute( int priority )
-        {
-            Priority = priority;
-        }
-
-        public int Priority { get; private set; }
+        /// <summary />
+        public int Priority { get; private set; } = priority;
     }
 
+    /// <summary />
     public class TestCollectionOrderer : ITestCollectionOrderer
     {
+        /// <inheritdoc />
         public IEnumerable<ITestCollection> OrderTestCollections( IEnumerable<ITestCollection> testCollections )
         {
             var sortedCollections = new SortedDictionary<int, List<ITestCollection>>();
@@ -166,8 +192,7 @@ namespace EssSharp.Integration.Setup
             }
         }
 
-        static TValue GetOrCreate<TKey, TValue>( IDictionary<TKey, TValue> dictionary, TKey key )
-            where TValue : new()
+        private static TValue GetOrCreate<TKey, TValue>( IDictionary<TKey, TValue> dictionary, TKey key ) where TValue : new()
         {
             TValue result;
 
@@ -180,8 +205,10 @@ namespace EssSharp.Integration.Setup
         }
     }
 
+    /// <summary />
     public class TestPriorityOrderer : ITestCaseOrderer
     {
+        /// <inheritdoc />
         public IEnumerable<TTestCase> OrderTestCases<TTestCase>( IEnumerable<TTestCase> testCases ) where TTestCase : ITestCase
         {
             var sortedMethods = new SortedDictionary<int, List<TTestCase>>();
@@ -204,8 +231,7 @@ namespace EssSharp.Integration.Setup
             }
         }
 
-        static TValue GetOrCreate<TKey, TValue>( IDictionary<TKey, TValue> dictionary, TKey key )
-            where TValue : new()
+        private static TValue GetOrCreate<TKey, TValue>( IDictionary<TKey, TValue> dictionary, TKey key ) where TValue : new()
         {
             TValue result;
 
@@ -218,18 +244,18 @@ namespace EssSharp.Integration.Setup
         }
     }
 
-    public class IntegrationTestBase
+    /// <summary />
+    /// <param name="outputHelper" />
+    public class IntegrationTestBase( ITestOutputHelper outputHelper ) : IAssemblyFixture<AssemblyFixture>
     {
-        private ITestOutputHelper _outputHelper;
+        private ITestOutputHelper _outputHelper = outputHelper;
         private TestOutputLogger  _outputLogger;
 
-        public IntegrationTestBase( ITestOutputHelper outputHelper ) { _outputHelper = outputHelper; }
+        /// <summary />
+        protected static string Database => IntegrationTestFactory.DatabaseContainerId;
 
         /// <summary />
-        protected string Database => IntegrationTestFactory.DatabaseContainerId;
-
-        /// <summary />
-        protected string Essbase => IntegrationTestFactory.EssbaseContainerId;
+        protected static string Essbase => IntegrationTestFactory.EssbaseContainerId;
 
         /// <summary />
         /// <param name="id" />
@@ -273,17 +299,20 @@ namespace EssSharp.Integration.Setup
         protected TestOutputLogger OutputLogger => _outputLogger ??= new TestOutputLogger(_outputHelper);
     }
 
-    public class FileOutputLogger : ILogger
+    /// <summary />
+    /// <param name="outputDirectory" />
+    public class FileOutputLogger( DirectoryInfo outputDirectory ) : ILogger
     {
-        private readonly DirectoryInfo _outputDirectory;
+        private readonly DirectoryInfo _outputDirectory = outputDirectory;
 
-        public FileOutputLogger( DirectoryInfo outputDirectory ) { _outputDirectory = outputDirectory; }
-
+        /// <inheritdoc />
         public IDisposable BeginScope<TState>( TState state ) => null;
 
-        public bool IsEnabled( Microsoft.Extensions.Logging.LogLevel logLevel ) => true;
+        /// <inheritdoc />
+        public bool IsEnabled( LogLevel logLevel ) => true;
 
-        void ILogger.Log<TState>( Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+        /// <inheritdoc />
+        void ILogger.Log<TState>( LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
         {
             if ( eventId.Id is not ((int)EssSharpLogEventType.Request or (int)EssSharpLogEventType.Response) )
                 return;
@@ -319,34 +348,43 @@ namespace EssSharp.Integration.Setup
         }
     }
 
-    public class TestOutputLogger : ILogger
+    /// <summary />
+    /// <param name="helper" />
+    public class TestOutputLogger( ITestOutputHelper helper ) : ILogger
     {
-        private readonly ITestOutputHelper _helper;
+        private readonly ITestOutputHelper _helper = helper;
 
-        public TestOutputLogger( ITestOutputHelper helper ) { _helper = helper; }
-
+        /// <inheritdoc />
         public IDisposable BeginScope<TState>( TState state ) => null;
 
-        public bool IsEnabled( Microsoft.Extensions.Logging.LogLevel logLevel ) => true;
+        /// <inheritdoc />
+        public bool IsEnabled( LogLevel logLevel ) => true;
 
-        void ILogger.Log<TState>( Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+        /// <inheritdoc />
+        void ILogger.Log<TState>( LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
         {
             if ( state?.ToString() is { Length: > 0 } message )
                 _helper?.WriteLine(message);
         }
     }
 
+    /// <summary />
     internal class StringLogger : ILogger
     {
         private readonly StringBuilder _builder;
 
+        /// <summary />
+        /// <param name="builder" />
         public StringLogger( ref StringBuilder builder ) { _builder = builder; }
 
+        /// <inheritdoc />
         public IDisposable BeginScope<TState>( TState state ) => null;
 
-        public bool IsEnabled( Microsoft.Extensions.Logging.LogLevel logLevel ) => true;
+        /// <inheritdoc />
+        public bool IsEnabled( LogLevel logLevel ) => true;
 
-        void ILogger.Log<TState>( Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
+        /// <inheritdoc />
+        void ILogger.Log<TState>( LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter )
         {
             if ( state?.ToString() is { Length: > 0 } message )
                 _builder?.AppendLine(message);
