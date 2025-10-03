@@ -215,7 +215,7 @@ namespace EssSharp.Integration
 
             Assert.True(memberList[1].DescentantsCount == 16);
 
-            var memList = await cube.GetMembersSearchedAsync("new");
+            var memList = await cube.GetMembersSearchedAsync("new", searchType: EssMemberSearchType.wildSearch);
 
             Assert.NotNull(memList);
 
@@ -237,9 +237,9 @@ namespace EssSharp.Integration
             var searchType = EssMemberSearchType.wildSearch;
             var queryOptions = EssMemberSearchOptions.membersOnly;
 
-            var members = await cube.GetMembersSelectedAsync(search: "100", isCaseSensitive: false, searchType: searchType, searchOptions: queryOptions, fields: null, limit:500);
+            var members = await cube.GetMembersSearchedAsync(search: "100", isCaseSensitive: false, searchType: searchType, searchOptions: queryOptions, fields: null, limit:500);
 
-            Assert.Equal(6, members.Count);
+            Assert.Equal(5, members.Count);
             Assert.Equal("100-30", members[2].Name);
             Assert.All([members], members =>
             {
@@ -249,7 +249,7 @@ namespace EssSharp.Integration
             searchType = EssMemberSearchType.dtsMembers;
             queryOptions = EssMemberSearchOptions.membersAndAliases;
 
-            var dtsFromMembersSelected = await cube.GetMembersSelectedAsync(searchType: searchType, searchOptions: queryOptions);
+            var dtsFromMembersSelected = await cube.GetMembersSearchedAsync(searchType: searchType, searchOptions: queryOptions);
             var dtsFromDTSMethod = await cube.GetDynamicTimeSeriesMembersAsync();
 
             Assert.Equal(2, dtsFromMembersSelected.Count);
@@ -258,14 +258,14 @@ namespace EssSharp.Integration
             searchType = EssMemberSearchType.search;
             queryOptions = EssMemberSearchOptions.membersAndAliases;
 
-            var memberByAlias = await cube.GetMembersSelectedAsync(search: "Cola", searchType: searchType, searchOptions: queryOptions);
+            var memberByAlias = await cube.GetMembersSearchedAsync(search: "Cola", searchType: searchType, searchOptions: queryOptions);
 
             Assert.Single(memberByAlias);
             Assert.Equal("Cola", memberByAlias[0].ActiveAliasName);
 
             searchType = EssMemberSearchType.wildSearch;
 
-            var memberByAliasCaseSensitive = await cube.GetMembersSelectedAsync(search: "cola", isCaseSensitive: true, searchType: searchType, searchOptions: queryOptions);
+            var memberByAliasCaseSensitive = await cube.GetMembersSearchedAsync(search: "cola", isCaseSensitive: true, searchType: searchType, searchOptions: queryOptions);
 
             Assert.Empty(memberByAliasCaseSensitive);
         }

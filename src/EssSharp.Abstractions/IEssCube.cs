@@ -440,7 +440,7 @@ namespace EssSharp
         /// <param name="searchOptions"></param>
         /// <param name="fields"></param>
         /// <param name="limit"></param>
-        public List<IEssMember> GetMembersSelected(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50);
+        public List<IEssMember> GetMembersSearched(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50);
 
         /// <summary>
         /// 
@@ -451,8 +451,9 @@ namespace EssSharp
         /// <param name="fields"></param>
         /// <param name="limit"></param>
         /// <param name="cancellationToken"></param>
-        public Task<List<IEssMember>> GetMembersSelectedAsync(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default);
+        public Task<List<IEssMember>> GetMembersSearchedAsync(string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default);
 
+        /*
         /// <summary>
         /// 
         /// </summary>
@@ -469,6 +470,7 @@ namespace EssSharp
         /// <param name="limit"></param>
         /// <param name="cancellationTokenn"></param>
         public Task<List<IEssMember>> GetMembersSearchedAsync( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationTokenn = default );
+        */
 
         /// <summary>
         /// Asynchronously gets a list of locked objects.

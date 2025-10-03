@@ -786,15 +786,25 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns></returns>
-        public List<IEssMember> GetMembersSelected( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSelectedAsync(search, dimensionName, aliasName, isCaseSensitive, searchType, searchOptions, fields, limit).GetAwaiter().GetResult();
+        public List<IEssMember> GetMembersSearched( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSearchedAsync(search, dimensionName, aliasName, isCaseSensitive, searchType, searchOptions, fields, limit).GetAwaiter().GetResult();
 
         /// <inheritdoc />
         /// <returns></returns>
-        public async Task<List<IEssMember>> GetMembersSelectedAsync( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
+        public async Task<List<IEssMember>> GetMembersSearchedAsync( string search = null, string dimensionName = null, string aliasName = null, bool isCaseSensitive = false, EssMemberSearchType searchType = EssMemberSearchType.search, EssMemberSearchOptions searchOptions = EssMemberSearchOptions.membersOnly, EssMemberFields? fields = null, int limit = 50, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<OutlineViewerApi>();
+
+                if ( searchOptions == EssMemberSearchOptions.membersOnly )
+                {
+                    var matchWholeWord = searchType == EssMemberSearchType.search;
+
+                    if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, keyword: search, matchWholeWord: matchWholeWord, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } members)
+                        throw new Exception("Cannot get Members.");
+
+                    return members.ToEssSharpList(this) ?? new List<IEssMember>();
+                }
 
                 // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
                 if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
@@ -818,6 +828,7 @@ namespace EssSharp
             }
         }
 
+        /*
         /// <inheritdoc />
         /// <returns></returns>
         public List<IEssMember> GetMembersSearched( string keyword, bool matchWholeWord = false, EssMemberFields? fields = null, int limit = 50 ) => GetMembersSearchedAsync(keyword, matchWholeWord, fields, limit).GetAwaiter().GetResult();
@@ -845,6 +856,7 @@ namespace EssSharp
                 throw new Exception($@"Unable to get members from cube ""{Name}"". {e.Message}", e);
             }
         }
+        */
 
         /// <inheritdoc />
         public void Unlock<T>( List<T> lockedList ) where T : class, IEssLock  => UnlockAsync<T>(lockedList).GetAwaiter().GetResult(); 
