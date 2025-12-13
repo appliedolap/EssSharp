@@ -5,6 +5,7 @@ using EssSharp.Client;
 
 namespace EssSharp
 {
+    /// <summary />
     internal class ApiFactory
     {
         /// <summary />
@@ -13,10 +14,11 @@ namespace EssSharp
         /// <param name="username" />
         /// <param name="password" />
         /// <param name="timeout" />
+        /// <param name="userAgent" />
         /// <param name="callerPath" />
         /// <param name="callerName" />
-        public static T GetApi<T>( string basePath, string username, string password, TimeSpan? timeout = null, [System.Runtime.CompilerServices.CallerFilePath] string callerPath = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null ) where T : IApiAccessor, new() =>
-            GetApiAndClient<T>(new Configuration() { BasePath = basePath, Username = username, Password = password, Timeout = timeout ?? TimeSpan.FromMilliseconds(int.MaxValue), UserAgent = "EssSharp.Client/1.0.0.0" }, null, callerPath, callerName).Api;
+        public static T GetApi<T>( string basePath, string username, string password, TimeSpan? timeout = null, string userAgent = null, [System.Runtime.CompilerServices.CallerFilePath] string callerPath = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null ) where T : IApiAccessor, new() =>
+            GetApiAndClient<T>(new Configuration() { BasePath = basePath, Username = username, Password = password, Timeout = timeout ?? TimeSpan.FromMilliseconds(int.MaxValue), UserAgent = userAgent ?? $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}" }, null, callerPath, callerName).Api;
 
         /// <summary />
         /// <typeparam name="T" />
@@ -24,10 +26,11 @@ namespace EssSharp
         /// <param name="username" />
         /// <param name="password" />
         /// <param name="timeout" />
+        /// <param name="userAgent" />
         /// <param name="callerPath" />
         /// <param name="callerName" />
-        public static (T Api, ApiClient Client) GetApiAndClient<T>( string basePath, string username, string password, TimeSpan? timeout = null, [System.Runtime.CompilerServices.CallerFilePath] string callerPath = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null ) where T : IApiAccessor, new() =>
-            GetApiAndClient<T>(new Configuration() { BasePath = basePath, Username = username, Password = password, Timeout = timeout ?? TimeSpan.FromMilliseconds(int.MaxValue), UserAgent = "EssSharp.Client/1.0.0.0" }, null, callerPath, callerName);
+        public static (T Api, ApiClient Client) GetApiAndClient<T>( string basePath, string username, string password, TimeSpan? timeout = null, string userAgent = null, [System.Runtime.CompilerServices.CallerFilePath] string callerPath = null, [System.Runtime.CompilerServices.CallerMemberName] string callerName = null ) where T : IApiAccessor, new() =>
+            GetApiAndClient<T>(new Configuration() { BasePath = basePath, Username = username, Password = password, Timeout = timeout ?? TimeSpan.FromMilliseconds(int.MaxValue), UserAgent = userAgent ?? $"{nameof(EssSharp)}/{typeof(EssServer).Assembly.GetName().Version}" }, null, callerPath, callerName);
 
         /// <summary />
         /// <typeparam name="T" />

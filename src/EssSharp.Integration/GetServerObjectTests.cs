@@ -168,7 +168,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 07 - Essbase_AfterReportCreation_CanGetDefaultGridPrefernces"), Priority(07)]
         public async Task Essbase_AfterReportCreation_CanGetDefaultGridPrefernces()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             var preferences = await server.GetDefaultGridPreferencesAsync();
@@ -185,7 +185,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 08 - Essbase_AfterReportCreation_CanGetMembers"), Priority(08)]
         public async Task Essbase_AfterReportCreation_CanGetMembers()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -225,7 +225,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 08 - Essbase_AfterReportCreation_CanGetMembersSelected"), Priority(08)]
         public async Task Essbase_AfterReportCreation_CanGetMembersByAlias()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -273,7 +273,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 09 - Essbase_AfterReportCreation_CanGetMember"), Priority(09)]
         public async Task Essbase_AfterReportCreation_CanGetMember()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -309,7 +309,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 10 - Essbase_AfterReportCreation_CanGetAncestor"), Priority(10)]
         public async Task Essbase_AfterReportCreation_CanGetAncestor()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -337,7 +337,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 11 - Essbase_AfterReportCreation_CanGetDescendants"), Priority(11)]
         public async Task Essbase_AfterReportCreation_CanGetDescendants()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -357,7 +357,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 12 - Essbase_AfterReportCreation_CanGetSiblings"), Priority(12)]
         public async Task Essbase_AfterReportCreation_CanGetSiblings()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -375,7 +375,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 13 - Essbase_AfterReportCreation_CanGetMemberWithFields"), Priority(13)]
         public async Task Essbase_AfterReportCreation_CanGetMemberWithFields()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -395,7 +395,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 14 - Essbase_AfterReportCreation_CanGetMember_returnLevelNumber"), Priority(14)]
         public async Task Essbase_AfterReportCreation_CanGetMember_returnLevelNumber()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -415,7 +415,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 15 - Essbase_AfterReportCreation_CanGetMember_returnGenerationNumber"), Priority(15)]
         public async Task Essbase_AfterReportCreation_CanGetMember_returnGenerationNumber()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -435,7 +435,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 16 - Essbase_AfterReportCreation_CanGetMemberByGen"), Priority(16)]
         public async Task Essbase_AfterReportCreation_CanGetMemberByGen()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -451,7 +451,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 16 - Essbase_AfterReportCreation_CanGetMemberByLevel"), Priority(16)]
         public async Task Essbase_AfterReportCreation_CanGetMemberByLevel()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -467,7 +467,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 17 - Essbase_AfterReportCreation_CanGetDimensionMembers"), Priority(17)]
         public async Task Essbase_AfterReportCreation_CanGetDimensionMembers()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -483,7 +483,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 18 - Essbase_AfterReportCreation_CanGetDimensionFromMember"), Priority(18)]
         public async Task Essbase_AfterReportCreation_CanGetDimensionFromMember()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -501,7 +501,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 19 - Essbase_AfterReportCreation_CanGetSameGenerationMembers"), Priority(19)]
         public async Task Essbase_AfterReportCreation_CanGetSameGenerationMembers()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
@@ -530,8 +530,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 20 - Essbase_AfterReportCreation_CanGetDynamicTimeSeriesMembersAsync"), Priority(20)]
         public async Task Essbase_AfterReportCreation_CanGetDynamicTimeSeriesMembersAsync()
         {
-            // Get an unconnected server as a regular user.
-            var server = GetEssServer(EssServerRole.User);
+            // Get an unconnected server.
+            var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
@@ -550,8 +550,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 21 - Essbase_AfterReportCreation_CanGetDimensionsAsync"), Priority(21)]
         public async Task Essbase_AfterReportCreation_CanGetDimensionsAsync()
         {
-            // Get an unconnected server as a regular user.
-            var server = GetEssServer(EssServerRole.User);
+            // Get an unconnected server.
+            var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
@@ -578,8 +578,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 22 - Essbase_AfterReportCreation_CanGetDimensionGenerationsAsync"), Priority(22)]
         public async Task Essbase_AfterReportCreation_CanGetDimensionGenerationsAsync()
         {
-            // Get an unconnected server as a regular user.
-            var server = GetEssServer(EssServerRole.User);
+            // Get an unconnected server.
+            var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
@@ -605,8 +605,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 22 - Essbase_AfterReportCreation_CanGetDimensionLevelsAsync"), Priority(22)]
         public async Task Essbase_AfterReportCreation_CanGetDimensionLevelsAsync()
         {
-            // Get an unconnected server as a regular user.
-            var server = GetEssServer(EssServerRole.User);
+            // Get an unconnected server.
+            var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
@@ -632,7 +632,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"GetServerObjectTests - 23 - Essbase_AfterReportCreation_CanGetBottemLevelDescendants"), Priority(23)]
         public async Task Essbase_AfterReportCreation_CanGetBottemLevelDescendants()
         {
-            // Get an unconnected server as a regular user.
+            // Get an unconnected server.
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.

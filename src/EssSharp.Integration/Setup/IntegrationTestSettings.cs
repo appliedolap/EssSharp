@@ -25,15 +25,19 @@ namespace EssSharp.Integration.Setup
         public string Password { get; set; }
 
         /// <summary />
+        public string AccessToken { get; set; }
+
+        /// <summary />
         public EssServerRole Role { get; set; }
 
         /// <inheritdoc />
         public object Clone() => new IntegrationTestSettingsConnection()
         {
-            Server   = this.Server,
-            Username = this.Username,
-            Password = this.Password,
-            Role     = this.Role
+            Server      = this.Server,
+            AccessToken = this.AccessToken,
+            Username    = this.Username,
+            Password    = this.Password,
+            Role        = this.Role
         };
     }
 

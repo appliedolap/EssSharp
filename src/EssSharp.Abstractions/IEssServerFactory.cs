@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
 
 namespace EssSharp
 {
+    /// <summary />
     public interface IEssServerFactory
     {
         /// <summary>
@@ -16,6 +18,16 @@ namespace EssSharp
         /// Gets or sets the maximum number of concurrent requests by any <see cref="IEssServer"/> created by this factory.
         /// </summary>
         public int MaxDegreeOfParallelism { get; set; }
+
+        /// <summary>
+        /// Gets or sets the tmeout of requests by any <see cref="IEssServer"/> created by this factory.
+        /// </summary>
+        public TimeSpan Timeout { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user agent of any <see cref="IEssServer"/> created by this factory.
+        /// </summary>
+        public string UserAgent { get; set; }
 
         /// <summary>
         /// Creates a new server and, optionally, connects with the given credentials.

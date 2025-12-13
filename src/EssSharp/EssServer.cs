@@ -698,6 +698,7 @@ namespace EssSharp
                     // Apply the base configuration settings.
                     BasePath               = Configuration.BasePath,
                     MaxDegreeOfParallelism = Configuration.MaxDegreeOfParallelism,
+                    AccessToken            = Configuration.AccessToken,
                     Username               = Configuration.Username,
                     Password               = Configuration.Password,
                     Timeout                = Configuration.Timeout,

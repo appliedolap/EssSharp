@@ -213,7 +213,11 @@ namespace EssSharp.Integration.Setup
 
             factory ??= new EssServerFactory();
 
-            return factory.CreateEssServer(connection.Server, connection.Username, connection.Password, connect: false);
+            return (connection is { AccessToken.Length: > 0 }) switch
+            {
+                true  => factory.CreateEssServer(connection.Server, oauthToken: connection.AccessToken, connect: false),
+                false => factory.CreateEssServer(connection.Server, username: connection.Username, password: connection.Password, connect: false)
+            };
         }
 
         /// <summary />
