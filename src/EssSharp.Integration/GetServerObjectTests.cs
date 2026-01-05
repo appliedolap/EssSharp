@@ -165,8 +165,8 @@ namespace EssSharp.Integration
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.Unauthorized } });
         }
 
-        [Fact(DisplayName = @"GetServerObjectTests - 07 - Essbase_AfterReportCreation_CanGetDefaultGridPrefernces"), Priority(07)]
-        public async Task Essbase_AfterReportCreation_CanGetDefaultGridPrefernces()
+        [Fact(DisplayName = @"GetServerObjectTests - 07 - Essbase_AfterReportCreation_CanGetDefaultGridPreferences"), Priority(07)]
+        public async Task Essbase_AfterReportCreation_CanGetDefaultGridPreferences()
         {
             // Get an unconnected server.
             var server = GetEssServer();

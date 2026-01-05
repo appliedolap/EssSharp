@@ -875,8 +875,10 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanGetGridLayout"), Priority(31)]
         public async Task Essbase_AfterDefaultGrid_CanGetGridLayout()
         {
-            // Get an unconnected server.
-            var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
+            // Get the Sample.Basic cube.
+            var cube = await GetEssServer()
+                .GetApplicationAsync("Sample")
+                .GetCubeAsync("Basic");
 
             var defaultGrid = await cube.GetDefaultGridAsync();
 
@@ -886,8 +888,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 32 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperations"), Priority(32)]
         public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperations()
         {
-            // Get the Sample.Basic cube (as an end-user).
-            var cube = await GetEssServer(EssServerRole.User)
+            // Get the Sample.Basic cube.
+            var cube = await GetEssServer()
                 .GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic");
 

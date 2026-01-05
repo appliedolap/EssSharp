@@ -160,8 +160,15 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CleanServerTests - 06 - Essbase_AfterConnection_CanRemoveUsers"), Priority(06)]
         public async Task Essbase_AfterConnection_CanRemoveUsers()
         {
+            // Get a service admin connection.
+            var connection = GetEssConnection();
+
+            // If the connection uses an access-token, throw a not supported exception.
+            if (connection is { AccessToken.Length: > 0 })
+                throw new NotSupportedException("EssSharp tests do not support the deletion of all cloud users ");
+
             // Get an unconnected server.
-            var server = GetEssServer();
+            var server = GetEssServer(connection);
 
             // Get and delete all existing users except admin.
             foreach ( var user in (await server.GetUsersAsync()).Where(u => !string.Equals(u.Name, "admin")) )
@@ -204,8 +211,15 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CleanServerTests - 07 - Essbase_AfterConnection_CanRemoveUserPermissions"), Priority(07)]
         public async Task Essbase_AfterConnection_CanRemoveUserPermissions()
         {
+            // Get a service admin connection.
+            var connection = GetEssConnection();
+
+            // If the connection uses an access-token, throw a not supported exception.
+            if (connection is { AccessToken.Length: > 0 })
+                throw new NotSupportedException("EssSharp tests do not support the deletion of all user permissions ");
+
             // Get an unconnected server.
-            var server = GetEssServer();
+            var server = GetEssServer(connection);
 
             // Get the list of existing applications.
             foreach ( var application in await server.GetApplicationsAsync() )
@@ -222,8 +236,15 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CleanServerTests - 08 - Essbase_AfterConnection_CanRemoveGroups"), Priority(08)]
         public async Task Essbase_AfterConnection_CanRemoveGroups()
         {
+            // Get a service admin connection.
+            var connection = GetEssConnection();
+
+            // If the connection uses an access-token, throw a not supported exception.
+            if (connection is { AccessToken.Length: > 0 })
+                throw new NotSupportedException("EssSharp tests do not support the deletion of all cloud user groups ");
+
             // Get an unconnected server.
-            var server = GetEssServer();
+            var server = GetEssServer(connection);
 
             // Get the list of existing applications.
             foreach ( var group in await server.GetGroupsAsync() )

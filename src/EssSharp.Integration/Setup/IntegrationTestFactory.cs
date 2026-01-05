@@ -198,6 +198,7 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary />
+        /// <param name="role" />
         internal static IntegrationTestSettingsConnection GetEssConnection( EssServerRole role = EssServerRole.ServiceAdministrator )
         {
             if ( Connections?.FirstOrDefault(conn => conn?.Role == role) is not IntegrationTestSettingsConnection connection )
@@ -207,15 +208,22 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary />
-        internal static IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator, EssServerFactory factory = null )
-        {
-            var connection = GetEssConnection(role);
+        /// <param name="role" />
+        /// <param name="factory" />
+        internal static IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator, EssServerFactory factory = null ) =>
+            GetEssServer(GetEssConnection(role), factory);
 
-            factory ??= new EssServerFactory();
+        /// <summary />
+        /// <param name="connection" />
+        /// <param name="factory" />
+        internal static IEssServer GetEssServer( IntegrationTestSettingsConnection connection, EssServerFactory factory = null )
+        {
+            connection ??= GetEssConnection();
+            factory    ??= new EssServerFactory();
 
             return (connection is { AccessToken.Length: > 0 }) switch
             {
-                true  => factory.CreateEssServer(connection.Server, oauthToken: connection.AccessToken, connect: false),
+                true => factory.CreateEssServer(connection.Server, oauthToken: connection.AccessToken, connect: false),
                 false => factory.CreateEssServer(connection.Server, username: connection.Username, password: connection.Password, connect: false)
             };
         }

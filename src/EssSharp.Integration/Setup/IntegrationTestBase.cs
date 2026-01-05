@@ -292,8 +292,13 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         /// <param name="role" />
-        /// <param name="maxDegreeOfParallelism" />
+        /// <param name="factory" />
         protected IEssServer GetEssServer( EssServerRole role = EssServerRole.ServiceAdministrator, EssServerFactory factory = null ) => IntegrationTestFactory.GetEssServer(role, factory);
+
+        /// <summary />
+        /// <param name="essConnection" />
+        /// <param name="factory" />
+        protected IEssServer GetEssServer( IntegrationTestSettingsConnection essConnection, EssServerFactory factory = null ) => IntegrationTestFactory.GetEssServer(essConnection, factory);
 
         /// <summary />
         protected TestOutputLogger OutputLogger => _outputLogger ??= new TestOutputLogger(_outputHelper);
