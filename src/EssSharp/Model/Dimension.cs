@@ -30,6 +30,55 @@ namespace EssSharp.Model
     public partial class Dimension : IValidatableObject
     {
         /// <summary>
+        /// Defines AggregateLevelUsage
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AggregateLevelUsageEnum
+        {
+            /// <summary>
+            /// Enum DEFAULT for value: DEFAULT
+            /// </summary>
+            [EnumMember(Value = "DEFAULT")]
+            DEFAULT = 1,
+
+            /// <summary>
+            /// Enum ALLLEVELS for value: ALLLEVELS
+            /// </summary>
+            [EnumMember(Value = "ALLLEVELS")]
+            ALLLEVELS = 2,
+
+            /// <summary>
+            /// Enum NOAGGREGATION for value: NOAGGREGATION
+            /// </summary>
+            [EnumMember(Value = "NOAGGREGATION")]
+            NOAGGREGATION = 3,
+
+            /// <summary>
+            /// Enum TOPLEVELONLY for value: TOPLEVELONLY
+            /// </summary>
+            [EnumMember(Value = "TOPLEVELONLY")]
+            TOPLEVELONLY = 4,
+
+            /// <summary>
+            /// Enum NOINTERMEDIATELEVELS for value: NOINTERMEDIATELEVELS
+            /// </summary>
+            [EnumMember(Value = "NOINTERMEDIATELEVELS")]
+            NOINTERMEDIATELEVELS = 5,
+
+            /// <summary>
+            /// Enum BOTTOMLEVELONLY for value: BOTTOMLEVELONLY
+            /// </summary>
+            [EnumMember(Value = "BOTTOMLEVELONLY")]
+            BOTTOMLEVELONLY = 6
+        }
+
+
+        /// <summary>
+        /// Gets or Sets AggregateLevelUsage
+        /// </summary>
+        [DataMember(Name = "aggregateLevelUsage", EmitDefaultValue = false)]
+        public AggregateLevelUsageEnum? AggregateLevelUsage { get; set; }
+        /// <summary>
         /// Defines AddMemberOption
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -257,16 +306,10 @@ namespace EssSharp.Model
             LABELONLY = 4,
 
             /// <summary>
-            /// Enum DYNAMICCALCSTORE for value: DYNAMIC_CALC_STORE
-            /// </summary>
-            [EnumMember(Value = "DYNAMIC_CALC_STORE")]
-            DYNAMICCALCSTORE = 5,
-
-            /// <summary>
             /// Enum DYNAMICCALC for value: DYNAMIC_CALC
             /// </summary>
             [EnumMember(Value = "DYNAMIC_CALC")]
-            DYNAMICCALC = 6
+            DYNAMICCALC = 5
         }
 
 
@@ -429,7 +472,7 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="dimensionSolveOrder">dimensionSolveOrder.</param>
         /// <param name="added">added.</param>
-        public Dimension(List<Level> generations = default, List<Level> levels = default, bool allowassociationChanges = default, bool allowFormulaChanges = default, bool allowPropertyChanges = default, bool allowUDAChanges = default, MeasureOptions measureOptions = default, int aggregateLevelUsage = default, AddMemberOptionEnum? addMemberOption = default, AttributeOptions attributeOptions = default, ConfigOptionEnum? configOption = default, UniqueEnum? unique = default, HierarchyTypeEnum? hierarchyType = default, SortOptionEnum? sortOption = default, StorageTypeEnum? storageType = default, TypeEnum? type = default, UpdateOptionEnum? updateOption = default, AllowMovesEnum? allowMoves = default, int solveOrder = default, bool createAttributeMembers = default, bool share = default, bool incrementalSort = default, bool autoFixSharedMember = default, bool flexible = default, string memberName = default, string name = default, int dimensionSolveOrder = default, bool added = default)
+        public Dimension(List<Level> generations = default, List<Level> levels = default, bool allowassociationChanges = default, bool allowFormulaChanges = default, bool allowPropertyChanges = default, bool allowUDAChanges = default, MeasureOptions measureOptions = default, AggregateLevelUsageEnum? aggregateLevelUsage = default, AddMemberOptionEnum? addMemberOption = default, AttributeOptions attributeOptions = default, ConfigOptionEnum? configOption = default, UniqueEnum? unique = default, HierarchyTypeEnum? hierarchyType = default, SortOptionEnum? sortOption = default, StorageTypeEnum? storageType = default, TypeEnum? type = default, UpdateOptionEnum? updateOption = default, AllowMovesEnum? allowMoves = default, int solveOrder = default, bool createAttributeMembers = default, bool share = default, bool incrementalSort = default, bool autoFixSharedMember = default, bool flexible = default, string memberName = default, string name = default, int dimensionSolveOrder = default, bool added = default)
         {
             this.Generations = generations;
             this.Levels = levels;
@@ -502,12 +545,6 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "measureOptions", EmitDefaultValue = false)]
         public MeasureOptions MeasureOptions { get; set; }
-
-        /// <summary>
-        /// Gets or Sets AggregateLevelUsage
-        /// </summary>
-        [DataMember(Name = "aggregateLevelUsage", EmitDefaultValue = false)]
-        public int AggregateLevelUsage { get; set; }
 
         /// <summary>
         /// Gets or Sets AttributeOptions

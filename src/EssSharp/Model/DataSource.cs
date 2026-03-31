@@ -117,7 +117,13 @@ namespace EssSharp.Model
             /// Enum FILE for value: FILE
             /// </summary>
             [EnumMember(Value = "FILE")]
-            FILE = 14
+            FILE = 14,
+
+            /// <summary>
+            /// Enum AI for value: AI
+            /// </summary>
+            [EnumMember(Value = "AI")]
+            AI = 15
         }
 
 

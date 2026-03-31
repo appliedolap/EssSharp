@@ -74,17 +74,6 @@ namespace EssSharp.Test.Api
         }
 
         /// <summary>
-        /// Test PSMSettingsGetDatabaseSettings
-        /// </summary>
-        [Fact]
-        public void PSMSettingsGetDatabaseSettingsTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //var response = instance.PSMSettingsGetDatabaseSettings();
-            //Assert.IsType<Limits>(response);
-        }
-
-        /// <summary>
         /// Test PSMSettingsGetSystemMaintenanceLimits
         /// </summary>
         [Fact]
@@ -92,18 +81,6 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //var response = instance.PSMSettingsGetSystemMaintenanceLimits();
-            //Assert.IsType<Limits>(response);
-        }
-
-        /// <summary>
-        /// Test PSMSettingsSetDatabaseSettings
-        /// </summary>
-        [Fact]
-        public void PSMSettingsSetDatabaseSettingsTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //DatabaseSettings body = null;
-            //var response = instance.PSMSettingsSetDatabaseSettings(body);
             //Assert.IsType<Limits>(response);
         }
 

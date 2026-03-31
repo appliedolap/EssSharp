@@ -35,11 +35,13 @@ namespace EssSharp.Model
         /// <param name="description">description.</param>
         /// <param name="spec">spec.</param>
         /// <param name="preferences">preferences.</param>
-        public Query(string description = default, string spec = default, NamedQueriesPreferences preferences = default)
+        /// <param name="nlq">nlq.</param>
+        public Query(string description = default, string spec = default, NamedQueriesPreferences preferences = default, string nlq = default)
         {
             this.Description = description;
             this.Spec = spec;
             this.Preferences = preferences;
+            this.Nlq = nlq;
         }
 
         /// <summary>
@@ -61,6 +63,12 @@ namespace EssSharp.Model
         public NamedQueriesPreferences Preferences { get; set; }
 
         /// <summary>
+        /// Gets or Sets Nlq
+        /// </summary>
+        [DataMember(Name = "nlq", EmitDefaultValue = false)]
+        public string Nlq { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -71,6 +79,7 @@ namespace EssSharp.Model
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Spec: ").Append(Spec).Append("\n");
             sb.Append("  Preferences: ").Append(Preferences).Append("\n");
+            sb.Append("  Nlq: ").Append(Nlq).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

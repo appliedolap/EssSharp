@@ -78,7 +78,8 @@ namespace EssSharp.Test.Api
             //string database = null;
             //string name = null;
             //string format = null;
-            //var response = instance.MDXExecutenq(application, database, name, format);
+            //string aliasTable = null;
+            //var response = instance.MDXExecutenq(application, database, name, format, aliasTable);
             //Assert.IsType<Object>(response);
         }
     }

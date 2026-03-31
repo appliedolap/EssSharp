@@ -18,7 +18,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Create Drill Through Report
 
-<p>Creates a drill through report in the specified application and database, and returns details about the report.</p>
+<p>Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.</p><p>Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).</p><p>To create a drill through report definition, you must be a Database Manager or higher.</p>
 
 ### Example
 ```csharp
@@ -45,7 +45,7 @@ namespace Example
             var apiInstance = new DrillThroughReportsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var body = new DrillthroughBean(); // DrillthroughBean | <p>Drill through report details.</p>
+            var body = new DrillthroughBean(); // DrillthroughBean | <p>Drill through report definition details.</p>
 
             try
             {
@@ -90,7 +90,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **body** | [**DrillthroughBean**](DrillthroughBean.md) | &lt;p&gt;Drill through report details.&lt;/p&gt; |  |
+| **body** | [**DrillthroughBean**](DrillthroughBean.md) | &lt;p&gt;Drill through report definition details.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -109,8 +109,8 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The drill through report was created successfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to create the drill through report. The application or database name may be incorrect, or the report may already exist.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The drill through report definition was created successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to create the drill through report definition. The application or database name may be incorrect, or the report may already exist.&lt;/p&gt; |  -  |
 | **415** | &lt;p&gt;&lt;strong&gt;Not Acceptable&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The media type isn&#39;t supported or wasn&#39;t specified.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
@@ -122,7 +122,7 @@ catch (ApiException e)
 
 Delete Drill Through Report
 
-<p>Deletes the specified drill through report from the specified application and database.</p>
+<p>Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.</p>
 
 ### Example
 ```csharp
@@ -248,7 +248,7 @@ namespace Example
             var apiInstance = new DrillThroughReportsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var name = "name_example";  // string | <p>Drillthrough report name.</p>
+            var name = "name_example";  // string | <p>Drill through report name.</p>
             var body = new DrillthroughMetadataBean(); // DrillthroughMetadataBean | <p>Drill through metadata. In the example request body, <i>dtrContext</i> corresponds to the intersection of cells in Smart View.</p>
 
             try
@@ -290,7 +290,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **name** | **string** | &lt;p&gt;Drillthrough report name.&lt;/p&gt; |  |
+| **name** | **string** | &lt;p&gt;Drill through report name.&lt;/p&gt; |  |
 | **body** | [**DrillthroughMetadataBean**](DrillthroughMetadataBean.md) | &lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt; |  |
 
 ### Return type
@@ -310,7 +310,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The drillthrough report was executed successfully. Result is a JSON array where the first node is the datatype of each column, the  second node is the column names, and the remaining nodes are the data nodes corresponding to each record in the report.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The drillthrough report was executed successfully. Result is a JSON array where the first node is the datatype of each column, the second node is the column names, and the remaining nodes are the data nodes corresponding to each record in the report.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to execute the drillthrough report.&lt;/p&gt; |  -  |
 | **415** | &lt;p&gt;&lt;strong&gt;Not Acceptable&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The media type isn&#39;t supported or wasn&#39;t specified.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
@@ -422,7 +422,7 @@ catch (ApiException e)
 
 <a id="drillthroughreportsgetreports"></a>
 # **DrillThroughReportsGetReports**
-> ReportList DrillThroughReportsGetReports (string applicationName, string databaseName, string keyword = null)
+> ReportList DrillThroughReportsGetReports (string applicationName, string databaseName, string keyword = null, string orderBy = null)
 
 Get Drill Through Reports
 
@@ -454,11 +454,12 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
             var keyword = "keyword_example";  // string | <p>Filter the list of drill-through reports using a keyword.<p> (optional) 
+            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
 
             try
             {
                 // Get Drill Through Reports
-                ReportList result = apiInstance.DrillThroughReportsGetReports(applicationName, databaseName, keyword);
+                ReportList result = apiInstance.DrillThroughReportsGetReports(applicationName, databaseName, keyword, orderBy);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -479,7 +480,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Drill Through Reports
-    ApiResponse<ReportList> response = apiInstance.DrillThroughReportsGetReportsWithHttpInfo(applicationName, databaseName, keyword);
+    ApiResponse<ReportList> response = apiInstance.DrillThroughReportsGetReportsWithHttpInfo(applicationName, databaseName, keyword, orderBy);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -499,6 +500,7 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **keyword** | **string** | &lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
 
 ### Return type
 

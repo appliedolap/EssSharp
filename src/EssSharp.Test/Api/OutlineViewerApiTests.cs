@@ -154,5 +154,20 @@ namespace EssSharp.Test.Api
             //ExportOptions body = null;
             //instance.OutlineGetOutlineXML(app, cube, connection, applicationNameForConnection, body);
         }
+
+        /// <summary>
+        /// Test OutlineGetPivotDimension
+        /// </summary>
+        [Fact]
+        public void OutlineGetPivotDimensionTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string app = null;
+            //string cube = null;
+            //string connection = null;
+            //string applicationNameForConnection = null;
+            //var response = instance.OutlineGetPivotDimension(app, cube, connection, applicationNameForConnection);
+            //Assert.IsType<string>(response);
+        }
     }
 }

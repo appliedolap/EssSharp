@@ -83,9 +83,9 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="metaDataOnly">&lt;p&gt;Metadata Only.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
+        /// <param name="includeHeaders">&lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="metaDataOnly">&lt;p&gt;Stream metadata only?&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="body">&lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void ApplicationDatasourcesGetDataStream(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0);
@@ -98,9 +98,9 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="metaDataOnly">&lt;p&gt;Metadata Only.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
+        /// <param name="includeHeaders">&lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="metaDataOnly">&lt;p&gt;Stream metadata only?&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="body">&lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ApplicationDatasourcesGetDataStreamWithHttpInfo(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0);
@@ -112,10 +112,10 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        Datasource ApplicationDatasourcesGetDatasourceDetails(string applicationName, string datasouceName, int operationIndex = 0);
+        Datasource ApplicationDatasourcesGetDatasourceDetails(string applicationName, string datasourceName, int operationIndex = 0);
 
         /// <summary>
         /// Get Application Datasource
@@ -125,10 +125,10 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        ApiResponse<Datasource> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfo(string applicationName, string datasouceName, int operationIndex = 0);
+        ApiResponse<Datasource> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfo(string applicationName, string datasourceName, int operationIndex = 0);
         /// <summary>
         /// Get Application Datasources
         /// </summary>
@@ -164,11 +164,11 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        Datasource ApplicationDatasourcesUpdateDatasource(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0);
+        Datasource ApplicationDatasourcesUpdateDatasource(string applicationName, string datasourceName, Datasource body = default, int operationIndex = 0);
 
         /// <summary>
         /// Update Application Datasource
@@ -178,11 +178,11 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        ApiResponse<Datasource> ApplicationDatasourcesUpdateDatasourceWithHttpInfo(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0);
+        ApiResponse<Datasource> ApplicationDatasourcesUpdateDatasourceWithHttpInfo(string applicationName, string datasourceName, Datasource body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -254,9 +254,9 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="metaDataOnly">&lt;p&gt;Metadata Only.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
+        /// <param name="includeHeaders">&lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="metaDataOnly">&lt;p&gt;Stream metadata only?&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="body">&lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -270,9 +270,9 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="metaDataOnly">&lt;p&gt;Metadata Only.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
+        /// <param name="includeHeaders">&lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="metaDataOnly">&lt;p&gt;Stream metadata only?&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="body">&lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -285,11 +285,11 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesGetDatasourceDetailsAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesGetDatasourceDetailsAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Datasource
@@ -299,11 +299,11 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Datasource>> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Datasource>> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Datasources
         /// </summary>
@@ -341,12 +341,12 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesUpdateDatasourceAsync(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesUpdateDatasourceAsync(string applicationName, string datasourceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Application Datasource
@@ -356,12 +356,12 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Datasource>> ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Datasource>> ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(string applicationName, string datasourceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -885,9 +885,9 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="metaDataOnly">&lt;p&gt;Metadata Only.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
+        /// <param name="includeHeaders">&lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="metaDataOnly">&lt;p&gt;Stream metadata only?&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="body">&lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void ApplicationDatasourcesGetDataStream(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0)
@@ -900,9 +900,9 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="metaDataOnly">&lt;p&gt;Metadata Only.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
+        /// <param name="includeHeaders">&lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="metaDataOnly">&lt;p&gt;Stream metadata only?&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="body">&lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> ApplicationDatasourcesGetDataStreamWithHttpInfo(string applicationName, bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0)
@@ -992,9 +992,9 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="metaDataOnly">&lt;p&gt;Metadata Only.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
+        /// <param name="includeHeaders">&lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="metaDataOnly">&lt;p&gt;Stream metadata only?&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="body">&lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -1008,9 +1008,9 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="metaDataOnly">&lt;p&gt;Metadata Only.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Query information.&lt;/p&gt; (optional)</param>
+        /// <param name="includeHeaders">&lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="metaDataOnly">&lt;p&gt;Stream metadata only?&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="body">&lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -1102,12 +1102,12 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        public Datasource ApplicationDatasourcesGetDatasourceDetails(string applicationName, string datasouceName, int operationIndex = 0)
+        public Datasource ApplicationDatasourcesGetDatasourceDetails(string applicationName, string datasourceName, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<Datasource> localVarResponse = ApplicationDatasourcesGetDatasourceDetailsWithHttpInfo(applicationName, datasouceName);
+            EssSharp.Client.ApiResponse<Datasource> localVarResponse = ApplicationDatasourcesGetDatasourceDetailsWithHttpInfo(applicationName, datasourceName);
             return localVarResponse.Data;
         }
 
@@ -1116,10 +1116,10 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        public EssSharp.Client.ApiResponse<Datasource> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfo(string applicationName, string datasouceName, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Datasource> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfo(string applicationName, string datasourceName, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1127,10 +1127,10 @@ namespace EssSharp.Api
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesGetDatasourceDetails");
             }
 
-            // verify the required parameter 'datasouceName' is set
-            if (datasouceName == null)
+            // verify the required parameter 'datasourceName' is set
+            if (datasourceName == null)
             {
-                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasouceName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesGetDatasourceDetails");
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasourceName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesGetDatasourceDetails");
             }
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1158,7 +1158,7 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
-            localVarRequestOptions.PathParameters.Add("datasouceName", EssSharp.Client.ClientUtils.ParameterToString(datasouceName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("datasourceName", EssSharp.Client.ClientUtils.ParameterToString(datasourceName)); // path parameter
 
             localVarRequestOptions.Operation = "ApplicationDatasourcesApi.ApplicationDatasourcesGetDatasourceDetails";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1187,7 +1187,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<Datasource>("/applications/{applicationName}/datasources/{datasouceName}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<Datasource>("/applications/{applicationName}/datasources/{datasourceName}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ApplicationDatasourcesGetDatasourceDetails", localVarResponse);
@@ -1205,13 +1205,13 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        public async System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesGetDatasourceDetailsAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesGetDatasourceDetailsAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<Datasource> localVarResponse = await ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(applicationName, datasouceName, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<Datasource> localVarResponse = await ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(applicationName, datasourceName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1220,11 +1220,11 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string applicationName, string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> ApplicationDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string applicationName, string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1232,10 +1232,10 @@ namespace EssSharp.Api
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesGetDatasourceDetails");
             }
 
-            // verify the required parameter 'datasouceName' is set
-            if (datasouceName == null)
+            // verify the required parameter 'datasourceName' is set
+            if (datasourceName == null)
             {
-                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasouceName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesGetDatasourceDetails");
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasourceName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesGetDatasourceDetails");
             }
 
 
@@ -1263,7 +1263,7 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
-            localVarRequestOptions.PathParameters.Add("datasouceName", EssSharp.Client.ClientUtils.ParameterToString(datasouceName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("datasourceName", EssSharp.Client.ClientUtils.ParameterToString(datasourceName)); // path parameter
 
             localVarRequestOptions.Operation = "ApplicationDatasourcesApi.ApplicationDatasourcesGetDatasourceDetails";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1292,7 +1292,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<Datasource>("/applications/{applicationName}/datasources/{datasouceName}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<Datasource>("/applications/{applicationName}/datasources/{datasourceName}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1526,13 +1526,13 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        public Datasource ApplicationDatasourcesUpdateDatasource(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0)
+        public Datasource ApplicationDatasourcesUpdateDatasource(string applicationName, string datasourceName, Datasource body = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<Datasource> localVarResponse = ApplicationDatasourcesUpdateDatasourceWithHttpInfo(applicationName, datasouceName, body);
+            EssSharp.Client.ApiResponse<Datasource> localVarResponse = ApplicationDatasourcesUpdateDatasourceWithHttpInfo(applicationName, datasourceName, body);
             return localVarResponse.Data;
         }
 
@@ -1541,11 +1541,11 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        public EssSharp.Client.ApiResponse<Datasource> ApplicationDatasourcesUpdateDatasourceWithHttpInfo(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Datasource> ApplicationDatasourcesUpdateDatasourceWithHttpInfo(string applicationName, string datasourceName, Datasource body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1553,10 +1553,10 @@ namespace EssSharp.Api
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesUpdateDatasource");
             }
 
-            // verify the required parameter 'datasouceName' is set
-            if (datasouceName == null)
+            // verify the required parameter 'datasourceName' is set
+            if (datasourceName == null)
             {
-                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasouceName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesUpdateDatasource");
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasourceName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesUpdateDatasource");
             }
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1586,7 +1586,7 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
-            localVarRequestOptions.PathParameters.Add("datasouceName", EssSharp.Client.ClientUtils.ParameterToString(datasouceName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("datasourceName", EssSharp.Client.ClientUtils.ParameterToString(datasourceName)); // path parameter
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "ApplicationDatasourcesApi.ApplicationDatasourcesUpdateDatasource";
@@ -1616,7 +1616,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Put<Datasource>("/applications/{applicationName}/datasources/{datasouceName}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Put<Datasource>("/applications/{applicationName}/datasources/{datasourceName}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ApplicationDatasourcesUpdateDatasource", localVarResponse);
@@ -1634,14 +1634,14 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        public async System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesUpdateDatasourceAsync(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Datasource> ApplicationDatasourcesUpdateDatasourceAsync(string applicationName, string datasourceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<Datasource> localVarResponse = await ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(applicationName, datasouceName, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<Datasource> localVarResponse = await ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(applicationName, datasourceName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1650,12 +1650,12 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(string applicationName, string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> ApplicationDatasourcesUpdateDatasourceWithHttpInfoAsync(string applicationName, string datasourceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1663,10 +1663,10 @@ namespace EssSharp.Api
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesUpdateDatasource");
             }
 
-            // verify the required parameter 'datasouceName' is set
-            if (datasouceName == null)
+            // verify the required parameter 'datasourceName' is set
+            if (datasourceName == null)
             {
-                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasouceName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesUpdateDatasource");
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasourceName' when calling ApplicationDatasourcesApi->ApplicationDatasourcesUpdateDatasource");
             }
 
 
@@ -1696,7 +1696,7 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
-            localVarRequestOptions.PathParameters.Add("datasouceName", EssSharp.Client.ClientUtils.ParameterToString(datasouceName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("datasourceName", EssSharp.Client.ClientUtils.ParameterToString(datasourceName)); // path parameter
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "ApplicationDatasourcesApi.ApplicationDatasourcesUpdateDatasource";
@@ -1726,7 +1726,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PutAsync<Datasource>("/applications/{applicationName}/datasources/{datasouceName}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PutAsync<Datasource>("/applications/{applicationName}/datasources/{datasourceName}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

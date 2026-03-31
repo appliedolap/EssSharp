@@ -29,7 +29,7 @@ namespace EssSharp.Api
         /// Get Database Size Statistics
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns a list of databases and their page and index sizes.&lt;/p&gt;
+        /// &lt;p&gt;Returns a list of block storage databases and their page and index sizes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -40,7 +40,7 @@ namespace EssSharp.Api
         /// Get Database Size Statistics
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns a list of databases and their page and index sizes.&lt;/p&gt;
+        /// &lt;p&gt;Returns a list of block storage databases and their page and index sizes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -59,7 +59,7 @@ namespace EssSharp.Api
         /// Get Database Size Statistics
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns a list of databases and their page and index sizes.&lt;/p&gt;
+        /// &lt;p&gt;Returns a list of block storage databases and their page and index sizes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -71,7 +71,7 @@ namespace EssSharp.Api
         /// Get Database Size Statistics
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns a list of databases and their page and index sizes.&lt;/p&gt;
+        /// &lt;p&gt;Returns a list of block storage databases and their page and index sizes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -199,7 +199,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Database Size Statistics &lt;p&gt;Returns a list of databases and their page and index sizes.&lt;/p&gt;
+        /// Get Database Size Statistics &lt;p&gt;Returns a list of block storage databases and their page and index sizes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -211,7 +211,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Database Size Statistics &lt;p&gt;Returns a list of databases and their page and index sizes.&lt;/p&gt;
+        /// Get Database Size Statistics &lt;p&gt;Returns a list of block storage databases and their page and index sizes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -284,7 +284,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Database Size Statistics &lt;p&gt;Returns a list of databases and their page and index sizes.&lt;/p&gt;
+        /// Get Database Size Statistics &lt;p&gt;Returns a list of block storage databases and their page and index sizes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -297,7 +297,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Database Size Statistics &lt;p&gt;Returns a list of databases and their page and index sizes.&lt;/p&gt;
+        /// Get Database Size Statistics &lt;p&gt;Returns a list of block storage databases and their page and index sizes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>

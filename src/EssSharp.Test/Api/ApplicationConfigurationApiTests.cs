@@ -112,7 +112,8 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
-            //var response = instance.ApplicationConfigurationGetConfigurations(applicationName);
+            //string orderBy = null;
+            //var response = instance.ApplicationConfigurationGetConfigurations(applicationName, orderBy);
             //Assert.IsType<ApplicationConfigList>(response);
         }
 

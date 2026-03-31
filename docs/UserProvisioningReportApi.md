@@ -4,20 +4,20 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**UserProvisioningReportGetFilters**](UserProvisioningReportApi.md#userprovisioningreportgetfilters) | **GET** /users/{userId}/provisionReport/applications/{application}/filters | Get Filters Provisioning Report |
-| [**UserProvisioningReportGetFullReport**](UserProvisioningReportApi.md#userprovisioningreportgetfullreport) | **GET** /users/{userId}/provisionReport | Get Full Provisioning Report |
-| [**UserProvisioningReportGetReportForAllApplications**](UserProvisioningReportApi.md#userprovisioningreportgetreportforallapplications) | **GET** /users/{userId}/provisionReport/applications | Get Applications Provisioning Reports |
-| [**UserProvisioningReportGetReportForApplication**](UserProvisioningReportApi.md#userprovisioningreportgetreportforapplication) | **GET** /users/{userId}/provisionReport/applications/{application} | Get Application Provisioning Report |
-| [**UserProvisioningReportGetRoles**](UserProvisioningReportApi.md#userprovisioningreportgetroles) | **GET** /users/{userId}/provisionReport/applications/{application}/roles | Get Application Roles Provisioning Report |
-| [**UserProvisioningReportGetScripts**](UserProvisioningReportApi.md#userprovisioningreportgetscripts) | **GET** /users/{userId}/provisionReport/applications/{application}/scripts | Get Scripts Provisioning Report |
+| [**UserProvisioningReportGetFilters**](UserProvisioningReportApi.md#userprovisioningreportgetfilters) | **GET** /users/{userId}/provisionReport/applications/{application}/filters | Get User&#39;s Filters Provisioning Report |
+| [**UserProvisioningReportGetFullReport**](UserProvisioningReportApi.md#userprovisioningreportgetfullreport) | **GET** /users/{userId}/provisionReport | Get User&#39;s Full Provisioning Report |
+| [**UserProvisioningReportGetReportForAllApplications**](UserProvisioningReportApi.md#userprovisioningreportgetreportforallapplications) | **GET** /users/{userId}/provisionReport/applications | Get User&#39;s Applications Provisioning Reports |
+| [**UserProvisioningReportGetReportForApplication**](UserProvisioningReportApi.md#userprovisioningreportgetreportforapplication) | **GET** /users/{userId}/provisionReport/applications/{application} | Get User&#39;s Application Provisioning Report |
+| [**UserProvisioningReportGetRoles**](UserProvisioningReportApi.md#userprovisioningreportgetroles) | **GET** /users/{userId}/provisionReport/applications/{application}/roles | Get User&#39;s Application Roles Provisioning Report |
+| [**UserProvisioningReportGetScripts**](UserProvisioningReportApi.md#userprovisioningreportgetscripts) | **GET** /users/{userId}/provisionReport/applications/{application}/scripts | Get User&#39;s Scripts Provisioning Report |
 
 <a id="userprovisioningreportgetfilters"></a>
 # **UserProvisioningReportGetFilters**
 > DatabaseProvisionReportItemList UserProvisioningReportGetFilters (string application, string userId)
 
-Get Filters Provisioning Report
+Get User's Filters Provisioning Report
 
-<p>Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp
@@ -47,7 +47,7 @@ namespace Example
 
             try
             {
-                // Get Filters Provisioning Report
+                // Get User's Filters Provisioning Report
                 DatabaseProvisionReportItemList result = apiInstance.UserProvisioningReportGetFilters(application, userId);
                 Debug.WriteLine(result);
             }
@@ -68,7 +68,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Filters Provisioning Report
+    // Get User's Filters Provisioning Report
     ApiResponse<DatabaseProvisionReportItemList> response = apiInstance.UserProvisioningReportGetFiltersWithHttpInfo(application, userId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -117,9 +117,9 @@ catch (ApiException e)
 # **UserProvisioningReportGetFullReport**
 > MainProvisionReport UserProvisioningReportGetFullReport (string userId, string expand = null)
 
-Get Full Provisioning Report
+Get User's Full Provisioning Report
 
-<p>Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp
@@ -149,7 +149,7 @@ namespace Example
 
             try
             {
-                // Get Full Provisioning Report
+                // Get User's Full Provisioning Report
                 MainProvisionReport result = apiInstance.UserProvisioningReportGetFullReport(userId, expand);
                 Debug.WriteLine(result);
             }
@@ -170,7 +170,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Full Provisioning Report
+    // Get User's Full Provisioning Report
     ApiResponse<MainProvisionReport> response = apiInstance.UserProvisioningReportGetFullReportWithHttpInfo(userId, expand);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -218,9 +218,9 @@ catch (ApiException e)
 # **UserProvisioningReportGetReportForAllApplications**
 > ApplicationProvisionReportItemList UserProvisioningReportGetReportForAllApplications (string userId, string expand = null)
 
-Get Applications Provisioning Reports
+Get User's Applications Provisioning Reports
 
-<p>Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp
@@ -250,7 +250,7 @@ namespace Example
 
             try
             {
-                // Get Applications Provisioning Reports
+                // Get User's Applications Provisioning Reports
                 ApplicationProvisionReportItemList result = apiInstance.UserProvisioningReportGetReportForAllApplications(userId, expand);
                 Debug.WriteLine(result);
             }
@@ -271,7 +271,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Applications Provisioning Reports
+    // Get User's Applications Provisioning Reports
     ApiResponse<ApplicationProvisionReportItemList> response = apiInstance.UserProvisioningReportGetReportForAllApplicationsWithHttpInfo(userId, expand);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -319,9 +319,9 @@ catch (ApiException e)
 # **UserProvisioningReportGetReportForApplication**
 > ApplicationProvisionReportItem UserProvisioningReportGetReportForApplication (string application, string userId, string expand = null)
 
-Get Application Provisioning Report
+Get User's Application Provisioning Report
 
-<p>Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp
@@ -352,7 +352,7 @@ namespace Example
 
             try
             {
-                // Get Application Provisioning Report
+                // Get User's Application Provisioning Report
                 ApplicationProvisionReportItem result = apiInstance.UserProvisioningReportGetReportForApplication(application, userId, expand);
                 Debug.WriteLine(result);
             }
@@ -373,7 +373,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Application Provisioning Report
+    // Get User's Application Provisioning Report
     ApiResponse<ApplicationProvisionReportItem> response = apiInstance.UserProvisioningReportGetReportForApplicationWithHttpInfo(application, userId, expand);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -423,9 +423,9 @@ catch (ApiException e)
 # **UserProvisioningReportGetRoles**
 > ProvisionReportItemList UserProvisioningReportGetRoles (string application, string userId)
 
-Get Application Roles Provisioning Report
+Get User's Application Roles Provisioning Report
 
-<p>Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp
@@ -455,7 +455,7 @@ namespace Example
 
             try
             {
-                // Get Application Roles Provisioning Report
+                // Get User's Application Roles Provisioning Report
                 ProvisionReportItemList result = apiInstance.UserProvisioningReportGetRoles(application, userId);
                 Debug.WriteLine(result);
             }
@@ -476,7 +476,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Application Roles Provisioning Report
+    // Get User's Application Roles Provisioning Report
     ApiResponse<ProvisionReportItemList> response = apiInstance.UserProvisioningReportGetRolesWithHttpInfo(application, userId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -525,9 +525,9 @@ catch (ApiException e)
 # **UserProvisioningReportGetScripts**
 > DatabaseProvisionReportItemList UserProvisioningReportGetScripts (string application, string userId)
 
-Get Scripts Provisioning Report
+Get User's Scripts Provisioning Report
 
-<p>Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp
@@ -557,7 +557,7 @@ namespace Example
 
             try
             {
-                // Get Scripts Provisioning Report
+                // Get User's Scripts Provisioning Report
                 DatabaseProvisionReportItemList result = apiInstance.UserProvisioningReportGetScripts(application, userId);
                 Debug.WriteLine(result);
             }
@@ -578,7 +578,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Scripts Provisioning Report
+    // Get User's Scripts Provisioning Report
     ApiResponse<DatabaseProvisionReportItemList> response = apiInstance.UserProvisioningReportGetScriptsWithHttpInfo(application, userId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

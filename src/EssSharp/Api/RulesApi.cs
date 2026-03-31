@@ -29,7 +29,7 @@ namespace EssSharp.Api
         /// Get Rules
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets rules file from file catalog path.&lt;/p&gt;
+        /// &lt;p&gt;Gets rule file from file catalog path.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
@@ -41,7 +41,7 @@ namespace EssSharp.Api
         /// Get Rules
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets rules file from file catalog path.&lt;/p&gt;
+        /// &lt;p&gt;Gets rule file from file catalog path.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
@@ -52,10 +52,10 @@ namespace EssSharp.Api
         /// Preview Rules Data
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
+        /// &lt;p&gt;Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>RulePreviewOutput</returns>
         RulePreviewOutput RulesGetPreviewData(RulePreviewInput body = default, int operationIndex = 0);
@@ -64,10 +64,10 @@ namespace EssSharp.Api
         /// Preview Rules Data
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
+        /// &lt;p&gt;Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of RulePreviewOutput</returns>
         ApiResponse<RulePreviewOutput> RulesGetPreviewDataWithHttpInfo(RulePreviewInput body = default, int operationIndex = 0);
@@ -100,12 +100,12 @@ namespace EssSharp.Api
         /// Create Rules
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Creates a rule file.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Optional file catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void RulesSave(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0);
@@ -114,62 +114,62 @@ namespace EssSharp.Api
         /// Create Rules
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Creates a rule file.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Optional file catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> RulesSaveWithHttpInfo(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0);
         /// <summary>
-        /// Verify Rules (Deprecated)
+        /// Verify Rule (Deprecated)
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use &lt;a href&#x3D;\&quot;./op-utils-rules-verifyrule-post.html\&quot;&gt;Verify Rule&lt;/a&gt; endpoint instead if possible.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void RulesVerify(Rules body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Verify Rules (Deprecated)
+        /// Verify Rule (Deprecated)
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use &lt;a href&#x3D;\&quot;./op-utils-rules-verifyrule-post.html\&quot;&gt;Verify Rule&lt;/a&gt; endpoint instead if possible.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> RulesVerifyWithHttpInfo(Rules body = default, int operationIndex = 0);
         /// <summary>
-        /// Verify Rules
+        /// Verify Rule
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Verifies a rule file, either regular or index-based.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void RulesVerifyRule(string application = default, string database = default, Rules body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Verify Rules
+        /// Verify Rule
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Verifies a rule file, either regular or index-based.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> RulesVerifyRuleWithHttpInfo(string application = default, string database = default, Rules body = default, int operationIndex = 0);
@@ -186,7 +186,7 @@ namespace EssSharp.Api
         /// Get Rules
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets rules file from file catalog path.&lt;/p&gt;
+        /// &lt;p&gt;Gets rule file from file catalog path.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
@@ -199,7 +199,7 @@ namespace EssSharp.Api
         /// Get Rules
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets rules file from file catalog path.&lt;/p&gt;
+        /// &lt;p&gt;Gets rule file from file catalog path.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
@@ -211,10 +211,10 @@ namespace EssSharp.Api
         /// Preview Rules Data
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
+        /// &lt;p&gt;Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RulePreviewOutput</returns>
@@ -224,10 +224,10 @@ namespace EssSharp.Api
         /// Preview Rules Data
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
+        /// &lt;p&gt;Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RulePreviewOutput)</returns>
@@ -263,12 +263,12 @@ namespace EssSharp.Api
         /// Create Rules
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Creates a rule file.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Optional file catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -278,66 +278,66 @@ namespace EssSharp.Api
         /// Create Rules
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Creates a rule file.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Optional file catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> RulesSaveWithHttpInfoAsync(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Verify Rules (Deprecated)
+        /// Verify Rule (Deprecated)
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use &lt;a href&#x3D;\&quot;./op-utils-rules-verifyrule-post.html\&quot;&gt;Verify Rule&lt;/a&gt; endpoint instead if possible.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task RulesVerifyAsync(Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Verify Rules (Deprecated)
+        /// Verify Rule (Deprecated)
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use &lt;a href&#x3D;\&quot;./op-utils-rules-verifyrule-post.html\&quot;&gt;Verify Rule&lt;/a&gt; endpoint instead if possible.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> RulesVerifyWithHttpInfoAsync(Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Verify Rules
+        /// Verify Rule
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Verifies a rule file, either regular or index-based.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task RulesVerifyRuleAsync(string application = default, string database = default, Rules body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Verify Rules
+        /// Verify Rule
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// &lt;p&gt;Verifies a rule file, either regular or index-based.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -463,7 +463,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Rules &lt;p&gt;Gets rules file from file catalog path.&lt;/p&gt;
+        /// Get Rules &lt;p&gt;Gets rule file from file catalog path.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
@@ -476,7 +476,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Rules &lt;p&gt;Gets rules file from file catalog path.&lt;/p&gt;
+        /// Get Rules &lt;p&gt;Gets rule file from file catalog path.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
@@ -554,7 +554,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Rules &lt;p&gt;Gets rules file from file catalog path.&lt;/p&gt;
+        /// Get Rules &lt;p&gt;Gets rule file from file catalog path.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
@@ -568,7 +568,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Rules &lt;p&gt;Gets rules file from file catalog path.&lt;/p&gt;
+        /// Get Rules &lt;p&gt;Gets rule file from file catalog path.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path.&lt;/p&gt; (optional)</param>
@@ -648,10 +648,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Preview Rules Data &lt;p&gt;Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
+        /// Preview Rules Data &lt;p&gt;Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>RulePreviewOutput</returns>
         public RulePreviewOutput RulesGetPreviewData(RulePreviewInput body = default, int operationIndex = 0)
@@ -661,10 +661,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Preview Rules Data &lt;p&gt;Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
+        /// Preview Rules Data &lt;p&gt;Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of RulePreviewOutput</returns>
         public EssSharp.Client.ApiResponse<RulePreviewOutput> RulesGetPreviewDataWithHttpInfo(RulePreviewInput body = default, int operationIndex = 0)
@@ -738,10 +738,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Preview Rules Data &lt;p&gt;Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
+        /// Preview Rules Data &lt;p&gt;Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RulePreviewOutput</returns>
@@ -752,10 +752,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Preview Rules Data &lt;p&gt;Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
+        /// Preview Rules Data &lt;p&gt;Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RulePreviewOutput)</returns>
@@ -1020,12 +1020,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Rules &lt;p&gt;Creates a rules file.&lt;/p&gt;
+        /// Create Rules &lt;p&gt;Creates a rule file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Optional file catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void RulesSave(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0)
@@ -1034,12 +1034,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Rules &lt;p&gt;Creates a rules file.&lt;/p&gt;
+        /// Create Rules &lt;p&gt;Creates a rule file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Optional file catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> RulesSaveWithHttpInfo(string path = default, bool? overwrite = default, Rules body = default, int operationIndex = 0)
@@ -1119,12 +1119,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Rules &lt;p&gt;Creates a rules file.&lt;/p&gt;
+        /// Create Rules &lt;p&gt;Creates a rule file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Optional file catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -1134,12 +1134,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Rules &lt;p&gt;Creates a rules file.&lt;/p&gt;
+        /// Create Rules &lt;p&gt;Creates a rule file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Optional file catalog path.&lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -1221,10 +1221,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules (Deprecated) &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rule (Deprecated) &lt;p&gt;Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use &lt;a href&#x3D;\&quot;./op-utils-rules-verifyrule-post.html\&quot;&gt;Verify Rule&lt;/a&gt; endpoint instead if possible.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void RulesVerify(Rules body = default, int operationIndex = 0)
@@ -1233,10 +1233,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules (Deprecated) &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rule (Deprecated) &lt;p&gt;Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use &lt;a href&#x3D;\&quot;./op-utils-rules-verifyrule-post.html\&quot;&gt;Verify Rule&lt;/a&gt; endpoint instead if possible.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> RulesVerifyWithHttpInfo(Rules body = default, int operationIndex = 0)
@@ -1310,10 +1310,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules (Deprecated) &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rule (Deprecated) &lt;p&gt;Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use &lt;a href&#x3D;\&quot;./op-utils-rules-verifyrule-post.html\&quot;&gt;Verify Rule&lt;/a&gt; endpoint instead if possible.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -1323,10 +1323,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules (Deprecated) &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rule (Deprecated) &lt;p&gt;Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use &lt;a href&#x3D;\&quot;./op-utils-rules-verifyrule-post.html\&quot;&gt;Verify Rule&lt;/a&gt; endpoint instead if possible.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -1402,12 +1402,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rule &lt;p&gt;Verifies a rule file, either regular or index-based.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void RulesVerifyRule(string application = default, string database = default, Rules body = default, int operationIndex = 0)
@@ -1416,12 +1416,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rule &lt;p&gt;Verifies a rule file, either regular or index-based.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> RulesVerifyRuleWithHttpInfo(string application = default, string database = default, Rules body = default, int operationIndex = 0)
@@ -1503,12 +1503,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rule &lt;p&gt;Verifies a rule file, either regular or index-based.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -1518,12 +1518,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Verify Rules &lt;p&gt;Verifies a rules file.&lt;/p&gt;
+        /// Verify Rule &lt;p&gt;Verifies a rule file, either regular or index-based.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="body">&lt;p&gt;Rules file details.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;Rule file details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>

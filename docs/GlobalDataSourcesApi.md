@@ -6,13 +6,13 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**GlobalDatasourcesCreateDatasource**](GlobalDatasourcesApi.md#globaldatasourcescreatedatasource) | **POST** /datasources | Create Global Datasource |
 | [**GlobalDatasourcesDeleteDatasource**](GlobalDatasourcesApi.md#globaldatasourcesdeletedatasource) | **DELETE** /datasources/{datasourceName} | Delete Global Datasource |
-| [**GlobalDatasourcesGetData**](GlobalDatasourcesApi.md#globaldatasourcesgetdata) | **GET** /datasources/query/data/{streamId} | Get Streamed Datasource Results by ID |
-| [**GlobalDatasourcesGetDataStream**](GlobalDatasourcesApi.md#globaldatasourcesgetdatastream) | **POST** /datasources/query/stream | Get Streamed Datasource Results |
-| [**GlobalDatasourcesGetDatasourceDetails**](GlobalDatasourcesApi.md#globaldatasourcesgetdatasourcedetails) | **GET** /datasources/{datasouceName} | Get Global Datasource |
-| [**GlobalDatasourcesGetDatasources**](GlobalDatasourcesApi.md#globaldatasourcesgetdatasources) | **GET** /datasources | Get Global Datasource |
-| [**GlobalDatasourcesGetDelimitedDataStream**](GlobalDatasourcesApi.md#globaldatasourcesgetdelimiteddatastream) | **POST** /datasources/customdelimited/query/stream | Get Streamed Datasource Results |
-| [**GlobalDatasourcesGetResults**](GlobalDatasourcesApi.md#globaldatasourcesgetresults) | **POST** /datasources/query | Stream Datasource Results |
-| [**GlobalDatasourcesUpdateDatasource**](GlobalDatasourcesApi.md#globaldatasourcesupdatedatasource) | **PUT** /datasources/{datasouceName} | Update Global Datasource |
+| [**GlobalDatasourcesGetData**](GlobalDatasourcesApi.md#globaldatasourcesgetdata) | **GET** /datasources/query/data/{streamId} | Get Streamed Global Datasource Results by ID |
+| [**GlobalDatasourcesGetDataStream**](GlobalDatasourcesApi.md#globaldatasourcesgetdatastream) | **POST** /datasources/query/stream | Get Streamed Global Datasource Results |
+| [**GlobalDatasourcesGetDatasourceDetails**](GlobalDatasourcesApi.md#globaldatasourcesgetdatasourcedetails) | **GET** /datasources/{datasourceName} | Get Global Datasource |
+| [**GlobalDatasourcesGetDatasources**](GlobalDatasourcesApi.md#globaldatasourcesgetdatasources) | **GET** /datasources | Get Global Datasources |
+| [**GlobalDatasourcesGetDelimitedDataStream**](GlobalDatasourcesApi.md#globaldatasourcesgetdelimiteddatastream) | **POST** /datasources/customdelimited/query/stream | Get Streamed Global Datasource Results |
+| [**GlobalDatasourcesGetResults**](GlobalDatasourcesApi.md#globaldatasourcesgetresults) | **POST** /datasources/query | Stream Global Datasource Results |
+| [**GlobalDatasourcesUpdateDatasource**](GlobalDatasourcesApi.md#globaldatasourcesupdatedatasource) | **PUT** /datasources/{datasourceName} | Update Global Datasource |
 
 <a id="globaldatasourcescreatedatasource"></a>
 # **GlobalDatasourcesCreateDatasource**
@@ -206,7 +206,7 @@ void (empty response body)
 # **GlobalDatasourcesGetData**
 > void GlobalDatasourcesGetData (string streamId)
 
-Get Streamed Datasource Results by ID
+Get Streamed Global Datasource Results by ID
 
 <p>Returns results from a global-level Datasource associated with the specified stream id.</p>
 
@@ -237,7 +237,7 @@ namespace Example
 
             try
             {
-                // Get Streamed Datasource Results by ID
+                // Get Streamed Global Datasource Results by ID
                 apiInstance.GlobalDatasourcesGetData(streamId);
             }
             catch (ApiException  e)
@@ -257,7 +257,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Streamed Datasource Results by ID
+    // Get Streamed Global Datasource Results by ID
     apiInstance.GlobalDatasourcesGetDataWithHttpInfo(streamId);
 }
 catch (ApiException e)
@@ -301,7 +301,7 @@ void (empty response body)
 # **GlobalDatasourcesGetDataStream**
 > void GlobalDatasourcesGetDataStream (bool? includeHeaders = null, bool? metaDataOnly = null, DatasourceQueryInfo body = null)
 
-Get Streamed Datasource Results
+Get Streamed Global Datasource Results
 
 <p>Returns results in stream from a global-level Datasource.</p>
 
@@ -334,7 +334,7 @@ namespace Example
 
             try
             {
-                // Get Streamed Datasource Results
+                // Get Streamed Global Datasource Results
                 apiInstance.GlobalDatasourcesGetDataStream(includeHeaders, metaDataOnly, body);
             }
             catch (ApiException  e)
@@ -354,7 +354,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Streamed Datasource Results
+    // Get Streamed Global Datasource Results
     apiInstance.GlobalDatasourcesGetDataStreamWithHttpInfo(includeHeaders, metaDataOnly, body);
 }
 catch (ApiException e)
@@ -398,7 +398,7 @@ void (empty response body)
 
 <a id="globaldatasourcesgetdatasourcedetails"></a>
 # **GlobalDatasourcesGetDatasourceDetails**
-> Datasource GlobalDatasourcesGetDatasourceDetails (string datasouceName)
+> Datasource GlobalDatasourcesGetDatasourceDetails (string datasourceName)
 
 Get Global Datasource
 
@@ -427,12 +427,12 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new GlobalDatasourcesApi(config);
-            var datasouceName = "datasouceName_example";  // string | <p>Datasource name.</p>
+            var datasourceName = "datasourceName_example";  // string | <p>Datasource name.</p>
 
             try
             {
                 // Get Global Datasource
-                Datasource result = apiInstance.GlobalDatasourcesGetDatasourceDetails(datasouceName);
+                Datasource result = apiInstance.GlobalDatasourcesGetDatasourceDetails(datasourceName);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -453,7 +453,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Global Datasource
-    ApiResponse<Datasource> response = apiInstance.GlobalDatasourcesGetDatasourceDetailsWithHttpInfo(datasouceName);
+    ApiResponse<Datasource> response = apiInstance.GlobalDatasourcesGetDatasourceDetailsWithHttpInfo(datasourceName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -470,7 +470,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **datasouceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; |  |
+| **datasourceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -498,7 +498,7 @@ catch (ApiException e)
 # **GlobalDatasourcesGetDatasources**
 > DatasourcesList GlobalDatasourcesGetDatasources (int? offset = null, int? limit = null)
 
-Get Global Datasource
+Get Global Datasources
 
 <p>Returns a list of global-level Datasources, including details such as name, description, connection, and type.</p>
 
@@ -530,7 +530,7 @@ namespace Example
 
             try
             {
-                // Get Global Datasource
+                // Get Global Datasources
                 DatasourcesList result = apiInstance.GlobalDatasourcesGetDatasources(offset, limit);
                 Debug.WriteLine(result);
             }
@@ -551,7 +551,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Global Datasource
+    // Get Global Datasources
     ApiResponse<DatasourcesList> response = apiInstance.GlobalDatasourcesGetDatasourcesWithHttpInfo(offset, limit);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -598,7 +598,7 @@ catch (ApiException e)
 # **GlobalDatasourcesGetDelimitedDataStream**
 > void GlobalDatasourcesGetDelimitedDataStream (bool? includeHeaders = null, bool? metaDataOnly = null, DatasourceQueryInfo body = null)
 
-Get Streamed Datasource Results
+Get Streamed Global Datasource Results
 
 <p>Returns results in stream from a global-level Datasource.</p>
 
@@ -631,7 +631,7 @@ namespace Example
 
             try
             {
-                // Get Streamed Datasource Results
+                // Get Streamed Global Datasource Results
                 apiInstance.GlobalDatasourcesGetDelimitedDataStream(includeHeaders, metaDataOnly, body);
             }
             catch (ApiException  e)
@@ -651,7 +651,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Streamed Datasource Results
+    // Get Streamed Global Datasource Results
     apiInstance.GlobalDatasourcesGetDelimitedDataStreamWithHttpInfo(includeHeaders, metaDataOnly, body);
 }
 catch (ApiException e)
@@ -697,7 +697,7 @@ void (empty response body)
 # **GlobalDatasourcesGetResults**
 > ResultBean GlobalDatasourcesGetResults (int? pageSize = null, DatasourceQueryInfo body = null)
 
-Stream Datasource Results
+Stream Global Datasource Results
 
 <p>Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.</p>
 
@@ -729,7 +729,7 @@ namespace Example
 
             try
             {
-                // Stream Datasource Results
+                // Stream Global Datasource Results
                 ResultBean result = apiInstance.GlobalDatasourcesGetResults(pageSize, body);
                 Debug.WriteLine(result);
             }
@@ -750,7 +750,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Stream Datasource Results
+    // Stream Global Datasource Results
     ApiResponse<ResultBean> response = apiInstance.GlobalDatasourcesGetResultsWithHttpInfo(pageSize, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -796,7 +796,7 @@ catch (ApiException e)
 
 <a id="globaldatasourcesupdatedatasource"></a>
 # **GlobalDatasourcesUpdateDatasource**
-> Datasource GlobalDatasourcesUpdateDatasource (string datasouceName, Datasource body = null)
+> Datasource GlobalDatasourcesUpdateDatasource (string datasourceName, Datasource body = null)
 
 Update Global Datasource
 
@@ -825,13 +825,13 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new GlobalDatasourcesApi(config);
-            var datasouceName = "datasouceName_example";  // string | <p>Datasource name.</p>
+            var datasourceName = "datasourceName_example";  // string | <p>Datasource name.</p>
             var body = new Datasource(); // Datasource | <p>Updated Datasource details.</p> (optional) 
 
             try
             {
                 // Update Global Datasource
-                Datasource result = apiInstance.GlobalDatasourcesUpdateDatasource(datasouceName, body);
+                Datasource result = apiInstance.GlobalDatasourcesUpdateDatasource(datasourceName, body);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -852,7 +852,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Update Global Datasource
-    ApiResponse<Datasource> response = apiInstance.GlobalDatasourcesUpdateDatasourceWithHttpInfo(datasouceName, body);
+    ApiResponse<Datasource> response = apiInstance.GlobalDatasourcesUpdateDatasourceWithHttpInfo(datasourceName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -869,7 +869,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **datasouceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; |  |
+| **datasourceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; |  |
 | **body** | [**Datasource**](Datasource.md) | &lt;p&gt;Updated Datasource details.&lt;/p&gt; | [optional]  |
 
 ### Return type

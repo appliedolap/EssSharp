@@ -26,7 +26,7 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Add Essbase Script Permissions
+        /// Add Calc Script Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
@@ -41,7 +41,7 @@ namespace EssSharp.Api
         UserGroupProvisionInfo ScriptsAddScriptPermission(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0);
 
         /// <summary>
-        /// Add Essbase Script Permissions
+        /// Add Calc Script Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
@@ -55,7 +55,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of UserGroupProvisionInfo</returns>
         ApiResponse<UserGroupProvisionInfo> ScriptsAddScriptPermissionWithHttpInfo(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0);
         /// <summary>
-        /// Copy Essbase Script
+        /// Copy Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -69,7 +69,7 @@ namespace EssSharp.Api
         Script ScriptsCopyScript(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0);
 
         /// <summary>
-        /// Copy Essbase Script
+        /// Copy Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -111,31 +111,31 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Script</returns>
         ApiResponse<Script> ScriptsCreateScriptWithHttpInfo(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0);
         /// <summary>
-        /// Delete Essbase Script
+        /// Delete Calc or MDX Script
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes the specified script in the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Deletes the specified calculation or MDX script in the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="scriptName">&lt;p&gt;Calc or MDX script name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void ScriptsDeleteScript(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
 
         /// <summary>
-        /// Delete Essbase Script
+        /// Delete Calc or MDX Script
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes the specified script in the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Deletes the specified calculation or MDX script in the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="scriptName">&lt;p&gt;Calc or MDX script name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ScriptsDeleteScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
@@ -198,10 +198,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of List&lt;RTSVList&gt;</returns>
         ApiResponse<List<RTSVList>> ScriptsGetRTSVsForScriptsWithHttpInfo(string applicationName, string databaseName, string scriptName, int operationIndex = 0);
         /// <summary>
-        /// Get Essbase Script
+        /// Get Calc or MDX Script
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the named script from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns the named calculation or MDX script from the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -213,10 +213,10 @@ namespace EssSharp.Api
         Script ScriptsGetScript(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Essbase Script
+        /// Get Calc or MDX Script
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the named script from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns the named calculation or MDX script from the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -236,7 +236,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="file">&lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ScriptContent</returns>
         ScriptContent ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
@@ -251,7 +251,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="file">&lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ScriptContent</returns>
         ApiResponse<ScriptContent> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0);
@@ -283,36 +283,38 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of List&lt;UserGroupProvisionInfoList&gt;</returns>
         ApiResponse<List<UserGroupProvisionInfoList>> ScriptsGetScriptPermissionsWithHttpInfo(string applicationName, string databaseName, string scriptName, int operationIndex = 0);
         /// <summary>
-        /// List Essbase Scripts
+        /// List Calc or MDX Scripts
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the scripts from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns calculation or MDX scripts from the specified Essbase application and cube.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ScriptList</returns>
-        ScriptList ScriptsListScripts(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0);
+        ScriptList ScriptsListScripts(string applicationName, string databaseName, string file = default, string orderBy = default, string keyword = default, int operationIndex = 0);
 
         /// <summary>
-        /// List Essbase Scripts
+        /// List Calc or MDX Scripts
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the scripts from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns calculation or MDX scripts from the specified Essbase application and cube.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ScriptList</returns>
-        ApiResponse<ScriptList> ScriptsListScriptsWithHttpInfo(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0);
+        ApiResponse<ScriptList> ScriptsListScriptsWithHttpInfo(string applicationName, string databaseName, string file = default, string orderBy = default, string keyword = default, int operationIndex = 0);
         /// <summary>
-        /// Remove Essbase Script Permissions
+        /// Remove Calc Script Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
@@ -328,7 +330,7 @@ namespace EssSharp.Api
         void ScriptsRemoveScriptPermission(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0);
 
         /// <summary>
-        /// Remove Essbase Script Permissions
+        /// Remove Calc Script Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
@@ -343,7 +345,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ScriptsRemoveScriptPermissionWithHttpInfo(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0);
         /// <summary>
-        /// Rename Essbase Script
+        /// Rename Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -357,7 +359,7 @@ namespace EssSharp.Api
         Script ScriptsRenameScript(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0);
 
         /// <summary>
-        /// Rename Essbase Script
+        /// Rename Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -370,7 +372,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Script</returns>
         ApiResponse<Script> ScriptsRenameScriptWithHttpInfo(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0);
         /// <summary>
-        /// Validate Essbase Script
+        /// Validate Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -385,7 +387,7 @@ namespace EssSharp.Api
         void ScriptsValidateScript(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0);
 
         /// <summary>
-        /// Validate Essbase Script
+        /// Validate Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -408,7 +410,7 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Add Essbase Script Permissions
+        /// Add Calc Script Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
@@ -424,7 +426,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<UserGroupProvisionInfo> ScriptsAddScriptPermissionAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Add Essbase Script Permissions
+        /// Add Calc Script Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
@@ -439,7 +441,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
         System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ScriptsAddScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Copy Essbase Script
+        /// Copy Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -454,7 +456,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Script> ScriptsCopyScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Copy Essbase Script
+        /// Copy Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -499,32 +501,32 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Script)</returns>
         System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsCreateScriptWithHttpInfoAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Delete Essbase Script
+        /// Delete Calc or MDX Script
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes the specified script in the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Deletes the specified calculation or MDX script in the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="scriptName">&lt;p&gt;Calc or MDX script name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task ScriptsDeleteScriptAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Delete Essbase Script
+        /// Delete Calc or MDX Script
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes the specified script in the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Deletes the specified calculation or MDX script in the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="scriptName">&lt;p&gt;Calc or MDX script name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -592,10 +594,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (List&lt;RTSVList&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<RTSVList>>> ScriptsGetRTSVsForScriptsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Essbase Script
+        /// Get Calc or MDX Script
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the named script from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns the named calculation or MDX script from the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -608,10 +610,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Script> ScriptsGetScriptAsync(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Essbase Script
+        /// Get Calc or MDX Script
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the named script from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns the named calculation or MDX script from the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -632,7 +634,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="file">&lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptContent</returns>
@@ -648,7 +650,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="file">&lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptContent)</returns>
@@ -683,38 +685,40 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (List&lt;UserGroupProvisionInfoList&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<UserGroupProvisionInfoList>>> ScriptsGetScriptPermissionsWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// List Essbase Scripts
+        /// List Calc or MDX Scripts
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the scripts from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns calculation or MDX scripts from the specified Essbase application and cube.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptList</returns>
-        System.Threading.Tasks.Task<ScriptList> ScriptsListScriptsAsync(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ScriptList> ScriptsListScriptsAsync(string applicationName, string databaseName, string file = default, string orderBy = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// List Essbase Scripts
+        /// List Calc or MDX Scripts
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns all the scripts from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns calculation or MDX scripts from the specified Essbase application and cube.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ScriptList>> ScriptsListScriptsWithHttpInfoAsync(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<ScriptList>> ScriptsListScriptsWithHttpInfoAsync(string applicationName, string databaseName, string file = default, string orderBy = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Remove Essbase Script Permissions
+        /// Remove Calc Script Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
@@ -731,7 +735,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ScriptsRemoveScriptPermissionAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Remove Essbase Script Permissions
+        /// Remove Calc Script Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
@@ -747,7 +751,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ScriptsRemoveScriptPermissionWithHttpInfoAsync(string applicationName, string databaseName, string scriptName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Rename Essbase Script
+        /// Rename Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -762,7 +766,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Script> ScriptsRenameScriptAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Rename Essbase Script
+        /// Rename Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -776,7 +780,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Script)</returns>
         System.Threading.Tasks.Task<ApiResponse<Script>> ScriptsRenameScriptWithHttpInfoAsync(string applicationName, string databaseName, ScriptCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Validate Essbase Script
+        /// Validate Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -792,7 +796,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ScriptsValidateScriptAsync(string applicationName, string databaseName, Script body, string file = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Validate Essbase Script
+        /// Validate Calc Script
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
@@ -927,7 +931,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Add Essbase Script Permissions &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Add Calc Script Permissions &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -943,7 +947,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Add Essbase Script Permissions &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Add Calc Script Permissions &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1050,7 +1054,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Add Essbase Script Permissions &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Add Calc Script Permissions &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1067,7 +1071,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Add Essbase Script Permissions &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Add Calc Script Permissions &lt;p&gt;Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1176,7 +1180,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy Essbase Script &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Copy Calc Script &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1191,7 +1195,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy Essbase Script &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Copy Calc Script &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1290,7 +1294,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy Essbase Script &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Copy Calc Script &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1306,7 +1310,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy Essbase Script &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Copy Calc Script &lt;p&gt;Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1646,13 +1650,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Essbase Script &lt;p&gt;Deletes the specified script in the specified application and database.&lt;/p&gt;
+        /// Delete Calc or MDX Script &lt;p&gt;Deletes the specified calculation or MDX script in the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="scriptName">&lt;p&gt;Calc or MDX script name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void ScriptsDeleteScript(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
@@ -1661,13 +1665,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Essbase Script &lt;p&gt;Deletes the specified script in the specified application and database.&lt;/p&gt;
+        /// Delete Calc or MDX Script &lt;p&gt;Deletes the specified calculation or MDX script in the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="scriptName">&lt;p&gt;Calc or MDX script name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> ScriptsDeleteScriptWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
@@ -1761,13 +1765,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Essbase Script &lt;p&gt;Deletes the specified script in the specified application and database.&lt;/p&gt;
+        /// Delete Calc or MDX Script &lt;p&gt;Deletes the specified calculation or MDX script in the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="scriptName">&lt;p&gt;Calc or MDX script name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -1777,13 +1781,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Essbase Script &lt;p&gt;Deletes the specified script in the specified application and database.&lt;/p&gt;
+        /// Delete Calc or MDX Script &lt;p&gt;Deletes the specified calculation or MDX script in the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="scriptName">&lt;p&gt;Calc or MDX script name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -2363,7 +2367,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Essbase Script &lt;p&gt;Returns the named script from the specified application and database.&lt;/p&gt;
+        /// Get Calc or MDX Script &lt;p&gt;Returns the named calculation or MDX script from the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2379,7 +2383,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Essbase Script &lt;p&gt;Returns the named script from the specified application and database.&lt;/p&gt;
+        /// Get Calc or MDX Script &lt;p&gt;Returns the named calculation or MDX script from the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2481,7 +2485,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Essbase Script &lt;p&gt;Returns the named script from the specified application and database.&lt;/p&gt;
+        /// Get Calc or MDX Script &lt;p&gt;Returns the named calculation or MDX script from the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2498,7 +2502,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Essbase Script &lt;p&gt;Returns the named script from the specified application and database.&lt;/p&gt;
+        /// Get Calc or MDX Script &lt;p&gt;Returns the named calculation or MDX script from the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2608,7 +2612,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="file">&lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ScriptContent</returns>
         public ScriptContent ScriptsGetScriptContent(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
@@ -2624,7 +2628,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="file">&lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ScriptContent</returns>
         public EssSharp.Client.ApiResponse<ScriptContent> ScriptsGetScriptContentWithHttpInfo(string applicationName, string databaseName, string scriptName, string file = default, int operationIndex = 0)
@@ -2726,7 +2730,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="file">&lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptContent</returns>
@@ -2743,7 +2747,7 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="scriptName">&lt;p&gt;Script name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="file">&lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptContent)</returns>
@@ -3068,32 +3072,34 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Essbase Scripts &lt;p&gt;Returns all the scripts from the specified application and database.&lt;/p&gt;
+        /// List Calc or MDX Scripts &lt;p&gt;Returns calculation or MDX scripts from the specified Essbase application and cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ScriptList</returns>
-        public ScriptList ScriptsListScripts(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0)
+        public ScriptList ScriptsListScripts(string applicationName, string databaseName, string file = default, string orderBy = default, string keyword = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<ScriptList> localVarResponse = ScriptsListScriptsWithHttpInfo(applicationName, databaseName, file, keyword);
+            EssSharp.Client.ApiResponse<ScriptList> localVarResponse = ScriptsListScriptsWithHttpInfo(applicationName, databaseName, file, orderBy, keyword);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List Essbase Scripts &lt;p&gt;Returns all the scripts from the specified application and database.&lt;/p&gt;
+        /// List Calc or MDX Scripts &lt;p&gt;Returns calculation or MDX scripts from the specified Essbase application and cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ScriptList</returns>
-        public EssSharp.Client.ApiResponse<ScriptList> ScriptsListScriptsWithHttpInfo(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ScriptList> ScriptsListScriptsWithHttpInfo(string applicationName, string databaseName, string file = default, string orderBy = default, string keyword = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3136,6 +3142,10 @@ namespace EssSharp.Api
             if (file != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "file", file));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
             if (keyword != null)
             {
@@ -3183,34 +3193,36 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Essbase Scripts &lt;p&gt;Returns all the scripts from the specified application and database.&lt;/p&gt;
+        /// List Calc or MDX Scripts &lt;p&gt;Returns calculation or MDX scripts from the specified Essbase application and cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ScriptList</returns>
-        public async System.Threading.Tasks.Task<ScriptList> ScriptsListScriptsAsync(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ScriptList> ScriptsListScriptsAsync(string applicationName, string databaseName, string file = default, string orderBy = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<ScriptList> localVarResponse = await ScriptsListScriptsWithHttpInfoAsync(applicationName, databaseName, file, keyword, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<ScriptList> localVarResponse = await ScriptsListScriptsWithHttpInfoAsync(applicationName, databaseName, file, orderBy, keyword, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List Essbase Scripts &lt;p&gt;Returns all the scripts from the specified application and database.&lt;/p&gt;
+        /// List Calc or MDX Scripts &lt;p&gt;Returns calculation or MDX scripts from the specified Essbase application and cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="file">&lt;p&gt;Type of script file.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="file">&lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; (optional, default to &quot;calc&quot;)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ScriptList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptList>> ScriptsListScriptsWithHttpInfoAsync(string applicationName, string databaseName, string file = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ScriptList>> ScriptsListScriptsWithHttpInfoAsync(string applicationName, string databaseName, string file = default, string orderBy = default, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -3253,6 +3265,10 @@ namespace EssSharp.Api
             if (file != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "file", file));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
             if (keyword != null)
             {
@@ -3301,7 +3317,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Remove Essbase Script Permissions &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Remove Calc Script Permissions &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3317,7 +3333,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Remove Essbase Script Permissions &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Remove Calc Script Permissions &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3422,7 +3438,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Remove Essbase Script Permissions &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Remove Calc Script Permissions &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3439,7 +3455,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Remove Essbase Script Permissions &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Remove Calc Script Permissions &lt;p&gt;Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3546,7 +3562,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Rename Essbase Script &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Rename Calc Script &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3561,7 +3577,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Rename Essbase Script &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Rename Calc Script &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3660,7 +3676,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Rename Essbase Script &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Rename Calc Script &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3676,7 +3692,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Rename Essbase Script &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Rename Calc Script &lt;p&gt;Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3777,7 +3793,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Validate Essbase Script &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Validate Calc Script &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3792,7 +3808,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Validate Essbase Script &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Validate Calc Script &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3894,7 +3910,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Validate Essbase Script &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Validate Calc Script &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3910,7 +3926,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Validate Essbase Script &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
+        /// Validate Calc Script &lt;p&gt;Validates the specified script. Applicable only for calculation scripts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

@@ -4,12 +4,12 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**ApplicationAppSupportedEncryptionMethods**](ApplicationsApi.md#applicationappsupportedencryptionmethods) | **GET** /applications/{applicationName}/encryptionconfig | Application Encryption supported methods |
-| [**ApplicationDecrypt**](ApplicationsApi.md#applicationdecrypt) | **POST** /applications/{applicationName}/decrypt | Application Encryption |
-| [**ApplicationEncrypt**](ApplicationsApi.md#applicationencrypt) | **POST** /applications/{applicationName}/encrypt | Application Encryption |
+| [**ApplicationAppSupportedEncryptionMethods**](ApplicationsApi.md#applicationappsupportedencryptionmethods) | **GET** /applications/{applicationName}/encryptionconfig | Get Encryption Info |
+| [**ApplicationDecrypt**](ApplicationsApi.md#applicationdecrypt) | **POST** /applications/{applicationName}/decrypt | Decrypt Application |
+| [**ApplicationEncrypt**](ApplicationsApi.md#applicationencrypt) | **POST** /applications/{applicationName}/encrypt | Encrypt Application |
 | [**ApplicationsCopyApplication**](ApplicationsApi.md#applicationscopyapplication) | **POST** /applications/actions/copy | Copy Application |
 | [**ApplicationsCopyDatabase**](ApplicationsApi.md#applicationscopydatabase) | **POST** /applications/{applicationName}/databases/actions/copy | Copy Database |
-| [**ApplicationsCreateApplications**](ApplicationsApi.md#applicationscreateapplications) | **POST** /applications | Create Application |
+| [**ApplicationsCreateApplications**](ApplicationsApi.md#applicationscreateapplications) | **POST** /applications | Create Application and Database |
 | [**ApplicationsCreateShadowApplication**](ApplicationsApi.md#applicationscreateshadowapplication) | **POST** /applications/actions/shadowCopy | Create Shadow Application |
 | [**ApplicationsDeleteApplication**](ApplicationsApi.md#applicationsdeleteapplication) | **DELETE** /applications/{applicationName} | Delete Application |
 | [**ApplicationsDeleteDatabase**](ApplicationsApi.md#applicationsdeletedatabase) | **DELETE** /applications/{applicationName}/databases/{databaseName} | Delete Database |
@@ -26,7 +26,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationsGetCubes**](ApplicationsApi.md#applicationsgetcubes) | **GET** /applications/{applicationName}/databases | List Databases |
 | [**ApplicationsGetSupportedFederatedTypes**](ApplicationsApi.md#applicationsgetsupportedfederatedtypes) | **GET** /applications/partitions/supportedfederatedtypes | Get Supported Partition Types |
 | [**ApplicationsPerformDbOperation**](ApplicationsApi.md#applicationsperformdboperation) | **PUT** /applications/{applicationName}/databases/{databaseName} | Start or Stop Database |
-| [**ApplicationsPerformOperation**](ApplicationsApi.md#applicationsperformoperation) | **PUT** /applications/{applicationName} | Start, Stop Application |
+| [**ApplicationsPerformOperation**](ApplicationsApi.md#applicationsperformoperation) | **PUT** /applications/{applicationName} | Start or Stop Application |
 | [**ApplicationsPromoteShadowApplication**](ApplicationsApi.md#applicationspromoteshadowapplication) | **POST** /applications/actions/shadowPromote | Promote Shadow Application |
 | [**ApplicationsRenameApplication**](ApplicationsApi.md#applicationsrenameapplication) | **POST** /applications/actions/rename | Rename Application |
 | [**ApplicationsRenameDatabase**](ApplicationsApi.md#applicationsrenamedatabase) | **POST** /applications/{applicationName}/databases/actions/rename | Rename Database |
@@ -41,9 +41,9 @@ All URIs are relative to */essbase/rest/v1*
 # **ApplicationAppSupportedEncryptionMethods**
 > EncryptionConfig ApplicationAppSupportedEncryptionMethods (string applicationName)
 
-Application Encryption supported methods
+Get Encryption Info
 
-<p>Enable encryption on application</p>
+<p>List the types of encryption supported by Essbase and available for the  application.</p><p><b>EncryptionMode</b></p><p>The encryption modes supported in Oracle Essbase.</p><p>0 - No encryption.</p><p>1 - N/A. Use Oracle OCI Vault instead.</p><p>2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.</p><p><b>AvailableTypes</b></p><p>The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.</p><p><b>See Also</b></p><ul><li><a href=\"./op-applications-applicationname-encrypt-post.html\">Encrypt Application</a></li><li><a href=\"./op-applications-applicationname-decrypt-post.html\">Decrypt Application</a></li></ul>
 
 ### Example
 ```csharp
@@ -72,7 +72,7 @@ namespace Example
 
             try
             {
-                // Application Encryption supported methods
+                // Get Encryption Info
                 EncryptionConfig result = apiInstance.ApplicationAppSupportedEncryptionMethods(applicationName);
                 Debug.WriteLine(result);
             }
@@ -93,7 +93,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Application Encryption supported methods
+    // Get Encryption Info
     ApiResponse<EncryptionConfig> response = apiInstance.ApplicationAppSupportedEncryptionMethodsWithHttpInfo(applicationName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -130,7 +130,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | successful operation |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Returned supported encryption types successfully.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -138,9 +138,9 @@ catch (ApiException e)
 # **ApplicationDecrypt**
 > void ApplicationDecrypt (string applicationName)
 
-Application Encryption
+Decrypt Application
 
-<p>Enable encryption on application</p>
+<p>Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.</p><p><b>See Also</b></p><ul><li><a href=\"./op-applications-applicationname-encryptionconfig-get.html\">Get Encryption Info</a></li><li><a href=\"./op-applications-applicationname-encrypt-post.html\">Encrypt Application</a></li></ul>
 
 ### Example
 ```csharp
@@ -169,7 +169,7 @@ namespace Example
 
             try
             {
-                // Application Encryption
+                // Decrypt Application
                 apiInstance.ApplicationDecrypt(applicationName);
             }
             catch (ApiException  e)
@@ -189,7 +189,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Application Encryption
+    // Decrypt Application
     apiInstance.ApplicationDecryptWithHttpInfo(applicationName);
 }
 catch (ApiException e)
@@ -223,10 +223,10 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;SUCCESS&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Encryption applied on the application.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
-| **415** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
-| **500** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to apply encryption on the application.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;SUCCESS&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Encryption removed on the application.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to remove encryption on the application.&lt;/p&gt; |  -  |
+| **415** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to remove encryption on the application.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;&lt;strong&gt;FAILURE&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to remove encryption on the application.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -234,9 +234,9 @@ void (empty response body)
 # **ApplicationEncrypt**
 > void ApplicationEncrypt (string applicationName, AppEncryption body)
 
-Application Encryption
+Encrypt Application
 
-<p>Enable encryption on application</p>
+<p>To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.</p><p>OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.</p><p>For <b>type</b>, enter <code>OCID</code>. For <b>vaultId</b>, enter the OCID of the Vault. For <b>masterKeyId</b>, enter the OCID of the Master Encryption Key.</p><p><b>See Also</b></p><ul><li><a href=\"./op-applications-applicationname-encryptionconfig-get.html\">Get Encryption Info</a></li><li><a href=\"./op-applications-applicationname-decrypt-post.html\">Decrypt Application</a></li></ul>
 
 ### Example
 ```csharp
@@ -266,7 +266,7 @@ namespace Example
 
             try
             {
-                // Application Encryption
+                // Encrypt Application
                 apiInstance.ApplicationEncrypt(applicationName, body);
             }
             catch (ApiException  e)
@@ -286,7 +286,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Application Encryption
+    // Encrypt Application
     apiInstance.ApplicationEncryptWithHttpInfo(applicationName, body);
 }
 catch (ApiException e)
@@ -429,7 +429,7 @@ void (empty response body)
 
 Copy Database
 
-<p>Copies a database. You must provide the source and destination application and database names.</p>
+<p>Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.</p>
 
 ### Example
 ```csharp
@@ -524,9 +524,9 @@ void (empty response body)
 # **ApplicationsCreateApplications**
 > void ApplicationsCreateApplications (CreateApplication body)
 
-Create Application
+Create Application and Database
 
-<p>Creates an application with the specified details.</p>
+<p>Creates an application and database (cube) with the specified details.</p>
 
 ### Example
 ```csharp
@@ -555,7 +555,7 @@ namespace Example
 
             try
             {
-                // Create Application
+                // Create Application and Database
                 apiInstance.ApplicationsCreateApplications(body);
             }
             catch (ApiException  e)
@@ -575,7 +575,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create Application
+    // Create Application and Database
     apiInstance.ApplicationsCreateApplicationsWithHttpInfo(body);
 }
 catch (ApiException e)
@@ -621,7 +621,7 @@ void (empty response body)
 
 Create Shadow Application
 
-<p>Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.</p> <p>A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.</p> <p>Permission required: power user.</p> <p>Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.</p> <p>Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.</p> <p>Note that a shadow application can be made as hidden copy of the primary application.</p> <p>This means if you invoke <a href='./op-applications-get.html'>List Applications</a>, you will not see the shadow application in that list.</p> <p>The parameter <i>waitForOngoingUpdatesInSecs</i> allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.</p> <p>For example, if there is a data load in progress, the cloning process fails.</p> <p>If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.</p> <p>If the data load doesn't complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.</p><p><b>See Also</b></p><ul><li><a href='./op-applications-actions-name-appvisiblity-get.html'>List Application Names</a></li><li><a href='./op-applications-actions-shadowpromote-post.html'>Promote Shadow Application</a></li><li><a href='./op-applications-actions-shadowdelete-shadowappname-delete.html'>Delete Shadow Application</a></li></ul>
+<p>Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.</p> <p>A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.</p> <p>Permission required: power user.</p> <p>Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.</p> <p>Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.</p> <p>Note that a shadow application can be made as hidden copy of the primary application.</p> <p>This means if you invoke <a href=\"./op-applications-get.html\">List Applications</a>, you will not see the shadow application in that list.</p> <p>The parameter <i>waitForOngoingUpdatesInSecs</i> allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.</p> <p>For example, if there is a data load in progress, the cloning process fails.</p> <p>If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.</p> <p>If the data load doesn't complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.</p><p><b>See Also</b></p><ul><li><a href=\"./op-applications-actions-name-appvisiblity-get.html\">List Application Names</a></li><li><a href=\"./op-applications-actions-shadowpromote-post.html\">Promote Shadow Application</a></li><li><a href=\"./op-applications-actions-shadowdelete-shadowappname-delete.html\">Delete Shadow Application</a></li></ul>
 
 ### Example
 ```csharp
@@ -909,7 +909,7 @@ void (empty response body)
 
 Delete Shadow Application
 
-<p>Forcefully deletes the specified shadow application.</p> <p>Although shadow applications can also be deleted using the regular <a href='./op-applications-applicationname-delete.html'>Delete Application</a>, if the shadow application is corrupted or has any locks, then it the regular delete application fails.</p> <p>Therefore, this API guarantees a forceful deletion of the shadow application.</p> <p>This API is similar to the MaxL statement <b>drop application <i>APP-NAME</i> cascade force</b></p>
+<p>Forcefully deletes the specified shadow application.</p> <p>Although shadow applications can also be deleted using the regular <a href=\"./op-applications-applicationname-delete.html\">Delete Application</a>, if the shadow application is corrupted or has any locks, then it the regular delete application fails.</p> <p>Therefore, this API guarantees a forceful deletion of the shadow application.</p> <p>This API is similar to the MaxL statement <b>drop application <i>APP-NAME</i> cascade force</b></p>
 
 ### Example
 ```csharp
@@ -1105,7 +1105,7 @@ void (empty response body)
 
 List Active Aliases
 
-<p>Returns alias tables associated with the specified application and database.</p>
+<p>Returns the currently active alias table associated with the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -1597,7 +1597,7 @@ void (empty response body)
 
 <a id="applicationsgetapplications"></a>
 # **ApplicationsGetApplications**
-> ApplicationList ApplicationsGetApplications (string filter = null, int? offset = null, int? limit = null, string connectionName = null, string applicationNameForConnection = null, string fields = null)
+> ApplicationList ApplicationsGetApplications (string filter = null, int? offset = null, int? limit = null, string connectionName = null, string applicationNameForConnection = null, string fields = null, string orderBy = null)
 
 List Applications
 
@@ -1632,11 +1632,12 @@ namespace Example
             var connectionName = "connectionName_example";  // string | <p>Connection name.</p> (optional) 
             var applicationNameForConnection = "applicationNameForConnection_example";  // string | <p>Application name for connection.</p> (optional) 
             var fields = "fields_example";  // string | <p>Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.</p> (optional) 
+            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
 
             try
             {
                 // List Applications
-                ApplicationList result = apiInstance.ApplicationsGetApplications(filter, offset, limit, connectionName, applicationNameForConnection, fields);
+                ApplicationList result = apiInstance.ApplicationsGetApplications(filter, offset, limit, connectionName, applicationNameForConnection, fields, orderBy);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -1657,7 +1658,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List Applications
-    ApiResponse<ApplicationList> response = apiInstance.ApplicationsGetApplicationsWithHttpInfo(filter, offset, limit, connectionName, applicationNameForConnection, fields);
+    ApiResponse<ApplicationList> response = apiInstance.ApplicationsGetApplicationsWithHttpInfo(filter, offset, limit, connectionName, applicationNameForConnection, fields, orderBy);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1680,6 +1681,7 @@ catch (ApiException e)
 | **connectionName** | **string** | &lt;p&gt;Connection name.&lt;/p&gt; | [optional]  |
 | **applicationNameForConnection** | **string** | &lt;p&gt;Application name for connection.&lt;/p&gt; | [optional]  |
 | **fields** | **string** | &lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -1900,7 +1902,7 @@ catch (ApiException e)
 
 <a id="applicationsgetcubes"></a>
 # **ApplicationsGetCubes**
-> CubeList ApplicationsGetCubes (string applicationName, string connectionName = null, string applicationNameForConnection = null)
+> CubeList ApplicationsGetCubes (string applicationName, string connectionName = null, string orderBy = null, string applicationNameForConnection = null)
 
 List Databases
 
@@ -1931,12 +1933,13 @@ namespace Example
             var apiInstance = new ApplicationsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var connectionName = "connectionName_example";  // string | <p>Connection name.</p> (optional) 
+            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
             var applicationNameForConnection = "applicationNameForConnection_example";  // string | <p>Application name from which to list databases.</p> (optional) 
 
             try
             {
                 // List Databases
-                CubeList result = apiInstance.ApplicationsGetCubes(applicationName, connectionName, applicationNameForConnection);
+                CubeList result = apiInstance.ApplicationsGetCubes(applicationName, connectionName, orderBy, applicationNameForConnection);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -1957,7 +1960,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List Databases
-    ApiResponse<CubeList> response = apiInstance.ApplicationsGetCubesWithHttpInfo(applicationName, connectionName, applicationNameForConnection);
+    ApiResponse<CubeList> response = apiInstance.ApplicationsGetCubesWithHttpInfo(applicationName, connectionName, orderBy, applicationNameForConnection);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1976,6 +1979,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **connectionName** | **string** | &lt;p&gt;Connection name.&lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
 | **applicationNameForConnection** | **string** | &lt;p&gt;Application name from which to list databases.&lt;/p&gt; | [optional]  |
 
 ### Return type
@@ -2007,7 +2011,7 @@ catch (ApiException e)
 
 Get Supported Partition Types
 
-<p>Returns supported partition types.</p>
+<p>Returns supported federated partition types.</p><p>Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase's RCU schemas.</p> <p>This API returns <code>[ &quot;ANALYTIC_VIEW&quot; ]</code> if federated partitions are supported in the current environment, and an empty result otherwise.</p>
 
 ### Example
 ```csharp
@@ -2194,9 +2198,9 @@ void (empty response body)
 # **ApplicationsPerformOperation**
 > void ApplicationsPerformOperation (string applicationName, string action)
 
-Start, Stop Application
+Start or Stop Application
 
-<p>Performs specified action on the application. Valid actions are <b>Start</b>, <b>Stop</b> and <b>Stop_no_force</b>.</p>
+<p>Performs specified action on the application. Valid actions are <b>Start</b>, <b>Stop</b>, and <b>Stop_no_force</b>.</p>
 
 ### Example
 ```csharp
@@ -2222,11 +2226,11 @@ namespace Example
 
             var apiInstance = new ApplicationsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var action = "action_example";  // string | Action
+            var action = "action_example";  // string | <p>Action to perform on the application: <b>Start</b>, <b>Stop</b>, or  <b>Stop_no_force</b></p>.
 
             try
             {
-                // Start, Stop Application
+                // Start or Stop Application
                 apiInstance.ApplicationsPerformOperation(applicationName, action);
             }
             catch (ApiException  e)
@@ -2246,7 +2250,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Start, Stop Application
+    // Start or Stop Application
     apiInstance.ApplicationsPerformOperationWithHttpInfo(applicationName, action);
 }
 catch (ApiException e)
@@ -2262,7 +2266,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **action** | **string** | Action |  |
+| **action** | **string** | &lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;. |  |
 
 ### Return type
 

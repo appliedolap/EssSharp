@@ -4,7 +4,7 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**FiltersAddFilterPermission**](FiltersApi.md#filtersaddfilterpermission) | **POST** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions | Add Permissions |
+| [**FiltersAddFilterPermission**](FiltersApi.md#filtersaddfilterpermission) | **POST** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions | Add Permissions in Filter |
 | [**FiltersCopyFilter**](FiltersApi.md#filterscopyfilter) | **POST** /applications/{applicationName}/databases/{databaseName}/filters/filterops/copy | Copy Filter |
 | [**FiltersCreateFilter**](FiltersApi.md#filterscreatefilter) | **POST** /applications/{applicationName}/databases/{databaseName}/filters | Create Filter |
 | [**FiltersDeleteFilter**](FiltersApi.md#filtersdeletefilter) | **DELETE** /applications/{applicationName}/databases/{databaseName}/filters/{filterName} | Delete Filter |
@@ -13,16 +13,16 @@ All URIs are relative to */essbase/rest/v1*
 | [**FiltersGetFilterPermissions**](FiltersApi.md#filtersgetfilterpermissions) | **GET** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions | Get Permissions |
 | [**FiltersGetFilterRows**](FiltersApi.md#filtersgetfilterrows) | **GET** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/rows | Get Filter Rows |
 | [**FiltersListFilters**](FiltersApi.md#filterslistfilters) | **GET** /applications/{applicationName}/databases/{databaseName}/filters | Get Filters |
-| [**FiltersRemoveFilterPermission**](FiltersApi.md#filtersremovefilterpermission) | **DELETE** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions/{userGroupId} | Delete Permission |
+| [**FiltersRemoveFilterPermission**](FiltersApi.md#filtersremovefilterpermission) | **DELETE** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions/{userGroupId} | Delete Permission from Filter  |
 | [**FiltersRenameFilter**](FiltersApi.md#filtersrenamefilter) | **POST** /applications/{applicationName}/databases/{databaseName}/filters/filterops/rename | Rename Filter |
-| [**FiltersReplaceFilterPermission**](FiltersApi.md#filtersreplacefilterpermission) | **PUT** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions | Edit Permissions |
+| [**FiltersReplaceFilterPermission**](FiltersApi.md#filtersreplacefilterpermission) | **PUT** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions | Replace Filter Permissions |
 | [**FiltersValidateFilter**](FiltersApi.md#filtersvalidatefilter) | **POST** /applications/{applicationName}/databases/{databaseName}/filters/filterops/validate | Validate Filter |
 
 <a id="filtersaddfilterpermission"></a>
 # **FiltersAddFilterPermission**
 > UserGroupProvisionInfo FiltersAddFilterPermission (string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body)
 
-Add Permissions
+Add Permissions in Filter
 
 <p>Adds permissions, in the named filter, for the named user or group.</p>
 
@@ -56,7 +56,7 @@ namespace Example
 
             try
             {
-                // Add Permissions
+                // Add Permissions in Filter
                 UserGroupProvisionInfo result = apiInstance.FiltersAddFilterPermission(applicationName, databaseName, filterName, body);
                 Debug.WriteLine(result);
             }
@@ -77,7 +77,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Add Permissions
+    // Add Permissions in Filter
     ApiResponse<UserGroupProvisionInfo> response = apiInstance.FiltersAddFilterPermissionWithHttpInfo(applicationName, databaseName, filterName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -157,7 +157,7 @@ namespace Example
             var apiInstance = new FiltersApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var body = new FilterCopy(); // FilterCopy | Filter copy details
+            var body = new FilterCopy(); // FilterCopy | <p>Filter copy details.</p>
 
             try
             {
@@ -202,7 +202,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **body** | [**FilterCopy**](FilterCopy.md) | Filter copy details |  |
+| **body** | [**FilterCopy**](FilterCopy.md) | &lt;p&gt;Filter copy details.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -234,7 +234,7 @@ catch (ApiException e)
 
 Create Filter
 
-<p>Creates the filter in the specified application and database and returns the created filter</p>
+<p>Creates a filter in the specified application and database, and returns the created filter.</p><p>Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.</p>
 
 ### Example
 ```csharp
@@ -951,7 +951,7 @@ catch (ApiException e)
 # **FiltersRemoveFilterPermission**
 > void FiltersRemoveFilterPermission (string applicationName, string databaseName, string filterName, string userGroupId, bool group)
 
-Delete Permission
+Delete Permission from Filter 
 
 <p>Removes permissions from a filter for the specified user or group.</p>
 
@@ -986,7 +986,7 @@ namespace Example
 
             try
             {
-                // Delete Permission
+                // Delete Permission from Filter 
                 apiInstance.FiltersRemoveFilterPermission(applicationName, databaseName, filterName, userGroupId, group);
             }
             catch (ApiException  e)
@@ -1006,7 +1006,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete Permission
+    // Delete Permission from Filter 
     apiInstance.FiltersRemoveFilterPermissionWithHttpInfo(applicationName, databaseName, filterName, userGroupId, group);
 }
 catch (ApiException e)
@@ -1158,7 +1158,7 @@ catch (ApiException e)
 # **FiltersReplaceFilterPermission**
 > UserGroupProvisionInfo FiltersReplaceFilterPermission (string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body)
 
-Edit Permissions
+Replace Filter Permissions
 
 <p>Replaces all the users and groups assigned to the filter with a new list of users and groups.</p>
 
@@ -1192,7 +1192,7 @@ namespace Example
 
             try
             {
-                // Edit Permissions
+                // Replace Filter Permissions
                 UserGroupProvisionInfo result = apiInstance.FiltersReplaceFilterPermission(applicationName, databaseName, filterName, body);
                 Debug.WriteLine(result);
             }
@@ -1213,7 +1213,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Edit Permissions
+    // Replace Filter Permissions
     ApiResponse<UserGroupProvisionInfo> response = apiInstance.FiltersReplaceFilterPermissionWithHttpInfo(applicationName, databaseName, filterName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

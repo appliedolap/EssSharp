@@ -1017,7 +1017,7 @@ catch (ApiException e)
 
 Remove Group Users
 
-Remove multiple user members from a group
+<p>Remove multiple user members from a group.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp

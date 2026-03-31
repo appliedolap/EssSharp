@@ -80,7 +80,8 @@ namespace EssSharp.Model
         /// <param name="inspectAppAllowed">inspectAppAllowed.</param>
         /// <param name="appVariablesSetting">appVariablesSetting.</param>
         /// <param name="encrypted">encrypted.</param>
-        public Application(string name = default, string owner = default, long creationTime = default, string modifiedBy = default, long modifiedTime = default, string status = default, string description = default, TypeEnum? type = default, long startTime = default, int connectedUsersCount = default, string role = default, List<Link> links = default, bool easManagedApp = default, bool startStopAppAllowed = default, bool inspectAppAllowed = default, VariablesSetting appVariablesSetting = default, bool encrypted = default)
+        /// <param name="aiConnection">aiConnection.</param>
+        public Application(string name = default, string owner = default, long creationTime = default, string modifiedBy = default, long modifiedTime = default, string status = default, string description = default, TypeEnum? type = default, long startTime = default, int connectedUsersCount = default, string role = default, List<Link> links = default, bool easManagedApp = default, bool startStopAppAllowed = default, bool inspectAppAllowed = default, VariablesSetting appVariablesSetting = default, bool encrypted = default, string aiConnection = default)
         {
             this.Name = name;
             this.Owner = owner;
@@ -99,6 +100,7 @@ namespace EssSharp.Model
             this.InspectAppAllowed = inspectAppAllowed;
             this.AppVariablesSetting = appVariablesSetting;
             this.Encrypted = encrypted;
+            this.AiConnection = aiConnection;
         }
 
         /// <summary>
@@ -198,6 +200,12 @@ namespace EssSharp.Model
         public bool Encrypted { get; set; }
 
         /// <summary>
+        /// Gets or Sets AiConnection
+        /// </summary>
+        [DataMember(Name = "aiConnection", EmitDefaultValue = false)]
+        public string AiConnection { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -222,6 +230,7 @@ namespace EssSharp.Model
             sb.Append("  InspectAppAllowed: ").Append(InspectAppAllowed).Append("\n");
             sb.Append("  AppVariablesSetting: ").Append(AppVariablesSetting).Append("\n");
             sb.Append("  Encrypted: ").Append(Encrypted).Append("\n");
+            sb.Append("  AiConnection: ").Append(AiConnection).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

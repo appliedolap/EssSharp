@@ -26,7 +26,7 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Delete Layout
+        /// Delete Grid Layout
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
@@ -41,7 +41,7 @@ namespace EssSharp.Api
         void LayoutsDeleteLayout(string application, string database, string layout, string user = default, int operationIndex = 0);
 
         /// <summary>
-        /// Delete Layout
+        /// Delete Grid Layout
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
@@ -55,7 +55,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> LayoutsDeleteLayoutWithHttpInfo(string application, string database, string layout, string user = default, int operationIndex = 0);
         /// <summary>
-        /// Update Layout
+        /// Update Grid Layout
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
@@ -71,7 +71,7 @@ namespace EssSharp.Api
         Layout LayoutsEditLayout(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Update Layout
+        /// Update Grid Layout
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
@@ -86,10 +86,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Layout</returns>
         ApiResponse<Layout> LayoutsEditLayoutWithHttpInfo(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0);
         /// <summary>
-        /// Get Layout Details
+        /// Get Grid Layout Details
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;
+        /// &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -101,10 +101,10 @@ namespace EssSharp.Api
         Layout LayoutsGetLayoutDetails(string application, string database, string layout, string user = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Layout Details
+        /// Get Grid Layout Details
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;
+        /// &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -115,10 +115,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Layout</returns>
         ApiResponse<Layout> LayoutsGetLayoutDetailsWithHttpInfo(string application, string database, string layout, string user = default, int operationIndex = 0);
         /// <summary>
-        /// List Layouts
+        /// List Grid Layouts
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;
+        /// &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -128,10 +128,10 @@ namespace EssSharp.Api
         Layouts LayoutsGetLayouts(string application, string database, int operationIndex = 0);
 
         /// <summary>
-        /// List Layouts
+        /// List Grid Layouts
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;
+        /// &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -140,7 +140,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Layouts</returns>
         ApiResponse<Layouts> LayoutsGetLayoutsWithHttpInfo(string application, string database, int operationIndex = 0);
         /// <summary>
-        /// Mark Layout as Default
+        /// Mark Grid Layout as Default
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
@@ -155,7 +155,7 @@ namespace EssSharp.Api
         Layout LayoutsMarkDefaultLayout(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Mark Layout as Default
+        /// Mark Grid Layout as Default
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
@@ -169,10 +169,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Layout</returns>
         ApiResponse<Layout> LayoutsMarkDefaultLayoutWithHttpInfo(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0);
         /// <summary>
-        /// Save Layout
+        /// Save Grid Layout
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Saves a grid layout for the specified cube.&lt;/p&gt;
+        /// &lt;p&gt;Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -183,10 +183,10 @@ namespace EssSharp.Api
         Layout LayoutsSaveLayout(string application, string database, Layout body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Save Layout
+        /// Save Grid Layout
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Saves a grid layout for the specified cube.&lt;/p&gt;
+        /// &lt;p&gt;Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -205,7 +205,7 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Delete Layout
+        /// Delete Grid Layout
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
@@ -221,7 +221,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task LayoutsDeleteLayoutAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Delete Layout
+        /// Delete Grid Layout
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
@@ -236,7 +236,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> LayoutsDeleteLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Update Layout
+        /// Update Grid Layout
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
@@ -253,7 +253,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Layout> LayoutsEditLayoutAsync(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Update Layout
+        /// Update Grid Layout
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
@@ -269,10 +269,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Layout)</returns>
         System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsEditLayoutWithHttpInfoAsync(string application, string database, string layout, string user = default, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Layout Details
+        /// Get Grid Layout Details
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;
+        /// &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -285,10 +285,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Layout> LayoutsGetLayoutDetailsAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Layout Details
+        /// Get Grid Layout Details
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;
+        /// &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -300,10 +300,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Layout)</returns>
         System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsGetLayoutDetailsWithHttpInfoAsync(string application, string database, string layout, string user = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// List Layouts
+        /// List Grid Layouts
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;
+        /// &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -314,10 +314,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Layouts> LayoutsGetLayoutsAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// List Layouts
+        /// List Grid Layouts
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;
+        /// &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -327,7 +327,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Layouts)</returns>
         System.Threading.Tasks.Task<ApiResponse<Layouts>> LayoutsGetLayoutsWithHttpInfoAsync(string application, string database, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Mark Layout as Default
+        /// Mark Grid Layout as Default
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
@@ -343,7 +343,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Layout> LayoutsMarkDefaultLayoutAsync(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Mark Layout as Default
+        /// Mark Grid Layout as Default
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
@@ -358,10 +358,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Layout)</returns>
         System.Threading.Tasks.Task<ApiResponse<Layout>> LayoutsMarkDefaultLayoutWithHttpInfoAsync(string application, string database, string layout, DefaultLayoutBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Save Layout
+        /// Save Grid Layout
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Saves a grid layout for the specified cube.&lt;/p&gt;
+        /// &lt;p&gt;Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -373,10 +373,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Layout> LayoutsSaveLayoutAsync(string application, string database, Layout body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Save Layout
+        /// Save Grid Layout
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Saves a grid layout for the specified cube.&lt;/p&gt;
+        /// &lt;p&gt;Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -507,7 +507,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Layout &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
+        /// Delete Grid Layout &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -522,7 +522,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Layout &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
+        /// Delete Grid Layout &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -622,7 +622,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Layout &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
+        /// Delete Grid Layout &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -638,7 +638,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Layout &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
+        /// Delete Grid Layout &lt;p&gt;Deletes the layout in the specified cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -740,7 +740,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Layout &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
+        /// Update Grid Layout &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -757,7 +757,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Layout &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
+        /// Update Grid Layout &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -863,7 +863,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Layout &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
+        /// Update Grid Layout &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -881,7 +881,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Layout &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
+        /// Update Grid Layout &lt;p&gt;Updates the layout with the provided details in the specified cube.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -989,7 +989,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Layout Details &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;
+        /// Get Grid Layout Details &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1005,7 +1005,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Layout Details &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;
+        /// Get Grid Layout Details &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1107,7 +1107,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Layout Details &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;
+        /// Get Grid Layout Details &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1124,7 +1124,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Layout Details &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;
+        /// Get Grid Layout Details &lt;p&gt;Gets the details for the specified layout.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1228,7 +1228,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Layouts &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;
+        /// List Grid Layouts &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1242,7 +1242,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Layouts &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;
+        /// List Grid Layouts &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1331,7 +1331,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Layouts &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;
+        /// List Grid Layouts &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1346,7 +1346,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Layouts &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;
+        /// List Grid Layouts &lt;p&gt;Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.&lt;/p&gt;&lt;p&gt;A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1437,7 +1437,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Mark Layout as Default &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
+        /// Mark Grid Layout as Default &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1453,7 +1453,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Mark Layout as Default &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
+        /// Mark Grid Layout as Default &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1554,7 +1554,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Mark Layout as Default &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
+        /// Mark Grid Layout as Default &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1571,7 +1571,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Mark Layout as Default &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
+        /// Mark Grid Layout as Default &lt;p&gt;Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1674,7 +1674,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Save Layout &lt;p&gt;Saves a grid layout for the specified cube.&lt;/p&gt;
+        /// Save Grid Layout &lt;p&gt;Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1689,7 +1689,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Save Layout &lt;p&gt;Saves a grid layout for the specified cube.&lt;/p&gt;
+        /// Save Grid Layout &lt;p&gt;Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1782,7 +1782,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Save Layout &lt;p&gt;Saves a grid layout for the specified cube.&lt;/p&gt;
+        /// Save Grid Layout &lt;p&gt;Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1798,7 +1798,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Save Layout &lt;p&gt;Saves a grid layout for the specified cube.&lt;/p&gt;
+        /// Save Grid Layout &lt;p&gt;Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>

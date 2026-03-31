@@ -6,9 +6,7 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**Getodllogsettings**](PlatformServiceSettingsApi.md#getodllogsettings) | **GET** /settings/odlLogSettings | Get Diagnostic Log Settings |
 | [**PSMSettingsGetAll**](PlatformServiceSettingsApi.md#psmsettingsgetall) | **GET** /settings | Get Available Platform Service Settings |
-| [**PSMSettingsGetDatabaseSettings**](PlatformServiceSettingsApi.md#psmsettingsgetdatabasesettings) | **GET** /settings/database | Get Database Settings |
 | [**PSMSettingsGetSystemMaintenanceLimits**](PlatformServiceSettingsApi.md#psmsettingsgetsystemmaintenancelimits) | **GET** /settings/maintenance | Get Maintenance Settings |
-| [**PSMSettingsSetDatabaseSettings**](PlatformServiceSettingsApi.md#psmsettingssetdatabasesettings) | **PUT** /settings/database | Store Database Settings |
 | [**Setodllogsettings**](PlatformServiceSettingsApi.md#setodllogsettings) | **PUT** /settings/odlLogSettings | Set Diagnostic Log Settings |
 
 <a id="getodllogsettings"></a>
@@ -187,100 +185,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | successful operation |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="psmsettingsgetdatabasesettings"></a>
-# **PSMSettingsGetDatabaseSettings**
-> Limits PSMSettingsGetDatabaseSettings ()
-
-Get Database Settings
-
-<p>Gets the platform service database settings.</p>
-
-### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using EssSharp.Api;
-using EssSharp.Client;
-using EssSharp.Model;
-
-namespace Example
-{
-    public class PSMSettingsGetDatabaseSettingsExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "/essbase/rest/v1";
-            // Configure OAuth2 access token for authorization: OAuth2
-            config.AccessToken = "YOUR_ACCESS_TOKEN";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
-
-            var apiInstance = new PlatformServiceSettingsApi(config);
-
-            try
-            {
-                // Get Database Settings
-                Limits result = apiInstance.PSMSettingsGetDatabaseSettings();
-                Debug.WriteLine(result);
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling PlatformServiceSettingsApi.PSMSettingsGetDatabaseSettings: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
-    }
-}
-```
-
-#### Using the PSMSettingsGetDatabaseSettingsWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // Get Database Settings
-    ApiResponse<Limits> response = apiInstance.PSMSettingsGetDatabaseSettingsWithHttpInfo();
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling PlatformServiceSettingsApi.PSMSettingsGetDatabaseSettingsWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-This endpoint does not need any parameter.
-### Return type
-
-[**Limits**](Limits.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Platform service database settings returned successfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to get resource settings.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Platform service settings returned successfully.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -374,104 +279,6 @@ This endpoint does not need any parameter.
 |-------------|-------------|------------------|
 | **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Saved platform service resource settings returned successfully.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to get resource settings.&lt;/p&gt; |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="psmsettingssetdatabasesettings"></a>
-# **PSMSettingsSetDatabaseSettings**
-> Limits PSMSettingsSetDatabaseSettings (DatabaseSettings body = null)
-
-Store Database Settings
-
-<p>Saves the platform service database settings.</p>
-
-### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using EssSharp.Api;
-using EssSharp.Client;
-using EssSharp.Model;
-
-namespace Example
-{
-    public class PSMSettingsSetDatabaseSettingsExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "/essbase/rest/v1";
-            // Configure OAuth2 access token for authorization: OAuth2
-            config.AccessToken = "YOUR_ACCESS_TOKEN";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
-
-            var apiInstance = new PlatformServiceSettingsApi(config);
-            var body = new DatabaseSettings(); // DatabaseSettings |  (optional) 
-
-            try
-            {
-                // Store Database Settings
-                Limits result = apiInstance.PSMSettingsSetDatabaseSettings(body);
-                Debug.WriteLine(result);
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling PlatformServiceSettingsApi.PSMSettingsSetDatabaseSettings: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
-    }
-}
-```
-
-#### Using the PSMSettingsSetDatabaseSettingsWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // Store Database Settings
-    ApiResponse<Limits> response = apiInstance.PSMSettingsSetDatabaseSettingsWithHttpInfo(body);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling PlatformServiceSettingsApi.PSMSettingsSetDatabaseSettingsWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **body** | [**DatabaseSettings**](DatabaseSettings.md) |  | [optional]  |
-
-### Return type
-
-[**Limits**](Limits.md)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, application/xml
- - **Accept**: application/json, application/xml
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to save settings.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to save settings.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

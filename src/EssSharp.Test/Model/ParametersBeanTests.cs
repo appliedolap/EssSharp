@@ -755,12 +755,30 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'BackupPath'
+        /// </summary>
+        [Fact]
+        public void BackupPathTest()
+        {
+            // TODO unit test for the property 'BackupPath'
+        }
+
+        /// <summary>
         /// Test the property 'RestEncryPassword'
         /// </summary>
         [Fact]
         public void RestEncryPasswordTest()
         {
             // TODO unit test for the property 'RestEncryPassword'
+        }
+
+        /// <summary>
+        /// Test the property 'Pivotdimension'
+        /// </summary>
+        [Fact]
+        public void PivotdimensionTest()
+        {
+            // TODO unit test for the property 'Pivotdimension'
         }
 
         /// <summary>

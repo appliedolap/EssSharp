@@ -107,8 +107,9 @@ namespace EssSharp.Test.Api
         public void VariablesListServerVariablesTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
+            //string orderBy = null;
             //string all = null;
-            //var response = instance.VariablesListServerVariables(all);
+            //var response = instance.VariablesListServerVariables(orderBy, all);
             //Assert.IsType<VariableList>(response);
         }
     }

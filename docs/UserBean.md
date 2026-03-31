@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] 
 **Token** | **string** |  | [optional] 
-**Groups** | **List&lt;string&gt;** |  | [optional] 
 **Email** | **string** |  | [optional] 
-**Password** | **string** |  | [optional] 
+**Groups** | **List&lt;string&gt;** |  | [optional] 
 **Role** | **string** |  | [optional] 
+**Password** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 

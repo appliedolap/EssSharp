@@ -34,7 +34,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Batch outline JSON/XML</param>
+        /// <param name="body">&lt;p&gt;Batch outline JSON/XML.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>BOEOutput</returns>
         BOEOutput BatchOutlineEditingExecute(string application, string database, OtlEditMain body, int operationIndex = 0);
@@ -48,7 +48,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Batch outline JSON/XML</param>
+        /// <param name="body">&lt;p&gt;Batch outline JSON/XML.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BOEOutput</returns>
         ApiResponse<BOEOutput> BatchOutlineEditingExecuteWithHttpInfo(string application, string database, OtlEditMain body, int operationIndex = 0);
@@ -70,7 +70,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Batch outline JSON/XML</param>
+        /// <param name="body">&lt;p&gt;Batch outline JSON/XML.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of BOEOutput</returns>
@@ -85,7 +85,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Batch outline JSON/XML</param>
+        /// <param name="body">&lt;p&gt;Batch outline JSON/XML.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BOEOutput)</returns>
@@ -216,7 +216,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Batch outline JSON/XML</param>
+        /// <param name="body">&lt;p&gt;Batch outline JSON/XML.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>BOEOutput</returns>
         public BOEOutput BatchOutlineEditingExecute(string application, string database, OtlEditMain body, int operationIndex = 0)
@@ -231,7 +231,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Batch outline JSON/XML</param>
+        /// <param name="body">&lt;p&gt;Batch outline JSON/XML.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BOEOutput</returns>
         public EssSharp.Client.ApiResponse<BOEOutput> BatchOutlineEditingExecuteWithHttpInfo(string application, string database, OtlEditMain body, int operationIndex = 0)
@@ -330,7 +330,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Batch outline JSON/XML</param>
+        /// <param name="body">&lt;p&gt;Batch outline JSON/XML.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of BOEOutput</returns>
@@ -346,7 +346,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Batch outline JSON/XML</param>
+        /// <param name="body">&lt;p&gt;Batch outline JSON/XML.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BOEOutput)</returns>

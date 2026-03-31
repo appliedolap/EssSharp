@@ -29,13 +29,13 @@ namespace EssSharp.Api
         /// Create Partition
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
+        /// &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;,&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;targetInfo&#39;:{&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Create the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void PartitionCreatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0);
@@ -44,13 +44,13 @@ namespace EssSharp.Api
         /// Create Partition
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
+        /// &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;,&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;targetInfo&#39;:{&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Create the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PartitionCreatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0);
@@ -68,7 +68,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -88,7 +88,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -132,11 +132,11 @@ namespace EssSharp.Api
         /// <param name="type">&lt;p&gt;Partition type. Multiple types can be added with a comma separator.&lt;/p&gt; (optional)</param>
         /// <param name="offset">&lt;p&gt;Number of partitions to omit from the start of the result set.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of partitions to return.&lt;/p&gt; (optional)</param>
-        /// <param name="serverName">&lt;p&gt;Partition source server name.&lt;/p&gt; (optional)</param>
+        /// <param name="serverName">&lt;p&gt;Partition source server URL, ending in &lt;code&gt;/essbase/agent&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PartitionList</returns>
@@ -154,11 +154,11 @@ namespace EssSharp.Api
         /// <param name="type">&lt;p&gt;Partition type. Multiple types can be added with a comma separator.&lt;/p&gt; (optional)</param>
         /// <param name="offset">&lt;p&gt;Number of partitions to omit from the start of the result set.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of partitions to return.&lt;/p&gt; (optional)</param>
-        /// <param name="serverName">&lt;p&gt;Partition source server name.&lt;/p&gt; (optional)</param>
+        /// <param name="serverName">&lt;p&gt;Partition source server URL, ending in &lt;code&gt;/essbase/agent&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of PartitionList</returns>
@@ -167,7 +167,7 @@ namespace EssSharp.Api
         /// Get Supported Partition Types
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -180,7 +180,7 @@ namespace EssSharp.Api
         /// Get Supported Partition Types
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -202,7 +202,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -222,7 +222,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -274,7 +274,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -294,7 +294,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -303,13 +303,13 @@ namespace EssSharp.Api
         /// Update Partition
         /// </summary>
         /// <remarks>
-        /// Updates an existing partition
+        /// &lt;p&gt;Updates an existing partition.&lt;/p&gt;&lt;p&gt;User authentication for both source and target cubes are required to create or update a transparent or replicated partition.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Update the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void PartitionUpdatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0);
@@ -318,13 +318,13 @@ namespace EssSharp.Api
         /// Update Partition
         /// </summary>
         /// <remarks>
-        /// Updates an existing partition
+        /// &lt;p&gt;Updates an existing partition.&lt;/p&gt;&lt;p&gt;User authentication for both source and target cubes are required to create or update a transparent or replicated partition.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Update the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> PartitionUpdatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0);
@@ -368,13 +368,13 @@ namespace EssSharp.Api
         /// Create Partition
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
+        /// &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;,&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;targetInfo&#39;:{&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Create the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -384,13 +384,13 @@ namespace EssSharp.Api
         /// Create Partition
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
+        /// &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;,&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;targetInfo&#39;:{&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Create the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -409,7 +409,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -430,7 +430,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -477,11 +477,11 @@ namespace EssSharp.Api
         /// <param name="type">&lt;p&gt;Partition type. Multiple types can be added with a comma separator.&lt;/p&gt; (optional)</param>
         /// <param name="offset">&lt;p&gt;Number of partitions to omit from the start of the result set.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of partitions to return.&lt;/p&gt; (optional)</param>
-        /// <param name="serverName">&lt;p&gt;Partition source server name.&lt;/p&gt; (optional)</param>
+        /// <param name="serverName">&lt;p&gt;Partition source server URL, ending in &lt;code&gt;/essbase/agent&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -500,11 +500,11 @@ namespace EssSharp.Api
         /// <param name="type">&lt;p&gt;Partition type. Multiple types can be added with a comma separator.&lt;/p&gt; (optional)</param>
         /// <param name="offset">&lt;p&gt;Number of partitions to omit from the start of the result set.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of partitions to return.&lt;/p&gt; (optional)</param>
-        /// <param name="serverName">&lt;p&gt;Partition source server name.&lt;/p&gt; (optional)</param>
+        /// <param name="serverName">&lt;p&gt;Partition source server URL, ending in &lt;code&gt;/essbase/agent&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -514,7 +514,7 @@ namespace EssSharp.Api
         /// Get Supported Partition Types
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -528,7 +528,7 @@ namespace EssSharp.Api
         /// Get Supported Partition Types
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -551,7 +551,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -572,7 +572,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -627,7 +627,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -648,7 +648,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -658,13 +658,13 @@ namespace EssSharp.Api
         /// Update Partition
         /// </summary>
         /// <remarks>
-        /// Updates an existing partition
+        /// &lt;p&gt;Updates an existing partition.&lt;/p&gt;&lt;p&gt;User authentication for both source and target cubes are required to create or update a transparent or replicated partition.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Update the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -674,13 +674,13 @@ namespace EssSharp.Api
         /// Update Partition
         /// </summary>
         /// <remarks>
-        /// Updates an existing partition
+        /// &lt;p&gt;Updates an existing partition.&lt;/p&gt;&lt;p&gt;User authentication for both source and target cubes are required to create or update a transparent or replicated partition.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Update the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -835,13 +835,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Partition &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
+        /// Create Partition &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;,&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;targetInfo&#39;:{&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Create the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void PartitionCreatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0)
@@ -850,13 +850,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Partition &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
+        /// Create Partition &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;,&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;targetInfo&#39;:{&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Create the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> PartitionCreatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0)
@@ -952,13 +952,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Partition &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
+        /// Create Partition &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;,&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;targetInfo&#39;:{&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Create the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -968,13 +968,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Partition &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
+        /// Create Partition &lt;p&gt;Creates a new partition. For partitions across instances, &lt;i&gt;connectionName&lt;/i&gt; must be provided.&lt;/p&gt;&lt;p&gt;If the connection is defined at the application level, the property &lt;i&gt;applicationLevelConnection&lt;/i&gt; must be specified as true.&lt;/p&gt;&lt;p&gt;If the Datasource is defined at the application level, the property &lt;i&gt;applicationLevelDatasource&lt;/i&gt;  must be specified as true.&lt;/p&gt;&lt;p&gt;Examples (with minimum required properties)&lt;/p&gt;&lt;p&gt;&lt;b&gt;TRANSPARENT/REPLICATED&lt;/b&gt; (change type appropriately)&lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;TRANSPARENT&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;applicationName&#39;:&#39;Sample_2&#39;,&#39;databaseName&#39;:&#39;Basic&#39;,&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;targetInfo&#39;:{&#39;userName&#39;:&#39;username&#39;,&#39;password&#39;:&#39;password&#39;},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}],&#39;mappings&#39;:[]}&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;FEDERATED&lt;/b&gt; &lt;/p&gt;&lt;p&gt;&lt;code&gt;{&#39;type&#39;:&#39;FEDERATED&#39;,&#39;isNew&#39;:true,&#39;sourceInfo&#39;:{&#39;datasourceName&#39;:&#39;federatedDatasourceExcel1&#39;,&#39;measuresDimensionName&#39;:&#39;Measures&#39;,&#39;essbaseToColumnMap&#39;:{&#39;arr&#39;:[{&#39;essbaseName&#39;:&#39;Caffeinated&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Ounces&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Pkg Type&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Population&#39;,&#39;columnName&#39;:&#39;&#39;},{&#39;essbaseName&#39;:&#39;Intro Date&#39;,&#39;columnName&#39;:&#39;&#39;}]}},&#39;areas&#39;:[{&#39;sourceArea&#39;:&#39;Jan&#39;,&#39;targetArea&#39;:&#39;Jan&#39;,&#39;slices&#39;:[]}]}&lt;/code&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Create the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -1082,7 +1082,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -1102,7 +1102,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -1227,7 +1227,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1248,7 +1248,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1604,11 +1604,11 @@ namespace EssSharp.Api
         /// <param name="type">&lt;p&gt;Partition type. Multiple types can be added with a comma separator.&lt;/p&gt; (optional)</param>
         /// <param name="offset">&lt;p&gt;Number of partitions to omit from the start of the result set.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of partitions to return.&lt;/p&gt; (optional)</param>
-        /// <param name="serverName">&lt;p&gt;Partition source server name.&lt;/p&gt; (optional)</param>
+        /// <param name="serverName">&lt;p&gt;Partition source server URL, ending in &lt;code&gt;/essbase/agent&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PartitionList</returns>
@@ -1627,11 +1627,11 @@ namespace EssSharp.Api
         /// <param name="type">&lt;p&gt;Partition type. Multiple types can be added with a comma separator.&lt;/p&gt; (optional)</param>
         /// <param name="offset">&lt;p&gt;Number of partitions to omit from the start of the result set.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of partitions to return.&lt;/p&gt; (optional)</param>
-        /// <param name="serverName">&lt;p&gt;Partition source server name.&lt;/p&gt; (optional)</param>
+        /// <param name="serverName">&lt;p&gt;Partition source server URL, ending in &lt;code&gt;/essbase/agent&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of PartitionList</returns>
@@ -1761,11 +1761,11 @@ namespace EssSharp.Api
         /// <param name="type">&lt;p&gt;Partition type. Multiple types can be added with a comma separator.&lt;/p&gt; (optional)</param>
         /// <param name="offset">&lt;p&gt;Number of partitions to omit from the start of the result set.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of partitions to return.&lt;/p&gt; (optional)</param>
-        /// <param name="serverName">&lt;p&gt;Partition source server name.&lt;/p&gt; (optional)</param>
+        /// <param name="serverName">&lt;p&gt;Partition source server URL, ending in &lt;code&gt;/essbase/agent&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1785,11 +1785,11 @@ namespace EssSharp.Api
         /// <param name="type">&lt;p&gt;Partition type. Multiple types can be added with a comma separator.&lt;/p&gt; (optional)</param>
         /// <param name="offset">&lt;p&gt;Number of partitions to omit from the start of the result set.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of partitions to return.&lt;/p&gt; (optional)</param>
-        /// <param name="serverName">&lt;p&gt;Partition source server name.&lt;/p&gt; (optional)</param>
+        /// <param name="serverName">&lt;p&gt;Partition source server URL, ending in &lt;code&gt;/essbase/agent&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1913,7 +1913,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Supported Partition Types &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// Get Supported Partition Types &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1926,7 +1926,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Supported Partition Types &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// Get Supported Partition Types &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2013,7 +2013,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Supported Partition Types &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// Get Supported Partition Types &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2027,7 +2027,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Supported Partition Types &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// Get Supported Partition Types &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2126,7 +2126,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -2146,7 +2146,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -2271,7 +2271,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2292,7 +2292,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2682,7 +2682,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -2702,7 +2702,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -2827,7 +2827,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2848,7 +2848,7 @@ namespace EssSharp.Api
         /// <param name="applicationName2">&lt;p&gt;Partition source application name.&lt;/p&gt; (optional)</param>
         /// <param name="databaseName2">&lt;p&gt;Partition source database name.&lt;/p&gt; (optional)</param>
         /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt; (optional)</param>
-        /// <param name="measuresDimensionName">&lt;p&gt;Measures dimension name.&lt;/p&gt; (optional)</param>
+        /// <param name="measuresDimensionName">&lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; (optional)</param>
         /// <param name="applicationLevelDatasource">&lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2965,13 +2965,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Partition Updates an existing partition
+        /// Update Partition &lt;p&gt;Updates an existing partition.&lt;/p&gt;&lt;p&gt;User authentication for both source and target cubes are required to create or update a transparent or replicated partition.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Update the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void PartitionUpdatePartition(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0)
@@ -2980,13 +2980,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Partition Updates an existing partition
+        /// Update Partition &lt;p&gt;Updates an existing partition.&lt;/p&gt;&lt;p&gt;User authentication for both source and target cubes are required to create or update a transparent or replicated partition.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Update the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> PartitionUpdatePartitionWithHttpInfo(string applicationName, string databaseName, PartitionBean body, bool? executeInBackground = default, int operationIndex = 0)
@@ -3082,13 +3082,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Partition Updates an existing partition
+        /// Update Partition &lt;p&gt;Updates an existing partition.&lt;/p&gt;&lt;p&gt;User authentication for both source and target cubes are required to create or update a transparent or replicated partition.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Update the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -3098,13 +3098,13 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Partition Updates an existing partition
+        /// Update Partition &lt;p&gt;Updates an existing partition.&lt;/p&gt;&lt;p&gt;User authentication for both source and target cubes are required to create or update a transparent or replicated partition.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Partition information.&lt;/p&gt;</param>
-        /// <param name="executeInBackground">&lt;p&gt;Execute Analytic View federated partition in background&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="executeInBackground">&lt;p&gt;Update the partition in the background (applicable for federated partitions).&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>

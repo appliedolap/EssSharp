@@ -269,6 +269,123 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'AiConnection'
+        /// </summary>
+        [Fact]
+        public void AiConnectionTest()
+        {
+            // TODO unit test for the property 'AiConnection'
+        }
+
+        /// <summary>
+        /// Test the property 'ChatCredential'
+        /// </summary>
+        [Fact]
+        public void ChatCredentialTest()
+        {
+            // TODO unit test for the property 'ChatCredential'
+        }
+
+        /// <summary>
+        /// Test the property 'VectorCredential'
+        /// </summary>
+        [Fact]
+        public void VectorCredentialTest()
+        {
+            // TODO unit test for the property 'VectorCredential'
+        }
+
+        /// <summary>
+        /// Test the property 'ChatModel'
+        /// </summary>
+        [Fact]
+        public void ChatModelTest()
+        {
+            // TODO unit test for the property 'ChatModel'
+        }
+
+        /// <summary>
+        /// Test the property 'OciCompartmentId'
+        /// </summary>
+        [Fact]
+        public void OciCompartmentIdTest()
+        {
+            // TODO unit test for the property 'OciCompartmentId'
+        }
+
+        /// <summary>
+        /// Test the property 'Region'
+        /// </summary>
+        [Fact]
+        public void RegionTest()
+        {
+            // TODO unit test for the property 'Region'
+        }
+
+        /// <summary>
+        /// Test the property 'Url'
+        /// </summary>
+        [Fact]
+        public void UrlTest()
+        {
+            // TODO unit test for the property 'Url'
+        }
+
+        /// <summary>
+        /// Test the property 'EmbedModel'
+        /// </summary>
+        [Fact]
+        public void EmbedModelTest()
+        {
+            // TODO unit test for the property 'EmbedModel'
+        }
+
+        /// <summary>
+        /// Test the property 'TransferTimeout'
+        /// </summary>
+        [Fact]
+        public void TransferTimeoutTest()
+        {
+            // TODO unit test for the property 'TransferTimeout'
+        }
+
+        /// <summary>
+        /// Test the property 'OciAPIFormat'
+        /// </summary>
+        [Fact]
+        public void OciAPIFormatTest()
+        {
+            // TODO unit test for the property 'OciAPIFormat'
+        }
+
+        /// <summary>
+        /// Test the property 'NarrateIndexName'
+        /// </summary>
+        [Fact]
+        public void NarrateIndexNameTest()
+        {
+            // TODO unit test for the property 'NarrateIndexName'
+        }
+
+        /// <summary>
+        /// Test the property 'NarrateProfileName'
+        /// </summary>
+        [Fact]
+        public void NarrateProfileNameTest()
+        {
+            // TODO unit test for the property 'NarrateProfileName'
+        }
+
+        /// <summary>
+        /// Test the property 'NarrateDocDirectory'
+        /// </summary>
+        [Fact]
+        public void NarrateDocDirectoryTest()
+        {
+            // TODO unit test for the property 'NarrateDocDirectory'
+        }
+
+        /// <summary>
         /// Test the property 'Links'
         /// </summary>
         [Fact]

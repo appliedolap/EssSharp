@@ -4,18 +4,18 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**LayoutsDeleteLayout**](LayoutsApi.md#layoutsdeletelayout) | **DELETE** /applications/{application}/databases/{database}/layouts/{layout} | Delete Layout |
-| [**LayoutsEditLayout**](LayoutsApi.md#layoutseditlayout) | **PUT** /applications/{application}/databases/{database}/layouts/{layout} | Update Layout |
-| [**LayoutsGetLayoutDetails**](LayoutsApi.md#layoutsgetlayoutdetails) | **GET** /applications/{application}/databases/{database}/layouts/{layout} | Get Layout Details |
-| [**LayoutsGetLayouts**](LayoutsApi.md#layoutsgetlayouts) | **GET** /applications/{application}/databases/{database}/layouts | List Layouts |
-| [**LayoutsMarkDefaultLayout**](LayoutsApi.md#layoutsmarkdefaultlayout) | **POST** /applications/{application}/databases/{database}/layouts/{layout}/actions/markDefault | Mark Layout as Default |
-| [**LayoutsSaveLayout**](LayoutsApi.md#layoutssavelayout) | **POST** /applications/{application}/databases/{database}/layouts | Save Layout |
+| [**LayoutsDeleteLayout**](LayoutsApi.md#layoutsdeletelayout) | **DELETE** /applications/{application}/databases/{database}/layouts/{layout} | Delete Grid Layout |
+| [**LayoutsEditLayout**](LayoutsApi.md#layoutseditlayout) | **PUT** /applications/{application}/databases/{database}/layouts/{layout} | Update Grid Layout |
+| [**LayoutsGetLayoutDetails**](LayoutsApi.md#layoutsgetlayoutdetails) | **GET** /applications/{application}/databases/{database}/layouts/{layout} | Get Grid Layout Details |
+| [**LayoutsGetLayouts**](LayoutsApi.md#layoutsgetlayouts) | **GET** /applications/{application}/databases/{database}/layouts | List Grid Layouts |
+| [**LayoutsMarkDefaultLayout**](LayoutsApi.md#layoutsmarkdefaultlayout) | **POST** /applications/{application}/databases/{database}/layouts/{layout}/actions/markDefault | Mark Grid Layout as Default |
+| [**LayoutsSaveLayout**](LayoutsApi.md#layoutssavelayout) | **POST** /applications/{application}/databases/{database}/layouts | Save Grid Layout |
 
 <a id="layoutsdeletelayout"></a>
 # **LayoutsDeleteLayout**
 > void LayoutsDeleteLayout (string application, string database, string layout, string user = null)
 
-Delete Layout
+Delete Grid Layout
 
 <p>Deletes the layout in the specified cube.</p>
 
@@ -49,7 +49,7 @@ namespace Example
 
             try
             {
-                // Delete Layout
+                // Delete Grid Layout
                 apiInstance.LayoutsDeleteLayout(application, database, layout, user);
             }
             catch (ApiException  e)
@@ -69,7 +69,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete Layout
+    // Delete Grid Layout
     apiInstance.LayoutsDeleteLayoutWithHttpInfo(application, database, layout, user);
 }
 catch (ApiException e)
@@ -115,7 +115,7 @@ void (empty response body)
 # **LayoutsEditLayout**
 > Layout LayoutsEditLayout (string application, string database, string layout, string user = null, Layout body = null)
 
-Update Layout
+Update Grid Layout
 
 <p>Updates the layout with the provided details in the specified cube.</p>
 
@@ -150,7 +150,7 @@ namespace Example
 
             try
             {
-                // Update Layout
+                // Update Grid Layout
                 Layout result = apiInstance.LayoutsEditLayout(application, database, layout, user, body);
                 Debug.WriteLine(result);
             }
@@ -171,7 +171,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Update Layout
+    // Update Grid Layout
     ApiResponse<Layout> response = apiInstance.LayoutsEditLayoutWithHttpInfo(application, database, layout, user, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -221,9 +221,9 @@ catch (ApiException e)
 # **LayoutsGetLayoutDetails**
 > Layout LayoutsGetLayoutDetails (string application, string database, string layout, string user = null)
 
-Get Layout Details
+Get Grid Layout Details
 
-<p>Gets the details for the specified layout.</p>
+<p>Gets the details for the specified layout.</p><p>A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.</p>
 
 ### Example
 ```csharp
@@ -255,7 +255,7 @@ namespace Example
 
             try
             {
-                // Get Layout Details
+                // Get Grid Layout Details
                 Layout result = apiInstance.LayoutsGetLayoutDetails(application, database, layout, user);
                 Debug.WriteLine(result);
             }
@@ -276,7 +276,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Layout Details
+    // Get Grid Layout Details
     ApiResponse<Layout> response = apiInstance.LayoutsGetLayoutDetailsWithHttpInfo(application, database, layout, user);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -325,9 +325,9 @@ catch (ApiException e)
 # **LayoutsGetLayouts**
 > Layouts LayoutsGetLayouts (string application, string database)
 
-List Layouts
+List Grid Layouts
 
-<p>Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.</p>
+<p>Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.</p><p>A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.</p>
 
 ### Example
 ```csharp
@@ -357,7 +357,7 @@ namespace Example
 
             try
             {
-                // List Layouts
+                // List Grid Layouts
                 Layouts result = apiInstance.LayoutsGetLayouts(application, database);
                 Debug.WriteLine(result);
             }
@@ -378,7 +378,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List Layouts
+    // List Grid Layouts
     ApiResponse<Layouts> response = apiInstance.LayoutsGetLayoutsWithHttpInfo(application, database);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -425,7 +425,7 @@ catch (ApiException e)
 # **LayoutsMarkDefaultLayout**
 > Layout LayoutsMarkDefaultLayout (string application, string database, string layout, DefaultLayoutBean body = null)
 
-Mark Layout as Default
+Mark Grid Layout as Default
 
 <p>Marks a saved grid layout as the default grid view for this user or this cube. Requires Database Access permission to set the user default layout, and Database Manager permission to set the cube default layout.</p>
 
@@ -459,7 +459,7 @@ namespace Example
 
             try
             {
-                // Mark Layout as Default
+                // Mark Grid Layout as Default
                 Layout result = apiInstance.LayoutsMarkDefaultLayout(application, database, layout, body);
                 Debug.WriteLine(result);
             }
@@ -480,7 +480,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Mark Layout as Default
+    // Mark Grid Layout as Default
     ApiResponse<Layout> response = apiInstance.LayoutsMarkDefaultLayoutWithHttpInfo(application, database, layout, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -529,9 +529,9 @@ catch (ApiException e)
 # **LayoutsSaveLayout**
 > Layout LayoutsSaveLayout (string application, string database, Layout body = null)
 
-Save Layout
+Save Grid Layout
 
-<p>Saves a grid layout for the specified cube.</p>
+<p>Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.</p>
 
 ### Example
 ```csharp
@@ -562,7 +562,7 @@ namespace Example
 
             try
             {
-                // Save Layout
+                // Save Grid Layout
                 Layout result = apiInstance.LayoutsSaveLayout(application, database, body);
                 Debug.WriteLine(result);
             }
@@ -583,7 +583,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Save Layout
+    // Save Grid Layout
     ApiResponse<Layout> response = apiInstance.LayoutsSaveLayoutWithHttpInfo(application, database, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

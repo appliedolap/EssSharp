@@ -12,7 +12,7 @@ All URIs are relative to */essbase/rest/v1*
 
 <a id="gridexecute"></a>
 # **GridExecute**
-> Grid GridExecute (string applicationName, string databaseName, GridOperation body = null)
+> Grid GridExecute (string applicationName, string databaseName, bool? svParity = null, GridOperation body = null)
 
 Execute Grid Operation
 
@@ -43,12 +43,13 @@ namespace Example
             var apiInstance = new GridApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name for grid operation.</p>
             var databaseName = "databaseName_example";  // string | <p>Database/Cube name for grid operation.</p>
+            var svParity = true;  // bool? |  (optional)  (default to true)
             var body = new GridOperation(); // GridOperation | <p>Grid Operation to be performed.</p> (optional) 
 
             try
             {
                 // Execute Grid Operation
-                Grid result = apiInstance.GridExecute(applicationName, databaseName, body);
+                Grid result = apiInstance.GridExecute(applicationName, databaseName, svParity, body);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -69,7 +70,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Execute Grid Operation
-    ApiResponse<Grid> response = apiInstance.GridExecuteWithHttpInfo(applicationName, databaseName, body);
+    ApiResponse<Grid> response = apiInstance.GridExecuteWithHttpInfo(applicationName, databaseName, svParity, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -88,6 +89,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name for grid operation.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt; |  |
+| **svParity** | **bool?** |  | [optional] [default to true] |
 | **body** | [**GridOperation**](GridOperation.md) | &lt;p&gt;Grid Operation to be performed.&lt;/p&gt; | [optional]  |
 
 ### Return type

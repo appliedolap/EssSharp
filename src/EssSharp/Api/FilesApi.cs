@@ -32,7 +32,7 @@ namespace EssSharp.Api
         /// &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder for which to terminate the multipart upload.&lt;/p&gt;</param>
         /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -45,7 +45,7 @@ namespace EssSharp.Api
         /// &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder for which to terminate the multipart upload.&lt;/p&gt;</param>
         /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -60,7 +60,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
         /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
-        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="append">&lt;p&gt;Append to existing file?&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>GenericEntity</returns>
         GenericEntity FilesAddFile(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0);
@@ -75,7 +75,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
         /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
-        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="append">&lt;p&gt;Append to existing file?&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of GenericEntity</returns>
         ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0);
@@ -83,7 +83,7 @@ namespace EssSharp.Api
         /// Copy File
         /// </summary>
         /// <remarks>
-        /// Copy a file from source to destination.
+        /// &lt;p&gt;Copy a file from source to destination.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;File path details.&lt;/p&gt;</param>
@@ -96,7 +96,7 @@ namespace EssSharp.Api
         /// Copy File
         /// </summary>
         /// <remarks>
-        /// Copy a file from source to destination.
+        /// &lt;p&gt;Copy a file from source to destination.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;File path details.&lt;/p&gt;</param>
@@ -108,7 +108,7 @@ namespace EssSharp.Api
         /// Create Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
+        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;&lt;p&gt;This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-part-path-put.html\&quot;&gt;Upload File Part&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-commit-path-post.html\&quot;&gt;Commit Partial File Upload&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-abort-path-delete.html\&quot;&gt;Abort Multipart File Upload&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -122,7 +122,7 @@ namespace EssSharp.Api
         /// Create Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
+        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;&lt;p&gt;This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-part-path-put.html\&quot;&gt;Upload File Part&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-commit-path-post.html\&quot;&gt;Commit Partial File Upload&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-abort-path-delete.html\&quot;&gt;Abort Multipart File Upload&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -183,7 +183,7 @@ namespace EssSharp.Api
         /// Extract Zip File Using a Job
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Extract a zip file on same location. Supported for applications, users and shared folders.&lt;/p&gt;
+        /// &lt;p&gt;Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.&lt;/p&gt;&lt;p&gt;This endpoint is similar to &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;, except it initiates a system job you can monitor using &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. Use this endpoint if you experience failures with &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Zip file path details.&lt;/p&gt;</param>
@@ -196,7 +196,7 @@ namespace EssSharp.Api
         /// Extract Zip File Using a Job
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Extract a zip file on same location. Supported for applications, users and shared folders.&lt;/p&gt;
+        /// &lt;p&gt;Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.&lt;/p&gt;&lt;p&gt;This endpoint is similar to &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;, except it initiates a system job you can monitor using &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. Use this endpoint if you experience failures with &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Zip file path details.&lt;/p&gt;</param>
@@ -208,7 +208,7 @@ namespace EssSharp.Api
         /// Get Shared Path
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get user shared path.&lt;/p&gt;
+        /// &lt;p&gt;Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -219,7 +219,7 @@ namespace EssSharp.Api
         /// Get Shared Path
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get user shared path.&lt;/p&gt;
+        /// &lt;p&gt;Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -229,7 +229,7 @@ namespace EssSharp.Api
         /// Get Home Path
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get user home path.&lt;/p&gt;
+        /// &lt;p&gt;Get the home path of the current logged in user.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -240,7 +240,7 @@ namespace EssSharp.Api
         /// Get Home Path
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get user home path.&lt;/p&gt;
+        /// &lt;p&gt;Get the home path of the current logged in user.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -257,6 +257,7 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="type">&lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">&lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="action">&lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="fileSize">&lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
@@ -264,7 +265,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Recursive param to get search result as recursive.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>FileCollectionResponse</returns>
-        FileCollectionResponse FilesListFiles(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0);
+        FileCollectionResponse FilesListFiles(string path, int? offset = default, int? limit = default, string type = default, string orderBy = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0);
 
         /// <summary>
         /// List or Download Files
@@ -277,6 +278,7 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="type">&lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">&lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="action">&lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="fileSize">&lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
@@ -284,7 +286,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Recursive param to get search result as recursive.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of FileCollectionResponse</returns>
-        ApiResponse<FileCollectionResponse> FilesListFilesWithHttpInfo(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0);
+        ApiResponse<FileCollectionResponse> FilesListFilesWithHttpInfo(string path, int? offset = default, int? limit = default, string type = default, string orderBy = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0);
         /// <summary>
         /// List Root Folders
         /// </summary>
@@ -336,37 +338,37 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> FilesMoveResourceWithHttpInfo(FilePathDetail body, bool? overwrite = default, int operationIndex = 0);
         /// <summary>
-        /// Commit Partial File Upload
+        /// Commit Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
+        /// &lt;p&gt;Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path"></param>
-        /// <param name="uploadId"> (optional)</param>
-        /// <param name="body"> (optional)</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Request body for committing a partial file upload. Must include an array of all part numbers and corresponding Etags (entity tags). Example: &lt;code&gt;{&amp;quot;1&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a150e1&amp;quot;,&amp;quot;2&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a151e1&amp;quot;}&lt;/code&gt;&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CommitFilePartUploadResponse</returns>
-        CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0);
+        CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId, Dictionary<string, string> body, int operationIndex = 0);
 
         /// <summary>
-        /// Commit Partial File Upload
+        /// Commit Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
+        /// &lt;p&gt;Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path"></param>
-        /// <param name="uploadId"> (optional)</param>
-        /// <param name="body"> (optional)</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Request body for committing a partial file upload. Must include an array of all part numbers and corresponding Etags (entity tags). Example: &lt;code&gt;{&amp;quot;1&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a150e1&amp;quot;,&amp;quot;2&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a151e1&amp;quot;}&lt;/code&gt;&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CommitFilePartUploadResponse</returns>
-        ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0);
+        ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId, Dictionary<string, string> body, int operationIndex = 0);
         /// <summary>
         /// Upload File Part
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
+        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;&lt;p&gt;Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -380,7 +382,7 @@ namespace EssSharp.Api
         /// Upload File Part
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
+        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;&lt;p&gt;Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -389,6 +391,26 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UploadFilePartResponse</returns>
         ApiResponse<UploadFilePartResponse> FilesUploadPartWithHttpInfo(string path, int partNum, string uploadId, int operationIndex = 0);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        void GetObjectStoreURI(string path = default, int operationIndex = 0);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> GetObjectStoreURIWithHttpInfo(string path = default, int operationIndex = 0);
         /// <summary>
         /// 
         /// </summary>
@@ -423,7 +445,7 @@ namespace EssSharp.Api
         /// &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder for which to terminate the multipart upload.&lt;/p&gt;</param>
         /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -437,7 +459,7 @@ namespace EssSharp.Api
         /// &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder for which to terminate the multipart upload.&lt;/p&gt;</param>
         /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -453,7 +475,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
         /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
-        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="append">&lt;p&gt;Append to existing file?&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenericEntity</returns>
@@ -469,7 +491,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
         /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
-        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="append">&lt;p&gt;Append to existing file?&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenericEntity)</returns>
@@ -478,7 +500,7 @@ namespace EssSharp.Api
         /// Copy File
         /// </summary>
         /// <remarks>
-        /// Copy a file from source to destination.
+        /// &lt;p&gt;Copy a file from source to destination.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;File path details.&lt;/p&gt;</param>
@@ -492,7 +514,7 @@ namespace EssSharp.Api
         /// Copy File
         /// </summary>
         /// <remarks>
-        /// Copy a file from source to destination.
+        /// &lt;p&gt;Copy a file from source to destination.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;File path details.&lt;/p&gt;</param>
@@ -505,7 +527,7 @@ namespace EssSharp.Api
         /// Create Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
+        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;&lt;p&gt;This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-part-path-put.html\&quot;&gt;Upload File Part&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-commit-path-post.html\&quot;&gt;Commit Partial File Upload&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-abort-path-delete.html\&quot;&gt;Abort Multipart File Upload&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -520,7 +542,7 @@ namespace EssSharp.Api
         /// Create Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
+        /// &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;&lt;p&gt;This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-part-path-put.html\&quot;&gt;Upload File Part&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-commit-path-post.html\&quot;&gt;Commit Partial File Upload&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-abort-path-delete.html\&quot;&gt;Abort Multipart File Upload&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -586,7 +608,7 @@ namespace EssSharp.Api
         /// Extract Zip File Using a Job
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Extract a zip file on same location. Supported for applications, users and shared folders.&lt;/p&gt;
+        /// &lt;p&gt;Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.&lt;/p&gt;&lt;p&gt;This endpoint is similar to &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;, except it initiates a system job you can monitor using &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. Use this endpoint if you experience failures with &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Zip file path details.&lt;/p&gt;</param>
@@ -600,7 +622,7 @@ namespace EssSharp.Api
         /// Extract Zip File Using a Job
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Extract a zip file on same location. Supported for applications, users and shared folders.&lt;/p&gt;
+        /// &lt;p&gt;Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.&lt;/p&gt;&lt;p&gt;This endpoint is similar to &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;, except it initiates a system job you can monitor using &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. Use this endpoint if you experience failures with &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Zip file path details.&lt;/p&gt;</param>
@@ -613,7 +635,7 @@ namespace EssSharp.Api
         /// Get Shared Path
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get user shared path.&lt;/p&gt;
+        /// &lt;p&gt;Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -625,7 +647,7 @@ namespace EssSharp.Api
         /// Get Shared Path
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get user shared path.&lt;/p&gt;
+        /// &lt;p&gt;Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -636,7 +658,7 @@ namespace EssSharp.Api
         /// Get Home Path
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get user home path.&lt;/p&gt;
+        /// &lt;p&gt;Get the home path of the current logged in user.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -648,7 +670,7 @@ namespace EssSharp.Api
         /// Get Home Path
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get user home path.&lt;/p&gt;
+        /// &lt;p&gt;Get the home path of the current logged in user.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -666,6 +688,7 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="type">&lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">&lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="action">&lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="fileSize">&lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
@@ -674,7 +697,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FileCollectionResponse</returns>
-        System.Threading.Tasks.Task<FileCollectionResponse> FilesListFilesAsync(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<FileCollectionResponse> FilesListFilesAsync(string path, int? offset = default, int? limit = default, string type = default, string orderBy = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List or Download Files
@@ -687,6 +710,7 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="type">&lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">&lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="action">&lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="fileSize">&lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
@@ -695,7 +719,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FileCollectionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<FileCollectionResponse>> FilesListFilesWithHttpInfoAsync(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<FileCollectionResponse>> FilesListFilesWithHttpInfoAsync(string path, int? offset = default, int? limit = default, string type = default, string orderBy = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Root Folders
         /// </summary>
@@ -751,39 +775,39 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> FilesMoveResourceWithHttpInfoAsync(FilePathDetail body, bool? overwrite = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Commit Partial File Upload
+        /// Commit Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
+        /// &lt;p&gt;Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path"></param>
-        /// <param name="uploadId"> (optional)</param>
-        /// <param name="body"> (optional)</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Request body for committing a partial file upload. Must include an array of all part numbers and corresponding Etags (entity tags). Example: &lt;code&gt;{&amp;quot;1&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a150e1&amp;quot;,&amp;quot;2&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a151e1&amp;quot;}&lt;/code&gt;&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommitFilePartUploadResponse</returns>
-        System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId, Dictionary<string, string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Commit Partial File Upload
+        /// Commit Multipart File Upload
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
+        /// &lt;p&gt;Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path"></param>
-        /// <param name="uploadId"> (optional)</param>
-        /// <param name="body"> (optional)</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Request body for committing a partial file upload. Must include an array of all part numbers and corresponding Etags (entity tags). Example: &lt;code&gt;{&amp;quot;1&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a150e1&amp;quot;,&amp;quot;2&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a151e1&amp;quot;}&lt;/code&gt;&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommitFilePartUploadResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId, Dictionary<string, string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Upload File Part
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
+        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;&lt;p&gt;Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -798,7 +822,7 @@ namespace EssSharp.Api
         /// Upload File Part
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
+        /// &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;&lt;p&gt;Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -808,6 +832,31 @@ namespace EssSharp.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UploadFilePartResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<UploadFilePartResponse>> FilesUploadPartWithHttpInfoAsync(string path, int partNum, string uploadId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task GetObjectStoreURIAsync(string path = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> GetObjectStoreURIWithHttpInfoAsync(string path = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// 
         /// </summary>
@@ -955,7 +1004,7 @@ namespace EssSharp.Api
         /// Abort Multipart File Upload &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder for which to terminate the multipart upload.&lt;/p&gt;</param>
         /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -968,7 +1017,7 @@ namespace EssSharp.Api
         /// Abort Multipart File Upload &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder for which to terminate the multipart upload.&lt;/p&gt;</param>
         /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -1055,7 +1104,7 @@ namespace EssSharp.Api
         /// Abort Multipart File Upload &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder for which to terminate the multipart upload.&lt;/p&gt;</param>
         /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1069,7 +1118,7 @@ namespace EssSharp.Api
         /// Abort Multipart File Upload &lt;p&gt;Terminate the multipart upload operation of a file and delete all the uploaded parts.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path">&lt;p&gt;File Path to abort&lt;/p&gt;</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder for which to terminate the multipart upload.&lt;/p&gt;</param>
         /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1161,7 +1210,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
         /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
-        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="append">&lt;p&gt;Append to existing file?&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>GenericEntity</returns>
         public GenericEntity FilesAddFile(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0)
@@ -1177,7 +1226,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
         /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
-        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="append">&lt;p&gt;Append to existing file?&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of GenericEntity</returns>
         public EssSharp.Client.ApiResponse<GenericEntity> FilesAddFileWithHttpInfo(string path, bool overwrite, System.IO.Stream stream, bool? append = default, int operationIndex = 0)
@@ -1274,7 +1323,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
         /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
-        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="append">&lt;p&gt;Append to existing file?&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GenericEntity</returns>
@@ -1291,7 +1340,7 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="overwrite">&lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt;</param>
         /// <param name="stream">&lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt;</param>
-        /// <param name="append">append (optional, default to false)</param>
+        /// <param name="append">&lt;p&gt;Append to existing file?&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GenericEntity)</returns>
@@ -1384,7 +1433,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy File Copy a file from source to destination.
+        /// Copy File &lt;p&gt;Copy a file from source to destination.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;File path details.&lt;/p&gt;</param>
@@ -1397,7 +1446,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy File Copy a file from source to destination.
+        /// Copy File &lt;p&gt;Copy a file from source to destination.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;File path details.&lt;/p&gt;</param>
@@ -1483,7 +1532,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy File Copy a file from source to destination.
+        /// Copy File &lt;p&gt;Copy a file from source to destination.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;File path details.&lt;/p&gt;</param>
@@ -1497,7 +1546,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy File Copy a file from source to destination.
+        /// Copy File &lt;p&gt;Copy a file from source to destination.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;File path details.&lt;/p&gt;</param>
@@ -1585,7 +1634,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
+        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;&lt;p&gt;This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-part-path-put.html\&quot;&gt;Upload File Part&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-commit-path-post.html\&quot;&gt;Commit Partial File Upload&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-abort-path-delete.html\&quot;&gt;Abort Multipart File Upload&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -1600,7 +1649,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
+        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;&lt;p&gt;This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-part-path-put.html\&quot;&gt;Upload File Part&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-commit-path-post.html\&quot;&gt;Commit Partial File Upload&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-abort-path-delete.html\&quot;&gt;Abort Multipart File Upload&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -1685,7 +1734,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
+        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;&lt;p&gt;This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-part-path-put.html\&quot;&gt;Upload File Part&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-commit-path-post.html\&quot;&gt;Commit Partial File Upload&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-abort-path-delete.html\&quot;&gt;Abort Multipart File Upload&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -1701,7 +1750,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;
+        /// Create Multipart File Upload &lt;p&gt;Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.&lt;/p&gt;&lt;p&gt;Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.&lt;/p&gt;&lt;p&gt;This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-part-path-put.html\&quot;&gt;Upload File Part&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-upload-commit-path-post.html\&quot;&gt;Commit Partial File Upload&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-files-abort-path-delete.html\&quot;&gt;Abort Multipart File Upload&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -2174,7 +2223,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Extract Zip File Using a Job &lt;p&gt;Extract a zip file on same location. Supported for applications, users and shared folders.&lt;/p&gt;
+        /// Extract Zip File Using a Job &lt;p&gt;Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.&lt;/p&gt;&lt;p&gt;This endpoint is similar to &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;, except it initiates a system job you can monitor using &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. Use this endpoint if you experience failures with &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Zip file path details.&lt;/p&gt;</param>
@@ -2187,7 +2236,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Extract Zip File Using a Job &lt;p&gt;Extract a zip file on same location. Supported for applications, users and shared folders.&lt;/p&gt;
+        /// Extract Zip File Using a Job &lt;p&gt;Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.&lt;/p&gt;&lt;p&gt;This endpoint is similar to &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;, except it initiates a system job you can monitor using &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. Use this endpoint if you experience failures with &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Zip file path details.&lt;/p&gt;</param>
@@ -2273,7 +2322,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Extract Zip File Using a Job &lt;p&gt;Extract a zip file on same location. Supported for applications, users and shared folders.&lt;/p&gt;
+        /// Extract Zip File Using a Job &lt;p&gt;Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.&lt;/p&gt;&lt;p&gt;This endpoint is similar to &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;, except it initiates a system job you can monitor using &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. Use this endpoint if you experience failures with &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Zip file path details.&lt;/p&gt;</param>
@@ -2287,7 +2336,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Extract Zip File Using a Job &lt;p&gt;Extract a zip file on same location. Supported for applications, users and shared folders.&lt;/p&gt;
+        /// Extract Zip File Using a Job &lt;p&gt;Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.&lt;/p&gt;&lt;p&gt;This endpoint is similar to &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;, except it initiates a system job you can monitor using &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. Use this endpoint if you experience failures with &lt;a href&#x3D;\&quot;./op-files-actions-extract-post.html\&quot;&gt;Extract Zip File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Zip file path details.&lt;/p&gt;</param>
@@ -2375,7 +2424,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Shared Path &lt;p&gt;Get user shared path.&lt;/p&gt;
+        /// Get Shared Path &lt;p&gt;Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2387,7 +2436,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Shared Path &lt;p&gt;Get user shared path.&lt;/p&gt;
+        /// Get Shared Path &lt;p&gt;Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2460,7 +2509,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Shared Path &lt;p&gt;Get user shared path.&lt;/p&gt;
+        /// Get Shared Path &lt;p&gt;Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2473,7 +2522,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Shared Path &lt;p&gt;Get user shared path.&lt;/p&gt;
+        /// Get Shared Path &lt;p&gt;Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2548,7 +2597,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Home Path &lt;p&gt;Get user home path.&lt;/p&gt;
+        /// Get Home Path &lt;p&gt;Get the home path of the current logged in user.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2560,7 +2609,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Home Path &lt;p&gt;Get user home path.&lt;/p&gt;
+        /// Get Home Path &lt;p&gt;Get the home path of the current logged in user.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2633,7 +2682,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Home Path &lt;p&gt;Get user home path.&lt;/p&gt;
+        /// Get Home Path &lt;p&gt;Get the home path of the current logged in user.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2646,7 +2695,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Home Path &lt;p&gt;Get user home path.&lt;/p&gt;
+        /// Get Home Path &lt;p&gt;Get the home path of the current logged in user.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2728,6 +2777,7 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="type">&lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">&lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="action">&lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="fileSize">&lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
@@ -2735,9 +2785,9 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Recursive param to get search result as recursive.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>FileCollectionResponse</returns>
-        public FileCollectionResponse FilesListFiles(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0)
+        public FileCollectionResponse FilesListFiles(string path, int? offset = default, int? limit = default, string type = default, string orderBy = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = FilesListFilesWithHttpInfo(path, offset, limit, type, overwrite, action, fileSize, filter, recursive);
+            EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = FilesListFilesWithHttpInfo(path, offset, limit, type, orderBy, overwrite, action, fileSize, filter, recursive);
             return localVarResponse.Data;
         }
 
@@ -2749,6 +2799,7 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="type">&lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">&lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="action">&lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="fileSize">&lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
@@ -2756,7 +2807,7 @@ namespace EssSharp.Api
         /// <param name="recursive">&lt;p&gt;Recursive param to get search result as recursive.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of FileCollectionResponse</returns>
-        public EssSharp.Client.ApiResponse<FileCollectionResponse> FilesListFilesWithHttpInfo(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<FileCollectionResponse> FilesListFilesWithHttpInfo(string path, int? offset = default, int? limit = default, string type = default, string orderBy = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -2800,6 +2851,10 @@ namespace EssSharp.Api
             if (type != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "type", type));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
             if (overwrite != null)
             {
@@ -2870,6 +2925,7 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="type">&lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">&lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="action">&lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="fileSize">&lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
@@ -2878,9 +2934,9 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FileCollectionResponse</returns>
-        public async System.Threading.Tasks.Task<FileCollectionResponse> FilesListFilesAsync(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<FileCollectionResponse> FilesListFilesAsync(string path, int? offset = default, int? limit = default, string type = default, string orderBy = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = await FilesListFilesWithHttpInfoAsync(path, offset, limit, type, overwrite, action, fileSize, filter, recursive, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<FileCollectionResponse> localVarResponse = await FilesListFilesWithHttpInfoAsync(path, offset, limit, type, orderBy, overwrite, action, fileSize, filter, recursive, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2892,6 +2948,7 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; (optional)</param>
         /// <param name="type">&lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">&lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="overwrite">&lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="action">&lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
         /// <param name="fileSize">&lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; (optional)</param>
@@ -2900,7 +2957,7 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FileCollectionResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FileCollectionResponse>> FilesListFilesWithHttpInfoAsync(string path, int? offset = default, int? limit = default, string type = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FileCollectionResponse>> FilesListFilesWithHttpInfoAsync(string path, int? offset = default, int? limit = default, string type = default, string orderBy = default, bool? overwrite = default, string action = default, long? fileSize = default, string filter = default, bool? recursive = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -2944,6 +3001,10 @@ namespace EssSharp.Api
             if (type != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "type", type));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
             if (overwrite != null)
             {
@@ -3406,35 +3467,47 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Commit Partial File Upload &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
+        /// Commit Multipart File Upload &lt;p&gt;Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path"></param>
-        /// <param name="uploadId"> (optional)</param>
-        /// <param name="body"> (optional)</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Request body for committing a partial file upload. Must include an array of all part numbers and corresponding Etags (entity tags). Example: &lt;code&gt;{&amp;quot;1&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a150e1&amp;quot;,&amp;quot;2&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a151e1&amp;quot;}&lt;/code&gt;&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CommitFilePartUploadResponse</returns>
-        public CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0)
+        public CommitFilePartUploadResponse FilesUploadCommit(string path, string uploadId, Dictionary<string, string> body, int operationIndex = 0)
         {
             EssSharp.Client.ApiResponse<CommitFilePartUploadResponse> localVarResponse = FilesUploadCommitWithHttpInfo(path, uploadId, body);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Commit Partial File Upload &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
+        /// Commit Multipart File Upload &lt;p&gt;Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path"></param>
-        /// <param name="uploadId"> (optional)</param>
-        /// <param name="body"> (optional)</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Request body for committing a partial file upload. Must include an array of all part numbers and corresponding Etags (entity tags). Example: &lt;code&gt;{&amp;quot;1&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a150e1&amp;quot;,&amp;quot;2&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a151e1&amp;quot;}&lt;/code&gt;&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CommitFilePartUploadResponse</returns>
-        public EssSharp.Client.ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<CommitFilePartUploadResponse> FilesUploadCommitWithHttpInfo(string path, string uploadId, Dictionary<string, string> body, int operationIndex = 0)
         {
             // verify the required parameter 'path' is set
             if (path == null)
             {
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'path' when calling FilesApi->FilesUploadCommit");
+            }
+
+            // verify the required parameter 'uploadId' is set
+            if (uploadId == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'uploadId' when calling FilesApi->FilesUploadCommit");
+            }
+
+            // verify the required parameter 'body' is set
+            if (body == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'body' when calling FilesApi->FilesUploadCommit");
             }
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -3464,10 +3537,7 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("path", EssSharp.Client.ClientUtils.ParameterToString(path)); // path parameter
-            if (uploadId != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "uploadId", uploadId));
-            }
+            localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "uploadId", uploadId));
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "FilesApi.FilesUploadCommit";
@@ -3511,37 +3581,49 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Commit Partial File Upload &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
+        /// Commit Multipart File Upload &lt;p&gt;Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path"></param>
-        /// <param name="uploadId"> (optional)</param>
-        /// <param name="body"> (optional)</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Request body for committing a partial file upload. Must include an array of all part numbers and corresponding Etags (entity tags). Example: &lt;code&gt;{&amp;quot;1&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a150e1&amp;quot;,&amp;quot;2&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a151e1&amp;quot;}&lt;/code&gt;&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CommitFilePartUploadResponse</returns>
-        public async System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<CommitFilePartUploadResponse> FilesUploadCommitAsync(string path, string uploadId, Dictionary<string, string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             EssSharp.Client.ApiResponse<CommitFilePartUploadResponse> localVarResponse = await FilesUploadCommitWithHttpInfoAsync(path, uploadId, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Commit Partial File Upload &lt;p&gt;Commit the upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
+        /// Commit Multipart File Upload &lt;p&gt;Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="path"></param>
-        /// <param name="uploadId"> (optional)</param>
-        /// <param name="body"> (optional)</param>
+        /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
+        /// <param name="uploadId">&lt;p&gt;Upload ID of partial file upload initiation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Request body for committing a partial file upload. Must include an array of all part numbers and corresponding Etags (entity tags). Example: &lt;code&gt;{&amp;quot;1&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a150e1&amp;quot;,&amp;quot;2&amp;quot;:&amp;quot;9ac601f6-cc23-437a-9a55-93d581a151e1&amp;quot;}&lt;/code&gt;&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CommitFilePartUploadResponse)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId = default, Dictionary<string, string> body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CommitFilePartUploadResponse>> FilesUploadCommitWithHttpInfoAsync(string path, string uploadId, Dictionary<string, string> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'path' is set
             if (path == null)
             {
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'path' when calling FilesApi->FilesUploadCommit");
+            }
+
+            // verify the required parameter 'uploadId' is set
+            if (uploadId == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'uploadId' when calling FilesApi->FilesUploadCommit");
+            }
+
+            // verify the required parameter 'body' is set
+            if (body == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'body' when calling FilesApi->FilesUploadCommit");
             }
 
 
@@ -3571,10 +3653,7 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("path", EssSharp.Client.ClientUtils.ParameterToString(path)); // path parameter
-            if (uploadId != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "uploadId", uploadId));
-            }
+            localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "uploadId", uploadId));
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "FilesApi.FilesUploadCommit";
@@ -3619,7 +3698,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
+        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;&lt;p&gt;Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -3634,7 +3713,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
+        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;&lt;p&gt;Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -3725,7 +3804,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
+        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;&lt;p&gt;Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -3741,7 +3820,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;
+        /// Upload File Part &lt;p&gt;Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.&lt;/p&gt;&lt;p&gt;Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="path">&lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt;</param>
@@ -3824,6 +3903,185 @@ namespace EssSharp.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("FilesUploadPart", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        public void GetObjectStoreURI(string path = default, int operationIndex = 0)
+        {
+            GetObjectStoreURIWithHttpInfo(path);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public EssSharp.Client.ApiResponse<Object> GetObjectStoreURIWithHttpInfo(string path = default, int operationIndex = 0)
+        {
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            if (path != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "path", path));
+            }
+
+            localVarRequestOptions.Operation = "FilesApi.GetObjectStoreURI";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (OAuth2) required
+            // oauth required
+            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+                {
+                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+                }
+                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                         this.Configuration.OAuthFlow != null)
+                {
+                    localVarRequestOptions.OAuth = true;
+                }
+            }
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<Object>("/files/getobjectstoreuri", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetObjectStoreURI", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task GetObjectStoreURIAsync(string path = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        {
+            await GetObjectStoreURIWithHttpInfoAsync(path, operationIndex, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="path"> (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GetObjectStoreURIWithHttpInfoAsync(string path = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        {
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            if (path != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "path", path));
+            }
+
+            localVarRequestOptions.Operation = "FilesApi.GetObjectStoreURI";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (OAuth2) required
+            // oauth required
+            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+                {
+                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+                }
+                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                         this.Configuration.OAuthFlow != null)
+                {
+                    localVarRequestOptions.OAuth = true;
+                }
+            }
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/files/getobjectstoreuri", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetObjectStoreURI", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

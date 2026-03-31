@@ -34,10 +34,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"> (optional, default to true)</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Grid</returns>
-        Grid GridExecute(string applicationName, string databaseName, GridOperation body = default, int operationIndex = 0);
+        Grid GridExecute(string applicationName, string databaseName, bool? svParity = default, GridOperation body = default, int operationIndex = 0);
 
         /// <summary>
         /// Execute Grid Operation
@@ -48,10 +49,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"> (optional, default to true)</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Grid</returns>
-        ApiResponse<Grid> GridExecuteWithHttpInfo(string applicationName, string databaseName, GridOperation body = default, int operationIndex = 0);
+        ApiResponse<Grid> GridExecuteWithHttpInfo(string applicationName, string databaseName, bool? svParity = default, GridOperation body = default, int operationIndex = 0);
         /// <summary>
         /// Execute Grid Layout
         /// </summary>
@@ -180,11 +182,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"> (optional, default to true)</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        System.Threading.Tasks.Task<Grid> GridExecuteAsync(string applicationName, string databaseName, GridOperation body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Grid> GridExecuteAsync(string applicationName, string databaseName, bool? svParity = default, GridOperation body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Execute Grid Operation
@@ -195,11 +198,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"> (optional, default to true)</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Grid>> GridExecuteWithHttpInfoAsync(string applicationName, string databaseName, GridOperation body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Grid>> GridExecuteWithHttpInfoAsync(string applicationName, string databaseName, bool? svParity = default, GridOperation body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Execute Grid Layout
         /// </summary>
@@ -444,12 +448,13 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"> (optional, default to true)</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Grid</returns>
-        public Grid GridExecute(string applicationName, string databaseName, GridOperation body = default, int operationIndex = 0)
+        public Grid GridExecute(string applicationName, string databaseName, bool? svParity = default, GridOperation body = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<Grid> localVarResponse = GridExecuteWithHttpInfo(applicationName, databaseName, body);
+            EssSharp.Client.ApiResponse<Grid> localVarResponse = GridExecuteWithHttpInfo(applicationName, databaseName, svParity, body);
             return localVarResponse.Data;
         }
 
@@ -459,10 +464,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"> (optional, default to true)</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Grid</returns>
-        public EssSharp.Client.ApiResponse<Grid> GridExecuteWithHttpInfo(string applicationName, string databaseName, GridOperation body = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Grid> GridExecuteWithHttpInfo(string applicationName, string databaseName, bool? svParity = default, GridOperation body = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -503,6 +509,10 @@ namespace EssSharp.Api
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
             localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            if (svParity != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "svParity", svParity));
+            }
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "GridApi.GridExecute";
@@ -551,13 +561,14 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"> (optional, default to true)</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Grid</returns>
-        public async System.Threading.Tasks.Task<Grid> GridExecuteAsync(string applicationName, string databaseName, GridOperation body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Grid> GridExecuteAsync(string applicationName, string databaseName, bool? svParity = default, GridOperation body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<Grid> localVarResponse = await GridExecuteWithHttpInfoAsync(applicationName, databaseName, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<Grid> localVarResponse = await GridExecuteWithHttpInfoAsync(applicationName, databaseName, svParity, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -567,11 +578,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"> (optional, default to true)</param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridExecuteWithHttpInfoAsync(string applicationName, string databaseName, GridOperation body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Grid>> GridExecuteWithHttpInfoAsync(string applicationName, string databaseName, bool? svParity = default, GridOperation body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -612,6 +624,10 @@ namespace EssSharp.Api
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
             localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            if (svParity != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "svParity", svParity));
+            }
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "GridApi.GridExecute";

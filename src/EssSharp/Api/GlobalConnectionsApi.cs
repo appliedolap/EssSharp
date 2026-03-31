@@ -26,10 +26,10 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Create Connection
+        /// Create Global Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;
+        /// &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-connections-connectionname-wallet-put.html\&quot;&gt;Upload Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
@@ -38,10 +38,10 @@ namespace EssSharp.Api
         void GlobalConnectionsCreateConnection(Connection body, int operationIndex = 0);
 
         /// <summary>
-        /// Create Connection
+        /// Create Global Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;
+        /// &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-connections-connectionname-wallet-put.html\&quot;&gt;Upload Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
@@ -49,7 +49,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> GlobalConnectionsCreateConnectionWithHttpInfo(Connection body, int operationIndex = 0);
         /// <summary>
-        /// Delete Connection
+        /// Delete Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
@@ -61,7 +61,7 @@ namespace EssSharp.Api
         void GlobalConnectionsDeleteConnection(string connectionName, int operationIndex = 0);
 
         /// <summary>
-        /// Delete Connection
+        /// Delete Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
@@ -72,7 +72,27 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> GlobalConnectionsDeleteConnectionWithHttpInfo(string connectionName, int operationIndex = 0);
         /// <summary>
-        /// Get Connection
+        /// List dependamt connection names
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="connection"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        void GlobalConnectionsDependantconnections(string connection, int operationIndex = 0);
+
+        /// <summary>
+        /// List dependamt connection names
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="connection"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> GlobalConnectionsDependantconnectionsWithHttpInfo(string connection, int operationIndex = 0);
+        /// <summary>
+        /// Get Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
@@ -85,7 +105,7 @@ namespace EssSharp.Api
         Connection GlobalConnectionsGetConnectionDetails(string connectionName, bool? password = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Connection
+        /// Get Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
@@ -97,7 +117,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Connection</returns>
         ApiResponse<Connection> GlobalConnectionsGetConnectionDetailsWithHttpInfo(string connectionName, bool? password = default, int operationIndex = 0);
         /// <summary>
-        /// List Connections
+        /// List Global Connections
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
@@ -113,7 +133,7 @@ namespace EssSharp.Api
         ConnectionsList GlobalConnectionsGetConnections(int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0);
 
         /// <summary>
-        /// List Connections
+        /// List Global Connections
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
@@ -128,30 +148,32 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of ConnectionsList</returns>
         ApiResponse<ConnectionsList> GlobalConnectionsGetConnectionsWithHttpInfo(int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0);
         /// <summary>
-        /// Test New Connection
+        /// Test New Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void GlobalConnectionsTestConnection(Connection body, int operationIndex = 0);
+        void GlobalConnectionsTestConnection(Connection body, bool? validateName = default, int operationIndex = 0);
 
         /// <summary>
-        /// Test New Connection
+        /// Test New Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> GlobalConnectionsTestConnectionWithHttpInfo(Connection body, int operationIndex = 0);
+        ApiResponse<Object> GlobalConnectionsTestConnectionWithHttpInfo(Connection body, bool? validateName = default, int operationIndex = 0);
         /// <summary>
-        /// Test Saved Connection
+        /// Test Saved Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
@@ -163,7 +185,7 @@ namespace EssSharp.Api
         void GlobalConnectionsTestConnectionExisting(string connectionName, int operationIndex = 0);
 
         /// <summary>
-        /// Test Saved Connection
+        /// Test Saved Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
@@ -174,7 +196,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> GlobalConnectionsTestConnectionExistingWithHttpInfo(string connectionName, int operationIndex = 0);
         /// <summary>
-        /// Update Connection
+        /// Update Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
@@ -187,7 +209,7 @@ namespace EssSharp.Api
         Connection GlobalConnectionsUpdateConnection(string connectionName, Connection body, int operationIndex = 0);
 
         /// <summary>
-        /// Update Connection
+        /// Update Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
@@ -199,7 +221,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Connection</returns>
         ApiResponse<Connection> GlobalConnectionsUpdateConnectionWithHttpInfo(string connectionName, Connection body, int operationIndex = 0);
         /// <summary>
-        /// Upload Connection Wallet File
+        /// Upload Global Connection Wallet File
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
@@ -211,7 +233,7 @@ namespace EssSharp.Api
         WalletLocation GlobalConnectionsWallets(string connectionName, int operationIndex = 0);
 
         /// <summary>
-        /// Upload Connection Wallet File
+        /// Upload Global Connection Wallet File
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
@@ -231,10 +253,10 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Create Connection
+        /// Create Global Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;
+        /// &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-connections-connectionname-wallet-put.html\&quot;&gt;Upload Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
@@ -244,10 +266,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task GlobalConnectionsCreateConnectionAsync(Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Create Connection
+        /// Create Global Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;
+        /// &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-connections-connectionname-wallet-put.html\&quot;&gt;Upload Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
@@ -256,7 +278,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> GlobalConnectionsCreateConnectionWithHttpInfoAsync(Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Delete Connection
+        /// Delete Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
@@ -269,7 +291,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task GlobalConnectionsDeleteConnectionAsync(string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Delete Connection
+        /// Delete Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
@@ -281,7 +303,32 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> GlobalConnectionsDeleteConnectionWithHttpInfoAsync(string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Connection
+        /// List dependamt connection names
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="connection"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task GlobalConnectionsDependantconnectionsAsync(string connection, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// List dependamt connection names
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="connection"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> GlobalConnectionsDependantconnectionsWithHttpInfoAsync(string connection, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Get Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
@@ -295,7 +342,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Connection> GlobalConnectionsGetConnectionDetailsAsync(string connectionName, bool? password = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Connection
+        /// Get Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
@@ -308,7 +355,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Connection)</returns>
         System.Threading.Tasks.Task<ApiResponse<Connection>> GlobalConnectionsGetConnectionDetailsWithHttpInfoAsync(string connectionName, bool? password = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// List Connections
+        /// List Global Connections
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
@@ -325,7 +372,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<ConnectionsList> GlobalConnectionsGetConnectionsAsync(int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// List Connections
+        /// List Global Connections
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
@@ -341,32 +388,34 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (ConnectionsList)</returns>
         System.Threading.Tasks.Task<ApiResponse<ConnectionsList>> GlobalConnectionsGetConnectionsWithHttpInfoAsync(int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Test New Connection
+        /// Test New Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task GlobalConnectionsTestConnectionAsync(Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task GlobalConnectionsTestConnectionAsync(Connection body, bool? validateName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Test New Connection
+        /// Test New Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> GlobalConnectionsTestConnectionWithHttpInfoAsync(Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Object>> GlobalConnectionsTestConnectionWithHttpInfoAsync(Connection body, bool? validateName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Test Saved Connection
+        /// Test Saved Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
@@ -379,7 +428,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task GlobalConnectionsTestConnectionExistingAsync(string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Test Saved Connection
+        /// Test Saved Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
@@ -391,7 +440,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> GlobalConnectionsTestConnectionExistingWithHttpInfoAsync(string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Update Connection
+        /// Update Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
@@ -405,7 +454,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Connection> GlobalConnectionsUpdateConnectionAsync(string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Update Connection
+        /// Update Global Connection
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
@@ -418,7 +467,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Connection)</returns>
         System.Threading.Tasks.Task<ApiResponse<Connection>> GlobalConnectionsUpdateConnectionWithHttpInfoAsync(string connectionName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Upload Connection Wallet File
+        /// Upload Global Connection Wallet File
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
@@ -431,7 +480,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<WalletLocation> GlobalConnectionsWalletsAsync(string connectionName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Upload Connection Wallet File
+        /// Upload Global Connection Wallet File
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
@@ -563,7 +612,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Connection &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;
+        /// Create Global Connection &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-connections-connectionname-wallet-put.html\&quot;&gt;Upload Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
@@ -575,7 +624,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Connection &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;
+        /// Create Global Connection &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-connections-connectionname-wallet-put.html\&quot;&gt;Upload Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
@@ -656,7 +705,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Connection &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;
+        /// Create Global Connection &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-connections-connectionname-wallet-put.html\&quot;&gt;Upload Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
@@ -669,7 +718,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Connection &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;
+        /// Create Global Connection &lt;p&gt;Creates a connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of connection.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-connections-connectionname-wallet-put.html\&quot;&gt;Upload Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
@@ -752,7 +801,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Connection &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
+        /// Delete Global Connection &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -764,7 +813,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Connection &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
+        /// Delete Global Connection &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -843,7 +892,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Connection &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
+        /// Delete Global Connection &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -856,7 +905,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Connection &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
+        /// Delete Global Connection &lt;p&gt;Deletes a named global connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -937,7 +986,192 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Connection &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
+        /// List dependamt connection names 
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="connection"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns></returns>
+        public void GlobalConnectionsDependantconnections(string connection, int operationIndex = 0)
+        {
+            GlobalConnectionsDependantconnectionsWithHttpInfo(connection);
+        }
+
+        /// <summary>
+        /// List dependamt connection names 
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="connection"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public EssSharp.Client.ApiResponse<Object> GlobalConnectionsDependantconnectionsWithHttpInfo(string connection, int operationIndex = 0)
+        {
+            // verify the required parameter 'connection' is set
+            if (connection == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'connection' when calling GlobalConnectionsApi->GlobalConnectionsDependantconnections");
+            }
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("connection", EssSharp.Client.ClientUtils.ParameterToString(connection)); // path parameter
+
+            localVarRequestOptions.Operation = "GlobalConnectionsApi.GlobalConnectionsDependantconnections";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (OAuth2) required
+            // oauth required
+            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+                {
+                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+                }
+                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                         this.Configuration.OAuthFlow != null)
+                {
+                    localVarRequestOptions.OAuth = true;
+                }
+            }
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<Object>("/connections/{connection}/getdependentconnections", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GlobalConnectionsDependantconnections", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List dependamt connection names 
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="connection"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task GlobalConnectionsDependantconnectionsAsync(string connection, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        {
+            await GlobalConnectionsDependantconnectionsWithHttpInfoAsync(connection, operationIndex, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// List dependamt connection names 
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="connection"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GlobalConnectionsDependantconnectionsWithHttpInfoAsync(string connection, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'connection' is set
+            if (connection == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'connection' when calling GlobalConnectionsApi->GlobalConnectionsDependantconnections");
+            }
+
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("connection", EssSharp.Client.ClientUtils.ParameterToString(connection)); // path parameter
+
+            localVarRequestOptions.Operation = "GlobalConnectionsApi.GlobalConnectionsDependantconnections";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (OAuth2) required
+            // oauth required
+            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+                {
+                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+                }
+                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                         this.Configuration.OAuthFlow != null)
+                {
+                    localVarRequestOptions.OAuth = true;
+                }
+            }
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<Object>("/connections/{connection}/getdependentconnections", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GlobalConnectionsDependantconnections", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get Global Connection &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -951,7 +1185,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Connection &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
+        /// Get Global Connection &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1037,7 +1271,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Connection &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
+        /// Get Global Connection &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1052,7 +1286,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Connection &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
+        /// Get Global Connection &lt;p&gt;Returns details about the specified global connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1140,7 +1374,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Connections &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
+        /// List Global Connections &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
@@ -1157,7 +1391,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Connections &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
+        /// List Global Connections &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
@@ -1255,7 +1489,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Connections &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
+        /// List Global Connections &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
@@ -1273,7 +1507,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Connections &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
+        /// List Global Connections &lt;p&gt;Returns global connections list, including details such as name, description, and type.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
@@ -1373,25 +1607,27 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Test New Connection &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
+        /// Test New Global Connection &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void GlobalConnectionsTestConnection(Connection body, int operationIndex = 0)
+        public void GlobalConnectionsTestConnection(Connection body, bool? validateName = default, int operationIndex = 0)
         {
-            GlobalConnectionsTestConnectionWithHttpInfo(body);
+            GlobalConnectionsTestConnectionWithHttpInfo(body, validateName);
         }
 
         /// <summary>
-        /// Test New Connection &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
+        /// Test New Global Connection &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> GlobalConnectionsTestConnectionWithHttpInfo(Connection body, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> GlobalConnectionsTestConnectionWithHttpInfo(Connection body, bool? validateName = default, int operationIndex = 0)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1423,6 +1659,10 @@ namespace EssSharp.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
+            if (validateName != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "validateName", validateName));
+            }
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "GlobalConnectionsApi.GlobalConnectionsTestConnection";
@@ -1466,27 +1706,29 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Test New Connection &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
+        /// Test New Global Connection &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task GlobalConnectionsTestConnectionAsync(Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task GlobalConnectionsTestConnectionAsync(Connection body, bool? validateName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            await GlobalConnectionsTestConnectionWithHttpInfoAsync(body, operationIndex, cancellationToken).ConfigureAwait(false);
+            await GlobalConnectionsTestConnectionWithHttpInfoAsync(body, validateName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Test New Connection &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
+        /// Test New Global Connection &lt;p&gt;Tests a new or updated global connection, using specified inputs, without saving it.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GlobalConnectionsTestConnectionWithHttpInfoAsync(Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> GlobalConnectionsTestConnectionWithHttpInfoAsync(Connection body, bool? validateName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'body' is set
             if (body == null)
@@ -1518,6 +1760,10 @@ namespace EssSharp.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
+            if (validateName != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "validateName", validateName));
+            }
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "GlobalConnectionsApi.GlobalConnectionsTestConnection";
@@ -1562,7 +1808,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Test Saved Connection &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
+        /// Test Saved Global Connection &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1574,7 +1820,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Test Saved Connection &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
+        /// Test Saved Global Connection &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1653,7 +1899,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Test Saved Connection &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
+        /// Test Saved Global Connection &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1666,7 +1912,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Test Saved Connection &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
+        /// Test Saved Global Connection &lt;p&gt;Tests a saved global connection by name.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1747,7 +1993,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Connection &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// Update Global Connection &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1761,7 +2007,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Connection &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// Update Global Connection &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1852,7 +2098,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Connection &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// Update Global Connection &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1867,7 +2113,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Connection &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
+        /// Update Global Connection &lt;p&gt;Update the named global connection. If the update is successful, returns details about the updated connection. &lt;code&gt;type&lt;/code&gt; is a required input for all types of connections. Other required inputs differ based on the type of the connection.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1960,7 +2206,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload Connection Wallet File &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
+        /// Upload Global Connection Wallet File &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -1973,7 +2219,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload Connection Wallet File &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
+        /// Upload Global Connection Wallet File &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -2054,7 +2300,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload Connection Wallet File &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
+        /// Upload Global Connection Wallet File &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>
@@ -2068,7 +2314,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Upload Connection Wallet File &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
+        /// Upload Global Connection Wallet File &lt;p&gt;Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt;</param>

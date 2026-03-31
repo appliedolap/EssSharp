@@ -135,9 +135,10 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApplicationConfigList</returns>
-        ApplicationConfigList ApplicationConfigurationGetConfigurations(string applicationName, int operationIndex = 0);
+        ApplicationConfigList ApplicationConfigurationGetConfigurations(string applicationName, string orderBy = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Application Configuration
@@ -147,9 +148,10 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApplicationConfigList</returns>
-        ApiResponse<ApplicationConfigList> ApplicationConfigurationGetConfigurationsWithHttpInfo(string applicationName, int operationIndex = 0);
+        ApiResponse<ApplicationConfigList> ApplicationConfigurationGetConfigurationsWithHttpInfo(string applicationName, string orderBy = default, int operationIndex = 0);
         /// <summary>
         /// Update Application Configuration
         /// </summary>
@@ -178,7 +180,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of ApplicationConfigEntry</returns>
         ApiResponse<ApplicationConfigEntry> ApplicationConfigurationSetConfigurationWithHttpInfo(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0);
         /// <summary>
-        /// Updates Application Configurations
+        /// Update Application Configurations
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
@@ -191,7 +193,7 @@ namespace EssSharp.Api
         ApplicationConfigList ApplicationConfigurationSetConfigurations(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0);
 
         /// <summary>
-        /// Updates Application Configurations
+        /// Update Application Configurations
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
@@ -329,10 +331,11 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigList</returns>
-        System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationGetConfigurationsAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationGetConfigurationsAsync(string applicationName, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Configuration
@@ -342,10 +345,11 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigList>> ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<ApplicationConfigList>> ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(string applicationName, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Update Application Configuration
         /// </summary>
@@ -376,7 +380,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (ApplicationConfigEntry)</returns>
         System.Threading.Tasks.Task<ApiResponse<ApplicationConfigEntry>> ApplicationConfigurationSetConfigurationWithHttpInfoAsync(string applicationName, string configId, ApplicationConfigEntry body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Updates Application Configurations
+        /// Update Application Configurations
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
@@ -390,7 +394,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationSetConfigurationsAsync(string applicationName, List<ApplicationConfigEntry> body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Updates Application Configurations
+        /// Update Application Configurations
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
@@ -1367,11 +1371,12 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApplicationConfigList</returns>
-        public ApplicationConfigList ApplicationConfigurationGetConfigurations(string applicationName, int operationIndex = 0)
+        public ApplicationConfigList ApplicationConfigurationGetConfigurations(string applicationName, string orderBy = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<ApplicationConfigList> localVarResponse = ApplicationConfigurationGetConfigurationsWithHttpInfo(applicationName);
+            EssSharp.Client.ApiResponse<ApplicationConfigList> localVarResponse = ApplicationConfigurationGetConfigurationsWithHttpInfo(applicationName, orderBy);
             return localVarResponse.Data;
         }
 
@@ -1380,9 +1385,10 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApplicationConfigList</returns>
-        public EssSharp.Client.ApiResponse<ApplicationConfigList> ApplicationConfigurationGetConfigurationsWithHttpInfo(string applicationName, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ApplicationConfigList> ApplicationConfigurationGetConfigurationsWithHttpInfo(string applicationName, string orderBy = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1415,6 +1421,10 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
+            }
 
             localVarRequestOptions.Operation = "ApplicationConfigurationApi.ApplicationConfigurationGetConfigurations";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1461,12 +1471,13 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationConfigList</returns>
-        public async System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationGetConfigurationsAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApplicationConfigList> ApplicationConfigurationGetConfigurationsAsync(string applicationName, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<ApplicationConfigList> localVarResponse = await ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(applicationName, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<ApplicationConfigList> localVarResponse = await ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(applicationName, orderBy, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1475,10 +1486,11 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationConfigList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigList>> ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationConfigList>> ApplicationConfigurationGetConfigurationsWithHttpInfoAsync(string applicationName, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1511,6 +1523,10 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
+            }
 
             localVarRequestOptions.Operation = "ApplicationConfigurationApi.ApplicationConfigurationGetConfigurations";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1785,7 +1801,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Updates Application Configurations &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
+        /// Update Application Configurations &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1799,7 +1815,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Updates Application Configurations &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
+        /// Update Application Configurations &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1890,7 +1906,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Updates Application Configurations &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
+        /// Update Application Configurations &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1905,7 +1921,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Updates Application Configurations &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
+        /// Update Application Configurations &lt;p&gt;Updates the application configurations and returns the updated configuration details.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

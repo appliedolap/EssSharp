@@ -29,7 +29,7 @@ namespace EssSharp.Api
         /// Get Essbase URLs
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the list of available Essbase URLs.&lt;/p&gt;
+        /// &lt;p&gt;Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path &lt;code&gt;/essbase/&lt;/code&gt;.&lt;/p&gt; &lt;p&gt;The default secured port is 9001, unless it was changed during deployment.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -40,7 +40,7 @@ namespace EssSharp.Api
         /// Get Essbase URLs
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the list of available Essbase URLs.&lt;/p&gt;
+        /// &lt;p&gt;Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path &lt;code&gt;/essbase/&lt;/code&gt;.&lt;/p&gt; &lt;p&gt;The default secured port is 9001, unless it was changed during deployment.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -59,7 +59,7 @@ namespace EssSharp.Api
         /// Get Essbase URLs
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the list of available Essbase URLs.&lt;/p&gt;
+        /// &lt;p&gt;Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path &lt;code&gt;/essbase/&lt;/code&gt;.&lt;/p&gt; &lt;p&gt;The default secured port is 9001, unless it was changed during deployment.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -71,7 +71,7 @@ namespace EssSharp.Api
         /// Get Essbase URLs
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns the list of available Essbase URLs.&lt;/p&gt;
+        /// &lt;p&gt;Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path &lt;code&gt;/essbase/&lt;/code&gt;.&lt;/p&gt; &lt;p&gt;The default secured port is 9001, unless it was changed during deployment.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -199,7 +199,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Essbase URLs &lt;p&gt;Returns the list of available Essbase URLs.&lt;/p&gt;
+        /// Get Essbase URLs &lt;p&gt;Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path &lt;code&gt;/essbase/&lt;/code&gt;.&lt;/p&gt; &lt;p&gt;The default secured port is 9001, unless it was changed during deployment.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -211,7 +211,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Essbase URLs &lt;p&gt;Returns the list of available Essbase URLs.&lt;/p&gt;
+        /// Get Essbase URLs &lt;p&gt;Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path &lt;code&gt;/essbase/&lt;/code&gt;.&lt;/p&gt; &lt;p&gt;The default secured port is 9001, unless it was changed during deployment.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -284,7 +284,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Essbase URLs &lt;p&gt;Returns the list of available Essbase URLs.&lt;/p&gt;
+        /// Get Essbase URLs &lt;p&gt;Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path &lt;code&gt;/essbase/&lt;/code&gt;.&lt;/p&gt; &lt;p&gt;The default secured port is 9001, unless it was changed during deployment.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -297,7 +297,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Essbase URLs &lt;p&gt;Returns the list of available Essbase URLs.&lt;/p&gt;
+        /// Get Essbase URLs &lt;p&gt;Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path &lt;code&gt;/essbase/&lt;/code&gt;.&lt;/p&gt; &lt;p&gt;The default secured port is 9001, unless it was changed during deployment.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>

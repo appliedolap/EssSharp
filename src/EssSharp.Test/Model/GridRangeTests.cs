@@ -53,15 +53,6 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Types'
-        /// </summary>
-        [Fact]
-        public void TypesTest()
-        {
-            // TODO unit test for the property 'Types'
-        }
-
-        /// <summary>
         /// Test the property 'Statuses'
         /// </summary>
         [Fact]
@@ -98,12 +89,12 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Filters'
+        /// Test the property 'Types'
         /// </summary>
         [Fact]
-        public void FiltersTest()
+        public void TypesTest()
         {
-            // TODO unit test for the property 'Filters'
+            // TODO unit test for the property 'Types'
         }
 
         /// <summary>
@@ -113,6 +104,15 @@ namespace EssSharp.Test.Model
         public void StartTest()
         {
             // TODO unit test for the property 'Start'
+        }
+
+        /// <summary>
+        /// Test the property 'Filters'
+        /// </summary>
+        [Fact]
+        public void FiltersTest()
+        {
+            // TODO unit test for the property 'Filters'
         }
 
         /// <summary>

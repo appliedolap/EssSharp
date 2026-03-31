@@ -71,15 +71,6 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Groups'
-        /// </summary>
-        [Fact]
-        public void GroupsTest()
-        {
-            // TODO unit test for the property 'Groups'
-        }
-
-        /// <summary>
         /// Test the property 'Email'
         /// </summary>
         [Fact]
@@ -89,12 +80,12 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Password'
+        /// Test the property 'Groups'
         /// </summary>
         [Fact]
-        public void PasswordTest()
+        public void GroupsTest()
         {
-            // TODO unit test for the property 'Password'
+            // TODO unit test for the property 'Groups'
         }
 
         /// <summary>
@@ -104,6 +95,15 @@ namespace EssSharp.Test.Model
         public void RoleTest()
         {
             // TODO unit test for the property 'Role'
+        }
+
+        /// <summary>
+        /// Test the property 'Password'
+        /// </summary>
+        [Fact]
+        public void PasswordTest()
+        {
+            // TODO unit test for the property 'Password'
         }
 
         /// <summary>

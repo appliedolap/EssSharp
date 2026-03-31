@@ -17,7 +17,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Create Server Property
 
-<p>Adds a Provider Services configuration property at the Essbase server level. These properties help you manage network timeout parameters.</p>
+<p>Adds a Provider Services configuration property at the Essbase Server level. These properties help you manage network timeout parameters.</p>
 
 ### Example
 ```csharp
@@ -42,7 +42,7 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PropertiesApi(config);
-            var body = new PropertyEntry(); // PropertyEntry | Property entry
+            var body = new PropertyEntry(); // PropertyEntry | <p>Property entry.</p>
 
             try
             {
@@ -85,7 +85,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **body** | [**PropertyEntry**](PropertyEntry.md) | Property entry |  |
+| **body** | [**PropertyEntry**](PropertyEntry.md) | &lt;p&gt;Property entry.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -204,7 +204,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | successful operation |  -  |
+| **200** | &lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successful operation.&lt;/p&gt; |  -  |
 | **204** | &lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Property is deleted successfully. Returns the property details and the links to get/edit the property.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to delete the property. The JSON for the property may be incorrect, or the specified property may have already been deleted.&lt;/p&gt; |  -  |
 | **415** | &lt;p&gt;&lt;strong&gt;Not Acceptable&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The media type isn&#39;t supported or wasn&#39;t specified.&lt;/p&gt; |  -  |
@@ -218,7 +218,7 @@ catch (ApiException e)
 
 Get Server Properties
 
-<p>Returns the Provider Services configuration properties available at the Essbase server level to help you manage network timeout parameters.</p>
+<p>Returns the Provider Services configuration properties available at the Essbase Server level to help you manage network timeout parameters.</p>
 
 ### Example
 ```csharp
@@ -411,7 +411,7 @@ catch (ApiException e)
 
 Update Property Values
 
-<p>Updates the Provider Services properties in the Essbase Server, and returns the list of updated properties.</p>
+<p>Updates Provider Services configuration property values in the Essbase Server, and returns the list of updated properties.</p>
 
 ### Example
 ```csharp
@@ -511,7 +511,7 @@ catch (ApiException e)
 
 Update Server Property
 
-<p>Updates a Provider Services configuration property in the Essbase Server, and returns the list of updated properties.</p>
+<p>Updates a Provider Services property in the Essbase Server, and returns the updated property.</p>
 
 ### Example
 ```csharp

@@ -60,5 +60,14 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Dimensions'
         }
+
+        /// <summary>
+        /// Test the property 'PivotDimension'
+        /// </summary>
+        [Fact]
+        public void PivotDimensionTest()
+        {
+            // TODO unit test for the property 'PivotDimension'
+        }
     }
 }

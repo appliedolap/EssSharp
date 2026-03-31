@@ -63,8 +63,6 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Preferences" /> class.
         /// </summary>
-        /// <param name="indentation">indentation.</param>
-        /// <param name="rowSupression">rowSupression.</param>
         /// <param name="columnSupression">columnSupression.</param>
         /// <param name="cellText">cellText.</param>
         /// <param name="zoomIn">zoomIn.</param>
@@ -78,11 +76,11 @@ namespace EssSharp.Model
         /// <param name="noAccessText">noAccessText.</param>
         /// <param name="formulaRetention">formulaRetention.</param>
         /// <param name="maxColumns">maxColumns.</param>
+        /// <param name="indentation">indentation.</param>
+        /// <param name="rowSupression">rowSupression.</param>
         /// <param name="maxRows">maxRows.</param>
-        public Preferences(IndentationEnum? indentation = default, RowSuppression rowSupression = default, ColumnSuppression columnSupression = default, bool cellText = default, ZoomIn zoomIn = default, bool navigate = default, bool includeSelection = default, bool repeatMemberLabels = default, bool withinSelectedGroup = default, bool removeUnSelectedGroup = default, bool includeDescriptionLabel = default, string missingText = default, string noAccessText = default, FormulaRetention formulaRetention = default, long maxColumns = default, long maxRows = default)
+        public Preferences(ColumnSuppression columnSupression = default, bool cellText = default, ZoomIn zoomIn = default, bool navigate = default, bool includeSelection = default, bool repeatMemberLabels = default, bool withinSelectedGroup = default, bool removeUnSelectedGroup = default, bool includeDescriptionLabel = default, string missingText = default, string noAccessText = default, FormulaRetention formulaRetention = default, long maxColumns = default, IndentationEnum? indentation = default, RowSuppression rowSupression = default, long maxRows = default)
         {
-            this.Indentation = indentation;
-            this.RowSupression = rowSupression;
             this.ColumnSupression = columnSupression;
             this.CellText = cellText;
             this.ZoomIn = zoomIn;
@@ -96,14 +94,10 @@ namespace EssSharp.Model
             this.NoAccessText = noAccessText;
             this.FormulaRetention = formulaRetention;
             this.MaxColumns = maxColumns;
+            this.Indentation = indentation;
+            this.RowSupression = rowSupression;
             this.MaxRows = maxRows;
         }
-
-        /// <summary>
-        /// Gets or Sets RowSupression
-        /// </summary>
-        [DataMember(Name = "rowSupression", EmitDefaultValue = false)]
-        public RowSuppression RowSupression { get; set; }
 
         /// <summary>
         /// Gets or Sets ColumnSupression
@@ -184,6 +178,12 @@ namespace EssSharp.Model
         public long MaxColumns { get; set; }
 
         /// <summary>
+        /// Gets or Sets RowSupression
+        /// </summary>
+        [DataMember(Name = "rowSupression", EmitDefaultValue = false)]
+        public RowSuppression RowSupression { get; set; }
+
+        /// <summary>
         /// Gets or Sets MaxRows
         /// </summary>
         [DataMember(Name = "maxRows", EmitDefaultValue = false)]
@@ -197,8 +197,6 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Preferences {\n");
-            sb.Append("  Indentation: ").Append(Indentation).Append("\n");
-            sb.Append("  RowSupression: ").Append(RowSupression).Append("\n");
             sb.Append("  ColumnSupression: ").Append(ColumnSupression).Append("\n");
             sb.Append("  CellText: ").Append(CellText).Append("\n");
             sb.Append("  ZoomIn: ").Append(ZoomIn).Append("\n");
@@ -212,6 +210,8 @@ namespace EssSharp.Model
             sb.Append("  NoAccessText: ").Append(NoAccessText).Append("\n");
             sb.Append("  FormulaRetention: ").Append(FormulaRetention).Append("\n");
             sb.Append("  MaxColumns: ").Append(MaxColumns).Append("\n");
+            sb.Append("  Indentation: ").Append(Indentation).Append("\n");
+            sb.Append("  RowSupression: ").Append(RowSupression).Append("\n");
             sb.Append("  MaxRows: ").Append(MaxRows).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

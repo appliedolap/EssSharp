@@ -28,7 +28,7 @@ namespace EssSharp.Api
         /// Get Audit Data
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;p&gt;
+        /// &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;/p&gt;&lt;p&gt;The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -42,7 +42,7 @@ namespace EssSharp.Api
         /// Get Audit Data
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;p&gt;
+        /// &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;/p&gt;&lt;p&gt;The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -91,7 +91,7 @@ namespace EssSharp.Api
         /// Get Audit Data
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;p&gt;
+        /// &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;/p&gt;&lt;p&gt;The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -106,7 +106,7 @@ namespace EssSharp.Api
         /// Get Audit Data
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;p&gt;
+        /// &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;/p&gt;&lt;p&gt;The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -266,7 +266,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Audit Data &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;p&gt;
+        /// Get Audit Data &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;/p&gt;&lt;p&gt;The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -281,7 +281,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Audit Data &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;p&gt;
+        /// Get Audit Data &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;/p&gt;&lt;p&gt;The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -375,7 +375,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Audit Data &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;p&gt;
+        /// Get Audit Data &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;/p&gt;&lt;p&gt;The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -391,7 +391,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Audit Data &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;p&gt;
+        /// Get Audit Data &lt;p&gt;Returns audit trail data in CSV string format if &lt;code&gt;Accept&#x3D;&#39;text/csv&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;text/plain&#39;&lt;/code&gt;. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, returns audit data as a CSV stream to download. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt;, returns the audit data list in JSON format.&lt;/p&gt;&lt;p&gt;The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>

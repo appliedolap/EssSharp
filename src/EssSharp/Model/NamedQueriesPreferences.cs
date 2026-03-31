@@ -72,7 +72,8 @@ namespace EssSharp.Model
         /// <param name="textList">textList.</param>
         /// <param name="urlDrillThrough">urlDrillThrough.</param>
         /// <param name="memberIdentifierType">memberIdentifierType.</param>
-        public NamedQueriesPreferences(bool dataless = default, bool hideRestrictedData = default, bool cellAttributes = default, bool formatString = default, bool formatValues = default, bool meaninglessCells = default, bool textList = default, bool urlDrillThrough = default, MemberIdentifierTypeEnum? memberIdentifierType = default)
+        /// <param name="aliasTableName">aliasTableName.</param>
+        public NamedQueriesPreferences(bool dataless = default, bool hideRestrictedData = default, bool cellAttributes = default, bool formatString = default, bool formatValues = default, bool meaninglessCells = default, bool textList = default, bool urlDrillThrough = default, MemberIdentifierTypeEnum? memberIdentifierType = default, string aliasTableName = default)
         {
             this.Dataless = dataless;
             this.HideRestrictedData = hideRestrictedData;
@@ -83,6 +84,7 @@ namespace EssSharp.Model
             this.TextList = textList;
             this.UrlDrillThrough = urlDrillThrough;
             this.MemberIdentifierType = memberIdentifierType;
+            this.AliasTableName = aliasTableName;
         }
 
         /// <summary>
@@ -134,6 +136,12 @@ namespace EssSharp.Model
         public bool UrlDrillThrough { get; set; }
 
         /// <summary>
+        /// Gets or Sets AliasTableName
+        /// </summary>
+        [DataMember(Name = "aliasTableName", EmitDefaultValue = false)]
+        public string AliasTableName { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -150,6 +158,7 @@ namespace EssSharp.Model
             sb.Append("  TextList: ").Append(TextList).Append("\n");
             sb.Append("  UrlDrillThrough: ").Append(UrlDrillThrough).Append("\n");
             sb.Append("  MemberIdentifierType: ").Append(MemberIdentifierType).Append("\n");
+            sb.Append("  AliasTableName: ").Append(AliasTableName).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

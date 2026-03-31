@@ -29,12 +29,12 @@ namespace EssSharp.Api
         /// Create Location Alias
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a new location alias in the given application and database.&lt;/p&gt;
+        /// &lt;p&gt;Create a new location alias in the given application and database (cube).&lt;/p&gt; &lt;p&gt;A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Location alias definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void LocationAliasesCreate(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0);
@@ -43,12 +43,12 @@ namespace EssSharp.Api
         /// Create Location Alias
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a new location alias in the given application and database.&lt;/p&gt;
+        /// &lt;p&gt;Create a new location alias in the given application and database (cube).&lt;/p&gt; &lt;p&gt;A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Location alias definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> LocationAliasesCreateWithHttpInfo(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0);
@@ -107,10 +107,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of LocationAliasBean</returns>
         ApiResponse<LocationAliasBean> LocationAliasesGetLocationAliasWithHttpInfo(string applicationName, string databaseName, string aliasName, int operationIndex = 0);
         /// <summary>
-        /// Get Location Alias
+        /// Get Location Aliases
         /// </summary>
         /// <remarks>
-        /// Get Location Alias
+        /// &lt;p&gt;Gets details about location aliases defined on the database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -125,10 +125,10 @@ namespace EssSharp.Api
         LocationAliasList LocationAliasesGetLocationAliases(string applicationName, string databaseName, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Location Alias
+        /// Get Location Aliases
         /// </summary>
         /// <remarks>
-        /// Get Location Alias
+        /// &lt;p&gt;Gets details about location aliases defined on the database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -148,8 +148,8 @@ namespace EssSharp.Api
         /// &lt;p&gt;Updates location alias with new application and database. Not supported when location alias is defined across Essbase instances.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
         /// <param name="aliasName">&lt;p&gt;Location alias name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -163,8 +163,8 @@ namespace EssSharp.Api
         /// &lt;p&gt;Updates location alias with new application and database. Not supported when location alias is defined across Essbase instances.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
         /// <param name="aliasName">&lt;p&gt;Location alias name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -183,12 +183,12 @@ namespace EssSharp.Api
         /// Create Location Alias
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a new location alias in the given application and database.&lt;/p&gt;
+        /// &lt;p&gt;Create a new location alias in the given application and database (cube).&lt;/p&gt; &lt;p&gt;A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Location alias definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -198,12 +198,12 @@ namespace EssSharp.Api
         /// Create Location Alias
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a new location alias in the given application and database.&lt;/p&gt;
+        /// &lt;p&gt;Create a new location alias in the given application and database (cube).&lt;/p&gt; &lt;p&gt;A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Location alias definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -267,10 +267,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (LocationAliasBean)</returns>
         System.Threading.Tasks.Task<ApiResponse<LocationAliasBean>> LocationAliasesGetLocationAliasWithHttpInfoAsync(string applicationName, string databaseName, string aliasName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Location Alias
+        /// Get Location Aliases
         /// </summary>
         /// <remarks>
-        /// Get Location Alias
+        /// &lt;p&gt;Gets details about location aliases defined on the database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -286,10 +286,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<LocationAliasList> LocationAliasesGetLocationAliasesAsync(string applicationName, string databaseName, int? offset = default, int? limit = default, string serverName = default, string applicationName2 = default, string databaseName2 = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Location Alias
+        /// Get Location Aliases
         /// </summary>
         /// <remarks>
-        /// Get Location Alias
+        /// &lt;p&gt;Gets details about location aliases defined on the database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -310,8 +310,8 @@ namespace EssSharp.Api
         /// &lt;p&gt;Updates location alias with new application and database. Not supported when location alias is defined across Essbase instances.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
         /// <param name="aliasName">&lt;p&gt;Location alias name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -326,8 +326,8 @@ namespace EssSharp.Api
         /// &lt;p&gt;Updates location alias with new application and database. Not supported when location alias is defined across Essbase instances.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
         /// <param name="aliasName">&lt;p&gt;Location alias name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -455,12 +455,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Location Alias &lt;p&gt;Creates a new location alias in the given application and database.&lt;/p&gt;
+        /// Create Location Alias &lt;p&gt;Create a new location alias in the given application and database (cube).&lt;/p&gt; &lt;p&gt;A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Location alias definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void LocationAliasesCreate(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0)
@@ -469,12 +469,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Location Alias &lt;p&gt;Creates a new location alias in the given application and database.&lt;/p&gt;
+        /// Create Location Alias &lt;p&gt;Create a new location alias in the given application and database (cube).&lt;/p&gt; &lt;p&gt;A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Location alias definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> LocationAliasesCreateWithHttpInfo(string applicationName, string databaseName, LocationAliasBean body, int operationIndex = 0)
@@ -566,12 +566,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Location Alias &lt;p&gt;Creates a new location alias in the given application and database.&lt;/p&gt;
+        /// Create Location Alias &lt;p&gt;Create a new location alias in the given application and database (cube).&lt;/p&gt; &lt;p&gt;A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Location alias definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -581,12 +581,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Location Alias &lt;p&gt;Creates a new location alias in the given application and database.&lt;/p&gt;
+        /// Create Location Alias &lt;p&gt;Create a new location alias in the given application and database (cube).&lt;/p&gt; &lt;p&gt;A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Location alias definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -1128,7 +1128,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Location Alias Get Location Alias
+        /// Get Location Aliases &lt;p&gt;Gets details about location aliases defined on the database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1147,7 +1147,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Location Alias Get Location Alias
+        /// Get Location Aliases &lt;p&gt;Gets details about location aliases defined on the database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1261,7 +1261,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Location Alias Get Location Alias
+        /// Get Location Aliases &lt;p&gt;Gets details about location aliases defined on the database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1281,7 +1281,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Location Alias Get Location Alias
+        /// Get Location Aliases &lt;p&gt;Gets details about location aliases defined on the database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1400,8 +1400,8 @@ namespace EssSharp.Api
         /// Update Location Alias &lt;p&gt;Updates location alias with new application and database. Not supported when location alias is defined across Essbase instances.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
         /// <param name="aliasName">&lt;p&gt;Location alias name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1415,8 +1415,8 @@ namespace EssSharp.Api
         /// Update Location Alias &lt;p&gt;Updates location alias with new application and database. Not supported when location alias is defined across Essbase instances.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
         /// <param name="aliasName">&lt;p&gt;Location alias name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1520,8 +1520,8 @@ namespace EssSharp.Api
         /// Update Location Alias &lt;p&gt;Updates location alias with new application and database. Not supported when location alias is defined across Essbase instances.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
         /// <param name="aliasName">&lt;p&gt;Location alias name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1536,8 +1536,8 @@ namespace EssSharp.Api
         /// Update Location Alias &lt;p&gt;Updates location alias with new application and database. Not supported when location alias is defined across Essbase instances.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="applicationName">&lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt;</param>
         /// <param name="aliasName">&lt;p&gt;Location alias name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Location alias details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>

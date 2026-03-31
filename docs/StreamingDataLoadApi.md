@@ -117,7 +117,7 @@ catch (ApiException e)
 
 Start Data Load
 
-<p>Starts streaming data load.</p>
+<p>Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls <a href=\"./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\">Push Data</a> and <a href=\"./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\">End Data Load</a>.</p>
 
 ### Example
 ```csharp
@@ -142,7 +142,7 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new StreamingDataLoadApi(config);
-            var applicationName = "applicationName_example";  // string | Application name
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
             var body = new DataLoadStartPayload(); // DataLoadStartPayload | <p>Data load options such as rule file name and delimiter.</p> (optional) 
 
@@ -187,7 +187,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **applicationName** | **string** | Application name |  |
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **body** | [**DataLoadStartPayload**](DataLoadStartPayload.md) | &lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; | [optional]  |
 
@@ -247,8 +247,8 @@ namespace Example
             var apiInstance = new StreamingDataLoadApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var streamId = "streamId_example";  // string | <p>Stream ID.</p>
-            var body = "body_example";  // string | <p>CSV data.</p> (optional) 
+            var streamId = "streamId_example";  // string | <p>Stream ID returned from the Start Data Load operation.</p>
+            var body = "body_example";  // string | <p>Comma-separated data.</p> (optional) 
 
             try
             {
@@ -293,8 +293,8 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **streamId** | **string** | &lt;p&gt;Stream ID.&lt;/p&gt; |  |
-| **body** | **string** | &lt;p&gt;CSV data.&lt;/p&gt; | [optional]  |
+| **streamId** | **string** | &lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt; |  |
+| **body** | **string** | &lt;p&gt;Comma-separated data.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -313,7 +313,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Data pushed successfully; includes links to push more data and end data load if  &lt;code&gt;links&#x3D;true&lt;/code&gt; parameter is passed.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Data pushed successfully; includes links to push more data and end data load if &lt;code&gt;links&#x3D;true&lt;/code&gt; parameter is passed.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to push data. The stream ID may be invalid.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 

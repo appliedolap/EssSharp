@@ -29,7 +29,7 @@ namespace EssSharp.Api
         /// Create Application Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-applications-applicationname-connections-connectionname-wallet-put.html\&quot;&gt;Upload Application Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -42,7 +42,7 @@ namespace EssSharp.Api
         /// Create Application Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-applications-applicationname-connections-connectionname-wallet-put.html\&quot;&gt;Upload Application Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -113,8 +113,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="connType">&lt;p&gt;Type of connections to return, if provided&lt;/p&gt; (optional)</param>
-        /// <param name="repoConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="repoConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="walletConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ConnectionsList</returns>
         ConnectionsList ApplicationConnectionsGetConnections(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0);
@@ -130,8 +130,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="connType">&lt;p&gt;Type of connections to return, if provided&lt;/p&gt; (optional)</param>
-        /// <param name="repoConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="repoConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="walletConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ConnectionsList</returns>
         ApiResponse<ConnectionsList> ApplicationConnectionsGetConnectionsWithHttpInfo(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0);
@@ -144,9 +144,10 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void ApplicationConnectionsTestConnection(string applicationName, Connection body, int operationIndex = 0);
+        void ApplicationConnectionsTestConnection(string applicationName, Connection body, bool? validateName = default, int operationIndex = 0);
 
         /// <summary>
         /// Test New Application Connection
@@ -157,9 +158,10 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> ApplicationConnectionsTestConnectionWithHttpInfo(string applicationName, Connection body, int operationIndex = 0);
+        ApiResponse<Object> ApplicationConnectionsTestConnectionWithHttpInfo(string applicationName, Connection body, bool? validateName = default, int operationIndex = 0);
         /// <summary>
         /// Test Saved Application Connection
         /// </summary>
@@ -250,7 +252,7 @@ namespace EssSharp.Api
         /// Create Application Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-applications-applicationname-connections-connectionname-wallet-put.html\&quot;&gt;Upload Application Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -264,7 +266,7 @@ namespace EssSharp.Api
         /// Create Application Connection
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-applications-applicationname-connections-connectionname-wallet-put.html\&quot;&gt;Upload Application Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -340,8 +342,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="connType">&lt;p&gt;Type of connections to return, if provided&lt;/p&gt; (optional)</param>
-        /// <param name="repoConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="repoConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="walletConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ConnectionsList</returns>
@@ -358,8 +360,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="connType">&lt;p&gt;Type of connections to return, if provided&lt;/p&gt; (optional)</param>
-        /// <param name="repoConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="repoConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="walletConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ConnectionsList)</returns>
@@ -373,10 +375,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task ApplicationConnectionsTestConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task ApplicationConnectionsTestConnectionAsync(string applicationName, Connection body, bool? validateName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Test New Application Connection
@@ -387,10 +390,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsTestConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationConnectionsTestConnectionWithHttpInfoAsync(string applicationName, Connection body, bool? validateName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Test Saved Application Connection
         /// </summary>
@@ -595,7 +599,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
+        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-applications-applicationname-connections-connectionname-wallet-put.html\&quot;&gt;Upload Application Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -608,7 +612,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
+        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-applications-applicationname-connections-connectionname-wallet-put.html\&quot;&gt;Upload Application Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -697,7 +701,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
+        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-applications-applicationname-connections-connectionname-wallet-put.html\&quot;&gt;Upload Application Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -711,7 +715,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;
+        /// Create Application Connection &lt;p&gt;Creates an application-level connection based on specified inputs. &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;type&lt;/code&gt; are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.&lt;/p&gt;&lt;p&gt;A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.&lt;/p&gt;&lt;p&gt;If you are creating a connection to Autonomous Data Warehouse, see also &lt;a href&#x3D;\&quot;./op-applications-applicationname-connections-connectionname-wallet-put.html\&quot;&gt;Upload Application Connection Wallet File&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1233,8 +1237,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="connType">&lt;p&gt;Type of connections to return, if provided&lt;/p&gt; (optional)</param>
-        /// <param name="repoConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="repoConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="walletConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ConnectionsList</returns>
         public ConnectionsList ApplicationConnectionsGetConnections(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0)
@@ -1251,8 +1255,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="connType">&lt;p&gt;Type of connections to return, if provided&lt;/p&gt; (optional)</param>
-        /// <param name="repoConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="repoConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="walletConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ConnectionsList</returns>
         public EssSharp.Client.ApiResponse<ConnectionsList> ApplicationConnectionsGetConnectionsWithHttpInfo(string applicationName, int? offset = default, int? limit = default, string connType = default, bool? repoConn = default, bool? walletConn = default, int operationIndex = 0)
@@ -1357,8 +1361,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="connType">&lt;p&gt;Type of connections to return, if provided&lt;/p&gt; (optional)</param>
-        /// <param name="repoConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="repoConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="walletConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ConnectionsList</returns>
@@ -1376,8 +1380,8 @@ namespace EssSharp.Api
         /// <param name="offset">&lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
         /// <param name="limit">&lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; (optional, default to 50)</param>
         /// <param name="connType">&lt;p&gt;Type of connections to return, if provided&lt;/p&gt; (optional)</param>
-        /// <param name="repoConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
-        /// <param name="walletConn">&lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="repoConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="walletConn">&lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ConnectionsList)</returns>
@@ -1482,11 +1486,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void ApplicationConnectionsTestConnection(string applicationName, Connection body, int operationIndex = 0)
+        public void ApplicationConnectionsTestConnection(string applicationName, Connection body, bool? validateName = default, int operationIndex = 0)
         {
-            ApplicationConnectionsTestConnectionWithHttpInfo(applicationName, body);
+            ApplicationConnectionsTestConnectionWithHttpInfo(applicationName, body, validateName);
         }
 
         /// <summary>
@@ -1495,9 +1500,10 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> ApplicationConnectionsTestConnectionWithHttpInfo(string applicationName, Connection body, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> ApplicationConnectionsTestConnectionWithHttpInfo(string applicationName, Connection body, bool? validateName = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1536,6 +1542,10 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            if (validateName != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "validateName", validateName));
+            }
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "ApplicationConnectionsApi.ApplicationConnectionsTestConnection";
@@ -1584,12 +1594,13 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task ApplicationConnectionsTestConnectionAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task ApplicationConnectionsTestConnectionAsync(string applicationName, Connection body, bool? validateName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            await ApplicationConnectionsTestConnectionWithHttpInfoAsync(applicationName, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            await ApplicationConnectionsTestConnectionWithHttpInfoAsync(applicationName, body, validateName, operationIndex, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1598,10 +1609,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Connection details.&lt;/p&gt;</param>
+        /// <param name="validateName">&lt;p&gt;Validate if connection name already exists.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsTestConnectionWithHttpInfoAsync(string applicationName, Connection body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> ApplicationConnectionsTestConnectionWithHttpInfoAsync(string applicationName, Connection body, bool? validateName = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1640,6 +1652,10 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            if (validateName != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "validateName", validateName));
+            }
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "ApplicationConnectionsApi.ApplicationConnectionsTestConnection";

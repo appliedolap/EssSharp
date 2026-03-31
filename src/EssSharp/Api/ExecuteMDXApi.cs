@@ -35,7 +35,7 @@ namespace EssSharp.Api
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
-        /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Object</returns>
         Object MDXExecuteMDX(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0);
@@ -50,7 +50,7 @@ namespace EssSharp.Api
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
-        /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object</returns>
         ApiResponse<Object> MDXExecuteMDXWithHttpInfo(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0);
@@ -58,31 +58,33 @@ namespace EssSharp.Api
         /// Run MDX Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;
+        /// &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;&lt;p&gt;See also:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-post.html\&quot;&gt;Save MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-get.html\&quot;&gt;List MDX Reports&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-get.html\&quot;&gt;List MDX Report Details&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-put.html\&quot;&gt;Update MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-delete.html\&quot;&gt;Delete MDX Report&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;MDX report name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
+        /// <param name="aliasTable">&lt;p&gt;Alias table name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Object</returns>
-        Object MDXExecutenq(string application, string database, string name, string format = default, int operationIndex = 0);
+        Object MDXExecutenq(string application, string database, string name, string format = default, string aliasTable = default, int operationIndex = 0);
 
         /// <summary>
         /// Run MDX Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;
+        /// &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;&lt;p&gt;See also:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-post.html\&quot;&gt;Save MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-get.html\&quot;&gt;List MDX Reports&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-get.html\&quot;&gt;List MDX Report Details&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-put.html\&quot;&gt;Update MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-delete.html\&quot;&gt;Delete MDX Report&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;MDX report name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
+        /// <param name="aliasTable">&lt;p&gt;Alias table name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> MDXExecutenqWithHttpInfo(string application, string database, string name, string format = default, int operationIndex = 0);
+        ApiResponse<Object> MDXExecutenqWithHttpInfo(string application, string database, string name, string format = default, string aliasTable = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -102,7 +104,7 @@ namespace EssSharp.Api
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
-        /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
@@ -118,7 +120,7 @@ namespace EssSharp.Api
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
-        /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
@@ -127,33 +129,35 @@ namespace EssSharp.Api
         /// Run MDX Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;
+        /// &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;&lt;p&gt;See also:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-post.html\&quot;&gt;Save MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-get.html\&quot;&gt;List MDX Reports&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-get.html\&quot;&gt;List MDX Report Details&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-put.html\&quot;&gt;Update MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-delete.html\&quot;&gt;Delete MDX Report&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;MDX report name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
+        /// <param name="aliasTable">&lt;p&gt;Alias table name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> MDXExecutenqAsync(string application, string database, string name, string format = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Object> MDXExecutenqAsync(string application, string database, string name, string format = default, string aliasTable = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Run MDX Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;
+        /// &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;&lt;p&gt;See also:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-post.html\&quot;&gt;Save MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-get.html\&quot;&gt;List MDX Reports&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-get.html\&quot;&gt;List MDX Report Details&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-put.html\&quot;&gt;Update MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-delete.html\&quot;&gt;Delete MDX Report&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;MDX report name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
+        /// <param name="aliasTable">&lt;p&gt;Alias table name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> MDXExecutenqWithHttpInfoAsync(string application, string database, string name, string format = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Object>> MDXExecutenqWithHttpInfoAsync(string application, string database, string name, string format = default, string aliasTable = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -281,7 +285,7 @@ namespace EssSharp.Api
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
-        /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Object</returns>
         public Object MDXExecuteMDX(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0)
@@ -297,7 +301,7 @@ namespace EssSharp.Api
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
-        /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object</returns>
         public EssSharp.Client.ApiResponse<Object> MDXExecuteMDXWithHttpInfo(string application, string database, string format = default, MDXInput body = default, int operationIndex = 0)
@@ -394,7 +398,7 @@ namespace EssSharp.Api
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
-        /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
@@ -411,7 +415,7 @@ namespace EssSharp.Api
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
-        /// <param name="body">&lt;p&gt;MDX query and preferences.&lt;/p&gt; (optional)</param>
+        /// <param name="body">&lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
@@ -504,32 +508,34 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Run MDX Report &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;
+        /// Run MDX Report &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;&lt;p&gt;See also:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-post.html\&quot;&gt;Save MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-get.html\&quot;&gt;List MDX Reports&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-get.html\&quot;&gt;List MDX Report Details&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-put.html\&quot;&gt;Update MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-delete.html\&quot;&gt;Delete MDX Report&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;MDX report name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
+        /// <param name="aliasTable">&lt;p&gt;Alias table name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Object</returns>
-        public Object MDXExecutenq(string application, string database, string name, string format = default, int operationIndex = 0)
+        public Object MDXExecutenq(string application, string database, string name, string format = default, string aliasTable = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<Object> localVarResponse = MDXExecutenqWithHttpInfo(application, database, name, format);
+            EssSharp.Client.ApiResponse<Object> localVarResponse = MDXExecutenqWithHttpInfo(application, database, name, format, aliasTable);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Run MDX Report &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;
+        /// Run MDX Report &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;&lt;p&gt;See also:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-post.html\&quot;&gt;Save MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-get.html\&quot;&gt;List MDX Reports&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-get.html\&quot;&gt;List MDX Report Details&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-put.html\&quot;&gt;Update MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-delete.html\&quot;&gt;Delete MDX Report&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;MDX report name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
+        /// <param name="aliasTable">&lt;p&gt;Alias table name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object</returns>
-        public EssSharp.Client.ApiResponse<Object> MDXExecutenqWithHttpInfo(string application, string database, string name, string format = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> MDXExecutenqWithHttpInfo(string application, string database, string name, string format = default, string aliasTable = default, int operationIndex = 0)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -579,6 +585,10 @@ namespace EssSharp.Api
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "format", format));
             }
+            if (aliasTable != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "aliasTable", aliasTable));
+            }
 
             localVarRequestOptions.Operation = "ExecuteMDXApi.MDXExecutenq";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -621,34 +631,36 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Run MDX Report &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;
+        /// Run MDX Report &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;&lt;p&gt;See also:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-post.html\&quot;&gt;Save MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-get.html\&quot;&gt;List MDX Reports&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-get.html\&quot;&gt;List MDX Report Details&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-put.html\&quot;&gt;Update MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-delete.html\&quot;&gt;Delete MDX Report&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;MDX report name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
+        /// <param name="aliasTable">&lt;p&gt;Alias table name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> MDXExecutenqAsync(string application, string database, string name, string format = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Object> MDXExecutenqAsync(string application, string database, string name, string format = default, string aliasTable = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<Object> localVarResponse = await MDXExecutenqWithHttpInfoAsync(application, database, name, format, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<Object> localVarResponse = await MDXExecutenqWithHttpInfoAsync(application, database, name, format, aliasTable, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Run MDX Report &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;
+        /// Run MDX Report &lt;p&gt;Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.&lt;/p&gt;&lt;p&gt;See also:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-post.html\&quot;&gt;Save MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-get.html\&quot;&gt;List MDX Reports&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-get.html\&quot;&gt;List MDX Report Details&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-put.html\&quot;&gt;Update MDX Report&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-application-databases-database-queries-query-delete.html\&quot;&gt;Delete MDX Report&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="name">&lt;p&gt;MDX report name.&lt;/p&gt;</param>
         /// <param name="format">&lt;p&gt;Result format.&lt;/p&gt; (optional, default to JSON)</param>
+        /// <param name="aliasTable">&lt;p&gt;Alias table name.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> MDXExecutenqWithHttpInfoAsync(string application, string database, string name, string format = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> MDXExecutenqWithHttpInfoAsync(string application, string database, string name, string format = default, string aliasTable = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'application' is set
             if (application == null)
@@ -697,6 +709,10 @@ namespace EssSharp.Api
             if (format != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "format", format));
+            }
+            if (aliasTable != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "aliasTable", aliasTable));
             }
 
             localVarRequestOptions.Operation = "ExecuteMDXApi.MDXExecutenq";

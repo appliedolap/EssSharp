@@ -55,7 +55,7 @@ namespace EssSharp.Api
         /// &lt;p&gt;Executes the job and returns the record containing job information, such as job ID, status, inputs, and output information for the current job.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">parameter provided as json string in the request body</param>
+        /// <param name="body">&lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>JobRecordBean</returns>
         JobRecordBean JobsExecuteJob(JobsInputBean body, int operationIndex = 0);
@@ -67,7 +67,7 @@ namespace EssSharp.Api
         /// &lt;p&gt;Executes the job and returns the record containing job information, such as job ID, status, inputs, and output information for the current job.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">parameter provided as json string in the request body</param>
+        /// <param name="body">&lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of JobRecordBean</returns>
         ApiResponse<JobRecordBean> JobsExecuteJobWithHttpInfo(JobsInputBean body, int operationIndex = 0);
@@ -153,37 +153,37 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of JobStatisticsBean</returns>
         ApiResponse<JobStatisticsBean> JobsGetJobStatisticsWithHttpInfo(string userId, int operationIndex = 0);
         /// <summary>
-        /// Delete jobs
+        /// Delete Jobs
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes jobs data older than the specified time.&lt;/p&gt;
+        /// &lt;p&gt;Deletes jobs data based on query parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
+        /// <param name="olderthan">&lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; (optional)</param>
         /// <param name="rangeStartTime">&lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="rangeEndTime">&lt;p&gt;End Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="jobtype">&lt;p&gt;Job Type.&lt;/p&gt; (optional)</param>
-        /// <param name="jobstatus">&lt;p&gt;Job Status.&lt;/p&gt; (optional)</param>
+        /// <param name="jobtype">&lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; (optional)</param>
+        /// <param name="jobstatus">&lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void JobsPurge(long? olderthan = default, long? rangeStartTime = default, long? rangeEndTime = default, string application = default, string database = default, string jobtype = default, int? jobstatus = default, int operationIndex = 0);
 
         /// <summary>
-        /// Delete jobs
+        /// Delete Jobs
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes jobs data older than the specified time.&lt;/p&gt;
+        /// &lt;p&gt;Deletes jobs data based on query parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
+        /// <param name="olderthan">&lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; (optional)</param>
         /// <param name="rangeStartTime">&lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="rangeEndTime">&lt;p&gt;End Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="jobtype">&lt;p&gt;Job Type.&lt;/p&gt; (optional)</param>
-        /// <param name="jobstatus">&lt;p&gt;Job Status.&lt;/p&gt; (optional)</param>
+        /// <param name="jobtype">&lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; (optional)</param>
+        /// <param name="jobstatus">&lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> JobsPurgeWithHttpInfo(long? olderthan = default, long? rangeStartTime = default, long? rangeEndTime = default, string application = default, string database = default, string jobtype = default, int? jobstatus = default, int operationIndex = 0);
@@ -228,7 +228,7 @@ namespace EssSharp.Api
         /// &lt;p&gt;Executes the job and returns the record containing job information, such as job ID, status, inputs, and output information for the current job.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">parameter provided as json string in the request body</param>
+        /// <param name="body">&lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordBean</returns>
@@ -241,7 +241,7 @@ namespace EssSharp.Api
         /// &lt;p&gt;Executes the job and returns the record containing job information, such as job ID, status, inputs, and output information for the current job.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">parameter provided as json string in the request body</param>
+        /// <param name="body">&lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordBean)</returns>
@@ -334,38 +334,38 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (JobStatisticsBean)</returns>
         System.Threading.Tasks.Task<ApiResponse<JobStatisticsBean>> JobsGetJobStatisticsWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Delete jobs
+        /// Delete Jobs
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes jobs data older than the specified time.&lt;/p&gt;
+        /// &lt;p&gt;Deletes jobs data based on query parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
+        /// <param name="olderthan">&lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; (optional)</param>
         /// <param name="rangeStartTime">&lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="rangeEndTime">&lt;p&gt;End Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="jobtype">&lt;p&gt;Job Type.&lt;/p&gt; (optional)</param>
-        /// <param name="jobstatus">&lt;p&gt;Job Status.&lt;/p&gt; (optional)</param>
+        /// <param name="jobtype">&lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; (optional)</param>
+        /// <param name="jobstatus">&lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task JobsPurgeAsync(long? olderthan = default, long? rangeStartTime = default, long? rangeEndTime = default, string application = default, string database = default, string jobtype = default, int? jobstatus = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Delete jobs
+        /// Delete Jobs
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes jobs data older than the specified time.&lt;/p&gt;
+        /// &lt;p&gt;Deletes jobs data based on query parameters.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
+        /// <param name="olderthan">&lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; (optional)</param>
         /// <param name="rangeStartTime">&lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="rangeEndTime">&lt;p&gt;End Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="jobtype">&lt;p&gt;Job Type.&lt;/p&gt; (optional)</param>
-        /// <param name="jobstatus">&lt;p&gt;Job Status.&lt;/p&gt; (optional)</param>
+        /// <param name="jobtype">&lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; (optional)</param>
+        /// <param name="jobstatus">&lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -673,7 +673,7 @@ namespace EssSharp.Api
         /// Execute Job &lt;p&gt;Executes the job and returns the record containing job information, such as job ID, status, inputs, and output information for the current job.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">parameter provided as json string in the request body</param>
+        /// <param name="body">&lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>JobRecordBean</returns>
         public JobRecordBean JobsExecuteJob(JobsInputBean body, int operationIndex = 0)
@@ -686,7 +686,7 @@ namespace EssSharp.Api
         /// Execute Job &lt;p&gt;Executes the job and returns the record containing job information, such as job ID, status, inputs, and output information for the current job.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">parameter provided as json string in the request body</param>
+        /// <param name="body">&lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of JobRecordBean</returns>
         public EssSharp.Client.ApiResponse<JobRecordBean> JobsExecuteJobWithHttpInfo(JobsInputBean body, int operationIndex = 0)
@@ -767,7 +767,7 @@ namespace EssSharp.Api
         /// Execute Job &lt;p&gt;Executes the job and returns the record containing job information, such as job ID, status, inputs, and output information for the current job.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">parameter provided as json string in the request body</param>
+        /// <param name="body">&lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of JobRecordBean</returns>
@@ -781,7 +781,7 @@ namespace EssSharp.Api
         /// Execute Job &lt;p&gt;Executes the job and returns the record containing job information, such as job ID, status, inputs, and output information for the current job.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">parameter provided as json string in the request body</param>
+        /// <param name="body">&lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (JobRecordBean)</returns>
@@ -1496,16 +1496,16 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete jobs &lt;p&gt;Deletes jobs data older than the specified time.&lt;/p&gt;
+        /// Delete Jobs &lt;p&gt;Deletes jobs data based on query parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
+        /// <param name="olderthan">&lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; (optional)</param>
         /// <param name="rangeStartTime">&lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="rangeEndTime">&lt;p&gt;End Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="jobtype">&lt;p&gt;Job Type.&lt;/p&gt; (optional)</param>
-        /// <param name="jobstatus">&lt;p&gt;Job Status.&lt;/p&gt; (optional)</param>
+        /// <param name="jobtype">&lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; (optional)</param>
+        /// <param name="jobstatus">&lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void JobsPurge(long? olderthan = default, long? rangeStartTime = default, long? rangeEndTime = default, string application = default, string database = default, string jobtype = default, int? jobstatus = default, int operationIndex = 0)
@@ -1514,16 +1514,16 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete jobs &lt;p&gt;Deletes jobs data older than the specified time.&lt;/p&gt;
+        /// Delete Jobs &lt;p&gt;Deletes jobs data based on query parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
+        /// <param name="olderthan">&lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; (optional)</param>
         /// <param name="rangeStartTime">&lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="rangeEndTime">&lt;p&gt;End Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="jobtype">&lt;p&gt;Job Type.&lt;/p&gt; (optional)</param>
-        /// <param name="jobstatus">&lt;p&gt;Job Status.&lt;/p&gt; (optional)</param>
+        /// <param name="jobtype">&lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; (optional)</param>
+        /// <param name="jobstatus">&lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> JobsPurgeWithHttpInfo(long? olderthan = default, long? rangeStartTime = default, long? rangeEndTime = default, string application = default, string database = default, string jobtype = default, int? jobstatus = default, int operationIndex = 0)
@@ -1620,16 +1620,16 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete jobs &lt;p&gt;Deletes jobs data older than the specified time.&lt;/p&gt;
+        /// Delete Jobs &lt;p&gt;Deletes jobs data based on query parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
+        /// <param name="olderthan">&lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; (optional)</param>
         /// <param name="rangeStartTime">&lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="rangeEndTime">&lt;p&gt;End Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="jobtype">&lt;p&gt;Job Type.&lt;/p&gt; (optional)</param>
-        /// <param name="jobstatus">&lt;p&gt;Job Status.&lt;/p&gt; (optional)</param>
+        /// <param name="jobtype">&lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; (optional)</param>
+        /// <param name="jobstatus">&lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -1639,16 +1639,16 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete jobs &lt;p&gt;Deletes jobs data older than the specified time.&lt;/p&gt;
+        /// Delete Jobs &lt;p&gt;Deletes jobs data based on query parameters.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="olderthan">&lt;p&gt;Time in milliseconds.&lt;/p&gt; (optional)</param>
+        /// <param name="olderthan">&lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; (optional)</param>
         /// <param name="rangeStartTime">&lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="rangeEndTime">&lt;p&gt;End Time range in milliseconds.&lt;/p&gt; (optional)</param>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt; (optional)</param>
         /// <param name="database">&lt;p&gt;Database name.&lt;/p&gt; (optional)</param>
-        /// <param name="jobtype">&lt;p&gt;Job Type.&lt;/p&gt; (optional)</param>
-        /// <param name="jobstatus">&lt;p&gt;Job Status.&lt;/p&gt; (optional)</param>
+        /// <param name="jobtype">&lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; (optional)</param>
+        /// <param name="jobstatus">&lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>

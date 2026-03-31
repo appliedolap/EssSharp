@@ -123,7 +123,7 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of user.&lt;/p&gt;</param>
-        /// <param name="body">Updated user</param>
+        /// <param name="body">&lt;p&gt;Updated user.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UserBean</returns>
         UserBean UsersPUT(string id, UserBean body, int operationIndex = 0);
@@ -136,7 +136,7 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of user.&lt;/p&gt;</param>
-        /// <param name="body">Updated user</param>
+        /// <param name="body">&lt;p&gt;Updated user.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserBean</returns>
         ApiResponse<UserBean> UsersPUTWithHttpInfo(string id, UserBean body, int operationIndex = 0);
@@ -282,7 +282,7 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of user.&lt;/p&gt;</param>
-        /// <param name="body">Updated user</param>
+        /// <param name="body">&lt;p&gt;Updated user.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
@@ -296,7 +296,7 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of user.&lt;/p&gt;</param>
-        /// <param name="body">Updated user</param>
+        /// <param name="body">&lt;p&gt;Updated user.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>
@@ -1197,7 +1197,7 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of user.&lt;/p&gt;</param>
-        /// <param name="body">Updated user</param>
+        /// <param name="body">&lt;p&gt;Updated user.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UserBean</returns>
         public UserBean UsersPUT(string id, UserBean body, int operationIndex = 0)
@@ -1211,7 +1211,7 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of user.&lt;/p&gt;</param>
-        /// <param name="body">Updated user</param>
+        /// <param name="body">&lt;p&gt;Updated user.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UserBean</returns>
         public EssSharp.Client.ApiResponse<UserBean> UsersPUTWithHttpInfo(string id, UserBean body, int operationIndex = 0)
@@ -1302,7 +1302,7 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of user.&lt;/p&gt;</param>
-        /// <param name="body">Updated user</param>
+        /// <param name="body">&lt;p&gt;Updated user.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UserBean</returns>
@@ -1317,7 +1317,7 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of user.&lt;/p&gt;</param>
-        /// <param name="body">Updated user</param>
+        /// <param name="body">&lt;p&gt;Updated user.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UserBean)</returns>

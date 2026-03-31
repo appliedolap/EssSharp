@@ -833,7 +833,7 @@ catch (ApiException e)
 
 <a id="variableslistappvariables"></a>
 # **VariablesListAppVariables**
-> VariableList VariablesListAppVariables (string applicationName, bool? includeDatabaseVariables = null)
+> VariableList VariablesListAppVariables (string applicationName, string orderBy = null, bool? includeDatabaseVariables = null)
 
 Get Application Variables
 
@@ -863,12 +863,13 @@ namespace Example
 
             var apiInstance = new VariablesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var includeDatabaseVariables = false;  // bool? | <P>Include database variables in application variables result</P> (optional)  (default to false)
+            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
+            var includeDatabaseVariables = false;  // bool? | <P>Include database variables in application variables result.</P> (optional)  (default to false)
 
             try
             {
                 // Get Application Variables
-                VariableList result = apiInstance.VariablesListAppVariables(applicationName, includeDatabaseVariables);
+                VariableList result = apiInstance.VariablesListAppVariables(applicationName, orderBy, includeDatabaseVariables);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -889,7 +890,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Application Variables
-    ApiResponse<VariableList> response = apiInstance.VariablesListAppVariablesWithHttpInfo(applicationName, includeDatabaseVariables);
+    ApiResponse<VariableList> response = apiInstance.VariablesListAppVariablesWithHttpInfo(applicationName, orderBy, includeDatabaseVariables);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -907,7 +908,8 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **includeDatabaseVariables** | **bool?** | &lt;P&gt;Include database variables in application variables result&lt;/P&gt; | [optional] [default to false] |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **includeDatabaseVariables** | **bool?** | &lt;P&gt;Include database variables in application variables result.&lt;/P&gt; | [optional] [default to false] |
 
 ### Return type
 
@@ -934,7 +936,7 @@ catch (ApiException e)
 
 <a id="variableslistvariables"></a>
 # **VariablesListVariables**
-> VariableList VariablesListVariables (string applicationName, string databaseName)
+> VariableList VariablesListVariables (string applicationName, string databaseName, string orderBy = null)
 
 Get Database Variables
 
@@ -965,11 +967,12 @@ namespace Example
             var apiInstance = new VariablesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
 
             try
             {
                 // Get Database Variables
-                VariableList result = apiInstance.VariablesListVariables(applicationName, databaseName);
+                VariableList result = apiInstance.VariablesListVariables(applicationName, databaseName, orderBy);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -990,7 +993,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Database Variables
-    ApiResponse<VariableList> response = apiInstance.VariablesListVariablesWithHttpInfo(applicationName, databaseName);
+    ApiResponse<VariableList> response = apiInstance.VariablesListVariablesWithHttpInfo(applicationName, databaseName, orderBy);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1009,6 +1012,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
 
 ### Return type
 

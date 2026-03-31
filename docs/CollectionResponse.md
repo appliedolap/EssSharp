@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **HasMore** | **bool** |  | [optional] 
 **TotalResults** | **long** |  | [optional] 
-**Items** | **List&lt;Object&gt;** |  | [optional] 
 **Count** | **long** |  | [optional] 
+**Items** | **List&lt;Object&gt;** |  | [optional] 
 **Limit** | **long** |  | [optional] 
 **Properties** | **Dictionary&lt;string, string&gt;** |  | [optional] 
 **Offset** | **long** |  | [optional] 

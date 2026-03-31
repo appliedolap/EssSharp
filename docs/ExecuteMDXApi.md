@@ -41,7 +41,7 @@ namespace Example
             var application = "application_example";  // string | <p>Application name.</p>
             var database = "database_example";  // string | <p>Database name.</p>
             var format = "XLSX";  // string | <p>Result format.</p> (optional)  (default to JSON)
-            var body = new MDXInput(); // MDXInput | <p>MDX query and preferences.</p> (optional) 
+            var body = new MDXInput(); // MDXInput | <p>MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).</p> (optional) 
 
             try
             {
@@ -87,7 +87,7 @@ catch (ApiException e)
 | **application** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **format** | **string** | &lt;p&gt;Result format.&lt;/p&gt; | [optional] [default to JSON] |
-| **body** | [**MDXInput**](MDXInput.md) | &lt;p&gt;MDX query and preferences.&lt;/p&gt; | [optional]  |
+| **body** | [**MDXInput**](MDXInput.md) | &lt;p&gt;MDX query and preferences. Use this to execute an MDX query directly as a string, rather than running a saved MDX report (a named query saved in the cube context).&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -114,11 +114,11 @@ catch (ApiException e)
 
 <a id="mdxexecutenq"></a>
 # **MDXExecutenq**
-> Object MDXExecutenq (string application, string database, string name, string format = null)
+> Object MDXExecutenq (string application, string database, string name, string format = null, string aliasTable = null)
 
 Run MDX Report
 
-<p>Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.</p>
+<p>Runs an MDX report, returning the results in the selected format (JSON, HTML, Excel, or CSV). An MDX report is saved in the cube context.</p><p>See also:</p><ul><li><a href=\"./op-applications-application-databases-database-queries-post.html\">Save MDX Report</a></li><li><a href=\"./op-applications-application-databases-database-queries-get.html\">List MDX Reports</a></li><li><a href=\"./op-applications-application-databases-database-queries-query-get.html\">List MDX Report Details</a></li><li><a href=\"./op-applications-application-databases-database-queries-query-put.html\">Update MDX Report</a></li><li><a href=\"./op-applications-application-databases-database-queries-query-delete.html\">Delete MDX Report</a></li></ul>
 
 ### Example
 ```csharp
@@ -147,11 +147,12 @@ namespace Example
             var database = "database_example";  // string | <p>Database name.</p>
             var name = "name_example";  // string | <p>MDX report name.</p>
             var format = "XLSX";  // string | <p>Result format.</p> (optional)  (default to JSON)
+            var aliasTable = "aliasTable_example";  // string | <p>Alias table name.</p> (optional) 
 
             try
             {
                 // Run MDX Report
-                Object result = apiInstance.MDXExecutenq(application, database, name, format);
+                Object result = apiInstance.MDXExecutenq(application, database, name, format, aliasTable);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -172,7 +173,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Run MDX Report
-    ApiResponse<Object> response = apiInstance.MDXExecutenqWithHttpInfo(application, database, name, format);
+    ApiResponse<Object> response = apiInstance.MDXExecutenqWithHttpInfo(application, database, name, format, aliasTable);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -193,6 +194,7 @@ catch (ApiException e)
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **name** | **string** | &lt;p&gt;MDX report name.&lt;/p&gt; |  |
 | **format** | **string** | &lt;p&gt;Result format.&lt;/p&gt; | [optional] [default to JSON] |
+| **aliasTable** | **string** | &lt;p&gt;Alias table name.&lt;/p&gt; | [optional]  |
 
 ### Return type
 

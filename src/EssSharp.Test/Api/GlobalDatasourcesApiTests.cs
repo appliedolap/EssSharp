@@ -105,8 +105,8 @@ namespace EssSharp.Test.Api
         public void GlobalDatasourcesGetDatasourceDetailsTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //string datasouceName = null;
-            //var response = instance.GlobalDatasourcesGetDatasourceDetails(datasouceName);
+            //string datasourceName = null;
+            //var response = instance.GlobalDatasourcesGetDatasourceDetails(datasourceName);
             //Assert.IsType<Datasource>(response);
         }
 
@@ -156,9 +156,9 @@ namespace EssSharp.Test.Api
         public void GlobalDatasourcesUpdateDatasourceTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //string datasouceName = null;
+            //string datasourceName = null;
             //Datasource body = null;
-            //var response = instance.GlobalDatasourcesUpdateDatasource(datasouceName, body);
+            //var response = instance.GlobalDatasourcesUpdateDatasource(datasourceName, body);
             //Assert.IsType<Datasource>(response);
         }
     }

@@ -33,9 +33,11 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="EssToDsMapDTO" /> class.
         /// </summary>
         /// <param name="dimensions">dimensions.</param>
-        public EssToDsMapDTO(List<Dimension> dimensions = default)
+        /// <param name="pivotDimension">pivotDimension.</param>
+        public EssToDsMapDTO(List<Dimension> dimensions = default, Dimension pivotDimension = default)
         {
             this.Dimensions = dimensions;
+            this.PivotDimension = pivotDimension;
         }
 
         /// <summary>
@@ -43,6 +45,12 @@ namespace EssSharp.Model
         /// </summary>
         [DataMember(Name = "dimensions", EmitDefaultValue = false)]
         public List<Dimension> Dimensions { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PivotDimension
+        /// </summary>
+        [DataMember(Name = "pivotDimension", EmitDefaultValue = false)]
+        public Dimension PivotDimension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -53,6 +61,7 @@ namespace EssSharp.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class EssToDsMapDTO {\n");
             sb.Append("  Dimensions: ").Append(Dimensions).Append("\n");
+            sb.Append("  PivotDimension: ").Append(PivotDimension).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

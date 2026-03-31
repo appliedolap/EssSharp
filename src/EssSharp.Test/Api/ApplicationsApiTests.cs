@@ -255,7 +255,8 @@ namespace EssSharp.Test.Api
             //string connectionName = null;
             //string applicationNameForConnection = null;
             //string fields = null;
-            //var response = instance.ApplicationsGetApplications(filter, offset, limit, connectionName, applicationNameForConnection, fields);
+            //string orderBy = null;
+            //var response = instance.ApplicationsGetApplications(filter, offset, limit, connectionName, applicationNameForConnection, fields, orderBy);
             //Assert.IsType<ApplicationList>(response);
         }
 
@@ -292,8 +293,9 @@ namespace EssSharp.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
             //string connectionName = null;
+            //string orderBy = null;
             //string applicationNameForConnection = null;
-            //var response = instance.ApplicationsGetCubes(applicationName, connectionName, applicationNameForConnection);
+            //var response = instance.ApplicationsGetCubes(applicationName, connectionName, orderBy, applicationNameForConnection);
             //Assert.IsType<CubeList>(response);
         }
 

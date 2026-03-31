@@ -32,14 +32,14 @@ namespace EssSharp.Api
         /// &lt;p&gt;Returns all text lists associated with the database outline.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="app"></param>
-        /// <param name="cube"></param>
-        /// <param name="connection"> (optional)</param>
-        /// <param name="applicationNameForConnection"> (optional)</param>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt;</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt;</param>
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        void OutlineGetAllSmartList(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0);
+        void OutlineGetAllSmartList(string app, string cube, string connection, string applicationNameForConnection, string accept = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Text Lists
@@ -48,14 +48,14 @@ namespace EssSharp.Api
         /// &lt;p&gt;Returns all text lists associated with the database outline.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="app"></param>
-        /// <param name="cube"></param>
-        /// <param name="connection"> (optional)</param>
-        /// <param name="applicationNameForConnection"> (optional)</param>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt;</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt;</param>
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> OutlineGetAllSmartListWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0);
+        ApiResponse<Object> OutlineGetAllSmartListWithHttpInfo(string app, string cube, string connection, string applicationNameForConnection, string accept = default, int operationIndex = 0);
         /// <summary>
         /// Get Member Ancestors
         /// </summary>
@@ -229,6 +229,35 @@ namespace EssSharp.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0);
+        /// <summary>
+        /// Get Pivot dimension
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Get Pivot dimension details&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>string</returns>
+        string OutlineGetPivotDimension(string app, string cube, string connection = default, string applicationNameForConnection = default, int operationIndex = 0);
+
+        /// <summary>
+        /// Get Pivot dimension
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Get Pivot dimension details&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of string</returns>
+        ApiResponse<string> OutlineGetPivotDimensionWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -245,15 +274,15 @@ namespace EssSharp.Api
         /// &lt;p&gt;Returns all text lists associated with the database outline.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="app"></param>
-        /// <param name="cube"></param>
-        /// <param name="connection"> (optional)</param>
-        /// <param name="applicationNameForConnection"> (optional)</param>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt;</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt;</param>
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task OutlineGetAllSmartListAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task OutlineGetAllSmartListAsync(string app, string cube, string connection, string applicationNameForConnection, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Text Lists
@@ -262,15 +291,15 @@ namespace EssSharp.Api
         /// &lt;p&gt;Returns all text lists associated with the database outline.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="app"></param>
-        /// <param name="cube"></param>
-        /// <param name="connection"> (optional)</param>
-        /// <param name="applicationNameForConnection"> (optional)</param>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt;</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt;</param>
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> OutlineGetAllSmartListWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Object>> OutlineGetAllSmartListWithHttpInfoAsync(string app, string cube, string connection, string applicationNameForConnection, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Member Ancestors
         /// </summary>
@@ -454,6 +483,37 @@ namespace EssSharp.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Get Pivot dimension
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Get Pivot dimension details&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of string</returns>
+        System.Threading.Tasks.Task<string> OutlineGetPivotDimensionAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get Pivot dimension
+        /// </summary>
+        /// <remarks>
+        /// &lt;p&gt;Get Pivot dimension details&lt;/p&gt;
+        /// </remarks>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (string)</returns>
+        System.Threading.Tasks.Task<ApiResponse<string>> OutlineGetPivotDimensionWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -578,14 +638,14 @@ namespace EssSharp.Api
         /// Get Text Lists &lt;p&gt;Returns all text lists associated with the database outline.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="app"></param>
-        /// <param name="cube"></param>
-        /// <param name="connection"> (optional)</param>
-        /// <param name="applicationNameForConnection"> (optional)</param>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt;</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt;</param>
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
-        public void OutlineGetAllSmartList(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0)
+        public void OutlineGetAllSmartList(string app, string cube, string connection, string applicationNameForConnection, string accept = default, int operationIndex = 0)
         {
             OutlineGetAllSmartListWithHttpInfo(app, cube, connection, applicationNameForConnection, accept);
         }
@@ -594,14 +654,14 @@ namespace EssSharp.Api
         /// Get Text Lists &lt;p&gt;Returns all text lists associated with the database outline.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="app"></param>
-        /// <param name="cube"></param>
-        /// <param name="connection"> (optional)</param>
-        /// <param name="applicationNameForConnection"> (optional)</param>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt;</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt;</param>
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> OutlineGetAllSmartListWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Object> OutlineGetAllSmartListWithHttpInfo(string app, string cube, string connection, string applicationNameForConnection, string accept = default, int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -613,6 +673,18 @@ namespace EssSharp.Api
             if (cube == null)
             {
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'cube' when calling OutlineViewerApi->OutlineGetAllSmartList");
+            }
+
+            // verify the required parameter 'connection' is set
+            if (connection == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'connection' when calling OutlineViewerApi->OutlineGetAllSmartList");
+            }
+
+            // verify the required parameter 'applicationNameForConnection' is set
+            if (applicationNameForConnection == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationNameForConnection' when calling OutlineViewerApi->OutlineGetAllSmartList");
             }
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -639,14 +711,8 @@ namespace EssSharp.Api
 
             localVarRequestOptions.PathParameters.Add("app", EssSharp.Client.ClientUtils.ParameterToString(app)); // path parameter
             localVarRequestOptions.PathParameters.Add("cube", EssSharp.Client.ClientUtils.ParameterToString(cube)); // path parameter
-            if (connection != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "connection", connection));
-            }
-            if (applicationNameForConnection != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "applicationNameForConnection", applicationNameForConnection));
-            }
+            localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "connection", connection));
+            localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "applicationNameForConnection", applicationNameForConnection));
             if (accept != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("accept", EssSharp.Client.ClientUtils.ParameterToString(accept)); // header parameter
@@ -696,15 +762,15 @@ namespace EssSharp.Api
         /// Get Text Lists &lt;p&gt;Returns all text lists associated with the database outline.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="app"></param>
-        /// <param name="cube"></param>
-        /// <param name="connection"> (optional)</param>
-        /// <param name="applicationNameForConnection"> (optional)</param>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt;</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt;</param>
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task OutlineGetAllSmartListAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task OutlineGetAllSmartListAsync(string app, string cube, string connection, string applicationNameForConnection, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             await OutlineGetAllSmartListWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, accept, operationIndex, cancellationToken).ConfigureAwait(false);
         }
@@ -713,15 +779,15 @@ namespace EssSharp.Api
         /// Get Text Lists &lt;p&gt;Returns all text lists associated with the database outline.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="app"></param>
-        /// <param name="cube"></param>
-        /// <param name="connection"> (optional)</param>
-        /// <param name="applicationNameForConnection"> (optional)</param>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt;</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt;</param>
         /// <param name="accept"> (optional, default to &quot;application/json&quot;)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> OutlineGetAllSmartListWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> OutlineGetAllSmartListWithHttpInfoAsync(string app, string cube, string connection, string applicationNameForConnection, string accept = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -733,6 +799,18 @@ namespace EssSharp.Api
             if (cube == null)
             {
                 throw new EssSharp.Client.ApiException(400, "Missing required parameter 'cube' when calling OutlineViewerApi->OutlineGetAllSmartList");
+            }
+
+            // verify the required parameter 'connection' is set
+            if (connection == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'connection' when calling OutlineViewerApi->OutlineGetAllSmartList");
+            }
+
+            // verify the required parameter 'applicationNameForConnection' is set
+            if (applicationNameForConnection == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'applicationNameForConnection' when calling OutlineViewerApi->OutlineGetAllSmartList");
             }
 
 
@@ -759,14 +837,8 @@ namespace EssSharp.Api
 
             localVarRequestOptions.PathParameters.Add("app", EssSharp.Client.ClientUtils.ParameterToString(app)); // path parameter
             localVarRequestOptions.PathParameters.Add("cube", EssSharp.Client.ClientUtils.ParameterToString(cube)); // path parameter
-            if (connection != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "connection", connection));
-            }
-            if (applicationNameForConnection != null)
-            {
-                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "applicationNameForConnection", applicationNameForConnection));
-            }
+            localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "connection", connection));
+            localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "applicationNameForConnection", applicationNameForConnection));
             if (accept != null)
             {
                 localVarRequestOptions.HeaderParameters.Add("accept", EssSharp.Client.ClientUtils.ParameterToString(accept)); // header parameter
@@ -2141,6 +2213,239 @@ namespace EssSharp.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("OutlineGetOutlineXML", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get Pivot dimension &lt;p&gt;Get Pivot dimension details&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>string</returns>
+        public string OutlineGetPivotDimension(string app, string cube, string connection = default, string applicationNameForConnection = default, int operationIndex = 0)
+        {
+            EssSharp.Client.ApiResponse<string> localVarResponse = OutlineGetPivotDimensionWithHttpInfo(app, cube, connection, applicationNameForConnection);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Pivot dimension &lt;p&gt;Get Pivot dimension details&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of string</returns>
+        public EssSharp.Client.ApiResponse<string> OutlineGetPivotDimensionWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, int operationIndex = 0)
+        {
+            // verify the required parameter 'app' is set
+            if (app == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'app' when calling OutlineViewerApi->OutlineGetPivotDimension");
+            }
+
+            // verify the required parameter 'cube' is set
+            if (cube == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'cube' when calling OutlineViewerApi->OutlineGetPivotDimension");
+            }
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/xml"
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            var localVarMultipartFormData = localVarContentType == "multipart/form-data";
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("app", EssSharp.Client.ClientUtils.ParameterToString(app)); // path parameter
+            localVarRequestOptions.PathParameters.Add("cube", EssSharp.Client.ClientUtils.ParameterToString(cube)); // path parameter
+            if (connection != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "connection", connection));
+            }
+            if (applicationNameForConnection != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "applicationNameForConnection", applicationNameForConnection));
+            }
+
+            localVarRequestOptions.Operation = "OutlineViewerApi.OutlineGetPivotDimension";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (OAuth2) required
+            // oauth required
+            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+                {
+                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+                }
+                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                         this.Configuration.OAuthFlow != null)
+                {
+                    localVarRequestOptions.OAuth = true;
+                }
+            }
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<string>("/outline/{app}/{cube}/pivotDimension", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("OutlineGetPivotDimension", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get Pivot dimension &lt;p&gt;Get Pivot dimension details&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of string</returns>
+        public async System.Threading.Tasks.Task<string> OutlineGetPivotDimensionAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        {
+            EssSharp.Client.ApiResponse<string> localVarResponse = await OutlineGetPivotDimensionWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Pivot dimension &lt;p&gt;Get Pivot dimension details&lt;/p&gt;
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="connection">&lt;p&gt;Essbase connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (string)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<string>> OutlineGetPivotDimensionWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'app' is set
+            if (app == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'app' when calling OutlineViewerApi->OutlineGetPivotDimension");
+            }
+
+            // verify the required parameter 'cube' is set
+            if (cube == null)
+            {
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'cube' when calling OutlineViewerApi->OutlineGetPivotDimension");
+            }
+
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/xml"
+            };
+
+            var localVarContentType = EssSharp.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = EssSharp.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("app", EssSharp.Client.ClientUtils.ParameterToString(app)); // path parameter
+            localVarRequestOptions.PathParameters.Add("cube", EssSharp.Client.ClientUtils.ParameterToString(cube)); // path parameter
+            if (connection != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "connection", connection));
+            }
+            if (applicationNameForConnection != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "applicationNameForConnection", applicationNameForConnection));
+            }
+
+            localVarRequestOptions.Operation = "OutlineViewerApi.OutlineGetPivotDimension";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (OAuth2) required
+            // oauth required
+            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+                {
+                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+                }
+                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                         this.Configuration.OAuthFlow != null)
+                {
+                    localVarRequestOptions.OAuth = true;
+                }
+            }
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<string>("/outline/{app}/{cube}/pivotDimension", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("OutlineGetPivotDimension", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

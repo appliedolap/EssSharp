@@ -26,10 +26,10 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Get Filters Provisioning Report
+        /// Get User&#39;s Filters Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -39,10 +39,10 @@ namespace EssSharp.Api
         DatabaseProvisionReportItemList UserProvisioningReportGetFilters(string application, string userId, int operationIndex = 0);
 
         /// <summary>
-        /// Get Filters Provisioning Report
+        /// Get User&#39;s Filters Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -51,10 +51,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of DatabaseProvisionReportItemList</returns>
         ApiResponse<DatabaseProvisionReportItemList> UserProvisioningReportGetFiltersWithHttpInfo(string application, string userId, int operationIndex = 0);
         /// <summary>
-        /// Get Full Provisioning Report
+        /// Get User&#39;s Full Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -64,10 +64,10 @@ namespace EssSharp.Api
         MainProvisionReport UserProvisioningReportGetFullReport(string userId, string expand = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Full Provisioning Report
+        /// Get User&#39;s Full Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -76,10 +76,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of MainProvisionReport</returns>
         ApiResponse<MainProvisionReport> UserProvisioningReportGetFullReportWithHttpInfo(string userId, string expand = default, int operationIndex = 0);
         /// <summary>
-        /// Get Applications Provisioning Reports
+        /// Get User&#39;s Applications Provisioning Reports
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -89,10 +89,10 @@ namespace EssSharp.Api
         ApplicationProvisionReportItemList UserProvisioningReportGetReportForAllApplications(string userId, string expand = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Applications Provisioning Reports
+        /// Get User&#39;s Applications Provisioning Reports
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -101,10 +101,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of ApplicationProvisionReportItemList</returns>
         ApiResponse<ApplicationProvisionReportItemList> UserProvisioningReportGetReportForAllApplicationsWithHttpInfo(string userId, string expand = default, int operationIndex = 0);
         /// <summary>
-        /// Get Application Provisioning Report
+        /// Get User&#39;s Application Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -115,10 +115,10 @@ namespace EssSharp.Api
         ApplicationProvisionReportItem UserProvisioningReportGetReportForApplication(string application, string userId, string expand = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Application Provisioning Report
+        /// Get User&#39;s Application Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -128,10 +128,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of ApplicationProvisionReportItem</returns>
         ApiResponse<ApplicationProvisionReportItem> UserProvisioningReportGetReportForApplicationWithHttpInfo(string application, string userId, string expand = default, int operationIndex = 0);
         /// <summary>
-        /// Get Application Roles Provisioning Report
+        /// Get User&#39;s Application Roles Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -141,10 +141,10 @@ namespace EssSharp.Api
         ProvisionReportItemList UserProvisioningReportGetRoles(string application, string userId, int operationIndex = 0);
 
         /// <summary>
-        /// Get Application Roles Provisioning Report
+        /// Get User&#39;s Application Roles Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -153,10 +153,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of ProvisionReportItemList</returns>
         ApiResponse<ProvisionReportItemList> UserProvisioningReportGetRolesWithHttpInfo(string application, string userId, int operationIndex = 0);
         /// <summary>
-        /// Get Scripts Provisioning Report
+        /// Get User&#39;s Scripts Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -166,10 +166,10 @@ namespace EssSharp.Api
         DatabaseProvisionReportItemList UserProvisioningReportGetScripts(string application, string userId, int operationIndex = 0);
 
         /// <summary>
-        /// Get Scripts Provisioning Report
+        /// Get User&#39;s Scripts Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -187,10 +187,10 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Get Filters Provisioning Report
+        /// Get User&#39;s Filters Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -201,10 +201,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<DatabaseProvisionReportItemList> UserProvisioningReportGetFiltersAsync(string application, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Filters Provisioning Report
+        /// Get User&#39;s Filters Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -214,10 +214,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (DatabaseProvisionReportItemList)</returns>
         System.Threading.Tasks.Task<ApiResponse<DatabaseProvisionReportItemList>> UserProvisioningReportGetFiltersWithHttpInfoAsync(string application, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Full Provisioning Report
+        /// Get User&#39;s Full Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -228,10 +228,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<MainProvisionReport> UserProvisioningReportGetFullReportAsync(string userId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Full Provisioning Report
+        /// Get User&#39;s Full Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -241,10 +241,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (MainProvisionReport)</returns>
         System.Threading.Tasks.Task<ApiResponse<MainProvisionReport>> UserProvisioningReportGetFullReportWithHttpInfoAsync(string userId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Applications Provisioning Reports
+        /// Get User&#39;s Applications Provisioning Reports
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -255,10 +255,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<ApplicationProvisionReportItemList> UserProvisioningReportGetReportForAllApplicationsAsync(string userId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Applications Provisioning Reports
+        /// Get User&#39;s Applications Provisioning Reports
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -268,10 +268,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (ApplicationProvisionReportItemList)</returns>
         System.Threading.Tasks.Task<ApiResponse<ApplicationProvisionReportItemList>> UserProvisioningReportGetReportForAllApplicationsWithHttpInfoAsync(string userId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Application Provisioning Report
+        /// Get User&#39;s Application Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -283,10 +283,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<ApplicationProvisionReportItem> UserProvisioningReportGetReportForApplicationAsync(string application, string userId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Application Provisioning Report
+        /// Get User&#39;s Application Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -297,10 +297,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (ApplicationProvisionReportItem)</returns>
         System.Threading.Tasks.Task<ApiResponse<ApplicationProvisionReportItem>> UserProvisioningReportGetReportForApplicationWithHttpInfoAsync(string application, string userId, string expand = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Application Roles Provisioning Report
+        /// Get User&#39;s Application Roles Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -311,10 +311,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<ProvisionReportItemList> UserProvisioningReportGetRolesAsync(string application, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Application Roles Provisioning Report
+        /// Get User&#39;s Application Roles Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -324,10 +324,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (ProvisionReportItemList)</returns>
         System.Threading.Tasks.Task<ApiResponse<ProvisionReportItemList>> UserProvisioningReportGetRolesWithHttpInfoAsync(string application, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Scripts Provisioning Report
+        /// Get User&#39;s Scripts Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -338,10 +338,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<DatabaseProvisionReportItemList> UserProvisioningReportGetScriptsAsync(string application, string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Scripts Provisioning Report
+        /// Get User&#39;s Scripts Provisioning Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -471,7 +471,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Filters Provisioning Report &lt;p&gt;Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Filters Provisioning Report &lt;p&gt;Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -485,7 +485,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Filters Provisioning Report &lt;p&gt;Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Filters Provisioning Report &lt;p&gt;Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -574,7 +574,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Filters Provisioning Report &lt;p&gt;Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Filters Provisioning Report &lt;p&gt;Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -589,7 +589,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Filters Provisioning Report &lt;p&gt;Gets a filters provisioning report for the specified application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Filters Provisioning Report &lt;p&gt;Gets a filters provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -680,7 +680,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Full Provisioning Report &lt;p&gt;Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Full Provisioning Report &lt;p&gt;Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -694,7 +694,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Full Provisioning Report &lt;p&gt;Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Full Provisioning Report &lt;p&gt;Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -780,7 +780,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Full Provisioning Report &lt;p&gt;Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Full Provisioning Report &lt;p&gt;Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -795,7 +795,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Full Provisioning Report &lt;p&gt;Gets a full provisioning report. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Full Provisioning Report &lt;p&gt;Gets a full provisioning report for a specific user. Service roles are included in the response only if the logged in user has Service Administrator role. The logged in user must have at least Database Manager role for an application to get its provisioning report. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -883,7 +883,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Applications Provisioning Reports &lt;p&gt;Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Applications Provisioning Reports &lt;p&gt;Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -897,7 +897,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Applications Provisioning Reports &lt;p&gt;Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Applications Provisioning Reports &lt;p&gt;Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -983,7 +983,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Applications Provisioning Reports &lt;p&gt;Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Applications Provisioning Reports &lt;p&gt;Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -998,7 +998,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Applications Provisioning Reports &lt;p&gt;Gets a provisioning report for all the applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Applications Provisioning Reports &lt;p&gt;Gets a provisioning report for a specific user across all applications. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">&lt;p&gt;User ID.&lt;/p&gt;</param>
@@ -1086,7 +1086,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Application Provisioning Report &lt;p&gt;Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Application Provisioning Report &lt;p&gt;Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1101,7 +1101,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Application Provisioning Report &lt;p&gt;Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Application Provisioning Report &lt;p&gt;Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1195,7 +1195,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Application Provisioning Report &lt;p&gt;Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Application Provisioning Report &lt;p&gt;Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1211,7 +1211,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Application Provisioning Report &lt;p&gt;Gets a provisioning report for the specified application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Application Provisioning Report &lt;p&gt;Gets a provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application. Application roles are included in the report only if the logged in user has at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1307,7 +1307,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Application Roles Provisioning Report &lt;p&gt;Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Application Roles Provisioning Report &lt;p&gt;Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1321,7 +1321,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Application Roles Provisioning Report &lt;p&gt;Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Application Roles Provisioning Report &lt;p&gt;Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1410,7 +1410,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Application Roles Provisioning Report &lt;p&gt;Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Application Roles Provisioning Report &lt;p&gt;Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1425,7 +1425,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Application Roles Provisioning Report &lt;p&gt;Get a roles provisioning report for the specified application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Application Roles Provisioning Report &lt;p&gt;Gets a roles provisioning report for a specific user and application. The logged in user must have at least Application Manager role for the application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1516,7 +1516,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Scripts Provisioning Report &lt;p&gt;Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Scripts Provisioning Report &lt;p&gt;Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1530,7 +1530,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Scripts Provisioning Report &lt;p&gt;Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Scripts Provisioning Report &lt;p&gt;Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1619,7 +1619,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Scripts Provisioning Report &lt;p&gt;Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Scripts Provisioning Report &lt;p&gt;Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1634,7 +1634,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Scripts Provisioning Report &lt;p&gt;Get a scripts provisioning report for the specified application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get User&#39;s Scripts Provisioning Report &lt;p&gt;Gets a scripts provisioning report for a specific user and application. The logged in user must have at least Database Manager role for the application to get a provisioning report.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="application">&lt;p&gt;Application name.&lt;/p&gt;</param>

@@ -7,9 +7,9 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationDatasourcesCreateDatasource**](ApplicationDatasourcesApi.md#applicationdatasourcescreatedatasource) | **POST** /applications/{applicationName}/datasources | Create Application Datasource |
 | [**ApplicationDatasourcesDeleteDatasource**](ApplicationDatasourcesApi.md#applicationdatasourcesdeletedatasource) | **DELETE** /applications/{applicationName}/datasources/{datasourceName} | Delete Application Datasource |
 | [**ApplicationDatasourcesGetDataStream**](ApplicationDatasourcesApi.md#applicationdatasourcesgetdatastream) | **POST** /applications/{applicationName}/datasources/query/stream | Get Streamed Datasource Results |
-| [**ApplicationDatasourcesGetDatasourceDetails**](ApplicationDatasourcesApi.md#applicationdatasourcesgetdatasourcedetails) | **GET** /applications/{applicationName}/datasources/{datasouceName} | Get Application Datasource |
+| [**ApplicationDatasourcesGetDatasourceDetails**](ApplicationDatasourcesApi.md#applicationdatasourcesgetdatasourcedetails) | **GET** /applications/{applicationName}/datasources/{datasourceName} | Get Application Datasource |
 | [**ApplicationDatasourcesGetDatasources**](ApplicationDatasourcesApi.md#applicationdatasourcesgetdatasources) | **GET** /applications/{applicationName}/datasources | Get Application Datasources |
-| [**ApplicationDatasourcesUpdateDatasource**](ApplicationDatasourcesApi.md#applicationdatasourcesupdatedatasource) | **PUT** /applications/{applicationName}/datasources/{datasouceName} | Update Application Datasource |
+| [**ApplicationDatasourcesUpdateDatasource**](ApplicationDatasourcesApi.md#applicationdatasourcesupdatedatasource) | **PUT** /applications/{applicationName}/datasources/{datasourceName} | Update Application Datasource |
 
 <a id="applicationdatasourcescreatedatasource"></a>
 # **ApplicationDatasourcesCreateDatasource**
@@ -235,9 +235,9 @@ namespace Example
 
             var apiInstance = new ApplicationDatasourcesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var includeHeaders = false;  // bool? | <p>Include headers.</p> (optional)  (default to false)
-            var metaDataOnly = false;  // bool? | <p>Metadata Only.</p> (optional)  (default to false)
-            var body = new DatasourceQueryInfo(); // DatasourceQueryInfo | <p>Query information.</p> (optional) 
+            var includeHeaders = false;  // bool? | <p>Include headers with query results? If true, the first record of the results will consist of column headers.</p> (optional)  (default to false)
+            var metaDataOnly = false;  // bool? | <p>Stream metadata only?</p> (optional)  (default to false)
+            var body = new DatasourceQueryInfo(); // DatasourceQueryInfo | <p>Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.</p> (optional) 
 
             try
             {
@@ -277,9 +277,9 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **includeHeaders** | **bool?** | &lt;p&gt;Include headers.&lt;/p&gt; | [optional] [default to false] |
-| **metaDataOnly** | **bool?** | &lt;p&gt;Metadata Only.&lt;/p&gt; | [optional] [default to false] |
-| **body** | [**DatasourceQueryInfo**](DatasourceQueryInfo.md) | &lt;p&gt;Query information.&lt;/p&gt; | [optional]  |
+| **includeHeaders** | **bool?** | &lt;p&gt;Include headers with query results? If true, the first record of the results will consist of column headers.&lt;/p&gt; | [optional] [default to false] |
+| **metaDataOnly** | **bool?** | &lt;p&gt;Stream metadata only?&lt;/p&gt; | [optional] [default to false] |
+| **body** | [**DatasourceQueryInfo**](DatasourceQueryInfo.md) | &lt;p&gt;Query information. Object specifying the SQL query if used, the record delimiter used in the source data, and information about any parameters associated with the Datasource.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -306,7 +306,7 @@ void (empty response body)
 
 <a id="applicationdatasourcesgetdatasourcedetails"></a>
 # **ApplicationDatasourcesGetDatasourceDetails**
-> Datasource ApplicationDatasourcesGetDatasourceDetails (string applicationName, string datasouceName)
+> Datasource ApplicationDatasourcesGetDatasourceDetails (string applicationName, string datasourceName)
 
 Get Application Datasource
 
@@ -336,12 +336,12 @@ namespace Example
 
             var apiInstance = new ApplicationDatasourcesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var datasouceName = "datasouceName_example";  // string | <p>Datasource name</p>
+            var datasourceName = "datasourceName_example";  // string | <p>Datasource name</p>
 
             try
             {
                 // Get Application Datasource
-                Datasource result = apiInstance.ApplicationDatasourcesGetDatasourceDetails(applicationName, datasouceName);
+                Datasource result = apiInstance.ApplicationDatasourcesGetDatasourceDetails(applicationName, datasourceName);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -362,7 +362,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Application Datasource
-    ApiResponse<Datasource> response = apiInstance.ApplicationDatasourcesGetDatasourceDetailsWithHttpInfo(applicationName, datasouceName);
+    ApiResponse<Datasource> response = apiInstance.ApplicationDatasourcesGetDatasourceDetailsWithHttpInfo(applicationName, datasourceName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -380,7 +380,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **datasouceName** | **string** | &lt;p&gt;Datasource name&lt;/p&gt; |  |
+| **datasourceName** | **string** | &lt;p&gt;Datasource name&lt;/p&gt; |  |
 
 ### Return type
 
@@ -508,7 +508,7 @@ catch (ApiException e)
 
 <a id="applicationdatasourcesupdatedatasource"></a>
 # **ApplicationDatasourcesUpdateDatasource**
-> Datasource ApplicationDatasourcesUpdateDatasource (string applicationName, string datasouceName, Datasource body = null)
+> Datasource ApplicationDatasourcesUpdateDatasource (string applicationName, string datasourceName, Datasource body = null)
 
 Update Application Datasource
 
@@ -538,13 +538,13 @@ namespace Example
 
             var apiInstance = new ApplicationDatasourcesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var datasouceName = "datasouceName_example";  // string | <p>Datasource name.</p>
+            var datasourceName = "datasourceName_example";  // string | <p>Datasource name.</p>
             var body = new Datasource(); // Datasource | <p>Updated Datasource details.</p> (optional) 
 
             try
             {
                 // Update Application Datasource
-                Datasource result = apiInstance.ApplicationDatasourcesUpdateDatasource(applicationName, datasouceName, body);
+                Datasource result = apiInstance.ApplicationDatasourcesUpdateDatasource(applicationName, datasourceName, body);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -565,7 +565,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Update Application Datasource
-    ApiResponse<Datasource> response = apiInstance.ApplicationDatasourcesUpdateDatasourceWithHttpInfo(applicationName, datasouceName, body);
+    ApiResponse<Datasource> response = apiInstance.ApplicationDatasourcesUpdateDatasourceWithHttpInfo(applicationName, datasourceName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -583,7 +583,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **datasouceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; |  |
+| **datasourceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; |  |
 | **body** | [**Datasource**](Datasource.md) | &lt;p&gt;Updated Datasource details.&lt;/p&gt; | [optional]  |
 
 ### Return type

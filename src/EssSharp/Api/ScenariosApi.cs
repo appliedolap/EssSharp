@@ -124,7 +124,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of ScenarioBean</returns>
         ApiResponse<ScenarioBean> ScenariosCreateWithHttpInfo(ScenarioBean body = default, int operationIndex = 0);
         /// <summary>
-        /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
+        /// Delete Scenario
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
@@ -136,7 +136,7 @@ namespace EssSharp.Api
         void ScenariosDelete(long id, int operationIndex = 0);
 
         /// <summary>
-        /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
+        /// Delete Scenario
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
@@ -699,7 +699,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (ScenarioBean)</returns>
         System.Threading.Tasks.Task<ApiResponse<ScenarioBean>> ScenariosCreateWithHttpInfoAsync(ScenarioBean body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
+        /// Delete Scenario
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
@@ -712,7 +712,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ScenariosDeleteAsync(long id, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
+        /// Delete Scenario
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
@@ -2053,7 +2053,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt; &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
+        /// Delete Scenario &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;Scenario ID.&lt;/p&gt;</param>
@@ -2065,7 +2065,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt; &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
+        /// Delete Scenario &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;Scenario ID.&lt;/p&gt;</param>
@@ -2138,7 +2138,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt; &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
+        /// Delete Scenario &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;Scenario ID.&lt;/p&gt;</param>
@@ -2151,7 +2151,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt; &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
+        /// Delete Scenario &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;Scenario ID.&lt;/p&gt;</param>

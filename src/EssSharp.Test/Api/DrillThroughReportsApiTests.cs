@@ -117,7 +117,8 @@ namespace EssSharp.Test.Api
             //string applicationName = null;
             //string databaseName = null;
             //string keyword = null;
-            //var response = instance.DrillThroughReportsGetReports(applicationName, databaseName, keyword);
+            //string orderBy = null;
+            //var response = instance.DrillThroughReportsGetReports(applicationName, databaseName, keyword, orderBy);
             //Assert.IsType<ReportList>(response);
         }
 

@@ -98,8 +98,8 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
-            //string datasouceName = null;
-            //var response = instance.ApplicationDatasourcesGetDatasourceDetails(applicationName, datasouceName);
+            //string datasourceName = null;
+            //var response = instance.ApplicationDatasourcesGetDatasourceDetails(applicationName, datasourceName);
             //Assert.IsType<Datasource>(response);
         }
 
@@ -125,9 +125,9 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
-            //string datasouceName = null;
+            //string datasourceName = null;
             //Datasource body = null;
-            //var response = instance.ApplicationDatasourcesUpdateDatasource(applicationName, datasouceName, body);
+            //var response = instance.ApplicationDatasourcesUpdateDatasource(applicationName, datasourceName, body);
             //Assert.IsType<Datasource>(response);
         }
     }

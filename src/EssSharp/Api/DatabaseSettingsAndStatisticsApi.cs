@@ -29,12 +29,12 @@ namespace EssSharp.Api
         /// Export Query Tracking
         /// </summary>
         /// <remarks>
-        /// Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// &lt;p&gt;Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void DatabaseSettingsStatisticsExportQueryData(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0);
@@ -43,12 +43,12 @@ namespace EssSharp.Api
         /// Export Query Tracking
         /// </summary>
         /// <remarks>
-        /// Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// &lt;p&gt;Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DatabaseSettingsStatisticsExportQueryDataWithHttpInfo(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0);
@@ -153,29 +153,29 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of CompressionSettings</returns>
         ApiResponse<CompressionSettings> DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfo(string applicationName, string databaseName, int operationIndex = 0);
         /// <summary>
-        /// Get Compression Settings
+        /// Get ASO Compression Info
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// &lt;p&gt;Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.&lt;/p&gt;&lt;p&gt;If you include query parameter &lt;code&gt;fetch&#x3D;true&lt;/code&gt;, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. The job type is listed as &lt;b&gt;ASO Compression information&lt;/b&gt;, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the &lt;code&gt;fetch&#x3D;true&lt;/code&gt; parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with &lt;code&gt;fetch&#x3D;true&lt;/code&gt;.&lt;/p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Column Name&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;dimensionName&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Each dimension name in the cube, hypothetically considered to be the compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;isCompression&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;storedLevel0Members&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageBundleFill&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageValueLength&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;level0MB&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.&lt;br&gt;&lt;br&gt;Except for the scenario in which there is no compression dimension (&lt;i&gt;No Compression Dimension&lt;/i&gt;), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for &lt;i&gt;No Compression Dimension&lt;/i&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CompressionInfoOutput</returns>
         CompressionInfoOutput DatabaseSettingsStatisticsGetCompressionInfoSettings(string applicationName, string databaseName, bool? fetch = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Compression Settings
+        /// Get ASO Compression Info
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// &lt;p&gt;Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.&lt;/p&gt;&lt;p&gt;If you include query parameter &lt;code&gt;fetch&#x3D;true&lt;/code&gt;, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. The job type is listed as &lt;b&gt;ASO Compression information&lt;/b&gt;, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the &lt;code&gt;fetch&#x3D;true&lt;/code&gt; parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with &lt;code&gt;fetch&#x3D;true&lt;/code&gt;.&lt;/p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Column Name&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;dimensionName&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Each dimension name in the cube, hypothetically considered to be the compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;isCompression&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;storedLevel0Members&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageBundleFill&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageValueLength&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;level0MB&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.&lt;br&gt;&lt;br&gt;Except for the scenario in which there is no compression dimension (&lt;i&gt;No Compression Dimension&lt;/i&gt;), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for &lt;i&gt;No Compression Dimension&lt;/i&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CompressionInfoOutput</returns>
         ApiResponse<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo(string applicationName, string databaseName, bool? fetch = default, int operationIndex = 0);
@@ -422,12 +422,12 @@ namespace EssSharp.Api
         /// Import Query Tracking
         /// </summary>
         /// <remarks>
-        /// Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// &lt;p&gt;Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void DatabaseSettingsStatisticsImportQueryData(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0);
@@ -436,12 +436,12 @@ namespace EssSharp.Api
         /// Import Query Tracking
         /// </summary>
         /// <remarks>
-        /// Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// &lt;p&gt;Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> DatabaseSettingsStatisticsImportQueryDataWithHttpInfo(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0);
@@ -449,7 +449,7 @@ namespace EssSharp.Api
         /// Update Outline Settings
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the outline settings of the specified database.&lt;/p&gt;
+        /// &lt;p&gt;Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the &lt;b&gt;otlUpdate&lt;/b&gt; action in &lt;a href&#x3D;\&quot;./op-applications-application-databases-database-boe-post.html\&quot;&gt;Run Batch Outline Edit&lt;/a&gt; API.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -463,7 +463,7 @@ namespace EssSharp.Api
         /// Update Outline Settings
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the outline settings of the specified database.&lt;/p&gt;
+        /// &lt;p&gt;Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the &lt;b&gt;otlUpdate&lt;/b&gt; action in &lt;a href&#x3D;\&quot;./op-applications-application-databases-database-boe-post.html\&quot;&gt;Run Batch Outline Edit&lt;/a&gt; API.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -512,12 +512,12 @@ namespace EssSharp.Api
         /// Export Query Tracking
         /// </summary>
         /// <remarks>
-        /// Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// &lt;p&gt;Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -527,12 +527,12 @@ namespace EssSharp.Api
         /// Export Query Tracking
         /// </summary>
         /// <remarks>
-        /// Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// &lt;p&gt;Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -646,30 +646,30 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (CompressionSettings)</returns>
         System.Threading.Tasks.Task<ApiResponse<CompressionSettings>> DatabaseSettingsStatisticsGetCompressSettingsWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Compression Settings
+        /// Get ASO Compression Info
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// &lt;p&gt;Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.&lt;/p&gt;&lt;p&gt;If you include query parameter &lt;code&gt;fetch&#x3D;true&lt;/code&gt;, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. The job type is listed as &lt;b&gt;ASO Compression information&lt;/b&gt;, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the &lt;code&gt;fetch&#x3D;true&lt;/code&gt; parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with &lt;code&gt;fetch&#x3D;true&lt;/code&gt;.&lt;/p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Column Name&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;dimensionName&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Each dimension name in the cube, hypothetically considered to be the compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;isCompression&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;storedLevel0Members&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageBundleFill&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageValueLength&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;level0MB&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.&lt;br&gt;&lt;br&gt;Except for the scenario in which there is no compression dimension (&lt;i&gt;No Compression Dimension&lt;/i&gt;), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for &lt;i&gt;No Compression Dimension&lt;/i&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CompressionInfoOutput</returns>
         System.Threading.Tasks.Task<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsAsync(string applicationName, string databaseName, bool? fetch = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Compression Settings
+        /// Get ASO Compression Info
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// &lt;p&gt;Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.&lt;/p&gt;&lt;p&gt;If you include query parameter &lt;code&gt;fetch&#x3D;true&lt;/code&gt;, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. The job type is listed as &lt;b&gt;ASO Compression information&lt;/b&gt;, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the &lt;code&gt;fetch&#x3D;true&lt;/code&gt; parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with &lt;code&gt;fetch&#x3D;true&lt;/code&gt;.&lt;/p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Column Name&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;dimensionName&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Each dimension name in the cube, hypothetically considered to be the compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;isCompression&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;storedLevel0Members&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageBundleFill&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageValueLength&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;level0MB&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.&lt;br&gt;&lt;br&gt;Except for the scenario in which there is no compression dimension (&lt;i&gt;No Compression Dimension&lt;/i&gt;), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for &lt;i&gt;No Compression Dimension&lt;/i&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CompressionInfoOutput)</returns>
@@ -935,12 +935,12 @@ namespace EssSharp.Api
         /// Import Query Tracking
         /// </summary>
         /// <remarks>
-        /// Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// &lt;p&gt;Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -950,12 +950,12 @@ namespace EssSharp.Api
         /// Import Query Tracking
         /// </summary>
         /// <remarks>
-        /// Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// &lt;p&gt;Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -964,7 +964,7 @@ namespace EssSharp.Api
         /// Update Outline Settings
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the outline settings of the specified database.&lt;/p&gt;
+        /// &lt;p&gt;Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the &lt;b&gt;otlUpdate&lt;/b&gt; action in &lt;a href&#x3D;\&quot;./op-applications-application-databases-database-boe-post.html\&quot;&gt;Run Batch Outline Edit&lt;/a&gt; API.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -979,7 +979,7 @@ namespace EssSharp.Api
         /// Update Outline Settings
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Updates the outline settings of the specified database.&lt;/p&gt;
+        /// &lt;p&gt;Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the &lt;b&gt;otlUpdate&lt;/b&gt; action in &lt;a href&#x3D;\&quot;./op-applications-application-databases-database-boe-post.html\&quot;&gt;Run Batch Outline Edit&lt;/a&gt; API.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1139,12 +1139,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Export Query Tracking Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// Export Query Tracking &lt;p&gt;Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void DatabaseSettingsStatisticsExportQueryData(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0)
@@ -1153,12 +1153,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Export Query Tracking Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// Export Query Tracking &lt;p&gt;Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> DatabaseSettingsStatisticsExportQueryDataWithHttpInfo(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0)
@@ -1248,12 +1248,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Export Query Tracking Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// Export Query Tracking &lt;p&gt;Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -1263,12 +1263,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Export Query Tracking Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// Export Query Tracking &lt;p&gt;Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -2196,12 +2196,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Compression Settings &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// Get ASO Compression Info &lt;p&gt;Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.&lt;/p&gt;&lt;p&gt;If you include query parameter &lt;code&gt;fetch&#x3D;true&lt;/code&gt;, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. The job type is listed as &lt;b&gt;ASO Compression information&lt;/b&gt;, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the &lt;code&gt;fetch&#x3D;true&lt;/code&gt; parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with &lt;code&gt;fetch&#x3D;true&lt;/code&gt;.&lt;/p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Column Name&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;dimensionName&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Each dimension name in the cube, hypothetically considered to be the compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;isCompression&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;storedLevel0Members&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageBundleFill&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageValueLength&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;level0MB&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.&lt;br&gt;&lt;br&gt;Except for the scenario in which there is no compression dimension (&lt;i&gt;No Compression Dimension&lt;/i&gt;), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for &lt;i&gt;No Compression Dimension&lt;/i&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CompressionInfoOutput</returns>
         public CompressionInfoOutput DatabaseSettingsStatisticsGetCompressionInfoSettings(string applicationName, string databaseName, bool? fetch = default, int operationIndex = 0)
@@ -2211,12 +2211,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Compression Settings &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// Get ASO Compression Info &lt;p&gt;Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.&lt;/p&gt;&lt;p&gt;If you include query parameter &lt;code&gt;fetch&#x3D;true&lt;/code&gt;, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. The job type is listed as &lt;b&gt;ASO Compression information&lt;/b&gt;, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the &lt;code&gt;fetch&#x3D;true&lt;/code&gt; parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with &lt;code&gt;fetch&#x3D;true&lt;/code&gt;.&lt;/p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Column Name&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;dimensionName&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Each dimension name in the cube, hypothetically considered to be the compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;isCompression&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;storedLevel0Members&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageBundleFill&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageValueLength&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;level0MB&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.&lt;br&gt;&lt;br&gt;Except for the scenario in which there is no compression dimension (&lt;i&gt;No Compression Dimension&lt;/i&gt;), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for &lt;i&gt;No Compression Dimension&lt;/i&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CompressionInfoOutput</returns>
         public EssSharp.Client.ApiResponse<CompressionInfoOutput> DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo(string applicationName, string databaseName, bool? fetch = default, int operationIndex = 0)
@@ -2305,12 +2305,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Compression Settings &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// Get ASO Compression Info &lt;p&gt;Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.&lt;/p&gt;&lt;p&gt;If you include query parameter &lt;code&gt;fetch&#x3D;true&lt;/code&gt;, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. The job type is listed as &lt;b&gt;ASO Compression information&lt;/b&gt;, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the &lt;code&gt;fetch&#x3D;true&lt;/code&gt; parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with &lt;code&gt;fetch&#x3D;true&lt;/code&gt;.&lt;/p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Column Name&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;dimensionName&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Each dimension name in the cube, hypothetically considered to be the compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;isCompression&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;storedLevel0Members&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageBundleFill&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageValueLength&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;level0MB&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.&lt;br&gt;&lt;br&gt;Except for the scenario in which there is no compression dimension (&lt;i&gt;No Compression Dimension&lt;/i&gt;), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for &lt;i&gt;No Compression Dimension&lt;/i&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CompressionInfoOutput</returns>
@@ -2321,12 +2321,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Compression Settings &lt;p&gt;Returns compression settings of the specified database.&lt;/p&gt;
+        /// Get ASO Compression Info &lt;p&gt;Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.&lt;/p&gt;&lt;p&gt;If you include query parameter &lt;code&gt;fetch&#x3D;true&lt;/code&gt;, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use &lt;a href&#x3D;\&quot;./op-jobs-get.html\&quot;&gt;Get Job List&lt;/a&gt;. The job type is listed as &lt;b&gt;ASO Compression information&lt;/b&gt;, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the &lt;code&gt;fetch&#x3D;true&lt;/code&gt; parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with &lt;code&gt;fetch&#x3D;true&lt;/code&gt;.&lt;/p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Column Name&lt;/th&gt;&lt;th&gt;Description&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;dimensionName&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Each dimension name in the cube, hypothetically considered to be the compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;isCompression&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;storedLevel0Members&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageBundleFill&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;averageValueLength&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;strong&gt;level0MB&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.&lt;br&gt;&lt;br&gt;Except for the scenario in which there is no compression dimension (&lt;i&gt;No Compression Dimension&lt;/i&gt;), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for &lt;i&gt;No Compression Dimension&lt;/i&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="fetch">&lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; (optional, default to false)</param>
+        /// <param name="databaseName">&lt;p&gt;Database (cube) name.&lt;/p&gt;</param>
+        /// <param name="fetch">&lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CompressionInfoOutput)</returns>
@@ -4382,12 +4382,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Import Query Tracking Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// Import Query Tracking &lt;p&gt;Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void DatabaseSettingsStatisticsImportQueryData(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0)
@@ -4396,12 +4396,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Import Query Tracking Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// Import Query Tracking &lt;p&gt;Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> DatabaseSettingsStatisticsImportQueryDataWithHttpInfo(string applicationName, string databaseName, QueryTrackingInputs body, int operationIndex = 0)
@@ -4491,12 +4491,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Import Query Tracking Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// Import Query Tracking &lt;p&gt;Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -4506,12 +4506,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Import Query Tracking Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+        /// Import Query Tracking &lt;p&gt;Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.&lt;/p&gt;&lt;p&gt;When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.&lt;/p&gt; &lt;p&gt;To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-settings-get.html\&quot;&gt;Get General Settings&lt;/a&gt; and ensure that &lt;code&gt;queryTracking&lt;/code&gt; is &lt;b&gt;true&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
-        /// <param name="databaseName">Database name</param>
-        /// <param name="body">File Name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
+        /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;File name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -4603,7 +4603,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Outline Settings &lt;p&gt;Updates the outline settings of the specified database.&lt;/p&gt;
+        /// Update Outline Settings &lt;p&gt;Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the &lt;b&gt;otlUpdate&lt;/b&gt; action in &lt;a href&#x3D;\&quot;./op-applications-application-databases-database-boe-post.html\&quot;&gt;Run Batch Outline Edit&lt;/a&gt; API.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -4617,7 +4617,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Outline Settings &lt;p&gt;Updates the outline settings of the specified database.&lt;/p&gt;
+        /// Update Outline Settings &lt;p&gt;Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the &lt;b&gt;otlUpdate&lt;/b&gt; action in &lt;a href&#x3D;\&quot;./op-applications-application-databases-database-boe-post.html\&quot;&gt;Run Batch Outline Edit&lt;/a&gt; API.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -4714,7 +4714,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Outline Settings &lt;p&gt;Updates the outline settings of the specified database.&lt;/p&gt;
+        /// Update Outline Settings &lt;p&gt;Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the &lt;b&gt;otlUpdate&lt;/b&gt; action in &lt;a href&#x3D;\&quot;./op-applications-application-databases-database-boe-post.html\&quot;&gt;Run Batch Outline Edit&lt;/a&gt; API.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -4729,7 +4729,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Update Outline Settings &lt;p&gt;Updates the outline settings of the specified database.&lt;/p&gt;
+        /// Update Outline Settings &lt;p&gt;Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the &lt;b&gt;otlUpdate&lt;/b&gt; action in &lt;a href&#x3D;\&quot;./op-applications-application-databases-database-boe-post.html\&quot;&gt;Run Batch Outline Edit&lt;/a&gt; API.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

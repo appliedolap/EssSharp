@@ -19,7 +19,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Create Application Connection
 
-<p>Creates an application-level connection based on specified inputs. <code>name</code> and <code>type</code> are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.</p><p>A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.</p>
+<p>Creates an application-level connection based on specified inputs. <code>name</code> and <code>type</code> are required inputs for all types of connections. Other required inputs differ based on the type of the connection. You must be an application manager, or a power user with application management permission to the specified application.</p><p>A connection stores information about an external server and the login credentials that are required to access it. By defining one connection that can be used by multiple processes and artifacts, you can simplify many aspects of your analytics.</p><p>If you are creating a connection to Autonomous Data Warehouse, see also <a href=\"./op-applications-applicationname-connections-connectionname-wallet-put.html\">Upload Application Connection Wallet File</a>.</p>
 
 ### Example
 ```csharp
@@ -342,8 +342,8 @@ namespace Example
             var offset = 0;  // int? | <p>Number of connections to omit from the start of the result set.</p> (optional)  (default to 0)
             var limit = 50;  // int? | <p>Maximum number of connections to return. Default is 50.</p> (optional)  (default to 50)
             var connType = "connType_example";  // string | <p>Type of connections to return, if provided</p> (optional) 
-            var repoConn = false;  // bool? | <p>Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false</p> (optional)  (default to false)
-            var walletConn = false;  // bool? | <p>Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false</p> (optional)  (default to false)
+            var repoConn = false;  // bool? | <p>Used in conjunction with <i>connType</i> param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.</p> (optional)  (default to false)
+            var walletConn = false;  // bool? | <p>Used in conjunction with <i>connType</i> param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.</p> (optional)  (default to false)
 
             try
             {
@@ -390,8 +390,8 @@ catch (ApiException e)
 | **offset** | **int?** | &lt;p&gt;Number of connections to omit from the start of the result set.&lt;/p&gt; | [optional] [default to 0] |
 | **limit** | **int?** | &lt;p&gt;Maximum number of connections to return. Default is 50.&lt;/p&gt; | [optional] [default to 50] |
 | **connType** | **string** | &lt;p&gt;Type of connections to return, if provided&lt;/p&gt; | [optional]  |
-| **repoConn** | **bool?** | &lt;p&gt;Used in conjunction with connType param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; | [optional] [default to false] |
-| **walletConn** | **bool?** | &lt;p&gt;Used in conjunction with connType param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false&lt;/p&gt; | [optional] [default to false] |
+| **repoConn** | **bool?** | &lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns repository-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; | [optional] [default to false] |
+| **walletConn** | **bool?** | &lt;p&gt;Used in conjunction with &lt;i&gt;connType&lt;/i&gt; param. If set to true, returns wallet-based Autonomous Data Warehouse connections. Default is false.&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
 
@@ -417,7 +417,7 @@ catch (ApiException e)
 
 <a id="applicationconnectionstestconnection"></a>
 # **ApplicationConnectionsTestConnection**
-> void ApplicationConnectionsTestConnection (string applicationName, Connection body)
+> void ApplicationConnectionsTestConnection (string applicationName, Connection body, bool? validateName = null)
 
 Test New Application Connection
 
@@ -448,11 +448,12 @@ namespace Example
             var apiInstance = new ApplicationConnectionsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var body = new Connection(); // Connection | <p>Connection details.</p>
+            var validateName = false;  // bool? | <p>Validate if connection name already exists.</p> (optional)  (default to false)
 
             try
             {
                 // Test New Application Connection
-                apiInstance.ApplicationConnectionsTestConnection(applicationName, body);
+                apiInstance.ApplicationConnectionsTestConnection(applicationName, body, validateName);
             }
             catch (ApiException  e)
             {
@@ -472,7 +473,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Test New Application Connection
-    apiInstance.ApplicationConnectionsTestConnectionWithHttpInfo(applicationName, body);
+    apiInstance.ApplicationConnectionsTestConnectionWithHttpInfo(applicationName, body, validateName);
 }
 catch (ApiException e)
 {
@@ -488,6 +489,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **body** | [**Connection**](Connection.md) | &lt;p&gt;Connection details.&lt;/p&gt; |  |
+| **validateName** | **bool?** | &lt;p&gt;Validate if connection name already exists.&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
 

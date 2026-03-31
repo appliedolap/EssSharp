@@ -72,7 +72,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> GlobalDatasourcesDeleteDatasourceWithHttpInfo(string datasourceName, int operationIndex = 0);
         /// <summary>
-        /// Get Streamed Datasource Results by ID
+        /// Get Streamed Global Datasource Results by ID
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
@@ -84,7 +84,7 @@ namespace EssSharp.Api
         void GlobalDatasourcesGetData(string streamId, int operationIndex = 0);
 
         /// <summary>
-        /// Get Streamed Datasource Results by ID
+        /// Get Streamed Global Datasource Results by ID
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
@@ -95,7 +95,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> GlobalDatasourcesGetDataWithHttpInfo(string streamId, int operationIndex = 0);
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
@@ -109,7 +109,7 @@ namespace EssSharp.Api
         void GlobalDatasourcesGetDataStream(bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
@@ -128,10 +128,10 @@ namespace EssSharp.Api
         /// &lt;p&gt;Returns details about the specified global Datasource.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        Datasource GlobalDatasourcesGetDatasourceDetails(string datasouceName, int operationIndex = 0);
+        Datasource GlobalDatasourcesGetDatasourceDetails(string datasourceName, int operationIndex = 0);
 
         /// <summary>
         /// Get Global Datasource
@@ -140,12 +140,12 @@ namespace EssSharp.Api
         /// &lt;p&gt;Returns details about the specified global Datasource.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        ApiResponse<Datasource> GlobalDatasourcesGetDatasourceDetailsWithHttpInfo(string datasouceName, int operationIndex = 0);
+        ApiResponse<Datasource> GlobalDatasourcesGetDatasourceDetailsWithHttpInfo(string datasourceName, int operationIndex = 0);
         /// <summary>
-        /// Get Global Datasource
+        /// Get Global Datasources
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
@@ -158,7 +158,7 @@ namespace EssSharp.Api
         DatasourcesList GlobalDatasourcesGetDatasources(int? offset = default, int? limit = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Global Datasource
+        /// Get Global Datasources
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
@@ -170,7 +170,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of DatasourcesList</returns>
         ApiResponse<DatasourcesList> GlobalDatasourcesGetDatasourcesWithHttpInfo(int? offset = default, int? limit = default, int operationIndex = 0);
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
@@ -184,7 +184,7 @@ namespace EssSharp.Api
         void GlobalDatasourcesGetDelimitedDataStream(bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
@@ -197,7 +197,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> GlobalDatasourcesGetDelimitedDataStreamWithHttpInfo(bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0);
         /// <summary>
-        /// Stream Datasource Results
+        /// Stream Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
@@ -210,7 +210,7 @@ namespace EssSharp.Api
         ResultBean GlobalDatasourcesGetResults(int? pageSize = default, DatasourceQueryInfo body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Stream Datasource Results
+        /// Stream Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
@@ -228,11 +228,11 @@ namespace EssSharp.Api
         /// &lt;p&gt;Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        Datasource GlobalDatasourcesUpdateDatasource(string datasouceName, Datasource body = default, int operationIndex = 0);
+        Datasource GlobalDatasourcesUpdateDatasource(string datasourceName, Datasource body = default, int operationIndex = 0);
 
         /// <summary>
         /// Update Global Datasource
@@ -241,11 +241,11 @@ namespace EssSharp.Api
         /// &lt;p&gt;Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        ApiResponse<Datasource> GlobalDatasourcesUpdateDatasourceWithHttpInfo(string datasouceName, Datasource body = default, int operationIndex = 0);
+        ApiResponse<Datasource> GlobalDatasourcesUpdateDatasourceWithHttpInfo(string datasourceName, Datasource body = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -306,7 +306,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> GlobalDatasourcesDeleteDatasourceWithHttpInfoAsync(string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Streamed Datasource Results by ID
+        /// Get Streamed Global Datasource Results by ID
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
@@ -319,7 +319,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task GlobalDatasourcesGetDataAsync(string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Streamed Datasource Results by ID
+        /// Get Streamed Global Datasource Results by ID
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
@@ -331,7 +331,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> GlobalDatasourcesGetDataWithHttpInfoAsync(string streamId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
@@ -346,7 +346,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task GlobalDatasourcesGetDataStreamAsync(bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
@@ -366,11 +366,11 @@ namespace EssSharp.Api
         /// &lt;p&gt;Returns details about the specified global Datasource.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        System.Threading.Tasks.Task<Datasource> GlobalDatasourcesGetDatasourceDetailsAsync(string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Datasource> GlobalDatasourcesGetDatasourceDetailsAsync(string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Global Datasource
@@ -379,13 +379,13 @@ namespace EssSharp.Api
         /// &lt;p&gt;Returns details about the specified global Datasource.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Datasource>> GlobalDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Datasource>> GlobalDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Global Datasource
+        /// Get Global Datasources
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
@@ -399,7 +399,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<DatasourcesList> GlobalDatasourcesGetDatasourcesAsync(int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Global Datasource
+        /// Get Global Datasources
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
@@ -412,7 +412,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (DatasourcesList)</returns>
         System.Threading.Tasks.Task<ApiResponse<DatasourcesList>> GlobalDatasourcesGetDatasourcesWithHttpInfoAsync(int? offset = default, int? limit = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
@@ -427,7 +427,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task GlobalDatasourcesGetDelimitedDataStreamAsync(bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Streamed Datasource Results
+        /// Get Streamed Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
@@ -441,7 +441,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> GlobalDatasourcesGetDelimitedDataStreamWithHttpInfoAsync(bool? includeHeaders = default, bool? metaDataOnly = default, DatasourceQueryInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Stream Datasource Results
+        /// Stream Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
@@ -455,7 +455,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<ResultBean> GlobalDatasourcesGetResultsAsync(int? pageSize = default, DatasourceQueryInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Stream Datasource Results
+        /// Stream Global Datasource Results
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
@@ -474,12 +474,12 @@ namespace EssSharp.Api
         /// &lt;p&gt;Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        System.Threading.Tasks.Task<Datasource> GlobalDatasourcesUpdateDatasourceAsync(string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<Datasource> GlobalDatasourcesUpdateDatasourceAsync(string datasourceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update Global Datasource
@@ -488,12 +488,12 @@ namespace EssSharp.Api
         /// &lt;p&gt;Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Datasource>> GlobalDatasourcesUpdateDatasourceWithHttpInfoAsync(string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<Datasource>> GlobalDatasourcesUpdateDatasourceWithHttpInfoAsync(string datasourceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -977,7 +977,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="streamId">&lt;p&gt;Stream id.&lt;/p&gt;</param>
@@ -989,7 +989,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="streamId">&lt;p&gt;Stream id.&lt;/p&gt;</param>
@@ -1068,7 +1068,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="streamId">&lt;p&gt;Stream id.&lt;/p&gt;</param>
@@ -1081,7 +1081,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results by ID &lt;p&gt;Returns results from a global-level Datasource associated with the specified stream id.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="streamId">&lt;p&gt;Stream id.&lt;/p&gt;</param>
@@ -1162,7 +1162,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
@@ -1176,7 +1176,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
@@ -1260,7 +1260,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
@@ -1275,7 +1275,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
@@ -1364,12 +1364,12 @@ namespace EssSharp.Api
         /// Get Global Datasource &lt;p&gt;Returns details about the specified global Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        public Datasource GlobalDatasourcesGetDatasourceDetails(string datasouceName, int operationIndex = 0)
+        public Datasource GlobalDatasourcesGetDatasourceDetails(string datasourceName, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<Datasource> localVarResponse = GlobalDatasourcesGetDatasourceDetailsWithHttpInfo(datasouceName);
+            EssSharp.Client.ApiResponse<Datasource> localVarResponse = GlobalDatasourcesGetDatasourceDetailsWithHttpInfo(datasourceName);
             return localVarResponse.Data;
         }
 
@@ -1377,15 +1377,15 @@ namespace EssSharp.Api
         /// Get Global Datasource &lt;p&gt;Returns details about the specified global Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        public EssSharp.Client.ApiResponse<Datasource> GlobalDatasourcesGetDatasourceDetailsWithHttpInfo(string datasouceName, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Datasource> GlobalDatasourcesGetDatasourceDetailsWithHttpInfo(string datasourceName, int operationIndex = 0)
         {
-            // verify the required parameter 'datasouceName' is set
-            if (datasouceName == null)
+            // verify the required parameter 'datasourceName' is set
+            if (datasourceName == null)
             {
-                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasouceName' when calling GlobalDatasourcesApi->GlobalDatasourcesGetDatasourceDetails");
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasourceName' when calling GlobalDatasourcesApi->GlobalDatasourcesGetDatasourceDetails");
             }
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -1412,7 +1412,7 @@ namespace EssSharp.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("datasouceName", EssSharp.Client.ClientUtils.ParameterToString(datasouceName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("datasourceName", EssSharp.Client.ClientUtils.ParameterToString(datasourceName)); // path parameter
 
             localVarRequestOptions.Operation = "GlobalDatasourcesApi.GlobalDatasourcesGetDatasourceDetails";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1441,7 +1441,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<Datasource>("/datasources/{datasouceName}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<Datasource>("/datasources/{datasourceName}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GlobalDatasourcesGetDatasourceDetails", localVarResponse);
@@ -1458,13 +1458,13 @@ namespace EssSharp.Api
         /// Get Global Datasource &lt;p&gt;Returns details about the specified global Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        public async System.Threading.Tasks.Task<Datasource> GlobalDatasourcesGetDatasourceDetailsAsync(string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Datasource> GlobalDatasourcesGetDatasourceDetailsAsync(string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<Datasource> localVarResponse = await GlobalDatasourcesGetDatasourceDetailsWithHttpInfoAsync(datasouceName, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<Datasource> localVarResponse = await GlobalDatasourcesGetDatasourceDetailsWithHttpInfoAsync(datasourceName, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1472,16 +1472,16 @@ namespace EssSharp.Api
         /// Get Global Datasource &lt;p&gt;Returns details about the specified global Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> GlobalDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string datasouceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> GlobalDatasourcesGetDatasourceDetailsWithHttpInfoAsync(string datasourceName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'datasouceName' is set
-            if (datasouceName == null)
+            // verify the required parameter 'datasourceName' is set
+            if (datasourceName == null)
             {
-                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasouceName' when calling GlobalDatasourcesApi->GlobalDatasourcesGetDatasourceDetails");
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasourceName' when calling GlobalDatasourcesApi->GlobalDatasourcesGetDatasourceDetails");
             }
 
 
@@ -1508,7 +1508,7 @@ namespace EssSharp.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("datasouceName", EssSharp.Client.ClientUtils.ParameterToString(datasouceName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("datasourceName", EssSharp.Client.ClientUtils.ParameterToString(datasourceName)); // path parameter
 
             localVarRequestOptions.Operation = "GlobalDatasourcesApi.GlobalDatasourcesGetDatasourceDetails";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1537,7 +1537,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<Datasource>("/datasources/{datasouceName}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<Datasource>("/datasources/{datasourceName}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1552,7 +1552,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Global Datasource &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
+        /// Get Global Datasources &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">&lt;p&gt;Number of Datasources to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
@@ -1566,7 +1566,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Global Datasource &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
+        /// Get Global Datasources &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">&lt;p&gt;Number of Datasources to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
@@ -1649,7 +1649,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Global Datasource &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
+        /// Get Global Datasources &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">&lt;p&gt;Number of Datasources to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
@@ -1664,7 +1664,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Global Datasource &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
+        /// Get Global Datasources &lt;p&gt;Returns a list of global-level Datasources, including details such as name, description, connection, and type.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">&lt;p&gt;Number of Datasources to omit from the start of the result set.&lt;/p&gt; (optional, default to 0)</param>
@@ -1749,7 +1749,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
@@ -1763,7 +1763,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
@@ -1846,7 +1846,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
@@ -1861,7 +1861,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Streamed Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
+        /// Get Streamed Global Datasource Results &lt;p&gt;Returns results in stream from a global-level Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="includeHeaders">&lt;p&gt;Include headers.&lt;/p&gt; (optional, default to false)</param>
@@ -1946,7 +1946,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Stream Datasource Results &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
+        /// Stream Global Datasource Results &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">&lt;p&gt;Number of records to return. If not passed, all records are returned.&lt;/p&gt; (optional, default to -1)</param>
@@ -1960,7 +1960,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Stream Datasource Results &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
+        /// Stream Global Datasource Results &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">&lt;p&gt;Number of records to return. If not passed, all records are returned.&lt;/p&gt; (optional, default to -1)</param>
@@ -2041,7 +2041,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Stream Datasource Results &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
+        /// Stream Global Datasource Results &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">&lt;p&gt;Number of records to return. If not passed, all records are returned.&lt;/p&gt; (optional, default to -1)</param>
@@ -2056,7 +2056,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Stream Datasource Results &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
+        /// Stream Global Datasource Results &lt;p&gt;Returns column headers of the Datasource, and a link to fetch the streamed results in CSV (comma-separated) or TSV (tab-separated) formats.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="pageSize">&lt;p&gt;Number of records to return. If not passed, all records are returned.&lt;/p&gt; (optional, default to -1)</param>
@@ -2142,13 +2142,13 @@ namespace EssSharp.Api
         /// Update Global Datasource &lt;p&gt;Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>Datasource</returns>
-        public Datasource GlobalDatasourcesUpdateDatasource(string datasouceName, Datasource body = default, int operationIndex = 0)
+        public Datasource GlobalDatasourcesUpdateDatasource(string datasourceName, Datasource body = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<Datasource> localVarResponse = GlobalDatasourcesUpdateDatasourceWithHttpInfo(datasouceName, body);
+            EssSharp.Client.ApiResponse<Datasource> localVarResponse = GlobalDatasourcesUpdateDatasourceWithHttpInfo(datasourceName, body);
             return localVarResponse.Data;
         }
 
@@ -2156,16 +2156,16 @@ namespace EssSharp.Api
         /// Update Global Datasource &lt;p&gt;Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Datasource</returns>
-        public EssSharp.Client.ApiResponse<Datasource> GlobalDatasourcesUpdateDatasourceWithHttpInfo(string datasouceName, Datasource body = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<Datasource> GlobalDatasourcesUpdateDatasourceWithHttpInfo(string datasourceName, Datasource body = default, int operationIndex = 0)
         {
-            // verify the required parameter 'datasouceName' is set
-            if (datasouceName == null)
+            // verify the required parameter 'datasourceName' is set
+            if (datasourceName == null)
             {
-                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasouceName' when calling GlobalDatasourcesApi->GlobalDatasourcesUpdateDatasource");
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasourceName' when calling GlobalDatasourcesApi->GlobalDatasourcesUpdateDatasource");
             }
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -2194,7 +2194,7 @@ namespace EssSharp.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("datasouceName", EssSharp.Client.ClientUtils.ParameterToString(datasouceName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("datasourceName", EssSharp.Client.ClientUtils.ParameterToString(datasourceName)); // path parameter
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "GlobalDatasourcesApi.GlobalDatasourcesUpdateDatasource";
@@ -2224,7 +2224,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Put<Datasource>("/datasources/{datasouceName}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Put<Datasource>("/datasources/{datasourceName}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GlobalDatasourcesUpdateDatasource", localVarResponse);
@@ -2241,14 +2241,14 @@ namespace EssSharp.Api
         /// Update Global Datasource &lt;p&gt;Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of Datasource</returns>
-        public async System.Threading.Tasks.Task<Datasource> GlobalDatasourcesUpdateDatasourceAsync(string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Datasource> GlobalDatasourcesUpdateDatasourceAsync(string datasourceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<Datasource> localVarResponse = await GlobalDatasourcesUpdateDatasourceWithHttpInfoAsync(datasouceName, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<Datasource> localVarResponse = await GlobalDatasourcesUpdateDatasourceWithHttpInfoAsync(datasourceName, body, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2256,17 +2256,17 @@ namespace EssSharp.Api
         /// Update Global Datasource &lt;p&gt;Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="datasouceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
+        /// <param name="datasourceName">&lt;p&gt;Datasource name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Updated Datasource details.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Datasource)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> GlobalDatasourcesUpdateDatasourceWithHttpInfoAsync(string datasouceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Datasource>> GlobalDatasourcesUpdateDatasourceWithHttpInfoAsync(string datasourceName, Datasource body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'datasouceName' is set
-            if (datasouceName == null)
+            // verify the required parameter 'datasourceName' is set
+            if (datasourceName == null)
             {
-                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasouceName' when calling GlobalDatasourcesApi->GlobalDatasourcesUpdateDatasource");
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'datasourceName' when calling GlobalDatasourcesApi->GlobalDatasourcesUpdateDatasource");
             }
 
 
@@ -2295,7 +2295,7 @@ namespace EssSharp.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("datasouceName", EssSharp.Client.ClientUtils.ParameterToString(datasouceName)); // path parameter
+            localVarRequestOptions.PathParameters.Add("datasourceName", EssSharp.Client.ClientUtils.ParameterToString(datasourceName)); // path parameter
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "GlobalDatasourcesApi.GlobalDatasourcesUpdateDatasource";
@@ -2325,7 +2325,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PutAsync<Datasource>("/datasources/{datasouceName}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PutAsync<Datasource>("/datasources/{datasourceName}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

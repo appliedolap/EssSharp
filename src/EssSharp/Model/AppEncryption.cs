@@ -32,22 +32,12 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AppEncryption" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        protected AppEncryption() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AppEncryption" /> class.
-        /// </summary>
-        /// <param name="type">type (required).</param>
+        /// <param name="type">&lt;p&gt;The supported encryption type. The only supported value is &lt;code&gt;OCID&lt;/code&gt;, representing Oracle Vault key management.&lt;/p&gt;.</param>
         /// <param name="key">key.</param>
-        /// <param name="vaultId">vaultId.</param>
-        /// <param name="masterKeyId">masterKeyId.</param>
+        /// <param name="vaultId">&lt;p&gt;Required for OCID encryption type. The OCID of the Oracle Vault in OCI.&lt;/p&gt;.</param>
+        /// <param name="masterKeyId">&lt;p&gt;Required for OCID encryption type. The OCID of the Master Encryption Key (MEK) in the Oracle Vault in OCI.&lt;/p&gt;.</param>
         public AppEncryption(string type = default, List<byte[]> key = default, string vaultId = default, string masterKeyId = default)
         {
-            // to ensure "type" is required (not null)
-            if (type == null)
-            {
-                throw new ArgumentNullException("type is a required property for AppEncryption and cannot be null");
-            }
             this.Type = type;
             this.Key = key;
             this.VaultId = vaultId;
@@ -55,9 +45,10 @@ namespace EssSharp.Model
         }
 
         /// <summary>
-        /// Gets or Sets Type
+        /// &lt;p&gt;The supported encryption type. The only supported value is &lt;code&gt;OCID&lt;/code&gt;, representing Oracle Vault key management.&lt;/p&gt;
         /// </summary>
-        [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+        /// <value>&lt;p&gt;The supported encryption type. The only supported value is &lt;code&gt;OCID&lt;/code&gt;, representing Oracle Vault key management.&lt;/p&gt;</value>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
@@ -67,14 +58,16 @@ namespace EssSharp.Model
         public List<byte[]> Key { get; set; }
 
         /// <summary>
-        /// Gets or Sets VaultId
+        /// &lt;p&gt;Required for OCID encryption type. The OCID of the Oracle Vault in OCI.&lt;/p&gt;
         /// </summary>
+        /// <value>&lt;p&gt;Required for OCID encryption type. The OCID of the Oracle Vault in OCI.&lt;/p&gt;</value>
         [DataMember(Name = "vaultId", EmitDefaultValue = false)]
         public string VaultId { get; set; }
 
         /// <summary>
-        /// Gets or Sets MasterKeyId
+        /// &lt;p&gt;Required for OCID encryption type. The OCID of the Master Encryption Key (MEK) in the Oracle Vault in OCI.&lt;/p&gt;
         /// </summary>
+        /// <value>&lt;p&gt;Required for OCID encryption type. The OCID of the Master Encryption Key (MEK) in the Oracle Vault in OCI.&lt;/p&gt;</value>
         [DataMember(Name = "masterKeyId", EmitDefaultValue = false)]
         public string MasterKeyId { get; set; }
 

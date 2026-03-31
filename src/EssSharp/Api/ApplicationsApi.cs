@@ -26,10 +26,10 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Application Encryption supported methods
+        /// Get Encryption Info
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;List the types of encryption supported by Essbase and available for the  application.&lt;/p&gt;&lt;p&gt;&lt;b&gt;EncryptionMode&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The encryption modes supported in Oracle Essbase.&lt;/p&gt;&lt;p&gt;0 - No encryption.&lt;/p&gt;&lt;p&gt;1 - N/A. Use Oracle OCI Vault instead.&lt;/p&gt;&lt;p&gt;2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;&lt;b&gt;AvailableTypes&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -38,10 +38,10 @@ namespace EssSharp.Api
         EncryptionConfig ApplicationAppSupportedEncryptionMethods(string applicationName, int operationIndex = 0);
 
         /// <summary>
-        /// Application Encryption supported methods
+        /// Get Encryption Info
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;List the types of encryption supported by Essbase and available for the  application.&lt;/p&gt;&lt;p&gt;&lt;b&gt;EncryptionMode&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The encryption modes supported in Oracle Essbase.&lt;/p&gt;&lt;p&gt;0 - No encryption.&lt;/p&gt;&lt;p&gt;1 - N/A. Use Oracle OCI Vault instead.&lt;/p&gt;&lt;p&gt;2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;&lt;b&gt;AvailableTypes&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -49,10 +49,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of EncryptionConfig</returns>
         ApiResponse<EncryptionConfig> ApplicationAppSupportedEncryptionMethodsWithHttpInfo(string applicationName, int operationIndex = 0);
         /// <summary>
-        /// Application Encryption
+        /// Decrypt Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -61,10 +61,10 @@ namespace EssSharp.Api
         void ApplicationDecrypt(string applicationName, int operationIndex = 0);
 
         /// <summary>
-        /// Application Encryption
+        /// Decrypt Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -72,10 +72,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ApplicationDecryptWithHttpInfo(string applicationName, int operationIndex = 0);
         /// <summary>
-        /// Application Encryption
+        /// Encrypt Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.&lt;/p&gt;&lt;p&gt;OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;For &lt;b&gt;type&lt;/b&gt;, enter &lt;code&gt;OCID&lt;/code&gt;. For &lt;b&gt;vaultId&lt;/b&gt;, enter the OCID of the Vault. For &lt;b&gt;masterKeyId&lt;/b&gt;, enter the OCID of the Master Encryption Key.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -85,10 +85,10 @@ namespace EssSharp.Api
         void ApplicationEncrypt(string applicationName, AppEncryption body, int operationIndex = 0);
 
         /// <summary>
-        /// Application Encryption
+        /// Encrypt Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.&lt;/p&gt;&lt;p&gt;OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;For &lt;b&gt;type&lt;/b&gt;, enter &lt;code&gt;OCID&lt;/code&gt;. For &lt;b&gt;vaultId&lt;/b&gt;, enter the OCID of the Vault. For &lt;b&gt;masterKeyId&lt;/b&gt;, enter the OCID of the Master Encryption Key.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -123,7 +123,7 @@ namespace EssSharp.Api
         /// Copy Database
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Copies a database. You must provide the source and destination application and database names.&lt;/p&gt;
+        /// &lt;p&gt;Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Source application name.&lt;/p&gt;</param>
@@ -136,7 +136,7 @@ namespace EssSharp.Api
         /// Copy Database
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Copies a database. You must provide the source and destination application and database names.&lt;/p&gt;
+        /// &lt;p&gt;Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Source application name.&lt;/p&gt;</param>
@@ -145,10 +145,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ApplicationsCopyDatabaseWithHttpInfo(string applicationName, CubeCopy body, int operationIndex = 0);
         /// <summary>
-        /// Create Application
+        /// Create Application and Database
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application with the specified details.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application and database (cube) with the specified details.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Application details.&lt;/p&gt;</param>
@@ -157,10 +157,10 @@ namespace EssSharp.Api
         void ApplicationsCreateApplications(CreateApplication body, int operationIndex = 0);
 
         /// <summary>
-        /// Create Application
+        /// Create Application and Database
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application with the specified details.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application and database (cube) with the specified details.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Application details.&lt;/p&gt;</param>
@@ -171,7 +171,7 @@ namespace EssSharp.Api
         /// Create Shadow Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;&#39;./op-applications-get.html&#39;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-name-appvisiblity-get.html&#39;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowpromote-post.html&#39;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowdelete-shadowappname-delete.html&#39;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        /// &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;\&quot;./op-applications-get.html\&quot;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-name-appvisiblity-get.html\&quot;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowpromote-post.html\&quot;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowdelete-shadowappname-delete.html\&quot;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;primaryAppName: Source application name which you intend to clone.&lt;/p&gt; &lt;p&gt;shadowAppName : Unique Destination or secondary application name which will be a copy of the source.&lt;/p&gt; &lt;p&gt;hideShadow: Specify &lt;b&gt;true&lt;/b&gt; to hide the application; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;waitForOngoingUpdatesInSecs: Waiting period (in seconds) for any active write-operations to complete.&lt;/p&gt; &lt;p&gt;runInBackground: Specify &lt;b&gt;true&lt;/b&gt; to schedule &#39;Shadow Copy&#39; as a Job; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; </param>
@@ -183,7 +183,7 @@ namespace EssSharp.Api
         /// Create Shadow Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;&#39;./op-applications-get.html&#39;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-name-appvisiblity-get.html&#39;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowpromote-post.html&#39;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowdelete-shadowappname-delete.html&#39;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        /// &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;\&quot;./op-applications-get.html\&quot;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-name-appvisiblity-get.html\&quot;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowpromote-post.html\&quot;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowdelete-shadowappname-delete.html\&quot;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;primaryAppName: Source application name which you intend to clone.&lt;/p&gt; &lt;p&gt;shadowAppName : Unique Destination or secondary application name which will be a copy of the source.&lt;/p&gt; &lt;p&gt;hideShadow: Specify &lt;b&gt;true&lt;/b&gt; to hide the application; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;waitForOngoingUpdatesInSecs: Waiting period (in seconds) for any active write-operations to complete.&lt;/p&gt; &lt;p&gt;runInBackground: Specify &lt;b&gt;true&lt;/b&gt; to schedule &#39;Shadow Copy&#39; as a Job; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; </param>
@@ -242,7 +242,7 @@ namespace EssSharp.Api
         /// Delete Shadow Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;&#39;./op-applications-applicationname-delete.html&#39;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
+        /// &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;\&quot;./op-applications-applicationname-delete.html\&quot;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="shadowAppName">&lt;p&gt;shadowAppName: Name of the shadow application to remove.&lt;/p&gt;</param>
@@ -254,7 +254,7 @@ namespace EssSharp.Api
         /// Delete Shadow Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;&#39;./op-applications-applicationname-delete.html&#39;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
+        /// &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;\&quot;./op-applications-applicationname-delete.html\&quot;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="shadowAppName">&lt;p&gt;shadowAppName: Name of the shadow application to remove.&lt;/p&gt;</param>
@@ -294,7 +294,7 @@ namespace EssSharp.Api
         /// List Active Aliases
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns alias tables associated with the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns the currently active alias table associated with the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -307,7 +307,7 @@ namespace EssSharp.Api
         /// List Active Aliases
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns alias tables associated with the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns the currently active alias table associated with the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -424,9 +424,10 @@ namespace EssSharp.Api
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApplicationList</returns>
-        ApplicationList ApplicationsGetApplications(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0);
+        ApplicationList ApplicationsGetApplications(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, string orderBy = default, int operationIndex = 0);
 
         /// <summary>
         /// List Applications
@@ -441,9 +442,10 @@ namespace EssSharp.Api
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApplicationList</returns>
-        ApiResponse<ApplicationList> ApplicationsGetApplicationsWithHttpInfo(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0);
+        ApiResponse<ApplicationList> ApplicationsGetApplicationsWithHttpInfo(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, string orderBy = default, int operationIndex = 0);
         /// <summary>
         /// Get Application Tree View
         /// </summary>
@@ -499,10 +501,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name from which to list databases.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CubeList</returns>
-        CubeList ApplicationsGetCubes(string applicationName, string connectionName = default, string applicationNameForConnection = default, int operationIndex = 0);
+        CubeList ApplicationsGetCubes(string applicationName, string connectionName = default, string orderBy = default, string applicationNameForConnection = default, int operationIndex = 0);
 
         /// <summary>
         /// List Databases
@@ -513,15 +516,16 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name from which to list databases.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CubeList</returns>
-        ApiResponse<CubeList> ApplicationsGetCubesWithHttpInfo(string applicationName, string connectionName = default, string applicationNameForConnection = default, int operationIndex = 0);
+        ApiResponse<CubeList> ApplicationsGetCubesWithHttpInfo(string applicationName, string connectionName = default, string orderBy = default, string applicationNameForConnection = default, int operationIndex = 0);
         /// <summary>
         /// Get Supported Partition Types
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -532,7 +536,7 @@ namespace EssSharp.Api
         /// Get Supported Partition Types
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -566,27 +570,27 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ApplicationsPerformDbOperationWithHttpInfo(string applicationName, string databaseName, string action, int operationIndex = 0);
         /// <summary>
-        /// Start, Stop Application
+        /// Start or Stop Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt; and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
+        /// &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="action">Action</param>
+        /// <param name="action">&lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void ApplicationsPerformOperation(string applicationName, string action, int operationIndex = 0);
 
         /// <summary>
-        /// Start, Stop Application
+        /// Start or Stop Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt; and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
+        /// &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="action">Action</param>
+        /// <param name="action">&lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ApplicationsPerformOperationWithHttpInfo(string applicationName, string action, int operationIndex = 0);
@@ -825,10 +829,10 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Application Encryption supported methods
+        /// Get Encryption Info
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;List the types of encryption supported by Essbase and available for the  application.&lt;/p&gt;&lt;p&gt;&lt;b&gt;EncryptionMode&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The encryption modes supported in Oracle Essbase.&lt;/p&gt;&lt;p&gt;0 - No encryption.&lt;/p&gt;&lt;p&gt;1 - N/A. Use Oracle OCI Vault instead.&lt;/p&gt;&lt;p&gt;2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;&lt;b&gt;AvailableTypes&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -838,10 +842,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<EncryptionConfig> ApplicationAppSupportedEncryptionMethodsAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Application Encryption supported methods
+        /// Get Encryption Info
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;List the types of encryption supported by Essbase and available for the  application.&lt;/p&gt;&lt;p&gt;&lt;b&gt;EncryptionMode&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The encryption modes supported in Oracle Essbase.&lt;/p&gt;&lt;p&gt;0 - No encryption.&lt;/p&gt;&lt;p&gt;1 - N/A. Use Oracle OCI Vault instead.&lt;/p&gt;&lt;p&gt;2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;&lt;b&gt;AvailableTypes&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -850,10 +854,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (EncryptionConfig)</returns>
         System.Threading.Tasks.Task<ApiResponse<EncryptionConfig>> ApplicationAppSupportedEncryptionMethodsWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Application Encryption
+        /// Decrypt Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -863,10 +867,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ApplicationDecryptAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Application Encryption
+        /// Decrypt Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -875,10 +879,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationDecryptWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Application Encryption
+        /// Encrypt Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.&lt;/p&gt;&lt;p&gt;OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;For &lt;b&gt;type&lt;/b&gt;, enter &lt;code&gt;OCID&lt;/code&gt;. For &lt;b&gt;vaultId&lt;/b&gt;, enter the OCID of the Vault. For &lt;b&gt;masterKeyId&lt;/b&gt;, enter the OCID of the Master Encryption Key.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -889,10 +893,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ApplicationEncryptAsync(string applicationName, AppEncryption body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Application Encryption
+        /// Encrypt Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// &lt;p&gt;To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.&lt;/p&gt;&lt;p&gt;OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;For &lt;b&gt;type&lt;/b&gt;, enter &lt;code&gt;OCID&lt;/code&gt;. For &lt;b&gt;vaultId&lt;/b&gt;, enter the OCID of the Vault. For &lt;b&gt;masterKeyId&lt;/b&gt;, enter the OCID of the Master Encryption Key.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -930,7 +934,7 @@ namespace EssSharp.Api
         /// Copy Database
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Copies a database. You must provide the source and destination application and database names.&lt;/p&gt;
+        /// &lt;p&gt;Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Source application name.&lt;/p&gt;</param>
@@ -944,7 +948,7 @@ namespace EssSharp.Api
         /// Copy Database
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Copies a database. You must provide the source and destination application and database names.&lt;/p&gt;
+        /// &lt;p&gt;Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Source application name.&lt;/p&gt;</param>
@@ -954,10 +958,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationsCopyDatabaseWithHttpInfoAsync(string applicationName, CubeCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Create Application
+        /// Create Application and Database
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application with the specified details.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application and database (cube) with the specified details.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Application details.&lt;/p&gt;</param>
@@ -967,10 +971,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ApplicationsCreateApplicationsAsync(CreateApplication body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Create Application
+        /// Create Application and Database
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates an application with the specified details.&lt;/p&gt;
+        /// &lt;p&gt;Creates an application and database (cube) with the specified details.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Application details.&lt;/p&gt;</param>
@@ -982,7 +986,7 @@ namespace EssSharp.Api
         /// Create Shadow Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;&#39;./op-applications-get.html&#39;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-name-appvisiblity-get.html&#39;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowpromote-post.html&#39;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowdelete-shadowappname-delete.html&#39;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        /// &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;\&quot;./op-applications-get.html\&quot;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-name-appvisiblity-get.html\&quot;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowpromote-post.html\&quot;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowdelete-shadowappname-delete.html\&quot;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;primaryAppName: Source application name which you intend to clone.&lt;/p&gt; &lt;p&gt;shadowAppName : Unique Destination or secondary application name which will be a copy of the source.&lt;/p&gt; &lt;p&gt;hideShadow: Specify &lt;b&gt;true&lt;/b&gt; to hide the application; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;waitForOngoingUpdatesInSecs: Waiting period (in seconds) for any active write-operations to complete.&lt;/p&gt; &lt;p&gt;runInBackground: Specify &lt;b&gt;true&lt;/b&gt; to schedule &#39;Shadow Copy&#39; as a Job; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; </param>
@@ -995,7 +999,7 @@ namespace EssSharp.Api
         /// Create Shadow Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;&#39;./op-applications-get.html&#39;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-name-appvisiblity-get.html&#39;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowpromote-post.html&#39;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowdelete-shadowappname-delete.html&#39;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        /// &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;\&quot;./op-applications-get.html\&quot;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-name-appvisiblity-get.html\&quot;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowpromote-post.html\&quot;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowdelete-shadowappname-delete.html\&quot;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;primaryAppName: Source application name which you intend to clone.&lt;/p&gt; &lt;p&gt;shadowAppName : Unique Destination or secondary application name which will be a copy of the source.&lt;/p&gt; &lt;p&gt;hideShadow: Specify &lt;b&gt;true&lt;/b&gt; to hide the application; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;waitForOngoingUpdatesInSecs: Waiting period (in seconds) for any active write-operations to complete.&lt;/p&gt; &lt;p&gt;runInBackground: Specify &lt;b&gt;true&lt;/b&gt; to schedule &#39;Shadow Copy&#39; as a Job; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; </param>
@@ -1059,7 +1063,7 @@ namespace EssSharp.Api
         /// Delete Shadow Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;&#39;./op-applications-applicationname-delete.html&#39;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
+        /// &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;\&quot;./op-applications-applicationname-delete.html\&quot;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="shadowAppName">&lt;p&gt;shadowAppName: Name of the shadow application to remove.&lt;/p&gt;</param>
@@ -1072,7 +1076,7 @@ namespace EssSharp.Api
         /// Delete Shadow Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;&#39;./op-applications-applicationname-delete.html&#39;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
+        /// &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;\&quot;./op-applications-applicationname-delete.html\&quot;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="shadowAppName">&lt;p&gt;shadowAppName: Name of the shadow application to remove.&lt;/p&gt;</param>
@@ -1115,7 +1119,7 @@ namespace EssSharp.Api
         /// List Active Aliases
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns alias tables associated with the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns the currently active alias table associated with the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1129,7 +1133,7 @@ namespace EssSharp.Api
         /// List Active Aliases
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns alias tables associated with the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Returns the currently active alias table associated with the specified application and database.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1255,10 +1259,11 @@ namespace EssSharp.Api
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationList</returns>
-        System.Threading.Tasks.Task<ApplicationList> ApplicationsGetApplicationsAsync(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApplicationList> ApplicationsGetApplicationsAsync(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Applications
@@ -1273,10 +1278,11 @@ namespace EssSharp.Api
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationList>> ApplicationsGetApplicationsWithHttpInfoAsync(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<ApplicationList>> ApplicationsGetApplicationsWithHttpInfoAsync(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Application Tree View
         /// </summary>
@@ -1336,11 +1342,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name from which to list databases.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CubeList</returns>
-        System.Threading.Tasks.Task<CubeList> ApplicationsGetCubesAsync(string applicationName, string connectionName = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<CubeList> ApplicationsGetCubesAsync(string applicationName, string connectionName = default, string orderBy = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List Databases
@@ -1351,16 +1358,17 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name from which to list databases.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CubeList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CubeList>> ApplicationsGetCubesWithHttpInfoAsync(string applicationName, string connectionName = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<CubeList>> ApplicationsGetCubesWithHttpInfoAsync(string applicationName, string connectionName = default, string orderBy = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Supported Partition Types
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1372,7 +1380,7 @@ namespace EssSharp.Api
         /// Get Supported Partition Types
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1409,28 +1417,28 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationsPerformDbOperationWithHttpInfoAsync(string applicationName, string databaseName, string action, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Start, Stop Application
+        /// Start or Stop Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt; and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
+        /// &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="action">Action</param>
+        /// <param name="action">&lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
         System.Threading.Tasks.Task ApplicationsPerformOperationAsync(string applicationName, string action, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Start, Stop Application
+        /// Start or Stop Application
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt; and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
+        /// &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="action">Action</param>
+        /// <param name="action">&lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
@@ -1799,7 +1807,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption supported methods &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Get Encryption Info &lt;p&gt;List the types of encryption supported by Essbase and available for the  application.&lt;/p&gt;&lt;p&gt;&lt;b&gt;EncryptionMode&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The encryption modes supported in Oracle Essbase.&lt;/p&gt;&lt;p&gt;0 - No encryption.&lt;/p&gt;&lt;p&gt;1 - N/A. Use Oracle OCI Vault instead.&lt;/p&gt;&lt;p&gt;2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;&lt;b&gt;AvailableTypes&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1812,7 +1820,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption supported methods &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Get Encryption Info &lt;p&gt;List the types of encryption supported by Essbase and available for the  application.&lt;/p&gt;&lt;p&gt;&lt;b&gt;EncryptionMode&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The encryption modes supported in Oracle Essbase.&lt;/p&gt;&lt;p&gt;0 - No encryption.&lt;/p&gt;&lt;p&gt;1 - N/A. Use Oracle OCI Vault instead.&lt;/p&gt;&lt;p&gt;2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;&lt;b&gt;AvailableTypes&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1893,7 +1901,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption supported methods &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Get Encryption Info &lt;p&gt;List the types of encryption supported by Essbase and available for the  application.&lt;/p&gt;&lt;p&gt;&lt;b&gt;EncryptionMode&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The encryption modes supported in Oracle Essbase.&lt;/p&gt;&lt;p&gt;0 - No encryption.&lt;/p&gt;&lt;p&gt;1 - N/A. Use Oracle OCI Vault instead.&lt;/p&gt;&lt;p&gt;2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;&lt;b&gt;AvailableTypes&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1907,7 +1915,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption supported methods &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Get Encryption Info &lt;p&gt;List the types of encryption supported by Essbase and available for the  application.&lt;/p&gt;&lt;p&gt;&lt;b&gt;EncryptionMode&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The encryption modes supported in Oracle Essbase.&lt;/p&gt;&lt;p&gt;0 - No encryption.&lt;/p&gt;&lt;p&gt;1 - N/A. Use Oracle OCI Vault instead.&lt;/p&gt;&lt;p&gt;2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;&lt;b&gt;AvailableTypes&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1990,7 +1998,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Decrypt Application &lt;p&gt;Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2002,7 +2010,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Decrypt Application &lt;p&gt;Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2081,7 +2089,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Decrypt Application &lt;p&gt;Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2094,7 +2102,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Decrypt Application &lt;p&gt;Disable encryption on the application. Applicable only when Essbase is deployed as a stack on OCI, using Oracle Cloud Marketplace listing.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encrypt-post.html\&quot;&gt;Encrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2175,7 +2183,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Encrypt Application &lt;p&gt;To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.&lt;/p&gt;&lt;p&gt;OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;For &lt;b&gt;type&lt;/b&gt;, enter &lt;code&gt;OCID&lt;/code&gt;. For &lt;b&gt;vaultId&lt;/b&gt;, enter the OCID of the Vault. For &lt;b&gt;masterKeyId&lt;/b&gt;, enter the OCID of the Master Encryption Key.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2188,7 +2196,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Encrypt Application &lt;p&gt;To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.&lt;/p&gt;&lt;p&gt;OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;For &lt;b&gt;type&lt;/b&gt;, enter &lt;code&gt;OCID&lt;/code&gt;. For &lt;b&gt;vaultId&lt;/b&gt;, enter the OCID of the Vault. For &lt;b&gt;masterKeyId&lt;/b&gt;, enter the OCID of the Master Encryption Key.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2275,7 +2283,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Encrypt Application &lt;p&gt;To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.&lt;/p&gt;&lt;p&gt;OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;For &lt;b&gt;type&lt;/b&gt;, enter &lt;code&gt;OCID&lt;/code&gt;. For &lt;b&gt;vaultId&lt;/b&gt;, enter the OCID of the Vault. For &lt;b&gt;masterKeyId&lt;/b&gt;, enter the OCID of the Master Encryption Key.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2289,7 +2297,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Application Encryption &lt;p&gt;Enable encryption on application&lt;/p&gt;
+        /// Encrypt Application &lt;p&gt;To prevent unauthorized access to the Essbase application, encrypt it. Only logged in Essbase users can access encrypted applications.&lt;/p&gt;&lt;p&gt;OCID encryption type is available for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. This encryption type uses Oracle OCI Vault, a service that securely stores and manages master encryption keys and secrets.&lt;/p&gt;&lt;p&gt;For &lt;b&gt;type&lt;/b&gt;, enter &lt;code&gt;OCID&lt;/code&gt;. For &lt;b&gt;vaultId&lt;/b&gt;, enter the OCID of the Vault. For &lt;b&gt;masterKeyId&lt;/b&gt;, enter the OCID of the Master Encryption Key.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-encryptionconfig-get.html\&quot;&gt;Get Encryption Info&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-decrypt-post.html\&quot;&gt;Decrypt Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2567,7 +2575,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy Database &lt;p&gt;Copies a database. You must provide the source and destination application and database names.&lt;/p&gt;
+        /// Copy Database &lt;p&gt;Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Source application name.&lt;/p&gt;</param>
@@ -2580,7 +2588,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy Database &lt;p&gt;Copies a database. You must provide the source and destination application and database names.&lt;/p&gt;
+        /// Copy Database &lt;p&gt;Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Source application name.&lt;/p&gt;</param>
@@ -2669,7 +2677,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy Database &lt;p&gt;Copies a database. You must provide the source and destination application and database names.&lt;/p&gt;
+        /// Copy Database &lt;p&gt;Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Source application name.&lt;/p&gt;</param>
@@ -2683,7 +2691,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Copy Database &lt;p&gt;Copies a database. You must provide the source and destination application and database names.&lt;/p&gt;
+        /// Copy Database &lt;p&gt;Copies an Essbase database (cube). You must provide the source and destination application and cube  names. This operation is supported only for block storage cubes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Source application name.&lt;/p&gt;</param>
@@ -2774,7 +2782,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application &lt;p&gt;Creates an application with the specified details.&lt;/p&gt;
+        /// Create Application and Database &lt;p&gt;Creates an application and database (cube) with the specified details.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Application details.&lt;/p&gt;</param>
@@ -2786,7 +2794,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application &lt;p&gt;Creates an application with the specified details.&lt;/p&gt;
+        /// Create Application and Database &lt;p&gt;Creates an application and database (cube) with the specified details.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Application details.&lt;/p&gt;</param>
@@ -2866,7 +2874,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application &lt;p&gt;Creates an application with the specified details.&lt;/p&gt;
+        /// Create Application and Database &lt;p&gt;Creates an application and database (cube) with the specified details.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Application details.&lt;/p&gt;</param>
@@ -2879,7 +2887,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Application &lt;p&gt;Creates an application with the specified details.&lt;/p&gt;
+        /// Create Application and Database &lt;p&gt;Creates an application and database (cube) with the specified details.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;Application details.&lt;/p&gt;</param>
@@ -2961,7 +2969,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Shadow Application &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;&#39;./op-applications-get.html&#39;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-name-appvisiblity-get.html&#39;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowpromote-post.html&#39;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowdelete-shadowappname-delete.html&#39;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        /// Create Shadow Application &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;\&quot;./op-applications-get.html\&quot;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-name-appvisiblity-get.html\&quot;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowpromote-post.html\&quot;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowdelete-shadowappname-delete.html\&quot;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;primaryAppName: Source application name which you intend to clone.&lt;/p&gt; &lt;p&gt;shadowAppName : Unique Destination or secondary application name which will be a copy of the source.&lt;/p&gt; &lt;p&gt;hideShadow: Specify &lt;b&gt;true&lt;/b&gt; to hide the application; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;waitForOngoingUpdatesInSecs: Waiting period (in seconds) for any active write-operations to complete.&lt;/p&gt; &lt;p&gt;runInBackground: Specify &lt;b&gt;true&lt;/b&gt; to schedule &#39;Shadow Copy&#39; as a Job; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; </param>
@@ -2973,7 +2981,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Shadow Application &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;&#39;./op-applications-get.html&#39;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-name-appvisiblity-get.html&#39;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowpromote-post.html&#39;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowdelete-shadowappname-delete.html&#39;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        /// Create Shadow Application &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;\&quot;./op-applications-get.html\&quot;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-name-appvisiblity-get.html\&quot;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowpromote-post.html\&quot;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowdelete-shadowappname-delete.html\&quot;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;primaryAppName: Source application name which you intend to clone.&lt;/p&gt; &lt;p&gt;shadowAppName : Unique Destination or secondary application name which will be a copy of the source.&lt;/p&gt; &lt;p&gt;hideShadow: Specify &lt;b&gt;true&lt;/b&gt; to hide the application; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;waitForOngoingUpdatesInSecs: Waiting period (in seconds) for any active write-operations to complete.&lt;/p&gt; &lt;p&gt;runInBackground: Specify &lt;b&gt;true&lt;/b&gt; to schedule &#39;Shadow Copy&#39; as a Job; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; </param>
@@ -3054,7 +3062,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Shadow Application &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;&#39;./op-applications-get.html&#39;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-name-appvisiblity-get.html&#39;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowpromote-post.html&#39;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowdelete-shadowappname-delete.html&#39;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        /// Create Shadow Application &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;\&quot;./op-applications-get.html\&quot;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-name-appvisiblity-get.html\&quot;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowpromote-post.html\&quot;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowdelete-shadowappname-delete.html\&quot;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;primaryAppName: Source application name which you intend to clone.&lt;/p&gt; &lt;p&gt;shadowAppName : Unique Destination or secondary application name which will be a copy of the source.&lt;/p&gt; &lt;p&gt;hideShadow: Specify &lt;b&gt;true&lt;/b&gt; to hide the application; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;waitForOngoingUpdatesInSecs: Waiting period (in seconds) for any active write-operations to complete.&lt;/p&gt; &lt;p&gt;runInBackground: Specify &lt;b&gt;true&lt;/b&gt; to schedule &#39;Shadow Copy&#39; as a Job; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; </param>
@@ -3067,7 +3075,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Shadow Application &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;&#39;./op-applications-get.html&#39;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-name-appvisiblity-get.html&#39;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowpromote-post.html&#39;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;&#39;./op-applications-actions-shadowdelete-shadowappname-delete.html&#39;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+        /// Create Shadow Application &lt;p&gt;Puts the specified primary application in read-only mode and creates a shadow application (a complete copy) out of the primary application.&lt;/p&gt; &lt;p&gt;A shadow application enables you to perform cube modifications and outline restructure on the shadow application, while the primary application serves read-only operations such as queries.&lt;/p&gt; &lt;p&gt;Permission required: power user.&lt;/p&gt; &lt;p&gt;Shadow applications are useful because an outline restructure can take a very long time, depending on the size of the application.&lt;/p&gt; &lt;p&gt;Instead of reporting users being blocked by the downtime due to restructure, a shadow solution helps them continue their read-only queries against the primary application, while the restructure is occurring on the shadow application.&lt;/p&gt; &lt;p&gt;Note that a shadow application can be made as hidden copy of the primary application.&lt;/p&gt; &lt;p&gt;This means if you invoke &lt;a href&#x3D;\&quot;./op-applications-get.html\&quot;&gt;List Applications&lt;/a&gt;, you will not see the shadow application in that list.&lt;/p&gt; &lt;p&gt;The parameter &lt;i&gt;waitForOngoingUpdatesInSecs&lt;/i&gt; allows you to control how long the copying process can wait, if there are any ongoing write-operations on the cubes(s) of this application at the time you are attempting to make a shadow copy.&lt;/p&gt; &lt;p&gt;For example, if there is a data load in progress, the cloning process fails.&lt;/p&gt; &lt;p&gt;If you specified waitForOngoingUpdatesInSecs as 60, Essbase waits up to one minute for the data load to complete before initiating a cloning process.&lt;/p&gt; &lt;p&gt;If the data load doesn&#39;t complete within this specified wait-interval, Essbase does not create the copy, the cloning process fails with an error, and the data load continues.&lt;/p&gt;&lt;p&gt;&lt;b&gt;See Also&lt;/b&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-name-appvisiblity-get.html\&quot;&gt;List Application Names&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowpromote-post.html\&quot;&gt;Promote Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-actions-shadowdelete-shadowappname-delete.html\&quot;&gt;Delete Shadow Application&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">&lt;p&gt;primaryAppName: Source application name which you intend to clone.&lt;/p&gt; &lt;p&gt;shadowAppName : Unique Destination or secondary application name which will be a copy of the source.&lt;/p&gt; &lt;p&gt;hideShadow: Specify &lt;b&gt;true&lt;/b&gt; to hide the application; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;waitForOngoingUpdatesInSecs: Waiting period (in seconds) for any active write-operations to complete.&lt;/p&gt; &lt;p&gt;runInBackground: Specify &lt;b&gt;true&lt;/b&gt; to schedule &#39;Shadow Copy&#39; as a Job; otherwise, specify &lt;b&gt;false&lt;/b&gt;.&lt;/p&gt; </param>
@@ -3538,7 +3546,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Shadow Application &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;&#39;./op-applications-applicationname-delete.html&#39;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
+        /// Delete Shadow Application &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;\&quot;./op-applications-applicationname-delete.html\&quot;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="shadowAppName">&lt;p&gt;shadowAppName: Name of the shadow application to remove.&lt;/p&gt;</param>
@@ -3550,7 +3558,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Shadow Application &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;&#39;./op-applications-applicationname-delete.html&#39;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
+        /// Delete Shadow Application &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;\&quot;./op-applications-applicationname-delete.html\&quot;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="shadowAppName">&lt;p&gt;shadowAppName: Name of the shadow application to remove.&lt;/p&gt;</param>
@@ -3629,7 +3637,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Shadow Application &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;&#39;./op-applications-applicationname-delete.html&#39;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
+        /// Delete Shadow Application &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;\&quot;./op-applications-applicationname-delete.html\&quot;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="shadowAppName">&lt;p&gt;shadowAppName: Name of the shadow application to remove.&lt;/p&gt;</param>
@@ -3642,7 +3650,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Shadow Application &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;&#39;./op-applications-applicationname-delete.html&#39;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
+        /// Delete Shadow Application &lt;p&gt;Forcefully deletes the specified shadow application.&lt;/p&gt; &lt;p&gt;Although shadow applications can also be deleted using the regular &lt;a href&#x3D;\&quot;./op-applications-applicationname-delete.html\&quot;&gt;Delete Application&lt;/a&gt;, if the shadow application is corrupted or has any locks, then it the regular delete application fails.&lt;/p&gt; &lt;p&gt;Therefore, this API guarantees a forceful deletion of the shadow application.&lt;/p&gt; &lt;p&gt;This API is similar to the MaxL statement &lt;b&gt;drop application &lt;i&gt;APP-NAME&lt;/i&gt; cascade force&lt;/b&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="shadowAppName">&lt;p&gt;shadowAppName: Name of the shadow application to remove.&lt;/p&gt;</param>
@@ -3956,7 +3964,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Active Aliases &lt;p&gt;Returns alias tables associated with the specified application and database.&lt;/p&gt;
+        /// List Active Aliases &lt;p&gt;Returns the currently active alias table associated with the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3970,7 +3978,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Active Aliases &lt;p&gt;Returns alias tables associated with the specified application and database.&lt;/p&gt;
+        /// List Active Aliases &lt;p&gt;Returns the currently active alias table associated with the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -4059,7 +4067,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Active Aliases &lt;p&gt;Returns alias tables associated with the specified application and database.&lt;/p&gt;
+        /// List Active Aliases &lt;p&gt;Returns the currently active alias table associated with the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -4074,7 +4082,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// List Active Aliases &lt;p&gt;Returns alias tables associated with the specified application and database.&lt;/p&gt;
+        /// List Active Aliases &lt;p&gt;Returns the currently active alias table associated with the specified application and database.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -4962,11 +4970,12 @@ namespace EssSharp.Api
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApplicationList</returns>
-        public ApplicationList ApplicationsGetApplications(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0)
+        public ApplicationList ApplicationsGetApplications(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, string orderBy = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<ApplicationList> localVarResponse = ApplicationsGetApplicationsWithHttpInfo(filter, offset, limit, connectionName, applicationNameForConnection, fields);
+            EssSharp.Client.ApiResponse<ApplicationList> localVarResponse = ApplicationsGetApplicationsWithHttpInfo(filter, offset, limit, connectionName, applicationNameForConnection, fields, orderBy);
             return localVarResponse.Data;
         }
 
@@ -4980,9 +4989,10 @@ namespace EssSharp.Api
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ApplicationList</returns>
-        public EssSharp.Client.ApiResponse<ApplicationList> ApplicationsGetApplicationsWithHttpInfo(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ApplicationList> ApplicationsGetApplicationsWithHttpInfo(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, string orderBy = default, int operationIndex = 0)
         {
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
 
@@ -5031,6 +5041,10 @@ namespace EssSharp.Api
             if (fields != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "fields", fields));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
 
             localVarRequestOptions.Operation = "ApplicationsApi.ApplicationsGetApplications";
@@ -5083,12 +5097,13 @@ namespace EssSharp.Api
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApplicationList</returns>
-        public async System.Threading.Tasks.Task<ApplicationList> ApplicationsGetApplicationsAsync(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ApplicationList> ApplicationsGetApplicationsAsync(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<ApplicationList> localVarResponse = await ApplicationsGetApplicationsWithHttpInfoAsync(filter, offset, limit, connectionName, applicationNameForConnection, fields, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<ApplicationList> localVarResponse = await ApplicationsGetApplicationsWithHttpInfoAsync(filter, offset, limit, connectionName, applicationNameForConnection, fields, orderBy, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -5102,10 +5117,11 @@ namespace EssSharp.Api
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name for connection.&lt;/p&gt; (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ApplicationList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationList>> ApplicationsGetApplicationsWithHttpInfoAsync(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ApplicationList>> ApplicationsGetApplicationsWithHttpInfoAsync(string filter = default, int? offset = default, int? limit = default, string connectionName = default, string applicationNameForConnection = default, string fields = default, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
 
             EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
@@ -5154,6 +5170,10 @@ namespace EssSharp.Api
             if (fields != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "fields", fields));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
 
             localVarRequestOptions.Operation = "ApplicationsApi.ApplicationsGetApplications";
@@ -5585,12 +5605,13 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name from which to list databases.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CubeList</returns>
-        public CubeList ApplicationsGetCubes(string applicationName, string connectionName = default, string applicationNameForConnection = default, int operationIndex = 0)
+        public CubeList ApplicationsGetCubes(string applicationName, string connectionName = default, string orderBy = default, string applicationNameForConnection = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<CubeList> localVarResponse = ApplicationsGetCubesWithHttpInfo(applicationName, connectionName, applicationNameForConnection);
+            EssSharp.Client.ApiResponse<CubeList> localVarResponse = ApplicationsGetCubesWithHttpInfo(applicationName, connectionName, orderBy, applicationNameForConnection);
             return localVarResponse.Data;
         }
 
@@ -5600,10 +5621,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name from which to list databases.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CubeList</returns>
-        public EssSharp.Client.ApiResponse<CubeList> ApplicationsGetCubesWithHttpInfo(string applicationName, string connectionName = default, string applicationNameForConnection = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<CubeList> ApplicationsGetCubesWithHttpInfo(string applicationName, string connectionName = default, string orderBy = default, string applicationNameForConnection = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -5639,6 +5661,10 @@ namespace EssSharp.Api
             if (connectionName != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "connectionName", connectionName));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
             if (applicationNameForConnection != null)
             {
@@ -5691,13 +5717,14 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name from which to list databases.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CubeList</returns>
-        public async System.Threading.Tasks.Task<CubeList> ApplicationsGetCubesAsync(string applicationName, string connectionName = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<CubeList> ApplicationsGetCubesAsync(string applicationName, string connectionName = default, string orderBy = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<CubeList> localVarResponse = await ApplicationsGetCubesWithHttpInfoAsync(applicationName, connectionName, applicationNameForConnection, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<CubeList> localVarResponse = await ApplicationsGetCubesWithHttpInfoAsync(applicationName, connectionName, orderBy, applicationNameForConnection, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -5707,11 +5734,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="connectionName">&lt;p&gt;Connection name.&lt;/p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="applicationNameForConnection">&lt;p&gt;Application name from which to list databases.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CubeList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CubeList>> ApplicationsGetCubesWithHttpInfoAsync(string applicationName, string connectionName = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<CubeList>> ApplicationsGetCubesWithHttpInfoAsync(string applicationName, string connectionName = default, string orderBy = default, string applicationNameForConnection = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -5747,6 +5775,10 @@ namespace EssSharp.Api
             if (connectionName != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "connectionName", connectionName));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
             if (applicationNameForConnection != null)
             {
@@ -5795,7 +5827,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Supported Partition Types &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// Get Supported Partition Types &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -5806,7 +5838,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Supported Partition Types &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// Get Supported Partition Types &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -5877,7 +5909,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Supported Partition Types &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// Get Supported Partition Types &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -5889,7 +5921,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Supported Partition Types &lt;p&gt;Returns supported partition types.&lt;/p&gt;
+        /// Get Supported Partition Types &lt;p&gt;Returns supported federated partition types.&lt;/p&gt;&lt;p&gt;Federated partition feature requires the following infrastructure: Essbase and Oracle Autonomous Database Serverless (with Autonomous Data Warehouse workload type) are deployed together in a shared OCI tenancy. The Autonomous Data Warehouse is the repository database for Essbase&#39;s RCU schemas.&lt;/p&gt; &lt;p&gt;This API returns &lt;code&gt;[ &amp;quot;ANALYTIC_VIEW&amp;quot; ]&lt;/code&gt; if federated partitions are supported in the current environment, and an empty result otherwise.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -6183,11 +6215,11 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start, Stop Application &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt; and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
+        /// Start or Stop Application &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="action">Action</param>
+        /// <param name="action">&lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         public void ApplicationsPerformOperation(string applicationName, string action, int operationIndex = 0)
@@ -6196,11 +6228,11 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start, Stop Application &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt; and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
+        /// Start or Stop Application &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="action">Action</param>
+        /// <param name="action">&lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         public EssSharp.Client.ApiResponse<Object> ApplicationsPerformOperationWithHttpInfo(string applicationName, string action, int operationIndex = 0)
@@ -6283,11 +6315,11 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start, Stop Application &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt; and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
+        /// Start or Stop Application &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="action">Action</param>
+        /// <param name="action">&lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
@@ -6297,11 +6329,11 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start, Stop Application &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt; and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
+        /// Start or Stop Application &lt;p&gt;Performs specified action on the application. Valid actions are &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, and &lt;b&gt;Stop_no_force&lt;/b&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="action">Action</param>
+        /// <param name="action">&lt;p&gt;Action to perform on the application: &lt;b&gt;Start&lt;/b&gt;, &lt;b&gt;Stop&lt;/b&gt;, or  &lt;b&gt;Stop_no_force&lt;/b&gt;&lt;/p&gt;.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>

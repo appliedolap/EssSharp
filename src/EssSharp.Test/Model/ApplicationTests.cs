@@ -204,5 +204,14 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Encrypted'
         }
+
+        /// <summary>
+        /// Test the property 'AiConnection'
+        /// </summary>
+        [Fact]
+        public void AiConnectionTest()
+        {
+            // TODO unit test for the property 'AiConnection'
+        }
     }
 }

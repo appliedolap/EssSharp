@@ -10,7 +10,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationConfigurationGetConfigurationKeys**](ApplicationConfigurationApi.md#applicationconfigurationgetconfigurationkeys) | **GET** /applications/{applicationName}/configurationkeys | Get Application Configuration (Filtered) |
 | [**ApplicationConfigurationGetConfigurations**](ApplicationConfigurationApi.md#applicationconfigurationgetconfigurations) | **GET** /applications/{applicationName}/configurations | Get Application Configuration |
 | [**ApplicationConfigurationSetConfiguration**](ApplicationConfigurationApi.md#applicationconfigurationsetconfiguration) | **PUT** /applications/{applicationName}/configurations/{configId} | Update Application Configuration |
-| [**ApplicationConfigurationSetConfigurations**](ApplicationConfigurationApi.md#applicationconfigurationsetconfigurations) | **PUT** /applications/{applicationName}/configurations | Updates Application Configurations |
+| [**ApplicationConfigurationSetConfigurations**](ApplicationConfigurationApi.md#applicationconfigurationsetconfigurations) | **PUT** /applications/{applicationName}/configurations | Update Application Configurations |
 
 <a id="applicationconfigurationaddconfiguration"></a>
 # **ApplicationConfigurationAddConfiguration**
@@ -417,7 +417,7 @@ catch (ApiException e)
 
 <a id="applicationconfigurationgetconfigurations"></a>
 # **ApplicationConfigurationGetConfigurations**
-> ApplicationConfigList ApplicationConfigurationGetConfigurations (string applicationName)
+> ApplicationConfigList ApplicationConfigurationGetConfigurations (string applicationName, string orderBy = null)
 
 Get Application Configuration
 
@@ -447,11 +447,12 @@ namespace Example
 
             var apiInstance = new ApplicationConfigurationApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>key:asc</code> </p> (optional) 
 
             try
             {
                 // Get Application Configuration
-                ApplicationConfigList result = apiInstance.ApplicationConfigurationGetConfigurations(applicationName);
+                ApplicationConfigList result = apiInstance.ApplicationConfigurationGetConfigurations(applicationName, orderBy);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -472,7 +473,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Application Configuration
-    ApiResponse<ApplicationConfigList> response = apiInstance.ApplicationConfigurationGetConfigurationsWithHttpInfo(applicationName);
+    ApiResponse<ApplicationConfigList> response = apiInstance.ApplicationConfigurationGetConfigurationsWithHttpInfo(applicationName, orderBy);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -490,6 +491,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -622,7 +624,7 @@ catch (ApiException e)
 # **ApplicationConfigurationSetConfigurations**
 > ApplicationConfigList ApplicationConfigurationSetConfigurations (string applicationName, List<ApplicationConfigEntry> body)
 
-Updates Application Configurations
+Update Application Configurations
 
 <p>Updates the application configurations and returns the updated configuration details.</p>
 
@@ -654,7 +656,7 @@ namespace Example
 
             try
             {
-                // Updates Application Configurations
+                // Update Application Configurations
                 ApplicationConfigList result = apiInstance.ApplicationConfigurationSetConfigurations(applicationName, body);
                 Debug.WriteLine(result);
             }
@@ -675,7 +677,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Updates Application Configurations
+    // Update Application Configurations
     ApiResponse<ApplicationConfigList> response = apiInstance.ApplicationConfigurationSetConfigurationsWithHttpInfo(applicationName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

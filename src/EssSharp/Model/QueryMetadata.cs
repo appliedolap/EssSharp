@@ -60,11 +60,15 @@ namespace EssSharp.Model
         /// <param name="name">name.</param>
         /// <param name="type">type.</param>
         /// <param name="links">links.</param>
-        public QueryMetadata(string name = default, TypeEnum? type = default, List<Link> links = default)
+        /// <param name="description">description.</param>
+        /// <param name="aiGenerated">aiGenerated.</param>
+        public QueryMetadata(string name = default, TypeEnum? type = default, List<Link> links = default, string description = default, bool aiGenerated = default)
         {
             this.Name = name;
             this.Type = type;
             this.Links = links;
+            this.Description = description;
+            this.AiGenerated = aiGenerated;
         }
 
         /// <summary>
@@ -80,6 +84,18 @@ namespace EssSharp.Model
         public List<Link> Links { get; set; }
 
         /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AiGenerated
+        /// </summary>
+        [DataMember(Name = "aiGenerated", EmitDefaultValue = true)]
+        public bool AiGenerated { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -90,6 +106,8 @@ namespace EssSharp.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  AiGenerated: ").Append(AiGenerated).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

@@ -567,7 +567,7 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ApplicationsApi>();
-                var applications = await api.ApplicationsGetApplicationsAsync(null, null, applicationsLimit, null, null, null, 0, cancellationToken).ConfigureAwait(false);
+                var applications = await api.ApplicationsGetApplicationsAsync(limit: applicationsLimit, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return applications?.ToEssSharpList(this) ?? new List<IEssApplication>();
             }
@@ -801,7 +801,7 @@ namespace EssSharp
                 {
                     // Build the search path from all but the last path component.
                     var searchPath = string.Join(@"/", pathComponents.Take(pathComponents.Length - 1));
-                    files = await api.FilesListFilesAsync(searchPath, null, null, "folder", null, null, null, folderName, false, 0, cancellationToken).ConfigureAwait(false);
+                    files = await api.FilesListFilesAsync(path: searchPath, type: "folder", filter: folderName, recursive: false, cancellationToken: cancellationToken).ConfigureAwait(false);
                 }
 
                 // If the given folder path was found, return it.
@@ -1137,7 +1137,7 @@ namespace EssSharp
                 bool getAllVariables = false;
 
                 var api = GetApi<ServerVariablesApi>();
-                var variables = await api.VariablesListServerVariablesAsync(getAllVariables.ToString().ToLowerInvariant(), 0, cancellationToken).ConfigureAwait(false);
+                var variables = await api.VariablesListServerVariablesAsync(getAllVariables.ToString().ToLowerInvariant(), cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return variables?.ToEssSharpList<IEssServerVariable>(this) ?? new List<IEssServerVariable>();
             }

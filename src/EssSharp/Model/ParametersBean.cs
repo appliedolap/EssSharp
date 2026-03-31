@@ -221,10 +221,12 @@ namespace EssSharp.Model
         /// <param name="filetype">filetype.</param>
         /// <param name="exportpartitions">exportpartitions.</param>
         /// <param name="exportfilters">exportfilters.</param>
+        /// <param name="backupPath">backupPath.</param>
         /// <param name="restEncryPassword">restEncryPassword.</param>
+        /// <param name="pivotdimension">pivotdimension.</param>
         /// <param name="catalogZipPath">catalogZipPath.</param>
         /// <param name="physical">physical.</param>
-        public ParametersBean(string rule = default, string file = default, string abortOnError = default, string restructureOption = default, string forceDimBuild = default, string script = default, string option = default, string loaddata = default, string useConnection = default, string connection = default, string user = default, string password = default, string calc = default, BuildMethodEnum? buildMethod = default, string data = default, string memberIds = default, string zipFileName = default, string skipdata = default, string threads = default, string overwrite = default, string lcmImportFromStorage = default, string analyzeFileName = default, string analyzeSheetName = default, string deleteExcelOnSuccess = default, string catalogExcelPath = default, string importExcelFileName = default, string recreateApplication = default, string createFiles = default, string executeScript = default, BuildOptionEnum? buildOption = default, string copyToStorage = default, string filesystemcopy = default, DataLevelEnum? dataLevel = default, string columnFormat = default, string targetApplicationName = default, string partialDataExpression = default, string allApp = default, string includeServerLevel = default, string enableSandboxing = default, string dbType = default, string dimDesignationMode = default, CompactDesignation unstructuredAnalysis = default, string ratioToStop = default, string basedOnQueryData = default, string enableAlternateRollups = default, string compress = default, string generateArtifactList = default, string artifactList = default, string verbose = default, string disasterRecovery = default, string force = default, string backupType = default, string appId = default, string timestamp = default, string maxParallel = default, List<string> selectedDimensions = default, List<RTSV> rtsv = default, int bufferId = default, List<int> bufferIds = default, string commitOption = default, string actionType = default, string termOption = default, string discoverDimensionTables = default, string exportDynamicBlocks = default, string shadowAppName = default, string primaryAppName = default, string timeoutToForceUnloadApp = default, string hideShadow = default, string waitForOngoingUpdatesInSecs = default, string reportScriptFilename = default, string lockForUpdate = default, string isScriptContent = default, string useCatalogPath = default, string exportdata = default, string cube = default, string filetype = default, string exportpartitions = default, string exportfilters = default, string restEncryPassword = default, string catalogZipPath = default, string physical = default)
+        public ParametersBean(string rule = default, string file = default, string abortOnError = default, string restructureOption = default, string forceDimBuild = default, string script = default, string option = default, string loaddata = default, string useConnection = default, string connection = default, string user = default, string password = default, string calc = default, BuildMethodEnum? buildMethod = default, string data = default, string memberIds = default, string zipFileName = default, string skipdata = default, string threads = default, string overwrite = default, string lcmImportFromStorage = default, string analyzeFileName = default, string analyzeSheetName = default, string deleteExcelOnSuccess = default, string catalogExcelPath = default, string importExcelFileName = default, string recreateApplication = default, string createFiles = default, string executeScript = default, BuildOptionEnum? buildOption = default, string copyToStorage = default, string filesystemcopy = default, DataLevelEnum? dataLevel = default, string columnFormat = default, string targetApplicationName = default, string partialDataExpression = default, string allApp = default, string includeServerLevel = default, string enableSandboxing = default, string dbType = default, string dimDesignationMode = default, CompactDesignation unstructuredAnalysis = default, string ratioToStop = default, string basedOnQueryData = default, string enableAlternateRollups = default, string compress = default, string generateArtifactList = default, string artifactList = default, string verbose = default, string disasterRecovery = default, string force = default, string backupType = default, string appId = default, string timestamp = default, string maxParallel = default, List<string> selectedDimensions = default, List<RTSV> rtsv = default, int bufferId = default, List<int> bufferIds = default, string commitOption = default, string actionType = default, string termOption = default, string discoverDimensionTables = default, string exportDynamicBlocks = default, string shadowAppName = default, string primaryAppName = default, string timeoutToForceUnloadApp = default, string hideShadow = default, string waitForOngoingUpdatesInSecs = default, string reportScriptFilename = default, string lockForUpdate = default, string isScriptContent = default, string useCatalogPath = default, string exportdata = default, string cube = default, string filetype = default, string exportpartitions = default, string exportfilters = default, string backupPath = default, string restEncryPassword = default, string pivotdimension = default, string catalogZipPath = default, string physical = default)
         {
             this.Rule = rule;
             this.File = file;
@@ -304,7 +306,9 @@ namespace EssSharp.Model
             this.Filetype = filetype;
             this.Exportpartitions = exportpartitions;
             this.Exportfilters = exportfilters;
+            this.BackupPath = backupPath;
             this.RestEncryPassword = restEncryPassword;
+            this.Pivotdimension = pivotdimension;
             this.CatalogZipPath = catalogZipPath;
             this.Physical = physical;
         }
@@ -760,10 +764,22 @@ namespace EssSharp.Model
         public string Exportfilters { get; set; }
 
         /// <summary>
+        /// Gets or Sets BackupPath
+        /// </summary>
+        [DataMember(Name = "backupPath", EmitDefaultValue = false)]
+        public string BackupPath { get; set; }
+
+        /// <summary>
         /// Gets or Sets RestEncryPassword
         /// </summary>
         [DataMember(Name = "restEncryPassword", EmitDefaultValue = false)]
         public string RestEncryPassword { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Pivotdimension
+        /// </summary>
+        [DataMember(Name = "pivotdimension", EmitDefaultValue = false)]
+        public string Pivotdimension { get; set; }
 
         /// <summary>
         /// Gets or Sets CatalogZipPath
@@ -863,7 +879,9 @@ namespace EssSharp.Model
             sb.Append("  Filetype: ").Append(Filetype).Append("\n");
             sb.Append("  Exportpartitions: ").Append(Exportpartitions).Append("\n");
             sb.Append("  Exportfilters: ").Append(Exportfilters).Append("\n");
+            sb.Append("  BackupPath: ").Append(BackupPath).Append("\n");
             sb.Append("  RestEncryPassword: ").Append(RestEncryPassword).Append("\n");
+            sb.Append("  Pivotdimension: ").Append(Pivotdimension).Append("\n");
             sb.Append("  CatalogZipPath: ").Append(CatalogZipPath).Append("\n");
             sb.Append("  Physical: ").Append(Physical).Append("\n");
             sb.Append("}\n");

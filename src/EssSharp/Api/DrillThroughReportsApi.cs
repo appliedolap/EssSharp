@@ -29,12 +29,12 @@ namespace EssSharp.Api
         /// Create Drill Through Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a drill through report in the specified application and database, and returns details about the report.&lt;/p&gt;
+        /// &lt;p&gt;Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.&lt;/p&gt;&lt;p&gt;Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).&lt;/p&gt;&lt;p&gt;To create a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drill through report details.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through report definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>DrillthroughBean</returns>
         DrillthroughBean DrillThroughReportsCreate(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0);
@@ -43,12 +43,12 @@ namespace EssSharp.Api
         /// Create Drill Through Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a drill through report in the specified application and database, and returns details about the report.&lt;/p&gt;
+        /// &lt;p&gt;Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.&lt;/p&gt;&lt;p&gt;Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).&lt;/p&gt;&lt;p&gt;To create a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drill through report details.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through report definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of DrillthroughBean</returns>
         ApiResponse<DrillthroughBean> DrillThroughReportsCreateWithHttpInfo(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0);
@@ -56,7 +56,7 @@ namespace EssSharp.Api
         /// Delete Drill Through Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes the specified drill through report from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -70,7 +70,7 @@ namespace EssSharp.Api
         /// Delete Drill Through Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes the specified drill through report from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -88,7 +88,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
+        /// <param name="name">&lt;p&gt;Drill through report name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -103,7 +103,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
+        /// <param name="name">&lt;p&gt;Drill through report name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -145,9 +145,10 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ReportList</returns>
-        ReportList DrillThroughReportsGetReports(string applicationName, string databaseName, string keyword = default, int operationIndex = 0);
+        ReportList DrillThroughReportsGetReports(string applicationName, string databaseName, string keyword = default, string orderBy = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Drill Through Reports
@@ -159,9 +160,10 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ReportList</returns>
-        ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, string keyword = default, int operationIndex = 0);
+        ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, string keyword = default, string orderBy = default, int operationIndex = 0);
         /// <summary>
         /// List Drill Through Reports For Given Cell Intersections
         /// </summary>
@@ -231,12 +233,12 @@ namespace EssSharp.Api
         /// Create Drill Through Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a drill through report in the specified application and database, and returns details about the report.&lt;/p&gt;
+        /// &lt;p&gt;Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.&lt;/p&gt;&lt;p&gt;Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).&lt;/p&gt;&lt;p&gt;To create a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drill through report details.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through report definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DrillthroughBean</returns>
@@ -246,12 +248,12 @@ namespace EssSharp.Api
         /// Create Drill Through Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates a drill through report in the specified application and database, and returns details about the report.&lt;/p&gt;
+        /// &lt;p&gt;Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.&lt;/p&gt;&lt;p&gt;Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).&lt;/p&gt;&lt;p&gt;To create a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drill through report details.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through report definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DrillthroughBean)</returns>
@@ -260,7 +262,7 @@ namespace EssSharp.Api
         /// Delete Drill Through Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes the specified drill through report from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -275,7 +277,7 @@ namespace EssSharp.Api
         /// Delete Drill Through Report
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deletes the specified drill through report from the specified application and database.&lt;/p&gt;
+        /// &lt;p&gt;Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -294,7 +296,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
+        /// <param name="name">&lt;p&gt;Drill through report name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -310,7 +312,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
+        /// <param name="name">&lt;p&gt;Drill through report name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -355,10 +357,11 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ReportList</returns>
-        System.Threading.Tasks.Task<ReportList> DrillThroughReportsGetReportsAsync(string applicationName, string databaseName, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ReportList> DrillThroughReportsGetReportsAsync(string applicationName, string databaseName, string keyword = default, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Drill Through Reports
@@ -370,10 +373,11 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ReportList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, string keyword = default, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// List Drill Through Reports For Given Cell Intersections
         /// </summary>
@@ -555,12 +559,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Drill Through Report &lt;p&gt;Creates a drill through report in the specified application and database, and returns details about the report.&lt;/p&gt;
+        /// Create Drill Through Report &lt;p&gt;Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.&lt;/p&gt;&lt;p&gt;Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).&lt;/p&gt;&lt;p&gt;To create a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drill through report details.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through report definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>DrillthroughBean</returns>
         public DrillthroughBean DrillThroughReportsCreate(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0)
@@ -570,12 +574,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Drill Through Report &lt;p&gt;Creates a drill through report in the specified application and database, and returns details about the report.&lt;/p&gt;
+        /// Create Drill Through Report &lt;p&gt;Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.&lt;/p&gt;&lt;p&gt;Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).&lt;/p&gt;&lt;p&gt;To create a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drill through report details.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through report definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of DrillthroughBean</returns>
         public EssSharp.Client.ApiResponse<DrillthroughBean> DrillThroughReportsCreateWithHttpInfo(string applicationName, string databaseName, DrillthroughBean body, int operationIndex = 0)
@@ -669,12 +673,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Drill Through Report &lt;p&gt;Creates a drill through report in the specified application and database, and returns details about the report.&lt;/p&gt;
+        /// Create Drill Through Report &lt;p&gt;Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.&lt;/p&gt;&lt;p&gt;Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).&lt;/p&gt;&lt;p&gt;To create a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drill through report details.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through report definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of DrillthroughBean</returns>
@@ -685,12 +689,12 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Drill Through Report &lt;p&gt;Creates a drill through report in the specified application and database, and returns details about the report.&lt;/p&gt;
+        /// Create Drill Through Report &lt;p&gt;Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.&lt;/p&gt;&lt;p&gt;Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).&lt;/p&gt;&lt;p&gt;To create a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;Drill through report details.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Drill through report definition details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DrillthroughBean)</returns>
@@ -786,7 +790,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Drill Through Report &lt;p&gt;Deletes the specified drill through report from the specified application and database.&lt;/p&gt;
+        /// Delete Drill Through Report &lt;p&gt;Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -800,7 +804,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Drill Through Report &lt;p&gt;Deletes the specified drill through report from the specified application and database.&lt;/p&gt;
+        /// Delete Drill Through Report &lt;p&gt;Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -895,7 +899,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Drill Through Report &lt;p&gt;Deletes the specified drill through report from the specified application and database.&lt;/p&gt;
+        /// Delete Drill Through Report &lt;p&gt;Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -910,7 +914,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Drill Through Report &lt;p&gt;Deletes the specified drill through report from the specified application and database.&lt;/p&gt;
+        /// Delete Drill Through Report &lt;p&gt;Deletes the specified drill through report from the specified application and database. To delete a drill through report definition, you must be a Database Manager or higher.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1012,7 +1016,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
+        /// <param name="name">&lt;p&gt;Drill through report name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -1027,7 +1031,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
+        /// <param name="name">&lt;p&gt;Drill through report name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -1131,7 +1135,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
+        /// <param name="name">&lt;p&gt;Drill through report name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1147,7 +1151,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="name">&lt;p&gt;Drillthrough report name.&lt;/p&gt;</param>
+        /// <param name="name">&lt;p&gt;Drill through report name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Drill through metadata. In the example request body, &lt;i&gt;dtrContext&lt;/i&gt; corresponds to the intersection of cells in Smart View.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1481,11 +1485,12 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ReportList</returns>
-        public ReportList DrillThroughReportsGetReports(string applicationName, string databaseName, string keyword = default, int operationIndex = 0)
+        public ReportList DrillThroughReportsGetReports(string applicationName, string databaseName, string keyword = default, string orderBy = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<ReportList> localVarResponse = DrillThroughReportsGetReportsWithHttpInfo(applicationName, databaseName, keyword);
+            EssSharp.Client.ApiResponse<ReportList> localVarResponse = DrillThroughReportsGetReportsWithHttpInfo(applicationName, databaseName, keyword, orderBy);
             return localVarResponse.Data;
         }
 
@@ -1496,9 +1501,10 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of ReportList</returns>
-        public EssSharp.Client.ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, string keyword = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<ReportList> DrillThroughReportsGetReportsWithHttpInfo(string applicationName, string databaseName, string keyword = default, string orderBy = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1541,6 +1547,10 @@ namespace EssSharp.Api
             if (keyword != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "keyword", keyword));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
 
             localVarRequestOptions.Operation = "DrillThroughReportsApi.DrillThroughReportsGetReports";
@@ -1590,12 +1600,13 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ReportList</returns>
-        public async System.Threading.Tasks.Task<ReportList> DrillThroughReportsGetReportsAsync(string applicationName, string databaseName, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<ReportList> DrillThroughReportsGetReportsAsync(string applicationName, string databaseName, string keyword = default, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<ReportList> localVarResponse = await DrillThroughReportsGetReportsWithHttpInfoAsync(applicationName, databaseName, keyword, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<ReportList> localVarResponse = await DrillThroughReportsGetReportsWithHttpInfoAsync(applicationName, databaseName, keyword, orderBy, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1606,10 +1617,11 @@ namespace EssSharp.Api
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="keyword">&lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; (optional)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (ReportList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, string keyword = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<ReportList>> DrillThroughReportsGetReportsWithHttpInfoAsync(string applicationName, string databaseName, string keyword = default, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -1652,6 +1664,10 @@ namespace EssSharp.Api
             if (keyword != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "keyword", keyword));
+            }
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
             }
 
             localVarRequestOptions.Operation = "DrillThroughReportsApi.DrillThroughReportsGetReports";

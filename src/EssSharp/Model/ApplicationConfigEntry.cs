@@ -37,7 +37,7 @@ namespace EssSharp.Model
         /// <param name="syntax">syntax.</param>
         /// <param name="example">example.</param>
         /// <param name="value">value.</param>
-        /// <param name="configured">configured.</param>
+        /// <param name="configured">the configuration property is enabled..</param>
         /// <param name="links">links.</param>
         public ApplicationConfigEntry(string key = default, string description = default, string syntax = default, string example = default, string value = default, bool configured = default, List<Link> links = default)
         {
@@ -81,8 +81,9 @@ namespace EssSharp.Model
         public string Value { get; set; }
 
         /// <summary>
-        /// Gets or Sets Configured
+        /// the configuration property is enabled.
         /// </summary>
+        /// <value>the configuration property is enabled.</value>
         [DataMember(Name = "configured", EmitDefaultValue = true)]
         public bool Configured { get; set; }
 

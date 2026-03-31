@@ -245,10 +245,11 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result&lt;/P&gt; (optional, default to false)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
+        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result.&lt;/P&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>VariableList</returns>
-        VariableList VariablesListAppVariables(string applicationName, bool? includeDatabaseVariables = default, int operationIndex = 0);
+        VariableList VariablesListAppVariables(string applicationName, string orderBy = default, bool? includeDatabaseVariables = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Application Variables
@@ -258,10 +259,11 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result&lt;/P&gt; (optional, default to false)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
+        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result.&lt;/P&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of VariableList</returns>
-        ApiResponse<VariableList> VariablesListAppVariablesWithHttpInfo(string applicationName, bool? includeDatabaseVariables = default, int operationIndex = 0);
+        ApiResponse<VariableList> VariablesListAppVariablesWithHttpInfo(string applicationName, string orderBy = default, bool? includeDatabaseVariables = default, int operationIndex = 0);
         /// <summary>
         /// Get Database Variables
         /// </summary>
@@ -271,9 +273,10 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>VariableList</returns>
-        VariableList VariablesListVariables(string applicationName, string databaseName, int operationIndex = 0);
+        VariableList VariablesListVariables(string applicationName, string databaseName, string orderBy = default, int operationIndex = 0);
 
         /// <summary>
         /// Get Database Variables
@@ -284,9 +287,10 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of VariableList</returns>
-        ApiResponse<VariableList> VariablesListVariablesWithHttpInfo(string applicationName, string databaseName, int operationIndex = 0);
+        ApiResponse<VariableList> VariablesListVariablesWithHttpInfo(string applicationName, string databaseName, string orderBy = default, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -532,11 +536,12 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result&lt;/P&gt; (optional, default to false)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
+        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result.&lt;/P&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of VariableList</returns>
-        System.Threading.Tasks.Task<VariableList> VariablesListAppVariablesAsync(string applicationName, bool? includeDatabaseVariables = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<VariableList> VariablesListAppVariablesAsync(string applicationName, string orderBy = default, bool? includeDatabaseVariables = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Application Variables
@@ -546,11 +551,12 @@ namespace EssSharp.Api
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result&lt;/P&gt; (optional, default to false)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
+        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result.&lt;/P&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (VariableList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VariableList>> VariablesListAppVariablesWithHttpInfoAsync(string applicationName, bool? includeDatabaseVariables = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<VariableList>> VariablesListAppVariablesWithHttpInfoAsync(string applicationName, string orderBy = default, bool? includeDatabaseVariables = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Database Variables
         /// </summary>
@@ -560,10 +566,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of VariableList</returns>
-        System.Threading.Tasks.Task<VariableList> VariablesListVariablesAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<VariableList> VariablesListVariablesAsync(string applicationName, string databaseName, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get Database Variables
@@ -574,10 +581,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (VariableList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VariableList>> VariablesListVariablesWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<VariableList>> VariablesListVariablesWithHttpInfoAsync(string applicationName, string databaseName, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -2487,12 +2495,13 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result&lt;/P&gt; (optional, default to false)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
+        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result.&lt;/P&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>VariableList</returns>
-        public VariableList VariablesListAppVariables(string applicationName, bool? includeDatabaseVariables = default, int operationIndex = 0)
+        public VariableList VariablesListAppVariables(string applicationName, string orderBy = default, bool? includeDatabaseVariables = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<VariableList> localVarResponse = VariablesListAppVariablesWithHttpInfo(applicationName, includeDatabaseVariables);
+            EssSharp.Client.ApiResponse<VariableList> localVarResponse = VariablesListAppVariablesWithHttpInfo(applicationName, orderBy, includeDatabaseVariables);
             return localVarResponse.Data;
         }
 
@@ -2501,10 +2510,11 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result&lt;/P&gt; (optional, default to false)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
+        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result.&lt;/P&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of VariableList</returns>
-        public EssSharp.Client.ApiResponse<VariableList> VariablesListAppVariablesWithHttpInfo(string applicationName, bool? includeDatabaseVariables = default, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<VariableList> VariablesListAppVariablesWithHttpInfo(string applicationName, string orderBy = default, bool? includeDatabaseVariables = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2537,6 +2547,10 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
+            }
             if (includeDatabaseVariables != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "includeDatabaseVariables", includeDatabaseVariables));
@@ -2587,13 +2601,14 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result&lt;/P&gt; (optional, default to false)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
+        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result.&lt;/P&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of VariableList</returns>
-        public async System.Threading.Tasks.Task<VariableList> VariablesListAppVariablesAsync(string applicationName, bool? includeDatabaseVariables = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<VariableList> VariablesListAppVariablesAsync(string applicationName, string orderBy = default, bool? includeDatabaseVariables = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<VariableList> localVarResponse = await VariablesListAppVariablesWithHttpInfoAsync(applicationName, includeDatabaseVariables, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<VariableList> localVarResponse = await VariablesListAppVariablesWithHttpInfoAsync(applicationName, orderBy, includeDatabaseVariables, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2602,11 +2617,12 @@ namespace EssSharp.Api
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
-        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result&lt;/P&gt; (optional, default to false)</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
+        /// <param name="includeDatabaseVariables">&lt;P&gt;Include database variables in application variables result.&lt;/P&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (VariableList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<VariableList>> VariablesListAppVariablesWithHttpInfoAsync(string applicationName, bool? includeDatabaseVariables = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<VariableList>> VariablesListAppVariablesWithHttpInfoAsync(string applicationName, string orderBy = default, bool? includeDatabaseVariables = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2639,6 +2655,10 @@ namespace EssSharp.Api
             }
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
+            }
             if (includeDatabaseVariables != null)
             {
                 localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "includeDatabaseVariables", includeDatabaseVariables));
@@ -2691,11 +2711,12 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>VariableList</returns>
-        public VariableList VariablesListVariables(string applicationName, string databaseName, int operationIndex = 0)
+        public VariableList VariablesListVariables(string applicationName, string databaseName, string orderBy = default, int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<VariableList> localVarResponse = VariablesListVariablesWithHttpInfo(applicationName, databaseName);
+            EssSharp.Client.ApiResponse<VariableList> localVarResponse = VariablesListVariablesWithHttpInfo(applicationName, databaseName, orderBy);
             return localVarResponse.Data;
         }
 
@@ -2705,9 +2726,10 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of VariableList</returns>
-        public EssSharp.Client.ApiResponse<VariableList> VariablesListVariablesWithHttpInfo(string applicationName, string databaseName, int operationIndex = 0)
+        public EssSharp.Client.ApiResponse<VariableList> VariablesListVariablesWithHttpInfo(string applicationName, string databaseName, string orderBy = default, int operationIndex = 0)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2747,6 +2769,10 @@ namespace EssSharp.Api
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
             localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
+            }
 
             localVarRequestOptions.Operation = "VariablesApi.VariablesListVariables";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -2794,12 +2820,13 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of VariableList</returns>
-        public async System.Threading.Tasks.Task<VariableList> VariablesListVariablesAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<VariableList> VariablesListVariablesAsync(string applicationName, string databaseName, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            EssSharp.Client.ApiResponse<VariableList> localVarResponse = await VariablesListVariablesWithHttpInfoAsync(applicationName, databaseName, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<VariableList> localVarResponse = await VariablesListVariablesWithHttpInfoAsync(applicationName, databaseName, orderBy, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -2809,10 +2836,11 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="orderBy">Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (VariableList)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<VariableList>> VariablesListVariablesWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<VariableList>> VariablesListVariablesWithHttpInfoAsync(string applicationName, string databaseName, string orderBy = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'applicationName' is set
             if (applicationName == null)
@@ -2852,6 +2880,10 @@ namespace EssSharp.Api
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
             localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            if (orderBy != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "orderBy", orderBy));
+            }
 
             localVarRequestOptions.Operation = "VariablesApi.VariablesListVariables";
             localVarRequestOptions.OperationIndex = operationIndex;

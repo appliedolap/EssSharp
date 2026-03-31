@@ -8,7 +8,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ScenariosAddComment**](ScenariosApi.md#scenariosaddcomment) | **POST** /scenarios/{scenarioId}/comments | Add Comment |
 | [**ScenariosAddParticipant**](ScenariosApi.md#scenariosaddparticipant) | **POST** /scenarios/{scenarioId}/participants | Add Participant |
 | [**ScenariosCreate**](ScenariosApi.md#scenarioscreate) | **POST** /scenarios | Create Scenario |
-| [**ScenariosDelete**](ScenariosApi.md#scenariosdelete) | **DELETE** /scenarios/{id} | &lt;p&gt;Deletes a scenario by ID.&lt;/p&gt; |
+| [**ScenariosDelete**](ScenariosApi.md#scenariosdelete) | **DELETE** /scenarios/{id} | Delete Scenario |
 | [**ScenariosDeleteApprover**](ScenariosApi.md#scenariosdeleteapprover) | **DELETE** /scenarios/{scenarioId}/approvers/{userId} | Delete Approver |
 | [**ScenariosDeleteComment**](ScenariosApi.md#scenariosdeletecomment) | **DELETE** /scenarios/{scenarioId}/comments/{commentId} | Delete Comment |
 | [**ScenariosDeleteParticipant**](ScenariosApi.md#scenariosdeleteparticipant) | **DELETE** /scenarios/{scenarioId}/participants/{userId} | Delete Participant |
@@ -425,7 +425,7 @@ catch (ApiException e)
 # **ScenariosDelete**
 > void ScenariosDelete (long id)
 
-<p>Deletes a scenario by ID.</p>
+Delete Scenario
 
 <p>Deletes a scenario by ID.</p>
 
@@ -456,7 +456,7 @@ namespace Example
 
             try
             {
-                // <p>Deletes a scenario by ID.</p>
+                // Delete Scenario
                 apiInstance.ScenariosDelete(id);
             }
             catch (ApiException  e)
@@ -476,7 +476,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // <p>Deletes a scenario by ID.</p>
+    // Delete Scenario
     apiInstance.ScenariosDeleteWithHttpInfo(id);
 }
 catch (ApiException e)

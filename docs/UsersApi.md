@@ -431,7 +431,7 @@ namespace Example
 
             var apiInstance = new UsersApi(config);
             var id = "id_example";  // string | <p>ID of user.</p>
-            var body = new UserBean(); // UserBean | Updated user
+            var body = new UserBean(); // UserBean | <p>Updated user.</p>
 
             try
             {
@@ -475,7 +475,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **id** | **string** | &lt;p&gt;ID of user.&lt;/p&gt; |  |
-| **body** | [**UserBean**](UserBean.md) | Updated user |  |
+| **body** | [**UserBean**](UserBean.md) | &lt;p&gt;Updated user.&lt;/p&gt; |  |
 
 ### Return type
 

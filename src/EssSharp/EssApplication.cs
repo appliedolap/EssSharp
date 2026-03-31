@@ -551,7 +551,7 @@ namespace EssSharp
             try
             {
                 var api = GetApi<ApplicationsApi>();
-                var cubes = await api.ApplicationsGetCubesAsync(_application.Name, null, null, 0, cancellationToken).ConfigureAwait(false);
+                var cubes = await api.ApplicationsGetCubesAsync(applicationName: _application.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return cubes?.ToEssSharpList(this) ?? new List<IEssCube>();
             }

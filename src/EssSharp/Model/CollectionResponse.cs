@@ -34,17 +34,17 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="hasMore">hasMore.</param>
         /// <param name="totalResults">totalResults.</param>
-        /// <param name="items">items.</param>
         /// <param name="count">count.</param>
+        /// <param name="items">items.</param>
         /// <param name="limit">limit.</param>
         /// <param name="properties">properties.</param>
         /// <param name="offset">offset.</param>
-        public CollectionResponse(bool hasMore = default, long totalResults = default, List<Object> items = default, long count = default, long limit = default, Dictionary<string, string> properties = default, long offset = default)
+        public CollectionResponse(bool hasMore = default, long totalResults = default, long count = default, List<Object> items = default, long limit = default, Dictionary<string, string> properties = default, long offset = default)
         {
             this.HasMore = hasMore;
             this.TotalResults = totalResults;
-            this.Items = items;
             this.Count = count;
+            this.Items = items;
             this.Limit = limit;
             this.Properties = properties;
             this.Offset = offset;
@@ -63,16 +63,16 @@ namespace EssSharp.Model
         public long TotalResults { get; set; }
 
         /// <summary>
-        /// Gets or Sets Items
-        /// </summary>
-        [DataMember(Name = "items", EmitDefaultValue = false)]
-        public List<Object> Items { get; set; }
-
-        /// <summary>
         /// Gets or Sets Count
         /// </summary>
         [DataMember(Name = "count", EmitDefaultValue = false)]
         public long Count { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Items
+        /// </summary>
+        [DataMember(Name = "items", EmitDefaultValue = false)]
+        public List<Object> Items { get; set; }
 
         /// <summary>
         /// Gets or Sets Limit
@@ -102,8 +102,8 @@ namespace EssSharp.Model
             sb.Append("class CollectionResponse {\n");
             sb.Append("  HasMore: ").Append(HasMore).Append("\n");
             sb.Append("  TotalResults: ").Append(TotalResults).Append("\n");
-            sb.Append("  Items: ").Append(Items).Append("\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
+            sb.Append("  Items: ").Append(Items).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Properties: ").Append(Properties).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");

@@ -34,17 +34,17 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="pov">pov.</param>
         /// <param name="expanded">expanded.</param>
-        /// <param name="row">row.</param>
         /// <param name="column">column.</param>
+        /// <param name="row">row.</param>
         /// <param name="displayName">displayName.</param>
         /// <param name="hidden">hidden.</param>
         /// <param name="name">name.</param>
-        public GridDimension(string pov = default, bool expanded = default, int row = default, int column = default, string displayName = default, bool hidden = default, string name = default)
+        public GridDimension(string pov = default, bool expanded = default, int column = default, int row = default, string displayName = default, bool hidden = default, string name = default)
         {
             this.Pov = pov;
             this.Expanded = expanded;
-            this.Row = row;
             this.Column = column;
+            this.Row = row;
             this.DisplayName = displayName;
             this.Hidden = hidden;
             this.Name = name;
@@ -63,16 +63,16 @@ namespace EssSharp.Model
         public bool Expanded { get; set; }
 
         /// <summary>
-        /// Gets or Sets Row
-        /// </summary>
-        [DataMember(Name = "row", EmitDefaultValue = false)]
-        public int Row { get; set; }
-
-        /// <summary>
         /// Gets or Sets Column
         /// </summary>
         [DataMember(Name = "column", EmitDefaultValue = false)]
         public int Column { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Row
+        /// </summary>
+        [DataMember(Name = "row", EmitDefaultValue = false)]
+        public int Row { get; set; }
 
         /// <summary>
         /// Gets or Sets DisplayName
@@ -102,8 +102,8 @@ namespace EssSharp.Model
             sb.Append("class GridDimension {\n");
             sb.Append("  Pov: ").Append(Pov).Append("\n");
             sb.Append("  Expanded: ").Append(Expanded).Append("\n");
-            sb.Append("  Row: ").Append(Row).Append("\n");
             sb.Append("  Column: ").Append(Column).Append("\n");
+            sb.Append("  Row: ").Append(Row).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Hidden: ").Append(Hidden).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");

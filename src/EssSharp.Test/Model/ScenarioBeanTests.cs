@@ -71,30 +71,12 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Database'
-        /// </summary>
-        [Fact]
-        public void DatabaseTest()
-        {
-            // TODO unit test for the property 'Database'
-        }
-
-        /// <summary>
         /// Test the property 'Scripts'
         /// </summary>
         [Fact]
         public void ScriptsTest()
         {
             // TODO unit test for the property 'Scripts'
-        }
-
-        /// <summary>
-        /// Test the property 'Approvers'
-        /// </summary>
-        [Fact]
-        public void ApproversTest()
-        {
-            // TODO unit test for the property 'Approvers'
         }
 
         /// <summary>
@@ -107,12 +89,30 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Approvers'
+        /// </summary>
+        [Fact]
+        public void ApproversTest()
+        {
+            // TODO unit test for the property 'Approvers'
+        }
+
+        /// <summary>
         /// Test the property 'DueDate'
         /// </summary>
         [Fact]
         public void DueDateTest()
         {
             // TODO unit test for the property 'DueDate'
+        }
+
+        /// <summary>
+        /// Test the property 'Database'
+        /// </summary>
+        [Fact]
+        public void DatabaseTest()
+        {
+            // TODO unit test for the property 'Database'
         }
 
         /// <summary>
@@ -179,12 +179,12 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Description'
+        /// Test the property 'Participants'
         /// </summary>
         [Fact]
-        public void DescriptionTest()
+        public void ParticipantsTest()
         {
-            // TODO unit test for the property 'Description'
+            // TODO unit test for the property 'Participants'
         }
 
         /// <summary>
@@ -197,12 +197,12 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Participants'
+        /// Test the property 'Description'
         /// </summary>
         [Fact]
-        public void ParticipantsTest()
+        public void DescriptionTest()
         {
-            // TODO unit test for the property 'Participants'
+            // TODO unit test for the property 'Description'
         }
 
         /// <summary>

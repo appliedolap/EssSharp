@@ -267,7 +267,7 @@ namespace EssSharp.Api
         /// Remove Group Users
         /// </summary>
         /// <remarks>
-        /// Remove multiple user members from a group
+        /// &lt;p&gt;Remove multiple user members from a group.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
@@ -280,7 +280,7 @@ namespace EssSharp.Api
         /// Remove Group Users
         /// </summary>
         /// <remarks>
-        /// Remove multiple user members from a group
+        /// &lt;p&gt;Remove multiple user members from a group.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
@@ -607,7 +607,7 @@ namespace EssSharp.Api
         /// Remove Group Users
         /// </summary>
         /// <remarks>
-        /// Remove multiple user members from a group
+        /// &lt;p&gt;Remove multiple user members from a group.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
@@ -621,7 +621,7 @@ namespace EssSharp.Api
         /// Remove Group Users
         /// </summary>
         /// <remarks>
-        /// Remove multiple user members from a group
+        /// &lt;p&gt;Remove multiple user members from a group.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
@@ -2799,7 +2799,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Remove Group Users Remove multiple user members from a group
+        /// Remove Group Users &lt;p&gt;Remove multiple user members from a group.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
@@ -2813,7 +2813,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Remove Group Users Remove multiple user members from a group
+        /// Remove Group Users &lt;p&gt;Remove multiple user members from a group.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
@@ -2904,7 +2904,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Remove Group Users Remove multiple user members from a group
+        /// Remove Group Users &lt;p&gt;Remove multiple user members from a group.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>
@@ -2919,7 +2919,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Remove Group Users Remove multiple user members from a group
+        /// Remove Group Users &lt;p&gt;Remove multiple user members from a group.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;ID of group.&lt;/p&gt;</param>

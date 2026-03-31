@@ -34,20 +34,20 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="token">token.</param>
-        /// <param name="groups">groups.</param>
         /// <param name="email">email.</param>
-        /// <param name="password">password.</param>
+        /// <param name="groups">groups.</param>
         /// <param name="role">role.</param>
+        /// <param name="password">password.</param>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public UserBean(List<Link> links = default, string token = default, List<string> groups = default, string email = default, string password = default, string role = default, string id = default, string name = default)
+        public UserBean(List<Link> links = default, string token = default, string email = default, List<string> groups = default, string role = default, string password = default, string id = default, string name = default)
         {
             this.Links = links;
             this.Token = token;
-            this.Groups = groups;
             this.Email = email;
-            this.Password = password;
+            this.Groups = groups;
             this.Role = role;
+            this.Password = password;
             this.Id = id;
             this.Name = name;
         }
@@ -65,28 +65,28 @@ namespace EssSharp.Model
         public string Token { get; set; }
 
         /// <summary>
-        /// Gets or Sets Groups
-        /// </summary>
-        [DataMember(Name = "groups", EmitDefaultValue = false)]
-        public List<string> Groups { get; set; }
-
-        /// <summary>
         /// Gets or Sets Email
         /// </summary>
         [DataMember(Name = "email", EmitDefaultValue = false)]
         public string Email { get; set; }
 
         /// <summary>
-        /// Gets or Sets Password
+        /// Gets or Sets Groups
         /// </summary>
-        [DataMember(Name = "password", EmitDefaultValue = false)]
-        public string Password { get; set; }
+        [DataMember(Name = "groups", EmitDefaultValue = false)]
+        public List<string> Groups { get; set; }
 
         /// <summary>
         /// Gets or Sets Role
         /// </summary>
         [DataMember(Name = "role", EmitDefaultValue = false)]
         public string Role { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Password
+        /// </summary>
+        [DataMember(Name = "password", EmitDefaultValue = false)]
+        public string Password { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -110,10 +110,10 @@ namespace EssSharp.Model
             sb.Append("class UserBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Token: ").Append(Token).Append("\n");
-            sb.Append("  Groups: ").Append(Groups).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
-            sb.Append("  Password: ").Append(Password).Append("\n");
+            sb.Append("  Groups: ").Append(Groups).Append("\n");
             sb.Append("  Role: ").Append(Role).Append("\n");
+            sb.Append("  Password: ").Append(Password).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");

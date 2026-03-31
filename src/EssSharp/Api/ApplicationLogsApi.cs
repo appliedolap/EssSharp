@@ -26,10 +26,10 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Download All Logs
+        /// Download All Application Logs
         /// </summary>
         /// <remarks>
-        /// Returns or download zip file which contains all log files for the specific application
+        /// &lt;p&gt;Returns a download zip file which contains all log files for the specific application.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -38,10 +38,10 @@ namespace EssSharp.Api
         System.IO.Stream ApplicationLogsDownloadAllLogFiles(string applicationName, int operationIndex = 0);
 
         /// <summary>
-        /// Download All Logs
+        /// Download All Application Logs
         /// </summary>
         /// <remarks>
-        /// Returns or download zip file which contains all log files for the specific application
+        /// &lt;p&gt;Returns a download zip file which contains all log files for the specific application.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -49,7 +49,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of System.IO.Stream</returns>
         ApiResponse<System.IO.Stream> ApplicationLogsDownloadAllLogFilesWithHttpInfo(string applicationName, int operationIndex = 0);
         /// <summary>
-        /// Download Logs
+        /// Download Application Logs
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
@@ -61,7 +61,7 @@ namespace EssSharp.Api
         Link ApplicationLogsDownloadAppLogFiles(string applicationName, int operationIndex = 0);
 
         /// <summary>
-        /// Download Logs
+        /// Download Application Logs
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
@@ -72,7 +72,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Link</returns>
         ApiResponse<Link> ApplicationLogsDownloadAppLogFilesWithHttpInfo(string applicationName, int operationIndex = 0);
         /// <summary>
-        /// Download Latest Log
+        /// Download Latest Application Log
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
@@ -84,7 +84,7 @@ namespace EssSharp.Api
         System.IO.Stream ApplicationLogsDownloadLatestLogFile(string applicationName, int operationIndex = 0);
 
         /// <summary>
-        /// Download Latest Log
+        /// Download Latest Application Log
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
@@ -104,10 +104,10 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Download All Logs
+        /// Download All Application Logs
         /// </summary>
         /// <remarks>
-        /// Returns or download zip file which contains all log files for the specific application
+        /// &lt;p&gt;Returns a download zip file which contains all log files for the specific application.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -117,10 +117,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<System.IO.Stream> ApplicationLogsDownloadAllLogFilesAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Download All Logs
+        /// Download All Application Logs
         /// </summary>
         /// <remarks>
-        /// Returns or download zip file which contains all log files for the specific application
+        /// &lt;p&gt;Returns a download zip file which contains all log files for the specific application.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -129,7 +129,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
         System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> ApplicationLogsDownloadAllLogFilesWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Download Logs
+        /// Download Application Logs
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
@@ -142,7 +142,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<Link> ApplicationLogsDownloadAppLogFilesAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Download Logs
+        /// Download Application Logs
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
@@ -154,7 +154,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (Link)</returns>
         System.Threading.Tasks.Task<ApiResponse<Link>> ApplicationLogsDownloadAppLogFilesWithHttpInfoAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Download Latest Log
+        /// Download Latest Application Log
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
@@ -167,7 +167,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<System.IO.Stream> ApplicationLogsDownloadLatestLogFileAsync(string applicationName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Download Latest Log
+        /// Download Latest Application Log
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
@@ -299,7 +299,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download All Logs Returns or download zip file which contains all log files for the specific application
+        /// Download All Application Logs &lt;p&gt;Returns a download zip file which contains all log files for the specific application.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -312,7 +312,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download All Logs Returns or download zip file which contains all log files for the specific application
+        /// Download All Application Logs &lt;p&gt;Returns a download zip file which contains all log files for the specific application.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -395,7 +395,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download All Logs Returns or download zip file which contains all log files for the specific application
+        /// Download All Application Logs &lt;p&gt;Returns a download zip file which contains all log files for the specific application.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -409,7 +409,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download All Logs Returns or download zip file which contains all log files for the specific application
+        /// Download All Application Logs &lt;p&gt;Returns a download zip file which contains all log files for the specific application.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -494,7 +494,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download Logs &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
+        /// Download Application Logs &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -507,7 +507,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download Logs &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
+        /// Download Application Logs &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -588,7 +588,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download Logs &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
+        /// Download Application Logs &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -602,7 +602,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download Logs &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
+        /// Download Application Logs &lt;p&gt;Returns links to download all log files as a zip file, and to download the latest log file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -685,7 +685,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download Latest Log &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
+        /// Download Latest Application Log &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -698,7 +698,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download Latest Log &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
+        /// Download Latest Application Log &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -780,7 +780,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download Latest Log &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
+        /// Download Latest Application Log &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -794,7 +794,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Download Latest Log &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
+        /// Download Latest Application Log &lt;p&gt;Downloads the latest application log file as a text file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

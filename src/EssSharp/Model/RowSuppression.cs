@@ -32,31 +32,25 @@ namespace EssSharp.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="RowSuppression" /> class.
         /// </summary>
-        /// <param name="invalid">invalid.</param>
         /// <param name="zero">zero.</param>
         /// <param name="missing">missing.</param>
         /// <param name="underScore">underScore.</param>
         /// <param name="derived">derived.</param>
         /// <param name="noAccess">noAccess.</param>
         /// <param name="emptyBlocks">emptyBlocks.</param>
+        /// <param name="invalid">invalid.</param>
         /// <param name="error">error.</param>
-        public RowSuppression(bool invalid = default, bool zero = default, bool missing = default, bool underScore = default, bool derived = default, bool noAccess = default, bool emptyBlocks = default, bool error = default)
+        public RowSuppression(bool zero = default, bool missing = default, bool underScore = default, bool derived = default, bool noAccess = default, bool emptyBlocks = default, bool invalid = default, bool error = default)
         {
-            this.Invalid = invalid;
             this.Zero = zero;
             this.Missing = missing;
             this.UnderScore = underScore;
             this.Derived = derived;
             this.NoAccess = noAccess;
             this.EmptyBlocks = emptyBlocks;
+            this.Invalid = invalid;
             this.Error = error;
         }
-
-        /// <summary>
-        /// Gets or Sets Invalid
-        /// </summary>
-        [DataMember(Name = "invalid", EmitDefaultValue = true)]
-        public bool Invalid { get; set; }
 
         /// <summary>
         /// Gets or Sets Zero
@@ -95,6 +89,12 @@ namespace EssSharp.Model
         public bool EmptyBlocks { get; set; }
 
         /// <summary>
+        /// Gets or Sets Invalid
+        /// </summary>
+        [DataMember(Name = "invalid", EmitDefaultValue = true)]
+        public bool Invalid { get; set; }
+
+        /// <summary>
         /// Gets or Sets Error
         /// </summary>
         [DataMember(Name = "error", EmitDefaultValue = true)]
@@ -108,13 +108,13 @@ namespace EssSharp.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class RowSuppression {\n");
-            sb.Append("  Invalid: ").Append(Invalid).Append("\n");
             sb.Append("  Zero: ").Append(Zero).Append("\n");
             sb.Append("  Missing: ").Append(Missing).Append("\n");
             sb.Append("  UnderScore: ").Append(UnderScore).Append("\n");
             sb.Append("  Derived: ").Append(Derived).Append("\n");
             sb.Append("  NoAccess: ").Append(NoAccess).Append("\n");
             sb.Append("  EmptyBlocks: ").Append(EmptyBlocks).Append("\n");
+            sb.Append("  Invalid: ").Append(Invalid).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

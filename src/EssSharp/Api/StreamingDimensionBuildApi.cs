@@ -85,7 +85,7 @@ namespace EssSharp.Api
         /// Start Streaming Dimension Build
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Starts an incremental dimension build.&lt;/p&gt;
+        /// &lt;p&gt;Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: &lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\&quot;&gt;Start Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\&quot;&gt;Push Dimensions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\&quot;&gt;End Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\&quot;&gt;End Streaming Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -99,7 +99,7 @@ namespace EssSharp.Api
         /// Start Streaming Dimension Build
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Starts an incremental dimension build.&lt;/p&gt;
+        /// &lt;p&gt;Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: &lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\&quot;&gt;Start Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\&quot;&gt;Push Dimensions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\&quot;&gt;End Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\&quot;&gt;End Streaming Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -109,7 +109,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
         ApiResponse<StreamProcessStartResponse> DimensionBuildStartWithHttpInfo(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0);
         /// <summary>
-        /// Start Dimension Build&lt;/p&gt;
+        /// Start Dimension Build
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
@@ -124,7 +124,7 @@ namespace EssSharp.Api
         StreamProcessStartResponse DimensionBuildStartDimBuild(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0);
 
         /// <summary>
-        /// Start Dimension Build&lt;/p&gt;
+        /// Start Dimension Build
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
@@ -239,7 +239,7 @@ namespace EssSharp.Api
         /// Start Streaming Dimension Build
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Starts an incremental dimension build.&lt;/p&gt;
+        /// &lt;p&gt;Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: &lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\&quot;&gt;Start Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\&quot;&gt;Push Dimensions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\&quot;&gt;End Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\&quot;&gt;End Streaming Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -254,7 +254,7 @@ namespace EssSharp.Api
         /// Start Streaming Dimension Build
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Starts an incremental dimension build.&lt;/p&gt;
+        /// &lt;p&gt;Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: &lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\&quot;&gt;Start Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\&quot;&gt;Push Dimensions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\&quot;&gt;End Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\&quot;&gt;End Streaming Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -265,7 +265,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<StreamProcessStartResponse>> DimensionBuildStartWithHttpInfoAsync(string applicationName, string databaseName, DimBuildStartPayload body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Start Dimension Build&lt;/p&gt;
+        /// Start Dimension Build
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
@@ -281,7 +281,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<StreamProcessStartResponse> DimensionBuildStartDimBuildAsync(string applicationName, string databaseName, string streamId, string ruleFileName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Start Dimension Build&lt;/p&gt;
+        /// Start Dimension Build
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
@@ -919,7 +919,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Streaming Dimension Build &lt;p&gt;Starts an incremental dimension build.&lt;/p&gt;
+        /// Start Streaming Dimension Build &lt;p&gt;Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: &lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\&quot;&gt;Start Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\&quot;&gt;Push Dimensions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\&quot;&gt;End Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\&quot;&gt;End Streaming Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -934,7 +934,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Streaming Dimension Build &lt;p&gt;Starts an incremental dimension build.&lt;/p&gt;
+        /// Start Streaming Dimension Build &lt;p&gt;Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: &lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\&quot;&gt;Start Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\&quot;&gt;Push Dimensions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\&quot;&gt;End Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\&quot;&gt;End Streaming Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1027,7 +1027,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Streaming Dimension Build &lt;p&gt;Starts an incremental dimension build.&lt;/p&gt;
+        /// Start Streaming Dimension Build &lt;p&gt;Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: &lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\&quot;&gt;Start Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\&quot;&gt;Push Dimensions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\&quot;&gt;End Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\&quot;&gt;End Streaming Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1043,7 +1043,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Streaming Dimension Build &lt;p&gt;Starts an incremental dimension build.&lt;/p&gt;
+        /// Start Streaming Dimension Build &lt;p&gt;Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: &lt;ol&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\&quot;&gt;Start Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\&quot;&gt;Push Dimensions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\&quot;&gt;End Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\&quot;&gt;End Streaming Dimension Build&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1138,7 +1138,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Dimension Build&lt;/p&gt; &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
+        /// Start Dimension Build &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1154,7 +1154,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Dimension Build&lt;/p&gt; &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
+        /// Start Dimension Build &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1259,7 +1259,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Dimension Build&lt;/p&gt; &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
+        /// Start Dimension Build &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1276,7 +1276,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Dimension Build&lt;/p&gt; &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
+        /// Start Dimension Build &lt;p&gt;Starts a dimension build with a rule file.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

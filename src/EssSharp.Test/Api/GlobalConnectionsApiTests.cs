@@ -75,6 +75,17 @@ namespace EssSharp.Test.Api
         }
 
         /// <summary>
+        /// Test GlobalConnectionsDependantconnections
+        /// </summary>
+        [Fact]
+        public void GlobalConnectionsDependantconnectionsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string connection = null;
+            //instance.GlobalConnectionsDependantconnections(connection);
+        }
+
+        /// <summary>
         /// Test GlobalConnectionsGetConnectionDetails
         /// </summary>
         [Fact]
@@ -111,7 +122,8 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //Connection body = null;
-            //instance.GlobalConnectionsTestConnection(body);
+            //bool? validateName = null;
+            //instance.GlobalConnectionsTestConnection(body, validateName);
         }
 
         /// <summary>

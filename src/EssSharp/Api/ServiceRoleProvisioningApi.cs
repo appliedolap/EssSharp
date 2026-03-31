@@ -26,35 +26,35 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Deprovision
+        /// Deprovision Service Role
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deprovisions a single user or group from a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;&lt;p&gt;To deprovision a group, you can use &lt;a href&#x3D;\&quot;./op-groups-id-delete.html\&quot;&gt;Delete Group&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-delete.html\&quot;&gt;Deprovision User or Group from Application&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
+        /// <param name="id">&lt;p&gt;User ID.&lt;/p&gt;</param>
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
         void ServiceRoleProvisioningDeprovision(string id, bool? group = default, int operationIndex = 0);
 
         /// <summary>
-        /// Deprovision
+        /// Deprovision Service Role
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deprovisions a single user or group from a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;&lt;p&gt;To deprovision a group, you can use &lt;a href&#x3D;\&quot;./op-groups-id-delete.html\&quot;&gt;Delete Group&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-delete.html\&quot;&gt;Deprovision User or Group from Application&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
+        /// <param name="id">&lt;p&gt;User ID.&lt;/p&gt;</param>
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ServiceRoleProvisioningDeprovisionWithHttpInfo(string id, bool? group = default, int operationIndex = 0);
         /// <summary>
-        /// Get Provision
+        /// Get Service Role Provision
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets service role provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-get.html\&quot;&gt;Get Application Role Provision&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -64,10 +64,10 @@ namespace EssSharp.Api
         UserGroupProvisionInfo ServiceRoleProvisioningGetProvision(string id, bool? group = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Provision
+        /// Get Service Role Provision
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets service role provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-get.html\&quot;&gt;Get Application Role Provision&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -76,10 +76,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of UserGroupProvisionInfo</returns>
         ApiResponse<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionWithHttpInfo(string id, bool? group = default, int operationIndex = 0);
         /// <summary>
-        /// Provision User or Group
+        /// Provision Service Role
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Provisions a single user or group for a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -89,10 +89,10 @@ namespace EssSharp.Api
         void ServiceRoleProvisioningProvision(string id, UserGroupProvisionInfo body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Provision User or Group
+        /// Provision Service Role
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Provisions a single user or group for a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -101,10 +101,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ServiceRoleProvisioningProvisionWithHttpInfo(string id, UserGroupProvisionInfo body = default, int operationIndex = 0);
         /// <summary>
-        /// Search Provision
+        /// Search Service Role Provisioning
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Search for provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-get.html\&quot;&gt;Search Application Role Provisioning&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; (optional, default to &quot;*&quot;)</param>
@@ -116,10 +116,10 @@ namespace EssSharp.Api
         UserGroupProvisionInfoList ServiceRoleProvisioningSearchProvision(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0);
 
         /// <summary>
-        /// Search Provision
+        /// Search Service Role Provisioning
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Search for provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-get.html\&quot;&gt;Search Application Role Provisioning&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; (optional, default to &quot;*&quot;)</param>
@@ -139,13 +139,13 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Deprovision
+        /// Deprovision Service Role
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deprovisions a single user or group from a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;&lt;p&gt;To deprovision a group, you can use &lt;a href&#x3D;\&quot;./op-groups-id-delete.html\&quot;&gt;Delete Group&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-delete.html\&quot;&gt;Deprovision User or Group from Application&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
+        /// <param name="id">&lt;p&gt;User ID.&lt;/p&gt;</param>
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -153,23 +153,23 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ServiceRoleProvisioningDeprovisionAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Deprovision
+        /// Deprovision Service Role
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Deprovisions a single user or group from a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;&lt;p&gt;To deprovision a group, you can use &lt;a href&#x3D;\&quot;./op-groups-id-delete.html\&quot;&gt;Delete Group&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-delete.html\&quot;&gt;Deprovision User or Group from Application&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
+        /// <param name="id">&lt;p&gt;User ID.&lt;/p&gt;</param>
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ServiceRoleProvisioningDeprovisionWithHttpInfoAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Provision
+        /// Get Service Role Provision
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets service role provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-get.html\&quot;&gt;Get Application Role Provision&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -180,10 +180,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<UserGroupProvisionInfo> ServiceRoleProvisioningGetProvisionAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Provision
+        /// Get Service Role Provision
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Gets service role provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-get.html\&quot;&gt;Get Application Role Provision&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -193,10 +193,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
         System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ServiceRoleProvisioningGetProvisionWithHttpInfoAsync(string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Provision User or Group
+        /// Provision Service Role
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Provisions a single user or group for a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -207,10 +207,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ServiceRoleProvisioningProvisionAsync(string id, UserGroupProvisionInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Provision User or Group
+        /// Provision Service Role
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Provisions a single user or group for a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -220,10 +220,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ServiceRoleProvisioningProvisionWithHttpInfoAsync(string id, UserGroupProvisionInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Search Provision
+        /// Search Service Role Provisioning
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Search for provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-get.html\&quot;&gt;Search Application Role Provisioning&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; (optional, default to &quot;*&quot;)</param>
@@ -236,10 +236,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<UserGroupProvisionInfoList> ServiceRoleProvisioningSearchProvisionAsync(string id = default, string role = default, string filter = default, int? page = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Search Provision
+        /// Search Service Role Provisioning
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Search for provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-get.html\&quot;&gt;Search Application Role Provisioning&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; (optional, default to &quot;*&quot;)</param>
@@ -371,10 +371,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Deprovision &lt;p&gt;Deprovisions a single user or group from a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Deprovision Service Role &lt;p&gt;Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;&lt;p&gt;To deprovision a group, you can use &lt;a href&#x3D;\&quot;./op-groups-id-delete.html\&quot;&gt;Delete Group&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-delete.html\&quot;&gt;Deprovision User or Group from Application&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
+        /// <param name="id">&lt;p&gt;User ID.&lt;/p&gt;</param>
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns></returns>
@@ -384,10 +384,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Deprovision &lt;p&gt;Deprovisions a single user or group from a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Deprovision Service Role &lt;p&gt;Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;&lt;p&gt;To deprovision a group, you can use &lt;a href&#x3D;\&quot;./op-groups-id-delete.html\&quot;&gt;Delete Group&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-delete.html\&quot;&gt;Deprovision User or Group from Application&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
+        /// <param name="id">&lt;p&gt;User ID.&lt;/p&gt;</param>
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of Object(void)</returns>
@@ -468,10 +468,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Deprovision &lt;p&gt;Deprovisions a single user or group from a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Deprovision Service Role &lt;p&gt;Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;&lt;p&gt;To deprovision a group, you can use &lt;a href&#x3D;\&quot;./op-groups-id-delete.html\&quot;&gt;Delete Group&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-delete.html\&quot;&gt;Deprovision User or Group from Application&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
+        /// <param name="id">&lt;p&gt;User ID.&lt;/p&gt;</param>
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -482,10 +482,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Deprovision &lt;p&gt;Deprovisions a single user or group from a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Deprovision Service Role &lt;p&gt;Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;&lt;p&gt;To deprovision a group, you can use &lt;a href&#x3D;\&quot;./op-groups-id-delete.html\&quot;&gt;Delete Group&lt;/a&gt;&lt;/p&gt;&lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-delete.html\&quot;&gt;Deprovision User or Group from Application&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
+        /// <param name="id">&lt;p&gt;User ID.&lt;/p&gt;</param>
         /// <param name="group">&lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -568,7 +568,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Provision &lt;p&gt;Gets service role provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get Service Role Provision &lt;p&gt;Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-get.html\&quot;&gt;Get Application Role Provision&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -582,7 +582,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Provision &lt;p&gt;Gets service role provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get Service Role Provision &lt;p&gt;Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-get.html\&quot;&gt;Get Application Role Provision&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -668,7 +668,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Provision &lt;p&gt;Gets service role provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get Service Role Provision &lt;p&gt;Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-get.html\&quot;&gt;Get Application Role Provision&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -683,7 +683,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Provision &lt;p&gt;Gets service role provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get Service Role Provision &lt;p&gt;Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-id-get.html\&quot;&gt;Get Application Role Provision&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -771,7 +771,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Provision User or Group &lt;p&gt;Provisions a single user or group for a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Provision Service Role &lt;p&gt;Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -784,7 +784,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Provision User or Group &lt;p&gt;Provisions a single user or group for a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Provision Service Role &lt;p&gt;Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -867,7 +867,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Provision User or Group &lt;p&gt;Provisions a single user or group for a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Provision Service Role &lt;p&gt;Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -881,7 +881,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Provision User or Group &lt;p&gt;Provisions a single user or group for a service role.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Provision Service Role &lt;p&gt;Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID.&lt;/p&gt;</param>
@@ -966,7 +966,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Search Provision &lt;p&gt;Search for provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Search Service Role Provisioning &lt;p&gt;Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-get.html\&quot;&gt;Search Application Role Provisioning&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; (optional, default to &quot;*&quot;)</param>
@@ -982,7 +982,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Search Provision &lt;p&gt;Search for provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Search Service Role Provisioning &lt;p&gt;Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-get.html\&quot;&gt;Search Application Role Provisioning&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; (optional, default to &quot;*&quot;)</param>
@@ -1075,7 +1075,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Search Provision &lt;p&gt;Search for provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Search Service Role Provisioning &lt;p&gt;Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-get.html\&quot;&gt;Search Application Role Provisioning&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; (optional, default to &quot;*&quot;)</param>
@@ -1092,7 +1092,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Search Provision &lt;p&gt;Search for provisioning information.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Search Service Role Provisioning &lt;p&gt;Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;See Also: &lt;a href&#x3D;\&quot;./op-applications-app-permissions-get.html\&quot;&gt;Search Application Role Provisioning&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">&lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; (optional, default to &quot;*&quot;)</param>

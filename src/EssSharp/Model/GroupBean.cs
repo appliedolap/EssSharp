@@ -34,15 +34,15 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="groups">groups.</param>
-        /// <param name="description">description.</param>
         /// <param name="role">role.</param>
+        /// <param name="description">description.</param>
         /// <param name="name">name.</param>
-        public GroupBean(List<Link> links = default, List<string> groups = default, string description = default, string role = default, string name = default)
+        public GroupBean(List<Link> links = default, List<string> groups = default, string role = default, string description = default, string name = default)
         {
             this.Links = links;
             this.Groups = groups;
-            this.Description = description;
             this.Role = role;
+            this.Description = description;
             this.Name = name;
         }
 
@@ -59,16 +59,16 @@ namespace EssSharp.Model
         public List<string> Groups { get; set; }
 
         /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
-
-        /// <summary>
         /// Gets or Sets Role
         /// </summary>
         [DataMember(Name = "role", EmitDefaultValue = false)]
         public string Role { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -86,8 +86,8 @@ namespace EssSharp.Model
             sb.Append("class GroupBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Groups: ").Append(Groups).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Role: ").Append(Role).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

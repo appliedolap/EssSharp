@@ -56,10 +56,10 @@ namespace EssSharp.Api
         /// Start Data Load
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Starts streaming data load.&lt;/p&gt;
+        /// &lt;p&gt;Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\&quot;&gt;Push Data&lt;/a&gt; and &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\&quot;&gt;End Data Load&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -70,10 +70,10 @@ namespace EssSharp.Api
         /// Start Data Load
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Starts streaming data load.&lt;/p&gt;
+        /// &lt;p&gt;Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\&quot;&gt;Push Data&lt;/a&gt; and &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\&quot;&gt;End Data Load&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -88,8 +88,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="streamId">&lt;p&gt;Stream ID.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
+        /// <param name="streamId">&lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Comma-separated data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
         StreamProcessStartResponse DataloadStreamData(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0);
@@ -103,8 +103,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="streamId">&lt;p&gt;Stream ID.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
+        /// <param name="streamId">&lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Comma-separated data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
         ApiResponse<StreamProcessStartResponse> DataloadStreamDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0);
@@ -150,10 +150,10 @@ namespace EssSharp.Api
         /// Start Data Load
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Starts streaming data load.&lt;/p&gt;
+        /// &lt;p&gt;Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\&quot;&gt;Push Data&lt;/a&gt; and &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\&quot;&gt;End Data Load&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -165,10 +165,10 @@ namespace EssSharp.Api
         /// Start Data Load
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Starts streaming data load.&lt;/p&gt;
+        /// &lt;p&gt;Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\&quot;&gt;Push Data&lt;/a&gt; and &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\&quot;&gt;End Data Load&lt;/a&gt;.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -184,8 +184,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="streamId">&lt;p&gt;Stream ID.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
+        /// <param name="streamId">&lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Comma-separated data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
@@ -200,8 +200,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="streamId">&lt;p&gt;Stream ID.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
+        /// <param name="streamId">&lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Comma-separated data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>
@@ -554,10 +554,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Data Load &lt;p&gt;Starts streaming data load.&lt;/p&gt;
+        /// Start Data Load &lt;p&gt;Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\&quot;&gt;Push Data&lt;/a&gt; and &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\&quot;&gt;End Data Load&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -569,10 +569,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Data Load &lt;p&gt;Starts streaming data load.&lt;/p&gt;
+        /// Start Data Load &lt;p&gt;Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\&quot;&gt;Push Data&lt;/a&gt; and &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\&quot;&gt;End Data Load&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -662,10 +662,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Data Load &lt;p&gt;Starts streaming data load.&lt;/p&gt;
+        /// Start Data Load &lt;p&gt;Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\&quot;&gt;Push Data&lt;/a&gt; and &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\&quot;&gt;End Data Load&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -678,10 +678,10 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Start Data Load &lt;p&gt;Starts streaming data load.&lt;/p&gt;
+        /// Start Data Load &lt;p&gt;Starts streaming data load. This call generates a unique stream ID that is consumed by subsequent calls &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-post.html\&quot;&gt;Push Data&lt;/a&gt; and &lt;a href&#x3D;\&quot;./op-applications-applicationname-databases-databasename-dataload-streamid-delete.html\&quot;&gt;End Data Load&lt;/a&gt;.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="applicationName">Application name</param>
+        /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
         /// <param name="body">&lt;p&gt;Data load options such as rule file name and delimiter.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -778,8 +778,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="streamId">&lt;p&gt;Stream ID.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
+        /// <param name="streamId">&lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Comma-separated data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>StreamProcessStartResponse</returns>
         public StreamProcessStartResponse DataloadStreamData(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0)
@@ -794,8 +794,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="streamId">&lt;p&gt;Stream ID.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
+        /// <param name="streamId">&lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Comma-separated data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of StreamProcessStartResponse</returns>
         public EssSharp.Client.ApiResponse<StreamProcessStartResponse> DataloadStreamDataWithHttpInfo(string applicationName, string databaseName, string streamId, string body = default, int operationIndex = 0)
@@ -895,8 +895,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="streamId">&lt;p&gt;Stream ID.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
+        /// <param name="streamId">&lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Comma-separated data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of StreamProcessStartResponse</returns>
@@ -912,8 +912,8 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="streamId">&lt;p&gt;Stream ID.&lt;/p&gt;</param>
-        /// <param name="body">&lt;p&gt;CSV data.&lt;/p&gt; (optional)</param>
+        /// <param name="streamId">&lt;p&gt;Stream ID returned from the Start Data Load operation.&lt;/p&gt;</param>
+        /// <param name="body">&lt;p&gt;Comma-separated data.&lt;/p&gt; (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (StreamProcessStartResponse)</returns>

@@ -38,15 +38,10 @@ namespace EssSharp.Model
         /// Initializes a new instance of the <see cref="Generation" /> class.
         /// </summary>
         /// <param name="generationNumber">generationNumber (required).</param>
-        /// <param name="columnName">columnName (required).</param>
+        /// <param name="columnName">columnName.</param>
         public Generation(int generationNumber = default, string columnName = default)
         {
             this.GenerationNumber = generationNumber;
-            // to ensure "columnName" is required (not null)
-            if (columnName == null)
-            {
-                throw new ArgumentNullException("columnName is a required property for Generation and cannot be null");
-            }
             this.ColumnName = columnName;
         }
 
@@ -59,7 +54,7 @@ namespace EssSharp.Model
         /// <summary>
         /// Gets or Sets ColumnName
         /// </summary>
-        [DataMember(Name = "columnName", IsRequired = true, EmitDefaultValue = true)]
+        [DataMember(Name = "columnName", EmitDefaultValue = false)]
         public string ColumnName { get; set; }
 
         /// <summary>

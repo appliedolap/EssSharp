@@ -78,5 +78,23 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Links'
         }
+
+        /// <summary>
+        /// Test the property 'Description'
+        /// </summary>
+        [Fact]
+        public void DescriptionTest()
+        {
+            // TODO unit test for the property 'Description'
+        }
+
+        /// <summary>
+        /// Test the property 'AiGenerated'
+        /// </summary>
+        [Fact]
+        public void AiGeneratedTest()
+        {
+            // TODO unit test for the property 'AiGenerated'
+        }
     }
 }

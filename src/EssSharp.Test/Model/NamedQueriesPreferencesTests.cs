@@ -132,5 +132,14 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MemberIdentifierType'
         }
+
+        /// <summary>
+        /// Test the property 'AliasTableName'
+        /// </summary>
+        [Fact]
+        public void AliasTableNameTest()
+        {
+            // TODO unit test for the property 'AliasTableName'
+        }
     }
 }

@@ -7,7 +7,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DimensionBuildEnd**](StreamingDimensionBuildApi.md#dimensionbuildend) | **DELETE** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId} | End Streaming Dimension Build |
 | [**DimensionBuildEndDimBuild**](StreamingDimensionBuildApi.md#dimensionbuildenddimbuild) | **DELETE** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId}/{ruleFileName} | End Dimension Build |
 | [**DimensionBuildStart**](StreamingDimensionBuildApi.md#dimensionbuildstart) | **POST** /applications/{applicationName}/databases/{databaseName}/dimbuild | Start Streaming Dimension Build |
-| [**DimensionBuildStartDimBuild**](StreamingDimensionBuildApi.md#dimensionbuildstartdimbuild) | **POST** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId}/{ruleFileName} | Start Dimension Build&lt;/p&gt; |
+| [**DimensionBuildStartDimBuild**](StreamingDimensionBuildApi.md#dimensionbuildstartdimbuild) | **POST** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId}/{ruleFileName} | Start Dimension Build |
 | [**DimensionBuildStreamDimBuildData**](StreamingDimensionBuildApi.md#dimensionbuildstreamdimbuilddata) | **POST** /applications/{applicationName}/databases/{databaseName}/dimbuild/{streamId} | Push Dimensions |
 
 <a id="dimensionbuildend"></a>
@@ -224,7 +224,7 @@ catch (ApiException e)
 
 Start Streaming Dimension Build
 
-<p>Starts an incremental dimension build.</p>
+<p>Starts an incremental dimension build to push metadata to an Essbase outline. This call generates a unique stream ID that is consumed by subsequent calls in this order: <ol><li><a href=\"./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-post.html\">Start Dimension Build</a></li><li><a href=\"./op-applications-applicationname-databases-databasename-dimbuild-streamid-post.html\">Push Dimensions</a></li><li><a href=\"./op-applications-applicationname-databases-databasename-dimbuild-streamid-rulefilename-delete.html\">End Dimension Build</a></li><li><a href=\"./op-applications-applicationname-databases-databasename-dimbuild-streamid-delete.html\">End Streaming Dimension Build</a></li></ol></p>
 
 ### Example
 ```csharp
@@ -325,7 +325,7 @@ catch (ApiException e)
 # **DimensionBuildStartDimBuild**
 > StreamProcessStartResponse DimensionBuildStartDimBuild (string applicationName, string databaseName, string streamId, string ruleFileName)
 
-Start Dimension Build</p>
+Start Dimension Build
 
 <p>Starts a dimension build with a rule file.</p>
 
@@ -359,7 +359,7 @@ namespace Example
 
             try
             {
-                // Start Dimension Build</p>
+                // Start Dimension Build
                 StreamProcessStartResponse result = apiInstance.DimensionBuildStartDimBuild(applicationName, databaseName, streamId, ruleFileName);
                 Debug.WriteLine(result);
             }
@@ -380,7 +380,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Start Dimension Build</p>
+    // Start Dimension Build
     ApiResponse<StreamProcessStartResponse> response = apiInstance.DimensionBuildStartDimBuildWithHttpInfo(applicationName, databaseName, streamId, ruleFileName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

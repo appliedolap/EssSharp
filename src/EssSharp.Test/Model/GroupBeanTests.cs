@@ -71,21 +71,21 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Description'
-        /// </summary>
-        [Fact]
-        public void DescriptionTest()
-        {
-            // TODO unit test for the property 'Description'
-        }
-
-        /// <summary>
         /// Test the property 'Role'
         /// </summary>
         [Fact]
         public void RoleTest()
         {
             // TODO unit test for the property 'Role'
+        }
+
+        /// <summary>
+        /// Test the property 'Description'
+        /// </summary>
+        [Fact]
+        public void DescriptionTest()
+        {
+            // TODO unit test for the property 'Description'
         }
 
         /// <summary>

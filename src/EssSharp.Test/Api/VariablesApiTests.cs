@@ -168,8 +168,9 @@ namespace EssSharp.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
+            //string orderBy = null;
             //bool? includeDatabaseVariables = null;
-            //var response = instance.VariablesListAppVariables(applicationName, includeDatabaseVariables);
+            //var response = instance.VariablesListAppVariables(applicationName, orderBy, includeDatabaseVariables);
             //Assert.IsType<VariableList>(response);
         }
 
@@ -182,7 +183,8 @@ namespace EssSharp.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
             //string databaseName = null;
-            //var response = instance.VariablesListVariables(applicationName, databaseName);
+            //string orderBy = null;
+            //var response = instance.VariablesListVariables(applicationName, databaseName, orderBy);
             //Assert.IsType<VariableList>(response);
         }
     }

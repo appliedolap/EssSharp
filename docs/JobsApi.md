@@ -9,7 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**JobsGetAllJobRecords**](JobsApi.md#jobsgetalljobrecords) | **GET** /jobs | Get Job List |
 | [**JobsGetJobInfo**](JobsApi.md#jobsgetjobinfo) | **GET** /jobs/{id} | Get Job |
 | [**JobsGetJobStatistics**](JobsApi.md#jobsgetjobstatistics) | **GET** /jobs/statistics/{userId} | Get Job Statistics |
-| [**JobsPurge**](JobsApi.md#jobspurge) | **DELETE** /jobs/purge | Delete jobs |
+| [**JobsPurge**](JobsApi.md#jobspurge) | **DELETE** /jobs/purge | Delete Jobs |
 
 <a id="jobsexecutebyjobid"></a>
 # **JobsExecuteByJobId**
@@ -141,7 +141,7 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new JobsApi(config);
-            var body = new JobsInputBean(); // JobsInputBean | parameter provided as json string in the request body
+            var body = new JobsInputBean(); // JobsInputBean | <p>Parameter provided as json string in the request body.</p>
 
             try
             {
@@ -184,7 +184,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **body** | [**JobsInputBean**](JobsInputBean.md) | parameter provided as json string in the request body |  |
+| **body** | [**JobsInputBean**](JobsInputBean.md) | &lt;p&gt;Parameter provided as json string in the request body.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -523,9 +523,9 @@ catch (ApiException e)
 # **JobsPurge**
 > void JobsPurge (long? olderthan = null, long? rangeStartTime = null, long? rangeEndTime = null, string application = null, string database = null, string jobtype = null, int? jobstatus = null)
 
-Delete jobs
+Delete Jobs
 
-<p>Deletes jobs data older than the specified time.</p>
+<p>Deletes jobs data based on query parameters.</p>
 
 ### Example
 ```csharp
@@ -550,17 +550,17 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new JobsApi(config);
-            var olderthan = 789L;  // long? | <p>Time in milliseconds.</p> (optional) 
+            var olderthan = 789L;  // long? | <p>Time in milliseconds, if you want to remove jobs data older than the specified time.</p> (optional) 
             var rangeStartTime = 789L;  // long? | <p>Start Time range in milliseconds.</p> (optional) 
             var rangeEndTime = 789L;  // long? | <p>End Time range in milliseconds.</p> (optional) 
             var application = "application_example";  // string | <p>Application name.</p> (optional) 
             var database = "database_example";  // string | <p>Database name.</p> (optional) 
-            var jobtype = "jobtype_example";  // string | <p>Job Type.</p> (optional) 
-            var jobstatus = 56;  // int? | <p>Job Status.</p> (optional) 
+            var jobtype = "jobtype_example";  // string | <p>The type of job. Examples: <code>dataload</code>, <code>dimbuild</code>, <code>calc</code>, <code>clear</code>, <code>importExcel</code>, <code>exportExcel</code>, <code>lcmExport</code>, <code>lcmImport</code>,  <code>clearAggregation</code>, <code>buildAggregation</code>, <code>asoBufferDataLoad</code>, <code>asoBufferCommit</code>, <code>exportData</code>, <code>mdxScript</code>.</p> (optional) 
+            var jobstatus = 56;  // int? | <p>Job Status code.</p><p><br><table><tr><th>Status code</th><th>Meaning</th></tr><tr><td>100</td><td>In progress</td></tr><tr><td>200</td><td>Completed</td></tr><tr><td>300</td>    <td>Completed with warnings</td></tr><tr><td>400</td><td>Failed</td></tr></table> (optional) 
 
             try
             {
-                // Delete jobs
+                // Delete Jobs
                 apiInstance.JobsPurge(olderthan, rangeStartTime, rangeEndTime, application, database, jobtype, jobstatus);
             }
             catch (ApiException  e)
@@ -580,7 +580,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete jobs
+    // Delete Jobs
     apiInstance.JobsPurgeWithHttpInfo(olderthan, rangeStartTime, rangeEndTime, application, database, jobtype, jobstatus);
 }
 catch (ApiException e)
@@ -595,13 +595,13 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **olderthan** | **long?** | &lt;p&gt;Time in milliseconds.&lt;/p&gt; | [optional]  |
+| **olderthan** | **long?** | &lt;p&gt;Time in milliseconds, if you want to remove jobs data older than the specified time.&lt;/p&gt; | [optional]  |
 | **rangeStartTime** | **long?** | &lt;p&gt;Start Time range in milliseconds.&lt;/p&gt; | [optional]  |
 | **rangeEndTime** | **long?** | &lt;p&gt;End Time range in milliseconds.&lt;/p&gt; | [optional]  |
 | **application** | **string** | &lt;p&gt;Application name.&lt;/p&gt; | [optional]  |
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; | [optional]  |
-| **jobtype** | **string** | &lt;p&gt;Job Type.&lt;/p&gt; | [optional]  |
-| **jobstatus** | **int?** | &lt;p&gt;Job Status.&lt;/p&gt; | [optional]  |
+| **jobtype** | **string** | &lt;p&gt;The type of job. Examples: &lt;code&gt;dataload&lt;/code&gt;, &lt;code&gt;dimbuild&lt;/code&gt;, &lt;code&gt;calc&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;, &lt;code&gt;importExcel&lt;/code&gt;, &lt;code&gt;exportExcel&lt;/code&gt;, &lt;code&gt;lcmExport&lt;/code&gt;, &lt;code&gt;lcmImport&lt;/code&gt;,  &lt;code&gt;clearAggregation&lt;/code&gt;, &lt;code&gt;buildAggregation&lt;/code&gt;, &lt;code&gt;asoBufferDataLoad&lt;/code&gt;, &lt;code&gt;asoBufferCommit&lt;/code&gt;, &lt;code&gt;exportData&lt;/code&gt;, &lt;code&gt;mdxScript&lt;/code&gt;.&lt;/p&gt; | [optional]  |
+| **jobstatus** | **int?** | &lt;p&gt;Job Status code.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Status code&lt;/th&gt;&lt;th&gt;Meaning&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;In progress&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;Completed&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;300&lt;/td&gt;    &lt;td&gt;Completed with warnings&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;400&lt;/td&gt;&lt;td&gt;Failed&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt; | [optional]  |
 
 ### Return type
 
@@ -620,7 +620,8 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;Purge request executed successfully.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Purge request executed successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;Invalid Inputs.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 | **503** | &lt;p&gt;&lt;strong&gt;Service Unavailable&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Naming exception or server exception.&lt;/p&gt; |  -  |
 

@@ -4,17 +4,17 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**ApplicationLogsDownloadAllLogFiles**](ApplicationLogsApi.md#applicationlogsdownloadalllogfiles) | **GET** /applications/{applicationName}/logs/all | Download All Logs |
-| [**ApplicationLogsDownloadAppLogFiles**](ApplicationLogsApi.md#applicationlogsdownloadapplogfiles) | **GET** /applications/{applicationName}/logs | Download Logs |
-| [**ApplicationLogsDownloadLatestLogFile**](ApplicationLogsApi.md#applicationlogsdownloadlatestlogfile) | **GET** /applications/{applicationName}/logs/latest | Download Latest Log |
+| [**ApplicationLogsDownloadAllLogFiles**](ApplicationLogsApi.md#applicationlogsdownloadalllogfiles) | **GET** /applications/{applicationName}/logs/all | Download All Application Logs |
+| [**ApplicationLogsDownloadAppLogFiles**](ApplicationLogsApi.md#applicationlogsdownloadapplogfiles) | **GET** /applications/{applicationName}/logs | Download Application Logs |
+| [**ApplicationLogsDownloadLatestLogFile**](ApplicationLogsApi.md#applicationlogsdownloadlatestlogfile) | **GET** /applications/{applicationName}/logs/latest | Download Latest Application Log |
 
 <a id="applicationlogsdownloadalllogfiles"></a>
 # **ApplicationLogsDownloadAllLogFiles**
 > System.IO.Stream ApplicationLogsDownloadAllLogFiles (string applicationName)
 
-Download All Logs
+Download All Application Logs
 
-Returns or download zip file which contains all log files for the specific application
+<p>Returns a download zip file which contains all log files for the specific application.</p>
 
 ### Example
 ```csharp
@@ -43,7 +43,7 @@ namespace Example
 
             try
             {
-                // Download All Logs
+                // Download All Application Logs
                 System.IO.Stream result = apiInstance.ApplicationLogsDownloadAllLogFiles(applicationName);
                 Debug.WriteLine(result);
             }
@@ -64,7 +64,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Download All Logs
+    // Download All Application Logs
     ApiResponse<System.IO.Stream> response = apiInstance.ApplicationLogsDownloadAllLogFilesWithHttpInfo(applicationName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -111,7 +111,7 @@ catch (ApiException e)
 # **ApplicationLogsDownloadAppLogFiles**
 > Link ApplicationLogsDownloadAppLogFiles (string applicationName)
 
-Download Logs
+Download Application Logs
 
 <p>Returns links to download all log files as a zip file, and to download the latest log file.</p>
 
@@ -142,7 +142,7 @@ namespace Example
 
             try
             {
-                // Download Logs
+                // Download Application Logs
                 Link result = apiInstance.ApplicationLogsDownloadAppLogFiles(applicationName);
                 Debug.WriteLine(result);
             }
@@ -163,7 +163,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Download Logs
+    // Download Application Logs
     ApiResponse<Link> response = apiInstance.ApplicationLogsDownloadAppLogFilesWithHttpInfo(applicationName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -210,7 +210,7 @@ catch (ApiException e)
 # **ApplicationLogsDownloadLatestLogFile**
 > System.IO.Stream ApplicationLogsDownloadLatestLogFile (string applicationName)
 
-Download Latest Log
+Download Latest Application Log
 
 <p>Downloads the latest application log file as a text file.</p>
 
@@ -241,7 +241,7 @@ namespace Example
 
             try
             {
-                // Download Latest Log
+                // Download Latest Application Log
                 System.IO.Stream result = apiInstance.ApplicationLogsDownloadLatestLogFile(applicationName);
                 Debug.WriteLine(result);
             }
@@ -262,7 +262,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Download Latest Log
+    // Download Latest Application Log
     ApiResponse<System.IO.Stream> response = apiInstance.ApplicationLogsDownloadLatestLogFileWithHttpInfo(applicationName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

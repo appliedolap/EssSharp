@@ -61,8 +61,9 @@ namespace EssSharp.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
             //string databaseName = null;
+            //bool? svParity = null;
             //GridOperation body = null;
-            //var response = instance.GridExecute(applicationName, databaseName, body);
+            //var response = instance.GridExecute(applicationName, databaseName, svParity, body);
             //Assert.IsType<Grid>(response);
         }
 

@@ -28,6 +28,19 @@ Name | Type | Description | Notes
 **MaxPoolSize** | **int** |  | [optional] 
 **Hidden** | **bool** |  | [optional] 
 **Availability** | **string** |  | [optional] 
+**AiConnection** | **string** |  | [optional] 
+**ChatCredential** | **string** |  | [optional] 
+**VectorCredential** | **string** |  | [optional] 
+**ChatModel** | **string** |  | [optional] 
+**OciCompartmentId** | **string** |  | [optional] 
+**Region** | **string** |  | [optional] 
+**Url** | **string** |  | [optional] 
+**EmbedModel** | **string** |  | [optional] 
+**TransferTimeout** | **string** |  | [optional] 
+**OciAPIFormat** | **string** |  | 
+**NarrateIndexName** | **string** |  | [optional] 
+**NarrateProfileName** | **string** |  | [optional] 
+**NarrateDocDirectory** | **string** |  | [optional] 
 **Links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

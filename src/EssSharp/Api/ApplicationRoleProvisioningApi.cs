@@ -26,7 +26,7 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Deprovision User or Group
+        /// Deprovision User or Group from Application
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -40,7 +40,7 @@ namespace EssSharp.Api
         void ApplicationRoleProvisioningDeprovision(string app, string id, bool? group = default, int operationIndex = 0);
 
         /// <summary>
-        /// Deprovision User or Group
+        /// Deprovision User or Group from Application
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -53,7 +53,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ApplicationRoleProvisioningDeprovisionWithHttpInfo(string app, string id, bool? group = default, int operationIndex = 0);
         /// <summary>
-        /// Get Provision
+        /// Get Application Role Provision
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -68,7 +68,7 @@ namespace EssSharp.Api
         UserGroupProvisionInfo ApplicationRoleProvisioningGetProvision(string app, string id, bool? group = default, bool? inherited = default, int operationIndex = 0);
 
         /// <summary>
-        /// Get Provision
+        /// Get Application Role Provision
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -82,10 +82,10 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of UserGroupProvisionInfo</returns>
         ApiResponse<UserGroupProvisionInfo> ApplicationRoleProvisioningGetProvisionWithHttpInfo(string app, string id, bool? group = default, bool? inherited = default, int operationIndex = 0);
         /// <summary>
-        /// Import Provision
+        /// Import Application Role Provisioning
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Imports provisioning information for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Imports provisioning for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;Takes as input a comma-separated (CSV) import file indicated in &lt;b&gt;- -data-binary&lt;/b&gt; option. Output can be written to a file specified by &lt;b&gt;- -output&lt;/b&gt; option, or to standard output if the output option is not provided. Requirements for the import file:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;No headers (first line is the first record)&lt;/li&gt;&lt;li&gt;Col1: user/group ID&lt;/li&gt;&lt;li&gt;Col2: Application permission. Values: &lt;b&gt;db_access&lt;/b&gt;, &lt;b&gt;db_update&lt;/b&gt;, &lt;b&gt;db_manager&lt;/b&gt;, or &lt;b&gt;app_manager&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Col3 (optional, Boolean) Is the ID a group? true|false (default false)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Sample import.csv  file:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;User1,app_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;User2,db_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Group1,db_access,true&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -94,10 +94,10 @@ namespace EssSharp.Api
         void ApplicationRoleProvisioningImportProvision(string app, int operationIndex = 0);
 
         /// <summary>
-        /// Import Provision
+        /// Import Application Role Provisioning
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Imports provisioning information for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Imports provisioning for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;Takes as input a comma-separated (CSV) import file indicated in &lt;b&gt;- -data-binary&lt;/b&gt; option. Output can be written to a file specified by &lt;b&gt;- -output&lt;/b&gt; option, or to standard output if the output option is not provided. Requirements for the import file:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;No headers (first line is the first record)&lt;/li&gt;&lt;li&gt;Col1: user/group ID&lt;/li&gt;&lt;li&gt;Col2: Application permission. Values: &lt;b&gt;db_access&lt;/b&gt;, &lt;b&gt;db_update&lt;/b&gt;, &lt;b&gt;db_manager&lt;/b&gt;, or &lt;b&gt;app_manager&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Col3 (optional, Boolean) Is the ID a group? true|false (default false)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Sample import.csv  file:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;User1,app_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;User2,db_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Group1,db_access,true&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -105,7 +105,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ApplicationRoleProvisioningImportProvisionWithHttpInfo(string app, int operationIndex = 0);
         /// <summary>
-        /// Provision User or Group
+        /// Provision Application Role to User or Group
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -119,7 +119,7 @@ namespace EssSharp.Api
         void ApplicationRoleProvisioningProvision(string app, string id, UserGroupProvisionInfo body = default, int operationIndex = 0);
 
         /// <summary>
-        /// Provision User or Group
+        /// Provision Application Role to User or Group
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -132,7 +132,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> ApplicationRoleProvisioningProvisionWithHttpInfo(string app, string id, UserGroupProvisionInfo body = default, int operationIndex = 0);
         /// <summary>
-        /// Search Application Provisioning
+        /// Search Application Role Provisioning
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -148,7 +148,7 @@ namespace EssSharp.Api
         UserGroupProvisionInfoList ApplicationRoleProvisioningSearchProvision(string app, string id = default, string role = default, string filter = default, bool? inherited = default, int operationIndex = 0);
 
         /// <summary>
-        /// Search Application Provisioning
+        /// Search Application Role Provisioning
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -172,7 +172,7 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Deprovision User or Group
+        /// Deprovision User or Group from Application
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -187,7 +187,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ApplicationRoleProvisioningDeprovisionAsync(string app, string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Deprovision User or Group
+        /// Deprovision User or Group from Application
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -201,7 +201,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningDeprovisionWithHttpInfoAsync(string app, string id, bool? group = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Provision
+        /// Get Application Role Provision
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -217,7 +217,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<UserGroupProvisionInfo> ApplicationRoleProvisioningGetProvisionAsync(string app, string id, bool? group = default, bool? inherited = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Provision
+        /// Get Application Role Provision
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -232,10 +232,10 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (UserGroupProvisionInfo)</returns>
         System.Threading.Tasks.Task<ApiResponse<UserGroupProvisionInfo>> ApplicationRoleProvisioningGetProvisionWithHttpInfoAsync(string app, string id, bool? group = default, bool? inherited = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Import Provision
+        /// Import Application Role Provisioning
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Imports provisioning information for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Imports provisioning for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;Takes as input a comma-separated (CSV) import file indicated in &lt;b&gt;- -data-binary&lt;/b&gt; option. Output can be written to a file specified by &lt;b&gt;- -output&lt;/b&gt; option, or to standard output if the output option is not provided. Requirements for the import file:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;No headers (first line is the first record)&lt;/li&gt;&lt;li&gt;Col1: user/group ID&lt;/li&gt;&lt;li&gt;Col2: Application permission. Values: &lt;b&gt;db_access&lt;/b&gt;, &lt;b&gt;db_update&lt;/b&gt;, &lt;b&gt;db_manager&lt;/b&gt;, or &lt;b&gt;app_manager&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Col3 (optional, Boolean) Is the ID a group? true|false (default false)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Sample import.csv  file:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;User1,app_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;User2,db_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Group1,db_access,true&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -245,10 +245,10 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ApplicationRoleProvisioningImportProvisionAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Import Provision
+        /// Import Application Role Provisioning
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Imports provisioning information for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// &lt;p&gt;Imports provisioning for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;Takes as input a comma-separated (CSV) import file indicated in &lt;b&gt;- -data-binary&lt;/b&gt; option. Output can be written to a file specified by &lt;b&gt;- -output&lt;/b&gt; option, or to standard output if the output option is not provided. Requirements for the import file:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;No headers (first line is the first record)&lt;/li&gt;&lt;li&gt;Col1: user/group ID&lt;/li&gt;&lt;li&gt;Col2: Application permission. Values: &lt;b&gt;db_access&lt;/b&gt;, &lt;b&gt;db_update&lt;/b&gt;, &lt;b&gt;db_manager&lt;/b&gt;, or &lt;b&gt;app_manager&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Col3 (optional, Boolean) Is the ID a group? true|false (default false)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Sample import.csv  file:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;User1,app_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;User2,db_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Group1,db_access,true&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -257,7 +257,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningImportProvisionWithHttpInfoAsync(string app, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Provision User or Group
+        /// Provision Application Role to User or Group
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -272,7 +272,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task ApplicationRoleProvisioningProvisionAsync(string app, string id, UserGroupProvisionInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Provision User or Group
+        /// Provision Application Role to User or Group
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -286,7 +286,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<Object>> ApplicationRoleProvisioningProvisionWithHttpInfoAsync(string app, string id, UserGroupProvisionInfo body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Search Application Provisioning
+        /// Search Application Role Provisioning
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -303,7 +303,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<UserGroupProvisionInfoList> ApplicationRoleProvisioningSearchProvisionAsync(string app, string id = default, string role = default, string filter = default, bool? inherited = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Search Application Provisioning
+        /// Search Application Role Provisioning
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
@@ -439,7 +439,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Deprovision User or Group &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Deprovision User or Group from Application &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -453,7 +453,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Deprovision User or Group &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Deprovision User or Group from Application &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -545,7 +545,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Deprovision User or Group &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Deprovision User or Group from Application &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -560,7 +560,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Deprovision User or Group &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Deprovision User or Group from Application &lt;p&gt;Deprovisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -654,7 +654,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Provision &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get Application Role Provision &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -670,7 +670,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Provision &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get Application Role Provision &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -769,7 +769,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Provision &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get Application Role Provision &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -786,7 +786,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Get Provision &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Get Application Role Provision &lt;p&gt;Gets provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -887,7 +887,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Import Provision &lt;p&gt;Imports provisioning information for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Import Application Role Provisioning &lt;p&gt;Imports provisioning for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;Takes as input a comma-separated (CSV) import file indicated in &lt;b&gt;- -data-binary&lt;/b&gt; option. Output can be written to a file specified by &lt;b&gt;- -output&lt;/b&gt; option, or to standard output if the output option is not provided. Requirements for the import file:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;No headers (first line is the first record)&lt;/li&gt;&lt;li&gt;Col1: user/group ID&lt;/li&gt;&lt;li&gt;Col2: Application permission. Values: &lt;b&gt;db_access&lt;/b&gt;, &lt;b&gt;db_update&lt;/b&gt;, &lt;b&gt;db_manager&lt;/b&gt;, or &lt;b&gt;app_manager&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Col3 (optional, Boolean) Is the ID a group? true|false (default false)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Sample import.csv  file:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;User1,app_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;User2,db_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Group1,db_access,true&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -899,7 +899,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Import Provision &lt;p&gt;Imports provisioning information for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Import Application Role Provisioning &lt;p&gt;Imports provisioning for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;Takes as input a comma-separated (CSV) import file indicated in &lt;b&gt;- -data-binary&lt;/b&gt; option. Output can be written to a file specified by &lt;b&gt;- -output&lt;/b&gt; option, or to standard output if the output option is not provided. Requirements for the import file:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;No headers (first line is the first record)&lt;/li&gt;&lt;li&gt;Col1: user/group ID&lt;/li&gt;&lt;li&gt;Col2: Application permission. Values: &lt;b&gt;db_access&lt;/b&gt;, &lt;b&gt;db_update&lt;/b&gt;, &lt;b&gt;db_manager&lt;/b&gt;, or &lt;b&gt;app_manager&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Col3 (optional, Boolean) Is the ID a group? true|false (default false)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Sample import.csv  file:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;User1,app_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;User2,db_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Group1,db_access,true&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -978,7 +978,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Import Provision &lt;p&gt;Imports provisioning information for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Import Application Role Provisioning &lt;p&gt;Imports provisioning for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;Takes as input a comma-separated (CSV) import file indicated in &lt;b&gt;- -data-binary&lt;/b&gt; option. Output can be written to a file specified by &lt;b&gt;- -output&lt;/b&gt; option, or to standard output if the output option is not provided. Requirements for the import file:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;No headers (first line is the first record)&lt;/li&gt;&lt;li&gt;Col1: user/group ID&lt;/li&gt;&lt;li&gt;Col2: Application permission. Values: &lt;b&gt;db_access&lt;/b&gt;, &lt;b&gt;db_update&lt;/b&gt;, &lt;b&gt;db_manager&lt;/b&gt;, or &lt;b&gt;app_manager&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Col3 (optional, Boolean) Is the ID a group? true|false (default false)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Sample import.csv  file:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;User1,app_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;User2,db_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Group1,db_access,true&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -991,7 +991,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Import Provision &lt;p&gt;Imports provisioning information for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Import Application Role Provisioning &lt;p&gt;Imports provisioning for multiple users or groups on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt; &lt;p&gt;Takes as input a comma-separated (CSV) import file indicated in &lt;b&gt;- -data-binary&lt;/b&gt; option. Output can be written to a file specified by &lt;b&gt;- -output&lt;/b&gt; option, or to standard output if the output option is not provided. Requirements for the import file:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;No headers (first line is the first record)&lt;/li&gt;&lt;li&gt;Col1: user/group ID&lt;/li&gt;&lt;li&gt;Col2: Application permission. Values: &lt;b&gt;db_access&lt;/b&gt;, &lt;b&gt;db_update&lt;/b&gt;, &lt;b&gt;db_manager&lt;/b&gt;, or &lt;b&gt;app_manager&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Col3 (optional, Boolean) Is the ID a group? true|false (default false)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;Sample import.csv  file:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;User1,app_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;User2,db_manager,false&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Group1,db_access,true&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1072,7 +1072,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Provision User or Group &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Provision Application Role to User or Group &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1086,7 +1086,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Provision User or Group &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Provision Application Role to User or Group &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1177,7 +1177,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Provision User or Group &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Provision Application Role to User or Group &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1192,7 +1192,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Provision User or Group &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Provision Application Role to User or Group &lt;p&gt;Provisions a single user or group on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1285,7 +1285,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Search Application Provisioning &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Search Application Role Provisioning &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1302,7 +1302,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Search Application Provisioning &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Search Application Role Provisioning &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1403,7 +1403,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Search Application Provisioning &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Search Application Role Provisioning &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1421,7 +1421,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Search Application Provisioning &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
+        /// Search Application Role Provisioning &lt;p&gt;Search for provisioning information on the specified application.&lt;/p&gt; &lt;p&gt;If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>

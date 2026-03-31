@@ -71,21 +71,21 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Row'
-        /// </summary>
-        [Fact]
-        public void RowTest()
-        {
-            // TODO unit test for the property 'Row'
-        }
-
-        /// <summary>
         /// Test the property 'Column'
         /// </summary>
         [Fact]
         public void ColumnTest()
         {
             // TODO unit test for the property 'Column'
+        }
+
+        /// <summary>
+        /// Test the property 'Row'
+        /// </summary>
+        [Fact]
+        public void RowTest()
+        {
+            // TODO unit test for the property 'Row'
         }
 
         /// <summary>

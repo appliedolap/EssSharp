@@ -9,7 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DatabaseSettingsStatisticsGetCachesSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcachessettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/caches | Get Cache Settings |
 | [**DatabaseSettingsStatisticsGetCalculationSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcalculationsettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/calculation | Get Calculation Settings |
 | [**DatabaseSettingsStatisticsGetCompressSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcompresssettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/compression | Get Compression Settings |
-| [**DatabaseSettingsStatisticsGetCompressionInfoSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcompressioninfosettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/compressioninfo | Get Compression Settings |
+| [**DatabaseSettingsStatisticsGetCompressionInfoSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetcompressioninfosettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/compressioninfo | Get ASO Compression Info |
 | [**DatabaseSettingsStatisticsGetOutlineAttributesSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetoutlineattributessettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/outline/attributes | Get Attribute Settings |
 | [**DatabaseSettingsStatisticsGetOutlineSettings**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetoutlinesettings) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/outline | Get Outline Settings |
 | [**DatabaseSettingsStatisticsGetOutlineSettingsDateFormats**](DatabaseSettingsAndStatisticsApi.md#databasesettingsstatisticsgetoutlinesettingsdateformats) | **GET** /applications/{applicationName}/databases/{databaseName}/settings/outline/dateformats | Get Date Formats |
@@ -29,7 +29,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Export Query Tracking
 
-Export query data from an aggregate storage database to a text file. To do this operation query tracking must be enabled for given aggregate storage database.
+<p>Export query data from an aggregate storage (ASO) database to a text file. Essbase tracks query data to optimize aggregate views based on usage.</p><p>When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.</p> <p>To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use <a href=\"./op-applications-applicationname-databases-databasename-settings-get.html\">Get General Settings</a> and ensure that <code>queryTracking</code> is <b>true</b>.</p>
 
 ### Example
 ```csharp
@@ -54,9 +54,9 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new DatabaseSettingsAndStatisticsApi(config);
-            var applicationName = "applicationName_example";  // string | Application name
-            var databaseName = "databaseName_example";  // string | Database name
-            var body = new QueryTrackingInputs(); // QueryTrackingInputs | File Name
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var body = new QueryTrackingInputs(); // QueryTrackingInputs | <p>File name.</p>
 
             try
             {
@@ -95,9 +95,9 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **applicationName** | **string** | Application name |  |
-| **databaseName** | **string** | Database name |  |
-| **body** | [**QueryTrackingInputs**](QueryTrackingInputs.md) | File Name |  |
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **body** | [**QueryTrackingInputs**](QueryTrackingInputs.md) | &lt;p&gt;File name.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -116,9 +116,9 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Query data exported successfully. |  -  |
-| **400** | Fails to export query data. |  -  |
-| **500** | Internal server error. |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Query data  exported successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to export query data.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -530,9 +530,9 @@ catch (ApiException e)
 # **DatabaseSettingsStatisticsGetCompressionInfoSettings**
 > CompressionInfoOutput DatabaseSettingsStatisticsGetCompressionInfoSettings (string applicationName, string databaseName, bool? fetch = null)
 
-Get Compression Settings
+Get ASO Compression Info
 
-<p>Returns compression settings of the specified database.</p>
+<p>Returns estimated compression information for the ASO cube when different dimensions are hypothetically used as the compression dimension. These estimates can help you choose the best dimension to use as the compression dimension.</p><p>If you include query parameter <code>fetch=true</code>, this API initiates an internal system job which evaluates the whole cube in terms of ASO compression. To monitor the job progress, you can use <a href=\"./op-jobs-get.html\">Get Job List</a>. The job type is listed as <b>ASO Compression information</b>, and the job stores the compression information. This job is not available to rerun. When any user calls this API without the <code>fetch=true</code> parameter, the result is retrieved from the stored system job. To re-evaluate the cube for ASO compression information, call the API again with <code>fetch=true</code>.</p><br><table><tr><th>Column Name</th><th>Description</th></tr><tr><td><strong>dimensionName</strong></td><td>Each dimension name in the cube, hypothetically considered to be the compression dimension.</td></tr><tr><td><strong>isCompression</strong></td><td>Indicates whether the dimension is the ASO compression dimension. There can be only one compression dimension in an ASO cube.</td></tr><tr><td><strong>storedLevel0Members</strong></td><td>The number of leaf-level members in the dimension. A large number of stored  level-0 members in a dimension indicates that it may not perform well as a compression dimension.</td></tr><tr><td><strong>averageBundleFill</strong></td><td>Estimated average number of values per compression dimension bundle. Choosing a  compression dimension that has a higher average bundle fill means that the cube compresses better.</td></tr><tr><td><strong>averageValueLength</strong></td><td>Estimated average number of bytes required to store a value. Dimensions with a  smaller average value length compress the cube better.</td></tr><tr><td><strong>level0MB</strong></td><td>Estimated size of the compressed cube, in megabytes. A smaller expected level-0 size indicates that choosing this dimension enables better compression.<br><br>Except for the scenario in which there is no compression dimension (<i>No Compression Dimension</i>), all estimates assume that all pages are compressed. As compressed pages require additional overhead that uncompressed pages do not, the estimated level-0 cube size for some dimensions may be larger than the value for <i>No Compression Dimension</i>.</td></tr></table>
 
 ### Example
 ```csharp
@@ -558,12 +558,12 @@ namespace Example
 
             var apiInstance = new DatabaseSettingsAndStatisticsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var fetch = false;  // bool? | <p>Set it to true, if you need to re-evaluate compression info. Default is false</p> (optional)  (default to false)
+            var databaseName = "databaseName_example";  // string | <p>Database (cube) name.</p>
+            var fetch = false;  // bool? | <p>Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.</p> (optional)  (default to false)
 
             try
             {
-                // Get Compression Settings
+                // Get ASO Compression Info
                 CompressionInfoOutput result = apiInstance.DatabaseSettingsStatisticsGetCompressionInfoSettings(applicationName, databaseName, fetch);
                 Debug.WriteLine(result);
             }
@@ -584,7 +584,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Compression Settings
+    // Get ASO Compression Info
     ApiResponse<CompressionInfoOutput> response = apiInstance.DatabaseSettingsStatisticsGetCompressionInfoSettingsWithHttpInfo(applicationName, databaseName, fetch);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -603,8 +603,8 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **fetch** | **bool?** | &lt;p&gt;Set it to true, if you need to re-evaluate compression info. Default is false&lt;/p&gt; | [optional] [default to false] |
+| **databaseName** | **string** | &lt;p&gt;Database (cube) name.&lt;/p&gt; |  |
+| **fetch** | **bool?** | &lt;p&gt;Set fetch parameter to true if you need to re-evaluate compression info. The default value is false.&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
 
@@ -1558,7 +1558,7 @@ catch (ApiException e)
 
 Import Query Tracking
 
-Import query data, which was previously exported from an aggregate storage database to a text file, to an aggregate storage database. To do this operation query tracking must be enabled for given aggregate storage database.
+<p>Import query tracking data from a text file to an Essbase aggregate storage (ASO) database. Essbase tracks query data to optimize aggregate views based on usage.</p><p>When an ASO cube is refreshed or restarted, query data is not persisted. As an optimization technique, before refreshing or restarting, you can export query tracking data to a text file. To rebuild aggregate views after a refresh or restart, import the query tracking data from the text file. Essbase uses the query data to select the most appropriate set of aggregate views to materialize.</p> <p>To perform this operation, query tracking must be enabled for the current ASO cube. Query tracking is enabled by default.  To ensure that query tracking is enabled, use <a href=\"./op-applications-applicationname-databases-databasename-settings-get.html\">Get General Settings</a> and ensure that <code>queryTracking</code> is <b>true</b>.</p>
 
 ### Example
 ```csharp
@@ -1583,9 +1583,9 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new DatabaseSettingsAndStatisticsApi(config);
-            var applicationName = "applicationName_example";  // string | Application name
-            var databaseName = "databaseName_example";  // string | Database name
-            var body = new QueryTrackingInputs(); // QueryTrackingInputs | File Name
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var body = new QueryTrackingInputs(); // QueryTrackingInputs | <p>File name.</p>
 
             try
             {
@@ -1624,9 +1624,9 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **applicationName** | **string** | Application name |  |
-| **databaseName** | **string** | Database name |  |
-| **body** | [**QueryTrackingInputs**](QueryTrackingInputs.md) | File Name |  |
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **body** | [**QueryTrackingInputs**](QueryTrackingInputs.md) | &lt;p&gt;File name.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -1645,9 +1645,9 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Query data imported successfully. |  -  |
-| **400** | Fails to import query data. |  -  |
-| **500** | Internal server error. |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Query data imported successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to import query data.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1657,7 +1657,7 @@ void (empty response body)
 
 Update Outline Settings
 
-<p>Updates the outline settings of the specified database.</p>
+<p>Updates the outline settings of the specified database. This operation has limited capacity. For more outline update options, refer to the <b>otlUpdate</b> action in <a href=\"./op-applications-application-databases-database-boe-post.html\">Run Batch Outline Edit</a> API.</p>
 
 ### Example
 ```csharp

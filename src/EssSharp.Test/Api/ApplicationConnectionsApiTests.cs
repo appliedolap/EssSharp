@@ -116,7 +116,8 @@ namespace EssSharp.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //string applicationName = null;
             //Connection body = null;
-            //instance.ApplicationConnectionsTestConnection(applicationName, body);
+            //bool? validateName = null;
+            //instance.ApplicationConnectionsTestConnection(applicationName, body, validateName);
         }
 
         /// <summary>

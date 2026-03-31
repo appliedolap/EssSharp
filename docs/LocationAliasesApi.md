@@ -7,7 +7,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**LocationAliasesCreate**](LocationAliasesApi.md#locationaliasescreate) | **POST** /applications/{applicationName}/databases/{databaseName}/locationaliases | Create Location Alias |
 | [**LocationAliasesDelete**](LocationAliasesApi.md#locationaliasesdelete) | **DELETE** /applications/{applicationName}/databases/{databaseName}/locationaliases/{aliasName} | Delete Location Alias |
 | [**LocationAliasesGetLocationAlias**](LocationAliasesApi.md#locationaliasesgetlocationalias) | **GET** /applications/{applicationName}/databases/{databaseName}/locationaliases/{aliasName} | Get Location Alias |
-| [**LocationAliasesGetLocationAliases**](LocationAliasesApi.md#locationaliasesgetlocationaliases) | **GET** /applications/{applicationName}/databases/{databaseName}/locationaliases | Get Location Alias |
+| [**LocationAliasesGetLocationAliases**](LocationAliasesApi.md#locationaliasesgetlocationaliases) | **GET** /applications/{applicationName}/databases/{databaseName}/locationaliases | Get Location Aliases |
 | [**LocationAliasesUpdate**](LocationAliasesApi.md#locationaliasesupdate) | **PATCH** /applications/{applicationName}/databases/{databaseName}/locationaliases/{aliasName} | Update Location Alias |
 
 <a id="locationaliasescreate"></a>
@@ -16,7 +16,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Create Location Alias
 
-<p>Creates a new location alias in the given application and database.</p>
+<p>Create a new location alias in the given application and database (cube).</p> <p>A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.</p>
 
 ### Example
 ```csharp
@@ -41,9 +41,9 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new LocationAliasesApi(config);
-            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var body = new LocationAliasBean(); // LocationAliasBean | <p>Location alias details.</p>
+            var applicationName = "applicationName_example";  // string | <p>Application name for the database/cube to which the location alias refers.</p>
+            var databaseName = "databaseName_example";  // string | <p>Name of the database to which the location alias refers.</p>
+            var body = new LocationAliasBean(); // LocationAliasBean | <p>Location alias definition details.</p>
 
             try
             {
@@ -82,9 +82,9 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **body** | [**LocationAliasBean**](LocationAliasBean.md) | &lt;p&gt;Location alias details.&lt;/p&gt; |  |
+| **applicationName** | **string** | &lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt; |  |
+| **body** | [**LocationAliasBean**](LocationAliasBean.md) | &lt;p&gt;Location alias definition details.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -315,9 +315,9 @@ catch (ApiException e)
 # **LocationAliasesGetLocationAliases**
 > LocationAliasList LocationAliasesGetLocationAliases (string applicationName, string databaseName, int? offset = null, int? limit = null, string serverName = null, string applicationName2 = null, string databaseName2 = null)
 
-Get Location Alias
+Get Location Aliases
 
-Get Location Alias
+<p>Gets details about location aliases defined on the database.</p>
 
 ### Example
 ```csharp
@@ -352,7 +352,7 @@ namespace Example
 
             try
             {
-                // Get Location Alias
+                // Get Location Aliases
                 LocationAliasList result = apiInstance.LocationAliasesGetLocationAliases(applicationName, databaseName, offset, limit, serverName, applicationName2, databaseName2);
                 Debug.WriteLine(result);
             }
@@ -373,7 +373,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Location Alias
+    // Get Location Aliases
     ApiResponse<LocationAliasList> response = apiInstance.LocationAliasesGetLocationAliasesWithHttpInfo(applicationName, databaseName, offset, limit, serverName, applicationName2, databaseName2);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -416,7 +416,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Location alias returned successfully.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Location aliases returned successfully.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to get location alias details.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
@@ -453,8 +453,8 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new LocationAliasesApi(config);
-            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var applicationName = "applicationName_example";  // string | <p>Application name for the database/cube to which the location alias refers.</p>
+            var databaseName = "databaseName_example";  // string | <p>Name of the database to which the location alias refers.</p>
             var aliasName = "aliasName_example";  // string | <p>Location alias name.</p>
             var body = new LocationAliasBean(); // LocationAliasBean | <p>Location alias details.</p>
 
@@ -495,8 +495,8 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **applicationName** | **string** | &lt;p&gt;Application name for the database/cube to which the location alias refers.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Name of the database to which the location alias refers.&lt;/p&gt; |  |
 | **aliasName** | **string** | &lt;p&gt;Location alias name.&lt;/p&gt; |  |
 | **body** | [**LocationAliasBean**](LocationAliasBean.md) | &lt;p&gt;Location alias details.&lt;/p&gt; |  |
 

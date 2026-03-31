@@ -4,18 +4,18 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**ServiceRoleProvisioningDeprovision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningdeprovision) | **DELETE** /permissions/{id} | Deprovision |
-| [**ServiceRoleProvisioningGetProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioninggetprovision) | **GET** /permissions/{id} | Get Provision |
-| [**ServiceRoleProvisioningProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningprovision) | **PUT** /permissions/{id} | Provision User or Group |
-| [**ServiceRoleProvisioningSearchProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningsearchprovision) | **GET** /permissions | Search Provision |
+| [**ServiceRoleProvisioningDeprovision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningdeprovision) | **DELETE** /permissions/{id} | Deprovision Service Role |
+| [**ServiceRoleProvisioningGetProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioninggetprovision) | **GET** /permissions/{id} | Get Service Role Provision |
+| [**ServiceRoleProvisioningProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningprovision) | **PUT** /permissions/{id} | Provision Service Role |
+| [**ServiceRoleProvisioningSearchProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningsearchprovision) | **GET** /permissions | Search Service Role Provisioning |
 
 <a id="serviceroleprovisioningdeprovision"></a>
 # **ServiceRoleProvisioningDeprovision**
 > void ServiceRoleProvisioningDeprovision (string id, bool? group = null)
 
-Deprovision
+Deprovision Service Role
 
-<p>Deprovisions a single user or group from a service role.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Deprovisions a single user from an Essbase service role. Service roles include Service Administrator, Power User, and User.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p><p>To deprovision a group, you can use <a href=\"./op-groups-id-delete.html\">Delete Group</a></p><p>See Also: <a href=\"./op-applications-app-permissions-id-delete.html\">Deprovision User or Group from Application</a>.</p>
 
 ### Example
 ```csharp
@@ -40,12 +40,12 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new ServiceRoleProvisioningApi(config);
-            var id = "id_example";  // string | <p>User or group ID.</p>
+            var id = "id_example";  // string | <p>User ID.</p>
             var group = false;  // bool? | <p>If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)</p> (optional)  (default to false)
 
             try
             {
-                // Deprovision
+                // Deprovision Service Role
                 apiInstance.ServiceRoleProvisioningDeprovision(id, group);
             }
             catch (ApiException  e)
@@ -65,7 +65,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Deprovision
+    // Deprovision Service Role
     apiInstance.ServiceRoleProvisioningDeprovisionWithHttpInfo(id, group);
 }
 catch (ApiException e)
@@ -80,7 +80,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **id** | **string** | &lt;p&gt;User or group ID.&lt;/p&gt; |  |
+| **id** | **string** | &lt;p&gt;User ID.&lt;/p&gt; |  |
 | **group** | **bool?** | &lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
@@ -110,9 +110,9 @@ void (empty response body)
 # **ServiceRoleProvisioningGetProvision**
 > UserGroupProvisionInfo ServiceRoleProvisioningGetProvision (string id, bool? group = null)
 
-Get Provision
+Get Service Role Provision
 
-<p>Gets service role provisioning information.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p> <p>See Also: <a href=\"./op-applications-app-permissions-id-get.html\">Get Application Role Provision</a>.</p>
 
 ### Example
 ```csharp
@@ -142,7 +142,7 @@ namespace Example
 
             try
             {
-                // Get Provision
+                // Get Service Role Provision
                 UserGroupProvisionInfo result = apiInstance.ServiceRoleProvisioningGetProvision(id, group);
                 Debug.WriteLine(result);
             }
@@ -163,7 +163,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Provision
+    // Get Service Role Provision
     ApiResponse<UserGroupProvisionInfo> response = apiInstance.ServiceRoleProvisioningGetProvisionWithHttpInfo(id, group);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -211,9 +211,9 @@ catch (ApiException e)
 # **ServiceRoleProvisioningProvision**
 > void ServiceRoleProvisioningProvision (string id, UserGroupProvisionInfo body = null)
 
-Provision User or Group
+Provision Service Role
 
-<p>Provisions a single user or group for a service role.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Provisions a single user or group for an Essbase service role. Service roles include Service Administrator, Power User, and User.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp
@@ -243,7 +243,7 @@ namespace Example
 
             try
             {
-                // Provision User or Group
+                // Provision Service Role
                 apiInstance.ServiceRoleProvisioningProvision(id, body);
             }
             catch (ApiException  e)
@@ -263,7 +263,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Provision User or Group
+    // Provision Service Role
     apiInstance.ServiceRoleProvisioningProvisionWithHttpInfo(id, body);
 }
 catch (ApiException e)
@@ -309,9 +309,9 @@ void (empty response body)
 # **ServiceRoleProvisioningSearchProvision**
 > UserGroupProvisionInfoList ServiceRoleProvisioningSearchProvision (string id = null, string role = null, string filter = null, int? page = null)
 
-Search Provision
+Search Service Role Provisioning
 
-<p>Search for provisioning information.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Search for Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p> <p>See Also: <a href=\"./op-applications-app-permissions-get.html\">Search Application Role Provisioning</a>.</p>
 
 ### Example
 ```csharp
@@ -343,7 +343,7 @@ namespace Example
 
             try
             {
-                // Search Provision
+                // Search Service Role Provisioning
                 UserGroupProvisionInfoList result = apiInstance.ServiceRoleProvisioningSearchProvision(id, role, filter, page);
                 Debug.WriteLine(result);
             }
@@ -364,7 +364,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Search Provision
+    // Search Service Role Provisioning
     ApiResponse<UserGroupProvisionInfoList> response = apiInstance.ServiceRoleProvisioningSearchProvisionWithHttpInfo(id, role, filter, page);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

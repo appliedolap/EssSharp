@@ -26,7 +26,7 @@ namespace EssSharp.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Add Permissions
+        /// Add Permissions in Filter
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
@@ -41,7 +41,7 @@ namespace EssSharp.Api
         UserGroupProvisionInfo FiltersAddFilterPermission(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0);
 
         /// <summary>
-        /// Add Permissions
+        /// Add Permissions in Filter
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
@@ -63,7 +63,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Filter copy details</param>
+        /// <param name="body">&lt;p&gt;Filter copy details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>FilterBean</returns>
         FilterBean FiltersCopyFilter(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0);
@@ -77,7 +77,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Filter copy details</param>
+        /// <param name="body">&lt;p&gt;Filter copy details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of FilterBean</returns>
         ApiResponse<FilterBean> FiltersCopyFilterWithHttpInfo(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0);
@@ -85,7 +85,7 @@ namespace EssSharp.Api
         /// Create Filter
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates the filter in the specified application and database and returns the created filter&lt;/p&gt;
+        /// &lt;p&gt;Creates a filter in the specified application and database, and returns the created filter.&lt;/p&gt;&lt;p&gt;Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -99,7 +99,7 @@ namespace EssSharp.Api
         /// Create Filter
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates the filter in the specified application and database and returns the created filter&lt;/p&gt;
+        /// &lt;p&gt;Creates a filter in the specified application and database, and returns the created filter.&lt;/p&gt;&lt;p&gt;Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -271,7 +271,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of List&lt;FilterList&gt;</returns>
         ApiResponse<List<FilterList>> FiltersListFiltersWithHttpInfo(string applicationName, string databaseName, int operationIndex = 0);
         /// <summary>
-        /// Delete Permission
+        /// Delete Permission from Filter 
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
@@ -287,7 +287,7 @@ namespace EssSharp.Api
         void FiltersRemoveFilterPermission(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0);
 
         /// <summary>
-        /// Delete Permission
+        /// Delete Permission from Filter 
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
@@ -329,7 +329,7 @@ namespace EssSharp.Api
         /// <returns>ApiResponse of FilterBean</returns>
         ApiResponse<FilterBean> FiltersRenameFilterWithHttpInfo(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0);
         /// <summary>
-        /// Edit Permissions
+        /// Replace Filter Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
@@ -344,7 +344,7 @@ namespace EssSharp.Api
         UserGroupProvisionInfo FiltersReplaceFilterPermission(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0);
 
         /// <summary>
-        /// Edit Permissions
+        /// Replace Filter Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
@@ -394,7 +394,7 @@ namespace EssSharp.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Add Permissions
+        /// Add Permissions in Filter
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
@@ -410,7 +410,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersAddFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfo body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Add Permissions
+        /// Add Permissions in Filter
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
@@ -433,7 +433,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Filter copy details</param>
+        /// <param name="body">&lt;p&gt;Filter copy details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
@@ -448,7 +448,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Filter copy details</param>
+        /// <param name="body">&lt;p&gt;Filter copy details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
@@ -457,7 +457,7 @@ namespace EssSharp.Api
         /// Create Filter
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates the filter in the specified application and database and returns the created filter&lt;/p&gt;
+        /// &lt;p&gt;Creates a filter in the specified application and database, and returns the created filter.&lt;/p&gt;&lt;p&gt;Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -472,7 +472,7 @@ namespace EssSharp.Api
         /// Create Filter
         /// </summary>
         /// <remarks>
-        /// &lt;p&gt;Creates the filter in the specified application and database and returns the created filter&lt;/p&gt;
+        /// &lt;p&gt;Creates a filter in the specified application and database, and returns the created filter.&lt;/p&gt;&lt;p&gt;Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.&lt;/p&gt;
         /// </remarks>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -657,7 +657,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (List&lt;FilterList&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<FilterList>>> FiltersListFiltersWithHttpInfoAsync(string applicationName, string databaseName, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Delete Permission
+        /// Delete Permission from Filter 
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
@@ -674,7 +674,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task FiltersRemoveFilterPermissionAsync(string applicationName, string databaseName, string filterName, string userGroupId, bool group, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Delete Permission
+        /// Delete Permission from Filter 
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
@@ -719,7 +719,7 @@ namespace EssSharp.Api
         /// <returns>Task of ApiResponse (FilterBean)</returns>
         System.Threading.Tasks.Task<ApiResponse<FilterBean>> FiltersRenameFilterWithHttpInfoAsync(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Edit Permissions
+        /// Replace Filter Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
@@ -735,7 +735,7 @@ namespace EssSharp.Api
         System.Threading.Tasks.Task<UserGroupProvisionInfo> FiltersReplaceFilterPermissionAsync(string applicationName, string databaseName, string filterName, UserGroupProvisionInfoList body, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Edit Permissions
+        /// Replace Filter Permissions
         /// </summary>
         /// <remarks>
         /// &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
@@ -899,7 +899,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Add Permissions &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
+        /// Add Permissions in Filter &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -915,7 +915,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Add Permissions &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
+        /// Add Permissions in Filter &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1022,7 +1022,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Add Permissions &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
+        /// Add Permissions in Filter &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1039,7 +1039,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Add Permissions &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
+        /// Add Permissions in Filter &lt;p&gt;Adds permissions, in the named filter, for the named user or group.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1153,7 +1153,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Filter copy details</param>
+        /// <param name="body">&lt;p&gt;Filter copy details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>FilterBean</returns>
         public FilterBean FiltersCopyFilter(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0)
@@ -1168,7 +1168,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Filter copy details</param>
+        /// <param name="body">&lt;p&gt;Filter copy details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of FilterBean</returns>
         public EssSharp.Client.ApiResponse<FilterBean> FiltersCopyFilterWithHttpInfo(string applicationName, string databaseName, FilterCopy body, int operationIndex = 0)
@@ -1267,7 +1267,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Filter copy details</param>
+        /// <param name="body">&lt;p&gt;Filter copy details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of FilterBean</returns>
@@ -1283,7 +1283,7 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database name.&lt;/p&gt;</param>
-        /// <param name="body">Filter copy details</param>
+        /// <param name="body">&lt;p&gt;Filter copy details.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (FilterBean)</returns>
@@ -1379,7 +1379,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Filter &lt;p&gt;Creates the filter in the specified application and database and returns the created filter&lt;/p&gt;
+        /// Create Filter &lt;p&gt;Creates a filter in the specified application and database, and returns the created filter.&lt;/p&gt;&lt;p&gt;Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1394,7 +1394,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Filter &lt;p&gt;Creates the filter in the specified application and database and returns the created filter&lt;/p&gt;
+        /// Create Filter &lt;p&gt;Creates a filter in the specified application and database, and returns the created filter.&lt;/p&gt;&lt;p&gt;Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1493,7 +1493,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Filter &lt;p&gt;Creates the filter in the specified application and database and returns the created filter&lt;/p&gt;
+        /// Create Filter &lt;p&gt;Creates a filter in the specified application and database, and returns the created filter.&lt;/p&gt;&lt;p&gt;Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -1509,7 +1509,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Create Filter &lt;p&gt;Creates the filter in the specified application and database and returns the created filter&lt;/p&gt;
+        /// Create Filter &lt;p&gt;Creates a filter in the specified application and database, and returns the created filter.&lt;/p&gt;&lt;p&gt;Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2970,7 +2970,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Permission &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
+        /// Delete Permission from Filter  &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -2986,7 +2986,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Permission &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
+        /// Delete Permission from Filter  &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3091,7 +3091,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Permission &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
+        /// Delete Permission from Filter  &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3108,7 +3108,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Delete Permission &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
+        /// Delete Permission from Filter  &lt;p&gt;Removes permissions from a filter for the specified user or group.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3446,7 +3446,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Edit Permissions &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
+        /// Replace Filter Permissions &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3462,7 +3462,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Edit Permissions &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
+        /// Replace Filter Permissions &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3569,7 +3569,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Edit Permissions &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
+        /// Replace Filter Permissions &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>
@@ -3586,7 +3586,7 @@ namespace EssSharp.Api
         }
 
         /// <summary>
-        /// Edit Permissions &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
+        /// Replace Filter Permissions &lt;p&gt;Replaces all the users and groups assigned to the filter with a new list of users and groups.&lt;/p&gt;
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name.&lt;/p&gt;</param>

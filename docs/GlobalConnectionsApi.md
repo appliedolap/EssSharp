@@ -4,22 +4,23 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GlobalConnectionsCreateConnection**](GlobalConnectionsApi.md#globalconnectionscreateconnection) | **POST** /connections | Create Connection |
-| [**GlobalConnectionsDeleteConnection**](GlobalConnectionsApi.md#globalconnectionsdeleteconnection) | **DELETE** /connections/{connectionName} | Delete Connection |
-| [**GlobalConnectionsGetConnectionDetails**](GlobalConnectionsApi.md#globalconnectionsgetconnectiondetails) | **GET** /connections/{connectionName} | Get Connection |
-| [**GlobalConnectionsGetConnections**](GlobalConnectionsApi.md#globalconnectionsgetconnections) | **GET** /connections | List Connections |
-| [**GlobalConnectionsTestConnection**](GlobalConnectionsApi.md#globalconnectionstestconnection) | **POST** /connections/actions/test | Test New Connection |
-| [**GlobalConnectionsTestConnectionExisting**](GlobalConnectionsApi.md#globalconnectionstestconnectionexisting) | **POST** /connections/{connectionName}/actions/test | Test Saved Connection |
-| [**GlobalConnectionsUpdateConnection**](GlobalConnectionsApi.md#globalconnectionsupdateconnection) | **PUT** /connections/{connectionName} | Update Connection |
-| [**GlobalConnectionsWallets**](GlobalConnectionsApi.md#globalconnectionswallets) | **PUT** /connections/{connectionName}/wallet | Upload Connection Wallet File |
+| [**GlobalConnectionsCreateConnection**](GlobalConnectionsApi.md#globalconnectionscreateconnection) | **POST** /connections | Create Global Connection |
+| [**GlobalConnectionsDeleteConnection**](GlobalConnectionsApi.md#globalconnectionsdeleteconnection) | **DELETE** /connections/{connectionName} | Delete Global Connection |
+| [**GlobalConnectionsDependantconnections**](GlobalConnectionsApi.md#globalconnectionsdependantconnections) | **GET** /connections/{connection}/getdependentconnections | List dependamt connection names |
+| [**GlobalConnectionsGetConnectionDetails**](GlobalConnectionsApi.md#globalconnectionsgetconnectiondetails) | **GET** /connections/{connectionName} | Get Global Connection |
+| [**GlobalConnectionsGetConnections**](GlobalConnectionsApi.md#globalconnectionsgetconnections) | **GET** /connections | List Global Connections |
+| [**GlobalConnectionsTestConnection**](GlobalConnectionsApi.md#globalconnectionstestconnection) | **POST** /connections/actions/test | Test New Global Connection |
+| [**GlobalConnectionsTestConnectionExisting**](GlobalConnectionsApi.md#globalconnectionstestconnectionexisting) | **POST** /connections/{connectionName}/actions/test | Test Saved Global Connection |
+| [**GlobalConnectionsUpdateConnection**](GlobalConnectionsApi.md#globalconnectionsupdateconnection) | **PUT** /connections/{connectionName} | Update Global Connection |
+| [**GlobalConnectionsWallets**](GlobalConnectionsApi.md#globalconnectionswallets) | **PUT** /connections/{connectionName}/wallet | Upload Global Connection Wallet File |
 
 <a id="globalconnectionscreateconnection"></a>
 # **GlobalConnectionsCreateConnection**
 > void GlobalConnectionsCreateConnection (Connection body)
 
-Create Connection
+Create Global Connection
 
-<p>Creates a connection based on specified inputs. <code>name</code> and <code>type</code> are required inputs for all types of connections. Other required inputs differ based on the type of connection.</p>
+<p>Creates a connection based on specified inputs. <code>name</code> and <code>type</code> are required inputs for all types of connections. Other required inputs differ based on the type of connection.</p><p>If you are creating a connection to Autonomous Data Warehouse, see also <a href=\"./op-connections-connectionname-wallet-put.html\">Upload Connection Wallet File</a>.</p>
 
 ### Example
 ```csharp
@@ -48,7 +49,7 @@ namespace Example
 
             try
             {
-                // Create Connection
+                // Create Global Connection
                 apiInstance.GlobalConnectionsCreateConnection(body);
             }
             catch (ApiException  e)
@@ -68,7 +69,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create Connection
+    // Create Global Connection
     apiInstance.GlobalConnectionsCreateConnectionWithHttpInfo(body);
 }
 catch (ApiException e)
@@ -111,7 +112,7 @@ void (empty response body)
 # **GlobalConnectionsDeleteConnection**
 > void GlobalConnectionsDeleteConnection (string connectionName)
 
-Delete Connection
+Delete Global Connection
 
 <p>Deletes a named global connection.</p>
 
@@ -142,7 +143,7 @@ namespace Example
 
             try
             {
-                // Delete Connection
+                // Delete Global Connection
                 apiInstance.GlobalConnectionsDeleteConnection(connectionName);
             }
             catch (ApiException  e)
@@ -162,7 +163,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete Connection
+    // Delete Global Connection
     apiInstance.GlobalConnectionsDeleteConnectionWithHttpInfo(connectionName);
 }
 catch (ApiException e)
@@ -201,11 +202,102 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="globalconnectionsdependantconnections"></a>
+# **GlobalConnectionsDependantconnections**
+> void GlobalConnectionsDependantconnections (string connection)
+
+List dependamt connection names
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class GlobalConnectionsDependantconnectionsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new GlobalConnectionsApi(config);
+            var connection = "connection_example";  // string | 
+
+            try
+            {
+                // List dependamt connection names
+                apiInstance.GlobalConnectionsDependantconnections(connection);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling GlobalConnectionsApi.GlobalConnectionsDependantconnections: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the GlobalConnectionsDependantconnectionsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List dependamt connection names
+    apiInstance.GlobalConnectionsDependantconnectionsWithHttpInfo(connection);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling GlobalConnectionsApi.GlobalConnectionsDependantconnectionsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **connection** | **string** |  |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="globalconnectionsgetconnectiondetails"></a>
 # **GlobalConnectionsGetConnectionDetails**
 > Connection GlobalConnectionsGetConnectionDetails (string connectionName, bool? password = null)
 
-Get Connection
+Get Global Connection
 
 <p>Returns details about the specified global connection.</p>
 
@@ -237,7 +329,7 @@ namespace Example
 
             try
             {
-                // Get Connection
+                // Get Global Connection
                 Connection result = apiInstance.GlobalConnectionsGetConnectionDetails(connectionName, password);
                 Debug.WriteLine(result);
             }
@@ -258,7 +350,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Connection
+    // Get Global Connection
     ApiResponse<Connection> response = apiInstance.GlobalConnectionsGetConnectionDetailsWithHttpInfo(connectionName, password);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -305,7 +397,7 @@ catch (ApiException e)
 # **GlobalConnectionsGetConnections**
 > ConnectionsList GlobalConnectionsGetConnections (int? offset = null, int? limit = null, string connType = null, bool? repoConn = null, bool? walletConn = null)
 
-List Connections
+List Global Connections
 
 <p>Returns global connections list, including details such as name, description, and type.</p>
 
@@ -340,7 +432,7 @@ namespace Example
 
             try
             {
-                // List Connections
+                // List Global Connections
                 ConnectionsList result = apiInstance.GlobalConnectionsGetConnections(offset, limit, connType, repoConn, walletConn);
                 Debug.WriteLine(result);
             }
@@ -361,7 +453,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List Connections
+    // List Global Connections
     ApiResponse<ConnectionsList> response = apiInstance.GlobalConnectionsGetConnectionsWithHttpInfo(offset, limit, connType, repoConn, walletConn);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -409,9 +501,9 @@ catch (ApiException e)
 
 <a id="globalconnectionstestconnection"></a>
 # **GlobalConnectionsTestConnection**
-> void GlobalConnectionsTestConnection (Connection body)
+> void GlobalConnectionsTestConnection (Connection body, bool? validateName = null)
 
-Test New Connection
+Test New Global Connection
 
 <p>Tests a new or updated global connection, using specified inputs, without saving it.</p>
 
@@ -439,11 +531,12 @@ namespace Example
 
             var apiInstance = new GlobalConnectionsApi(config);
             var body = new Connection(); // Connection | <p>Connection details.</p>
+            var validateName = false;  // bool? | <p>Validate if connection name already exists.</p> (optional)  (default to false)
 
             try
             {
-                // Test New Connection
-                apiInstance.GlobalConnectionsTestConnection(body);
+                // Test New Global Connection
+                apiInstance.GlobalConnectionsTestConnection(body, validateName);
             }
             catch (ApiException  e)
             {
@@ -462,8 +555,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Test New Connection
-    apiInstance.GlobalConnectionsTestConnectionWithHttpInfo(body);
+    // Test New Global Connection
+    apiInstance.GlobalConnectionsTestConnectionWithHttpInfo(body, validateName);
 }
 catch (ApiException e)
 {
@@ -478,6 +571,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **body** | [**Connection**](Connection.md) | &lt;p&gt;Connection details.&lt;/p&gt; |  |
+| **validateName** | **bool?** | &lt;p&gt;Validate if connection name already exists.&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
 
@@ -505,7 +599,7 @@ void (empty response body)
 # **GlobalConnectionsTestConnectionExisting**
 > void GlobalConnectionsTestConnectionExisting (string connectionName)
 
-Test Saved Connection
+Test Saved Global Connection
 
 <p>Tests a saved global connection by name.</p>
 
@@ -536,7 +630,7 @@ namespace Example
 
             try
             {
-                // Test Saved Connection
+                // Test Saved Global Connection
                 apiInstance.GlobalConnectionsTestConnectionExisting(connectionName);
             }
             catch (ApiException  e)
@@ -556,7 +650,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Test Saved Connection
+    // Test Saved Global Connection
     apiInstance.GlobalConnectionsTestConnectionExistingWithHttpInfo(connectionName);
 }
 catch (ApiException e)
@@ -599,7 +693,7 @@ void (empty response body)
 # **GlobalConnectionsUpdateConnection**
 > Connection GlobalConnectionsUpdateConnection (string connectionName, Connection body)
 
-Update Connection
+Update Global Connection
 
 <p>Update the named global connection. If the update is successful, returns details about the updated connection. <code>type</code> is a required input for all types of connections. Other required inputs differ based on the type of the connection.</p>
 
@@ -631,7 +725,7 @@ namespace Example
 
             try
             {
-                // Update Connection
+                // Update Global Connection
                 Connection result = apiInstance.GlobalConnectionsUpdateConnection(connectionName, body);
                 Debug.WriteLine(result);
             }
@@ -652,7 +746,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Update Connection
+    // Update Global Connection
     ApiResponse<Connection> response = apiInstance.GlobalConnectionsUpdateConnectionWithHttpInfo(connectionName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -699,7 +793,7 @@ catch (ApiException e)
 # **GlobalConnectionsWallets**
 > WalletLocation GlobalConnectionsWallets (string connectionName)
 
-Upload Connection Wallet File
+Upload Global Connection Wallet File
 
 <p>Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.</p>
 
@@ -730,7 +824,7 @@ namespace Example
 
             try
             {
-                // Upload Connection Wallet File
+                // Upload Global Connection Wallet File
                 WalletLocation result = apiInstance.GlobalConnectionsWallets(connectionName);
                 Debug.WriteLine(result);
             }
@@ -751,7 +845,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Upload Connection Wallet File
+    // Upload Global Connection Wallet File
     ApiResponse<WalletLocation> response = apiInstance.GlobalConnectionsWalletsWithHttpInfo(connectionName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

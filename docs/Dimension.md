@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **AllowPropertyChanges** | **bool** |  | [optional] 
 **AllowUDAChanges** | **bool** |  | [optional] 
 **MeasureOptions** | [**MeasureOptions**](MeasureOptions.md) |  | [optional] 
-**AggregateLevelUsage** | **int** |  | [optional] 
+**AggregateLevelUsage** | **string** |  | [optional] 
 **AddMemberOption** | **string** |  | [optional] 
 **AttributeOptions** | [**AttributeOptions**](AttributeOptions.md) |  | [optional] 
 **ConfigOption** | **string** |  | [optional] 

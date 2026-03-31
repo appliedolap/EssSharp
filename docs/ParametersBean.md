@@ -82,7 +82,9 @@ Name | Type | Description | Notes
 **Filetype** | **string** |  | [optional] 
 **Exportpartitions** | **string** |  | [optional] 
 **Exportfilters** | **string** |  | [optional] 
+**BackupPath** | **string** |  | [optional] 
 **RestEncryPassword** | **string** |  | [optional] 
+**Pivotdimension** | **string** |  | [optional] 
 **CatalogZipPath** | **string** |  | [optional] 
 **Physical** | **string** |  | [optional] 
 

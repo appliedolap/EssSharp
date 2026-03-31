@@ -78,5 +78,14 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'Preferences'
         }
+
+        /// <summary>
+        /// Test the property 'Nlq'
+        /// </summary>
+        [Fact]
+        public void NlqTest()
+        {
+            // TODO unit test for the property 'Nlq'
+        }
     }
 }

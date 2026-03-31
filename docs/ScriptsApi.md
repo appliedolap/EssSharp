@@ -4,25 +4,25 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**ScriptsAddScriptPermission**](ScriptsApi.md#scriptsaddscriptpermission) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/permissions | Add Essbase Script Permissions |
-| [**ScriptsCopyScript**](ScriptsApi.md#scriptscopyscript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/copy | Copy Essbase Script |
+| [**ScriptsAddScriptPermission**](ScriptsApi.md#scriptsaddscriptpermission) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/permissions | Add Calc Script Permissions |
+| [**ScriptsCopyScript**](ScriptsApi.md#scriptscopyscript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/copy | Copy Calc Script |
 | [**ScriptsCreateScript**](ScriptsApi.md#scriptscreatescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts | Create Essbase Script |
-| [**ScriptsDeleteScript**](ScriptsApi.md#scriptsdeletescript) | **DELETE** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName} | Delete Essbase Script |
+| [**ScriptsDeleteScript**](ScriptsApi.md#scriptsdeletescript) | **DELETE** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName} | Delete Calc or MDX Script |
 | [**ScriptsEditScript**](ScriptsApi.md#scriptseditscript) | **PUT** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName} | Update Essbase Script |
 | [**ScriptsGetRTSVsForScripts**](ScriptsApi.md#scriptsgetrtsvsforscripts) | **GET** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/rtsv | Get Essbase Script RTSVs |
-| [**ScriptsGetScript**](ScriptsApi.md#scriptsgetscript) | **GET** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName} | Get Essbase Script |
+| [**ScriptsGetScript**](ScriptsApi.md#scriptsgetscript) | **GET** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName} | Get Calc or MDX Script |
 | [**ScriptsGetScriptContent**](ScriptsApi.md#scriptsgetscriptcontent) | **GET** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content | Get Essbase Script Contents |
 | [**ScriptsGetScriptPermissions**](ScriptsApi.md#scriptsgetscriptpermissions) | **GET** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/permissions | Get Essbase Script Permissions |
-| [**ScriptsListScripts**](ScriptsApi.md#scriptslistscripts) | **GET** /applications/{applicationName}/databases/{databaseName}/scripts | List Essbase Scripts |
-| [**ScriptsRemoveScriptPermission**](ScriptsApi.md#scriptsremovescriptpermission) | **DELETE** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/permissions/{userGroupId} | Remove Essbase Script Permissions |
-| [**ScriptsRenameScript**](ScriptsApi.md#scriptsrenamescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/rename | Rename Essbase Script |
-| [**ScriptsValidateScript**](ScriptsApi.md#scriptsvalidatescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/validate | Validate Essbase Script |
+| [**ScriptsListScripts**](ScriptsApi.md#scriptslistscripts) | **GET** /applications/{applicationName}/databases/{databaseName}/scripts | List Calc or MDX Scripts |
+| [**ScriptsRemoveScriptPermission**](ScriptsApi.md#scriptsremovescriptpermission) | **DELETE** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/permissions/{userGroupId} | Remove Calc Script Permissions |
+| [**ScriptsRenameScript**](ScriptsApi.md#scriptsrenamescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/rename | Rename Calc Script |
+| [**ScriptsValidateScript**](ScriptsApi.md#scriptsvalidatescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/validate | Validate Calc Script |
 
 <a id="scriptsaddscriptpermission"></a>
 # **ScriptsAddScriptPermission**
 > UserGroupProvisionInfo ScriptsAddScriptPermission (string applicationName, string databaseName, string scriptName, UserGroupProvisionInfo body)
 
-Add Essbase Script Permissions
+Add Calc Script Permissions
 
 <p>Adds permissions to the specified script for the specified user or group. Applicable only for calculation scripts.</p>
 
@@ -56,7 +56,7 @@ namespace Example
 
             try
             {
-                // Add Essbase Script Permissions
+                // Add Calc Script Permissions
                 UserGroupProvisionInfo result = apiInstance.ScriptsAddScriptPermission(applicationName, databaseName, scriptName, body);
                 Debug.WriteLine(result);
             }
@@ -77,7 +77,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Add Essbase Script Permissions
+    // Add Calc Script Permissions
     ApiResponse<UserGroupProvisionInfo> response = apiInstance.ScriptsAddScriptPermissionWithHttpInfo(applicationName, databaseName, scriptName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -128,7 +128,7 @@ catch (ApiException e)
 # **ScriptsCopyScript**
 > Script ScriptsCopyScript (string applicationName, string databaseName, ScriptCopy body)
 
-Copy Essbase Script
+Copy Calc Script
 
 <p>Copies the script in the specified application and database and returns the created script. Applicable only for calculation scripts.</p>
 
@@ -161,7 +161,7 @@ namespace Example
 
             try
             {
-                // Copy Essbase Script
+                // Copy Calc Script
                 Script result = apiInstance.ScriptsCopyScript(applicationName, databaseName, body);
                 Debug.WriteLine(result);
             }
@@ -182,7 +182,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Copy Essbase Script
+    // Copy Calc Script
     ApiResponse<Script> response = apiInstance.ScriptsCopyScriptWithHttpInfo(applicationName, databaseName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -338,9 +338,9 @@ catch (ApiException e)
 # **ScriptsDeleteScript**
 > void ScriptsDeleteScript (string applicationName, string databaseName, string scriptName, string file = null)
 
-Delete Essbase Script
+Delete Calc or MDX Script
 
-<p>Deletes the specified script in the specified application and database.</p>
+<p>Deletes the specified calculation or MDX script in the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -367,12 +367,12 @@ namespace Example
             var apiInstance = new ScriptsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var scriptName = "scriptName_example";  // string | <p>Script name.</p>
-            var file = "\"calc\"";  // string | <p>Type of script file.</p> (optional)  (default to "calc")
+            var scriptName = "scriptName_example";  // string | <p>Calc or MDX script name.</p>
+            var file = "\"calc\"";  // string | <p>Type of script file. Supported types are <b>calc</b> (the default), or <b>mdx</b>.</p> (optional)  (default to "calc")
 
             try
             {
-                // Delete Essbase Script
+                // Delete Calc or MDX Script
                 apiInstance.ScriptsDeleteScript(applicationName, databaseName, scriptName, file);
             }
             catch (ApiException  e)
@@ -392,7 +392,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete Essbase Script
+    // Delete Calc or MDX Script
     apiInstance.ScriptsDeleteScriptWithHttpInfo(applicationName, databaseName, scriptName, file);
 }
 catch (ApiException e)
@@ -409,8 +409,8 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **scriptName** | **string** | &lt;p&gt;Script name.&lt;/p&gt; |  |
-| **file** | **string** | &lt;p&gt;Type of script file.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
+| **scriptName** | **string** | &lt;p&gt;Calc or MDX script name.&lt;/p&gt; |  |
+| **file** | **string** | &lt;p&gt;Type of script file. Supported types are &lt;b&gt;calc&lt;/b&gt; (the default), or &lt;b&gt;mdx&lt;/b&gt;.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
 
 ### Return type
 
@@ -650,9 +650,9 @@ catch (ApiException e)
 # **ScriptsGetScript**
 > Script ScriptsGetScript (string applicationName, string databaseName, string scriptName, string file = null)
 
-Get Essbase Script
+Get Calc or MDX Script
 
-<p>Returns the named script from the specified application and database.</p>
+<p>Returns the named calculation or MDX script from the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -684,7 +684,7 @@ namespace Example
 
             try
             {
-                // Get Essbase Script
+                // Get Calc or MDX Script
                 Script result = apiInstance.ScriptsGetScript(applicationName, databaseName, scriptName, file);
                 Debug.WriteLine(result);
             }
@@ -705,7 +705,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Essbase Script
+    // Get Calc or MDX Script
     ApiResponse<Script> response = apiInstance.ScriptsGetScriptWithHttpInfo(applicationName, databaseName, scriptName, file);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -785,7 +785,7 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
             var scriptName = "scriptName_example";  // string | <p>Script name.</p>
-            var file = "\"calc\"";  // string | <p>Type of script file.</p> (optional)  (default to "calc")
+            var file = "\"calc\"";  // string | <p>Type of script file. If omitted, the default is <b>calc</b>. Values can be: <b>calc</b>, <b>mdx</b>, <b>maxl</b>, or <b>report</b>.</p> (optional)  (default to "calc")
 
             try
             {
@@ -831,7 +831,7 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **scriptName** | **string** | &lt;p&gt;Script name.&lt;/p&gt; |  |
-| **file** | **string** | &lt;p&gt;Type of script file.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
+| **file** | **string** | &lt;p&gt;Type of script file. If omitted, the default is &lt;b&gt;calc&lt;/b&gt;. Values can be: &lt;b&gt;calc&lt;/b&gt;, &lt;b&gt;mdx&lt;/b&gt;, &lt;b&gt;maxl&lt;/b&gt;, or &lt;b&gt;report&lt;/b&gt;.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
 
 ### Return type
 
@@ -961,11 +961,11 @@ catch (ApiException e)
 
 <a id="scriptslistscripts"></a>
 # **ScriptsListScripts**
-> ScriptList ScriptsListScripts (string applicationName, string databaseName, string file = null, string keyword = null)
+> ScriptList ScriptsListScripts (string applicationName, string databaseName, string file = null, string orderBy = null, string keyword = null)
 
-List Essbase Scripts
+List Calc or MDX Scripts
 
-<p>Returns all the scripts from the specified application and database.</p>
+<p>Returns calculation or MDX scripts from the specified Essbase application and cube.</p>
 
 ### Example
 ```csharp
@@ -991,14 +991,15 @@ namespace Example
 
             var apiInstance = new ScriptsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var file = "\"calc\"";  // string | <p>Type of script file.</p> (optional)  (default to "calc")
+            var databaseName = "databaseName_example";  // string | <p>Database (cube) name.</p>
+            var file = "\"calc\"";  // string | <p>Type of script file to return. Valid values: <code>calc</code> or <code>mdx</code>. Default value, if unspecified, is <code>calc</code>.</p> (optional)  (default to "calc")
+            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
             var keyword = "keyword_example";  // string | <p>Filter the list of scripts using a keyword.</p> (optional) 
 
             try
             {
-                // List Essbase Scripts
-                ScriptList result = apiInstance.ScriptsListScripts(applicationName, databaseName, file, keyword);
+                // List Calc or MDX Scripts
+                ScriptList result = apiInstance.ScriptsListScripts(applicationName, databaseName, file, orderBy, keyword);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -1018,8 +1019,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List Essbase Scripts
-    ApiResponse<ScriptList> response = apiInstance.ScriptsListScriptsWithHttpInfo(applicationName, databaseName, file, keyword);
+    // List Calc or MDX Scripts
+    ApiResponse<ScriptList> response = apiInstance.ScriptsListScriptsWithHttpInfo(applicationName, databaseName, file, orderBy, keyword);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1037,8 +1038,9 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **file** | **string** | &lt;p&gt;Type of script file.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
+| **databaseName** | **string** | &lt;p&gt;Database (cube) name.&lt;/p&gt; |  |
+| **file** | **string** | &lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
 | **keyword** | **string** | &lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; | [optional]  |
 
 ### Return type
@@ -1068,7 +1070,7 @@ catch (ApiException e)
 # **ScriptsRemoveScriptPermission**
 > void ScriptsRemoveScriptPermission (string applicationName, string databaseName, string scriptName, string userGroupId, bool group)
 
-Remove Essbase Script Permissions
+Remove Calc Script Permissions
 
 <p>Removes permissions from the specified script for the specified user or group. Applicable only for calculation scripts.</p>
 
@@ -1103,7 +1105,7 @@ namespace Example
 
             try
             {
-                // Remove Essbase Script Permissions
+                // Remove Calc Script Permissions
                 apiInstance.ScriptsRemoveScriptPermission(applicationName, databaseName, scriptName, userGroupId, group);
             }
             catch (ApiException  e)
@@ -1123,7 +1125,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Remove Essbase Script Permissions
+    // Remove Calc Script Permissions
     apiInstance.ScriptsRemoveScriptPermissionWithHttpInfo(applicationName, databaseName, scriptName, userGroupId, group);
 }
 catch (ApiException e)
@@ -1171,7 +1173,7 @@ void (empty response body)
 # **ScriptsRenameScript**
 > Script ScriptsRenameScript (string applicationName, string databaseName, ScriptCopy body)
 
-Rename Essbase Script
+Rename Calc Script
 
 <p>Renames the script in the specified application and database and returns the created script. Applicable only for calculation scripts.</p>
 
@@ -1204,7 +1206,7 @@ namespace Example
 
             try
             {
-                // Rename Essbase Script
+                // Rename Calc Script
                 Script result = apiInstance.ScriptsRenameScript(applicationName, databaseName, body);
                 Debug.WriteLine(result);
             }
@@ -1225,7 +1227,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Rename Essbase Script
+    // Rename Calc Script
     ApiResponse<Script> response = apiInstance.ScriptsRenameScriptWithHttpInfo(applicationName, databaseName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -1275,7 +1277,7 @@ catch (ApiException e)
 # **ScriptsValidateScript**
 > void ScriptsValidateScript (string applicationName, string databaseName, Script body, string file = null)
 
-Validate Essbase Script
+Validate Calc Script
 
 <p>Validates the specified script. Applicable only for calculation scripts.</p>
 
@@ -1309,7 +1311,7 @@ namespace Example
 
             try
             {
-                // Validate Essbase Script
+                // Validate Calc Script
                 apiInstance.ScriptsValidateScript(applicationName, databaseName, body, file);
             }
             catch (ApiException  e)
@@ -1329,7 +1331,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Validate Essbase Script
+    // Validate Calc Script
     apiInstance.ScriptsValidateScriptWithHttpInfo(applicationName, databaseName, body, file);
 }
 catch (ApiException e)

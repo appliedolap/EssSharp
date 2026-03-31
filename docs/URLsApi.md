@@ -12,7 +12,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Get Essbase URLs
 
-<p>Returns the list of available Essbase URLs.</p>
+<p>Returns the list of available Essbase URLs. Essbase components, such as the web interface, Smart View client, and REST API, have their own URL endings. The main URL includes the host name or IP address, the port number, and the path <code>/essbase/</code>.</p> <p>The default secured port is 9001, unless it was changed during deployment.</p>
 
 ### Example
 ```csharp
@@ -94,7 +94,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | successful operation |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The operation completed successfully.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

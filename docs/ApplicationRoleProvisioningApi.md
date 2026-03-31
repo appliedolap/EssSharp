@@ -4,17 +4,17 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**ApplicationRoleProvisioningDeprovision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioningdeprovision) | **DELETE** /applications/{app}/permissions/{id} | Deprovision User or Group |
-| [**ApplicationRoleProvisioningGetProvision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioninggetprovision) | **GET** /applications/{app}/permissions/{id} | Get Provision |
-| [**ApplicationRoleProvisioningImportProvision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioningimportprovision) | **POST** /applications/{app}/permissions | Import Provision |
-| [**ApplicationRoleProvisioningProvision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioningprovision) | **PUT** /applications/{app}/permissions/{id} | Provision User or Group |
-| [**ApplicationRoleProvisioningSearchProvision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioningsearchprovision) | **GET** /applications/{app}/permissions | Search Application Provisioning |
+| [**ApplicationRoleProvisioningDeprovision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioningdeprovision) | **DELETE** /applications/{app}/permissions/{id} | Deprovision User or Group from Application |
+| [**ApplicationRoleProvisioningGetProvision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioninggetprovision) | **GET** /applications/{app}/permissions/{id} | Get Application Role Provision |
+| [**ApplicationRoleProvisioningImportProvision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioningimportprovision) | **POST** /applications/{app}/permissions | Import Application Role Provisioning |
+| [**ApplicationRoleProvisioningProvision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioningprovision) | **PUT** /applications/{app}/permissions/{id} | Provision Application Role to User or Group |
+| [**ApplicationRoleProvisioningSearchProvision**](ApplicationRoleProvisioningApi.md#applicationroleprovisioningsearchprovision) | **GET** /applications/{app}/permissions | Search Application Role Provisioning |
 
 <a id="applicationroleprovisioningdeprovision"></a>
 # **ApplicationRoleProvisioningDeprovision**
 > void ApplicationRoleProvisioningDeprovision (string app, string id, bool? group = null)
 
-Deprovision User or Group
+Deprovision User or Group from Application
 
 <p>Deprovisions a single user or group on the specified application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
@@ -47,7 +47,7 @@ namespace Example
 
             try
             {
-                // Deprovision User or Group
+                // Deprovision User or Group from Application
                 apiInstance.ApplicationRoleProvisioningDeprovision(app, id, group);
             }
             catch (ApiException  e)
@@ -67,7 +67,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Deprovision User or Group
+    // Deprovision User or Group from Application
     apiInstance.ApplicationRoleProvisioningDeprovisionWithHttpInfo(app, id, group);
 }
 catch (ApiException e)
@@ -113,7 +113,7 @@ void (empty response body)
 # **ApplicationRoleProvisioningGetProvision**
 > UserGroupProvisionInfo ApplicationRoleProvisioningGetProvision (string app, string id, bool? group = null, bool? inherited = null)
 
-Get Provision
+Get Application Role Provision
 
 <p>Gets provisioning information on the specified application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
@@ -147,7 +147,7 @@ namespace Example
 
             try
             {
-                // Get Provision
+                // Get Application Role Provision
                 UserGroupProvisionInfo result = apiInstance.ApplicationRoleProvisioningGetProvision(app, id, group, inherited);
                 Debug.WriteLine(result);
             }
@@ -168,7 +168,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Provision
+    // Get Application Role Provision
     ApiResponse<UserGroupProvisionInfo> response = apiInstance.ApplicationRoleProvisioningGetProvisionWithHttpInfo(app, id, group, inherited);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -218,9 +218,9 @@ catch (ApiException e)
 # **ApplicationRoleProvisioningImportProvision**
 > void ApplicationRoleProvisioningImportProvision (string app)
 
-Import Provision
+Import Application Role Provisioning
 
-<p>Imports provisioning information for multiple users or groups on the specified application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Imports provisioning for multiple users or groups on the specified application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p> <p>Takes as input a comma-separated (CSV) import file indicated in <b>- -data-binary</b> option. Output can be written to a file specified by <b>- -output</b> option, or to standard output if the output option is not provided. Requirements for the import file:</p> <ol><li>No headers (first line is the first record)</li><li>Col1: user/group ID</li><li>Col2: Application permission. Values: <b>db_access</b>, <b>db_update</b>, <b>db_manager</b>, or <b>app_manager</b></li><li>Col3 (optional, Boolean) Is the ID a group? true|false (default false)</li></ol><p>Sample import.csv  file:</p><table><tr><td>User1,app_manager,false</td></tr><tr><td>User2,db_manager,false</td></tr><tr><td>Group1,db_access,true</td></tr></table>
 
 ### Example
 ```csharp
@@ -249,7 +249,7 @@ namespace Example
 
             try
             {
-                // Import Provision
+                // Import Application Role Provisioning
                 apiInstance.ApplicationRoleProvisioningImportProvision(app);
             }
             catch (ApiException  e)
@@ -269,7 +269,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Import Provision
+    // Import Application Role Provisioning
     apiInstance.ApplicationRoleProvisioningImportProvisionWithHttpInfo(app);
 }
 catch (ApiException e)
@@ -313,7 +313,7 @@ void (empty response body)
 # **ApplicationRoleProvisioningProvision**
 > void ApplicationRoleProvisioningProvision (string app, string id, UserGroupProvisionInfo body = null)
 
-Provision User or Group
+Provision Application Role to User or Group
 
 <p>Provisions a single user or group on the specified application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
@@ -346,7 +346,7 @@ namespace Example
 
             try
             {
-                // Provision User or Group
+                // Provision Application Role to User or Group
                 apiInstance.ApplicationRoleProvisioningProvision(app, id, body);
             }
             catch (ApiException  e)
@@ -366,7 +366,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Provision User or Group
+    // Provision Application Role to User or Group
     apiInstance.ApplicationRoleProvisioningProvisionWithHttpInfo(app, id, body);
 }
 catch (ApiException e)
@@ -413,7 +413,7 @@ void (empty response body)
 # **ApplicationRoleProvisioningSearchProvision**
 > UserGroupProvisionInfoList ApplicationRoleProvisioningSearchProvision (string app, string id = null, string role = null, string filter = null, bool? inherited = null)
 
-Search Application Provisioning
+Search Application Role Provisioning
 
 <p>Search for provisioning information on the specified application.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
@@ -448,7 +448,7 @@ namespace Example
 
             try
             {
-                // Search Application Provisioning
+                // Search Application Role Provisioning
                 UserGroupProvisionInfoList result = apiInstance.ApplicationRoleProvisioningSearchProvision(app, id, role, filter, inherited);
                 Debug.WriteLine(result);
             }
@@ -469,7 +469,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Search Application Provisioning
+    // Search Application Role Provisioning
     ApiResponse<UserGroupProvisionInfoList> response = apiInstance.ApplicationRoleProvisioningSearchProvisionWithHttpInfo(app, id, role, filter, inherited);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

@@ -12,7 +12,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Get Database Size Statistics
 
-<p>Returns a list of databases and their page and index sizes.</p>
+<p>Returns a list of block storage databases and their page and index sizes.</p>
 
 ### Example
 ```csharp

@@ -10,10 +10,11 @@ All URIs are relative to */essbase/rest/v1*
 | [**OutlineGetMemberInfo**](OutlineViewerApi.md#outlinegetmemberinfo) | **GET** /outline/{app}/{cube}/{memberUniqueName} | Get Member Info |
 | [**OutlineGetMembers**](OutlineViewerApi.md#outlinegetmembers) | **GET** /outline/{app}/{cube} | Get Dimensions, Children, or Search |
 | [**OutlineGetOutlineXML**](OutlineViewerApi.md#outlinegetoutlinexml) | **POST** /outline/{app}/{cube}/xml | Export Outline to XML |
+| [**OutlineGetPivotDimension**](OutlineViewerApi.md#outlinegetpivotdimension) | **GET** /outline/{app}/{cube}/pivotDimension | Get Pivot dimension |
 
 <a id="outlinegetallsmartlist"></a>
 # **OutlineGetAllSmartList**
-> void OutlineGetAllSmartList (string app, string cube, string connection = null, string applicationNameForConnection = null, string accept = null)
+> void OutlineGetAllSmartList (string app, string cube, string connection, string applicationNameForConnection, string accept = null)
 
 Get Text Lists
 
@@ -42,10 +43,10 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new OutlineViewerApi(config);
-            var app = "app_example";  // string | 
-            var cube = "cube_example";  // string | 
-            var connection = "connection_example";  // string |  (optional) 
-            var applicationNameForConnection = "applicationNameForConnection_example";  // string |  (optional) 
+            var app = "app_example";  // string | <p>Application name.</p>
+            var cube = "cube_example";  // string | <p>Database name.</p>
+            var connection = "connection_example";  // string | <p>Essbase connection name.</p>
+            var applicationNameForConnection = "applicationNameForConnection_example";  // string | <p>Application name for connection.</p>
             var accept = "\"application/json\"";  // string |  (optional)  (default to "application/json")
 
             try
@@ -85,10 +86,10 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **app** | **string** |  |  |
-| **cube** | **string** |  |  |
-| **connection** | **string** |  | [optional]  |
-| **applicationNameForConnection** | **string** |  | [optional]  |
+| **app** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **cube** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **connection** | **string** | &lt;p&gt;Essbase connection name.&lt;/p&gt; |  |
+| **applicationNameForConnection** | **string** | &lt;p&gt;Application name for connection.&lt;/p&gt; |  |
 | **accept** | **string** |  | [optional] [default to &quot;application/json&quot;] |
 
 ### Return type
@@ -108,7 +109,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **0** | successful operation |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Text lists returned.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -656,6 +657,111 @@ void (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **0** | successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="outlinegetpivotdimension"></a>
+# **OutlineGetPivotDimension**
+> string OutlineGetPivotDimension (string app, string cube, string connection = null, string applicationNameForConnection = null)
+
+Get Pivot dimension
+
+<p>Get Pivot dimension details</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class OutlineGetPivotDimensionExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new OutlineViewerApi(config);
+            var app = "app_example";  // string | <p>Application name.</p>
+            var cube = "cube_example";  // string | <p>Database name.</p>
+            var connection = "connection_example";  // string | <p>Essbase connection name.</p> (optional) 
+            var applicationNameForConnection = "applicationNameForConnection_example";  // string | <p>Application name for connection.</p> (optional) 
+
+            try
+            {
+                // Get Pivot dimension
+                string result = apiInstance.OutlineGetPivotDimension(app, cube, connection, applicationNameForConnection);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling OutlineViewerApi.OutlineGetPivotDimension: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the OutlineGetPivotDimensionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get Pivot dimension
+    ApiResponse<string> response = apiInstance.OutlineGetPivotDimensionWithHttpInfo(app, cube, connection, applicationNameForConnection);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling OutlineViewerApi.OutlineGetPivotDimensionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **app** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **cube** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **connection** | **string** | &lt;p&gt;Essbase connection name.&lt;/p&gt; | [optional]  |
+| **applicationNameForConnection** | **string** | &lt;p&gt;Application name for connection.&lt;/p&gt; | [optional]  |
+
+### Return type
+
+**string**
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/xml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Pivot dimension retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to get pivot dimension.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

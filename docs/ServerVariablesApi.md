@@ -408,7 +408,7 @@ catch (ApiException e)
 
 <a id="variableslistservervariables"></a>
 # **VariablesListServerVariables**
-> VariableList VariablesListServerVariables (string all = null)
+> VariableList VariablesListServerVariables (string orderBy = null, string all = null)
 
 Get Server Variables
 
@@ -437,12 +437,13 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new ServerVariablesApi(config);
+            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
             var all = "\"false\"";  // string |  (optional)  (default to "false")
 
             try
             {
                 // Get Server Variables
-                VariableList result = apiInstance.VariablesListServerVariables(all);
+                VariableList result = apiInstance.VariablesListServerVariables(orderBy, all);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -463,7 +464,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Server Variables
-    ApiResponse<VariableList> response = apiInstance.VariablesListServerVariablesWithHttpInfo(all);
+    ApiResponse<VariableList> response = apiInstance.VariablesListServerVariablesWithHttpInfo(orderBy, all);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -480,6 +481,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
 | **all** | **string** |  | [optional] [default to &quot;false&quot;] |
 
 ### Return type

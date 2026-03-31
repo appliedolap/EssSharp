@@ -8,8 +8,8 @@ All URIs are relative to */essbase/rest/v1*
 | [**RulesGetPreviewData**](RulesApi.md#rulesgetpreviewdata) | **POST** /utils/rules/preview | Preview Rules Data |
 | [**RulesImportRule**](RulesApi.md#rulesimportrule) | **POST** /utils/rules/actions/import | Import Rules |
 | [**RulesSave**](RulesApi.md#rulessave) | **POST** /utils/rules | Create Rules |
-| [**RulesVerify**](RulesApi.md#rulesverify) | **POST** /utils/rules/verify | Verify Rules (Deprecated) |
-| [**RulesVerifyRule**](RulesApi.md#rulesverifyrule) | **POST** /utils/rules/verifyRule | Verify Rules |
+| [**RulesVerify**](RulesApi.md#rulesverify) | **POST** /utils/rules/verify | Verify Rule (Deprecated) |
+| [**RulesVerifyRule**](RulesApi.md#rulesverifyrule) | **POST** /utils/rules/verifyRule | Verify Rule |
 
 <a id="rulesget"></a>
 # **RulesGet**
@@ -17,7 +17,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Get Rules
 
-<p>Gets rules file from file catalog path.</p>
+<p>Gets rule file from file catalog path.</p>
 
 ### Example
 ```csharp
@@ -104,8 +104,8 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully returned rules file.  Response type can be either JSON, XML, or JSON stream, depending on the Accept header. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;, the rules are returned in the response body. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, the rules are returned as a JSON stream.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to import rules file. The catalog path information may be incorrect.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully returned rule file.  Response type can be either JSON, XML, or JSON stream, depending on the Accept header. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;, the rules are returned in the response body. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, the rules are returned as a JSON stream.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to import rule file. The catalog path information may be incorrect.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -116,7 +116,7 @@ catch (ApiException e)
 
 Preview Rules Data
 
-<p>Applies a rules file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.</p>
+<p>Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.</p>
 
 ### Example
 ```csharp
@@ -141,7 +141,7 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new RulesApi(config);
-            var body = new RulePreviewInput(); // RulePreviewInput | <p>Rules file details and input two dimensional array.</p> (optional) 
+            var body = new RulePreviewInput(); // RulePreviewInput | <p>Rule file details and input two dimensional array.</p> (optional) 
 
             try
             {
@@ -184,7 +184,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **body** | [**RulePreviewInput**](RulePreviewInput.md) | &lt;p&gt;Rules file details and input two dimensional array.&lt;/p&gt; | [optional]  |
+| **body** | [**RulePreviewInput**](RulePreviewInput.md) | &lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -203,8 +203,8 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Data through rules file was previewed successfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to preview this data through this rules file.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Data through rule file was previewed successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to preview this data through this rule file.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -312,7 +312,7 @@ void (empty response body)
 
 Create Rules
 
-<p>Creates a rules file.</p>
+<p>Creates a rule file.</p>
 
 ### Example
 ```csharp
@@ -339,7 +339,7 @@ namespace Example
             var apiInstance = new RulesApi(config);
             var path = "path_example";  // string | <p>Optional file catalog path.</p> (optional) 
             var overwrite = false;  // bool? | <p>Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.</p> (optional)  (default to false)
-            var body = new Rules(); // Rules | <p>Rules file details.</p> (optional) 
+            var body = new Rules(); // Rules | <p>Rule file details.</p> (optional) 
 
             try
             {
@@ -380,7 +380,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **path** | **string** | &lt;p&gt;Optional file catalog path.&lt;/p&gt; | [optional]  |
 | **overwrite** | **bool?** | &lt;p&gt;Optional overwrite specification. Default value is false, meaning if the rules file already exists, an error is returned. When set to true, if the rule file already exists, it will be overwritten.&lt;/p&gt; | [optional] [default to false] |
-| **body** | [**Rules**](Rules.md) | &lt;p&gt;Rules file details.&lt;/p&gt; | [optional]  |
+| **body** | [**Rules**](Rules.md) | &lt;p&gt;Rule file details.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -409,9 +409,9 @@ void (empty response body)
 # **RulesVerify**
 > void RulesVerify (Rules body = null)
 
-Verify Rules (Deprecated)
+Verify Rule (Deprecated)
 
-<p>Verifies a rules file.</p>
+<p>Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use <a href=\"./op-utils-rules-verifyrule-post.html\">Verify Rule</a> endpoint instead if possible.</p>
 
 ### Example
 ```csharp
@@ -436,11 +436,11 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new RulesApi(config);
-            var body = new Rules(); // Rules | <p>Rules file details.</p> (optional) 
+            var body = new Rules(); // Rules | <p>Rule file details.</p> (optional) 
 
             try
             {
-                // Verify Rules (Deprecated)
+                // Verify Rule (Deprecated)
                 apiInstance.RulesVerify(body);
             }
             catch (ApiException  e)
@@ -460,7 +460,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Verify Rules (Deprecated)
+    // Verify Rule (Deprecated)
     apiInstance.RulesVerifyWithHttpInfo(body);
 }
 catch (ApiException e)
@@ -475,7 +475,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **body** | [**Rules**](Rules.md) | &lt;p&gt;Rules file details.&lt;/p&gt; | [optional]  |
+| **body** | [**Rules**](Rules.md) | &lt;p&gt;Rule file details.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -494,7 +494,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Rules file verified successfully.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Rule file verified successfully.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Rules verification failed. Response contains a list of verification errors.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
@@ -504,9 +504,9 @@ void (empty response body)
 # **RulesVerifyRule**
 > void RulesVerifyRule (string application = null, string database = null, Rules body = null)
 
-Verify Rules
+Verify Rule
 
-<p>Verifies a rules file.</p>
+<p>Verifies a rule file, either regular or index-based.</p>
 
 ### Example
 ```csharp
@@ -533,11 +533,11 @@ namespace Example
             var apiInstance = new RulesApi(config);
             var application = "application_example";  // string | <p>Application name.</p> (optional) 
             var database = "database_example";  // string | <p>Database name.</p> (optional) 
-            var body = new Rules(); // Rules | <p>Rules file details.</p> (optional) 
+            var body = new Rules(); // Rules | <p>Rule file details.</p> (optional) 
 
             try
             {
-                // Verify Rules
+                // Verify Rule
                 apiInstance.RulesVerifyRule(application, database, body);
             }
             catch (ApiException  e)
@@ -557,7 +557,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Verify Rules
+    // Verify Rule
     apiInstance.RulesVerifyRuleWithHttpInfo(application, database, body);
 }
 catch (ApiException e)
@@ -574,7 +574,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **application** | **string** | &lt;p&gt;Application name.&lt;/p&gt; | [optional]  |
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; | [optional]  |
-| **body** | [**Rules**](Rules.md) | &lt;p&gt;Rules file details.&lt;/p&gt; | [optional]  |
+| **body** | [**Rules**](Rules.md) | &lt;p&gt;Rule file details.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -593,8 +593,8 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Rules file verified successfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Rules verification failed. Response contains a list of verification errors.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Rule file verified successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Rule verification failed. Response contains a list of verification errors.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

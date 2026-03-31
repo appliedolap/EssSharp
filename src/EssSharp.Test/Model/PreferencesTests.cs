@@ -53,24 +53,6 @@ namespace EssSharp.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Indentation'
-        /// </summary>
-        [Fact]
-        public void IndentationTest()
-        {
-            // TODO unit test for the property 'Indentation'
-        }
-
-        /// <summary>
-        /// Test the property 'RowSupression'
-        /// </summary>
-        [Fact]
-        public void RowSupressionTest()
-        {
-            // TODO unit test for the property 'RowSupression'
-        }
-
-        /// <summary>
         /// Test the property 'ColumnSupression'
         /// </summary>
         [Fact]
@@ -185,6 +167,24 @@ namespace EssSharp.Test.Model
         public void MaxColumnsTest()
         {
             // TODO unit test for the property 'MaxColumns'
+        }
+
+        /// <summary>
+        /// Test the property 'Indentation'
+        /// </summary>
+        [Fact]
+        public void IndentationTest()
+        {
+            // TODO unit test for the property 'Indentation'
+        }
+
+        /// <summary>
+        /// Test the property 'RowSupression'
+        /// </summary>
+        [Fact]
+        public void RowSupressionTest()
+        {
+            // TODO unit test for the property 'RowSupression'
         }
 
         /// <summary>

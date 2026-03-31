@@ -13,7 +13,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Get Audit Data
 
-<p>Returns audit trail data in CSV string format if <code>Accept='text/csv'</code> or <code>Accept='text/plain'</code>. If <code>Accept='application/octet-stream'</code>, returns audit data as a CSV stream to download. If <code>Accept='application/json'</code>, returns the audit data list in JSON format.<p>
+<p>Returns audit trail data in CSV string format if <code>Accept='text/csv'</code> or <code>Accept='text/plain'</code>. If <code>Accept='application/octet-stream'</code>, returns audit data as a CSV stream to download. If <code>Accept='application/json'</code>, returns the audit data list in JSON format.</p><p>The audit trail records are stored in the ESSBASE_DATA_AUDIT_TRAIL table in the Essbase repository database schema.</p>
 
 ### Example
 ```csharp

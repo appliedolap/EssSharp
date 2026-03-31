@@ -108,11 +108,11 @@ namespace EssSharp.Model
         /// </summary>
         /// <param name="links">links.</param>
         /// <param name="scenarioUser">scenarioUser.</param>
-        /// <param name="database">database.</param>
         /// <param name="scripts">scripts.</param>
-        /// <param name="approvers">approvers.</param>
         /// <param name="sandbox">sandbox.</param>
+        /// <param name="approvers">approvers.</param>
         /// <param name="dueDate">dueDate.</param>
+        /// <param name="database">database.</param>
         /// <param name="overdue">overdue.</param>
         /// <param name="createdTime">createdTime.</param>
         /// <param name="submittedTime">submittedTime.</param>
@@ -120,23 +120,23 @@ namespace EssSharp.Model
         /// <param name="refreshedTime">refreshedTime.</param>
         /// <param name="useCalculatedValues">useCalculatedValues.</param>
         /// <param name="commentsCount">commentsCount.</param>
-        /// <param name="description">description.</param>
-        /// <param name="application">application.</param>
         /// <param name="participants">participants.</param>
+        /// <param name="application">application.</param>
+        /// <param name="description">description.</param>
         /// <param name="owner">owner.</param>
         /// <param name="state">state.</param>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
         /// <param name="priority">priority.</param>
-        public ScenarioBean(List<Link> links = default, bool scenarioUser = default, string database = default, List<ScriptBean> scripts = default, List<ApproverBean> approvers = default, string sandbox = default, long dueDate = default, bool overdue = default, long createdTime = default, long submittedTime = default, long appliedTime = default, long refreshedTime = default, bool useCalculatedValues = default, int commentsCount = default, string description = default, string application = default, List<ParticipantBean> participants = default, string owner = default, StateEnum? state = default, long id = default, string name = default, PriorityEnum? priority = default)
+        public ScenarioBean(List<Link> links = default, bool scenarioUser = default, List<ScriptBean> scripts = default, string sandbox = default, List<ApproverBean> approvers = default, long dueDate = default, string database = default, bool overdue = default, long createdTime = default, long submittedTime = default, long appliedTime = default, long refreshedTime = default, bool useCalculatedValues = default, int commentsCount = default, List<ParticipantBean> participants = default, string application = default, string description = default, string owner = default, StateEnum? state = default, long id = default, string name = default, PriorityEnum? priority = default)
         {
             this.Links = links;
             this.ScenarioUser = scenarioUser;
-            this.Database = database;
             this.Scripts = scripts;
-            this.Approvers = approvers;
             this.Sandbox = sandbox;
+            this.Approvers = approvers;
             this.DueDate = dueDate;
+            this.Database = database;
             this.Overdue = overdue;
             this.CreatedTime = createdTime;
             this.SubmittedTime = submittedTime;
@@ -144,9 +144,9 @@ namespace EssSharp.Model
             this.RefreshedTime = refreshedTime;
             this.UseCalculatedValues = useCalculatedValues;
             this.CommentsCount = commentsCount;
-            this.Description = description;
-            this.Application = application;
             this.Participants = participants;
+            this.Application = application;
+            this.Description = description;
             this.Owner = owner;
             this.State = state;
             this.Id = id;
@@ -167,22 +167,10 @@ namespace EssSharp.Model
         public bool ScenarioUser { get; set; }
 
         /// <summary>
-        /// Gets or Sets Database
-        /// </summary>
-        [DataMember(Name = "database", EmitDefaultValue = false)]
-        public string Database { get; set; }
-
-        /// <summary>
         /// Gets or Sets Scripts
         /// </summary>
         [DataMember(Name = "scripts", EmitDefaultValue = false)]
         public List<ScriptBean> Scripts { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Approvers
-        /// </summary>
-        [DataMember(Name = "approvers", EmitDefaultValue = false)]
-        public List<ApproverBean> Approvers { get; set; }
 
         /// <summary>
         /// Gets or Sets Sandbox
@@ -191,10 +179,22 @@ namespace EssSharp.Model
         public string Sandbox { get; set; }
 
         /// <summary>
+        /// Gets or Sets Approvers
+        /// </summary>
+        [DataMember(Name = "approvers", EmitDefaultValue = false)]
+        public List<ApproverBean> Approvers { get; set; }
+
+        /// <summary>
         /// Gets or Sets DueDate
         /// </summary>
         [DataMember(Name = "dueDate", EmitDefaultValue = false)]
         public long DueDate { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Database
+        /// </summary>
+        [DataMember(Name = "database", EmitDefaultValue = false)]
+        public string Database { get; set; }
 
         /// <summary>
         /// Gets or Sets Overdue
@@ -239,10 +239,10 @@ namespace EssSharp.Model
         public int CommentsCount { get; set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// Gets or Sets Participants
         /// </summary>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
-        public string Description { get; set; }
+        [DataMember(Name = "participants", EmitDefaultValue = false)]
+        public List<ParticipantBean> Participants { get; set; }
 
         /// <summary>
         /// Gets or Sets Application
@@ -251,10 +251,10 @@ namespace EssSharp.Model
         public string Application { get; set; }
 
         /// <summary>
-        /// Gets or Sets Participants
+        /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name = "participants", EmitDefaultValue = false)]
-        public List<ParticipantBean> Participants { get; set; }
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Owner
@@ -284,11 +284,11 @@ namespace EssSharp.Model
             sb.Append("class ScenarioBean {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  ScenarioUser: ").Append(ScenarioUser).Append("\n");
-            sb.Append("  Database: ").Append(Database).Append("\n");
             sb.Append("  Scripts: ").Append(Scripts).Append("\n");
-            sb.Append("  Approvers: ").Append(Approvers).Append("\n");
             sb.Append("  Sandbox: ").Append(Sandbox).Append("\n");
+            sb.Append("  Approvers: ").Append(Approvers).Append("\n");
             sb.Append("  DueDate: ").Append(DueDate).Append("\n");
+            sb.Append("  Database: ").Append(Database).Append("\n");
             sb.Append("  Overdue: ").Append(Overdue).Append("\n");
             sb.Append("  CreatedTime: ").Append(CreatedTime).Append("\n");
             sb.Append("  SubmittedTime: ").Append(SubmittedTime).Append("\n");
@@ -296,9 +296,9 @@ namespace EssSharp.Model
             sb.Append("  RefreshedTime: ").Append(RefreshedTime).Append("\n");
             sb.Append("  UseCalculatedValues: ").Append(UseCalculatedValues).Append("\n");
             sb.Append("  CommentsCount: ").Append(CommentsCount).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Application: ").Append(Application).Append("\n");
             sb.Append("  Participants: ").Append(Participants).Append("\n");
+            sb.Append("  Application: ").Append(Application).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Owner: ").Append(Owner).Append("\n");
             sb.Append("  State: ").Append(State).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");

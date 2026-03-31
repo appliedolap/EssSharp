@@ -173,12 +173,13 @@ namespace EssSharp.Test.Api
             //int? offset = null;
             //int? limit = null;
             //string type = null;
+            //string orderBy = null;
             //bool? overwrite = null;
             //string action = null;
             //long? fileSize = null;
             //string filter = null;
             //bool? recursive = null;
-            //var response = instance.FilesListFiles(path, offset, limit, type, overwrite, action, fileSize, filter, recursive);
+            //var response = instance.FilesListFiles(path, offset, limit, type, orderBy, overwrite, action, fileSize, filter, recursive);
             //Assert.IsType<FileCollectionResponse>(response);
         }
 
@@ -233,6 +234,17 @@ namespace EssSharp.Test.Api
             //string uploadId = null;
             //var response = instance.FilesUploadPart(path, partNum, uploadId);
             //Assert.IsType<UploadFilePartResponse>(response);
+        }
+
+        /// <summary>
+        /// Test GetObjectStoreURI
+        /// </summary>
+        [Fact]
+        public void GetObjectStoreURITest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string path = null;
+            //instance.GetObjectStoreURI(path);
         }
 
         /// <summary>

@@ -57,7 +57,13 @@ namespace EssSharp.Model
             /// Enum BI for value: BI
             /// </summary>
             [EnumMember(Value = "BI")]
-            BI = 4
+            BI = 4,
+
+            /// <summary>
+            /// Enum AI for value: AI
+            /// </summary>
+            [EnumMember(Value = "AI")]
+            AI = 5
         }
 
 
@@ -154,7 +160,13 @@ namespace EssSharp.Model
             /// Enum FILE for value: FILE
             /// </summary>
             [EnumMember(Value = "FILE")]
-            FILE = 14
+            FILE = 14,
+
+            /// <summary>
+            /// Enum AI for value: AI
+            /// </summary>
+            [EnumMember(Value = "AI")]
+            AI = 15
         }
 
 
@@ -195,8 +207,21 @@ namespace EssSharp.Model
         /// <param name="maxPoolSize">maxPoolSize.</param>
         /// <param name="hidden">hidden.</param>
         /// <param name="availability">availability.</param>
+        /// <param name="aiConnection">aiConnection.</param>
+        /// <param name="chatCredential">chatCredential.</param>
+        /// <param name="vectorCredential">vectorCredential.</param>
+        /// <param name="chatModel">chatModel.</param>
+        /// <param name="ociCompartmentId">ociCompartmentId.</param>
+        /// <param name="region">region.</param>
+        /// <param name="url">url.</param>
+        /// <param name="embedModel">embedModel.</param>
+        /// <param name="transferTimeout">transferTimeout.</param>
+        /// <param name="ociAPIFormat">ociAPIFormat (required).</param>
+        /// <param name="narrateIndexName">narrateIndexName.</param>
+        /// <param name="narrateProfileName">narrateProfileName.</param>
+        /// <param name="narrateDocDirectory">narrateDocDirectory.</param>
         /// <param name="links">links.</param>
-        public Connection(string description = default, string name = default, TypeEnum type = default, string path = default, bool catalog = default, string host = default, int port = default, string user = default, string password = default, bool encrypted = default, string token = default, string sid = default, string service = default, string schema = default, string dbURL = default, string dbDriver = default, string datasource = default, SubtypeEnum? subtype = default, string walletPath = default, bool repoWallet = default, int minPoolSize = default, int maxPoolSize = default, bool hidden = default, string availability = default, List<Link> links = default)
+        public Connection(string description = default, string name = default, TypeEnum type = default, string path = default, bool catalog = default, string host = default, int port = default, string user = default, string password = default, bool encrypted = default, string token = default, string sid = default, string service = default, string schema = default, string dbURL = default, string dbDriver = default, string datasource = default, SubtypeEnum? subtype = default, string walletPath = default, bool repoWallet = default, int minPoolSize = default, int maxPoolSize = default, bool hidden = default, string availability = default, string aiConnection = default, string chatCredential = default, string vectorCredential = default, string chatModel = default, string ociCompartmentId = default, string region = default, string url = default, string embedModel = default, string transferTimeout = default, string ociAPIFormat = default, string narrateIndexName = default, string narrateProfileName = default, string narrateDocDirectory = default, List<Link> links = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -205,6 +230,12 @@ namespace EssSharp.Model
             }
             this.Name = name;
             this.Type = type;
+            // to ensure "ociAPIFormat" is required (not null)
+            if (ociAPIFormat == null)
+            {
+                throw new ArgumentNullException("ociAPIFormat is a required property for Connection and cannot be null");
+            }
+            this.OciAPIFormat = ociAPIFormat;
             this.Description = description;
             this.Path = path;
             this.Catalog = catalog;
@@ -227,6 +258,18 @@ namespace EssSharp.Model
             this.MaxPoolSize = maxPoolSize;
             this.Hidden = hidden;
             this.Availability = availability;
+            this.AiConnection = aiConnection;
+            this.ChatCredential = chatCredential;
+            this.VectorCredential = vectorCredential;
+            this.ChatModel = chatModel;
+            this.OciCompartmentId = ociCompartmentId;
+            this.Region = region;
+            this.Url = url;
+            this.EmbedModel = embedModel;
+            this.TransferTimeout = transferTimeout;
+            this.NarrateIndexName = narrateIndexName;
+            this.NarrateProfileName = narrateProfileName;
+            this.NarrateDocDirectory = narrateDocDirectory;
             this.Links = links;
         }
 
@@ -363,6 +406,84 @@ namespace EssSharp.Model
         public string Availability { get; set; }
 
         /// <summary>
+        /// Gets or Sets AiConnection
+        /// </summary>
+        [DataMember(Name = "aiConnection", EmitDefaultValue = false)]
+        public string AiConnection { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ChatCredential
+        /// </summary>
+        [DataMember(Name = "chatCredential", EmitDefaultValue = false)]
+        public string ChatCredential { get; set; }
+
+        /// <summary>
+        /// Gets or Sets VectorCredential
+        /// </summary>
+        [DataMember(Name = "vectorCredential", EmitDefaultValue = false)]
+        public string VectorCredential { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ChatModel
+        /// </summary>
+        [DataMember(Name = "chatModel", EmitDefaultValue = false)]
+        public string ChatModel { get; set; }
+
+        /// <summary>
+        /// Gets or Sets OciCompartmentId
+        /// </summary>
+        [DataMember(Name = "ociCompartmentId", EmitDefaultValue = false)]
+        public string OciCompartmentId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Region
+        /// </summary>
+        [DataMember(Name = "region", EmitDefaultValue = false)]
+        public string Region { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Url
+        /// </summary>
+        [DataMember(Name = "url", EmitDefaultValue = false)]
+        public string Url { get; set; }
+
+        /// <summary>
+        /// Gets or Sets EmbedModel
+        /// </summary>
+        [DataMember(Name = "embedModel", EmitDefaultValue = false)]
+        public string EmbedModel { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TransferTimeout
+        /// </summary>
+        [DataMember(Name = "transferTimeout", EmitDefaultValue = false)]
+        public string TransferTimeout { get; set; }
+
+        /// <summary>
+        /// Gets or Sets OciAPIFormat
+        /// </summary>
+        [DataMember(Name = "ociAPIFormat", IsRequired = true, EmitDefaultValue = true)]
+        public string OciAPIFormat { get; set; }
+
+        /// <summary>
+        /// Gets or Sets NarrateIndexName
+        /// </summary>
+        [DataMember(Name = "narrateIndexName", EmitDefaultValue = false)]
+        public string NarrateIndexName { get; set; }
+
+        /// <summary>
+        /// Gets or Sets NarrateProfileName
+        /// </summary>
+        [DataMember(Name = "narrateProfileName", EmitDefaultValue = false)]
+        public string NarrateProfileName { get; set; }
+
+        /// <summary>
+        /// Gets or Sets NarrateDocDirectory
+        /// </summary>
+        [DataMember(Name = "narrateDocDirectory", EmitDefaultValue = false)]
+        public string NarrateDocDirectory { get; set; }
+
+        /// <summary>
         /// Gets or Sets Links
         /// </summary>
         [DataMember(Name = "links", EmitDefaultValue = false)]
@@ -400,6 +521,19 @@ namespace EssSharp.Model
             sb.Append("  MaxPoolSize: ").Append(MaxPoolSize).Append("\n");
             sb.Append("  Hidden: ").Append(Hidden).Append("\n");
             sb.Append("  Availability: ").Append(Availability).Append("\n");
+            sb.Append("  AiConnection: ").Append(AiConnection).Append("\n");
+            sb.Append("  ChatCredential: ").Append(ChatCredential).Append("\n");
+            sb.Append("  VectorCredential: ").Append(VectorCredential).Append("\n");
+            sb.Append("  ChatModel: ").Append(ChatModel).Append("\n");
+            sb.Append("  OciCompartmentId: ").Append(OciCompartmentId).Append("\n");
+            sb.Append("  Region: ").Append(Region).Append("\n");
+            sb.Append("  Url: ").Append(Url).Append("\n");
+            sb.Append("  EmbedModel: ").Append(EmbedModel).Append("\n");
+            sb.Append("  TransferTimeout: ").Append(TransferTimeout).Append("\n");
+            sb.Append("  OciAPIFormat: ").Append(OciAPIFormat).Append("\n");
+            sb.Append("  NarrateIndexName: ").Append(NarrateIndexName).Append("\n");
+            sb.Append("  NarrateProfileName: ").Append(NarrateProfileName).Append("\n");
+            sb.Append("  NarrateDocDirectory: ").Append(NarrateDocDirectory).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

@@ -39,7 +39,7 @@ namespace Example
             var apiInstance = new BatchOutlineEditingApi(config);
             var application = "application_example";  // string | <p>Application name.</p>
             var database = "database_example";  // string | <p>Database name.</p>
-            var body = new OtlEditMain(); // OtlEditMain | Batch outline JSON/XML
+            var body = new OtlEditMain(); // OtlEditMain | <p>Batch outline JSON/XML.</p>
 
             try
             {
@@ -84,7 +84,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **application** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **body** | [**OtlEditMain**](OtlEditMain.md) | Batch outline JSON/XML |  |
+| **body** | [**OtlEditMain**](OtlEditMain.md) | &lt;p&gt;Batch outline JSON/XML.&lt;/p&gt; |  |
 
 ### Return type
 
