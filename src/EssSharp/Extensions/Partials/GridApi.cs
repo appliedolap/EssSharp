@@ -14,12 +14,13 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="applicationName">&lt;p&gt;Application name for grid operation.&lt;/p&gt;</param>
         /// <param name="databaseName">&lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt;</param>
+        /// <param name="svParity"></param>
         /// <param name="body">&lt;p&gt;Grid Operation to be performed.&lt;/p&gt;</param>
         /// <param name="preferences">&lt;p&gt;Preferences with which to perform the operation.&lt;/p&gt;</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (Grid)</returns>
-        public async System.Threading.Tasks.Task<Grid> GridExecuteAsync( string applicationName, string databaseName, GridOperation body, object preferences, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken) )
+        public async System.Threading.Tasks.Task<Grid> GridExecuteAsync( string applicationName, string databaseName, bool? svParity, GridOperation body, object preferences, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken) )
         {
             body ??= default(GridOperation);
 
@@ -64,6 +65,10 @@ namespace EssSharp.Api
 
             localVarRequestOptions.PathParameters.Add("applicationName", EssSharp.Client.ClientUtils.ParameterToString(applicationName)); // path parameter
             localVarRequestOptions.PathParameters.Add("databaseName", EssSharp.Client.ClientUtils.ParameterToString(databaseName)); // path parameter
+            if ( svParity != null )
+            {
+                localVarRequestOptions.QueryParameters.Add(EssSharp.Client.ClientUtils.ParameterToMultiMap("", "svParity", svParity));
+            }
             localVarRequestOptions.Data = body;
 
             localVarRequestOptions.Operation = "GridApi.GridExecute";

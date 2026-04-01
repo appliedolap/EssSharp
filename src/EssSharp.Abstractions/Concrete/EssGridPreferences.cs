@@ -55,6 +55,8 @@ namespace EssSharp
 
         public bool SendBlanksAsMissing { get; set; } = true;
 
+        public bool SmartViewParity { get; set; } = true;
+
         public bool TrackDataChanges { get; set; } = false;
 
         public bool WithinSelectedGroup { get; set; } = false;
@@ -110,6 +112,7 @@ namespace EssSharp
                 Zero                = this.RowSupression.Zero
             },
             SendBlanksAsMissing     = this.SendBlanksAsMissing,
+            SmartViewParity         = this.SmartViewParity,
             TrackDataChanges        = this.TrackDataChanges,
             WithinSelectedGroup     = this.WithinSelectedGroup,
             ZoomIn                  = new EssGridPreferencesZoomIn()
@@ -182,6 +185,9 @@ namespace EssSharp
             if ( SendBlanksAsMissing != other.SendBlanksAsMissing )
                 return false;
 
+            if ( SmartViewParity != other.SmartViewParity )
+                return false;
+
             if ( TrackDataChanges != other.TrackDataChanges ) 
                 return false;
 
@@ -213,6 +219,7 @@ namespace EssSharp
             RepeatMemberLabels,
             RowSupression,
             SendBlanksAsMissing,
+            SmartViewParity,
             TrackDataChanges,
             WithinSelectedGroup,
             ZoomIn

@@ -444,7 +444,7 @@ namespace EssSharp
 
                 var body = GetGridOperation(action, gridSelection, newPosition);
 
-                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, body: body, preferences: Preferences, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, svParity: Preferences?.SmartViewParity, body: body, preferences: Preferences, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
                     throw new Exception($@"Could not get a grid via the {action} operation.");
 
                 // If MissingText/NoAccessText is non-empty...

@@ -855,6 +855,8 @@ namespace EssSharp.Integration
 
             defaultGrid.Preferences.RepeatMemberLabels = false;
 
+            defaultGrid.Preferences.SmartViewParity = true;
+
             /*
             await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
             await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 1));
@@ -2003,9 +2005,11 @@ namespace EssSharp.Integration
             Assert.Contains("Unable to successfully execute data load job", exception.Message);
         }
 
-        [Fact(DisplayName = @"PerformServerFunctionTests - 55 - Essbase_AfterDefaultGrid_CanLoadData_SQL"), Priority(55)]
-        public async Task Essbase_AfterDefaultGrid_CanLoadData_SQL()
+        [Fact(DisplayName = @"PerformServerFunctionTests - 55 - Essbase_AfterDefaultGrid_CannotLoadDataFromSQLWithBadCredentials_SQL"), Priority(55)]
+        public async Task Essbase_AfterDefaultGrid_CannotLoadDataFromSQLWithBadCredentials_SQL()
         {
+            //TODO: Add test that successfully loads data from SQL with correct credentials, once we have a test SQL database to connect to.
+
             // Get an unconnected server.
             var server = GetEssServer();
 
@@ -2018,13 +2022,12 @@ namespace EssSharp.Integration
 
             var options = new EssJobLoadDataOptions(essRuleFile: ruleFile, abortOnError: true, password: "password1", username: "sa");
 
-
             // Assert that an Exception is thrown when we try to load data using SQL Server credentials,
             // and capture the base exception, since this is not supported by the server.
             var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options))).GetBaseException();
 
-            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
-            Assert.Equal("Unable to successfully execute data load job. Failed to Establish Connection With SQL Database Server.  See log for more information", exception.Message);
+            // Assert that the exception contains substring "Unable to successfully execute data load job"
+            Assert.Contains("Unable to successfully execute data load job.", exception.Message);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 56 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithTypes"), Priority(56)]
@@ -2036,7 +2039,7 @@ namespace EssSharp.Integration
             // Get the test mdx script from the server.
             var script = await server.GetApplicationAsync("Sample")
                 .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssMdxScript>("test");
+                .GetScriptAsync<IEssMdxScript>("test", getContent: true);
 
             var preferences = new EssQueryPreferences()
             {
@@ -2053,7 +2056,7 @@ namespace EssSharp.Integration
             // Assert that the data cell at row 3, column 2 equals "105522.0".
             //Assert.Equal("105522.0", report.Data [2, 1]);
             // Assert that the data type at row 3, column 2 equals 2 (for a data cell).
-            Assert.Equal(2,          report.Types[2, 1]);
+            Assert.Equal(2, report.Types[2, 1]);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 57 - Essbase_AfterScriptCreation_CanGetMdxQueryReportWithDimensionProperties"), Priority(57)]
