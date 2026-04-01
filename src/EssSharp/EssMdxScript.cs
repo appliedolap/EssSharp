@@ -122,7 +122,7 @@ namespace EssSharp
             // If we have an array, select the dimension name from the page object or directly.
             if (metadata["page"] is { Type: JTokenType.Array } page)
                 pageDimensionMembers = page
-                    .Select(t => (t["name"] ?? t)?.ToObject<string>())
+                    .Select(t => ( t.Type == JTokenType.Object ? t.Value<string>("name") : t)?.ToObject<string>())
                     .Where (d => d is { Length: > 0 })
                     .ToArray();
 
