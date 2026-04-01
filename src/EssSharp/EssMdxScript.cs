@@ -116,7 +116,16 @@ namespace EssSharp
             if ( response["metadata"] is not { } metadata )
                 throw new Exception("Unable to capture result metadata.");
 
-            var pageDimensionMembers   = metadata["page"]  ?.ToObject<string[]>() ?? new string[0];
+            string[] pageDimensionMembers = [];
+
+            // In 21.8, the page field was changed from a string array to an array of objects.
+            // If we have an array, select the dimension name from the page object or directly.
+            if (metadata["page"] is { Type: JTokenType.Array } page)
+                pageDimensionMembers = page
+                    .Select(t => (t["name"] ?? t)?.ToObject<string>())
+                    .Where (d => d is { Length: > 0 })
+                    .ToArray();
+
             var columnDimensionMembers = metadata["column"]?.ToObject<string[]>() ?? new string[0];
             var rowDimensionMembers    = metadata["row"]   ?.ToObject<string[]>() ?? new string[0];
 
