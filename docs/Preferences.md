@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Indentation** | **string** |  | [optional] 
 **RowSupression** | [**RowSuppression**](RowSuppression.md) |  | [optional] 
 **MaxRows** | **long** |  | [optional] 
+**LatestMemberName** | **Object** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

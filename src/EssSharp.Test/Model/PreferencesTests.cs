@@ -195,5 +195,14 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'MaxRows'
         }
+
+        /// <summary>
+        /// Test the property 'LatestMemberName'
+        /// </summary>
+        [Fact]
+        public void LatestMemberNameTest()
+        {
+            // TODO unit test for the property 'LatestMemberName'
+        }
     }
 }

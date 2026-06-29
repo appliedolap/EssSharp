@@ -586,6 +586,8 @@ cat temp.json | jq '.definitions.ZoomIn.properties.ancestor.enum = ["top", "bott
 
 cat temp.json | jq '.definitions.ZoomIn.properties.mode.enum = ["children", "descendents", "base"]' > json.tmp && mv json.tmp temp.json
 
+cat temp.json | jq '.definitions.Preferences.properties.LatestMemberName.Type = "string"' > json.tmp && mv json.tmp temp.json
+
 #### securityDefinitions ####
 
 # Add securityDefinitions and security for basic auth by default.

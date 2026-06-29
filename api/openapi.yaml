@@ -20700,6 +20700,7 @@ components:
       example:
         navigate: true
         cellText: true
+        LatestMemberName: "{}"
         includeDescriptionLabel: true
         removeUnSelectedGroup: true
         zoomIn:
@@ -20776,6 +20777,8 @@ components:
         maxRows:
           format: int64
           type: integer
+        LatestMemberName:
+          type: object
       type: object
     RowSuppression:
       example:

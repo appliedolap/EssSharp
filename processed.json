@@ -22050,6 +22050,9 @@
         "maxRows": {
           "type": "integer",
           "format": "int64"
+        },
+        "LatestMemberName": {
+          "Type": "string"
         }
       }
     },

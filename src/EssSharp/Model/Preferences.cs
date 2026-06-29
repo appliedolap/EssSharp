@@ -79,7 +79,8 @@ namespace EssSharp.Model
         /// <param name="indentation">indentation.</param>
         /// <param name="rowSupression">rowSupression.</param>
         /// <param name="maxRows">maxRows.</param>
-        public Preferences(ColumnSuppression columnSupression = default, bool cellText = default, ZoomIn zoomIn = default, bool navigate = default, bool includeSelection = default, bool repeatMemberLabels = default, bool withinSelectedGroup = default, bool removeUnSelectedGroup = default, bool includeDescriptionLabel = default, string missingText = default, string noAccessText = default, FormulaRetention formulaRetention = default, long maxColumns = default, IndentationEnum? indentation = default, RowSuppression rowSupression = default, long maxRows = default)
+        /// <param name="latestMemberName">latestMemberName.</param>
+        public Preferences(ColumnSuppression columnSupression = default, bool cellText = default, ZoomIn zoomIn = default, bool navigate = default, bool includeSelection = default, bool repeatMemberLabels = default, bool withinSelectedGroup = default, bool removeUnSelectedGroup = default, bool includeDescriptionLabel = default, string missingText = default, string noAccessText = default, FormulaRetention formulaRetention = default, long maxColumns = default, IndentationEnum? indentation = default, RowSuppression rowSupression = default, long maxRows = default, Object latestMemberName = default)
         {
             this.ColumnSupression = columnSupression;
             this.CellText = cellText;
@@ -97,6 +98,7 @@ namespace EssSharp.Model
             this.Indentation = indentation;
             this.RowSupression = rowSupression;
             this.MaxRows = maxRows;
+            this.LatestMemberName = latestMemberName;
         }
 
         /// <summary>
@@ -190,6 +192,12 @@ namespace EssSharp.Model
         public long MaxRows { get; set; }
 
         /// <summary>
+        /// Gets or Sets LatestMemberName
+        /// </summary>
+        [DataMember(Name = "LatestMemberName", EmitDefaultValue = false)]
+        public Object LatestMemberName { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -213,6 +221,7 @@ namespace EssSharp.Model
             sb.Append("  Indentation: ").Append(Indentation).Append("\n");
             sb.Append("  RowSupression: ").Append(RowSupression).Append("\n");
             sb.Append("  MaxRows: ").Append(MaxRows).Append("\n");
+            sb.Append("  LatestMemberName: ").Append(LatestMemberName).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

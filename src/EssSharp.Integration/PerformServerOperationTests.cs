@@ -887,6 +887,107 @@ namespace EssSharp.Integration
             await defaultGrid.GetGridLayoutAsync();
         }
 
+        [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanGetDTSGrid"), Priority(31)]
+        public async Task Essbase_AfterDefaultGrid_CanGetDTSGrid()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            var grid = new Grid()
+            {
+                Dimensions = new List<GridDimension>()
+                {
+                    new GridDimension()
+                    {
+                        Name = "Year",
+                        Row = -1,
+                        Column = -1,
+                        Pov = "H-T-D",
+                        Hidden = false,
+                        Expanded = false
+                    },
+                    new GridDimension()
+                    {
+                        Name = "Measures",
+                        Row = -1,
+                        Column = -1,
+                        Pov = "Sales",
+                        Hidden = false,
+                        Expanded = false
+                    },
+                    new GridDimension()
+                    {
+                        Name = "Product",
+                        Row = -1,
+                        Column = 0,
+                        Pov = "",
+                        Hidden = false,
+                        Expanded = false
+                    },
+                    new GridDimension()
+                    {
+                        Name = "Market",
+                        Row = -1,
+                        Column = -1,
+                        Pov = "New York",
+                        Hidden = false,
+                        Expanded = false
+                    },
+                    new GridDimension()
+                    {
+                        Name = "Scenario",
+                        Row = -1,
+                        Column = -1,
+                        Pov = "Actual",
+                        Hidden = false,
+                        Expanded = false
+                    }
+                },
+                Slice = new Slice()
+                {
+                    Columns = 5,
+                    Rows = 2,
+                    Data = new Data()
+                    {
+                        Ranges = new List<GridRange>()
+                        {
+                            new GridRange()
+                            {
+                                Start = 0,
+                                End = 9,
+                                Values = new List<string>() { "", "H-T-D", "Sales", "New York", "Actual", "100-10", "3466.0", "", "", "" },
+                                Types = new List<string>() { "7", "0", "0", "0", "0", "0", "2", "7", "7", "7" },
+                                Texts = new List<string>() { null, null, null, null, null, null, null, null, null, null },
+                                DataFormats = new List<string>() {},
+                                Statuses = new List<string>() { "0", "132", "134217744", "402653200", "536870928", "268435472", "2097153", "0", "0", "0" },
+                                Filters = new List<string>() {},
+                                EnumIds = new List<string>() { "", "", "", "", "", "", "", "", "", "" }
+                            }
+                        }
+                    }
+                }
+            };
+
+            var essGrid = new EssGrid(grid, cube as EssCube);
+
+            var preferences = await server.GetDefaultGridPreferencesAsync();
+
+            essGrid.Preferences = preferences;
+
+            essGrid.Preferences.LatestMemberName = "May";
+
+            //await essGrid.RefreshAsync();
+
+            // Assert that an Exception is thrown when we try to execute a MaxL script,
+            // and capture the base exception, since this is not supported by the server.
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await essGrid.RefreshAsync())).GetBaseException();
+
+            // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
+            Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
+        }
+
         [Fact(DisplayName = @"PerformServerFunctionTests - 32 - Essbase_AfterDefaultGrid_CanPerformParallelGridOperations"), Priority(32)]
         public async Task Essbase_AfterDefaultGrid_CanPerformParallelGridOperations()
         {

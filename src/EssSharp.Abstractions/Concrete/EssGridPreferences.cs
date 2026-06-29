@@ -37,6 +37,8 @@ namespace EssSharp
 
         public IndentationType Indentation { get; set; } = IndentationType.SUBITEMS;
 
+        public string LatestMemberName { get; set; }
+
         public long MaxColumns { get; set; } = 0;
 
         public long MaxRows { get; set; } = 0;
@@ -93,6 +95,7 @@ namespace EssSharp
             IncludeDescriptionLabel = this.IncludeDescriptionLabel,
             IncludeSelection        = this.IncludeSelection,
             Indentation             = this.Indentation,
+            LatestMemberName        = this.LatestMemberName,
             MaxColumns              = this.MaxColumns,
             MaxRows                 = this.MaxRows,
             MissingText             = this.MissingText,
@@ -158,6 +161,9 @@ namespace EssSharp
             if ( Indentation != other.Indentation )
                 return false;
 
+            if ( LatestMemberName != other.LatestMemberName )
+                return false;
+
             if ( MaxColumns != other.MaxColumns )
                 return false;
 
@@ -210,6 +216,7 @@ namespace EssSharp
             IncludeDescriptionLabel, 
             IncludeSelection,
             Indentation,
+            LatestMemberName,
             MaxColumns, 
             MaxRows, 
             MissingText, 

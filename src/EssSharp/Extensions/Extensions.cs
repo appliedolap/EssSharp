@@ -833,6 +833,7 @@ namespace EssSharp
             IncludeDescriptionLabel = preferences.IncludeDescriptionLabel,
             IncludeSelection = preferences.IncludeSelection,
             Indentation = Enum.IsDefined(typeof(Preferences.IndentationEnum), (Preferences.IndentationEnum)preferences.Indentation) ? (Preferences.IndentationEnum)preferences.Indentation : throw new NotSupportedException(),
+            LatestMemberName = preferences.LatestMemberName,
             MaxColumns = preferences.MaxColumns,
             MaxRows = preferences.MaxRows,
             MissingText = preferences.MissingText,
