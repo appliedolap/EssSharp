@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using EssSharp.Model;
 
@@ -33,6 +34,9 @@ namespace EssSharp
 
         /// <inheritdoc />
         public virtual string UserId => _user.Id;
+
+        /// <inheritdoc />
+        public virtual List<string> GroupNames => _user?.Groups;
 
         #endregion
     }

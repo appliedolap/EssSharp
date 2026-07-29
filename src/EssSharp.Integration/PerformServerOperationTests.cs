@@ -1987,7 +1987,6 @@ namespace EssSharp.Integration
 
             var options = new EssJobBuildDimensionOptions(essRuleFile: ruleFile, forceDimBuild: true, restructureOption: EssRestructureOption.PRESERVE_ALL_DATA);
 
-            // Assert that an Exception is thrown when we try to build dimension with Datasource,
             // and capture the base exception, since this is not supported by the server.
             var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options))).GetBaseException();
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Threading;
 
 namespace EssSharp
@@ -16,6 +17,12 @@ namespace EssSharp
         /// Returns the user ID associated with this user session.
         /// </summary>
         public string UserId { get; }
+
+        /// <summary>
+        /// Returns the names of the groups that the user of this session belongs to.
+        /// </summary>
+        /// <remarks>The groups are only available if explicitly captured.</remarks>
+        public List<string> GroupNames { get; }
     }
 
 }
