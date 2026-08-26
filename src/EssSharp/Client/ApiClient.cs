@@ -642,7 +642,9 @@ namespace EssSharp.Client
                 if (RetryConfiguration.RetryPolicy != null)
                 {
                     var policy = RetryConfiguration.RetryPolicy;
-                    var policyResult = policy.ExecuteAndCapture(() => client.Execute(request));
+                    // Applied OLAP Modification
+                    // Supply the policy context (client, configuration, and request) that the retry policy in EssObject uses to reset the session and reapply authorization on a retry.
+                    var policyResult = policy.ExecuteAndCapture((context) => client.Execute(request), new Dictionary<string, object> { ["client"] = this, ["configuration"] = configuration, ["request"] = request });
                     return DeserializeRestResponseFromPolicyAsync<T>(client, request, policyResult);
                 }
                 else
@@ -666,7 +668,9 @@ namespace EssSharp.Client
                 if (RetryConfiguration.AsyncRetryPolicy != null)
                 {
                     var policy = RetryConfiguration.AsyncRetryPolicy;
-                    var policyResult = await policy.ExecuteAndCaptureAsync((ct) => client.ExecuteAsync(request, ct), cancellationToken).ConfigureAwait(false);
+                    // Applied OLAP Modification
+                    // Supply the policy context (client, configuration, and request) that the retry policy in EssObject uses to reset the session and reapply authorization on a retry.
+                    var policyResult = await policy.ExecuteAndCaptureAsync((context, ct) => client.ExecuteAsync(request, ct), new Dictionary<string, object> { ["client"] = this, ["configuration"] = configuration, ["request"] = request }, cancellationToken).ConfigureAwait(false);
                     return await DeserializeRestResponseFromPolicyAsync<T>(client, request, policyResult, cancellationToken).ConfigureAwait(false);
                 }
                 else
