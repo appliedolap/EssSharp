@@ -151,15 +151,21 @@ namespace EssSharp
                             // Remove all session cookies from the request's CookieContainer by marking them expired.
                             foreach ( Cookie cookie in request.CookieContainer.GetCookies(baseUri) )
                             {
-                                if ( string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase) )
-                                {
-                                    // Mark the cookie expired.
-                                    cookie.Expired = true;
-                                    // Remove the associated session preferences.
-                                    Client.SessionPreferences.TryRemove(cookie?.Value, out _);
-                                    break;
-                                }
+                                // Mark the cookie expired.
+                                cookie.Expired = true;
+                                // Remove the associated session preferences.
+                                Client.SessionPreferences.TryRemove(cookie?.Value, out _);
                             }
+                        }
+
+                        // If the context contains the client, clear its retained session cookies (and their tracked
+                        // preferences) so subsequent requests re-authenticate rather than riding a dead session.
+                        if ( context.TryGetValue("client", out var clientValue) && clientValue is EssSharp.Client.ApiClient apiClient )
+                        {
+                            foreach ( var retained in apiClient.SessionCookies.Values )
+                                apiClient.SessionPreferences.TryRemove(retained?.Value ?? string.Empty, out _);
+
+                            apiClient.SessionCookies.Clear();
                         }
 
                         if ( !string.IsNullOrEmpty(configuration.AccessToken) )
