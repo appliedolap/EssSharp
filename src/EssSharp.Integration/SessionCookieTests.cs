@@ -22,9 +22,9 @@ namespace EssSharp.Integration
     public class SessionCookieClientTestsCollection : ICollectionFixture<CollectionFixture> { }
 
     /// <summary>
-    /// Offline tests for session cookie retention and recovery against a loopback stub, including
-    /// Set-Cookie headers with an empty Domain= attribute, which some fronting proxies and load
-    /// balancers (including the Essbase on Autonomous Database gateway) emit and cookie parsing
+    /// Offline tests for session cookie retention, recovery, and pooling against a loopback stub,
+    /// including Set-Cookie headers with an empty Domain= attribute, which some fronting proxies and
+    /// load balancers (including the Essbase on Autonomous Database gateway) emit and cookie parsing
     /// rejects with a CookieException. These tests require no Essbase server or container.
     /// </summary>
     [Collection(nameof(SessionCookieClientTests)), Trait("type", "client")]
@@ -92,8 +92,10 @@ namespace EssSharp.Integration
             // Get a session and assert that the full cookie set was retained, parsed and recovered alike.
             await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
 
+            var sessionCookies = Assert.Single(client.SessionCookies);
+
             foreach ( var name in new[] { @"JSESSIONID", @"essbaseToken", @"sessionExpiry", @"brokerToken", @"gatewayToken" } )
-                Assert.True(client.SessionCookies.ContainsKey(name), $@"Expected a retained cookie named {name}.");
+                Assert.Contains(sessionCookies.Cast<Cookie>(), cookie => string.Equals(cookie?.Name, name, StringComparison.OrdinalIgnoreCase));
 
             // Get a session again and assert that the full set rode the request in place of authorization.
             await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
@@ -250,6 +252,39 @@ namespace EssSharp.Integration
             AssertRetainedSessionCookie(client, @"PrefBroken77");
         }
 
+        [Fact(DisplayName = "SessionCookieClientTests - 10 - ApiClient_WithConcurrentRequests_RidesDistinctSessions"), Priority(10)]
+        public async Task ApiClient_WithConcurrentRequests_RidesDistinctSessions()
+        {
+            // Create a stub server that issues a distinct session cookie per request and holds every
+            // response until both requests have arrived, so the requests are genuinely concurrent.
+            using var stub = new LoopbackEssbaseStub(index => new[] { $@"JSESSIONID=Parallel{index}; Path=/; HttpOnly" }) { HoldResponsesUntilRequestCount = 2 };
+
+            // Create a session API around a client for the stub.
+            var (client, api) = CreateSessionApi(stub);
+
+            // Get two sessions concurrently.
+            await Task.WhenAll(
+                api.UserSessionGetSessionWithHttpInfoAsync(token: true),
+                api.UserSessionGetSessionWithHttpInfoAsync(token: true));
+
+            Assert.Equal(2, stub.Requests.Count);
+
+            // Assert that both requests authenticated with basic authorization: neither found a pooled
+            // session, so neither rode one, and Essbase never sees concurrent requests on one session.
+            Assert.Contains(@"authorization: basic", stub.Requests[0].ToLowerInvariant());
+            Assert.Contains(@"authorization: basic", stub.Requests[1].ToLowerInvariant());
+
+            // Assert that two distinct sessions were pooled.
+            Assert.Equal(2, client.SessionCookies.Count);
+
+            var values = client.SessionCookies
+                .Select(sessionCookies => sessionCookies.Cast<Cookie>().FirstOrDefault(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase))?.Value)
+                .OrderBy(value => value, StringComparer.Ordinal)
+                .ToArray();
+
+            Assert.Equal(new[] { @"Parallel0", @"Parallel1" }, values);
+        }
+
         /// <summary>
         /// Creates request options with configured grid preferences and a basic authorization header,
         /// as the generated API surfaces add one before the request is intercepted.
@@ -282,13 +317,16 @@ namespace EssSharp.Integration
         }
 
         /// <summary>
-        /// Asserts that the client retained a JSESSIONID session cookie with the given value and returns it.
+        /// Asserts that the client pooled exactly one session cookie set whose JSESSIONID carries the given value.
         /// </summary>
         /// <param name="client">The API client.</param>
         /// <param name="value">The expected cookie value.</param>
         private static Cookie AssertRetainedSessionCookie( ApiClient client, string value )
         {
-            Assert.True(client.SessionCookies.TryGetValue(@"JSESSIONID", out var cookie), @"Expected a retained JSESSIONID session cookie.");
+            var sessionCookies = Assert.Single(client.SessionCookies);
+            var cookie         = sessionCookies.Cast<Cookie>().FirstOrDefault(retained => string.Equals(retained?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase));
+
+            Assert.NotNull(cookie);
             Assert.Equal(value, cookie.Value);
 
             return cookie;
@@ -361,22 +399,23 @@ namespace EssSharp.Integration
             var first = await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
             Assert.Equal(HttpStatusCode.OK, first.StatusCode);
 
-            // Assert that a JSESSIONID session cookie was retained, whether parsed or recovered.
-            Assert.True(client.SessionCookies.ContainsKey(@"JSESSIONID"), @"Expected a retained JSESSIONID session cookie.");
+            // Assert that a session cookie set with a JSESSIONID was pooled, whether parsed or recovered.
+            Assert.Contains(client.SessionCookies, sessionCookies => sessionCookies.Cast<Cookie>().Any(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)));
 
-            // Get a session again, riding the retained cookies, and assert success.
+            // Get a session again, riding the pooled set, and assert success.
             var second = await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
             Assert.Equal(HttpStatusCode.OK, second.StatusCode);
 
-            // Assert that a JSESSIONID session cookie was retained again from the second response.
-            Assert.True(client.SessionCookies.ContainsKey(@"JSESSIONID"), @"Expected a retained JSESSIONID session cookie.");
+            // Assert that a session cookie set with a JSESSIONID was pooled again from the second response.
+            Assert.Contains(client.SessionCookies, sessionCookies => sessionCookies.Cast<Cookie>().Any(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)));
         }
     }
 
     /// <summary>
     /// A minimal loopback HTTP server that answers every request with a small JSON body and scripted
     /// Set-Cookie headers emitted verbatim, so malformed cookie values can be exercised byte-for-byte
-    /// on the wire.
+    /// on the wire. Connections are handled concurrently, and responses can be held until a given
+    /// number of requests have arrived to force genuine request concurrency.
     /// </summary>
     internal sealed class LoopbackEssbaseStub : IDisposable
     {
@@ -408,7 +447,12 @@ namespace EssSharp.Integration
         public string BasePath { get; }
 
         /// <summary>
-        /// The raw text of each received request, in order.
+        /// Holds every response until at least this many requests have arrived (0 = respond immediately).
+        /// </summary>
+        public int HoldResponsesUntilRequestCount { get; set; }
+
+        /// <summary>
+        /// The raw text of each received request, in order of arrival.
         /// </summary>
         public List<string> Requests { get; } = new List<string>();
 
@@ -426,7 +470,7 @@ namespace EssSharp.Integration
         }
 
         /// <summary>
-        /// Accepts connections and answers one request per connection until disposed.
+        /// Accepts connections until disposed, handling each concurrently.
         /// </summary>
         private async Task AcceptLoopAsync()
         {
@@ -437,56 +481,81 @@ namespace EssSharp.Integration
                 try
                 {
                     client = await _listener.AcceptTcpClientAsync().ConfigureAwait(false);
-
-                    using var stream = client.GetStream();
-
-                    // Read the request head.
-                    var request = await ReadRequestAsync(stream).ConfigureAwait(false);
-
-                    if ( string.IsNullOrEmpty(request) )
-                        continue;
-
-                    int index;
-
-                    lock ( Requests )
-                    {
-                        Requests.Add(request);
-                        index = Requests.Count - 1;
-                    }
-
-                    // Compose a small JSON body that deserializes as a UserBean (or is ignored).
-                    var body = @"{""id"":""admin"",""name"":""admin"",""token"":""stub-token""}";
-
-                    var builder = new StringBuilder()
-                        .Append("HTTP/1.1 200 OK\r\n")
-                        .Append("Content-Type: application/json\r\n")
-                        .Append($"Content-Length: {Encoding.UTF8.GetByteCount(body)}\r\n");
-
-                    foreach ( var setCookieHeader in SetCookieProvider(index) ?? Array.Empty<string>() )
-                        builder.Append($"Set-Cookie: {setCookieHeader}\r\n");
-
-                    var bytes = Encoding.UTF8.GetBytes(builder.Append("Connection: close\r\n\r\n").Append(body).ToString());
-
-                    await stream.WriteAsync(bytes, 0, bytes.Length).ConfigureAwait(false);
-                    await stream.FlushAsync().ConfigureAwait(false);
-                }
-                catch when ( _disposed )
-                {
-                    break;
                 }
                 catch
                 {
-                    // Keep serving subsequent connections.
-                }
-                finally
-                {
                     client?.Dispose();
+                    break;
                 }
+
+                _ = Task.Run(() => HandleConnectionAsync(client));
             }
         }
 
         /// <summary>
-        /// Reads the head of a request (through the blank line separating it from any body).
+        /// Reads one request from the given connection and answers it.
+        /// </summary>
+        /// <param name="client">The accepted connection.</param>
+        private async Task HandleConnectionAsync( TcpClient client )
+        {
+            try
+            {
+                using var stream = client.GetStream();
+
+                // Read the request through its headers and any body.
+                var request = await ReadRequestAsync(stream).ConfigureAwait(false);
+
+                if ( string.IsNullOrEmpty(request) )
+                    return;
+
+                int index;
+
+                lock ( Requests )
+                {
+                    Requests.Add(request);
+                    index = Requests.Count - 1;
+                }
+
+                // Hold the response until the configured number of requests has arrived.
+                while ( !_disposed && HoldResponsesUntilRequestCount > 0 )
+                {
+                    lock ( Requests )
+                    {
+                        if ( Requests.Count >= HoldResponsesUntilRequestCount )
+                            break;
+                    }
+
+                    await Task.Delay(10).ConfigureAwait(false);
+                }
+
+                // Compose a small JSON body that deserializes as a UserBean (or is ignored).
+                var body = @"{""id"":""admin"",""name"":""admin"",""token"":""stub-token""}";
+
+                var builder = new StringBuilder()
+                    .Append("HTTP/1.1 200 OK\r\n")
+                    .Append("Content-Type: application/json\r\n")
+                    .Append($"Content-Length: {Encoding.UTF8.GetByteCount(body)}\r\n");
+
+                foreach ( var setCookieHeader in SetCookieProvider(index) ?? Array.Empty<string>() )
+                    builder.Append($"Set-Cookie: {setCookieHeader}\r\n");
+
+                var bytes = Encoding.UTF8.GetBytes(builder.Append("Connection: close\r\n\r\n").Append(body).ToString());
+
+                await stream.WriteAsync(bytes, 0, bytes.Length).ConfigureAwait(false);
+                await stream.FlushAsync().ConfigureAwait(false);
+            }
+            catch
+            {
+                // Ignore failed connections; the test assertions will surface any missing exchange.
+            }
+            finally
+            {
+                client?.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Reads a request through its headers and, when a Content-Length is present, its body.
         /// </summary>
         /// <param name="stream">The connection stream.</param>
         private static async Task<string> ReadRequestAsync( NetworkStream stream )
@@ -494,14 +563,37 @@ namespace EssSharp.Integration
             var buffer  = new byte[8192];
             var builder = new StringBuilder();
 
-            while ( !builder.ToString().Contains("\r\n\r\n") )
+            // Read through the end of the headers.
+            while ( builder.ToString().IndexOf("\r\n\r\n", StringComparison.Ordinal) < 0 )
             {
                 var read = await stream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
 
                 if ( read <= 0 )
-                    break;
+                    return builder.ToString();
 
                 builder.Append(Encoding.ASCII.GetString(buffer, 0, read));
+            }
+
+            var text        = builder.ToString();
+            var headerEnd   = text.IndexOf("\r\n\r\n", StringComparison.Ordinal) + 4;
+            var contentLine = text.Split(new[] { "\r\n" }, StringSplitOptions.None).FirstOrDefault(line => line.StartsWith("Content-Length:", StringComparison.OrdinalIgnoreCase));
+
+            // Drain any remaining body bytes indicated by a Content-Length header, so the connection
+            // is not closed with unread data (which can reset the client).
+            if ( contentLine?.Split(':') is { Length: 2 } parts && int.TryParse(parts[1].Trim(), out var contentLength) )
+            {
+                var remaining = contentLength - Encoding.ASCII.GetByteCount(text.Substring(headerEnd));
+
+                while ( remaining > 0 )
+                {
+                    var read = await stream.ReadAsync(buffer, 0, Math.Min(buffer.Length, remaining)).ConfigureAwait(false);
+
+                    if ( read <= 0 )
+                        break;
+
+                    builder.Append(Encoding.ASCII.GetString(buffer, 0, read));
+                    remaining -= read;
+                }
             }
 
             return builder.ToString();

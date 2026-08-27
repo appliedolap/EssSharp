@@ -158,16 +158,6 @@ namespace EssSharp
                             }
                         }
 
-                        // If the context contains the client, clear its retained session cookies (and their tracked
-                        // preferences) so subsequent requests re-authenticate rather than riding a dead session.
-                        if ( context.TryGetValue("client", out var clientValue) && clientValue is EssSharp.Client.ApiClient apiClient )
-                        {
-                            foreach ( var retained in apiClient.SessionCookies.Values )
-                                apiClient.SessionPreferences.TryRemove(retained?.Value ?? string.Empty, out _);
-
-                            apiClient.SessionCookies.Clear();
-                        }
-
                         if ( !string.IsNullOrEmpty(configuration.AccessToken) )
                         {
                             // Reapply the bearer authorization header.

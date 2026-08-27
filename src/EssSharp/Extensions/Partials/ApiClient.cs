@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Net;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 
 using EssSharp.Api;
 
@@ -24,10 +24,13 @@ namespace EssSharp.Client
         #region Public Properties
 
         /// <summary>
-        /// The session cookies retained for this client, keyed by cookie name. The full set is replayed
-        /// on subsequent requests in place of the authorization header once a session is established.
+        /// The pool of retained session cookie sets for this client. Each set carries the full group of
+        /// cookies for one session (the JSESSIONID together with any gateway token cookies issued with it).
+        /// A request takes a set from the pool and rides it in place of the authorization header, and its
+        /// response pools the set (or its forked successor) again, so concurrent requests ride distinct
+        /// sessions, since Essbase does not allow concurrent requests on one session.
         /// </summary>
-        public ConcurrentDictionary<string, Cookie> SessionCookies { get; } = new ConcurrentDictionary<string, Cookie>(StringComparer.OrdinalIgnoreCase);
+        public ConcurrentBag<CookieCollection> SessionCookies { get; } = new ConcurrentBag<CookieCollection>();
 
         /// <summary />
         public ConcurrentDictionary<string, EssGridPreferences> SessionPreferences { get; } = new ConcurrentDictionary<string, EssGridPreferences>();
@@ -76,18 +79,24 @@ namespace EssSharp.Client
                 return;
             }
 
-            // Snapshot the retained session cookies and capture the JSESSIONID, if one is retained.
-            var sessionCookies = SessionCookies.Values.ToArray();
-            var cookie = sessionCookies.FirstOrDefault(retained => string.Equals(retained?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase));
+            Cookie cookie = null;
 
-            // If a session is established, remove any authorization headers in favor of the session cookies.
-            if ( cookie is not null )
-                request.Parameters?.RemoveParameter("Authorization");
+            // If a free session cookie set is available, take it for this request, so concurrent
+            // requests ride distinct sessions.
+            if ( SessionCookies.TryTake(out CookieCollection sessionCookies) && sessionCookies is { Count: > 0 } )
+            {
+                // Capture the JSESSIONID session cookie, if the set contains one.
+                cookie = sessionCookies.Cast<Cookie>().FirstOrDefault(retained => string.Equals(retained?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase));
 
-            // Apply the full set of retained cookies, since gateways in front of Essbase can require
-            // their own token cookies (e.g. gatewayToken and brokerToken) on every request.
-            foreach ( var sessionCookie in sessionCookies )
-                request.AddCookie(sessionCookie.Name, sessionCookie.Value, sessionCookie.Path, sessionCookie.Domain);
+                // If the set establishes a session, remove any authorization headers in favor of its cookies.
+                if ( cookie is not null )
+                    request.Parameters?.RemoveParameter("Authorization");
+
+                // Apply the full cookie set, since gateways in front of Essbase can require their own
+                // token cookies (e.g. gatewayToken and brokerToken) on every request.
+                foreach ( Cookie sessionCookie in sessionCookies )
+                    request.AddCookie(sessionCookie.Name, sessionCookie.Value, sessionCookie.Path, sessionCookie.Domain);
+            }
 
             // If there are no configured preferences, we are finished 
             if ( (options?.Preferences as EssGridPreferences)?.Clone() is not EssGridPreferences configuredPreferences )
@@ -144,14 +153,11 @@ namespace EssSharp.Client
 
                 var response = await api.GridPreferencesSetForSessionAsync(preferences.ToModelObject(), cookie, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                // Capture the response cookies, recovering any that cookie processing rejected.
-                var responseCookies = response.Cookies
-                    .Concat(RecoverDroppedCookies(response.Cookies, GetSetCookieValues(response.Headers), config))
-                    .Where(returned => returned is { Expired: false })
-                    .ToArray();
+                // Capture the cookies the response actually set, recovering any that cookie processing rejected:
+                // the new session created for the preferences when no cookie was given or, on servers where the
+                // grid API forks the session, the fork carrying the preferences.
+                var responseCookies = BuildResponseCookieSet(response.Cookies, GetSetCookieValues(response.Headers), config).Where(returned => returned is { Expired: false }).ToArray();
 
-                // Capture the returned session cookie: the new session created for the preferences when no cookie
-                // was given or, on servers where the grid API forks the session, the fork carrying the preferences.
                 var responseCookie = responseCookies.FirstOrDefault(returned => string.Equals(returned?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase));
 
                 if ( responseCookie?.Value is { Length: > 0 } sessionID )
@@ -162,18 +168,16 @@ namespace EssSharp.Client
                         addValue:                       preferences,
                         updateValueFactory: ( _, _ ) => preferences);
 
-                    // If the preferences created a new session, retain its full cookie set and ride it on this
-                    // request in place of any authorization header, so the request observes the preferences just
-                    // applied instead of authenticating into a fresh, undecorated session.
+                    // If the preferences created a new session, ride its full cookie set on this request in
+                    // place of any authorization header, so the request observes the preferences just applied
+                    // instead of authenticating into a fresh, undecorated session. The response pools the
+                    // ridden set for subsequent requests.
                     if ( cookie is null )
                     {
                         request.Parameters?.RemoveParameter("Authorization");
 
                         foreach ( var returned in responseCookies )
-                        {
-                            RetainCookie(returned);
                             request.AddCookie(returned.Name, returned.Value, returned.Path, returned.Domain);
-                        }
                     }
                 }
             }
@@ -193,28 +197,9 @@ namespace EssSharp.Client
             if ( response is null )
                 return Task.CompletedTask;
 
-            // If configured to do so, retain the response's session cookies.
+            // If configured to do so, retain the session cookie set for the request and response.
             if ( configuration?.RetainCookies is true )
-            {
-                // If this is a successful logout, clear the retained cookies and their tracked preferences.
-                if ( IsSuccessfulLogout(request, response) )
-                {
-                    foreach ( var retained in SessionCookies.Values )
-                        SessionPreferences.TryRemove(retained?.Value ?? string.Empty, out _);
-
-                    SessionCookies.Clear();
-                }
-                else
-                {
-                    // Retain every parsed cookie, dropping any the response expired.
-                    foreach ( var parsed in response.Cookies?.Cast<Cookie>() ?? Enumerable.Empty<Cookie>() )
-                        RetainCookie(parsed);
-
-                    // Recover and retain cookies that cookie processing rejected, e.g. for an empty Domain= attribute.
-                    foreach ( var recovered in RecoverDroppedCookies(response, configuration) )
-                        RetainCookie(recovered);
-                }
-            }
+                RetainSessionCookies(request, response, configuration);
 
             // Write the response to any configured logger.
             response.WriteLogMessage(configuration);
@@ -232,28 +217,60 @@ namespace EssSharp.Client
         #region Private Methods
 
         /// <summary>
-        /// Retains the given cookie in <see cref="SessionCookies"/>, or removes the retained cookie of the
-        /// same name (together with any grid preferences tracked against its value) when the given cookie
-        /// is expired, which is how a server deletes a cookie.
+        /// Pools the session cookie set carried by the given request and response: the unexpired cookies
+        /// that rode the request (which continue the session on servers that do not reissue cookies),
+        /// superseded by the cookies the response actually set (e.g. the successor session when the grid
+        /// API forks). Nothing is pooled after a failed response, whose ridden session is not trusted, or
+        /// after a successful logout, which ends the session.
         /// </summary>
-        /// <param name="cookie">The parsed or recovered cookie to retain.</param>
-        private void RetainCookie( Cookie cookie )
+        /// <param name="request">The RestSharp request object</param>
+        /// <param name="response">The RestSharp response object</param>
+        /// <param name="configuration">The per-client configuration.</param>
+        private void RetainSessionCookies( RestRequest request, RestResponse response, IReadableConfiguration configuration )
         {
-            // Return if the cookie has no name.
-            if ( cookie?.Name is not { Length: > 0 } name )
+            // Return after a successful logout, which ends the session (the ridden set stays out of the pool).
+            if ( IsSuccessfulLogout(request, response) )
                 return;
 
-            // If the cookie is expired, remove the retained cookie and any preferences tracked against its value.
-            if ( cookie.Expired )
+            // Return without pooling for a failed response, e.g. a 401 whose ridden session is dead.
+            if ( !response.IsSuccessful() )
+                return;
+
+            // Return if an absolute base uri cannot be constructed, since the ridden and recovered cookies
+            // are resolved against it.
+            if ( !Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out var baseUri) )
+                return;
+
+            var merged = new Dictionary<string, Cookie>(StringComparer.OrdinalIgnoreCase);
+
+            // Start from the unexpired cookies that rode the request. (A retried 401 expires them.)
+            foreach ( Cookie ridden in request?.CookieContainer?.GetCookies(baseUri) ?? new CookieCollection() )
             {
-                if ( SessionCookies.TryRemove(name, out var removed) )
-                    SessionPreferences.TryRemove(removed?.Value ?? string.Empty, out _);
-
-                return;
+                if ( ridden is { Expired: false } )
+                    merged[ridden.Name] = ridden;
             }
 
-            // Retain the cookie by name.
-            SessionCookies[name] = cookie;
+            // Supersede them with the cookies the response actually set, parsed when available and
+            // recovered otherwise, removing any the response expired.
+            foreach ( var setCookie in BuildResponseCookieSet(response.Cookies?.Cast<Cookie>(), GetSetCookieValues(response), configuration) )
+            {
+                if ( setCookie.Expired )
+                    merged.Remove(setCookie.Name);
+                else
+                    merged[setCookie.Name] = setCookie;
+            }
+
+            // Return if the merged set carries no session.
+            if ( !merged.Values.Any(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) )
+                return;
+
+            // Pool the merged session cookie set.
+            var sessionCookies = new CookieCollection();
+
+            foreach ( var cookie in merged.Values )
+                sessionCookies.Add(cookie);
+
+            SessionCookies.Add(sessionCookies);
         }
 
         /// <summary>
@@ -267,37 +284,29 @@ namespace EssSharp.Client
             response.IsSuccessful();
 
         /// <summary>
-        /// Recovers cookies from the raw Set-Cookie response headers that cookie processing rejected.
-        /// Some fronting proxies and load balancers (including the Essbase on Autonomous Database gateway)
-        /// emit legacy attribute tails such as <c>;Version=1;Comment=;Domain=;</c>, whose empty
-        /// <c>Domain=</c> attribute RFC 6265 (section 5.2.3) directs clients to ignore but the .NET
-        /// <see cref="CookieContainer"/> rejects with a <see cref="CookieException"/>, dropping the whole
-        /// cookie. Recovered cookies are scoped host-only to the configured base address host.
-        /// </summary>
-        /// <param name="response">The RestSharp response object</param>
-        /// <param name="configuration">The per-client configuration.</param>
-        /// <returns>The recovered cookies, if any, with Max-Age expirations marked.</returns>
-        private static IEnumerable<Cookie> RecoverDroppedCookies( RestResponse response, IReadableConfiguration configuration ) =>
-            RecoverDroppedCookies(
-                response.Cookies?.Cast<Cookie>(),
-                response.Headers?.Where(header => string.Equals(header?.Name, @"Set-Cookie", StringComparison.OrdinalIgnoreCase)).Select(header => header?.Value?.ToString()),
-                configuration);
-
-        /// <summary>
-        /// Recovers cookies from the given raw Set-Cookie header values that cookie processing rejected.
+        /// Builds the set of cookies a response actually set from its raw Set-Cookie header values,
+        /// preferring the parsed cookie matching each header by name and value and tolerantly recovering
+        /// the rest. Some fronting proxies and load balancers (including the Essbase on Autonomous
+        /// Database gateway) emit legacy attribute tails such as <c>;Version=1;Comment=;Domain=;</c>,
+        /// whose empty <c>Domain=</c> attribute RFC 6265 (section 5.2.3) directs clients to ignore but
+        /// the .NET <see cref="CookieContainer"/> rejects with a <see cref="CookieException"/>, dropping
+        /// the whole cookie. Recovered cookies are scoped host-only to the configured base address host,
+        /// with elapsed Max-Age expirations marked.
         /// </summary>
         /// <param name="parsedCookies">The cookies that parsed normally.</param>
         /// <param name="setCookieHeaders">The raw Set-Cookie header values.</param>
         /// <param name="configuration">The per-client configuration.</param>
-        /// <returns>The recovered cookies, if any, with Max-Age expirations marked.</returns>
-        private static IEnumerable<Cookie> RecoverDroppedCookies( IEnumerable<Cookie> parsedCookies, IEnumerable<string> setCookieHeaders, IReadableConfiguration configuration )
+        private static List<Cookie> BuildResponseCookieSet( IEnumerable<Cookie> parsedCookies, IEnumerable<string> setCookieHeaders, IReadableConfiguration configuration )
         {
-            // Yield nothing if an absolute base uri cannot be constructed, since recovered cookies are scoped to its host.
-            if ( !Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out var baseUri) )
-                yield break;
+            var setCookies = new List<Cookie>();
 
-            // Capture the names of the cookies that parsed, so only dropped headers are recovered.
-            var parsedNames = new HashSet<string>((parsedCookies ?? Enumerable.Empty<Cookie>()).Select(parsed => parsed?.Name).Where(name => !string.IsNullOrEmpty(name)), StringComparer.OrdinalIgnoreCase);
+            // Return an empty set if an absolute base uri cannot be constructed, since recovered cookies
+            // are scoped to its host.
+            if ( !Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out var baseUri) )
+                return setCookies;
+
+            // Capture the cookies that parsed normally.
+            var parsed = (parsedCookies ?? Enumerable.Empty<Cookie>()).Where(candidate => candidate?.Name is { Length: > 0 }).ToArray();
 
             foreach ( var setCookie in setCookieHeaders ?? Enumerable.Empty<string>() )
             {
@@ -312,9 +321,12 @@ namespace EssSharp.Client
                 if ( segments[0].Split(new[] { '=' }, 2) is not { Length: 2 } pair || pair[0].Trim() is not { Length: > 0 } name || pair[1].Trim() is not { Length: > 0 } value )
                     continue;
 
-                // Skip the header if its cookie parsed normally.
-                if ( parsedNames.Contains(name) )
+                // Prefer the parsed cookie matching the header by name and value.
+                if ( parsed.FirstOrDefault(candidate => string.Equals(candidate.Name, name, StringComparison.OrdinalIgnoreCase) && string.Equals(candidate.Value, value, StringComparison.Ordinal)) is { } parsedCookie )
+                {
+                    setCookies.Add(parsedCookie);
                     continue;
+                }
 
                 var path = @"/";
                 var expired = false;
@@ -335,11 +347,20 @@ namespace EssSharp.Client
                         expired = true;
                 }
 
-                // Yield the recovered cookie, if one can be constructed.
+                // Add the recovered cookie, if one can be constructed.
                 if ( CreateRecoveredCookie(name, value, path, baseUri.Host, expired) is { } recovered )
-                    yield return recovered;
+                    setCookies.Add(recovered);
             }
+
+            return setCookies;
         }
+
+        /// <summary>
+        /// Returns the raw Set-Cookie header values from the given response.
+        /// </summary>
+        /// <param name="response">The RestSharp response object</param>
+        private static IEnumerable<string> GetSetCookieValues( RestResponse response ) =>
+            response?.Headers?.Where(header => string.Equals(header?.Name, @"Set-Cookie", StringComparison.OrdinalIgnoreCase)).Select(header => header?.Value?.ToString()) ?? Enumerable.Empty<string>();
 
         /// <summary>
         /// Returns the raw Set-Cookie header values from the given response headers.
