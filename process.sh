@@ -11,7 +11,7 @@ pushd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" >/dev/null 2>&1
 if [ ! -z "$1" ]; then
   ESSBASE_SWAGGER_VERSION=$1
 elif [ -z "${ESSBASE_SWAGGER_VERSION}" ]; then
-  ESSBASE_SWAGGER_VERSION=$(find ./versions -mindepth 1 -maxdepth 1 -name '*' -type d -exec basename {} \; | sort | tail -1)
+  ESSBASE_SWAGGER_VERSION=$(find ./versions -mindepth 1 -maxdepth 1 -name '*' -type d -exec basename {} \; | sort -V | tail -1)
 fi
 
 # if the resolved path to the swagger.json does not exist, bail.
@@ -343,6 +343,17 @@ cat temp.json | jq '.definitions."FileCollectionResponse" = {
 #   Cannot deserialize value of type `oracle.essbase.restws.services.main.grid.Action` from String \"ZOOMIN\":
 #   value not one of declared Enum instance names: [removeonly, keeponly, pivot, submit, pivotToPOV, refresh, zoomin, zoomout]
 cat temp.json | jq '.definitions.GridOperation.properties.action.enum = ["zoomin", "zoomout", "keeponly", "removeonly", "refresh", "pivot", "pivotToPOV", "submit"]' > json.tmp && mv json.tmp temp.json
+
+# Preserve the Slice property order used by earlier Essbase specifications. The generated model's
+# JSON member order follows the schema, and the Essbase grid endpoint rejects grids posted back
+# when rows appears after the range data.
+cat temp.json | jq '.definitions.Slice.properties = {
+  "rows": .definitions.Slice.properties.rows,
+  "dirtyCells": .definitions.Slice.properties.dirtyCells,
+  "dirtyTexts": .definitions.Slice.properties.dirtyTexts,
+  "columns": .definitions.Slice.properties.columns,
+  "data": .definitions.Slice.properties.data
+}' > json.tmp && mv json.tmp temp.json
 
 # Add an enumerated jobtype to the JobsInputBean definition.
 cat temp.json | jq '.definitions.JobsInputBean.properties.jobtype.enum = ["dataload", "dimbuild", "calc", "clear", "importExcel", "exportExcel", "lcmExport", "lcmImport", "clearAggregation", "buildAggregation", "asoBufferDataLoad", "asoBufferCommit", "exportData", "mdxScript", "executeReport", "maxl", "groovy"]' > json.tmp && mv json.tmp temp.json
