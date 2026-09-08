@@ -211,7 +211,7 @@ void (empty response body)
 
 Update Server Variable
 
-<p>Updates a substitution variable on the server, and returns the updated variable.</p>
+<p>Updates a substitution variable on the server and returns the updated variable.</p>
 
 ### Example
 ```csharp
@@ -437,7 +437,7 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new ServerVariablesApi(config);
-            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>.</p> (optional)  (default to "")
             var all = "\"false\"";  // string |  (optional)  (default to "false")
 
             try
@@ -481,7 +481,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
 | **all** | **string** |  | [optional] [default to &quot;false&quot;] |
 
 ### Return type

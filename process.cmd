@@ -1,4 +1,5 @@
 @echo off
+setlocal
 
 :: verify that jq.exe is available on the path...
 where jq.exe >nul 2>&1 || ( echo The required 'jq' command is not present on the path, exiting. & exit /B 1 )
@@ -11,9 +12,7 @@ pushd "%~dp0"
 if not [%1]==[] (
   set "ESSBASE_SWAGGER_VERSION=%1"
 ) else (
-  pushd versions
-  for /d %%a in (*) do set "ESSBASE_SWAGGER_VERSION=%%a"
-  popd versions
+  for /F "usebackq delims=" %%a in (`powershell.exe -NoProfile -Command "Get-ChildItem -LiteralPath '%~dp0versions' -Directory | Sort-Object { [version]$_.Name } | Select-Object -Last 1 -ExpandProperty Name"`) do set "ESSBASE_SWAGGER_VERSION=%%a"
 )
 
 :: if the given or found swagger.json file does not exist, bail.
@@ -28,6 +27,18 @@ if exist json.tmp  del /f json.tmp  >nul 2>&1 || ( echo Unable to delete json.tm
 
 :: copy the formatted.json to temp.json
 copy /Y formatted.json temp.json >nul 2>&1 || ( echo Unable to copy formatted.json to temp.json, exiting. & exit /B 1)
+
+:: Essbase 26 publishes an OpenAPI 3 document. Apply the equivalent corrections
+:: using OpenAPI 3 request, response, component, and security shapes, then stop.
+set "OPENAPI_VERSION="
+for /F "usebackq delims=" %%v in (`jq -r ".openapi // empty" temp.json`) do set "OPENAPI_VERSION=%%v"
+if defined OPENAPI_VERSION (
+  jq -f process-openapi3.jq temp.json > json.tmp || ( echo Unable to process OpenAPI 3 document, exiting. & exit /B 1 )
+  move /Y json.tmp temp.json >nul 2>&1 || ( echo Unable to move json.tmp to temp.json, processing failed. & exit /B 1 )
+  copy /Y temp.json processed.json >nul 2>&1 || ( echo Unable to save processed.json, exiting. & exit /B 1 )
+  popd
+  exit /B 0
+)
 
 :::: paths ::::
 
@@ -68,10 +79,10 @@ type temp.json | jq ".paths.\"/applications/{applicationName}/databases/{databas
 :: Fix the consumes for the application datasource stream endpoint
 type temp.json | jq ".paths.\"/applications/{applicationName}/datasources/query/stream\".post.consumes = [\"application/json\"]" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
-# Fix the response schema for the application all logs download endpoint.
+:: Fix the response schema for the application all logs download endpoint.
 type temp.json | jq ".paths.\"/applications/{applicationName}/logs/all\".get.responses.\"200\".schema = {\"type\":\"string\",\"format\":\"binary\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
-# Fix the response schema for the application latest logs download endpoint.
+:: Fix the response schema for the application latest logs download endpoint.
 type temp.json | jq ".paths.\"/applications/{applicationName}/logs/latest\".get.responses.\"200\".schema = {\"type\":\"string\",\"format\":\"binary\"}" > json.tmp && move /Y json.tmp temp.json >nul 2>&1 || ( echo "Unable to move json.tmp to temp.json, processing failed." & exit /B 1 )
 
 :: Return types for variables are not a List<VariableList>, they are a VariableList

@@ -14,7 +14,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Delete All Sessions
 
-<p>Deletes all the sessions currently active, or kills all the requests currently processing.</p>
+<p>Deletes all the sessions currently active or kills all the requests currently processing.</p>
 
 ### Example
 ```csharp
@@ -239,7 +239,7 @@ namespace Example
             var apiInstance = new SessionsApi(config);
             var application = "application_example";  // string | <p>Application name.</p> (optional) 
             var database = "database_example";  // string | <p>Database name.</p> (optional) 
-            var userId = "userId_example";  // string | <p>User ID for whom to return the active sessions. If not provided, all the sesions are retrieved.</p> (optional) 
+            var userId = "userId_example";  // string | <p>User ID for whom to return the active sessions. If not provided, all the sessions are retrieved.</p> (optional) 
 
             try
             {
@@ -284,7 +284,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **application** | **string** | &lt;p&gt;Application name.&lt;/p&gt; | [optional]  |
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; | [optional]  |
-| **userId** | **string** | &lt;p&gt;User ID for whom to return the active sessions. If not provided, all the sesions are retrieved.&lt;/p&gt; | [optional]  |
+| **userId** | **string** | &lt;p&gt;User ID for whom to return the active sessions. If not provided, all the sessions are retrieved.&lt;/p&gt; | [optional]  |
 
 ### Return type
 

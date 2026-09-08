@@ -13,7 +13,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**FiltersGetFilterPermissions**](FiltersApi.md#filtersgetfilterpermissions) | **GET** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions | Get Permissions |
 | [**FiltersGetFilterRows**](FiltersApi.md#filtersgetfilterrows) | **GET** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/rows | Get Filter Rows |
 | [**FiltersListFilters**](FiltersApi.md#filterslistfilters) | **GET** /applications/{applicationName}/databases/{databaseName}/filters | Get Filters |
-| [**FiltersRemoveFilterPermission**](FiltersApi.md#filtersremovefilterpermission) | **DELETE** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions/{userGroupId} | Delete Permission from Filter  |
+| [**FiltersRemoveFilterPermission**](FiltersApi.md#filtersremovefilterpermission) | **DELETE** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions/{userGroupId} | Delete Permission from Filter |
 | [**FiltersRenameFilter**](FiltersApi.md#filtersrenamefilter) | **POST** /applications/{applicationName}/databases/{databaseName}/filters/filterops/rename | Rename Filter |
 | [**FiltersReplaceFilterPermission**](FiltersApi.md#filtersreplacefilterpermission) | **PUT** /applications/{applicationName}/databases/{databaseName}/filters/{filterName}/permissions | Replace Filter Permissions |
 | [**FiltersValidateFilter**](FiltersApi.md#filtersvalidatefilter) | **POST** /applications/{applicationName}/databases/{databaseName}/filters/filterops/validate | Validate Filter |
@@ -24,7 +24,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Add Permissions in Filter
 
-<p>Adds permissions, in the named filter, for the named user or group.</p>
+<p>Adds permissions in the named filter for the named user or group.</p>
 
 ### Example
 ```csharp
@@ -234,7 +234,7 @@ catch (ApiException e)
 
 Create Filter
 
-<p>Creates a filter in the specified application and database, and returns the created filter.</p><p>Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone, and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.</p>
+<p>Creates a filter in the specified application and database and returns the created filter.</p><p>Filters provide access restrictions on particular cells of the Essbase database (cube). System administrators can apply any filters to anyone and are unaffected by filters. Power users can define and apply filters for applications they created. Application and Database Managers can define and apply filters within their applications or cubes.</p>
 
 ### Example
 ```csharp
@@ -437,7 +437,7 @@ void (empty response body)
 
 Update Filter
 
-<p>Updates the named filter in the specified application and database, and returns the updated filter.</p>
+<p>Updates the named filter in the specified application and database and returns the updated filter.</p>
 
 ### Example
 ```csharp
@@ -951,7 +951,7 @@ catch (ApiException e)
 # **FiltersRemoveFilterPermission**
 > void FiltersRemoveFilterPermission (string applicationName, string databaseName, string filterName, string userGroupId, bool group)
 
-Delete Permission from Filter 
+Delete Permission from Filter
 
 <p>Removes permissions from a filter for the specified user or group.</p>
 
@@ -986,7 +986,7 @@ namespace Example
 
             try
             {
-                // Delete Permission from Filter 
+                // Delete Permission from Filter
                 apiInstance.FiltersRemoveFilterPermission(applicationName, databaseName, filterName, userGroupId, group);
             }
             catch (ApiException  e)
@@ -1006,7 +1006,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete Permission from Filter 
+    // Delete Permission from Filter
     apiInstance.FiltersRemoveFilterPermissionWithHttpInfo(applicationName, databaseName, filterName, userGroupId, group);
 }
 catch (ApiException e)

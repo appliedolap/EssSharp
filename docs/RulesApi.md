@@ -8,7 +8,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**RulesGetPreviewData**](RulesApi.md#rulesgetpreviewdata) | **POST** /utils/rules/preview | Preview Rules Data |
 | [**RulesImportRule**](RulesApi.md#rulesimportrule) | **POST** /utils/rules/actions/import | Import Rules |
 | [**RulesSave**](RulesApi.md#rulessave) | **POST** /utils/rules | Create Rules |
-| [**RulesVerify**](RulesApi.md#rulesverify) | **POST** /utils/rules/verify | Verify Rule (Deprecated) |
+| [**RulesVerify**](RulesApi.md#rulesverify) | **POST** /utils/rules/verify | Verify Rule Deprecated |
 | [**RulesVerifyRule**](RulesApi.md#rulesverifyrule) | **POST** /utils/rules/verifyRule | Verify Rule |
 
 <a id="rulesget"></a>
@@ -104,7 +104,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully returned rule file.  Response type can be either JSON, XML, or JSON stream, depending on the Accept header. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;, the rules are returned in the response body. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, the rules are returned as a JSON stream.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully returned rule file. Response type can be either JSON, XML, or JSON stream, depending on the Accept header. If &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;, the rules are returned in the response body. If &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;, the rules are returned as a JSON stream.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to import rule file. The catalog path information may be incorrect.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
@@ -116,7 +116,7 @@ catch (ApiException e)
 
 Preview Rules Data
 
-<p>Applies a rule file to a two-dimensional array of data, and returns a previewed data load as two-dimensional array.</p>
+<p>Applies a rule file to a two-dimensional array of data and returns a previewed data load as two-dimensional array.</p>
 
 ### Example
 ```csharp
@@ -141,7 +141,7 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new RulesApi(config);
-            var body = new RulePreviewInput(); // RulePreviewInput | <p>Rule file details and input two dimensional array.</p> (optional) 
+            var body = new RulePreviewInput(); // RulePreviewInput | <p>Rule file details and input two-dimensional array.</p> (optional) 
 
             try
             {
@@ -184,7 +184,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **body** | [**RulePreviewInput**](RulePreviewInput.md) | &lt;p&gt;Rule file details and input two dimensional array.&lt;/p&gt; | [optional]  |
+| **body** | [**RulePreviewInput**](RulePreviewInput.md) | &lt;p&gt;Rule file details and input two-dimensional array.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -409,7 +409,7 @@ void (empty response body)
 # **RulesVerify**
 > void RulesVerify (Rules body = null)
 
-Verify Rule (Deprecated)
+Verify Rule Deprecated
 
 <p>Verifies a data load or dimension build rule file (index or regular). As this API endpoint is older and has limited functionality, it is recommended to use <a href=\"./op-utils-rules-verifyrule-post.html\">Verify Rule</a> endpoint instead if possible.</p>
 
@@ -440,7 +440,7 @@ namespace Example
 
             try
             {
-                // Verify Rule (Deprecated)
+                // Verify Rule Deprecated
                 apiInstance.RulesVerify(body);
             }
             catch (ApiException  e)
@@ -460,7 +460,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Verify Rule (Deprecated)
+    // Verify Rule Deprecated
     apiInstance.RulesVerifyWithHttpInfo(body);
 }
 catch (ApiException e)

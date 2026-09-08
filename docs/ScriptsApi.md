@@ -17,6 +17,8 @@ All URIs are relative to */essbase/rest/v1*
 | [**ScriptsRemoveScriptPermission**](ScriptsApi.md#scriptsremovescriptpermission) | **DELETE** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/permissions/{userGroupId} | Remove Calc Script Permissions |
 | [**ScriptsRenameScript**](ScriptsApi.md#scriptsrenamescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/rename | Rename Calc Script |
 | [**ScriptsValidateScript**](ScriptsApi.md#scriptsvalidatescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/validate | Validate Calc Script |
+| [**ScriptsValidateScriptFile**](ScriptsApi.md#scriptsvalidatescriptfile) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/scriptops/validate | Validate Calc Script |
+| [**UploadScriptContent**](ScriptsApi.md#uploadscriptcontent) | **PUT** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content | Upload Script Content |
 
 <a id="scriptsaddscriptpermission"></a>
 # **ScriptsAddScriptPermission**
@@ -844,7 +846,7 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -993,8 +995,8 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database (cube) name.</p>
             var file = "\"calc\"";  // string | <p>Type of script file to return. Valid values: <code>calc</code> or <code>mdx</code>. Default value, if unspecified, is <code>calc</code>.</p> (optional)  (default to "calc")
-            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
-            var keyword = "keyword_example";  // string | <p>Filter the list of scripts using a keyword.</p> (optional) 
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>.</p> (optional)  (default to "")
+            var keyword = "\"\"";  // string | <p>Filter the list of scripts using a keyword.</p> (optional)  (default to "")
 
             try
             {
@@ -1040,8 +1042,8 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database (cube) name.&lt;/p&gt; |  |
 | **file** | **string** | &lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
-| **keyword** | **string** | &lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
+| **keyword** | **string** | &lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
 
 ### Return type
 
@@ -1100,7 +1102,7 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
             var scriptName = "scriptName_example";  // string | <p>Script name.</p>
-            var userGroupId = "userGroupId_example";  // string | <p>Id of the user or group.</p>
+            var userGroupId = "userGroupId_example";  // string | <p>ID of the user or group.</p>
             var group = false;  // bool | <p>True if the userGroupId refers to a group.</p> (default to false)
 
             try
@@ -1143,7 +1145,7 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **scriptName** | **string** | &lt;p&gt;Script name.&lt;/p&gt; |  |
-| **userGroupId** | **string** | &lt;p&gt;Id of the user or group.&lt;/p&gt; |  |
+| **userGroupId** | **string** | &lt;p&gt;ID of the user or group.&lt;/p&gt; |  |
 | **group** | **bool** | &lt;p&gt;True if the userGroupId refers to a group.&lt;/p&gt; | [default to false] |
 
 ### Return type
@@ -1372,6 +1374,208 @@ void (empty response body)
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to validate the script. The application or database name may be incorrect, or the contents may be incomplete for the specified script name.&lt;/p&gt; |  -  |
 | **415** | &lt;p&gt;&lt;strong&gt;Not Acceptable&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The media type isn&#39;t supported or wasn&#39;t specified.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="scriptsvalidatescriptfile"></a>
+# **ScriptsValidateScriptFile**
+> void ScriptsValidateScriptFile (string applicationName, string databaseName, string scriptName, string file = null)
+
+Validate Calc Script
+
+<p>Validates the specified script. Applicable only for calculation scripts.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class ScriptsValidateScriptFileExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new ScriptsApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var scriptName = "scriptName_example";  // string | <p>Script name.</p>
+            var file = "\"calc\"";  // string | <p>File.</p> (optional)  (default to "calc")
+
+            try
+            {
+                // Validate Calc Script
+                apiInstance.ScriptsValidateScriptFile(applicationName, databaseName, scriptName, file);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ScriptsApi.ScriptsValidateScriptFile: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the ScriptsValidateScriptFileWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Validate Calc Script
+    apiInstance.ScriptsValidateScriptFileWithHttpInfo(applicationName, databaseName, scriptName, file);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ScriptsApi.ScriptsValidateScriptFileWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **scriptName** | **string** | &lt;p&gt;Script name.&lt;/p&gt; |  |
+| **file** | **string** | &lt;p&gt;File.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Script validated successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to validate the script. The application or database name may be incorrect, or the contents may be incomplete for the specified script name.&lt;/p&gt; |  -  |
+| **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="uploadscriptcontent"></a>
+# **UploadScriptContent**
+> void UploadScriptContent (string applicationName, string databaseName, string scriptName, string file = null, Object body = null)
+
+Upload Script Content
+
+<p>Uploads or replaces the content of the specified script in an application database.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class UploadScriptContentExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new ScriptsApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var scriptName = "scriptName_example";  // string | <p>Script name.</p>
+            var file = "\"calc\"";  // string | <p>Type of script file.</p> (optional)  (default to "calc")
+            var body = null;  // Object |  (optional) 
+
+            try
+            {
+                // Upload Script Content
+                apiInstance.UploadScriptContent(applicationName, databaseName, scriptName, file, body);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling ScriptsApi.UploadScriptContent: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the UploadScriptContentWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Upload Script Content
+    apiInstance.UploadScriptContentWithHttpInfo(applicationName, databaseName, scriptName, file, body);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ScriptsApi.UploadScriptContentWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **scriptName** | **string** | &lt;p&gt;Script name.&lt;/p&gt; |  |
+| **file** | **string** | &lt;p&gt;Type of script file.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
+| **body** | **Object** |  | [optional]  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: text/plain, application/octet-stream
+ - **Accept**: application/json, application/xml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **0** | default response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

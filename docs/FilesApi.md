@@ -5,12 +5,13 @@ All URIs are relative to */essbase/rest/v1*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**FilesAbortUpload**](FilesApi.md#filesabortupload) | **DELETE** /files/abort/{path} | Abort Multipart File Upload |
-| [**FilesAddFile**](FilesApi.md#filesaddfile) | **PUT** /files/{path} | Upload File or Create Folder |
+| [**FilesAddFile**](FilesApi.md#filesaddfile) | **PUT** /files/{path} | Upload File Or Create Folder |
 | [**FilesCopyResource**](FilesApi.md#filescopyresource) | **POST** /files/actions/copy | Copy File |
 | [**FilesCreateUpload**](FilesApi.md#filescreateupload) | **POST** /files/upload-create/{path} | Create Multipart File Upload |
-| [**FilesDeleteFile**](FilesApi.md#filesdeletefile) | **DELETE** /files/{path} | Delete File or Folder |
+| [**FilesDeleteFile**](FilesApi.md#filesdeletefile) | **DELETE** /files/{path} | Delete File Or Folder |
 | [**FilesExtract**](FilesApi.md#filesextract) | **POST** /files/actions/extract | Extract Zip File |
-| [**FilesExtractJob**](FilesApi.md#filesextractjob) | **POST** /files/actions/extractJob | Extract Zip File Using a Job |
+| [**FilesExtractJob**](FilesApi.md#filesextractjob) | **POST** /files/actions/extractJob | Extract Zip File Using Job |
+| [**FilesGetDatabasesFromLCMZip**](FilesApi.md#filesgetdatabasesfromlcmzip) | **GET** /files/getDatabasesFromLCMZip | Get Database Names from LCM Zip File |
 | [**FilesGetSharedPath**](FilesApi.md#filesgetsharedpath) | **GET** /files/sharedpath | Get Shared Path |
 | [**FilesGetUserHomePath**](FilesApi.md#filesgetuserhomepath) | **GET** /files/homepath | Get Home Path |
 | [**FilesListFiles**](FilesApi.md#fileslistfiles) | **GET** /files/{path} | List or Download Files |
@@ -18,7 +19,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**FilesMoveResource**](FilesApi.md#filesmoveresource) | **POST** /files/actions/move | Move or Rename File |
 | [**FilesUploadCommit**](FilesApi.md#filesuploadcommit) | **POST** /files/upload-commit/{path} | Commit Multipart File Upload |
 | [**FilesUploadPart**](FilesApi.md#filesuploadpart) | **PUT** /files/upload-part/{path} | Upload File Part |
-| [**GetObjectStoreURI**](FilesApi.md#getobjectstoreuri) | **GET** /files/getobjectstoreuri | Get Object Storage URI |
+| [**GetObjectStoreURI**](FilesApi.md#getobjectstoreuri) | **GET** /files/getobjectstoreuri | Get Object Storage Uri |
 | [**GetUploadConfig**](FilesApi.md#getuploadconfig) | **GET** /files/uploadconfig | Get Upload Configuration |
 
 <a id="filesabortupload"></a>
@@ -27,7 +28,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Abort Multipart File Upload
 
-<p>Terminate the multipart upload operation of a file and delete all the uploaded parts.</p>
+<p>Terminates the multipart upload operation of a file and deletes all the uploaded parts.</p>
 
 ### Example
 ```csharp
@@ -119,11 +120,11 @@ void (empty response body)
 
 <a id="filesaddfile"></a>
 # **FilesAddFile**
-> GenericEntity FilesAddFile (string path, bool overwrite, System.IO.Stream stream, bool? append = null)
+> FilesAddFile200Response FilesAddFile (string path, bool overwrite, System.IO.Stream stream, bool? append = null)
 
-Upload File or Create Folder
+Upload File Or Create Folder
 
-<p>Uploads a file to Essbase.</p><p>Supported file types include text files, rules files, calculation script files, and MaxL script files.</p> <p>If there is no content type, and a folder name is specified in the URL, a folder is created.</p>
+<p>Uploads a file to Essbase.</p><p>Supported file types include text files, rules files, calculation script files, and MaxL script files.</p> <p>If there is no content type, and a folder name is specified in the URL, a folder is created.</p><p>To upload a file as a single stream, the file size must be known in advance. Most HTTP clients set the Content-Length header automatically. With chunked uploads, however, the client does not send the Content-Length. In those cases, the client must set the CLI-Content-Length to the file size in bytes for a successful upload. Otherwise, the server rejects the request with <code>File upload failed. File is empty.</code> error.</p>
 
 ### Example
 ```csharp
@@ -150,13 +151,13 @@ namespace Example
             var apiInstance = new FilesApi(config);
             var path = "path_example";  // string | <p>Catalog path. If <code>Content-Type=application/octet-stream</code>, this is a file name. Otherwise, it is a folder name.</p>
             var overwrite = false;  // bool | <p>Applicable only for adding a file. Overwriting folders is not supported.</p> (default to false)
-            var stream = new System.IO.MemoryStream(System.IO.File.ReadAllBytes("/path/to/file.txt"));  // System.IO.Stream | <p>Applicable only for adding a file. Provides the stream to upload.</p>
+            var stream = new System.IO.MemoryStream(System.IO.File.ReadAllBytes("/path/to/file.txt"));  // System.IO.Stream | Applicable only for adding a file. Provides the stream to upload.
             var append = false;  // bool? | <p>Append to existing file?</p> (optional)  (default to false)
 
             try
             {
-                // Upload File or Create Folder
-                GenericEntity result = apiInstance.FilesAddFile(path, overwrite, stream, append);
+                // Upload File Or Create Folder
+                FilesAddFile200Response result = apiInstance.FilesAddFile(path, overwrite, stream, append);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -176,8 +177,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Upload File or Create Folder
-    ApiResponse<GenericEntity> response = apiInstance.FilesAddFileWithHttpInfo(path, overwrite, stream, append);
+    // Upload File Or Create Folder
+    ApiResponse<FilesAddFile200Response> response = apiInstance.FilesAddFileWithHttpInfo(path, overwrite, stream, append);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -196,12 +197,12 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **path** | **string** | &lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt; |  |
 | **overwrite** | **bool** | &lt;p&gt;Applicable only for adding a file. Overwriting folders is not supported.&lt;/p&gt; | [default to false] |
-| **stream** | **System.IO.Stream****System.IO.Stream** | &lt;p&gt;Applicable only for adding a file. Provides the stream to upload.&lt;/p&gt; |  |
+| **stream** | **System.IO.Stream****System.IO.Stream** | Applicable only for adding a file. Provides the stream to upload. |  |
 | **append** | **bool?** | &lt;p&gt;Append to existing file?&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
 
-[**GenericEntity**](GenericEntity.md)
+[**FilesAddFile200Response**](FilesAddFile200Response.md)
 
 ### Authorization
 
@@ -228,7 +229,7 @@ catch (ApiException e)
 
 Copy File
 
-<p>Copy a file from source to destination.</p>
+<p>Copies a file from source to destination.</p>
 
 ### Example
 ```csharp
@@ -325,7 +326,7 @@ void (empty response body)
 
 Create Multipart File Upload
 
-<p>Initialize a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.</p><p>Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.</p><p>This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.</p><p><b>See Also</b></p><ul><li><a href=\"./op-files-upload-part-path-put.html\">Upload File Part</a></li><li><a href=\"./op-files-upload-commit-path-post.html\">Commit Partial File Upload</a></li><li><a href=\"./op-files-abort-path-delete.html\">Abort Multipart File Upload</a></li></ul>
+<p>Initializes a file upload in parts. This operation registers the file object and returns a unique upload ID, which must be included in any request related to this file-part upload.</p><p>Multipart file upload can improve performance of uploads by parallelizing them into threads. Multipart upload also protects against needing to restart large uploads in case of network failures.</p><p>This operation is the first step in the multi-part file upload process. The next steps are to upload the file parts, and then commit the upload.</p><p><b>See Also</b></p><ul><li><a href=\"./op-files-upload-part-path-put.html\">Upload File Part</a></li><li><a href=\"./op-files-upload-commit-path-post.html\">Commit Partial File Upload</a></li><li><a href=\"./op-files-abort-path-delete.html\">Abort Multipart File Upload</a></li></ul>
 
 ### Example
 ```csharp
@@ -426,9 +427,9 @@ catch (ApiException e)
 # **FilesDeleteFile**
 > void FilesDeleteFile (string path)
 
-Delete File or Folder
+Delete File Or Folder
 
-<p>Delete the file or folder specified in the path.</p>
+<p>Deletes the file or folder specified in the path.</p>
 
 ### Example
 ```csharp
@@ -457,7 +458,7 @@ namespace Example
 
             try
             {
-                // Delete File or Folder
+                // Delete File Or Folder
                 apiInstance.FilesDeleteFile(path);
             }
             catch (ApiException  e)
@@ -477,7 +478,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete File or Folder
+    // Delete File Or Folder
     apiInstance.FilesDeleteFileWithHttpInfo(path);
 }
 catch (ApiException e)
@@ -523,7 +524,7 @@ void (empty response body)
 
 Extract Zip File
 
-<p>Extract a zip file on same location. Supported for applications, users and shared folders.</p>
+<p>Extracts a zip file on same location. Supported for applications, users, and shared folders.</p>
 
 ### Example
 ```csharp
@@ -618,9 +619,9 @@ void (empty response body)
 # **FilesExtractJob**
 > void FilesExtractJob (ZipFileDetails body, bool? overwrite = null)
 
-Extract Zip File Using a Job
+Extract Zip File Using Job
 
-<p>Extract a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.</p><p>This endpoint is similar to <a href=\"./op-files-actions-extract-post.html\">Extract Zip File</a>, except it initiates a system job you can monitor using <a href=\"./op-jobs-get.html\">Get Job List</a>. Use this endpoint if you experience failures with <a href=\"./op-files-actions-extract-post.html\">Extract Zip File</a>.</p>
+<p>Extracts a zip file on the current Essbase catalog, using a system job. Supported for applications, users and shared folders.</p><p>This endpoint is similar to <a href=\"./op-files-actions-extract-post.html\">Extract Zip File</a>, except it initiates a system job you can monitor using <a href=\"./op-jobs-get.html\">Get Job List</a>. Use this endpoint if you experience failures with <a href=\"./op-files-actions-extract-post.html\">Extract Zip File</a>.</p>
 
 ### Example
 ```csharp
@@ -650,7 +651,7 @@ namespace Example
 
             try
             {
-                // Extract Zip File Using a Job
+                // Extract Zip File Using Job
                 apiInstance.FilesExtractJob(body, overwrite);
             }
             catch (ApiException  e)
@@ -670,7 +671,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Extract Zip File Using a Job
+    // Extract Zip File Using Job
     apiInstance.FilesExtractJobWithHttpInfo(body, overwrite);
 }
 catch (ApiException e)
@@ -711,13 +712,112 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="filesgetdatabasesfromlcmzip"></a>
+# **FilesGetDatabasesFromLCMZip**
+> string FilesGetDatabasesFromLCMZip (string zipFileName)
+
+Get Database Names from LCM Zip File
+
+Extracts database names from the Databases folder in an LCM zip file
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class FilesGetDatabasesFromLCMZipExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new FilesApi(config);
+            var zipFileName = "zipFileName_example";  // string | Zip file path
+
+            try
+            {
+                // Get Database Names from LCM Zip File
+                string result = apiInstance.FilesGetDatabasesFromLCMZip(zipFileName);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling FilesApi.FilesGetDatabasesFromLCMZip: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the FilesGetDatabasesFromLCMZipWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get Database Names from LCM Zip File
+    ApiResponse<string> response = apiInstance.FilesGetDatabasesFromLCMZipWithHttpInfo(zipFileName);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling FilesApi.FilesGetDatabasesFromLCMZipWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **zipFileName** | **string** | Zip file path |  |
+
+### Return type
+
+**string**
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/xml
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Validation Failed |  -  |
+| **500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="filesgetsharedpath"></a>
 # **FilesGetSharedPath**
 > string FilesGetSharedPath ()
 
 Get Shared Path
 
-<p>Get the shared path in the Essbase file catalog. This directory is a good location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.</p>
+<p>Gets the shared path in the Essbase file catalog. This directory is a safe location to store files and artifacts that you can use in more than one cube. Its contents are accessible to all users.</p>
 
 ### Example
 ```csharp
@@ -811,7 +911,7 @@ This endpoint does not need any parameter.
 
 Get Home Path
 
-<p>Get the home path of the current logged in user.</p>
+<p>Gets the home path of the current logged in user.</p>
 
 ### Example
 ```csharp
@@ -905,7 +1005,7 @@ This endpoint does not need any parameter.
 
 List or Download Files
 
-<p>Returns a list of files, or downloads the specified file. To list files, use <code>Accept='application/json'</code> for the Accept header. To download, use <code>Accept='application/octet-stream'</code> for the Accept header.</p>
+<p>Returns a list of files or downloads the specified file. To list files, use <code>Accept='application/json'</code> for the Accept header. To download, use <code>Accept='application/octet-stream'</code> for the Accept header.</p>
 
 ### Example
 ```csharp
@@ -934,7 +1034,7 @@ namespace Example
             var offset = 56;  // int? | <p>Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.</p> (optional) 
             var limit = 56;  // int? | <p>Maximum number of files to return. Applicable only for listing files.</p> (optional) 
             var type = "type_example";  // string | <p>List files by type. If type is not specified, returns all files. Applicable only for listing files.</p> (optional) 
-            var orderBy = "orderBy_example";  // string | <p>Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
+            var orderBy = "\"\"";  // string | <p>Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>.</p> (optional)  (default to "")
             var overwrite = false;  // bool? | <p>If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  <code>action=validateUpload</code> and <code>Accept='application/json'</code> or <code>Accept='application/xml'</code> . Default value is false.</p> (optional)  (default to false)
             var action = "action_example";  // string | <p>Validates the upload. Supported action values are <code>validateUpload</code> and <code>'Accept=application/json'</code> or <code>'Accept=application/xml'</code>.</p> (optional) 
             var fileSize = 789L;  // long? | <p>Validates whether enough free space is available. Applicable only with query parameters <code>action='validateUpload'</code> and <code>Accept='application/json'</code> or <code>Accept='application/xml'</code>.</p> (optional) 
@@ -986,7 +1086,7 @@ catch (ApiException e)
 | **offset** | **int?** | &lt;p&gt;Number of items to omit from the start of the result set. Default value is 0. Applicable only for listing files.&lt;/p&gt; | [optional]  |
 | **limit** | **int?** | &lt;p&gt;Maximum number of files to return. Applicable only for listing files.&lt;/p&gt; | [optional]  |
 | **type** | **string** | &lt;p&gt;List files by type. If type is not specified, returns all files. Applicable only for listing files.&lt;/p&gt; | [optional]  |
-| **orderBy** | **string** | &lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | &lt;p&gt;Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
 | **overwrite** | **bool?** | &lt;p&gt;If true, overwrite files. If false, any existing file is validated but not overwritten. Applicable only with query parameters  &lt;code&gt;action&#x3D;validateUpload&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt; . Default value is false.&lt;/p&gt; | [optional] [default to false] |
 | **action** | **string** | &lt;p&gt;Validates the upload. Supported action values are &lt;code&gt;validateUpload&lt;/code&gt; and &lt;code&gt;&#39;Accept&#x3D;application/json&#39;&lt;/code&gt; or &lt;code&gt;&#39;Accept&#x3D;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; | [optional]  |
 | **fileSize** | **long?** | &lt;p&gt;Validates whether enough free space is available. Applicable only with query parameters &lt;code&gt;action&#x3D;&#39;validateUpload&#39;&lt;/code&gt; and &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; | [optional]  |
@@ -1022,7 +1122,7 @@ catch (ApiException e)
 
 List Root Folders
 
-<p>List catalog root folders.</p>
+<p>Lists catalog root folders.</p>
 
 ### Example
 ```csharp
@@ -1123,7 +1223,7 @@ catch (ApiException e)
 
 Move or Rename File
 
-<p>Either moves a file from source to destination, or renames a file or folder. Moving a folder is not supported. Renaming a folder is supported only if the folder is not in the applications directory.</p>
+<p>Either moves a file from source to destination or renames a file or folder. Moving a folder is not supported. Renaming a folder is supported only if the folder is not in the applications directory.</p>
 
 ### Example
 ```csharp
@@ -1220,7 +1320,7 @@ void (empty response body)
 
 Commit Multipart File Upload
 
-<p>Commit the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.</p>
+<p>Commits the upload of one or more parts from a multipart file upload. Include the part number and corresponding ETag (entity tag) value for each part.</p>
 
 ### Example
 ```csharp
@@ -1323,7 +1423,7 @@ catch (ApiException e)
 
 Upload File Part
 
-<p>Upload part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.</p><p>Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.</p>
+<p>Uploads part of a file in a multipart file upload. You must have already initiated a multipart file upload. Provide the upload path, a part number (integer), and the unique upload ID that was returned from the Create Multipart File Upload operation.</p><p>Note: If multiple object parts are uploaded using the same upload ID and part number, the latest upload overwrites the previous.</p>
 
 ### Example
 ```csharp
@@ -1424,9 +1524,9 @@ catch (ApiException e)
 # **GetObjectStoreURI**
 > void GetObjectStoreURI (string path = null)
 
-Get Object Storage URI
+Get Object Storage Uri
 
-<p>Get Object Storage URI.</p>
+<p>Gets Object Storage URI.</p>
 
 ### Example
 ```csharp
@@ -1455,7 +1555,7 @@ namespace Example
 
             try
             {
-                // Get Object Storage URI
+                // Get Object Storage Uri
                 apiInstance.GetObjectStoreURI(path);
             }
             catch (ApiException  e)
@@ -1475,7 +1575,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Object Storage URI
+    // Get Object Storage Uri
     apiInstance.GetObjectStoreURIWithHttpInfo(path);
 }
 catch (ApiException e)
@@ -1503,23 +1603,23 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: text/plain, application/xml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **0** | successful operation |  -  |
+| **0** | default response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a id="getuploadconfig"></a>
 # **GetUploadConfig**
-> void GetUploadConfig ()
+> void GetUploadConfig (string path = null)
 
 Get Upload Configuration
 
-<p>Get Upload Configuration.</p>
+<p>Gets upload configuration for a specified path.</p><p>The <code>path</code> parameter is optional. Disk properties (minimum and maximum sizes) are returned only when path is specified. If path is not provided, the default values are returned: <code>1</code> for the minimum size and <code>-1</code> for the maximum size, indicating that no size limits are enforced.</p><p><strong>Note: </strong>The upper limit is only applicable to implementations handled through disk. It is not applicable for object storage or DB storage.</p>
 
 ### Example
 ```csharp
@@ -1544,11 +1644,12 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new FilesApi(config);
+            var path = "\"\"";  // string | <p>Catalog path of the folder to which you want to upload the file.</p> (optional)  (default to "")
 
             try
             {
                 // Get Upload Configuration
-                apiInstance.GetUploadConfig();
+                apiInstance.GetUploadConfig(path);
             }
             catch (ApiException  e)
             {
@@ -1568,7 +1669,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Upload Configuration
-    apiInstance.GetUploadConfigWithHttpInfo();
+    apiInstance.GetUploadConfigWithHttpInfo(path);
 }
 catch (ApiException e)
 {
@@ -1579,7 +1680,11 @@ catch (ApiException e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **path** | **string** | &lt;p&gt;Catalog path of the folder to which you want to upload the file.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
+
 ### Return type
 
 void (empty response body)
@@ -1591,13 +1696,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json, application/xml
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **0** | successful operation |  -  |
+| **0** | default response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

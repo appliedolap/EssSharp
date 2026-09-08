@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Items** | [**List&lt;DataLoadBuffer&gt;**](DataLoadBuffer.md) |  | [optional] 
 **TotalResults** | **long** |  | [optional] 
-**HasMore** | **bool** |  | [optional] 
 **Count** | **long** |  | [optional] 
+**HasMore** | **bool** |  | [optional] 
 **Limit** | **long** |  | [optional] 
 **Properties** | **Dictionary&lt;string, string&gt;** |  | [optional] 
 **Offset** | **long** |  | [optional] 

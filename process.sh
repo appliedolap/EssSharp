@@ -27,6 +27,15 @@ jq . "./versions/$ESSBASE_SWAGGER_VERSION/swagger.json" > formatted.json || { ec
 # copy the formatted.json to temp.json
 cp formatted.json temp.json >/dev/null 2>&1 || { echo "Unable to copy formatted.json to temp.json, exiting."; exit 1; }
 
+# Essbase 26 publishes an OpenAPI 3 document. Apply the equivalent corrections
+# using OpenAPI 3 request, response, component, and security shapes, then stop.
+if [ "$(jq -r '.openapi // empty' temp.json)" != "" ]; then
+  jq -f process-openapi3.jq temp.json > json.tmp && mv json.tmp temp.json || { echo "Unable to process OpenAPI 3 document, exiting."; exit 1; }
+  cp temp.json processed.json || { echo "Unable to save processed.json, exiting."; exit 1; }
+  popd >/dev/null 2>&1
+  exit 0
+fi
+
 ##### paths ####
 
 cat temp.json | jq '.paths."/about/instance".get.responses = {"200": {"description": "successful operation", "schema": { "$ref": "#/definitions/AboutInstance" }}}' > json.tmp && mv json.tmp temp.json 

@@ -6,7 +6,7 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**GlobalDatasourcesCreateDatasource**](GlobalDatasourcesApi.md#globaldatasourcescreatedatasource) | **POST** /datasources | Create Global Datasource |
 | [**GlobalDatasourcesDeleteDatasource**](GlobalDatasourcesApi.md#globaldatasourcesdeletedatasource) | **DELETE** /datasources/{datasourceName} | Delete Global Datasource |
-| [**GlobalDatasourcesGetData**](GlobalDatasourcesApi.md#globaldatasourcesgetdata) | **GET** /datasources/query/data/{streamId} | Get Streamed Global Datasource Results by ID |
+| [**GlobalDatasourcesGetData**](GlobalDatasourcesApi.md#globaldatasourcesgetdata) | **GET** /datasources/query/data/{streamId} | Get Streamed Global Datasource Results By ID |
 | [**GlobalDatasourcesGetDataStream**](GlobalDatasourcesApi.md#globaldatasourcesgetdatastream) | **POST** /datasources/query/stream | Get Streamed Global Datasource Results |
 | [**GlobalDatasourcesGetDatasourceDetails**](GlobalDatasourcesApi.md#globaldatasourcesgetdatasourcedetails) | **GET** /datasources/{datasourceName} | Get Global Datasource |
 | [**GlobalDatasourcesGetDatasources**](GlobalDatasourcesApi.md#globaldatasourcesgetdatasources) | **GET** /datasources | Get Global Datasources |
@@ -206,7 +206,7 @@ void (empty response body)
 # **GlobalDatasourcesGetData**
 > void GlobalDatasourcesGetData (string streamId)
 
-Get Streamed Global Datasource Results by ID
+Get Streamed Global Datasource Results By ID
 
 <p>Returns results from a global-level Datasource associated with the specified stream id.</p>
 
@@ -237,7 +237,7 @@ namespace Example
 
             try
             {
-                // Get Streamed Global Datasource Results by ID
+                // Get Streamed Global Datasource Results By ID
                 apiInstance.GlobalDatasourcesGetData(streamId);
             }
             catch (ApiException  e)
@@ -257,7 +257,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Streamed Global Datasource Results by ID
+    // Get Streamed Global Datasource Results By ID
     apiInstance.GlobalDatasourcesGetDataWithHttpInfo(streamId);
 }
 catch (ApiException e)
@@ -800,7 +800,7 @@ catch (ApiException e)
 
 Update Global Datasource
 
-<p>Update the named global-level Datasource. If the update is successful, returns details about the updated Datasource. <code>type</code> and <code>connection</code> are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.</p>
+<p>Updates the named global-level Datasource. If the update is successful, returns details about the updated Datasource. <code>type</code> and <code>connection</code> are required inputs for all types of Datasources. Other required inputs differ based on the type of the Datasource.</p>
 
 ### Example
 ```csharp

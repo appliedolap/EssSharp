@@ -411,7 +411,7 @@ catch (ApiException e)
 
 Update Property Values
 
-<p>Updates Provider Services configuration property values in the Essbase Server, and returns the list of updated properties.</p>
+<p>Updates Provider Services configuration property values in the Essbase Server and returns the list of updated properties.</p>
 
 ### Example
 ```csharp
@@ -511,7 +511,7 @@ catch (ApiException e)
 
 Update Server Property
 
-<p>Updates a Provider Services property in the Essbase Server, and returns the updated property.</p>
+<p>Updates a Provider Services property in the Essbase Server and returns the updated property.</p>
 
 ### Example
 ```csharp

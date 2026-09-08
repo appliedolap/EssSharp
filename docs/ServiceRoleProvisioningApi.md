@@ -5,7 +5,7 @@ All URIs are relative to */essbase/rest/v1*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**ServiceRoleProvisioningDeprovision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningdeprovision) | **DELETE** /permissions/{id} | Deprovision Service Role |
-| [**ServiceRoleProvisioningGetProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioninggetprovision) | **GET** /permissions/{id} | Get Service Role Provision |
+| [**ServiceRoleProvisioningGetProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioninggetprovision) | **GET** /permissions/{id} | Get Service Role Provisioning |
 | [**ServiceRoleProvisioningProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningprovision) | **PUT** /permissions/{id} | Provision Service Role |
 | [**ServiceRoleProvisioningSearchProvision**](ServiceRoleProvisioningApi.md#serviceroleprovisioningsearchprovision) | **GET** /permissions | Search Service Role Provisioning |
 
@@ -41,7 +41,7 @@ namespace Example
 
             var apiInstance = new ServiceRoleProvisioningApi(config);
             var id = "id_example";  // string | <p>User ID.</p>
-            var group = false;  // bool? | <p>If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)</p> (optional)  (default to false)
+            var group = false;  // bool? | <p>If true, ID is for a group. If false, ID is for a user. Default is false (ID is for a user.)</p> (optional)  (default to false)
 
             try
             {
@@ -81,7 +81,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **id** | **string** | &lt;p&gt;User ID.&lt;/p&gt; |  |
-| **group** | **bool?** | &lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; | [optional] [default to false] |
+| **group** | **bool?** | &lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is for a user.)&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
 
@@ -110,9 +110,9 @@ void (empty response body)
 # **ServiceRoleProvisioningGetProvision**
 > UserGroupProvisionInfo ServiceRoleProvisioningGetProvision (string id, bool? group = null)
 
-Get Service Role Provision
+Get Service Role Provisioning
 
-<p>Gets Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p> <p>See Also: <a href=\"./op-applications-app-permissions-id-get.html\">Get Application Role Provision</a>.</p>
+<p>Retrieve Essbase service role provisioning information. Service roles include Service Administrator, Power User, and User.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead use Shared Services Console to manage users, groups, and permissions.</p> <p>See Also: <a href=\"./op-applications-app-permissions-id-get.html\">Get Application Role Provision</a>.</p>
 
 ### Example
 ```csharp
@@ -138,11 +138,11 @@ namespace Example
 
             var apiInstance = new ServiceRoleProvisioningApi(config);
             var id = "id_example";  // string | <p>User or group ID.</p>
-            var group = false;  // bool? | <p>If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)</p> (optional)  (default to false)
+            var group = false;  // bool? | <p>If true, ID is for a group. If false, ID is for a user. Default is false (ID is for a user.)</p> (optional)  (default to false)
 
             try
             {
-                // Get Service Role Provision
+                // Get Service Role Provisioning
                 UserGroupProvisionInfo result = apiInstance.ServiceRoleProvisioningGetProvision(id, group);
                 Debug.WriteLine(result);
             }
@@ -163,7 +163,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Service Role Provision
+    // Get Service Role Provisioning
     ApiResponse<UserGroupProvisionInfo> response = apiInstance.ServiceRoleProvisioningGetProvisionWithHttpInfo(id, group);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -182,7 +182,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **id** | **string** | &lt;p&gt;User or group ID.&lt;/p&gt; |  |
-| **group** | **bool?** | &lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is considered to be for a user.)&lt;/p&gt; | [optional] [default to false] |
+| **group** | **bool?** | &lt;p&gt;If true, ID is for a group. If false, ID is for a user. Default is false (ID is for a user.)&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
 
@@ -337,7 +337,7 @@ namespace Example
 
             var apiInstance = new ServiceRoleProvisioningApi(config);
             var id = "\"*\"";  // string | <p>User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.</p> (optional)  (default to "*")
-            var role = "\"all\"";  // string | <p>Input may include <code>all</code>, <code>none</code>, or a comma-separated list of roles (for example, <code>service_administrator</code>, <code>power_user</code>, or <code>user</code>). Default value is <code>all</code>, so if this query parameter is not specified, all users and groups having some role are returned. If <code>none</code> is specified, only users and groups having no role will be returned. If named roles are specified, then only users and groups having any of the named roles are returned.</p> (optional)  (default to "all")
+            var role = "\"all\"";  // string | <p>Input may include <code>all</code>, <code>none</code>, or a comma-separated list of roles (for example, <code>service_administrator</code>, <code>power_user</code>, or <code>user</code>). Default value is <code>all</code>, so if this query parameter is not specified, all users and groups having some roles are returned. If <code>none</code> is specified, only users and groups having no role will be returned. If named roles are specified, then only users and groups having any of the named roles are returned.</p> (optional)  (default to "all")
             var filter = "\"all\"";  // string | <p>Search filter. Values available: <code>all/group/user</code>. Default value is <code>all</code>, so if this query parameter is not specified, then all users and groups having some role will be returned.</p> (optional)  (default to "all")
             var page = -1;  // int? | <p>This is used to get the list of users/groups having no service roles in paginated manner. Page number starts with 0</p> (optional)  (default to -1)
 
@@ -383,7 +383,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **id** | **string** | &lt;p&gt;User or group ID wildcard pattern. if specified, returns users and groups matching the pattern, if not specified, returns all the users and groups having some role. Users or groups having no role are not returned.&lt;/p&gt; | [optional] [default to &quot;*&quot;] |
-| **role** | **string** | &lt;p&gt;Input may include &lt;code&gt;all&lt;/code&gt;, &lt;code&gt;none&lt;/code&gt;, or a comma-separated list of roles (for example, &lt;code&gt;service_administrator&lt;/code&gt;, &lt;code&gt;power_user&lt;/code&gt;, or &lt;code&gt;user&lt;/code&gt;). Default value is &lt;code&gt;all&lt;/code&gt;, so if this query parameter is not specified, all users and groups having some role are returned. If &lt;code&gt;none&lt;/code&gt; is specified, only users and groups having no role will be returned. If named roles are specified, then only users and groups having any of the named roles are returned.&lt;/p&gt; | [optional] [default to &quot;all&quot;] |
+| **role** | **string** | &lt;p&gt;Input may include &lt;code&gt;all&lt;/code&gt;, &lt;code&gt;none&lt;/code&gt;, or a comma-separated list of roles (for example, &lt;code&gt;service_administrator&lt;/code&gt;, &lt;code&gt;power_user&lt;/code&gt;, or &lt;code&gt;user&lt;/code&gt;). Default value is &lt;code&gt;all&lt;/code&gt;, so if this query parameter is not specified, all users and groups having some roles are returned. If &lt;code&gt;none&lt;/code&gt; is specified, only users and groups having no role will be returned. If named roles are specified, then only users and groups having any of the named roles are returned.&lt;/p&gt; | [optional] [default to &quot;all&quot;] |
 | **filter** | **string** | &lt;p&gt;Search filter. Values available: &lt;code&gt;all/group/user&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, so if this query parameter is not specified, then all users and groups having some role will be returned.&lt;/p&gt; | [optional] [default to &quot;all&quot;] |
 | **page** | **int?** | &lt;p&gt;This is used to get the list of users/groups having no service roles in paginated manner. Page number starts with 0&lt;/p&gt; | [optional] [default to -1] |
 

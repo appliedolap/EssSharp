@@ -204,7 +204,7 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Job started successfully. Job information returned in response.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Application may not exist, or application parameter may be incorrect. Or, database may not exist, or database parameter may be incorrect. Or, a null argument may have been passed.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Application may not exist, or application parameter may be incorrect. Or, database may not exist, or database parameter may be incorrect. Or a null argument may have been passed.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 | **503** | &lt;p&gt;&lt;strong&gt;Service Unavailable&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Naming exception or server exception.&lt;/p&gt; |  -  |
 
@@ -212,7 +212,7 @@ catch (ApiException e)
 
 <a id="jobsgetalljobrecords"></a>
 # **JobsGetAllJobRecords**
-> JobRecordPaginatedResultWrapper JobsGetAllJobRecords (string keyword = null, string fullAppName = null, string fullDatabaseName = null, string orderBy = null, long? offset = null, long? limit = null, bool? systemjobs = null)
+> JobRecordPaginatedResultWrapper JobsGetAllJobRecords (string keyword = null, string fullAppName = null, string fullDatabaseName = null, string orderBy = null, long? offset = null, long? limit = null, bool? systemjobs = null, bool? caseSensitive = null, string searchBy = null, string jobTypeSearch = null, string jobDateFrom = null, string jobDateTo = null)
 
 Get Job List
 
@@ -241,18 +241,23 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new JobsApi(config);
-            var keyword = "keyword_example";  // string | <p>Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.</p> (optional) 
-            var fullAppName = "fullAppName_example";  // string | <p>Application name for which to retrieve job records.</p> (optional) 
-            var fullDatabaseName = "fullDatabaseName_example";  // string | <p>Database name for which to retrieve job records.</p> (optional) 
+            var keyword = "\"\"";  // string | <p>Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or username. If this parameter and fullAppName are both specified, fullAppName takes precedence.</p> (optional)  (default to "")
+            var fullAppName = "\"\"";  // string | <p>Application name for which to retrieve job records.</p> (optional)  (default to "")
+            var fullDatabaseName = "\"\"";  // string | <p>Database name for which to retrieve job records.</p> (optional)  (default to "")
             var orderBy = "\"job_ID:desc\"";  // string | <p>Order By specification. By default, jobs records are returned by job IDs in descending order.</p> (optional)  (default to "job_ID:desc")
             var offset = 0L;  // long? | <p>Number of jobs to omit from the start of the result set.</p> (optional)  (default to 0)
             var limit = 50L;  // long? | <p>Maximum number of jobs to fetch. </p> (optional)  (default to 50)
             var systemjobs = false;  // bool? | <p>Include backup jobs in jobs records.</p> (optional)  (default to false)
+            var caseSensitive = false;  // bool? | <p>Flag to determine if filters should be case-sensitive. Default: <code>false</code>. Set to true for case-sensitive matching, false for case-insensitive matching.</p> (optional)  (default to false)
+            var searchBy = "\"ALL\"";  // string | <p>Defines the specific field to apply the search on. Supported fields: <code>job_ID</code> (Job ID), <code>appName</code> (Application Name), <code>dbName</code> (Database Name), <code>jobtype</code> (Job Type), <code>script</code> (Script Name), <code>userName</code> (User Name). Default: <code>ALL</code>. Default behavior: If field is not provided, the search is  applied across all supported fields.</p> (optional)  (default to "ALL")
+            var jobTypeSearch = "\"ALL\"";  // string | <p>Job type for which to retrieve job records. Default: <code>ALL</code>.</p> (optional)  (default to "ALL")
+            var jobDateFrom = "\"\"";  // string | <p>Filters job records starting from this date and time (inclusive). Default: <code>Empty</code>.</p> (optional)  (default to "")
+            var jobDateTo = "\"\"";  // string | <p>Filters job records up to this date and time (inclusive). Default: <code>Empty</code>.</p> (optional)  (default to "")
 
             try
             {
                 // Get Job List
-                JobRecordPaginatedResultWrapper result = apiInstance.JobsGetAllJobRecords(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs);
+                JobRecordPaginatedResultWrapper result = apiInstance.JobsGetAllJobRecords(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs, caseSensitive, searchBy, jobTypeSearch, jobDateFrom, jobDateTo);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -273,7 +278,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Job List
-    ApiResponse<JobRecordPaginatedResultWrapper> response = apiInstance.JobsGetAllJobRecordsWithHttpInfo(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs);
+    ApiResponse<JobRecordPaginatedResultWrapper> response = apiInstance.JobsGetAllJobRecordsWithHttpInfo(keyword, fullAppName, fullDatabaseName, orderBy, offset, limit, systemjobs, caseSensitive, searchBy, jobTypeSearch, jobDateFrom, jobDateTo);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -290,13 +295,18 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **keyword** | **string** | &lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or user name. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; | [optional]  |
-| **fullAppName** | **string** | &lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; | [optional]  |
-| **fullDatabaseName** | **string** | &lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; | [optional]  |
+| **keyword** | **string** | &lt;p&gt;Filter the job records using a keyword that may be part of the job ID, application name, database name, job file name (script), or username. If this parameter and fullAppName are both specified, fullAppName takes precedence.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
+| **fullAppName** | **string** | &lt;p&gt;Application name for which to retrieve job records.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
+| **fullDatabaseName** | **string** | &lt;p&gt;Database name for which to retrieve job records.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
 | **orderBy** | **string** | &lt;p&gt;Order By specification. By default, jobs records are returned by job IDs in descending order.&lt;/p&gt; | [optional] [default to &quot;job_ID:desc&quot;] |
 | **offset** | **long?** | &lt;p&gt;Number of jobs to omit from the start of the result set.&lt;/p&gt; | [optional] [default to 0] |
 | **limit** | **long?** | &lt;p&gt;Maximum number of jobs to fetch. &lt;/p&gt; | [optional] [default to 50] |
 | **systemjobs** | **bool?** | &lt;p&gt;Include backup jobs in jobs records.&lt;/p&gt; | [optional] [default to false] |
+| **caseSensitive** | **bool?** | &lt;p&gt;Flag to determine if filters should be case-sensitive. Default: &lt;code&gt;false&lt;/code&gt;. Set to true for case-sensitive matching, false for case-insensitive matching.&lt;/p&gt; | [optional] [default to false] |
+| **searchBy** | **string** | &lt;p&gt;Defines the specific field to apply the search on. Supported fields: &lt;code&gt;job_ID&lt;/code&gt; (Job ID), &lt;code&gt;appName&lt;/code&gt; (Application Name), &lt;code&gt;dbName&lt;/code&gt; (Database Name), &lt;code&gt;jobtype&lt;/code&gt; (Job Type), &lt;code&gt;script&lt;/code&gt; (Script Name), &lt;code&gt;userName&lt;/code&gt; (User Name). Default: &lt;code&gt;ALL&lt;/code&gt;. Default behavior: If field is not provided, the search is  applied across all supported fields.&lt;/p&gt; | [optional] [default to &quot;ALL&quot;] |
+| **jobTypeSearch** | **string** | &lt;p&gt;Job type for which to retrieve job records. Default: &lt;code&gt;ALL&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;ALL&quot;] |
+| **jobDateFrom** | **string** | &lt;p&gt;Filters job records starting from this date and time (inclusive). Default: &lt;code&gt;Empty&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
+| **jobDateTo** | **string** | &lt;p&gt;Filters job records up to this date and time (inclusive). Default: &lt;code&gt;Empty&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
 
 ### Return type
 
@@ -451,7 +461,7 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new JobsApi(config);
-            var userId = "userId_example";  // string | User Id of the logged in user
+            var userId = "userId_example";  // string | User ID of the logged in user
 
             try
             {
@@ -494,7 +504,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **userId** | **string** | User Id of the logged in user |  |
+| **userId** | **string** | User ID of the logged in user |  |
 
 ### Return type
 
