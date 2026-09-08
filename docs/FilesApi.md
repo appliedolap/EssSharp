@@ -18,8 +18,8 @@ All URIs are relative to */essbase/rest/v1*
 | [**FilesMoveResource**](FilesApi.md#filesmoveresource) | **POST** /files/actions/move | Move or Rename File |
 | [**FilesUploadCommit**](FilesApi.md#filesuploadcommit) | **POST** /files/upload-commit/{path} | Commit Multipart File Upload |
 | [**FilesUploadPart**](FilesApi.md#filesuploadpart) | **PUT** /files/upload-part/{path} | Upload File Part |
-| [**GetObjectStoreURI**](FilesApi.md#getobjectstoreuri) | **GET** /files/getobjectstoreuri |  |
-| [**GetUploadConfig**](FilesApi.md#getuploadconfig) | **GET** /files/uploadconfig |  |
+| [**GetObjectStoreURI**](FilesApi.md#getobjectstoreuri) | **GET** /files/getobjectstoreuri | Get Object Storage URI |
+| [**GetUploadConfig**](FilesApi.md#getuploadconfig) | **GET** /files/uploadconfig | Get Upload Configuration |
 
 <a id="filesabortupload"></a>
 # **FilesAbortUpload**
@@ -1424,7 +1424,9 @@ catch (ApiException e)
 # **GetObjectStoreURI**
 > void GetObjectStoreURI (string path = null)
 
+Get Object Storage URI
 
+<p>Get Object Storage URI.</p>
 
 ### Example
 ```csharp
@@ -1453,6 +1455,7 @@ namespace Example
 
             try
             {
+                // Get Object Storage URI
                 apiInstance.GetObjectStoreURI(path);
             }
             catch (ApiException  e)
@@ -1472,6 +1475,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
+    // Get Object Storage URI
     apiInstance.GetObjectStoreURIWithHttpInfo(path);
 }
 catch (ApiException e)
@@ -1513,7 +1517,9 @@ void (empty response body)
 # **GetUploadConfig**
 > void GetUploadConfig ()
 
+Get Upload Configuration
 
+<p>Get Upload Configuration.</p>
 
 ### Example
 ```csharp
@@ -1541,6 +1547,7 @@ namespace Example
 
             try
             {
+                // Get Upload Configuration
                 apiInstance.GetUploadConfig();
             }
             catch (ApiException  e)
@@ -1560,6 +1567,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
+    // Get Upload Configuration
     apiInstance.GetUploadConfigWithHttpInfo();
 }
 catch (ApiException e)
