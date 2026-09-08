@@ -4,7 +4,7 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GroupsAdd**](GroupsApi.md#groupsadd) | **POST** /groups | Add or Import Group(s) |
+| [**GroupsAdd**](GroupsApi.md#groupsadd) | **POST** /groups | Add or Import Groups |
 | [**GroupsAddGroupMembersToGroup**](GroupsApi.md#groupsaddgroupmemberstogroup) | **POST** /groups/{id}/members/groups | Add Groups to Group |
 | [**GroupsAddUserMembersToGroup**](GroupsApi.md#groupsaddusermemberstogroup) | **POST** /groups/{id}/members/users | Add Group Users |
 | [**GroupsDelete**](GroupsApi.md#groupsdelete) | **DELETE** /groups/{id} | Delete Group |
@@ -13,7 +13,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**GroupsGetGroupMembersOfGroup**](GroupsApi.md#groupsgetgroupmembersofgroup) | **GET** /groups/{id}/members/groups | Get Groups in Group |
 | [**GroupsGetMembers**](GroupsApi.md#groupsgetmembers) | **GET** /groups/{id}/members | Get Group Members |
 | [**GroupsGetUserMembersOfGroup**](GroupsApi.md#groupsgetusermembersofgroup) | **GET** /groups/{id}/members/users | Get Group Users |
-| [**GroupsRemoveGroupMembersFromGroup**](GroupsApi.md#groupsremovegroupmembersfromgroup) | **DELETE** /groups/{id}/members/groups | Remove Groups From Group |
+| [**GroupsRemoveGroupMembersFromGroup**](GroupsApi.md#groupsremovegroupmembersfromgroup) | **DELETE** /groups/{id}/members/groups | Remove Groups from Group |
 | [**GroupsRemoveUserMembersFromGroup**](GroupsApi.md#groupsremoveusermembersfromgroup) | **DELETE** /groups/{id}/members/users | Remove Group Users |
 | [**GroupsSearch**](GroupsApi.md#groupssearch) | **GET** /groups | Search or Export Groups |
 | [**UsersDeleteGroups**](GroupsApi.md#usersdeletegroups) | **POST** /groups/actions/delete | Delete Groups in File |
@@ -22,7 +22,7 @@ All URIs are relative to */essbase/rest/v1*
 # **GroupsAdd**
 > GroupBean GroupsAdd (GroupBean body)
 
-Add or Import Group(s)
+Add or Import Groups
 
 <p>Adds or imports one or more groups.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
@@ -53,7 +53,7 @@ namespace Example
 
             try
             {
-                // Add or Import Group(s)
+                // Add or Import Groups
                 GroupBean result = apiInstance.GroupsAdd(body);
                 Debug.WriteLine(result);
             }
@@ -74,7 +74,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Add or Import Group(s)
+    // Add or Import Groups
     ApiResponse<GroupBean> response = apiInstance.GroupsAddWithHttpInfo(body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -914,7 +914,7 @@ catch (ApiException e)
 # **GroupsRemoveGroupMembersFromGroup**
 > UserBean GroupsRemoveGroupMembersFromGroup (string id, List<string> body)
 
-Remove Groups From Group
+Remove Groups from Group
 
 <p>Removes multiple group members from a group.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
@@ -946,7 +946,7 @@ namespace Example
 
             try
             {
-                // Remove Groups From Group
+                // Remove Groups from Group
                 UserBean result = apiInstance.GroupsRemoveGroupMembersFromGroup(id, body);
                 Debug.WriteLine(result);
             }
@@ -967,7 +967,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Remove Groups From Group
+    // Remove Groups from Group
     ApiResponse<UserBean> response = apiInstance.GroupsRemoveGroupMembersFromGroupWithHttpInfo(id, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -1017,7 +1017,7 @@ catch (ApiException e)
 
 Remove Group Users
 
-<p>Remove multiple user members from a group.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
+<p>Removes multiple user members from a group.</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
 ### Example
 ```csharp

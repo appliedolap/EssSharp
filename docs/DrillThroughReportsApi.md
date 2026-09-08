@@ -9,7 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**DrillThroughReportsExecute**](DrillThroughReportsApi.md#drillthroughreportsexecute) | **POST** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Execute Drill Through Report |
 | [**DrillThroughReportsGetReport**](DrillThroughReportsApi.md#drillthroughreportsgetreport) | **GET** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Get Drill Through Report |
 | [**DrillThroughReportsGetReports**](DrillThroughReportsApi.md#drillthroughreportsgetreports) | **GET** /applications/{applicationName}/databases/{databaseName}/reports | Get Drill Through Reports |
-| [**DrillThroughReportsGetReportsForIntersections**](DrillThroughReportsApi.md#drillthroughreportsgetreportsforintersections) | **POST** /applications/{applicationName}/databases/{databaseName}/dtreports/list | List Drill Through Reports For Given Cell Intersections |
+| [**DrillThroughReportsGetReportsForIntersections**](DrillThroughReportsApi.md#drillthroughreportsgetreportsforintersections) | **POST** /applications/{applicationName}/databases/{databaseName}/dtreports/list | List Drill Through Reports for Given Cell Intersections |
 | [**DrillThroughReportsUpdateReport**](DrillThroughReportsApi.md#drillthroughreportsupdatereport) | **PUT** /applications/{applicationName}/databases/{databaseName}/reports/{name} | Update Drill Through Report |
 
 <a id="drillthroughreportscreate"></a>
@@ -18,7 +18,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Create Drill Through Report
 
-<p>Creates a drill through report definition in the specified application and database, and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.</p><p>Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).</p><p>To create a drill through report definition, you must be a Database Manager or higher.</p>
+<p>Creates a drill through report definition in the specified application and database and returns details about the report. Drill through is useful when the cube contains aggregated values and an external source system has more detailed data. A drill through report definition determines the access users should have to information in the external source system.</p><p>Drill through report definitions are associated with a cube, and include a column mapping (required), a drillable region (required), and a mapping for runtime parameters (optional - can be used if the Datasource query is parameterized).</p><p>To create a drill through report definition, you must be a Database Manager or higher.</p>
 
 ### Example
 ```csharp
@@ -453,8 +453,8 @@ namespace Example
             var apiInstance = new DrillThroughReportsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var keyword = "keyword_example";  // string | <p>Filter the list of drill-through reports using a keyword.<p> (optional) 
-            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
+            var keyword = "\"\"";  // string | <p>Filter the list of drill-through reports using a keyword.<p> (optional)  (default to "")
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>. </p> (optional)  (default to "")
 
             try
             {
@@ -499,8 +499,8 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **keyword** | **string** | &lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; | [optional]  |
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **keyword** | **string** | &lt;p&gt;Filter the list of drill-through reports using a keyword.&lt;p&gt; | [optional] [default to &quot;&quot;] |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;. &lt;/p&gt; | [optional] [default to &quot;&quot;] |
 
 ### Return type
 
@@ -529,9 +529,9 @@ catch (ApiException e)
 # **DrillThroughReportsGetReportsForIntersections**
 > List&lt;string&gt; DrillThroughReportsGetReportsForIntersections (string applicationName, string databaseName, DrillthroughMetadataBean body = null)
 
-List Drill Through Reports For Given Cell Intersections
+List Drill Through Reports for Given Cell Intersections
 
-<p>Get a list of allowed drill through reports for provided cell intersections.</p>
+<p>Gets a list of allowed drill through reports for provided cell intersections.</p>
 
 ### Example
 ```csharp
@@ -562,7 +562,7 @@ namespace Example
 
             try
             {
-                // List Drill Through Reports For Given Cell Intersections
+                // List Drill Through Reports for Given Cell Intersections
                 List<string> result = apiInstance.DrillThroughReportsGetReportsForIntersections(applicationName, databaseName, body);
                 Debug.WriteLine(result);
             }
@@ -583,7 +583,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List Drill Through Reports For Given Cell Intersections
+    // List Drill Through Reports for Given Cell Intersections
     ApiResponse<List<string>> response = apiInstance.DrillThroughReportsGetReportsForIntersectionsWithHttpInfo(applicationName, databaseName, body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -634,7 +634,7 @@ catch (ApiException e)
 
 Update Drill Through Report
 
-<p>Updates the drill through report in the specified application and database, and returns details of the updated report.</p>
+<p>Updates the drill through report in the specified application and database and returns details of the updated report.</p>
 
 ### Example
 ```csharp

@@ -213,7 +213,7 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Dimension build ended successfully. Returns status. If &lt;code&gt;links&#x3D;true&lt;/code&gt; parameter is passed, also includes links to restructure.&lt;/p&gt; |  -  |
-| **400** | Validation failed. For example, specified stream id is invalid or dimension build is not started |  -  |
+| **400** | Validation failed. For example, specified stream id is invalid, or dimension build is not started. |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -421,7 +421,7 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Dimension build started successfully. If &lt;code&gt;links&#x3D;true&lt;/code&gt; parameter is passed, also includes links to push more data.&lt;/p&gt; |  -  |
-| **400** | Validation failed. For example, specified stream id or rule file name is invalid |  -  |
+| **400** | Validation failed. For example, specified stream id or rule file name is invalid. |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

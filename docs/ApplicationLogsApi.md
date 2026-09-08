@@ -14,7 +14,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Download All Application Logs
 
-<p>Returns a download zip file which contains all log files for the specific application.</p>
+<p>Downloads a zip file which contains all log files for the specific application.</p>
 
 ### Example
 ```csharp
@@ -95,7 +95,7 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/zip, application/octet-stream, application/json, application/xml
+ - **Accept**: application/zip, application/octet-stream
 
 
 ### HTTP response details
@@ -113,7 +113,7 @@ catch (ApiException e)
 
 Download Application Logs
 
-<p>Returns links to download all log files as a zip file, and to download the latest log file.</p>
+<p>Gets links to download all log files as a zip file, and to download the latest log file.</p>
 
 ### Example
 ```csharp
@@ -293,7 +293,7 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/octet-stream, application/json, application/xml
+ - **Accept**: application/octet-stream
 
 
 ### HTTP response details

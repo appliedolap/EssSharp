@@ -45,7 +45,7 @@ namespace Example
             var application = "application_example";  // string | <p>Application name.</p>
             var database = "database_example";  // string | <p>Database name.</p>
             var layout = "layout_example";  // string | <p>Layout name.</p>
-            var user = "user_example";  // string | <p>User name.</p> (optional) 
+            var user = "user_example";  // string | <p>Username.</p> (optional) 
 
             try
             {
@@ -87,7 +87,7 @@ catch (ApiException e)
 | **application** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **layout** | **string** | &lt;p&gt;Layout name.&lt;/p&gt; |  |
-| **user** | **string** | &lt;p&gt;User name.&lt;/p&gt; | [optional]  |
+| **user** | **string** | &lt;p&gt;Username.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -145,7 +145,7 @@ namespace Example
             var application = "application_example";  // string | <p>Application name.</p>
             var database = "database_example";  // string | <p>Database name.</p>
             var layout = "layout_example";  // string | <p>Layout name.</p>
-            var user = "user_example";  // string | <p>User name.</p> (optional) 
+            var user = "user_example";  // string | <p>Username.</p> (optional) 
             var body = new Layout(); // Layout | <p>Layout details to be updated.</p> (optional) 
 
             try
@@ -192,7 +192,7 @@ catch (ApiException e)
 | **application** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **layout** | **string** | &lt;p&gt;Layout name.&lt;/p&gt; |  |
-| **user** | **string** | &lt;p&gt;User name.&lt;/p&gt; | [optional]  |
+| **user** | **string** | &lt;p&gt;Username.&lt;/p&gt; | [optional]  |
 | **body** | [**Layout**](Layout.md) | &lt;p&gt;Layout details to be updated.&lt;/p&gt; | [optional]  |
 
 ### Return type
@@ -223,7 +223,7 @@ catch (ApiException e)
 
 Get Grid Layout Details
 
-<p>Gets the details for the specified layout.</p><p>A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.</p>
+<p>Gets the details for the specified layout.</p><p>A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Management (LCM) tools.</p>
 
 ### Example
 ```csharp
@@ -251,7 +251,7 @@ namespace Example
             var application = "application_example";  // string | <p>Application name.</p>
             var database = "database_example";  // string | <p>Database name.</p>
             var layout = "layout_example";  // string | <p>Layout name.</p>
-            var user = "user_example";  // string | <p>User name.</p> (optional) 
+            var user = "user_example";  // string | <p>Username.</p> (optional) 
 
             try
             {
@@ -297,7 +297,7 @@ catch (ApiException e)
 | **application** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **database** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **layout** | **string** | &lt;p&gt;Layout name.&lt;/p&gt; |  |
-| **user** | **string** | &lt;p&gt;User name.&lt;/p&gt; | [optional]  |
+| **user** | **string** | &lt;p&gt;Username.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -327,7 +327,7 @@ catch (ApiException e)
 
 List Grid Layouts
 
-<p>Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.</p><p>A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.</p>
+<p>Lists the available saved grid layouts. If you are a service administrator, all saved layouts are listed, including those created by other users.</p><p>A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Management (LCM) tools.</p>
 
 ### Example
 ```csharp
@@ -531,7 +531,7 @@ catch (ApiException e)
 
 Save Grid Layout
 
-<p>Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Mangement (LCM) tools.</p>
+<p>Saves a grid layout for the specified cube. A layout is a saved grid shape associated with a cube. If you create a grid that you would like to use again in the future, you can save it as a Layout. Layouts and reports are included when the cube is copied or moved using migration, export, and Lifecycle Management (LCM) tools.</p>
 
 ### Example
 ```csharp

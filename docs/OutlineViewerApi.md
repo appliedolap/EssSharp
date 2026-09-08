@@ -6,11 +6,11 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**OutlineGetAllSmartList**](OutlineViewerApi.md#outlinegetallsmartlist) | **GET** /outline/{app}/{cube}/settings/smartlist | Get Text Lists |
 | [**OutlineGetAncestorsMemberInfo**](OutlineViewerApi.md#outlinegetancestorsmemberinfo) | **GET** /outline/{app}/{cube}/ancestors/{memberUniqueName} | Get Member Ancestors |
-| [**OutlineGetDescendantsCount**](OutlineViewerApi.md#outlinegetdescendantscount) | **GET** /outline/{app}/{cube}/descendantsCount/{memberUniqueName} | Get Descendants Count |
+| [**OutlineGetDescendantsCount**](OutlineViewerApi.md#outlinegetdescendantscount) | **GET** /outline/{app}/{cube}/descendantsCount/{memberUniqueName} | Get Descendant Count |
 | [**OutlineGetMemberInfo**](OutlineViewerApi.md#outlinegetmemberinfo) | **GET** /outline/{app}/{cube}/{memberUniqueName} | Get Member Info |
-| [**OutlineGetMembers**](OutlineViewerApi.md#outlinegetmembers) | **GET** /outline/{app}/{cube} | Get Dimensions, Children, or Search |
-| [**OutlineGetOutlineXML**](OutlineViewerApi.md#outlinegetoutlinexml) | **POST** /outline/{app}/{cube}/xml | Export Outline to XML |
-| [**OutlineGetPivotDimension**](OutlineViewerApi.md#outlinegetpivotdimension) | **GET** /outline/{app}/{cube}/pivotDimension | Get Pivot dimension |
+| [**OutlineGetMembers**](OutlineViewerApi.md#outlinegetmembers) | **GET** /outline/{app}/{cube} | Get Dimensions Children or Search |
+| [**OutlineGetOutlineXML**](OutlineViewerApi.md#outlinegetoutlinexml) | **POST** /outline/{app}/{cube}/xml | Export Outline To XML |
+| [**OutlineGetPivotDimension**](OutlineViewerApi.md#outlinegetpivotdimension) | **GET** /outline/{app}/{cube}/pivotDimension | Get Pivot Dimension |
 
 <a id="outlinegetallsmartlist"></a>
 # **OutlineGetAllSmartList**
@@ -226,9 +226,9 @@ catch (ApiException e)
 # **OutlineGetDescendantsCount**
 > int OutlineGetDescendantsCount (string app, string cube, string memberUniqueName, string connection = null, string applicationNameForConnection = null)
 
-Get Descendants Count
+Get Descendant Count
 
-<p>Returns descendants count for the requested member.</p>
+<p>Retrieve descendant count for the requested member.</p>
 
 ### Example
 ```csharp
@@ -261,7 +261,7 @@ namespace Example
 
             try
             {
-                // Get Descendants Count
+                // Get Descendant Count
                 int result = apiInstance.OutlineGetDescendantsCount(app, cube, memberUniqueName, connection, applicationNameForConnection);
                 Debug.WriteLine(result);
             }
@@ -282,7 +282,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Descendants Count
+    // Get Descendant Count
     ApiResponse<int> response = apiInstance.OutlineGetDescendantsCountWithHttpInfo(app, cube, memberUniqueName, connection, applicationNameForConnection);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -335,7 +335,7 @@ catch (ApiException e)
 
 Get Member Info
 
-<p>Returns either all member properties, or requested member properties.</p>
+<p>Returns either all member properties or requested member properties.</p>
 
 ### Example
 ```csharp
@@ -362,7 +362,7 @@ namespace Example
             var apiInstance = new OutlineViewerApi(config);
             var app = "app_example";  // string | <p>Application name.</p>
             var cube = "cube_example";  // string | <p>Database name.</p>
-            var memberUniqueName = "memberUniqueName_example";  // string | <p>Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.</p>
+            var memberUniqueName = "memberUniqueName_example";  // string | <p>Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non-unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.</p>
             var connection = "connection_example";  // string | <p>Essbase connection name.</p> (optional) 
             var applicationNameForConnection = "applicationNameForConnection_example";  // string | <p>Application name for connection.</p> (optional) 
             var fields = "fields_example";  // string | <p>Comma-separated list of member properties to fetch.</p> (optional) 
@@ -410,7 +410,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **app** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **cube** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **memberUniqueName** | **string** | &lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt; |  |
+| **memberUniqueName** | **string** | &lt;p&gt;Unique member name (fully qualified name). Can be a member name, a member ID, or an alias. If the member name is non-unique (in a duplicate member enabled outline), use a fully qualified member name or use the member ID.&lt;/p&gt; |  |
 | **connection** | **string** | &lt;p&gt;Essbase connection name.&lt;/p&gt; | [optional]  |
 | **applicationNameForConnection** | **string** | &lt;p&gt;Application name for connection.&lt;/p&gt; | [optional]  |
 | **fields** | **string** | &lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; | [optional]  |
@@ -442,7 +442,7 @@ catch (ApiException e)
 # **OutlineGetMembers**
 > MembersList OutlineGetMembers (string app, string cube, string connection = null, string applicationNameForConnection = null, string keyword = null, bool? matchWholeWord = null, string parent = null, string parentUniqueName = null, string isMbrId = null, string fields = null, int? offset = null, int? limit = null)
 
-Get Dimensions, Children, or Search
+Get Dimensions Children or Search
 
 <p>Returns a list of dimensions when no parameters are provided. Returns a list of child members when <i>parent</i> or <i>parentUniqueName</i> parameters are provided. Returns search results when a search keyword parameter is used.</p>
 
@@ -484,7 +484,7 @@ namespace Example
 
             try
             {
-                // Get Dimensions, Children, or Search
+                // Get Dimensions Children or Search
                 MembersList result = apiInstance.OutlineGetMembers(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
                 Debug.WriteLine(result);
             }
@@ -505,7 +505,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Dimensions, Children, or Search
+    // Get Dimensions Children or Search
     ApiResponse<MembersList> response = apiInstance.OutlineGetMembersWithHttpInfo(app, cube, connection, applicationNameForConnection, keyword, matchWholeWord, parent, parentUniqueName, isMbrId, fields, offset, limit);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -561,9 +561,9 @@ catch (ApiException e)
 
 <a id="outlinegetoutlinexml"></a>
 # **OutlineGetOutlineXML**
-> void OutlineGetOutlineXML (string app, string cube, string connection = null, string applicationNameForConnection = null, ExportOptions body = null)
+> void OutlineGetOutlineXML (string app, string cube, string connection = null, string applicationNameForConnection = null, ExportOptions exportOptions = null)
 
-Export Outline to XML
+Export Outline To XML
 
 <p>Exports the outline to XML. If tree is true, then aliasTable will be ignored. Tree mode exports only member names. If aliasTable is provided, then only alias values of the members for the specified alias table will be exported.</p>
 
@@ -594,12 +594,12 @@ namespace Example
             var cube = "cube_example";  // string | Database name.
             var connection = "connection_example";  // string | Essbase connection name. (optional) 
             var applicationNameForConnection = "applicationNameForConnection_example";  // string | Application name for connection. (optional) 
-            var body = new ExportOptions(); // ExportOptions |  (optional) 
+            var exportOptions = new ExportOptions(); // ExportOptions |  (optional) 
 
             try
             {
-                // Export Outline to XML
-                apiInstance.OutlineGetOutlineXML(app, cube, connection, applicationNameForConnection, body);
+                // Export Outline To XML
+                apiInstance.OutlineGetOutlineXML(app, cube, connection, applicationNameForConnection, exportOptions);
             }
             catch (ApiException  e)
             {
@@ -618,8 +618,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Export Outline to XML
-    apiInstance.OutlineGetOutlineXMLWithHttpInfo(app, cube, connection, applicationNameForConnection, body);
+    // Export Outline To XML
+    apiInstance.OutlineGetOutlineXMLWithHttpInfo(app, cube, connection, applicationNameForConnection, exportOptions);
 }
 catch (ApiException e)
 {
@@ -637,7 +637,7 @@ catch (ApiException e)
 | **cube** | **string** | Database name. |  |
 | **connection** | **string** | Essbase connection name. | [optional]  |
 | **applicationNameForConnection** | **string** | Application name for connection. | [optional]  |
-| **body** | [**ExportOptions**](ExportOptions.md) |  | [optional]  |
+| **exportOptions** | [**ExportOptions**](ExportOptions.md) |  | [optional]  |
 
 ### Return type
 
@@ -649,14 +649,14 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: application/octet-stream
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **0** | successful operation |  -  |
+| **0** | default response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -664,7 +664,7 @@ void (empty response body)
 # **OutlineGetPivotDimension**
 > string OutlineGetPivotDimension (string app, string cube, string connection = null, string applicationNameForConnection = null)
 
-Get Pivot dimension
+Get Pivot Dimension
 
 <p>Get Pivot dimension details</p>
 
@@ -698,7 +698,7 @@ namespace Example
 
             try
             {
-                // Get Pivot dimension
+                // Get Pivot Dimension
                 string result = apiInstance.OutlineGetPivotDimension(app, cube, connection, applicationNameForConnection);
                 Debug.WriteLine(result);
             }
@@ -719,7 +719,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Pivot dimension
+    // Get Pivot Dimension
     ApiResponse<string> response = apiInstance.OutlineGetPivotDimensionWithHttpInfo(app, cube, connection, applicationNameForConnection);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

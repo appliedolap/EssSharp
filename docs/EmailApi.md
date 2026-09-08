@@ -4,21 +4,21 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**EmailAddIMAPDetails**](EmailApi.md#emailaddimapdetails) | **PUT** /email/imap | Add IMAP Configuration |
-| [**EmailAddSMTPDetails**](EmailApi.md#emailaddsmtpdetails) | **PUT** /email/smtp | Add SMTP Configuration |
-| [**EmailDeleteIMAPDetails**](EmailApi.md#emaildeleteimapdetails) | **DELETE** /email/imap | Delete IMAP Configuration |
-| [**EmailDeleteSMTPDetails**](EmailApi.md#emaildeletesmtpdetails) | **DELETE** /email/smtp | Delete SMTP Configuration |
-| [**EmailGetEmailLinks**](EmailApi.md#emailgetemaillinks) | **GET** /email | Get E-mail Configuration |
-| [**EmailGetIMAPServerDetail**](EmailApi.md#emailgetimapserverdetail) | **GET** /email/imap | Get IMAP Configuration |
-| [**EmailGetSMTPServerDetail**](EmailApi.md#emailgetsmtpserverdetail) | **GET** /email/smtp | Get SMTP Configuration |
+| [**EmailAddIMAPDetails**](EmailApi.md#emailaddimapdetails) | **PUT** /email/imap | Add Imap Configuration |
+| [**EmailAddSMTPDetails**](EmailApi.md#emailaddsmtpdetails) | **PUT** /email/smtp | Add Smtp Configuration |
+| [**EmailDeleteIMAPDetails**](EmailApi.md#emaildeleteimapdetails) | **DELETE** /email/imap | Delete Imap Configuration |
+| [**EmailDeleteSMTPDetails**](EmailApi.md#emaildeletesmtpdetails) | **DELETE** /email/smtp | Delete Smtp Configuration |
+| [**EmailGetEmailLinks**](EmailApi.md#emailgetemaillinks) | **GET** /email | Get Email Configuration |
+| [**EmailGetIMAPServerDetail**](EmailApi.md#emailgetimapserverdetail) | **GET** /email/imap | Get Imap Configuration |
+| [**EmailGetSMTPServerDetail**](EmailApi.md#emailgetsmtpserverdetail) | **GET** /email/smtp | Get Smtp Configuration |
 
 <a id="emailaddimapdetails"></a>
 # **EmailAddIMAPDetails**
 > ListLinkResponseObject EmailAddIMAPDetails (ServerConfiguration body = null)
 
-Add IMAP Configuration
+Add Imap Configuration
 
-<p>Configure IMAP e-mail server information. IMAP is the protocol Essbase uses for sending e-mails related to scenario management workflow and approval.</p>
+<p>Configures IMAP e-mail server information. IMAP is the protocol Essbase uses for sending e-mails related to scenario management workflow and approval.</p>
 
 ### Example
 ```csharp
@@ -47,7 +47,7 @@ namespace Example
 
             try
             {
-                // Add IMAP Configuration
+                // Add Imap Configuration
                 ListLinkResponseObject result = apiInstance.EmailAddIMAPDetails(body);
                 Debug.WriteLine(result);
             }
@@ -68,7 +68,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Add IMAP Configuration
+    // Add Imap Configuration
     ApiResponse<ListLinkResponseObject> response = apiInstance.EmailAddIMAPDetailsWithHttpInfo(body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -115,9 +115,9 @@ catch (ApiException e)
 # **EmailAddSMTPDetails**
 > ListLinkResponseObject EmailAddSMTPDetails (ServerConfiguration body = null)
 
-Add SMTP Configuration
+Add Smtp Configuration
 
-<p>Configure SMTP e-mail server information. IMAP is the protocol used for receiving e-mails related to scenario management workflow and approval.</p>
+<p>Configures SMTP e-mail server information. SMTP is the protocol Essbase uses for receiving e-mails related to scenario management workflow and approval.</p>
 
 ### Example
 ```csharp
@@ -146,7 +146,7 @@ namespace Example
 
             try
             {
-                // Add SMTP Configuration
+                // Add Smtp Configuration
                 ListLinkResponseObject result = apiInstance.EmailAddSMTPDetails(body);
                 Debug.WriteLine(result);
             }
@@ -167,7 +167,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Add SMTP Configuration
+    // Add Smtp Configuration
     ApiResponse<ListLinkResponseObject> response = apiInstance.EmailAddSMTPDetailsWithHttpInfo(body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -214,7 +214,7 @@ catch (ApiException e)
 # **EmailDeleteIMAPDetails**
 > void EmailDeleteIMAPDetails ()
 
-Delete IMAP Configuration
+Delete Imap Configuration
 
 <p>Deletes the IMAP server configuration details. IMAP is the protocol Essbase uses to send e-mails related to scenario management workflow and approval.</p>
 
@@ -244,7 +244,7 @@ namespace Example
 
             try
             {
-                // Delete IMAP Configuration
+                // Delete Imap Configuration
                 apiInstance.EmailDeleteIMAPDetails();
             }
             catch (ApiException  e)
@@ -264,7 +264,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete IMAP Configuration
+    // Delete Imap Configuration
     apiInstance.EmailDeleteIMAPDetailsWithHttpInfo();
 }
 catch (ApiException e)
@@ -304,7 +304,7 @@ void (empty response body)
 # **EmailDeleteSMTPDetails**
 > void EmailDeleteSMTPDetails ()
 
-Delete SMTP Configuration
+Delete Smtp Configuration
 
 <p>Deletes the SMTP server configuration details. SMTP is the protocol Essbase uses for receiving e-mails related to scenario management workflow and approval.</p>
 
@@ -334,7 +334,7 @@ namespace Example
 
             try
             {
-                // Delete SMTP Configuration
+                // Delete Smtp Configuration
                 apiInstance.EmailDeleteSMTPDetails();
             }
             catch (ApiException  e)
@@ -354,7 +354,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete SMTP Configuration
+    // Delete Smtp Configuration
     apiInstance.EmailDeleteSMTPDetailsWithHttpInfo();
 }
 catch (ApiException e)
@@ -394,7 +394,7 @@ void (empty response body)
 # **EmailGetEmailLinks**
 > ListLinkResponseObject EmailGetEmailLinks ()
 
-Get E-mail Configuration
+Get Email Configuration
 
 <p>Returns a URL to access the saved SMTP and IMAP server details. SMTP is the protocol Essbase uses for sending e-mails related to scenario management. IMAP is the protocol for receiving e-mails.</p>
 
@@ -424,7 +424,7 @@ namespace Example
 
             try
             {
-                // Get E-mail Configuration
+                // Get Email Configuration
                 ListLinkResponseObject result = apiInstance.EmailGetEmailLinks();
                 Debug.WriteLine(result);
             }
@@ -445,7 +445,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get E-mail Configuration
+    // Get Email Configuration
     ApiResponse<ListLinkResponseObject> response = apiInstance.EmailGetEmailLinksWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -488,7 +488,7 @@ This endpoint does not need any parameter.
 # **EmailGetIMAPServerDetail**
 > ServerConfiguration EmailGetIMAPServerDetail ()
 
-Get IMAP Configuration
+Get Imap Configuration
 
 <p>Returns IMAP server configuration details. IMAP is the protocol Essbase uses for sending e-mails related to scenario management workflow and approval.</p>
 
@@ -518,7 +518,7 @@ namespace Example
 
             try
             {
-                // Get IMAP Configuration
+                // Get Imap Configuration
                 ServerConfiguration result = apiInstance.EmailGetIMAPServerDetail();
                 Debug.WriteLine(result);
             }
@@ -539,7 +539,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get IMAP Configuration
+    // Get Imap Configuration
     ApiResponse<ServerConfiguration> response = apiInstance.EmailGetIMAPServerDetailWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -583,7 +583,7 @@ This endpoint does not need any parameter.
 # **EmailGetSMTPServerDetail**
 > ServerConfiguration EmailGetSMTPServerDetail ()
 
-Get SMTP Configuration
+Get Smtp Configuration
 
 <p>Returns SMTP server configuration details. SMTP is the protocol Essbase uses for receiving e-mails related to scenario management workflow and approval.</p>
 
@@ -613,7 +613,7 @@ namespace Example
 
             try
             {
-                // Get SMTP Configuration
+                // Get Smtp Configuration
                 ServerConfiguration result = apiInstance.EmailGetSMTPServerDetail();
                 Debug.WriteLine(result);
             }
@@ -634,7 +634,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get SMTP Configuration
+    // Get Smtp Configuration
     ApiResponse<ServerConfiguration> response = apiInstance.EmailGetSMTPServerDetailWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

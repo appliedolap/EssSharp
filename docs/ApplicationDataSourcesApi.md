@@ -17,7 +17,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Create Application Datasource
 
-<p>Creates an application-level Datasource based on specified inputs. <code>name</code>, <code>connection</code>, and <code>type</code> are required inputs for all types of Datasource. Other required inputs differ based on the type of Datasource.</p>
+<p>Creates an application-level datasource based on specified inputs. <code>name</code>, <code>connection</code>, and <code>type</code> are required inputs for all types of Datasource. Other required inputs differ based on the type of Datasource.</p>
 
 ### Example
 ```csharp
@@ -209,7 +209,7 @@ void (empty response body)
 
 Get Streamed Datasource Results
 
-<p>Returns results in stream from an application-level Datasource.</p>
+<p>Returns results in stream from an application-level datasource.</p>
 
 ### Example
 ```csharp
@@ -310,7 +310,7 @@ void (empty response body)
 
 Get Application Datasource
 
-<p>Returns details about the specified application-level Datasource.</p>
+<p>Returns details about the specified application-level datasource.</p>
 
 ### Example
 ```csharp
@@ -410,7 +410,7 @@ catch (ApiException e)
 
 Get Application Datasources
 
-<p>Returns a list of application-level Datasources, including details such as name, description, connection, and type.</p>
+<p>Returns a list of application-level datasources, including details such as name, description, connection, and type.</p>
 
 ### Example
 ```csharp
@@ -512,7 +512,7 @@ catch (ApiException e)
 
 Update Application Datasource
 
-<p>Update the named application-level Datasource. If the update is successful, returns details about the updated Datasource. <code>type</code> and <code>connection</code> are required inputs for all types of Datasource. Other required inputs differ based on the type of the Datasource.</p>
+<p>Updates the named application-level datasource. If the update is successful, returns details about the updated datasource. The <code>type</code> and <code>connection</code> are required inputs for all types of datasources. Other required inputs differ based on the type of the datasource.</p>
 
 ### Example
 ```csharp
@@ -539,7 +539,7 @@ namespace Example
             var apiInstance = new ApplicationDatasourcesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var datasourceName = "datasourceName_example";  // string | <p>Datasource name.</p>
-            var body = new Datasource(); // Datasource | <p>Updated Datasource details.</p> (optional) 
+            var body = new Datasource(); // Datasource | <p>Updated datasource details.</p> (optional) 
 
             try
             {
@@ -584,7 +584,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **datasourceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; |  |
-| **body** | [**Datasource**](Datasource.md) | &lt;p&gt;Updated Datasource details.&lt;/p&gt; | [optional]  |
+| **body** | [**Datasource**](Datasource.md) | &lt;p&gt;Updated datasource details.&lt;/p&gt; | [optional]  |
 
 ### Return type
 

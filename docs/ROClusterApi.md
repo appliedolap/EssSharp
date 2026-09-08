@@ -6,10 +6,10 @@ All URIs are relative to */essbase/rest/v1*
 |--------|--------------|-------------|
 | [**ROClusterCreateROCluster**](ROClusterApi.md#roclustercreaterocluster) | **POST** /rocluster | Create ReadOnly Cluster |
 | [**ROClusterDeleteROCluster**](ROClusterApi.md#roclusterdeleterocluster) | **DELETE** /rocluster | Delete ReadOnly Cluster |
-| [**ROClusterEnableCluster**](ROClusterApi.md#roclusterenablecluster) | **POST** /rocluster/changestatus | ReadOnly Cluster Change Status  |
+| [**ROClusterEnableCluster**](ROClusterApi.md#roclusterenablecluster) | **POST** /rocluster/changestatus | Change Read-only Cluster Status |
 | [**ROClusterGetAppAndCubeListByServerName**](ROClusterApi.md#roclustergetappandcubelistbyservername) | **GET** /rocluster/{svrName}/appcubelist | Get App Cube List |
-| [**ROClusterGetClusterList**](ROClusterApi.md#roclustergetclusterlist) | **GET** /rocluster | Get ReadOnly Cluster List |
-| [**ROClusterGetROCluster**](ROClusterApi.md#roclustergetrocluster) | **GET** /rocluster/findByName | Find ReadOnly Cluster By Name |
+| [**ROClusterGetClusterList**](ROClusterApi.md#roclustergetclusterlist) | **GET** /rocluster | Get Read-only Cluster List |
+| [**ROClusterGetROCluster**](ROClusterApi.md#roclustergetrocluster) | **GET** /rocluster/findByName | Find ReadOnly Cluster by Name |
 | [**ROClusterUpdateROCluster**](ROClusterApi.md#roclusterupdaterocluster) | **PUT** /rocluster | Update ReadOnly Cluster |
 
 <a id="roclustercreaterocluster"></a>
@@ -101,7 +101,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;p&gt;&lt;p&gt;Sucessfully created the ReadOnly cluster&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully created the ReadOnly cluster.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed the create ReadOnly cluster.JSON may be incorrect or name or node info is missing&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
@@ -196,7 +196,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;p&gt;&lt;p&gt;Sucessfully removed the ReadOnly cluster from the domain db of Essbase server.&lt;/p&gt; |  -  |
+| **204** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully removed the ReadOnly cluster from the domain DB of the Essbase server.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to delete the ReadOnly cluster.Name specified may be incorrect or not exist.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
@@ -206,9 +206,9 @@ void (empty response body)
 # **ROClusterEnableCluster**
 > ROCluster ROClusterEnableCluster (ROCluster body)
 
-ReadOnly Cluster Change Status 
+Change Read-only Cluster Status
 
-<p>Change Status allows to modify the state 1 (enable)/ 2(disable) of ReadOnly cluster nodes</p>
+<p>Change Status allows to modify the state 1(enable)/2(disable) of read-only cluster nodes.</p>
 
 ### Example
 ```csharp
@@ -237,7 +237,7 @@ namespace Example
 
             try
             {
-                // ReadOnly Cluster Change Status 
+                // Change Read-only Cluster Status
                 ROCluster result = apiInstance.ROClusterEnableCluster(body);
                 Debug.WriteLine(result);
             }
@@ -258,7 +258,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // ReadOnly Cluster Change Status 
+    // Change Read-only Cluster Status
     ApiResponse<ROCluster> response = apiInstance.ROClusterEnableClusterWithHttpInfo(body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -295,7 +295,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;p&gt;&lt;p&gt;Sucessfully changed the states of ReadOnly cluster nodes. Returns updated ReadOnly cluster&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully changed the states of ReadOnly cluster nodes. Returns updated ReadOnly cluster.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to Change the status of ReadOnly Cluster nodes. The JSON may be incorrect.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
@@ -303,7 +303,7 @@ catch (ApiException e)
 
 <a id="roclustergetappandcubelistbyservername"></a>
 # **ROClusterGetAppAndCubeListByServerName**
-> Dictionary&lt;string, Object&gt; ROClusterGetAppAndCubeListByServerName (string svrName)
+> string ROClusterGetAppAndCubeListByServerName (string svrName)
 
 Get App Cube List
 
@@ -337,7 +337,7 @@ namespace Example
             try
             {
                 // Get App Cube List
-                Dictionary<string, Object> result = apiInstance.ROClusterGetAppAndCubeListByServerName(svrName);
+                string result = apiInstance.ROClusterGetAppAndCubeListByServerName(svrName);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -358,7 +358,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get App Cube List
-    ApiResponse<Dictionary<string, Object>> response = apiInstance.ROClusterGetAppAndCubeListByServerNameWithHttpInfo(svrName);
+    ApiResponse<string> response = apiInstance.ROClusterGetAppAndCubeListByServerNameWithHttpInfo(svrName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -379,7 +379,7 @@ catch (ApiException e)
 
 ### Return type
 
-**Dictionary<string, Object>**
+**string**
 
 ### Authorization
 
@@ -394,8 +394,8 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;p&gt;&lt;p&gt;Sucessfully retrived the apps and cubes list &lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrive apps cube list.Incorrect server name&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully retrieved the apps and cubes list.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrieve the apps and cubes list. Incorrect server name.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -404,9 +404,9 @@ catch (ApiException e)
 # **ROClusterGetClusterList**
 > List&lt;ROCluster&gt; ROClusterGetClusterList ()
 
-Get ReadOnly Cluster List
+Get Read-only Cluster List
 
-Returns list of ReadOnly cluster from Essbase domain db.
+Returns list of read-only cluster from Essbase domain db.
 
 ### Example
 ```csharp
@@ -434,7 +434,7 @@ namespace Example
 
             try
             {
-                // Get ReadOnly Cluster List
+                // Get Read-only Cluster List
                 List<ROCluster> result = apiInstance.ROClusterGetClusterList();
                 Debug.WriteLine(result);
             }
@@ -455,7 +455,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get ReadOnly Cluster List
+    // Get Read-only Cluster List
     ApiResponse<List<ROCluster>> response = apiInstance.ROClusterGetClusterListWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -488,8 +488,8 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;p&gt;&lt;p&gt;RO-Cluster List retrived sucessfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrive the ReadOnly cluster list.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;RO-Cluster list retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrieve the ReadOnly cluster list.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -498,7 +498,7 @@ This endpoint does not need any parameter.
 # **ROClusterGetROCluster**
 > ROCluster ROClusterGetROCluster (string clusterName = null)
 
-Find ReadOnly Cluster By Name
+Find ReadOnly Cluster by Name
 
 <p>Returns the named ReadOnly cluster from Essbase domain db. Provide the URL encoded String value as input(clusterName)
 
@@ -529,7 +529,7 @@ namespace Example
 
             try
             {
-                // Find ReadOnly Cluster By Name
+                // Find ReadOnly Cluster by Name
                 ROCluster result = apiInstance.ROClusterGetROCluster(clusterName);
                 Debug.WriteLine(result);
             }
@@ -550,7 +550,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Find ReadOnly Cluster By Name
+    // Find ReadOnly Cluster by Name
     ApiResponse<ROCluster> response = apiInstance.ROClusterGetROClusterWithHttpInfo(clusterName);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -587,8 +587,8 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;p&gt;&lt;p&gt;ReadOnly cluster retrived sucessfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrive the Readonly cluster. Incorrect/missing cluster name&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;ReadOnly cluster retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrieve the ReadOnly cluster. Incorrect or missing cluster name.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -599,7 +599,7 @@ catch (ApiException e)
 
 Update ReadOnly Cluster
 
-<p>Removes the existing ReadOnly cluster,and create new ReadOnly cluster with latest nodes details.
+<p>Removes the existing ReadOnly cluster and create new ReadOnly cluster with latest nodes details.
 
 ### Example
 ```csharp
@@ -682,7 +682,7 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;p&gt;&lt;p&gt;Sucessfully created the ReadOnly cluster&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully created the ReadOnly cluster.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed the delete/create ReadOnly cluster.JSON may be incorrect or name or node info is missing&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 

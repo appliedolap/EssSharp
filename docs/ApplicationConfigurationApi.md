@@ -7,7 +7,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ApplicationConfigurationAddConfiguration**](ApplicationConfigurationApi.md#applicationconfigurationaddconfiguration) | **POST** /applications/{applicationName}/configurations | Add Application Configuration |
 | [**ApplicationConfigurationDeleteConfiguration**](ApplicationConfigurationApi.md#applicationconfigurationdeleteconfiguration) | **DELETE** /applications/{applicationName}/configurations/{configId} | Delete Application Configuration |
 | [**ApplicationConfigurationGetConfiguration**](ApplicationConfigurationApi.md#applicationconfigurationgetconfiguration) | **GET** /applications/{applicationName}/configurations/{configId} | Get Application Configuration Property |
-| [**ApplicationConfigurationGetConfigurationKeys**](ApplicationConfigurationApi.md#applicationconfigurationgetconfigurationkeys) | **GET** /applications/{applicationName}/configurationkeys | Get Application Configuration (Filtered) |
+| [**ApplicationConfigurationGetConfigurationKeys**](ApplicationConfigurationApi.md#applicationconfigurationgetconfigurationkeys) | **GET** /applications/{applicationName}/configurationkeys | Get Application Configuration Filtered |
 | [**ApplicationConfigurationGetConfigurations**](ApplicationConfigurationApi.md#applicationconfigurationgetconfigurations) | **GET** /applications/{applicationName}/configurations | Get Application Configuration |
 | [**ApplicationConfigurationSetConfiguration**](ApplicationConfigurationApi.md#applicationconfigurationsetconfiguration) | **PUT** /applications/{applicationName}/configurations/{configId} | Update Application Configuration |
 | [**ApplicationConfigurationSetConfigurations**](ApplicationConfigurationApi.md#applicationconfigurationsetconfigurations) | **PUT** /applications/{applicationName}/configurations | Update Application Configurations |
@@ -316,7 +316,7 @@ catch (ApiException e)
 # **ApplicationConfigurationGetConfigurationKeys**
 > List&lt;ApplicationConfigList&gt; ApplicationConfigurationGetConfigurationKeys (string applicationName, string key = null, string configured = null)
 
-Get Application Configuration (Filtered)
+Get Application Configuration Filtered
 
 <p>Returns all the configuration properties currently set for the specified application, with option to filter by configured value.</p>
 
@@ -349,7 +349,7 @@ namespace Example
 
             try
             {
-                // Get Application Configuration (Filtered)
+                // Get Application Configuration Filtered
                 List<ApplicationConfigList> result = apiInstance.ApplicationConfigurationGetConfigurationKeys(applicationName, key, configured);
                 Debug.WriteLine(result);
             }
@@ -370,7 +370,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Application Configuration (Filtered)
+    // Get Application Configuration Filtered
     ApiResponse<List<ApplicationConfigList>> response = apiInstance.ApplicationConfigurationGetConfigurationKeysWithHttpInfo(applicationName, key, configured);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -447,7 +447,7 @@ namespace Example
 
             var apiInstance = new ApplicationConfigurationApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>key:asc</code> </p> (optional) 
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>key:asc</code>. </p> (optional)  (default to "")
 
             try
             {
@@ -491,7 +491,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;key:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;key:asc&lt;/code&gt;. &lt;/p&gt; | [optional] [default to &quot;&quot;] |
 
 ### Return type
 

@@ -8,7 +8,7 @@ All URIs are relative to */essbase/rest/v1*
 
 <a id="preferencesget"></a>
 # **PreferencesGet**
-> Preference PreferencesGet ()
+> void PreferencesGet ()
 
 Get User Preferences
 
@@ -41,8 +41,7 @@ namespace Example
             try
             {
                 // Get User Preferences
-                Preference result = apiInstance.PreferencesGet();
-                Debug.WriteLine(result);
+                apiInstance.PreferencesGet();
             }
             catch (ApiException  e)
             {
@@ -62,10 +61,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get User Preferences
-    ApiResponse<Preference> response = apiInstance.PreferencesGetWithHttpInfo();
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
+    apiInstance.PreferencesGetWithHttpInfo();
 }
 catch (ApiException e)
 {
@@ -79,7 +75,7 @@ catch (ApiException e)
 This endpoint does not need any parameter.
 ### Return type
 
-[**Preference**](Preference.md)
+void (empty response body)
 
 ### Authorization
 
@@ -94,7 +90,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | successful operation |  -  |
+| **0** | default response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

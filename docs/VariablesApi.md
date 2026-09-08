@@ -21,7 +21,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Create Application Variable
 
-<p>Creates a substitution variable in the specified application, and returns the created variable.</p>
+<p>Creates a substitution variable in the specified application and returns the created variable.</p>
 
 ### Example
 ```csharp
@@ -123,7 +123,7 @@ catch (ApiException e)
 
 Create Database Variable
 
-<p>Creates a substitution variable in the specified application and database, and returns the created variable.</p>
+<p>Creates a substitution variable in the specified application and database and returns the created variable.</p>
 
 ### Example
 ```csharp
@@ -423,7 +423,7 @@ void (empty response body)
 
 Update Application Variable
 
-<p>Updates the substitution variable in the specified application, and returns the updated variable.</p>
+<p>Updates the substitution variable in the specified application and returns the updated variable.</p>
 
 ### Example
 ```csharp
@@ -527,7 +527,7 @@ catch (ApiException e)
 
 Update Database Variable
 
-<p>Updates a substitution variable in the specified application and database, and returns the updated variable.</p>
+<p>Updates a substitution variable in the specified application and database and returns the updated variable.</p>
 
 ### Example
 ```csharp
@@ -863,7 +863,7 @@ namespace Example
 
             var apiInstance = new VariablesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
-            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>.</p> (optional)  (default to "")
             var includeDatabaseVariables = false;  // bool? | <P>Include database variables in application variables result.</P> (optional)  (default to false)
 
             try
@@ -908,7 +908,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
 | **includeDatabaseVariables** | **bool?** | &lt;P&gt;Include database variables in application variables result.&lt;/P&gt; | [optional] [default to false] |
 
 ### Return type
@@ -967,7 +967,7 @@ namespace Example
             var apiInstance = new VariablesApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>. </p> (optional)  (default to "")
 
             try
             {
@@ -1012,7 +1012,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;. &lt;/p&gt; | [optional] [default to &quot;&quot;] |
 
 ### Return type
 

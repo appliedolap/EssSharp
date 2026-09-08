@@ -107,7 +107,7 @@ This endpoint does not need any parameter.
 
 <a id="performancedownload"></a>
 # **PerformanceDownload**
-> Object PerformanceDownload (string file)
+> void PerformanceDownload (string file)
 
 Get Performance Analyzer File
 
@@ -141,8 +141,7 @@ namespace Example
             try
             {
                 // Get Performance Analyzer File
-                Object result = apiInstance.PerformanceDownload(file);
-                Debug.WriteLine(result);
+                apiInstance.PerformanceDownload(file);
             }
             catch (ApiException  e)
             {
@@ -162,10 +161,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Performance Analyzer File
-    ApiResponse<Object> response = apiInstance.PerformanceDownloadWithHttpInfo(file);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
+    apiInstance.PerformanceDownloadWithHttpInfo(file);
 }
 catch (ApiException e)
 {
@@ -183,7 +179,7 @@ catch (ApiException e)
 
 ### Return type
 
-**Object**
+void (empty response body)
 
 ### Authorization
 
@@ -192,7 +188,7 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/octet-stream, text/html
+ - **Accept**: Not defined
 
 
 ### HTTP response details
@@ -206,7 +202,7 @@ catch (ApiException e)
 
 <a id="performancedownloadall"></a>
 # **PerformanceDownloadall**
-> Object PerformanceDownloadall ()
+> void PerformanceDownloadall ()
 
 Get Performance Analyzer File
 
@@ -239,8 +235,7 @@ namespace Example
             try
             {
                 // Get Performance Analyzer File
-                Object result = apiInstance.PerformanceDownloadall();
-                Debug.WriteLine(result);
+                apiInstance.PerformanceDownloadall();
             }
             catch (ApiException  e)
             {
@@ -260,10 +255,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Performance Analyzer File
-    ApiResponse<Object> response = apiInstance.PerformanceDownloadallWithHttpInfo();
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
+    apiInstance.PerformanceDownloadallWithHttpInfo();
 }
 catch (ApiException e)
 {
@@ -277,7 +269,7 @@ catch (ApiException e)
 This endpoint does not need any parameter.
 ### Return type
 
-**Object**
+void (empty response body)
 
 ### Authorization
 
@@ -286,7 +278,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/octet-stream, text/html
+ - **Accept**: Not defined
 
 
 ### HTTP response details
@@ -304,7 +296,7 @@ This endpoint does not need any parameter.
 
 Get Performance Analyzer Settings
 
-<p>Gets the Performance Analyzer settings. You can see whether Performance Analyzer is enabled, and view the time interval setting for creation of new data files. Requires Service Administrator role.</p>
+<p>Gets the Performance Analyzer settings. You can see whether Performance Analyzer is enabled and view the time interval setting for creation of new data files. Requires Service Administrator role.</p>
 
 ### Example
 ```csharp
@@ -492,7 +484,7 @@ This endpoint does not need any parameter.
 
 Set Performance Analyzer Settings
 
-<p>Changes the Performance Analyzer settings: you can enable or disable it, or change the time interval for creation of new data files. Requires Service Administrator role.</p>
+<p>Changes the Performance Analyzer settings: you can enable or disable it or change the time interval for creation of new data files. Requires Service Administrator role.</p>
 
 ### Example
 ```csharp

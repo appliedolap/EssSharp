@@ -16,7 +16,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Create Location Alias
 
-<p>Create a new location alias in the given application and database (cube).</p> <p>A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection, or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.</p>
+<p>Create a new location alias in the given application and database (cube).</p> <p>A location alias is a named pointer to the location of another cube. You can define the alias using a saved connection or embed the details of the secondary cube within the definition. You should create location alias on the cube from which the calculation scripts are run.</p>
 
 ### Example
 ```csharp
@@ -214,7 +214,7 @@ void (empty response body)
 
 Get Location Alias
 
-<p>Returns details of the specified location alias.</p>
+<p>Gets details of the specified location alias.</p>
 
 ### Example
 ```csharp

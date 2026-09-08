@@ -43,7 +43,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Get Encryption Info
 
-<p>List the types of encryption supported by Essbase and available for the  application.</p><p><b>EncryptionMode</b></p><p>The encryption modes supported in Oracle Essbase.</p><p>0 - No encryption.</p><p>1 - N/A. Use Oracle OCI Vault instead.</p><p>2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.</p><p><b>AvailableTypes</b></p><p>The types of encryption available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.</p><p><b>See Also</b></p><ul><li><a href=\"./op-applications-applicationname-encrypt-post.html\">Encrypt Application</a></li><li><a href=\"./op-applications-applicationname-decrypt-post.html\">Decrypt Application</a></li></ul>
+<p>List the types of encryption supported by Essbase and available for the  application.</p><p><b>EncryptionMode</b></p><p>The encryption modes supported in Oracle Essbase.</p><p>0 - No encryption.</p><p>1 - N/A. Use Oracle OCI Vault instead.</p><p>2 - Oracle OCI Vault encryption. OCI Vault is a service that securely stores and manages master encryption keys and secrets.</p><p><b>AvailableTypes</b></p><p>The types of encryptions available for this application. Valid values: OCID, or none. OCID/Vault encryption type is available only for Essbase stack deployments on Oracle Cloud Infrastructure via Marketplace. OCID type refers to the OCID of the OCI Vault.</p><p><b>See Also</b></p><ul><li><a href=\"./op-applications-applicationname-encrypt-post.html\">Encrypt Application</a></li><li><a href=\"./op-applications-applicationname-decrypt-post.html\">Decrypt Application</a></li></ul>
 
 ### Example
 ```csharp
@@ -1632,7 +1632,7 @@ namespace Example
             var connectionName = "connectionName_example";  // string | <p>Connection name.</p> (optional) 
             var applicationNameForConnection = "applicationNameForConnection_example";  // string | <p>Application name for connection.</p> (optional) 
             var fields = "fields_example";  // string | <p>Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.</p> (optional) 
-            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>. </p> (optional)  (default to "")
 
             try
             {
@@ -1681,7 +1681,7 @@ catch (ApiException e)
 | **connectionName** | **string** | &lt;p&gt;Connection name.&lt;/p&gt; | [optional]  |
 | **applicationNameForConnection** | **string** | &lt;p&gt;Application name for connection.&lt;/p&gt; | [optional]  |
 | **fields** | **string** | &lt;p&gt;Comma-separated list of fields to be returned in response fields. If omitted, all fields are returned.&lt;/p&gt; | [optional]  |
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;. &lt;/p&gt; | [optional] [default to &quot;&quot;] |
 
 ### Return type
 
@@ -1933,7 +1933,7 @@ namespace Example
             var apiInstance = new ApplicationsApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var connectionName = "connectionName_example";  // string | <p>Connection name.</p> (optional) 
-            var orderBy = "orderBy_example";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional) 
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>.</p> (optional)  (default to "")
             var applicationNameForConnection = "applicationNameForConnection_example";  // string | <p>Application name from which to list databases.</p> (optional) 
 
             try
@@ -1979,7 +1979,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **connectionName** | **string** | &lt;p&gt;Connection name.&lt;/p&gt; | [optional]  |
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional]  |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
 | **applicationNameForConnection** | **string** | &lt;p&gt;Application name from which to list databases.&lt;/p&gt; | [optional]  |
 
 ### Return type
@@ -2297,7 +2297,7 @@ void (empty response body)
 
 Promote Shadow Application
 
-<p>Promotes the shadow application as the base application. Conceptually, the promote operation is equivalent to moving the Essbase application directory from a source to destination location, at the file system level.</p> <p>Essbase must stop (unload) both applications, if they are running, before promoting. At the time of unloading, if the destination application is serving any ongoing operations, such as queries, Essbase terminates those operations and attempts to unload the application.</p> <p>If a graceful unload process fails or takes longer than permitted by the input argument <i>timeoutToForceUnloadApp</i> (unit=seconds), Essbase forcefully terminates the application.</p> <p>Example: if you specify 60 seconds for the timeout, but the termination of ongoing requests and graceful unloading of the application does not complete within one minute, Essbase triggers a forceful termination.  After termination, Essbase promotes the shadow application.</p> <p>The promote operation is supported on all applications, including aggregate storage, block storage, and Hybrid mode.</p> <p>Note: when moving an existing application, only the application and cube artifacts (such as metadata and data) are replaced from the source to destination.</p> <p>During a promotion, all security layer associations on the destination application, such as  users, groups, and security filters, are retained, while that of shadow/source are lost. The same rule applies for partition definitions.</p> <p>Example: If users X and Y had read-access to App1, and an admin promotes a shadow App2 to replace App1, both X and Y will be able to access App1.</p> <p>If user Z had access to App2, then after promotion, Z is not able to access App1.</p> <p>Promotion from shadowed application to base is honored only if there are no changes to the number of cubes and cube names. In other words, if a cube gets renamed or if there is any addition or deletion of an application after it was shadowed, then promotion of such an application fails with an error, leaving both applications as they were.</p> <p>Example:  ASOAppNew.cubeNew <i>cannot</i> be replaced as ASO.cube. ASOAppNew.cube <i>can</i> be replaced as ASO.cube.</p> <p>Tips: You need not unload or stop the application prior to calling this promotion API. Essbase loads the application to gather information, and unloads it prior to moving the applications.</p>
+<p>Promotes the shadow application as the base application. Conceptually, the promote operation is equivalent to moving the Essbase application directory from a source to destination location, at the file system level.</p> <p>Essbase must stop (unload) both applications, if they are running, before promoting. At the time of unloading, if the destination application is serving any ongoing operations, such as queries, Essbase terminates those operations and attempts to unload the application.</p> <p>If a graceful unload process fails or takes longer than permitted by the input argument <i>timeoutToForceUnloadApp</i> (unit=seconds), Essbase forcefully terminates the application.</p> <p>Example: if you specify 60 seconds for the timeout, but the termination of ongoing requests and graceful unloading of the application does not complete within one minute, Essbase triggers a forceful termination.  After termination, Essbase promotes the shadow application.</p> <p>The promote operation is supported on all applications, including aggregate storage, block storage, and Hybrid mode.</p> <p>Note: when moving an existing application, only the application and cube artifacts (such as metadata and data) are replaced from the source to destination.</p> <p>During a promotion, all security layer associations on the destination application, such as  users, groups, and security filters, are retained, while that of shadow/source are lost. The same rule applies for partition definitions.</p> <p>Example: If users X and Y had read-access to App1, and an admin promotes a shadow App2 to replace App1, both X and Y will be able to access App1.</p> <p>If user Z had access to App2, then after promotion, Z is not able to access App1.</p> <p>Promotion from shadowed application to base is honoured only if there are no changes to the number of cubes and cube names. In other words, if a cube gets renamed or if there is any addition or deletion of an application after it was shadowed, then promotion of such an application fails with an error, leaving both applications as they were.</p> <p>Example:  ASOAppNew.cubeNew <i>cannot</i> be replaced as ASO.cube. ASOAppNew.cube <i>can</i> be replaced as ASO.cube.</p> <p>Tips: You need not unload or stop the application prior to calling this promotion API. Essbase loads the application to gather information and unloads it prior to moving the applications.</p>
 
 ### Example
 ```csharp

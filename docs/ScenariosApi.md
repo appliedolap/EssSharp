@@ -18,7 +18,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ScenariosGetComment**](ScenariosApi.md#scenariosgetcomment) | **GET** /scenarios/{scenarioId}/comments/{commentId} | Get Comment |
 | [**ScenariosGetComments**](ScenariosApi.md#scenariosgetcomments) | **GET** /scenarios/{scenarioId}/comments | Get Comments |
 | [**ScenariosGetParticipants**](ScenariosApi.md#scenariosgetparticipants) | **GET** /scenarios/{scenarioId}/participants | Get Participants |
-| [**ScenariosGetRegisteredCubes**](ScenariosApi.md#scenariosgetregisteredcubes) | **GET** /scenarios/databases | Get Scenario-Enabled Cubes |
+| [**ScenariosGetRegisteredCubes**](ScenariosApi.md#scenariosgetregisteredcubes) | **GET** /scenarios/databases | Get Scenario Enabled Cubes |
 | [**ScenariosGetScenarios**](ScenariosApi.md#scenariosgetscenarios) | **GET** /scenarios | Get Scenarios |
 | [**ScenariosGetScripts**](ScenariosApi.md#scenariosgetscripts) | **GET** /scenarios/{scenarioId}/scripts | Get Scenario Scripts |
 | [**ScenariosPatch**](ScenariosApi.md#scenariospatch) | **PATCH** /scenarios/{id} | Update Scenario Partially |
@@ -33,7 +33,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Add Approver
 
-<p>Adds a scenario approver. Approvers are optional, and must have Database Access or higher role. They monitor and approve or reject scenarios. If a scenario has multiple approvers, each one must approve before it can be submitted.</p>
+<p>Adds a scenario approver. Approvers are optional and must have Database Access or higher role. They monitor and approve or reject scenarios. If a scenario has multiple approvers, each one must approve before it can be submitted.</p>
 
 ### Example
 ```csharp
@@ -1409,7 +1409,7 @@ catch (ApiException e)
 # **ScenariosGetRegisteredCubes**
 > ScenarioCubesList ScenariosGetRegisteredCubes ()
 
-Get Scenario-Enabled Cubes
+Get Scenario Enabled Cubes
 
 <p>Gets information about all the databases registered for scenario management.</p>
 
@@ -1439,7 +1439,7 @@ namespace Example
 
             try
             {
-                // Get Scenario-Enabled Cubes
+                // Get Scenario Enabled Cubes
                 ScenarioCubesList result = apiInstance.ScenariosGetRegisteredCubes();
                 Debug.WriteLine(result);
             }
@@ -1460,7 +1460,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Scenario-Enabled Cubes
+    // Get Scenario Enabled Cubes
     ApiResponse<ScenarioCubesList> response = apiInstance.ScenariosGetRegisteredCubesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -1539,7 +1539,7 @@ namespace Example
             var approvalPending = false;  // bool? | <p>Scenario is in submitted state, and approval is pending from logged in user.</p> (optional)  (default to false)
             var offset = 0L;  // long? | <p>Number of scenarios to omit from the start of the result set. Default is 0.</p> (optional)  (default to 0)
             var limit = 50L;  // long? | <p>Maximum number of scenarios to return. Default is 50.</p> (optional)  (default to 50)
-            var orderBy = "\"createdTime:desc\"";  // string | <p>Order-by field and order for the result set. The value of this parameter must follow the format of <code><i>fieldName</i>:asc|desc</code>. For example: <code>name:asc</code>. Default value is <code>createdTime:desc</code>, meaning that scenarios are listed with the most recently created scenarios first.</p> (optional)  (default to "createdTime:desc")
+            var orderBy = "\"createdTime:desc\"";  // string | <p>Order-by field and order for the result set. The value of this parameter must follow the format of <code><i>fieldName</i>:asc|desc</code>. For example, <code>name:asc</code>. Default value is <code>createdTime:desc</code>, meaning that scenarios are listed with the most recently created scenarios first.</p> (optional)  (default to "createdTime:desc")
             var count = false;  // bool? | <p>If <code>true</code>, response contains only the count of scenarios, and not actual scenarios.</p> (optional)  (default to false)
 
             try
@@ -1592,7 +1592,7 @@ catch (ApiException e)
 | **approvalPending** | **bool?** | &lt;p&gt;Scenario is in submitted state, and approval is pending from logged in user.&lt;/p&gt; | [optional] [default to false] |
 | **offset** | **long?** | &lt;p&gt;Number of scenarios to omit from the start of the result set. Default is 0.&lt;/p&gt; | [optional] [default to 0] |
 | **limit** | **long?** | &lt;p&gt;Maximum number of scenarios to return. Default is 50.&lt;/p&gt; | [optional] [default to 50] |
-| **orderBy** | **string** | &lt;p&gt;Order-by field and order for the result set. The value of this parameter must follow the format of &lt;code&gt;&lt;i&gt;fieldName&lt;/i&gt;:asc|desc&lt;/code&gt;. For example: &lt;code&gt;name:asc&lt;/code&gt;. Default value is &lt;code&gt;createdTime:desc&lt;/code&gt;, meaning that scenarios are listed with the most recently created scenarios first.&lt;/p&gt; | [optional] [default to &quot;createdTime:desc&quot;] |
+| **orderBy** | **string** | &lt;p&gt;Order-by field and order for the result set. The value of this parameter must follow the format of &lt;code&gt;&lt;i&gt;fieldName&lt;/i&gt;:asc|desc&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;. Default value is &lt;code&gt;createdTime:desc&lt;/code&gt;, meaning that scenarios are listed with the most recently created scenarios first.&lt;/p&gt; | [optional] [default to &quot;createdTime:desc&quot;] |
 | **count** | **bool?** | &lt;p&gt;If &lt;code&gt;true&lt;/code&gt;, response contains only the count of scenarios, and not actual scenarios.&lt;/p&gt; | [optional] [default to false] |
 
 ### Return type
