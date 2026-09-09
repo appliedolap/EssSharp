@@ -12,6 +12,12 @@ namespace EssSharp.Api
     /// <summary />
     public partial class ExecuteMDXApi
     {
+        // The "application/json;charset=UTF-8" entry in the generated MDXExecuteMDX accepts array is
+        // deliberate and is applied by process.sh. Essbase 26.2 rejects every proper subset of the
+        // media types this endpoint produces, and ClientUtils.SelectHeaderAccept collapses the header
+        // to "application/json" alone whenever that exact string appears. Carrying the charset keeps
+        // all three types on the Accept header. See the produces fix in process.sh.
+
         /// <summary>
         /// Gets the mdx response as a list of strings.
         /// </summary>

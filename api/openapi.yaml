@@ -8698,6 +8698,9 @@ paths:
             text/html:
               schema:
                 $ref: "#/components/schemas/InputStream"
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/InputStream"
           description: "<p><strong>Mostly OK</strong></p><p>As this is a streaming\
             \ API, it can fail even with status 200. Check for an <code>errorMessage</code>\
             \ tag in the response to identify any errors.</p>"

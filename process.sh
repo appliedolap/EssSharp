@@ -40,6 +40,13 @@ cat temp.json | jq '.paths."/applications".post.consumes = ["application/json"]'
 # Fix the consumes for the execute mdx endpoint
 cat temp.json | jq '.paths."/applications/{application}/databases/{database}/mdx".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 
+# Fix the produces for the execute mdx endpoint, which omits the JSON media type that the endpoint
+# returns by default. Essbase 26.2 rejects every proper subset of the media types it produces here,
+# so all three must reach the Accept header. The JSON type carries its charset parameter because
+# ClientUtils.SelectHeaderAccept collapses the header to "application/json" alone - a proper subset -
+# whenever that exact string appears in the produces list.
+cat temp.json | jq '.paths."/applications/{application}/databases/{database}/mdx".post.produces = ["application/octet-stream", "text/html", "application/json;charset=UTF-8"]' > json.tmp && mv json.tmp temp.json
+
 # Fix the consumes for the execute mdx endpoint
 cat temp.json | jq '.paths."/applications/{applicationName}/databases/{databaseName}/grid/layout".post.consumes = ["application/json"]' > json.tmp && mv json.tmp temp.json
 

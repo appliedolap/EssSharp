@@ -100,7 +100,7 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/octet-stream, text/html
+ - **Accept**: application/octet-stream, text/html, application/json;charset=UTF-8
 
 
 ### HTTP response details

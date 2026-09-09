@@ -10163,7 +10163,8 @@
         "operationId": "MDX.executeMDX",
         "produces": [
           "application/octet-stream",
-          "text/html"
+          "text/html",
+          "application/json;charset=UTF-8"
         ],
         "parameters": [
           {
