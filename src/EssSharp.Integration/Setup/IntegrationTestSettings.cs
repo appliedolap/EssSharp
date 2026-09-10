@@ -6,10 +6,29 @@ namespace EssSharp.Integration.Setup
     public class IntegrationTestSettings
     {
         /// <summary />
+        public IntegrationTestAiQuerySettings AiQuery { get; set; }
+
+        /// <summary />
         public IntegrationTestSettingsConnection[] Connections { get; set; }
 
         /// <summary />
         public string[] Images { get; set; }
+    }
+
+    /// <summary />
+    public class IntegrationTestAiQuerySettings
+    {
+        /// <summary />
+        public string ApplicationName { get; set; } = "Sample";
+
+        /// <summary />
+        public string CubeName { get; set; } = "Basic";
+
+        /// <summary />
+        public string NaturalLanguageQuery { get; set; } = "Show actual sales by year.";
+
+        /// <summary />
+        public string ProfileName { get; set; }
     }
 
     /// <summary />
