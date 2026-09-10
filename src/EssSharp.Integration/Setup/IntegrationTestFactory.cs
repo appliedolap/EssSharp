@@ -173,6 +173,9 @@ namespace EssSharp.Integration.Setup
         #region Internal Properties
 
         /// <summary />
+        internal static IntegrationTestAiQuerySettings AiQuery { get; set; }
+
+        /// <summary />
         internal static IntegrationTestSettingsConnection[] Connections { get; set; }
 
         /// <summary />

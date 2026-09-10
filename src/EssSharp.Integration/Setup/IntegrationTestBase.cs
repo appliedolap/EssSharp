@@ -116,6 +116,9 @@ namespace EssSharp.Integration.Setup
                 };
             }
 
+            // Retain the optional settings used by tests that exercise a configured AI Query environment.
+            IntegrationTestFactory.AiQuery = localSettings?.AiQuery ?? defaultSettings?.AiQuery ?? new IntegrationTestAiQuerySettings();
+
             // Do "global" initialization here; Only called once.
             var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync(_messageSink);
             var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync(_messageSink);
@@ -256,6 +259,9 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         protected static string Essbase => IntegrationTestFactory.EssbaseContainerId;
+
+        /// <summary />
+        protected static IntegrationTestAiQuerySettings AiQuerySettings => IntegrationTestFactory.AiQuery;
 
         /// <summary />
         /// <param name="id" />
