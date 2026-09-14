@@ -124,6 +124,18 @@ namespace EssSharp.Integration.Setup
             // Retain the optional settings used by tests that exercise a configured AI Query environment.
             IntegrationTestFactory.AiQuery = localSettings?.AiQuery ?? defaultSettings?.AiQuery ?? new IntegrationTestAiQuerySettings();
 
+            // If per-image settings could be obtained from either configuration, make them available to the factory.
+            // These describe how a given image differs from the Oracle Essbase 21.x container contract, and are
+            // resolved against the default image before either container is built.
+            if (localSettings?.ImageSettings is { Length: > 0 } localImageSettings)
+                IntegrationTestFactory.ImageSettings = localImageSettings;
+            else if (defaultSettings?.ImageSettings is { Length: > 0 } defaultImageSettings)
+                IntegrationTestFactory.ImageSettings = defaultImageSettings;
+
+            // Resolve the image profile before the container tasks below start, since both of them read it and would
+            // otherwise race to resolve it.
+            _messageSink?.OnMessage(new DiagnosticMessage($@"Using Essbase image '{IntegrationTestFactory.EssbaseProfile.Image}' (version {IntegrationTestFactory.EssbaseProfile.Version?.ToString() ?? "unknown"})."));
+
             // Do "global" initialization here; Only called once.
             var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync(_messageSink);
             var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync(_messageSink);
@@ -261,27 +273,29 @@ namespace EssSharp.Integration.Setup
         /// <param name="id" />
         /// <param name="command" />
         /// <param name="cancellationToken" />
-        protected async Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, CancellationToken cancellationToken = default )
-        {
-            var execParams = new ContainerExecCreateParameters()
-            {
-                AttachStderr = true,
-                AttachStdout = true,
-                Cmd = command,
-            };
+        protected Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, CancellationToken cancellationToken = default ) =>
+            IntegrationTestFactory.ExecAsync(id, command, cancellationToken);
 
-            using var client = GetClient();
+        /// <summary>
+        /// Executes a command inside the Essbase container and returns the exec details along with its output.
+        /// </summary>
+        /// <param name="command">The command and its arguments.</param>
+        /// <param name="cancellationToken" />
+        protected Task<(ContainerExecInspectResponse details, string stdout)> ExecEssbaseAsync( string[] command, CancellationToken cancellationToken = default ) =>
+            IntegrationTestFactory.ExecAsync(Essbase, command, cancellationToken);
 
-            // Create the exec instance, it is not started yet.
-            var exec = await client.Exec.CreateContainerExecAsync(id, execParams, cancellationToken);
-            // Start the exec instance and capture the output stream.
-            using var stream = await client.Exec.StartContainerExecAsync(exec.ID, new ContainerExecStartParameters { Detach = false }, cancellationToken);
-            var (stdout, stderr) = await stream.ReadOutputToEndAsync(cancellationToken);
+        /// <summary>
+        /// Executes a shell command inside the Essbase container and returns the exec details along with its output.
+        /// </summary>
+        /// <param name="command">A shell expression run through <c>/bin/bash -lc</c>.</param>
+        /// <param name="cancellationToken" />
+        protected Task<(ContainerExecInspectResponse details, string stdout)> ExecEssbaseAsync( string command, CancellationToken cancellationToken = default ) =>
+            IntegrationTestFactory.ExecAsync(Essbase, new[] { "/bin/bash", "-lc", command }, cancellationToken);
 
-            var details = await client.Exec.InspectContainerExecAsync(exec.ID, cancellationToken);
-
-            return (details, stdout);
-        }
+        /// <summary>
+        /// The profile resolved for the default (first configured) Essbase image.
+        /// </summary>
+        protected static EssbaseContainerProfile EssbaseProfile => IntegrationTestFactory.EssbaseProfile;
 
         /// <summary />
         protected DockerClient GetClient() => IntegrationTestFactory.GetDockerClient();
