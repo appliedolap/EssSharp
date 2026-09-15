@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,6 +27,17 @@ namespace EssSharp.Integration.Setup
         private static string          _essbaseContainerId;
 
         private static EssbaseContainerProfile _essbaseProfile;
+
+        /// <summary>
+        /// How long to wait for Essbase to write its registry entries, which only happens once it has created its
+        /// domain - well after the container itself reports as running.
+        /// </summary>
+        private static readonly TimeSpan RegistryEntryTimeout = TimeSpan.FromMinutes(30);
+
+        /// <summary>
+        /// How long to wait for the Essbase container to become usable again after a restart.
+        /// </summary>
+        private static readonly TimeSpan RestartTimeout = TimeSpan.FromMinutes(15);
 
         #endregion
 
@@ -173,8 +185,66 @@ namespace EssSharp.Integration.Setup
             {
                 _essbaseContainerId = _essbaseTestContainer.Id;
 
+                // Force any declared registry settings first, since that may restart the container, and only then run
+                // the setup commands - which may depend on a feature the registry settings just enabled.
+                await ApplyRegistrySettingsAsync(sink, cancellationToken);
                 await RunEssbaseSetupCommandsAsync(sink, cancellationToken);
             }
+        }
+
+        /// <summary>
+        /// Forces the Essbase registry settings declared by the resolved profile, restarting the Essbase container
+        /// when any value actually changed.
+        /// </summary>
+        /// <param name="sink" />
+        /// <param name="cancellationToken" />
+        /// <remarks>
+        /// Essbase derives its feature flags from the deployment mode, so features such as AI query are FALSE on a
+        /// locally built container. The computed values are persisted in the repository database, base64 encoded,
+        /// which lets a disposable test container force them on. The values are cached in the Essbase process, so a
+        /// restart is required for a change to take effect.
+        /// </remarks>
+        public static async Task ApplyRegistrySettingsAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
+        {
+            var profile = EssbaseProfile;
+
+            if ( profile.RegistrySettings is not { Count: > 0 } settings )
+                return;
+
+            var changed = false;
+
+            foreach ( var setting in settings )
+            {
+                if ( setting.Key is not { Length: > 0 } name || setting.Value is not { Length: > 0 } value )
+                    continue;
+
+                var encodedName  = Convert.ToBase64String(Encoding.UTF8.GetBytes(name));
+                var encodedValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
+
+                // The registry rows are only written once Essbase has created its domain, which happens well after
+                // the container itself reports as running, so wait for the entry to appear before updating it.
+                if ( !await WaitForRegistryEntryAsync(profile, encodedName, sink, cancellationToken) )
+                {
+                    sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage($@"Essbase registry entry '{name}' never appeared; leaving it unset."));
+                    continue;
+                }
+
+                // Only update an entry that does not already hold the desired value, so that a reused container is
+                // not restarted for no reason.
+                var updated = await RunRepositorySqlAsync(profile,
+                    $@"SET NOCOUNT ON; UPDATE {profile.EssbaseSchema}.ESSBASE_PROPERTIES SET VALUE = '{encodedValue}' WHERE NAME = '{encodedName}' AND VALUE <> '{encodedValue}'; SELECT CAST(@@ROWCOUNT AS VARCHAR(5));",
+                    cancellationToken);
+
+                if ( int.TryParse(updated?.Trim(), out var rows) && rows > 0 )
+                {
+                    sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage($@"Essbase registry entry '{name}' set to '{value}'."));
+                    changed = true;
+                }
+            }
+
+            // Essbase caches registry values in process, so a change only takes effect after a restart.
+            if ( changed )
+                await RestartEssbaseContainerAsync(sink, cancellationToken);
         }
 
         /// <summary>
@@ -229,6 +299,92 @@ namespace EssSharp.Integration.Setup
             var details = await client.Exec.InspectContainerExecAsync(exec.ID, cancellationToken);
 
             return (details, stdout);
+        }
+
+        /// <summary>
+        /// Executes a query against the repository database container and returns its output.
+        /// </summary>
+        /// <param name="profile" />
+        /// <param name="sql" />
+        /// <param name="cancellationToken" />
+        private static async Task<string> RunRepositorySqlAsync( EssbaseContainerProfile profile, string sql, CancellationToken cancellationToken )
+        {
+            // Pass the query as a discrete argument rather than through a shell, so that no quoting is required.
+            var (_, stdout) = await ExecAsync(DatabaseContainerId, new[]
+            {
+                @"/opt/mssql-tools/bin/sqlcmd",
+                "-S", "localhost",
+                "-U", profile.DatabaseAdminUsername,
+                "-P", profile.DatabaseAdminPassword,
+                "-d", profile.DatabaseName,
+                "-h", "-1",
+                "-W",
+                "-Q", sql
+            }, cancellationToken);
+
+            return stdout;
+        }
+
+        /// <summary>
+        /// Waits for an Essbase registry entry to be written to the repository database.
+        /// </summary>
+        /// <param name="profile" />
+        /// <param name="encodedName">The base64 encoded registry entry name.</param>
+        /// <param name="sink" />
+        /// <param name="cancellationToken" />
+        private static async Task<bool> WaitForRegistryEntryAsync( EssbaseContainerProfile profile, string encodedName, IMessageSink sink, CancellationToken cancellationToken )
+        {
+            var deadline = DateTime.UtcNow.Add(RegistryEntryTimeout);
+
+            while ( DateTime.UtcNow < deadline )
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var count = await RunRepositorySqlAsync(profile,
+                    $@"SET NOCOUNT ON; SELECT CAST(COUNT(*) AS VARCHAR(5)) FROM {profile.EssbaseSchema}.ESSBASE_PROPERTIES WHERE NAME = '{encodedName}';",
+                    cancellationToken);
+
+                if ( int.TryParse(count?.Trim(), out var rows) && rows > 0 )
+                    return true;
+
+                await Task.Delay(TimeSpan.FromSeconds(10), cancellationToken);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Restarts the Essbase container and waits for it to report as running (and healthy, when it declares a
+        /// health check).
+        /// </summary>
+        /// <param name="sink" />
+        /// <param name="cancellationToken" />
+        private static async Task RestartEssbaseContainerAsync( IMessageSink sink, CancellationToken cancellationToken )
+        {
+            sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage("Restarting the Essbase container to reload its registry settings."));
+
+            using var client = GetDockerClient();
+
+            await client.Containers.RestartContainerAsync(EssbaseContainerId, new ContainerRestartParameters(), cancellationToken);
+
+            var deadline = DateTime.UtcNow.Add(RestartTimeout);
+
+            while ( DateTime.UtcNow < deadline )
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                if ( (await client.Containers.InspectContainerAsync(EssbaseContainerId, cancellationToken))?.State is { } state )
+                {
+                    // A container that declares a health check is only usable once that check passes; one that does
+                    // not is taken as ready as soon as it is running again.
+                    if ( state.Running && state.Health?.Status is not "starting" )
+                        return;
+                }
+
+                await Task.Delay(TimeSpan.FromSeconds(5), cancellationToken);
+            }
+
+            sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage("The Essbase container did not report as ready after its restart."));
         }
 
 

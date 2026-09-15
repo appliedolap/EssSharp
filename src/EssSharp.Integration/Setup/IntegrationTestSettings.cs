@@ -99,6 +99,17 @@ namespace EssSharp.Integration.Setup
         public string DatabaseWaitTimeout { get; set; }
 
         /// <summary>
+        /// The schema prefix the Essbase container uses when it creates its repository schemas.
+        /// </summary>
+        public string DatabaseSchemaPrefix { get; set; }
+
+        /// <summary>
+        /// Essbase registry settings to force after the harness starts a container, keyed by registry entry name -
+        /// for example <c>AI_MDX</c> to <c>TRUE</c>. Unsupported, and only appropriate for a disposable container.
+        /// </summary>
+        public Dictionary<string, string> RegistrySettings { get; set; }
+
+        /// <summary>
         /// Additional environment variables applied to the Essbase container.
         /// </summary>
         public Dictionary<string, string> Environment { get; set; }

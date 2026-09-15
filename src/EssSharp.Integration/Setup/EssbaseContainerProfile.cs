@@ -67,6 +67,11 @@ namespace EssSharp.Integration.Setup
         /// </summary>
         public const string DefaultDatabaseWaitTimeout = @"240";
 
+        /// <summary>
+        /// The schema prefix the Essbase container uses when it creates its repository schemas.
+        /// </summary>
+        public const string DefaultDatabaseSchemaPrefix = @"ESS1";
+
         #endregion
 
         #region Public Properties
@@ -137,6 +142,22 @@ namespace EssSharp.Integration.Setup
         public string DatabaseWaitTimeout { get; set; } = DefaultDatabaseWaitTimeout;
 
         /// <summary>
+        /// The schema prefix the Essbase container uses when it creates its repository schemas.
+        /// </summary>
+        public string DatabaseSchemaPrefix { get; set; } = DefaultDatabaseSchemaPrefix;
+
+        /// <summary>
+        /// Essbase registry settings to force after the harness starts a container, keyed by registry entry name -
+        /// for example <c>AI_MDX</c> to <c>TRUE</c>.
+        /// </summary>
+        /// <remarks>
+        /// Essbase derives its feature flags from the deployment mode, so features such as AI query evaluate to FALSE
+        /// on a locally built container. The computed values are persisted in the repository, which lets a test
+        /// container force them on. This is unsupported, and is only appropriate for a disposable container.
+        /// </remarks>
+        public Dictionary<string, string> RegistrySettings { get; set; } = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
         /// Additional environment variables applied to the Essbase container, which override any variable the
         /// harness sets by the same name.
         /// </summary>
@@ -161,6 +182,11 @@ namespace EssSharp.Integration.Setup
         /// The connect string the Essbase container uses to reach its repository database.
         /// </summary>
         public string DatabaseConnectString => $@"{DatabaseContainerName}:{DatabasePort}:{DatabaseName}";
+
+        /// <summary>
+        /// The repository schema holding the Essbase registry, derived from <see cref="DatabaseSchemaPrefix" />.
+        /// </summary>
+        public string EssbaseSchema => $@"{DatabaseSchemaPrefix}_ESSBASE";
 
         #endregion
 
@@ -261,6 +287,12 @@ namespace EssSharp.Integration.Setup
 
             if ( setting.DatabaseWaitTimeout is { Length: > 0 } databaseWaitTimeout )
                 DatabaseWaitTimeout = databaseWaitTimeout;
+
+            if ( setting.DatabaseSchemaPrefix is { Length: > 0 } databaseSchemaPrefix )
+                DatabaseSchemaPrefix = databaseSchemaPrefix;
+
+            foreach ( var registrySetting in setting.RegistrySettings ?? new Dictionary<string, string>() )
+                RegistrySettings[registrySetting.Key] = registrySetting.Value;
 
             foreach ( var variable in setting.Environment ?? new Dictionary<string, string>() )
                 Environment[variable.Key] = variable.Value;
