@@ -71,7 +71,7 @@ namespace EssSharp
         /// <param name="exception">The exception to log.</param>
         /// <param name="message">Format string of the log message in message template format.</param>
         /// <param name="args">An object array that contains zero or more objects to format.</param>
-        protected void LogError( Exception exception, string message, params object[] args ) => 
+        private protected void LogError( Exception exception, string message, params object[] args ) =>
             Configuration?.Logger?.LogError(new EventId(id: (int)EssSharpLogEventType.Error), exception, message, args);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="message">Format string of the log message in message template format.</param>
         /// <param name="args">An object array that contains zero or more objects to format.</param>
-        protected void LogInformation( string message, params object[] args ) =>
+        private protected void LogInformation( string message, params object[] args ) =>
             Configuration?.Logger?.LogInformation(new EventId(id: (int)EssSharpLogEventType.Message), message, args);
 
         #endregion
