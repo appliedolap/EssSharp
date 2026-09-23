@@ -21,6 +21,7 @@
       "noRestore": false,
       "namespaceLayout": "flattened",
       "memberLayout": "samePage",
+      "enumSortOrder": "declaringOrder",
       "allowCompilationErrors": false
     },
     {
@@ -44,6 +45,7 @@
       "noRestore": false,
       "namespaceLayout": "flattened",
       "memberLayout": "samePage",
+      "enumSortOrder": "declaringOrder",
       "allowCompilationErrors": false
     }
   ],
