@@ -894,82 +894,80 @@ namespace EssSharp.Integration
 
             var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var grid = new Grid()
+            var essGrid = cube.GetGrid();
+
+            essGrid.Dimensions = new List<EssGridDimension>()
             {
-                Dimensions = new List<GridDimension>()
+                new EssGridDimension()
                 {
-                    new GridDimension()
-                    {
-                        Name = "Year",
-                        Row = -1,
-                        Column = -1,
-                        Pov = "H-T-D",
-                        Hidden = false,
-                        Expanded = false
-                    },
-                    new GridDimension()
-                    {
-                        Name = "Measures",
-                        Row = -1,
-                        Column = -1,
-                        Pov = "Sales",
-                        Hidden = false,
-                        Expanded = false
-                    },
-                    new GridDimension()
-                    {
-                        Name = "Product",
-                        Row = -1,
-                        Column = 0,
-                        Pov = "",
-                        Hidden = false,
-                        Expanded = false
-                    },
-                    new GridDimension()
-                    {
-                        Name = "Market",
-                        Row = -1,
-                        Column = -1,
-                        Pov = "New York",
-                        Hidden = false,
-                        Expanded = false
-                    },
-                    new GridDimension()
-                    {
-                        Name = "Scenario",
-                        Row = -1,
-                        Column = -1,
-                        Pov = "Actual",
-                        Hidden = false,
-                        Expanded = false
-                    }
+                    Name = "Year",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "H-T-D",
+                    Hidden = false,
+                    Expanded = false
                 },
-                Slice = new Slice()
+                new EssGridDimension()
                 {
-                    Columns = 5,
-                    Rows = 2,
-                    Data = new Data()
+                    Name = "Measures",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Sales",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Product",
+                    Row = -1,
+                    Column = 0,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Market",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "New York",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Scenario",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Actual",
+                    Hidden = false,
+                    Expanded = false
+                }
+            };
+
+            essGrid.Slice = new EssGridSlice()
+            {
+                Columns = 5,
+                Rows = 2,
+                Data = new EssGridSliceData()
+                {
+                    Ranges = new List<EssGridRange>()
                     {
-                        Ranges = new List<GridRange>()
+                        new EssGridRange()
                         {
-                            new GridRange()
-                            {
-                                Start = 0,
-                                End = 9,
-                                Values = new List<string>() { "", "H-T-D", "Sales", "New York", "Actual", "100-10", "3466.0", "", "", "" },
-                                Types = new List<string>() { "7", "0", "0", "0", "0", "0", "2", "7", "7", "7" },
-                                Texts = new List<string>() { null, null, null, null, null, null, null, null, null, null },
-                                DataFormats = new List<string>() {},
-                                Statuses = new List<string>() { "0", "132", "134217744", "402653200", "536870928", "268435472", "2097153", "0", "0", "0" },
-                                Filters = new List<string>() {},
-                                EnumIds = new List<string>() { "", "", "", "", "", "", "", "", "", "" }
-                            }
+                            Start = 0,
+                            End = 9,
+                            Values = new List<string>() { "", "H-T-D", "Sales", "New York", "Actual", "100-10", "3466.0", "", "", "" },
+                            Types = new List<string>() { "7", "0", "0", "0", "0", "0", "2", "7", "7", "7" },
+                            Texts = new List<string>() { null, null, null, null, null, null, null, null, null, null },
+                            DataFormats = new List<string>() {},
+                            Statuses = new List<string>() { "0", "132", "134217744", "402653200", "536870928", "268435472", "2097153", "0", "0", "0" },
+                            Filters = new List<string>() {},
+                            EnumIds = new List<string>() { "", "", "", "", "", "", "", "", "", "" }
                         }
                     }
                 }
             };
-
-            var essGrid = new EssGrid(grid, cube as EssCube);
 
             var preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
@@ -1170,81 +1168,79 @@ namespace EssSharp.Integration
 
             var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var grid = new Grid()
+            var essGrid = cube.GetGrid();
+
+            essGrid.Dimensions = new List<EssGridDimension>()
             {
-                Dimensions = new List<GridDimension>()
+                new EssGridDimension()
                 {
-                    new GridDimension()
-                    {
-                        Name = "Year",
-                        Row = -1,
-                        Column = -1,
-                        Pov = "Jan",
-                        Hidden = false,
-                        Expanded = false
-                    },
-                    new GridDimension()
-                    {
-                        Name = "Measures",
-                        Row = -1,
-                        Column = -1,
-                        Pov = "Sales",
-                        Hidden = false,
-                        Expanded = false
-                    },
-                    new GridDimension()
-                    {
-                        Name = "Product",
-                        Row = -1,
-                        Column = 0,
-                        Pov = "",
-                        Hidden = false,
-                        Expanded = false
-                    },
-                    new GridDimension() {
-                        Name = "Market",
-                        Row = -1,
-                        Column = -1,
-                        Pov = "New York",
-                        Hidden = false,
-                        Expanded = false
-                    },
-                    new GridDimension()
-                    {
-                        Name = "Scenario",
-                        Row = -1,
-                        Column = -1,
-                        Pov = "Actual",
-                        Hidden = false,
-                        Expanded = false
-                    }
+                    Name = "Year",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Jan",
+                    Hidden = false,
+                    Expanded = false
                 },
-                Slice = new Slice()
+                new EssGridDimension()
                 {
-                    Columns = 5,
-                    Rows = 2,
-                    Data = new Data()
-                    {
-                        Ranges = new List<GridRange>()
-                                    {
-                                        new GridRange()
-                                        {
-                                                Start = 0,
-                                                End = 9,
-                                                Values = new List<string>() { "", "Jan", "Sales", "New York", "Actual", "Colas", "2479.0", "", "", "" },
-                                                Types = new List<string>() { "7", "0", "0", "0", "0", "0", "2", "7", "7", "7" },
-                                                Texts = new List<string>() { null, null, null, null, null, null, null, null, null, null },
-                                                DataFormats = new List<string>() { },
-                                                Statuses = new List<string>() { "0", "16", "134217744", "402653200", "536870928", "268435475", "2", "0", "0", "0" },
-                                                Filters = new List<string>() { },
-                                                EnumIds = new List<string>() { "", "", "", "", "", "", "", "", "", "" }
-                                        }
-                                    }
-                    }
+                    Name = "Measures",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Sales",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Product",
+                    Row = -1,
+                    Column = 0,
+                    Pov = "",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension() {
+                    Name = "Market",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "New York",
+                    Hidden = false,
+                    Expanded = false
+                },
+                new EssGridDimension()
+                {
+                    Name = "Scenario",
+                    Row = -1,
+                    Column = -1,
+                    Pov = "Actual",
+                    Hidden = false,
+                    Expanded = false
                 }
             };
 
-            var essGrid = new EssGrid(grid, cube as EssCube);
+            essGrid.Slice = new EssGridSlice()
+            {
+                Columns = 5,
+                Rows = 2,
+                Data = new EssGridSliceData()
+                {
+                    Ranges = new List<EssGridRange>()
+                                {
+                                    new EssGridRange()
+                                    {
+                                            Start = 0,
+                                            End = 9,
+                                            Values = new List<string>() { "", "Jan", "Sales", "New York", "Actual", "Colas", "2479.0", "", "", "" },
+                                            Types = new List<string>() { "7", "0", "0", "0", "0", "0", "2", "7", "7", "7" },
+                                            Texts = new List<string>() { null, null, null, null, null, null, null, null, null, null },
+                                            DataFormats = new List<string>() { },
+                                            Statuses = new List<string>() { "0", "16", "134217744", "402653200", "536870928", "268435475", "2", "0", "0", "0" },
+                                            Filters = new List<string>() { },
+                                            EnumIds = new List<string>() { "", "", "", "", "", "", "", "", "", "" }
+                                    }
+                                }
+                }
+            };
 
             var preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
@@ -1270,9 +1266,7 @@ namespace EssSharp.Integration
 
             var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var grid = new Grid() { };
-
-            var essGrid = new EssGrid(grid, cube as EssCube);
+            var essGrid = cube.GetGrid();
 
             var preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
@@ -2200,52 +2194,50 @@ namespace EssSharp.Integration
 
             var cube = await server.GetApplicationAsync("ASOSamp", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var grid = new Grid()
+            var essGrid = cube.GetGrid();
+
+            essGrid.Dimensions = new List<EssGridDimension>() { };
+
+            essGrid.Slice = new EssGridSlice()
             {
-                Dimensions = new List<GridDimension>() { },
-                Slice = new Slice()
+                Columns = 18,
+                Rows = 12,
+                Data = new EssGridSliceData()
                 {
-                    Columns = 18,
-                    Rows = 12,
-                    Data = new Data()
-                    {
-                        Ranges = new List<GridRange>()
+                    Ranges = new List<EssGridRange>()
+                                {
+                                    new EssGridRange()
                                     {
-                                        new GridRange()
-                                        {
-                                                Start = 0,
-                                                End = 215,
-                                                Types = new List<string>() {"7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
-                                                                            "7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7",
-                                                                            "0","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7"},
-                                                Values = new List<string>() {"","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118",
-                                                                               "","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras",
-                                                                               "","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level",
-                                                                               "","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age",
-                                                                               "","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions",
-                                                                               "","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type",
-                                                                               "","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale",
-                                                                               "","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price",
-                                                                               "","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year",
-                                                                               "","Jan","Feb","Mar","Qtr1","Apr","May","Jun","Qtr2","Jul","Aug","Sep","Qtr3","Oct","Nov","Dec","Qtr4","MTD",
-                                                                               "","","","","","","","","","","","","","","","","","",
-                                                                               "ADDISON - MI","0","0","0","0","0","0","0","0","","","","","","","","",""}
-                                        }
+                                            Start = 0,
+                                            End = 215,
+                                            Types = new List<string>() {"7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
+                                                                        "7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7",
+                                                                        "0","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7","7"},
+                                            Values = new List<string>() {"","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118","004118",
+                                                                           "","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras","Digital Cameras",
+                                                                           "","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level","Income Level",
+                                                                           "","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age","Age",
+                                                                           "","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions","Promotions",
+                                                                           "","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type","Payment Type",
+                                                                           "","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale","Sale",
+                                                                           "","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price","Original Price",
+                                                                           "","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year","Current Year",
+                                                                           "","Jan","Feb","Mar","Qtr1","Apr","May","Jun","Qtr2","Jul","Aug","Sep","Qtr3","Oct","Nov","Dec","Qtr4","MTD",
+                                                                           "","","","","","","","","","","","","","","","","","",
+                                                                           "ADDISON - MI","0","0","0","0","0","0","0","0","","","","","","","","",""}
                                     }
-                    }
+                                }
                 }
             };
-
-            var essGrid = new EssGrid(grid, cube as EssCube);
 
             await essGrid.RefreshAsync(TestContext.Current.CancellationToken);
         }

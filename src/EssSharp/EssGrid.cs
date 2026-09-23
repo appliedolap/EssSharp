@@ -45,7 +45,7 @@ namespace EssSharp
         }
 
         /// <summary />
-        public EssGrid( Grid grid, EssCube cube ) : base(cube?.Configuration, cube?.Client)
+        internal EssGrid( Grid grid, EssCube cube ) : base(cube?.Configuration, cube?.Client)
         {
             _grid = grid ??
                 throw new ArgumentNullException(nameof(grid), $"An API model {nameof(grid)} is required to create an {nameof(EssGrid)}.");
