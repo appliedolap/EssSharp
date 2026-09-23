@@ -37,12 +37,12 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test mdx script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssMdxScript>("test");
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssMdxScript>("test", cancellationToken: TestContext.Current.CancellationToken);
 
             // Execute the mdx job and capture the results.
-            var job = await script.ExecuteAsync();
+            var job = await script.ExecuteAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Assert that the run mdx job completed without warnings.
             Assert.Equal(EssJobStatus.Completed, job?.JobStatus);
@@ -55,12 +55,12 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test mdx script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssMdxScript>("test");
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssMdxScript>("test", cancellationToken: TestContext.Current.CancellationToken);
 
             // Execute the mdx query and capture the report.
-            var report = await script.GetReportAsync();
+            var report = await script.GetReportAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Assert that the "Market" dimension is the first column dimension member.
             Assert.Equal("Market", report.Metadata.ColumnDimensionMembers.FirstOrDefault());
@@ -77,12 +77,12 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test mdx script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssMdxScript>("test");
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssMdxScript>("test", cancellationToken: TestContext.Current.CancellationToken);
 
             // Execute the mdx query and capture an Essbase grid.
-            var grid = await script.GetGridAsync();
+            var grid = await script.GetGridAsync(TestContext.Current.CancellationToken);
 
             // Assert that the "Market" dimension is the first column dimension member.
             Assert.Equal("Market", grid.Dimensions
@@ -109,18 +109,18 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Get the "test" mdx script from the cube and capture its content.
-            var script = await cube.GetScriptAsync<IEssMdxScript>("test", getContent: true);
+            var script = await cube.GetScriptAsync<IEssMdxScript>("test", getContent: true, TestContext.Current.CancellationToken);
             var content = script.Content;
 
             // Rename the "test" mdx script as "test2".
-            await script.RenameAsync("test2");
+            await script.RenameAsync("test2", TestContext.Current.CancellationToken);
 
             // Get all of the mdx scripts back from the cube.
-            var scripts = await cube.GetScriptsAsync<IEssMdxScript>(getContent: true);
+            var scripts = await cube.GetScriptsAsync<IEssMdxScript>(getContent: true, TestContext.Current.CancellationToken);
 
             // Assert that only a single mdx script remains on the server.
             Assert.Single(scripts);
@@ -135,10 +135,10 @@ namespace EssSharp.Integration
             Assert.Equal(content, renamedScript.Content);
 
             // Copy the renamed script back to "test" mdx.
-            await renamedScript.CopyAsync<IEssMdxScript>("test");
+            await renamedScript.CopyAsync<IEssMdxScript>("test", TestContext.Current.CancellationToken);
 
             // Get all of the mdx scripts back from the cube.
-            scripts = await cube.GetScriptsAsync<IEssMdxScript>(getContent: true);
+            scripts = await cube.GetScriptsAsync<IEssMdxScript>(getContent: true, TestContext.Current.CancellationToken);
 
             // Assert that the cube now has 2 mdx scripts.
             Assert.Equal(2, scripts.Count);
@@ -157,21 +157,21 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Create some updated script content.
             var content = @"SELECT {([Market], [Product])} ON COLUMNS, {[YEAR]} ON ROWS";
 
             // Get the "test2" mdx script from the cube and update the content.
-            var script = await cube.GetScriptAsync<IEssMdxScript>("test2", getContent: true);
+            var script = await cube.GetScriptAsync<IEssMdxScript>("test2", getContent: true, TestContext.Current.CancellationToken);
             script.Content = content;
 
             // Save the "test2" mdx script.
-            await script.SaveAsync();
+            await script.SaveAsync(TestContext.Current.CancellationToken);
 
             // Get the updated script back from the cube.
-            script = await cube.GetScriptAsync<IEssMdxScript>("test2", getContent: true);
+            script = await cube.GetScriptAsync<IEssMdxScript>("test2", getContent: true, TestContext.Current.CancellationToken);
 
             // Assert that the updated script exists and contains the updated content we saved to it.
             Assert.Equal(content, script?.Content);
@@ -184,12 +184,12 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test Report script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssReportScript>("test");
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssReportScript>("test", cancellationToken: TestContext.Current.CancellationToken);
 
             // Execute the Report job and capture the results.
-            var job = await script.ExecuteAsync();
+            var job = await script.ExecuteAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Assert that the run Report job completed without warnings.
             Assert.Equal(EssJobStatus.Completed, job?.JobStatus);
@@ -202,12 +202,12 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test Report script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssReportScript>("test");
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssReportScript>("test", cancellationToken: TestContext.Current.CancellationToken);
 
             // Execute the report job and capture the results.
-            var report = await script.GetReportAsync();
+            var report = await script.GetReportAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Assert that there is a single page dimension member.
             Assert.Single(report.Metadata.PageDimensionMembers);
@@ -235,12 +235,12 @@ namespace EssSharp.Integration
             var server = GetEssServer(EssServerRole.User);
 
             // Get the test Report script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssReportScript>("test");
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssReportScript>("test", cancellationToken: TestContext.Current.CancellationToken);
 
             // Execute the report job and capture the results.
-            var report = await script.GetReportAsync();
+            var report = await script.GetReportAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Assert that there is a single page dimension member.
             Assert.Single(report.Metadata.PageDimensionMembers);
@@ -268,12 +268,12 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test Report script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssReportScript>("test");
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssReportScript>("test", cancellationToken: TestContext.Current.CancellationToken);
 
             // Execute the report query and capture an Essbase grid.
-            var grid = await script.GetGridAsync();
+            var grid = await script.GetGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Assert that we got a grid back.
             Assert.NotNull(grid);
@@ -307,13 +307,13 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test MaxL script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssMaxlScript>("test");
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssMaxlScript>("test", cancellationToken: TestContext.Current.CancellationToken);
 
             // Assert that an Exception is thrown when we try to execute a MaxL script,
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await script.ExecuteAsync())).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await script.ExecuteAsync(cancellationToken: TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
@@ -324,9 +324,9 @@ namespace EssSharp.Integration
         {
             var server = GetEssServer();
 
-            var app = await server.GetApplicationAsync("Sample");
+            var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
-            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, new[] { EssApplicationRole.db_access });
+            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, new[] { EssApplicationRole.db_access }, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotEmpty(permissionsList);
         }
@@ -336,9 +336,9 @@ namespace EssSharp.Integration
         {
             var server = GetEssServer();
 
-            var app = await server.GetApplicationAsync("Sample");
+            var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
-            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, new[] { EssApplicationRole.db_access });
+            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, new[] { EssApplicationRole.db_access }, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotEmpty(permissionsList);
         }
@@ -349,11 +349,11 @@ namespace EssSharp.Integration
         {
             var server = GetEssServer();
 
-            var app = await server.GetApplicationAsync("Sample");
+            var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
             var user = GetEssConnection(EssServerRole.User);
 
-            var userPermissions = await app.UpdatePermissionsAsync(user.Username, EssApplicationRole.db_access);
+            var userPermissions = await app.UpdatePermissionsAsync(user.Username, EssApplicationRole.db_access, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(EssApplicationRole.db_access, userPermissions.Role);
         }
@@ -366,13 +366,13 @@ namespace EssSharp.Integration
 
             var userConnection = GetEssConnection(EssServerRole.User);
 
-            var group = await server.GetGroupAsync("Test_Group");
+            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
 
-            Assert.Empty(await group.GetUsersAsync());
+            Assert.Empty(await group.GetUsersAsync(TestContext.Current.CancellationToken));
 
-            await group.AddUsersAsync(new List<string>() { userConnection.Username });
+            await group.AddUsersAsync(new List<string>() { userConnection.Username }, TestContext.Current.CancellationToken);
 
-            Assert.NotEmpty(await group.GetUsersAsync());
+            Assert.NotEmpty(await group.GetUsersAsync(TestContext.Current.CancellationToken));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 15 - Essbase_AfterGroupCreation_CanAddGroup"), Priority(15)]
@@ -381,13 +381,13 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync("Test_Group");
+            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
 
-            Assert.Empty(await group.GetGroupsAsync());
+            Assert.Empty(await group.GetGroupsAsync(TestContext.Current.CancellationToken));
 
-            await group.AddGroupsAsync(new List<string>() { "Test_Group_2" });
+            await group.AddGroupsAsync(new List<string>() { "Test_Group_2" }, TestContext.Current.CancellationToken);
 
-            Assert.NotEmpty(await group.GetGroupsAsync());
+            Assert.NotEmpty(await group.GetGroupsAsync(TestContext.Current.CancellationToken));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 16 - Essbase_AfterGroupCreation_EditGroup"), Priority(16)]
@@ -396,9 +396,9 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync("Test_Group");
+            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
 
-            var editedGroup = await group.EditAsync( EssServerRole.User, "Edited test group");
+            var editedGroup = await group.EditAsync( EssServerRole.User, "Edited test group", TestContext.Current.CancellationToken);
 
             Assert.Equal(EssServerRole.User, editedGroup.Role);
             Assert.Equal("Edited test group", editedGroup.Description);
@@ -412,13 +412,13 @@ namespace EssSharp.Integration
 
             var userConnection = GetEssConnection(EssServerRole.User);
 
-            var group = await server.GetGroupAsync("Test_Group");
+            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
 
-            Assert.NotEmpty(await group.GetUsersAsync());
+            Assert.NotEmpty(await group.GetUsersAsync(TestContext.Current.CancellationToken));
 
-            await group.RemoveUsersAsync(new List<string>() { userConnection.Username });
+            await group.RemoveUsersAsync(new List<string>() { userConnection.Username }, TestContext.Current.CancellationToken);
 
-            Assert.Empty(await group.GetUsersAsync());
+            Assert.Empty(await group.GetUsersAsync(TestContext.Current.CancellationToken));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 18 - Essbase_AfterGroupCreation_CanRemoveGroup"), Priority(18)]
@@ -427,13 +427,13 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync("Test_Group");
+            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
 
-            Assert.NotEmpty(await group.GetGroupsAsync());
+            Assert.NotEmpty(await group.GetGroupsAsync(TestContext.Current.CancellationToken));
 
-            await group.RemoveGroupsAsync(new List<string>() { "Test_Group_2" });
+            await group.RemoveGroupsAsync(new List<string>() { "Test_Group_2" }, TestContext.Current.CancellationToken);
 
-            Assert.Empty(await group.GetGroupsAsync());
+            Assert.Empty(await group.GetGroupsAsync(TestContext.Current.CancellationToken));
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 19 - Essbase_AfterReportCreation_CanExecuteDrillthroughReport"), Priority(19)]
@@ -444,14 +444,14 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Declare a drillthrough report.
             var drillthroughReport = default(IEssDrillthroughReport);
 
             // Find the "drillthrough_samplebasic" report (if available).
-            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false, TestContext.Current.CancellationToken) )
                 if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
                     drillthroughReport = dtr;
 
@@ -460,7 +460,7 @@ namespace EssSharp.Integration
                 return;
 
             // Capture the (x.x) server version.
-            var version = new Version(string.Join('.', (await server.GetAboutAsync())?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
+            var version = new Version(string.Join('.', (await server.GetAboutAsync(TestContext.Current.CancellationToken))?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
 
             // If the server version is 21.4 or higher, execute the drillthrough report and validate the data.
             if ( version.CompareTo(new Version(major: 21, minor: 4)) >= 0 )
@@ -474,7 +474,7 @@ namespace EssSharp.Integration
                         ["Measures"] = new() { "Sales", "Sales" },
                         ["Market"] = new() { "New York", "California" },
                         ["Scenario"] = new() { "Actual", "Actual" }
-                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true));
+                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true), TestContext.Current.CancellationToken);
 
                 // Assert the column type, header name, and first row value for the fifth column.
                 Assert.Equal(expected: "double", actual: columnTypes[4], ignoreCase: true);
@@ -494,7 +494,7 @@ namespace EssSharp.Integration
                         ["Measures"] = new() { "Sales",    "Sales"      },
                         ["Market"  ] = new() { "New York", "California" },
                         ["Scenario"] = new() { "Actual",   "Actual"     }
-                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true))
+                    }), new EssDrillthroughOptions(returnTypedValues: true, prefixStringValuesForExcel: true), TestContext.Current.CancellationToken)
                 )).InnerException;
 
                 // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 405 (method not allowed).
@@ -507,12 +507,12 @@ namespace EssSharp.Integration
         {
             var server = GetEssServer();
             // Get an unconnected server.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Capture the (x.x) server version.
-            var version = new Version(string.Join('.', (await server.GetAboutAsync())?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
+            var version = new Version(string.Join('.', (await server.GetAboutAsync(TestContext.Current.CancellationToken))?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
 
             // If the server version is 21.7 or higher, execute the drillthrough report and validate the data.
             if (version.CompareTo(new Version(major: 21, minor: 7)) >= 0)
@@ -528,12 +528,12 @@ namespace EssSharp.Integration
                             ["Market"] = new() { "New York", "California" },
                             ["Scenario"] = new() { "Actual", "Actual" }
                         })
-                }, true);
+                }, true, TestContext.Current.CancellationToken);
 
                 IEssDrillthroughReport drillthroughReport = null;
 
                 // Find the "drillthrough_samplebasic" report (if available).
-                foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+                foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false, TestContext.Current.CancellationToken) )
                     if ( string.Equals(dtr.Name, @"drillthrough_samplebasic", StringComparison.Ordinal) )
                         drillthroughReport = dtr;
 
@@ -562,7 +562,7 @@ namespace EssSharp.Integration
                             ["Market"] = new() { "New York", "California" },
                             ["Scenario"] = new() { "Actual", "Actual" }
                         })
-                }, true))).InnerException;
+                }, true, TestContext.Current.CancellationToken))).InnerException;
 
                 Assert.True(exception is ApiException {ErrorCode: 404});
             }
@@ -574,9 +574,9 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
-            var refreshGrid = await defaultGrid.RefreshAsync();
+            var refreshGrid = await defaultGrid.RefreshAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(3, refreshGrid.Slice.Rows);
         }
@@ -588,18 +588,18 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
-            defaultGrid.Preferences = await server.GetDefaultGridPreferencesAsync();
+            defaultGrid.Preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
             {
                 defaultGrid.Preferences.ZoomIn.Ancestor = ZoomInAncestor.BOTTOM;
                 defaultGrid.Preferences.ZoomIn.Mode = ZoomInMode.BASE;
             }
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
             Assert.Equal(15, zoomInGrid.Slice.Rows);
 
@@ -612,11 +612,11 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync(reset : true);
+            var defaultGrid = await cube.GetDefaultGridAsync(reset : true, TestContext.Current.CancellationToken);
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
-            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT, new EssGridSelection(6, 0));
+            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT, new EssGridSelection(6, 0), TestContext.Current.CancellationToken);
 
             Assert.Equal(3, zoomOutGrid.Slice.Rows);
 
@@ -629,11 +629,11 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync(reset : true);
+            var defaultGrid = await cube.GetDefaultGridAsync(reset : true, TestContext.Current.CancellationToken);
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
-            var keepOnlyGrid = await defaultGrid.KeepOnlyAsync( new EssGridSelection(3, 0));
+            var keepOnlyGrid = await defaultGrid.KeepOnlyAsync( new EssGridSelection(3, 0), TestContext.Current.CancellationToken);
 
             Assert.Equal(3, keepOnlyGrid.Slice.Rows);
 
@@ -646,11 +646,11 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync(reset : true);
+            var defaultGrid = await cube.GetDefaultGridAsync(reset : true, TestContext.Current.CancellationToken);
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
-            var removeOnlyGrid = await defaultGrid.RemoveOnlyAsync( new EssGridSelection(2, 0));
+            var removeOnlyGrid = await defaultGrid.RemoveOnlyAsync( new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
             Assert.Equal(6, removeOnlyGrid.Slice.Rows);
 
@@ -664,7 +664,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             defaultGrid.Selection.Add(new EssGridSelection(startRow: 0, startColumn: 3));
 
@@ -691,36 +691,36 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Year > Qtr1 > Jan
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
             // Product > Colas > Cola
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
             // Market > East > New York 
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
             // Scenario > Actual
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3), TestContext.Current.CancellationToken);
 
             // Measures > Profit > Margin > Sales
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3), TestContext.Current.CancellationToken);
 
             defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
-            await defaultGrid.KeepOnlyAsync();
+            await defaultGrid.KeepOnlyAsync(TestContext.Current.CancellationToken);
 
             defaultGrid.Selection.Clear();
             defaultGrid.Selection.Add(new EssGridSelection(2, 0));
             defaultGrid.Selection.Add(new EssGridSelection(0, 2));
 
-            var pivotPovGrid = await defaultGrid.PivotAsync();
+            var pivotPovGrid = await defaultGrid.PivotAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(4, pivotPovGrid.Slice.Rows);
 
@@ -728,7 +728,7 @@ namespace EssSharp.Integration
 
             defaultGrid.Selection.Clear();
 
-            pivotPovGrid = await defaultGrid.PivotAsync(new EssGridSelection(1, 2));
+            pivotPovGrid = await defaultGrid.PivotAsync(new EssGridSelection(1, 2), cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(3, pivotPovGrid.Slice.Rows);
 
@@ -742,38 +742,38 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Year > Qtr1 > Jan
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
             // Product > Colas > Cola
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
             // Market > East > New York 
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
 
             // Scenario > Actual
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3), TestContext.Current.CancellationToken);
 
             // Measures > Profit > Margin > Sales
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3), TestContext.Current.CancellationToken);
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3), TestContext.Current.CancellationToken);
 
             defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
-            await defaultGrid.KeepOnlyAsync();
+            await defaultGrid.KeepOnlyAsync(TestContext.Current.CancellationToken);
 
             defaultGrid.Slice.Data.Ranges[0].Values[11] = "680.0";
 
-            var submitGrid = await defaultGrid.SubmitAsync( );
+            var submitGrid = await defaultGrid.SubmitAsync(TestContext.Current.CancellationToken );
 
-            await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ExecuteAsync();
+            await cube.GetScriptAsync<IEssCalcScript>("CalcAll", cancellationToken: TestContext.Current.CancellationToken).ExecuteAsync(TestContext.Current.CancellationToken);
 
-            await submitGrid.RefreshAsync();
+            await submitGrid.RefreshAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(3, submitGrid.Slice.Rows);
 
@@ -781,7 +781,7 @@ namespace EssSharp.Integration
 
             defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
 
-            submitGrid = await defaultGrid.SubmitAsync();
+            submitGrid = await defaultGrid.SubmitAsync(TestContext.Current.CancellationToken);
 
             /*
             if ( string.Equals(defaultGrid.Slice.Data.Ranges[0].Values[10], "680.0") )
@@ -801,11 +801,11 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             defaultGrid.Selection.Add(new EssGridSelection(2, 0));
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN );
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN , TestContext.Current.CancellationToken);
 
             Assert.Equal(7, zoomInGrid.Slice.Rows);
 
@@ -818,17 +818,17 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var cube = GetEssServer().GetApplication("Sample").GetCube("Basic");
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             defaultGrid.Selection.Add(new EssGridSelection(2, 0));
 
-            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN );
+            var zoomInGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMIN , TestContext.Current.CancellationToken);
 
             defaultGrid.Selection[0].startRow = 6;
 
             defaultGrid.Selection[0].startColumn = 0;
 
-            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT);
+            var zoomOutGrid = await defaultGrid.ZoomAsync( EssGridZoomType.ZOOMOUT, TestContext.Current.CancellationToken);
 
             Assert.Equal(3, zoomOutGrid.Slice.Rows);
 
@@ -841,12 +841,12 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Assign the default grid preferences from the server;
-            defaultGrid.Preferences = await server.GetDefaultGridPreferencesAsync();
+            defaultGrid.Preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
             defaultGrid.Preferences.ZoomIn.Ancestor = ZoomInAncestor.BOTTOM;
 
@@ -864,7 +864,7 @@ namespace EssSharp.Integration
             await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0,3));
             */
 
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new List<EssGridSelection>() { new EssGridSelection(0, 1), new EssGridSelection(0, 2), new EssGridSelection(0, 3), new EssGridSelection(2, 0) /*new EssGridSelection(0, 4)*/ });
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new List<EssGridSelection>() { new EssGridSelection(0, 1), new EssGridSelection(0, 2), new EssGridSelection(0, 3), new EssGridSelection(2, 0) /*new EssGridSelection(0, 4)*/ }, TestContext.Current.CancellationToken);
 
             Assert.Equal(23206, defaultGrid.Slice.Rows);
 
@@ -878,12 +878,12 @@ namespace EssSharp.Integration
         {
             // Get the Sample.Basic cube.
             var cube = await GetEssServer()
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
-            await defaultGrid.GetGridLayoutAsync();
+            await defaultGrid.GetGridLayoutAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 31 - Essbase_AfterDefaultGrid_CanGetDTSGrid"), Priority(31)]
@@ -892,7 +892,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var grid = new Grid()
             {
@@ -971,7 +971,7 @@ namespace EssSharp.Integration
 
             var essGrid = new EssGrid(grid, cube as EssCube);
 
-            var preferences = await server.GetDefaultGridPreferencesAsync();
+            var preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
             essGrid.Preferences = preferences;
 
@@ -981,7 +981,7 @@ namespace EssSharp.Integration
 
             // Assert that an Exception is thrown when we try to execute a MaxL script,
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await essGrid.RefreshAsync())).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await essGrid.RefreshAsync(TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
@@ -992,15 +992,15 @@ namespace EssSharp.Integration
         {
             // Get the Sample.Basic cube.
             var cube = await GetEssServer()
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Construct a list for grid refresh tasks.
             var refreshTasks = new List<Task<IEssGrid>>();
 
             // Add 20 tasks that get and refresh the default grid.
             for ( int i = 0; i < 20; i++ )
-                refreshTasks.Add(cube.GetDefaultGridAsync().RefreshAsync());
+                refreshTasks.Add(cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken).RefreshAsync(cancellationToken: TestContext.Current.CancellationToken));
 
             // Await the completion of all the refresh tasks.
             var grids = await Task.WhenAll(refreshTasks);
@@ -1016,12 +1016,12 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the default grid preferences from the server.
-            var preferences = await server.GetDefaultGridPreferencesAsync();
+            var preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Construct a new random.
             var random = new Random();
@@ -1078,7 +1078,7 @@ namespace EssSharp.Integration
             var username = GetEssConnection(EssServerRole.User).Username;
 
             // Capture the list of sessions for the end-user.
-            var userSessions = (await server.GetSessionsAsync())
+            var userSessions = (await server.GetSessionsAsync(TestContext.Current.CancellationToken))
                 .Where(session => string.Equals(session ?.UserId, username)).ToList();
 
             // DO NOT assert that there is at least one session for the end-user.
@@ -1088,7 +1088,7 @@ namespace EssSharp.Integration
             await (server as EssServer).KillSessionsForUserAsync(username);
 
             // Refresh the list of sessions for the end-user.
-            userSessions = (await server.GetSessionsAsync())
+            userSessions = (await server.GetSessionsAsync(TestContext.Current.CancellationToken))
                 .Where(session => string.Equals(session?.UserId, username)).ToList();
 
             // Assert that there are no sessions for the end-user.
@@ -1105,19 +1105,19 @@ namespace EssSharp.Integration
             var server = GetEssServer(factory: factory, role: EssServerRole.User);
 
             // Get the default grid preferences for the server.
-            await server.GetDefaultGridPreferencesAsync();
+            await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
             // Get the Sample.Basic cube (as an end-user).
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Construct a list for grid refresh tasks.
             var refreshTasks = new List<Task<IEssGrid>>();
 
             // Add 20 tasks that get and refresh the default grid.
             for ( int i = 0; i < 20; i++ )
-                refreshTasks.Add(cube.GetDefaultGridAsync().RefreshAsync());
+                refreshTasks.Add(cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken).RefreshAsync(cancellationToken: TestContext.Current.CancellationToken));
 
             // Await the completion of all the refresh tasks.
             var grids = await Task.WhenAll(refreshTasks);
@@ -1126,10 +1126,10 @@ namespace EssSharp.Integration
             Assert.All(grids, grid => Assert.Equal(3, grid.Slice.Rows));
 
             // Get the end-user's username.
-            var username = (await server.GetUserSessionAsync()).UserId;
+            var username = (await server.GetUserSessionAsync(cancellationToken: TestContext.Current.CancellationToken)).UserId;
 
             // Capture the list of sessions for the end-user.
-            var userSessions = (await cube.Application.Server.GetSessionsAsync())
+            var userSessions = (await cube.Application.Server.GetSessionsAsync(TestContext.Current.CancellationToken))
                 .Where(session => string.Equals(session?.UserId, username)).ToList();
 
             // Assert that there are only two sessions (one for server access and one grid operations).
@@ -1151,7 +1151,7 @@ namespace EssSharp.Integration
             // Get an unconnected server with the configured factory 
             var server = GetEssServer(factory: factory);
 
-            await server.GetApplicationAsync("Sample");
+            await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
             var requestSummary  = $@"# GET {serverBaseUrl}/rest/v1/applications/Sample HTTP/1.1";
 
@@ -1168,7 +1168,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var grid = new Grid()
             {
@@ -1246,7 +1246,7 @@ namespace EssSharp.Integration
 
             var essGrid = new EssGrid(grid, cube as EssCube);
 
-            var preferences = await server.GetDefaultGridPreferencesAsync();
+            var preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
             //preferences.ColumnSupression.Missing = true;
             //preferences.RowSupression.Missing = true;
@@ -1255,11 +1255,11 @@ namespace EssSharp.Integration
 
             essGrid.Selection = new List<EssGridSelection> { new EssGridSelection(1, 0) };
 
-            var zInGrid = await essGrid.ZoomAsync(zoomOption: EssGridZoomType.ZOOMIN);
+            var zInGrid = await essGrid.ZoomAsync(zoomOption: EssGridZoomType.ZOOMIN, TestContext.Current.CancellationToken);
 
-            var zOutGrid = await essGrid.ZoomAsync(zoomOption: EssGridZoomType.ZOOMOUT);
+            var zOutGrid = await essGrid.ZoomAsync(zoomOption: EssGridZoomType.ZOOMOUT, TestContext.Current.CancellationToken);
 
-            var rGrid = await essGrid.RefreshAsync();
+            var rGrid = await essGrid.RefreshAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 38 - Essbase_AfterDefaultGrid_CanRefreshEmptyGrid"), Priority(38)]
@@ -1268,13 +1268,13 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var grid = new Grid() { };
 
             var essGrid = new EssGrid(grid, cube as EssCube);
 
-            var preferences = await server.GetDefaultGridPreferencesAsync();
+            var preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
             //preferences.ColumnSupression.Missing = true;
             //preferences.RowSupression.Missing = true;
@@ -1283,7 +1283,7 @@ namespace EssSharp.Integration
 
             essGrid.Selection = new List<EssGridSelection> { new EssGridSelection(1, 0) };
 
-            var rGrid = await essGrid.RefreshAsync();
+            var rGrid = await essGrid.RefreshAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 39 - Essbase_AfterCubeCreation_CanBuildAndRefreshGrid"), Priority(39)]
@@ -1293,8 +1293,8 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var grid = cube.GetGrid();
 
@@ -1370,7 +1370,7 @@ namespace EssSharp.Integration
                 }
             };
 
-            await grid.RefreshAsync();
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal("105524.0", grid.Slice.Data.Ranges[0].Values[9]);
         }
@@ -1382,8 +1382,8 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var grid = cube.GetGrid();
 
@@ -1463,19 +1463,19 @@ namespace EssSharp.Integration
                 }
             };
 
-            await grid.RefreshAsync();
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
 
             grid.Preferences.TrackDataChanges = true;
 
             grid.Slice.Data.Ranges[0].Values[9] = "680.0";
 
-            await grid.SubmitAsync();
+            await grid.SubmitAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal("680.0", grid.Slice.Data.Ranges[0].Values[9]);
 
             grid.Slice.Data.Ranges[0].Values[9] = "678.0";
 
-            await grid.SubmitAsync();
+            await grid.SubmitAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal("678.0", grid.Slice.Data.Ranges[0].Values[9]);
         }
@@ -1487,8 +1487,8 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var grid = cube.GetGrid();
 
@@ -1568,7 +1568,7 @@ namespace EssSharp.Integration
                 }
             };
 
-            await grid.RefreshAsync();
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
 
             grid.Preferences.TrackDataChanges = true;
             
@@ -1576,7 +1576,7 @@ namespace EssSharp.Integration
 
             grid.Slice.Data.Ranges[0].Values[17] = "620.0";
 
-            await grid.SubmitAsync();
+            await grid.SubmitAsync(TestContext.Current.CancellationToken);
 
             Assert.NotEqual(grid.DataChanges.DataChanges[0].NewValue, grid.DataChanges.DataChanges[0].OldValue);
 
@@ -1610,7 +1610,7 @@ namespace EssSharp.Integration
 
             grid.Slice.Data.Ranges[0].Values[17] = "610.0";
 
-            await grid.SubmitAsync();
+            await grid.SubmitAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 42 - Essbase_AfterCubeCreation_CanTrackDataChangesMultipleColumnHeaders"), Priority(42)]
@@ -1620,8 +1620,8 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var grid = cube.GetGrid();
 
@@ -1711,7 +1711,7 @@ namespace EssSharp.Integration
 
 
 
-            await grid.RefreshAsync();
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
 
             /*
             if ( string.Equals(grid.Slice.Data.Ranges[0].Values[21], "1778.0") )
@@ -1721,13 +1721,13 @@ namespace EssSharp.Integration
             */
             grid.Slice.Data.Ranges[0].Values[21] = "551.0";
 
-            await grid.SubmitAsync();
+            await grid.SubmitAsync(TestContext.Current.CancellationToken);
 
             Assert.NotNull(grid.DataChanges);
 
             grid.Slice.Data.Ranges[0].Values[21] = "570";
 
-            await grid.SubmitAsync();
+            await grid.SubmitAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 43 - Essbase_AfterCubeCreation_CanExportAppToLcm"), Priority(43)]
@@ -1737,7 +1737,7 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var app = await server.GetApplicationAsync("Sample");
+            var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
             var options = new EssJobExportLcmOptions()
             {
@@ -1748,7 +1748,7 @@ namespace EssSharp.Integration
                 SkipData = false
             };
 
-            var lcmStream = await app.ExportCubeToLcmAsync("Basic", options);
+            var lcmStream = await app.ExportCubeToLcmAsync("Basic", options, TestContext.Current.CancellationToken);
 
             Assert.NotNull(lcmStream);
         }
@@ -1760,7 +1760,7 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var app = await server.GetApplicationAsync("Sample");
+            var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
             var options = new EssJobExportLcmOptions()
             {
@@ -1771,7 +1771,7 @@ namespace EssSharp.Integration
                 SkipData = false
             };
 
-            var lcmStream = await app.ExportCubeToLcmAsync("Basic", options);
+            var lcmStream = await app.ExportCubeToLcmAsync("Basic", options, TestContext.Current.CancellationToken);
 
             using ( FileStream output = File.OpenWrite(Path.Combine(Path.GetTempPath(), "exportedCubes.zip")) )
             {
@@ -1788,7 +1788,7 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var app = await server.GetApplicationAsync("Sample");
+            var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
             var options = new EssJobImportLcmOptions()
             {
@@ -1798,7 +1798,7 @@ namespace EssSharp.Integration
                 Overwrite = true
             };
 
-            var lcmStream = await app.CreateCubeFromLcmAsync("Basic", options);
+            var lcmStream = await app.CreateCubeFromLcmAsync("Basic", options, TestContext.Current.CancellationToken);
 
             Assert.NotNull(lcmStream);
         }
@@ -1807,11 +1807,11 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterCubeCreation_CanImportCubeWithLcmFromStream()
         {
             // Get Application Sample.
-            var app = await GetEssServer().GetApplicationAsync("Sample");
+            var app = await GetEssServer().GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
             // Get Cube Basic
-            var cube = await app.GetCubeAsync("basic");
+            var cube = await app.GetCubeAsync("basic", TestContext.Current.CancellationToken);
             //change a value in sample.basic
-            var defaultGrid = await cube.GetDefaultGridAsync();
+            var defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             defaultGrid.Preferences = new EssGridPreferences()
             {
@@ -1822,24 +1822,24 @@ namespace EssSharp.Integration
                 }
             };
             // Year > Jan
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
             // Product > Cola
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1), TestContext.Current.CancellationToken);
             // Market > New York 
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2), TestContext.Current.CancellationToken);
             // Scenario > Actual
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3), TestContext.Current.CancellationToken);
             // Measures > Sales
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3), TestContext.Current.CancellationToken);
 
             defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
-            await defaultGrid.KeepOnlyAsync();
+            await defaultGrid.KeepOnlyAsync(TestContext.Current.CancellationToken);
 
             defaultGrid.Slice.Data.Ranges[0].Values[11] = "680.0";
 
-            var submitGrid = await defaultGrid.SubmitAsync( );
+            var submitGrid = await defaultGrid.SubmitAsync(TestContext.Current.CancellationToken );
 
-            await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ExecuteAsync();
+            await cube.GetScriptAsync<IEssCalcScript>("CalcAll", cancellationToken: TestContext.Current.CancellationToken).ExecuteAsync(TestContext.Current.CancellationToken);
 
             // export cube to lcm.
             var options = new EssJobExportLcmOptions()
@@ -1851,7 +1851,7 @@ namespace EssSharp.Integration
                 SkipData = false
             };
 
-            var exportLcmStream = await app.ExportCubeToLcmAsync("Basic", options);
+            var exportLcmStream = await app.ExportCubeToLcmAsync("Basic", options, TestContext.Current.CancellationToken);
 
             using ( FileStream output = File.OpenWrite(Path.Combine(Path.GetTempPath(), "exportedCubes.zip")) )
             {
@@ -1861,7 +1861,7 @@ namespace EssSharp.Integration
             Assert.NotNull(exportLcmStream);
 
             // delete cube
-            await app.DeleteCubeAsync("basic");
+            await app.DeleteCubeAsync("basic", TestContext.Current.CancellationToken);
 
             // restore cube with lcm.
 
@@ -1870,16 +1870,16 @@ namespace EssSharp.Integration
                 Overwrite = true
             };
 
-            var importLcmStream = await app.CreateCubeFromLcmAsync(cubeName: "Basic", localLcmPath: Path.Combine(Path.GetTempPath(), "exportedCubes.zip"), options: option);
+            var importLcmStream = await app.CreateCubeFromLcmAsync(cubeName: "Basic", localLcmPath: Path.Combine(Path.GetTempPath(), "exportedCubes.zip"), options: option, TestContext.Current.CancellationToken);
 
             File.Delete(Path.Combine(Path.GetTempPath(), "exportedCubes.zip"));
 
             Assert.NotNull(importLcmStream);
 
             // test value in grid stayed 680.0 and change back to old value (678.0).
-            cube = await app.GetCubeAsync("basic");
+            cube = await app.GetCubeAsync("basic", TestContext.Current.CancellationToken);
             //change a value in sample.basic
-            defaultGrid = await cube.GetDefaultGridAsync();
+            defaultGrid = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             defaultGrid.Preferences = new EssGridPreferences()
             {
@@ -1890,25 +1890,25 @@ namespace EssSharp.Integration
                 }
             };
             // Year > Jan
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(2, 0), TestContext.Current.CancellationToken);
             // Product > Cola
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 1), TestContext.Current.CancellationToken);
             // Market > New York 
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 2), TestContext.Current.CancellationToken);
             // Scenario > Actual
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(0, 3), TestContext.Current.CancellationToken);
             // Measures > Sales
-            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3));
+            await defaultGrid.ZoomAsync(EssGridZoomType.ZOOMIN, new EssGridSelection(1, 3), TestContext.Current.CancellationToken);
 
             defaultGrid.Selection = new List<EssGridSelection>() { new EssGridSelection(0, 0, 3, 4) };
-            await defaultGrid.KeepOnlyAsync();
+            await defaultGrid.KeepOnlyAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal("680.0", defaultGrid.Slice.Data.Ranges[0].Values[11]);
 
             defaultGrid.Slice.Data.Ranges[0].Values[11] = "678.0";
-            await defaultGrid.SubmitAsync();
+            await defaultGrid.SubmitAsync(TestContext.Current.CancellationToken);
 
-            await cube.GetScriptAsync<IEssCalcScript>("CalcAll").ExecuteAsync();
+            await cube.GetScriptAsync<IEssCalcScript>("CalcAll", cancellationToken: TestContext.Current.CancellationToken).ExecuteAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 47 - Essbase_AfterDefaultGrid_CanLogRequestsAndResponsesToDirectory"), Priority(47)]
@@ -1925,7 +1925,7 @@ namespace EssSharp.Integration
             // Get an unconnected server with the configured factory 
             var server = GetEssServer(factory: factory);
 
-            await server.GetApplicationAsync("Sample");
+            await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
             var requestSummary  = $@"# GET {serverBaseUrl}/rest/v1/applications/Sample HTTP/1.1";
             var responseSummary = @"# HTTP/1.1 200 OK";
@@ -1958,15 +1958,15 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul");
+            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul", TestContext.Current.CancellationToken);
 
-            var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
+            var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt", TestContext.Current.CancellationToken);
 
             var options = new EssJobBuildDimensionOptions(dataFile, ruleFile, forceDimBuild: true, restructureOption: EssRestructureOption.PRESERVE_ALL_DATA);
 
-            var job = await cube.BuildDimensionOnCubeAsync(options);
+            var job = await cube.BuildDimensionOnCubeAsync(options, TestContext.Current.CancellationToken);
 
             Assert.Equal(EssJobStatus.Completed, job.JobStatus);
         }
@@ -1978,16 +1978,16 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var ruleFile = await cube.GetFileAsync("Data.rul");
+            var ruleFile = await cube.GetFileAsync("Data.rul", TestContext.Current.CancellationToken);
 
             //var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
 
             var options = new EssJobBuildDimensionOptions(essRuleFile: ruleFile, forceDimBuild: true, restructureOption: EssRestructureOption.PRESERVE_ALL_DATA);
 
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options))).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options, TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.Equal("Unable to successfully execute dimension build job.", exception.Message);
@@ -2000,9 +2000,9 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul");
+            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul", TestContext.Current.CancellationToken);
 
             //var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
 
@@ -2010,7 +2010,7 @@ namespace EssSharp.Integration
 
             // Assert that an Exception is thrown when we try to build dimension with named SQL connection,
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options))).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options, TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.Contains("Unable to successfully execute dimension build job.", exception.Message);
@@ -2023,9 +2023,9 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul");
+            var ruleFile = await cube.GetFileAsync("Dim_Caffeinated.rul", TestContext.Current.CancellationToken);
 
             //var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
 
@@ -2033,7 +2033,7 @@ namespace EssSharp.Integration
 
             // Assert that an Exception is thrown when we try to build dimension with SQL server credentials,
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options))).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.BuildDimensionOnCubeAsync(options, TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.Equal("Unable to successfully execute dimension build job.", exception.Message);
@@ -2046,15 +2046,15 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
             
-            var ruleFile = await cube.GetFileAsync("Data.rul");
+            var ruleFile = await cube.GetFileAsync("Data.rul", TestContext.Current.CancellationToken);
 
-            var dataFile = await cube.GetFileAsync("Data_Basic.txt");
+            var dataFile = await cube.GetFileAsync("Data_Basic.txt", TestContext.Current.CancellationToken);
 
             var options = new EssJobLoadDataOptions(essDataFile: dataFile, essRuleFile: ruleFile, abortOnError: true);
 
-            var job = await cube.LoadDataToCubeAsync(options);
+            var job = await cube.LoadDataToCubeAsync(options, TestContext.Current.CancellationToken);
 
             // Assert that the job was successful.
             Assert.Equal(EssJobStatus.Completed, job.JobStatus);
@@ -2067,9 +2067,9 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var ruleFile = await cube.GetFileAsync("Data.rul");
+            var ruleFile = await cube.GetFileAsync("Data.rul", TestContext.Current.CancellationToken);
 
             //var dataFile = await cube.GetFileAsync("Data_Basic.txt");
 
@@ -2077,7 +2077,7 @@ namespace EssSharp.Integration
 
             // Assert that an Exception is thrown when we try to load data using a Datasource,
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options))).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options, TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.Equal("Unable to successfully execute data load job. Cannot async import to cube. null", exception.Message);
@@ -2090,15 +2090,15 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var ruleFile = await cube.GetFileAsync("Data.rul");
+            var ruleFile = await cube.GetFileAsync("Data.rul", TestContext.Current.CancellationToken);
 
             var options = new EssJobLoadDataOptions(essRuleFile: ruleFile, abortOnError: true, connection: "connection_samplebasic");
 
             // Assert that an Exception is thrown when we try to load data using a named SQL connection,
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options))).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options, TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.Contains("Unable to successfully execute data load job", exception.Message);
@@ -2113,9 +2113,9 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the "CalcAll" script from Sample.Basic.
-            var cube = await server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var ruleFile = await cube.GetFileAsync("Data.rul");
+            var ruleFile = await cube.GetFileAsync("Data.rul", TestContext.Current.CancellationToken);
 
             //var dataFile = await cube.GetFileAsync("Dim_Caffeinated.txt");
 
@@ -2123,7 +2123,7 @@ namespace EssSharp.Integration
 
             // Assert that an Exception is thrown when we try to load data using SQL Server credentials,
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options))).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await cube.LoadDataToCubeAsync(options, TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the exception contains substring "Unable to successfully execute data load job"
             Assert.Contains("Unable to successfully execute data load job.", exception.Message);
@@ -2136,9 +2136,9 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test mdx script from the server.
-            var script = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetScriptAsync<IEssMdxScript>("test", getContent: true);
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssMdxScript>("test", getContent: true, TestContext.Current.CancellationToken);
 
             var preferences = new EssQueryPreferences()
             {
@@ -2146,7 +2146,7 @@ namespace EssSharp.Integration
             };
 
             // Execute the mdx query and capture the report.
-            var report = await script.GetReportAsync(preferences);
+            var report = await script.GetReportAsync(preferences, TestContext.Current.CancellationToken);
 
             // Assert that the "Market" dimension is the first column dimension member.
             Assert.Equal("Market", report.Metadata.ColumnDimensionMembers.FirstOrDefault());
@@ -2165,8 +2165,8 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the test mdx script from the server.
-            var cube = await server.GetApplicationAsync("ASOSamp")
-                .GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("ASOSamp", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var query = "WITH MEMBER\r\n \t[Measures].[Zip Count] AS 'COUNT(Descendants([Geography].CurrentMember, Geography.Levels(0)))'  \r\nselect {[Measures].[Zip Count]} on COLUMNS,\r\nHierarchize(Descendants([Michigan], Geography.Levels(1), SELF_AND_BEFORE), POST)\r\nDIMENSION PROPERTIES\r\n  GEN_NUMBER,  \r\n  PROPERTY_EXPR(Geography, MEMBER_NAME, AncestOR(CurrentAxisMember(), Geography.Generations(2)),\"Gen2\"),\r\n  PROPERTY_EXPR(Geography, MEMBER_NAME, AncestOR(CurrentAxisMember(), Geography.Generations(3)),\"Gen3\")\r\n   ON ROWS";
             //var query = "SELECT {} ON COLUMNS,\r\nTOPCOUNT(Filter([Market].Levels(0).Members, NOT Market.CurrentMember.Shared_Flag), 10, [Year].[Year]) ON ROWS\r\nWHERE ([Year], [Colas], [Sales], [Actual])";
@@ -2180,7 +2180,7 @@ namespace EssSharp.Integration
             };
 
             // Execute the mdx query and capture the report.
-            var report = await script.GetReportAsync(preferences);
+            var report = await script.GetReportAsync(preferences, TestContext.Current.CancellationToken);
 
             // Assert that the "Market" dimension is the first column dimension member.
             Assert.Equal("Measures", report.Metadata.ColumnDimensionMembers.FirstOrDefault());
@@ -2198,7 +2198,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var cube = await server.GetApplicationAsync("ASOSamp").GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("ASOSamp", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             var grid = new Grid()
             {
@@ -2247,7 +2247,7 @@ namespace EssSharp.Integration
 
             var essGrid = new EssGrid(grid, cube as EssCube);
 
-            await essGrid.RefreshAsync();
+            await essGrid.RefreshAsync(TestContext.Current.CancellationToken);
         }
     }
 }

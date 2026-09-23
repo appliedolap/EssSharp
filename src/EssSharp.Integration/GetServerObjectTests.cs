@@ -31,8 +31,8 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the configurations for the sample application.
-            var configurations = await (await server.GetApplicationAsync("Sample"))
-                .GetConfigurationsAsync();
+            var configurations = await (await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken))
+                .GetConfigurationsAsync(TestContext.Current.CancellationToken);
 
             // Assert that the collection of configurations is not empty.
             Assert.NotEmpty(configurations);
@@ -45,9 +45,9 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the locked object from the server.
-            var lockedObject = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic")
-                .GetLockedObjectAsync("CalcAll");
+            var lockedObject = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetLockedObjectAsync("CalcAll", TestContext.Current.CancellationToken);
 
             // Assert that the lock object name is the same as the one we passed. --Make better 
             Assert.Equal("CalcAll", lockedObject.Name);
@@ -60,15 +60,15 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the Sample.Basic cube from the server.
-            var cube = await server.GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Create an ephemeral mdx script in memory and verify that its content cannot be gotten (since it doesn't exist on the cube).
-            var inMemoryScript = await cube.CreateScriptAsync<IEssMdxScript>("test99", saveToCube: false);
+            var inMemoryScript = await cube.CreateScriptAsync<IEssMdxScript>("test99", saveToCube: false, cancellationToken: TestContext.Current.CancellationToken);
 
             // Assert that an Exception is thrown when we try to get the content of a script that does not exist on the server,
             // and capture the base exception, since this is not supported by the server.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await inMemoryScript.GetContentAsync())).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await inMemoryScript.GetContentAsync(TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 400 (bad request).
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } });
@@ -82,14 +82,14 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Declare a drillthrough report.
             var drillthroughReport = default(IEssDrillthroughReport);
 
             // Find the "drillthrough_samplebasic" report (if available).
-            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false, TestContext.Current.CancellationToken) )
                 if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
                     drillthroughReport = dtr;
 
@@ -109,14 +109,14 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Declare a drillthrough report.
             var drillthroughReport = default(IEssDrillthroughReport);
 
             // Find the "drillthrough_samplebasic" report (if available).
-            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false, TestContext.Current.CancellationToken) )
                 if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
                     drillthroughReport = dtr;
 
@@ -125,7 +125,7 @@ namespace EssSharp.Integration
                 return;
 
             // Get the full report specification details.
-            await drillthroughReport.GetDetailsAsync();
+            await drillthroughReport.GetDetailsAsync(TestContext.Current.CancellationToken);
 
             // Assert that we were able to get the drillthrough report specification details.
             Assert.NotNull(drillthroughReport.Details);
@@ -141,14 +141,14 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             // Declare a drillthrough report.
             var drillthroughReport = default(IEssDrillthroughReport);
 
             // Find the "drillthrough_samplebasic" report (if available).
-            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false) )
+            foreach ( var dtr in await cube.GetDrillthroughReportsAsync(false, TestContext.Current.CancellationToken) )
                 if ( string.Equals(dtr.Name, "drillthrough_samplebasic", StringComparison.Ordinal) )
                     drillthroughReport = dtr;
 
@@ -158,7 +158,7 @@ namespace EssSharp.Integration
 
             // Assert that an exception is thrown when we try to get the drillthrough report specification details
             // as an unprivileged user, and capture the base exception.
-            var exception = (await Assert.ThrowsAsync<Exception>(async () => await drillthroughReport.GetDetailsAsync())).GetBaseException();
+            var exception = (await Assert.ThrowsAsync<Exception>(async () => await drillthroughReport.GetDetailsAsync(TestContext.Current.CancellationToken))).GetBaseException();
 
             // Assert that the base exception is a WebException with a WebExceptionRestResponse with status code 401 (unauthorized).
             Assert.True(exception is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.Unauthorized } });
@@ -170,7 +170,7 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var preferences = await server.GetDefaultGridPreferencesAsync();
+            var preferences = await server.GetDefaultGridPreferencesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(preferences != null);
 
@@ -189,12 +189,12 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
             //var mem = await (await cube.GetMemberAsync("South").ConfigureAwait(false)).GetChildrenAsync().ConfigureAwait(false);
 
-            var memberList = await cube.GetMembersAsync() ;
+            var memberList = await cube.GetMembersAsync(cancellationToken: TestContext.Current.CancellationToken) ;
 
             Assert.NotNull(memberList);
 
@@ -214,7 +214,7 @@ namespace EssSharp.Integration
 
             Assert.True(memberList[1].DescentantsCount == 16);
 
-            var memList = await cube.GetMembersSearchedAsync("new", searchType: EssMemberSearchType.wildSearch);
+            var memList = await cube.GetMembersSearchedAsync("new", searchType: EssMemberSearchType.wildSearch, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotNull(memList);
 
@@ -229,14 +229,14 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
             
             //Get all members that contain "100" in name.
             var searchType = EssMemberSearchType.wildSearch;
             var queryOptions = EssMemberSearchOptions.membersOnly;
 
-            var members = await cube.GetMembersSearchedAsync(search: "100", isCaseSensitive: false, searchType: searchType, searchOptions: queryOptions, fields: null, limit:500);
+            var members = await cube.GetMembersSearchedAsync(search: "100", isCaseSensitive: false, searchType: searchType, searchOptions: queryOptions, fields: null, limit:500, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(5, members.Count);
             Assert.Equal("100-30", members[2].Name);
@@ -248,8 +248,8 @@ namespace EssSharp.Integration
             searchType = EssMemberSearchType.dtsMembers;
             queryOptions = EssMemberSearchOptions.membersAndAliases;
 
-            var dtsFromMembersSelected = await cube.GetMembersSearchedAsync(searchType: searchType, searchOptions: queryOptions);
-            var dtsFromDTSMethod = await cube.GetDynamicTimeSeriesMembersAsync();
+            var dtsFromMembersSelected = await cube.GetMembersSearchedAsync(searchType: searchType, searchOptions: queryOptions, cancellationToken: TestContext.Current.CancellationToken);
+            var dtsFromDTSMethod = await cube.GetDynamicTimeSeriesMembersAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(2, dtsFromMembersSelected.Count);
             Assert.Equal(dtsFromDTSMethod[0].Name, dtsFromMembersSelected[0].Name);
@@ -257,14 +257,14 @@ namespace EssSharp.Integration
             searchType = EssMemberSearchType.search;
             queryOptions = EssMemberSearchOptions.membersAndAliases;
 
-            var memberByAlias = await cube.GetMembersSearchedAsync(search: "Cola", searchType: searchType, searchOptions: queryOptions);
+            var memberByAlias = await cube.GetMembersSearchedAsync(search: "Cola", searchType: searchType, searchOptions: queryOptions, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Single(memberByAlias);
             Assert.Equal("Cola", memberByAlias[0].ActiveAliasName);
 
             searchType = EssMemberSearchType.wildSearch;
 
-            var memberByAliasCaseSensitive = await cube.GetMembersSearchedAsync(search: "cola", isCaseSensitive: true, searchType: searchType, searchOptions: queryOptions);
+            var memberByAliasCaseSensitive = await cube.GetMembersSearchedAsync(search: "cola", isCaseSensitive: true, searchType: searchType, searchOptions: queryOptions, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Empty(memberByAliasCaseSensitive);
         }
@@ -277,10 +277,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync("Year");
+            var member = await cube.GetMemberAsync("Year", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotNull(member);
 
@@ -292,7 +292,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(6, member.Aliases.Count);
 
-            member = await cube.GetMemberAsync("Shared Diet Cola");
+            member = await cube.GetMemberAsync("Shared Diet Cola", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotNull(member);
 
@@ -313,14 +313,14 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync("Year");
+            var member = await cube.GetMemberAsync("Year", cancellationToken: TestContext.Current.CancellationToken);
 
-            var children = await member.GetChildrenAsync();
+            var children = await member.GetChildrenAsync(cancellationToken: TestContext.Current.CancellationToken);
 
-            var ancestor = await children[0].GetAncestorsAsync();
+            var ancestor = await children[0].GetAncestorsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotNull(ancestor);
 
@@ -341,12 +341,12 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync("Market");
+            var member = await cube.GetMemberAsync("Market", cancellationToken: TestContext.Current.CancellationToken);
 
-            var descendants = await member.GetDescendantsAsync();
+            var descendants = await member.GetDescendantsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotNull(descendants);
 
@@ -361,12 +361,12 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync("Qtr1");
+            var member = await cube.GetMemberAsync("Qtr1", cancellationToken: TestContext.Current.CancellationToken);
 
-            var siblings = await member.GetSiblingsAsync();
+            var siblings = await member.GetSiblingsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.NotNull(siblings);
         }
@@ -379,10 +379,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync(uniqueName: "Shared Diet Cola", fields: EssMemberFields.activeAliasName | EssMemberFields.aliases);
+            var member = await cube.GetMemberAsync(uniqueName: "Shared Diet Cola", fields: EssMemberFields.activeAliasName | EssMemberFields.aliases, TestContext.Current.CancellationToken);
 
             Assert.True(member.IsSharedMember);
 
@@ -399,10 +399,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync(uniqueName: "Colas");
+            var member = await cube.GetMemberAsync(uniqueName: "Colas", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(1, member.LevelNumber);
 
@@ -419,10 +419,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync(uniqueName: "Year");
+            var member = await cube.GetMemberAsync(uniqueName: "Year", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(1, member.GenerationNumber);
 
@@ -439,10 +439,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var genMembers = await cube.GetMembersByGenerationAsync("Market", 3);
+            var genMembers = await cube.GetMembersByGenerationAsync("Market", 3, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(20, genMembers.Count);
         }
@@ -455,10 +455,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var genMembers = await cube.GetMembersByLevelAsync("Market", 0);
+            var genMembers = await cube.GetMembersByLevelAsync("Market", 0, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(20, genMembers.Count);
         }
@@ -471,10 +471,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var dimMembers = await cube.GetDimensionMembersAsync();
+            var dimMembers = await cube.GetDimensionMembersAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(11, dimMembers.Count);
         }
@@ -487,12 +487,12 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync("Market");
+            var member = await cube.GetMemberAsync("Market", cancellationToken: TestContext.Current.CancellationToken);
 
-            var dim = await member.GetDimensionAsync();
+            var dim = await member.GetDimensionAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal("Market", dim.Name);
         }
@@ -505,14 +505,14 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var member = await cube.GetMemberAsync("New York");
+            var member = await cube.GetMemberAsync("New York", cancellationToken: TestContext.Current.CancellationToken);
 
-            var sameGenFromMember = await member.GetSameGenerationMembersAsync();
+            var sameGenFromMember = await member.GetSameGenerationMembersAsync(cancellationToken: TestContext.Current.CancellationToken);
 
-            var sameGenFromCube = await cube.GetMembersByLevelAsync("Market", 0);
+            var sameGenFromCube = await cube.GetMembersByLevelAsync("Market", 0, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(20, sameGenFromMember.Count);
             Assert.Equal(20, sameGenFromCube.Count);
@@ -534,10 +534,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var dtsMembers = await cube.GetDynamicTimeSeriesMembersAsync();
+            var dtsMembers = await cube.GetDynamicTimeSeriesMembersAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(2, dtsMembers.Count);
 
@@ -554,10 +554,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var dimensions = await cube.GetDimensionsAsync();
+            var dimensions = await cube.GetDimensionsAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(10, dimensions.Count);
 
@@ -582,12 +582,12 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var dimension = (await cube.GetDimensionsAsync())[0];
+            var dimension = (await cube.GetDimensionsAsync(TestContext.Current.CancellationToken))[0];
 
-            var generations = await dimension.GetGenerationsAsync();
+            var generations = await dimension.GetGenerationsAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(3, generations.Count);
 
@@ -609,12 +609,12 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var dimension = (await cube.GetDimensionsAsync())[0];
+            var dimension = (await cube.GetDimensionsAsync(TestContext.Current.CancellationToken))[0];
 
-            var levels = await dimension.GetLevelsAsync();
+            var levels = await dimension.GetLevelsAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(3, levels.Count);
 
@@ -636,10 +636,10 @@ namespace EssSharp.Integration
 
             // Get the Sample.Basic cube from the server.
             var cube = await server
-                .GetApplicationAsync("Sample")
-                .GetCubeAsync("Basic");
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            var bottomLevelMembers = await (await cube.GetMemberAsync("Year")).GetBottomLevelDescendantsAsync();
+            var bottomLevelMembers = await (await cube.GetMemberAsync("Year", cancellationToken: TestContext.Current.CancellationToken)).GetBottomLevelDescendantsAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(12, bottomLevelMembers.Count);
 

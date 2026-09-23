@@ -31,17 +31,17 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the list of existing applications.
-            foreach ( var application in await server.GetApplicationsAsync() )
+            foreach ( var application in await server.GetApplicationsAsync(TestContext.Current.CancellationToken) )
             {
                 // Get the list of existing cubes.
-                foreach ( var cube in await application.GetCubesAsync() )
+                foreach ( var cube in await application.GetCubesAsync(TestContext.Current.CancellationToken) )
                 {
                     // Get the list of existing locks and unlock them.
-                    foreach ( var essLock in await cube.GetLockedObjectsAsync() )
-                        await essLock.UnlockAsync();
+                    foreach ( var essLock in await cube.GetLockedObjectsAsync(TestContext.Current.CancellationToken) )
+                        await essLock.UnlockAsync(TestContext.Current.CancellationToken);
 
                     // Assert that the (refreshed) list of existing locks is empty.
-                    Assert.Empty(await cube.GetLockedObjectsAsync());
+                    Assert.Empty(await cube.GetLockedObjectsAsync(TestContext.Current.CancellationToken));
                 }
             }
         }
@@ -53,42 +53,42 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the list of existing applications.
-            foreach ( var application in await server.GetApplicationsAsync() )
+            foreach ( var application in await server.GetApplicationsAsync(TestContext.Current.CancellationToken) )
             {
                 // Get the list of existing cubes.
-                foreach ( var cube in await application.GetCubesAsync() )
+                foreach ( var cube in await application.GetCubesAsync(TestContext.Current.CancellationToken) )
                 {
                     // ASO cubes cannot carry scripts.
                     if ( cube.CubeType is EssCubeType.ASO )
                         continue;
 
                     // Get and delete all existing calc scripts.
-                    foreach ( var script in await cube.GetScriptsAsync<IEssCalcScript>() )
-                        await script.DeleteAsync();
+                    foreach ( var script in await cube.GetScriptsAsync<IEssCalcScript>(cancellationToken: TestContext.Current.CancellationToken) )
+                        await script.DeleteAsync(TestContext.Current.CancellationToken);
 
                     // Assert that the (refreshed) list of calc scripts is empty.
-                    Assert.Empty(await cube.GetScriptsAsync<IEssCalcScript>());
+                    Assert.Empty(await cube.GetScriptsAsync<IEssCalcScript>(cancellationToken: TestContext.Current.CancellationToken));
 
                     // Get and delete all existing maxl scripts.
-                    foreach ( var script in await cube.GetScriptsAsync<IEssMaxlScript>() )
-                        await script.DeleteAsync();
+                    foreach ( var script in await cube.GetScriptsAsync<IEssMaxlScript>(cancellationToken: TestContext.Current.CancellationToken) )
+                        await script.DeleteAsync(TestContext.Current.CancellationToken);
 
                     // Assert that the (refreshed) list of maxl scripts is empty.
-                    Assert.Empty(await cube.GetScriptsAsync<IEssMaxlScript>());
+                    Assert.Empty(await cube.GetScriptsAsync<IEssMaxlScript>(cancellationToken: TestContext.Current.CancellationToken));
 
                     // Get and delete all existing mdx scripts.
-                    foreach ( var script in await cube.GetScriptsAsync<IEssMdxScript>() )
-                        await script.DeleteAsync();
+                    foreach ( var script in await cube.GetScriptsAsync<IEssMdxScript>(cancellationToken: TestContext.Current.CancellationToken) )
+                        await script.DeleteAsync(TestContext.Current.CancellationToken);
 
                     // Assert that the (refreshed) list of mdx scripts is empty.
-                    Assert.Empty(await cube.GetScriptsAsync<IEssMdxScript>());
+                    Assert.Empty(await cube.GetScriptsAsync<IEssMdxScript>(cancellationToken: TestContext.Current.CancellationToken));
 
                     // Get and delete all existing report scripts.
-                    foreach ( var script in await cube.GetScriptsAsync<IEssReportScript>() )
-                        await script.DeleteAsync();
+                    foreach ( var script in await cube.GetScriptsAsync<IEssReportScript>(cancellationToken: TestContext.Current.CancellationToken) )
+                        await script.DeleteAsync(TestContext.Current.CancellationToken);
 
                     // Assert that the (refreshed) list of report scripts is empty..
-                    Assert.Empty(await cube.GetScriptsAsync<IEssReportScript>());
+                    Assert.Empty(await cube.GetScriptsAsync<IEssReportScript>(cancellationToken: TestContext.Current.CancellationToken));
                 }
             }
         }
@@ -100,10 +100,10 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get the list of existing applications.
-            foreach ( var application in await server.GetApplicationsAsync() )
+            foreach ( var application in await server.GetApplicationsAsync(TestContext.Current.CancellationToken) )
             {
                 // Get the list of existing cubes.
-                foreach ( var cube in await application.GetCubesAsync() )
+                foreach ( var cube in await application.GetCubesAsync(TestContext.Current.CancellationToken) )
                 {
                     // ASO cubes cannot carry scripts.
                     if ( cube.CubeType is EssCubeType.ASO )
@@ -131,14 +131,14 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get all existing applications.
-            foreach ( var application in await server.GetApplicationsAsync() )
+            foreach ( var application in await server.GetApplicationsAsync(TestContext.Current.CancellationToken) )
             {
                 // Get and delete all existing cubes.
-                foreach ( var cube in await application.GetCubesAsync() )
-                    await application.DeleteCubeAsync(cube.Name);
+                foreach ( var cube in await application.GetCubesAsync(TestContext.Current.CancellationToken) )
+                    await application.DeleteCubeAsync(cube.Name, TestContext.Current.CancellationToken);
 
                 // Assert that the (refreshed) list of cubes is empty.
-                Assert.Empty(await application.GetCubesAsync());
+                Assert.Empty(await application.GetCubesAsync(TestContext.Current.CancellationToken));
             }
         }
 
@@ -149,11 +149,11 @@ namespace EssSharp.Integration
             var server = GetEssServer();
 
             // Get and delete all existing applications.
-            foreach ( var application in await server.GetApplicationsAsync() )
-                await application.DeleteAsync();
+            foreach ( var application in await server.GetApplicationsAsync(TestContext.Current.CancellationToken) )
+                await application.DeleteAsync(TestContext.Current.CancellationToken);
 
             // Assert that the (refreshed) list of applications is empty.
-            Assert.Empty(await server.GetApplicationsAsync());
+            Assert.Empty(await server.GetApplicationsAsync(TestContext.Current.CancellationToken));
         }
 
         [Fact(DisplayName = "CleanServerTests - 06 - Essbase_AfterConnection_CanRemoveUsers"), Priority(06)]
@@ -170,12 +170,12 @@ namespace EssSharp.Integration
             var server = GetEssServer(connection);
 
             // Get and delete all existing users except admin.
-            foreach ( var user in (await server.GetUsersAsync()).Where(u => !string.Equals(u.Name, "admin")) )
+            foreach ( var user in (await server.GetUsersAsync(TestContext.Current.CancellationToken)).Where(u => !string.Equals(u.Name, "admin")) )
             {
                 try
                 {
                     // Attempt to delete the user...
-                    await user.DeleteAsync();
+                    await user.DeleteAsync(TestContext.Current.CancellationToken);
                 }
                 catch ( Exception e )
                 {
@@ -186,8 +186,8 @@ namespace EssSharp.Integration
                     try
                     {
                         // Attempt to recreate the user and then delete it as a workaround.
-                        await user.Server.CreateUserAsync(new EssUserCreationOptions(id: user.Name, password: Guid.NewGuid().ToString("D").Substring(0, 20).TrimEnd('-'), user.Role));
-                        await user.DeleteAsync();
+                        await user.Server.CreateUserAsync(new EssUserCreationOptions(id: user.Name, password: Guid.NewGuid().ToString("D").Substring(0, 20).TrimEnd('-'), user.Role), TestContext.Current.CancellationToken);
+                        await user.DeleteAsync(TestContext.Current.CancellationToken);
                     }
                     catch
                     {
@@ -198,10 +198,10 @@ namespace EssSharp.Integration
             }
 
             // Get the full list of users.
-            var users = await server.GetUsersAsync();
+            var users = await server.GetUsersAsync(TestContext.Current.CancellationToken);
 
             // Assert that the (refreshed) list of users contains a single user.
-            Assert.Single(await server.GetUsersAsync());
+            Assert.Single(await server.GetUsersAsync(TestContext.Current.CancellationToken));
 
             // Assert that the name of the only remaining user is "admin".
             Assert.Equal("admin", users.First()?.Name);
@@ -221,14 +221,14 @@ namespace EssSharp.Integration
             var server = GetEssServer(connection);
 
             // Get the list of existing applications.
-            foreach ( var application in await server.GetApplicationsAsync() )
+            foreach ( var application in await server.GetApplicationsAsync(TestContext.Current.CancellationToken) )
             {
              // Get the list of existing locks and unlock them.
-                foreach ( var essPermission in await application.GetPermissionsAsync() )
-                    await essPermission.RemovePermissionsAsync();
+                foreach ( var essPermission in await application.GetPermissionsAsync(cancellationToken: TestContext.Current.CancellationToken) )
+                    await essPermission.RemovePermissionsAsync(TestContext.Current.CancellationToken);
 
                 // Assert that the (refreshed) list of existing locks is empty.
-                Assert.Empty(await application.GetPermissionsAsync());   
+                Assert.Empty(await application.GetPermissionsAsync(cancellationToken: TestContext.Current.CancellationToken));   
             }
         }
 
@@ -246,12 +246,12 @@ namespace EssSharp.Integration
             var server = GetEssServer(connection);
 
             // Get the list of existing applications.
-            foreach ( var group in await server.GetGroupsAsync() )
+            foreach ( var group in await server.GetGroupsAsync(TestContext.Current.CancellationToken) )
             {
                 try
                 {
                     // Attempt to delete the group...
-                    await group.DeleteAsync();
+                    await group.DeleteAsync(TestContext.Current.CancellationToken);
                 }
                 catch ( Exception e )
                 {
@@ -262,8 +262,8 @@ namespace EssSharp.Integration
                     try
                     {
                         // Attempt to recreate the group and then delete it as a workaround.
-                        await group.Server.CreateGroupAsync(name: group.Name, role: group.Role);
-                        await group.DeleteAsync();
+                        await group.Server.CreateGroupAsync(name: group.Name, role: group.Role, cancellationToken: TestContext.Current.CancellationToken);
+                        await group.DeleteAsync(TestContext.Current.CancellationToken);
                     }
                     catch
                     {
@@ -274,7 +274,7 @@ namespace EssSharp.Integration
             }
 
             // Assert that the (refreshed) list of existing locks is empty.
-            Assert.Empty(await server.GetGroupsAsync());
+            Assert.Empty(await server.GetGroupsAsync(TestContext.Current.CancellationToken));
         }
     }
 }

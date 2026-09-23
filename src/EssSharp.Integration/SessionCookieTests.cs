@@ -41,11 +41,11 @@ namespace EssSharp.Integration
             var (client, api) = CreateSessionApi(stub);
 
             // Get a session and assert that the session cookie was retained.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
             AssertRetainedSessionCookie(client, @"WellFormed456");
 
             // Get a session again and assert that the retained cookie rode the request in place of authorization.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
             AssertSecondRequestRodeTheSession(stub, @"JSESSIONID=WellFormed456");
         }
 
@@ -59,7 +59,7 @@ namespace EssSharp.Integration
             var (client, api) = CreateSessionApi(stub);
 
             // Get a session and assert that the session cookie was recovered despite the malformed domain.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
             var cookie = AssertRetainedSessionCookie(client, @"EmptyDomain123");
 
             // Assert that the recovered cookie is scoped host-only to the stub host with the cookie path.
@@ -67,7 +67,7 @@ namespace EssSharp.Integration
             Assert.Equal(@"/essbase", cookie.Path);
 
             // Get a session again and assert that the recovered cookie rode the request in place of authorization.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
             AssertSecondRequestRodeTheSession(stub, @"JSESSIONID=EmptyDomain123");
 
             // Assert that the recovered cookie was retained again from the second response.
@@ -91,7 +91,7 @@ namespace EssSharp.Integration
             var (client, api) = CreateSessionApi(stub);
 
             // Get a session and assert that the full cookie set was retained, parsed and recovered alike.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
 
             var sessionCookies = Assert.Single(client.SessionCookies);
 
@@ -99,7 +99,7 @@ namespace EssSharp.Integration
                 Assert.Contains(sessionCookies.Cast<Cookie>(), cookie => string.Equals(cookie?.Name, name, StringComparison.OrdinalIgnoreCase));
 
             // Get a session again and assert that the full set rode the request in place of authorization.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
             AssertSecondRequestRodeTheSession(stub, @"JSESSIONID=AdbSession123", @"essbaseToken=AdbEssbase456", @"brokerToken=AdbBroker789", @"gatewayToken=AdbGateway000");
         }
 
@@ -113,11 +113,11 @@ namespace EssSharp.Integration
             var (client, api) = CreateSessionApi(stub);
 
             // Get a session and assert that the session cookie was retained.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
             AssertRetainedSessionCookie(client, @"LogoutCookie789");
 
             // Sign off and assert that no session cookies remain, even though the logout response sets one.
-            await api.UserSessionSignoffWithHttpInfoAsync();
+            await api.UserSessionSignoffWithHttpInfoAsync(cancellationToken: TestContext.Current.CancellationToken);
             Assert.Empty(client.SessionCookies);
         }
 
@@ -132,9 +132,9 @@ namespace EssSharp.Integration
             var (client, api) = CreateSessionApi(stub);
 
             // Get a session three times.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(3, stub.Requests.Count);
 
@@ -157,9 +157,9 @@ namespace EssSharp.Integration
             var (client, api) = CreateSessionApi(stub);
 
             // Get a session three times.
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
-            await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
+            await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(3, stub.Requests.Count);
 
@@ -183,7 +183,7 @@ namespace EssSharp.Integration
             var client        = new ApiClient(stub.BasePath);
 
             // Get a session with configured grid preferences.
-            await client.GetAsync<object>(@"/session", CreatePreferenceOptions(), configuration);
+            await client.GetAsync<object>(@"/session", CreatePreferenceOptions(), configuration, TestContext.Current.CancellationToken);
 
             Assert.Equal(2, stub.Requests.Count);
 
@@ -214,8 +214,8 @@ namespace EssSharp.Integration
             var client        = new ApiClient(stub.BasePath);
 
             // Get a session with configured grid preferences twice.
-            await client.GetAsync<object>(@"/session", CreatePreferenceOptions(), configuration);
-            await client.GetAsync<object>(@"/session", CreatePreferenceOptions(), configuration);
+            await client.GetAsync<object>(@"/session", CreatePreferenceOptions(), configuration, TestContext.Current.CancellationToken);
+            await client.GetAsync<object>(@"/session", CreatePreferenceOptions(), configuration, TestContext.Current.CancellationToken);
 
             // Assert that the preferences were set only once: the second request matched the preferences
             // tracked for the retained session and rode it directly.
@@ -239,7 +239,7 @@ namespace EssSharp.Integration
             var client        = new ApiClient(stub.BasePath);
 
             // Get a session with configured grid preferences.
-            await client.GetAsync<object>(@"/session", CreatePreferenceOptions(), configuration);
+            await client.GetAsync<object>(@"/session", CreatePreferenceOptions(), configuration, TestContext.Current.CancellationToken);
 
             Assert.Equal(2, stub.Requests.Count);
 
@@ -265,8 +265,8 @@ namespace EssSharp.Integration
 
             // Get two sessions concurrently.
             await Task.WhenAll(
-                api.UserSessionGetSessionWithHttpInfoAsync(token: true),
-                api.UserSessionGetSessionWithHttpInfoAsync(token: true));
+                api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken),
+                api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken));
 
             Assert.Equal(2, stub.Requests.Count);
 
@@ -292,7 +292,7 @@ namespace EssSharp.Integration
             using var stub = new LoopbackEssbaseStub();
             var api = CreateMdxApi(stub);
 
-            await api.MDXExecuteMDXWithHttpInfoAsync(@"Sample", @"Basic");
+            await api.MDXExecuteMDXWithHttpInfoAsync(@"Sample", @"Basic", cancellationToken: TestContext.Current.CancellationToken);
 
             var request = Assert.Single(stub.Requests);
 
@@ -451,14 +451,14 @@ namespace EssSharp.Integration
             var api    = new UserSessionApi(client, client, configuration);
 
             // Get a session and assert success.
-            var first = await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            var first = await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
             Assert.Equal(HttpStatusCode.OK, first.StatusCode);
 
             // Assert that a session cookie set with a JSESSIONID was pooled, whether parsed or recovered.
             Assert.Contains(client.SessionCookies, sessionCookies => sessionCookies.Cast<Cookie>().Any(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)));
 
             // Get a session again, riding the pooled set, and assert success.
-            var second = await api.UserSessionGetSessionWithHttpInfoAsync(token: true);
+            var second = await api.UserSessionGetSessionWithHttpInfoAsync(token: true, cancellationToken: TestContext.Current.CancellationToken);
             Assert.Equal(HttpStatusCode.OK, second.StatusCode);
 
             // Assert that a session cookie set with a JSESSIONID was pooled again from the second response.

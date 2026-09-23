@@ -36,7 +36,7 @@ namespace EssSharp.Integration
             using var client = GetClient();
 
             // Get the state of the database container.
-            var state = (await client.Containers.InspectContainerAsync(Database))?.State;
+            var state = (await client.Containers.InspectContainerAsync(Database, TestContext.Current.CancellationToken))?.State;
 
             // Assert
             Assert.True(state?.Running);
@@ -56,7 +56,7 @@ namespace EssSharp.Integration
             using var client = GetClient();
 
             // Get the state of the essbase container.
-            var state = (await client.Containers.InspectContainerAsync(Essbase))?.State;
+            var state = (await client.Containers.InspectContainerAsync(Essbase, TestContext.Current.CancellationToken))?.State;
 
             // Assert
             Assert.True(state?.Running);

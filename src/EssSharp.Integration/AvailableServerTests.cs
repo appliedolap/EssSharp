@@ -76,7 +76,7 @@ namespace EssSharp.Integration
         public async Task Essbase_AfterStartup_CanConnect()
         {
             // Get a user session (for the service admin).
-            var session = await GetEssServer().SignInAsync();
+            var session = await GetEssServer().SignInAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             // Get the configured username (for the service admin).
             var username = GetEssConnection().Username;
@@ -101,7 +101,7 @@ namespace EssSharp.Integration
                 // Attempt to sign in with bad credentials.
                 await new EssServerFactory()
                     .CreateEssServer(connection.Server, connection.Username, connection.Password, connect: false)
-                    .SignInAsync();
+                    .SignInAsync(cancellationToken: TestContext.Current.CancellationToken);
             });
 
             // Assert that the message is appropriate.
