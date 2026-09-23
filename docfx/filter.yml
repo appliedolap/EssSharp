@@ -2,6 +2,8 @@ apiRules:
 - exclude:
     uidRegex: ^System\.Object$
     type: Type
+# The generated REST client namespaces. Excluding a namespace also excludes its child namespaces, so these three
+# rules hide EssSharp.Client.Auth (OAuthAuthenticator, OAuthFlow) as well; that is intended.
 - exclude:
     uidRegex: ^EssSharp\.Api$
     type: Namespace
@@ -11,6 +13,12 @@ apiRules:
 - exclude:
     uidRegex: ^EssSharp\.Model$
     type: Namespace
+# Documented on the interfaces they chain from instead; see tools/GenerateFluentExtensionDocs.cs.
 - exclude:
     uidRegex: ^EssSharp\.FluentExtensions$
+    type: Type
+attributeRules:
+# EnumMember carries each member's REST wire value (e.g. "asoBufferDataLoad"); readers need the member names only.
+- exclude:
+    uidRegex: ^System\.Runtime\.Serialization\.EnumMemberAttribute$
     type: Type
