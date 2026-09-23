@@ -1,0 +1,11 @@
+# Metadata for the hidden FluentExtensions class only. It is written to obj/ and never becomes a page;
+# tools/GenerateFluentExtensionDocs.cs turns it into overwrite files that document each chaining
+# method on the interface its Task<T> receiver produces.
+apiRules:
+- include:
+    uidRegex: ^EssSharp$
+    type: Namespace
+- include:
+    uidRegex: ^EssSharp\.FluentExtensions
+- exclude:
+    uidRegex: .*

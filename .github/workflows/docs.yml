@@ -48,8 +48,17 @@ jobs:
     - name: DocFx Plugin Build
       run: dotnet build docfx/plugins/EssSharp.DocAsCode.PostProcessor/EssSharp.DocAsCode.PostProcessor.csproj -c Release -o docfx/templates/EssSharp/plugins
 
+    - name: DocFx Metadata
+      run: docfx metadata docfx/docfx.json
+
+    # Document the FluentExtensions chaining methods on the interfaces they apply to. Problems are reported as warning
+    # annotations and never stop the docs from publishing; without this step the interface pages simply omit the section.
+    - name: DocFx Fluent Extension Docs
+      continue-on-error: true
+      run: dotnet run docfx/tools/GenerateFluentExtensionDocs.cs
+
     - name: DocFx Build
-      run: docfx docfx/docfx.json
+      run: docfx build docfx/docfx.json
     
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1

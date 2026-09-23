@@ -47,6 +47,30 @@
       "memberLayout": "samePage",
       "enumSortOrder": "declaringOrder",
       "allowCompilationErrors": false
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "EssSharp.Abstractions/*.csproj"
+          ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**"
+          ],
+          "src": "../src/"
+        }
+      ],
+      "dest": "obj/fluent-metadata",
+      "filter": "filter.fluent.yml",
+      "includePrivateMembers": false,
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false,
+      "noRestore": false,
+      "namespaceLayout": "flattened",
+      "memberLayout": "samePage",
+      "enumSortOrder": "declaringOrder",
+      "allowCompilationErrors": false
     }
   ],
   "build": {
@@ -88,6 +112,13 @@
     ],
     "postProcessors": ["EssSharpPostProcessor"],
     "keepFileLink": false,
-    "disableGitFeatures": false
+    "disableGitFeatures": false,
+    "overwrite": [
+      {
+        "files": [
+          "obj/fluent-overwrite/*.md"
+        ]
+      }
+    ]
   }
 }
