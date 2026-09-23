@@ -30,6 +30,8 @@ namespace EssSharp.Integration
     [Collection(nameof(SessionCookieClientTests)), Trait("type", "client")]
     public class SessionCookieClientTests
     {
+        private const string ExpectedMdxAcceptHeader = @"Accept: application/octet-stream,text/html,application/json;charset=UTF-8";
+
         [Fact(DisplayName = "SessionCookieClientTests - 01 - ApiClient_WithWellFormedSessionCookie_RetainsAndReusesIt"), Priority(01)]
         public async Task ApiClient_WithWellFormedSessionCookie_RetainsAndReusesIt()
         {
@@ -283,6 +285,60 @@ namespace EssSharp.Integration
                 .ToArray();
 
             Assert.Equal(new[] { @"Parallel0", @"Parallel1" }, values);
+        }
+
+        [Fact(DisplayName = "SessionCookieClientTests - 11 - MDXExecuteMDXAsync_AcceptsAllRequiredResponseTypes"), Priority(11)]
+        public async Task MDXExecuteMDXAsync_AcceptsAllRequiredResponseTypes()
+        {
+            using var stub = new LoopbackEssbaseStub();
+            var api = CreateMdxApi(stub);
+
+            await api.MDXExecuteMDXWithHttpInfoAsync(@"Sample", @"Basic");
+
+            var request = Assert.Single(stub.Requests);
+
+            Assert.Contains(ExpectedMdxAcceptHeader, request, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [Fact(DisplayName = "SessionCookieClientTests - 12 - MDXExecuteMDX_AcceptsAllRequiredResponseTypes"), Priority(12)]
+        public void MDXExecuteMDX_AcceptsAllRequiredResponseTypes()
+        {
+            using var stub = new LoopbackEssbaseStub();
+            var api = CreateMdxApi(stub);
+
+            api.MDXExecuteMDXWithHttpInfo(@"Sample", @"Basic");
+
+            var request = Assert.Single(stub.Requests);
+
+            Assert.Contains(ExpectedMdxAcceptHeader, request, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [Fact(DisplayName = "SessionCookieClientTests - 13 - SelectHeaderAccept_ForExistingMultiFormatEndpoints_StillPrefersJson"), Priority(13)]
+        public void SelectHeaderAccept_ForExistingMultiFormatEndpoints_StillPrefersJson()
+        {
+            var accept = ClientUtils.SelectHeaderAccept(new[]
+            {
+                @"application/zip",
+                @"application/octet-stream",
+                @"application/json",
+                @"application/xml"
+            });
+
+            Assert.Equal(@"application/json", accept);
+        }
+
+        /// <summary>
+        /// Creates a direct MDX API for the given stub.
+        /// </summary>
+        /// <param name="stub">The loopback stub server.</param>
+        private static ExecuteMDXApi CreateMdxApi( LoopbackEssbaseStub stub )
+        {
+            return new ExecuteMDXApi(new Configuration
+            {
+                BasePath = stub.BasePath,
+                Username = @"admin",
+                Password = @"password1"
+            });
         }
 
         /// <summary>
