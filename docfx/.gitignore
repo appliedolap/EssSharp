@@ -11,3 +11,6 @@
 .cache
 _site/
 api/
+
+# the post-processor plugin, built from plugins/ by the docs workflow
+templates/EssSharp/plugins/

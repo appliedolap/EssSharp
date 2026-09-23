@@ -25,7 +25,7 @@ namespace EssSharp.DocAsCode.PostProcessor
             return metadata;
         }
 
-        public Manifest Process( Manifest manifest, string outputFolder )
+        public Manifest Process( Manifest manifest, string outputFolder, CancellationToken cancellationToken = default )
         {
             #if DEBUG
             {
@@ -61,6 +61,8 @@ namespace EssSharp.DocAsCode.PostProcessor
 
                 File.WriteAllLines(generatedTocHtmlFile.FullName, updatedTocHtmlLines, encoding);
             }
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             var generatedTocJsonFile = new FileInfo(Path.Combine(siteDirectory.FullName, "toc.json"));
 

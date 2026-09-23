@@ -37,13 +37,17 @@ jobs:
     - name: Dotnet Setup
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.x
-    
-    - name: DocFx Setup 
-      run: | 
+        dotnet-version: 10.0.x
+
+    - name: DocFx Setup
+      run: |
         dotnet tool uninstall docfx --global &>/dev/null || true
-        dotnet tool install docfx --global --version 2.73.2
-    
+        dotnet tool install docfx --global --version 2.80.1
+
+    # Build the post-processor plugin into the EssSharp template; its Docfx.Plugins version must match docfx above.
+    - name: DocFx Plugin Build
+      run: dotnet build docfx/plugins/EssSharp.DocAsCode.PostProcessor/EssSharp.DocAsCode.PostProcessor.csproj -c Release -o docfx/templates/EssSharp/plugins
+
     - name: DocFx Build
       run: docfx docfx/docfx.json
     
