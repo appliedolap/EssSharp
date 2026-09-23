@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,21 +13,25 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Xunit;
-using Xunit.Abstractions;
-using Xunit.Extensions.AssemblyFixture;
 using Xunit.Sdk;
+using Xunit.v3;
 
-// Include support for assembly fixtures.
-[assembly: TestFramework(AssemblyFixtureFramework.TypeName, AssemblyFixtureFramework.AssemblyName)]
+// Create the containers once for the whole test assembly (xUnit.net v3 supports assembly fixtures natively).
+[assembly: AssemblyFixture(typeof(EssSharp.Integration.Setup.AssemblyFixture))]
 
 // Set the default collection orderer.
-[assembly: TestCollectionOrderer("EssSharp.Integration.Setup.TestCollectionOrderer", "EssSharp.Integration")]
+[assembly: TestCollectionOrderer(typeof(EssSharp.Integration.Setup.TestCollectionOrderer))]
 
 // Set the default (test) case orderer.
-[assembly: TestCaseOrderer($@"EssSharp.Integration.Setup.TestPriorityOrderer", "EssSharp.Integration")]
+[assembly: TestCaseOrderer(typeof(EssSharp.Integration.Setup.TestPriorityOrderer))]
+
+// Set the default (test) method and class orderers; since xUnit.net v3 4.0 tests are ordered collection, class, method, case,
+// so the priority must be applied at the method level and the class order must be deterministic.
+[assembly: TestMethodOrderer(typeof(EssSharp.Integration.Setup.TestPriorityMethodOrderer))]
+[assembly: TestClassOrderer(typeof(EssSharp.Integration.Setup.TestNameClassOrderer))]
 
 // Turn off test parallelization to enforce case ordering.
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+[assembly: Parallelization(Mode = ParallelMode.None)]
 
 namespace EssSharp.Integration.Setup
 {
@@ -37,7 +42,7 @@ namespace EssSharp.Integration.Setup
         private readonly IMessageSink _messageSink = messageSink;
 
         /// <inheritdoc />
-        public async Task InitializeAsync()
+        public async ValueTask InitializeAsync()
         {
             var localSettings   = default(IntegrationTestSettings);
             var defaultSettings = default(IntegrationTestSettings);
@@ -126,7 +131,7 @@ namespace EssSharp.Integration.Setup
         /// <summary>
         /// Do "global" teardown here; Only called once.
         /// </summary>
-        public async Task DisposeAsync() => await IntegrationTestFactory.DisposeAsync().ConfigureAwait(false);
+        public async ValueTask DisposeAsync() => await IntegrationTestFactory.DisposeAsync().ConfigureAwait(false);
 
         /// <summary>
         /// Do "global" teardown here; Only called once.
@@ -143,10 +148,10 @@ namespace EssSharp.Integration.Setup
         private readonly IMessageSink _messageSink = messageSink;
 
         /// <inheritdoc />
-        public Task DisposeAsync() => Task.CompletedTask;
+        public ValueTask DisposeAsync() => ValueTask.CompletedTask;
 
         /// <inheritdoc />
-        public Task InitializeAsync() => Task.CompletedTask;
+        public ValueTask InitializeAsync() => ValueTask.CompletedTask;
     }
 
     /// <summary />
@@ -167,86 +172,75 @@ namespace EssSharp.Integration.Setup
         public int Priority { get; private set; } = priority;
     }
 
-    /// <summary />
+    /// <summary>
+    /// Orders test collections by their <see cref="CollectionPriorityAttribute" />, then by collection name.
+    /// </summary>
     public class TestCollectionOrderer : ITestCollectionOrderer
     {
         /// <inheritdoc />
-        public IEnumerable<ITestCollection> OrderTestCollections( IEnumerable<ITestCollection> testCollections )
+        public IReadOnlyCollection<TTestCollection> OrderTestCollections<TTestCollection>( IReadOnlyCollection<TTestCollection> testCollections )
+            where TTestCollection : ITestCollection
         {
-            var sortedCollections = new SortedDictionary<int, List<ITestCollection>>();
-
-            foreach ( ITestCollection testCollection in testCollections )
-            {
-                int priority = 0;
-
-                foreach ( IAttributeInfo attr in testCollection.CollectionDefinition.GetCustomAttributes(typeof(CollectionPriorityAttribute).AssemblyQualifiedName) )
-                    priority = attr.GetNamedArgument<int>("Priority");
-
-                GetOrCreate(sortedCollections, priority).Add(testCollection);
-            }
-
-            foreach ( var list in sortedCollections.Keys.Select(priority => sortedCollections[priority]) )
-            {
-                list.Sort(( x, y ) => StringComparer.OrdinalIgnoreCase.Compare(x.CollectionDefinition.Name, y.CollectionDefinition.Name));
-                foreach ( ITestCollection testCollection in list ) yield return testCollection;
-            }
+            return testCollections
+                .OrderBy(testCollection => GetCollectionDefinition(testCollection)?.GetCustomAttribute<CollectionPriorityAttribute>(false)?.Priority ?? 0)
+                .ThenBy(testCollection => GetCollectionDefinition(testCollection)?.Name ?? testCollection.TestCollectionDisplayName, StringComparer.OrdinalIgnoreCase)
+                .ToList();
         }
 
-        private static TValue GetOrCreate<TKey, TValue>( IDictionary<TKey, TValue> dictionary, TKey key ) where TValue : new()
-        {
-            TValue result;
-
-            if ( dictionary.TryGetValue(key, out result) ) return result;
-
-            result = new TValue();
-            dictionary[key] = result;
-
-            return result;
-        }
+        private static Type GetCollectionDefinition( ITestCollection testCollection ) => (testCollection as IXunitTestCollection)?.CollectionDefinition;
     }
 
-    /// <summary />
+    /// <summary>
+    /// Orders the test cases of a single test method (e.g., theory data rows) by method name; since xUnit.net v3 4.0,
+    /// cross-method ordering is applied by <see cref="TestPriorityMethodOrderer" />.
+    /// </summary>
     public class TestPriorityOrderer : ITestCaseOrderer
     {
         /// <inheritdoc />
-        public IEnumerable<TTestCase> OrderTestCases<TTestCase>( IEnumerable<TTestCase> testCases ) where TTestCase : ITestCase
+        public IReadOnlyCollection<TTestCase> OrderTestCases<TTestCase>( IReadOnlyCollection<TTestCase> testCases )
+            where TTestCase : notnull, ITestCase
         {
-            var sortedMethods = new SortedDictionary<int, List<TTestCase>>();
-
-            foreach ( TTestCase testCase in testCases )
-            {
-                int priority = 0;
-
-                foreach ( IAttributeInfo attr in testCase.TestMethod.Method.GetCustomAttributes((typeof(PriorityAttribute).AssemblyQualifiedName)) )
-                    priority = attr.GetNamedArgument<int>("Priority");
-
-                GetOrCreate(sortedMethods, priority).Add(testCase);
-            }
-
-            foreach ( var list in sortedMethods.Keys.Select(priority => sortedMethods[priority]) )
-            {
-                list.Sort(( x, y ) => StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
-                foreach ( TTestCase testCase in list ) yield return testCase;
-
-            }
+            return testCases
+                .OrderBy(testCase => (testCase as IXunitTestCase)?.TestMethod.Method.GetCustomAttribute<PriorityAttribute>(false)?.Priority ?? 0)
+                .ThenBy(testCase => testCase.TestMethod?.MethodName ?? string.Empty, StringComparer.OrdinalIgnoreCase)
+                .ToList();
         }
+    }
 
-        private static TValue GetOrCreate<TKey, TValue>( IDictionary<TKey, TValue> dictionary, TKey key ) where TValue : new()
+    /// <summary>
+    /// Orders the test methods of a test class by their <see cref="PriorityAttribute" />, then by method name.
+    /// </summary>
+    public class TestPriorityMethodOrderer : ITestMethodOrderer
+    {
+        /// <inheritdoc />
+        public IReadOnlyCollection<TTestMethod> OrderTestMethods<TTestMethod>( IReadOnlyCollection<TTestMethod> testMethods )
+            where TTestMethod : notnull, ITestMethod
         {
-            TValue result;
+            return testMethods
+                .OrderBy(testMethod => (testMethod as IXunitTestMethod)?.Method.GetCustomAttribute<PriorityAttribute>(false)?.Priority ?? 0)
+                .ThenBy(testMethod => testMethod.MethodName, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+    }
 
-            if ( dictionary.TryGetValue(key, out result) ) return result;
-
-            result = new TValue();
-            dictionary[key] = result;
-
-            return result;
+    /// <summary>
+    /// Orders the test classes of a test collection by class name, so the order is deterministic.
+    /// </summary>
+    public class TestNameClassOrderer : ITestClassOrderer
+    {
+        /// <inheritdoc />
+        public IReadOnlyCollection<TTestClass> OrderTestClasses<TTestClass>( IReadOnlyCollection<TTestClass> testClasses )
+            where TTestClass : notnull, ITestClass
+        {
+            return testClasses
+                .OrderBy(testClass => testClass.TestClassName, StringComparer.OrdinalIgnoreCase)
+                .ToList();
         }
     }
 
     /// <summary />
     /// <param name="outputHelper" />
-    public class IntegrationTestBase( ITestOutputHelper outputHelper ) : IAssemblyFixture<AssemblyFixture>
+    public class IntegrationTestBase( ITestOutputHelper outputHelper )
     {
         private ITestOutputHelper _outputHelper = outputHelper;
         private TestOutputLogger  _outputLogger;

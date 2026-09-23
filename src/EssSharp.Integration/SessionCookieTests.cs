@@ -11,7 +11,6 @@ using EssSharp.Client;
 using EssSharp.Integration.Setup;
 
 using Xunit;
-using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {

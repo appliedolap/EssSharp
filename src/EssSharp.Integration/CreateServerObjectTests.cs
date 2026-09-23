@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using EssSharp.Integration.Setup;
 
 using Xunit;
-using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {

@@ -22,11 +22,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    # Setup .NET 9.0
-    - name: Setup .NET 9.0
+    # Setup .NET 10.0
+    - name: Setup .NET 10.0
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
     
     # The full MAUI Workload with the required target platforms is not supported on Linux.
     # We build and test a solution filter without the MAUI client to workaround this issue.
@@ -53,5 +53,7 @@ jobs:
       run: docker network create --driver bridge standalone || true
     
     # Test the EssSharp and EssSharp.Abstractions libraries.
+    # global.json opts dotnet test into Microsoft.Testing.Platform (required for xUnit.net v3 on the .NET 10 SDK).
+    # Run one test module at a time; the integration tests share containers and must never overlap.
     - name: Test EssSharp
-      run: dotnet test EssSharp.slnf --no-build --nologo --logger:"console;verbosity=detailed"
+      run: dotnet test --solution EssSharp.slnf --no-build --max-parallel-test-modules 1 --output Detailed

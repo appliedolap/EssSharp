@@ -10,7 +10,7 @@ using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Configurations;
 using DotNet.Testcontainers.Containers;
 using Testcontainers.MsSql;
-using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace EssSharp.Integration.Setup
 {
@@ -71,14 +71,13 @@ namespace EssSharp.Integration.Setup
             var msSqlScriptPath = Path.Combine(binPath, "Scripts", "MsSql");
 
             // Build the database container.
-            _databaseTestContainer = new MsSqlBuilder()
-                .WithImage(image)                                 // "mcr.microsoft.com/mssql/server:2022-latest"
+            _databaseTestContainer = new MsSqlBuilder(image)      // "mcr.microsoft.com/mssql/server:2022-latest"
                 .WithName(containerName)                          // "essbase-21-7-database"
                 .WithNetwork("standalone")
                 .WithEnvironment("ACCEPT_EULA", "Y")
                 .WithEnvironment("SA_PASSWORD", "StrongPassw0rd")
                 .WithPassword("StrongPassw0rd")
-                .WithResourceMapping(new DirectoryInfo(msSqlScriptPath), @"/opt/scripts", UnixFileModes.UserRead | UnixFileModes.UserWrite | UnixFileModes.UserExecute | UnixFileModes.GroupRead | UnixFileModes.GroupExecute | UnixFileModes.OtherRead | UnixFileModes.OtherExecute)
+                .WithResourceMapping(new DirectoryInfo(msSqlScriptPath), @"/opt/scripts", fileMode: UnixFileModes.UserRead | UnixFileModes.UserWrite | UnixFileModes.UserExecute | UnixFileModes.GroupRead | UnixFileModes.GroupExecute | UnixFileModes.OtherRead | UnixFileModes.OtherExecute)
                 .WithCommand(@"/opt/scripts/start-db.sh")
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" })
                 .WithCreateParameterModifier(pm => pm.Healthcheck = new Docker.DotNet.Models.HealthcheckConfig()
@@ -86,7 +85,7 @@ namespace EssSharp.Integration.Setup
                     Test = new[] { "CMD", "/opt/scripts/healthcheck.sh" },
                     Interval = TimeSpan.FromSeconds(30),
                     Timeout = TimeSpan.FromSeconds(5),
-                    StartPeriod = TimeSpan.FromSeconds(30).Ticks,
+                    StartPeriod = TimeSpan.FromSeconds(30),
                     Retries = 10
                 })
                 .Build();
@@ -132,9 +131,8 @@ namespace EssSharp.Integration.Setup
             var connection  = GetEssConnection(EssServerRole.ServiceAdministrator);
             var hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : "9000";
 
-            _essbaseTestContainer = new ContainerBuilder()
-                .WithImage(image)                                                                     // "appliedolap/essbase:21.7-latest"
-                .WithName(containerName)                                                              // "essbase-21-7"
+            _essbaseTestContainer = new ContainerBuilder(image)                                       // "appliedolap/essbase:21.7-latest"
+                .WithName(containerName)                                                             // "essbase-21-7"
                 .WithNetwork("standalone")
                 .WithPortBinding(hostPort, "9000")                                                    // "9000"
                 .WithEnvironment("ADMIN_USERNAME", connection.Username)                               // "admin"
@@ -229,7 +227,7 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary />
-        internal static DockerClient GetDockerClient() => TestcontainersSettings.OS?.DockerEndpointAuthConfig?.GetDockerClientConfiguration()?.CreateClient();
+        internal static DockerClient GetDockerClient() => TestcontainersSettings.OS?.DockerEndpointAuthConfig?.GetDockerClientBuilder(ResourceReaper.DefaultSessionId)?.Build();
 
         #endregion
     }
