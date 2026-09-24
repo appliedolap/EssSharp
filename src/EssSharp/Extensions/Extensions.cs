@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 using EssSharp.Client;
@@ -1233,7 +1234,11 @@ namespace EssSharp
         }
 
         /// <summary />
-        private static string GetFormattedHeaders( this RestResponse response, bool excludeSensitiveHeaders = false, string[] headersToExclude = null, string delimiter = null )
+        private static string GetFormattedHeaders(
+            this RestResponse response,
+            bool excludeSensitiveHeaders = true,
+            string[] headersToExclude = null,
+            string delimiter = null )
         {
             return (response?.Headers?.AsEnumerable() ?? Enumerable.Empty<HeaderParameter>()).Concat(response?.ContentHeaders?.AsEnumerable() ?? Enumerable.Empty<HeaderParameter>()).ToList() is { Count: > 0 } headers
                 ? GetFormattedHeaders(headers, excludeSensitiveHeaders, headersToExclude, delimiter)
@@ -1305,47 +1310,175 @@ namespace EssSharp
             return formattedContent;
         }
 
-        /// <summary />
-        private static string GetFormattedHeaders( List<HeaderParameter> headers, bool excludeSensitiveHeaders = true, string[] headersToExclude = null, string delimiter = null )
+        /// <summary>The HTTP headers whose values carry credentials.</summary>
+        private static readonly List<string> SensitiveHeaderNames =
+        [
+            @"authorization",
+            @"cookie",
+            @"password",
+            @"proxy-authorization",
+            @"set-cookie",
+            @"username",
+            @"x-requestdigest",
+        ];
+
+        /// <summary>The attributes that may follow the cookie value in a Set-Cookie header.</summary>
+        private static readonly List<string> CookieAttributeNames =
+        [
+            @"comment",
+            @"domain",
+            @"expires",
+            @"httponly",
+            @"max-age",
+            @"partitioned",
+            @"path",
+            @"priority",
+            @"samesite",
+            @"secure",
+            @"version",
+        ];
+
+        /// <summary>
+        /// Authentication schemes recognized when a header contains a scheme with an empty credential.
+        /// </summary>
+        private static readonly List<string> AuthenticationSchemeNames =
+        [
+            @"basic",
+            @"bearer",
+            @"digest",
+            @"negotiate",
+            @"ntlm",
+        ];
+
+        private const string MaskedHeaderValue = @"********";
+        private const string MaskedCredentialPattern = @"^(?:\S+ )?\*{8} \(\d+ bytes\)$";
+
+        /// <summary>Returns the value that may be written for an HTTP header.</summary>
+        private static string GetLoggableHeaderValue( string name, string value, bool maskSensitiveHeaders )
         {
-            // Initialize the standard array of sensitive headers, based on the excludeSensitiveHeaders flag.
-            var sensitiveHeadersArray = excludeSensitiveHeaders ? new string[] { "authorization", "username", "password" } : new string[0];
+            if ( !maskSensitiveHeaders || value is null
+                || !SensitiveHeaderNames.Any(header =>
+                    string.Equals(header, name, StringComparison.OrdinalIgnoreCase)) )
+                return value;
 
-            // Join the standard set of headers to exclude with the specific set of headers to exclude.
-            var prohibitedHeaders = sensitiveHeadersArray.Union(headersToExclude ?? new string[0], StringComparer.OrdinalIgnoreCase);
+            if ( string.Equals(name, @"authorization", StringComparison.OrdinalIgnoreCase)
+              || string.Equals(name, @"proxy-authorization", StringComparison.OrdinalIgnoreCase) )
+                return MaskCredentialHeaderValue(value);
 
-            // Initialize the headers dictionary.
-            var headerDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            if ( string.Equals(name, @"cookie", StringComparison.OrdinalIgnoreCase) )
+                return MaskCookieHeaderValue(value, keepAttributes: false);
 
-            // Add each header exposed by the standard headers collection to the headers dictionary.
-            foreach ( var header in headers )
+            if ( string.Equals(name, @"set-cookie", StringComparison.OrdinalIgnoreCase) )
+                return MaskCookieHeaderValue(value, keepAttributes: true);
+
+            return MaskedHeaderValue;
+        }
+
+        /// <summary>Masks a credential while preserving its recognized scheme and UTF-8 byte length.</summary>
+        private static string MaskCredentialHeaderValue( string value )
+        {
+            if ( Regex.IsMatch(value, MaskedCredentialPattern, RegexOptions.CultureInvariant) )
+                return value;
+
+            var separator = value.IndexOf(' ');
+            var candidate = separator >= 0 ? value.Substring(0, separator).Trim() : value.Trim();
+            var knownBareScheme = separator < 0 && AuthenticationSchemeNames.Any(
+                scheme => string.Equals(scheme, candidate, StringComparison.OrdinalIgnoreCase));
+
+            var scheme = separator >= 0 || knownBareScheme ? candidate : string.Empty;
+            var credential = separator >= 0
+                ? value.Substring(separator + 1).Trim()
+                : knownBareScheme ? string.Empty : candidate;
+
+            var length = Encoding.UTF8.GetByteCount(credential);
+
+            return scheme is { Length: > 0 }
+                ? $@"{scheme} {MaskedHeaderValue} ({length} bytes)"
+                : $@"{MaskedHeaderValue} ({length} bytes)";
+        }
+
+        /// <summary>Masks cookie values while preserving cookie names and optional Set-Cookie attributes.</summary>
+        private static string MaskCookieHeaderValue( string value, bool keepAttributes )
+        {
+            var maskedCookies = new List<string>();
+
+            foreach ( var rawCookie in Regex.Split(value, @",(?=\s*[^=;,\s]+\s*=)") )
             {
-                if ( !string.IsNullOrEmpty(header.Name) )
+                var maskedSegments = new List<string>();
+                var startsCookie = true;
+
+                foreach ( var rawSegment in rawCookie.Split(';') )
                 {
-                    if ( headerDictionary.ContainsKey(header.Name) )
-                        headerDictionary[header.Name] = $@"{headerDictionary[header.Name]}; {header.Value?.ToString()}";
+                    var segment = rawSegment.Trim();
+
+                    if ( segment.Length is 0 )
+                        continue;
+
+                    var separator = segment.IndexOf('=');
+                    var segmentName = separator > 0 ? segment.Substring(0, separator).Trim() : segment;
+
+                    if ( !startsCookie && keepAttributes && CookieAttributeNames.Any(
+                        attribute => string.Equals(attribute, segmentName, StringComparison.OrdinalIgnoreCase)) )
+                        maskedSegments.Add(segment);
                     else
-                        headerDictionary[header.Name] = header.Value?.ToString();
+                        maskedSegments.Add(separator > 0 ? $@"{segmentName}={MaskedHeaderValue}" : MaskedHeaderValue);
+
+                    startsCookie = false;
                 }
+
+                if ( maskedSegments.Count > 0 )
+                    maskedCookies.Add(string.Join(@"; ", maskedSegments));
             }
 
-            // If no headers could be obtained, return an empty string. 
-            if ( headers.Count is 0 )
+            return string.Join(@", ", maskedCookies);
+        }
+
+        /// <summary />
+        private static string GetFormattedHeaders(
+            List<HeaderParameter> headers,
+            bool excludeSensitiveHeaders = true,
+            string[] headersToExclude = null,
+            string delimiter = null )
+        {
+            var prohibitedHeaders = headersToExclude ?? Array.Empty<string>();
+
+            var loggableHeaders = headers
+                .Where(header => !string.IsNullOrEmpty(header.Name))
+                .Where(header => !prohibitedHeaders.Any(prohibited =>
+                    string.Equals(prohibited, header.Name, StringComparison.OrdinalIgnoreCase)))
+                .Select(header => new KeyValuePair<string, string>(
+                    header.Name,
+                    GetLoggableHeaderValue(header.Name, header.Value?.ToString(), excludeSensitiveHeaders)))
+                .ToList();
+
+            var formattedHeaders = new List<KeyValuePair<string, string>>();
+
+            foreach ( var group in loggableHeaders.GroupBy(header => header.Key, StringComparer.OrdinalIgnoreCase) )
+            {
+                // Preserve the established aggregation for ordinary repeated headers. Set-Cookie must retain each
+                // wire value so a later cookie cannot be mistaken for an attribute of the preceding cookie.
+                if ( string.Equals(group.Key, @"set-cookie", StringComparison.OrdinalIgnoreCase) )
+                    formattedHeaders.AddRange(group);
+                else
+                    formattedHeaders.Add(new KeyValuePair<string, string>(
+                        group.First().Key,
+                        string.Join(@"; ", group.Select(header => header.Value))));
+            }
+
+            // If no headers could be obtained, return an empty string.
+            if ( formattedHeaders.Count is 0 )
                 return string.Empty;
 
             // Set the delimiter.
             delimiter ??= $@"{Environment.NewLine}# ";
 
             // Get the length of the longest header key plus one for the separator character.
-            var keyLength = headerDictionary.Keys
-                .Where(key => !prohibitedHeaders.Any(header => string.Equals(header, key, StringComparison.OrdinalIgnoreCase)))
-                .Max  (key => key.Length) + 1;
+            var keyLength = formattedHeaders.Max(header => header.Key.Length) + 1;
 
             // Return the formatted header string.
-            return string.Join(delimiter, headerDictionary.Keys
-                    .Where  (key => !prohibitedHeaders.Any(header => string.Equals(header, key, StringComparison.OrdinalIgnoreCase)))
-                    .OrderBy(key => key)
-                    .Select (key => $@"{$@"{key}:".PadRight(keyLength)} {headerDictionary[key]}"));
+            return string.Join(delimiter, formattedHeaders
+                    .OrderBy(header => header.Key)
+                    .Select (header => $@"{$@"{header.Key}:".PadRight(keyLength)} {header.Value}"));
         }
 
         #endregion
