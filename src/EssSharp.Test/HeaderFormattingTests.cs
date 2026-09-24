@@ -20,6 +20,7 @@ namespace EssSharp.Test
             {
                 new HeaderParameter(@"Authorization", @"Bearer"),
                 new HeaderParameter(@"Authorization", @"raw-key"),
+                new HeaderParameter(@"Authorization", @"sk_live_abc ******** (0 bytes)"),
                 new HeaderParameter(@"Password", @"hunter(masked)2"),
                 new HeaderParameter(@"Proxy-Authorization", @"Bearer x(masked)"),
                 new HeaderParameter(@"Set-Cookie", @"FedAuth=first; path=/"),
@@ -48,7 +49,9 @@ namespace EssSharp.Test
 
             Assert.Equal(true, requestFormatter.GetParameters()[1].DefaultValue);
             Assert.Equal(true, responseFormatter.GetParameters()[1].DefaultValue);
-            Assert.Contains(@"Authorization: Bearer ******** (0 bytes); ******** (7 bytes)", lines);
+            Assert.Contains(
+                @"Authorization: Bearer ******** (0 bytes); ******** (7 bytes); ******** (30 bytes)",
+                lines);
             Assert.Contains(@"Password: ********", lines);
             Assert.Contains(@"Proxy-Authorization: Bearer ******** (9 bytes)", lines);
             Assert.Contains(@"Set-Cookie: FedAuth=********; path=/", lines);
@@ -57,6 +60,7 @@ namespace EssSharp.Test
             Assert.Contains(@"X-Diagnostic: retained; second", lines);
             Assert.DoesNotContain(@"hunter(masked)2", formatted);
             Assert.DoesNotContain(@"x(masked)", formatted);
+            Assert.DoesNotContain(@"sk_live_abc", formatted);
             Assert.DoesNotContain(@"FedAuth=first", formatted);
             Assert.DoesNotContain(@"Domain=second", formatted);
         }

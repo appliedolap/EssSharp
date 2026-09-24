@@ -1351,7 +1351,7 @@ namespace EssSharp
         ];
 
         private const string MaskedHeaderValue = @"********";
-        private const string MaskedCredentialPattern = @"^(?:\S+ )?\*{8} \(\d+ bytes\)$";
+        private const string MaskedCredentialPattern = @"^(?:(?<scheme>\S+) )?\*{8} \(\d+ bytes\)$";
 
         /// <summary>Returns the value that may be written for an HTTP header.</summary>
         private static string GetLoggableHeaderValue( string name, string value, bool maskSensitiveHeaders )
@@ -1377,18 +1377,17 @@ namespace EssSharp
         /// <summary>Masks a credential while preserving its recognized scheme and UTF-8 byte length.</summary>
         private static string MaskCredentialHeaderValue( string value )
         {
-            if ( Regex.IsMatch(value, MaskedCredentialPattern, RegexOptions.CultureInvariant) )
+            if ( IsMaskedCredentialHeaderValue(value) )
                 return value;
 
             var separator = value.IndexOf(' ');
             var candidate = separator >= 0 ? value.Substring(0, separator).Trim() : value.Trim();
-            var knownBareScheme = separator < 0 && AuthenticationSchemeNames.Any(
-                scheme => string.Equals(scheme, candidate, StringComparison.OrdinalIgnoreCase));
+            var knownScheme = IsAuthenticationScheme(candidate);
 
-            var scheme = separator >= 0 || knownBareScheme ? candidate : string.Empty;
-            var credential = separator >= 0
-                ? value.Substring(separator + 1).Trim()
-                : knownBareScheme ? string.Empty : candidate;
+            var scheme = knownScheme ? candidate : string.Empty;
+            var credential = knownScheme
+                ? separator >= 0 ? value.Substring(separator + 1).Trim() : string.Empty
+                : value.Trim();
 
             var length = Encoding.UTF8.GetByteCount(credential);
 
@@ -1396,6 +1395,19 @@ namespace EssSharp
                 ? $@"{scheme} {MaskedHeaderValue} ({length} bytes)"
                 : $@"{MaskedHeaderValue} ({length} bytes)";
         }
+
+        /// <summary>Returns whether every aggregated credential is already masked with a recognized scheme.</summary>
+        private static bool IsMaskedCredentialHeaderValue( string value ) =>
+            value.Split(';')
+                .Select(part => Regex.Match(part.Trim(), MaskedCredentialPattern, RegexOptions.CultureInvariant))
+                .All(match => match.Success
+                    && (match.Groups[@"scheme"].Value.Length is 0
+                        || IsAuthenticationScheme(match.Groups[@"scheme"].Value)));
+
+        /// <summary>Returns whether a token is an authentication scheme that is safe to retain in a log.</summary>
+        private static bool IsAuthenticationScheme( string value ) =>
+            AuthenticationSchemeNames.Any(scheme =>
+                string.Equals(scheme, value, StringComparison.OrdinalIgnoreCase));
 
         /// <summary>Masks cookie values while preserving cookie names and optional Set-Cookie attributes.</summary>
         private static string MaskCookieHeaderValue( string value, bool keepAttributes )
