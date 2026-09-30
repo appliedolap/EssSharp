@@ -13,6 +13,7 @@ using DotNet.Testcontainers.Configurations;
 using DotNet.Testcontainers.Containers;
 using Testcontainers.MsSql;
 using Xunit.Sdk;
+using Xunit.v3;
 
 namespace EssSharp.Integration.Setup
 {
@@ -225,7 +226,7 @@ namespace EssSharp.Integration.Setup
                 // the container itself reports as running, so wait for the entry to appear before updating it.
                 if ( !await WaitForRegistryEntryAsync(profile, encodedName, sink, cancellationToken) )
                 {
-                    sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage($@"Essbase registry entry '{name}' never appeared; leaving it unset."));
+                    sink?.OnMessage(new DiagnosticMessage($@"Essbase registry entry '{name}' never appeared; leaving it unset."));
                     continue;
                 }
 
@@ -237,7 +238,7 @@ namespace EssSharp.Integration.Setup
 
                 if ( int.TryParse(updated?.Trim(), out var rows) && rows > 0 )
                 {
-                    sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage($@"Essbase registry entry '{name}' set to '{value}'."));
+                    sink?.OnMessage(new DiagnosticMessage($@"Essbase registry entry '{name}' set to '{value}'."));
                     changed = true;
                 }
             }
@@ -263,7 +264,7 @@ namespace EssSharp.Integration.Setup
                 if ( command is not { Length: > 0 } )
                     continue;
 
-                sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage($@"Essbase container setup: {command}"));
+                sink?.OnMessage(new DiagnosticMessage($@"Essbase container setup: {command}"));
 
                 var (details, stdout) = await ExecAsync(EssbaseContainerId, new[] { "/bin/bash", "-lc", command }, cancellationToken);
 
@@ -361,7 +362,7 @@ namespace EssSharp.Integration.Setup
         /// <param name="cancellationToken" />
         private static async Task RestartEssbaseContainerAsync( IMessageSink sink, CancellationToken cancellationToken )
         {
-            sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage("Restarting the Essbase container to reload its registry settings."));
+            sink?.OnMessage(new DiagnosticMessage("Restarting the Essbase container to reload its registry settings."));
 
             using var client = GetDockerClient();
 
@@ -384,7 +385,7 @@ namespace EssSharp.Integration.Setup
                 await Task.Delay(TimeSpan.FromSeconds(5), cancellationToken);
             }
 
-            sink?.OnMessage(new Xunit.Sdk.DiagnosticMessage("The Essbase container did not report as ready after its restart."));
+            sink?.OnMessage(new DiagnosticMessage("The Essbase container did not report as ready after its restart."));
         }
 
 
