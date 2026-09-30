@@ -138,7 +138,7 @@ namespace EssSharp.Integration.Setup
 
             // Do "global" initialization here; Only called once.
             var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync(_messageSink);
-            var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync(_messageSink);
+            var essbaseTask  = IntegrationTestFactory.InitializeEssbaseContainerAsync(_messageSink, databaseTask);
 
             await Task.WhenAll(databaseTask, essbaseTask).ConfigureAwait(false);
         }
