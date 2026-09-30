@@ -133,7 +133,7 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary />
-        public static async Task InitializeEssbaseContainerAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
+        public static async Task InitializeEssbaseContainerAsync( IMessageSink sink = null, Task databaseReady = null, CancellationToken cancellationToken = default )
         {
             // Get the default (first configured) essbase image and its resolved profile.
             var profile       = EssbaseProfile;
@@ -197,6 +197,11 @@ namespace EssSharp.Integration.Setup
             if ( _essbaseTestContainer?.State is TestcontainersStates.Running )
             {
                 _essbaseContainerId = _essbaseTestContainer.Id;
+
+                // The registry settings live in the repository database, which is started concurrently with this
+                // container and takes far longer to become ready, so wait for it before reading or writing them.
+                if ( databaseReady is not null )
+                    await databaseReady;
 
                 // Force any declared registry settings first, since that may restart the container, and only then run
                 // the setup commands - which may depend on a feature the registry settings just enabled.
