@@ -9,7 +9,6 @@ using EssSharp.Integration.Setup;
 using Microsoft.Extensions.Logging;
 
 using Xunit;
-using Xunit.Abstractions;
 
 namespace EssSharp.Integration
 {
@@ -39,14 +38,15 @@ namespace EssSharp.Integration
             if ( version.CompareTo(_firstSupportedVersion) < 0 )
             {
                 await AssertAiQueryNotSupportedAsync(() => cube.GenerateMdxFromNaturalLanguageAsync(
-                    GetNaturalLanguageQuery(), GetProfileName()));
+                    GetNaturalLanguageQuery(), GetProfileName(), cancellationToken: TestContext.Current.CancellationToken));
                 return;
             }
 
             var result = await cube.GenerateMdxFromNaturalLanguageAsync(
                 GetNaturalLanguageQuery(),
                 GetProfileName(),
-                new EssAiQueryOptions(startNewConversation: true, includeAttributes: false));
+                new EssAiQueryOptions(startNewConversation: true, includeAttributes: false),
+                TestContext.Current.CancellationToken);
 
             Assert.NotNull(result);
             Assert.Equal(GetNaturalLanguageQuery(), result.NaturalLanguageQuery);
@@ -67,14 +67,15 @@ namespace EssSharp.Integration
             if ( version.CompareTo(_firstSupportedVersion) < 0 )
             {
                 await AssertAiQueryNotSupportedAsync(() => cube.ExecuteNaturalLanguageQueryAsync(
-                    GetNaturalLanguageQuery(), GetProfileName()));
+                    GetNaturalLanguageQuery(), GetProfileName(), cancellationToken: TestContext.Current.CancellationToken));
                 return;
             }
 
             var result = await cube.ExecuteNaturalLanguageQueryAsync(
                 GetNaturalLanguageQuery(),
                 GetProfileName(),
-                new EssAiQueryOptions(startNewConversation: true, includeAttributes: false));
+                new EssAiQueryOptions(startNewConversation: true, includeAttributes: false),
+                TestContext.Current.CancellationToken);
 
             Assert.NotNull(result?.Query);
             Assert.NotNull(result.Grid);
@@ -90,11 +91,11 @@ namespace EssSharp.Integration
 
             if ( version.CompareTo(_firstSupportedVersion) < 0 )
             {
-                await AssertAiQueryNotSupportedAsync(() => cube.GetAiQuerySamplesAsync());
+                await AssertAiQueryNotSupportedAsync(() => cube.GetAiQuerySamplesAsync(TestContext.Current.CancellationToken));
                 return;
             }
 
-            var samples = await cube.GetAiQuerySamplesAsync();
+            var samples = await cube.GetAiQuerySamplesAsync(TestContext.Current.CancellationToken);
 
             Assert.NotNull(samples);
             Assert.NotEmpty(samples);
@@ -110,16 +111,17 @@ namespace EssSharp.Integration
 
             if ( version.CompareTo(_firstSupportedVersion) < 0 )
             {
-                await AssertAiQueryNotSupportedAsync(() => cube.ClearAiQueryConversationAsync(GetProfileName()));
+                await AssertAiQueryNotSupportedAsync(() => cube.ClearAiQueryConversationAsync(GetProfileName(), TestContext.Current.CancellationToken));
                 return;
             }
 
             await cube.GenerateMdxFromNaturalLanguageAsync(
                 GetNaturalLanguageQuery(),
                 GetProfileName(),
-                new EssAiQueryOptions(startNewConversation: true));
+                new EssAiQueryOptions(startNewConversation: true),
+                TestContext.Current.CancellationToken);
 
-            await cube.ClearAiQueryConversationAsync(GetProfileName());
+            await cube.ClearAiQueryConversationAsync(GetProfileName(), TestContext.Current.CancellationToken);
         }
 
         /// <summary>
@@ -128,14 +130,14 @@ namespace EssSharp.Integration
         private async Task<(IEssCube cube, Version version)> GetAiQueryContextAsync()
         {
             var server = GetEssServer();
-            var about  = await server.GetAboutAsync();
+            var about  = await server.GetAboutAsync(TestContext.Current.CancellationToken);
             var version = new Version(string.Join('.', about?.Version?
                 .Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                 .Take(2)));
 
             var cube = await server
-                .GetApplicationAsync(AiQuerySettings.ApplicationName)
-                .GetCubeAsync(AiQuerySettings.CubeName);
+                .GetApplicationAsync(AiQuerySettings.ApplicationName, TestContext.Current.CancellationToken)
+                .GetCubeAsync(AiQuerySettings.CubeName, TestContext.Current.CancellationToken);
 
             return (cube, version);
         }
