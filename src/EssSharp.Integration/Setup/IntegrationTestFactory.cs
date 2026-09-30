@@ -29,6 +29,18 @@ namespace EssSharp.Integration.Setup
 
         private static EssbaseContainerProfile _essbaseProfile;
 
+        private static string _sqlcmdPath;
+
+        /// <summary>
+        /// The locations a SQL Server image may ship <c>sqlcmd</c>, in order of preference. Recent images carry only the
+        /// version 18 ODBC tools, while older images carry the unversioned directory.
+        /// </summary>
+        private static readonly string[] SqlcmdPaths =
+        {
+            @"/opt/mssql-tools18/bin/sqlcmd",
+            @"/opt/mssql-tools/bin/sqlcmd"
+        };
+
         /// <summary>
         /// How long to wait for Essbase to write its registry entries, which only happens once it has created its
         /// domain - well after the container itself reports as running.
@@ -310,10 +322,14 @@ namespace EssSharp.Integration.Setup
         /// <param name="cancellationToken" />
         private static async Task<string> RunRepositorySqlAsync( EssbaseContainerProfile profile, string sql, CancellationToken cancellationToken )
         {
+            var sqlcmd = await GetSqlcmdPathAsync(cancellationToken);
+
+            // The version 18 tools encrypt by default, so trust the certificate the database container generates.
+            var trustCertificate = sqlcmd.Contains("mssql-tools18") ? new[] { "-C" } : Array.Empty<string>();
+
             // Pass the query as a discrete argument rather than through a shell, so that no quoting is required.
-            var (_, stdout) = await ExecAsync(DatabaseContainerId, new[]
+            var (_, stdout) = await ExecAsync(DatabaseContainerId, new[] { sqlcmd }.Concat(trustCertificate).Concat(new[]
             {
-                @"/opt/mssql-tools/bin/sqlcmd",
                 "-S", "localhost",
                 "-U", profile.DatabaseAdminUsername,
                 "-P", profile.DatabaseAdminPassword,
@@ -321,9 +337,34 @@ namespace EssSharp.Integration.Setup
                 "-h", "-1",
                 "-W",
                 "-Q", sql
-            }, cancellationToken);
+            }).ToArray(), cancellationToken);
 
             return stdout;
+        }
+
+        /// <summary>
+        /// Finds <c>sqlcmd</c> inside the repository database container, which ships it in a different directory
+        /// depending on the age of the SQL Server image.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <remarks>
+        /// A missing <c>sqlcmd</c> is reported here rather than left to surface as empty query output, which callers
+        /// waiting on a repository row would otherwise treat as "not there yet" for the length of their timeout.
+        /// </remarks>
+        private static async Task<string> GetSqlcmdPathAsync( CancellationToken cancellationToken )
+        {
+            if ( _sqlcmdPath is { Length: > 0 } cached )
+                return cached;
+
+            foreach ( var candidate in SqlcmdPaths )
+            {
+                var (details, _) = await ExecAsync(DatabaseContainerId, new[] { "/bin/sh", "-c", $@"test -x {candidate}" }, cancellationToken);
+
+                if ( details?.ExitCode is 0 )
+                    return _sqlcmdPath = candidate;
+            }
+
+            throw new Exception($@"sqlcmd was not found in the repository database container at any of: {string.Join(", ", SqlcmdPaths)}.");
         }
 
         /// <summary>
@@ -398,6 +439,9 @@ namespace EssSharp.Integration.Setup
 
             // Await the disposal of any created test containers.
             await Task.WhenAll(disposeDatabase, disposeEssbase);
+
+            // The located sqlcmd belongs to the database container that was just disposed.
+            _sqlcmdPath = null;
         }
 
         #endregion
