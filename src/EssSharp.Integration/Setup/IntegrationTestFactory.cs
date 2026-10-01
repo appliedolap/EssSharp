@@ -297,13 +297,25 @@ namespace EssSharp.Integration.Setup
         /// <param name="id">The ID of the container to execute the command in.</param>
         /// <param name="command">The command and its arguments.</param>
         /// <param name="cancellationToken" />
-        public static async Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, CancellationToken cancellationToken = default )
+        public static Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, CancellationToken cancellationToken = default ) =>
+            ExecAsync(id, command, user: null, cancellationToken);
+
+        /// <summary>
+        /// Executes a command inside the given container as the given user, and returns the exec details along with
+        /// its output.
+        /// </summary>
+        /// <param name="id">The ID of the container to execute the command in.</param>
+        /// <param name="command">The command and its arguments.</param>
+        /// <param name="user">The user to run the command as, or <see langword="null" /> for the container's own user.</param>
+        /// <param name="cancellationToken" />
+        public static async Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, string user, CancellationToken cancellationToken = default )
         {
             var execParams = new ContainerExecCreateParameters()
             {
                 AttachStderr = true,
                 AttachStdout = true,
                 Cmd          = command,
+                User         = user,
             };
 
             using var client = GetDockerClient();
@@ -438,6 +450,9 @@ namespace EssSharp.Integration.Setup
         /// <summary />
         public static async Task DisposeAsync()
         {
+            // The AI query containers are built on top of the Essbase container, so they go first.
+            await IntegrationTestAiEnvironment.DisposeAsync();
+
             // Capture any test container disposal tasks.
             var disposeDatabase = _databaseTestContainer?.DisposeAsync().AsTask() ?? Task.CompletedTask;
             var disposeEssbase  = _essbaseTestContainer?.DisposeAsync().AsTask() ?? Task.CompletedTask;
@@ -455,6 +470,12 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         internal static IntegrationTestAiQuerySettings AiQuery { get; set; }
+
+        /// <summary>
+        /// Whether this run started the Essbase container, as opposed to finding one that was already running. A
+        /// container the run started is removed when the run ends; one that was already running outlives it.
+        /// </summary>
+        internal static bool EssbaseContainerStarted => _essbaseTestContainer is not null;
 
         /// <summary />
         internal static IntegrationTestSettingsConnection[] Connections { get; set; }
