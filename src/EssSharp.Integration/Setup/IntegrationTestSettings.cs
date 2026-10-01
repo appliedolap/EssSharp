@@ -136,9 +136,63 @@ namespace EssSharp.Integration.Setup
         }
     }
 
+    /// <summary>
+    /// How the environment the AI query tests need - an Essbase AI connection - is provided.
+    /// </summary>
+    public enum IntegrationTestAiQueryMode
+    {
+        /// <summary>
+        /// The harness builds the environment itself: an Oracle AI Database container, and a fake OCI Generative AI
+        /// service it talks to, so no OCI tenancy is needed. Essbase is then configured to use them.
+        /// </summary>
+        Managed,
+
+        /// <summary>
+        /// The Essbase server already has an AI connection associated with the application - for instance one backed
+        /// by a real OCI tenancy - and the harness leaves it alone.
+        /// </summary>
+        External,
+
+        /// <summary>
+        /// The AI query tests are skipped.
+        /// </summary>
+        Disabled
+    }
+
     /// <summary />
     public class IntegrationTestAiQuerySettings
     {
+        /// <summary>
+        /// How the environment the AI query tests need is provided. Defaults to <see cref="IntegrationTestAiQueryMode.Managed" />.
+        /// </summary>
+        public IntegrationTestAiQueryMode Mode { get; set; } = IntegrationTestAiQueryMode.Managed;
+
+        /// <summary>
+        /// The Oracle AI Database image used in <see cref="IntegrationTestAiQueryMode.Managed" /> mode. It must be the
+        /// full flavor: the slim flavor has no Oracle Text, so DBMS_VECTOR_CHAIN, which Essbase calls, does not exist.
+        /// </summary>
+        public string DatabaseImage { get; set; } = "gvenzl/oracle-free:23.26.3-full-faststart";
+
+        /// <summary>
+        /// The image the fake OCI Generative AI service runs in, in <see cref="IntegrationTestAiQueryMode.Managed" /> mode.
+        /// </summary>
+        public string FakeServiceImage { get; set; } = "python:3.12-slim";
+
+        /// <summary>
+        /// The OCI region whose Generative AI endpoint the fake service impersonates.
+        /// </summary>
+        public string Region { get; set; } = "us-chicago-1";
+
+        /// <summary>
+        /// The chat model named in the AI connection.
+        /// </summary>
+        public string ChatModel { get; set; } = "cohere.command-a-03-2025";
+
+        /// <summary>
+        /// The embedding model named in the AI connection.
+        /// </summary>
+        public string EmbedModel { get; set; } = "cohere.embed-english-v3.0";
+
         /// <summary />
         public string ApplicationName { get; set; } = "Sample";
 
@@ -148,7 +202,11 @@ namespace EssSharp.Integration.Setup
         /// <summary />
         public string NaturalLanguageQuery { get; set; } = "Show actual sales by year.";
 
-        /// <summary />
+        /// <summary>
+        /// A prefix for the AI profile names the tests create. Each test appends a unique suffix, because Essbase
+        /// creates a database profile for every conversation and will not replace an existing one. The prefix must be
+        /// a valid database identifier, so it cannot contain a hyphen.
+        /// </summary>
         public string ProfileName { get; set; }
     }
 
