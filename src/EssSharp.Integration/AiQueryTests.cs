@@ -16,19 +16,52 @@ namespace EssSharp.Integration
     /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />.
     /// </summary>
     [CollectionDefinition(nameof(AiQueryTests), DisableParallelization = true), CollectionPriority(6)]
-    public class AiQueryTestsCollection : ICollectionFixture<CollectionFixture> { }
+    public class AiQueryTestsCollection : ICollectionFixture<AiQueryCollectionFixture> { }
 
     /// <summary>
     /// Integration tests for AI Query operations against supported and unsupported Essbase servers.
     /// </summary>
     [Collection(nameof(AiQueryTests)), Trait("type", "execute")]
-    public class AiQueryTests : IntegrationTestBase
+    public class AiQueryTests : IntegrationTestBase, IAsyncLifetime
     {
         private static readonly Version _firstSupportedVersion = new(major: 21, minor: 8);
 
+        /// <summary>
+        /// The AI profile used by this test. Essbase creates a database profile with this name for each new
+        /// conversation and will not replace an existing one, so every test needs a name of its own. It must also be
+        /// a valid database identifier, which rules out hyphens.
+        /// </summary>
+        private readonly string _profileName;
+
         /// <summary />
         /// <param name="output" />
-        public AiQueryTests( ITestOutputHelper output ) : base(output) { }
+        public AiQueryTests( ITestOutputHelper output ) : base(output)
+        {
+            var prefix = string.IsNullOrWhiteSpace(AiQuerySettings?.ProfileName) ? "INTEGRATION_TEST" : AiQuerySettings.ProfileName;
+
+            _profileName = $@"{prefix}_{Guid.NewGuid():N}".Substring(0, prefix.Length + 9).ToUpperInvariant();
+        }
+
+        /// <inheritdoc />
+        public ValueTask InitializeAsync() => ValueTask.CompletedTask;
+
+        /// <summary>
+        /// Drops the conversation (and so the database profile) that the test started, if it started one.
+        /// </summary>
+        public async ValueTask DisposeAsync()
+        {
+            try
+            {
+                var (cube, version) = await GetAiQueryContextAsync();
+
+                if ( version.CompareTo(_firstSupportedVersion) >= 0 )
+                    await cube.ClearAiQueryConversationAsync(_profileName, TestContext.Current.CancellationToken);
+            }
+            catch ( Exception )
+            {
+                // The test may have been skipped or may not have started a conversation, so there may be nothing to drop.
+            }
+        }
 
         [Fact(DisplayName = @"AiQueryTests - 01 - Essbase_CanGenerateMdxFromNaturalLanguage"), Priority(01)]
         public async Task Essbase_CanGenerateMdxFromNaturalLanguage()
@@ -129,6 +162,8 @@ namespace EssSharp.Integration
         /// </summary>
         private async Task<(IEssCube cube, Version version)> GetAiQueryContextAsync()
         {
+            Assert.SkipWhen(AiQuerySettings?.Mode == IntegrationTestAiQueryMode.Disabled, "The AI query tests are disabled by the test settings (AiQuery:Mode).");
+
             var server = GetEssServer();
             var about  = await server.GetAboutAsync(TestContext.Current.CancellationToken);
             var version = new Version(string.Join('.', about?.Version?
@@ -151,12 +186,9 @@ namespace EssSharp.Integration
                 : AiQuerySettings.NaturalLanguageQuery;
 
         /// <summary>
-        /// Returns a profile name suitable for exercising an unsupported endpoint.
+        /// Returns the profile name unique to this test.
         /// </summary>
-        private static string GetProfileName() =>
-            string.IsNullOrWhiteSpace(AiQuerySettings?.ProfileName)
-                ? "integration-test-profile"
-                : AiQuerySettings.ProfileName;
+        private string GetProfileName() => _profileName;
 
         /// <summary>
         /// Asserts that an older server rejects an AI Query operation because its endpoint is unavailable.
