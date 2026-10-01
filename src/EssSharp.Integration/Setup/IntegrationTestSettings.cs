@@ -168,6 +168,14 @@ namespace EssSharp.Integration.Setup
         public IntegrationTestAiQueryMode Mode { get; set; } = IntegrationTestAiQueryMode.Managed;
 
         /// <summary>
+        /// Whether, in <see cref="IntegrationTestAiQueryMode.Managed" /> mode, the environment is left in place when the run
+        /// ends. By default it is removed: the AI connection is taken out of Essbase, then the containers and their
+        /// network are removed. Keeping it makes the next run quicker, because the database and the vectors are already
+        /// there, but it leaves a database running and an AI connection in Essbase until they are removed by hand.
+        /// </summary>
+        public bool KeepEnvironment { get; set; }
+
+        /// <summary>
         /// The Oracle AI Database image used in <see cref="IntegrationTestAiQueryMode.Managed" /> mode. It must be the
         /// full flavor: the slim flavor has no Oracle Text, so DBMS_VECTOR_CHAIN, which Essbase calls, does not exist.
         /// </summary>
