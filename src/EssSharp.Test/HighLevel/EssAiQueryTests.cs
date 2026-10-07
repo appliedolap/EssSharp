@@ -21,7 +21,7 @@ namespace EssSharp.Test.HighLevel
             using var stub = new AiQueryEssbaseStub(request =>
             {
                 if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
-                    return (200, $@"{{""mdx"":{Quote(mdx)},""explanation"":""Generated from the outline.""}}");
+                    return (200, $@"{{""error"":"""",""info"":""Generated from the outline."",""mdx"":{Quote(mdx)}}}");
 
                 return GetObjectResponse(request);
             });
@@ -65,6 +65,29 @@ namespace EssSharp.Test.HighLevel
             Assert.Equal(mdx, result.Query.Mdx);
             Assert.NotNull(result.Grid);
             Assert.Same(cube, result.Grid.Cube);
+            Assert.Contains(stub.Requests, request =>
+                request.StartsWith("POST /essbase/rest/v1/applications/Sample/databases/Basic/grid/mdx", StringComparison.Ordinal) &&
+                request.Contains(mdx, StringComparison.Ordinal));
+        }
+
+        [Fact]
+        public async Task GenerateMdxFromNaturalLanguageAsync_RejectsErrorResponseWithoutMdx()
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, @"{""error"":""Error while generating MDX"",""info"":"""",""mdx"":""""}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            var exception = await Assert.ThrowsAsync<Exception>(() =>
+                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca"));
+
+            Assert.IsType<InvalidOperationException>(exception.InnerException);
+            Assert.Contains("Received an empty or invalid MDX generator response", exception.Message, StringComparison.Ordinal);
+            Assert.Contains("Error while generating MDX", exception.Message, StringComparison.Ordinal);
         }
 
         [Fact]

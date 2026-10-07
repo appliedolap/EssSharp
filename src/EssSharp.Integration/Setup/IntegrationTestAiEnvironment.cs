@@ -47,12 +47,19 @@ namespace EssSharp.Integration.Setup
     /// that Essbase can reach it.
     /// </para>
     /// <para>
-    /// When the run ends the environment is removed: the AI connection is taken out of Essbase (unless the run started
-    /// the Essbase container, which goes with it), and then the containers and their network are removed. The order
-    /// matters: an Essbase server that outlived its database would be left with an AI connection, and a pool of
-    /// connections, pointing at nothing. <see cref="IntegrationTestAiQuerySettings.KeepEnvironment" /> leaves it all in
-    /// place instead, which makes the next run faster; every step checks before it acts, so a later run finds the pair
-    /// and reuses it.
+    /// The pair may already be running: a previous run that kept its environment, or a tool that starts it as persistent
+    /// containers, may have left it. A running pair is adopted as it is, the way the Essbase container is.
+    /// </para>
+    /// <para>
+    /// When the run ends, it removes what it created and nothing else, whoever else is using the containers. The AI
+    /// connection is taken out of Essbase if the run configured it there (unless the run started the Essbase container,
+    /// which goes with it), and then the containers and the network the run created are removed. The order matters: an
+    /// Essbase server that outlived its database would be left with an AI connection, and a pool of connections,
+    /// pointing at nothing. Containers and a network that were already there, and an AI connection that was already
+    /// associated with the application, are left alone. A container the run did not create is never removed or
+    /// started, even when it is in the way. <see cref="IntegrationTestAiQuerySettings.KeepEnvironment" /> leaves it all
+    /// in place instead, which makes the next run faster; every step checks before it acts, so a later run finds the
+    /// pair and reuses it.
     /// </para>
     /// </remarks>
     public static class IntegrationTestAiEnvironment
@@ -84,6 +91,11 @@ namespace EssSharp.Integration.Setup
         private const string VectorCredentialName   = @"ess_ai_vector";
         private const string AiConnectionName       = @"ess_ai_genai";
 
+        // Everything the harness creates carries this label, so that a leftover of its own can be told from a container
+        // or a network that somebody else started.
+        private const string EnvironmentLabelKey   = @"com.appliedolap.essharp.integration-tests";
+        private const string EnvironmentLabelValue = @"ai-environment";
+
         // The OCIDs only have to match the patterns Essbase validates; nothing ever looks them up.
         private const string UserOcid        = @"ocid1.user.oc1..aaaaaaaaessharpintegrationtests";
         private const string TenancyOcid     = @"ocid1.tenancy.oc1..aaaaaaaaessharpintegrationtests";
@@ -95,13 +107,19 @@ namespace EssSharp.Integration.Setup
 
         private static readonly SemaphoreSlim _gate = new(1, 1);
 
+        // The containers and the network this run created, by ID. Only these are removed when the run ends.
+        private static readonly List<string> _createdContainerIds = new();
+
         private static bool            _ready;
         private static bool            _keep;
         private static bool            _ownsEssbaseConfiguration;
+        private static bool            _createdDatabaseConnection;
+        private static bool            _createdAiConnection;
         private static string          _fakeServiceName;
         private static string          _databaseName;
         private static string          _networkName;
         private static string          _databaseContainerId;
+        private static string          _createdNetworkId;
         private static IntegrationTestAiQuerySettings _settings;
         private static IMessageSink    _sink;
 
@@ -158,12 +176,13 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary>
-        /// Removes the AI query environment, unless the settings ask for it to be kept: the AI connection first, then the
-        /// containers and their network.
+        /// Removes what the run created of the AI query environment, unless the settings ask for it to be kept: the AI
+        /// connection first, then the containers and the network.
         /// </summary>
         /// <remarks>
-        /// This never throws. It runs before the Essbase containers are removed, and a failure here must not stop that;
-        /// the test framework's cleanup removes whatever is left when the process exits.
+        /// Containers, a network and an AI connection that were already there are left alone. This never throws. It
+        /// runs before the Essbase containers are removed, and a failure here must not stop that; the test framework's
+        /// cleanup removes whatever is left when the process exits.
         /// </remarks>
         public static async Task DisposeAsync()
         {
@@ -172,9 +191,17 @@ namespace EssSharp.Integration.Setup
                 if ( !_keep && _fakeServiceName is not null )
                 {
                     // An Essbase container the run started goes away with its AI connection. One that was already running
-                    // would be left with a connection to a database that no longer exists.
-                    if ( _ownsEssbaseConfiguration && !IntegrationTestFactory.EssbaseContainerStarted )
-                        await TearDownEssbaseAsync();
+                    // is left as it was found: only a connection the run itself created is taken out of it.
+                    try
+                    {
+                        if ( _ownsEssbaseConfiguration && !IntegrationTestFactory.EssbaseContainerStarted )
+                            await TearDownEssbaseAsync();
+                    }
+                    catch ( Exception error )
+                    {
+                        // The containers the run created are removed whether or not Essbase could be cleaned up.
+                        Log(_sink, $@"Unable to remove the AI connection from Essbase: {error.Message}");
+                    }
 
                     await RemoveContainersAsync();
                 }
@@ -185,12 +212,16 @@ namespace EssSharp.Integration.Setup
             }
             finally
             {
-                _databaseContainerId      = null;
-                _ownsEssbaseConfiguration = false;
-                _fakeServiceName          = null;
-                _databaseName             = null;
-                _networkName              = null;
-                _ready                    = false;
+                _databaseContainerId       = null;
+                _createdContainerIds.Clear();
+                _createdNetworkId          = null;
+                _ownsEssbaseConfiguration  = false;
+                _createdDatabaseConnection = false;
+                _createdAiConnection       = false;
+                _fakeServiceName           = null;
+                _databaseName              = null;
+                _networkName               = null;
+                _ready                     = false;
             }
         }
         #endregion
@@ -198,9 +229,15 @@ namespace EssSharp.Integration.Setup
         #region Containers
 
         /// <summary>
-        /// Starts the fake OCI service and the database, unless a previous run left both of them running.
+        /// Starts the fake OCI service and the database, unless both of them are already running.
         /// </summary>
+        /// <remarks>
+        /// Only a container of the harness's own (one that carries <see cref="EnvironmentLabelKey" />) is ever removed to
+        /// make room for a new one. If a container the harness did not create is in the way, because the pair is not
+        /// running, this throws before anything is touched.
+        /// </remarks>
         /// <returns><see langword="true" /> if the containers were started, <see langword="false" /> if they were already running.</returns>
+        /// <exception cref="InvalidOperationException">A container that the harness did not create exists, and the pair is not running.</exception>
         private static async Task<bool> StartContainersAsync( IntegrationTestAiQuerySettings settings, EssbaseContainerProfile profile, IMessageSink sink, CancellationToken cancellationToken )
         {
             var host = GetInferenceHost(settings);
@@ -212,7 +249,8 @@ namespace EssSharp.Integration.Setup
             var database    = all.FirstOrDefault(container => container?.Names?.Any(name => string.Equals(_databaseName, name?.Trim('/'), StringComparison.OrdinalIgnoreCase)) is true);
 
             // The two containers are a pair: the database trusts the certificate authority whose certificate the fake
-            // service presents. If both are still running, a previous run made that pair, and it can be used as it is.
+            // service presents. If both are running, somebody made that pair, and it can be used as it is. It is not this
+            // run's to remove, whoever started it: only the containers this run creates are removed when it ends.
             if ( IsRunning(fakeService) && IsRunning(database) )
             {
                 _databaseContainerId = database.ID;
@@ -220,13 +258,31 @@ namespace EssSharp.Integration.Setup
                 return false;
             }
 
-            // Otherwise start again. A container left behind without its partner has no matching certificates.
-            foreach ( var stray in new[] { fakeService, database }.Where(container => container is not null) )
+            // Otherwise start again. A container left behind without its partner has no matching certificates, but it is
+            // only the harness's to remove if the harness made it. Check them all before removing any.
+            var strays  = new[] { fakeService, database }.Where(container => container is not null).ToList();
+            var foreign = strays.Where(container => !IsHarnessContainer(container)).ToList();
+
+            if ( foreign.Count > 0 )
+            {
+                // Say what each of the two containers is, including one that does not exist, so that a lone container does
+                // not read as a contradiction.
+                var states = string.Join(", ", new[] { (Name: _fakeServiceName, Container: fakeService), (Name: _databaseName, Container: database) }.Select(item => $@"'{item.Name}' ({item.Container?.State ?? "missing"})"));
+                var names  = string.Join(" and ", foreign.Select(container => $@"'{container.Names?.FirstOrDefault()?.Trim('/')}'"));
+                var verb   = foreign.Count == 1 ? "was" : "were";
+
+                throw new InvalidOperationException(
+                    $@"The AI query containers are not both running: {states}. " +
+                    $@"{names} {verb} not created by the test harness, and the harness will not remove or start containers it did not create. " +
+                    $@"Start them yourself so that both are running (for example with 'essbase-ai start'), or remove them, or set AiQuery:Mode to External so that the harness leaves the AI environment to you.");
+            }
+
+            foreach ( var stray in strays )
                 await client.Containers.RemoveContainerAsync(stray.ID, new ContainerRemoveParameters() { Force = true }, cancellationToken);
 
             // The fake service answers to the OCI host name on a network of its own, so that it cannot be confused with
             // the fake service of another AI environment on the Essbase container's network.
-            await EnsureNetworkAsync(client, _networkName, cancellationToken);
+            _createdNetworkId ??= await EnsureNetworkAsync(client, _networkName, cancellationToken);
 
             using var authority = TestCertificateAuthority.Create("EssSharp integration test CA");
 
@@ -236,6 +292,7 @@ namespace EssSharp.Integration.Setup
             // process exits, even if the run never reached its own cleanup.
             var fakeServiceContainer = new ContainerBuilder(settings.FakeServiceImage)
                 .WithName(_fakeServiceName)
+                .WithLabel(EnvironmentLabelKey, EnvironmentLabelValue)
                 .WithNetwork(_networkName)
                 .WithNetworkAliases(host)
                 .WithCleanUp(!_keep)
@@ -248,6 +305,7 @@ namespace EssSharp.Integration.Setup
 
             var databaseContainer = new ContainerBuilder(settings.DatabaseImage)
                 .WithName(_databaseName)
+                .WithLabel(EnvironmentLabelKey, EnvironmentLabelValue)
                 .WithNetwork(profile.Network)
                 .WithNetwork(_networkName)
                 .WithCleanUp(!_keep)
@@ -261,7 +319,16 @@ namespace EssSharp.Integration.Setup
 
             Log(sink, $@"Starting the AI query containers '{_fakeServiceName}' (as {host}) and '{_databaseName}' from '{settings.DatabaseImage}'.");
 
-            await Task.WhenAll(fakeServiceContainer.StartAsync(cancellationToken), databaseContainer.StartAsync(cancellationToken));
+            try
+            {
+                await Task.WhenAll(fakeServiceContainer.StartAsync(cancellationToken), databaseContainer.StartAsync(cancellationToken));
+            }
+            finally
+            {
+                // These are this run's to remove, even if one of them did not become ready.
+                RecordCreated(fakeServiceContainer);
+                RecordCreated(databaseContainer);
+            }
 
             _databaseContainerId = databaseContainer.Id;
 
@@ -272,50 +339,104 @@ namespace EssSharp.Integration.Setup
         /// Creates the docker network the fake service and the database share, unless it already exists.
         /// </summary>
         /// <remarks>
-        /// Unless the environment is to be kept, the network carries the labels the test framework's cleanup looks for, so
-        /// that it is removed with the containers if the run is stopped before it can remove them itself.
+        /// The network carries the harness's label. Unless the environment is to be kept, it also carries the labels the
+        /// test framework's cleanup looks for, so that it is removed with the containers if the run is stopped before it
+        /// can remove them itself.
         /// </remarks>
-        private static async Task EnsureNetworkAsync( Docker.DotNet.DockerClient client, string name, CancellationToken cancellationToken )
+        /// <returns>The ID of the network if it was created, <see langword="null" /> if it was already there and is not this run's to remove.</returns>
+        private static async Task<string> EnsureNetworkAsync( Docker.DotNet.DockerClient client, string name, CancellationToken cancellationToken )
         {
             var networks = await client.Networks.ListNetworksAsync(new NetworksListParameters() { Filters = new Dictionary<string, IDictionary<string, bool>>() { ["name"] = new Dictionary<string, bool>() { [name] = true } } }, cancellationToken);
 
             if ( networks.Any(network => string.Equals(network.Name, name, StringComparison.OrdinalIgnoreCase)) )
-                return;
+                return null;
 
-            await client.Networks.CreateNetworkAsync(new NetworksCreateParameters()
+            var labels = new Dictionary<string, string>() { [EnvironmentLabelKey] = EnvironmentLabelValue };
+
+            if ( !_keep )
+            {
+                labels["org.testcontainers"]            = "true";
+                labels["org.testcontainers.session-id"] = ResourceReaper.DefaultSessionId.ToString("D");
+            }
+
+            var created = await client.Networks.CreateNetworkAsync(new NetworksCreateParameters()
             {
                 Name   = name,
                 Driver = "bridge",
-                Labels = _keep ? null : new Dictionary<string, string>()
-                {
-                    ["org.testcontainers"]            = "true",
-                    ["org.testcontainers.session-id"] = ResourceReaper.DefaultSessionId.ToString("D")
-                }
+                Labels = labels
             }, cancellationToken);
+
+            return created.ID;
         }
 
         /// <summary>
-        /// Removes the AI query containers, whoever started them, and then their network.
+        /// Removes the containers this run created, and then the network if this run created it.
         /// </summary>
+        /// <remarks>
+        /// They are removed by ID, never by name: a container or network of the same name that somebody else started, or
+        /// that was already there when the run began, is not this run's to remove.
+        /// </remarks>
         private static async Task RemoveContainersAsync()
         {
+            if ( _createdContainerIds.Count == 0 && _createdNetworkId is null )
+                return;
+
             using var cancellation = new CancellationTokenSource(TimeSpan.FromMinutes(2));
             using var client       = IntegrationTestFactory.GetDockerClient();
 
-            var all = await client.Containers.ListContainersAsync(new ContainersListParameters() { All = true }, cancellation.Token);
+            foreach ( var id in _createdContainerIds )
+            {
+                try
+                {
+                    await client.Containers.RemoveContainerAsync(id, new ContainerRemoveParameters() { Force = true }, cancellation.Token);
+                }
+                catch ( Docker.DotNet.DockerContainerNotFoundException )
+                {
+                    // A container that is already gone, removed by the test framework's cleanup, needs no removing.
+                }
+                catch ( Exception error )
+                {
+                    // The other containers and the network are still this run's to remove.
+                    Log(_sink, $@"Unable to remove the AI query container '{id}': {error.Message}");
+                }
+            }
 
-            foreach ( var container in all.Where(container => container?.Names?.Any(name => string.Equals(_fakeServiceName, name?.Trim('/'), StringComparison.OrdinalIgnoreCase) || string.Equals(_databaseName, name?.Trim('/'), StringComparison.OrdinalIgnoreCase)) is true) )
-                await client.Containers.RemoveContainerAsync(container.ID, new ContainerRemoveParameters() { Force = true }, cancellation.Token);
+            if ( _createdNetworkId is null )
+                return;
 
             try
             {
-                await client.Networks.DeleteNetworkAsync(_networkName, cancellation.Token);
+                await client.Networks.DeleteNetworkAsync(_createdNetworkId, cancellation.Token);
             }
             catch ( Exception )
             {
                 // A network that is already gone needs no removing.
             }
         }
+
+        /// <summary>
+        /// Remembers that this run created the container, so that it is removed when the run ends.
+        /// </summary>
+        /// <param name="container" />
+        private static void RecordCreated( IContainer container )
+        {
+            try
+            {
+                _createdContainerIds.Add(container.Id);
+            }
+            catch ( InvalidOperationException )
+            {
+                // The container was never created, so there is nothing to remove.
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the container carries the harness's label, which means that an earlier run of the harness
+        /// created it.
+        /// </summary>
+        /// <param name="container" />
+        private static bool IsHarnessContainer( ContainerListResponse container ) =>
+            container?.Labels is { } labels && labels.TryGetValue(EnvironmentLabelKey, out var value) && string.Equals(value, EnvironmentLabelValue, StringComparison.Ordinal);
 
         /// <summary>
         /// Returns whether the container exists and is running.
@@ -383,7 +504,8 @@ namespace EssSharp.Integration.Setup
 
             using var http = CreateEssbaseClient();
 
-            // An application that already has an AI connection was set up by an earlier run.
+            // An application that already has an AI connection was set up by somebody else, either an earlier run or a
+            // persistent environment.
             var associated = await SendAsync(http, HttpMethod.Get, $@"ai/connection?application={Uri.EscapeDataString(application)}", body: null, cancellationToken);
 
             if ( associated.Status == HttpStatusCode.OK && associated.Body.Trim() is { Length: > 0 } associatedName )
@@ -395,10 +517,9 @@ namespace EssSharp.Integration.Setup
                     throw new InvalidOperationException(
                         $@"'{application}' still uses the AI connection '{associatedName}', which an earlier run set up against AI query containers that no longer exist, so it points at a database that has been rebuilt empty. " +
                         $@"Remove the AI connection (dissociate it from '{application}' and delete it; restart Essbase first if it reports 'UCP-29: Failed to get a connection') or use a new Essbase container, then run the tests again. " +
-                        $@"A run removes the AI connection itself when it ends, so this only happens if an earlier run was stopped before it could.");
+                        $@"A run removes the AI connection it created itself when it ends, so this only happens if an earlier run was stopped before it could.");
 
-                _ownsEssbaseConfiguration = string.Equals(associatedName.Trim(), AiConnectionName, StringComparison.OrdinalIgnoreCase);
-
+                // An association somebody else made - an earlier run, or a persistent environment - is not this run's to undo.
                 Log(sink, $@"'{application}' already uses the AI connection '{associatedName}'.");
                 return;
             }
@@ -407,7 +528,7 @@ namespace EssSharp.Integration.Setup
             Require((await SendAsync(http, HttpMethod.Get, $@"applications/{Uri.EscapeDataString(application)}", body: null, cancellationToken)),
                 $@"Find the '{application}' application. The AI query tests expect the tests that create the sample applications to have run first");
 
-            // From here on, what is created is this harness's to remove, even if building stops half way.
+            // From here on, what is created is this run's to remove, even if building stops half way.
             _ownsEssbaseConfiguration = true;
 
             // Essbase connects to the database by its container name, over the shared docker network.
@@ -427,6 +548,8 @@ namespace EssSharp.Integration.Setup
                     ["user"]        = DatabaseUser,
                     ["password"]    = DatabaseUserPassword,
                 }, cancellationToken)), "Create the AI database connection");
+
+                _createdDatabaseConnection = true;
             }
 
             Require((await SendAsync(http, HttpMethod.Post, $@"connections/{DatabaseConnectionName}/actions/test", body: null, cancellationToken)), "Connect to the AI database");
@@ -479,6 +602,8 @@ namespace EssSharp.Integration.Setup
                     ["transfer_timeout"]   = "3000",
                     ["oci_apiformat"]      = "GENERIC",
                 }, cancellationToken)), "Create the AI connection");
+
+                _createdAiConnection = true;
             }
 
             try
@@ -525,7 +650,7 @@ namespace EssSharp.Integration.Setup
 
         /// <summary>
         /// Takes the AI connection out of Essbase: dissociates it from the application, then deletes the AI connection and
-        /// the database connection it uses.
+        /// the database connection it uses, each only if this run created it.
         /// </summary>
         /// <remarks>
         /// Best effort. Dissociating starts a job in Essbase that deletes the outline's vectors from the database, so
@@ -553,8 +678,11 @@ namespace EssSharp.Integration.Setup
                 await Task.Delay(TimeSpan.FromSeconds(2), cancellation.Token);
             }
 
-            await SendAsync(http, HttpMethod.Delete, $@"connections/{AiConnectionName}", body: null, cancellation.Token);
-            await SendAsync(http, HttpMethod.Delete, $@"connections/{DatabaseConnectionName}", body: null, cancellation.Token);
+            if ( _createdAiConnection )
+                await SendAsync(http, HttpMethod.Delete, $@"connections/{AiConnectionName}", body: null, cancellation.Token);
+
+            if ( _createdDatabaseConnection )
+                await SendAsync(http, HttpMethod.Delete, $@"connections/{DatabaseConnectionName}", body: null, cancellation.Token);
 
             Log(_sink, "The AI connection has been removed from Essbase.");
         }
