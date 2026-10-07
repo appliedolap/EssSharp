@@ -1143,21 +1143,32 @@ namespace EssSharp.Integration
             // Build a new factory that creates connections with a logger.
             var factory = new EssServerFactory() { Logger = new StringLogger(ref builder) };
 
-            // Get the server base url, i.e., http://localhost:9000/essbase.
-            var serverBaseUrl = GetEssConnection().Server.TrimEnd('/');
+            // Get the connection, and from it the server base url, i.e., http://localhost:9000/essbase.
+            var connection    = GetEssConnection();
+            var serverBaseUrl = connection.Server.TrimEnd('/');
 
-            // Get an unconnected server with the configured factory 
+            // Get an unconnected server with the configured factory
             var server = GetEssServer(factory: factory);
 
             await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
+            var logged = builder.ToString();
+            var lines  = logged.Split(Environment.NewLine);
+
             var requestSummary  = $@"# GET {serverBaseUrl}/rest/v1/applications/Sample HTTP/1.1";
 
-            Assert.Equal(requestSummary, builder.ToString().Split(Environment.NewLine)[0]);
+            Assert.Equal(requestSummary, lines[0]);
+
+            // The request records that a credential was sent, with the credential itself masked.
+            Assert.Contains(lines, line => line.StartsWith(@"# Authorization:") && line.Contains(@"Basic ******** ("));
+
+            var credential = Convert.ToBase64String(Encoding.UTF8.GetBytes($@"{connection.Username}:{connection.Password}"));
+
+            Assert.DoesNotContain(credential, logged);
 
             var responseSummary = @"# HTTP/1.1 200 OK";
 
-            Assert.Equal(responseSummary, builder.ToString().Split(Environment.NewLine)[2]);
+            Assert.Contains(responseSummary, lines);
         }
 
         [Fact(DisplayName = @"PerformServerFunctionTests - 37 - Essbase_AfterDefaultGrid_CanRefreshGridUseAliases"), Priority(37)]
