@@ -30,6 +30,7 @@ namespace EssSharp
         private static readonly string[] _explanationPropertyNames =
         {
             "explanation",
+            "info",
             "message",
             "response",
             "answer"

@@ -169,8 +169,10 @@ namespace EssSharp.Integration.Setup
 
         /// <summary>
         /// Whether, in <see cref="IntegrationTestAiQueryMode.Managed" /> mode, the environment is left in place when the run
-        /// ends. By default it is removed: the AI connection is taken out of Essbase, then the containers and their
-        /// network are removed. Keeping it makes the next run quicker, because the database and the vectors are already
+        /// ends. By default what the run created is removed: the AI connection it set up in Essbase is taken out, then
+        /// the containers and the network it created are removed. Containers, a network and an AI connection that were
+        /// already there, for example started by a separate tool, are adopted and never removed, whatever this setting
+        /// says. Keeping the environment makes the next run quicker, because the database and the vectors are already
         /// there, but it leaves a database running and an AI connection in Essbase until they are removed by hand.
         /// </summary>
         public bool KeepEnvironment { get; set; }
