@@ -5,15 +5,28 @@ using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
+using EssSharp.Integration.Setup;
+
 using RestSharp;
 using Xunit;
 
-namespace EssSharp.Test
+namespace EssSharp.Integration
 {
-    /// <summary>Tests for request and response header formatting.</summary>
+    /// <summary>
+    /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
+    /// </summary>
+    [CollectionDefinition(nameof(HeaderFormattingTests), DisableParallelization = true), CollectionPriority(0)]
+    public class HeaderFormattingTestsCollection : ICollectionFixture<CollectionFixture> { }
+
+    /// <summary>
+    /// Offline tests for the masking of credential-bearing headers in logged requests and responses. These live here
+    /// rather than in EssSharp.Test, which the generator deletes when it regenerates. They require no Essbase server
+    /// or container.
+    /// </summary>
+    [Collection(nameof(HeaderFormattingTests)), Trait("type", "client")]
     public class HeaderFormattingTests
     {
-        [Fact]
+        [Fact(DisplayName = "HeaderFormattingTests - 01 - GetFormattedHeaders_MasksSensitiveValuesAndPreservesRepeatedHeaders"), Priority(01)]
         public void GetFormattedHeaders_MasksSensitiveValuesAndPreservesRepeatedHeaders()
         {
             var headers = new List<HeaderParameter>
@@ -65,7 +78,7 @@ namespace EssSharp.Test
             Assert.DoesNotContain(@"Domain=second", formatted);
         }
 
-        [Fact]
+        [Fact(DisplayName = "HeaderFormattingTests - 02 - RequestAndResponseMessages_MaskHeadersWithoutChangingBodies"), Priority(02)]
         public void RequestAndResponseMessages_MaskHeadersWithoutChangingBodies()
         {
             var extensions = typeof(EssServer).Assembly.GetType(@"EssSharp.Extensions");
