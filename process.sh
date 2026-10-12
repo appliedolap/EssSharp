@@ -11,14 +11,17 @@ pushd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" >/dev/null 2>&1
 if [ ! -z "$1" ]; then
   ESSBASE_SWAGGER_VERSION=$1
 elif [ -z "${ESSBASE_SWAGGER_VERSION}" ]; then
-  ESSBASE_SWAGGER_VERSION=$(find ./versions -mindepth 1 -maxdepth 1 -name '*' -type d -exec basename {} \; | sort | tail -1)
+  ESSBASE_SWAGGER_VERSION=$(find ./versions -mindepth 1 -maxdepth 1 -name '*' -type d -exec basename {} \; | sort -V | tail -1)
 fi
 
-# if the resolved path to the swagger.json does not exist, bail.
-[ -f "./versions/$ESSBASE_SWAGGER_VERSION/swagger.json" ] || { echo "versions/$ESSBASE_SWAGGER_VERSION/swagger.json does not exist, exiting."; exit 1; }
+# the specification is swagger.json for Swagger 2 (Essbase 21) and openapi.json for OpenAPI 3 (Essbase 26 and later).
+# if neither exists in the resolved version directory, bail.
+ESSBASE_SPEC="./versions/$ESSBASE_SWAGGER_VERSION/swagger.json"
+[ -f "$ESSBASE_SPEC" ] || ESSBASE_SPEC="./versions/$ESSBASE_SWAGGER_VERSION/openapi.json"
+[ -f "$ESSBASE_SPEC" ] || { echo "versions/$ESSBASE_SWAGGER_VERSION/swagger.json or openapi.json does not exist, exiting."; exit 1; }
 
-# format the located swagger.json file and save it as formatted.json.
-jq . "./versions/$ESSBASE_SWAGGER_VERSION/swagger.json" > formatted.json || { echo "Unable to save formatted.json"; exit 1; }
+# format the located specification and save it as formatted.json.
+jq . "$ESSBASE_SPEC" > formatted.json || { echo "Unable to save formatted.json"; exit 1; }
 
 # remove any prior temp.json/json.tmp files.
 [ -e temp.json ] && ( rm temp.json >/dev/null 2>&1 || { echo "Unable to delete temp.json, exiting."; exit 1; } )
@@ -26,6 +29,14 @@ jq . "./versions/$ESSBASE_SWAGGER_VERSION/swagger.json" > formatted.json || { ec
 
 # copy the formatted.json to temp.json
 cp formatted.json temp.json >/dev/null 2>&1 || { echo "Unable to copy formatted.json to temp.json, exiting."; exit 1; }
+
+# an OpenAPI 3 document (Essbase 26 and later) is corrected by process-openapi3.jq rather than by the Swagger 2
+# corrections below, which only apply to Swagger 2 documents (Essbase 21), so process it and stop here.
+if [ -n "$(jq -r '.openapi // empty' temp.json)" ]; then
+  jq -f process-openapi3.jq temp.json > json.tmp && mv json.tmp temp.json || { echo "Unable to process the OpenAPI 3 document, exiting."; rm -f json.tmp; exit 1; }
+  cp temp.json processed.json || { echo "Unable to save processed.json, exiting."; exit 1; }
+  exit 0
+fi
 
 ##### paths ####
 

@@ -347,8 +347,10 @@ namespace {{packageName}}.Client
                     var contentType = "application/octet-stream";
                     if (options.HeaderParameters != null)
                     {
-                        var contentTypes = options.HeaderParameters["Content-Type"];
-                        contentType = contentTypes[0];
+                        // Applied OLAP Modification
+                        // There is no Content-Type header when the specification documents no usable media type.
+                        if (options.HeaderParameters.TryGetValue("Content-Type", out var contentTypes))
+                            contentType = contentTypes[0];
                     }
 
                     var bytes = ClientUtils.ReadAsBytes(stream);
@@ -358,7 +360,10 @@ namespace {{packageName}}.Client
                 {
                     if (options.HeaderParameters != null)
                     {
-                        var contentTypes = options.HeaderParameters["Content-Type"];
+                        // Applied OLAP Modification
+                        // Essbase documents many JSON request bodies as the wildcard "*/*", which the generator omits, so
+                        // there is no Content-Type header for them. A body with no Content-Type is JSON.
+                        options.HeaderParameters.TryGetValue("Content-Type", out var contentTypes);
                         if (contentTypes == null || contentTypes.Any(header => header.Contains("application/json")))
                         {
                             request.RequestFormat = DataFormat.Json;

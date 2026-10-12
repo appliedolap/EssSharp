@@ -25,8 +25,11 @@ The document was compared with the spec served by an Essbase 26.1.0.0.0 (build 2
 
 - The 396 operations present in both are structurally identical: same parameters, request body content
   types, and response codes.
-- The published document adds tags and the HTML descriptions, and 18 operations the compared server does not
-  serve (for example `/cubedesigner/*`).
+- The 256 schemas present in both are structurally identical (descriptions aside) except one value: the
+  published `ZoomIn.mode` enumeration says `descendants`, while the server serves, and expects, `descendents`.
+  `process-openapi3.jq` restores the server's spelling.
+- The published document adds tags and the HTML descriptions, 18 operations the compared server does not
+  serve (for example `/cubedesigner/*`), and 6 request schemas for them.
 - The server serves 92 operations that Oracle does not publish (for example `/backup/*`, outline `edit` and
   `qedit`, `/ess-mcp`, `/amw`, `/odbc`). They are untagged, so a generator would put them in `DefaultApi`.
   EssSharp deliberately does not wrap them.

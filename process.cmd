@@ -16,11 +16,14 @@ if not [%1]==[] (
   popd versions
 )
 
-:: if the given or found swagger.json file does not exist, bail.
-if not exist "versions\%ESSBASE_SWAGGER_VERSION%\swagger.json" echo %~dp0\versions\%ESSBASE_SWAGGER_VERSION%\swagger.json does not exist, exiting. & exit /B 1
+:: the specification is swagger.json for Swagger 2 (Essbase 21) and openapi.json for OpenAPI 3 (Essbase 26 and later).
+:: if neither exists in the given or found version folder, bail.
+set "ESSBASE_SPEC=versions\%ESSBASE_SWAGGER_VERSION%\swagger.json"
+if not exist "%ESSBASE_SPEC%" set "ESSBASE_SPEC=versions\%ESSBASE_SWAGGER_VERSION%\openapi.json"
+if not exist "%ESSBASE_SPEC%" echo %~dp0%ESSBASE_SPEC% does not exist, exiting. & exit /B 1
 
-:: format the given swagger.json file and save it as formatted.json.
-jq . "versions\%ESSBASE_SWAGGER_VERSION%\swagger.json" > formatted.json || ( echo "Unable to save %~dp0\formatted.json" & exit /B 1 )
+:: format the located specification and save it as formatted.json.
+jq . "%ESSBASE_SPEC%" > formatted.json || ( echo "Unable to save %~dp0\formatted.json" & exit /B 1 )
 
 :: remove any prior temp.json/json.tmp files.
 if exist temp.json del /f temp.json >nul 2>&1 || ( echo Unable to delete temp.json, exiting. & exit /B 1 )
@@ -28,6 +31,17 @@ if exist json.tmp  del /f json.tmp  >nul 2>&1 || ( echo Unable to delete json.tm
 
 :: copy the formatted.json to temp.json
 copy /Y formatted.json temp.json >nul 2>&1 || ( echo Unable to copy formatted.json to temp.json, exiting. & exit /B 1)
+
+:: an OpenAPI 3 document (Essbase 26 and later) is corrected by process-openapi3.jq rather than by the Swagger 2
+:: corrections below, which only apply to Swagger 2 documents (Essbase 21), so process it and stop here.
+set "ESSBASE_OPENAPI="
+for /F "usebackq delims=" %%v in (`jq -r ".openapi // empty" temp.json`) do set "ESSBASE_OPENAPI=%%v"
+if defined ESSBASE_OPENAPI (
+  jq -f process-openapi3.jq temp.json > json.tmp || ( echo Unable to process the OpenAPI 3 document, exiting. & del /f json.tmp >nul 2>&1 & exit /B 1 )
+  move /Y json.tmp temp.json >nul 2>&1 || ( echo Unable to move json.tmp to temp.json, processing failed. & exit /B 1 )
+  copy /Y temp.json processed.json >nul 2>&1 || ( echo Unable to save processed.json, exiting. & exit /B 1 )
+  exit /B 0
+)
 
 :::: paths ::::
 

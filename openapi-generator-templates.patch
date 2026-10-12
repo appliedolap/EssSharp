@@ -1,5 +1,5 @@
 diff --git a/templates/ApiClient.mustache b/templates/ApiClient.mustache
-index 3e77467..5ee6836 100644
+index 3e77467..070627d 100644
 --- a/templates/ApiClient.mustache
 +++ b/templates/ApiClient.mustache
 @@ -30,6 +30,8 @@ using Polly;
@@ -40,7 +40,32 @@ index 3e77467..5ee6836 100644
  
          /// <summary>
          /// Initializes a new instance of the <see cref="ApiClient" />, defaulting to the global configurations' base url.
-@@ -392,6 +402,15 @@ namespace {{packageName}}.Client
+@@ -337,8 +347,10 @@ namespace {{packageName}}.Client
+                     var contentType = "application/octet-stream";
+                     if (options.HeaderParameters != null)
+                     {
+-                        var contentTypes = options.HeaderParameters["Content-Type"];
+-                        contentType = contentTypes[0];
++                        // Applied OLAP Modification
++                        // There is no Content-Type header when the specification documents no usable media type.
++                        if (options.HeaderParameters.TryGetValue("Content-Type", out var contentTypes))
++                            contentType = contentTypes[0];
+                     }
+ 
+                     var bytes = ClientUtils.ReadAsBytes(stream);
+@@ -348,7 +360,10 @@ namespace {{packageName}}.Client
+                 {
+                     if (options.HeaderParameters != null)
+                     {
+-                        var contentTypes = options.HeaderParameters["Content-Type"];
++                        // Applied OLAP Modification
++                        // Essbase documents many JSON request bodies as the wildcard "*/*", which the generator omits, so
++                        // there is no Content-Type header for them. A body with no Content-Type is JSON.
++                        options.HeaderParameters.TryGetValue("Content-Type", out var contentTypes);
+                         if (contentTypes == null || contentTypes.Any(header => header.Contains("application/json")))
+                         {
+                             request.RequestFormat = DataFormat.Json;
+@@ -392,6 +407,15 @@ namespace {{packageName}}.Client
                  }
              }
  
@@ -56,7 +81,7 @@ index 3e77467..5ee6836 100644
              return request;
          }
  
-@@ -446,6 +465,7 @@ namespace {{packageName}}.Client
+@@ -446,6 +470,7 @@ namespace {{packageName}}.Client
              return transformed;
          }
  
@@ -64,7 +89,7 @@ index 3e77467..5ee6836 100644
          /// <summary>
          /// Executes the HTTP request for the current service.
          /// Based on functions received it can be async or sync.
-@@ -456,8 +476,9 @@ namespace {{packageName}}.Client
+@@ -456,8 +481,9 @@ namespace {{packageName}}.Client
          /// <param name="options">The RestSharp options object</param>
          /// <param name="configuration">A per-request configuration object.
          /// It is assumed that any merge with GlobalConfiguration has been done before calling this method.</param>
@@ -75,7 +100,7 @@ index 3e77467..5ee6836 100644
          {
              var baseUrl = configuration.GetOperationServerUrl(options.Operation, options.OperationIndex) ?? _baseUrl;
              var clientOptions = new RestClientOptions(baseUrl)
-@@ -491,7 +512,19 @@ namespace {{packageName}}.Client
+@@ -491,7 +517,19 @@ namespace {{packageName}}.Client
              using (RestClient client = new RestClient(clientOptions,
                  configureSerialization: serializerConfig => serializerConfig.UseSerializer(() => new CustomJsonCodec(SerializerSettings, configuration))))
              {
@@ -96,7 +121,7 @@ index 3e77467..5ee6836 100644
  
                  RestResponse<T> response = await getResponse(client).ConfigureAwait(false);
  
-@@ -519,8 +552,16 @@ namespace {{packageName}}.Client
+@@ -519,8 +557,16 @@ namespace {{packageName}}.Client
                  {
                      response.Data = (T)(object)response.Content;
                  }
@@ -114,7 +139,7 @@ index 3e77467..5ee6836 100644
  
                  var result = ToApiResponse(response);
                  if (response.ErrorMessage != null)
-@@ -555,12 +596,19 @@ namespace {{packageName}}.Client
+@@ -555,12 +601,19 @@ namespace {{packageName}}.Client
                      }
                  }
                  return result;
@@ -135,7 +160,7 @@ index 3e77467..5ee6836 100644
              {
                  return await client.Deserialize<T>(policyResult.Result, cancellationToken).ConfigureAwait(false);
              }
-@@ -568,7 +616,10 @@ namespace {{packageName}}.Client
+@@ -568,7 +621,10 @@ namespace {{packageName}}.Client
              {
                  return new RestResponse<T>(request)
                  {
@@ -147,7 +172,7 @@ index 3e77467..5ee6836 100644
                  };
              }
          }
-@@ -594,7 +645,9 @@ namespace {{packageName}}.Client
+@@ -594,7 +650,9 @@ namespace {{packageName}}.Client
                  if (RetryConfiguration.RetryPolicy != null)
                  {
                      var policy = RetryConfiguration.RetryPolicy;
@@ -158,7 +183,7 @@ index 3e77467..5ee6836 100644
                      return DeserializeRestResponseFromPolicyAsync<T>(client, request, policyResult);
                  }
                  else
-@@ -620,7 +673,9 @@ namespace {{packageName}}.Client
+@@ -620,7 +678,9 @@ namespace {{packageName}}.Client
                  if (RetryConfiguration.AsyncRetryPolicy != null)
                  {
                      var policy = RetryConfiguration.AsyncRetryPolicy;
@@ -169,7 +194,7 @@ index 3e77467..5ee6836 100644
                      return await DeserializeRestResponseFromPolicyAsync<T>(client, request, policyResult, cancellationToken).ConfigureAwait(false);
                  }
                  else
-@@ -632,7 +687,8 @@ namespace {{packageName}}.Client
+@@ -632,7 +692,8 @@ namespace {{packageName}}.Client
                  {{/supportsRetry}}
              };
  
