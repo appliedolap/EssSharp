@@ -4,16 +4,16 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**CentraliazedurlGetSingleURLList**](CentralizedURLApi.md#centraliazedurlgetsingleurllist) | **GET** /centralizedurl | Get Essbase Server list |
-| [**CentralizedUrlAddHostSingleURL**](CentralizedURLApi.md#centralizedurladdhostsingleurl) | **POST** /centralizedurl | Add Essbase server to Centralized URL List  |
-| [**CentralizedUrlDeletSingleURLProperties**](CentralizedURLApi.md#centralizedurldeletsingleurlproperties) | **DELETE** /centralizedurl | Delete Essbase server from Centralized URL  |
-| [**CentralizedUrlUpdateSingleURLProperties**](CentralizedURLApi.md#centralizedurlupdatesingleurlproperties) | **PUT** /centralizedurl | Update Essbase URL of Centralized URL List |
+| [**CentraliazedurlGetSingleURLList**](CentralizedURLApi.md#centraliazedurlgetsingleurllist) | **GET** /centralizedurl | Get Essbase Server List |
+| [**CentralizedUrlAddHostSingleURL**](CentralizedURLApi.md#centralizedurladdhostsingleurl) | **POST** /centralizedurl | Add Essbase Server to Centralized URL List |
+| [**CentralizedUrlDeletSingleURLProperties**](CentralizedURLApi.md#centralizedurldeletsingleurlproperties) | **DELETE** /centralizedurl | Delete Essbase Server URL from Centralized URL List |
+| [**CentralizedUrlUpdateSingleURLProperties**](CentralizedURLApi.md#centralizedurlupdatesingleurlproperties) | **PUT** /centralizedurl | Update Essbase Server in Centralized URL List |
 
 <a id="centraliazedurlgetsingleurllist"></a>
 # **CentraliazedurlGetSingleURLList**
 > List&lt;CentralizedURLRes&gt; CentraliazedurlGetSingleURLList (string filter = null)
 
-Get Essbase Server list
+Get Essbase Server List
 
 <p> Returns the list of Essbase servers configured to access through centralized URL.</p>
 
@@ -44,7 +44,7 @@ namespace Example
 
             try
             {
-                // Get Essbase Server list
+                // Get Essbase Server List
                 List<CentralizedURLRes> result = apiInstance.CentraliazedurlGetSingleURLList(filter);
                 Debug.WriteLine(result);
             }
@@ -65,7 +65,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Essbase Server list
+    // Get Essbase Server List
     ApiResponse<List<CentralizedURLRes>> response = apiInstance.CentraliazedurlGetSingleURLListWithHttpInfo(filter);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -102,19 +102,19 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Centralized URL List retrived sucessfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrive the centralized url list.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Centralized URL list retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrieve the centralized URL list.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a id="centralizedurladdhostsingleurl"></a>
 # **CentralizedUrlAddHostSingleURL**
-> List&lt;CentralizedURL&gt; CentralizedUrlAddHostSingleURL (CentralizedURL body)
+> void CentralizedUrlAddHostSingleURL (CentralizedURL body)
 
-Add Essbase server to Centralized URL List 
+Add Essbase Server to Centralized URL List
 
-<p>Add new alias and agent-url pair to centralized url list
+<p>Adds new alias and agent-url pair to centralized url list
 
 ### Example
 ```csharp
@@ -143,9 +143,8 @@ namespace Example
 
             try
             {
-                // Add Essbase server to Centralized URL List 
-                List<CentralizedURL> result = apiInstance.CentralizedUrlAddHostSingleURL(body);
-                Debug.WriteLine(result);
+                // Add Essbase Server to Centralized URL List
+                apiInstance.CentralizedUrlAddHostSingleURL(body);
             }
             catch (ApiException  e)
             {
@@ -164,11 +163,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Add Essbase server to Centralized URL List 
-    ApiResponse<List<CentralizedURL>> response = apiInstance.CentralizedUrlAddHostSingleURLWithHttpInfo(body);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
+    // Add Essbase Server to Centralized URL List
+    apiInstance.CentralizedUrlAddHostSingleURLWithHttpInfo(body);
 }
 catch (ApiException e)
 {
@@ -186,7 +182,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;CentralizedURL&gt;**](CentralizedURL.md)
+void (empty response body)
 
 ### Authorization
 
@@ -195,14 +191,13 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
+ - **Accept**: Not defined
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | successful operation |  -  |
-| **204** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Added alias and agent url pair sucessfully into the centralized url list.&lt;/p&gt; |  -  |
+| **204** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Added alias and agent URL pair successfully to the centralized URL list.&lt;/p&gt; |  -  |
 | **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to add new entry to Centralized URL list. The JSON may be incorrect, or the given alias name may already exist or url specified is not an agent url.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
@@ -210,11 +205,11 @@ catch (ApiException e)
 
 <a id="centralizedurldeletsingleurlproperties"></a>
 # **CentralizedUrlDeletSingleURLProperties**
-> List&lt;CentralizedURL&gt; CentralizedUrlDeletSingleURLProperties (string aliasName = null)
+> void CentralizedUrlDeletSingleURLProperties (string aliasName = null)
 
-Delete Essbase server from Centralized URL 
+Delete Essbase Server URL from Centralized URL List
 
-<p> Removes the single entry from Centralized URL List.Provide the URL encoded String value as input(aliasName)</p>
+<p>Removes the single entry from Centralized URL List. You need to provide the URL encoded string value as input(aliasName).</p>
 
 ### Example
 ```csharp
@@ -243,9 +238,8 @@ namespace Example
 
             try
             {
-                // Delete Essbase server from Centralized URL 
-                List<CentralizedURL> result = apiInstance.CentralizedUrlDeletSingleURLProperties(aliasName);
-                Debug.WriteLine(result);
+                // Delete Essbase Server URL from Centralized URL List
+                apiInstance.CentralizedUrlDeletSingleURLProperties(aliasName);
             }
             catch (ApiException  e)
             {
@@ -264,11 +258,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete Essbase server from Centralized URL 
-    ApiResponse<List<CentralizedURL>> response = apiInstance.CentralizedUrlDeletSingleURLPropertiesWithHttpInfo(aliasName);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
+    // Delete Essbase Server URL from Centralized URL List
+    apiInstance.CentralizedUrlDeletSingleURLPropertiesWithHttpInfo(aliasName);
 }
 catch (ApiException e)
 {
@@ -286,7 +277,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;CentralizedURL&gt;**](CentralizedURL.md)
+void (empty response body)
 
 ### Authorization
 
@@ -295,15 +286,14 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, application/xml
+ - **Accept**: Not defined
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | successful operation |  -  |
-| **204** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Sucessfully removed the entry from the centralized URL list&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to delete entry from centralized url list. Name specified may be incorrect, or not exist.&lt;/p&gt; |  -  |
+| **204** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Successfully removed the entry from the centralized URL list.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to delete entry from centralized url list. Name specified may be incorrect or not exist.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -312,9 +302,9 @@ catch (ApiException e)
 # **CentralizedUrlUpdateSingleURLProperties**
 > CentralizedURL CentralizedUrlUpdateSingleURLProperties (List<CentralizedURL> body)
 
-Update Essbase URL of Centralized URL List
+Update Essbase Server in Centralized URL List
 
-<p>Updates the single/multiple values of Centralized URL list 
+<p>Updates the single/multiple Essbase Server URLs in the Centralized URL list.
 
 ### Example
 ```csharp
@@ -339,11 +329,11 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new CentralizedURLApi(config);
-            var body = new List<CentralizedURL>(); // List<CentralizedURL> | CentralizedURL entry
+            var body = new List<CentralizedURL>(); // List<CentralizedURL> | Centralized URL entry
 
             try
             {
-                // Update Essbase URL of Centralized URL List
+                // Update Essbase Server in Centralized URL List
                 CentralizedURL result = apiInstance.CentralizedUrlUpdateSingleURLProperties(body);
                 Debug.WriteLine(result);
             }
@@ -364,7 +354,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Update Essbase URL of Centralized URL List
+    // Update Essbase Server in Centralized URL List
     ApiResponse<CentralizedURL> response = apiInstance.CentralizedUrlUpdateSingleURLPropertiesWithHttpInfo(body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -382,7 +372,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **body** | [**List&lt;CentralizedURL&gt;**](CentralizedURL.md) | CentralizedURL entry |  |
+| **body** | [**List&lt;CentralizedURL&gt;**](CentralizedURL.md) | Centralized URL entry |  |
 
 ### Return type
 
@@ -401,8 +391,8 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Updated the agent urls successfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to update the entries.The JSON may be incorrect, or provided url are already exist in the list.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Updated the agent URLs successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to update the entries. The JSON may be incorrect or provided url already exist in the list.&lt;/p&gt; |  -  |
 | **500** | &lt;p&gt;Internal Server Error.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -214,7 +214,7 @@ catch (ApiException e)
 
 <a id="propertiesgetproperties"></a>
 # **PropertiesGetProperties**
-> List&lt;PropertyList&gt; PropertiesGetProperties ()
+> PropertyList PropertiesGetProperties ()
 
 Get Server Properties
 
@@ -247,7 +247,7 @@ namespace Example
             try
             {
                 // Get Server Properties
-                List<PropertyList> result = apiInstance.PropertiesGetProperties();
+                PropertyList result = apiInstance.PropertiesGetProperties();
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -268,7 +268,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Server Properties
-    ApiResponse<List<PropertyList>> response = apiInstance.PropertiesGetPropertiesWithHttpInfo();
+    ApiResponse<PropertyList> response = apiInstance.PropertiesGetPropertiesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -285,7 +285,7 @@ catch (ApiException e)
 This endpoint does not need any parameter.
 ### Return type
 
-[**List&lt;PropertyList&gt;**](PropertyList.md)
+[**PropertyList**](PropertyList.md)
 
 ### Authorization
 
@@ -411,7 +411,7 @@ catch (ApiException e)
 
 Update Property Values
 
-<p>Updates Provider Services configuration property values in the Essbase Server, and returns the list of updated properties.</p>
+<p>Updates Provider Services configuration property values in the Essbase Server and returns the list of updated properties.</p>
 
 ### Example
 ```csharp
@@ -511,7 +511,7 @@ catch (ApiException e)
 
 Update Server Property
 
-<p>Updates a Provider Services property in the Essbase Server, and returns the updated property.</p>
+<p>Updates a Provider Services property in the Essbase Server and returns the updated property.</p>
 
 ### Example
 ```csharp

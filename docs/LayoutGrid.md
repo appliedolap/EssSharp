@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Alias** | **string** |  | [optional] 
+**Alias** | **string** | &lt;p&gt;The active alias table for the grid.&lt;/p&gt; | [optional] 
 **Dimensions** | [**List&lt;LayoutDimension&gt;**](LayoutDimension.md) |  | [optional] 
 **Data** | [**LayoutData**](LayoutData.md) |  | [optional] 
 

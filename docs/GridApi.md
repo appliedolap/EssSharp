@@ -43,7 +43,7 @@ namespace Example
             var apiInstance = new GridApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name for grid operation.</p>
             var databaseName = "databaseName_example";  // string | <p>Database/Cube name for grid operation.</p>
-            var svParity = true;  // bool? |  (optional)  (default to true)
+            var svParity = true;  // bool? | <p>Default is true. When <code>repeatMemberLabels</code> is set to false in the Essbase session's grid preferences, repeated headings for column/page orientation on the grid are not preserved after a retrieval in the REST API, whereas they are preserved in the similar Java API operation. If you require preservation of repeated column headings (Java API like behavior), set <code>svParity</code> to false.</p> (optional)  (default to true)
             var body = new GridOperation(); // GridOperation | <p>Grid Operation to be performed.</p> (optional) 
 
             try
@@ -89,7 +89,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name for grid operation.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database/Cube name for grid operation.&lt;/p&gt; |  |
-| **svParity** | **bool?** |  | [optional] [default to true] |
+| **svParity** | **bool?** | &lt;p&gt;Default is true. When &lt;code&gt;repeatMemberLabels&lt;/code&gt; is set to false in the Essbase session&#39;s grid preferences, repeated headings for column/page orientation on the grid are not preserved after a retrieval in the REST API, whereas they are preserved in the similar Java API operation. If you require preservation of repeated column headings (Java API like behavior), set &lt;code&gt;svParity&lt;/code&gt; to false.&lt;/p&gt; | [optional] [default to true] |
 | **body** | [**GridOperation**](GridOperation.md) | &lt;p&gt;Grid Operation to be performed.&lt;/p&gt; | [optional]  |
 
 ### Return type
@@ -102,7 +102,7 @@ catch (ApiException e)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 
@@ -310,7 +310,7 @@ catch (ApiException e)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 
@@ -516,7 +516,7 @@ catch (ApiException e)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json, application/xml
 
 

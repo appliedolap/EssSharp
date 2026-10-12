@@ -115,7 +115,7 @@ void (empty response body)
 
 Delete Application Connection
 
-<p>Delete a saved application connection by name.</p>
+<p>Deletes a saved application connection by name.</p>
 
 ### Example
 ```csharp
@@ -207,7 +207,7 @@ void (empty response body)
 
 <a id="applicationconnectionsgetconnectiondetails"></a>
 # **ApplicationConnectionsGetConnectionDetails**
-> Connection ApplicationConnectionsGetConnectionDetails (string applicationName, string connectionName, bool? password = null)
+> Connection ApplicationConnectionsGetConnectionDetails (string applicationName, string connectionName, bool? password = null, bool? assertWallet = null)
 
 Get Application Connection
 
@@ -239,11 +239,12 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var connectionName = "connectionName_example";  // string | <p>Connection name.</p>
             var password = true;  // bool? | <p>If set to true, the encrypted password is returned in the result.</p> (optional) 
+            var assertWallet = true;  // bool? |  (optional)  (default to true)
 
             try
             {
                 // Get Application Connection
-                Connection result = apiInstance.ApplicationConnectionsGetConnectionDetails(applicationName, connectionName, password);
+                Connection result = apiInstance.ApplicationConnectionsGetConnectionDetails(applicationName, connectionName, password, assertWallet);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -264,7 +265,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get Application Connection
-    ApiResponse<Connection> response = apiInstance.ApplicationConnectionsGetConnectionDetailsWithHttpInfo(applicationName, connectionName, password);
+    ApiResponse<Connection> response = apiInstance.ApplicationConnectionsGetConnectionDetailsWithHttpInfo(applicationName, connectionName, password, assertWallet);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -284,6 +285,7 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **connectionName** | **string** | &lt;p&gt;Connection name.&lt;/p&gt; |  |
 | **password** | **bool?** | &lt;p&gt;If set to true, the encrypted password is returned in the result.&lt;/p&gt; | [optional]  |
+| **assertWallet** | **bool?** |  | [optional] [default to true] |
 
 ### Return type
 
@@ -615,7 +617,7 @@ void (empty response body)
 
 Update Application Connection
 
-<p>Update the named application connection. If successful, returns details of the updated connection. <code>type</code> is a required input for all connections. Other required inputs differ, depending on the type of the connection.</p>
+<p>Updates the named application connection. If successful, returns details of the updated connection. <code>type</code> is a required input for all connections. Other required inputs differ, depending on the type of the connection.</p>
 
 ### Example
 ```csharp
@@ -717,7 +719,7 @@ catch (ApiException e)
 
 Upload Application Connection Wallet File
 
-<p>Upload a wallet file for an application-level connection.</p>
+<p>Uploads a wallet file for an application-level connection.</p>
 
 ### Example
 ```csharp
