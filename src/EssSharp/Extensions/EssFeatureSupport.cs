@@ -18,13 +18,19 @@ namespace EssSharp
     /// Answers whether an Essbase server supports an <see cref="EssFeature"/>, and recognizes the failures that mean it does not.
     /// </summary>
     /// <remarks>
-    /// The answer comes from the operations the server declares in the specification it serves, read once and cached. When
-    /// the server does not serve its specification, a feature is reported as supported until a member that needs it fails
-    /// in a way that shows the server lacks it, and that failure is remembered for the server.
+    /// The answer comes from the operations the server declares in the specification it serves and, for a feature that a
+    /// deployment switches on or off, from the flags the server reports in <c>/about/instance</c>. Both are read once and
+    /// cached. A flag that is reported false, or not reported at all, means the feature is not supported. When the server
+    /// does not serve its specification (or does not answer <c>/about/instance</c>), that source is not used, and a feature
+    /// is reported as supported until a member that needs it fails in a way that shows the server lacks it; that failure
+    /// is remembered for the server.
     /// </remarks>
     internal class EssFeatureSupport
     {
         #region Private Data
+
+        // The master switch for the AI features, which each AI capability also needs.
+        private static readonly string[] _aiEnabled = new[] { "aiEnabled" };
 
         private static readonly Dictionary<EssFeature, FeatureDefinition> _features = new Dictionary<EssFeature, FeatureDefinition>()
         {
@@ -36,17 +42,57 @@ namespace EssSharp
             [EssFeature.DrillthroughReportsForCells] = new FeatureDefinition(
                 description: "Getting the drillthrough reports for grid cells",
                 operations:  new[] { "POST /applications/{}/databases/{}/dtreports/list" },
-                statusCode:  HttpStatusCode.NotFound)
+                statusCode:  HttpStatusCode.NotFound),
+
+            [EssFeature.AI] = new FeatureDefinition(
+                description: "AI",
+                operations:  new[] { "GET /ai/connection" },
+                flags:       new[] { _aiEnabled }),
+
+            [EssFeature.AIMdxGeneration] = new FeatureDefinition(
+                description: "Generating MDX with AI",
+                operations:  new[] { "POST /ai/applications/{}/databases/{}/mdxgenerator" },
+                flags:       new[] { _aiEnabled, new[] { "aiMdxEnabled" } }),
+
+            // Ask Essbase has no operation of its own, so its flags alone decide.
+            [EssFeature.AIAskEssbase] = new FeatureDefinition(
+                description: "Ask Essbase",
+                operations:  Array.Empty<string>(),
+                flags:       new[] { _aiEnabled, new[] { "aiAskEssbaseEnabled" } }),
+
+            [EssFeature.AICalcGeneration] = new FeatureDefinition(
+                description: "Generating calculation scripts with AI",
+                operations:  new[] { "POST /ai/applications/{}/databases/{}/calculation/generate" },
+                flags:       new[] { _aiEnabled, new[] { "aiCalcEnabled" } }),
+
+            [EssFeature.AISemanticSearch] = new FeatureDefinition(
+                description: "AI semantic search",
+                operations:  new[] { "POST /ai/applications/{}/databases/{}/semanticsearch" },
+                flags:       new[] { _aiEnabled, new[] { "aiSemanticSearchEnabled" } }),
+
+            // Essbase 21 reports one provisioning flag for both kinds of provisioning.
+            [EssFeature.ServiceRoleProvisioning] = new FeatureDefinition(
+                description: "Service role provisioning",
+                operations:  new[] { "PUT /permissions/{}" },
+                flags:       new[] { new[] { "serviceRoleProvisioningSupported", "provisioningSupported" } }),
+
+            [EssFeature.ApplicationRoleProvisioning] = new FeatureDefinition(
+                description: "Application role provisioning",
+                operations:  new[] { "PUT /applications/{}/permissions/{}" },
+                flags:       new[] { new[] { "appRoleProvisioningSupported", "provisioningSupported" } }),
+
+            [EssFeature.PasswordReset] = new FeatureDefinition(
+                description: "Password reset",
+                operations:  new[] { "PUT /session/password" },
+                flags:       new[] { new[] { "resetPasswordSupported" } })
         };
 
         private static readonly string[] _httpMethods = new[] { "get", "put", "post", "delete", "patch", "head", "options" };
 
         private readonly EssServer                              _server;
         private readonly ConcurrentDictionary<EssFeature, bool> _unsupportedFeatures = new ConcurrentDictionary<EssFeature, bool>();
-        private readonly SemaphoreSlim                          _specificationLock   = new SemaphoreSlim(1, 1);
-
-        private HashSet<string> _declaredOperations;
-        private volatile bool   _specificationRead;
+        private readonly ReadOnce<HashSet<string>>              _declaredOperations  = new ReadOnce<HashSet<string>>();
+        private readonly ReadOnce<JObject>                      _instance            = new ReadOnce<JObject>();
 
         #endregion
 
@@ -75,11 +121,15 @@ namespace EssSharp
             if (_unsupportedFeatures.ContainsKey(feature))
                 return false;
 
-            // Without a specification, report the feature as supported until a member that needs it has failed.
-            if (await GetDeclaredOperationsAsync(cancellationToken).ConfigureAwait(false) is not { } declaredOperations)
-                return true;
+            // Without a specification, the operations cannot rule the feature out.
+            if (await _declaredOperations.GetAsync(ReadDeclaredOperationsAsync, cancellationToken).ConfigureAwait(false) is { } declaredOperations && !definition.Operations.All(declaredOperations.Contains))
+                return false;
 
-            return definition.Operations.All(declaredOperations.Contains);
+            // Without the instance details, the flags cannot rule the feature out.
+            if (definition.Flags.Length > 0 && await _instance.GetAsync(ReadInstanceAsync, cancellationToken).ConfigureAwait(false) is { } instance)
+                return AreFlagsSet(instance, definition.Flags);
+
+            return true;
         }
 
         /// <summary>
@@ -102,7 +152,7 @@ namespace EssSharp
             if (GetStatusCode(exception) is not { } statusCode || statusCode is not (HttpStatusCode.NotFound or HttpStatusCode.MethodNotAllowed))
                 return null;
 
-            var supported = await GetDeclaredOperationsAsync(cancellationToken).ConfigureAwait(false) is { } declaredOperations
+            var supported = await _declaredOperations.GetAsync(ReadDeclaredOperationsAsync, cancellationToken).ConfigureAwait(false) is { } declaredOperations
                 ? definition.Operations.All(declaredOperations.Contains)
                 : statusCode != definition.StatusCode;
 
@@ -113,6 +163,14 @@ namespace EssSharp
 
             return new NotSupportedException($@"{definition.Description} is not supported by the Essbase server ""{_server.Name}"". {exception.Message}".TrimEnd(), exception);
         }
+
+        /// <summary>
+        /// Returns whether the given instance details report every one of the given flags as true, under one of its names.
+        /// </summary>
+        /// <param name="instance">The instance details, as reported by <c>/about/instance</c>.</param>
+        /// <param name="flags">The flags, each as its current name followed by any older names.</param>
+        internal static bool AreFlagsSet( JObject instance, string[][] flags ) =>
+            flags.All(names => names.Any(name => instance?[name] is JValue { Type: JTokenType.Boolean, Value: true }));
 
         /// <summary>
         /// Returns the operation, as compared with a feature's operations, that the given HTTP <paramref name="method"/> and
@@ -173,34 +231,6 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Asynchronously returns the operations the server declares, or null when the server does not serve its specification.
-        /// The specification is read once; a cancelled read is not remembered.
-        /// </summary>
-        /// <param name="cancellationToken" />
-        private async Task<HashSet<string>> GetDeclaredOperationsAsync( CancellationToken cancellationToken )
-        {
-            if (_specificationRead)
-                return _declaredOperations;
-
-            await _specificationLock.WaitAsync(cancellationToken).ConfigureAwait(false);
-
-            try
-            {
-                if (!_specificationRead)
-                {
-                    _declaredOperations = await ReadDeclaredOperationsAsync(cancellationToken).ConfigureAwait(false);
-                    _specificationRead  = true;
-                }
-
-                return _declaredOperations;
-            }
-            finally
-            {
-                _specificationLock.Release();
-            }
-        }
-
-        /// <summary>
         /// Asynchronously reads the operations the server declares in the specification it serves, or returns null when it
         /// does not serve one.
         /// </summary>
@@ -214,20 +244,49 @@ namespace EssSharp
 
                 var declaredOperations = GetDeclaredOperations(response?.Data);
 
-                _server.Configuration?.Logger?.LogInformation(new EventId(id: (int)EssSharpLogEventType.Message),
-                    @"Read {Count} operations from the specification served by ""{Server}"".", declaredOperations.Count, _server.Name);
+                LogInformation(@"Read {Count} operations from the specification served by ""{Server}"".", declaredOperations.Count, _server.Name);
 
                 return declaredOperations;
             }
             catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
             catch (Exception e)
             {
-                _server.Configuration?.Logger?.LogInformation(new EventId(id: (int)EssSharpLogEventType.Message),
-                    @"The Essbase server ""{Server}"" does not serve its specification, so features are reported as supported until they fail. {Message}", _server.Name, e.Message);
+                LogInformation(@"The Essbase server ""{Server}"" does not serve its specification, so its operations do not rule features out. {Message}", _server.Name, e.Message);
 
                 return null;
             }
         }
+
+        /// <summary>
+        /// Asynchronously reads the instance details the server reports in <c>/about/instance</c>, untyped, so that a flag
+        /// that is not reported is told apart from one reported false; or returns null when the server does not answer.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        private async Task<JObject> ReadInstanceAsync( CancellationToken cancellationToken )
+        {
+            try
+            {
+                var api      = _server.GetApi<AboutEssbaseApi>();
+                var response = await api.AboutGetInstanceDetailsWithHttpInfoAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return JObject.Parse(response?.RawContent ?? string.Empty);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+            catch (Exception e)
+            {
+                LogInformation(@"The Essbase server ""{Server}"" does not report its instance details, so its flags do not rule features out. {Message}", _server.Name, e.Message);
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Writes an informational log message through the server's logger, if it has one.
+        /// </summary>
+        /// <param name="message">Format string of the log message in message template format.</param>
+        /// <param name="args">An object array that contains zero or more objects to format.</param>
+        private void LogInformation( string message, params object[] args ) =>
+            _server.Configuration?.Logger?.LogInformation(new EventId(id: (int)EssSharpLogEventType.Message), message, args);
 
         #endregion
 
@@ -241,12 +300,14 @@ namespace EssSharp
             /// <summary />
             /// <param name="description">The feature, as it begins a sentence.</param>
             /// <param name="operations">The operations the feature needs.</param>
-            /// <param name="statusCode">The status code a server that lacks the feature answers with.</param>
-            internal FeatureDefinition( string description, string[] operations, HttpStatusCode statusCode )
+            /// <param name="statusCode">The status code a server that lacks the feature answers with, if known.</param>
+            /// <param name="flags">The <c>/about/instance</c> flags the feature needs, each as its current name followed by any older names.</param>
+            internal FeatureDefinition( string description, string[] operations, HttpStatusCode? statusCode = null, string[][] flags = null )
             {
                 Description = description;
                 Operations  = operations;
                 StatusCode  = statusCode;
+                Flags       = flags ?? Array.Empty<string[]>();
             }
 
             /// <summary>
@@ -255,14 +316,60 @@ namespace EssSharp
             internal string Description { get; }
 
             /// <summary>
+            /// The <c>/about/instance</c> flags the feature needs, each as its current name followed by any older names. Every
+            /// one must be reported true, under one of its names.
+            /// </summary>
+            internal string[][] Flags { get; }
+
+            /// <summary>
             /// The operations the feature needs, as returned by <see cref="GetOperation(string, string)"/>.
             /// </summary>
             internal string[] Operations { get; }
 
             /// <summary>
-            /// The status code a server that lacks the feature answers with, used when the server serves no specification.
+            /// The status code a server that lacks the feature answers with, if known, used when the server serves no specification.
             /// </summary>
-            internal HttpStatusCode StatusCode { get; }
+            internal HttpStatusCode? StatusCode { get; }
+        }
+
+        /// <summary>
+        /// A value read from the server once, on first use, and kept for the life of the server. A cancelled read is not kept.
+        /// </summary>
+        /// <typeparam name="T">The type of the value; null means the server could not provide it.</typeparam>
+        private sealed class ReadOnce<T> where T : class
+        {
+            private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
+
+            private T             _value;
+            private volatile bool _read;
+
+            /// <summary>
+            /// Asynchronously returns the value, reading it with the given <paramref name="read"/> function on first use.
+            /// </summary>
+            /// <param name="read">Reads the value from the server.</param>
+            /// <param name="cancellationToken" />
+            internal async Task<T> GetAsync( Func<CancellationToken, Task<T>> read, CancellationToken cancellationToken )
+            {
+                if (_read)
+                    return _value;
+
+                await _lock.WaitAsync(cancellationToken).ConfigureAwait(false);
+
+                try
+                {
+                    if (!_read)
+                    {
+                        _value = await read(cancellationToken).ConfigureAwait(false);
+                        _read  = true;
+                    }
+
+                    return _value;
+                }
+                finally
+                {
+                    _lock.Release();
+                }
+            }
         }
 
         #endregion

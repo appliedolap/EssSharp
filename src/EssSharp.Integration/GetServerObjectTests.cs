@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
+using Newtonsoft.Json.Linq;
 
 using Xunit;
 
@@ -653,6 +655,42 @@ namespace EssSharp.Integration
                 Assert.Equal(0, member.LevelNumber);
                 Assert.Equal("Year", member.DimensionName);
             });
+        }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 24 - Essbase_AfterConnection_SupportsAgreesWithTheReportedFlags"), Priority(24)]
+        public async Task Essbase_AfterConnection_SupportsAgreesWithTheReportedFlags()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Read the instance details the server reports, untyped, through the generated API.
+            var connection    = GetEssConnection();
+            var configuration = new EssSharp.Client.Configuration()
+            {
+                BasePath    = $"{connection.Server?.TrimEnd('/')}/rest/v1",
+                Username    = connection.Username,
+                Password    = connection.Password,
+                AccessToken = connection.AccessToken is { Length: > 0 } accessToken ? accessToken : null
+            };
+
+            var client   = new EssSharp.Client.ApiClient(configuration.BasePath);
+            var response = await new EssSharp.Api.AboutEssbaseApi(client, client, configuration).AboutGetInstanceDetailsWithHttpInfoAsync(cancellationToken: TestContext.Current.CancellationToken);
+            var instance = JObject.Parse(response.RawContent);
+
+            // Returns whether the server reports the flag as true, under any of its names.
+            bool Flag( params string[] names ) => names.Any(name => instance[name] is JValue { Type: JTokenType.Boolean, Value: true });
+
+            var ai = Flag("aiEnabled");
+
+            // Assert that each feature is reported as supported exactly when the server reports its flags as true.
+            Assert.Equal(ai,                                                      await server.SupportsAsync(EssFeature.AI, TestContext.Current.CancellationToken));
+            Assert.Equal(ai && Flag("aiMdxEnabled"),                              await server.SupportsAsync(EssFeature.AIMdxGeneration, TestContext.Current.CancellationToken));
+            Assert.Equal(ai && Flag("aiAskEssbaseEnabled"),                       await server.SupportsAsync(EssFeature.AIAskEssbase, TestContext.Current.CancellationToken));
+            Assert.Equal(ai && Flag("aiCalcEnabled"),                             await server.SupportsAsync(EssFeature.AICalcGeneration, TestContext.Current.CancellationToken));
+            Assert.Equal(ai && Flag("aiSemanticSearchEnabled"),                   await server.SupportsAsync(EssFeature.AISemanticSearch, TestContext.Current.CancellationToken));
+            Assert.Equal(Flag("serviceRoleProvisioningSupported", "provisioningSupported"), await server.SupportsAsync(EssFeature.ServiceRoleProvisioning, TestContext.Current.CancellationToken));
+            Assert.Equal(Flag("appRoleProvisioningSupported", "provisioningSupported"),     await server.SupportsAsync(EssFeature.ApplicationRoleProvisioning, TestContext.Current.CancellationToken));
+            Assert.Equal(Flag("resetPasswordSupported"),                          await server.SupportsAsync(EssFeature.PasswordReset, TestContext.Current.CancellationToken));
         }
     }
 }
