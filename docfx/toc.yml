@@ -2,3 +2,5 @@
   href: api/EssSharp/toc.yml
 - name: EssSharp.Abstractions
   href: api/EssSharp.Abstractions/toc.yml
+- name: API Coverage
+  href: articles/coverage.md
