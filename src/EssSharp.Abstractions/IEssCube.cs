@@ -57,6 +57,9 @@ namespace EssSharp
         /// Clears the AI query conversation history for the given chat profile.
         /// </summary>
         /// <param name="profileName">The AI chat profile name.</param>
+        /// <remarks>Requires an Essbase server with AI query configured (Essbase 26ai).</remarks>
+        /// <exception cref="ArgumentException">The profile name is empty.</exception>
+        /// <exception cref="NotSupportedException">The server does not provide the AI query endpoints (it answered with HTTP 404 or 405), for example an older Essbase or a deployment without AI.</exception>
         public void ClearAiQueryConversation( string profileName );
 
         /// <summary>
@@ -64,6 +67,9 @@ namespace EssSharp
         /// </summary>
         /// <param name="profileName">The AI chat profile name.</param>
         /// <param name="cancellationToken" />
+        /// <remarks>Requires an Essbase server with AI query configured (Essbase 26ai).</remarks>
+        /// <exception cref="ArgumentException">The profile name is empty.</exception>
+        /// <exception cref="NotSupportedException">The server does not provide the AI query endpoints (it answered with HTTP 404 or 405), for example an older Essbase or a deployment without AI.</exception>
         public Task ClearAiQueryConversationAsync( string profileName, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -149,6 +155,11 @@ namespace EssSharp
         /// <param name="query">The natural-language query.</param>
         /// <param name="profileName">The AI chat profile name.</param>
         /// <param name="options">Options for generating the MDX query.</param>
+        /// <returns>An <see cref="EssAiQueryExecutionResult"/> with the generated query and the grid it returned.</returns>
+        /// <remarks>Requires an Essbase server with AI query configured (Essbase 26ai). The generated MDX is executed as it is generated, without review, and AI generated MDX can be wrong; use <see cref="GenerateMdxFromNaturalLanguage(string, string, EssAiQueryOptions)"/> when it should be reviewed before it runs.</remarks>
+        /// <exception cref="ArgumentException">The query or the profile name is empty.</exception>
+        /// <exception cref="NotSupportedException">The server does not provide the AI query endpoints (it answered with HTTP 404 or 405), for example an older Essbase or a deployment without AI.</exception>
+        /// <exception cref="Exception">Generating the MDX failed, or the generated MDX failed to run. In the second case the message and <c>Exception.Data["Mdx"]</c> hold the MDX that was run.</exception>
         public EssAiQueryExecutionResult ExecuteNaturalLanguageQuery( string query, string profileName, EssAiQueryOptions options = null );
 
         /// <summary>
@@ -158,6 +169,11 @@ namespace EssSharp
         /// <param name="profileName">The AI chat profile name.</param>
         /// <param name="options">Options for generating the MDX query.</param>
         /// <param name="cancellationToken" />
+        /// <returns>An <see cref="EssAiQueryExecutionResult"/> with the generated query and the grid it returned.</returns>
+        /// <remarks>Requires an Essbase server with AI query configured (Essbase 26ai). The generated MDX is executed as it is generated, without review, and AI generated MDX can be wrong; use <see cref="GenerateMdxFromNaturalLanguage(string, string, EssAiQueryOptions)"/> when it should be reviewed before it runs.</remarks>
+        /// <exception cref="ArgumentException">The query or the profile name is empty.</exception>
+        /// <exception cref="NotSupportedException">The server does not provide the AI query endpoints (it answered with HTTP 404 or 405), for example an older Essbase or a deployment without AI.</exception>
+        /// <exception cref="Exception">Generating the MDX failed, or the generated MDX failed to run. In the second case the message and <c>Exception.Data["Mdx"]</c> hold the MDX that was run.</exception>
         public Task<EssAiQueryExecutionResult> ExecuteNaturalLanguageQueryAsync( string query, string profileName, EssAiQueryOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -207,6 +223,11 @@ namespace EssSharp
         /// <param name="query">The natural-language query.</param>
         /// <param name="profileName">The AI chat profile name.</param>
         /// <param name="options">Options for generating the MDX query.</param>
+        /// <returns>An <see cref="EssAiQueryResult"/> with the generated MDX and any explanation Essbase gave.</returns>
+        /// <remarks>Requires an Essbase server with AI query configured (Essbase 26ai). When <see cref="EssAiQueryOptions.StartNewConversation"/> is set, Essbase starts a conversation under the profile name and does not replace an existing one; clear it with <see cref="ClearAiQueryConversation(string)"/> when it is no longer needed.</remarks>
+        /// <exception cref="ArgumentException">The query or the profile name is empty.</exception>
+        /// <exception cref="NotSupportedException">The server does not provide the AI query endpoints (it answered with HTTP 404 or 405), for example an older Essbase or a deployment without AI.</exception>
+        /// <exception cref="Exception">The request failed, or the response held no MDX. The message says why and includes what the server answered.</exception>
         public EssAiQueryResult GenerateMdxFromNaturalLanguage( string query, string profileName, EssAiQueryOptions options = null );
 
         /// <summary>
@@ -216,6 +237,11 @@ namespace EssSharp
         /// <param name="profileName">The AI chat profile name.</param>
         /// <param name="options">Options for generating the MDX query.</param>
         /// <param name="cancellationToken" />
+        /// <returns>An <see cref="EssAiQueryResult"/> with the generated MDX and any explanation Essbase gave.</returns>
+        /// <remarks>Requires an Essbase server with AI query configured (Essbase 26ai). When <see cref="EssAiQueryOptions.StartNewConversation"/> is set, Essbase starts a conversation under the profile name and does not replace an existing one; clear it with <see cref="ClearAiQueryConversation(string)"/> when it is no longer needed.</remarks>
+        /// <exception cref="ArgumentException">The query or the profile name is empty.</exception>
+        /// <exception cref="NotSupportedException">The server does not provide the AI query endpoints (it answered with HTTP 404 or 405), for example an older Essbase or a deployment without AI.</exception>
+        /// <exception cref="Exception">The request failed, or the response held no MDX. The message says why and includes what the server answered.</exception>
         public Task<EssAiQueryResult> GenerateMdxFromNaturalLanguageAsync( string query, string profileName, EssAiQueryOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -232,12 +258,18 @@ namespace EssSharp
         /// <summary>
         /// Returns sample natural-language queries for the cube.
         /// </summary>
+        /// <returns>The sample natural-language queries Essbase offers for the cube, which may be none.</returns>
+        /// <remarks>Requires an Essbase server with AI query configured (Essbase 26ai).</remarks>
+        /// <exception cref="NotSupportedException">The server does not provide the AI query endpoints (it answered with HTTP 404 or 405), for example an older Essbase or a deployment without AI.</exception>
         public List<string> GetAiQuerySamples();
 
         /// <summary>
         /// Asynchronously returns sample natural-language queries for the cube.
         /// </summary>
         /// <param name="cancellationToken" />
+        /// <returns>The sample natural-language queries Essbase offers for the cube, which may be none.</returns>
+        /// <remarks>Requires an Essbase server with AI query configured (Essbase 26ai).</remarks>
+        /// <exception cref="NotSupportedException">The server does not provide the AI query endpoints (it answered with HTTP 404 or 405), for example an older Essbase or a deployment without AI.</exception>
         public Task<List<string>> GetAiQuerySamplesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>

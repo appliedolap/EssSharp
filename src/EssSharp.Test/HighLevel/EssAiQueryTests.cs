@@ -196,6 +196,146 @@ namespace EssSharp.Test.HighLevel
         }
 
         [Fact]
+        public async Task GenerateMdxFromNaturalLanguageAsync_SendsTheDefaultOptions()
+        {
+            const string mdx = "SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]";
+
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, $@"{{""mdx"":{Quote(mdx)}}}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca");
+
+            var generate = Assert.Single(stub.Requests, request => request.Contains("/mdxgenerator?", StringComparison.Ordinal));
+            Assert.Contains("isConvStart=true", generate, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains("includeAttributesInNlq=false", generate, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("prompt=", generate, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [Fact]
+        public async Task GenerateMdxFromNaturalLanguageAsync_ContinuesAConversationAndSendsThePrompt()
+        {
+            const string mdx = "SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]";
+
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, $@"{{""mdx"":{Quote(mdx)}}}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", new EssAiQueryOptions(startNewConversation: false, prompt: "Use the Actual scenario"));
+
+            var generate = Assert.Single(stub.Requests, request => request.Contains("/mdxgenerator?", StringComparison.Ordinal));
+            Assert.Contains("isConvStart=false", generate, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains("prompt=Use%20the%20Actual%20scenario", generate, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [Theory]
+        [InlineData("generate", 404)]
+        [InlineData("generate", 405)]
+        [InlineData("execute", 404)]
+        [InlineData("execute", 405)]
+        [InlineData("samples", 404)]
+        [InlineData("samples", 405)]
+        [InlineData("clear", 404)]
+        [InlineData("clear", 405)]
+        public async Task EveryAiQueryOperation_TranslatesAMissingEndpointToNotSupportedAndKeepsTheStatus( string operation, int statusCode )
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.Contains("/essbase/rest/v1/ai/", StringComparison.Ordinal) )
+                    return (statusCode, @"{""message"":""Endpoint unavailable""}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+
+            Task Call() => operation switch
+            {
+                "generate" => cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca"),
+                "execute"  => cube.ExecuteNaturalLanguageQueryAsync("Show sales", "Dodeca"),
+                "samples"  => cube.GetAiQuerySamplesAsync(),
+                _          => cube.ClearAiQueryConversationAsync("Dodeca")
+            };
+
+            var exception = await Assert.ThrowsAsync<NotSupportedException>(Call);
+
+            Assert.StartsWith("AI Query is not supported by this Essbase server.", exception.Message, StringComparison.Ordinal);
+            Assert.Contains($"status code {statusCode}", exception.Message, StringComparison.Ordinal);
+            Assert.NotNull(exception.InnerException);
+        }
+
+        [Fact]
+        public async Task TheSynchronousMethodsReturnTheSameResultsAsTheAsynchronousOnes()
+        {
+            const string mdx = "SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]";
+
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, $@"{{""mdx"":{Quote(mdx)}}}");
+
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/listSampleQueries", StringComparison.Ordinal) )
+                    return (200, @"[""Show sales""]");
+
+                if ( request.StartsWith("POST /essbase/rest/v1/applications/Sample/databases/Basic/grid/mdx", StringComparison.Ordinal) )
+                    return (200, "{}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+
+            Assert.Equal(mdx, cube.GenerateMdxFromNaturalLanguage("Show sales", "Dodeca").Mdx);
+            Assert.Equal(mdx, cube.ExecuteNaturalLanguageQuery("Show sales", "Dodeca").Query.Mdx);
+            Assert.Equal(new[] { "Show sales" }, cube.GetAiQuerySamples());
+
+            cube.ClearAiQueryConversation("Dodeca");
+
+            Assert.Contains(stub.Requests, request => request.StartsWith("DELETE /essbase/rest/v1/ai/applications/Sample/databases/Basic/conversationHistory?", StringComparison.Ordinal));
+        }
+
+        [Fact]
+        public async Task TheFluentExtensionsChainFromACubeTask()
+        {
+            const string mdx = "SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]";
+
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, $@"{{""mdx"":{Quote(mdx)}}}");
+
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/listSampleQueries", StringComparison.Ordinal) )
+                    return (200, @"[""Show sales""]");
+
+                if ( request.StartsWith("POST /essbase/rest/v1/applications/Sample/databases/Basic/grid/mdx", StringComparison.Ordinal) )
+                    return (200, "{}");
+
+                return GetObjectResponse(request);
+            });
+
+            var server = await new EssServerFactory().CreateEssServerAsync(stub.BasePath, "admin", "password", connect: false);
+            Task<IEssCube> CubeTask() => server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
+
+            Assert.Equal(mdx, (await CubeTask().GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca")).Mdx);
+            Assert.Equal(mdx, (await CubeTask().ExecuteNaturalLanguageQueryAsync("Show sales", "Dodeca")).Query.Mdx);
+            Assert.Equal(new[] { "Show sales" }, await CubeTask().GetAiQuerySamplesAsync());
+
+            await CubeTask().ClearAiQueryConversationAsync("Dodeca");
+
+            Assert.Contains(stub.Requests, request => request.StartsWith("DELETE /essbase/rest/v1/ai/applications/Sample/databases/Basic/conversationHistory?", StringComparison.Ordinal));
+        }
+
+        [Fact]
         public async Task GetAiQuerySamplesAsync_ReadsAListOfStrings()
         {
             using var stub = new AiQueryEssbaseStub(request =>
@@ -433,7 +573,12 @@ namespace EssSharp.Test.HighLevel
         /// </summary>
         public string ContentType { get; set; } = "application/json";
 
-        public List<string> Requests { get; } = new List<string>();
+        private readonly List<string> _requests = new List<string>();
+
+        /// <summary>
+        /// The requests received so far, as a snapshot: the stub answers on other threads.
+        /// </summary>
+        public IReadOnlyList<string> Requests { get { lock ( _requests ) return _requests.ToList(); } }
 
         public void Dispose()
         {
@@ -468,8 +613,8 @@ namespace EssSharp.Test.HighLevel
                 using ( var stream = client.GetStream() )
                 {
                     var request = await ReadRequestAsync(stream);
-                    lock ( Requests )
-                        Requests.Add(request);
+                    lock ( _requests )
+                        _requests.Add(request);
 
                     var (statusCode, body) = _responseProvider(request);
                     var contentType = request.StartsWith("POST /essbase/rest/v1/ai/", StringComparison.Ordinal) ? ContentType : "application/json";

@@ -169,7 +169,7 @@ namespace EssSharp
             catch ( Exception e )
             {
                 if ( IsAiQueryUnsupported(e) )
-                    throw new NotSupportedException("AI Query is not supported by this Essbase server.", e);
+                    throw CreateAiQueryNotSupportedException(e);
 
                 throw new Exception($@"Unable to clear the AI query conversation for cube ""{Name}"". {e.Message}", e);
             }
@@ -417,7 +417,7 @@ namespace EssSharp
             catch ( Exception e )
             {
                 if ( IsAiQueryUnsupported(e) )
-                    throw new NotSupportedException("AI Query is not supported by this Essbase server.", e);
+                    throw CreateAiQueryNotSupportedException(e);
 
                 throw new Exception($@"Unable to generate an AI query for cube ""{Name}"". {e.Message}", e);
             }
@@ -463,7 +463,7 @@ namespace EssSharp
             catch ( Exception e )
             {
                 if ( IsAiQueryUnsupported(e) )
-                    throw new NotSupportedException("AI Query is not supported by this Essbase server.", e);
+                    throw CreateAiQueryNotSupportedException(e);
 
                 throw new Exception($@"Unable to get AI query samples for cube ""{Name}"". {e.Message}", e);
             }
@@ -1236,6 +1236,13 @@ namespace EssSharp
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Returns the exception for an AI request that failed because the endpoint is unavailable. It keeps what the server
+        /// said, which tells a missing endpoint from a server that has AI query switched off.
+        /// </summary>
+        private static NotSupportedException CreateAiQueryNotSupportedException( Exception exception ) =>
+            new NotSupportedException($"AI Query is not supported by this Essbase server. {exception?.Message}".TrimEnd(), exception);
 
         /// <summary>
         /// Returns whether an AI request failed because the endpoint is unavailable.
