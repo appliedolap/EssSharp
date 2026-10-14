@@ -1,18 +1,25 @@
-# Corrections applied to the Essbase 26 OpenAPI 3 document before code generation. process.sh runs this
-# instead of the Swagger 2 corrections whenever the document has an "openapi" property.
+# Corrections applied to the Essbase OpenAPI document before code generation. gen.sh and gen.cmd run this on
+# the newest specification in versions/ and generate the client from the result.
 #
 # Keep this file small. Before adding anything here, check whether the correction can be made another way:
-#   * a template override in templates/ (for example the "*/*" request content type in ClientUtils.mustache),
+#   * a template override in templates/ (for example the "*/*" request content type in ApiClient.mustache),
 #   * a generator option in gen.sh/gen.cmd (model and operationId name mappings), or
 #   * a hand-written partial class in src/EssSharp/Extensions/Partials.
 # What remains here is the response shapes, response models, and enum/property fixes that the generator
 # and templates cannot know about for the operations EssSharp wraps.
 
 # jq silently creates any path an assignment names, so a correction aimed at an operation or schema that
-# Oracle renamed or removed would quietly add junk instead of failing. These helpers fail instead.
+# Oracle renamed or removed would quietly add junk instead of failing. Likewise, a correction that replaces
+# something Oracle later starts to define would quietly discard Oracle's version. These helpers fail instead.
 def require($path):
   if getpath($path) == null
-  then error("process-openapi3.jq: cannot patch missing OpenAPI path: " + ($path | map(tostring) | join(" > ")))
+  then error("process.jq: cannot patch missing OpenAPI path: " + ($path | map(tostring) | join(" > ")))
+  else .
+  end;
+
+def require_absent($path):
+  if getpath($path) != null
+  then error("process.jq: the document now defines OpenAPI path: " + ($path | map(tostring) | join(" > ")) + ", review the correction that replaces it")
   else .
   end;
 
@@ -42,28 +49,59 @@ def set_response_content($path; $method; $status; $content):
   require(["paths", $path, $method, "responses", $status])
   | .paths[$path][$method].responses[$status].content = $content;
 
-# Sets a property of an existing schema, for example an enumeration of its allowed values.
+# Defines a model that the document does not define.
+def define_schema($name; $schema):
+  require_absent(["components", "schemas", $name])
+  | .components.schemas[$name] = $schema;
+
+# Adds properties that the document does not declare to an existing schema.
+def add_schema_properties($schema; $properties):
+  require(["components", "schemas", $schema, "properties"])
+  | reduce ($properties | keys[]) as $property
+      (.; require_absent(["components", "schemas", $schema, "properties", $property]))
+  | .components.schemas[$schema].properties += $properties;
+
+# Sets a property of an existing schema, for example its type.
 def set_schema_property($schema; $property; $key; $value):
   require(["components", "schemas", $schema, "properties", $property])
   | .components.schemas[$schema].properties[$property][$key] = $value;
 
-# Oracle documents several list endpoints as an array of the list type (for example an array of
-# DimensionList) when the server returns the list object itself. Use the list type as the response schema.
-def unwrap_list_arrays:
-  def unwrap:
-    if (.schema.type? == "array") and ((.schema.items["$ref"]? // "") | test("/[A-Za-z]*List$"))
-    then .schema = .schema.items
-    else .
+# Declares the allowed values of a property that the document leaves as a free string.
+def set_schema_enum($schema; $property; $values):
+  require(["components", "schemas", $schema, "properties", $property])
+  | require_absent(["components", "schemas", $schema, "properties", $property, "enum"])
+  | .components.schemas[$schema].properties[$property].enum = $values;
+
+# Corrects one allowed value of a property's enumeration.
+def replace_enum_value($schema; $property; $from; $to):
+  require(["components", "schemas", $schema, "properties", $property, "enum"])
+  | if (.components.schemas[$schema].properties[$property].enum | index($from)) == null
+    then error("process.jq: " + $schema + "." + $property + " no longer allows " + $from + ", review the correction")
+    else .components.schemas[$schema].properties[$property].enum |= map(if . == $from then $to else . end)
     end;
-  .paths |= map_values(map_values(
-    if type == "object" and has("responses")
-    then .responses |= with_entries(
-           if (.key | startswith("2")) and (.value | has("content"))
-           then .value.content |= map_values(unwrap)
-           else .
-           end)
-    else .
-    end));
+
+# Oracle documents several list endpoints as an array of a paged collection (for example an array of
+# DimensionList) when the server returns the collection object itself. A schema is a paged collection when it
+# has both the items and totalResults properties. Use the collection as the response schema.
+def unwrap_collection_arrays:
+  .components.schemas as $schemas
+  | def collection($ref):
+      ($ref | startswith("#/components/schemas/"))
+      and (($schemas[$ref | ltrimstr("#/components/schemas/")].properties // {}) | has("items") and has("totalResults"));
+    def unwrap:
+      if .schema.type? == "array" and ((.schema.items["$ref"]? // "") as $ref | $ref != "" and collection($ref))
+      then .schema = .schema.items
+      else .
+      end;
+    .paths |= map_values(map_values(
+      if type == "object" and has("responses")
+      then .responses |= with_entries(
+             if (.key | startswith("2")) and (.value | has("content"))
+             then .value.content |= map_values(unwrap)
+             else .
+             end)
+      else .
+      end));
 
 # Oracle's document contains both "openapi" and "swagger" properties. The latter is invalid in an OpenAPI 3
 # document and makes OpenAPI Generator's validation fail.
@@ -79,7 +117,7 @@ del(.swagger)
 
 # ---- Response shapes ----
 
-| unwrap_list_arrays
+| unwrap_collection_arrays
 | set_response_schema("/about/instance"; "get"; "200"; schema_ref("AboutInstance"))
 | set_response_schema("/applications/{applicationName}/databases/{databaseName}/dtreports/list"; "post"; "200"; {"type": "array", "items": {"type": "string"}})
 | set_response_schema("/applications/{applicationName}/databases/{databaseName}/grid/layout"; "post"; "200"; schema_ref("GridLayout"))
@@ -145,7 +183,7 @@ del(.swagger)
 
 # ---- Response models the document does not define ----
 
-| .components.schemas.AboutInstance = {
+| define_schema("AboutInstance"; {
     "type": "object",
     "properties": {
       "provisioningSupported": {"type": "boolean"},
@@ -160,21 +198,21 @@ del(.swagger)
       "aiSemanticSearchEnabled": {"type": "boolean"}
     },
     "xml": {"name": "aboutInstance"}
-  }
-| .components.schemas.EssbaseURL = {
+  })
+| define_schema("EssbaseURL"; {
     "type": "object",
     "properties": {
       "application": {"type": "string"},
       "url": {"type": "string"}
     }
-  }
-| .components.schemas.EssbaseURLList = {
+  })
+| define_schema("EssbaseURLList"; {
     "type": "object",
     "properties": {
       "items": {"type": "array", "items": schema_ref("EssbaseURL")}
     }
-  }
-| .components.schemas.FileBean = {
+  })
+| define_schema("FileBean"; {
     "type": "object",
     "properties": {
       "name": {"type": "string"},
@@ -190,8 +228,8 @@ del(.swagger)
       "links": {"type": "array", "items": schema_ref("Link")}
     },
     "xml": {"name": "File"}
-  }
-| .components.schemas.FileCollectionResponse = {
+  })
+| define_schema("FileCollectionResponse"; {
     "type": "object",
     "properties": {
       "count": {"type": "integer", "format": "int64"},
@@ -202,29 +240,29 @@ del(.swagger)
       "properties": {"type": "object", "additionalProperties": {"type": "string"}},
       "offset": {"type": "integer", "format": "int64"}
     }
-  }
-| .components.schemas.ScriptContent = {
+  })
+| define_schema("ScriptContent"; {
     "type": "object",
     "properties": {"content": {"type": "string"}}
-  }
-| .components.schemas.MembersList = {
+  })
+| define_schema("MembersList"; {
     "type": "object",
     "properties": {
       "items": {"type": "array", "items": schema_ref("MemberBean")}
     }
-  }
-| .components.schemas.AncestorsList = {
+  })
+| define_schema("AncestorsList"; {
     "type": "array",
     "items": schema_ref("MemberBean")
-  }
-| .components.schemas.GridLayout = {
+  })
+| define_schema("GridLayout"; {
     "type": "object",
     "properties": {
       "data": schema_ref("LayoutData"),
       "alias": {"type": "string"},
       "dimensions": {"type": "array", "items": schema_ref("GridDimension")}
     }
-  }
+  })
 
 # ---- Schema corrections ----
 
@@ -238,25 +276,24 @@ del(.swagger)
 
 # The server's own specification, and the wire value, spell the zoom in mode "descendents". Oracle's published
 # document spells it "descendants".
-| set_schema_property("ZoomIn"; "mode"; "enum"; ["children", "descendents", "base"])
+| replace_enum_value("ZoomIn"; "mode"; "descendants"; "descendents")
 
 # Only the connection and type properties of a datasource are required.
 | require(["components", "schemas", "Datasource"])
 | .components.schemas.Datasource.required = ["connection", "type"]
 
 # The document leaves the properties of these job parameters untyped or too loosely typed.
-| set_schema_property("JobsInputBean"; "jobtype"; "enum"; ["dataload", "dimbuild", "calc", "clear", "importExcel", "exportExcel", "lcmExport", "lcmImport", "clearAggregation", "buildAggregation", "asoBufferDataLoad", "asoBufferCommit", "exportData", "mdxScript", "executeReport", "maxl", "groovy"])
-| set_schema_property("ParametersBean"; "buildMethod"; "enum"; ["PARENT-CHILD", "GENERATION"])
-| set_schema_property("ParametersBean"; "buildOption"; "enum"; ["NONE", "RETAIN_ALL_DATA", "RETAIN_INPUT_DATA", "RETAIN_LEAF_DATA", "REMOVE_ALL_DATA"])
-| set_schema_property("ParametersBean"; "dataLevel"; "enum"; ["ALL_DATA", "UPPER_LEVEL_BLOCKS", "NON_INPUT_BLOCKS", "LEVEL_ZERO_BLOCKS", "INPUT_LEVEL_DATA_BLOCKS"])
+| set_schema_enum("JobsInputBean"; "jobtype"; ["dataload", "dimbuild", "calc", "clear", "importExcel", "exportExcel", "lcmExport", "lcmImport", "clearAggregation", "buildAggregation", "asoBufferDataLoad", "asoBufferCommit", "exportData", "mdxScript", "executeReport", "maxl", "groovy"])
+| set_schema_enum("ParametersBean"; "buildMethod"; ["PARENT-CHILD", "GENERATION"])
+| set_schema_enum("ParametersBean"; "buildOption"; ["NONE", "RETAIN_ALL_DATA", "RETAIN_INPUT_DATA", "RETAIN_LEAF_DATA", "REMOVE_ALL_DATA"])
+| set_schema_enum("ParametersBean"; "dataLevel"; ["ALL_DATA", "UPPER_LEVEL_BLOCKS", "NON_INPUT_BLOCKS", "LEVEL_ZERO_BLOCKS", "INPUT_LEVEL_DATA_BLOCKS"])
 
 # Essbase expects these job parameters as strings, not booleans.
 | reduce ("isScriptContent", "lockForUpdate", "useCatalogPath", "exportdata", "exportpartitions", "exportfilters", "physical") as $property
     (.; set_schema_property("ParametersBean"; $property; "type"; "string"))
 
 # The properties of the MemberBean definition are incomplete.
-| require(["components", "schemas", "MemberBean", "properties"])
-| .components.schemas.MemberBean.properties += {
+| add_schema_properties("MemberBean"; {
     "dimSolveOrder": {"type": "integer"},
     "dimensionType": {"type": "string", "enum": ["TIME", "ACCOUNTS", "REGULAR", "ATTRIBUTE", "ATTRIBUTECALC"]},
     "formatString": {"type": "string"},
@@ -265,11 +302,14 @@ del(.swagger)
     "uda": {"type": "array", "items": {"type": "string"}},
     "dataStorageType": {"type": "string"},
     "parentName": {"type": "string"}
-  }
+  })
 
 # The generated model's JSON member order follows the schema, and the Essbase grid endpoint rejects grids
 # posted back when rows appears after the range data.
-| require(["components", "schemas", "Slice", "properties"])
+| if (.components.schemas.Slice.properties // {} | keys) != ["columns", "data", "dirtyCells", "dirtyTexts", "rows"]
+  then error("process.jq: Slice properties changed, review the property order correction")
+  else .
+  end
 | .components.schemas.Slice.properties = {
     "rows": .components.schemas.Slice.properties.rows,
     "dirtyCells": .components.schemas.Slice.properties.dirtyCells,
@@ -284,12 +324,12 @@ del(.swagger)
 | del(.components.schemas.Preferences.properties.rowSuppression)
 
 # The server sends and accepts LatestMemberName, which the document does not declare.
-| require(["components", "schemas", "Preferences", "properties"])
-| .components.schemas.Preferences.properties.LatestMemberName = {"type": "object"}
+| add_schema_properties("Preferences"; {"LatestMemberName": {"type": "object"}})
 
 # ---- Security ----
 
 # Add the authentication schemes that EssSharp's customised generated client expects. The document declares none.
+| require_absent(["components", "securitySchemes"])
 | .components.securitySchemes = {
     "basicAuth": {"type": "http", "scheme": "basic"},
     "OAuth2": {

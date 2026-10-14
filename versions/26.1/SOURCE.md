@@ -2,8 +2,8 @@
 
 `openapi.json` is the Essbase 26ai (26.1) REST API document exactly as Oracle publishes it. It is an
 OpenAPI 3.0.1 document, unlike the Swagger 2.0 `swagger.json` files of Essbase 21.x. Do not edit it; every
-correction EssSharp needs is applied later by `process.sh` (through `process-openapi3.jq`), the generator
-options in `gen.sh`/`gen.cmd`, and the templates.
+correction EssSharp needs is applied later by `process.jq`, the generator options in `gen.sh`/`gen.cmd`, and
+the templates.
 
 | | |
 |---|---|
@@ -27,7 +27,7 @@ The document was compared with the spec served by an Essbase 26.1.0.0.0 (build 2
   types, and response codes.
 - The 256 schemas present in both are structurally identical (descriptions aside) except one value: the
   published `ZoomIn.mode` enumeration says `descendants`, while the server serves, and expects, `descendents`.
-  `process-openapi3.jq` restores the server's spelling.
+  `process.jq` restores the server's spelling.
 - The published document adds tags and the HTML descriptions, 18 operations the compared server does not
   serve (for example `/cubedesigner/*`), and 6 request schemas for them.
 - The server serves 92 operations that Oracle does not publish (for example `/backup/*`, outline `edit` and
@@ -39,6 +39,6 @@ structure EssSharp already has. Capture the served document again (and compare) 
 
 ## Adding a new version
 
-1. Save the document unmodified in `versions/<ver>/` (`openapi.json` for OpenAPI 3, `swagger.json` for Swagger 2).
+1. Save the document unmodified as `versions/<ver>/openapi.json`. The client is generated from the newest version only.
 2. Record the source URL, retrieval date, server version/build, `info.version` and SHA-256 here.
-3. Run `process.sh <ver>`, then `gen.sh`.
+3. Run `gen.sh` (or `gen.cmd`), which applies `process.jq` and generates the client.
