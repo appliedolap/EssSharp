@@ -9,6 +9,11 @@ on:
   pull_request:
     branches: [ "develop" ]
   workflow_dispatch:
+    inputs:
+      ai_query_tests:
+        description: Run the AI query integration tests. They build their own test environment (an Oracle AI Database container and a fake OCI Generative AI service), which adds several minutes and several gigabytes.
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -32,6 +37,35 @@ jobs:
       with:
         dotnet-version: 10.0.x
     
+    # The AI query tests build an Oracle AI Database container next to the Essbase and SQL Server containers. Together the
+    # images are larger than the disk a standard runner leaves free, so remove what the runner image carries and this
+    # job does not use.
+    - name: Free disk space for the AI query tests
+      if: ${{ inputs.ai_query_tests }}
+      run: |
+        sudo rm -rf /usr/local/lib/android /usr/share/swift /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL
+        df -h /
+
+    # The AI query tests are off unless a local settings file turns them on (see src/EssSharp.Integration/README.md). The
+    # file replaces only the AiQuery section; the rest of the settings still come from appsettings.json. It has to exist
+    # before the build, which copies it next to the tests. The question is one the fake OCI service has an answer for.
+    - name: Enable the AI query tests
+      if: ${{ inputs.ai_query_tests }}
+      run: |
+        cat > src/EssSharp.Integration/appsettings.local.json <<'EOF'
+        {
+          "Settings": {
+            "AiQuery": {
+              "Mode": "Managed",
+              "ApplicationName": "Sample",
+              "CubeName": "Basic",
+              "NaturalLanguageQuery": "Show actual sales by year.",
+              "ProfileName": ""
+            }
+          }
+        }
+        EOF
+
     # The full MAUI Workload with the required target platforms is not supported on Linux.
     # We build and test a solution filter without the MAUI client to workaround this issue.
     #- name: Install MAUI Workload
