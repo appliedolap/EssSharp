@@ -21,6 +21,14 @@ namespace EssSharp.Client
 
         private int _maxDegreeOfParallelism = 4;
 
+        // The JSESSIONIDs of the sessions that have crossed into the grid. Essbase opens a second, grid session behind
+        // a session's first grid request, and logging the session out does not end it, so grid requests keep to the
+        // sessions that have already crossed rather than opening grid sessions on others.
+        private readonly ConcurrentDictionary<string, bool> _gridSessions = new ConcurrentDictionary<string, bool>(StringComparer.Ordinal);
+
+        // Serializes choosing a session from the pool by whether it has crossed into the grid.
+        private readonly object _sessionChoiceLock = new object();
+
         #endregion
 
         #region Public Properties
@@ -30,7 +38,8 @@ namespace EssSharp.Client
         /// cookies for one session (the JSESSIONID together with any gateway token cookies issued with it).
         /// A request takes a set from the pool and rides it in place of the authorization header, and its
         /// response pools the set (or its forked successor) again, so concurrent requests ride distinct
-        /// sessions, since Essbase does not allow concurrent requests on one session.
+        /// sessions, since Essbase does not allow concurrent requests on one session. A grid request prefers
+        /// a session that has already crossed into the grid, and any other request prefers one that has not.
         /// </summary>
         public ConcurrentBag<CookieCollection> SessionCookies { get; } = new ConcurrentBag<CookieCollection>();
 
@@ -115,7 +124,7 @@ namespace EssSharp.Client
 
             // If a free session cookie set is available, take it for this request, so concurrent
             // requests ride distinct sessions.
-            if ( SessionCookies.TryTake(out CookieCollection sessionCookies) && sessionCookies is { Count: > 0 } )
+            if (TakeSessionCookies(IsGridRequest(options)) is { Count: > 0 } sessionCookies)
             {
                 // Capture the JSESSIONID session cookie, if the set contains one.
                 cookie = sessionCookies.Cast<Cookie>().FirstOrDefault(retained => string.Equals(retained?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase));
@@ -262,9 +271,15 @@ namespace EssSharp.Client
         /// <param name="options">The per-request options.</param>
         private void RetainSessionCookies( RestRequest request, RestResponse response, IReadableConfiguration configuration, RequestOptions options )
         {
-            // Return after a successful logout, which ends the session (the ridden set stays out of the pool).
-            if ( IsSuccessfulLogout(request, response) )
+            // Return after a successful logout, which ends the session (the ridden set stays out of the pool), forgetting
+            // whether it crossed into the grid.
+            if (IsSuccessfulLogout(request, response))
+            {
+                if (Uri.TryCreate(configuration?.BasePath, UriKind.Absolute, out var logoutUri) && request?.CookieContainer?.GetCookies(logoutUri)[@"JSESSIONID"]?.Value is { } loggedOutSession)
+                    _gridSessions.TryRemove(loggedOutSession, out _);
+
                 return;
+            }
 
             // Return without pooling for a failed response, e.g. a 401 whose ridden session is dead.
             if ( !response.IsSuccessful() )
@@ -298,6 +313,10 @@ namespace EssSharp.Client
             if ( !merged.Values.Any(cookie => string.Equals(cookie?.Name, @"JSESSIONID", StringComparison.OrdinalIgnoreCase)) )
                 return;
 
+            // Remember a session that a grid request rode, since it has crossed into the grid.
+            if (IsGridRequest(options) && merged.TryGetValue(@"JSESSIONID", out var gridSession))
+                _gridSessions[gridSession.Value] = true;
+
             // Pool the merged session cookie set.
             var sessionCookies = new CookieCollection();
 
@@ -311,6 +330,43 @@ namespace EssSharp.Client
             else
                 SessionCookies.Add(sessionCookies);
         }
+
+        /// <summary>
+        /// Takes a session cookie set from the pool, preferring, for a grid request, one that has already crossed into the
+        /// grid and, for any other request, one that has not; or returns null when the pool is empty.
+        /// </summary>
+        /// <param name="forGrid">Whether the set is for a grid request.</param>
+        private CookieCollection TakeSessionCookies( bool forGrid )
+        {
+            lock (_sessionChoiceLock)
+            {
+                var available = new List<CookieCollection>();
+
+                while (SessionCookies.TryTake(out var sessionCookies))
+                    available.Add(sessionCookies);
+
+                var chosen = available.FirstOrDefault(sessionCookies => IsGridSession(sessionCookies) == forGrid) ?? available.FirstOrDefault();
+
+                foreach (var sessionCookies in available.Where(sessionCookies => !ReferenceEquals(sessionCookies, chosen)))
+                    SessionCookies.Add(sessionCookies);
+
+                return chosen;
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the session the given cookie set carries has crossed into the grid.
+        /// </summary>
+        /// <param name="sessionCookies">The session cookie set.</param>
+        private bool IsGridSession( CookieCollection sessionCookies ) =>
+            sessionCookies?[@"JSESSIONID"]?.Value is { } session && _gridSessions.ContainsKey(session);
+
+        /// <summary>
+        /// Returns whether the given request options are for a grid operation, which crosses its session into the grid.
+        /// </summary>
+        /// <param name="options">The per-request options.</param>
+        private static bool IsGridRequest( RequestOptions options ) =>
+            options?.Operation?.StartsWith("GridApi.", StringComparison.Ordinal) is true;
 
         /// <summary>
         /// Returns whether the given request options are for an operation that starts a job.
