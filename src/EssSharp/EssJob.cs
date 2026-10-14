@@ -207,7 +207,7 @@ namespace EssSharp
             // Wait for the job to complete by polling the job info.
             while ( jobInfo.StatusCode is 100 )
             {
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
                 jobInfo = await jobsApi.JobsGetJobInfoAsync(id: jobId.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false);
             }
 
