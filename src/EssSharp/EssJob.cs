@@ -200,20 +200,38 @@ namespace EssSharp
             // Get the JobsAPI if necessary.
             jobsApi ??= GetApi<JobsApi>();
 
-            // Attempt to get the job info.
-            if ( await jobsApi.JobsGetJobInfoAsync(id: jobId.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } jobInfo )
-                throw new Exception("Failed to retrieve job information.");
+            // The client holds the session that started the job until the job has finished, so these polls ride another
+            // session; Essbase rejects a second request on a session that is still running the job.
+            JobRecordBean jobInfo = null;
 
-            // Wait for the job to complete by polling the job info. A poll that returns no job info ends the wait, and
-            // the caller reports it.
-            while (jobInfo is { StatusCode: 100 })
+            try
             {
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
-                jobInfo = await jobsApi.JobsGetJobInfoAsync(id: jobId.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
+                // Attempt to get the job info.
+                if ( await jobsApi.JobsGetJobInfoAsync(id: jobId.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } firstJobInfo )
+                    throw new Exception("Failed to retrieve job information.");
 
-            // Return the completed (or failed) job, or null when a poll returned no job info.
-            return jobInfo;
+                // Wait for the job to complete by polling the job info. A poll that returns no job info ends the wait, and
+                // the caller reports it.
+                jobInfo = firstJobInfo;
+
+                while (jobInfo is { StatusCode: 100 })
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
+                    jobInfo = await jobsApi.JobsGetJobInfoAsync(id: jobId.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false);
+                }
+
+                // Return the completed (or failed) job, or null when a poll returned no job info.
+                return jobInfo;
+            }
+            finally
+            {
+                // Return the job's session to the pool once the job has finished; otherwise (the wait was cancelled or
+                // failed, or the job's state is unknown), stop holding it, since the job may still be running on it.
+                if (jobInfo is { StatusCode: not 100 })
+                    Client?.ReturnJobSession(jobId);
+                else
+                    Client?.ForgetJobSession(jobId);
+            }
         }
 
         #endregion

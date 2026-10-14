@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 using EssSharp.Api;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace EssSharp.Client
@@ -32,8 +34,38 @@ namespace EssSharp.Client
         /// </summary>
         public ConcurrentBag<CookieCollection> SessionCookies { get; } = new ConcurrentBag<CookieCollection>();
 
+        /// <summary>
+        /// The session cookie sets held out of <see cref="SessionCookies"/> while the job each one started is running, by job
+        /// ID. A job keeps running on the session that started it after the starting request's response arrives, so the
+        /// set must not ride another request (such as the job's own status poll) until the job has finished; see
+        /// <see cref="ReturnJobSession(long)"/> and <see cref="ForgetJobSession(long)"/>.
+        /// </summary>
+        public ConcurrentDictionary<long, CookieCollection> JobSessionCookies { get; } = new ConcurrentDictionary<long, CookieCollection>();
+
         /// <summary />
         public ConcurrentDictionary<string, EssGridPreferences> SessionPreferences { get; } = new ConcurrentDictionary<string, EssGridPreferences>();
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Returns the session cookie set held for the given job to <see cref="SessionCookies"/>, once the job has finished.
+        /// </summary>
+        /// <param name="jobId">The ID of the finished job.</param>
+        public void ReturnJobSession( long jobId )
+        {
+            if (JobSessionCookies.TryRemove(jobId, out var sessionCookies))
+                SessionCookies.Add(sessionCookies);
+        }
+
+        /// <summary>
+        /// Stops holding the session cookie set for the given job without returning it to <see cref="SessionCookies"/>, when
+        /// the job may still be running on it (for example, after the wait for the job was cancelled). The server ends the
+        /// session once it is idle.
+        /// </summary>
+        /// <param name="jobId">The ID of the job.</param>
+        public void ForgetJobSession( long jobId ) => JobSessionCookies.TryRemove(jobId, out _);
 
         #endregion
 
@@ -199,7 +231,7 @@ namespace EssSharp.Client
 
             // If configured to do so, retain the session cookie set for the request and response.
             if ( configuration?.RetainCookies is true )
-                RetainSessionCookies(request, response, configuration);
+                RetainSessionCookies(request, response, configuration, options);
 
             // Write the response to any configured logger.
             response.WriteLogMessage(configuration);
@@ -221,12 +253,14 @@ namespace EssSharp.Client
         /// that rode the request (which continue the session on servers that do not reissue cookies),
         /// superseded by the cookies the response actually set (e.g. the successor session when the grid
         /// API forks). Nothing is pooled after a failed response, whose ridden session is not trusted, or
-        /// after a successful logout, which ends the session.
+        /// after a successful logout, which ends the session. The set for a request that started a job is held
+        /// in <see cref="JobSessionCookies"/> instead, since the job keeps running on that session.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
         /// <param name="configuration">The per-client configuration.</param>
-        private void RetainSessionCookies( RestRequest request, RestResponse response, IReadableConfiguration configuration )
+        /// <param name="options">The per-request options.</param>
+        private void RetainSessionCookies( RestRequest request, RestResponse response, IReadableConfiguration configuration, RequestOptions options )
         {
             // Return after a successful logout, which ends the session (the ridden set stays out of the pool).
             if ( IsSuccessfulLogout(request, response) )
@@ -270,7 +304,35 @@ namespace EssSharp.Client
             foreach ( var cookie in merged.Values )
                 sessionCookies.Add(cookie);
 
-            SessionCookies.Add(sessionCookies);
+            // A job keeps running on the session that started it after this response, so hold that session out of the
+            // pool until the job has finished; otherwise, pool it.
+            if (IsJobStart(options) && GetJobId(response) is { } jobId)
+                JobSessionCookies[jobId] = sessionCookies;
+            else
+                SessionCookies.Add(sessionCookies);
+        }
+
+        /// <summary>
+        /// Returns whether the given request options are for an operation that starts a job.
+        /// </summary>
+        /// <param name="options">The per-request options.</param>
+        private static bool IsJobStart( RequestOptions options ) =>
+            options?.Operation is "JobsApi.JobsExecuteJob" or "JobsApi.JobsExecuteByJobId";
+
+        /// <summary>
+        /// Returns the ID of the job that the given response to a job start reports, if any.
+        /// </summary>
+        /// <param name="response">The RestSharp response object</param>
+        private static long? GetJobId( RestResponse response )
+        {
+            try
+            {
+                return JObject.Parse(response?.Content ?? string.Empty)["job_ID"] is JValue { Type: JTokenType.Integer } jobId ? jobId.Value<long>() : null;
+            }
+            catch (JsonException)
+            {
+                return null;
+            }
         }
 
         /// <summary>
