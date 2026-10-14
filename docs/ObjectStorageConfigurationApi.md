@@ -4,15 +4,15 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**CloudStorageCreateOrUpdateConfig**](ObjectStorageConfigurationApi.md#cloudstoragecreateorupdateconfig) | **PUT** /cloudstorage/config | Create or Update Object Storage Configuration |
-| [**CloudStorageGetConfig**](ObjectStorageConfigurationApi.md#cloudstoragegetconfig) | **GET** /cloudstorage/config | Get Object Storage Configuration |
-| [**CloudStorageTestConfig**](ObjectStorageConfigurationApi.md#cloudstoragetestconfig) | **POST** /cloudstorage/config/test | Verify Object Storage Configuration |
+| [**CloudStorageCreateOrUpdateConfig**](ObjectStorageConfigurationApi.md#cloudstoragecreateorupdateconfig) | **PUT** /cloudstorage/config | Create or update object storage configuration |
+| [**CloudStorageGetConfig**](ObjectStorageConfigurationApi.md#cloudstoragegetconfig) | **GET** /cloudstorage/config | Get object storage configuration |
+| [**CloudStorageTestConfig**](ObjectStorageConfigurationApi.md#cloudstoragetestconfig) | **POST** /cloudstorage/config/test | Verify object storage configuration |
 
 <a id="cloudstoragecreateorupdateconfig"></a>
 # **CloudStorageCreateOrUpdateConfig**
 > void CloudStorageCreateOrUpdateConfig (CloudStorageDetails body)
 
-Create or Update Object Storage Configuration
+Create or update object storage configuration
 
 <p>Create or update object storage configuration. This is applicable only in ADBS deployment
 
@@ -43,7 +43,7 @@ namespace Example
 
             try
             {
-                // Create or Update Object Storage Configuration
+                // Create or update object storage configuration
                 apiInstance.CloudStorageCreateOrUpdateConfig(body);
             }
             catch (ApiException  e)
@@ -63,7 +63,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create or Update Object Storage Configuration
+    // Create or update object storage configuration
     apiInstance.CloudStorageCreateOrUpdateConfigWithHttpInfo(body);
 }
 catch (ApiException e)
@@ -107,7 +107,7 @@ void (empty response body)
 # **CloudStorageGetConfig**
 > void CloudStorageGetConfig ()
 
-Get Object Storage Configuration
+Get object storage configuration
 
 <p>Get object storage configuration. This is applicable only in ADBS deployment
 
@@ -137,7 +137,7 @@ namespace Example
 
             try
             {
-                // Get Object Storage Configuration
+                // Get object storage configuration
                 apiInstance.CloudStorageGetConfig();
             }
             catch (ApiException  e)
@@ -157,7 +157,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Object Storage Configuration
+    // Get object storage configuration
     apiInstance.CloudStorageGetConfigWithHttpInfo();
 }
 catch (ApiException e)
@@ -197,7 +197,7 @@ void (empty response body)
 # **CloudStorageTestConfig**
 > void CloudStorageTestConfig (CloudStorageDetails body)
 
-Verify Object Storage Configuration
+Verify object storage configuration
 
 <p>Verify provided object storage configuration details. This is applicable only in ADBS deployment
 
@@ -228,7 +228,7 @@ namespace Example
 
             try
             {
-                // Verify Object Storage Configuration
+                // Verify object storage configuration
                 apiInstance.CloudStorageTestConfig(body);
             }
             catch (ApiException  e)
@@ -248,7 +248,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Verify Object Storage Configuration
+    // Verify object storage configuration
     apiInstance.CloudStorageTestConfigWithHttpInfo(body);
 }
 catch (ApiException e)

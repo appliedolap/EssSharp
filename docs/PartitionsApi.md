@@ -154,7 +154,7 @@ namespace Example
             var applicationName2 = "applicationName_example";  // string | <p>Partition source application name.</p> (optional) 
             var databaseName2 = "databaseName_example";  // string | <p>Partition source database name.</p> (optional) 
             var datasourceName = "datasourceName_example";  // string | <p>Datasource name.</p> (optional) 
-            var measuresDimensionName = "measuresDimensionName_example";  // string | <p>Pivot dimension name. Can be Measures dimension but does not have to be.</p> (optional) 
+            var measuresDimensionName = "measuresDimensionName_example";  // string | <p>Pivot dimension name. Can be Measures dimension, but does not have to be.</p> (optional) 
             var applicationLevelDatasource = true;  // bool? | <p>Specify whether the Datasource is defined at the application level.</p> (optional) 
 
             try
@@ -201,7 +201,7 @@ catch (ApiException e)
 | **applicationName2** | **string** | &lt;p&gt;Partition source application name.&lt;/p&gt; | [optional]  |
 | **databaseName2** | **string** | &lt;p&gt;Partition source database name.&lt;/p&gt; | [optional]  |
 | **datasourceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; | [optional]  |
-| **measuresDimensionName** | **string** | &lt;p&gt;Pivot dimension name. Can be Measures dimension but does not have to be.&lt;/p&gt; | [optional]  |
+| **measuresDimensionName** | **string** | &lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; | [optional]  |
 | **applicationLevelDatasource** | **bool?** | &lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; | [optional]  |
 
 ### Return type
@@ -370,7 +370,7 @@ namespace Example
             var applicationName2 = "applicationName_example";  // string | <p>Partition source application name.</p> (optional) 
             var databaseName2 = "databaseName_example";  // string | <p>Partition source database name.</p> (optional) 
             var datasourceName = "datasourceName_example";  // string | <p>Datasource name.</p> (optional) 
-            var measuresDimensionName = "measuresDimensionName_example";  // string | <p>Pivot dimension name. Can be Measures dimension but does not have to be.</p> (optional) 
+            var measuresDimensionName = "measuresDimensionName_example";  // string | <p>Pivot dimension name. Can be Measures dimension, but does not have to be.</p> (optional) 
             var applicationLevelDatasource = true;  // bool? | <p>Specify whether the Datasource is defined at application level.</p> (optional) 
 
             try
@@ -423,7 +423,7 @@ catch (ApiException e)
 | **applicationName2** | **string** | &lt;p&gt;Partition source application name.&lt;/p&gt; | [optional]  |
 | **databaseName2** | **string** | &lt;p&gt;Partition source database name.&lt;/p&gt; | [optional]  |
 | **datasourceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; | [optional]  |
-| **measuresDimensionName** | **string** | &lt;p&gt;Pivot dimension name. Can be Measures dimension but does not have to be.&lt;/p&gt; | [optional]  |
+| **measuresDimensionName** | **string** | &lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; | [optional]  |
 | **applicationLevelDatasource** | **bool?** | &lt;p&gt;Specify whether the Datasource is defined at application level.&lt;/p&gt; | [optional]  |
 
 ### Return type
@@ -584,7 +584,7 @@ namespace Example
             var applicationName2 = "applicationName_example";  // string | <p>Partition source application name.</p> (optional) 
             var databaseName2 = "databaseName_example";  // string | <p>Partition source database name.</p> (optional) 
             var datasourceName = "datasourceName_example";  // string | <p>Datasource name.</p> (optional) 
-            var measuresDimensionName = "measuresDimensionName_example";  // string | <p>Pivot dimension name. Can be Measures dimension but does not have to be.</p> (optional) 
+            var measuresDimensionName = "measuresDimensionName_example";  // string | <p>Pivot dimension name. Can be Measures dimension, but does not have to be.</p> (optional) 
             var applicationLevelDatasource = true;  // bool? | <p>Specify whether the Datasource is defined at the application level.</p> (optional) 
 
             try
@@ -631,7 +631,7 @@ catch (ApiException e)
 | **applicationName2** | **string** | &lt;p&gt;Partition source application name.&lt;/p&gt; | [optional]  |
 | **databaseName2** | **string** | &lt;p&gt;Partition source database name.&lt;/p&gt; | [optional]  |
 | **datasourceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; | [optional]  |
-| **measuresDimensionName** | **string** | &lt;p&gt;Pivot dimension name. Can be Measures dimension but does not have to be.&lt;/p&gt; | [optional]  |
+| **measuresDimensionName** | **string** | &lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; | [optional]  |
 | **applicationLevelDatasource** | **bool?** | &lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; | [optional]  |
 
 ### Return type
@@ -800,7 +800,7 @@ namespace Example
             var applicationName2 = "applicationName_example";  // string | <p>Partition source application name.</p> (optional) 
             var databaseName2 = "databaseName_example";  // string | <p>Partition source database name.</p> (optional) 
             var datasourceName = "datasourceName_example";  // string | <p>Datasource name.</p> (optional) 
-            var measuresDimensionName = "measuresDimensionName_example";  // string | <p>Pivot dimension name. Can be Measures dimension but does not have to be.</p> (optional) 
+            var measuresDimensionName = "measuresDimensionName_example";  // string | <p>Pivot dimension name. Can be Measures dimension, but does not have to be.</p> (optional) 
             var applicationLevelDatasource = true;  // bool? | <p>Specify whether the Datasource is defined at the application level.</p> (optional) 
 
             try
@@ -847,7 +847,7 @@ catch (ApiException e)
 | **applicationName2** | **string** | &lt;p&gt;Partition source application name.&lt;/p&gt; | [optional]  |
 | **databaseName2** | **string** | &lt;p&gt;Partition source database name.&lt;/p&gt; | [optional]  |
 | **datasourceName** | **string** | &lt;p&gt;Datasource name.&lt;/p&gt; | [optional]  |
-| **measuresDimensionName** | **string** | &lt;p&gt;Pivot dimension name. Can be Measures dimension but does not have to be.&lt;/p&gt; | [optional]  |
+| **measuresDimensionName** | **string** | &lt;p&gt;Pivot dimension name. Can be Measures dimension, but does not have to be.&lt;/p&gt; | [optional]  |
 | **applicationLevelDatasource** | **bool?** | &lt;p&gt;Specify whether the Datasource is defined at the application level.&lt;/p&gt; | [optional]  |
 
 ### Return type

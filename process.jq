@@ -72,13 +72,35 @@ def set_schema_enum($schema; $property; $values):
   | require_absent(["components", "schemas", $schema, "properties", $property, "enum"])
   | .components.schemas[$schema].properties[$property].enum = $values;
 
-# Corrects one allowed value of a property's enumeration.
-def replace_enum_value($schema; $property; $from; $to):
-  require(["components", "schemas", $schema, "properties", $property, "enum"])
-  | if (.components.schemas[$schema].properties[$property].enum | index($from)) == null
-    then error("process.jq: " + $schema + "." + $property + " no longer allows " + $from + ", review the correction")
-    else .components.schemas[$schema].properties[$property].enum |= map(if . == $from then $to else . end)
-    end;
+# Tags each untagged operation with the tag of the longest path prefix in $tags that it falls under, and names
+# it after that tag as Oracle names its tagged operations ("Tag.operation"), dropping a numeric suffix such as
+# _1 where the name is unique within the tag. An untagged operation under none of the prefixes fails, so a new
+# one is given a tag deliberately instead of landing in a generated DefaultApi.
+def tag_untagged_operations($tags):
+  def untagged: type == "object" and has("operationId") and ((.tags // []) | length) == 0;
+  def base_name: .operationId | sub("_[0-9]+$"; "");
+  .paths |= with_entries(
+      .key as $path
+      | .value |= with_entries(
+          if (.value | untagged)
+          then ([$tags | to_entries[] | select(.key as $prefix | $path == $prefix or ($path | startswith($prefix + "/")))]
+                | max_by(.key | length)) as $match
+            | if $match == null
+              then error("process.jq: no tag for the untagged operation " + (.key | ascii_upcase) + " " + $path + ", add one to the tags")
+              else .value.tags = [$match.value] | .value["x-process-tagged"] = true
+              end
+          else .
+          end))
+  | ([.paths[][] | objects | select(.["x-process-tagged"]) | [.tags[0], base_name]]
+     | group_by(.) | map(select(length > 1) | .[0])) as $ambiguous
+  | .paths |= map_values(map_values(
+      if type == "object" and .["x-process-tagged"]
+      then [.tags[0], base_name] as $key
+           | .operationId = (.tags[0] | gsub(" "; "")) + "."
+                            + (if ($ambiguous | index([$key])) then .operationId else base_name end)
+           | del(.["x-process-tagged"])
+      else .
+      end));
 
 # Oracle documents several list endpoints as an array of a paged collection (for example an array of
 # DimensionList) when the server returns the collection object itself. A schema is a paged collection when it
@@ -103,9 +125,24 @@ def unwrap_collection_arrays:
       else .
       end));
 
-# Oracle's document contains both "openapi" and "swagger" properties. The latter is invalid in an OpenAPI 3
-# document and makes OpenAPI Generator's validation fail.
-del(.swagger)
+# The server serves operations that Oracle does not publish, without tags. Tag them by path, so that each group
+# is generated into its own API class.
+tag_untagged_operations({
+    "/amw": "AMW",
+    "/backup": "Backup",
+    "/catalog_old": "Legacy Catalog",
+    "/ess-mcp": "Essbase MCP",
+    "/event": "Events",
+    "/fastwriteback": "Fast Writeback",
+    "/federatedoverdatasource": "Federated Over Datasource",
+    "/federatedsample": "Federated Sample",
+    "/odbc": "ODBC",
+    "/outline/{app}/{cube}/edit": "Outline Editor",
+    "/outline/{app}/{cube}/qedit": "Outline Quick Editor",
+    "/security": "Security",
+    "/service": "Service",
+    "/version": "Version"
+  })
 
 # OpenAPI 3 request bodies are unnamed, so the generator would name the C# parameter after the body's schema.
 # Swagger 2 body parameters were named "body" and the wrapper code relies on that name.
@@ -273,10 +310,6 @@ del(.swagger)
 | .components.schemas |= with_entries(if .key == "DataSource" then .key = "RuleDataSource" else . end)
 | require(["components", "schemas", "Rules", "properties", "dataSource", "$ref"])
 | .components.schemas.Rules.properties.dataSource["$ref"] = "#/components/schemas/RuleDataSource"
-
-# The server's own specification, and the wire value, spell the zoom in mode "descendents". Oracle's published
-# document spells it "descendants".
-| replace_enum_value("ZoomIn"; "mode"; "descendants"; "descendents")
 
 # Only the connection and type properties of a datasource are required.
 | require(["components", "schemas", "Datasource"])

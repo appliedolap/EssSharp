@@ -425,7 +425,7 @@ namespace Example
 
             var apiInstance = new ServerLogsApi(config);
             var msgtype = new List<string>(); // List<string> | One or more Log message types e.g. ERROR (optional) 
-            var user = "user_example";  // string | <p>User ID.</p> (optional) 
+            var user = "user_example";  // string | <p>User Id.</p> (optional) 
             var after = 789L;  // long? | <p>After time (in milliseconds).</p> (optional) 
             var before = 789L;  // long? | <p>Before time (in milliseconds).</p> (optional) 
             var tail = 56;  // int? | <p>Last <i>n</i> records - maximum of 1000.</p> (optional) 
@@ -472,7 +472,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **msgtype** | [**List&lt;string&gt;**](string.md) | One or more Log message types e.g. ERROR | [optional]  |
-| **user** | **string** | &lt;p&gt;User ID.&lt;/p&gt; | [optional]  |
+| **user** | **string** | &lt;p&gt;User Id.&lt;/p&gt; | [optional]  |
 | **after** | **long?** | &lt;p&gt;After time (in milliseconds).&lt;/p&gt; | [optional]  |
 | **before** | **long?** | &lt;p&gt;Before time (in milliseconds).&lt;/p&gt; | [optional]  |
 | **tail** | **int?** | &lt;p&gt;Last &lt;i&gt;n&lt;/i&gt; records - maximum of 1000.&lt;/p&gt; | [optional]  |

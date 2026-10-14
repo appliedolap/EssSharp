@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **Type** | **string** |  | [optional] 
 **BaseDimension** | **string** |  | [optional] 
 **Modified** | **bool** |  | [optional] 
-**ScaassociationMode** | **string** |  | [optional] 
 **ScadisAssociationMode** | **string** |  | [optional] 
+**ScaassociationMode** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

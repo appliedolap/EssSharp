@@ -296,7 +296,7 @@ void (empty response body)
 
 Get Performance Analyzer Settings
 
-<p>Gets the Performance Analyzer settings. You can see whether Performance Analyzer is enabled and view the time interval setting for creation of new data files. Requires Service Administrator role.</p>
+<p>Gets the Performance Analyzer settings. You can see whether Performance Analyzer is enabled, and view the time interval setting for creation of new data files. Requires Service Administrator role.</p>
 
 ### Example
 ```csharp
@@ -484,7 +484,7 @@ This endpoint does not need any parameter.
 
 Set Performance Analyzer Settings
 
-<p>Changes the Performance Analyzer settings: you can enable or disable it or change the time interval for creation of new data files. Requires Service Administrator role.</p>
+<p>Changes the Performance Analyzer settings: you can enable or disable it, or change the time interval for creation of new data files. Requires Service Administrator role.</p>
 
 ### Example
 ```csharp

@@ -57,6 +57,10 @@ jobs:
       continue-on-error: true
       run: dotnet run docfx/tools/GenerateFluentExtensionDocs.cs
 
+    # List every endpoint of the newest Essbase specification and whether the EssSharp contracts reach it.
+    - name: DocFx Coverage Docs
+      run: dotnet run docfx/tools/GenerateCoverageDocs.cs
+
     - name: DocFx Build
       run: docfx build docfx/docfx.json
     

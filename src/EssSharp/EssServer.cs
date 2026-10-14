@@ -1148,35 +1148,22 @@ namespace EssSharp
             }
         }
 
-        /// <summary>
-        /// Kills all active sessions for the given <paramref name="username"/> (including sessions with active requests).
-        /// </summary>
-        /// <param name="username">The user whose sessions to kill.</param>
-        /// <remarks>Administrative privilege is required in order to perform this operation.</remarks>
-        public void KillSessionsForUser( string username ) => KillSessionsForUserAsync(username).GetAwaiter().GetResult();
+        /// <inheritdoc />
+        public void KillSessions( string applicationName = null, string cubeName = null, string userId = null, bool disconnect = false ) =>
+            KillSessionsAsync(applicationName, cubeName, userId, disconnect).GetAwaiter().GetResult();
 
-        /// <summary>
-        /// Asynchronously kills all active sessions for the given <paramref name="username"/> (including sessions with active requests).
-        /// </summary>
-        /// <param name="username">The user whose sessions to kill.</param>
-        /// <remarks>Administrative privilege is required in order to perform this operation.</remarks>
-        public async Task KillSessionsForUserAsync( string username )
+        /// <inheritdoc />
+        public async Task KillSessionsAsync( string applicationName = null, string cubeName = null, string userId = null, bool disconnect = false, CancellationToken cancellationToken = default )
         {
             try
             {
-                if ( string.IsNullOrEmpty(username) )
-                    throw new ArgumentNullException(nameof(username), $"A {nameof(username)} is required to kill active sessions.");
-
                 var api = GetApi<SessionsApi>();
-                await api.SessionsDeleteAllActiveSessionsAsync(userId: username, disconnect: true).ConfigureAwait(false);
+                await api.SessionsDeleteAllActiveSessionsAsync(applicationName, cubeName, userId, disconnect, 0, cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                if ( !string.IsNullOrWhiteSpace(username) )
-                    throw new Exception($@"Unable to kill all active sessions for user ""{username}"". {e.Message}", e);
-                else
-                    throw new Exception($@"Unable to kill all active sessions. {e.Message}", e);
+                throw new Exception($@"Unable to kill the active sessions on ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -1214,6 +1201,31 @@ namespace EssSharp
                 else
                     throw new Exception(@"Unable to sign out of the current session.");
             }
+        }
+
+        #endregion
+
+        #region Internal Methods
+
+        /// <summary>
+        /// Logs off all active sessions for the given <paramref name="username"/> (including sessions with active requests).
+        /// </summary>
+        /// <param name="username">The user whose sessions to kill.</param>
+        /// <remarks>Administrative privilege is required in order to perform this operation.</remarks>
+        internal void KillSessionsForUser( string username ) => KillSessionsForUserAsync(username).GetAwaiter().GetResult();
+
+        /// <summary>
+        /// Asynchronously logs off all active sessions for the given <paramref name="username"/> (including sessions with active requests).
+        /// </summary>
+        /// <param name="username">The user whose sessions to kill.</param>
+        /// <param name="cancellationToken" />
+        /// <remarks>Administrative privilege is required in order to perform this operation.</remarks>
+        internal Task KillSessionsForUserAsync( string username, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrEmpty(username) )
+                throw new ArgumentNullException(nameof(username), $"A {nameof(username)} is required to kill active sessions.");
+
+            return KillSessionsAsync(userId: username, disconnect: true, cancellationToken: cancellationToken);
         }
 
         #endregion

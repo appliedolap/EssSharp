@@ -14,7 +14,7 @@ All URIs are relative to */essbase/rest/v1*
 
 Download All Application Logs
 
-<p>Downloads a zip file which contains all log files for the specific application.</p>
+<p>Returns a download zip file which contains all log files for the specific application.</p>
 
 ### Example
 ```csharp
@@ -113,7 +113,7 @@ catch (ApiException e)
 
 Download Application Logs
 
-<p>Gets links to download all log files as a zip file, and to download the latest log file.</p>
+<p>Returns links to download all log files as a zip file, and to download the latest log file.</p>
 
 ### Example
 ```csharp

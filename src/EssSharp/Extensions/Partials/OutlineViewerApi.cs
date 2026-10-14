@@ -129,7 +129,13 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="queryType">The type of search: SEARCH, WILDSEARCH, or DTSMEMBERS.</param>
+        /// <param name="queryOptions">The comma-separated search options.</param>
+        /// <param name="search">The member name, or name pattern, to search for. (optional)</param>
+        /// <param name="dimensionName">The name of the dimension to search. (optional)</param>
+        /// <param name="aliasName">The name of the alias table to search. (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
+        /// <param name="limit">The maximum number of members to return. (optional, default to 500)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of MemberBean</returns>
@@ -145,7 +151,13 @@ namespace EssSharp.Api
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="app">&lt;p&gt;Application name.&lt;/p&gt;</param>
         /// <param name="cube">&lt;p&gt;Database name.&lt;/p&gt;</param>
+        /// <param name="queryType">The type of search: SEARCH, WILDSEARCH, or DTSMEMBERS.</param>
+        /// <param name="queryOptions">The comma-separated search options.</param>
+        /// <param name="search">The member name, or name pattern, to search for. (optional)</param>
+        /// <param name="dimensionName">The name of the dimension to search. (optional)</param>
+        /// <param name="aliasName">The name of the alias table to search. (optional)</param>
         /// <param name="fields">&lt;p&gt;Comma-separated list of member properties to fetch.&lt;/p&gt; (optional)</param>
+        /// <param name="limit">The maximum number of members to return. (optional, default to 500)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (MemberBean)</returns>
