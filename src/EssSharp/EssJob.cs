@@ -204,14 +204,15 @@ namespace EssSharp
             if ( await jobsApi.JobsGetJobInfoAsync(id: jobId.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } jobInfo )
                 throw new Exception("Failed to retrieve job information.");
 
-            // Wait for the job to complete by polling the job info.
-            while ( jobInfo.StatusCode is 100 )
+            // Wait for the job to complete by polling the job info. A poll that returns no job info ends the wait, and
+            // the caller reports it.
+            while (jobInfo is { StatusCode: 100 })
             {
                 await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).ConfigureAwait(false);
                 jobInfo = await jobsApi.JobsGetJobInfoAsync(id: jobId.ToString(), cancellationToken: cancellationToken).ConfigureAwait(false);
             }
 
-            // Return the completed (or failed) job.
+            // Return the completed (or failed) job, or null when a poll returned no job info.
             return jobInfo;
         }
 
