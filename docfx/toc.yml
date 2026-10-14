@@ -1,6 +1,8 @@
 - name: EssSharp
-  href: api/EssSharp/toc.yml
+  href: api/EssSharp/
+  topicHref: api/EssSharp/EssSharp.html
 - name: EssSharp.Abstractions
-  href: api/EssSharp.Abstractions/toc.yml
+  href: api/EssSharp.Abstractions/
+  topicHref: api/EssSharp.Abstractions/EssSharp.html
 - name: API Coverage
   href: articles/coverage.md
