@@ -43,9 +43,10 @@ namespace EssSharp.Integration.Setup
 
         /// <summary>
         /// How long to wait for Essbase to write its registry entries, which only happens once it has created its
-        /// domain - well after the container itself reports as running.
+        /// domain - well after the container itself reports as running. A domain that has not been created by then is
+        /// not going to be.
         /// </summary>
-        private static readonly TimeSpan RegistryEntryTimeout = TimeSpan.FromMinutes(30);
+        private static readonly TimeSpan RegistryEntryTimeout = TimeSpan.FromMinutes(10);
 
         /// <summary>
         /// How long to wait for the Essbase container to become usable again after a restart.
@@ -198,14 +199,30 @@ namespace EssSharp.Integration.Setup
             {
                 _essbaseContainerId = _essbaseTestContainer.Id;
 
-                // The registry settings live in the repository database, which is started concurrently with this
-                // container and takes far longer to become ready, so wait for it before reading or writing them.
-                if ( databaseReady is not null )
-                    await databaseReady;
+                // Only the AI query tests depend on the registry settings, so when they are disabled there is nothing to
+                // force, and no reason to wait for the repository database or to restart Essbase.
+                if ( AiQuery?.Mode is not IntegrationTestAiQueryMode.Disabled )
+                {
+                    try
+                    {
+                        // The registry settings live in the repository database, which is started concurrently with this
+                        // container and takes far longer to become ready, so wait for it before reading or writing them.
+                        if ( databaseReady is not null )
+                            await databaseReady;
 
-                // Force any declared registry settings first, since that may restart the container, and only then run
-                // the setup commands - which may depend on a feature the registry settings just enabled.
-                await ApplyRegistrySettingsAsync(sink, cancellationToken);
+                        // Force any declared registry settings first, since that may restart the container, and only
+                        // then run the setup commands - which may depend on a feature the registry settings just enabled.
+                        await ApplyRegistrySettingsAsync(sink, cancellationToken);
+                    }
+                    catch ( Exception e ) when ( e is not OperationCanceledException )
+                    {
+                        // This fixture is shared by every collection, so a failure here must not fail them all. Keep it for
+                        // the AI query environment to report, which is the only thing that needs the settings.
+                        RegistrySettingsFailure = e;
+                        sink?.OnMessage(new DiagnosticMessage($@"Unable to force the Essbase registry settings: {e.Message}"));
+                    }
+                }
+
                 await RunEssbaseSetupCommandsAsync(sink, cancellationToken);
             }
         }
@@ -222,6 +239,7 @@ namespace EssSharp.Integration.Setup
         /// which lets a disposable test container force them on. The values are cached in the Essbase process, so a
         /// restart is required for a change to take effect.
         /// </remarks>
+        /// <exception cref="InvalidOperationException">A registry entry did not appear within <see cref="RegistryEntryTimeout" />.</exception>
         public static async Task ApplyRegistrySettingsAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
         {
             var profile = EssbaseProfile;
@@ -242,10 +260,7 @@ namespace EssSharp.Integration.Setup
                 // The registry rows are only written once Essbase has created its domain, which happens well after
                 // the container itself reports as running, so wait for the entry to appear before updating it.
                 if ( !await WaitForRegistryEntryAsync(profile, encodedName, sink, cancellationToken) )
-                {
-                    sink?.OnMessage(new DiagnosticMessage($@"Essbase registry entry '{name}' never appeared; leaving it unset."));
-                    continue;
-                }
+                    throw new InvalidOperationException($@"The Essbase registry entry '{name}' did not appear within {RegistryEntryTimeout.TotalMinutes:0} minutes, so it cannot be forced to '{value}'.");
 
                 // Only update an entry that does not already hold the desired value, so that a reused container is
                 // not restarted for no reason.
@@ -470,6 +485,12 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         internal static IntegrationTestAiQuerySettings AiQuery { get; set; }
+
+        /// <summary>
+        /// The failure to force the Essbase registry settings, if there was one. The AI query environment reports it
+        /// instead of the shared fixture failing every collection.
+        /// </summary>
+        internal static Exception RegistrySettingsFailure { get; private set; }
 
         /// <summary>
         /// Whether this run started the Essbase container, as opposed to finding one that was already running. A

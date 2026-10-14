@@ -143,6 +143,11 @@ namespace EssSharp.Integration.Setup
             if ( profile.Version is { } version && version < FirstSupportedVersion )
                 return;
 
+            // AI query needs registry settings that were forced when the Essbase container started. If that failed, say so
+            // here, where it explains why these tests cannot run, rather than letting each of them fail on its own.
+            if ( IntegrationTestFactory.RegistrySettingsFailure is { } registryFailure )
+                throw new InvalidOperationException($@"The Essbase registry settings that AI query needs could not be forced: {registryFailure.Message}", registryFailure);
+
             await _gate.WaitAsync(cancellationToken);
 
             try
