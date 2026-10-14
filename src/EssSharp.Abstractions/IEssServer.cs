@@ -544,6 +544,11 @@ namespace EssSharp
         /// Signs out of the server.
         /// </summary>
         /// <param name="allSessions">Whether to sign out all sessions associated with the <see cref="IEssServer"/> instance.</param>
+        /// <remarks>
+        /// Essbase splits off a second session behind a session's first grid request, and signing out does not end it; it
+        /// stays open until the server's idle timeout. EssSharp keeps grid requests on the sessions that have already crossed
+        /// into the grid, so grid work leaves one such session per session it runs grid requests on at once.
+        /// </remarks>
         public void SignOut( bool allSessions = false );
 
         /// <summary>
@@ -551,6 +556,11 @@ namespace EssSharp
         /// </summary>
         /// <param name="allSessions">Whether to sign out all sessions associated with the <see cref="IEssServer"/> instance.</param>
         /// <param name="cancellationToken" />
+        /// <remarks>
+        /// Essbase splits off a second session behind a session's first grid request, and signing out does not end it; it
+        /// stays open until the server's idle timeout. EssSharp keeps grid requests on the sessions that have already crossed
+        /// into the grid, so grid work leaves one such session per session it runs grid requests on at once.
+        /// </remarks>
         public Task SignOutAsync( bool allSessions = false, CancellationToken cancellationToken = default );
 
         /// <summary>

@@ -1195,13 +1195,15 @@ namespace EssSharp
             {
                 var api = GetApi<UserSessionApi>();
 
-                if ( allSessions )
+                // Sign out of the sessions the client holds: one, or all of them. With none held there is nothing to sign
+                // out of, and a logout without a session would only log in to a new session to end it.
+                while (!Client.SessionCookies.IsEmpty)
                 {
-                    while ( !Client.SessionCookies.IsEmpty )
-                        await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
-                }
+                    await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                await api.UserSessionSignoffAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    if (!allSessions)
+                        break;
+                }
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
