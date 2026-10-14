@@ -505,6 +505,27 @@ namespace EssSharp
         public Task<List<IEssUtility>> GetUtilitiesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Kills the active sessions on the server, optionally only those of the given application, cube, and/or user.
+        /// </summary>
+        /// <param name="applicationName">The application whose sessions to kill, or null for sessions of any application.</param>
+        /// <param name="cubeName">The cube whose sessions to kill, or null for sessions of any cube.</param>
+        /// <param name="userId">The user whose sessions to kill, or null for sessions of any user.</param>
+        /// <param name="disconnect">Whether to log the sessions off. When false, only the requests running in them are killed.</param>
+        /// <remarks>Administrative privilege is required in order to perform this operation.</remarks>
+        public void KillSessions( string applicationName = null, string cubeName = null, string userId = null, bool disconnect = false );
+
+        /// <summary>
+        /// Asynchronously kills the active sessions on the server, optionally only those of the given application, cube, and/or user.
+        /// </summary>
+        /// <param name="applicationName">The application whose sessions to kill, or null for sessions of any application.</param>
+        /// <param name="cubeName">The cube whose sessions to kill, or null for sessions of any cube.</param>
+        /// <param name="userId">The user whose sessions to kill, or null for sessions of any user.</param>
+        /// <param name="disconnect">Whether to log the sessions off. When false, only the requests running in them are killed.</param>
+        /// <param name="cancellationToken" />
+        /// <remarks>Administrative privilege is required in order to perform this operation.</remarks>
+        public Task KillSessionsAsync( string applicationName = null, string cubeName = null, string userId = null, bool disconnect = false, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Signs into the server and returns a user session for the connected user as an <see cref="IEssUserSession"/> object.
         /// </summary>
         /// <param name="includeGroups" />

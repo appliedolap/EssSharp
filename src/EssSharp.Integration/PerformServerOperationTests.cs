@@ -1083,7 +1083,7 @@ namespace EssSharp.Integration
             //Assert.NotEmpty(userSessions);
 
             // Kill all open sessions for the end-user.
-            await (server as EssServer).KillSessionsForUserAsync(username);
+            await server.KillSessionsAsync(userId: username, disconnect: true, cancellationToken: TestContext.Current.CancellationToken);
 
             // Refresh the list of sessions for the end-user.
             userSessions = (await server.GetSessionsAsync(TestContext.Current.CancellationToken))
