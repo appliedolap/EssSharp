@@ -24,7 +24,8 @@ namespace EssSharp
 
         private readonly string _server;
 
-        private bool _disposed;
+        private bool              _disposed;
+        private EssFeatureSupport _featureSupport;
 
         #endregion
 
@@ -54,7 +55,7 @@ namespace EssSharp
 
             var basePath = _server;
 
-            // If necessary, append the default REST API path if necessary.
+            // If necessary, append the default REST API path.
             if ( !_server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
                 basePath = $"{_server}{_defaultRestApiPath}";
 
@@ -84,7 +85,7 @@ namespace EssSharp
 
             var basePath = _server;
 
-            // If necessary, append the default REST API path if necessary.
+            // If necessary, append the default REST API path.
             if ( !_server.EndsWith(_defaultRestApiPath, StringComparison.OrdinalIgnoreCase) )
                 basePath = $"{_server}{_defaultRestApiPath}";
 
@@ -111,6 +112,15 @@ namespace EssSharp
 
         /// <summary />
         private EssGridPreferences DefaultGridPreferences { get; set; } = null;
+
+        #endregion
+
+        #region Internal Properties
+
+        /// <summary>
+        /// Answers whether this server supports an <see cref="EssFeature"/>, and recognizes the failures that mean it does not.
+        /// </summary>
+        internal EssFeatureSupport FeatureSupport => LazyInitializer.EnsureInitialized(ref _featureSupport, () => new EssFeatureSupport(this));
 
         #endregion
 
@@ -1199,9 +1209,16 @@ namespace EssSharp
                 if ( !string.IsNullOrWhiteSpace(Configuration?.Username) )
                     throw new Exception($@"Unable to sign out of the current session for user ""{Configuration.Username}"". {e.Message}", e);
                 else
-                    throw new Exception(@"Unable to sign out of the current session.");
+                    throw new Exception($@"Unable to sign out of the current session. {e.Message}", e);
             }
         }
+
+        /// <inheritdoc />
+        public bool Supports( EssFeature feature ) => SupportsAsync(feature).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public Task<bool> SupportsAsync( EssFeature feature, CancellationToken cancellationToken = default ) =>
+            FeatureSupport.SupportsAsync(feature, cancellationToken);
 
         #endregion
 

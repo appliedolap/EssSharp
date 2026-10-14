@@ -462,6 +462,9 @@ namespace EssSharp.Integration
             // Capture the (x.x) server version.
             var version = new Version(string.Join('.', (await server.GetAboutAsync(TestContext.Current.CancellationToken))?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
 
+            // Assert that the server reports drillthrough report execution as supported exactly when it is (21.4 or higher).
+            Assert.Equal(version.CompareTo(new Version(major: 21, minor: 4)) >= 0, await server.SupportsAsync(EssFeature.DrillthroughReportExecution, TestContext.Current.CancellationToken));
+
             // If the server version is 21.4 or higher, execute the drillthrough report and validate the data.
             if ( version.CompareTo(new Version(major: 21, minor: 4)) >= 0 )
             {
@@ -513,6 +516,9 @@ namespace EssSharp.Integration
 
             // Capture the (x.x) server version.
             var version = new Version(string.Join('.', (await server.GetAboutAsync(TestContext.Current.CancellationToken))?.Version?.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).Take(2)));
+
+            // Assert that the server reports getting drillthrough reports for cells as supported exactly when it is (21.7 or higher).
+            Assert.Equal(version.CompareTo(new Version(major: 21, minor: 7)) >= 0, await server.SupportsAsync(EssFeature.DrillthroughReportsForCells, TestContext.Current.CancellationToken));
 
             // If the server version is 21.7 or higher, execute the drillthrough report and validate the data.
             if (version.CompareTo(new Version(major: 21, minor: 7)) >= 0)

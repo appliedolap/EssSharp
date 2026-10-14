@@ -536,7 +536,7 @@ namespace EssSharp
         /// Asynchronously signs into the server and returns a user session for the connected user as an <see cref="IEssUserSession"/> object.
         /// </summary>
         /// <param name="includeGroups" />
-         /// <param name="includeToken" />
+        /// <param name="includeToken" />
         /// <param name="cancellationToken" />
         public Task<IEssUserSession> SignInAsync( bool includeToken = false, bool includeGroups = false, CancellationToken cancellationToken = default );
 
@@ -552,6 +552,29 @@ namespace EssSharp
         /// <param name="allSessions">Whether to sign out all sessions associated with the <see cref="IEssServer"/> instance.</param>
         /// <param name="cancellationToken" />
         public Task SignOutAsync( bool allSessions = false, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns whether the server supports the given <see cref="EssFeature"/>.
+        /// </summary>
+        /// <param name="feature">The feature to check.</param>
+        /// <remarks>
+        /// The answer comes from the operations the server declares in the specification it serves, which is read once and
+        /// cached. When the server does not serve its specification, a feature is reported as supported until a member that
+        /// needs it has thrown a <see cref="NotSupportedException"/>.
+        /// </remarks>
+        public bool Supports( EssFeature feature );
+
+        /// <summary>
+        /// Asynchronously returns whether the server supports the given <see cref="EssFeature"/>.
+        /// </summary>
+        /// <param name="feature">The feature to check.</param>
+        /// <param name="cancellationToken" />
+        /// <remarks>
+        /// The answer comes from the operations the server declares in the specification it serves, which is read once and
+        /// cached. When the server does not serve its specification, a feature is reported as supported until a member that
+        /// needs it has thrown a <see cref="NotSupportedException"/>.
+        /// </remarks>
+        public Task<bool> SupportsAsync( EssFeature feature, CancellationToken cancellationToken = default );
 
         #endregion
     }

@@ -512,6 +512,12 @@ namespace EssSharp.Integration
         public List<string> Requests { get; } = new List<string>();
 
         /// <summary>
+        /// Returns the status code and JSON body to answer a request with, given the request line (for example,
+        /// "GET /essbase/rest/v1/about HTTP/1.1"), or null to answer with the default 200 response.
+        /// </summary>
+        public Func<string, (HttpStatusCode StatusCode, string Body)?> ResponseProvider { get; set; }
+
+        /// <summary>
         /// Returns the Set-Cookie header values to emit for the request at a given index.
         /// </summary>
         public Func<int, string[]> SetCookieProvider { get; }
@@ -583,11 +589,12 @@ namespace EssSharp.Integration
                     await Task.Delay(10).ConfigureAwait(false);
                 }
 
-                // Compose a small JSON body that deserializes as a UserBean (or is ignored).
-                var body = @"{""id"":""admin"",""name"":""admin"",""token"":""stub-token""}";
+                // Answer with the scripted response, or with a small JSON body that deserializes as a UserBean (or is ignored).
+                var requestLine = request.Substring(0, Math.Max(0, request.IndexOf("\r\n", StringComparison.Ordinal)));
+                var (statusCode, body) = ResponseProvider?.Invoke(requestLine) ?? (HttpStatusCode.OK, @"{""id"":""admin"",""name"":""admin"",""token"":""stub-token""}");
 
                 var builder = new StringBuilder()
-                    .Append("HTTP/1.1 200 OK\r\n")
+                    .Append($"HTTP/1.1 {(int)statusCode} {statusCode}\r\n")
                     .Append("Content-Type: application/json\r\n")
                     .Append($"Content-Length: {Encoding.UTF8.GetByteCount(body)}\r\n");
 
