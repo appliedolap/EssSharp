@@ -73,6 +73,13 @@ namespace EssSharp.Integration.Setup
         private static readonly System.Version FirstSupportedVersion = new(major: 21, minor: 8);
 
         /// <summary>
+        /// The longest the whole environment may take to build. Pulling the images and starting the database take
+        /// minutes on a cold start; a build that takes this long is stuck, and the tests should fail with a message
+        /// instead of waiting for the limit of the job that runs them.
+        /// </summary>
+        private static readonly TimeSpan EnvironmentTimeout = TimeSpan.FromMinutes(30);
+
+        /// <summary>
         /// How long to wait for the vectorize job to finish.
         /// </summary>
         private static readonly TimeSpan VectorizeTimeout = TimeSpan.FromMinutes(15);
@@ -165,10 +172,22 @@ namespace EssSharp.Integration.Setup
                 _databaseName    = $@"{profile.ContainerName}-ai-database";
                 _networkName     = $@"{profile.ContainerName}-ai";
 
-                var created = await StartContainersAsync(settings, profile, sink, cancellationToken);
+                // Every wait below - the image pulls, the container wait strategies, the database setup script, the
+                // Essbase configuration - takes this token, so one timeout bounds them all.
+                using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                timeout.CancelAfter(EnvironmentTimeout);
 
-                await ConfigureDatabaseAsync(sink, cancellationToken);
-                await ConfigureEssbaseAsync(settings, profile, created, sink, cancellationToken);
+                try
+                {
+                    var created = await StartContainersAsync(settings, profile, sink, timeout.Token);
+
+                    await ConfigureDatabaseAsync(sink, timeout.Token);
+                    await ConfigureEssbaseAsync(settings, profile, created, sink, timeout.Token);
+                }
+                catch ( OperationCanceledException ) when ( timeout.IsCancellationRequested && !cancellationToken.IsCancellationRequested )
+                {
+                    throw new TimeoutException($@"The AI query environment was not ready within {EnvironmentTimeout.TotalMinutes:0} minutes.");
+                }
 
                 Log(sink, $@"The AI query environment is ready ({stopwatch.Elapsed.TotalSeconds:0} s).");
 

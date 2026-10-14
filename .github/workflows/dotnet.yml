@@ -18,6 +18,10 @@ jobs:
     # https://github.com/actions/runner-images/issues/1143
     # runs-on: windows-latest
     runs-on: ubuntu-latest
+
+    # The integration tests start Docker containers, and a stuck one would otherwise hold the runner for the default
+    # six hours. The run normally takes about ten minutes.
+    timeout-minutes: 60
     
     steps:
     - uses: actions/checkout@v3
