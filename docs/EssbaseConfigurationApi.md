@@ -4,13 +4,13 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**EssbaseConfigurationGet**](EssbaseConfigurationApi.md#essbaseconfigurationget) | **GET** /cfg | Get Essbase Configuration |
+| [**EssbaseConfigurationGet**](EssbaseConfigurationApi.md#essbaseconfigurationget) | **GET** /cfg | Get Essbase Configuration. |
 
 <a id="essbaseconfigurationget"></a>
 # **EssbaseConfigurationGet**
 > string EssbaseConfigurationGet ()
 
-Get Essbase Configuration
+Get Essbase Configuration.
 
 <p>Gets the Essbase server configuration details.</p>
 
@@ -40,7 +40,7 @@ namespace Example
 
             try
             {
-                // Get Essbase Configuration
+                // Get Essbase Configuration.
                 string result = apiInstance.EssbaseConfigurationGet();
                 Debug.WriteLine(result);
             }
@@ -61,7 +61,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Essbase Configuration
+    // Get Essbase Configuration.
     ApiResponse<string> response = apiInstance.EssbaseConfigurationGetWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

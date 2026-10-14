@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Items** | [**List&lt;ProvisionReportItem&gt;**](ProvisionReportItem.md) |  | [optional] 
 **Links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] 
-**Count** | **long** |  | [optional] 
 **TotalResults** | **long** |  | [optional] 
 **HasMore** | **bool** |  | [optional] 
+**Count** | **long** |  | [optional] 
 **Limit** | **long** |  | [optional] 
 **Properties** | **Dictionary&lt;string, string&gt;** |  | [optional] 
 **Offset** | **long** |  | [optional] 

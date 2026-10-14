@@ -4,7 +4,7 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**UsersAdd**](UsersApi.md#usersadd) | **POST** /users | Add or Import Users |
+| [**UsersAdd**](UsersApi.md#usersadd) | **POST** /users | Add or Import User(s) |
 | [**UsersDelete**](UsersApi.md#usersdelete) | **DELETE** /users/{id} | Delete User |
 | [**UsersDeleteUsers**](UsersApi.md#usersdeleteusers) | **POST** /users/actions/delete | Delete Users |
 | [**UsersGet**](UsersApi.md#usersget) | **GET** /users/{id} | Get User |
@@ -15,7 +15,7 @@ All URIs are relative to */essbase/rest/v1*
 # **UsersAdd**
 > UserBean UsersAdd (UserBean body)
 
-Add or Import Users
+Add or Import User(s)
 
 <p>Add or import user(s).</p> <p>If you are using EPM Shared Services security mode, this operation is not available. Instead, manage users, groups, and permissions in the Shared Services Console.</p>
 
@@ -42,11 +42,11 @@ namespace Example
             config.Password = "YOUR_PASSWORD";
 
             var apiInstance = new UsersApi(config);
-            var body = new UserBean(); // UserBean | <p>Users details to create, if <code>Accept='application/json'</code> or <code>Accept='application/xml'</code>. Or CSV file from which to import users, if <code>Accept='application/octet-stream'</code>.</p>
+            var body = new UserBean(); // UserBean | <p>Users details to create, if <code>Accept='application/json'</code> or <code>Accept='application/xml'</code>. Or, CSV file from which to import users, if <code>Accept='application/octet-stream'</code>.</p>
 
             try
             {
-                // Add or Import Users
+                // Add or Import User(s)
                 UserBean result = apiInstance.UsersAdd(body);
                 Debug.WriteLine(result);
             }
@@ -67,7 +67,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Add or Import Users
+    // Add or Import User(s)
     ApiResponse<UserBean> response = apiInstance.UsersAddWithHttpInfo(body);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -85,7 +85,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **body** | [**UserBean**](UserBean.md) | &lt;p&gt;Users details to create, if &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;. Or CSV file from which to import users, if &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;.&lt;/p&gt; |  |
+| **body** | [**UserBean**](UserBean.md) | &lt;p&gt;Users details to create, if &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;. Or, CSV file from which to import users, if &lt;code&gt;Accept&#x3D;&#39;application/octet-stream&#39;&lt;/code&gt;.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -528,7 +528,7 @@ namespace Example
 
             var apiInstance = new UsersApi(config);
             var filter = "filter_example";  // string | <p>User ID wildcard pattern. Filter by name of user if header <code>Accept='application/json'</code> or <code>Accept='application/xml'</code>.</p> (optional) 
-            var limit = -1;  // int? | <p>Maximum number of users to return if header <code>Accept='application/json'</code> or <code>Accept='application/xml'</code>. Default of <code>-1</code> = no maximum.</p> (optional)  (default to -1)
+            var limit = -1;  // int? | <p>Maximum number of users to return, if header <code>Accept='application/json'</code> or <code>Accept='application/xml'</code>. Default of <code>-1</code> = no maximum.</p> (optional)  (default to -1)
             var expand = "\"all\"";  // string | <p>Value can be <code>all</code> or <code>none</code>. Default value is <code>all</code>, meaning service role and groups are returned for each user. If <code>none</code> is specified, service role and groups are not returned.</p> (optional)  (default to "all")
 
             try
@@ -573,7 +573,7 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **filter** | **string** | &lt;p&gt;User ID wildcard pattern. Filter by name of user if header &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;.&lt;/p&gt; | [optional]  |
-| **limit** | **int?** | &lt;p&gt;Maximum number of users to return if header &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;. Default of &lt;code&gt;-1&lt;/code&gt; &#x3D; no maximum.&lt;/p&gt; | [optional] [default to -1] |
+| **limit** | **int?** | &lt;p&gt;Maximum number of users to return, if header &lt;code&gt;Accept&#x3D;&#39;application/json&#39;&lt;/code&gt; or &lt;code&gt;Accept&#x3D;&#39;application/xml&#39;&lt;/code&gt;. Default of &lt;code&gt;-1&lt;/code&gt; &#x3D; no maximum.&lt;/p&gt; | [optional] [default to -1] |
 | **expand** | **string** | &lt;p&gt;Value can be &lt;code&gt;all&lt;/code&gt; or &lt;code&gt;none&lt;/code&gt;. Default value is &lt;code&gt;all&lt;/code&gt;, meaning service role and groups are returned for each user. If &lt;code&gt;none&lt;/code&gt; is specified, service role and groups are not returned.&lt;/p&gt; | [optional] [default to &quot;all&quot;] |
 
 ### Return type

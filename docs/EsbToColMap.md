@@ -1,5 +1,4 @@
 # EssSharp.Model.EsbToColMap
-<p>For federated Essbase cube, map dimensions or members to columns in the fact table.</p>
 
 ## Properties
 

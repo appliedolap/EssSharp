@@ -115,7 +115,7 @@ void (empty response body)
 
 Delete Application Connection
 
-<p>Deletes a saved application connection by name.</p>
+<p>Delete a saved application connection by name.</p>
 
 ### Example
 ```csharp
@@ -617,7 +617,7 @@ void (empty response body)
 
 Update Application Connection
 
-<p>Updates the named application connection. If successful, returns details of the updated connection. <code>type</code> is a required input for all connections. Other required inputs differ, depending on the type of the connection.</p>
+<p>Update the named application connection. If successful, returns details of the updated connection. <code>type</code> is a required input for all connections. Other required inputs differ, depending on the type of the connection.</p>
 
 ### Example
 ```csharp
@@ -719,7 +719,7 @@ catch (ApiException e)
 
 Upload Application Connection Wallet File
 
-<p>Uploads a wallet file for an application-level connection.</p>
+<p>Upload a wallet file for an application-level connection.</p>
 
 ### Example
 ```csharp

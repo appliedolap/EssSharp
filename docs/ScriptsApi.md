@@ -18,7 +18,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**ScriptsRenameScript**](ScriptsApi.md#scriptsrenamescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/rename | Rename Calc Script |
 | [**ScriptsValidateScript**](ScriptsApi.md#scriptsvalidatescript) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/scriptops/validate | Validate Calc Script |
 | [**ScriptsValidateScriptFile**](ScriptsApi.md#scriptsvalidatescriptfile) | **POST** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/scriptops/validate | Validate Calc Script |
-| [**UploadScriptContent**](ScriptsApi.md#uploadscriptcontent) | **PUT** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content | Upload Script Content |
+| [**UploadScriptContent**](ScriptsApi.md#uploadscriptcontent) | **PUT** /applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}/content |  |
 
 <a id="scriptsaddscriptpermission"></a>
 # **ScriptsAddScriptPermission**
@@ -995,7 +995,7 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database (cube) name.</p>
             var file = "\"calc\"";  // string | <p>Type of script file to return. Valid values: <code>calc</code> or <code>mdx</code>. Default value, if unspecified, is <code>calc</code>.</p> (optional)  (default to "calc")
-            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. For example, <code>name:asc</code>.</p> (optional)  (default to "")
+            var orderBy = "\"\"";  // string | Order By specification in format:<code>column</code>:<code>direction</code>. e.g.<code>name:asc</code> </p> (optional)  (default to "")
             var keyword = "\"\"";  // string | <p>Filter the list of scripts using a keyword.</p> (optional)  (default to "")
 
             try
@@ -1042,7 +1042,7 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database (cube) name.&lt;/p&gt; |  |
 | **file** | **string** | &lt;p&gt;Type of script file to return. Valid values: &lt;code&gt;calc&lt;/code&gt; or &lt;code&gt;mdx&lt;/code&gt;. Default value, if unspecified, is &lt;code&gt;calc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;calc&quot;] |
-| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. For example, &lt;code&gt;name:asc&lt;/code&gt;.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
+| **orderBy** | **string** | Order By specification in format:&lt;code&gt;column&lt;/code&gt;:&lt;code&gt;direction&lt;/code&gt;. e.g.&lt;code&gt;name:asc&lt;/code&gt; &lt;/p&gt; | [optional] [default to &quot;&quot;] |
 | **keyword** | **string** | &lt;p&gt;Filter the list of scripts using a keyword.&lt;/p&gt; | [optional] [default to &quot;&quot;] |
 
 ### Return type
@@ -1102,7 +1102,7 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
             var scriptName = "scriptName_example";  // string | <p>Script name.</p>
-            var userGroupId = "userGroupId_example";  // string | <p>ID of the user or group.</p>
+            var userGroupId = "userGroupId_example";  // string | <p>Id of the user or group.</p>
             var group = false;  // bool | <p>True if the userGroupId refers to a group.</p> (default to false)
 
             try
@@ -1145,7 +1145,7 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **scriptName** | **string** | &lt;p&gt;Script name.&lt;/p&gt; |  |
-| **userGroupId** | **string** | &lt;p&gt;ID of the user or group.&lt;/p&gt; |  |
+| **userGroupId** | **string** | &lt;p&gt;Id of the user or group.&lt;/p&gt; |  |
 | **group** | **bool** | &lt;p&gt;True if the userGroupId refers to a group.&lt;/p&gt; | [default to false] |
 
 ### Return type
@@ -1482,9 +1482,7 @@ void (empty response body)
 # **UploadScriptContent**
 > void UploadScriptContent (string applicationName, string databaseName, string scriptName, string file = null, Object body = null)
 
-Upload Script Content
 
-<p>Uploads or replaces the content of the specified script in an application database.</p>
 
 ### Example
 ```csharp
@@ -1517,7 +1515,6 @@ namespace Example
 
             try
             {
-                // Upload Script Content
                 apiInstance.UploadScriptContent(applicationName, databaseName, scriptName, file, body);
             }
             catch (ApiException  e)
@@ -1537,7 +1534,6 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Upload Script Content
     apiInstance.UploadScriptContentWithHttpInfo(applicationName, databaseName, scriptName, file, body);
 }
 catch (ApiException e)

@@ -4,115 +4,15 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**Clone**](GlobalConnectionsApi.md#clone) | **POST** /connections/clone | Clone Connection |
 | [**GlobalConnectionsCreateConnection**](GlobalConnectionsApi.md#globalconnectionscreateconnection) | **POST** /connections | Create Global Connection |
 | [**GlobalConnectionsDeleteConnection**](GlobalConnectionsApi.md#globalconnectionsdeleteconnection) | **DELETE** /connections/{connectionName} | Delete Global Connection |
-| [**GlobalConnectionsDependantconnections**](GlobalConnectionsApi.md#globalconnectionsdependantconnections) | **GET** /connections/{connection}/getdependentconnections | List Dependent Connection Names |
+| [**GlobalConnectionsDependantconnections**](GlobalConnectionsApi.md#globalconnectionsdependantconnections) | **GET** /connections/{connection}/getdependentconnections | List dependamt connection names |
 | [**GlobalConnectionsGetConnectionDetails**](GlobalConnectionsApi.md#globalconnectionsgetconnectiondetails) | **GET** /connections/{connectionName} | Get Global Connection |
 | [**GlobalConnectionsGetConnections**](GlobalConnectionsApi.md#globalconnectionsgetconnections) | **GET** /connections | List Global Connections |
 | [**GlobalConnectionsTestConnection**](GlobalConnectionsApi.md#globalconnectionstestconnection) | **POST** /connections/actions/test | Test New Global Connection |
 | [**GlobalConnectionsTestConnectionExisting**](GlobalConnectionsApi.md#globalconnectionstestconnectionexisting) | **POST** /connections/{connectionName}/actions/test | Test Saved Global Connection |
 | [**GlobalConnectionsUpdateConnection**](GlobalConnectionsApi.md#globalconnectionsupdateconnection) | **PUT** /connections/{connectionName} | Update Global Connection |
 | [**GlobalConnectionsWallets**](GlobalConnectionsApi.md#globalconnectionswallets) | **PUT** /connections/{connectionName}/wallet | Upload Global Connection Wallet File |
-
-<a id="clone"></a>
-# **Clone**
-> void Clone (string from = null, string fromapp = null, string to = null, string toapp = null)
-
-Clone Connection
-
-<p>Clones a connection from the specified source connection and application context to the specified target connection and application context.</p>
-
-### Example
-```csharp
-using System.Collections.Generic;
-using System.Diagnostics;
-using EssSharp.Api;
-using EssSharp.Client;
-using EssSharp.Model;
-
-namespace Example
-{
-    public class CloneExample
-    {
-        public static void Main()
-        {
-            Configuration config = new Configuration();
-            config.BasePath = "/essbase/rest/v1";
-            // Configure OAuth2 access token for authorization: OAuth2
-            config.AccessToken = "YOUR_ACCESS_TOKEN";
-            // Configure HTTP basic authorization: basicAuth
-            config.Username = "YOUR_USERNAME";
-            config.Password = "YOUR_PASSWORD";
-
-            var apiInstance = new GlobalConnectionsApi(config);
-            var from = "from_example";  // string |  (optional) 
-            var fromapp = "fromapp_example";  // string |  (optional) 
-            var to = "to_example";  // string |  (optional) 
-            var toapp = "toapp_example";  // string |  (optional) 
-
-            try
-            {
-                // Clone Connection
-                apiInstance.Clone(from, fromapp, to, toapp);
-            }
-            catch (ApiException  e)
-            {
-                Debug.Print("Exception when calling GlobalConnectionsApi.Clone: " + e.Message);
-                Debug.Print("Status Code: " + e.ErrorCode);
-                Debug.Print(e.StackTrace);
-            }
-        }
-    }
-}
-```
-
-#### Using the CloneWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // Clone Connection
-    apiInstance.CloneWithHttpInfo(from, fromapp, to, toapp);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling GlobalConnectionsApi.CloneWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **from** | **string** |  | [optional]  |
-| **fromapp** | **string** |  | [optional]  |
-| **to** | **string** |  | [optional]  |
-| **toapp** | **string** |  | [optional]  |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **0** | default response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a id="globalconnectionscreateconnection"></a>
 # **GlobalConnectionsCreateConnection**
@@ -306,9 +206,7 @@ void (empty response body)
 # **GlobalConnectionsDependantconnections**
 > void GlobalConnectionsDependantconnections (string connection)
 
-List Dependent Connection Names
-
-<p>Returns the names of connections that depend on the specified global connection.</p>
+List dependamt connection names
 
 ### Example
 ```csharp
@@ -337,7 +235,7 @@ namespace Example
 
             try
             {
-                // List Dependent Connection Names
+                // List dependamt connection names
                 apiInstance.GlobalConnectionsDependantconnections(connection);
             }
             catch (ApiException  e)
@@ -357,7 +255,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List Dependent Connection Names
+    // List dependamt connection names
     apiInstance.GlobalConnectionsDependantconnectionsWithHttpInfo(connection);
 }
 catch (ApiException e)
@@ -799,7 +697,7 @@ void (empty response body)
 
 Update Global Connection
 
-<p>Updates the named global connection. If the update is successful, returns details about the updated connection. <code>type</code> is a required input for all types of connections. Other required inputs differ based on the type of the connection.</p>
+<p>Update the named global connection. If the update is successful, returns details about the updated connection. <code>type</code> is a required input for all types of connections. Other required inputs differ based on the type of the connection.</p>
 
 ### Example
 ```csharp
@@ -899,7 +797,7 @@ catch (ApiException e)
 
 Upload Global Connection Wallet File
 
-<p>Uploads a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.</p>
+<p>Upload a connection wallet file for a global connection. Oracle client credentials (wallet files) are downloaded from Autonomous Data Warehouse by a service administrator. If you are not an Autonomous Data Warehouse administrator, your administrator should provide you with the client credentials.</p>
 
 ### Example
 ```csharp

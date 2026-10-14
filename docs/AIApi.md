@@ -4,41 +4,41 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**AIAssociateConnection**](AIApi.md#aiassociateconnection) | **POST** /ai/applications/{applicationName}/connection/{connectionName} | Associate AI Connection |
-| [**AICreateOCIChatCredentialUsingSingingKey**](AIApi.md#aicreateocichatcredentialusingsingingkey) | **POST** /ai/dbconnection/{dbConnectionName}/chat/credential/signingkey/{credentialName} | Create OCI Chat Credential using Signing Key |
-| [**AICreateOCIChatProfile**](AIApi.md#aicreateocichatprofile) | **POST** /ai/aiconnection/{aiConnectionName}/chat/profile/{profileName} | Create OCI Chat Profile |
-| [**AICreateOCIVectorCredential**](AIApi.md#aicreateocivectorcredential) | **POST** /ai/dbconnection/{dbConnectionName}/vector/credential/{credentialName} | Create OCI Vector Credential |
-| [**AICreateVectorIndexJob**](AIApi.md#aicreatevectorindexjob) | **POST** /ai/aiconnection/{aiConnectionName}/job/vectorindex | Enable Ask Essbase |
-| [**AIDeleteCalculationConversations**](AIApi.md#aideletecalculationconversations) | **DELETE** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation/{conversationId} | Delete Calculation-specific Conversation |
-| [**AIDeleteConversationHistory**](AIApi.md#aideleteconversationhistory) | **DELETE** /ai/applications/{applicationName}/databases/{databaseName}/conversationHistory | Delete Conversation History |
-| [**AIDissociateConnection**](AIApi.md#aidissociateconnection) | **DELETE** /ai/applications/{applicationName}/connection | Dissociate AI Connection |
-| [**AIDropOCIChatCredential**](AIApi.md#aidropocichatcredential) | **DELETE** /ai/dbconnection/{dbConnectionName}/chat/credential/{credentialName} | Delete OCI Chat Credential |
-| [**AIDropOCIChatProfile**](AIApi.md#aidropocichatprofile) | **DELETE** /ai/aiconnection/{aiConnectionName}/chat/profile/{profileName} | Delete OCI Chat Profile |
-| [**AIDropOCIVectorCredential**](AIApi.md#aidropocivectorcredential) | **DELETE** /ai/dbconnection/{dbConnectionName}/vector/credential/{credentialName} | Delete OCI Vector Credential |
-| [**AIDropVectorIndexJob**](AIApi.md#aidropvectorindexjob) | **DELETE** /ai/aiconnection/{aiConnectionName}/job/vectorindex | Disable Ask Essbase |
-| [**AIGenerateCalculationScript**](AIApi.md#aigeneratecalculationscript) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/calculation/generate | Generate Calculation Script |
-| [**AIGetCalculationConversations**](AIApi.md#aigetcalculationconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation/{conversationId} | Get Calculation-specific Conversation History |
-| [**AIGetConnection**](AIApi.md#aigetconnection) | **GET** /ai/connection | Get AI Connection |
-| [**AIGetConversationHistory**](AIApi.md#aigetconversationhistory) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/conversationHistory | Get Conversation History |
-| [**AIGetVectorIndex**](AIApi.md#aigetvectorindex) | **GET** /ai/vectorindex | Check If Ask Essbase Is Enabled |
-| [**AIListCalculationConversations**](AIApi.md#ailistcalculationconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation | List Calculation-specific Conversations IDs |
-| [**AIListConversations**](AIApi.md#ailistconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/conversation | List Conversations |
+| [**AIAssociateConnection**](AIApi.md#aiassociateconnection) | **POST** /ai/applications/{applicationName}/connection/{connectionName} | Associate AI connection |
+| [**AICreateOCIChatCredentialUsingSingingKey**](AIApi.md#aicreateocichatcredentialusingsingingkey) | **POST** /ai/dbconnection/{dbConnectionName}/chat/credential/signingkey/{credentialName} | Create OCI chat credential using singing key |
+| [**AICreateOCIChatProfile**](AIApi.md#aicreateocichatprofile) | **POST** /ai/aiconnection/{aiConnectionName}/chat/profile/{profileName} | Create OCI chat profile |
+| [**AICreateOCIVectorCredential**](AIApi.md#aicreateocivectorcredential) | **POST** /ai/dbconnection/{dbConnectionName}/vector/credential/{credentialName} | Create OCI vector credential |
+| [**AICreateVectorIndexJob**](AIApi.md#aicreatevectorindexjob) | **POST** /ai/aiconnection/{aiConnectionName}/job/vectorindex | Create a job to build vector index |
+| [**AIDeleteCalculationConversations**](AIApi.md#aideletecalculationconversations) | **DELETE** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation/{conversationId} | Drop a conversation. |
+| [**AIDeleteConversationHistory**](AIApi.md#aideleteconversationhistory) | **DELETE** /ai/applications/{applicationName}/databases/{databaseName}/conversationHistory | Delete conversation history |
+| [**AIDissociateConnection**](AIApi.md#aidissociateconnection) | **DELETE** /ai/applications/{applicationName}/connection | Dissociate AI connection |
+| [**AIDropOCIChatCredential**](AIApi.md#aidropocichatcredential) | **DELETE** /ai/dbconnection/{dbConnectionName}/chat/credential/{credentialName} | Drop OCI chat credential |
+| [**AIDropOCIChatProfile**](AIApi.md#aidropocichatprofile) | **DELETE** /ai/aiconnection/{aiConnectionName}/chat/profile/{profileName} | Drop OCI chat profile |
+| [**AIDropOCIVectorCredential**](AIApi.md#aidropocivectorcredential) | **DELETE** /ai/dbconnection/{dbConnectionName}/vector/credential/{credentialName} | Drop OCI vector credential |
+| [**AIDropVectorIndexJob**](AIApi.md#aidropvectorindexjob) | **DELETE** /ai/aiconnection/{aiConnectionName}/job/vectorindex | Create a job to drop the vector index |
+| [**AIGenerateCalculationScript**](AIApi.md#aigeneratecalculationscript) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/calculation/generate | Generate calculation script. |
+| [**AIGetCalculationConversations**](AIApi.md#aigetcalculationconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation/{conversationId} | Get all calculation specific conversations. |
+| [**AIGetConnection**](AIApi.md#aigetconnection) | **GET** /ai/connection | Get AI connection |
+| [**AIGetConversationHistory**](AIApi.md#aigetconversationhistory) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/conversationHistory | Get conversation history |
+| [**AIGetVectorIndex**](AIApi.md#aigetvectorindex) | **GET** /ai/vectorindex | Get vector index |
+| [**AIListCalculationConversations**](AIApi.md#ailistcalculationconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation | List all calculation specific Conversations IDs |
+| [**AIListConversations**](AIApi.md#ailistconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/conversation | List conversations |
 | [**AIListSampleQueries**](AIApi.md#ailistsamplequeries) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/listSampleQueries | List Sample Queries |
 | [**AIMDXGenerator**](AIApi.md#aimdxgenerator) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/mdxgenerator | MDX Generator |
-| [**AINNearestNeighbourSearch**](AIApi.md#ainnearestneighboursearch) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/nnearestneighboursearch | N-Nearest-Neighbour Search |
-| [**AINarrateVectorIndex**](AIApi.md#ainarratevectorindex) | **GET** /ai/aiconnection/{aiConnectionName}/vectorindex/{vectorIndexName}/narrate/{profileName} | Chat with Ask Essbase |
-| [**AIPassThrough**](AIApi.md#aipassthrough) | **POST** /ai/applications/{applicationName}/chat/passThrough | AI Pass Through |
+| [**AINNearestNeighbourSearch**](AIApi.md#ainnearestneighboursearch) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/nnearestneighboursearch | N-Nearest Neighbour Search |
+| [**AINarrateVectorIndex**](AIApi.md#ainarratevectorindex) | **GET** /ai/aiconnection/{aiConnectionName}/vectorindex/{vectorIndexName}/narrate/{profileName} | AI Narrate |
+| [**AIPassThrough**](AIApi.md#aipassthrough) | **POST** /ai/applications/{applicationName}/chat/passThrough | AI pass through |
 | [**AISemanticSearch**](AIApi.md#aisemanticsearch) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/semanticsearch | Semantic Search |
 | [**AIVectorizationDate**](AIApi.md#aivectorizationdate) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/vectorizationDate | Vectorization Date |
-| [**AIVectorizeOutlineJob**](AIApi.md#aivectorizeoutlinejob) | **POST** /ai/applications/{applicationName}/job/vectorize/databases/{databaseName} | Vectorize Outline Job |
+| [**AIVectorizeOutlineJob**](AIApi.md#aivectorizeoutlinejob) | **POST** /ai/applications/{applicationName}/job/vectorize/databases/{databaseName} | Vectorize outline job |
 
 <a id="aiassociateconnection"></a>
 # **AIAssociateConnection**
 > void AIAssociateConnection (string applicationName, string connectionName)
 
-Associate AI Connection
+Associate AI connection
 
-<p>Associates the AI connection for the specified application.</p>
+<p>Associate AI connection for the specified application.</p>
 
 ### Example
 ```csharp
@@ -68,7 +68,7 @@ namespace Example
 
             try
             {
-                // Associate AI Connection
+                // Associate AI connection
                 apiInstance.AIAssociateConnection(applicationName, connectionName);
             }
             catch (ApiException  e)
@@ -88,7 +88,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Associate AI Connection
+    // Associate AI connection
     apiInstance.AIAssociateConnectionWithHttpInfo(applicationName, connectionName);
 }
 catch (ApiException e)
@@ -132,9 +132,9 @@ void (empty response body)
 # **AICreateOCIChatCredentialUsingSingingKey**
 > void AICreateOCIChatCredentialUsingSingingKey (string dbConnectionName, string credentialName, OCIChatCredentialSigningKeyDTO body)
 
-Create OCI Chat Credential using Signing Key
+Create OCI chat credential using singing key
 
-<p>Creates OCI chat credential against the specified database connection using the signing key.</p>
+<p>Create OCI chat credential against the specified DB connection using singing key.</p>
 
 ### Example
 ```csharp
@@ -161,11 +161,11 @@ namespace Example
             var apiInstance = new AIApi(config);
             var dbConnectionName = "dbConnectionName_example";  // string | <p>DB connection name.</p>
             var credentialName = "credentialName_example";  // string | <p>Credential name.</p>
-            var body = new OCIChatCredentialSigningKeyDTO(); // OCIChatCredentialSigningKeyDTO | <p>OCI credential details: signing key.</p>
+            var body = new OCIChatCredentialSigningKeyDTO(); // OCIChatCredentialSigningKeyDTO | <p>OCI credential details: singing key.</p>
 
             try
             {
-                // Create OCI Chat Credential using Signing Key
+                // Create OCI chat credential using singing key
                 apiInstance.AICreateOCIChatCredentialUsingSingingKey(dbConnectionName, credentialName, body);
             }
             catch (ApiException  e)
@@ -185,7 +185,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create OCI Chat Credential using Signing Key
+    // Create OCI chat credential using singing key
     apiInstance.AICreateOCIChatCredentialUsingSingingKeyWithHttpInfo(dbConnectionName, credentialName, body);
 }
 catch (ApiException e)
@@ -202,7 +202,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **dbConnectionName** | **string** | &lt;p&gt;DB connection name.&lt;/p&gt; |  |
 | **credentialName** | **string** | &lt;p&gt;Credential name.&lt;/p&gt; |  |
-| **body** | [**OCIChatCredentialSigningKeyDTO**](OCIChatCredentialSigningKeyDTO.md) | &lt;p&gt;OCI credential details: signing key.&lt;/p&gt; |  |
+| **body** | [**OCIChatCredentialSigningKeyDTO**](OCIChatCredentialSigningKeyDTO.md) | &lt;p&gt;OCI credential details: singing key.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -221,8 +221,8 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;OCI chat credential using signing key created successfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to create OCI chat credential using signing key.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;OCI chat credential using singing key created successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to create OCI chat credential using singing key.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -230,9 +230,9 @@ void (empty response body)
 # **AICreateOCIChatProfile**
 > void AICreateOCIChatProfile (string aiConnectionName, string profileName, string description = null)
 
-Create OCI Chat Profile
+Create OCI chat profile
 
-<p>Creates the OCI chat profile for the specified application.</p>
+<p>Create OCI chat profile for the specified application.</p>
 
 ### Example
 ```csharp
@@ -263,7 +263,7 @@ namespace Example
 
             try
             {
-                // Create OCI Chat Profile
+                // Create OCI chat profile
                 apiInstance.AICreateOCIChatProfile(aiConnectionName, profileName, description);
             }
             catch (ApiException  e)
@@ -283,7 +283,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create OCI Chat Profile
+    // Create OCI chat profile
     apiInstance.AICreateOCIChatProfileWithHttpInfo(aiConnectionName, profileName, description);
 }
 catch (ApiException e)
@@ -328,9 +328,9 @@ void (empty response body)
 # **AICreateOCIVectorCredential**
 > void AICreateOCIVectorCredential (string dbConnectionName, string credentialName, OCIVectorCredentialDTO body)
 
-Create OCI Vector Credential
+Create OCI vector credential
 
-<p>Creates the OCI vector credential for the specified application.</p>
+<p>Create OCI vector credential.</p>
 
 ### Example
 ```csharp
@@ -361,7 +361,7 @@ namespace Example
 
             try
             {
-                // Create OCI Vector Credential
+                // Create OCI vector credential
                 apiInstance.AICreateOCIVectorCredential(dbConnectionName, credentialName, body);
             }
             catch (ApiException  e)
@@ -381,7 +381,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create OCI Vector Credential
+    // Create OCI vector credential
     apiInstance.AICreateOCIVectorCredentialWithHttpInfo(dbConnectionName, credentialName, body);
 }
 catch (ApiException e)
@@ -426,9 +426,9 @@ void (empty response body)
 # **AICreateVectorIndexJob**
 > void AICreateVectorIndexJob (string aiConnectionName)
 
-Enable Ask Essbase
+Create a job to build vector index
 
-<p>Enables the Ask Essbase feature.</p>
+<p>Create a job to build vector index.</p>
 
 ### Example
 ```csharp
@@ -457,7 +457,7 @@ namespace Example
 
             try
             {
-                // Enable Ask Essbase
+                // Create a job to build vector index
                 apiInstance.AICreateVectorIndexJob(aiConnectionName);
             }
             catch (ApiException  e)
@@ -477,7 +477,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Enable Ask Essbase
+    // Create a job to build vector index
     apiInstance.AICreateVectorIndexJobWithHttpInfo(aiConnectionName);
 }
 catch (ApiException e)
@@ -520,9 +520,9 @@ void (empty response body)
 # **AIDeleteCalculationConversations**
 > void AIDeleteCalculationConversations (string applicationName, string databaseName, string conversationId)
 
-Delete Calculation-specific Conversation
+Drop a conversation.
 
-<p>Deletes the specified conversation.</p>
+<p>Drop a conversation.</p>
 
 ### Example
 ```csharp
@@ -553,7 +553,7 @@ namespace Example
 
             try
             {
-                // Delete Calculation-specific Conversation
+                // Drop a conversation.
                 apiInstance.AIDeleteCalculationConversations(applicationName, databaseName, conversationId);
             }
             catch (ApiException  e)
@@ -573,7 +573,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete Calculation-specific Conversation
+    // Drop a conversation.
     apiInstance.AIDeleteCalculationConversationsWithHttpInfo(applicationName, databaseName, conversationId);
 }
 catch (ApiException e)
@@ -618,9 +618,9 @@ void (empty response body)
 # **AIDeleteConversationHistory**
 > void AIDeleteConversationHistory (string applicationName, string databaseName, string profileName)
 
-Delete Conversation History
+Delete conversation history
 
-<p>Deletes conversation history for the specified outline and chat profile.</p>
+<p>Delete conversation history for the specified outline and conversation Id.</p>
 
 ### Example
 ```csharp
@@ -651,7 +651,7 @@ namespace Example
 
             try
             {
-                // Delete Conversation History
+                // Delete conversation history
                 apiInstance.AIDeleteConversationHistory(applicationName, databaseName, profileName);
             }
             catch (ApiException  e)
@@ -671,7 +671,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete Conversation History
+    // Delete conversation history
     apiInstance.AIDeleteConversationHistoryWithHttpInfo(applicationName, databaseName, profileName);
 }
 catch (ApiException e)
@@ -716,9 +716,9 @@ void (empty response body)
 # **AIDissociateConnection**
 > void AIDissociateConnection (string applicationName)
 
-Dissociate AI Connection
+Dissociate AI connection
 
-<p>Dissociates the AI connection from the specified application.</p>
+<p>Dissociate AI connection for the specified application.</p>
 
 ### Example
 ```csharp
@@ -747,7 +747,7 @@ namespace Example
 
             try
             {
-                // Dissociate AI Connection
+                // Dissociate AI connection
                 apiInstance.AIDissociateConnection(applicationName);
             }
             catch (ApiException  e)
@@ -767,7 +767,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Dissociate AI Connection
+    // Dissociate AI connection
     apiInstance.AIDissociateConnectionWithHttpInfo(applicationName);
 }
 catch (ApiException e)
@@ -810,9 +810,9 @@ void (empty response body)
 # **AIDropOCIChatCredential**
 > void AIDropOCIChatCredential (string dbConnectionName, string credentialName)
 
-Delete OCI Chat Credential
+Drop OCI chat credential
 
-<p>Deletes the specified OCI chat credential.</p>
+<p>Drop OCI chat credential for the specified application.</p>
 
 ### Example
 ```csharp
@@ -842,7 +842,7 @@ namespace Example
 
             try
             {
-                // Delete OCI Chat Credential
+                // Drop OCI chat credential
                 apiInstance.AIDropOCIChatCredential(dbConnectionName, credentialName);
             }
             catch (ApiException  e)
@@ -862,7 +862,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete OCI Chat Credential
+    // Drop OCI chat credential
     apiInstance.AIDropOCIChatCredentialWithHttpInfo(dbConnectionName, credentialName);
 }
 catch (ApiException e)
@@ -906,9 +906,9 @@ void (empty response body)
 # **AIDropOCIChatProfile**
 > void AIDropOCIChatProfile (string aiConnectionName, string profileName)
 
-Delete OCI Chat Profile
+Drop OCI chat profile
 
-<p>Deletes the OCI chat profile.</p>
+<p>Drop OCI chat profile.</p>
 
 ### Example
 ```csharp
@@ -938,7 +938,7 @@ namespace Example
 
             try
             {
-                // Delete OCI Chat Profile
+                // Drop OCI chat profile
                 apiInstance.AIDropOCIChatProfile(aiConnectionName, profileName);
             }
             catch (ApiException  e)
@@ -958,7 +958,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete OCI Chat Profile
+    // Drop OCI chat profile
     apiInstance.AIDropOCIChatProfileWithHttpInfo(aiConnectionName, profileName);
 }
 catch (ApiException e)
@@ -1002,9 +1002,9 @@ void (empty response body)
 # **AIDropOCIVectorCredential**
 > void AIDropOCIVectorCredential (string dbConnectionName, string credentialName)
 
-Delete OCI Vector Credential
+Drop OCI vector credential
 
-<p>Deletes the OCI vector credential for the specified application.</p>
+<p>Drop OCI vector credential for the specified application.</p>
 
 ### Example
 ```csharp
@@ -1034,7 +1034,7 @@ namespace Example
 
             try
             {
-                // Delete OCI Vector Credential
+                // Drop OCI vector credential
                 apiInstance.AIDropOCIVectorCredential(dbConnectionName, credentialName);
             }
             catch (ApiException  e)
@@ -1054,7 +1054,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete OCI Vector Credential
+    // Drop OCI vector credential
     apiInstance.AIDropOCIVectorCredentialWithHttpInfo(dbConnectionName, credentialName);
 }
 catch (ApiException e)
@@ -1098,9 +1098,9 @@ void (empty response body)
 # **AIDropVectorIndexJob**
 > void AIDropVectorIndexJob (string aiConnectionName)
 
-Disable Ask Essbase
+Create a job to drop the vector index
 
-<p>Disables the Ask Essbase feature.</p>
+<p>Create a job to drop the vector index.</p>
 
 ### Example
 ```csharp
@@ -1129,7 +1129,7 @@ namespace Example
 
             try
             {
-                // Disable Ask Essbase
+                // Create a job to drop the vector index
                 apiInstance.AIDropVectorIndexJob(aiConnectionName);
             }
             catch (ApiException  e)
@@ -1149,7 +1149,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Disable Ask Essbase
+    // Create a job to drop the vector index
     apiInstance.AIDropVectorIndexJobWithHttpInfo(aiConnectionName);
 }
 catch (ApiException e)
@@ -1192,9 +1192,9 @@ void (empty response body)
 # **AIGenerateCalculationScript**
 > void AIGenerateCalculationScript (string applicationName, string databaseName, CalcAssistGeneratorDTO body)
 
-Generate Calculation Script
+Generate calculation script.
 
-<p>Generates the calculation script.</p>
+<p>Generate calculation script.</p>
 
 ### Example
 ```csharp
@@ -1225,7 +1225,7 @@ namespace Example
 
             try
             {
-                // Generate Calculation Script
+                // Generate calculation script.
                 apiInstance.AIGenerateCalculationScript(applicationName, databaseName, body);
             }
             catch (ApiException  e)
@@ -1245,7 +1245,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Generate Calculation Script
+    // Generate calculation script.
     apiInstance.AIGenerateCalculationScriptWithHttpInfo(applicationName, databaseName, body);
 }
 catch (ApiException e)
@@ -1290,9 +1290,9 @@ void (empty response body)
 # **AIGetCalculationConversations**
 > void AIGetCalculationConversations (string applicationName, string databaseName, string conversationId)
 
-Get Calculation-specific Conversation History
+Get all calculation specific conversations.
 
-<p>Gets convesation history for a specified conversations.</p>
+<p>Get all calculation specific conversations.</p>
 
 ### Example
 ```csharp
@@ -1323,7 +1323,7 @@ namespace Example
 
             try
             {
-                // Get Calculation-specific Conversation History
+                // Get all calculation specific conversations.
                 apiInstance.AIGetCalculationConversations(applicationName, databaseName, conversationId);
             }
             catch (ApiException  e)
@@ -1343,7 +1343,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Calculation-specific Conversation History
+    // Get all calculation specific conversations.
     apiInstance.AIGetCalculationConversationsWithHttpInfo(applicationName, databaseName, conversationId);
 }
 catch (ApiException e)
@@ -1388,9 +1388,9 @@ void (empty response body)
 # **AIGetConnection**
 > void AIGetConnection (string application = null)
 
-Get AI Connection
+Get AI connection
 
-<p>Retrieves the AI connection details.</p>
+<p>Get AI connection.</p>
 
 ### Example
 ```csharp
@@ -1419,7 +1419,7 @@ namespace Example
 
             try
             {
-                // Get AI Connection
+                // Get AI connection
                 apiInstance.AIGetConnection(application);
             }
             catch (ApiException  e)
@@ -1439,7 +1439,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get AI Connection
+    // Get AI connection
     apiInstance.AIGetConnectionWithHttpInfo(application);
 }
 catch (ApiException e)
@@ -1482,9 +1482,9 @@ void (empty response body)
 # **AIGetConversationHistory**
 > void AIGetConversationHistory (string applicationName, string databaseName, string profileName)
 
-Get Conversation History
+Get conversation history
 
-<p>Gets full query/response sequence for a conversation.</p>
+<p>Get conversation history for the specified outline and conversation Id.</p>
 
 ### Example
 ```csharp
@@ -1515,7 +1515,7 @@ namespace Example
 
             try
             {
-                // Get Conversation History
+                // Get conversation history
                 apiInstance.AIGetConversationHistory(applicationName, databaseName, profileName);
             }
             catch (ApiException  e)
@@ -1535,7 +1535,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get Conversation History
+    // Get conversation history
     apiInstance.AIGetConversationHistoryWithHttpInfo(applicationName, databaseName, profileName);
 }
 catch (ApiException e)
@@ -1580,9 +1580,9 @@ void (empty response body)
 # **AIGetVectorIndex**
 > void AIGetVectorIndex ()
 
-Check If Ask Essbase Is Enabled
+Get vector index
 
-<p>Checks if the Ask Essbase feature is enabled or not.</p>
+<p>Get vector index.</p>
 
 ### Example
 ```csharp
@@ -1610,7 +1610,7 @@ namespace Example
 
             try
             {
-                // Check If Ask Essbase Is Enabled
+                // Get vector index
                 apiInstance.AIGetVectorIndex();
             }
             catch (ApiException  e)
@@ -1630,7 +1630,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Check If Ask Essbase Is Enabled
+    // Get vector index
     apiInstance.AIGetVectorIndexWithHttpInfo();
 }
 catch (ApiException e)
@@ -1669,9 +1669,9 @@ void (empty response body)
 # **AIListCalculationConversations**
 > void AIListCalculationConversations (string applicationName, string databaseName)
 
-List Calculation-specific Conversations IDs
+List all calculation specific Conversations IDs
 
-<p>Lists all calculation specific conversation IDs.</p>
+<p>List all calculation specific Conversations IDs.</p>
 
 ### Example
 ```csharp
@@ -1701,7 +1701,7 @@ namespace Example
 
             try
             {
-                // List Calculation-specific Conversations IDs
+                // List all calculation specific Conversations IDs
                 apiInstance.AIListCalculationConversations(applicationName, databaseName);
             }
             catch (ApiException  e)
@@ -1721,7 +1721,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List Calculation-specific Conversations IDs
+    // List all calculation specific Conversations IDs
     apiInstance.AIListCalculationConversationsWithHttpInfo(applicationName, databaseName);
 }
 catch (ApiException e)
@@ -1765,9 +1765,9 @@ void (empty response body)
 # **AIListConversations**
 > void AIListConversations (string applicationName, string databaseName)
 
-List Conversations
+List conversations
 
-<p>Lists all conversations for the user.</p>
+<p>List conversations for the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -1797,7 +1797,7 @@ namespace Example
 
             try
             {
-                // List Conversations
+                // List conversations
                 apiInstance.AIListConversations(applicationName, databaseName);
             }
             catch (ApiException  e)
@@ -1817,7 +1817,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List Conversations
+    // List conversations
     apiInstance.AIListConversationsWithHttpInfo(applicationName, databaseName);
 }
 catch (ApiException e)
@@ -1863,7 +1863,7 @@ void (empty response body)
 
 List Sample Queries
 
-<p>Retrieves sample queries for an outline.</p>
+Returns samples queries for an outline
 
 ### Example
 ```csharp
@@ -1959,7 +1959,7 @@ void (empty response body)
 
 MDX Generator
 
-<p>Generates MDX.</p>
+<p>MDX Generator.</p>
 
 ### Example
 ```csharp
@@ -2067,9 +2067,9 @@ void (empty response body)
 # **AINNearestNeighbourSearch**
 > void AINNearestNeighbourSearch (string applicationName, string databaseName, string responseParam, int topMatches, NNearestNeighbourDTO body, string aliasType = null, double? threshold = null)
 
-N-Nearest-Neighbour Search
+N-Nearest Neighbour Search
 
-<p>Retrieve the N-Nearest-Neighbour.</p>
+<p>N-Nearest Neighbour Search.</p>
 
 ### Example
 ```csharp
@@ -2096,7 +2096,7 @@ namespace Example
             var apiInstance = new AIApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var responseParam = "responseParam_example";  // string | <p>Response parameter.</p>
+            var responseParam = "responseParam_example";  // string | <p>Response paramter.</p>
             var topMatches = 1;  // int | <p>Top matches.</p> (default to 1)
             var body = new NNearestNeighbourDTO(); // NNearestNeighbourDTO | <p>N-Nearest neighbour body data.</p>
             var aliasType = "aliasType_example";  // string | <p>Alias Table Name.</p> (optional) 
@@ -2104,7 +2104,7 @@ namespace Example
 
             try
             {
-                // N-Nearest-Neighbour Search
+                // N-Nearest Neighbour Search
                 apiInstance.AINNearestNeighbourSearch(applicationName, databaseName, responseParam, topMatches, body, aliasType, threshold);
             }
             catch (ApiException  e)
@@ -2124,7 +2124,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // N-Nearest-Neighbour Search
+    // N-Nearest Neighbour Search
     apiInstance.AINNearestNeighbourSearchWithHttpInfo(applicationName, databaseName, responseParam, topMatches, body, aliasType, threshold);
 }
 catch (ApiException e)
@@ -2141,7 +2141,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **responseParam** | **string** | &lt;p&gt;Response parameter.&lt;/p&gt; |  |
+| **responseParam** | **string** | &lt;p&gt;Response paramter.&lt;/p&gt; |  |
 | **topMatches** | **int** | &lt;p&gt;Top matches.&lt;/p&gt; | [default to 1] |
 | **body** | [**NNearestNeighbourDTO**](NNearestNeighbourDTO.md) | &lt;p&gt;N-Nearest neighbour body data.&lt;/p&gt; |  |
 | **aliasType** | **string** | &lt;p&gt;Alias Table Name.&lt;/p&gt; | [optional]  |
@@ -2173,9 +2173,9 @@ void (empty response body)
 # **AINarrateVectorIndex**
 > void AINarrateVectorIndex (string aiConnectionName, string vectorIndexName, string profileName, string docDirName, string prompt, bool isConvStart)
 
-Chat with Ask Essbase
+AI Narrate
 
-<p>The AI prompt to interact with the Ask Essbase feature.</p>
+<p>AI Narrate.</p>
 
 ### Example
 ```csharp
@@ -2209,7 +2209,7 @@ namespace Example
 
             try
             {
-                // Chat with Ask Essbase
+                // AI Narrate
                 apiInstance.AINarrateVectorIndex(aiConnectionName, vectorIndexName, profileName, docDirName, prompt, isConvStart);
             }
             catch (ApiException  e)
@@ -2229,7 +2229,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Chat with Ask Essbase
+    // AI Narrate
     apiInstance.AINarrateVectorIndexWithHttpInfo(aiConnectionName, vectorIndexName, profileName, docDirName, prompt, isConvStart);
 }
 catch (ApiException e)
@@ -2277,9 +2277,9 @@ void (empty response body)
 # **AIPassThrough**
 > void AIPassThrough (string applicationName, string profileName, bool isConvStart, PassThroughDTO body)
 
-AI Pass Through
+AI pass through
 
-<p>Performs AI pass through for the specified application.</p>
+<p>AI pass through for the specified application.</p>
 
 ### Example
 ```csharp
@@ -2311,7 +2311,7 @@ namespace Example
 
             try
             {
-                // AI Pass Through
+                // AI pass through
                 apiInstance.AIPassThrough(applicationName, profileName, isConvStart, body);
             }
             catch (ApiException  e)
@@ -2331,7 +2331,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // AI Pass Through
+    // AI pass through
     apiInstance.AIPassThroughWithHttpInfo(applicationName, profileName, isConvStart, body);
 }
 catch (ApiException e)
@@ -2379,7 +2379,7 @@ void (empty response body)
 
 Semantic Search
 
-<p>Retrieves the semantic search.</p>
+<p>Semantic Search.</p>
 
 ### Example
 ```csharp
@@ -2485,7 +2485,7 @@ void (empty response body)
 
 Vectorization Date
 
-<p>Retrieves the vectorization date for the specified application and database.</p>
+<p>Retrive Vectorization Date for the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -2579,9 +2579,9 @@ void (empty response body)
 # **AIVectorizeOutlineJob**
 > void AIVectorizeOutlineJob (string applicationName, string databaseName)
 
-Vectorize Outline Job
+Vectorize outline job
 
-<p>Vectorizes the outline job for the specified application and database.</p>
+<p>Vectorize outline job for the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -2611,7 +2611,7 @@ namespace Example
 
             try
             {
-                // Vectorize Outline Job
+                // Vectorize outline job
                 apiInstance.AIVectorizeOutlineJob(applicationName, databaseName);
             }
             catch (ApiException  e)
@@ -2631,7 +2631,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Vectorize Outline Job
+    // Vectorize outline job
     apiInstance.AIVectorizeOutlineJobWithHttpInfo(applicationName, databaseName);
 }
 catch (ApiException e)

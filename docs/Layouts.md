@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Count** | **long** |  | [optional] 
-**Items** | [**List&lt;LayoutMetadata&gt;**](LayoutMetadata.md) |  | [optional] 
 **TotalResults** | **long** |  | [optional] 
 **HasMore** | **bool** |  | [optional] 
+**Count** | **long** |  | [optional] 
+**Items** | [**List&lt;LayoutMetadata&gt;**](LayoutMetadata.md) |  | [optional] 
 **Limit** | **long** |  | [optional] 
 **Properties** | **Dictionary&lt;string, string&gt;** |  | [optional] 
 **Offset** | **long** |  | [optional] 

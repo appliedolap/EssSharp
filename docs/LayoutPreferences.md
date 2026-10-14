@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **RemoveUnSelectedGroup** | **bool** |  | [optional] 
 **IncludeDescriptionLabel** | **bool** |  | [optional] 
 **MissingText** | **string** |  | [optional] 
-**NoAccessText** | **string** | &lt;p&gt;The string displayed when you do not have the proper security access to view a data value. Default is #NoAccess.&lt;/p&gt; | [optional] 
+**NoAccessText** | **string** |  | [optional] 
 **MaxRows** | **int** |  | [optional] 
 **FormulaRetention** | [**FormulaRetention**](FormulaRetention.md) |  | [optional] 
 
