@@ -172,10 +172,10 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                if ( e is ApiException { ErrorCode: 404 } )
-                    throw new NotSupportedException($@"Getting Drillthrough reports by intersection is not supported by this server version. Must use 21.7 or higher. {e.Message}", e);
+                if (Cube?.Application?.Server is EssServer server && await server.FeatureSupport.GetNotSupportedExceptionAsync(EssFeature.DrillthroughReportsForCells, e, cancellationToken).ConfigureAwait(false) is { } notSupportedException)
+                    throw notSupportedException;
 
-                throw new Exception($@"Unable to get drill through reports for specified interaction for ""{Name}"" grid. {e.Message}", e);
+                throw new Exception($@"Unable to get the drillthrough reports for the given cells of the ""{Name}"" grid. {e.Message}", e);
             }
         }
         /// <inheritdoc />

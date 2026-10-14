@@ -96,8 +96,8 @@ namespace EssSharp
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                if ( e is WebException { Response: WebExceptionRestResponse { StatusCode: HttpStatusCode.MethodNotAllowed } } )
-                    throw new NotSupportedException($@"Drillthrough report execution is not supported by this server version. {e.Message}", e);
+                if (_cube?.Application?.Server is EssServer server && await server.FeatureSupport.GetNotSupportedExceptionAsync(EssFeature.DrillthroughReportExecution, e, cancellationToken).ConfigureAwait(false) is { } notSupportedException)
+                    throw notSupportedException;
 
                 throw new Exception($@"Unable to execute or process the drillthrough report ""{_definition?.Name ?? _report?.Name}"". {e.Message}", e);
             }
