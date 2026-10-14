@@ -52,6 +52,18 @@ namespace EssSharp
             "answer"
         };
 
+        // Properties that may hold the sample queries as a list of plain strings, for a response that wraps the list.
+        private static readonly HashSet<string> _sampleListPropertyNames = new HashSet<string>(StringComparer.Ordinal)
+        {
+            "samplequeries",
+            "samples",
+            "queries",
+            "naturallanguagequeries",
+            "nlqs",
+            "questions",
+            "items"
+        };
+
         private static readonly string[] _sampleQueryPropertyNames =
         {
             "naturalLanguageQuery",
@@ -87,7 +99,7 @@ namespace EssSharp
             mdx = RemoveMarkdownCodeFence(mdx);
 
             var explanation = FindNamedString(token, _explanationPropertyNames);
-            if ( string.Equals(explanation?.Trim(), mdx, StringComparison.Ordinal) )
+            if ( string.Equals(RemoveMarkdownCodeFence(explanation), mdx, StringComparison.Ordinal) )
                 explanation = null;
 
             return new EssAiQueryResult
@@ -109,10 +121,12 @@ namespace EssSharp
             if ( token is null )
                 return new List<string>();
 
-            var queries = new List<string>();
+            var queries    = new List<string>();
+            var recognized = token is JArray;
 
             if ( token is JArray array )
             {
+                // The shape Essbase 26ai returns: a list of natural-language queries.
                 foreach ( var item in array )
                 {
                     if ( item.Type is JTokenType.String )
@@ -124,11 +138,24 @@ namespace EssSharp
             else
             {
                 AddNamedStrings(queries, token, _sampleQueryPropertyNames);
+
+                // The queries may also be a list of plain strings held by a property of the response.
+                foreach ( var property in GetSelfAndDescendants(token).OfType<JProperty>() )
+                {
+                    if ( property.Value is not JArray list || !_sampleListPropertyNames.Contains(NormalizePropertyName(property.Name)) )
+                        continue;
+
+                    recognized = true;
+
+                    foreach ( var item in list.Where(item => item.Type is JTokenType.String) )
+                        AddQuery(queries, item.Value<string>());
+                }
             }
 
-            if ( queries.Count is 0 )
-                foreach ( var value in GetStringValues(token).Where(value => !LooksLikeMdx(value)) )
-                    AddQuery(queries, value);
+            // An empty list is a valid answer. Content that is not a list of queries is not: returning every string in
+            // it (a status, an error message) would present those as sample queries.
+            if ( queries.Count is 0 && !recognized && GetStringValues(token).Any(value => !string.IsNullOrWhiteSpace(value)) )
+                throw new InvalidOperationException($"Received an unrecognized AI sample queries response. {response?.RawContent}".TrimEnd());
 
             return queries;
         }
@@ -273,7 +300,8 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Removes an optional Markdown code fence from generated MDX.
+        /// Removes an optional Markdown code fence from generated MDX: one on its own lines, with or without a language
+        /// after the opening fence, one that is never closed, and one opened and closed on a single line.
         /// </summary>
         private static string RemoveMarkdownCodeFence( string value )
         {
@@ -281,13 +309,16 @@ namespace EssSharp
             if ( string.IsNullOrEmpty(value) || !value.StartsWith("```", StringComparison.Ordinal) )
                 return value;
 
-            var firstLineEnd = value.IndexOf('\n');
             var closingFence = value.LastIndexOf("```", StringComparison.Ordinal);
+            var body         = value.Substring(3, (closingFence < 3 ? value.Length : closingFence) - 3);
 
-            if ( firstLineEnd < 0 || closingFence <= firstLineEnd )
-                return value;
+            // The opening fence line may name a language, such as mdx, and nothing else.
+            var firstLineEnd = body.IndexOf('\n');
+            if ( firstLineEnd >= 0 && Regex.IsMatch(body.Substring(0, firstLineEnd).Trim(), @"^[\w+-]*$") )
+                return body.Substring(firstLineEnd + 1).Trim();
 
-            return value.Substring(firstLineEnd + 1, closingFence - firstLineEnd - 1).Trim();
+            // Otherwise the code starts on the line of the fence, perhaps after a language.
+            return Regex.Replace(body.Trim(), @"^(?:mdx|sql)\s+(?=\S)", string.Empty, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         }
 
         /// <summary>

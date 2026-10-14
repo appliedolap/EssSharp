@@ -196,6 +196,115 @@ namespace EssSharp.Test.HighLevel
         }
 
         [Fact]
+        public async Task GetAiQuerySamplesAsync_ReadsAListOfStrings()
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/listSampleQueries", StringComparison.Ordinal) )
+                    return (200, @"[ ""Using Jan, display Sales."", ""Using Jan and Sales, display top 10 Product."" ]");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+
+            Assert.Equal(new[] { "Using Jan, display Sales.", "Using Jan and Sales, display top 10 Product." }, await cube.GetAiQuerySamplesAsync());
+        }
+
+        [Fact]
+        public async Task GetAiQuerySamplesAsync_ReadsAListHeldByAPropertyWithoutTheOtherStrings()
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/listSampleQueries", StringComparison.Ordinal) )
+                    return (200, @"{""status"":""SUCCESS"",""sampleQueries"":[""Show sales"",""Show profit""]}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+
+            Assert.Equal(new[] { "Show sales", "Show profit" }, await cube.GetAiQuerySamplesAsync());
+        }
+
+        [Theory]
+        [InlineData("[]")]
+        [InlineData("{}")]
+        [InlineData(@"{""status"":""SUCCESS"",""queries"":[]}")]
+        public async Task GetAiQuerySamplesAsync_ReturnsAnEmptyListForAnEmptyAnswer( string body )
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/listSampleQueries", StringComparison.Ordinal) )
+                    return (200, body);
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+
+            Assert.Empty(await cube.GetAiQuerySamplesAsync());
+        }
+
+        [Fact]
+        public async Task GetAiQuerySamplesAsync_RejectsContentThatIsNotAListOfQueries()
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/listSampleQueries", StringComparison.Ordinal) )
+                    return (200, @"{""status"":""FAILED"",""detail"":""The profile is missing""}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            var exception = await Assert.ThrowsAsync<Exception>(() => cube.GetAiQuerySamplesAsync());
+
+            Assert.IsType<InvalidOperationException>(exception.InnerException);
+            Assert.Contains("The profile is missing", exception.Message, StringComparison.Ordinal);
+        }
+
+        [Theory]
+        [InlineData("```mdx\\nSELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]\\n```")]
+        [InlineData("```mdx\\nSELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]")]
+        [InlineData("```SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]```")]
+        [InlineData("```mdx SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]```")]
+        [InlineData("```\\nSELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]\\n```")]
+        public async Task GenerateMdxFromNaturalLanguageAsync_RemovesCodeFences( string fencedMdx )
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, $@"{{""mdx"":""{fencedMdx}""}}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca");
+
+            Assert.Equal("SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]", result.Mdx);
+        }
+
+        [Fact]
+        public async Task GenerateMdxFromNaturalLanguageAsync_DoesNotRepeatTheMdxAsItsExplanation()
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, @"{""response"":""```mdx\nSELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]\n```""}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca");
+
+            Assert.Equal("SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]", result.Mdx);
+            Assert.Null(result.Explanation);
+        }
+
+        [Fact]
         public async Task GetAiQuerySamplesAsync_ReturnsNaturalLanguageQueries()
         {
             using var stub = new AiQueryEssbaseStub(request =>
