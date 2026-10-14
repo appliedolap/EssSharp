@@ -338,9 +338,11 @@ namespace EssSharp
         /// <inheritdoc />
         public async Task<EssAiQueryExecutionResult> ExecuteNaturalLanguageQueryAsync( string query, string profileName, EssAiQueryOptions options = null, CancellationToken cancellationToken = default )
         {
+            // Generating the MDX checks the arguments and reports its own failures, so none of that is wrapped again here.
+            var generatedQuery = await GenerateMdxFromNaturalLanguageAsync(query, profileName, options, cancellationToken).ConfigureAwait(false);
+
             try
             {
-                var generatedQuery = await GenerateMdxFromNaturalLanguageAsync(query, profileName, options, cancellationToken).ConfigureAwait(false);
                 var grid = await new EssMdxScript(new Script { Content = generatedQuery.Mdx }, this)
                     .GetGridAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -355,7 +357,11 @@ namespace EssSharp
             catch ( NotSupportedException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to generate and execute an AI query for cube ""{Name}"". {e.Message}", e);
+                // Generated MDX often fails to run, and the caller has no other way to see what was run, so say so.
+                var exception = new Exception($@"Unable to execute the MDX that AI generated for cube ""{Name}"". {e.Message} The generated MDX was: {generatedQuery.Mdx}", e);
+                exception.Data["Mdx"] = generatedQuery.Mdx;
+
+                throw exception;
             }
         }
 

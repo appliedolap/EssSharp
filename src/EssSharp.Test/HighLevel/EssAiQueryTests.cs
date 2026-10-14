@@ -70,6 +70,48 @@ namespace EssSharp.Test.HighLevel
                 request.Contains(mdx, StringComparison.Ordinal));
         }
 
+        [Theory]
+        [InlineData(null, "Dodeca")]
+        [InlineData("", "Dodeca")]
+        [InlineData("Show sales", null)]
+        [InlineData("Show sales", " ")]
+        public async Task ExecuteNaturalLanguageQueryAsync_RejectsMissingArgumentsWithoutWrappingThem( string query, string profileName )
+        {
+            using var stub = new AiQueryEssbaseStub(GetObjectResponse);
+
+            var cube = await GetCubeAsync(stub);
+
+            // ThrowsAsync<T> only accepts that exact type, so a wrapping Exception fails this.
+            await Assert.ThrowsAsync<ArgumentException>(() => cube.ExecuteNaturalLanguageQueryAsync(query, profileName));
+
+            Assert.DoesNotContain(stub.Requests, request => request.Contains("/ai/", StringComparison.Ordinal));
+        }
+
+        [Fact]
+        public async Task ExecuteNaturalLanguageQueryAsync_ReportsTheGeneratedMdxWhenItFailsToRun()
+        {
+            const string mdx = "SELECT {[Measures].[Nothing]} ON COLUMNS FROM [Sample].[Basic]";
+
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, $@"{{""generatedMdx"":{Quote(mdx)}}}");
+
+                if ( request.StartsWith("POST /essbase/rest/v1/applications/Sample/databases/Basic/grid/mdx", StringComparison.Ordinal) )
+                    return (400, @"{""message"":""Unknown member [Nothing]""}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            var exception = await Assert.ThrowsAsync<Exception>(() =>
+                cube.ExecuteNaturalLanguageQueryAsync("Show nothing", "Dodeca"));
+
+            Assert.Contains(mdx, exception.Message, StringComparison.Ordinal);
+            Assert.Equal(mdx, exception.Data["Mdx"]);
+            Assert.NotNull(exception.InnerException);
+        }
+
         [Fact]
         public async Task GenerateMdxFromNaturalLanguageAsync_RejectsErrorResponseWithoutMdx()
         {
