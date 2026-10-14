@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 using EssSharp.Client;
 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace EssSharp
@@ -26,6 +29,19 @@ namespace EssSharp
             "generatedQuery",
             "query"
         };
+
+        private static readonly string[] _errorPropertyNames =
+        {
+            "errorMessage",
+            "error"
+        };
+
+        // An MDX query starts with SELECT or WITH, and either lays out its axes with ON or names its cube after FROM.
+        // Prose that merely contains the words "select" and "from" - an explanation, an error message, a sample
+        // question - is not MDX.
+        private static readonly Regex _mdxStart = new Regex(@"^\s*(WITH|SELECT)\b", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        private static readonly Regex _mdxAxis  = new Regex(@"\bON\s+(COLUMNS|ROWS|PAGES|CHAPTERS|SECTIONS|AXIS\s*\(\s*\d+\s*\)|\d+)\b", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        private static readonly Regex _mdxCube  = new Regex(@"\bFROM\s+(\[|\w+\s*\.\s*\w)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
         private static readonly string[] _explanationPropertyNames =
         {
@@ -61,7 +77,12 @@ namespace EssSharp
                 mdx = response.RawContent;
 
             if ( string.IsNullOrWhiteSpace(mdx) )
-                throw new InvalidOperationException($"Received an empty or invalid MDX generator response. {response?.RawContent}".TrimEnd());
+            {
+                var error    = FindNamedString(token, _errorPropertyNames);
+                var reported = string.IsNullOrWhiteSpace(error) ? string.Empty : $" The server reported: {error.Trim()}";
+
+                throw new InvalidOperationException($"Received an empty or invalid MDX generator response.{reported} {response?.RawContent}".TrimEnd());
+            }
 
             mdx = RemoveMarkdownCodeFence(mdx);
 
@@ -117,22 +138,37 @@ namespace EssSharp
         /// </summary>
         private static JToken GetResponseToken( ApiResponse<object> response )
         {
-            if ( response?.Data is JToken token )
+            var data = response?.Data;
+
+            if ( data is JToken token )
                 return token;
 
-            if ( response?.Data is not null )
-                return JToken.FromObject(response.Data);
+            // When the content type is not one the client reads as JSON, the data is the raw bytes (or the raw text)
+            // and not the response. Describing it as a token would turn a JSON envelope into a string of base64, so
+            // read the text instead.
+            if ( data is not null and not byte[] and not string )
+                return JToken.FromObject(data);
 
-            if ( string.IsNullOrWhiteSpace(response?.RawContent) )
+            var text = response?.RawContent;
+
+            if ( string.IsNullOrWhiteSpace(text) )
+                text = data switch
+                {
+                    byte[] bytes => Encoding.UTF8.GetString(bytes),
+                    string value => value,
+                    _            => null
+                };
+
+            if ( string.IsNullOrWhiteSpace(text) )
                 return null;
 
             try
             {
-                return JToken.Parse(response.RawContent);
+                return JToken.Parse(text);
             }
-            catch
+            catch ( JsonReaderException )
             {
-                return new JValue(response.RawContent);
+                return new JValue(text);
             }
         }
 
@@ -233,8 +269,7 @@ namespace EssSharp
                 return false;
 
             value = RemoveMarkdownCodeFence(value);
-            return value.IndexOf("SELECT", StringComparison.OrdinalIgnoreCase) >= 0 &&
-                   value.IndexOf("FROM", StringComparison.OrdinalIgnoreCase) >= 0;
+            return _mdxStart.IsMatch(value) && (_mdxAxis.IsMatch(value) || _mdxCube.IsMatch(value));
         }
 
         /// <summary>

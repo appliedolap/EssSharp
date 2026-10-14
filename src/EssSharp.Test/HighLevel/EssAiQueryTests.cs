@@ -90,6 +90,69 @@ namespace EssSharp.Test.HighLevel
             Assert.Contains("Error while generating MDX", exception.Message, StringComparison.Ordinal);
         }
 
+        [Theory]
+        [InlineData(@"{""error"":"""",""info"":""Please select a measure from the list"",""mdx"":""""}", "Please select a measure from the list")]
+        [InlineData(@"{""query"":""show sales from selected region"",""mdx"":""""}", "show sales from selected region")]
+        [InlineData(@"{""errorMessage"":""Select a profile from the settings""}", "The server reported: Select a profile from the settings")]
+        public async Task GenerateMdxFromNaturalLanguageAsync_DoesNotTreatProseAsMdx( string body, string expectedInMessage )
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, body);
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            var exception = await Assert.ThrowsAsync<Exception>(() =>
+                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca"));
+
+            Assert.IsType<InvalidOperationException>(exception.InnerException);
+            Assert.Contains(expectedInMessage, exception.Message, StringComparison.Ordinal);
+            Assert.DoesNotContain(stub.Requests, request => request.Contains("/grid/mdx", StringComparison.Ordinal));
+        }
+
+        [Theory]
+        [InlineData("text/plain")]
+        [InlineData("*/*")]
+        [InlineData("application/xml")]
+        public async Task GenerateMdxFromNaturalLanguageAsync_ReadsJsonSentWithAnotherContentType( string contentType )
+        {
+            const string mdx = "SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]";
+
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/mdxgenerator?", StringComparison.Ordinal) )
+                    return (200, $@"{{""error"":"""",""info"":""Generated from the outline."",""mdx"":{Quote(mdx)}}}");
+
+                return GetObjectResponse(request);
+            }) { ContentType = contentType };
+
+            var cube = await GetCubeAsync(stub);
+            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca");
+
+            Assert.Equal(mdx, result.Mdx);
+            Assert.Equal("Generated from the outline.", result.Explanation);
+        }
+
+        [Fact]
+        public async Task GetAiQuerySamplesAsync_KeepsSamplesThatReadLikeMdx()
+        {
+            using var stub = new AiQueryEssbaseStub(request =>
+            {
+                if ( request.StartsWith("POST /essbase/rest/v1/ai/applications/Sample/databases/Basic/listSampleQueries", StringComparison.Ordinal) )
+                    return (200, @"{""sampleQueries"":[{""nlq"":""Select the top 5 products from last year""},{""nlq"":""Show sales by market""}]}");
+
+                return GetObjectResponse(request);
+            });
+
+            var cube = await GetCubeAsync(stub);
+            var samples = await cube.GetAiQuerySamplesAsync();
+
+            Assert.Equal(new[] { "Select the top 5 products from last year", "Show sales by market" }, samples);
+        }
+
         [Fact]
         public async Task GetAiQuerySamplesAsync_ReturnsNaturalLanguageQueries()
         {
@@ -213,6 +276,12 @@ namespace EssSharp.Test.HighLevel
 
         public string BasePath { get; }
 
+        /// <summary>
+        /// The Content-Type the stub answers the AI endpoints with. Everything else is JSON, which the client needs to
+        /// get the application and cube the AI endpoints are called on.
+        /// </summary>
+        public string ContentType { get; set; } = "application/json";
+
         public List<string> Requests { get; } = new List<string>();
 
         public void Dispose()
@@ -252,6 +321,7 @@ namespace EssSharp.Test.HighLevel
                         Requests.Add(request);
 
                     var (statusCode, body) = _responseProvider(request);
+                    var contentType = request.StartsWith("POST /essbase/rest/v1/ai/", StringComparison.Ordinal) ? ContentType : "application/json";
                     var reason = statusCode switch
                     {
                         404 => "Not Found",
@@ -262,7 +332,7 @@ namespace EssSharp.Test.HighLevel
                     var bodyBytes = Encoding.UTF8.GetBytes(body ?? string.Empty);
                     var headers = Encoding.ASCII.GetBytes(
                         $"HTTP/1.1 {statusCode} {reason}\r\n" +
-                        "Content-Type: application/json\r\n" +
+                        $"Content-Type: {contentType}\r\n" +
                         $"Content-Length: {bodyBytes.Length}\r\n" +
                         "Connection: close\r\n\r\n");
 
