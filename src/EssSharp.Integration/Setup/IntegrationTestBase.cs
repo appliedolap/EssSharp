@@ -117,7 +117,7 @@ namespace EssSharp.Integration.Setup
             {
                 IntegrationTestFactory.Images = new[]
                 {
-                    "appliedolap/essbase:21.7.0"
+                    "appliedolap/essbase:26.1-latest"
                 };
             }
 
