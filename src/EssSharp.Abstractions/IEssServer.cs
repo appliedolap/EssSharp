@@ -558,9 +558,11 @@ namespace EssSharp
         /// </summary>
         /// <param name="feature">The feature to check.</param>
         /// <remarks>
-        /// The answer comes from the operations the server declares in the specification it serves, which is read once and
-        /// cached. When the server does not serve its specification, a feature is reported as supported until a member that
-        /// needs it has thrown a <see cref="NotSupportedException"/>.
+        /// The answer comes from the operations the server declares in the specification it serves and, for a feature that
+        /// a deployment switches on or off, from the flags the server reports in its instance details; both are read once
+        /// and cached. A feature whose flag is reported false, or not reported at all, is not supported. When the server
+        /// does not serve its specification or report its instance details, that source is not used, and a feature is
+        /// reported as supported until a member that needs it has thrown a <see cref="NotSupportedException"/>.
         /// </remarks>
         public bool Supports( EssFeature feature );
 
@@ -570,9 +572,11 @@ namespace EssSharp
         /// <param name="feature">The feature to check.</param>
         /// <param name="cancellationToken" />
         /// <remarks>
-        /// The answer comes from the operations the server declares in the specification it serves, which is read once and
-        /// cached. When the server does not serve its specification, a feature is reported as supported until a member that
-        /// needs it has thrown a <see cref="NotSupportedException"/>.
+        /// The answer comes from the operations the server declares in the specification it serves and, for a feature that
+        /// a deployment switches on or off, from the flags the server reports in its instance details; both are read once
+        /// and cached. A feature whose flag is reported false, or not reported at all, is not supported. When the server
+        /// does not serve its specification or report its instance details, that source is not used, and a feature is
+        /// reported as supported until a member that needs it has thrown a <see cref="NotSupportedException"/>.
         /// </remarks>
         public Task<bool> SupportsAsync( EssFeature feature, CancellationToken cancellationToken = default );
 
