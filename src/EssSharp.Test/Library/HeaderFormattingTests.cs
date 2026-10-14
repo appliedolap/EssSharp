@@ -1,32 +1,25 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-using EssSharp.Integration.Setup;
 
 using RestSharp;
 using Xunit;
 
-namespace EssSharp.Integration
+namespace EssSharp.Test.Library
 {
-    /// <summary>
-    /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
-    /// </summary>
-    [CollectionDefinition(nameof(HeaderFormattingTests), DisableParallelization = true), CollectionPriority(0)]
-    public class HeaderFormattingTestsCollection : ICollectionFixture<CollectionFixture> { }
-
     /// <summary>
     /// Offline tests for the masking of credential-bearing headers in logged requests and responses. These live here
     /// rather than in EssSharp.Test, which the generator deletes when it regenerates. They require no Essbase server
     /// or container.
     /// </summary>
-    [Collection(nameof(HeaderFormattingTests)), Trait("type", "client")]
+    [Collection(nameof(LibraryCollection))]
     public class HeaderFormattingTests
     {
-        [Fact(DisplayName = "HeaderFormattingTests - 01 - GetFormattedHeaders_MasksSensitiveValuesAndPreservesRepeatedHeaders"), Priority(01)]
+        [Fact(DisplayName = "HeaderFormattingTests - GetFormattedHeaders_MasksSensitiveValuesAndPreservesRepeatedHeaders")]
         public void GetFormattedHeaders_MasksSensitiveValuesAndPreservesRepeatedHeaders()
         {
             var headers = new List<HeaderParameter>
@@ -78,7 +71,7 @@ namespace EssSharp.Integration
             Assert.DoesNotContain(@"Domain=second", formatted);
         }
 
-        [Fact(DisplayName = "HeaderFormattingTests - 02 - RequestAndResponseMessages_MaskHeadersWithoutChangingBodies"), Priority(02)]
+        [Fact(DisplayName = "HeaderFormattingTests - RequestAndResponseMessages_MaskHeadersWithoutChangingBodies")]
         public void RequestAndResponseMessages_MaskHeadersWithoutChangingBodies()
         {
             var extensions = typeof(EssServer).Assembly.GetType(@"EssSharp.Extensions");

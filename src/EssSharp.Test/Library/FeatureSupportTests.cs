@@ -4,25 +4,20 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-using EssSharp.Integration.Setup;
 using Xunit;
 
-namespace EssSharp.Integration
+namespace EssSharp.Test.Library
 {
-    /// <summary />
-    [CollectionDefinition(nameof(FeatureSupportClientTests), DisableParallelization = true), CollectionPriority(0)]
-    public class FeatureSupportClientTestsCollection : ICollectionFixture<CollectionFixture> { }
-
     /// <summary>
     /// Client-side tests of <see cref="IEssServer.SupportsAsync(EssFeature, System.Threading.CancellationToken)"/> and of
     /// the members that need a feature, against a loopback stub that scripts the server's responses.
     /// </summary>
-    [Collection(nameof(FeatureSupportClientTests)), Trait("type", "client")]
-    public class FeatureSupportClientTests
+    [Collection(nameof(LibraryCollection))]
+    public class FeatureSupportTests
     {
         private const string _reportsPath = "/applications/Sample/databases/Basic/reports";
 
-        [Fact(DisplayName = "FeatureSupportClientTests - 01 - SupportsAsync_WithServedSpecification_AnswersFromTheDeclaredOperations"), Priority(01)]
+        [Fact(DisplayName = "FeatureSupportTests - SupportsAsync_WithServedSpecification_AnswersFromTheDeclaredOperations")]
         public async Task SupportsAsync_WithServedSpecification_AnswersFromTheDeclaredOperations()
         {
             // Declare report execution under parameter names that differ from the ones EssSharp uses, and no lookup by cells.
@@ -37,7 +32,7 @@ namespace EssSharp.Integration
             Assert.Single(stub.Requests, request => request.Contains("/openapi.json"));
         }
 
-        [Fact(DisplayName = "FeatureSupportClientTests - 02 - SupportsAsync_WithoutServedSpecification_ReportsSupported"), Priority(02)]
+        [Fact(DisplayName = "FeatureSupportTests - SupportsAsync_WithoutServedSpecification_ReportsSupported")]
         public async Task SupportsAsync_WithoutServedSpecification_ReportsSupported()
         {
             using var stub = new LoopbackEssbaseStub() { ResponseProvider = Respond(specification: null) };
@@ -48,7 +43,7 @@ namespace EssSharp.Integration
             Assert.True(await server.SupportsAsync(EssFeature.DrillthroughReportsForCells, TestContext.Current.CancellationToken));
         }
 
-        [Fact(DisplayName = "FeatureSupportClientTests - 03 - ExecuteAsync_WithoutServedSpecification_TranslatesTheFailureAndRemembersIt"), Priority(03)]
+        [Fact(DisplayName = "FeatureSupportTests - ExecuteAsync_WithoutServedSpecification_TranslatesTheFailureAndRemembersIt")]
         public async Task ExecuteAsync_WithoutServedSpecification_TranslatesTheFailureAndRemembersIt()
         {
             // A server without report execution answers its POST with a 405 (method not allowed).
@@ -62,7 +57,7 @@ namespace EssSharp.Integration
             Assert.False(await server.SupportsAsync(EssFeature.DrillthroughReportExecution, TestContext.Current.CancellationToken));
         }
 
-        [Fact(DisplayName = "FeatureSupportClientTests - 04 - ExecuteAsync_WithServedSpecificationDeclaringTheOperation_DoesNotTranslateTheFailure"), Priority(04)]
+        [Fact(DisplayName = "FeatureSupportTests - ExecuteAsync_WithServedSpecificationDeclaringTheOperation_DoesNotTranslateTheFailure")]
         public async Task ExecuteAsync_WithServedSpecificationDeclaringTheOperation_DoesNotTranslateTheFailure()
         {
             // The server declares report execution, so the failure is not a missing operation, even with the status code that
@@ -77,7 +72,7 @@ namespace EssSharp.Integration
             Assert.True(await server.SupportsAsync(EssFeature.DrillthroughReportExecution, TestContext.Current.CancellationToken));
         }
 
-        [Fact(DisplayName = "FeatureSupportClientTests - 05 - ExecuteAsync_WithServedSpecification_TranslatesAnUndeclaredOperation"), Priority(05)]
+        [Fact(DisplayName = "FeatureSupportTests - ExecuteAsync_WithServedSpecification_TranslatesAnUndeclaredOperation")]
         public async Task ExecuteAsync_WithServedSpecification_TranslatesAnUndeclaredOperation()
         {
             // The server declares the report path, but not its POST, as Essbase 21.3 and earlier do.
