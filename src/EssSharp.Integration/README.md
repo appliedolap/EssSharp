@@ -49,5 +49,7 @@ To run them locally, add a complete `AiQuery` section to `appsettings.local.json
 }
 ```
 
-The AI tests are off by default so that CI does not have to build the AI environment. Against an Essbase 21.x server
-(older than 21.8) the tests assert that the AI endpoints are refused.
+The AI tests are off by default so that a local run does not have to build the AI environment. The Build / Test
+workflow turns them on for every push, pull request and manual run (a manual run can clear the `ai_query_tests`
+input); it does so by writing an `appsettings.local.json` like the one above, in `.github/workflows/dotnet.yml`.
+Against an Essbase 21.x server (older than 21.8) the tests assert that the AI endpoints are refused.
