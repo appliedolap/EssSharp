@@ -6988,7 +6988,7 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: "#/components/schemas/LockObject"
           description: <p><strong>OK</strong></p><p>Object locked successfully. Gives
@@ -16777,7 +16777,7 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: "#/components/schemas/Script"
           description: "<p><strong>OK</strong></p><p>Script created successfully,\
@@ -16959,7 +16959,7 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: "#/components/schemas/Script"
           description: "<strong>OK</strong></p><p>Script updated successfully. Includes\

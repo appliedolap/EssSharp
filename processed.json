@@ -8433,7 +8433,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Object locked successfully. Gives the details of locked object along with the links to lock/unlock the object.</p>",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/LockObject"
                 }
@@ -20291,7 +20291,7 @@
           "200": {
             "description": "<p><strong>OK</strong></p><p>Script created successfully, including script details and links to get, edit, or delete the script and to get its contents.</p>",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Script"
                 }
@@ -20445,7 +20445,7 @@
           "200": {
             "description": "<strong>OK</strong></p><p>Script updated successfully. Includes script details and links get, edit, or delete the script and to get its contents.</p>",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Script"
                 }

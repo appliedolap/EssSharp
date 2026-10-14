@@ -30,6 +30,13 @@ def set_response_schema($path; $method; $status; $schema):
          else (.content | with_entries(.value.schema = $schema))
          end));
 
+# The document gives some responses only the wildcard "*/*". Essbase 21 answers a wildcard Accept header in a form
+# the client cannot read, so declare the JSON these operations return.
+def use_json_response($path; $method; $status):
+  require(["paths", $path, $method, "responses", $status, "content"])
+  | .paths[$path][$method].responses[$status].content |=
+      {"application/json": (.["application/json"] // .["*/*"] // (to_entries[0].value))};
+
 # Declares the media types of a response that the document leaves without any content.
 def set_response_content($path; $method; $status; $content):
   require(["paths", $path, $method, "responses", $status])
@@ -85,6 +92,9 @@ del(.swagger)
 | set_response_schema("/outline/{app}/{cube}/ancestors/{memberUniqueName}"; "get"; "200"; schema_ref("AncestorsList"))
 | set_response_schema("/sessions"; "get"; "200"; {"type": "array", "items": schema_ref("SessionAttributes")})
 | set_response_schema("/urls"; "get"; "200"; schema_ref("EssbaseURLList"))
+| use_json_response("/applications/{applicationName}/databases/{databaseName}/scripts"; "post"; "200")
+| use_json_response("/applications/{applicationName}/databases/{databaseName}/scripts/{scriptName}"; "put"; "200")
+| use_json_response("/applications/{applicationName}/databases/{databaseName}/locks/objects/lock"; "post"; "200")
 
 # Execute MDX returns JSON, but the document gives its response no content, so the generator would return nothing
 # and send no Accept header. Essbase 26 rejects every proper subset of the media types this endpoint produces,
