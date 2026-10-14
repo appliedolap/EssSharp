@@ -15,7 +15,7 @@ namespace EssSharp.Integration
     /// <summary>
     /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />.
     /// </summary>
-    [CollectionDefinition(nameof(AiQueryTests), DisableParallelization = true), CollectionPriority(6)]
+    [CollectionDefinition(nameof(AiQueryTests), DisableParallelization = true), CollectionPriority(7)]
     public class AiQueryTestsCollection : ICollectionFixture<AiQueryCollectionFixture> { }
 
     /// <summary>
@@ -133,6 +133,14 @@ namespace EssSharp.Integration
             Assert.NotNull(samples);
             Assert.NotEmpty(samples);
             Assert.All(samples, sample => Assert.False(string.IsNullOrWhiteSpace(sample)));
+
+            // The samples are natural-language queries. A response that was read wrongly shows up as JSON or MDX.
+            Assert.All(samples, sample =>
+            {
+                Assert.DoesNotContain("{", sample, StringComparison.Ordinal);
+                Assert.DoesNotContain("\"", sample, StringComparison.Ordinal);
+                Assert.False(sample.TrimStart().StartsWith("SELECT ", StringComparison.OrdinalIgnoreCase) || sample.TrimStart().StartsWith("WITH ", StringComparison.OrdinalIgnoreCase));
+            });
 
             OutputLogger.LogInformation("AI sample queries: {Samples}", string.Join(Environment.NewLine, samples));
         }

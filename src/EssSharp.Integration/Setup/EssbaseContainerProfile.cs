@@ -224,13 +224,17 @@ namespace EssSharp.Integration.Setup
         /// <remarks>
         /// Tags are expected to lead with a dotted version and may carry a trailing qualifier, so <c>21.7-latest</c>,
         /// <c>21.8.2-dev</c>, and <c>26</c> all parse. A tag with no leading digits - such as <c>latest</c> - yields
-        /// <see langword="null" />.
+        /// <see langword="null" />, as does an image given by its digest alone; a digest after a tag is ignored.
         /// </remarks>
         public static Version ParseVersion( string image )
         {
             // Reduce the image reference to its tag, guarding against a registry host that carries a port.
             if ( image?.Split('/').LastOrDefault() is not { Length: > 0 } repoAndTag )
                 return null;
+
+            // A digest (image@sha256:...) is not a tag, and its hexadecimal characters must not be read as a version.
+            if ( repoAndTag.IndexOf('@') is >= 0 and var digest )
+                repoAndTag = repoAndTag.Substring(0, digest);
 
             if ( repoAndTag.Split(':') is not { Length: > 1 } segments )
                 return null;

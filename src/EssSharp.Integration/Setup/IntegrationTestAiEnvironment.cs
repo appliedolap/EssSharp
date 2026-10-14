@@ -186,7 +186,17 @@ namespace EssSharp.Integration.Setup
                 }
                 catch ( OperationCanceledException ) when ( timeout.IsCancellationRequested && !cancellationToken.IsCancellationRequested )
                 {
+                    await DisposeAsync();
+
                     throw new TimeoutException($@"The AI query environment was not ready within {EnvironmentTimeout.TotalMinutes:0} minutes.");
+                }
+                catch
+                {
+                    // A half-built environment is no use to any test, and would otherwise keep its database container
+                    // (and the memory it takes) until the run ends. Whatever was kept on purpose is left alone.
+                    await DisposeAsync();
+
+                    throw;
                 }
 
                 Log(sink, $@"The AI query environment is ready ({stopwatch.Elapsed.TotalSeconds:0} s).");
@@ -298,7 +308,7 @@ namespace EssSharp.Integration.Setup
                 throw new InvalidOperationException(
                     $@"The AI query containers are not both running: {states}. " +
                     $@"{names} {verb} not created by the test harness, and the harness will not remove or start containers it did not create. " +
-                    $@"Start them yourself so that both are running (for example with 'essbase-ai start'), or remove them, or set AiQuery:Mode to External so that the harness leaves the AI environment to you.");
+                    $@"Start them yourself so that both are running, or remove them, or set AiQuery:Mode to External so that the harness leaves the AI environment to you.");
             }
 
             foreach ( var stray in strays )
