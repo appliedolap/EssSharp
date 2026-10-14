@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Description** | **string** |  | [optional] 
 **Type** | **string** |  | [optional] 
 **ApplicationRole** | **string** |  | [optional] 
-**EasManagedApp** | **bool** |  | [optional] 
+**EasManagedApp** | **bool** | &lt;p&gt;If &lt;b&gt;true&lt;/b&gt;, the application is managed in Essbase Administration Services (EAS) Lite instead of the Essbase web interface. EAS Lite is available as a limited-option alternative available only for Essbase 21c independent deployment.&lt;/p&gt; | [optional] 
 **StartStopDBAllowed** | **bool** |  | [optional] 
 **InspectDBAllowed** | **bool** |  | [optional] 
 **DbVariablesSetting** | [**VariablesSetting**](VariablesSetting.md) |  | [optional] 

@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HasMore** | **bool** |  | [optional] 
-**TotalResults** | **long** |  | [optional] 
 **Count** | **long** |  | [optional] 
 **Items** | [**List&lt;QueryMetadata&gt;**](QueryMetadata.md) |  | [optional] 
+**TotalResults** | **long** |  | [optional] 
+**HasMore** | **bool** |  | [optional] 
 **Limit** | **long** |  | [optional] 
 **Properties** | **Dictionary&lt;string, string&gt;** |  | [optional] 
 **Offset** | **long** |  | [optional] 

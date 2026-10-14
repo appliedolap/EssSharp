@@ -9,7 +9,7 @@ All URIs are relative to */essbase/rest/v1*
 | [**NamedqueriesGetNamedQueries**](MDXReportsApi.md#namedqueriesgetnamedqueries) | **GET** /applications/{application}/databases/{database}/queries | List MDX Reports |
 | [**NamedqueriesGetNamedQueryDetails**](MDXReportsApi.md#namedqueriesgetnamedquerydetails) | **GET** /applications/{application}/databases/{database}/queries/{query} | Get MDX Report Details |
 | [**NamedqueriesSaveNamedQuery**](MDXReportsApi.md#namedqueriessavenamedquery) | **POST** /applications/{application}/databases/{database}/queries | Save MDX Report |
-| [**Rename**](MDXReportsApi.md#rename) | **PUT** /applications/{application}/databases/{database}/queries/rename | Rename MDX report. |
+| [**Rename**](MDXReportsApi.md#rename) | **PUT** /applications/{application}/databases/{database}/queries/rename | Rename MDX Report |
 
 <a id="namedqueriesdeletenamedquery"></a>
 # **NamedqueriesDeleteNamedQuery**
@@ -521,7 +521,7 @@ catch (ApiException e)
 # **Rename**
 > void Rename (string application, string database, string source, string dest)
 
-Rename MDX report.
+Rename MDX Report
 
 <p>Rename named query for specified cube and application.</p>
 
@@ -555,7 +555,7 @@ namespace Example
 
             try
             {
-                // Rename MDX report.
+                // Rename MDX Report
                 apiInstance.Rename(application, database, source, dest);
             }
             catch (ApiException  e)
@@ -575,7 +575,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Rename MDX report.
+    // Rename MDX Report
     apiInstance.RenameWithHttpInfo(application, database, source, dest);
 }
 catch (ApiException e)

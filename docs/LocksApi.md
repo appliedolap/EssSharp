@@ -17,7 +17,7 @@ All URIs are relative to */essbase/rest/v1*
 
 List Locked Blocks
 
-<p>Returns all the locked blocks from the specified application and database.</p>
+<p>Gets all the locked blocks from the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -122,7 +122,7 @@ catch (ApiException e)
 
 List Locked Objects
 
-<p>Returns all the locked objects from the specified application and database.</p>
+<p>Gets all the locked objects from the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -227,7 +227,7 @@ catch (ApiException e)
 
 List Locks
 
-<p>Returns links for locked objects and locked blocks from the specified application and database.</p>
+<p>Gets links for locked objects and locked blocks from the specified application and database.</p>
 
 ### Example
 ```csharp

@@ -4,34 +4,41 @@ All URIs are relative to */essbase/rest/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**AIAssociateConnection**](AIApi.md#aiassociateconnection) | **POST** /ai/applications/{applicationName}/connection/{connectionName} | Associate AI connection |
-| [**AICreateOCIChatCredentialUsingSingingKey**](AIApi.md#aicreateocichatcredentialusingsingingkey) | **POST** /ai/dbconnection/{dbConnectionName}/chat/credential/signingkey/{credentialName} | Create OCI chat credential using singing key |
-| [**AICreateOCIChatProfile**](AIApi.md#aicreateocichatprofile) | **POST** /ai/aiconnection/{aiConnectionName}/chat/profile/{profileName} | Create OCI chat profile |
-| [**AICreateOCIVectorCredential**](AIApi.md#aicreateocivectorcredential) | **POST** /ai/dbconnection/{dbConnectionName}/vector/credential/{credentialName} | Create OCI vector credential |
-| [**AICreateVectorIndexJob**](AIApi.md#aicreatevectorindexjob) | **POST** /ai/aiconnection/{aiConnectionName}/job/vectorindex | Create a job to build vector index |
-| [**AIDissociateConnection**](AIApi.md#aidissociateconnection) | **DELETE** /ai/applications/{applicationName}/connection | Dissociate AI connection |
-| [**AIDropOCIChatCredential**](AIApi.md#aidropocichatcredential) | **DELETE** /ai/dbconnection/{dbConnectionName}/chat/credential/{credentialName} | Drop OCI chat credential |
-| [**AIDropOCIChatProfile**](AIApi.md#aidropocichatprofile) | **DELETE** /ai/aiconnection/{aiConnectionName}/chat/profile/{profileName} | Drop OCI chat profile |
-| [**AIDropOCIVectorCredential**](AIApi.md#aidropocivectorcredential) | **DELETE** /ai/dbconnection/{dbConnectionName}/vector/credential/{credentialName} | Drop OCI vector credential |
-| [**AIDropVectorIndexJob**](AIApi.md#aidropvectorindexjob) | **DELETE** /ai/aiconnection/{aiConnectionName}/job/vectorindex | Create a job to drop the vector index |
-| [**AIGetConnection**](AIApi.md#aigetconnection) | **GET** /ai/connection | Get AI connection |
-| [**AIGetVectorIndex**](AIApi.md#aigetvectorindex) | **GET** /ai/vectorindex | Get vector index |
+| [**AIAssociateConnection**](AIApi.md#aiassociateconnection) | **POST** /ai/applications/{applicationName}/connection/{connectionName} | Associate AI Connection |
+| [**AICreateOCIChatCredentialUsingSingingKey**](AIApi.md#aicreateocichatcredentialusingsingingkey) | **POST** /ai/dbconnection/{dbConnectionName}/chat/credential/signingkey/{credentialName} | Create OCI Chat Credential using Signing Key |
+| [**AICreateOCIChatProfile**](AIApi.md#aicreateocichatprofile) | **POST** /ai/aiconnection/{aiConnectionName}/chat/profile/{profileName} | Create OCI Chat Profile |
+| [**AICreateOCIVectorCredential**](AIApi.md#aicreateocivectorcredential) | **POST** /ai/dbconnection/{dbConnectionName}/vector/credential/{credentialName} | Create OCI Vector Credential |
+| [**AICreateVectorIndexJob**](AIApi.md#aicreatevectorindexjob) | **POST** /ai/aiconnection/{aiConnectionName}/job/vectorindex | Enable Ask Essbase |
+| [**AIDeleteCalculationConversations**](AIApi.md#aideletecalculationconversations) | **DELETE** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation/{conversationId} | Delete Calculation-specific Conversation |
+| [**AIDeleteConversationHistory**](AIApi.md#aideleteconversationhistory) | **DELETE** /ai/applications/{applicationName}/databases/{databaseName}/conversationHistory | Delete Conversation History |
+| [**AIDissociateConnection**](AIApi.md#aidissociateconnection) | **DELETE** /ai/applications/{applicationName}/connection | Dissociate AI Connection |
+| [**AIDropOCIChatCredential**](AIApi.md#aidropocichatcredential) | **DELETE** /ai/dbconnection/{dbConnectionName}/chat/credential/{credentialName} | Delete OCI Chat Credential |
+| [**AIDropOCIChatProfile**](AIApi.md#aidropocichatprofile) | **DELETE** /ai/aiconnection/{aiConnectionName}/chat/profile/{profileName} | Delete OCI Chat Profile |
+| [**AIDropOCIVectorCredential**](AIApi.md#aidropocivectorcredential) | **DELETE** /ai/dbconnection/{dbConnectionName}/vector/credential/{credentialName} | Delete OCI Vector Credential |
+| [**AIDropVectorIndexJob**](AIApi.md#aidropvectorindexjob) | **DELETE** /ai/aiconnection/{aiConnectionName}/job/vectorindex | Disable Ask Essbase |
+| [**AIGenerateCalculationScript**](AIApi.md#aigeneratecalculationscript) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/calculation/generate | Generate Calculation Script |
+| [**AIGetCalculationConversations**](AIApi.md#aigetcalculationconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation/{conversationId} | Get Calculation-specific Conversation History |
+| [**AIGetConnection**](AIApi.md#aigetconnection) | **GET** /ai/connection | Get AI Connection |
+| [**AIGetConversationHistory**](AIApi.md#aigetconversationhistory) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/conversationHistory | Get Conversation History |
+| [**AIGetVectorIndex**](AIApi.md#aigetvectorindex) | **GET** /ai/vectorindex | Check If Ask Essbase Is Enabled |
+| [**AIListCalculationConversations**](AIApi.md#ailistcalculationconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/calculation/conversation | List Calculation-specific Conversations IDs |
+| [**AIListConversations**](AIApi.md#ailistconversations) | **GET** /ai/applications/{applicationName}/databases/{databaseName}/conversation | List Conversations |
 | [**AIListSampleQueries**](AIApi.md#ailistsamplequeries) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/listSampleQueries | List Sample Queries |
 | [**AIMDXGenerator**](AIApi.md#aimdxgenerator) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/mdxgenerator | MDX Generator |
-| [**AINNearestNeighbourSearch**](AIApi.md#ainnearestneighboursearch) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/nnearestneighboursearch | N-Nearest Neighbour Search |
-| [**AINarrateVectorIndex**](AIApi.md#ainarratevectorindex) | **GET** /ai/aiconnection/{aiConnectionName}/vectorindex/{vectorIndexName}/narrate/{profileName} | AI Narrate |
-| [**AIPassThrough**](AIApi.md#aipassthrough) | **POST** /ai/applications/{applicationName}/chat/passThrough | AI pass through |
+| [**AINNearestNeighbourSearch**](AIApi.md#ainnearestneighboursearch) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/nnearestneighboursearch | N-Nearest-Neighbour Search |
+| [**AINarrateVectorIndex**](AIApi.md#ainarratevectorindex) | **GET** /ai/aiconnection/{aiConnectionName}/vectorindex/{vectorIndexName}/narrate/{profileName} | Chat with Ask Essbase |
+| [**AIPassThrough**](AIApi.md#aipassthrough) | **POST** /ai/applications/{applicationName}/chat/passThrough | AI Pass Through |
 | [**AISemanticSearch**](AIApi.md#aisemanticsearch) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/semanticsearch | Semantic Search |
 | [**AIVectorizationDate**](AIApi.md#aivectorizationdate) | **POST** /ai/applications/{applicationName}/databases/{databaseName}/vectorizationDate | Vectorization Date |
-| [**AIVectorizeOutlineJob**](AIApi.md#aivectorizeoutlinejob) | **POST** /ai/applications/{applicationName}/job/vectorize/databases/{databaseName} | Vectorize outline job |
+| [**AIVectorizeOutlineJob**](AIApi.md#aivectorizeoutlinejob) | **POST** /ai/applications/{applicationName}/job/vectorize/databases/{databaseName} | Vectorize Outline Job |
 
 <a id="aiassociateconnection"></a>
 # **AIAssociateConnection**
 > void AIAssociateConnection (string applicationName, string connectionName)
 
-Associate AI connection
+Associate AI Connection
 
-<p>Associate AI connection for the specified application.</p>
+<p>Associates the AI connection for the specified application.</p>
 
 ### Example
 ```csharp
@@ -61,7 +68,7 @@ namespace Example
 
             try
             {
-                // Associate AI connection
+                // Associate AI Connection
                 apiInstance.AIAssociateConnection(applicationName, connectionName);
             }
             catch (ApiException  e)
@@ -81,7 +88,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Associate AI connection
+    // Associate AI Connection
     apiInstance.AIAssociateConnectionWithHttpInfo(applicationName, connectionName);
 }
 catch (ApiException e)
@@ -125,9 +132,9 @@ void (empty response body)
 # **AICreateOCIChatCredentialUsingSingingKey**
 > void AICreateOCIChatCredentialUsingSingingKey (string dbConnectionName, string credentialName, OCIChatCredentialSigningKeyDTO body)
 
-Create OCI chat credential using singing key
+Create OCI Chat Credential using Signing Key
 
-<p>Create OCI chat credential against the specified DB connection using singing key.</p>
+<p>Creates OCI chat credential against the specified database connection using the signing key.</p>
 
 ### Example
 ```csharp
@@ -154,11 +161,11 @@ namespace Example
             var apiInstance = new AIApi(config);
             var dbConnectionName = "dbConnectionName_example";  // string | <p>DB connection name.</p>
             var credentialName = "credentialName_example";  // string | <p>Credential name.</p>
-            var body = new OCIChatCredentialSigningKeyDTO(); // OCIChatCredentialSigningKeyDTO | <p>OCI credential details: singing key.</p>
+            var body = new OCIChatCredentialSigningKeyDTO(); // OCIChatCredentialSigningKeyDTO | <p>OCI credential details: signing key.</p>
 
             try
             {
-                // Create OCI chat credential using singing key
+                // Create OCI Chat Credential using Signing Key
                 apiInstance.AICreateOCIChatCredentialUsingSingingKey(dbConnectionName, credentialName, body);
             }
             catch (ApiException  e)
@@ -178,7 +185,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create OCI chat credential using singing key
+    // Create OCI Chat Credential using Signing Key
     apiInstance.AICreateOCIChatCredentialUsingSingingKeyWithHttpInfo(dbConnectionName, credentialName, body);
 }
 catch (ApiException e)
@@ -195,7 +202,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **dbConnectionName** | **string** | &lt;p&gt;DB connection name.&lt;/p&gt; |  |
 | **credentialName** | **string** | &lt;p&gt;Credential name.&lt;/p&gt; |  |
-| **body** | [**OCIChatCredentialSigningKeyDTO**](OCIChatCredentialSigningKeyDTO.md) | &lt;p&gt;OCI credential details: singing key.&lt;/p&gt; |  |
+| **body** | [**OCIChatCredentialSigningKeyDTO**](OCIChatCredentialSigningKeyDTO.md) | &lt;p&gt;OCI credential details: signing key.&lt;/p&gt; |  |
 
 ### Return type
 
@@ -214,18 +221,18 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;OCI chat credential using singing key created successfully.&lt;/p&gt; |  -  |
-| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to create OCI chat credential using singing key.&lt;/p&gt; |  -  |
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;OCI chat credential using signing key created successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to create OCI chat credential using signing key.&lt;/p&gt; |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a id="aicreateocichatprofile"></a>
 # **AICreateOCIChatProfile**
-> void AICreateOCIChatProfile (string aiConnectionName, string profileName)
+> void AICreateOCIChatProfile (string aiConnectionName, string profileName, string description = null)
 
-Create OCI chat profile
+Create OCI Chat Profile
 
-<p>Create OCI chat profile for the specified application.</p>
+<p>Creates the OCI chat profile for the specified application.</p>
 
 ### Example
 ```csharp
@@ -252,11 +259,12 @@ namespace Example
             var apiInstance = new AIApi(config);
             var aiConnectionName = "aiConnectionName_example";  // string | <p>AI Connection Name.</p>
             var profileName = "profileName_example";  // string | <p>OCI chat profile name.</p>
+            var description = "description_example";  // string | <p>Description.</p> (optional) 
 
             try
             {
-                // Create OCI chat profile
-                apiInstance.AICreateOCIChatProfile(aiConnectionName, profileName);
+                // Create OCI Chat Profile
+                apiInstance.AICreateOCIChatProfile(aiConnectionName, profileName, description);
             }
             catch (ApiException  e)
             {
@@ -275,8 +283,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create OCI chat profile
-    apiInstance.AICreateOCIChatProfileWithHttpInfo(aiConnectionName, profileName);
+    // Create OCI Chat Profile
+    apiInstance.AICreateOCIChatProfileWithHttpInfo(aiConnectionName, profileName, description);
 }
 catch (ApiException e)
 {
@@ -292,6 +300,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **aiConnectionName** | **string** | &lt;p&gt;AI Connection Name.&lt;/p&gt; |  |
 | **profileName** | **string** | &lt;p&gt;OCI chat profile name.&lt;/p&gt; |  |
+| **description** | **string** | &lt;p&gt;Description.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -319,9 +328,9 @@ void (empty response body)
 # **AICreateOCIVectorCredential**
 > void AICreateOCIVectorCredential (string dbConnectionName, string credentialName, OCIVectorCredentialDTO body)
 
-Create OCI vector credential
+Create OCI Vector Credential
 
-<p>Create OCI vector credential.</p>
+<p>Creates the OCI vector credential for the specified application.</p>
 
 ### Example
 ```csharp
@@ -352,7 +361,7 @@ namespace Example
 
             try
             {
-                // Create OCI vector credential
+                // Create OCI Vector Credential
                 apiInstance.AICreateOCIVectorCredential(dbConnectionName, credentialName, body);
             }
             catch (ApiException  e)
@@ -372,7 +381,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create OCI vector credential
+    // Create OCI Vector Credential
     apiInstance.AICreateOCIVectorCredentialWithHttpInfo(dbConnectionName, credentialName, body);
 }
 catch (ApiException e)
@@ -417,9 +426,9 @@ void (empty response body)
 # **AICreateVectorIndexJob**
 > void AICreateVectorIndexJob (string aiConnectionName)
 
-Create a job to build vector index
+Enable Ask Essbase
 
-<p>Create a job to build vector index.</p>
+<p>Enables the Ask Essbase feature.</p>
 
 ### Example
 ```csharp
@@ -448,7 +457,7 @@ namespace Example
 
             try
             {
-                // Create a job to build vector index
+                // Enable Ask Essbase
                 apiInstance.AICreateVectorIndexJob(aiConnectionName);
             }
             catch (ApiException  e)
@@ -468,7 +477,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create a job to build vector index
+    // Enable Ask Essbase
     apiInstance.AICreateVectorIndexJobWithHttpInfo(aiConnectionName);
 }
 catch (ApiException e)
@@ -507,13 +516,209 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="aideletecalculationconversations"></a>
+# **AIDeleteCalculationConversations**
+> void AIDeleteCalculationConversations (string applicationName, string databaseName, string conversationId)
+
+Delete Calculation-specific Conversation
+
+<p>Deletes the specified conversation.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class AIDeleteCalculationConversationsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new AIApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var conversationId = "conversationId_example";  // string | <p>Conversation ID.</p>
+
+            try
+            {
+                // Delete Calculation-specific Conversation
+                apiInstance.AIDeleteCalculationConversations(applicationName, databaseName, conversationId);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.AIDeleteCalculationConversations: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the AIDeleteCalculationConversationsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Delete Calculation-specific Conversation
+    apiInstance.AIDeleteCalculationConversationsWithHttpInfo(applicationName, databaseName, conversationId);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.AIDeleteCalculationConversationsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **conversationId** | **string** | &lt;p&gt;Conversation ID.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Conversation dropped successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to drop conversation.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="aideleteconversationhistory"></a>
+# **AIDeleteConversationHistory**
+> void AIDeleteConversationHistory (string applicationName, string databaseName, string profileName)
+
+Delete Conversation History
+
+<p>Deletes conversation history for the specified outline and chat profile.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class AIDeleteConversationHistoryExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new AIApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var profileName = "profileName_example";  // string | <p>profile name.</p>
+
+            try
+            {
+                // Delete Conversation History
+                apiInstance.AIDeleteConversationHistory(applicationName, databaseName, profileName);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.AIDeleteConversationHistory: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the AIDeleteConversationHistoryWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Delete Conversation History
+    apiInstance.AIDeleteConversationHistoryWithHttpInfo(applicationName, databaseName, profileName);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.AIDeleteConversationHistoryWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **profileName** | **string** | &lt;p&gt;profile name.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Conversation history deleted successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to delete conversation history.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="aidissociateconnection"></a>
 # **AIDissociateConnection**
 > void AIDissociateConnection (string applicationName)
 
-Dissociate AI connection
+Dissociate AI Connection
 
-<p>Dissociate AI connection for the specified application.</p>
+<p>Dissociates the AI connection from the specified application.</p>
 
 ### Example
 ```csharp
@@ -542,7 +747,7 @@ namespace Example
 
             try
             {
-                // Dissociate AI connection
+                // Dissociate AI Connection
                 apiInstance.AIDissociateConnection(applicationName);
             }
             catch (ApiException  e)
@@ -562,7 +767,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Dissociate AI connection
+    // Dissociate AI Connection
     apiInstance.AIDissociateConnectionWithHttpInfo(applicationName);
 }
 catch (ApiException e)
@@ -605,9 +810,9 @@ void (empty response body)
 # **AIDropOCIChatCredential**
 > void AIDropOCIChatCredential (string dbConnectionName, string credentialName)
 
-Drop OCI chat credential
+Delete OCI Chat Credential
 
-<p>Drop OCI chat credential for the specified application.</p>
+<p>Deletes the specified OCI chat credential.</p>
 
 ### Example
 ```csharp
@@ -637,7 +842,7 @@ namespace Example
 
             try
             {
-                // Drop OCI chat credential
+                // Delete OCI Chat Credential
                 apiInstance.AIDropOCIChatCredential(dbConnectionName, credentialName);
             }
             catch (ApiException  e)
@@ -657,7 +862,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Drop OCI chat credential
+    // Delete OCI Chat Credential
     apiInstance.AIDropOCIChatCredentialWithHttpInfo(dbConnectionName, credentialName);
 }
 catch (ApiException e)
@@ -701,9 +906,9 @@ void (empty response body)
 # **AIDropOCIChatProfile**
 > void AIDropOCIChatProfile (string aiConnectionName, string profileName)
 
-Drop OCI chat profile
+Delete OCI Chat Profile
 
-<p>Drop OCI chat profile.</p>
+<p>Deletes the OCI chat profile.</p>
 
 ### Example
 ```csharp
@@ -733,7 +938,7 @@ namespace Example
 
             try
             {
-                // Drop OCI chat profile
+                // Delete OCI Chat Profile
                 apiInstance.AIDropOCIChatProfile(aiConnectionName, profileName);
             }
             catch (ApiException  e)
@@ -753,7 +958,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Drop OCI chat profile
+    // Delete OCI Chat Profile
     apiInstance.AIDropOCIChatProfileWithHttpInfo(aiConnectionName, profileName);
 }
 catch (ApiException e)
@@ -797,9 +1002,9 @@ void (empty response body)
 # **AIDropOCIVectorCredential**
 > void AIDropOCIVectorCredential (string dbConnectionName, string credentialName)
 
-Drop OCI vector credential
+Delete OCI Vector Credential
 
-<p>Drop OCI vector credential for the specified application.</p>
+<p>Deletes the OCI vector credential for the specified application.</p>
 
 ### Example
 ```csharp
@@ -829,7 +1034,7 @@ namespace Example
 
             try
             {
-                // Drop OCI vector credential
+                // Delete OCI Vector Credential
                 apiInstance.AIDropOCIVectorCredential(dbConnectionName, credentialName);
             }
             catch (ApiException  e)
@@ -849,7 +1054,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Drop OCI vector credential
+    // Delete OCI Vector Credential
     apiInstance.AIDropOCIVectorCredentialWithHttpInfo(dbConnectionName, credentialName);
 }
 catch (ApiException e)
@@ -893,9 +1098,9 @@ void (empty response body)
 # **AIDropVectorIndexJob**
 > void AIDropVectorIndexJob (string aiConnectionName)
 
-Create a job to drop the vector index
+Disable Ask Essbase
 
-<p>Create a job to drop the vector index.</p>
+<p>Disables the Ask Essbase feature.</p>
 
 ### Example
 ```csharp
@@ -924,7 +1129,7 @@ namespace Example
 
             try
             {
-                // Create a job to drop the vector index
+                // Disable Ask Essbase
                 apiInstance.AIDropVectorIndexJob(aiConnectionName);
             }
             catch (ApiException  e)
@@ -944,7 +1149,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create a job to drop the vector index
+    // Disable Ask Essbase
     apiInstance.AIDropVectorIndexJobWithHttpInfo(aiConnectionName);
 }
 catch (ApiException e)
@@ -983,13 +1188,209 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="aigeneratecalculationscript"></a>
+# **AIGenerateCalculationScript**
+> void AIGenerateCalculationScript (string applicationName, string databaseName, CalcAssistGeneratorDTO body)
+
+Generate Calculation Script
+
+<p>Generates the calculation script.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class AIGenerateCalculationScriptExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new AIApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var body = new CalcAssistGeneratorDTO(); // CalcAssistGeneratorDTO | <p>Body details for generating calculation script.</p>
+
+            try
+            {
+                // Generate Calculation Script
+                apiInstance.AIGenerateCalculationScript(applicationName, databaseName, body);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.AIGenerateCalculationScript: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the AIGenerateCalculationScriptWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Generate Calculation Script
+    apiInstance.AIGenerateCalculationScriptWithHttpInfo(applicationName, databaseName, body);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.AIGenerateCalculationScriptWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **body** | [**CalcAssistGeneratorDTO**](CalcAssistGeneratorDTO.md) | &lt;p&gt;Body details for generating calculation script.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Calculation script generated successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to generate calculation script.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="aigetcalculationconversations"></a>
+# **AIGetCalculationConversations**
+> void AIGetCalculationConversations (string applicationName, string databaseName, string conversationId)
+
+Get Calculation-specific Conversation History
+
+<p>Gets convesation history for a specified conversations.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class AIGetCalculationConversationsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new AIApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var conversationId = "conversationId_example";  // string | <p>Conversation ID.</p>
+
+            try
+            {
+                // Get Calculation-specific Conversation History
+                apiInstance.AIGetCalculationConversations(applicationName, databaseName, conversationId);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.AIGetCalculationConversations: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the AIGetCalculationConversationsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get Calculation-specific Conversation History
+    apiInstance.AIGetCalculationConversationsWithHttpInfo(applicationName, databaseName, conversationId);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.AIGetCalculationConversationsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **conversationId** | **string** | &lt;p&gt;Conversation ID.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Conversations retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrieve conversations.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="aigetconnection"></a>
 # **AIGetConnection**
 > void AIGetConnection (string application = null)
 
-Get AI connection
+Get AI Connection
 
-<p>Get AI connection.</p>
+<p>Retrieves the AI connection details.</p>
 
 ### Example
 ```csharp
@@ -1018,7 +1419,7 @@ namespace Example
 
             try
             {
-                // Get AI connection
+                // Get AI Connection
                 apiInstance.AIGetConnection(application);
             }
             catch (ApiException  e)
@@ -1038,7 +1439,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get AI connection
+    // Get AI Connection
     apiInstance.AIGetConnectionWithHttpInfo(application);
 }
 catch (ApiException e)
@@ -1077,13 +1478,111 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="aigetconversationhistory"></a>
+# **AIGetConversationHistory**
+> void AIGetConversationHistory (string applicationName, string databaseName, string profileName)
+
+Get Conversation History
+
+<p>Gets full query/response sequence for a conversation.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class AIGetConversationHistoryExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new AIApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+            var profileName = "profileName_example";  // string | <p>Profile name.</p>
+
+            try
+            {
+                // Get Conversation History
+                apiInstance.AIGetConversationHistory(applicationName, databaseName, profileName);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.AIGetConversationHistory: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the AIGetConversationHistoryWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get Conversation History
+    apiInstance.AIGetConversationHistoryWithHttpInfo(applicationName, databaseName, profileName);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.AIGetConversationHistoryWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+| **profileName** | **string** | &lt;p&gt;Profile name.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Conversation history retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrieve conversation history.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="aigetvectorindex"></a>
 # **AIGetVectorIndex**
 > void AIGetVectorIndex ()
 
-Get vector index
+Check If Ask Essbase Is Enabled
 
-<p>Get vector index.</p>
+<p>Checks if the Ask Essbase feature is enabled or not.</p>
 
 ### Example
 ```csharp
@@ -1111,7 +1610,7 @@ namespace Example
 
             try
             {
-                // Get vector index
+                // Check If Ask Essbase Is Enabled
                 apiInstance.AIGetVectorIndex();
             }
             catch (ApiException  e)
@@ -1131,7 +1630,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get vector index
+    // Check If Ask Essbase Is Enabled
     apiInstance.AIGetVectorIndexWithHttpInfo();
 }
 catch (ApiException e)
@@ -1166,13 +1665,205 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+<a id="ailistcalculationconversations"></a>
+# **AIListCalculationConversations**
+> void AIListCalculationConversations (string applicationName, string databaseName)
+
+List Calculation-specific Conversations IDs
+
+<p>Lists all calculation specific conversation IDs.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class AIListCalculationConversationsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new AIApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+
+            try
+            {
+                // List Calculation-specific Conversations IDs
+                apiInstance.AIListCalculationConversations(applicationName, databaseName);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.AIListCalculationConversations: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the AIListCalculationConversationsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List Calculation-specific Conversations IDs
+    apiInstance.AIListCalculationConversationsWithHttpInfo(applicationName, databaseName);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.AIListCalculationConversationsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Conversation IDs retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrieve Conversations IDs.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="ailistconversations"></a>
+# **AIListConversations**
+> void AIListConversations (string applicationName, string databaseName)
+
+List Conversations
+
+<p>Lists all conversations for the user.</p>
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using EssSharp.Api;
+using EssSharp.Client;
+using EssSharp.Model;
+
+namespace Example
+{
+    public class AIListConversationsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "/essbase/rest/v1";
+            // Configure OAuth2 access token for authorization: OAuth2
+            config.AccessToken = "YOUR_ACCESS_TOKEN";
+            // Configure HTTP basic authorization: basicAuth
+            config.Username = "YOUR_USERNAME";
+            config.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new AIApi(config);
+            var applicationName = "applicationName_example";  // string | <p>Application name.</p>
+            var databaseName = "databaseName_example";  // string | <p>Database name.</p>
+
+            try
+            {
+                // List Conversations
+                apiInstance.AIListConversations(applicationName, databaseName);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling AIApi.AIListConversations: " + e.Message);
+                Debug.Print("Status Code: " + e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+#### Using the AIListConversationsWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List Conversations
+    apiInstance.AIListConversationsWithHttpInfo(applicationName, databaseName);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling AIApi.AIListConversationsWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
+| **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | &lt;p&gt;&lt;strong&gt;OK&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Conversations retrieved successfully.&lt;/p&gt; |  -  |
+| **400** | &lt;p&gt;&lt;strong&gt;Bad Request&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Failed to retrieve conversations.&lt;/p&gt; |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 <a id="ailistsamplequeries"></a>
 # **AIListSampleQueries**
 > void AIListSampleQueries (string applicationName, string databaseName)
 
 List Sample Queries
 
-Returns samples queries for an outline
+<p>Retrieves sample queries for an outline.</p>
 
 ### Example
 ```csharp
@@ -1264,11 +1955,11 @@ void (empty response body)
 
 <a id="aimdxgenerator"></a>
 # **AIMDXGenerator**
-> void AIMDXGenerator (string applicationName, string databaseName, string profileName, string nlq, bool includeAttributesInNlq, bool isConvStart, string prompt = null)
+> void AIMDXGenerator (string applicationName, string databaseName, string profileName, bool isConvStart, string nlq, bool includeAttributesInNlq, string prompt = null, bool? isFeedback = null, MdxGeneratorDTO body = null)
 
 MDX Generator
 
-<p>MDX Generator.</p>
+<p>Generates MDX.</p>
 
 ### Example
 ```csharp
@@ -1296,15 +1987,17 @@ namespace Example
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
             var profileName = "profileName_example";  // string | <p>Profile name.</p>
+            var isConvStart = true;  // bool | <p>Is Conversation Start.</p>
             var nlq = "nlq_example";  // string | <p>NLQ.</p>
             var includeAttributesInNlq = true;  // bool | <p>Include Attributes in NLQ.</p>
-            var isConvStart = true;  // bool | <p>Is Conversation Start.</p>
             var prompt = "prompt_example";  // string | <p>Prompt.</p> (optional) 
+            var isFeedback = true;  // bool? | <p>Is Feedback.</p> (optional) 
+            var body = new MdxGeneratorDTO(); // MdxGeneratorDTO | <p>Feedback details.</p> (optional) 
 
             try
             {
                 // MDX Generator
-                apiInstance.AIMDXGenerator(applicationName, databaseName, profileName, nlq, includeAttributesInNlq, isConvStart, prompt);
+                apiInstance.AIMDXGenerator(applicationName, databaseName, profileName, isConvStart, nlq, includeAttributesInNlq, prompt, isFeedback, body);
             }
             catch (ApiException  e)
             {
@@ -1324,7 +2017,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // MDX Generator
-    apiInstance.AIMDXGeneratorWithHttpInfo(applicationName, databaseName, profileName, nlq, includeAttributesInNlq, isConvStart, prompt);
+    apiInstance.AIMDXGeneratorWithHttpInfo(applicationName, databaseName, profileName, isConvStart, nlq, includeAttributesInNlq, prompt, isFeedback, body);
 }
 catch (ApiException e)
 {
@@ -1341,10 +2034,12 @@ catch (ApiException e)
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
 | **profileName** | **string** | &lt;p&gt;Profile name.&lt;/p&gt; |  |
+| **isConvStart** | **bool** | &lt;p&gt;Is Conversation Start.&lt;/p&gt; |  |
 | **nlq** | **string** | &lt;p&gt;NLQ.&lt;/p&gt; |  |
 | **includeAttributesInNlq** | **bool** | &lt;p&gt;Include Attributes in NLQ.&lt;/p&gt; |  |
-| **isConvStart** | **bool** | &lt;p&gt;Is Conversation Start.&lt;/p&gt; |  |
 | **prompt** | **string** | &lt;p&gt;Prompt.&lt;/p&gt; | [optional]  |
+| **isFeedback** | **bool?** | &lt;p&gt;Is Feedback.&lt;/p&gt; | [optional]  |
+| **body** | [**MdxGeneratorDTO**](MdxGeneratorDTO.md) | &lt;p&gt;Feedback details.&lt;/p&gt; | [optional]  |
 
 ### Return type
 
@@ -1372,9 +2067,9 @@ void (empty response body)
 # **AINNearestNeighbourSearch**
 > void AINNearestNeighbourSearch (string applicationName, string databaseName, string responseParam, int topMatches, NNearestNeighbourDTO body, string aliasType = null, double? threshold = null)
 
-N-Nearest Neighbour Search
+N-Nearest-Neighbour Search
 
-<p>N-Nearest Neighbour Search.</p>
+<p>Retrieve the N-Nearest-Neighbour.</p>
 
 ### Example
 ```csharp
@@ -1401,15 +2096,15 @@ namespace Example
             var apiInstance = new AIApi(config);
             var applicationName = "applicationName_example";  // string | <p>Application name.</p>
             var databaseName = "databaseName_example";  // string | <p>Database name.</p>
-            var responseParam = "responseParam_example";  // string | <p>Response paramter.</p>
+            var responseParam = "responseParam_example";  // string | <p>Response parameter.</p>
             var topMatches = 1;  // int | <p>Top matches.</p> (default to 1)
             var body = new NNearestNeighbourDTO(); // NNearestNeighbourDTO | <p>N-Nearest neighbour body data.</p>
             var aliasType = "aliasType_example";  // string | <p>Alias Table Name.</p> (optional) 
-            var threshold = 1.0D;  // double? | <p>Threshold.</p> (optional)  (default to 1.0D)
+            var threshold = 1D;  // double? | <p>Threshold.</p> (optional)  (default to 1D)
 
             try
             {
-                // N-Nearest Neighbour Search
+                // N-Nearest-Neighbour Search
                 apiInstance.AINNearestNeighbourSearch(applicationName, databaseName, responseParam, topMatches, body, aliasType, threshold);
             }
             catch (ApiException  e)
@@ -1429,7 +2124,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // N-Nearest Neighbour Search
+    // N-Nearest-Neighbour Search
     apiInstance.AINNearestNeighbourSearchWithHttpInfo(applicationName, databaseName, responseParam, topMatches, body, aliasType, threshold);
 }
 catch (ApiException e)
@@ -1446,11 +2141,11 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **applicationName** | **string** | &lt;p&gt;Application name.&lt;/p&gt; |  |
 | **databaseName** | **string** | &lt;p&gt;Database name.&lt;/p&gt; |  |
-| **responseParam** | **string** | &lt;p&gt;Response paramter.&lt;/p&gt; |  |
+| **responseParam** | **string** | &lt;p&gt;Response parameter.&lt;/p&gt; |  |
 | **topMatches** | **int** | &lt;p&gt;Top matches.&lt;/p&gt; | [default to 1] |
 | **body** | [**NNearestNeighbourDTO**](NNearestNeighbourDTO.md) | &lt;p&gt;N-Nearest neighbour body data.&lt;/p&gt; |  |
 | **aliasType** | **string** | &lt;p&gt;Alias Table Name.&lt;/p&gt; | [optional]  |
-| **threshold** | **double?** | &lt;p&gt;Threshold.&lt;/p&gt; | [optional] [default to 1.0D] |
+| **threshold** | **double?** | &lt;p&gt;Threshold.&lt;/p&gt; | [optional] [default to 1D] |
 
 ### Return type
 
@@ -1478,9 +2173,9 @@ void (empty response body)
 # **AINarrateVectorIndex**
 > void AINarrateVectorIndex (string aiConnectionName, string vectorIndexName, string profileName, string docDirName, string prompt, bool isConvStart)
 
-AI Narrate
+Chat with Ask Essbase
 
-<p>AI Narrate.</p>
+<p>The AI prompt to interact with the Ask Essbase feature.</p>
 
 ### Example
 ```csharp
@@ -1514,7 +2209,7 @@ namespace Example
 
             try
             {
-                // AI Narrate
+                // Chat with Ask Essbase
                 apiInstance.AINarrateVectorIndex(aiConnectionName, vectorIndexName, profileName, docDirName, prompt, isConvStart);
             }
             catch (ApiException  e)
@@ -1534,7 +2229,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // AI Narrate
+    // Chat with Ask Essbase
     apiInstance.AINarrateVectorIndexWithHttpInfo(aiConnectionName, vectorIndexName, profileName, docDirName, prompt, isConvStart);
 }
 catch (ApiException e)
@@ -1582,9 +2277,9 @@ void (empty response body)
 # **AIPassThrough**
 > void AIPassThrough (string applicationName, string profileName, bool isConvStart, PassThroughDTO body)
 
-AI pass through
+AI Pass Through
 
-<p>AI pass through for the specified application.</p>
+<p>Performs AI pass through for the specified application.</p>
 
 ### Example
 ```csharp
@@ -1616,7 +2311,7 @@ namespace Example
 
             try
             {
-                // AI pass through
+                // AI Pass Through
                 apiInstance.AIPassThrough(applicationName, profileName, isConvStart, body);
             }
             catch (ApiException  e)
@@ -1636,7 +2331,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // AI pass through
+    // AI Pass Through
     apiInstance.AIPassThroughWithHttpInfo(applicationName, profileName, isConvStart, body);
 }
 catch (ApiException e)
@@ -1684,7 +2379,7 @@ void (empty response body)
 
 Semantic Search
 
-<p>Semantic Search.</p>
+<p>Retrieves the semantic search.</p>
 
 ### Example
 ```csharp
@@ -1790,7 +2485,7 @@ void (empty response body)
 
 Vectorization Date
 
-<p>Retrive Vectorization Date for the specified application and database.</p>
+<p>Retrieves the vectorization date for the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -1884,9 +2579,9 @@ void (empty response body)
 # **AIVectorizeOutlineJob**
 > void AIVectorizeOutlineJob (string applicationName, string databaseName)
 
-Vectorize outline job
+Vectorize Outline Job
 
-<p>Vectorize outline job for the specified application and database.</p>
+<p>Vectorizes the outline job for the specified application and database.</p>
 
 ### Example
 ```csharp
@@ -1916,7 +2611,7 @@ namespace Example
 
             try
             {
-                // Vectorize outline job
+                // Vectorize Outline Job
                 apiInstance.AIVectorizeOutlineJob(applicationName, databaseName);
             }
             catch (ApiException  e)
@@ -1936,7 +2631,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Vectorize outline job
+    // Vectorize Outline Job
     apiInstance.AIVectorizeOutlineJobWithHttpInfo(applicationName, databaseName);
 }
 catch (ApiException e)

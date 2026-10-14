@@ -94,7 +94,7 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/zip, application/octet-stream, application/json, application/xml
+ - **Accept**: application/zip, application/octet-stream
 
 
 ### HTTP response details

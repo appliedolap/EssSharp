@@ -14,10 +14,10 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>GenericEntity</returns>
-        public GenericEntity FilesCreateFolder(string path, bool? append = default(bool?), int operationIndex = 0)
+        /// <returns>FilesAddFile200Response</returns>
+        public FilesAddFile200Response FilesCreateFolder(string path, bool? append = default(bool?), int operationIndex = 0)
         {
-            EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = FilesCreateFolderWithHttpInfo(path, append);
+            EssSharp.Client.ApiResponse<FilesAddFile200Response> localVarResponse = FilesCreateFolderWithHttpInfo(path, append);
             return localVarResponse.Data;
         }
 
@@ -28,8 +28,8 @@ namespace EssSharp.Api
         /// <param name="path">&lt;p&gt;Catalog path. If &lt;code&gt;Content-Type&#x3D;application/octet-stream&lt;/code&gt;, this is a file name. Otherwise, it is a folder name.&lt;/p&gt;</param>
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of GenericEntity</returns>
-        public EssSharp.Client.ApiResponse<GenericEntity> FilesCreateFolderWithHttpInfo(string path, bool? append = default(bool?), int operationIndex = 0)
+        /// <returns>ApiResponse of FilesAddFile200Response</returns>
+        public EssSharp.Client.ApiResponse<FilesAddFile200Response> FilesCreateFolderWithHttpInfo(string path, bool? append = default(bool?), int operationIndex = 0)
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -94,7 +94,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Put<GenericEntity>("/files/{path}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Put<FilesAddFile200Response>("/files/{path}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("FilesCreateFolder", localVarResponse);
@@ -115,10 +115,10 @@ namespace EssSharp.Api
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of GenericEntity</returns>
-        public async System.Threading.Tasks.Task<GenericEntity> FilesCreateFolderAsync(string path, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of FilesAddFile200Response</returns>
+        public async System.Threading.Tasks.Task<FilesAddFile200Response> FilesCreateFolderAsync(string path, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            EssSharp.Client.ApiResponse<GenericEntity> localVarResponse = await FilesCreateFolderWithHttpInfoAsync(path, append, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<FilesAddFile200Response> localVarResponse = await FilesCreateFolderWithHttpInfoAsync(path, append, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -130,8 +130,8 @@ namespace EssSharp.Api
         /// <param name="append">append (optional, default to false)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (GenericEntity)</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<GenericEntity>> FilesCreateFolderWithHttpInfoAsync(string path, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (FilesAddFile200Response)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<FilesAddFile200Response>> FilesCreateFolderWithHttpInfoAsync(string path, bool? append = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'path' is set
             if (path == null)
@@ -196,7 +196,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PutAsync<GenericEntity>("/files/{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PutAsync<FilesAddFile200Response>("/files/{path}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

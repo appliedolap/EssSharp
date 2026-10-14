@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Items** | [**List&lt;FilterBean&gt;**](FilterBean.md) |  | [optional] 
-**HasMore** | **bool** |  | [optional] 
-**TotalResults** | **long** |  | [optional] 
 **Count** | **long** |  | [optional] 
+**TotalResults** | **long** |  | [optional] 
+**HasMore** | **bool** |  | [optional] 
 **Limit** | **long** |  | [optional] 
 **Properties** | **Dictionary&lt;string, string&gt;** |  | [optional] 
 **Offset** | **long** |  | [optional] 

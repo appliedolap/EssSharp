@@ -99,7 +99,7 @@ catch (ApiException e)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/octet-stream, text/html, application/json;charset=UTF-8
 
 
@@ -114,7 +114,7 @@ catch (ApiException e)
 
 <a id="mdxexecutenq"></a>
 # **MDXExecutenq**
-> Object MDXExecutenq (string application, string database, string name, string format = null, string aliasTable = null)
+> void MDXExecutenq (string application, string database, string name, string format = null, string aliasTable = null)
 
 Run MDX Report
 
@@ -152,8 +152,7 @@ namespace Example
             try
             {
                 // Run MDX Report
-                Object result = apiInstance.MDXExecutenq(application, database, name, format, aliasTable);
-                Debug.WriteLine(result);
+                apiInstance.MDXExecutenq(application, database, name, format, aliasTable);
             }
             catch (ApiException  e)
             {
@@ -173,10 +172,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Run MDX Report
-    ApiResponse<Object> response = apiInstance.MDXExecutenqWithHttpInfo(application, database, name, format, aliasTable);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
+    apiInstance.MDXExecutenqWithHttpInfo(application, database, name, format, aliasTable);
 }
 catch (ApiException e)
 {
@@ -198,7 +194,7 @@ catch (ApiException e)
 
 ### Return type
 
-**Object**
+void (empty response body)
 
 ### Authorization
 
@@ -207,7 +203,7 @@ catch (ApiException e)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/octet-stream
+ - **Accept**: Not defined
 
 
 ### HTTP response details
