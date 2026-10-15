@@ -65,6 +65,11 @@ namespace EssSharp.Test.Library
         public Func<string, (HttpStatusCode StatusCode, string Body)?> ResponseProvider { get; set; }
 
         /// <summary>
+        /// The Content-Type of every response (application/json by default).
+        /// </summary>
+        public string ContentType { get; set; } = "application/json";
+
+        /// <summary>
         /// Returns the Set-Cookie header values to emit for the request at a given index.
         /// </summary>
         public Func<int, string[]> SetCookieProvider { get; }
@@ -142,7 +147,7 @@ namespace EssSharp.Test.Library
 
                 var builder = new StringBuilder()
                     .Append($"HTTP/1.1 {(int)statusCode} {statusCode}\r\n")
-                    .Append("Content-Type: application/json\r\n")
+                    .Append($"Content-Type: {ContentType}\r\n")
                     .Append($"Content-Length: {Encoding.UTF8.GetByteCount(body)}\r\n");
 
                 foreach ( var setCookieHeader in SetCookieProvider(index) ?? Array.Empty<string>() )
