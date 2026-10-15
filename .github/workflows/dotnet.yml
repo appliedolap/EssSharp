@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       ai_query_tests:
-        description: Run the AI query integration tests. They build their own test environment (an Oracle AI Database container and a fake OCI Generative AI service), which adds about five minutes. Pushes and pull requests always run them; clear this to skip them in a manual run.
+        description: Run the AI query integration tests. They build their own test environment (an Oracle AI Database container and the AI gateway beside it), which adds about five minutes. Pushes and pull requests always run them; clear this to skip them in a manual run.
         type: boolean
         default: true
 
@@ -48,7 +48,7 @@ jobs:
     # The AI query tests are off in appsettings.json, so that a local run does not have to build their environment, and
     # this job turns them on with a local settings file (see src/EssSharp.Integration/README.md). The file replaces only
     # the AiQuery section; the rest of the settings still come from appsettings.json. It has to exist before the build,
-    # which copies it next to the tests. The question is one the fake OCI service has an answer for.
+    # which copies it next to the tests. The question is one the AI gateway has a canned answer for (Scripts/Ai/gateway/answers.json).
     - name: Enable the AI query tests
       if: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests }}
       run: |

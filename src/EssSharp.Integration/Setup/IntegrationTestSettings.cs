@@ -142,8 +142,9 @@ namespace EssSharp.Integration.Setup
     public enum IntegrationTestAiQueryMode
     {
         /// <summary>
-        /// The harness builds the environment itself: an Oracle AI Database container, and a fake OCI Generative AI
-        /// service it talks to, so no OCI tenancy is needed. Essbase is then configured to use them.
+        /// The harness builds the environment itself: an Oracle AI Database container, and the AI gateway beside it,
+        /// which answers the database's model calls with canned answers, so no OCI tenancy is needed. The gateway then
+        /// configures Essbase to use them.
         /// </summary>
         Managed,
 
@@ -184,12 +185,12 @@ namespace EssSharp.Integration.Setup
         public string DatabaseImage { get; set; } = "gvenzl/oracle-free:23.26.3-full-faststart";
 
         /// <summary>
-        /// The image the fake OCI Generative AI service runs in, in <see cref="IntegrationTestAiQueryMode.Managed" /> mode.
+        /// The image the AI gateway runs in, in <see cref="IntegrationTestAiQueryMode.Managed" /> mode.
         /// </summary>
-        public string FakeServiceImage { get; set; } = "python:3.12-slim";
+        public string GatewayImage { get; set; } = "python:3.12-slim";
 
         /// <summary>
-        /// The OCI region whose Generative AI endpoint the fake service impersonates.
+        /// The region of the inference endpoint the AI gateway answers for.
         /// </summary>
         public string Region { get; set; } = "us-chicago-1";
 

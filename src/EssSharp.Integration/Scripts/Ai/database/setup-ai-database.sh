@@ -8,14 +8,14 @@
 #
 #   * the full image flavor is required (the slim flavor has no Oracle Text, so DBMS_VECTOR_CHAIN does not exist)
 #   * DBMS_CLOUD, installed with Oracle's catcon.pl
-#   * an SSL wallet trusting the test CA, named by the SSL_WALLET database property (set in the root container)
+#   * an SSL wallet trusting the AI gateway's certificate authority, named by the SSL_WALLET database property (set in the root container)
 #   * network access for the DBMS_CLOUD schema owner, and for the Essbase database user
 #   * the privileges Essbase's credential and profile calls need
 #   * MAX_STRING_SIZE=EXTENDED, because Essbase creates VARCHAR2(32767) columns
 #
 # Every step checks before it acts, so the script can be run again against a container it has already prepared.
-# Expects ORACLE_PASSWORD and APP_USER in the environment (the container's own settings) and the test CA certificate
-# next to this script.
+# Expects ORACLE_PASSWORD and APP_USER in the environment (the container's own settings) and the certificate authority
+# certificate at CA_CERT (by default, next to this script).
 
 exec 2>&1
 set -euo pipefail
@@ -26,11 +26,11 @@ set -euo pipefail
 APP_USER=$(echo "$APP_USER" | tr '[:lower:]' '[:upper:]')
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 WALLET_DIR=/opt/oracle/wallets/ssl
-CA_CERT="$SCRIPT_DIR/ca.crt"
+CA_CERT="${CA_CERT:-$SCRIPT_DIR/ca.crt}"
 
 sysdba() { sqlplus -s -L / as sysdba; }
 
-echo "==> SSL wallet trusting the test CA"
+echo "==> SSL wallet trusting the AI gateway's certificate authority"
 if [ ! -f "$WALLET_DIR/cwallet.sso" ]; then
   mkdir -p "$WALLET_DIR"
   "$ORACLE_HOME/bin/orapki" wallet create -wallet "$WALLET_DIR" -auto_login_only
@@ -38,8 +38,9 @@ fi
 # Adding a certificate the wallet already holds is an error, and a harmless one on a re-run, so do not stop on it - but
 # do check that the wallet really does trust the CA afterwards.
 "$ORACLE_HOME/bin/orapki" wallet add -wallet "$WALLET_DIR" -trusted_cert -cert "$CA_CERT" -auto_login_only || true
+ca_subject=$("$ORACLE_HOME/bin/orapki" cert display -cert "$CA_CERT" -summary | sed -n 's/^Subject:[[:space:]]*//p')
 wallet_contents=$("$ORACLE_HOME/bin/orapki" wallet display -wallet "$WALLET_DIR")
-grep -q "EssSharp integration test CA" <<<"$wallet_contents" || { echo "The SSL wallet does not trust the test CA"; exit 1; }
+[ -n "$ca_subject" ] && grep -qF "$ca_subject" <<<"$wallet_contents" || { echo "The SSL wallet does not trust the AI gateway's certificate authority"; exit 1; }
 
 echo "==> DBMS_CLOUD"
 cloud_ready() {

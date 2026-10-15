@@ -20,8 +20,7 @@
     <Content Include="Scripts\MsSql\healthcheck.sh" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Scripts\MsSql\setup.sql" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Scripts\MsSql\start-db.sh" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Scripts\AiQuery\fake-oci-genai.py" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="Scripts\AiQuery\setup-ai-database.sh" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Scripts\Ai\**\*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

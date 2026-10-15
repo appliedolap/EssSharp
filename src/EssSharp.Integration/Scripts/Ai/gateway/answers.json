@@ -1,0 +1,33 @@
+{
+  "answers": [
+    {
+      "question": "actual sales by year",
+      "answer": {
+        "operator": "none",
+        "operands": [],
+        "sort": {},
+        "POV": {
+          "Scenario": [
+            {
+              "member_name": "Actual",
+              "hierarchy_scope": ""
+            }
+          ],
+          "Measures": [
+            {
+              "member_name": "Sales",
+              "hierarchy_scope": ""
+            }
+          ],
+          "Year": [
+            {
+              "member_name": "Year",
+              "hierarchy_scope": "children"
+            }
+          ]
+        }
+      },
+      "info": "Shows actual sales for each quarter of the year."
+    }
+  ]
+}

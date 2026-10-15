@@ -30,8 +30,16 @@ Essbase AI connection:
 | Mode | What happens |
 |---|---|
 | `Disabled` (the committed default) | The AI query tests are skipped, and the harness does none of the AI setup. |
-| `Managed` | The harness builds the environment: an Oracle AI Database container and a fake OCI Generative AI service on a private network, with the Essbase registry and AI connection configured to use them. It reuses a running pair (`<essbase container>-ai-service` and `-ai-database`), and removes only what it created when the run ends, unless `KeepEnvironment` is set. It pulls large images and takes several minutes on a cold start. |
+| `Managed` | The harness builds the environment: an Oracle AI Database container and the AI gateway as its sidecar, answering in canned mode, with the Essbase registry forced and the gateway configuring the AI connection. It reuses a running pair (`<essbase container>-ai-gateway` and `-ai-database`, the names the scoop `essbase` stack uses), and removes only what it created when the run ends, unless `KeepEnvironment` is set. It pulls large images and takes several minutes on a cold start. |
 | `External` | The Essbase server already has an AI connection for the application (for example one backed by a real OCI tenancy); the harness leaves it alone. |
+
+The gateway (`Scripts/Ai/gateway`) answers each question from `answers.json`, keyed by a phrase of the question, and
+embeds text deterministically, so the tests can assert what Essbase makes of an answer. To give a new test a
+deterministic answer, add an entry to `answers.json`. The gateway reads it on every request.
+
+The same gateway runs in the scoop `essbase` stack, in model mode by default. To run these tests in `External` mode
+against that stack, switch its gateway to canned answers first (`essbase ai canned`, and `essbase ai local` to switch
+back).
 
 To run them locally, add a complete `AiQuery` section to `appsettings.local.json`:
 
