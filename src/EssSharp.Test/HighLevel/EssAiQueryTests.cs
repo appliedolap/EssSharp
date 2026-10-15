@@ -30,7 +30,8 @@ namespace EssSharp.Test.HighLevel
             var result = await cube.GenerateMdxFromNaturalLanguageAsync(
                 "Show sales",
                 "Dodeca",
-                new EssAiQueryOptions(startNewConversation: true, includeAttributes: true, prompt: "Additional context"));
+                new EssAiQueryOptions(startNewConversation: true, includeAttributes: true, prompt: "Additional context"),
+                TestContext.Current.CancellationToken);
 
             Assert.Equal("Show sales", result.NaturalLanguageQuery);
             Assert.Equal("Dodeca", result.ProfileName);
@@ -60,7 +61,7 @@ namespace EssSharp.Test.HighLevel
             });
 
             var cube = await GetCubeAsync(stub);
-            var result = await cube.ExecuteNaturalLanguageQueryAsync("Show sales", "Dodeca");
+            var result = await cube.ExecuteNaturalLanguageQueryAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(mdx, result.Query.Mdx);
             Assert.NotNull(result.Grid);
@@ -82,7 +83,7 @@ namespace EssSharp.Test.HighLevel
             var cube = await GetCubeAsync(stub);
 
             // ThrowsAsync<T> only accepts that exact type, so a wrapping Exception fails this.
-            await Assert.ThrowsAsync<ArgumentException>(() => cube.ExecuteNaturalLanguageQueryAsync(query, profileName));
+            await Assert.ThrowsAsync<ArgumentException>(() => cube.ExecuteNaturalLanguageQueryAsync(query, profileName, cancellationToken: TestContext.Current.CancellationToken));
 
             Assert.DoesNotContain(stub.Requests, request => request.Contains("/ai/", StringComparison.Ordinal));
         }
@@ -105,7 +106,7 @@ namespace EssSharp.Test.HighLevel
 
             var cube = await GetCubeAsync(stub);
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                cube.ExecuteNaturalLanguageQueryAsync("Show nothing", "Dodeca"));
+                cube.ExecuteNaturalLanguageQueryAsync("Show nothing", "Dodeca", cancellationToken: TestContext.Current.CancellationToken));
 
             Assert.Contains(mdx, exception.Message, StringComparison.Ordinal);
             Assert.Equal(mdx, exception.Data["Mdx"]);
@@ -125,7 +126,7 @@ namespace EssSharp.Test.HighLevel
 
             var cube = await GetCubeAsync(stub);
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca"));
+                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken));
 
             Assert.IsType<InvalidOperationException>(exception.InnerException);
             Assert.Contains("Received an empty or invalid MDX generator response", exception.Message, StringComparison.Ordinal);
@@ -148,7 +149,7 @@ namespace EssSharp.Test.HighLevel
 
             var cube = await GetCubeAsync(stub);
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca"));
+                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken));
 
             Assert.IsType<InvalidOperationException>(exception.InnerException);
             Assert.Contains(expectedInMessage, exception.Message, StringComparison.Ordinal);
@@ -172,7 +173,7 @@ namespace EssSharp.Test.HighLevel
             }) { ContentType = contentType };
 
             var cube = await GetCubeAsync(stub);
-            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca");
+            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(mdx, result.Mdx);
             Assert.Equal("Generated from the outline.", result.Explanation);
@@ -190,7 +191,7 @@ namespace EssSharp.Test.HighLevel
             });
 
             var cube = await GetCubeAsync(stub);
-            var samples = await cube.GetAiQuerySamplesAsync();
+            var samples = await cube.GetAiQuerySamplesAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(new[] { "Select the top 5 products from last year", "Show sales by market" }, samples);
         }
@@ -209,7 +210,7 @@ namespace EssSharp.Test.HighLevel
             });
 
             var cube = await GetCubeAsync(stub);
-            await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca");
+            await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken);
 
             var generate = Assert.Single(stub.Requests, request => request.Contains("/mdxgenerator?", StringComparison.Ordinal));
             Assert.Contains("isConvStart=true", generate, StringComparison.OrdinalIgnoreCase);
@@ -231,7 +232,7 @@ namespace EssSharp.Test.HighLevel
             });
 
             var cube = await GetCubeAsync(stub);
-            await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", new EssAiQueryOptions(startNewConversation: false, prompt: "Use the Actual scenario"));
+            await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", new EssAiQueryOptions(startNewConversation: false, prompt: "Use the Actual scenario"), cancellationToken: TestContext.Current.CancellationToken);
 
             var generate = Assert.Single(stub.Requests, request => request.Contains("/mdxgenerator?", StringComparison.Ordinal));
             Assert.Contains("isConvStart=false", generate, StringComparison.OrdinalIgnoreCase);
@@ -323,14 +324,14 @@ namespace EssSharp.Test.HighLevel
                 return GetObjectResponse(request);
             });
 
-            var server = await new EssServerFactory().CreateEssServerAsync(stub.BasePath, "admin", "password", connect: false);
+            var server = await new EssServerFactory().CreateEssServerAsync(stub.BasePath, "admin", "password", connect: false, cancellationToken: TestContext.Current.CancellationToken);
             Task<IEssCube> CubeTask() => server.GetApplicationAsync("Sample").GetCubeAsync("Basic");
 
-            Assert.Equal(mdx, (await CubeTask().GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca")).Mdx);
-            Assert.Equal(mdx, (await CubeTask().ExecuteNaturalLanguageQueryAsync("Show sales", "Dodeca")).Query.Mdx);
-            Assert.Equal(new[] { "Show sales" }, await CubeTask().GetAiQuerySamplesAsync());
+            Assert.Equal(mdx, (await CubeTask().GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken)).Mdx);
+            Assert.Equal(mdx, (await CubeTask().ExecuteNaturalLanguageQueryAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken)).Query.Mdx);
+            Assert.Equal(new[] { "Show sales" }, await CubeTask().GetAiQuerySamplesAsync(cancellationToken: TestContext.Current.CancellationToken));
 
-            await CubeTask().ClearAiQueryConversationAsync("Dodeca");
+            await CubeTask().ClearAiQueryConversationAsync("Dodeca", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Contains(stub.Requests, request => request.StartsWith("DELETE /essbase/rest/v1/ai/applications/Sample/databases/Basic/conversationHistory?", StringComparison.Ordinal));
         }
@@ -348,7 +349,7 @@ namespace EssSharp.Test.HighLevel
 
             var cube = await GetCubeAsync(stub);
 
-            Assert.Equal(new[] { "Using Jan, display Sales.", "Using Jan and Sales, display top 10 Product." }, await cube.GetAiQuerySamplesAsync());
+            Assert.Equal(new[] { "Using Jan, display Sales.", "Using Jan and Sales, display top 10 Product." }, await cube.GetAiQuerySamplesAsync(cancellationToken: TestContext.Current.CancellationToken));
         }
 
         [Fact]
@@ -364,7 +365,7 @@ namespace EssSharp.Test.HighLevel
 
             var cube = await GetCubeAsync(stub);
 
-            Assert.Equal(new[] { "Show sales", "Show profit" }, await cube.GetAiQuerySamplesAsync());
+            Assert.Equal(new[] { "Show sales", "Show profit" }, await cube.GetAiQuerySamplesAsync(cancellationToken: TestContext.Current.CancellationToken));
         }
 
         [Theory]
@@ -383,7 +384,7 @@ namespace EssSharp.Test.HighLevel
 
             var cube = await GetCubeAsync(stub);
 
-            Assert.Empty(await cube.GetAiQuerySamplesAsync());
+            Assert.Empty(await cube.GetAiQuerySamplesAsync(cancellationToken: TestContext.Current.CancellationToken));
         }
 
         [Fact]
@@ -398,7 +399,7 @@ namespace EssSharp.Test.HighLevel
             });
 
             var cube = await GetCubeAsync(stub);
-            var exception = await Assert.ThrowsAsync<Exception>(() => cube.GetAiQuerySamplesAsync());
+            var exception = await Assert.ThrowsAsync<Exception>(() => cube.GetAiQuerySamplesAsync(cancellationToken: TestContext.Current.CancellationToken));
 
             Assert.IsType<InvalidOperationException>(exception.InnerException);
             Assert.Contains("The profile is missing", exception.Message, StringComparison.Ordinal);
@@ -421,7 +422,7 @@ namespace EssSharp.Test.HighLevel
             });
 
             var cube = await GetCubeAsync(stub);
-            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca");
+            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal("SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]", result.Mdx);
         }
@@ -438,7 +439,7 @@ namespace EssSharp.Test.HighLevel
             });
 
             var cube = await GetCubeAsync(stub);
-            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca");
+            var result = await cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal("SELECT {[Measures].[Sales]} ON COLUMNS FROM [Sample].[Basic]", result.Mdx);
             Assert.Null(result.Explanation);
@@ -456,7 +457,7 @@ namespace EssSharp.Test.HighLevel
             });
 
             var cube = await GetCubeAsync(stub);
-            var samples = await cube.GetAiQuerySamplesAsync();
+            var samples = await cube.GetAiQuerySamplesAsync(cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Equal(new[] { "Show sales by market", "Compare actual to budget" }, samples);
         }
@@ -467,7 +468,7 @@ namespace EssSharp.Test.HighLevel
             using var stub = new AiQueryEssbaseStub(GetObjectResponse);
 
             var cube = await GetCubeAsync(stub);
-            await cube.ClearAiQueryConversationAsync("Dodeca");
+            await cube.ClearAiQueryConversationAsync("Dodeca", cancellationToken: TestContext.Current.CancellationToken);
 
             Assert.Contains(stub.Requests, request =>
                 request.StartsWith("DELETE /essbase/rest/v1/ai/applications/Sample/databases/Basic/conversationHistory?", StringComparison.Ordinal) &&
@@ -489,7 +490,7 @@ namespace EssSharp.Test.HighLevel
 
             var cube = await GetCubeAsync(stub);
             var exception = await Assert.ThrowsAsync<NotSupportedException>(() =>
-                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca"));
+                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken));
 
             Assert.DoesNotContain("version", exception.Message, StringComparison.OrdinalIgnoreCase);
             Assert.DoesNotContain(stub.Requests, request => request.Contains("/about", StringComparison.OrdinalIgnoreCase));
@@ -512,7 +513,7 @@ namespace EssSharp.Test.HighLevel
 
             var cube = await GetCubeAsync(stub);
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca"));
+                cube.GenerateMdxFromNaturalLanguageAsync("Show sales", "Dodeca", cancellationToken: TestContext.Current.CancellationToken));
 
             Assert.IsNotType<NotSupportedException>(exception);
         }

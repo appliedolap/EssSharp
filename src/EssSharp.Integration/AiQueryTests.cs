@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 using EssSharp.Client;
@@ -89,6 +90,16 @@ namespace EssSharp.Integration
             Assert.Contains("FROM", result.Mdx, StringComparison.OrdinalIgnoreCase);
             Assert.False(string.IsNullOrWhiteSpace(result.RawResponse));
 
+            // The harness's AI gateway answers this question with a fixed point of view (Scripts/Ai/gateway/answers.json):
+            // actual sales for each quarter of the year. Essbase looks up each of its words as a member and builds the MDX,
+            // so the members show that the whole chain worked, not just that some MDX came back.
+            if (IntegrationTestAiEnvironment.ServesCannedAnswers && GetNaturalLanguageQuery().Contains("actual sales by year", StringComparison.OrdinalIgnoreCase))
+            {
+                Assert.Contains("[Actual]", result.Mdx, StringComparison.OrdinalIgnoreCase);
+                Assert.Contains("[Sales]", result.Mdx, StringComparison.OrdinalIgnoreCase);
+                Assert.Contains("[Year].CHILDREN", result.Mdx, StringComparison.OrdinalIgnoreCase);
+            }
+
             OutputLogger.LogInformation("AI MDX generator response: {Response}", result.RawResponse);
         }
 
@@ -162,7 +173,12 @@ namespace EssSharp.Integration
                 new EssAiQueryOptions(startNewConversation: true),
                 TestContext.Current.CancellationToken);
 
+            // Essbase keeps the conversation under the profile name until it is cleared, and then has nothing for it.
+            Assert.Contains(GetNaturalLanguageQuery(), await GetConversationHistoryAsync(), StringComparison.Ordinal);
+
             await cube.ClearAiQueryConversationAsync(GetProfileName(), TestContext.Current.CancellationToken);
+
+            Assert.Equal(string.Empty, await GetConversationHistoryAsync());
         }
 
         /// <summary>
@@ -183,6 +199,24 @@ namespace EssSharp.Integration
                 .GetCubeAsync(AiQuerySettings.CubeName, TestContext.Current.CancellationToken);
 
             return (cube, version);
+        }
+
+        /// <summary>
+        /// Returns the conversation Essbase keeps for this test's profile, read over the REST API because EssSharp has
+        /// no call for it: the questions and the MDX generated for them, or an empty string when there is none.
+        /// </summary>
+        private async Task<string> GetConversationHistoryAsync()
+        {
+            using var http = IntegrationTestAiEnvironment.CreateEssbaseClient();
+
+            var application = Uri.EscapeDataString(AiQuerySettings.ApplicationName);
+            var cube        = Uri.EscapeDataString(AiQuerySettings.CubeName);
+
+            using var response = await http.GetAsync($@"ai/applications/{application}/databases/{cube}/conversationHistory?profileName={Uri.EscapeDataString(GetProfileName())}", TestContext.Current.CancellationToken);
+
+            response.EnsureSuccessStatusCode();
+
+            return (await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken)).Trim();
         }
 
         /// <summary>

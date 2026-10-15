@@ -114,6 +114,7 @@ namespace EssSharp.Integration.Setup
         private static readonly List<string> _createdContainerIds = new();
 
         private static bool                           _ready;
+        private static bool                           _cannedAnswers;
         private static bool                           _keep;
         private static bool                           _ownsEssbaseConfiguration;
         private static bool                           _createdDatabaseConnection;
@@ -124,6 +125,17 @@ namespace EssSharp.Integration.Setup
         private static IVolume                        _createdVolume;
         private static IntegrationTestAiQuerySettings _settings;
         private static IMessageSink                   _sink;
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Whether the AI gateway answers with the canned answers in <c>answers.json</c>, so that a test can assert what
+        /// Essbase makes of them: always when the harness started the gateway, and when it adopted a running one that was
+        /// started in canned mode.
+        /// </summary>
+        public static bool ServesCannedAnswers => _cannedAnswers;
 
         #endregion
 
@@ -270,6 +282,7 @@ namespace EssSharp.Integration.Setup
                 _databaseName              = null;
                 _volumeName                = null;
                 _ready                     = false;
+                _cannedAnswers             = false;
             }
         }
         #endregion
@@ -300,7 +313,11 @@ namespace EssSharp.Integration.Setup
             // run creates are removed when it ends.
             if (IsRunning(gateway) && IsRunning(database))
             {
-                Log(sink, $@"Using the running AI query containers '{_gatewayName}' and '{_databaseName}'.");
+                var inspected = await client.Containers.InspectContainerAsync(gateway.ID, cancellationToken);
+
+                _cannedAnswers = inspected.Config?.Env?.Contains("AI_GATEWAY_MODE=canned") is true;
+
+                Log(sink, $@"Using the running AI query containers '{_gatewayName}' and '{_databaseName}' ({(_cannedAnswers ? "canned answers" : "the gateway's models")}).");
                 return false;
             }
 
@@ -418,6 +435,8 @@ namespace EssSharp.Integration.Setup
             }
 
             Log(sink, $@"The AI gateway configured '{settings.ApplicationName}.{settings.CubeName}'.");
+
+            _cannedAnswers = true;
 
             return true;
         }
@@ -559,7 +578,7 @@ namespace EssSharp.Integration.Setup
         /// <summary>
         /// Creates a client for the Essbase REST API, signed in as the configured service administrator.
         /// </summary>
-        private static HttpClient CreateEssbaseClient()
+        internal static HttpClient CreateEssbaseClient()
         {
             var connection = IntegrationTestFactory.GetEssConnection();
             var http       = new HttpClient() { BaseAddress = new Uri($@"{connection.Server.TrimEnd('/')}/rest/v1/"), Timeout = TimeSpan.FromMinutes(5) };
