@@ -195,6 +195,12 @@ tag_untagged_operations({
     "application/octet-stream": {"schema": {"type": "string", "format": "binary"}}
   })
 
+# The document declares the export outline to XML response as octet-stream without a schema, so the client would
+# discard the XML.
+| set_response_content("/outline/{app}/{cube}/xml"; "post"; "default"; {
+    "application/octet-stream": {"schema": {"type": "string", "format": "binary"}}
+  })
+
 # The document names two query parameters of the export outline to XML operation with their HTML descriptions
 # instead of their names.
 | require(["paths", "/outline/{app}/{cube}/xml", "post", "parameters"])

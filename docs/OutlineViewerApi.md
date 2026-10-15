@@ -561,7 +561,7 @@ catch (ApiException e)
 
 <a id="outlinegetoutlinexml"></a>
 # **OutlineGetOutlineXML**
-> void OutlineGetOutlineXML (string app, string cube, string connection = null, string applicationNameForConnection = null, ExportOptions body = null)
+> System.IO.Stream OutlineGetOutlineXML (string app, string cube, string connection = null, string applicationNameForConnection = null, ExportOptions body = null)
 
 Export Outline to XML
 
@@ -599,7 +599,8 @@ namespace Example
             try
             {
                 // Export Outline to XML
-                apiInstance.OutlineGetOutlineXML(app, cube, connection, applicationNameForConnection, body);
+                System.IO.Stream result = apiInstance.OutlineGetOutlineXML(app, cube, connection, applicationNameForConnection, body);
+                Debug.WriteLine(result);
             }
             catch (ApiException  e)
             {
@@ -619,7 +620,10 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Export Outline to XML
-    apiInstance.OutlineGetOutlineXMLWithHttpInfo(app, cube, connection, applicationNameForConnection, body);
+    ApiResponse<System.IO.Stream> response = apiInstance.OutlineGetOutlineXMLWithHttpInfo(app, cube, connection, applicationNameForConnection, body);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
 }
 catch (ApiException e)
 {
@@ -641,7 +645,7 @@ catch (ApiException e)
 
 ### Return type
 
-void (empty response body)
+**System.IO.Stream**
 
 ### Authorization
 
