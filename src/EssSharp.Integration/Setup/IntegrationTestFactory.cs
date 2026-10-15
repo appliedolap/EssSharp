@@ -2,15 +2,18 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 using Docker.DotNet;
+using Docker.DotNet.Models;
 using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Configurations;
 using DotNet.Testcontainers.Containers;
 using Testcontainers.MsSql;
 using Xunit.Sdk;
+using Xunit.v3;
 
 namespace EssSharp.Integration.Setup
 {
@@ -24,6 +27,32 @@ namespace EssSharp.Integration.Setup
         private static DockerContainer _essbaseTestContainer;
         private static string          _essbaseContainerId;
 
+        private static EssbaseContainerProfile _essbaseProfile;
+
+        private static string _sqlcmdPath;
+
+        /// <summary>
+        /// The locations a SQL Server image may ship <c>sqlcmd</c>, in order of preference. Recent images carry only the
+        /// version 18 ODBC tools, while older images carry the unversioned directory.
+        /// </summary>
+        private static readonly string[] SqlcmdPaths =
+        {
+            @"/opt/mssql-tools18/bin/sqlcmd",
+            @"/opt/mssql-tools/bin/sqlcmd"
+        };
+
+        /// <summary>
+        /// How long to wait for Essbase to write its registry entries, which only happens once it has created its
+        /// domain - well after the container itself reports as running. A domain that has not been created by then is
+        /// not going to be.
+        /// </summary>
+        private static readonly TimeSpan RegistryEntryTimeout = TimeSpan.FromMinutes(10);
+
+        /// <summary>
+        /// How long to wait for the Essbase container to become usable again after a restart.
+        /// </summary>
+        private static readonly TimeSpan RestartTimeout = TimeSpan.FromMinutes(15);
+
         #endregion
 
         #region Public Properties
@@ -34,6 +63,11 @@ namespace EssSharp.Integration.Setup
         /// <summary />
         public static string EssbaseContainerId => _essbaseContainerId ?? throw new Exception("An essbase container must be initialized or running.");
 
+        /// <summary>
+        /// The profile resolved for the default (first configured) Essbase image.
+        /// </summary>
+        public static EssbaseContainerProfile EssbaseProfile => _essbaseProfile ??= EssbaseContainerProfile.Resolve(Images?.FirstOrDefault(), ImageSettings);
+
         #endregion
 
         #region Public Methods
@@ -41,9 +75,10 @@ namespace EssSharp.Integration.Setup
         /// <summary />
         public static async Task InitializeDatabaseContainerAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
         {
-            // Get the sql server image (and an appropriate container name).
-            var image         =  @"mcr.microsoft.com/mssql/server:2022-latest";
-            var containerName = $@"{GetContainerNameForImage(Images.FirstOrDefault())}-database";
+            // Get the repository database image (and an appropriate container name) from the resolved profile.
+            var profile       = EssbaseProfile;
+            var image         = profile.DatabaseImage;                                    // "mcr.microsoft.com/mssql/server:2022-latest"
+            var containerName = profile.DatabaseContainerName;                            // "essbase-21-7-database"
 
             // If a database test container is already running, update the retained ID and return.
             if ( _databaseTestContainer?.State is TestcontainersStates.Running )
@@ -73,10 +108,10 @@ namespace EssSharp.Integration.Setup
             // Build the database container.
             _databaseTestContainer = new MsSqlBuilder(image)      // "mcr.microsoft.com/mssql/server:2022-latest"
                 .WithName(containerName)                          // "essbase-21-7-database"
-                .WithNetwork("standalone")
+                .WithNetwork(profile.Network)
                 .WithEnvironment("ACCEPT_EULA", "Y")
-                .WithEnvironment("SA_PASSWORD", "StrongPassw0rd")
-                .WithPassword("StrongPassw0rd")
+                .WithEnvironment("SA_PASSWORD", profile.DatabaseAdminPassword)
+                .WithPassword(profile.DatabaseAdminPassword)
                 .WithResourceMapping(new DirectoryInfo(msSqlScriptPath), @"/opt/scripts", fileMode: UnixFileModes.UserRead | UnixFileModes.UserWrite | UnixFileModes.UserExecute | UnixFileModes.GroupRead | UnixFileModes.GroupExecute | UnixFileModes.OtherRead | UnixFileModes.OtherExecute)
                 .WithCommand(@"/opt/scripts/start-db.sh")
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" })
@@ -99,11 +134,16 @@ namespace EssSharp.Integration.Setup
         }
 
         /// <summary />
-        public static async Task InitializeEssbaseContainerAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
+        public static async Task InitializeEssbaseContainerAsync( IMessageSink sink = null, Task databaseReady = null, CancellationToken cancellationToken = default )
         {
-            // Get the first configured essbase image (and an appropriate container name).
-            var image         = Images.FirstOrDefault();
-            var containerName = GetContainerNameForImage(image);
+            // Get the default (first configured) essbase image and its resolved profile.
+            var profile       = EssbaseProfile;
+            var image         = profile.Image;
+            var containerName = profile.ContainerName;
+
+            // Fail early and clearly when no image has been configured.
+            if ( image is not { Length: > 0 } )
+                throw new Exception("An essbase image must be configured in the 'Images' section of the test settings.");
 
             // If an essbase test container is already running, update the retained ID and return.
             if ( _essbaseTestContainer?.State is TestcontainersStates.Running )
@@ -129,41 +169,314 @@ namespace EssSharp.Integration.Setup
 
             // Start by getting the admin password and host port from configuration.
             var connection  = GetEssConnection(EssServerRole.ServiceAdministrator);
-            var hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : "9000";
+            var hostPort = Uri.TryCreate(connection.Server, UriKind.Absolute, out var serverUri) ? serverUri.Port.ToString() : profile.ManagedServerPort.ToString();
 
-            _essbaseTestContainer = new ContainerBuilder(image)                                       // "appliedolap/essbase:21.7-latest"
-                .WithName(containerName)                                                             // "essbase-21-7"
-                .WithNetwork("standalone")
-                .WithPortBinding(hostPort, "9000")                                                    // "9000"
+            var builder = new ContainerBuilder(image)                                             // "appliedolap/essbase:21.7-latest"
+                .WithName(containerName)                                                          // "essbase-21-7"
+                .WithNetwork(profile.Network)
+                .WithPortBinding(hostPort, profile.ManagedServerPort.ToString())                  // "9000"
                 .WithEnvironment("ADMIN_USERNAME", connection.Username)                               // "admin"
                 .WithEnvironment("ADMIN_PASSWORD", connection.Password)                               // "welcome1"
-                .WithEnvironment("DATABASE_TYPE", "sqlserver")
-                .WithEnvironment("DATABASE_CONNECT_STRING", $@"{containerName}-database:1433:CertDB") // "essbase-21-7-database:1433:CertDB"
-                .WithEnvironment("DATABASE_ADMIN_USERNAME", "sa")
-                .WithEnvironment("DATABASE_ADMIN_PASSWORD", "StrongPassw0rd")
-                .WithEnvironment("DATABASE_WAIT_TIMEOUT", "240")
-                .WithCommand(@"/u01/container-scripts/createAndStartDomain.sh")
-                .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" })
-                .Build() as DockerContainer;
+                .WithEnvironment("DATABASE_TYPE", profile.DatabaseType)                               // "sqlserver"
+                .WithEnvironment("DATABASE_CONNECT_STRING", profile.DatabaseConnectString)            // "essbase-21-7-database:1433:CertDB"
+                .WithEnvironment("DATABASE_ADMIN_USERNAME", profile.DatabaseAdminUsername)            // "sa"
+                .WithEnvironment("DATABASE_ADMIN_PASSWORD", profile.DatabaseAdminPassword)
+                .WithEnvironment("DATABASE_WAIT_TIMEOUT", profile.DatabaseWaitTimeout)                // "240"
+                .WithCommand(profile.StartupCommand)                                                  // "/u01/container-scripts/createAndStartDomain.sh"
+                .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" });
+
+            // Apply the profile environment last, so that a profile may override any variable set above.
+            foreach ( var variable in profile.Environment )
+                builder = builder.WithEnvironment(variable.Key, variable.Value);
+
+            _essbaseTestContainer = builder.Build() as DockerContainer;
 
             // Start the essbase test container
             await (_essbaseTestContainer?.StartAsync(cancellationToken) ?? throw new Exception("Unable to build and start the configured Essbase container."));
 
-            // If the essbase test container is running, update the retained ID and return.
+            // If the essbase test container is running, update the retained ID and run any configured setup commands.
             if ( _essbaseTestContainer?.State is TestcontainersStates.Running )
+            {
                 _essbaseContainerId = _essbaseTestContainer.Id;
+
+                // Only the AI query tests depend on the registry settings, so when they are disabled there is nothing to
+                // force, and no reason to wait for the repository database or to restart Essbase.
+                if ( AiQuery?.Mode is not IntegrationTestAiQueryMode.Disabled )
+                {
+                    try
+                    {
+                        // The registry settings live in the repository database, which is started concurrently with this
+                        // container and takes far longer to become ready, so wait for it before reading or writing them.
+                        if ( databaseReady is not null )
+                            await databaseReady;
+
+                        // Force any declared registry settings first, since that may restart the container, and only
+                        // then run the setup commands - which may depend on a feature the registry settings just enabled.
+                        await ApplyRegistrySettingsAsync(sink, cancellationToken);
+                    }
+                    catch ( Exception e ) when ( e is not OperationCanceledException )
+                    {
+                        // This fixture is shared by every collection, so a failure here must not fail them all. Keep it for
+                        // the AI query environment to report, which is the only thing that needs the settings.
+                        RegistrySettingsFailure = e;
+                        sink?.OnMessage(new DiagnosticMessage($@"Unable to force the Essbase registry settings: {e.Message}"));
+                    }
+                }
+
+                await RunEssbaseSetupCommandsAsync(sink, cancellationToken);
+            }
+        }
+
+        /// <summary>
+        /// Forces the Essbase registry settings declared by the resolved profile, restarting the Essbase container
+        /// when any value actually changed.
+        /// </summary>
+        /// <param name="sink" />
+        /// <param name="cancellationToken" />
+        /// <remarks>
+        /// Essbase derives its feature flags from the deployment mode, so features such as AI query are FALSE on a
+        /// locally built container. The computed values are persisted in the repository database, base64 encoded,
+        /// which lets a disposable test container force them on. The values are cached in the Essbase process, so a
+        /// restart is required for a change to take effect.
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">A registry entry did not appear within <see cref="RegistryEntryTimeout" />.</exception>
+        public static async Task ApplyRegistrySettingsAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
+        {
+            var profile = EssbaseProfile;
+
+            if ( profile.RegistrySettings is not { Count: > 0 } settings )
+                return;
+
+            var changed = false;
+
+            foreach ( var setting in settings )
+            {
+                if ( setting.Key is not { Length: > 0 } name || setting.Value is not { Length: > 0 } value )
+                    continue;
+
+                var encodedName  = Convert.ToBase64String(Encoding.UTF8.GetBytes(name));
+                var encodedValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
+
+                // The registry rows are only written once Essbase has created its domain, which happens well after
+                // the container itself reports as running, so wait for the entry to appear before updating it.
+                if ( !await WaitForRegistryEntryAsync(profile, encodedName, sink, cancellationToken) )
+                    throw new InvalidOperationException($@"The Essbase registry entry '{name}' did not appear within {RegistryEntryTimeout.TotalMinutes:0} minutes, so it cannot be forced to '{value}'.");
+
+                // Only update an entry that does not already hold the desired value, so that a reused container is
+                // not restarted for no reason.
+                var updated = await RunRepositorySqlAsync(profile,
+                    $@"SET NOCOUNT ON; UPDATE {profile.EssbaseSchema}.ESSBASE_PROPERTIES SET VALUE = '{encodedValue}' WHERE NAME = '{encodedName}' AND VALUE <> '{encodedValue}'; SELECT CAST(@@ROWCOUNT AS VARCHAR(5));",
+                    cancellationToken);
+
+                if ( int.TryParse(updated?.Trim(), out var rows) && rows > 0 )
+                {
+                    sink?.OnMessage(new DiagnosticMessage($@"Essbase registry entry '{name}' set to '{value}'."));
+                    changed = true;
+                }
+            }
+
+            // Essbase caches registry values in process, so a change only takes effect after a restart.
+            if ( changed )
+                await RestartEssbaseContainerAsync(sink, cancellationToken);
+        }
+
+        /// <summary>
+        /// Executes the setup commands declared by the resolved profile against the running Essbase container.
+        /// </summary>
+        /// <param name="sink" />
+        /// <param name="cancellationToken" />
+        /// <remarks>
+        /// This is called automatically for a container the harness starts. It is public so that a test - or a
+        /// developer working against a container that was already running - may configure a container on demand.
+        /// </remarks>
+        public static async Task RunEssbaseSetupCommandsAsync( IMessageSink sink = null, CancellationToken cancellationToken = default )
+        {
+            foreach ( var command in EssbaseProfile.SetupCommands )
+            {
+                if ( command is not { Length: > 0 } )
+                    continue;
+
+                sink?.OnMessage(new DiagnosticMessage($@"Essbase container setup: {command}"));
+
+                var (details, stdout) = await ExecAsync(EssbaseContainerId, new[] { "/bin/bash", "-lc", command }, cancellationToken);
+
+                // Surface a failing setup command rather than letting the tests fail later for an unclear reason.
+                if ( details?.ExitCode is not 0 )
+                    throw new Exception($@"The Essbase container setup command '{command}' exited with code {details?.ExitCode}.{System.Environment.NewLine}{stdout}");
+            }
+        }
+
+        /// <summary>
+        /// Executes a command inside the given container and returns the exec details along with its output.
+        /// </summary>
+        /// <param name="id">The ID of the container to execute the command in.</param>
+        /// <param name="command">The command and its arguments.</param>
+        /// <param name="cancellationToken" />
+        public static Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, CancellationToken cancellationToken = default ) =>
+            ExecAsync(id, command, user: null, cancellationToken);
+
+        /// <summary>
+        /// Executes a command inside the given container as the given user, and returns the exec details along with
+        /// its output.
+        /// </summary>
+        /// <param name="id">The ID of the container to execute the command in.</param>
+        /// <param name="command">The command and its arguments.</param>
+        /// <param name="user">The user to run the command as, or <see langword="null" /> for the container's own user.</param>
+        /// <param name="cancellationToken" />
+        public static async Task<(ContainerExecInspectResponse details, string stdout)> ExecAsync( string id, string[] command, string user, CancellationToken cancellationToken = default )
+        {
+            var execParams = new ContainerExecCreateParameters()
+            {
+                AttachStderr = true,
+                AttachStdout = true,
+                Cmd          = command,
+                User         = user,
+            };
+
+            using var client = GetDockerClient();
+
+            // Create the exec instance, it is not started yet.
+            var exec = await client.Exec.CreateContainerExecAsync(id, execParams, cancellationToken);
+            // Start the exec instance and capture the output stream.
+            using var stream = await client.Exec.StartContainerExecAsync(exec.ID, new ContainerExecStartParameters { Detach = false }, cancellationToken);
+            var (stdout, stderr) = await stream.ReadOutputToEndAsync(cancellationToken);
+
+            var details = await client.Exec.InspectContainerExecAsync(exec.ID, cancellationToken);
+
+            return (details, stdout);
+        }
+
+        /// <summary>
+        /// Executes a query against the repository database container and returns its output.
+        /// </summary>
+        /// <param name="profile" />
+        /// <param name="sql" />
+        /// <param name="cancellationToken" />
+        private static async Task<string> RunRepositorySqlAsync( EssbaseContainerProfile profile, string sql, CancellationToken cancellationToken )
+        {
+            var sqlcmd = await GetSqlcmdPathAsync(cancellationToken);
+
+            // The version 18 tools encrypt by default, so trust the certificate the database container generates.
+            var trustCertificate = sqlcmd.Contains("mssql-tools18") ? new[] { "-C" } : Array.Empty<string>();
+
+            // Pass the query as a discrete argument rather than through a shell, so that no quoting is required.
+            var (_, stdout) = await ExecAsync(DatabaseContainerId, new[] { sqlcmd }.Concat(trustCertificate).Concat(new[]
+            {
+                "-S", "localhost",
+                "-U", profile.DatabaseAdminUsername,
+                "-P", profile.DatabaseAdminPassword,
+                "-d", profile.DatabaseName,
+                "-h", "-1",
+                "-W",
+                "-Q", sql
+            }).ToArray(), cancellationToken);
+
+            return stdout;
+        }
+
+        /// <summary>
+        /// Finds <c>sqlcmd</c> inside the repository database container, which ships it in a different directory
+        /// depending on the age of the SQL Server image.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <remarks>
+        /// A missing <c>sqlcmd</c> is reported here rather than left to surface as empty query output, which callers
+        /// waiting on a repository row would otherwise treat as "not there yet" for the length of their timeout.
+        /// </remarks>
+        private static async Task<string> GetSqlcmdPathAsync( CancellationToken cancellationToken )
+        {
+            if ( _sqlcmdPath is { Length: > 0 } cached )
+                return cached;
+
+            foreach ( var candidate in SqlcmdPaths )
+            {
+                var (details, _) = await ExecAsync(DatabaseContainerId, new[] { "/bin/sh", "-c", $@"test -x {candidate}" }, cancellationToken);
+
+                if ( details?.ExitCode is 0 )
+                    return _sqlcmdPath = candidate;
+            }
+
+            throw new Exception($@"sqlcmd was not found in the repository database container at any of: {string.Join(", ", SqlcmdPaths)}.");
+        }
+
+        /// <summary>
+        /// Waits for an Essbase registry entry to be written to the repository database.
+        /// </summary>
+        /// <param name="profile" />
+        /// <param name="encodedName">The base64 encoded registry entry name.</param>
+        /// <param name="sink" />
+        /// <param name="cancellationToken" />
+        private static async Task<bool> WaitForRegistryEntryAsync( EssbaseContainerProfile profile, string encodedName, IMessageSink sink, CancellationToken cancellationToken )
+        {
+            var deadline = DateTime.UtcNow.Add(RegistryEntryTimeout);
+
+            while ( DateTime.UtcNow < deadline )
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var count = await RunRepositorySqlAsync(profile,
+                    $@"SET NOCOUNT ON; SELECT CAST(COUNT(*) AS VARCHAR(5)) FROM {profile.EssbaseSchema}.ESSBASE_PROPERTIES WHERE NAME = '{encodedName}';",
+                    cancellationToken);
+
+                if ( int.TryParse(count?.Trim(), out var rows) && rows > 0 )
+                    return true;
+
+                await Task.Delay(TimeSpan.FromSeconds(10), cancellationToken);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Restarts the Essbase container and waits for it to report as running (and healthy, when it declares a
+        /// health check).
+        /// </summary>
+        /// <param name="sink" />
+        /// <param name="cancellationToken" />
+        private static async Task RestartEssbaseContainerAsync( IMessageSink sink, CancellationToken cancellationToken )
+        {
+            sink?.OnMessage(new DiagnosticMessage("Restarting the Essbase container to reload its registry settings."));
+
+            using var client = GetDockerClient();
+
+            await client.Containers.RestartContainerAsync(EssbaseContainerId, new ContainerRestartParameters(), cancellationToken);
+
+            var deadline = DateTime.UtcNow.Add(RestartTimeout);
+
+            while ( DateTime.UtcNow < deadline )
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                if ( (await client.Containers.InspectContainerAsync(EssbaseContainerId, cancellationToken))?.State is { } state )
+                {
+                    // A container that declares a health check is only usable once that check passes; one that does
+                    // not is taken as ready as soon as it is running again.
+                    if ( state.Running && state.Health?.Status is not "starting" )
+                        return;
+                }
+
+                await Task.Delay(TimeSpan.FromSeconds(5), cancellationToken);
+            }
+
+            sink?.OnMessage(new DiagnosticMessage("The Essbase container did not report as ready after its restart."));
         }
 
 
         /// <summary />
         public static async Task DisposeAsync()
         {
+            // The AI query containers are built on top of the Essbase container, so they go first.
+            await IntegrationTestAiEnvironment.DisposeAsync();
+
             // Capture any test container disposal tasks.
             var disposeDatabase = _databaseTestContainer?.DisposeAsync().AsTask() ?? Task.CompletedTask;
             var disposeEssbase  = _essbaseTestContainer?.DisposeAsync().AsTask() ?? Task.CompletedTask;
 
             // Await the disposal of any created test containers.
             await Task.WhenAll(disposeDatabase, disposeEssbase);
+
+            // The located sqlcmd belongs to the database container that was just disposed.
+            _sqlcmdPath = null;
         }
 
         #endregion
@@ -171,10 +484,30 @@ namespace EssSharp.Integration.Setup
         #region Internal Properties
 
         /// <summary />
+        internal static IntegrationTestAiQuerySettings AiQuery { get; set; }
+
+        /// <summary>
+        /// The failure to force the Essbase registry settings, if there was one. The AI query environment reports it
+        /// instead of the shared fixture failing every collection.
+        /// </summary>
+        internal static Exception RegistrySettingsFailure { get; private set; }
+
+        /// <summary>
+        /// Whether this run started the Essbase container, as opposed to finding one that was already running. A
+        /// container the run started is removed when the run ends; one that was already running outlives it.
+        /// </summary>
+        internal static bool EssbaseContainerStarted => _essbaseTestContainer is not null;
+
+        /// <summary />
         internal static IntegrationTestSettingsConnection[] Connections { get; set; }
 
         /// <summary />
         internal static string[] Images { get; set; }
+
+        /// <summary>
+        /// Per-image overrides describing how a given image differs from the Oracle Essbase 21.x container contract.
+        /// </summary>
+        internal static IntegrationTestSettingsImage[] ImageSettings { get; set; }
 
         #endregion
 

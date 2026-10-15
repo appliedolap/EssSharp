@@ -9,6 +9,11 @@ on:
   pull_request:
     branches: [ "develop" ]
   workflow_dispatch:
+    inputs:
+      ai_query_tests:
+        description: Run the AI query integration tests. They build their own test environment (an Oracle AI Database container and the AI gateway beside it), which adds about five minutes. Pushes and pull requests always run them; clear this to skip them in a manual run.
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -18,6 +23,10 @@ jobs:
     # https://github.com/actions/runner-images/issues/1143
     # runs-on: windows-latest
     runs-on: ubuntu-latest
+
+    # The integration tests start Docker containers, and a stuck one would otherwise hold the runner for the default
+    # six hours. The run normally takes about ten minutes.
+    timeout-minutes: 60
     
     steps:
     - uses: actions/checkout@v3
@@ -28,6 +37,35 @@ jobs:
       with:
         dotnet-version: 10.0.x
     
+    # The AI query tests build an Oracle AI Database container next to the Essbase and SQL Server containers. Remove what
+    # the runner image carries and this job does not use, to leave room for the images.
+    - name: Free disk space for the AI query tests
+      if: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests }}
+      run: |
+        sudo rm -rf /usr/local/lib/android /usr/share/swift /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL
+        df -h /
+
+    # The AI query tests are off in appsettings.json, so that a local run does not have to build their environment, and
+    # this job turns them on with a local settings file (see src/EssSharp.Integration/README.md). The file replaces only
+    # the AiQuery section; the rest of the settings still come from appsettings.json. It has to exist before the build,
+    # which copies it next to the tests. The question is one the AI gateway has a canned answer for (Scripts/Ai/gateway/answers.json).
+    - name: Enable the AI query tests
+      if: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests }}
+      run: |
+        cat > src/EssSharp.Integration/appsettings.local.json <<'EOF'
+        {
+          "Settings": {
+            "AiQuery": {
+              "Mode": "Managed",
+              "ApplicationName": "Sample",
+              "CubeName": "Basic",
+              "NaturalLanguageQuery": "Show actual sales by year.",
+              "ProfileName": ""
+            }
+          }
+        }
+        EOF
+
     # The full MAUI Workload with the required target platforms is not supported on Linux.
     # We build and test a solution filter without the MAUI client to workaround this issue.
     #- name: Install MAUI Workload

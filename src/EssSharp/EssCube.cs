@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using EssSharp.Api;
+using EssSharp.Client;
 using EssSharp;
 using EssSharp.Model;
 
@@ -147,6 +148,30 @@ namespace EssSharp
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to clear data from cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public void ClearAiQueryConversation( string profileName ) => ClearAiQueryConversationAsync(profileName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task ClearAiQueryConversationAsync( string profileName, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(profileName) )
+                throw new ArgumentException("An AI chat profile name is required to clear a conversation.", nameof(profileName));
+
+            try
+            {
+                var api = GetApi<AIApi>();
+                await api.AIDeleteConversationHistoryAsync(Application.Name, Name, profileName, 0, cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                if ( IsAiQueryUnsupported(e) )
+                    throw CreateAiQueryNotSupportedException(e);
+
+                throw new Exception($@"Unable to clear the AI query conversation for cube ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -307,6 +332,40 @@ namespace EssSharp
             new EssMdxScript(new Script() { Content = query }, this).GetReportAsync(preferences, cancellationToken);
 
         /// <inheritdoc />
+        public EssAiQueryExecutionResult ExecuteNaturalLanguageQuery( string query, string profileName, EssAiQueryOptions options = null ) =>
+            ExecuteNaturalLanguageQueryAsync(query, profileName, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssAiQueryExecutionResult> ExecuteNaturalLanguageQueryAsync( string query, string profileName, EssAiQueryOptions options = null, CancellationToken cancellationToken = default )
+        {
+            // Generating the MDX checks the arguments and reports its own failures, so none of that is wrapped again here.
+            var generatedQuery = await GenerateMdxFromNaturalLanguageAsync(query, profileName, options, cancellationToken).ConfigureAwait(false);
+
+            try
+            {
+                var grid = await new EssMdxScript(new Script { Content = generatedQuery.Mdx }, this)
+                    .GetGridAsync(cancellationToken)
+                    .ConfigureAwait(false);
+
+                return new EssAiQueryExecutionResult
+                {
+                    Query = generatedQuery,
+                    Grid  = grid
+                };
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( NotSupportedException ) { throw; }
+            catch ( Exception e )
+            {
+                // Generated MDX often fails to run, and the caller has no other way to see what was run, so say so.
+                var exception = new Exception($@"Unable to execute the MDX that AI generated for cube ""{Name}"". {e.Message} The generated MDX was: {generatedQuery.Mdx}", e);
+                exception.Data["Mdx"] = generatedQuery.Mdx;
+
+                throw exception;
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns></returns>
         public Stream ExportToLcm( EssJobExportLcmOptions options = null ) => ExportToLcmAsync(options).GetAwaiter().GetResult();
 
@@ -350,6 +409,46 @@ namespace EssSharp
             Application.ExportCubeToWorkbookAsync(Name, options, cancellationToken);
 
         /// <inheritdoc />
+        public EssAiQueryResult GenerateMdxFromNaturalLanguage( string query, string profileName, EssAiQueryOptions options = null ) =>
+            GenerateMdxFromNaturalLanguageAsync(query, profileName, options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssAiQueryResult> GenerateMdxFromNaturalLanguageAsync( string query, string profileName, EssAiQueryOptions options = null, CancellationToken cancellationToken = default )
+        {
+            if ( string.IsNullOrWhiteSpace(query) )
+                throw new ArgumentException("A natural-language query is required to generate MDX.", nameof(query));
+
+            if ( string.IsNullOrWhiteSpace(profileName) )
+                throw new ArgumentException("An AI chat profile name is required to generate MDX.", nameof(profileName));
+
+            options ??= new EssAiQueryOptions();
+
+            try
+            {
+                var api = GetApi<AIApi>();
+                var response = await api.AIMDXGeneratorWithHttpInfoAsync(
+                    applicationName:       Application.Name,
+                    databaseName:          Name,
+                    profileName:           profileName,
+                    isConvStart:           options.StartNewConversation,
+                    nlq:                   query,
+                    includeAttributesInNlq: options.IncludeAttributes,
+                    prompt:                options.Prompt,
+                    cancellationToken:     cancellationToken).ConfigureAwait(false);
+
+                return EssAiQueryResponseParser.ToQueryResult(response, query, profileName);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                if ( IsAiQueryUnsupported(e) )
+                    throw CreateAiQueryNotSupportedException(e);
+
+                throw new Exception($@"Unable to generate an AI query for cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>A <see cref="string"/>.</returns>
         public string GetActiveAlias() => GetActiveAliasAsync().GetAwaiter().GetResult();
 
@@ -370,6 +469,28 @@ namespace EssSharp
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to get Active Alias for cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        public List<string> GetAiQuerySamples() => GetAiQuerySamplesAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<string>> GetAiQuerySamplesAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api = GetApi<AIApi>();
+                var response = await api.AIListSampleQueriesWithHttpInfoAsync(Application.Name, Name, 0, cancellationToken).ConfigureAwait(false);
+                return EssAiQueryResponseParser.ToSampleQueries(response);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                if ( IsAiQueryUnsupported(e) )
+                    throw CreateAiQueryNotSupportedException(e);
+
+                throw new Exception($@"Unable to get AI query samples for cube ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -1137,6 +1258,42 @@ namespace EssSharp
                 throw new Exception($@"Unable to load data to cube ""{Name}"". {e.Message}", e);
             }
         }
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Returns the exception for an AI request that failed because the endpoint is unavailable. It keeps what the server
+        /// said, which tells a missing endpoint from a server that has AI query switched off.
+        /// </summary>
+        private static NotSupportedException CreateAiQueryNotSupportedException( Exception exception ) =>
+            new NotSupportedException($"AI Query is not supported by this Essbase server. {exception?.Message}".TrimEnd(), exception);
+
+        /// <summary>
+        /// Returns whether an AI request failed because the endpoint is unavailable.
+        /// </summary>
+        private static bool IsAiQueryUnsupported( Exception exception )
+        {
+            while ( exception is not null )
+            {
+                if ( exception is ApiException { ErrorCode: 404 or 405 } )
+                    return true;
+
+                if ( exception is WebException
+                     {
+                         Response: WebExceptionRestResponse
+                         {
+                             StatusCode: HttpStatusCode.NotFound or HttpStatusCode.MethodNotAllowed
+                         }
+                     } )
+                    return true;
+
+                exception = exception.InnerException;
+            }
+
+            return false;
+        }
+
         #endregion
     }
 }
