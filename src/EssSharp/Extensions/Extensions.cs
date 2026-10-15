@@ -853,6 +853,13 @@ namespace EssSharp
             Type = lockOptions.LockedFileType.HasValue && Enum.IsDefined(typeof(LockObject.TypeEnum), (LockObject.TypeEnum)lockOptions.LockedFileType) ? (LockObject.TypeEnum)lockOptions.LockedFileType : throw new Exception($@"{nameof(EssLockedFileType)} is required.")
         };
 
+        internal static Model.ExportOptions ToExportOptions( this EssOutlineXmlExportOptions options ) => new Model.ExportOptions()
+        {
+            AliasTable = options.AliasTable,
+            Dimensions = options.Dimensions?.Count > 0 ? new List<string>(options.Dimensions) : null,
+            Tree = options.Tree
+        };
+
         internal static NamedQueriesPreferences ToNamedQueriesPreferences( this EssQueryPreferences queryPreferences ) => new NamedQueriesPreferences()
         {
             Dataless = queryPreferences.Dataless,

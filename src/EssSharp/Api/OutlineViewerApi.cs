@@ -213,8 +213,8 @@ namespace EssSharp.Api
         /// <param name="applicationNameForConnection">Application name for connection. (optional)</param>
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        void OutlineGetOutlineXML(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0);
+        /// <returns>System.IO.Stream</returns>
+        System.IO.Stream OutlineGetOutlineXML(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0);
 
         /// <summary>
         /// Export Outline to XML
@@ -229,8 +229,8 @@ namespace EssSharp.Api
         /// <param name="applicationNameForConnection">Application name for connection. (optional)</param>
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0);
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        ApiResponse<System.IO.Stream> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0);
         /// <summary>
         /// Get Pivot dimension
         /// </summary>
@@ -466,8 +466,8 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task OutlineGetOutlineXMLAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of System.IO.Stream</returns>
+        System.Threading.Tasks.Task<System.IO.Stream> OutlineGetOutlineXMLAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Export Outline to XML
@@ -483,8 +483,8 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Pivot dimension
         /// </summary>
@@ -2001,10 +2001,11 @@ namespace EssSharp.Api
         /// <param name="applicationNameForConnection">Application name for connection. (optional)</param>
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns></returns>
-        public void OutlineGetOutlineXML(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0)
+        /// <returns>System.IO.Stream</returns>
+        public System.IO.Stream OutlineGetOutlineXML(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0)
         {
-            OutlineGetOutlineXMLWithHttpInfo(app, cube, connection, applicationNameForConnection, body);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = OutlineGetOutlineXMLWithHttpInfo(app, cube, connection, applicationNameForConnection, body);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2017,8 +2018,8 @@ namespace EssSharp.Api
         /// <param name="applicationNameForConnection">Application name for connection. (optional)</param>
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        public EssSharp.Client.ApiResponse<Object> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0)
+        /// <returns>ApiResponse of System.IO.Stream</returns>
+        public EssSharp.Client.ApiResponse<System.IO.Stream> OutlineGetOutlineXMLWithHttpInfo(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -2094,7 +2095,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Object>("/outline/{app}/{cube}/xml", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<System.IO.Stream>("/outline/{app}/{cube}/xml", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("OutlineGetOutlineXML", localVarResponse);
@@ -2118,10 +2119,11 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task OutlineGetOutlineXMLAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of System.IO.Stream</returns>
+        public async System.Threading.Tasks.Task<System.IO.Stream> OutlineGetOutlineXMLAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
-            await OutlineGetOutlineXMLWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            EssSharp.Client.ApiResponse<System.IO.Stream> localVarResponse = await OutlineGetOutlineXMLWithHttpInfoAsync(app, cube, connection, applicationNameForConnection, body, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
         }
 
         /// <summary>
@@ -2135,8 +2137,8 @@ namespace EssSharp.Api
         /// <param name="body"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<Object>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of ApiResponse (System.IO.Stream)</returns>
+        public async System.Threading.Tasks.Task<EssSharp.Client.ApiResponse<System.IO.Stream>> OutlineGetOutlineXMLWithHttpInfoAsync(string app, string cube, string connection = default, string applicationNameForConnection = default, ExportOptions body = default, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'app' is set
             if (app == null)
@@ -2212,7 +2214,7 @@ namespace EssSharp.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Object>("/outline/{app}/{cube}/xml", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<System.IO.Stream>("/outline/{app}/{cube}/xml", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

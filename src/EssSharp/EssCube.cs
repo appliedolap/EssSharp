@@ -316,6 +316,31 @@ namespace EssSharp
             Application.ExportCubeToLcmAsync(Name, options, cancellationToken);
 
         /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/> of the outline XML.</returns>
+        public Stream ExportOutlineToXml( EssOutlineXmlExportOptions options = null ) => ExportOutlineToXmlAsync(options).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/> of the outline XML.</returns>
+        public async Task<Stream> ExportOutlineToXmlAsync( EssOutlineXmlExportOptions options = null, CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var api  = GetApi<OutlineViewerApi>();
+                var body = (options ?? new EssOutlineXmlExportOptions()).ToExportOptions();
+
+                if (await api.OutlineGetOutlineXMLAsync(app: Application.Name, cube: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } outlineXml)
+                    throw new Exception("The server returned no outline XML.");
+
+                return outlineXml;
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to export the outline of cube ""{Name}"" to XML. {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>A <see cref="Stream"/>.</returns>
         public Stream ExportCubeToWorkbook( EssJobExportExcelOptions options = null ) => ExportCubeToWorkbookAsync( options ).GetAwaiter().GetResult();
 
