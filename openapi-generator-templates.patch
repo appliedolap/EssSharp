@@ -205,7 +205,7 @@ index 3e77467..070627d 100644
  
          #region IAsynchronousClient
 diff --git a/templates/Configuration.mustache b/templates/Configuration.mustache
-index 39dbd9c..b7ab16c 100644
+index 39dbd9c..b4e434f 100644
 --- a/templates/Configuration.mustache
 +++ b/templates/Configuration.mustache
 @@ -17,6 +17,8 @@ using System.Net.Security;
@@ -217,7 +217,46 @@ index 39dbd9c..b7ab16c 100644
  
  namespace {{packageName}}.Client
  {
-@@ -246,6 +248,30 @@ namespace {{packageName}}.Client
+@@ -52,8 +54,9 @@ namespace {{packageName}}.Client
+             var status = (int)response.StatusCode;
+             if (status >= 400)
+             {
++                // Applied OLAP Modification
+                 return new ApiException(status,
+-                    string.Format("Error calling {0}: {1}", methodName, response.RawContent),
++                    string.Format("Error calling {0}: {1}", methodName, GetErrorText(response)),
+                     response.RawContent, response.Headers);
+             }
+             {{^netStandard}}
+@@ -66,6 +69,27 @@ namespace {{packageName}}.Client
+             return null;
+         };
+ 
++        // Applied OLAP Modification
++        /// <summary>
++        /// Gets the text that describes a failed response. An empty, HTML, or XML body, such as the error page that
++        /// the web server serves while Essbase is still starting, is replaced by a description of the status code.
++        /// </summary>
++        /// <param name="response">The failed response.</param>
++        private static string GetErrorText(IApiResponse response)
++        {
++            var content = response.RawContent?.Trim();
++
++            if (!string.IsNullOrEmpty(content) && !content.StartsWith("<", StringComparison.Ordinal))
++                return response.RawContent;
++
++            var text = $"The request failed with status code {(int)response.StatusCode} ({response.StatusCode}).";
++
++            if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
++                text += " The server may still be starting, or may be temporarily unavailable.";
++
++            return text;
++        }
++
+         #endregion Static Members
+ 
+         #region Private Members
+@@ -246,6 +270,30 @@ namespace {{packageName}}.Client
  
          #region Properties
  
@@ -248,7 +287,7 @@ index 39dbd9c..b7ab16c 100644
          /// <summary>
          /// Gets or sets the base path for API access.
          /// </summary>
-@@ -702,6 +728,14 @@ namespace {{packageName}}.Client
+@@ -702,6 +750,14 @@ namespace {{packageName}}.Client
  
              var config = new Configuration
              {

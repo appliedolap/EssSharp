@@ -57,12 +57,34 @@ namespace EssSharp.Client
             var status = (int)response.StatusCode;
             if (status >= 400)
             {
+                // Applied OLAP Modification
                 return new ApiException(status,
-                    string.Format("Error calling {0}: {1}", methodName, response.RawContent),
+                    string.Format("Error calling {0}: {1}", methodName, GetErrorText(response)),
                     response.RawContent, response.Headers);
             }
             return null;
         };
+
+        // Applied OLAP Modification
+        /// <summary>
+        /// Gets the text that describes a failed response. An empty, HTML, or XML body, such as the error page that
+        /// the web server serves while Essbase is still starting, is replaced by a description of the status code.
+        /// </summary>
+        /// <param name="response">The failed response.</param>
+        private static string GetErrorText(IApiResponse response)
+        {
+            var content = response.RawContent?.Trim();
+
+            if (!string.IsNullOrEmpty(content) && !content.StartsWith("<", StringComparison.Ordinal))
+                return response.RawContent;
+
+            var text = $"The request failed with status code {(int)response.StatusCode} ({response.StatusCode}).";
+
+            if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
+                text += " The server may still be starting, or may be temporarily unavailable.";
+
+            return text;
+        }
 
         #endregion Static Members
 
