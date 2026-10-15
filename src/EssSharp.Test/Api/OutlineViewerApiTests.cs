@@ -154,7 +154,8 @@ namespace EssSharp.Test.Api
             //string connection = null;
             //string applicationNameForConnection = null;
             //ExportOptions body = null;
-            //instance.OutlineGetOutlineXML(app, cube, connection, applicationNameForConnection, body);
+            //var response = instance.OutlineGetOutlineXML(app, cube, connection, applicationNameForConnection, body);
+            //Assert.IsType<System.IO.Stream>(response);
         }
 
         /// <summary>

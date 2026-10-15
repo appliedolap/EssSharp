@@ -204,6 +204,21 @@ namespace EssSharp
         public Task<Stream> ExportToLcmAsync( EssJobExportLcmOptions options = null, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Exports the outline of the cube to XML.
+        /// </summary>
+        /// <param name="options">(optional) The dimensions to export, the alias table to export, and whether to export only member names. The whole outline is exported when none are given.</param>
+        /// <returns>A <see cref="Stream"/> of the outline XML.</returns>
+        public Stream ExportOutlineToXml( EssOutlineXmlExportOptions options = null );
+
+        /// <summary>
+        /// Asynchronously exports the outline of the cube to XML.
+        /// </summary>
+        /// <param name="options">(optional) The dimensions to export, the alias table to export, and whether to export only member names. The whole outline is exported when none are given.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>A <see cref="Stream"/> of the outline XML.</returns>
+        public Task<Stream> ExportOutlineToXmlAsync( EssOutlineXmlExportOptions options = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Exports a cube to an excel workbook.
         /// </summary>
         /// <param name="options">Export options including Build method, calc, data, and include member IDs.</param>

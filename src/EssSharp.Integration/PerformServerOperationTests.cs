@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 using EssSharp.Client;
 using EssSharp.Integration.Setup;
@@ -2257,6 +2258,44 @@ namespace EssSharp.Integration
             };
 
             await essGrid.RefreshAsync(TestContext.Current.CancellationToken);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 59 - Essbase_AfterCubeCreation_CanExportOutlineToXml"), Priority(59)]
+        public async Task Essbase_AfterCubeCreation_CanExportOutlineToXml()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
+
+            // Export the whole outline.
+            using (var outlineXml = await cube.ExportOutlineToXmlAsync(cancellationToken: TestContext.Current.CancellationToken))
+            {
+                var application = XDocument.Load(outlineXml).Root;
+
+                Assert.Equal("application", application.Name.LocalName);
+                Assert.Equal("Sample", (string)application.Attribute("name"));
+                Assert.Equal("full", (string)application.Attribute("redeployType"));
+                Assert.NotNull(application.Element("cube"));
+                Assert.Contains("Year", application.Elements("Dimension").Select(dimension => (string)dimension.Attribute("name")));
+                Assert.Equal((int)application.Attribute("dimCount"), application.Elements("Dimension").Count());
+            }
+
+            // Export the member names of one dimension.
+            var options = new EssOutlineXmlExportOptions(dimensions: new[] { "Year" }, tree: true);
+
+            using (var outlineXml = cube.ExportOutlineToXml(options))
+            {
+                var application = XDocument.Load(outlineXml).Root;
+
+                Assert.Equal("listed Dimensions Tree", (string)application.Attribute("redeployType"));
+                Assert.Equal(new[] { "Year" }, application.Elements("Dimension").Select(dimension => (string)dimension.Attribute("name")));
+            }
+
+            // An alias table that does not exist fails.
+            await Assert.ThrowsAnyAsync<Exception>(() => cube.ExportOutlineToXmlAsync(new EssOutlineXmlExportOptions(aliasTable: "NoSuchAliasTable"), TestContext.Current.CancellationToken));
         }
     }
 }
