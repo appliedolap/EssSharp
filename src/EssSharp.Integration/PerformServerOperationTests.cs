@@ -2297,6 +2297,64 @@ namespace EssSharp.Integration
             // An alias table that does not exist fails.
             await Assert.ThrowsAnyAsync<Exception>(() => cube.ExportOutlineToXmlAsync(new EssOutlineXmlExportOptions(aliasTable: "NoSuchAliasTable"), TestContext.Current.CancellationToken));
         }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 60 - Essbase_AfterCubeCreation_MdxQueryReportLeavesOutTheAxesNotAskedFor"), Priority(60)]
+        public async Task Essbase_AfterCubeCreation_MdxQueryReportLeavesOutTheAxesNotAskedFor()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
+
+            // A query with members on both axes, not saved to the cube.
+            var script = cube.CreateScript<IEssMdxScript>("axes", MemberAxesQuery, saveToCube: false);
+
+            var both    = await script.GetReportAsync(new EssQueryPreferences() { Axes = EssQueryReport.ReportAxes.ColumnsAndRows }, TestContext.Current.CancellationToken);
+            var columns = await script.GetReportAsync(new EssQueryPreferences() { Axes = EssQueryReport.ReportAxes.Columns }, TestContext.Current.CancellationToken);
+            var rows    = await script.GetReportAsync(new EssQueryPreferences() { Axes = EssQueryReport.ReportAxes.Rows }, TestContext.Current.CancellationToken);
+
+            // Both axes: the column members across the top, the row members down the side.
+            Assert.Equal(3, both.Data.GetLength(0));
+            Assert.Equal(3, both.Data.GetLength(1));
+            Assert.Equal("Jan", both.Data[0, 1]);
+            Assert.Equal("New York", both.Data[1, 0]);
+
+            // The column axis alone: the report without the row members' column.
+            Assert.Equal(new object[,] { { both.Data[0, 1], both.Data[0, 2] }, { both.Data[1, 1], both.Data[1, 2] }, { both.Data[2, 1], both.Data[2, 2] } }, columns.Data);
+
+            // The row axis alone: the report without the column members' row.
+            Assert.Equal(new object[,] { { both.Data[1, 0], both.Data[1, 1], both.Data[1, 2] }, { both.Data[2, 0], both.Data[2, 1], both.Data[2, 2] } }, rows.Data);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 61 - Essbase_AfterCubeCreation_MdxQueryReportTypesTheFirstRowOfDataAsData"), Priority(61)]
+        public async Task Essbase_AfterCubeCreation_MdxQueryReportTypesTheFirstRowOfDataAsData()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get Sample.Basic.
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
+
+            var script = cube.CreateScript<IEssMdxScript>("types", MemberAxesQuery, saveToCube: false);
+
+            var both = await script.GetReportAsync(new EssQueryPreferences() { Axes = EssQueryReport.ReportAxes.ColumnsAndRows, CaptureCellTypes = true }, TestContext.Current.CancellationToken);
+            var rows = await script.GetReportAsync(new EssQueryPreferences() { Axes = EssQueryReport.ReportAxes.Rows, CaptureCellTypes = true }, TestContext.Current.CancellationToken);
+
+            // With the column axis, the first row holds the column members (type 0) above the data (type 2).
+            Assert.Equal(0, both.Types[0, 1]);
+            Assert.Equal(2, both.Types[1, 1]);
+
+            // Without it, the first row is the first row of data: its member is a member and its data is data.
+            Assert.Equal(0, rows.Types[0, 0]);
+            Assert.Equal(2, rows.Types[0, 1]);
+            Assert.Equal(2, rows.Types[0, 2]);
+        }
+
+        /// <summary>An MDX query with two column members and two row members of Sample.Basic.</summary>
+        private const string MemberAxesQuery = "SELECT {[Jan], [Feb]} ON COLUMNS, {[New York], [California]} ON ROWS FROM [Sample].[Basic] WHERE ([Sales], [Actual], [Product])";
     }
 }
 

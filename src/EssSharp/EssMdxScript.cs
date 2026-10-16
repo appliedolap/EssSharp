@@ -140,6 +140,7 @@ namespace EssSharp
             // Identify which axes to include.
             bool includePageAxis   = preferences.Axes.HasFlag(EssQueryReport.ReportAxes.Pages);
             bool includeColumnAxis = preferences.Axes.HasFlag(EssQueryReport.ReportAxes.Columns);
+            bool includeRowAxis    = preferences.Axes.HasFlag(EssQueryReport.ReportAxes.Rows);
 
             var sourceFirstIndex = 0;
             var sourceFirstRow = source.FirstOrDefault()?.Value<JArray>();
@@ -159,11 +160,17 @@ namespace EssSharp
 
             bool hasDimensionProperties = sourceColumnCount > columnDimensionMembers.Length + rowDimensionMembers.Length;
 
+            // When the row axis is excluded, the row axis columns (the row members and their dimension properties), which come
+            // before the first column axis column, are left out of the report, as the column axis row is when it is excluded.
+            var sourceFirstColumn = !includeRowAxis && rowDimensionMembers.Any() ? firstColumnAxisIndex : 0;
+
+            reportColumnCount -= sourceFirstColumn;
+
             // If the page axis is included and there are page dimension members.
             if ( includePageAxis && pageDimensionMembers.Any() )
             {
                 // Update the column and row counts.
-                reportColumnCount = Math.Max(sourceColumnCount, Math.Max(firstColumnAxisIndex, 1) + pageDimensionMembers.Length);
+                reportColumnCount = Math.Max(sourceColumnCount - sourceFirstColumn, Math.Max(firstColumnAxisIndex - sourceFirstColumn, sourceFirstColumn > 0 ? 0 : 1) + pageDimensionMembers.Length);
                 reportRowCount += includeColumnAxis ? 1 : 0;
 
                 // Create the report.
@@ -174,7 +181,7 @@ namespace EssSharp
                     types = new int[reportRowCount, reportColumnCount].WithValue(7);
 
                 // Use the the first column axis member index as the first page column index.
-                var pageColumnIndex = Math.Max(firstColumnAxisIndex, rowDimensionMembers.Any() ? 1 : 0);
+                var pageColumnIndex = Math.Max(firstColumnAxisIndex - sourceFirstColumn, rowDimensionMembers.Any() && sourceFirstColumn is 0 ? 1 : 0);
 
                 // Write the page axis dimension members.
                 foreach ( var pageDimensionMember in pageDimensionMembers )
@@ -246,7 +253,7 @@ namespace EssSharp
             var sourceColumnSequence = Enumerable.Range(0, sourceColumnCount).ToArray();
 
             // If dimension property columns and rows should be relocated, do so.
-            if ( preferences.RelocateDimensionPropertyColumnsAndRows && hasDimensionProperties )
+            if ( preferences.RelocateDimensionPropertyColumnsAndRows && hasDimensionProperties && sourceFirstColumn is 0 )
             {
                 // Now, relocate dimension property columns such that they come before column axis member columns and data.
                 int relocatedColumns = 0;
@@ -265,13 +272,13 @@ namespace EssSharp
             // If numerics outside of the data block should be prefixed for Excel, apply the prefix if necessary.
             if ( preferences.PrefixStringValuesForExcel )
             {
-                for ( int c = 0; c < sourceColumnCount; c++ )
+                for ( int c = sourceFirstColumn; c < sourceColumnCount; c++ )
                 {
                     // If there are no data rows OR the current column is to the outside of the data block, prefix numerics.
                     bool prefixNumericsInColumn = rowDimensionMembers.Length == 0 || c < firstColumnAxisIndex;
 
                     // Get the report column index for the current source column index.
-                    var rc = sourceColumnSequence[c];
+                    var rc = sourceColumnSequence[c] - sourceFirstColumn;
 
                     // Iterate over rows, capturing each cell value as a string.
                     for ( int ri = reportFirstIndex, si = sourceFirstIndex; si < sourceRowCount; ri++, si++ )
@@ -291,13 +298,13 @@ namespace EssSharp
             {
                 if ( preferences.CaptureCellTypes )
                 {
-                    for ( int c = 0; c < sourceColumnCount; c++ )
+                    for ( int c = sourceFirstColumn; c < sourceColumnCount; c++ )
                     {
                         // If there are no data rows OR the current column is to the outside of the data block, prefix numerics.
                         bool isMemberColumn = c < firstColumnAxisIndex;
 
                         // Get the report column index for the current source column index.
-                        var rc = sourceColumnSequence[c];
+                        var rc = sourceColumnSequence[c] - sourceFirstColumn;
 
                         if ( isMemberColumn )
                         {
@@ -314,9 +321,9 @@ namespace EssSharp
                         {
                             string value;
 
-                            // Capture the first row value.
+                            // Capture the first row value: a column axis member when the column axis is included, else data.
                             report[reportFirstIndex, rc] = (value = source[sourceFirstIndex][c].Value<string>());
-                            types [reportFirstIndex, rc] = string.IsNullOrEmpty(value) ? 7 : 0;
+                            types [reportFirstIndex, rc] = string.IsNullOrEmpty(value) ? 7 : sourceFirstIndex is 0 && columnDimensionMembers.Any() ? 0 : 2;
 
                             // Iterate over rows, capturing each cell value as a string.
                             for ( int ri = reportFirstIndex + 1, si = sourceFirstIndex + 1; si < sourceRowCount; ri++, si++ )
@@ -329,10 +336,10 @@ namespace EssSharp
                 }
                 else
                 {
-                    for ( int c = 0; c < sourceColumnCount; c++ )
+                    for ( int c = sourceFirstColumn; c < sourceColumnCount; c++ )
                     {
                         // Get the report column index for the current source column index.
-                        var rc = sourceColumnSequence[c];
+                        var rc = sourceColumnSequence[c] - sourceFirstColumn;
 
                         // Iterate over rows, capturing each cell value as a string.
                         for ( int ri = reportFirstIndex, si = sourceFirstIndex; si < sourceRowCount; ri++, si++ )
