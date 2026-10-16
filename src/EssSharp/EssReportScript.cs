@@ -234,9 +234,10 @@ namespace EssSharp
                         // Capture the cell value.
                         string value = ci < row.Result.Length ? row.Result[ci] : string.Empty;
 
-                        // Trim quoted member names and identify any quoted cell value as a member.
+                        // Trim quoted member names and identify any quoted cell value as a member, any other value as data, and an
+                        // empty cell as blank, as the cell types of an Essbase grid do.
                         report[row.RowIndex, ci] = trimmed = value.Trim().Trim('"');
-                        types [row.RowIndex, ci] = !string.Equals(value.Trim(), trimmed, StringComparison.Ordinal) ? 0 : 7;
+                        types [row.RowIndex, ci] = !string.Equals(value.Trim(), trimmed, StringComparison.Ordinal) ? 0 : trimmed.Length is 0 ? 7 : 2;
                     }
                 }
             }
