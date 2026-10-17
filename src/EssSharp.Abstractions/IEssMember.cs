@@ -54,7 +54,9 @@ namespace EssSharp
         public int DimensionSolveOrder { get; }
 
         /// <summary>
-        /// Data type is designated for the measure.
+        /// The dimension tag of a dimension member: <see cref="EssDimensionType.REGULAR"/> for a dimension with no tag, which
+        /// Essbase leaves out of the response. <see cref="EssDimensionType.Unknown"/> for a member that is not a dimension and
+        /// whose response does not give its dimension's tag.
         /// </summary>
         public EssDimensionType DimensionType { get; }
 

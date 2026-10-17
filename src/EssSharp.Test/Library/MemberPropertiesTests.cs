@@ -51,6 +51,19 @@ namespace EssSharp.Test.Library
             Assert.Contains("twoPassCalc", fields);
         }
 
+        [Theory(DisplayName = "MemberPropertiesTests - GetMemberAsync_GivesADimensionsTag")]
+        [InlineData(@"{""name"":""Product"",""dimension"":true}", EssDimensionType.REGULAR)]
+        [InlineData(@"{""name"":""Year"",""dimension"":true,""dimensionType"":""TIME""}", EssDimensionType.TIME)]
+        [InlineData(@"{""name"":""100""}", EssDimensionType.Unknown)]
+        public async Task GetMemberAsync_GivesADimensionsTag( string memberJson, EssDimensionType dimensionType )
+        {
+            using var stub = Stub(memberJson);
+
+            var member = await (await Cube(stub)).GetMemberAsync("member", cancellationToken: TestContext.Current.CancellationToken);
+
+            Assert.Equal(dimensionType, member.DimensionType);
+        }
+
         /// <summary>
         /// Returns a stub that answers the application and cube requests, and every outline member request with the given JSON.
         /// </summary>

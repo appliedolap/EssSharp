@@ -73,7 +73,7 @@ namespace EssSharp
         public int DimensionSolveOrder => _memberBean.DimSolveOrder;
 
         /// <inheritdoc />
-        public EssDimensionType DimensionType => _memberBean.DimensionType.ToEssEnum();
+        public EssDimensionType DimensionType => _memberBean.DimensionType is null && _memberBean.Dimension ? EssDimensionType.REGULAR : _memberBean.DimensionType.ToEssEnum();
 
         /// <inheritdoc />
         public string DataStorageType => _memberBean.DataStorageType;
