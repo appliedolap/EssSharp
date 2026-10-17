@@ -64,6 +64,21 @@ namespace EssSharp.Test.Library
             Assert.Equal(dimensionType, member.DimensionType);
         }
 
+        [Fact(DisplayName = "MemberPropertiesTests - GetMemberAsync_AsksForEachFieldByTheNameEssbaseKnows")]
+        public async Task GetMemberAsync_AsksForEachFieldByTheNameEssbaseKnows()
+        {
+            using var stub = Stub(@"{""name"":""Qtr2""}");
+
+            await (await Cube(stub)).GetMemberAsync("Qtr2", EssMemberFields.perviousSiblingCount | EssMemberFields.descentantsCount | EssMemberFields.dimensionSolveOrder |
+                                                            EssMemberFields.dimensionStorageType | EssMemberFields.hasUniqueName, TestContext.Current.CancellationToken);
+
+            string request = stub.Requests.Single(candidate => candidate.StartsWith("GET ") && candidate.Contains("/outline/"));
+            string[] fields = System.Uri.UnescapeDataString(request.Split(' ')[1]).Split('?')[1].Split('&')
+                .Single(parameter => parameter.StartsWith("fields=")).Substring("fields=".Length).Split(',');
+
+            Assert.Equal(new[] { "dataStorageType", "descendantsCount", "dimSolveOrder", "dimStorageType", "memberHasUniqueName", "previousSiblingsCount" }, fields.OrderBy(field => field, System.StringComparer.Ordinal));
+        }
+
         /// <summary>
         /// Returns a stub that answers the application and cube requests, and every outline member request with the given JSON.
         /// </summary>

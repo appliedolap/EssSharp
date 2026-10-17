@@ -905,12 +905,26 @@ namespace EssSharp
             {
                 if ( filterOption.HasFlag(value) )
                 {
-                    values.Add(value.ToString());
+                    values.Add(value.ToFieldName());
                 }
             }
 
             return string.Join(",", values) ?? string.Empty;
         }
+
+        /// <summary>
+        /// Returns the name Essbase knows a member field by: the member's JSON property, which a few flags do not spell as it does.
+        /// </summary>
+        /// <param name="field" />
+        internal static string ToFieldName( this EssMemberFields field ) => field switch
+        {
+            EssMemberFields.perviousSiblingCount => "previousSiblingsCount",
+            EssMemberFields.descentantsCount     => "descendantsCount",
+            EssMemberFields.dimensionSolveOrder  => "dimSolveOrder",
+            EssMemberFields.dimensionStorageType => "dimStorageType",
+            EssMemberFields.hasUniqueName        => "memberHasUniqueName",
+            _                                    => field.ToString()
+        };
 
         internal static string ToDelimitedString( this EssMemberSearchOptions queryOption )
         {
