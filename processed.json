@@ -31843,6 +31843,24 @@
           },
           "parentName": {
             "type": "string"
+          },
+          "consolidation": {
+            "type": "string"
+          },
+          "formula": {
+            "type": "string"
+          },
+          "twoPassCalc": {
+            "type": "boolean"
+          },
+          "timeBalance": {
+            "type": "string"
+          },
+          "timeBalanceSkipOption": {
+            "type": "string"
+          },
+          "expense": {
+            "type": "boolean"
           }
         }
       },

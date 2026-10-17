@@ -31,6 +31,12 @@ Name | Type | Description | Notes
 **Uda** | **List&lt;string&gt;** |  | [optional] 
 **DataStorageType** | **string** |  | [optional] 
 **ParentName** | **string** |  | [optional] 
+**Consolidation** | **string** |  | [optional] 
+**Formula** | **string** |  | [optional] 
+**TwoPassCalc** | **bool** |  | [optional] 
+**TimeBalance** | **string** |  | [optional] 
+**TimeBalanceSkipOption** | **string** |  | [optional] 
+**Expense** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

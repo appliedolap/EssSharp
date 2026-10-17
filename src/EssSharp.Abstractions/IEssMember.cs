@@ -134,6 +134,41 @@ namespace EssSharp
         public bool IsSharedMember { get; }
 
         /// <summary>
+        /// The member's consolidation operator: <c>+</c>, <c>-</c>, <c>*</c>, <c>/</c>, <c>%</c>, <c>~</c>, or <c>^</c>.
+        /// Essbase leaves out the default, <c>+</c>, which this gives when the member's response has none.
+        /// </summary>
+        public string Consolidation { get; }
+
+        /// <summary>
+        /// The member's formula, or null when it has none. Essbase returns it only when <see cref="EssMemberFields.formula"/>
+        /// is requested.
+        /// </summary>
+        public string Formula { get; }
+
+        /// <summary>
+        /// True if the member is calculated in a second pass. Essbase returns it only when
+        /// <see cref="EssMemberFields.twoPassCalc"/> is requested, and leaves out false.
+        /// </summary>
+        public bool TwoPassCalc { get; }
+
+        /// <summary>
+        /// The member's time balance: <c>NONE</c>, <c>FIRST</c>, <c>LAST</c>, or <c>AVERAGE</c>. Essbase leaves out the default,
+        /// <c>NONE</c>, which this gives when the member's response has none.
+        /// </summary>
+        public string TimeBalance { get; }
+
+        /// <summary>
+        /// Which values the member's time balance skips: <c>NONE</c>, <c>MISSING</c>, <c>ZEROS</c>, or <c>MISSING_AND_ZEROS</c>.
+        /// Essbase leaves out the default, <c>NONE</c>, which this gives when the member's response has none.
+        /// </summary>
+        public string TimeBalanceSkipOption { get; }
+
+        /// <summary>
+        /// True if the member is reported as an expense. Essbase leaves out false.
+        /// </summary>
+        public bool Expense { get; }
+
+        /// <summary>
         /// Gets a list of ancestors.
         /// </summary>
         /// <param name="fields"></param>

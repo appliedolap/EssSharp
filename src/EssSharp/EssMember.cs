@@ -120,6 +120,24 @@ namespace EssSharp
         /// <inheritdoc />
         public bool IsSharedMember => _memberBean.IsSharedMember;
 
+        /// <inheritdoc />
+        public string Consolidation => string.IsNullOrEmpty(_memberBean.Consolidation) ? @"+" : _memberBean.Consolidation;
+
+        /// <inheritdoc />
+        public string Formula => _memberBean.Formula;
+
+        /// <inheritdoc />
+        public bool TwoPassCalc => _memberBean.TwoPassCalc;
+
+        /// <inheritdoc />
+        public string TimeBalance => string.IsNullOrEmpty(_memberBean.TimeBalance) ? @"NONE" : _memberBean.TimeBalance;
+
+        /// <inheritdoc />
+        public string TimeBalanceSkipOption => string.IsNullOrEmpty(_memberBean.TimeBalanceSkipOption) ? @"NONE" : _memberBean.TimeBalanceSkipOption;
+
+        /// <inheritdoc />
+        public bool Expense => _memberBean.Expense;
+
         #endregion
 
         #region IEssMember Methods

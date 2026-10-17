@@ -29722,6 +29722,7 @@ components:
           key: aliases
         dataStorageType: dataStorageType
         type: NONE
+        twoPassCalc: true
         currencyConversionCategory: currencyConversionCategory
         levelNumber: 6
         previousSiblingsCount: 2
@@ -29738,9 +29739,12 @@ components:
         attribute: true
         dimension: true
         descendantsCount: 5
+        timeBalanceSkipOption: timeBalanceSkipOption
         memberId: memberId
         memberHasUniqueName: true
         generationNumber: 1
+        consolidation: consolidation
+        expense: true
         dimensionName: dimensionName
         parentName: parentName
         numberOfChildren: 0
@@ -29748,8 +29752,10 @@ components:
         uda:
         - uda
         - uda
+        timeBalance: timeBalance
         dimStorageType: DENSE
         name: name
+        formula: formula
         memberSolveOrder: 5
         uniqueId: uniqueId
         account: true
@@ -29834,6 +29840,18 @@ components:
           type: string
         parentName:
           type: string
+        consolidation:
+          type: string
+        formula:
+          type: string
+        twoPassCalc:
+          type: boolean
+        timeBalance:
+          type: string
+        timeBalanceSkipOption:
+          type: string
+        expense:
+          type: boolean
       type: object
     RestCollectionResponse:
       properties:
@@ -35750,6 +35768,7 @@ components:
             key: aliases
           dataStorageType: dataStorageType
           type: NONE
+          twoPassCalc: true
           currencyConversionCategory: currencyConversionCategory
           levelNumber: 6
           previousSiblingsCount: 2
@@ -35766,9 +35785,12 @@ components:
           attribute: true
           dimension: true
           descendantsCount: 5
+          timeBalanceSkipOption: timeBalanceSkipOption
           memberId: memberId
           memberHasUniqueName: true
           generationNumber: 1
+          consolidation: consolidation
+          expense: true
           dimensionName: dimensionName
           parentName: parentName
           numberOfChildren: 0
@@ -35776,8 +35798,10 @@ components:
           uda:
           - uda
           - uda
+          timeBalance: timeBalance
           dimStorageType: DENSE
           name: name
+          formula: formula
           memberSolveOrder: 5
           uniqueId: uniqueId
           account: true
@@ -35788,6 +35812,7 @@ components:
             key: aliases
           dataStorageType: dataStorageType
           type: NONE
+          twoPassCalc: true
           currencyConversionCategory: currencyConversionCategory
           levelNumber: 6
           previousSiblingsCount: 2
@@ -35804,9 +35829,12 @@ components:
           attribute: true
           dimension: true
           descendantsCount: 5
+          timeBalanceSkipOption: timeBalanceSkipOption
           memberId: memberId
           memberHasUniqueName: true
           generationNumber: 1
+          consolidation: consolidation
+          expense: true
           dimensionName: dimensionName
           parentName: parentName
           numberOfChildren: 0
@@ -35814,8 +35842,10 @@ components:
           uda:
           - uda
           - uda
+          timeBalance: timeBalance
           dimStorageType: DENSE
           name: name
+          formula: formula
           memberSolveOrder: 5
           uniqueId: uniqueId
           account: true

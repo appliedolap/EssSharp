@@ -166,7 +166,13 @@ namespace EssSharp.Model
         /// <param name="uda">uda.</param>
         /// <param name="dataStorageType">dataStorageType.</param>
         /// <param name="parentName">parentName.</param>
-        public MemberBean(string name = default, string dimensionName = default, int numberOfChildren = default, int levelNumber = default, int generationNumber = default, Dictionary<string, string> aliases = default, string activeAliasName = default, bool memberHasUniqueName = default, string uniqueName = default, string memberId = default, string uniqueId = default, TypeEnum? type = default, int memberSolveOrder = default, long descendantsCount = default, int previousSiblingsCount = default, bool dimension = default, bool attribute = default, bool account = default, List<Link> links = default, int dimSolveOrder = default, DimensionTypeEnum? dimensionType = default, string formatString = default, DimStorageTypeEnum? dimStorageType = default, string currencyConversionCategory = default, List<string> uda = default, string dataStorageType = default, string parentName = default)
+        /// <param name="consolidation">consolidation.</param>
+        /// <param name="formula">formula.</param>
+        /// <param name="twoPassCalc">twoPassCalc.</param>
+        /// <param name="timeBalance">timeBalance.</param>
+        /// <param name="timeBalanceSkipOption">timeBalanceSkipOption.</param>
+        /// <param name="expense">expense.</param>
+        public MemberBean(string name = default, string dimensionName = default, int numberOfChildren = default, int levelNumber = default, int generationNumber = default, Dictionary<string, string> aliases = default, string activeAliasName = default, bool memberHasUniqueName = default, string uniqueName = default, string memberId = default, string uniqueId = default, TypeEnum? type = default, int memberSolveOrder = default, long descendantsCount = default, int previousSiblingsCount = default, bool dimension = default, bool attribute = default, bool account = default, List<Link> links = default, int dimSolveOrder = default, DimensionTypeEnum? dimensionType = default, string formatString = default, DimStorageTypeEnum? dimStorageType = default, string currencyConversionCategory = default, List<string> uda = default, string dataStorageType = default, string parentName = default, string consolidation = default, string formula = default, bool twoPassCalc = default, string timeBalance = default, string timeBalanceSkipOption = default, bool expense = default)
         {
             this.Name = name;
             this.DimensionName = dimensionName;
@@ -195,6 +201,12 @@ namespace EssSharp.Model
             this.Uda = uda;
             this.DataStorageType = dataStorageType;
             this.ParentName = parentName;
+            this.Consolidation = consolidation;
+            this.Formula = formula;
+            this.TwoPassCalc = twoPassCalc;
+            this.TimeBalance = timeBalance;
+            this.TimeBalanceSkipOption = timeBalanceSkipOption;
+            this.Expense = expense;
         }
 
         /// <summary>
@@ -342,6 +354,42 @@ namespace EssSharp.Model
         public string ParentName { get; set; }
 
         /// <summary>
+        /// Gets or Sets Consolidation
+        /// </summary>
+        [DataMember(Name = "consolidation", EmitDefaultValue = false)]
+        public string Consolidation { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Formula
+        /// </summary>
+        [DataMember(Name = "formula", EmitDefaultValue = false)]
+        public string Formula { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TwoPassCalc
+        /// </summary>
+        [DataMember(Name = "twoPassCalc", EmitDefaultValue = true)]
+        public bool TwoPassCalc { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TimeBalance
+        /// </summary>
+        [DataMember(Name = "timeBalance", EmitDefaultValue = false)]
+        public string TimeBalance { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TimeBalanceSkipOption
+        /// </summary>
+        [DataMember(Name = "timeBalanceSkipOption", EmitDefaultValue = false)]
+        public string TimeBalanceSkipOption { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Expense
+        /// </summary>
+        [DataMember(Name = "expense", EmitDefaultValue = true)]
+        public bool Expense { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -376,6 +424,12 @@ namespace EssSharp.Model
             sb.Append("  Uda: ").Append(Uda).Append("\n");
             sb.Append("  DataStorageType: ").Append(DataStorageType).Append("\n");
             sb.Append("  ParentName: ").Append(ParentName).Append("\n");
+            sb.Append("  Consolidation: ").Append(Consolidation).Append("\n");
+            sb.Append("  Formula: ").Append(Formula).Append("\n");
+            sb.Append("  TwoPassCalc: ").Append(TwoPassCalc).Append("\n");
+            sb.Append("  TimeBalance: ").Append(TimeBalance).Append("\n");
+            sb.Append("  TimeBalanceSkipOption: ").Append(TimeBalanceSkipOption).Append("\n");
+            sb.Append("  Expense: ").Append(Expense).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

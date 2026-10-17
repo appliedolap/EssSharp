@@ -296,5 +296,59 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'ParentName'
         }
+
+        /// <summary>
+        /// Test the property 'Consolidation'
+        /// </summary>
+        [Fact]
+        public void ConsolidationTest()
+        {
+            // TODO unit test for the property 'Consolidation'
+        }
+
+        /// <summary>
+        /// Test the property 'Formula'
+        /// </summary>
+        [Fact]
+        public void FormulaTest()
+        {
+            // TODO unit test for the property 'Formula'
+        }
+
+        /// <summary>
+        /// Test the property 'TwoPassCalc'
+        /// </summary>
+        [Fact]
+        public void TwoPassCalcTest()
+        {
+            // TODO unit test for the property 'TwoPassCalc'
+        }
+
+        /// <summary>
+        /// Test the property 'TimeBalance'
+        /// </summary>
+        [Fact]
+        public void TimeBalanceTest()
+        {
+            // TODO unit test for the property 'TimeBalance'
+        }
+
+        /// <summary>
+        /// Test the property 'TimeBalanceSkipOption'
+        /// </summary>
+        [Fact]
+        public void TimeBalanceSkipOptionTest()
+        {
+            // TODO unit test for the property 'TimeBalanceSkipOption'
+        }
+
+        /// <summary>
+        /// Test the property 'Expense'
+        /// </summary>
+        [Fact]
+        public void ExpenseTest()
+        {
+            // TODO unit test for the property 'Expense'
+        }
     }
 }

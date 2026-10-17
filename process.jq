@@ -340,7 +340,13 @@ tag_untagged_operations({
     "currencyConversionCategory": {"type": "string"},
     "uda": {"type": "array", "items": {"type": "string"}},
     "dataStorageType": {"type": "string"},
-    "parentName": {"type": "string"}
+    "parentName": {"type": "string"},
+    "consolidation": {"type": "string"},
+    "formula": {"type": "string"},
+    "twoPassCalc": {"type": "boolean"},
+    "timeBalance": {"type": "string"},
+    "timeBalanceSkipOption": {"type": "string"},
+    "expense": {"type": "boolean"}
   })
 
 # The generated model's JSON member order follows the schema, and the Essbase grid endpoint rejects grids

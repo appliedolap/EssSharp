@@ -32,6 +32,12 @@ namespace EssSharp
         attribute                  = 1 << 22,
         account                    = 1 << 23,
         uda                        = 1 << 24,
-        parentName                 = 1 << 25
+        parentName                 = 1 << 25,
+        consolidation              = 1 << 26,
+        formula                    = 1 << 27,
+        twoPassCalc                = 1 << 28,
+        timeBalance                = 1 << 29,
+        timeBalanceSkipOption      = 1 << 30,
+        expense                    = 1 << 31
     }
 }
