@@ -570,7 +570,7 @@ namespace EssSharp.Integration
             Assert.Equal(EssDimensionType.ACCOUNTS, dimensions[1].DimensionTag);
 
             Assert.Equal("Product", dimensions[2]?.Name);
-            Assert.Equal(EssDimensionType.Unknown, dimensions[2].DimensionTag);
+            Assert.Equal(EssDimensionType.REGULAR, dimensions[2].DimensionTag);
 
             Assert.Equal("Caffeinated", dimensions[5]?.Name);
             Assert.Equal(EssDimensionType.ATTRIBUTE, dimensions[5].DimensionTag);
