@@ -38,6 +38,7 @@ import os
 import re
 import ssl
 import sys
+import threading
 import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -187,9 +188,12 @@ def question_cube(chat):
     cubes = re.findall(r'Essbase application "([^"]+)" with "([^"]+)" database', prompt)
     if not cubes:
         return None
-    embed_texts = (lambda texts: ollama("/api/embed", {"model": EMBED_MODEL, "input": texts})["embeddings"]) \
-        if MODEL_URL else None
-    return essbase_hints.cube_hints(cubes[-1][0], cubes[-1][1], HINTS_DIR, embed_texts)
+    return essbase_hints.cube_hints(cubes[-1][0], cubes[-1][1], HINTS_DIR, embed_texts if MODEL_URL else None)
+
+
+def embed_texts(texts):
+    """Returns the embedding model's vector for each text, for the outline hints' comparisons of meaning."""
+    return ollama("/api/embed", {"model": EMBED_MODEL, "input": texts})["embeddings"]
 
 
 def hints_for(chat):
@@ -282,7 +286,7 @@ def checked_refinement(reply, prompt):
     """
     start = reply.find("{")
     try:
-        answer, end = json.JSONDecoder().raw_decode(reply[start:]) if start >= 0 else (None, 0)
+        answer, end, _ = essbase_hints.decode_answer(reply[start:]) if start >= 0 else (None, 0, [])
     except ValueError:
         answer = None
     sent = re.search(r"Input JSON:\s*(\{.*\})\s*Conversation History:", prompt, re.S)
@@ -438,4 +442,11 @@ if __name__ == "__main__":
                                                if MODE == "model" else "canned answers from " + ANSWERS_FILE),
           flush=True)
     sys.stdout.flush()
+
+    # The outline hints are read ahead of the questions, and kept fresh, because a large outline takes longer to read
+    # than Essbase waits for an answer.
+    if MODE == "model" and OUTLINE_HINTS:
+        cubes = [tuple(pair.partition(".")[::2]) for pair in os.environ.get("AI_APPLICATIONS", "").split()]
+        threading.Thread(target=essbase_hints.keep_read, args=(HINTS_DIR, embed_texts if MODEL_URL else None, cubes),
+                         daemon=True).start()
     server.serve_forever()

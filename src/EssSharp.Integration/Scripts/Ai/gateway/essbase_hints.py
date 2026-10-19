@@ -9,9 +9,16 @@ the names of their generations and the members directly below each dimension - a
   * correct() rewrites the model's answer before it goes back to Essbase, so that a word naming a level becomes the
     dimension (or the member it is limited to) with the matching hierarchy_scope, whatever the model chose.
 
-Only named generations take part: a level still called Gen2 or Gen3 gives nothing to match. A cube can add words of its
-own in hints/<App>.<Cube>.json: {"levelWords": {"product family": "Category"}} maps a word to a generation name, and
-{"phrases": {"second half": ["Qtr3", "Qtr4"]}} maps a phrase that names no member to the members it stands for.
+Only named generations take part: a level still called Gen2 or Gen3 gives nothing to match. A cube can add its own in
+hints/<App>.<Cube>.json:
+
+  * {"levels": {"Geography": {"State": {"members": ["Central", "West"], "scope": "children"}}}} names a level the
+    outline does not, as the children or leaves of the members listed (the dimension itself when none are). This is the
+    only way to reach a level in the middle of a dimension, or the leaves of one branch of a ragged one.
+  * {"levelWords": {"product family": "Category"}} maps more words to a level.
+  * {"phrases": {"second half": ["Qtr3", "Qtr4"]}} maps a phrase that names no member to the members it stands for.
+  * {"yearMembers": {"this": "Curr Year", "last": "Prev Year"}} names the members a year number stands for, when the
+    outline has members for this year and last year rather than one year in its time dimension.
 """
 import base64
 import json
@@ -62,6 +69,7 @@ YEAR_NUMBER = re.compile(r"^(?:fy\s*|year\s*)?(?:19|20)\d\d$", re.I)
 YEAR_MEMBER = re.compile(r"^(?:fy\s*|year\s*)?(?:(?:19|20)\d\d|\d\d)$", re.I)
 TIME_LEVEL = re.compile(r"quarter|month|week|period|day|half", re.I)
 TIME_DIMENSION = re.compile(r"^(year|years|time|period|periods|fiscal year)$", re.I)
+MEASURES_DIMENSION = re.compile(r"^(measures|accounts|account|metrics)$", re.I)
 
 # Words in front of a level word that do not change it ("all months", "each quarter").
 LEADING_WORDS = {"all", "each", "every", "the", "per", "by"}
@@ -111,15 +119,18 @@ def phrase_keys(text, adverbs=True):
 
 
 class Level:
-    """A named generation of a dimension that a hierarchy_scope can express."""
+    """A level of a dimension that a hierarchy_scope can express: a named generation, which is the dimension's children
+    or leaves, or a level a cube's own file names, which is the children or leaves of the members it lists ("State" is
+    the children of each region)."""
 
-    def __init__(self, dimension, name, scope):
+    def __init__(self, dimension, name, scope, members=None):
         self.dimension = dimension
         self.name = name
         self.scope = scope
+        self.members = list(members or [dimension])
 
     def __repr__(self):
-        return "%s %s (%s)" % (self.dimension, self.name, self.scope)
+        return "%s %s (%s of %s)" % (self.dimension, self.name, self.scope, ", ".join(self.members))
 
 
 class CubeHints:
@@ -135,12 +146,14 @@ class CubeHints:
         self.levels = []
         self.level_vectors = None
         self.known = set()  # dimension and member names (and aliases) that are never taken for a level
+        self.attribute_dimensions = []
 
         quoted_app = urllib.parse.quote(application)
         quoted_cube = urllib.parse.quote(cube)
         for item in rest("outline/%s/%s?fields=name,attribute,dimension" % (quoted_app, quoted_cube)).get("items", []):
             # Attribute dimensions, and the dimension Essbase adds to calculate them, have no levels to speak of.
             if item.get("attribute") or item["name"] == "Attribute Calculations":
+                self.attribute_dimensions.append(item["name"])
                 continue
             name = item["name"]
             generations = rest("applications/%s/databases/%s/dimensions/%s/generations"
@@ -169,6 +182,30 @@ class CubeHints:
                 for key in last_word:
                     self.words.setdefault(key, level)
 
+        # The cube's own file: levels the outline does not name, more words for them, and phrases.
+        settings = {}
+        extra = os.path.join(hints_dir, "%s.%s.json" % (application, cube))
+        if os.path.exists(extra):
+            with open(extra, encoding="utf-8") as source:
+                settings = json.load(source)
+        dimension_names = {name.lower(): name for name, _, _ in self.dimensions}
+        for dimension, levels in (settings.get("levels") or {}).items():
+            dimension = dimension_names.get(dimension.lower())
+            for level_name, spec in (levels or {}).items() if dimension else []:
+                if spec.get("scope") not in ("children", "leaves"):
+                    continue
+                level = Level(dimension, level_name, spec["scope"], spec.get("members"))
+                self.levels = [other for other in self.levels
+                               if not (other.dimension == dimension and other.name.lower() == level_name.lower())]
+                self.levels.append(level)
+                for key in phrase_keys(level_name, adverbs=False):
+                    self.words[key] = level
+        for word, generation_name in (settings.get("levelWords") or {}).items():
+            level = next((level for level in self.levels if level.name.lower() == generation_name.lower()), None)
+            if level:
+                for key in phrase_keys(word, adverbs=False):
+                    self.words[key] = level
+
         self.members = self.read_members(quoted_app, quoted_cube)
 
         # The time dimension: the one with a level named for a period of time, or failing that, one named like it.
@@ -180,21 +217,29 @@ class CubeHints:
         # of them, and is left for Essbase to look up.
         self.has_year_members = any(YEAR_MEMBER.match(name) for name in self.members)
 
+        # The members that stand for this year and last year, when the cube's file names them ({"this": "Curr Year",
+        # "last": "Prev Year"}): a year number becomes one of them instead of the time dimension.
+        self.year_members = {when: name for when, name in (settings.get("yearMembers") or {}).items()
+                             if when in ("this", "last") and name and name.lower() in self.members}
+        if "this" not in self.year_members:
+            self.year_members = {}
+
         # Phrases that stand for a set of members ("second half": Qtr3 and Qtr4), from the cube's own file.
         self.phrases = {}
-        extra = os.path.join(hints_dir, "%s.%s.json" % (application, cube))
-        if os.path.exists(extra):
-            with open(extra, encoding="utf-8") as source:
-                settings = json.load(source)
-            for word, generation_name in (settings.get("levelWords") or {}).items():
-                level = next((level for level in self.levels if level.name.lower() == generation_name.lower()), None)
-                if level:
-                    for key in phrase_keys(word, adverbs=False):
-                        self.words[key] = level
-            for phrase, names in (settings.get("phrases") or {}).items():
-                keys = phrase_keys(phrase, adverbs=False)
-                if keys and names:
-                    self.phrases[keys[0]] = list(names)
+        for phrase, names in (settings.get("phrases") or {}).items():
+            keys = phrase_keys(phrase, adverbs=False)
+            if keys and names:
+                self.phrases[keys[0]] = list(names)
+
+        # A level of the cube's file whose members are not in the outline would send Essbase names it cannot find.
+        for level in [level for level in self.levels if level.members != [level.dimension]]:
+            missing = [name for name in level.members if name.lower() not in self.members]
+            if missing:
+                print("Ignoring the level %s of %s.%s: no member %s" % (level.name, application, cube,
+                                                                       join_names(missing)), flush=True)
+                self.levels.remove(level)
+                for key in [key for key, other in self.words.items() if other is level]:
+                    del self.words[key]
 
     def read_members(self, quoted_app, quoted_cube):
         """Returns the dimension of each member, by its name and its default alias in lower case, for up to MEMBER_LIMIT
@@ -254,7 +299,8 @@ class CubeHints:
                               for child, alias in children[:CHILDREN_SHOWN])
             if len(children) > CHILDREN_SHOWN:
                 shown += ", ..."
-            parts = ['"%s" means hierarchy_scope "%s" of %s' % (level.name, level.scope, name) for level in named]
+            parts = ['"%s" means hierarchy_scope "%s" of %s' % (level.name, level.scope, join_names(level.members))
+                     for level in named]
             lines.append("- %s: members directly below it are %s.%s" % (name, shown or "none",
                                                                       (" " + "; ".join(parts) + ".") if parts else ""))
         return "\n".join(lines)
@@ -291,14 +337,14 @@ class CubeHints:
         if start < 0:
             return reply
         try:
-            answer, end = json.JSONDecoder().raw_decode(reply[start:])
+            answer, end, merged = decode_answer(reply[start:])
         except ValueError:
             return reply
         if not isinstance(answer, dict):
             return reply
-        info = reply[start + end:]
+        info = reply[start + end:].replace("```", "")
         info = info[info.find("info:"):] if "info:" in info else ""
-        changes = []
+        changes = ["%s written twice -> merged" % key for key in merged]
         self.correct_operator(answer, changes)
         if question:
             self.clear_unasked_scopes(answer, question, changes)
@@ -306,6 +352,8 @@ class CubeHints:
                 self.compare_side_by_side(answer, question, changes)
             self.rank_what_is_asked(answer, question, changes)
             self.total_of_all(answer, question, changes)
+            self.add_named_measure(answer, question, changes)
+        self.rank_members_of_dimension(answer, changes)
         drop_empty_operators(answer, changes)
         notes = self.overlap_notes(answer)
         if not changes and not notes:
@@ -320,15 +368,16 @@ class CubeHints:
         return json.dumps(answer) + ("\n" + info.strip() if info else "")
 
     def ranked_set(self, noun):
-        """Returns the member and hierarchy_scope a noun in a ranking question stands for ("quarter" is Year's children,
-        "products" Product's leaves), or None."""
+        """Returns the dimension, member and hierarchy_scope a noun in a ranking question stands for ("quarter" is Year's
+        children, "products" Product's leaves), or None. A level spread over several members ("State", the children of
+        each region) is not one set to rank, so it gives None."""
         for words in (noun, noun.split()[0]):
             level = self.level_for(words, "")
             if level:
-                return level.dimension, level.scope
+                return (level.dimension, level.members[0], level.scope) if len(level.members) == 1 else None
             for dimension_name, _, _ in self.dimensions:
                 if phrase_keys(words) and phrase_keys(words)[0] == phrase_keys(dimension_name)[0]:
-                    return dimension_name, "leaves"
+                    return dimension_name, dimension_name, "leaves"
         return None
 
     def rank_what_is_asked(self, answer, question, changes):
@@ -349,8 +398,8 @@ class CubeHints:
             target = self.ranked_set(count.group(2).lower()) if count else None
             if target:
                 replaced = operands[1].get("member_name")
-                operands[1] = {"member_name": target[0], "hierarchy_scope": target[1], FIXED: True}
-                changes.append("ranked %s instead of %s" % (target[0], replaced))
+                operands[1] = {"member_name": target[1], "hierarchy_scope": target[2], FIXED: True}
+                changes.append("ranked %s instead of %s" % (target[1], replaced))
             return
 
         which = WHICH_QUESTION.search(question)
@@ -359,20 +408,66 @@ class CubeHints:
         target = self.ranked_set(which.group(1).lower())
         if not target:
             return
-        dimension, scope = target
+        dimension, member_name, scope = target
         pov = answer.setdefault("POV", {})
         # Keep a member of that dimension the question itself names ("which state in the West"); drop others.
         limited = [member for member in pov.get(dimension, []) if is_member(member) and re.search(
             r"\b%s\b" % re.escape((member.get("member_name") or "").lower()), question.lower())
-            and member.get("member_name", "").lower() != dimension.lower()]
+            and member.get("member_name", "").lower() not in (dimension.lower(), member_name.lower())]
         pov.pop(dimension, None)
-        ranked = {"member_name": limited[0]["member_name"] if limited else dimension, "hierarchy_scope": scope,
+        ranked = {"member_name": limited[0]["member_name"] if limited else member_name, "hierarchy_scope": scope,
                   FIXED: True}
         high = re.search(r"\b(%s)\b" % HIGH_WORDS, which.group(2), re.I)
         answer["operator"] = "top count" if high else "bottom count"
         answer["operands"] = [1, ranked]
         answer["sort"] = json.loads(json.dumps(pov))
         changes.append("%s of 1 over %s %s" % (answer["operator"], ranked["member_name"], scope))
+
+    def rank_members_of_dimension(self, answer, changes):
+        """Makes a ranking of a whole dimension ("which payment type", answered as a top count of Payment Type) rank its
+        children, and drops the dimension's other members from the POV and sort beside it: Essbase cannot rank a set
+        and also cross it with a member of the same dimension."""
+        dimensions = {name.lower(): name for name, _, _ in self.dimensions}
+        for operator in all_operators(answer):
+            if (operator.get("operator") or "").lower() not in RANKING_OPERATORS:
+                continue
+            for operand in [operand for operand in operator.get("operands") or [] if is_member(operand)]:
+                name = (operand.get("member_name") or "").strip().lower()
+                if name in dimensions and not operand.get("hierarchy_scope"):
+                    operand["hierarchy_scope"] = "children"
+                    changes.append("%s: ranked its children" % operand.get("member_name"))
+                dimension = dimensions.get(name) or self.members.get(name)
+                for key in ("POV", "sort"):
+                    members_by_dimension = operator.get(key) if isinstance(operator.get(key), dict) else {}
+                    items = members_by_dimension.get(dimension)
+                    if not dimension or not isinstance(items, list):
+                        continue
+                    dropped = [item for item in items if is_member(item) and item is not operand]
+                    for item in dropped:
+                        items.remove(item)
+                        changes.append("%s: dropped from %s (ranked)" % (item.get("member_name"), key))
+                    if not items:
+                        members_by_dimension.pop(dimension)
+
+    def add_named_measure(self, answer, question, changes):
+        """Adds the measure the question names ("sales") to an answer that has none: without one, Essbase shows the
+        measures dimension itself, or whatever its lookup of another word lands on."""
+        measures = [name for name, _, _ in self.dimensions if MEASURES_DIMENSION.match(name)]
+        if len(measures) != 1:
+            return
+        dimension = measures[0]
+        if any(self.members.get((member.get("member_name") or "").strip().lower()) == dimension
+               for member in all_members(answer)) or (answer.get("POV") or {}).get(dimension):
+            return
+        named = normalized_words(question)
+        candidates = sorted((text for text, other in self.members.items()
+                             if other == dimension and len(text) > 2 and normalized_words(text).strip()
+                             and " %s " % normalized_words(text).strip() in named), key=len, reverse=True)
+        if not candidates:
+            return
+        target = self.texts_of.get(candidates[0], [candidates[0]])[0]
+        answer.setdefault("POV", {}).setdefault(dimension, []).append({"member_name": target, "hierarchy_scope": ""})
+        changes.append("added %s (the question names it)" % target)
 
     def overlap_notes(self, answer):
         """Returns a sentence for each alternate rollup the answer lists next to the members it overlaps: the children of
@@ -502,8 +597,10 @@ class CubeHints:
                     named = named.replace(" %s " % words, " | ")
             # The longest name of another member of the dimension that the question uses ("variance %" over
             # "variance").
+            # A name of one or two letters ("IN" for Indiana) is too often an ordinary word of the question.
             candidates = sorted((text for text, other in self.members.items()
-                                 if other == dimension and text not in used and normalized_words(text).strip()
+                                 if other == dimension and text not in used and len(text) > 2
+                                 and normalized_words(text).strip()
                                  and " %s " % normalized_words(text).strip() in named), key=len, reverse=True)
             if not candidates:
                 continue
@@ -571,13 +668,18 @@ class CubeHints:
                 del pov[level.dimension]
             corrected = {"member_name": plain[0]["member_name"], "hierarchy_scope": level.scope,
                          FIXED: member.get("member_name")}
+        elif len(level.members) == 1:
+            corrected = {"member_name": level.members[0], "hierarchy_scope": level.scope,
+                         FIXED: member.get("member_name")}
         else:
-            corrected = {"member_name": level.dimension, "hierarchy_scope": level.scope, FIXED: member.get("member_name")}
+            return member  # an operand is one member, and this level spreads over several
         changes.append("%s -> %s %s" % (member.get("member_name"), corrected["member_name"], level.scope))
         return corrected
 
     def correct_by_dimension(self, members_by_dimension, changes):
         """Corrects a POV or sort: {dimension: [members or operators]}."""
+        # First, so that a level ("each state") meets the member that limits it ("the West") in the same dimension.
+        self.file_under_own_dimension(members_by_dimension, changes)
         for key in list(members_by_dimension):
             items = members_by_dimension.get(key)
             if not isinstance(items, list):
@@ -606,12 +708,38 @@ class CubeHints:
                     changes.append("%s -> %s %s" % (item.get("member_name"), "/".join(other["member_name"]
                                                                                     for other in plain), level.scope))
                 else:
-                    target.append({"member_name": level.dimension, "hierarchy_scope": level.scope,
-                                   FIXED: item.get("member_name")})
-                    changes.append("%s -> %s %s" % (item.get("member_name"), level.dimension, level.scope))
+                    target.extend({"member_name": name, "hierarchy_scope": level.scope, FIXED: item.get("member_name")}
+                                  for name in level.members)
+                    changes.append("%s -> %s %s" % (item.get("member_name"), "/".join(level.members), level.scope))
                 if not members_by_dimension.get(key):
                     members_by_dimension.pop(key, None)
+        self.file_under_own_dimension(members_by_dimension, changes)
 
+    def file_under_own_dimension(self, members_by_dimension, changes):
+        """Moves members filed under a dimension the cube does not have ("Measures" in a cube whose measures dimension is
+        Accounts) to their own dimension: Essbase looks a member up only in the dimension it is filed under, and fails
+        when that dimension does not exist. A member that cannot be found by name goes to the dimension of the same
+        kind (measures or time), when the cube has one."""
+        dimensions = {name.lower(): name for name, _, _ in self.dimensions}
+        dimensions.update((name.lower(), name) for name in self.attribute_dimensions)
+        for key in list(members_by_dimension):
+            items = members_by_dimension.get(key)
+            if key.lower() in dimensions or not isinstance(items, list):
+                continue
+            pattern = next((pattern for pattern in (MEASURES_DIMENSION, TIME_DIMENSION) if pattern.match(key)), None)
+            same_kind = [name for name, _, _ in self.dimensions if pattern and pattern.match(name)]
+            for item in list(items):
+                name = (item.get("member_name") or "").strip().lower() if is_member(item) else ""
+                dimension = self.members.get(name) or dimensions.get(name) \
+                    or (same_kind[0] if len(same_kind) == 1 else None)
+                if dimension is None:
+                    continue
+                items.remove(item)
+                members_by_dimension.setdefault(dimension, []).append(item)
+                changes.append("%s: %s -> %s" % (item.get("member_name") if is_member(item) else "operator", key,
+                                                 dimension))
+            if not items:
+                members_by_dimension.pop(key, None)
 
     def replace_phrase(self, item, items, members_by_dimension, changes):
         """Replaces a member named by a phrase of the cube's file ("second half") with the members it stands for.
@@ -634,18 +762,46 @@ class CubeHints:
         return True
 
     def replace_year_number(self, item, items, members_by_dimension, changes):
-        """Replaces a year number that is not a member ("2026" for "this year") with the time dimension. Returns whether
-        it did."""
+        """Replaces a year number that is not a member ("2026" for "this year") with the member the cube's file names for
+        this year or last year, or else with the time dimension. Returns whether it did."""
         name = (item.get("member_name") or "").strip()
-        if not self.time_dimension or self.has_year_members or not YEAR_NUMBER.match(name) or name.lower() in self.members:
+        if not (self.time_dimension or self.year_members) or self.has_year_members or not YEAR_NUMBER.match(name) \
+                or name.lower() in self.members:
             return False
+        if self.year_members:
+            # Last year's number is last year; any other is this year, the one year the outline holds data for.
+            last = int(re.sub(r"\D", "", name)) == time.localtime().tm_year - 1
+            replacement = self.year_members.get("last" if last else "this") or self.year_members["this"]
+            dimension = self.members[replacement.lower()]
+        else:
+            replacement = dimension = self.time_dimension
         items.remove(item)
-        target = members_by_dimension.setdefault(self.time_dimension, [])
-        if not any(is_member(other) and (other.get("member_name") or "").lower() == self.time_dimension.lower()
+        target = members_by_dimension.setdefault(dimension, [])
+        if not any(is_member(other) and (other.get("member_name") or "").lower() == replacement.lower()
                    for other in target):
-            target.append({"member_name": self.time_dimension, "hierarchy_scope": ""})
-        changes.append("%s -> %s (no such member)" % (name, self.time_dimension))
+            target.append({"member_name": replacement, "hierarchy_scope": ""})
+        changes.append("%s -> %s (no such member)" % (name, replacement))
         return True
+
+
+def decode_answer(text):
+    """Decodes the JSON answer at the start of text, and returns it, where it ends, and the keys written more than once
+    in one object. A model may write a dimension twice ("Scenario" for Actual, then again for Budget); a plain decode
+    keeps only the last, so the lists of members under a repeated key are joined instead."""
+    merged = []
+
+    def join_repeated(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result and isinstance(result[key], list) and isinstance(value, list):
+                result[key] = result[key] + value
+                merged.append(key)
+            else:
+                result[key] = value
+        return result
+
+    answer, end = json.JSONDecoder(object_pairs_hook=join_repeated).raw_decode(text)
+    return answer, end, merged
 
 
 def is_member(item):
@@ -729,19 +885,44 @@ def known_dimensions():
 
 
 def cube_hints(application, cube, hints_dir, embed):
-    """Returns the hints for a cube, reading its outline when it has not been read lately. Returns None when Essbase
-    cannot be asked."""
-    key = (application.lower(), cube.lower())
+    """Returns the hints for a cube. Hints read before are returned even when they are old, because a large outline
+    takes longer to read than Essbase waits for an answer; keep_read() reads them again in the background. Reads the
+    outline now only when it has never been read. Returns None when Essbase cannot be asked."""
     with _lock:
-        hints = _cache.get(key)
-        if hints is not None and time.time() - hints.read_at < CACHE_SECONDS:
-            return hints
+        hints = _cache.get((application.lower(), cube.lower()))
+    return hints if hints is not None else read_hints(application, cube, hints_dir, embed)
+
+
+def read_hints(application, cube, hints_dir, embed):
+    """Reads the outline of a cube into the cache, and returns its hints, or None when Essbase cannot be asked."""
+    started = time.time()
     try:
         hints = CubeHints(application, cube, hints_dir, embed)
     except Exception as error:  # the outline is help, not a requirement
         print("Could not read the outline of %s.%s: %r" % (application, cube, error), flush=True)
         return None
-    print("Read the outline of %s.%s: levels %s" % (application, cube, hints.levels), flush=True)
+    print("Read the outline of %s.%s in %.1f s: levels %s" % (application, cube, time.time() - started, hints.levels),
+          flush=True)
     with _lock:
-        _cache[key] = hints
+        _cache[(application.lower(), cube.lower())] = hints
     return hints
+
+
+def keep_read(hints_dir, embed, cubes=None):
+    """Reads the outline of each cube (every cube on the server, or the (application, cube) pairs given) that has not
+    been read in CACHE_SECONDS, and goes on doing so every minute. Runs in a thread of its own, so that no question waits
+    for an outline; a cube that appears later (a new stack imports its cubes after it starts) is read when it does."""
+    while True:
+        try:
+            pairs = cubes or [(application["name"], database["name"])
+                              for application in rest("applications").get("items", [])
+                              for database in rest("applications/%s/databases"
+                                                   % urllib.parse.quote(application["name"])).get("items", [])]
+        except Exception:  # Essbase is not answering yet
+            pairs = []
+        for application, cube in pairs:
+            with _lock:
+                hints = _cache.get((application.lower(), cube.lower()))
+            if hints is None or time.time() - hints.read_at >= CACHE_SECONDS:
+                read_hints(application, cube, hints_dir, embed)
+        time.sleep(60)
