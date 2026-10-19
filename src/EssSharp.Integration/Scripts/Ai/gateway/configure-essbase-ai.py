@@ -35,12 +35,14 @@ SETTINGS = {
     "OCI_REGION": "us-chicago-1",
     "AI_CHAT_MODEL": "cohere.command-a-03-2025",
     "AI_EMBED_MODEL": "cohere.embed-english-v3.0",
-    # Space separated Application.Cube pairs, each waited for (a new stack imports them after it starts) and then skipped
-    # if it has still not appeared.
-    "AI_APPLICATIONS": "Sample.Basic",
+    # Space separated Application.Cube pairs to limit the setup to, each waited for (a new stack imports them after it
+    # starts) and then skipped if it has still not appeared. Empty for every cube on the server.
+    "AI_APPLICATIONS": "",
     "AI_APPLICATION_WAIT_MINUTES": "60",
-    # The question the warm-up asks once everything is configured.
+    # The question the warm-up asks once everything is configured, and the cube it asks (any configured cube when that
+    # one is not).
     "AI_WARMUP_QUERY": "Show actual sales by year.",
+    "AI_WARMUP_CUBE": "Sample.Basic",
     # How long to keep trying before giving up until the next start.
     "AI_SETUP_MINUTES": "60",
 }
@@ -58,11 +60,15 @@ AUTHORIZATION = "Basic " + base64.b64encode(("%s:%s" % (S["ESSBASE_USER"], S["ES
 
 def rest(method, path, body=None):
     """Sends a request to the Essbase REST API and returns the status and the body text."""
+    headers = {"Authorization": AUTHORIZATION, "Accept": "application/json"}
+    # A GET that names a content type is refused by some routes (ai/connection answers 415).
+    if method != "GET":
+        headers["Content-Type"] = "application/json"
     request = urllib.request.Request(
         S["ESSBASE_URL"].rstrip("/") + "/essbase/rest/v1/" + path,
         method=method,
         data=None if body is None else json.dumps(body).encode(),
-        headers={"Authorization": AUTHORIZATION, "Accept": "application/json", "Content-Type": "application/json"})
+        headers=headers)
     try:
         with urllib.request.urlopen(request, timeout=600) as response:
             return response.status, response.read().decode()
@@ -180,12 +186,11 @@ def main():
     if not wait_for("about", 30, "Essbase to answer"):
         raise RuntimeError("Essbase did not answer within 30 minutes")
 
-    pairs = [pair.partition(".")[::2] for pair in S["AI_APPLICATIONS"].split()]
-    if pairs:
-        application, cube = (urllib.parse.quote(part) for part in pairs[0])
-        if wait_for("applications/%s/databases/%s" % (application, cube), int(S["AI_APPLICATION_WAIT_MINUTES"]),
-                    "%s.%s" % pairs[0]):
-            wait_for_ai(application, cube)
+    listed = [tuple(pair.partition(".")[::2]) for pair in S["AI_APPLICATIONS"].split()]
+    first = wait_for_first_cube(listed)
+    if first:
+        # On a new stack, Essbase turns AI on by restarting once it has imported its cubes, so every cube is there after.
+        wait_for_ai(*(urllib.parse.quote(part) for part in first))
 
     print("==> Database connection %s" % DATABASE_CONNECTION, flush=True)
     if rest("GET", "connections/" + DATABASE_CONNECTION)[0] != 200:
@@ -215,35 +220,73 @@ def main():
             "Create the AI connection")
 
     ready = []
-    for pair in S["AI_APPLICATIONS"].split():
-        application, _, cube = pair.partition(".")
+    associated = {}  # application -> the cubes vectorized in this pass, for the applications this pass associated
+    for application, cube in listed or all_cubes():
+        pair = "%s.%s" % (application, cube)
         quoted = urllib.parse.quote(application)
-        if not wait_for("applications/%s/databases/%s" % (quoted, urllib.parse.quote(cube)),
-                        int(S["AI_APPLICATION_WAIT_MINUTES"]), pair):
+        if listed and not wait_for("applications/%s/databases/%s" % (quoted, urllib.parse.quote(cube)),
+                                   int(S["AI_APPLICATION_WAIT_MINUTES"]), pair):
             print("==> Skipping %s: it does not exist" % pair, flush=True)
             continue
-        status, body = rest("GET", "ai/connection?application=" + quoted)
-        if status == 200 and AI_CONNECTION in body:
-            print("==> %s is already associated with %s" % (application, AI_CONNECTION), flush=True)
-            ready.append((quoted, urllib.parse.quote(cube)))
-            continue
+        if application not in associated:
+            status, body = rest("GET", "ai/connection?application=" + quoted)
+            if status == 200 and AI_CONNECTION in body:
+                print("==> %s is already associated with %s" % (pair, AI_CONNECTION), flush=True)
+                ready.append((quoted, urllib.parse.quote(cube)))
+                continue
+            print("==> Associating %s with %s" % (application, AI_CONNECTION), flush=True)
+            require(rest("POST", "ai/applications/%s/connection/%s" % (quoted, AI_CONNECTION)),
+                    "Associate the AI connection with " + application)
+            associated[application] = []
 
-        print("==> Associating %s with %s and vectorizing %s" % (application, AI_CONNECTION, pair), flush=True)
-        require(rest("POST", "ai/applications/%s/connection/%s" % (quoted, AI_CONNECTION)),
-                "Associate the AI connection with " + application)
+        print("==> Vectorizing %s" % pair, flush=True)
         try:
             vectorize(quoted, urllib.parse.quote(cube))
-        except Exception:
-            # An application that is associated but not vectorized would be taken for a finished setup by the next run.
-            rest("DELETE", "ai/applications/%s/connection" % quoted)
-            raise
+        except Exception as error:
+            # One cube Essbase cannot vectorize does not hold up the others. An application left associated with none of
+            # its cubes vectorized would be taken for a finished setup by the next run, so it is released to try again.
+            print("==> Skipping %s: %s" % (pair, error), flush=True)
+            if not associated[application]:
+                rest("DELETE", "ai/applications/%s/connection" % quoted)
+                del associated[application]
+            continue
+        associated[application].append(cube)
         ready.append((quoted, urllib.parse.quote(cube)))
 
     # The applications share one AI connection, and so one pool, so one warm-up serves them all.
     if ready:
-        warm_up(*ready[0])
+        wanted = tuple(urllib.parse.quote(part) for part in S["AI_WARMUP_CUBE"].partition(".")[::2])
+        warm_up(*(wanted if wanted in ready else ready[0]))
 
     print("Essbase AI configured", flush=True)
+
+
+def all_cubes():
+    """Returns every cube on the server, as (application, cube) pairs."""
+    cubes = []
+    for application in json.loads(require(rest("GET", "applications"), "List the applications")).get("items", []):
+        quoted = urllib.parse.quote(application["name"])
+        databases = json.loads(require(rest("GET", "applications/%s/databases" % quoted),
+                                       "List the cubes of " + application["name"])).get("items", [])
+        cubes.extend((application["name"], database["name"]) for database in databases)
+    return cubes
+
+
+def wait_for_first_cube(listed):
+    """Waits for the first listed cube, or for any cube when none are listed, and returns it (or None)."""
+    minutes = int(S["AI_APPLICATION_WAIT_MINUTES"])
+    if listed:
+        application, cube = listed[0]
+        found = wait_for("applications/%s/databases/%s" % (urllib.parse.quote(application), urllib.parse.quote(cube)),
+                         minutes, "%s.%s" % listed[0])
+        return listed[0] if found else None
+    deadline = time.time() + minutes * 60
+    while True:
+        cubes = all_cubes()
+        if cubes or time.time() >= deadline:
+            return cubes[0] if cubes else None
+        print("    waiting for a cube", flush=True)
+        time.sleep(30)
 
 
 def wait_for_port(port, minutes, what):

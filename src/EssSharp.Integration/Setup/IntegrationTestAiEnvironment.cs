@@ -205,10 +205,10 @@ namespace EssSharp.Integration.Setup
                     }
                     else if (!created)
                     {
-                        // A running gateway configures Essbase when it starts, for the applications it was started with.
+                        // A running gateway configures Essbase when it starts: every cube, or only those in its AI_APPLICATIONS.
                         throw new InvalidOperationException(
                             $@"The AI query containers '{_gatewayName}' and '{_databaseName}' are running, but '{settings.ApplicationName}' has no AI connection. " +
-                            $@"Restart '{_gatewayName}' with '{settings.ApplicationName}.{settings.CubeName}' in AI_APPLICATIONS so that it configures it, or remove both containers so that the harness starts its own.");
+                            $@"Restart '{_gatewayName}' so that it configures it (with an empty AI_APPLICATIONS, or one that includes '{settings.ApplicationName}.{settings.CubeName}'), or remove both containers so that the harness starts its own.");
                     }
                 }
                 catch ( OperationCanceledException ) when ( timeout.IsCancellationRequested && !cancellationToken.IsCancellationRequested )
