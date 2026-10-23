@@ -27,6 +27,7 @@ import os
 import re
 import threading
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -908,21 +909,62 @@ def read_hints(application, cube, hints_dir, embed):
     return hints
 
 
+def ai_enabled(application, cube):
+    """Returns whether Essbase answers AI requests, asked of an existing cube. A new stack turns AI on by restarting its
+    server once its own setup (waitForAndSetUpEnvironment.sh), which imports the cubes, is done."""
+    request = urllib.request.Request(ESSBASE_URL + "/essbase/rest/v1/ai/applications/%s/databases/%s/listSampleQueries"
+                                     % (urllib.parse.quote(application), urllib.parse.quote(cube)),
+                                     method="POST", data=b"",
+                                     headers={"Authorization": AUTHORIZATION, "Accept": "application/json",
+                                              "Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(request, timeout=60) as response:
+            body = response.read().decode()
+    except urllib.error.HTTPError as error:
+        if error.code in (502, 503):  # restarting
+            return False
+        body = error.read().decode()
+    except (urllib.error.URLError, OSError):  # not answering
+        return False
+    return "Registry setting" not in body and "No registry is enabled" not in body
+
+
+def job_running(application):
+    """Returns whether an application has a job in progress (an import, a data load, a vectorize), or whether that
+    cannot be told."""
+    try:
+        jobs = rest("jobs?fullAppName=%s&systemjobs=false" % urllib.parse.quote(application)).get("items", [])
+    except Exception:
+        return True
+    return any(job.get("statusCode") == 100 for job in jobs)
+
+
 def keep_read(hints_dir, embed, cubes=None):
     """Reads the outline of each cube (every cube on the server, or the (application, cube) pairs given) that has not
     been read in CACHE_SECONDS, and goes on doing so every minute. Runs in a thread of its own, so that no question waits
-    for an outline; a cube that appears later (a new stack imports its cubes after it starts) is read when it does."""
+    for an outline; a cube that appears later (a new stack imports its cubes after it starts) is read when it does.
+
+    Reading an outline opens its cube, and Essbase refuses to build the dimensions of a cube anyone else has open
+    ("There are other active users on database"). So nothing is read before Essbase turns AI on, which on a new stack
+    comes after the setup imports its cubes, and a cube is skipped while its application runs a job, such as an import
+    from the imports folder."""
+    wanted = {(application.lower(), cube.lower()) for application, cube in cubes or []}
+    started = False
     while True:
         try:
-            pairs = cubes or [(application["name"], database["name"])
-                              for application in rest("applications").get("items", [])
-                              for database in rest("applications/%s/databases"
-                                                   % urllib.parse.quote(application["name"])).get("items", [])]
+            pairs = [(application["name"], database["name"])
+                     for application in rest("applications").get("items", [])
+                     for database in rest("applications/%s/databases"
+                                          % urllib.parse.quote(application["name"])).get("items", [])]
         except Exception:  # Essbase is not answering yet
             pairs = []
-        for application, cube in pairs:
+        if wanted:
+            pairs = [pair for pair in pairs if (pair[0].lower(), pair[1].lower()) in wanted]
+        # Essbase answers the AI check of a cube that does not exist as if AI were on, so only an existing one is asked.
+        started = started or bool(pairs) and ai_enabled(*pairs[0])
+        for application, cube in pairs if started else []:
             with _lock:
                 hints = _cache.get((application.lower(), cube.lower()))
-            if hints is None or time.time() - hints.read_at >= CACHE_SECONDS:
+            if (hints is None or time.time() - hints.read_at >= CACHE_SECONDS) and not job_running(application):
                 read_hints(application, cube, hints_dir, embed)
         time.sleep(60)
