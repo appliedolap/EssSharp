@@ -21,6 +21,7 @@ hints/<App>.<Cube>.json:
     outline has members for this year and last year rather than one year in its time dimension.
 """
 import base64
+import http.cookiejar
 import json
 import math
 import os
@@ -85,11 +86,37 @@ COUNT_PHRASE = re.compile(r"\b(?:top|bottom|the|first|last)?\s*(\d+|one|two|thre
                           r"([a-z]+(?:\s+[a-z]+)?)", re.I)
 
 
+_session = threading.local()
+
+
+def essbase_open(request, timeout=60):
+    """Opens a request to Essbase in this thread's session. A request without the session's cookie logs in to Essbase
+    again, and each such login stays on the server for an hour, so every request of a thread shares one session, which
+    end_session() closes."""
+    if getattr(_session, "opener", None) is None:
+        _session.opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
+    return _session.opener.open(request, timeout=timeout)
+
+
+def end_session():
+    """Logs this thread's session out of Essbase. A session that has read an outline holds its cube open, and Essbase
+    refuses to build the dimensions of a cube anyone else has open."""
+    opener, _session.opener = getattr(_session, "opener", None), None
+    if opener is None:
+        return
+    request = urllib.request.Request(ESSBASE_URL + "/essbase/rest/v1/session", method="DELETE",
+                                     headers={"Authorization": AUTHORIZATION})
+    try:
+        opener.open(request, timeout=60).close()
+    except Exception:  # the session ends on its own within the hour
+        pass
+
+
 def rest(path):
     """Returns the parsed JSON response to a GET on the Essbase REST API."""
     request = urllib.request.Request(ESSBASE_URL + "/essbase/rest/v1/" + path,
                                      headers={"Authorization": AUTHORIZATION, "Accept": "application/json"})
-    with urllib.request.urlopen(request, timeout=60) as response:
+    with essbase_open(request) as response:
         return json.loads(response.read().decode())
 
 
@@ -902,6 +929,8 @@ def read_hints(application, cube, hints_dir, embed):
     except Exception as error:  # the outline is help, not a requirement
         print("Could not read the outline of %s.%s: %r" % (application, cube, error), flush=True)
         return None
+    finally:
+        end_session()
     print("Read the outline of %s.%s in %.1f s: levels %s" % (application, cube, time.time() - started, hints.levels),
           flush=True)
     with _lock:
@@ -918,12 +947,15 @@ def ai_enabled(application, cube):
                                      headers={"Authorization": AUTHORIZATION, "Accept": "application/json",
                                               "Content-Type": "application/json"})
     try:
-        with urllib.request.urlopen(request, timeout=60) as response:
+        with essbase_open(request) as response:
             body = response.read().decode()
     except urllib.error.HTTPError as error:
         if error.code in (502, 503):  # restarting
             return False
-        body = error.read().decode()
+        try:
+            body = error.read().decode()
+        except OSError:
+            return False
     except (urllib.error.URLError, OSError):  # not answering
         return False
     return "Registry setting" not in body and "No registry is enabled" not in body
@@ -947,24 +979,36 @@ def keep_read(hints_dir, embed, cubes=None):
     Reading an outline opens its cube, and Essbase refuses to build the dimensions of a cube anyone else has open
     ("There are other active users on database"). So nothing is read before Essbase turns AI on, which on a new stack
     comes after the setup imports its cubes, and a cube is skipped while its application runs a job, such as an import
-    from the imports folder."""
+    from the imports folder. Each round logs its session out, so that no cube stays open between rounds."""
     wanted = {(application.lower(), cube.lower()) for application, cube in cubes or []}
     started = False
     while True:
         try:
-            pairs = [(application["name"], database["name"])
-                     for application in rest("applications").get("items", [])
-                     for database in rest("applications/%s/databases"
-                                          % urllib.parse.quote(application["name"])).get("items", [])]
-        except Exception:  # Essbase is not answering yet
-            pairs = []
-        if wanted:
-            pairs = [pair for pair in pairs if (pair[0].lower(), pair[1].lower()) in wanted]
-        # Essbase answers the AI check of a cube that does not exist as if AI were on, so only an existing one is asked.
-        started = started or bool(pairs) and ai_enabled(*pairs[0])
-        for application, cube in pairs if started else []:
-            with _lock:
-                hints = _cache.get((application.lower(), cube.lower()))
-            if (hints is None or time.time() - hints.read_at >= CACHE_SECONDS) and not job_running(application):
-                read_hints(application, cube, hints_dir, embed)
+            try:
+                pairs = [(application["name"], database["name"])
+                         for application in rest("applications").get("items", [])
+                         for database in rest("applications/%s/databases"
+                                              % urllib.parse.quote(application["name"])).get("items", [])]
+            except Exception:  # Essbase is not answering yet
+                pairs = None
+            if pairs is not None:
+                if wanted:
+                    pairs = [pair for pair in pairs if (pair[0].lower(), pair[1].lower()) in wanted]
+                # forget the cubes that are gone, so that their dimensions no longer count as known.
+                existing = {(application.lower(), cube.lower()) for application, cube in pairs}
+                with _lock:
+                    for key in [key for key in _cache if key not in existing]:
+                        del _cache[key]
+            # Essbase answers the AI check of a cube that does not exist as if AI were on, so only an existing one is
+            # asked.
+            started = started or bool(pairs) and ai_enabled(*pairs[0])
+            for application, cube in (pairs or []) if started else []:
+                with _lock:
+                    hints = _cache.get((application.lower(), cube.lower()))
+                if (hints is None or time.time() - hints.read_at >= CACHE_SECONDS) and not job_running(application):
+                    read_hints(application, cube, hints_dir, embed)
+        except Exception as error:  # a round that fails is tried again in a minute; the thread must not end
+            print("Could not check the outlines: %r" % (error,), flush=True)
+        finally:
+            end_session()
         time.sleep(60)
