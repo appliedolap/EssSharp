@@ -271,8 +271,10 @@ namespace EssSharp
                         }
                     }
                 }
-                // If typed values should be returned AND we have at least one data row AND at least one column type is not a string...
-                if ( options.ReturnTypedValues && lastSourceIndex >= 2 && columnTypes.Any(ct => !string.Equals("string", ct, StringComparison.OrdinalIgnoreCase)) )
+                // Otherwise, if typed values should be returned AND we have at least one data row AND at least one column type is not a string...
+                // (The prefixing pass above already typed the numeric columns when typed values were requested, and the string
+                //  columns it prefixed must not be read again, since that would drop the prefix.)
+                else if (options.ReturnTypedValues && lastSourceIndex >= 2 && columnTypes.Any(ct => !string.Equals("string", ct, StringComparison.OrdinalIgnoreCase)))
                 {
                     // Iterate over columns first, since we need to convert every value to the appropriate return type.
                     for ( int c = 0; c < secondDimLength; ++c )
