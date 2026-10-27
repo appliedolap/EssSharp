@@ -484,6 +484,11 @@ namespace EssSharp.Integration
                 Assert.Equal(expected: "double", actual: columnTypes[4], ignoreCase: true);
                 Assert.Equal(expected: "amount", actual: (string)report[0, 4], ignoreCase: true);
                 Assert.Equal(expected: 501.72, actual: (double)report[1, 4]);
+
+                // Assert that the first column, which Essbase types as a string, comes back as dates, as the driver wrote them (#68).
+                Assert.Equal(expected: "string", actual: columnTypes[0], ignoreCase: true);
+                Assert.Equal(expected: "transdate", actual: (string)report[0, 0], ignoreCase: true);
+                Assert.IsType<DateTime>(report[1, 0]);
             }
             // If the server version is 21.3 or lower, assert that a 405 (method not allowed) exception is thrown.
             else

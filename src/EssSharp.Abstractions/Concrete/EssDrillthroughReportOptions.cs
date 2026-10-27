@@ -19,7 +19,7 @@ namespace EssSharp
         /// <param name="aliasTable">(optional) The alias table that was used to produce the associated drillthrough ranges.</param>
         /// <param name="includeColumnHeaders">(optional) Whether to include column headers in the report.</param>
         /// <param name="includeMetadataOnly">(optional) Whether to include only column types and, optionally, column headers in the report.</param>
-        /// <param name="returnTypedValues">(optional) Whether report values should be converted to the column types indicated by the server.</param>
+        /// <param name="returnTypedValues">(optional) Whether report values should be converted to the column types indicated by the server, with a string column of dates in the JDBC driver's form returned as dates.</param>
         /// <param name="prefixStringValuesForExcel">(optional) Whether to prefix string values with an apostrophe (') for use in Excel.</param>
         public EssDrillthroughOptions( string aliasTable = null, bool includeColumnHeaders = true, bool includeMetadataOnly = false, bool returnTypedValues = false, bool prefixStringValuesForExcel = false )
         {

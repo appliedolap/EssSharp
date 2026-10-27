@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices.ComTypes;
@@ -341,6 +342,22 @@ namespace EssSharp
                         for ( int c = 0; c < secondDimLength; ++c )
                             report[ri, c] = source[si][c].Value<string>();
                 }
+
+                // If typed values should be returned AND we have at least one data row, return a string column that holds dates
+                // throughout as dates: Essbase types a date column as a string, and its text is the JDBC driver's, in the escape
+                // form the JDBC specification fixes, so the form is the only signal there is and it is the same on every server.
+                if (options.ReturnTypedValues && lastSourceIndex >= 2)
+                {
+                    int firstDataRow = options.IncludeColumnHeaders && firstSourceIndex < sourceDataIndex ? 1 : 0;
+
+                    for ( int c = 0; c < secondDimLength; ++c)
+                    {
+                        if (columnTypes[c]?.ToLowerInvariant() is "double" or "long")
+                            continue;
+
+                        ReadDateColumn(report, c, firstDataRow, options.PrefixStringValuesForExcel);
+                    }
+                }
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( IndexOutOfRangeException )
@@ -349,6 +366,109 @@ namespace EssSharp
             }
 
             return (report, columnTypes);
+        }
+
+        /// <summary>
+        /// Replaces a column's strings with <see cref="DateTime"/> values when every one of them is a date as a JDBC driver writes
+        /// one (see <see cref="TryReadDriverDate"/>). A column with any other text, or with no text at all, is left as it is, so a
+        /// column is always one type; an empty cell stays empty.
+        /// </summary>
+        /// <param name="report">The report.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="firstRow">The first data row, below the column headers when the report has them.</param>
+        /// <param name="prefixed">Whether string values carry the apostrophe prefix for Excel, which a date does not keep.</param>
+        private static void ReadDateColumn( object[,] report, int column, int firstRow, bool prefixed )
+        {
+            int rows   = report.GetLength(0);
+            var dates  = new DateTime?[rows];
+            var blanks = new bool[rows];
+            bool any   = false;
+
+            for ( int r = firstRow; r < rows; r++ )
+            {
+                if (report[r, column] is not string text)
+                    continue;
+
+                // The prefix for Excel goes on every string, an empty one included.
+                if (prefixed && text.Length > 0 && text[0] == '\'')
+                    text = text.Substring(1);
+
+                if (text.Length is 0)
+                {
+                    blanks[r] = true;
+                    continue;
+                }
+
+                if (!TryReadDriverDate(text, out var date))
+                    return;
+
+                dates[r] = date;
+                any      = true;
+            }
+
+            if (!any)
+                return;
+
+            // The column is dates: each date as a value, and an empty cell empty, with no prefix to show.
+            for ( int r = firstRow; r < rows; r++ )
+            {
+                if (dates[r] is { } date)
+                    report[r, column] = date;
+                else if (blanks[r])
+                    report[r, column] = null;
+            }
+        }
+
+        /// <summary>
+        /// Reads a date as a JDBC driver writes one with <c>getString</c>: the JDBC escape form <c>yyyy-MM-dd</c>, optionally
+        /// followed by <c> HH:mm:ss</c>, optionally followed by a fraction of a second of up to nine digits, of which the seven
+        /// that <see cref="DateTime"/> keeps are read. The date is read in the invariant culture with an unspecified kind.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="date">The date, when the text is one.</param>
+        private static bool TryReadDriverDate( string text, out DateTime date )
+        {
+            date = default;
+
+            int length = text?.Length ?? 0;
+
+            if (length is not (10 or 19) && (length < 21 || length > 29))
+                return false;
+
+            if (!AreDigits(text, 0, 4) || text[4] != '-' || !AreDigits(text, 5, 2) || text[7] != '-' || !AreDigits(text, 8, 2))
+                return false;
+
+            if (length is 10)
+                return DateTime.TryParseExact(text, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+            if (text[10] != ' ' || !AreDigits(text, 11, 2) || text[13] != ':' || !AreDigits(text, 14, 2) || text[16] != ':' || !AreDigits(text, 17, 2))
+                return false;
+
+            if (length is 19)
+                return DateTime.TryParseExact(text, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+            if (text[19] != '.' || !AreDigits(text, 20, length - 20))
+                return false;
+
+            // The fraction, cut to the seven digits a DateTime keeps.
+            return DateTime.TryParseExact(text.Substring(0, 20 + Math.Min(7, length - 20)), "yyyy-MM-dd HH:mm:ss.FFFFFFF", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+        }
+
+        /// <summary>
+        /// Whether the given run of characters is all digits.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="start">The first character of the run.</param>
+        /// <param name="count">The number of characters in the run.</param>
+        private static bool AreDigits( string text, int start, int count )
+        {
+            for ( int i = start; i < start + count; i++ )
+            {
+                if (text[i] < '0' || text[i] > '9')
+                    return false;
+            }
+
+            return true;
         }
 
         #endregion
