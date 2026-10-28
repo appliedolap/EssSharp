@@ -117,14 +117,24 @@ namespace EssSharp
                 throw new Exception("Unable to capture result metadata.");
 
             string[] pageDimensionMembers = [];
+            string[] pagePovMembers       = [];
 
-            // In 21.8, the page field was changed from a string array to an array of objects.
-            // If we have an array, select the dimension name from the page object or directly.
+            // In 21.8, the page field was changed from a string array to an array of objects, each with the page dimension's
+            // name and its point-of-view member (pov): the member the query's slicer chose, as the report's member identifier
+            // names it. The metadata lists the page dimensions by name; the report's page row shows their pov members, as the
+            // Essbase grid does, or their names when a response has no pov.
             if (metadata["page"] is { Type: JTokenType.Array } page)
-                pageDimensionMembers = page
-                    .Select(t => ( t.Type == JTokenType.Object ? t.Value<string>("name") : t)?.ToObject<string>())
-                    .Where (d => d is { Length: > 0 })
+            {
+                var pageDimensions = page
+                    .Select(t => t.Type == JTokenType.Object
+                        ? (Name: t.Value<string>("name"), Pov: t.Value<string>("pov"))
+                        : (Name: t.ToObject<string>(), Pov: null))
+                    .Where (d => d.Name is { Length: > 0 })
                     .ToArray();
+
+                pageDimensionMembers = pageDimensions.Select(d => d.Name).ToArray();
+                pagePovMembers       = pageDimensions.Select(d => d.Pov is { Length: > 0 } ? d.Pov : d.Name).ToArray();
+            }
 
             var columnDimensionMembers = metadata["column"]?.ToObject<string[]>() ?? new string[0];
             var rowDimensionMembers    = metadata["row"]   ?.ToObject<string[]>() ?? new string[0];
@@ -183,10 +193,10 @@ namespace EssSharp
                 // Use the the first column axis member index as the first page column index.
                 var pageColumnIndex = Math.Max(firstColumnAxisIndex - sourceFirstColumn, rowDimensionMembers.Any() && sourceFirstColumn is 0 ? 1 : 0);
 
-                // Write the page axis dimension members.
-                foreach ( var pageDimensionMember in pageDimensionMembers )
+                // Write the page dimensions' point-of-view members.
+                foreach ( var pagePovMember in pagePovMembers )
                 {
-                    report[0, pageColumnIndex] = pageDimensionMember;
+                    report[0, pageColumnIndex] = pagePovMember;
 
                     if ( preferences.CaptureCellTypes )
                         types[0, pageColumnIndex] = 0;
