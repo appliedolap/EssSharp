@@ -657,7 +657,8 @@ namespace EssSharp
 
         /// <summary>
         /// Returns the slice to send Essbase for the given operation: a copy of the grid's slice, with each cell typed by its
-        /// value and the caller's type, as <see cref="EssGridCellLayout"/> describes. A submit sends the data block's values,
+        /// value and the caller's type, as <see cref="EssGridCellLayout"/> describes, and text in the data block sent blank as
+        /// the comment it is. A submit sends the data block's values,
         /// a missing label as a missing value, and a blank data cell as missing when
         /// <see cref="EssGridPreferences.SendBlanksAsMissing"/> is set, and never writes a no-access cell or a number outside
         /// the data block. Any other operation sends every data cell blank, since Essbase reads the layout from the members.
@@ -686,6 +687,8 @@ namespace EssSharp
 
                 var (sentValue, sentType) = layout.Kinds[index] switch
                 {
+                    // Text in the data block is a comment, which Essbase cannot keep in a grid it is sent.
+                    EssGridCellLayout.Member when layout.IsComment(index) => (string.Empty, EssGridCellLayout.Blank),
                     EssGridCellLayout.Member => (value, EssGridCellLayout.Member),
 
                     // Only a submit sends data, and only to the data block's writable cells.
@@ -745,7 +748,7 @@ namespace EssSharp
 
             var layout = new EssGridCellLayout(range.Values ?? new List<string>(), range.Types, slice.Columns, Preferences);
 
-            return layout.Block is { } block ? new EssGridSelection(block.Top, block.Left) : new EssGridSelection(0, 0);
+            return layout.Start is { } start ? new EssGridSelection(start.Row, start.Column) : new EssGridSelection(0, 0);
         }
 
         /// <summary>

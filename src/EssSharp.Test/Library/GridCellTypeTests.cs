@@ -108,6 +108,46 @@ namespace EssSharp.Test.Library
             Assert.Equal("100", values[2]);
         }
 
+        [Fact(DisplayName = "GridCellTypeTests - RefreshAsync_WithANumberAmongTheColumnHeaderMembers_SendsItAsAMember")]
+        public async Task RefreshAsync_WithANumberAmongTheColumnHeaderMembers_SendsItAsAMember()
+        {
+            // Product 100 entered as a number beside the members of its header row, as Dodeca's Income Statement Variance by Product has.
+            using var stub = Stub();
+
+            var grid = await GridAsync(stub, new[]
+            {
+                new[] { "",      "100", "'100-10" },
+                new[] { "",      "Jan", "Jan"     },
+                new[] { "Sales", "",    ""        }
+            });
+
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
+
+            var (values, types, _) = Posted(stub);
+
+            Assert.Equal(new[] { "7", "0", "0", "7", "0", "0", "0", "7", "7" }, types);
+            Assert.Equal("100", values[1]);
+        }
+
+        [Fact(DisplayName = "GridCellTypeTests - RefreshAsync_WithANumberAmongTheRowHeaderMembers_SendsItAsAMember")]
+        public async Task RefreshAsync_WithANumberAmongTheRowHeaderMembers_SendsItAsAMember()
+        {
+            using var stub = Stub();
+
+            var grid = await GridAsync(stub, new[]
+            {
+                new[] { "",        "Jan" },
+                new[] { "'100-10", ""    },
+                new[] { "100",     ""    }
+            });
+
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
+
+            var (_, types, _) = Posted(stub);
+
+            Assert.Equal(new[] { "7", "0", "0", "7", "0", "7" }, types);
+        }
+
         [Fact(DisplayName = "GridCellTypeTests - RefreshAsync_WithAnUnquotedNumericMemberNameAndNoType_SendsItAsData")]
         public async Task RefreshAsync_WithAnUnquotedNumericMemberNameAndNoType_SendsItAsData()
         {
@@ -145,6 +185,27 @@ namespace EssSharp.Test.Library
             var (_, types, _) = Posted(stub);
 
             Assert.Equal(new[] { "7", "0", "0", "7", "0", "7" }, types);
+        }
+
+        [Fact(DisplayName = "GridCellTypeTests - RefreshAsync_WithTextBesideTheData_SendsItBlankAsAComment")]
+        public async Task RefreshAsync_WithTextBesideTheData_SendsItBlankAsAComment()
+        {
+            // A key string to the right of a template's still-empty data, beyond the column members; Essbase REST keeps no comments.
+            using var stub = Stub();
+
+            var grid = await GridAsync(stub, new[]
+            {
+                new[] { "",          "",         "Jan", "Feb", ""          },
+                new[] { "Cola",      "New York", "",    "",    "Key=Cola;" },
+                new[] { "Diet Cola", "New York", "",    "",    "Key=Diet;" }
+            });
+
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
+
+            var (values, types, _) = Posted(stub);
+
+            Assert.Equal(new[] { "7", "7", "0", "0", "7", "0", "0", "7", "7", "7", "0", "0", "7", "7", "7" }, types);
+            Assert.Equal(new[] { "", "", "Jan", "Feb", "", "Cola", "New York", "", "", "", "Diet Cola", "New York", "", "", "" }, values);
         }
 
         [Fact(DisplayName = "GridCellTypeTests - SubmitAsync_SendsTheDataBlockAndNeverWritesANoAccessCellOrANumberOutsideIt")]
