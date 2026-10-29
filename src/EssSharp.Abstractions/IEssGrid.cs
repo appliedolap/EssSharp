@@ -29,7 +29,8 @@ namespace EssSharp
         public List<EssGridDimension> Dimensions { get; set; }
 
         /// <summary>
-        /// Gets grid slice.
+        /// Gets or sets the grid's slice: its cells' values and types, as <see cref="EssGridRange"/> describes them. An
+        /// operation sends a copy of the slice with each cell typed, and replaces the slice with the grid Essbase returns.
         /// </summary>
         public EssGridSlice Slice { get; set; }
 

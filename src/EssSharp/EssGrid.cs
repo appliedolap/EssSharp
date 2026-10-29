@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -436,13 +437,10 @@ namespace EssSharp
                 // Get the default grid preferences.
                 Preferences ??= await Cube.Application.Server.GetDefaultGridPreferencesAsync();
                 
-                // Remove the data block for non-submit
-                PrepareSliceForOperation(action);
+                // Type each cell for Essbase, and clear the data block for any operation but a submit (#72).
+                var slice = PrepareSliceForOperation(action);
 
-                if ( action == GridOperation.ActionEnum.Submit )
-                    SetDirtyCells();
-
-                var body = GetGridOperation(action, gridSelection, newPosition);
+                var body = GetGridOperation(action, slice, gridSelection, newPosition);
 
                 if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, svParity: Preferences?.SmartViewParity, body: body, preferences: Preferences, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
                     throw new Exception($@"Could not get a grid via the {action} operation.");
@@ -536,9 +534,9 @@ namespace EssSharp
                         changes.DataChanges.Add(new EssDataChange()
                         {
                             // the grid's original value 
-                            OldValue = double.TryParse(oldValues[index], out var ov) ? ov : null,
+                            OldValue = double.TryParse(oldValues[index], NumberStyles.Float, CultureInfo.InvariantCulture, out var ov) ? ov : null,
                             // the grid's new value
-                            NewValue = double.TryParse(newValues[index], out var nv) ? nv : null,
+                            NewValue = double.TryParse(newValues[index], NumberStyles.Float, CultureInfo.InvariantCulture, out var nv) ? nv : null,
                             // Grid Dimension and Dimension member information
                             DataPoints = dimMemberDict//newGrid.Dimensions
                             .Select(gd => new EssDataPoint()
@@ -658,136 +656,107 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// 
+        /// Returns the slice to send Essbase for the given operation: a copy of the grid's slice, with each cell typed by its
+        /// value and the caller's type, as <see cref="EssGridCellLayout"/> describes. A submit sends the data block's values,
+        /// a missing label as a missing value, and a blank data cell as missing when
+        /// <see cref="EssGridPreferences.SendBlanksAsMissing"/> is set, and never writes a no-access cell or a number outside
+        /// the data block. Any other operation sends every data cell blank, since Essbase reads the layout from the members.
+        /// The grid's own slice is left as it is, so a failed operation leaves the grid unchanged (#72).
         /// </summary>
-        /// <param name="action" />
-        private void PrepareSliceForOperation( Action action )
+        /// <param name="action">The operation.</param>
+        private EssGridSlice PrepareSliceForOperation( Action action )
         {
-            if ( Slice.Data.Ranges.FirstOrDefault() is not null )
+            var slice = Slice;
+
+            if (slice?.Data?.Ranges?.FirstOrDefault() is not { } range)
+                return new EssGridSlice();
+
+            var count               = Math.Max(range.End + 1, 0);
+            var values              = Enumerable.Range(0, count).Select(index => index < (range.Values?.Count ?? 0) ? range.Values[index] ?? string.Empty : string.Empty).ToList();
+            var layout              = new EssGridCellLayout(values, range.Types, slice.Columns, Preferences);
+            var isSubmit            = action == Action.Submit;
+            var sendBlanksAsMissing = Preferences?.SendBlanksAsMissing is true;
+            var sentValues          = new List<string>(count);
+            var sentTypes           = new List<string>(count);
+            var dirtyCells          = new List<int>();
+
+            for (var index = 0; index < count; index++)
             {
-                string cellType;
-                string cellValue;
-                var cellValues = Slice?.Data?.Ranges[0]?.Values;
-                bool isUpdate = action == GridOperation.ActionEnum.Submit;
-                bool sendBlanksAsMissing = Preferences.SendBlanksAsMissing;
-                var types = new List<string>();
-                var values = new List<string>();
+                var value = values[index];
 
-                var dataBlockStartAddress = GetDataBlockStartAddress(Slice);
-
-                // Loop through entire grid and decide the type of each cell.
-                for ( int index = 0; index < (Slice.Data.Ranges[0].End + 1); index++ )
+                var (sentValue, sentType) = layout.Kinds[index] switch
                 {
-                    if ( (index % Slice.Columns) >= dataBlockStartAddress.startColumn && (index / Slice.Columns) >= dataBlockStartAddress.startRow )
-                    {
-                        if ( isUpdate )
-                        {
-                            cellValue = ( string.Equals(Preferences.MissingText, cellValues[index]) || string.Equals(Preferences.MissingText, cellValues[index]) ) ? string.Empty : cellValues[index];
+                    EssGridCellLayout.Member => (value, EssGridCellLayout.Member),
 
-                            // If string is empty...
-                            if ( string.IsNullOrEmpty(cellValue) )
-                                // and sendBlanksAsMissing is true, send type 2. If false, send type 7.
-                                cellType = sendBlanksAsMissing ? "2" : "7";
-                            else
-                                // Else send type "2"
-                                cellType = "2";
-                        }
-                        else
-                        {
-                            // Alwasys send empty string and type 7 if not an update
-                            cellValue = string.Empty;
-                            cellType = "7";
-                        }
-                    }
-                    // If cell is not in the data block and is empty, send empty string and type 7.
-                    else if ( string.IsNullOrEmpty(cellValues[index]) )
-                    {
-                        cellValue = string.Empty;
-                        cellType = "7";
-                    }
-                    // Else, get cell value at index and set type to 0.
-                    else
-                    {
-                        cellValue = cellValues[index];
-                        cellType = "0";
-                    }
+                    // Only a submit sends data, and only to the data block's writable cells.
+                    EssGridCellLayout.Data when !isSubmit || !layout.IsInDataBlock(index) || layout.IsNoWriteLabel(value) => (string.Empty, EssGridCellLayout.Blank),
+                    EssGridCellLayout.Data when layout.IsMissingLabel(value) => (string.Empty, EssGridCellLayout.Data),
+                    EssGridCellLayout.Data when string.IsNullOrWhiteSpace(value) => (string.Empty, sendBlanksAsMissing ? EssGridCellLayout.Data : EssGridCellLayout.Blank),
+                    EssGridCellLayout.Data => (value, EssGridCellLayout.Data),
 
-                    // Add type and Value to arrays.
-                    values.Add(cellValue);
-                    types.Add(cellType);
-                }
+                    // A blank cell inside the data block is a missing value when the preferences send blanks as missing.
+                    _ when isSubmit && sendBlanksAsMissing && layout.IsInDataBlock(index) => (string.Empty, EssGridCellLayout.Data),
+                    _ => (string.Empty, EssGridCellLayout.Blank)
+                };
 
-                // Update the slice's values and types
-                Slice.Data.Ranges[0].Values = values ?? new List<string>();
-                Slice.Data.Ranges[0].Types = types ?? new List<string>();
+                sentValues.Add(sentValue);
+                sentTypes.Add(sentType);
+
+                if (isSubmit && sentType == EssGridCellLayout.Data)
+                    dirtyCells.Add(index);
             }
-            else
+
+            var sentData = new EssGridSliceData();
+
+            sentData.Ranges.Add(new EssGridRange()
             {
-                Slice = new EssGridSlice();
-            }
+                DataFormats = range.DataFormats,
+                End         = range.End,
+                EnumIds     = range.EnumIds,
+                Filters     = range.Filters,
+                Start       = range.Start,
+                Statuses    = range.Statuses,
+                Texts       = range.Texts,
+                Types       = sentTypes,
+                Values      = sentValues
+            });
+
+            sentData.Ranges.AddRange(slice.Data.Ranges.Skip(1));
+
+            return new EssGridSlice()
+            {
+                Columns    = slice.Columns,
+                Data       = sentData,
+                DirtyCells = isSubmit ? dirtyCells : slice.DirtyCells,
+                DirtyTexts = slice.DirtyTexts,
+                Rows       = slice.Rows
+            };
         }
 
         /// <summary>
-        /// 
+        /// Returns the first row and column of the given slice's data block, from its cells' kinds as
+        /// <see cref="EssGridCellLayout"/> types them, or the grid's first cell when it has no data cell (#72).
         /// </summary>
-        /// <param name="slice"></param>
-        /// <returns></returns>
+        /// <param name="slice">The slice.</param>
         private EssGridSelection GetDataBlockStartAddress( EssGridSlice slice )
         {
-            List<string> cellValues = slice.Data.Ranges[0].Values;
-            int firstRowIndex = 0;
-            var dataGridFirstCell = new EssGridSelection(0, 0);
-            var cols = Slice.Columns;
-            // Find the row the data block starts
-            for ( int index = 0; index < (slice?.Data?.Ranges[0]?.End + 1); index += cols )
-            {
-                // Find the first non empty cell at the start of a row...
-                if ( /*index % Slice.Columns == 0 &&*/ !string.IsNullOrEmpty(cellValues[index]) )
-                {
-                    // Retain the index...
-                    firstRowIndex = index;
-                    break;
-                }
-            }
+            if (slice?.Data?.Ranges?.FirstOrDefault() is not { } range)
+                return new EssGridSelection(0, 0);
 
-            //var columnIndex = firstRowIndex - Slice.Columns < 0 ? 0 : firstRowIndex - Slice.Columns;
-            // Find the column the data block starts by moving 1 row above the start of the data grid.
-            for ( var index = firstRowIndex - 1; index > Slice.Data.Ranges[0].Start; index-- )
-            {
-                // search the row for the first non empty cell
-                if ( !string.IsNullOrEmpty(cellValues[index]) )
-                {
-                    // And set the data grid start row.
-                    dataGridFirstCell.startRow = (index / Slice.Columns) + 1;
+            var layout = new EssGridCellLayout(range.Values ?? new List<string>(), range.Types, slice.Columns, Preferences);
 
-                    var columnStartRow = (index / Slice.Columns) * Slice.Columns;
-                    var columnEndRow = columnStartRow + Slice.Columns;
-
-                    for (var i = columnStartRow; i < columnEndRow; i++ )
-                    {
-                        if ( !string.IsNullOrEmpty(cellValues[i]) )
-                        {
-                            // calculate the column index and set the value in the data grid start column.
-                            dataGridFirstCell.startColumn = i % Slice.Columns;
-
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-
-            return dataGridFirstCell;
+            return layout.Block is { } block ? new EssGridSelection(block.Top, block.Left) : new EssGridSelection(0, 0);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="action"></param>
+        /// <param name="slice">The slice to send, as <see cref="PrepareSliceForOperation"/> prepared it.</param>
         /// <param name="gridSelection"></param>
         /// <param name="newPosition"></param>
         /// <returns></returns>
-        private GridOperation GetGridOperation( GridOperation.ActionEnum action, List<EssGridSelection> gridSelection = null, EssGridSelection newPosition = null )
+        private GridOperation GetGridOperation( GridOperation.ActionEnum action, EssGridSlice slice, List<EssGridSelection> gridSelection = null, EssGridSelection newPosition = null )
         {
             try
             {
@@ -819,11 +788,11 @@ namespace EssSharp
 
                 return new GridOperation()
                 {
-                    Grid = _grid ?? new Grid() 
+                    Grid = new Grid()
                     {
-                        //Alias = this.Alias,
-                        Dimensions = this.Dimensions.ToModelBean(),
-                        Slice      = this.Slice.ToModelBean(),  
+                        Alias      = _grid?.Alias,
+                        Dimensions = _grid?.Dimensions ?? this.Dimensions.ToModelBean(),
+                        Slice      = slice.ToModelBean()
                     },
                     Action      = action,
                     Alias       = UseAliases ? this.Alias : "none",
@@ -847,26 +816,6 @@ namespace EssSharp
         /// <returns></returns>
         private int GetCoordinate(EssGridSelection gridSelection, int columnCount ) =>
             (gridSelection.startRow * columnCount) + gridSelection.startColumn;
-
-        /// <summary>
-        /// Add all data cells to DirtyCells list in grid object.
-        /// </summary>
-        private void SetDirtyCells()
-        {
-            if ( _grid is not null )
-                _grid.Slice.DirtyCells = new List<int>();
-            else
-                _essGridSlice.DirtyCells ??= new List<int>();
-
-            for ( int i = 0; i < Slice.Data.Ranges[0].Types.Count; i++ )
-            {
-                if ( Slice.Data.Ranges[0].Types[i] == "2" )
-                    if ( _grid is not null )
-                        _grid.Slice.DirtyCells.Add(i);
-                    else
-                        _essGridSlice.DirtyCells.Add(i);
-            }
-        }
 
         #endregion
     }
