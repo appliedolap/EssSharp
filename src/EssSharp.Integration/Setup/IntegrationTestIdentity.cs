@@ -267,8 +267,15 @@ namespace EssSharp.Integration.Setup
             async Task<string> ExecEssbase( string command ) =>
                 (await IntegrationTestFactory.ExecAsync(IntegrationTestFactory.EssbaseContainerId, new[] { "/bin/bash", "-lc", command }, cancellationToken)).stdout?.Trim();
 
-            void Write( string title, string text ) =>
-                sink?.OnMessage(new DiagnosticMessage($@"OAuth diagnosis - {title}:{Environment.NewLine}{(string.IsNullOrWhiteSpace(text) ? "(nothing)" : text)}"));
+            // Written to the console too: a test runner may not show diagnostic messages (the CI runner does not), and
+            // this is the only record of why a CI run's identity setup failed.
+            void Write( string title, string text )
+            {
+                var message = $@"OAuth diagnosis - {title}:{Environment.NewLine}{(string.IsNullOrWhiteSpace(text) ? "(nothing)" : text)}";
+
+                sink?.OnMessage(new DiagnosticMessage(message));
+                Console.WriteLine(message);
+            }
 
             try
             {
