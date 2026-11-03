@@ -38,6 +38,30 @@ namespace EssSharp.Integration
             // Assert that the REST API is available and returns a 401 status code (for unauthorized requests).
             Assert.Equal(HttpStatusCode.Unauthorized, statusCode);
 
+            // A new domain in Identity Cloud mode answers before the administrator's service role has settled: its first
+            // sign-in can be refused (403, "Service role [SERVICE_ADMINISTRATOR] assignment failed") and the next one
+            // succeeds. Wait for that too, so that the tests after this one start against a server that is ready.
+            if (IntegrationTestFactory.EssbaseInIdentityCloudMode is true)
+                await WaitForAdministratorSessionAsync();
+
+            // Local polling function for the administrator's first session.
+            async Task WaitForAdministratorSessionAsync()
+            {
+                using var client = new HttpClient() { BaseAddress = new Uri($"{connection.Server.TrimEnd('/')}/") };
+
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{connection.Username}:{connection.Password}")));
+
+                for (int i = 0; i < TimeSpan.FromMinutes(2).TotalSeconds / 5; i++)
+                {
+                    using var response = await client.GetAsync(@"rest/v1/session");
+
+                    if (response.IsSuccessStatusCode)
+                        return;
+
+                    await Task.Delay(TimeSpan.FromSeconds(5));
+                }
+            }
+
             // Local polling function.
             async Task<HttpStatusCode> PollForRestfulApiAndReturnStatusCodeAsync()
             {
