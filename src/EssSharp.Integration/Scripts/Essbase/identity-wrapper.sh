@@ -4,7 +4,7 @@
 # its identity provider, the way the scoop essbase stack does: waits for the gateway's certificate authority, makes
 # the image's own IDCS step trust it in the domain right after it runs (trustOciGateway.sh), drops the LOGOUT_URL the
 # step sets (it sends the web UI's login page to Oracle's Cloud Gate, which this environment has none of), and then
-# runs the image's normal domain creation and start.
+# runs the image's start command: the arguments, or createAndStartDomain.sh without any.
 set -u
 
 script_dir="$(dirname "$(readlink -f "$0")")"
@@ -19,4 +19,7 @@ if [ "${IDENTITY_PROVIDER^^}" = "IDCS" ] && [ -e "$script_dir/trustOciGateway.sh
   "$script_dir/trustOciGateway.sh"
 fi
 
+if [ $# -gt 0 ]; then
+  exec "$@"
+fi
 exec "$script_dir/createAndStartDomain.sh"

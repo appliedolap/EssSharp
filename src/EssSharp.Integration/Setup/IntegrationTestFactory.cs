@@ -167,6 +167,7 @@ namespace EssSharp.Integration.Setup
             if ( !string.IsNullOrEmpty(essbaseLocalContainer?.ID) )
             {
                 _essbaseContainerId = essbaseLocalContainer.ID;
+                await RecordIdentityProviderAsync(cancellationToken);
                 return;
             }
 
@@ -187,7 +188,6 @@ namespace EssSharp.Integration.Setup
                 .WithEnvironment("DATABASE_ADMIN_USERNAME", profile.DatabaseAdminUsername)            // "sa"
                 .WithEnvironment("DATABASE_ADMIN_PASSWORD", profile.DatabaseAdminPassword)
                 .WithEnvironment("DATABASE_WAIT_TIMEOUT", profile.DatabaseWaitTimeout)                // "240"
-                .WithCommand(profile.StartupCommand)                                                  // "/u01/container-scripts/createAndStartDomain.sh"
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" });
 
             // In the OAuth tests' Managed mode the domain is created in Identity Cloud mode, with the harness's OCI
@@ -199,11 +199,17 @@ namespace EssSharp.Integration.Setup
                 foreach (var variable in IntegrationTestOciGateway.EssbaseIdentityEnvironment(containerName))
                     builder = builder.WithEnvironment(variable.Key, variable.Value);
 
+                // The wrapper runs the image's start command (its argument) once the trust is in place. WithCommand
+                // appends to the command, so the command is set once, here or below, never in both places.
                 builder = builder
                     .WithVolumeMount(IntegrationTestOciGateway.CertificateVolumeName, IntegrationTestOciGateway.CertificateMountPath, AccessMode.ReadOnly)
                     .WithResourceMapping(IntegrationTestOciGateway.ReadScript("Essbase", null, "identity-wrapper.sh"), "/u01/container-scripts/identity-wrapper.sh", fileMode: ScriptMode)
                     .WithResourceMapping(IntegrationTestOciGateway.ReadScript("Essbase", null, "trustOciGateway.sh"), "/u01/container-scripts/trustOciGateway.sh", fileMode: ScriptMode)
-                    .WithCommand("/u01/container-scripts/identity-wrapper.sh");
+                    .WithCommand("/u01/container-scripts/identity-wrapper.sh", profile.StartupCommand);
+            }
+            else
+            {
+                builder = builder.WithCommand(profile.StartupCommand);                               // "/u01/container-scripts/createAndStartDomain.sh"
             }
 
             // Apply the profile environment last, so that a profile may override any variable set above.
@@ -219,6 +225,7 @@ namespace EssSharp.Integration.Setup
             if ( _essbaseTestContainer?.State is TestcontainersStates.Running )
             {
                 _essbaseContainerId = _essbaseTestContainer.Id;
+                await RecordIdentityProviderAsync(cancellationToken);
 
                 // Only the AI query tests depend on the registry settings, so when they are disabled there is nothing to
                 // force, and no reason to wait for the repository database or to restart Essbase.
@@ -512,6 +519,25 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         internal static IntegrationTestOAuthSettings OAuth { get; set; }
+
+        /// <summary>
+        /// Whether the Essbase container was created in Identity Cloud mode (<c>IDENTITY_PROVIDER=IDCS</c>), read from the
+        /// container when it was started or adopted; <see langword="null" /> before then.
+        /// </summary>
+        internal static bool? EssbaseInIdentityCloudMode { get; private set; }
+
+        /// <summary>
+        /// Records how the Essbase container was created: a container that was already running may not have been created
+        /// the way the settings ask for.
+        /// </summary>
+        private static async Task RecordIdentityProviderAsync( CancellationToken cancellationToken )
+        {
+            using var client = GetDockerClient();
+
+            var inspected = await client.Containers.InspectContainerAsync(_essbaseContainerId, cancellationToken);
+
+            EssbaseInIdentityCloudMode = inspected.Config?.Env?.Contains("IDENTITY_PROVIDER=IDCS") is true;
+        }
 
         /// <summary>
         /// The failure to force the Essbase registry settings, if there was one. The AI query environment reports it

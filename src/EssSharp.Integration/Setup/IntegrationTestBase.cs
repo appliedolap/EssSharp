@@ -284,18 +284,24 @@ namespace EssSharp.Integration.Setup
         protected static IntegrationTestOAuthSettings OAuthSettings => IntegrationTestFactory.OAuth;
 
         /// <summary>
-        /// Whether the server under test manages its own users and groups. A server that accepts an identity service's
-        /// tokens (<c>OAuth:Mode</c> Managed or External) is in Identity Cloud mode: it looks its users up in the identity
-        /// service, keeps only their roles, and refuses to create, list or delete users and groups.
+        /// Whether the server under test manages its own users and groups. A server in Identity Cloud mode looks its users
+        /// up in the identity service, keeps only their roles, and refuses to create, list or delete users and groups. In
+        /// <c>OAuth:Mode</c> External the server is taken to be one; in Managed mode it is one if the Essbase container was
+        /// created that way, which a container that was already running may not have been.
         /// </summary>
-        protected static bool ServerManagesUsers => IntegrationTestFactory.OAuth?.Mode is null or IntegrationTestOAuthMode.Disabled;
+        protected static bool ServerManagesUsers => IntegrationTestFactory.OAuth?.Mode switch
+        {
+            IntegrationTestOAuthMode.External => false,
+            IntegrationTestOAuthMode.Managed  => IntegrationTestFactory.EssbaseInIdentityCloudMode is not true,
+            _                                 => true
+        };
 
         /// <summary>
         /// Skips a test that creates, lists or deletes users or groups when the server does not manage them (see
         /// <see cref="ServerManagesUsers" />).
         /// </summary>
         protected static void SkipUnlessServerManagesUsers() =>
-            Assert.SkipUnless(ServerManagesUsers, "The server is in Identity Cloud mode (OAuth:Mode is Managed or External): its users and groups live in the identity service, and it has no user or group management.");
+            Assert.SkipUnless(ServerManagesUsers, "The server is in Identity Cloud mode: its users and groups live in the identity service, and it has no user or group management.");
 
         /// <summary />
         /// <param name="id" />
