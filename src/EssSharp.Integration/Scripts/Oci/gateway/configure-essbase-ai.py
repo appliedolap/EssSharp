@@ -289,12 +289,12 @@ def wait_for_first_cube(listed):
         time.sleep(30)
 
 
-def wait_for_port(port, minutes, what):
-    """Waits until something listens on the port of this network (the database's, shared with this service)."""
+def wait_for_port(host, port, minutes, what):
+    """Waits until something listens on the port of a host: the gateway itself, or the AI database beside it."""
     deadline = time.time() + minutes * 60
     while time.time() < deadline:
         try:
-            with socket.create_connection(("127.0.0.1", port), timeout=5):
+            with socket.create_connection((host, port), timeout=5):
                 return
         except OSError:
             time.sleep(5)
@@ -335,8 +335,8 @@ def run():
     while True:
         attempt += 1
         try:
-            wait_for_port(443, 5, "the AI gateway")
-            wait_for_port(1521, 30, "the AI database")
+            wait_for_port("127.0.0.1", 443, 5, "the AI gateway")
+            wait_for_port(S["AI_DATABASE_HOST"], 1521, 30, "the AI database")
             wait_for_models()
             main()
             return

@@ -16,7 +16,7 @@ namespace EssSharp.Integration
     /// <summary>
     /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />.
     /// </summary>
-    [CollectionDefinition(nameof(AiQueryTests), DisableParallelization = true), CollectionPriority(7)]
+    [CollectionDefinition(nameof(AiQueryTests), DisableParallelization = true), CollectionPriority(8)]
     public class AiQueryTestsCollection : ICollectionFixture<AiQueryCollectionFixture> { }
 
     /// <summary>

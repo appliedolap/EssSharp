@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""The AI gateway: answers the calls an Oracle AI Database makes for Essbase's AI features.
+"""The OCI gateway: stands in for the Oracle Cloud services the Essbase stack would otherwise need.
+
+Its identity role (identity.py) is an Identity Cloud tenant for the stack: in Identity Cloud mode Essbase takes it for its
+identity provider, so Essbase REST accepts the bearer tokens it issues (OAuth). Its AI role, below, answers the calls an
+Oracle AI Database makes for Essbase's AI features.
 
 Essbase's AI features do not call a model themselves. They ask an Oracle database to do it, through DBMS_CLOUD_AI (chat)
 and DBMS_VECTOR_CHAIN (embeddings), and the database calls
@@ -7,9 +11,9 @@ and DBMS_VECTOR_CHAIN (embeddings), and the database calls
     https://inference.generativeai.<region>.oci.oraclecloud.com/20231130/actions/chat
     https://inference.generativeai.<region>.oci.oraclecloud.com/20231130/actions/embedText
 
-The gateway runs as a sidecar of the database container, sharing its network, where a hosts entry sends that host name
-to 127.0.0.1. It presents a certificate for the host name from a local certificate authority that the database's SSL
-wallet trusts (generate-certs.sh issues both). Requests are signed by the database with the credential's key; the
+Both host names, the inference host and the identity tenant, are aliases of the gateway's container on the stack's
+network. It presents a certificate for them from a local certificate authority that the database's SSL wallet and
+Essbase's WebLogic trust (generate-certs.sh issues both). Requests are signed by the database with the credential's key; the
 gateway does not check the signature.
 
 It answers in one of two modes, chosen by AI_GATEWAY_MODE:
@@ -28,7 +32,7 @@ It answers in one of two modes, chosen by AI_GATEWAY_MODE:
 
 Settings a harness provides: AI_GATEWAY_MODE, AI_GATEWAY_CERTIFICATE and AI_GATEWAY_PRIVATE_KEY (the files
 generate-certs.sh writes), and, for configure-essbase-ai.py, ESSBASE_URL, ESSBASE_USER, ESSBASE_PASSWORD,
-AI_DATABASE_HOST, APP_USER, APP_USER_PASSWORD and AI_APPLICATIONS. start.sh runs all three and logs "Essbase AI
+AI_DATABASE_HOST, APP_USER, APP_USER_PASSWORD and AI_APPLICATIONS. start.sh runs everything and logs "Essbase AI
 configured" when Essbase is ready to answer questions.
 """
 import hashlib
@@ -44,10 +48,13 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import essbase_hints
+import identity
 
 PORT = int(os.environ.get("AI_GATEWAY_PORT", "443"))
-CERTIFICATE = os.environ.get("AI_GATEWAY_CERTIFICATE", "/opt/ai-certs/server.crt")
-PRIVATE_KEY = os.environ.get("AI_GATEWAY_PRIVATE_KEY", "/opt/ai-certs/server.key")
+# The identity service again in plain HTTP, for the host (Dodeca, EssSharp tests); 0 for none.
+HTTP_PORT = int(os.environ.get("OCI_IDENTITY_HTTP_PORT", "8080"))
+CERTIFICATE = os.environ.get("AI_GATEWAY_CERTIFICATE", "/opt/oci-certs/server.crt")
+PRIVATE_KEY = os.environ.get("AI_GATEWAY_PRIVATE_KEY", "/opt/oci-certs/server.key")
 
 # Real models, on the Ollama server AI_MODEL_URL names. The embedding model must produce DIMENSIONS values.
 MODEL_URL = (os.environ.get("AI_MODEL_URL") or "").rstrip("/")
@@ -163,7 +170,9 @@ def reply_to(body):
 
 
 def ollama(path, body):
-    """Sends a request to the Ollama server and returns the parsed response."""
+    """Sends a request to the Ollama server and returns the parsed response. The model is asked to stay loaded between
+    requests, since loading it again for each short request is what makes a 13-token embedding take a minute."""
+    body = dict(body, keep_alive=body.get("keep_alive", "30m"))
     request = urllib.request.Request(MODEL_URL + path, data=json.dumps(body).encode(),
                                      headers={"Content-Type": "application/json"})
     with urllib.request.urlopen(request, timeout=600) as response:
@@ -230,16 +239,22 @@ def chat_messages(chat):
     return messages
 
 
+# The settings the chat API has refused once, which are left out of every later request instead of costing each one a
+# refusal and a second request.
+REFUSED_SETTINGS = set()
+
+
 def openai_reply(chat):
     """Returns the reply of the OpenAI-compatible chat API to an OCI chat request.
 
-    Reasoning models refuse some sampling settings, so a request that is refused for a setting is sent again without it.
+    Reasoning models refuse some sampling settings, so a request that is refused for a setting is sent again without it,
+    and the setting is left out of every later request.
     """
     request = {"model": CHAT_MODEL, "messages": chat_messages(chat)}
     for source, target in (("temperature", "temperature"), ("topP", "top_p"), ("maxTokens", "max_completion_tokens")):
-        if chat.get(source) is not None:
+        if chat.get(source) is not None and target not in REFUSED_SETTINGS:
             request[target] = chat[source]
-    if CHAT_REASONING_EFFORT:
+    if CHAT_REASONING_EFFORT and "reasoning_effort" not in REFUSED_SETTINGS:
         request["reasoning_effort"] = CHAT_REASONING_EFFORT
     while True:
         http = urllib.request.Request(CHAT_URL + "/chat/completions", data=json.dumps(request).encode(),
@@ -254,7 +269,8 @@ def openai_reply(chat):
                             if key in request and "'%s'" % key in detail), None)
             if error.code != 400 or refused is None:
                 raise RuntimeError("HTTP %d from the chat API: %s" % (error.code, detail[:500]))
-            print("The chat API refused %s; sending again without it" % refused, flush=True)
+            print("The chat API refused %s; sending again without it, and leaving it out from now on" % refused, flush=True)
+            REFUSED_SETTINGS.add(refused)
             del request[refused]
     return ((answer.get("choices") or [{}])[0].get("message") or {}).get("content") or ""
 
@@ -379,12 +395,19 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         try:
             self.handle_request()
+        except (BrokenPipeError, ConnectionResetError) as error:  # the caller hung up, so there is nobody to answer
+            print("ERROR %s: %r (the caller closed the connection before the answer)" % (self.path, error), flush=True)
         except Exception as error:  # a request the gateway cannot make sense of must still get an answer
             print("ERROR %s: %r" % (self.path, error), flush=True)
-            self.send_json(500, {"code": "InternalServerError", "message": "The AI gateway could not handle the request: %r" % (error,)})
+            try:
+                self.send_json(500, {"code": "InternalServerError", "message": "The OCI gateway could not handle the request: %r" % (error,)})
+            except OSError as failure:  # the caller may have hung up meanwhile, and a TLS socket cannot take the answer then
+                print("ERROR %s: the answer could not be sent: %r" % (self.path, failure), flush=True)
 
     def handle_request(self):
         raw = self.read_body()
+        if identity.handles(self.path):
+            return identity.handle(self, self.command, raw)
         try:
             body = json.loads(raw or b"{}")
         except ValueError:
@@ -424,7 +447,7 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json(200, {"id": "embeddings", "modelId": model, "modelVersion": "3.0", "inputs": None,
                                         "embeddings": vectors})
 
-        self.send_json(404, {"code": "NotFound", "message": "The AI gateway has no handler for " + self.path})
+        self.send_json(404, {"code": "NotFound", "message": "The OCI gateway has no handler for " + self.path})
 
     do_GET = do_POST
 
@@ -437,10 +460,12 @@ if __name__ == "__main__":
     # Leave the TLS handshake to the thread that serves each connection (it happens on the first read), so that a client
     # that connects and never completes it cannot stop the server accepting everyone else.
     server.socket = context.wrap_socket(server.socket, server_side=True, do_handshake_on_connect=False)
-    print("AI gateway listening on %d, %s" % (PORT, "chat %s at %s, embeddings %s at %s"
-                                               % (CHAT_MODEL, CHAT_URL or MODEL_URL, EMBED_MODEL, MODEL_URL)
-                                               if MODE == "model" else "canned answers from " + ANSWERS_FILE),
-          flush=True)
+    if HTTP_PORT:
+        plain = ThreadingHTTPServer(("0.0.0.0", HTTP_PORT), Handler)
+        threading.Thread(target=plain.serve_forever, daemon=True).start()
+    print("OCI gateway listening on %d (https) and %d (http): identity for %s, AI with %s" % (
+        PORT, HTTP_PORT, identity.BASE, "chat %s at %s, embeddings %s at %s" % (CHAT_MODEL, CHAT_URL or MODEL_URL, EMBED_MODEL, MODEL_URL)
+        if MODE == "model" else "canned answers from " + ANSWERS_FILE), flush=True)
     sys.stdout.flush()
 
     # The outline hints are read ahead of the questions, and kept fresh, because a large outline takes longer to read

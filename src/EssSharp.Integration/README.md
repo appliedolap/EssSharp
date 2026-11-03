@@ -61,3 +61,50 @@ The AI tests are off by default so that a local run does not have to build the A
 workflow turns them on for every push, pull request and manual run (a manual run can clear the `ai_query_tests`
 input); it does so by writing an `appsettings.local.json` like the one above, in `.github/workflows/dotnet.yml`.
 Against an Essbase 21.x server (older than 21.8) the tests assert that the AI endpoints are refused.
+
+## OAuth tests
+
+`OAuthTests` send Essbase REST the bearer tokens of an identity service, which is how Dodeca and the library use OAuth
+against Essbase: a token signs the library in as the token's user, a forged or expired token is refused, and the
+service's users also sign in with their passwords. `OAuth:Mode` decides where the tokens come from:
+
+| Mode | What happens |
+|---|---|
+| `Disabled` (the committed default) | The OAuth tests are skipped. |
+| `Managed` | The harness provides the identity service: it starts its OCI gateway (`Scripts/Oci/gateway`, the same scripts the scoop `essbase` stack runs) before Essbase, with the identity tenant and the GenAI inference host as network aliases, and creates the Essbase container in Identity Cloud mode against it (`IDENTITY_PROVIDER=IDCS`, with `Scripts/Essbase/identity-wrapper.sh` adding the gateway's certificate authority to the domain's trust). The tokens come from the gateway's identity port, published on a random host port. A running Essbase container is reused; if it was not created in Identity Cloud mode, the tests are skipped with that reason. |
+| `External` | The Essbase server already accepts an identity service's tokens, and `OAuth:TokenUrl` names its token endpoint; for the scoop stack created with `essbase identity idcs`, `http://localhost:9005/oauth2/v1/token`. |
+
+The tests take their tokens with the password grant, unattended; Essbase gets the same bearer token whichever grant
+produced it. `OAuth:Users` names the identity users the tests sign in as and the Essbase roles the collection's fixture
+gives them first (`alice` as a service administrator, `bob` as a user with read access to `Sample`, `carol` with no
+role): the users of the harness's identity service (`Scripts/Oci/gateway/users.json`), which the scoop stack's
+identity service also knows by default.
+
+An Essbase server in Identity Cloud mode keeps no users of its own: it looks them up in the identity service and only
+keeps the roles, and refuses to create, list or delete users and groups. The create, clean and perform collections do
+those things, so until they skip them on such a server, `Managed` mode is for a run of the OAuth collection on its
+own, and the Build / Test workflow leaves the OAuth tests off.
+
+The collection depends only on the `Sample` application and the identity users, so it can be run on its own against a
+prepared server: `dotnet test --project src/EssSharp.Integration/EssSharp.Integration.csproj --filter-class EssSharp.Integration.OAuthTests`.
+
+To run them locally against the scoop stack, add a complete `OAuth` section to `appsettings.local.json`:
+
+```json
+{
+  "Settings": {
+    "OAuth": {
+      "Mode": "External",
+      "TokenUrl": "http://localhost:9005/oauth2/v1/token",
+      "ClientId": "esssharp",
+      "ClientSecret": "",
+      "Scope": "openid",
+      "Users": [
+        { "Username": "alice", "Password": "Password1", "Role": "ServiceAdministrator" },
+        { "Username": "bob", "Password": "Password1", "Role": "User", "Applications": { "Sample": "db_access" } },
+        { "Username": "carol", "Password": "Password1", "Role": "Unkown" }
+      ]
+    }
+  }
+}
+```

@@ -9,6 +9,11 @@ namespace EssSharp.Integration.Setup
         /// <summary />
         public IntegrationTestAiQuerySettings AiQuery { get; set; }
 
+        /// <summary>
+        /// Whether, and how, the server under test accepts OAuth bearer tokens, for the OAuth tests.
+        /// </summary>
+        public IntegrationTestOAuthSettings OAuth { get; set; }
+
         /// <summary />
         public IntegrationTestSettingsConnection[] Connections { get; set; }
 
@@ -47,6 +52,12 @@ namespace EssSharp.Integration.Setup
         /// Matches every image whose parsed version begins with this value, such as <c>26</c> or <c>21.7</c>.
         /// </summary>
         public string VersionPrefix { get; set; }
+
+        /// <summary>
+        /// The name to give the Essbase container, instead of the one derived from the image (<c>essbase-26-1</c> for
+        /// <c>appliedolap/essbase:26.1-latest</c>). A running container of the resulting name is reused.
+        /// </summary>
+        public string ContainerName { get; set; }
 
         /// <summary>
         /// The command used to start the Essbase container.
@@ -219,6 +230,95 @@ namespace EssSharp.Integration.Setup
         /// a valid database identifier, so it cannot contain a hyphen.
         /// </summary>
         public string ProfileName { get; set; }
+    }
+
+    /// <summary>
+    /// How the identity service whose bearer tokens the OAuth tests send to Essbase is provided.
+    /// </summary>
+    public enum IntegrationTestOAuthMode
+    {
+        /// <summary>
+        /// The harness provides it: the Essbase container is created in Identity Cloud mode with the harness's OCI
+        /// gateway as its Identity Cloud tenant, wired as the scoop <c>essbase</c> stack wires it, and the tests take
+        /// their tokens from that gateway. An Essbase container that was already running must have been created that
+        /// way (for example by the scoop stack with <c>essbase identity idcs</c>); otherwise the tests are skipped.
+        /// </summary>
+        Managed,
+
+        /// <summary>
+        /// The Essbase server already accepts the bearer tokens of an identity service, whose token endpoint
+        /// <see cref="IntegrationTestOAuthSettings.TokenUrl" /> names, and the harness leaves both alone.
+        /// </summary>
+        External,
+
+        /// <summary>
+        /// The OAuth tests are skipped.
+        /// </summary>
+        Disabled
+    }
+
+    /// <summary />
+    public class IntegrationTestOAuthSettings
+    {
+        /// <summary>
+        /// How the identity service is provided. Defaults to <see cref="IntegrationTestOAuthMode.Managed" />.
+        /// </summary>
+        public IntegrationTestOAuthMode Mode { get; set; } = IntegrationTestOAuthMode.Managed;
+
+        /// <summary>
+        /// The identity service's token endpoint, in <see cref="IntegrationTestOAuthMode.External" /> mode. In
+        /// <see cref="IntegrationTestOAuthMode.Managed" /> mode it is the harness's gateway's.
+        /// </summary>
+        public string TokenUrl { get; set; }
+
+        /// <summary>
+        /// The OAuth client the tests ask tokens as. The harness's identity service knows <c>esssharp</c> as a public
+        /// client, with no secret.
+        /// </summary>
+        public string ClientId { get; set; } = "esssharp";
+
+        /// <summary />
+        public string ClientSecret { get; set; } = "";
+
+        /// <summary>
+        /// The scope to ask for. The harness's identity service does not check it; a real Identity Cloud tenant wants
+        /// the Essbase scope of the tenant.
+        /// </summary>
+        public string Scope { get; set; } = "openid";
+
+        /// <summary>
+        /// The identity users the tests sign in as, with the Essbase role each is given before the tests run. One must
+        /// hold the ServiceAdministrator role and one the User role. They are the users of the harness's identity service
+        /// (<c>Scripts/Oci/gateway/users.json</c>), which the scoop stack's identity service also knows by default.
+        /// </summary>
+        public IntegrationTestOAuthUser[] Users { get; set; } =
+        {
+            new IntegrationTestOAuthUser() { Username = "alice", Password = "Password1", Role = EssServerRole.ServiceAdministrator },
+            new IntegrationTestOAuthUser() { Username = "bob",   Password = "Password1", Role = EssServerRole.User, Applications = new Dictionary<string, string>() { ["Sample"] = "db_access" } },
+            new IntegrationTestOAuthUser() { Username = "carol", Password = "Password1", Role = EssServerRole.Unkown }
+        };
+    }
+
+    /// <summary>
+    /// A user of the identity service, and the Essbase roles the tests expect it to hold.
+    /// </summary>
+    public class IntegrationTestOAuthUser
+    {
+        /// <summary />
+        public string Username { get; set; }
+
+        /// <summary />
+        public string Password { get; set; }
+
+        /// <summary>
+        /// The service role the user is given; <see cref="EssServerRole.Unkown" /> for a user that is given none.
+        /// </summary>
+        public EssServerRole Role { get; set; }
+
+        /// <summary>
+        /// The role the user is given on each named application, such as <c>db_access</c> on <c>Sample</c>.
+        /// </summary>
+        public Dictionary<string, string> Applications { get; set; }
     }
 
     /// <summary />

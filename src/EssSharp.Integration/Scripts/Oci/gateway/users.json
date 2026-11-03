@@ -1,0 +1,44 @@
+{
+  "about": [
+    "The users, groups and OAuth clients of the identity service the test harness runs (the OCI gateway's identity",
+    "role) when OAuth:Mode is Managed. Essbase, created in Identity Cloud mode, looks every user up here; the",
+    "administrator comes from the harness's connection settings and is added by the gateway.",
+    "poweruser and user are the accounts of the harness's PowerUser and User connections (appsettings.json), which",
+    "an Identity Cloud server cannot create itself. Each \"essbase\" entry is applied to Essbase by the gateway on",
+    "every start and every two minutes after: \"role\" is the service role, \"applications\" the roles per application;",
+    "an application that does not exist yet is skipped until it does.",
+    "alice (service administrator) and bob (user, Sample only) are the OAuth tests' users; carol holds no role."
+  ],
+  "clients": {
+    "essbase": {"name": "Essbase", "secret": "EssbaseIdentityClient1"},
+    "esssharp": {"name": "EssSharp", "secret": ""},
+    "dodeca": {"name": "Dodeca", "secret": ""}
+  },
+  "groups": ["essbase-admins", "essbase-users"],
+  "users": [
+    {
+      "userName": "poweruser", "password": "welcome2", "givenName": "Power", "familyName": "User", "email": "poweruser@example.com",
+      "groups": ["essbase-users"],
+      "essbase": {"role": "power_user"}
+    },
+    {
+      "userName": "user", "password": "welcome3", "givenName": "Plain", "familyName": "User", "email": "user@example.com",
+      "groups": ["essbase-users"],
+      "essbase": {"role": "user"}
+    },
+    {
+      "userName": "alice", "password": "Password1", "givenName": "Alice", "familyName": "Admin", "email": "alice@example.com",
+      "groups": ["essbase-admins"],
+      "essbase": {"role": "service_administrator"}
+    },
+    {
+      "userName": "bob", "password": "Password1", "givenName": "Bob", "familyName": "User", "email": "bob@example.com",
+      "groups": ["essbase-users"],
+      "essbase": {"role": "user", "applications": {"Sample": "db_access"}}
+    },
+    {
+      "userName": "carol", "password": "Password1", "givenName": "Carol", "familyName": "Guest", "email": "carol@example.com",
+      "groups": ["essbase-users"]
+    }
+  ]
+}

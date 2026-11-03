@@ -21,6 +21,8 @@
     <Content Include="Scripts\MsSql\setup.sql" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Scripts\MsSql\start-db.sh" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Scripts\Ai\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Scripts\Oci\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Scripts\Essbase\**\*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

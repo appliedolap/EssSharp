@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,15 +35,15 @@ namespace EssSharp.Integration.Setup
     /// deterministic answer, add an entry to <c>answers.json</c>.
     /// </para>
     /// <para>
-    /// The gateway runs as a sidecar of the database: it shares the database container's network, and the database maps
-    /// the inference host name to 127.0.0.1, so the database's calls reach the gateway and no other container sees the
-    /// override. The gateway issues a certificate for that host name from a certificate authority of its own, into a
-    /// volume the database reads; the database's startup hook (<c>Scripts/Ai/database/startdb</c>) trusts the authority
-    /// and prepares the database. The gateway then sets Essbase up as a user would - a connection to the database, chat
-    /// and vector credentials, a GenAI connection that uses them, an association between that connection and the
+    /// The gateway is the harness's OCI gateway (<see cref="IntegrationTestOciGateway" />), which the assembly fixture
+    /// starts before Essbase: the inference host name is an alias of its container on the test network, and it issues a
+    /// certificate for that name from a certificate authority of its own, into a volume the database reads; the
+    /// database's startup hook (<c>Scripts/Ai/database/startdb</c>) trusts the authority and prepares the database.
+    /// Once the database listens, the gateway sets Essbase up as a user would - a connection to the database, chat and
+    /// vector credentials, a GenAI connection that uses them, an association between that connection and the
     /// application, and the job that vectorizes the application's outline - and logs <c>Essbase AI configured</c>. The
-    /// application has to exist for the last two steps, so this runs when the AI tests start rather than with the
-    /// assembly fixture - by then the tests that create the sample applications have run.
+    /// application has to exist for the last two steps, so the database is started when the AI tests start rather
+    /// than with the assembly fixture - by then the tests that create the sample applications have run.
     /// </para>
     /// <para>
     /// The pair may already be running: a previous run that kept its environment, or a tool that starts it as persistent
@@ -76,21 +76,19 @@ namespace EssSharp.Integration.Setup
         /// vectorizing the outline take minutes on a cold start; a build that takes this long is stuck, and the tests
         /// should fail with a message instead of waiting for the limit of the job that runs them.
         /// </summary>
-        private static readonly TimeSpan EnvironmentTimeout = TimeSpan.FromMinutes(30);
+        internal static readonly TimeSpan EnvironmentTimeout = TimeSpan.FromMinutes(30);
 
         /// <summary>
         /// What the gateway logs once Essbase is ready to answer questions.
         /// </summary>
         private const string ConfiguredMessage = @"Essbase AI configured";
 
-        private const string GatewayDirectory  = @"/opt/ai-gateway";
         private const string ScriptDirectory   = @"/opt/ai-scripts";
         private const string StartDbDirectory  = @"/container-entrypoint-startdb.d";
-        private const string CertificateFolder = @"/opt/ai-certs";
 
         private const string DatabaseAdminPassword = @"AiSys_Passw0rd1";
-        private const string DatabaseUser          = @"ESSAI";
-        private const string DatabaseUserPassword  = @"AiUser_Passw0rd1";
+        internal const string DatabaseUser         = @"ESSAI";
+        internal const string DatabaseUserPassword = @"AiUser_Passw0rd1";
 
         // The names the gateway gives what it creates in Essbase (see configure-essbase-ai.py).
         private const string DatabaseConnectionName = @"ess_ai_database";
@@ -105,24 +103,17 @@ namespace EssSharp.Integration.Setup
         private const UnixFileModes ReadableMode   = UnixFileModes.UserRead | UnixFileModes.UserWrite | UnixFileModes.GroupRead | UnixFileModes.OtherRead;
         private const UnixFileModes ExecutableMode = ReadableMode | UnixFileModes.UserExecute | UnixFileModes.GroupExecute | UnixFileModes.OtherExecute;
 
-        // The gateway's files, copied into the gateway container.
-        private static readonly string[] GatewayFiles = { "gateway.py", "essbase_hints.py", "configure-essbase-ai.py", "generate-certs.sh", "start.sh", "answers.json" };
-
         private static readonly SemaphoreSlim _gate = new(1, 1);
 
         // The containers this run created, by ID. Only these are removed when the run ends.
         private static readonly List<string> _createdContainerIds = new();
 
         private static bool                           _ready;
-        private static bool                           _cannedAnswers;
         private static bool                           _keep;
         private static bool                           _ownsEssbaseConfiguration;
         private static bool                           _createdDatabaseConnection;
         private static bool                           _createdAiConnection;
-        private static string                         _gatewayName;
         private static string                         _databaseName;
-        private static string                         _volumeName;
-        private static IVolume                        _createdVolume;
         private static IntegrationTestAiQuerySettings _settings;
         private static IMessageSink                   _sink;
 
@@ -135,7 +126,13 @@ namespace EssSharp.Integration.Setup
         /// Essbase makes of them: always when the harness started the gateway, and when it adopted a running one that was
         /// started in canned mode.
         /// </summary>
-        public static bool ServesCannedAnswers => _cannedAnswers;
+        public static bool ServesCannedAnswers => IntegrationTestOciGateway.ServesCannedAnswers;
+
+        /// <summary>
+        /// The name of the AI database container for the given Essbase container profile: <c>&lt;essbase container&gt;-ai-database</c>.
+        /// </summary>
+        /// <param name="profile" />
+        public static string DatabaseContainerNameFor( EssbaseContainerProfile profile ) => $@"{profile.ContainerName}-ai-database";
 
         #endregion
 
@@ -175,9 +172,10 @@ namespace EssSharp.Integration.Setup
                 _settings     = settings;
                 _sink         = sink;
                 _keep         = settings.KeepEnvironment;
-                _gatewayName  = $@"{profile.ContainerName}-ai-gateway";
-                _databaseName = $@"{profile.ContainerName}-ai-database";
-                _volumeName   = $@"{profile.ContainerName}-ai-certs";
+                _databaseName = DatabaseContainerNameFor(profile);
+
+                if (!IntegrationTestOciGateway.IsRunning)
+                    throw new InvalidOperationException("The AI query environment needs the OCI gateway, which the assembly fixture starts in Managed mode.");
 
                 // Every wait below - the image pulls, the container wait strategies, the gateway's configuration of
                 // Essbase - takes this token, so one timeout bounds them all.
@@ -205,10 +203,10 @@ namespace EssSharp.Integration.Setup
                     }
                     else if (!created)
                     {
-                        // A running gateway configures Essbase when it starts: every cube, or only those in its AI_APPLICATIONS.
+                        // The gateway configures Essbase whenever the database comes up: every cube, or only those in its AI_APPLICATIONS.
                         throw new InvalidOperationException(
-                            $@"The AI query containers '{_gatewayName}' and '{_databaseName}' are running, but '{settings.ApplicationName}' has no AI connection. " +
-                            $@"Restart '{_gatewayName}' so that it configures it (with an empty AI_APPLICATIONS, or one that includes '{settings.ApplicationName}.{settings.CubeName}'), or remove both containers so that the harness starts its own.");
+                            $@"The AI database '{_databaseName}' and the OCI gateway '{IntegrationTestOciGateway.ContainerName}' are running, but '{settings.ApplicationName}' has no AI connection. " +
+                            $@"Restart '{IntegrationTestOciGateway.ContainerName}' so that it configures it (with an empty AI_APPLICATIONS, or one that includes '{settings.ApplicationName}.{settings.CubeName}'), or remove the database so that the harness starts its own.");
                     }
                 }
                 catch ( OperationCanceledException ) when ( timeout.IsCancellationRequested && !cancellationToken.IsCancellationRequested )
@@ -249,7 +247,7 @@ namespace EssSharp.Integration.Setup
         {
             try
             {
-                if (!_keep && _gatewayName is not null)
+                if (!_keep && _databaseName is not null)
                 {
                     // An Essbase container the run started goes away with its AI connection. One that was already running
                     // is left as it was found: only a connection the run itself created is taken out of it.
@@ -274,15 +272,11 @@ namespace EssSharp.Integration.Setup
             finally
             {
                 _createdContainerIds.Clear();
-                _createdVolume             = null;
                 _ownsEssbaseConfiguration  = false;
                 _createdDatabaseConnection = false;
                 _createdAiConnection       = false;
-                _gatewayName               = null;
                 _databaseName              = null;
-                _volumeName                = null;
                 _ready                     = false;
-                _cannedAnswers             = false;
             }
         }
         #endregion
@@ -290,100 +284,58 @@ namespace EssSharp.Integration.Setup
         #region Containers
 
         /// <summary>
-        /// Starts the database and the gateway beside it, unless both of them are already running.
+        /// Starts the AI database, unless it is already running. The gateway it calls is the shared OCI gateway.
         /// </summary>
         /// <remarks>
         /// Only a container of the harness's own (one that carries <see cref="EnvironmentLabelKey" />) is ever removed to
-        /// make room for a new one. If a container the harness did not create is in the way, because the pair is not
-        /// running, this throws before anything is touched.
+        /// make room for a new one. If a stopped container the harness did not create is in the way, this throws before
+        /// anything is touched.
         /// </remarks>
-        /// <returns><see langword="true" /> if the containers were started, <see langword="false" /> if they were already running.</returns>
-        /// <exception cref="InvalidOperationException">A container that the harness did not create exists, and the pair is not running.</exception>
+        /// <returns><see langword="true" /> if the database was started, <see langword="false" /> if it was already running.</returns>
+        /// <exception cref="InvalidOperationException">A container that the harness did not create exists and is not running.</exception>
         private static async Task<bool> StartContainersAsync( IntegrationTestAiQuerySettings settings, EssbaseContainerProfile profile, IMessageSink sink, CancellationToken cancellationToken )
         {
             using var client = IntegrationTestFactory.GetDockerClient();
 
             var all      = await client.Containers.ListContainersAsync(new ContainersListParameters() { All = true }, cancellationToken);
-            var gateway  = all.FirstOrDefault(container => container?.Names?.Any(name => string.Equals(_gatewayName, name?.Trim('/'), StringComparison.OrdinalIgnoreCase)) is true);
             var database = all.FirstOrDefault(container => container?.Names?.Any(name => string.Equals(_databaseName, name?.Trim('/'), StringComparison.OrdinalIgnoreCase)) is true);
 
-            // The two containers are a pair: the gateway shares the database's network, and the database trusts the
-            // certificate authority whose certificate the gateway presents. If both are running, somebody made that pair,
-            // and it can be used as it is. It is not this run's to remove, whoever started it: only the containers this
-            // run creates are removed when it ends.
-            if (IsRunning(gateway) && IsRunning(database))
+            // A running database was made by somebody, with the gateway it trusts; it can be used as it is and is not this
+            // run's to remove, whoever started it: only the containers this run creates are removed when it ends.
+            if (IsRunning(database))
             {
-                var inspected = await client.Containers.InspectContainerAsync(gateway.ID, cancellationToken);
-
-                _cannedAnswers = inspected.Config?.Env?.Contains("AI_GATEWAY_MODE=canned") is true;
-
-                Log(sink, $@"Using the running AI query containers '{_gatewayName}' and '{_databaseName}' ({(_cannedAnswers ? "canned answers" : "the gateway's models")}).");
+                Log(sink, $@"Using the running AI database '{_databaseName}' with the OCI gateway '{IntegrationTestOciGateway.ContainerName}' ({(IntegrationTestOciGateway.ServesCannedAnswers ? "canned answers" : "the gateway's models")}).");
                 return false;
             }
 
-            // Otherwise start again. A container left behind without its partner is no use, but it is only the harness's
-            // to remove if the harness made it. Check them all before removing any.
-            var strays  = new[] { gateway, database }.Where(container => container is not null).ToList();
-            var foreign = strays.Where(container => !IsHarnessContainer(container)).ToList();
-
-            if ( foreign.Count > 0 )
+            // A stopped database is only the harness's to remove if the harness made it.
+            if (database is not null)
             {
-                // Say what each of the two containers is, including one that does not exist, so that a lone container does
-                // not read as a contradiction.
-                var states = string.Join(", ", new[] { (Name: _gatewayName, Container: gateway), (Name: _databaseName, Container: database) }.Select(item => $@"'{item.Name}' ({item.Container?.State ?? "missing"})"));
-                var names  = string.Join(" and ", foreign.Select(container => $@"'{container.Names?.FirstOrDefault()?.Trim('/')}'"));
-                var verb   = foreign.Count == 1 ? "was" : "were";
+                if (!IsHarnessContainer(database))
+                    throw new InvalidOperationException(
+                        $@"The AI database '{_databaseName}' exists but is not running ({database.State}), and it was not created by the test harness, which will not remove or start containers it did not create. " +
+                        $@"Start it yourself, or remove it, or set AiQuery:Mode to External so that the harness leaves the AI environment to you.");
 
-                throw new InvalidOperationException(
-                    $@"The AI query containers are not both running: {states}. " +
-                    $@"{names} {verb} not created by the test harness, and the harness will not remove or start containers it did not create. " +
-                    $@"Start them yourself so that both are running, or remove them, or set AiQuery:Mode to External so that the harness leaves the AI environment to you.");
+                await client.Containers.RemoveContainerAsync(database.ID, new ContainerRemoveParameters() { Force = true }, cancellationToken);
             }
 
-            foreach ( var stray in strays )
-                await client.Containers.RemoveContainerAsync(stray.ID, new ContainerRemoveParameters() { Force = true }, cancellationToken);
-
-            // The certificates the gateway issues, shared with the database. A fresh volume for a fresh pair: a database
-            // trusts only the authority it was started with.
-            try
-            {
-                await client.Volumes.RemoveAsync(_volumeName, force: true, cancellationToken);
-            }
-            catch (Docker.DotNet.DockerApiException)
-            {
-                // There was no such volume, or it is in use by a container that is not the harness's; creating it says which.
-            }
-
-            _createdVolume = new VolumeBuilder()
-                .WithName(_volumeName)
-                .WithLabel(EnvironmentLabelKey, EnvironmentLabelValue)
-                .WithCleanUp(!_keep)
-                .Build();
-
-            await _createdVolume.CreateAsync(cancellationToken);
-
-            var host       = GetInferenceHost(settings);
-            var connection = IntegrationTestFactory.GetEssConnection();
-
-            // Unless the environment is to be kept, the test framework's cleanup removes the containers when the test
-            // process exits, even if the run never reached its own cleanup. The database is started first, because the
-            // gateway joins its network; its startup hook waits for the gateway's certificate authority, so its readiness
-            // is awaited after the gateway has started.
+            // Unless the environment is to be kept, the test framework's cleanup removes the container when the test
+            // process exits, even if the run never reached its own cleanup. The database resolves the inference host name
+            // to the OCI gateway through the gateway's network alias, and trusts the authority in the gateway's volume.
             var databaseContainer = new ContainerBuilder(settings.DatabaseImage)
                 .WithName(_databaseName)
                 .WithLabel(EnvironmentLabelKey, EnvironmentLabelValue)
                 .WithNetwork(profile.Network)
-                .WithExtraHost(host, "127.0.0.1")
                 .WithCleanUp(!_keep)
                 .WithEnvironment("ORACLE_PASSWORD", DatabaseAdminPassword)
                 .WithEnvironment("APP_USER", DatabaseUser)
                 .WithEnvironment("APP_USER_PASSWORD", DatabaseUserPassword)
-                .WithVolumeMount(_createdVolume, CertificateFolder, AccessMode.ReadOnly)
+                .WithVolumeMount(IntegrationTestOciGateway.CertificateVolumeName, IntegrationTestOciGateway.CertificateMountPath, AccessMode.ReadOnly)
                 .WithResourceMapping(ReadScript("database", "setup-ai-database.sh"), $@"{ScriptDirectory}/setup-ai-database.sh", fileMode: ExecutableMode)
                 .WithResourceMapping(ReadScript(Path.Combine("database", "startdb"), "01-essbase-ai.sh"), $@"{StartDbDirectory}/01-essbase-ai.sh", fileMode: ExecutableMode)
                 .Build() as DockerContainer;
 
-            Log(sink, $@"Starting the AI query containers '{_databaseName}' from '{settings.DatabaseImage}' and '{_gatewayName}' beside it (as {host}).");
+            Log(sink, $@"Starting the AI database '{_databaseName}' from '{settings.DatabaseImage}'.");
 
             try
             {
@@ -394,64 +346,26 @@ namespace EssSharp.Integration.Setup
                 RecordCreated(databaseContainer);
             }
 
-            var gatewayBuilder = new ContainerBuilder(settings.GatewayImage)
-                .WithName(_gatewayName)
-                .WithLabel(EnvironmentLabelKey, EnvironmentLabelValue)
-                .WithCleanUp(!_keep)
-                // The gateway shares the database's network: it answers on 127.0.0.1, where the database sends the
-                // inference host name, and reaches Essbase through the database's network.
-                .WithCreateParameterModifier(parameters => parameters.HostConfig.NetworkMode = $@"container:{databaseContainer.Id}")
-                .WithVolumeMount(_createdVolume, CertificateFolder)
-                .WithEnvironment("AI_GATEWAY_MODE", "canned")
-                .WithEnvironment("AI_GATEWAY_CERTIFICATE", $@"{CertificateFolder}/server.crt")
-                .WithEnvironment("AI_GATEWAY_PRIVATE_KEY", $@"{CertificateFolder}/server.key")
-                .WithEnvironment("OCI_REGION", settings.Region)
-                .WithEnvironment("ESSBASE_URL", $@"http://{profile.ContainerName}:{profile.ManagedServerPort}")
-                .WithEnvironment("ESSBASE_USER", connection.Username)
-                .WithEnvironment("ESSBASE_PASSWORD", connection.Password)
-                .WithEnvironment("AI_DATABASE_HOST", _databaseName)
-                .WithEnvironment("APP_USER", DatabaseUser)
-                .WithEnvironment("APP_USER_PASSWORD", DatabaseUserPassword)
-                .WithEnvironment("AI_CHAT_MODEL", settings.ChatModel)
-                .WithEnvironment("AI_EMBED_MODEL", settings.EmbedModel)
-                .WithEnvironment("AI_APPLICATIONS", $@"{settings.ApplicationName}.{settings.CubeName}")
-                .WithEnvironment("AI_SETUP_MINUTES", $@"{EnvironmentTimeout.TotalMinutes:0}")
-                .WithCommand("sh", $@"{GatewayDirectory}/start.sh")
-                .WithWaitStrategy(Wait.ForUnixContainer().UntilMessageIsLogged(ConfiguredMessage));
+            // The gateway configures Essbase AI once the database listens, and logs that it is configured only once the
+            // database is ready and the outline vectorized.
+            if (!await IntegrationTestOciGateway.WaitForLogAsync(ConfiguredMessage, EnvironmentTimeout, cancellationToken))
+                throw new TimeoutException($@"The OCI gateway did not report '{ConfiguredMessage}' within {EnvironmentTimeout.TotalMinutes:0} minutes.");
 
-            foreach (var file in GatewayFiles)
-                gatewayBuilder = gatewayBuilder.WithResourceMapping(ReadScript("gateway", file), $@"{GatewayDirectory}/{file}", fileMode: file.EndsWith(".sh", StringComparison.Ordinal) ? ExecutableMode : ReadableMode);
-
-            var gatewayContainer = gatewayBuilder.Build() as DockerContainer;
-
-            try
-            {
-                // The gateway logs that Essbase is configured only once the database is ready and the outline vectorized.
-                await gatewayContainer.StartAsync(cancellationToken);
-            }
-            finally
-            {
-                RecordCreated(gatewayContainer);
-            }
-
-            Log(sink, $@"The AI gateway configured '{settings.ApplicationName}.{settings.CubeName}'.");
-
-            _cannedAnswers = true;
+            Log(sink, $@"The OCI gateway configured '{settings.ApplicationName}.{settings.CubeName}'.");
 
             return true;
         }
 
         /// <summary>
-        /// Removes the containers this run created, and then the volume if this run created it.
+        /// Removes the containers this run created.
         /// </summary>
         /// <remarks>
         /// The containers are removed by ID, never by name: a container of the same name that somebody else started, or
-        /// that was already there when the run began, is not this run's to remove. The gateway goes first, because it
-        /// lives in the database's network.
+        /// that was already there when the run began, is not this run's to remove.
         /// </remarks>
         private static async Task RemoveContainersAsync()
         {
-            if (_createdContainerIds.Count == 0 && _createdVolume is null)
+            if (_createdContainerIds.Count == 0)
                 return;
 
             using var cancellation = new CancellationTokenSource(TimeSpan.FromMinutes(2));
@@ -469,21 +383,9 @@ namespace EssSharp.Integration.Setup
                 }
                 catch ( Exception error )
                 {
-                    // The other containers and the volume are still this run's to remove.
+                    // The other containers are still this run's to remove.
                     Log(_sink, $@"Unable to remove the AI query container '{id}': {error.Message}");
                 }
-            }
-
-            if (_createdVolume is null)
-                return;
-
-            try
-            {
-                await _createdVolume.DeleteAsync(cancellation.Token);
-            }
-            catch ( Exception )
-            {
-                // A volume that is already gone needs no removing.
             }
         }
 
@@ -519,26 +421,12 @@ namespace EssSharp.Integration.Setup
             string.Equals(container?.State, "running", StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
-        /// Returns the host name of the model service's inference endpoint for the configured region, which the database
-        /// sends to the gateway.
-        /// </summary>
-        /// <param name="settings" />
-        private static string GetInferenceHost( IntegrationTestAiQuerySettings settings ) =>
-            $@"inference.generativeai.{settings.Region}.oci.oraclecloud.com";
-
-        /// <summary>
         /// Reads one of the scripts copied to the output directory, with Unix line endings. A script checked out on
         /// Windows can carry Windows line endings, which a shell in a Linux container would reject.
         /// </summary>
         /// <param name="folder">The folder under <c>Scripts/Ai</c>.</param>
         /// <param name="name" />
-        private static byte[] ReadScript( string folder, string name )
-        {
-            var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var text      = File.ReadAllText(Path.Combine(directory, "Scripts", "Ai", folder, name));
-
-            return new UTF8Encoding(encoderShouldEmitUTF8Identifier: false).GetBytes(text.Replace("\r\n", "\n"));
-        }
+        private static byte[] ReadScript( string folder, string name ) => IntegrationTestOciGateway.ReadScript("Ai", folder, name);
 
         #endregion
 

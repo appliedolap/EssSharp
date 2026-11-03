@@ -48,7 +48,9 @@ jobs:
         df -h /
 
     # The AI query tests are off in appsettings.json, so that a local run does not have to build their environment, and
-    # this job turns them on with a local settings file (see src/EssSharp.Integration/README.md). The file replaces only
+    # this job turns them on with a local settings file (see src/EssSharp.Integration/README.md). The OAuth tests stay
+    # off here for now: their Managed mode creates the Essbase container in Identity Cloud mode, where the server has no
+    # user or group management, and the create, clean and perform collections do not yet skip those operations. The file replaces only
     # the AiQuery section; the rest of the settings still come from appsettings.json. It has to exist before the build,
     # which copies it next to the tests. The question is one the AI gateway has a canned answer for (Scripts/Ai/gateway/answers.json).
     - name: Enable the AI query tests

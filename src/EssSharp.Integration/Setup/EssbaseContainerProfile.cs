@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -262,6 +262,9 @@ namespace EssSharp.Integration.Setup
         /// <param name="setting" />
         private void Apply( IntegrationTestSettingsImage setting )
         {
+            if (setting.ContainerName is { Length: > 0 } containerName)
+                ContainerName = containerName;
+
             if ( setting.StartupCommand is { Length: > 0 } startupCommand )
                 StartupCommand = startupCommand;
 

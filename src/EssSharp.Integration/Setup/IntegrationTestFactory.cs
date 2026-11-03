@@ -53,6 +53,11 @@ namespace EssSharp.Integration.Setup
         /// </summary>
         private static readonly TimeSpan RestartTimeout = TimeSpan.FromMinutes(15);
 
+        /// <summary>
+        /// The Unix permissions of a script copied into a container: rwxr-xr-x.
+        /// </summary>
+        private const UnixFileModes ScriptMode = UnixFileModes.UserRead | UnixFileModes.UserWrite | UnixFileModes.UserExecute | UnixFileModes.GroupRead | UnixFileModes.GroupExecute | UnixFileModes.OtherRead | UnixFileModes.OtherExecute;
+
         #endregion
 
         #region Public Properties
@@ -184,6 +189,22 @@ namespace EssSharp.Integration.Setup
                 .WithEnvironment("DATABASE_WAIT_TIMEOUT", profile.DatabaseWaitTimeout)                // "240"
                 .WithCommand(profile.StartupCommand)                                                  // "/u01/container-scripts/createAndStartDomain.sh"
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" });
+
+            // In the OAuth tests' Managed mode the domain is created in Identity Cloud mode, with the harness's OCI
+            // gateway as its Identity Cloud tenant, the way the scoop essbase stack creates it: the gateway's certificate
+            // authority mounted for the domain to trust, and a wrapper that adds that trust right after the image's own
+            // IDCS step and then runs the image's normal start (Scripts/Essbase).
+            if (OAuth?.Mode is IntegrationTestOAuthMode.Managed)
+            {
+                foreach (var variable in IntegrationTestOciGateway.EssbaseIdentityEnvironment(containerName))
+                    builder = builder.WithEnvironment(variable.Key, variable.Value);
+
+                builder = builder
+                    .WithVolumeMount(IntegrationTestOciGateway.CertificateVolumeName, IntegrationTestOciGateway.CertificateMountPath, AccessMode.ReadOnly)
+                    .WithResourceMapping(IntegrationTestOciGateway.ReadScript("Essbase", null, "identity-wrapper.sh"), "/u01/container-scripts/identity-wrapper.sh", fileMode: ScriptMode)
+                    .WithResourceMapping(IntegrationTestOciGateway.ReadScript("Essbase", null, "trustOciGateway.sh"), "/u01/container-scripts/trustOciGateway.sh", fileMode: ScriptMode)
+                    .WithCommand("/u01/container-scripts/identity-wrapper.sh");
+            }
 
             // Apply the profile environment last, so that a profile may override any variable set above.
             foreach ( var variable in profile.Environment )
@@ -475,6 +496,9 @@ namespace EssSharp.Integration.Setup
             // Await the disposal of any created test containers.
             await Task.WhenAll(disposeDatabase, disposeEssbase);
 
+            // The OCI gateway goes last: Essbase and the AI database mount its certificate volume.
+            await IntegrationTestOciGateway.DisposeAsync();
+
             // The located sqlcmd belongs to the database container that was just disposed.
             _sqlcmdPath = null;
         }
@@ -485,6 +509,9 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         internal static IntegrationTestAiQuerySettings AiQuery { get; set; }
+
+        /// <summary />
+        internal static IntegrationTestOAuthSettings OAuth { get; set; }
 
         /// <summary>
         /// The failure to force the Essbase registry settings, if there was one. The AI query environment reports it

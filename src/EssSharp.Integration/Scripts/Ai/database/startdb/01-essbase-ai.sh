@@ -1,14 +1,14 @@
 #!/bin/bash
 #
 # Runs on every start of the Oracle AI Database, before the container reports as healthy: trusts the certificate
-# authority of the AI gateway beside it, then prepares the database for the Essbase AI features. Every
+# authority of the stack's OCI gateway, then prepares the database for the Essbase AI features. Every
 # step checks before it acts.
 
 set -euo pipefail
 
-CA_CERT=/opt/ai-certs/ca.crt
+CA_CERT=/opt/oci-certs/ca.crt
 
-# The AI gateway issues the certificate authority when it first starts. It may start well after the database (a test
+# The OCI gateway issues the certificate authority when it first starts. It may start well after the database (a test
 # harness starts it once the database is running, and may have to pull its image first), so wait up to ten minutes.
 for _ in $(seq 1 300); do
   [ -s "$CA_CERT" ] && break

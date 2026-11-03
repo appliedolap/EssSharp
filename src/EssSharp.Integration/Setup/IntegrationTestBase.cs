@@ -124,6 +124,9 @@ namespace EssSharp.Integration.Setup
             // Retain the optional settings used by tests that exercise a configured AI Query environment.
             IntegrationTestFactory.AiQuery = localSettings?.AiQuery ?? defaultSettings?.AiQuery ?? new IntegrationTestAiQuerySettings();
 
+            // Retain the settings that say whether, and how, the server accepts OAuth bearer tokens.
+            IntegrationTestFactory.OAuth = localSettings?.OAuth ?? defaultSettings?.OAuth ?? new IntegrationTestOAuthSettings();
+
             // If per-image settings could be obtained from either configuration, make them available to the factory.
             // These describe how a given image differs from the Oracle Essbase 21.x container contract, and are
             // resolved against the default image before either container is built.
@@ -135,6 +138,14 @@ namespace EssSharp.Integration.Setup
             // Resolve the image profile before the container tasks below start, since both of them read it and would
             // otherwise race to resolve it.
             _messageSink?.OnMessage(new DiagnosticMessage($@"Using Essbase image '{IntegrationTestFactory.EssbaseProfile.Image}' (version {IntegrationTestFactory.EssbaseProfile.Version?.ToString() ?? "unknown"})."));
+
+            // The OCI gateway stands in for the Oracle Cloud services the containers below may need: the identity provider
+            // an Essbase domain in Identity Cloud mode trusts at creation (OAuth Managed), and the GenAI endpoint the AI
+            // database calls (AI query Managed). It has to be up, with its certificate authority issued, before Essbase.
+            var identity = IntegrationTestFactory.OAuth?.Mode is IntegrationTestOAuthMode.Managed;
+
+            if (identity || IntegrationTestFactory.AiQuery?.Mode is IntegrationTestAiQueryMode.Managed)
+                await IntegrationTestOciGateway.EnsureAsync(IntegrationTestFactory.EssbaseProfile, identity, IntegrationTestFactory.AiQuery, _messageSink);
 
             // Do "global" initialization here; Only called once.
             var databaseTask = IntegrationTestFactory.InitializeDatabaseContainerAsync(_messageSink);
@@ -268,6 +279,9 @@ namespace EssSharp.Integration.Setup
 
         /// <summary />
         protected static IntegrationTestAiQuerySettings AiQuerySettings => IntegrationTestFactory.AiQuery;
+
+        /// <summary />
+        protected static IntegrationTestOAuthSettings OAuthSettings => IntegrationTestFactory.OAuth;
 
         /// <summary />
         /// <param name="id" />
