@@ -30,7 +30,7 @@ namespace EssSharp.Integration.Setup
     /// <c>DBMS_VECTOR_CHAIN</c> (embeddings), and the database calls the model service's inference endpoint for the
     /// region. In <see cref="IntegrationTestAiQueryMode.Managed" /> mode the harness therefore starts two containers
     /// beside the Essbase one: an Oracle AI Database, and the AI gateway, which answers those calls (see
-    /// <c>Scripts/Ai/gateway/gateway.py</c>). It answers in canned mode: fixed answers from <c>answers.json</c> and
+    /// <c>Scripts/Oci/gateway/gateway.py</c>). It answers in canned mode: fixed answers from <c>answers.json</c> and
     /// deterministic embeddings, so that the tests can assert what Essbase makes of them. To give a new test a
     /// deterministic answer, add an entry to <c>answers.json</c>.
     /// </para>

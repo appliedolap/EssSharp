@@ -66,6 +66,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"CreateServerObjectTests - 02 - Essbase_AfterClean_CanCreateGroup"), Priority(02)]
         public async Task Essbase_AfterClean_CanCreateGroups()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get an unconnected server.
             var server = GetEssServer();
 
@@ -91,6 +93,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CreateServerObjectTests - 03 - Essbase_AfterCubeCreation_CanCreateUser"), Priority(03)]
         public async Task Essbase_AfterCubeCreation_CanCreateUser()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get an unconnected server.
             var server = GetEssServer();
 
@@ -126,6 +130,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CreateServerObjectTests - 05 - Essbase_AfterCubeCreation_CanCreateGroupPermissions"), Priority(05)]
         public async Task Essbase_AfterCubeCreation_CanCreateGroupPermissions()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get an unconnected server.
             var server = GetEssServer();
 

@@ -335,6 +335,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 12 - Essbase_AfterPermissionCreation_CanGetListOfGroupPermissions"), Priority(12)]
         public async Task Essbase_AfterPermissionCreation_CanGetListOfPermissions()
         {
+            SkipUnlessServerManagesUsers();
+
             var server = GetEssServer();
 
             var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
@@ -362,6 +364,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 14 - Essbase_AfterGroupCreation_CanAddUser"), Priority(14)]
         public async Task Essbase_AfterGroupCreation_CanAddUser()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get an unconnected server.
             var server = GetEssServer();
 
@@ -379,6 +383,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 15 - Essbase_AfterGroupCreation_CanAddGroup"), Priority(15)]
         public async Task Essbase_AfterGroupCreation_CanAddGroup()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get an unconnected server.
             var server = GetEssServer();
 
@@ -394,6 +400,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 16 - Essbase_AfterGroupCreation_EditGroup"), Priority(16)]
         public async Task Essbase_AfterGroupCreation_EditGroup()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get an unconnected server.
             var server = GetEssServer();
 
@@ -408,6 +416,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 17 - Essbase_AfterGroupCreation_CanRemoveUser"), Priority(17)]
         public async Task Essbase_AfterGroupCreation_CanRemoveUser()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get an unconnected server.
             var server = GetEssServer();
 
@@ -425,6 +435,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 18 - Essbase_AfterGroupCreation_CanRemoveGroup"), Priority(18)]
         public async Task Essbase_AfterGroupCreation_CanRemoveGroup()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get an unconnected server.
             var server = GetEssServer();
 

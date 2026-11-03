@@ -10,6 +10,10 @@ on:
     branches: [ "develop" ]
   workflow_dispatch:
     inputs:
+      oauth_tests:
+        description: Run the whole suite against an Essbase created in Identity Cloud mode, with the harness's OCI gateway as its identity provider, and run the OAuth tests. User and group management tests are skipped on such a server.
+        type: boolean
+        default: false
       ai_query_tests:
         description: Run the AI query integration tests. They build their own test environment (an Oracle AI Database container and the AI gateway beside it), which adds about five minutes. Pushes and pull requests always run them; clear this to skip them in a manual run.
         type: boolean
@@ -48,27 +52,27 @@ jobs:
         df -h /
 
     # The AI query tests are off in appsettings.json, so that a local run does not have to build their environment, and
-    # this job turns them on with a local settings file (see src/EssSharp.Integration/README.md). The OAuth tests stay
-    # off here for now: their Managed mode creates the Essbase container in Identity Cloud mode, where the server has no
-    # user or group management, and the create, clean and perform collections do not yet skip those operations. The file replaces only
+    # this job turns them on with a local settings file (see src/EssSharp.Integration/README.md). The OAuth tests are off
+    # unless a manual run asks for them (oauth_tests): then the Essbase container is created in Identity Cloud mode, and
+    # the same file sets OAuth:Mode to Managed. The file replaces only
     # the AiQuery section; the rest of the settings still come from appsettings.json. It has to exist before the build,
-    # which copies it next to the tests. The question is one the AI gateway has a canned answer for (Scripts/Ai/gateway/answers.json).
-    - name: Enable the AI query tests
-      if: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests }}
+    # which copies it next to the tests. The question is one the AI gateway has a canned answer for (Scripts/Oci/gateway/answers.json).
+    - name: Enable the AI query and OAuth tests
+      if: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests || inputs.oauth_tests }}
+      env:
+        AI_QUERY_TESTS: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests }}
+        OAUTH_TESTS: ${{ github.event_name == 'workflow_dispatch' && inputs.oauth_tests }}
       run: |
-        cat > src/EssSharp.Integration/appsettings.local.json <<'EOF'
-        {
-          "Settings": {
-            "AiQuery": {
-              "Mode": "Managed",
-              "ApplicationName": "Sample",
-              "CubeName": "Basic",
-              "NaturalLanguageQuery": "Show actual sales by year.",
-              "ProfileName": ""
-            }
-          }
-        }
-        EOF
+        sections=()
+        if [ "$AI_QUERY_TESTS" = "true" ]; then
+          sections+=('"AiQuery": { "Mode": "Managed", "ApplicationName": "Sample", "CubeName": "Basic", "NaturalLanguageQuery": "Show actual sales by year.", "ProfileName": "" }')
+        fi
+        if [ "$OAUTH_TESTS" = "true" ]; then
+          sections+=('"OAuth": { "Mode": "Managed", "ClientId": "esssharp", "ClientSecret": "", "Scope": "openid", "Users": [ { "Username": "alice", "Password": "Password1", "Role": "ServiceAdministrator" }, { "Username": "bob", "Password": "Password1", "Role": "User", "Applications": { "Sample": "db_access" } }, { "Username": "carol", "Password": "Password1", "Role": "Unkown" } ] }')
+        fi
+        joined=$(IFS=,; echo "${sections[*]}")
+        echo "{ \"Settings\": { $joined } }" > src/EssSharp.Integration/appsettings.local.json
+        python3 -m json.tool src/EssSharp.Integration/appsettings.local.json
 
     # The full MAUI Workload with the required target platforms is not supported on Linux.
     # We build and test a solution filter without the MAUI client to workaround this issue.

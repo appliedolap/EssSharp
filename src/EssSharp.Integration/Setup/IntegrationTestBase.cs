@@ -283,6 +283,20 @@ namespace EssSharp.Integration.Setup
         /// <summary />
         protected static IntegrationTestOAuthSettings OAuthSettings => IntegrationTestFactory.OAuth;
 
+        /// <summary>
+        /// Whether the server under test manages its own users and groups. A server that accepts an identity service's
+        /// tokens (<c>OAuth:Mode</c> Managed or External) is in Identity Cloud mode: it looks its users up in the identity
+        /// service, keeps only their roles, and refuses to create, list or delete users and groups.
+        /// </summary>
+        protected static bool ServerManagesUsers => IntegrationTestFactory.OAuth?.Mode is null or IntegrationTestOAuthMode.Disabled;
+
+        /// <summary>
+        /// Skips a test that creates, lists or deletes users or groups when the server does not manage them (see
+        /// <see cref="ServerManagesUsers" />).
+        /// </summary>
+        protected static void SkipUnlessServerManagesUsers() =>
+            Assert.SkipUnless(ServerManagesUsers, "The server is in Identity Cloud mode (OAuth:Mode is Managed or External): its users and groups live in the identity service, and it has no user or group management.");
+
         /// <summary />
         /// <param name="id" />
         /// <param name="command" />

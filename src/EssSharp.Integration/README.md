@@ -30,10 +30,10 @@ Essbase AI connection:
 | Mode | What happens |
 |---|---|
 | `Disabled` (the committed default) | The AI query tests are skipped, and the harness does none of the AI setup. |
-| `Managed` | The harness builds the environment: an Oracle AI Database container and the AI gateway as its sidecar, answering in canned mode, with the Essbase registry forced and the gateway configuring the AI connection. It reuses a running pair (`<essbase container>-ai-gateway` and `-ai-database`, the names the scoop `essbase` stack uses), and removes only what it created when the run ends, unless `KeepEnvironment` is set. It pulls large images and takes several minutes on a cold start. |
+| `Managed` | The harness builds the environment: an Oracle AI Database container beside the harness's OCI gateway, which answers in canned mode, with the Essbase registry forced and the gateway configuring the AI connection. It reuses a running `<essbase container>-ai-database` and `-oci-gateway` (the names the scoop `essbase` stack uses), and removes only what it created when the run ends, unless `KeepEnvironment` is set. It pulls large images and takes several minutes on a cold start. |
 | `External` | The Essbase server already has an AI connection for the application (for example one backed by a real OCI tenancy); the harness leaves it alone. |
 
-The gateway (`Scripts/Ai/gateway`) answers each question from `answers.json`, keyed by a phrase of the question, and
+The gateway (`Scripts/Oci/gateway`) answers each question from `answers.json`, keyed by a phrase of the question, and
 embeds text deterministically, so the tests can assert what Essbase makes of an answer. To give a new test a
 deterministic answer, add an entry to `answers.json`. The gateway reads it on every request.
 
@@ -81,9 +81,14 @@ role): the users of the harness's identity service (`Scripts/Oci/gateway/users.j
 identity service also knows by default.
 
 An Essbase server in Identity Cloud mode keeps no users of its own: it looks them up in the identity service and only
-keeps the roles, and refuses to create, list or delete users and groups. The create, clean and perform collections do
-those things, so until they skip them on such a server, `Managed` mode is for a run of the OAuth collection on its
-own, and the Build / Test workflow leaves the OAuth tests off.
+keeps the roles, and refuses to create, list or delete users and groups. So when `OAuth:Mode` is `Managed` or
+`External`, the tests that create or remove users and every group test are skipped; application permissions still
+work and are still tested. The `PowerUser` and `User` connections must then name users of the identity service: the
+harness's (`Scripts/Oci/gateway/users.json`) has `poweruser` and `user` with the committed passwords, and gives them
+their service roles.
+
+The Build / Test workflow leaves the OAuth tests off on pushes and pull requests; a manual run with the `oauth_tests`
+input runs the whole suite with `OAuth:Mode` set to `Managed`.
 
 The collection depends only on the `Sample` application and the identity users, so it can be run on its own against a
 prepared server: `dotnet test --project src/EssSharp.Integration/EssSharp.Integration.csproj --filter-class EssSharp.Integration.OAuthTests`.

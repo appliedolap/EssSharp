@@ -159,6 +159,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CleanServerTests - 06 - Essbase_AfterConnection_CanRemoveUsers"), Priority(06)]
         public async Task Essbase_AfterConnection_CanRemoveUsers()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get a service admin connection.
             var connection = GetEssConnection();
 
@@ -235,6 +237,8 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CleanServerTests - 08 - Essbase_AfterConnection_CanRemoveGroups"), Priority(08)]
         public async Task Essbase_AfterConnection_CanRemoveGroups()
         {
+            SkipUnlessServerManagesUsers();
+
             // Get a service admin connection.
             var connection = GetEssConnection();
 

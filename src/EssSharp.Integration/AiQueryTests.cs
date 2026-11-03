@@ -90,7 +90,7 @@ namespace EssSharp.Integration
             Assert.Contains("FROM", result.Mdx, StringComparison.OrdinalIgnoreCase);
             Assert.False(string.IsNullOrWhiteSpace(result.RawResponse));
 
-            // The harness's AI gateway answers this question with a fixed point of view (Scripts/Ai/gateway/answers.json):
+            // The harness's AI gateway answers this question with a fixed point of view (Scripts/Oci/gateway/answers.json):
             // actual sales for each quarter of the year. Essbase looks up each of its words as a member and builds the MDX,
             // so the members show that the whole chain worked, not just that some MDX came back.
             if (IntegrationTestAiEnvironment.ServesCannedAnswers && GetNaturalLanguageQuery().Contains("actual sales by year", StringComparison.OrdinalIgnoreCase))
