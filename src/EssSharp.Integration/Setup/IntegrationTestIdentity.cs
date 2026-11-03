@@ -134,6 +134,10 @@ namespace EssSharp.Integration.Setup
                 if (response.StatusCode is HttpStatusCode.Unauthorized)
                 {
                     _reason = $@"The Essbase server at {server} does not accept the tokens of the identity service at {_tokenUrl} (HTTP 401): it was not created with that service as its identity provider.";
+
+                    if (settings.Mode is IntegrationTestOAuthMode.Managed)
+                        await LogManagedDiagnosisAsync(sink, cancellationToken);
+
                     return;
                 }
 
@@ -251,6 +255,41 @@ namespace EssSharp.Integration.Setup
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Writes what the harness can see of a Managed identity setup that Essbase does not accept: the Essbase
+        /// container's own account of its identity setup, whether the domain trusts the gateway's certificate authority,
+        /// the identity store's errors in the managed server's log, and the requests the gateway received. The containers
+        /// are removed when the run ends, so this is the only record a CI run keeps.
+        /// </summary>
+        private static async Task LogManagedDiagnosisAsync( IMessageSink sink, CancellationToken cancellationToken )
+        {
+            async Task<string> ExecEssbase( string command ) =>
+                (await IntegrationTestFactory.ExecAsync(IntegrationTestFactory.EssbaseContainerId, new[] { "/bin/bash", "-lc", command }, cancellationToken)).stdout?.Trim();
+
+            void Write( string title, string text ) =>
+                sink?.OnMessage(new DiagnosticMessage($@"OAuth diagnosis - {title}:{Environment.NewLine}{(string.IsNullOrWhiteSpace(text) ? "(nothing)" : text)}"));
+
+            try
+            {
+                using var client = IntegrationTestFactory.GetDockerClient();
+
+                var essbase = await client.Containers.InspectContainerAsync(IntegrationTestFactory.EssbaseContainerId, cancellationToken);
+                Write("Essbase identity environment", string.Join(Environment.NewLine, (essbase.Config?.Env ?? new List<string>()).Where(variable => variable.StartsWith("IDENTITY_PROVIDER=") || variable.StartsWith("IDCS_HOST=") || variable.StartsWith("IDCS_TENANT=") || variable.StartsWith("IDCS_PORT="))) + Environment.NewLine + "command: " + string.Join(" ", essbase.Config?.Cmd ?? new List<string>()));
+
+                var domain = @"/u01/config/domains/infra_domain";
+                Write("Essbase identity setup", await ExecEssbase($@"grep -n 'trustOciGateway' /u01/container-scripts/_createDomain.sh; grep -c LOGOUT_URL /u01/container-scripts/wlst/enable_idcs_mode.py; ls -la /opt/oci-certs; echo 'CA entries in the domain trust store:'; grep -c 'oci-gateway-ca' {domain}/config/fmwconfig/keystores.xml; grep -n -A12 'IdentityCloudServiceIntegrator' {domain}/config/config.xml | head -14"));
+                Write("name resolution from Essbase", await ExecEssbase($@"getent hosts {IntegrationTestOciGateway.TenantFor(IntegrationTestFactory.EssbaseProfile.ContainerName)}.identity.local"));
+                Write("identity store errors in the managed server log", await ExecEssbase($@"grep -h -i 'PKIX\|IGF-\|LIBOVD\|SCIMPlugin\|Error while finding\|idstore' {domain}/servers/essbase_server1/logs/essbase_server1.out 2>/dev/null | cut -c1-300 | tail -15"));
+
+                var gatewayLog = await IntegrationTestOciGateway.ReadLogAsync(cancellationToken);
+                Write("OCI gateway log (last 40 lines)", string.Join(Environment.NewLine, gatewayLog.Split('\n').Select(line => line.TrimEnd()).Where(line => line.Length > 0).TakeLast(40).Select(line => line.Length > 300 ? line.Substring(0, 300) : line)));
+            }
+            catch (Exception error) when (error is not OperationCanceledException)
+            {
+                sink?.OnMessage(new DiagnosticMessage($@"OAuth diagnosis failed: {error.Message}"));
+            }
+        }
 
         /// <summary>
         /// The discovery document next to a token endpoint: <c>/.well-known/openid-configuration</c> on the same host.
