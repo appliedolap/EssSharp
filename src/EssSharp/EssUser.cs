@@ -14,7 +14,7 @@ namespace EssSharp
         #region Private Data
 
         private readonly EssServer  _server;
-        private readonly UserBean _user;
+        private UserBean _user;
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace EssSharp
         /// <summary />
         internal EssUser( UserBean user, EssServer server ) : base(server?.Configuration, server?.Client)
         {
-            _user = user ?? 
+            _user = user ??
                 throw new ArgumentNullException(nameof(user), $"An API model {nameof(user)} is required to create an {nameof(EssUser)}.");
 
             _server = server ??
@@ -59,6 +59,9 @@ namespace EssSharp
         /// <inheritdoc />
         public List<string> GroupNames => _user?.Groups;
 
+        /// <inheritdoc />
+        public List<EssLink> Links => _user.Links.ToEssLinks();
+
         #endregion
 
         #region IEssUser Members
@@ -80,6 +83,128 @@ namespace EssSharp
             {
                 throw new Exception($@"Unable to delete user ""{Name}"". {e.Message}", e);
             }
+        }
+
+        /// <inheritdoc />
+        /// <returns>This <see cref="IEssUser"/>, as edited.</returns>
+        public IEssUser Edit( string fullName = null, string email = null, EssServerRole? role = null, string password = null ) =>
+            EditAsync(fullName, email, role, password).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>This <see cref="IEssUser"/>, as edited.</returns>
+        public async Task<IEssUser> EditAsync( string fullName = null, string email = null, EssServerRole? role = null, string password = null, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UsersApi>();
+
+            return await _server.RequestAsync(EssFeature.UserGroupManagement, async () =>
+            {
+                // The server replaces the whole user, and requires a role, so what the caller leaves out is read from the user as the server has it.
+                // A user sent without a name or email is left with none (the server stores the name as the text "null"). The server's answer for
+                // one user is not always as complete as its list of users (for the built-in admin user it leaves out the email), so a value it
+                // leaves empty is taken from this user as it was last read.
+                var current = await api.UsersGetAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) ?? _user;
+
+                var body = new UserBean()
+                {
+                    Name     = fullName ?? (string.IsNullOrEmpty(current.Name)  ? _user.Name  : current.Name),
+                    Email    = email    ?? (string.IsNullOrEmpty(current.Email) ? _user.Email : current.Email),
+                    Role     = role?.EssServerRoleToString() ?? (string.IsNullOrEmpty(current.Role) ? _user.Role : current.Role).ToServerRoleName(),
+                    Password = password
+                };
+
+                if ( await api.UsersPUTAsync(id: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )
+                    throw new Exception("The server did not return the edited user.");
+
+                // The server answers with the password it was given. Do not keep it.
+                user.Password = null;
+
+                _user = user;
+
+                return this as IEssUser;
+            }, $@"Unable to edit user ""{Name}"".", cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public EssApplicationProvisioning GetApplicationProvisioningReport( string applicationName ) =>
+            GetApplicationProvisioningReportAsync(applicationName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssApplicationProvisioning> GetApplicationProvisioningReportAsync( string applicationName, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UserProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.UserProvisioningReportGetReportForApplicationAsync(application: applicationName, userId: Name, expand: "all", cancellationToken: cancellationToken),
+                $@"Unable to get the provisioning report of user ""{Name}"" for application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssApplicationProvisioning();
+        }
+
+        /// <inheritdoc />
+        public List<EssApplicationProvisioning> GetApplicationProvisioningReports() =>
+            GetApplicationProvisioningReportsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<EssApplicationProvisioning>> GetApplicationProvisioningReportsAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UserProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.UserProvisioningReportGetReportForAllApplicationsAsync(userId: Name, expand: "all", cancellationToken: cancellationToken),
+                $@"Unable to get the provisioning report of user ""{Name}"" for the applications.", cancellationToken).ConfigureAwait(false)).ToEssApplicationProvisionings();
+        }
+
+        /// <inheritdoc />
+        public EssProvisioningReport GetProvisioningReport() => GetProvisioningReportAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UserProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.UserProvisioningReportGetFullReportAsync(userId: Name, expand: "all", cancellationToken: cancellationToken),
+                $@"Unable to get the provisioning report of user ""{Name}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisioningReport();
+        }
+
+        /// <inheritdoc />
+        public List<EssDatabaseProvisioning> GetProvisionedFilters( string applicationName ) =>
+            GetProvisionedFiltersAsync(applicationName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<EssDatabaseProvisioning>> GetProvisionedFiltersAsync( string applicationName, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UserProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.UserProvisioningReportGetFiltersAsync(application: applicationName, userId: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the filters of user ""{Name}"" in application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssDatabaseProvisionings();
+        }
+
+        /// <inheritdoc />
+        public List<EssProvisionedItem> GetProvisionedRoles( string applicationName ) =>
+            GetProvisionedRolesAsync(applicationName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<EssProvisionedItem>> GetProvisionedRolesAsync( string applicationName, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UserProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.UserProvisioningReportGetRolesAsync(application: applicationName, userId: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the roles of user ""{Name}"" in application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisionedItems();
+        }
+
+        /// <inheritdoc />
+        public List<EssDatabaseProvisioning> GetProvisionedScripts( string applicationName ) =>
+            GetProvisionedScriptsAsync(applicationName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<EssDatabaseProvisioning>> GetProvisionedScriptsAsync( string applicationName, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UserProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.UserProvisioningReportGetScriptsAsync(application: applicationName, userId: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the scripts of user ""{Name}"" in application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssDatabaseProvisionings();
         }
 
         #endregion

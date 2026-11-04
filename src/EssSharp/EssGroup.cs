@@ -55,6 +55,9 @@ namespace EssSharp
         /// <inheritdoc />
         public EssServerRole Role => _group.Role.ToEssServerRole();
 
+        /// <inheritdoc />
+        public List<EssLink> Links => _group.Links.ToEssLinks();
+
         #endregion
 
         #region IEssGroup Members
@@ -119,10 +122,13 @@ namespace EssSharp
             {
                 var api = GetApi<GroupsApi>();
 
+                // The server replaces the whole group, and requires a role, so what the caller leaves out is read from the group as the server has it.
+                var current = await api.GroupsGetAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) ?? _group;
+
                 var body = new GroupBean()
                 {
-                    Role = role?.EssServerRoleToString() ?? null,
-                    Description = description
+                    Role = role?.EssServerRoleToString() ?? current.Role.ToServerRoleName(),
+                    Description = description ?? current.Description
                 };
 
                 if ( await api.GroupsEditAsync(id: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groupBean )
@@ -240,6 +246,110 @@ namespace EssSharp
             {
                 throw new Exception($@"Unable to remove user(s) from group ""{Name}"" groups. {e.Message}", e);
             }
+        }
+
+        /// <inheritdoc />
+        public EssGroupMembers GetMembers() => GetMembersAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssGroupMembers> GetMembersAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupsApi>();
+
+            // The server's own answer to a request for the members of a group is two links, with paths that do not work,
+            // so ask for each kind of member.
+            var users = await _server.RequestAsync(EssFeature.UserGroupManagement,
+                () => api.GroupsGetUserMembersOfGroupAsync(id: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the members of group ""{Name}"".", cancellationToken).ConfigureAwait(false);
+
+            var groups = await _server.RequestAsync(EssFeature.UserGroupManagement,
+                () => api.GroupsGetGroupMembersOfGroupAsync(id: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the members of group ""{Name}"".", cancellationToken).ConfigureAwait(false);
+
+            return new EssGroupMembers(users?.ToEssSharpList(_server), groups?.ToEssSharpList(_server));
+        }
+
+        /// <inheritdoc />
+        public EssApplicationProvisioning GetApplicationProvisioningReport( string applicationName ) =>
+            GetApplicationProvisioningReportAsync(applicationName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssApplicationProvisioning> GetApplicationProvisioningReportAsync( string applicationName, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.GroupProvisioningReportGetReportForApplicationAsync(application: applicationName, groupId: Name, expand: "all", cancellationToken: cancellationToken),
+                $@"Unable to get the provisioning report of group ""{Name}"" for application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssApplicationProvisioning();
+        }
+
+        /// <inheritdoc />
+        public List<EssApplicationProvisioning> GetApplicationProvisioningReports() =>
+            GetApplicationProvisioningReportsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<EssApplicationProvisioning>> GetApplicationProvisioningReportsAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.GroupProvisioningReportGetReportForAllApplicationsAsync(groupId: Name, expand: "all", cancellationToken: cancellationToken),
+                $@"Unable to get the provisioning report of group ""{Name}"" for the applications.", cancellationToken).ConfigureAwait(false)).ToEssApplicationProvisionings();
+        }
+
+        /// <inheritdoc />
+        public EssProvisioningReport GetProvisioningReport() => GetProvisioningReportAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.GroupProvisioningReportGetFullReportAsync(groupId: Name, expand: "all", cancellationToken: cancellationToken),
+                $@"Unable to get the provisioning report of group ""{Name}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisioningReport();
+        }
+
+        /// <inheritdoc />
+        public List<EssDatabaseProvisioning> GetProvisionedFilters( string applicationName ) =>
+            GetProvisionedFiltersAsync(applicationName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<EssDatabaseProvisioning>> GetProvisionedFiltersAsync( string applicationName, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.GroupProvisioningReportGetFiltersAsync(application: applicationName, groupId: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the filters of group ""{Name}"" in application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssDatabaseProvisionings();
+        }
+
+        /// <inheritdoc />
+        public List<EssProvisionedItem> GetProvisionedRoles( string applicationName ) =>
+            GetProvisionedRolesAsync(applicationName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<EssProvisionedItem>> GetProvisionedRolesAsync( string applicationName, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.GroupProvisioningReportGetRolesAsync(application: applicationName, groupId: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the roles of group ""{Name}"" in application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisionedItems();
+        }
+
+        /// <inheritdoc />
+        public List<EssDatabaseProvisioning> GetProvisionedScripts( string applicationName ) =>
+            GetProvisionedScriptsAsync(applicationName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<List<EssDatabaseProvisioning>> GetProvisionedScriptsAsync( string applicationName, CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.GroupProvisioningReportGetScriptsAsync(application: applicationName, groupId: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the scripts of group ""{Name}"" in application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssDatabaseProvisionings();
         }
 
         #endregion

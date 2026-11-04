@@ -84,7 +84,18 @@ namespace EssSharp
             [EssFeature.PasswordReset] = new FeatureDefinition(
                 description: "Password reset",
                 operations:  new[] { "PUT /session/password" },
-                flags:       new[] { new[] { "resetPasswordSupported" } })
+                flags:       new[] { new[] { "resetPasswordSupported" } }),
+
+            // A server in EPM Shared Services or Identity Cloud mode holds no users or groups of its own. The instance details report no
+            // flag for the security mode, and what such a server answers with is not known, so only a specification that does not
+            // declare the operations rules the feature out.
+            [EssFeature.UserGroupManagement] = new FeatureDefinition(
+                description: "User and group management",
+                operations:  new[] { "GET /users", "POST /users", "PUT /users/{}", "POST /users/actions/delete", "GET /groups", "POST /groups", "POST /groups/actions/delete" }),
+
+            [EssFeature.ProvisioningReports] = new FeatureDefinition(
+                description: "Provisioning reports",
+                operations:  new[] { "GET /users/{}/provisionReport", "GET /groups/{}/provisionReport" })
         };
 
         private static readonly string[] _httpMethods = new[] { "get", "put", "post", "delete", "patch", "head", "options" };

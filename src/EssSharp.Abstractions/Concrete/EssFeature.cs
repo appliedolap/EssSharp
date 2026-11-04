@@ -55,6 +55,19 @@
         /// <summary>
         /// Resetting a user's password. Not available in EPM Shared Services security mode.
         /// </summary>
-        PasswordReset = 10
+        PasswordReset = 10,
+
+        /// <summary>
+        /// Managing the users and groups the server holds: updating, deleting several at once, searching, importing and exporting
+        /// them, and managing group members. Not available in EPM Shared Services security mode or Identity Cloud mode, where the
+        /// users and groups live outside the server.
+        /// </summary>
+        UserGroupManagement = 11,
+
+        /// <summary>
+        /// Getting the provisioning report of a user or group, which lists the roles, filters and scripts it holds. Not available
+        /// in EPM Shared Services security mode or Identity Cloud mode.
+        /// </summary>
+        ProvisioningReports = 12
     }
 }
