@@ -132,6 +132,28 @@ namespace EssSharp.Integration
             Assert.Empty(grid.UnknownMembers);
         }
 
+        [Fact(DisplayName = @"GridUnknownMemberTests - 06 - Essbase_RefreshUnderAnotherAliasTable_TakesTheGridItReturned"), Priority(06)]
+        public async Task Essbase_RefreshUnderAnotherAliasTable_TakesTheGridItReturned()
+        {
+            // Under GermanNames, Essbase returns every member of this grid under another name than the one it was sent.
+            // A numeric member name is sent with a leading apostrophe, as Dodeca writes one a sheet holds as text.
+            var values = new[]
+            {
+                new[] { "",    "Jan" },
+                new[] { "'100", ""    }
+            };
+
+            var grid = await GridAsync(values, displayUnknownMembers: true);
+
+            grid.Alias = "GermanNames";
+
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
+
+            Assert.Contains("Cola Getränke", grid.Slice.Data.Ranges[0].Values);
+            Assert.Contains("Januar", grid.Slice.Data.Ranges[0].Values);
+            Assert.Empty(grid.UnknownMembers);
+        }
+
         /// <summary>
         /// Returns a grid of Sample.Basic holding the given values, row by row.
         /// </summary>

@@ -466,12 +466,21 @@ namespace EssSharp
 
                 if (DisplayUnknownMembers)
                 {
-                    _unknownMembers = GetUnknownMembers(slice, grid, out var isDefaultGrid);
+                    var members = GetSentMembers(slice);
 
                     // Essbase answers a grid that holds no member it knows with its default grid, in place of the grid it was
-                    // sent, so the grid is left as it is.
-                    if (isDefaultGrid)
+                    // sent, so the grid is left as it is and all of its text is listed. A grid returned without any of the text
+                    // sent as members is not always that grid, since Essbase names members after the grid's alias table, so it
+                    // is compared with the default grid.
+                    if (members.Count > 0 && !HoldsAMemberOf(grid, members) &&
+                        await IsDefaultGridAsync(api, grid, body, preferences, cancellationToken).ConfigureAwait(false))
+                    {
+                        _unknownMembers = members;
+
                         return;
+                    }
+
+                    _unknownMembers = GetReturnedComments(grid, members);
                 }
 
                 // If MissingText/NoAccessText is non-empty...
@@ -768,42 +777,110 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// Returns the text sent as members that Essbase did not know: the text it returned as comments, each once, in the order
-        /// the returned grid holds it. When the returned grid holds none of the members that were sent, it is Essbase's
-        /// default grid, which Essbase answers a grid that holds no member it knows with, and every member sent is listed.
+        /// Returns the text the given slice sends as members, each once, in the order the slice holds it.
         /// </summary>
         /// <param name="sent">The slice that was sent.</param>
-        /// <param name="returned">The grid Essbase returned.</param>
-        /// <param name="isDefaultGrid">Whether the returned grid is Essbase's default grid rather than the one that was sent.</param>
-        private static List<string> GetUnknownMembers( EssGridSlice sent, Grid returned, out bool isDefaultGrid )
+        private static List<string> GetSentMembers( EssGridSlice sent )
         {
-            isDefaultGrid = false;
-
-            if (sent?.Data?.Ranges?.FirstOrDefault() is not { Values: { } sentValues, Types: { } sentTypes })
+            if (sent?.Data?.Ranges?.FirstOrDefault() is not { Values: { } values, Types: { } types })
                 return new List<string>();
 
-            var members = Enumerable.Range(0, Math.Min(sentValues.Count, sentTypes.Count))
-                                    .Where(index => sentTypes[index] == EssGridCellLayout.Member && !string.IsNullOrEmpty(sentValues[index]))
-                                    .Select(index => sentValues[index])
-                                    .Distinct()
-                                    .ToList();
+            return Enumerable.Range(0, Math.Min(values.Count, types.Count))
+                             .Where(index => types[index] == EssGridCellLayout.Member && !string.IsNullOrEmpty(values[index]))
+                             .Select(index => values[index])
+                             .Distinct()
+                             .ToList();
+        }
 
-            if (members.Count == 0 || returned?.Slice?.Data?.Ranges?.FirstOrDefault() is not { Values: { } values, Types: { } types })
+        /// <summary>
+        /// Whether the given grid Essbase returned holds a member cell with the text of one of the given members.
+        /// </summary>
+        /// <param name="returned">The grid Essbase returned.</param>
+        /// <param name="members">The text sent as members.</param>
+        private static bool HoldsAMemberOf( Grid returned, List<string> members ) =>
+            returned?.Slice?.Data?.Ranges?.FirstOrDefault() is { Values: { } values, Types: { } types } &&
+            Enumerable.Range(0, Math.Min(values.Count, types.Count))
+                      .Any(index => types[index] == EssGridCellLayout.Member && members.Contains(values[index], StringComparer.OrdinalIgnoreCase));
+
+        /// <summary>
+        /// Returns the text sent as members that Essbase did not know: the text it returned as comments, each once, in the order
+        /// the returned grid holds it.
+        /// </summary>
+        /// <param name="returned">The grid Essbase returned.</param>
+        /// <param name="members">The text sent as members.</param>
+        private static List<string> GetReturnedComments( Grid returned, List<string> members )
+        {
+            if (returned?.Slice?.Data?.Ranges?.FirstOrDefault() is not { Values: { } values, Types: { } types })
                 return new List<string>();
 
-            var cells = Enumerable.Range(0, Math.Min(values.Count, types.Count)).ToList();
+            return Enumerable.Range(0, Math.Min(values.Count, types.Count))
+                             .Where(index => types[index] == EssGridCellLayout.Comment && members.Contains(values[index], StringComparer.Ordinal))
+                             .Select(index => values[index])
+                             .Distinct()
+                             .ToList();
+        }
 
-            if (!cells.Any(index => types[index] == EssGridCellLayout.Member && members.Contains(values[index], StringComparer.OrdinalIgnoreCase)))
+        /// <summary>
+        /// Whether the given grid Essbase returned is its default grid: whether its member and data cells are those of the grid
+        /// Essbase answers an empty grid with, under the same alias table and preferences. Comments Essbase kept do not count.
+        /// </summary>
+        /// <param name="api">The grid API the operation used.</param>
+        /// <param name="returned">The grid Essbase returned.</param>
+        /// <param name="operation">The operation that was sent.</param>
+        /// <param name="preferences">The preferences the operation ran with.</param>
+        /// <param name="cancellationToken" />
+        private async Task<bool> IsDefaultGridAsync( GridApi api, Grid returned, GridOperation operation, EssGridPreferences preferences, CancellationToken cancellationToken )
+        {
+            var empty = new EssGridSlice() { Columns = 1, Rows = 1 };
+
+            empty.Data.Ranges.Add(new EssGridRange()
             {
-                isDefaultGrid = true;
+                Start  = 0,
+                End    = 0,
+                Values = new List<string>() { string.Empty },
+                Types  = new List<string>() { EssGridCellLayout.Blank }
+            });
 
-                return members;
+            var request = new GridOperation()
+            {
+                Action = GridOperation.ActionEnum.Refresh,
+                Alias  = operation.Alias,
+                Grid   = new Grid() { Alias = operation.Grid?.Alias, Slice = empty.ToModelBean() }
+            };
+
+            Grid defaultGrid;
+
+            try
+            {
+                defaultGrid = await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, svParity: preferences?.SmartViewParity, body: request, preferences: preferences, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch
+            {
+                // Without the default grid to compare with, the grid Essbase returned is taken as the answer.
+                return false;
             }
 
-            return cells.Where(index => types[index] == EssGridCellLayout.Comment && members.Contains(values[index], StringComparer.Ordinal))
-                        .Select(index => values[index])
-                        .Distinct()
-                        .ToList();
+            return MemberAndDataCells(returned).SetEquals(MemberAndDataCells(defaultGrid));
+
+            // Each member cell's position and text, and each data cell's position.
+            static HashSet<(int Row, int Column, string Type, string Value)> MemberAndDataCells( Grid grid )
+            {
+                var cells = new HashSet<(int, int, string, string)>();
+
+                if (grid?.Slice is not { Columns: > 0 and var columns } slice || slice.Data?.Ranges?.FirstOrDefault() is not { Values: { } values, Types: { } types })
+                    return cells;
+
+                for (var index = 0; index < Math.Min(values.Count, types.Count); index++)
+                {
+                    if (types[index] == EssGridCellLayout.Member)
+                        cells.Add((index / columns, index % columns, types[index], values[index]));
+                    else if (types[index] == EssGridCellLayout.Data)
+                        cells.Add((index / columns, index % columns, types[index], null));
+                }
+
+                return cells;
+            }
         }
 
         /// <summary>

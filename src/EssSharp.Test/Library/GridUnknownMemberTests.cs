@@ -152,7 +152,8 @@ namespace EssSharp.Test.Library
             };
 
             using var stub = Stub(Answer(new[] { new[] { "Function", "Measures", "Product", "Market", "Scenario" }, new[] { "Year", "105522.0", "", "", "" } },
-                                         new[] { new[] { "3", "0", "0", "0", "0" }, new[] { "0", "2", "7", "7", "7" } }));
+                                         new[] { new[] { "3", "0", "0", "0", "0" }, new[] { "0", "2", "7", "7", "7" } }),
+                                  DefaultGrid("Measures", "Product", "Market", "Scenario", "Year"));
 
             var grid = await GridAsync(stub, values);
 
@@ -160,6 +161,53 @@ namespace EssSharp.Test.Library
 
             Assert.Equal(values.SelectMany(row => row), grid.Slice.Data.Ranges[0].Values);
             Assert.Equal(values.SelectMany(row => row), grid.UnknownMembers);
+
+            // The second grid is the empty one whose answer is Essbase's default grid.
+            Assert.Equal(new[] { "7" }, Posts(stub)[1].Types);
+        }
+
+        [Fact(DisplayName = "GridUnknownMemberTests - RefreshAsync_WhenTheReturnedGridIsLaidOutAsTheDefaultGridWithOtherMembers_TakesIt")]
+        public async Task RefreshAsync_WhenTheReturnedGridIsLaidOutAsTheDefaultGridWithOtherMembers_TakesIt()
+        {
+            // Laid out as the default grid, but with members of the sheet's own, under another alias table's names.
+            var values = new[]
+            {
+                new[] { "",    "Sales", "100", "East", "Actual" },
+                new[] { "Jan", "",      "",    "",     ""       }
+            };
+
+            using var stub = Stub(Answer(new[] { new[] { "", "Umsätze", "Cola Getränke", "Osten", "Ist" }, new[] { "Januar", "2355.0", "", "", "" } },
+                                         new[] { new[] { "7", "0", "0", "0", "0" }, new[] { "0", "2", "7", "7", "7" } }),
+                                  DefaultGrid("Umsätze", "Produkt", "Markt", "Szenario", "Jahr"));
+
+            var grid = await GridAsync(stub, values);
+
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
+
+            Assert.Equal("Cola Getränke", grid.Slice.Data.Ranges[0].Values[2]);
+            Assert.Empty(grid.UnknownMembers);
+        }
+
+        [Fact(DisplayName = "GridUnknownMemberTests - RefreshAsync_WhenEssbaseNamesEveryMemberAfterAnotherAliasTable_TakesTheGridItReturned")]
+        public async Task RefreshAsync_WhenEssbaseNamesEveryMemberAfterAnotherAliasTable_TakesTheGridItReturned()
+        {
+            // Under the GermanNames alias table, Essbase returns Jan as Januar and 100 as Cola Getränke: none of the text sent,
+            // though every member is known.
+            var values = new[]
+            {
+                new[] { "",    "Jan" },
+                new[] { "100", ""    }
+            };
+
+            using var stub = Stub(Answer(new[] { new[] { "", "Januar" }, new[] { "Cola Getränke", "2355.0" } }, new[] { new[] { "7", "0" }, new[] { "0", "2" } }),
+                                  DefaultGrid("Umsätze", "Produkt", "Markt", "Szenario", "Jahr"));
+
+            var grid = await GridAsync(stub, values);
+
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
+
+            Assert.Equal(new[] { "", "Januar", "Cola Getränke", "2355.0" }, grid.Slice.Data.Ranges[0].Values);
+            Assert.Empty(grid.UnknownMembers);
         }
 
         [Fact(DisplayName = "GridUnknownMemberTests - ZoomAsync_WithDisplayUnknownMembers_ListsTheNoteWhereverTheZoomPutsIt")]
@@ -210,6 +258,15 @@ namespace EssSharp.Test.Library
 
             return (HttpStatusCode.OK, JsonSerializer.Serialize(grid));
         }
+
+        /// <summary>
+        /// Returns Essbase's default grid of Sample.Basic, as it answers an empty grid: the given four dimensions across, the
+        /// fifth down, and the data at their top.
+        /// </summary>
+        /// <param name="dimensions">The dimensions, as the grid's alias table names them.</param>
+        private static (HttpStatusCode, string) DefaultGrid( params string[] dimensions ) =>
+            Answer(new[] { new[] { "", dimensions[0], dimensions[1], dimensions[2], dimensions[3] }, new[] { dimensions[4], "105522.0", "", "", "" } },
+                   new[] { new[] { "7", "0", "0", "0", "0" }, new[] { "0", "2", "7", "7", "7" } });
 
         /// <summary>
         /// Returns a stub that answers the application and cube requests, and the grid operations with the given answers, one
