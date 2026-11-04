@@ -33,6 +33,7 @@ namespace EssSharp
         private List<EssGridDimension> _essGridDimension = new List<EssGridDimension>();
         private EssGridSlice _essGridSlice = new EssGridSlice();
         private List<string> _oldValues = new List<string>();
+        private List<string> _unknownMembers = new List<string>();
 
         #endregion
 
@@ -140,6 +141,12 @@ namespace EssSharp
 
         /// <inheritdoc />
         public bool UseAliases { get; set; } = true;
+
+        /// <inheritdoc />
+        public bool DisplayUnknownMembers { get; set; }
+
+        /// <inheritdoc />
+        public IReadOnlyList<string> UnknownMembers => _unknownMembers;
 
         /// <inheritdoc />
         public EssGridPreferences Preferences { get; set; }
@@ -437,13 +444,35 @@ namespace EssSharp
                 // Get the default grid preferences.
                 Preferences ??= await Cube.Application.Server.GetDefaultGridPreferencesAsync();
                 
+                // To display unknown members, the operation keeps comments, as Essbase then keeps text it does not know as a
+                // comment rather than refusing the grid; the grid's own preferences are left as they are.
+                var preferences = Preferences;
+
+                if (DisplayUnknownMembers && preferences?.FormulaRetention?.Comments is not true && preferences?.Clone() is EssGridPreferences keepingComments)
+                {
+                    keepingComments.FormulaRetention.Comments = true;
+                    preferences = keepingComments;
+                }
+
                 // Type each cell for Essbase, and clear the data block for any operation but a submit (#72).
-                var slice = PrepareSliceForOperation(action);
+                var slice = PrepareSliceForOperation(action, keepComments: preferences?.FormulaRetention?.Comments is true);
 
                 var body = GetGridOperation(action, slice, gridSelection, newPosition);
 
-                if ( await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, svParity: Preferences?.SmartViewParity, body: body, preferences: Preferences, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid )
+                _unknownMembers = new List<string>();
+
+                if (await api.GridExecuteAsync(applicationName: _cube.Application.Name, databaseName: _cube.Name, svParity: preferences?.SmartViewParity, body: body, preferences: preferences, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } grid)
                     throw new Exception($@"Could not get a grid via the {action} operation.");
+
+                if (DisplayUnknownMembers)
+                {
+                    _unknownMembers = GetUnknownMembers(slice, grid, out var isDefaultGrid);
+
+                    // Essbase answers a grid that holds no member it knows with its default grid, in place of the grid it was
+                    // sent, so the grid is left as it is.
+                    if (isDefaultGrid)
+                        return;
+                }
 
                 // If MissingText/NoAccessText is non-empty...
                 if ( !string.IsNullOrEmpty(Preferences.MissingText) || !string.IsNullOrEmpty(Preferences.NoAccessText) )
@@ -657,15 +686,17 @@ namespace EssSharp
 
         /// <summary>
         /// Returns the slice to send Essbase for the given operation: a copy of the grid's slice, with each cell typed by its
-        /// value and the caller's type, as <see cref="EssGridCellLayout"/> describes, and text in the data block sent blank as
-        /// the comment it is. A submit sends the data block's values,
+        /// value and the caller's type, as <see cref="EssGridCellLayout"/> describes, and text in the data block sent as the
+        /// comment it is: as a comment when the operation keeps comments, and blank otherwise, since Essbase refuses a comment
+        /// it is not keeping. A submit sends the data block's values,
         /// a missing label as a missing value, and a blank data cell as missing when
         /// <see cref="EssGridPreferences.SendBlanksAsMissing"/> is set, and never writes a no-access cell or a number outside
         /// the data block. Any other operation sends every data cell blank, since Essbase reads the layout from the members.
         /// The grid's own slice is left as it is, so a failed operation leaves the grid unchanged (#72).
         /// </summary>
         /// <param name="action">The operation.</param>
-        private EssGridSlice PrepareSliceForOperation( Action action )
+        /// <param name="keepComments">Whether the operation runs with the grid preferences' comment retention on.</param>
+        private EssGridSlice PrepareSliceForOperation( Action action, bool keepComments )
         {
             var slice = Slice;
 
@@ -687,8 +718,8 @@ namespace EssSharp
 
                 var (sentValue, sentType) = layout.Kinds[index] switch
                 {
-                    // Text in the data block is a comment, which Essbase cannot keep in a grid it is sent.
-                    EssGridCellLayout.Member when layout.IsComment(index) => (string.Empty, EssGridCellLayout.Blank),
+                    // Text in the data block is a comment, which Essbase keeps only with comment retention on.
+                    EssGridCellLayout.Member when layout.IsComment(index) => keepComments ? (value, EssGridCellLayout.Comment) : (string.Empty, EssGridCellLayout.Blank),
                     EssGridCellLayout.Member => (value, EssGridCellLayout.Member),
 
                     // Only a submit sends data, and only to the data block's writable cells.
@@ -734,6 +765,45 @@ namespace EssSharp
                 DirtyTexts = slice.DirtyTexts,
                 Rows       = slice.Rows
             };
+        }
+
+        /// <summary>
+        /// Returns the text sent as members that Essbase did not know: the text it returned as comments, each once, in the order
+        /// the returned grid holds it. When the returned grid holds none of the members that were sent, it is Essbase's
+        /// default grid, which Essbase answers a grid that holds no member it knows with, and every member sent is listed.
+        /// </summary>
+        /// <param name="sent">The slice that was sent.</param>
+        /// <param name="returned">The grid Essbase returned.</param>
+        /// <param name="isDefaultGrid">Whether the returned grid is Essbase's default grid rather than the one that was sent.</param>
+        private static List<string> GetUnknownMembers( EssGridSlice sent, Grid returned, out bool isDefaultGrid )
+        {
+            isDefaultGrid = false;
+
+            if (sent?.Data?.Ranges?.FirstOrDefault() is not { Values: { } sentValues, Types: { } sentTypes })
+                return new List<string>();
+
+            var members = Enumerable.Range(0, Math.Min(sentValues.Count, sentTypes.Count))
+                                    .Where(index => sentTypes[index] == EssGridCellLayout.Member && !string.IsNullOrEmpty(sentValues[index]))
+                                    .Select(index => sentValues[index])
+                                    .Distinct()
+                                    .ToList();
+
+            if (members.Count == 0 || returned?.Slice?.Data?.Ranges?.FirstOrDefault() is not { Values: { } values, Types: { } types })
+                return new List<string>();
+
+            var cells = Enumerable.Range(0, Math.Min(values.Count, types.Count)).ToList();
+
+            if (!cells.Any(index => types[index] == EssGridCellLayout.Member && members.Contains(values[index], StringComparer.OrdinalIgnoreCase)))
+            {
+                isDefaultGrid = true;
+
+                return members;
+            }
+
+            return cells.Where(index => types[index] == EssGridCellLayout.Comment && members.Contains(values[index], StringComparer.Ordinal))
+                        .Select(index => values[index])
+                        .Distinct()
+                        .ToList();
         }
 
         /// <summary>

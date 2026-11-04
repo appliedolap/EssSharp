@@ -50,6 +50,30 @@ namespace EssSharp
         public bool UseAliases { get; set; }
 
         /// <summary>
+        /// Gets or sets whether a grid operation tolerates text that is not a member of the cube, as the Essbase Java API's
+        /// <c>IEssGridView.setDisplayUnknownMembers</c> does: the operation goes ahead, the text stays in the grid as a
+        /// comment, and <see cref="UnknownMembers"/> lists it. False, the default, makes Essbase's refusal of such a grid the
+        /// operation's failure.
+        /// </summary>
+        /// <remarks>
+        /// Over Essbase REST this is the grid preferences' comment retention (<see cref="EssGridPreferencesFormulaRetention.Comments"/>),
+        /// with which Essbase keeps text it does not know as a comment, and the operation runs with it on, whatever
+        /// <see cref="Preferences"/> says, without changing them. A grid that holds no member Essbase knows is left as it is:
+        /// Essbase would answer it with its default grid, and all of the grid's text is listed.
+        /// </remarks>
+        public bool DisplayUnknownMembers { get; set; }
+
+        /// <summary>
+        /// Gets the text the last grid operation sent as members that Essbase did not know, each once, in the order the
+        /// grid it returned holds it, when <see cref="DisplayUnknownMembers"/> is set; empty otherwise.
+        /// </summary>
+        /// <remarks>
+        /// Text Essbase drops from the grid it returns, as a zoom drops text on its own row below the rows it lays out again,
+        /// is not listed.
+        /// </remarks>
+        public IReadOnlyList<string> UnknownMembers { get; }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="dtr"></param>

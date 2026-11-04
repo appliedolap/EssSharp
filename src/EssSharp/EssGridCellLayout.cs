@@ -20,8 +20,8 @@ namespace EssSharp
     /// The data block is found from the members alone, so it is found in a grid whose data cells are still empty. Its first
     /// row is the first that begins with a row member, in the grid's leftmost member column, below a column member. Its first
     /// column is that of the first column member, past the row members, in the nearest row above that holds one. A data cell
-    /// lies in a row of the block that has a row member, under a column member. Text in the block is a comment, which Essbase
-    /// REST cannot keep, rather than a member.
+    /// lies in a row of the block that has a row member, under a column member. Text in the block is a comment rather than a
+    /// member, which Essbase REST keeps only with the grid preferences' comment retention on, and refuses otherwise.
     /// </para>
     /// <para>
     /// A number the caller does not type is placed by where it lies. In a column header row that holds members, or in a row
@@ -42,6 +42,11 @@ namespace EssSharp
         /// The type Essbase gives a data cell.
         /// </summary>
         internal const string Data = "2";
+
+        /// <summary>
+        /// The type Essbase gives a comment cell: text it keeps, with comment retention on, that is not a member.
+        /// </summary>
+        internal const string Comment = "3";
 
         /// <summary>
         /// The type Essbase gives a blank cell.
