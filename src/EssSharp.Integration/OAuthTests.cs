@@ -15,7 +15,7 @@ namespace EssSharp.Integration
     /// <summary>
     /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />.
     /// </summary>
-    [CollectionDefinition(nameof(OAuthTests), DisableParallelization = true), CollectionPriority(7)]
+    [CollectionDefinition(nameof(OAuthTests), DisableParallelization = true), CollectionPriority(8)]
     public class OAuthTestsCollection : ICollectionFixture<OAuthCollectionFixture> { }
 
     /// <summary>
