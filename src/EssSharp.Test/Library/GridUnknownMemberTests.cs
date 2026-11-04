@@ -169,15 +169,16 @@ namespace EssSharp.Test.Library
         [Fact(DisplayName = "GridUnknownMemberTests - RefreshAsync_WhenTheReturnedGridIsLaidOutAsTheDefaultGridWithOtherMembers_TakesIt")]
         public async Task RefreshAsync_WhenTheReturnedGridIsLaidOutAsTheDefaultGridWithOtherMembers_TakesIt()
         {
-            // Laid out as the default grid, but with members of the sheet's own, under another alias table's names.
+            // Laid out as the default grid, but with members of the sheet's own, under another alias table's names, and a note
+            // Essbase keeps as a comment, as it keeps one in its default grid.
             var values = new[]
             {
-                new[] { "",    "Sales", "100", "East", "Actual" },
-                new[] { "Jan", "",      "",    "",     ""       }
+                new[] { "a note", "Sales", "100", "East", "Actual" },
+                new[] { "Jan",    "",      "",    "",     ""       }
             };
 
-            using var stub = Stub(Answer(new[] { new[] { "", "Umsätze", "Cola Getränke", "Osten", "Ist" }, new[] { "Januar", "2355.0", "", "", "" } },
-                                         new[] { new[] { "7", "0", "0", "0", "0" }, new[] { "0", "2", "7", "7", "7" } }),
+            using var stub = Stub(Answer(new[] { new[] { "a note", "Umsätze", "Cola Getränke", "Osten", "Ist" }, new[] { "Januar", "2355.0", "", "", "" } },
+                                         new[] { new[] { "3", "0", "0", "0", "0" }, new[] { "0", "2", "7", "7", "7" } }),
                                   DefaultGrid("Umsätze", "Produkt", "Markt", "Szenario", "Jahr"));
 
             var grid = await GridAsync(stub, values);
@@ -185,7 +186,29 @@ namespace EssSharp.Test.Library
             await grid.RefreshAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal("Cola Getränke", grid.Slice.Data.Ranges[0].Values[2]);
+            Assert.Equal(new[] { "a note" }, grid.UnknownMembers);
+        }
+
+        [Fact(DisplayName = "GridUnknownMemberTests - RefreshAsync_WhenTheDefaultGridIsRetrievedUnderAnotherAliasTable_TakesTheGridItReturned")]
+        public async Task RefreshAsync_WhenTheDefaultGridIsRetrievedUnderAnotherAliasTable_TakesTheGridItReturned()
+        {
+            // A sheet holding Essbase's default grid under GermanNames, retrieved under the default table: Essbase knows every
+            // member and returns its default grid under the default table's names, without a comment.
+            var values = new[]
+            {
+                new[] { "",     "Umsätze", "Produkt", "Markt", "Szenario" },
+                new[] { "Jahr", "",        "",        "",      ""         }
+            };
+
+            using var stub = Stub(DefaultGrid("Measures", "Product", "Market", "Scenario", "Year"));
+
+            var grid = await GridAsync(stub, values);
+
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
+
+            Assert.Equal("Product", grid.Slice.Data.Ranges[0].Values[2]);
             Assert.Empty(grid.UnknownMembers);
+            Assert.Single(Posts(stub));
         }
 
         [Fact(DisplayName = "GridUnknownMemberTests - RefreshAsync_WhenEssbaseNamesEveryMemberAfterAnotherAliasTable_TakesTheGridItReturned")]

@@ -154,6 +154,28 @@ namespace EssSharp.Integration
             Assert.Empty(grid.UnknownMembers);
         }
 
+        [Fact(DisplayName = @"GridUnknownMemberTests - 07 - Essbase_RefreshOfTheDefaultGridUnderAnotherAliasTable_TakesTheGridItReturned"), Priority(07)]
+        public async Task Essbase_RefreshOfTheDefaultGridUnderAnotherAliasTable_TakesTheGridItReturned()
+        {
+            // Essbase's default grid under GermanNames, retrieved under the default table, comes back as the default grid under
+            // the default table's names.
+            var values = new[]
+            {
+                new[] { "",     "Umsätze", "Produkt", "Markt", "Szenario" },
+                new[] { "Jahr", "",        "",        "",      ""         }
+            };
+
+            var grid = await GridAsync(values, displayUnknownMembers: true);
+
+            grid.Alias = "Default";
+
+            await grid.RefreshAsync(TestContext.Current.CancellationToken);
+
+            Assert.Contains("Product", grid.Slice.Data.Ranges[0].Values);
+            Assert.DoesNotContain("Produkt", grid.Slice.Data.Ranges[0].Values);
+            Assert.Empty(grid.UnknownMembers);
+        }
+
         /// <summary>
         /// Returns a grid of Sample.Basic holding the given values, row by row.
         /// </summary>

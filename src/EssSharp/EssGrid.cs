@@ -468,11 +468,15 @@ namespace EssSharp
                 {
                     var members = GetSentMembers(slice);
 
+                    var comments = GetReturnedComments(grid, members);
+
                     // Essbase answers a grid that holds no member it knows with its default grid, in place of the grid it was
-                    // sent, so the grid is left as it is and all of its text is listed. A grid returned without any of the text
-                    // sent as members is not always that grid, since Essbase names members after the grid's alias table, so it
-                    // is compared with the default grid.
-                    if (members.Count > 0 && !HoldsAMemberOf(grid, members) &&
+                    // sent, keeping text of it as a comment, so the grid is left as it is and all of its text is listed. A grid
+                    // returned without any of the text sent as members is not always that grid, since Essbase names members after
+                    // the grid's alias table: a grid it knows every member of, under another table's names, comes back without
+                    // a comment, and may even be laid out as the default grid. One that keeps a comment is compared with the
+                    // default grid.
+                    if (members.Count > 0 && comments.Count > 0 && !HoldsAMemberOf(grid, members) &&
                         await IsDefaultGridAsync(api, grid, body, preferences, cancellationToken).ConfigureAwait(false))
                     {
                         _unknownMembers = members;
@@ -480,7 +484,7 @@ namespace EssSharp
                         return;
                     }
 
-                    _unknownMembers = GetReturnedComments(grid, members);
+                    _unknownMembers = comments;
                 }
 
                 // If MissingText/NoAccessText is non-empty...
