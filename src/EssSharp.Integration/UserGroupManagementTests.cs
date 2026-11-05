@@ -15,7 +15,7 @@ namespace EssSharp.Integration
     /// <summary>
     /// Tests collection definition with <see cref="CollectionPriorityAttribute" /> for <see cref="TestCollectionOrderer" />
     /// </summary>
-    [CollectionDefinition(nameof(UserGroupManagementTests), DisableParallelization = true), CollectionPriority(10)]
+    [CollectionDefinition(nameof(UserGroupManagementTests), DisableParallelization = true), CollectionPriority(11)]
     public class UserGroupManagementTestsCollection : ICollectionFixture<CollectionFixture> { }
 
     /// <summary>
