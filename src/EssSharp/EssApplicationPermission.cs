@@ -65,12 +65,13 @@ namespace EssSharp
             {
                 var api = GetApi<ApplicationRoleProvisioningApi>();
 
-                await api.ApplicationRoleProvisioningDeprovisionAsync(_application.Name, Name).ConfigureAwait(false);
+                // The server looks for a user of the given ID unless it is told the permission is a group's.
+                await api.ApplicationRoleProvisioningDeprovisionAsync(app: _application.Name, id: Name, group: _provisionInfo.Group, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to remove permissions for user {Name} on application ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to remove permissions for {(_provisionInfo.Group ? "group" : "user")} {Name} on application ""{_application.Name}"". {e.Message}", e);
             }
         }
 

@@ -421,6 +421,29 @@ namespace EssSharp.Integration
             }
         }
 
+        [Fact(DisplayName = "UserGroupManagementTests - 08 - Essbase_InIdentityCloudMode_HasNoUserGroupManagement_ButGivesProvisioningReports"), Priority(08)]
+        public async Task Essbase_InIdentityCloudMode_HasNoUserGroupManagement_ButGivesProvisioningReports()
+        {
+            Assert.SkipWhen(ServerManagesUsers, "The server manages its own users and groups, so it is not in Identity Cloud mode.");
+
+            var server = GetEssServer();
+
+            // The server reports the mode, so the support check rules user and group management out, and its members say so.
+            Assert.False(await server.SupportsAsync(EssFeature.UserGroupManagement, TestContext.Current.CancellationToken));
+            Assert.True(await server.SupportsAsync(EssFeature.ProvisioningReports, TestContext.Current.CancellationToken));
+
+            await Assert.ThrowsAsync<NotSupportedException>(() => server.GetUsersAsync(TestContext.Current.CancellationToken));
+            await Assert.ThrowsAsync<NotSupportedException>(() => server.GetGroupsAsync(_prefix + "*", cancellationToken: TestContext.Current.CancellationToken));
+
+            // The server still answers for one user, and gives that user's provisioning report.
+            var userId = (await server.SignInAsync(cancellationToken: TestContext.Current.CancellationToken)).UserId;
+            var user   = await server.GetUserAsync(userId, TestContext.Current.CancellationToken);
+            var report = await user.GetProvisioningReportAsync(TestContext.Current.CancellationToken);
+
+            Assert.Equal(userId, user.Name, ignoreCase: true);
+            Assert.Contains(report.ServiceRoles, role => role.Name == "service_administrator");
+        }
+
         #region Helpers
 
         /// <summary>
@@ -485,7 +508,8 @@ namespace EssSharp.Integration
         /// <summary>
         /// Runs the given clean up, and runs it again after a pause when it fails. The server's embedded directory service fails
         /// for a minute or so now and then after a burst of user and group requests, and a clean up that gave up at once would
-        /// leave the users, groups and permissions of the test on a server that other tests share.
+        /// leave the users, groups and permissions of the test on a server that other tests share. A clean up that still fails
+        /// fails the test, so that what it leaves behind is noticed.
         /// </summary>
         /// <param name="description">What the clean up does, for the output.</param>
         /// <param name="cleanUp">The clean up, which must do no harm when it is run again.</param>
@@ -503,7 +527,7 @@ namespace EssSharp.Integration
                     _output.WriteLine($"{description} failed on attempt {attempt}. {e.Message}");
 
                     if ( attempt >= 8 )
-                        return;
+                        throw new Exception($"{description} failed {attempt} times, so the test left what it made on the server. {e.Message}", e);
                 }
 
                 await Task.Delay(TimeSpan.FromSeconds(15), CancellationToken.None);
