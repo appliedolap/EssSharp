@@ -1080,11 +1080,26 @@ namespace EssSharp
         {
             try
             {
-                foreach (var user in await GetUsersAsync( cancellationToken ).ConfigureAwait(false))
+                List<IEssUser> users;
+
+                try
                 {
-                    if ( string.Equals(id, user.Name, StringComparison.OrdinalIgnoreCase) ) 
-                    { 
-                        return user; 
+                    users = await GetUsersAsync( cancellationToken ).ConfigureAwait(false);
+                }
+                catch (NotSupportedException)
+                {
+                    // A server in Identity Cloud mode refuses to list its users, but answers for one, as its provisioning report needs.
+                    if (await GetApi<UsersApi>().UsersGetAsync(id: id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } single)
+                        throw new Exception($@"Cannot get user {id}.");
+
+                    return new EssUser(single, this);
+                }
+
+                foreach (var user in users)
+                {
+                    if ( string.Equals(id, user.Name, StringComparison.OrdinalIgnoreCase) )
+                    {
+                        return user;
                     }
                 }
                 throw new Exception($@"Cannot get user {id}.");

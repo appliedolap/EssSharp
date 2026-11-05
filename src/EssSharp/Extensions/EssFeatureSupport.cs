@@ -86,13 +86,14 @@ namespace EssSharp
                 operations:  new[] { "PUT /session/password" },
                 flags:       new[] { new[] { "resetPasswordSupported" } }),
 
-            // A server in EPM Shared Services or Identity Cloud mode holds no users or groups of its own. The instance details report no
-            // flag for the security mode, and what such a server answers with is not known, so only a specification that does not
-            // declare the operations rules the feature out.
+            // A server in Identity Cloud mode holds no users or groups of its own. It still declares the operations, and answers them with
+            // HTTP 400 "This operation is not supported", but it reports the mode as the "idcs" flag, which rules the feature out.
             [EssFeature.UserGroupManagement] = new FeatureDefinition(
                 description: "User and group management",
-                operations:  new[] { "GET /users", "POST /users", "PUT /users/{}", "POST /users/actions/delete", "GET /groups", "POST /groups", "POST /groups/actions/delete" }),
+                operations:  new[] { "GET /users", "POST /users", "PUT /users/{}", "POST /users/actions/delete", "GET /groups", "POST /groups", "PUT /groups/{}", "POST /groups/actions/delete" },
+                ruledOutBy:  new[] { "idcs" }),
 
+            // A server in Identity Cloud mode still answers the provisioning reports.
             [EssFeature.ProvisioningReports] = new FeatureDefinition(
                 description: "Provisioning reports",
                 operations:  new[] { "GET /users/{}/provisionReport", "GET /groups/{}/provisionReport" })
@@ -137,8 +138,11 @@ namespace EssSharp
                 return false;
 
             // Without the instance details, the flags cannot rule the feature out.
-            if (definition.Flags.Length > 0 && await _instance.GetAsync(ReadInstanceAsync, cancellationToken).ConfigureAwait(false) is { } instance)
-                return AreFlagsSet(instance, definition.Flags);
+            if (definition.Flags.Length > 0 || definition.RuledOutBy.Length > 0)
+            {
+                if (await _instance.GetAsync(ReadInstanceAsync, cancellationToken).ConfigureAwait(false) is { } instance)
+                    return !IsAnyFlagSet(instance, definition.RuledOutBy) && AreFlagsSet(instance, definition.Flags);
+            }
 
             return true;
         }
@@ -160,6 +164,15 @@ namespace EssSharp
         {
             var definition = GetDefinition(feature);
 
+            // A server that reports a flag that rules the feature out lacks it, whatever it answered with.
+            if (definition.RuledOutBy.Length > 0 && GetStatusCode(exception) is not null &&
+                await _instance.GetAsync(ReadInstanceAsync, cancellationToken).ConfigureAwait(false) is { } instance && IsAnyFlagSet(instance, definition.RuledOutBy))
+            {
+                _unsupportedFeatures[feature] = true;
+
+                return CreateNotSupportedException(definition, exception);
+            }
+
             if (GetStatusCode(exception) is not { } statusCode || statusCode is not (HttpStatusCode.NotFound or HttpStatusCode.MethodNotAllowed))
                 return null;
 
@@ -172,7 +185,7 @@ namespace EssSharp
 
             _unsupportedFeatures[feature] = true;
 
-            return new NotSupportedException($@"{definition.Description} is not supported by the Essbase server ""{_server.Name}"". {exception.Message}".TrimEnd(), exception);
+            return CreateNotSupportedException(definition, exception);
         }
 
         /// <summary>
@@ -181,7 +194,16 @@ namespace EssSharp
         /// <param name="instance">The instance details, as reported by <c>/about/instance</c>.</param>
         /// <param name="flags">The flags, each as its current name followed by any older names.</param>
         internal static bool AreFlagsSet( JObject instance, string[][] flags ) =>
-            flags.All(names => names.Any(name => instance?[name] is JValue { Type: JTokenType.Boolean, Value: true }));
+            flags.All(names => names.Any(name => IsFlagSet(instance, name)));
+
+        /// <summary>
+        /// Returns whether the given instance details report any one of the given flags as true. A flag that is not reported
+        /// is not set.
+        /// </summary>
+        /// <param name="instance">The instance details, as reported by <c>/about/instance</c>.</param>
+        /// <param name="flags">The names of the flags.</param>
+        internal static bool IsAnyFlagSet( JObject instance, string[] flags ) =>
+            flags.Any(name => IsFlagSet(instance, name));
 
         /// <summary>
         /// Returns the operation, as compared with a feature's operations, that the given HTTP <paramref name="method"/> and
@@ -215,6 +237,23 @@ namespace EssSharp
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Returns the <see cref="NotSupportedException"/> that reports the server lacks the feature of the given
+        /// <paramref name="definition"/>, as the given <paramref name="exception"/> shows.
+        /// </summary>
+        /// <param name="definition">The definition of the feature.</param>
+        /// <param name="exception">The exception that shows the server lacks the feature.</param>
+        private NotSupportedException CreateNotSupportedException( FeatureDefinition definition, Exception exception ) =>
+            new NotSupportedException($@"{definition.Description} is not supported by the Essbase server ""{_server.Name}"". {exception.Message}".TrimEnd(), exception);
+
+        /// <summary>
+        /// Returns whether the given instance details report the given flag as true.
+        /// </summary>
+        /// <param name="instance">The instance details, as reported by <c>/about/instance</c>.</param>
+        /// <param name="name">The name of the flag.</param>
+        private static bool IsFlagSet( JObject instance, string name ) =>
+            instance?[name] is JValue { Type: JTokenType.Boolean, Value: true };
 
         /// <summary>
         /// Returns the definition of the given <paramref name="feature"/>.
@@ -313,12 +352,14 @@ namespace EssSharp
             /// <param name="operations">The operations the feature needs.</param>
             /// <param name="statusCode">The status code a server that lacks the feature answers with, if known.</param>
             /// <param name="flags">The <c>/about/instance</c> flags the feature needs, each as its current name followed by any older names.</param>
-            internal FeatureDefinition( string description, string[] operations, HttpStatusCode? statusCode = null, string[][] flags = null )
+            /// <param name="ruledOutBy">The <c>/about/instance</c> flags that, when any one is reported true, show the server lacks the feature.</param>
+            internal FeatureDefinition( string description, string[] operations, HttpStatusCode? statusCode = null, string[][] flags = null, string[] ruledOutBy = null )
             {
                 Description = description;
                 Operations  = operations;
                 StatusCode  = statusCode;
                 Flags       = flags ?? Array.Empty<string[]>();
+                RuledOutBy  = ruledOutBy ?? Array.Empty<string>();
             }
 
             /// <summary>
@@ -336,6 +377,12 @@ namespace EssSharp
             /// The operations the feature needs, as returned by <see cref="GetOperation(string, string)"/>.
             /// </summary>
             internal string[] Operations { get; }
+
+            /// <summary>
+            /// The <c>/about/instance</c> flags that, when any one is reported true, show the server lacks the feature. A flag that
+            /// is not reported rules nothing out.
+            /// </summary>
+            internal string[] RuledOutBy { get; }
 
             /// <summary>
             /// The status code a server that lacks the feature answers with, if known, used when the server serves no specification.

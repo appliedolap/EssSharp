@@ -614,7 +614,7 @@ namespace EssSharp.Test.Library
         [Fact(DisplayName = "UserGroupTests - GetUsersAsync_WithServedSpecificationLackingTheOperations_ThrowsNotSupported")]
         public async Task GetUsersAsync_WithServedSpecificationLackingTheOperations_ThrowsNotSupported()
         {
-            // A server that holds no users, such as one in Identity Cloud mode, serves a specification without them, and answers 404.
+            // A server whose specification lacks the operations, and that answers them with 404.
             using var stub = Stub((method: "GET", path: "/openapi.json", body: @"{""openapi"":""3.0.1"",""paths"":{""/applications"":{""get"":{}}}}"));
 
             stub.ResponseProvider = Respond(stub.ResponseProvider, (HttpStatusCode.NotFound, "/users"), (HttpStatusCode.NotFound, "/groups/actions/delete"), (HttpStatusCode.NotFound, "/users/u1/provisionReport"));
@@ -633,7 +633,7 @@ namespace EssSharp.Test.Library
         {
             var specification = @"{""openapi"":""3.0.1"",""paths"":{
                 ""/users"":{""get"":{},""post"":{}},""/users/{id}"":{""put"":{}},""/users/actions/delete"":{""post"":{}},
-                ""/groups"":{""get"":{},""post"":{}},""/groups/actions/delete"":{""post"":{}},
+                ""/groups"":{""get"":{},""post"":{}},""/groups/{id}"":{""put"":{}},""/groups/actions/delete"":{""post"":{}},
                 ""/users/{userId}/provisionReport"":{""get"":{}},""/groups/{groupId}/provisionReport"":{""get"":{}}}}";
 
             using var stub = Stub((method: "GET", path: "/openapi.json", body: specification));
@@ -650,9 +650,118 @@ namespace EssSharp.Test.Library
             Assert.IsNotType<NotSupportedException>(exception);
         }
 
+        [Fact(DisplayName = "UserGroupTests - SupportsAsync_InIdentityCloudMode_RulesOutUserGroupManagement_ButNotProvisioningReports")]
+        public async Task SupportsAsync_InIdentityCloudMode_RulesOutUserGroupManagement_ButNotProvisioningReports()
+        {
+            using var stub = IdentityCloudStub();
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+
+            Assert.False(await server.SupportsAsync(EssFeature.UserGroupManagement, TestContext.Current.CancellationToken));
+            Assert.True(await server.SupportsAsync(EssFeature.ProvisioningReports, TestContext.Current.CancellationToken));
+        }
+
+        [Fact(DisplayName = "UserGroupTests - SupportsAsync_WithTheIdentityCloudFlagReportedFalseOrNotAtAll_AnswersSupported")]
+        public async Task SupportsAsync_WithTheIdentityCloudFlagReportedFalseOrNotAtAll_AnswersSupported()
+        {
+            foreach (var instance in new[] { @"{""idcs"":false}", @"{""aiEnabled"":true}" })
+            {
+                using var stub = Stub((method: "GET", path: "/about/instance", body: instance));
+
+                var server = new EssServer(stub.BasePath, "admin", "password");
+
+                Assert.True(await server.SupportsAsync(EssFeature.UserGroupManagement, TestContext.Current.CancellationToken));
+            }
+        }
+
+        [Fact(DisplayName = "UserGroupTests - Members_InIdentityCloudMode_ThrowNotSupported_WhatTheServerAnswered")]
+        public async Task Members_InIdentityCloudMode_ThrowNotSupported_WhatTheServerAnswered()
+        {
+            // The server declares the operations and answers them with HTTP 400, so only its report of the mode shows it lacks them.
+            using var stub = IdentityCloudStub((method: "GET", path: "/groups/g1", body: @"{""name"":""g1"",""role"":""User""}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+
+            var exception = await Assert.ThrowsAsync<NotSupportedException>(() => server.GetUsersAsync(TestContext.Current.CancellationToken));
+
+            Assert.Contains(_identityCloudRefusal, exception.Message);
+
+            await Assert.ThrowsAsync<NotSupportedException>(() => server.GetGroupsAsync("g*", cancellationToken: TestContext.Current.CancellationToken));
+            await Assert.ThrowsAsync<NotSupportedException>(() => server.ExportUsersAsync(TestContext.Current.CancellationToken));
+
+            var group = await server.GetGroupAsync("g1", TestContext.Current.CancellationToken);
+
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.EditAsync(description: "Described", cancellationToken: TestContext.Current.CancellationToken));
+        }
+
+        [Fact(DisplayName = "UserGroupTests - GetUserAsync_InIdentityCloudMode_GetsTheOneUser_SoItsProvisioningReportCanBeRead")]
+        public async Task GetUserAsync_InIdentityCloudMode_GetsTheOneUser_SoItsProvisioningReportCanBeRead()
+        {
+            using var stub = IdentityCloudStub(
+                (method: "GET", path: "/users/admin",                 body: @"{""id"":""admin"",""name"":""Essbase Administrator"",""role"":""Service Administrator"",""groups"":[""essbase-admins""]}"),
+                (method: "GET", path: "/users/admin/provisionReport", body: @"{""service"":{""roles"":{""items"":[{""name"":""service_administrator""}]}}}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var user   = await server.GetUserAsync("admin", TestContext.Current.CancellationToken);
+
+            Assert.Equal("admin", user.Name);
+            Assert.Equal(EssServerRole.ServiceAdministrator, user.Role);
+
+            var report = await user.GetProvisioningReportAsync(TestContext.Current.CancellationToken);
+
+            Assert.Equal("service_administrator", Assert.Single(report.ServiceRoles).Name);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - RemovePermissionsAsync_ForAGroup_TellsTheServerItIsAGroup")]
+        public async Task RemovePermissionsAsync_ForAGroup_TellsTheServerItIsAGroup()
+        {
+            using var stub = Stub(
+                (method: "GET",    path: "/applications/Sample",                body: @"{""name"":""Sample""}"),
+                (method: "GET",    path: "/applications/Sample/permissions/g1", body: @"{""id"":""g1"",""role"":""db_update"",""group"":true}"),
+                (method: "DELETE", path: "/applications/Sample/permissions/g1", body: "{}"));
+
+            var server      = new EssServer(stub.BasePath, "admin", "password");
+            var application = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
+            var permission  = await application.GetPermissionAsync("g1", group: true,TestContext.Current.CancellationToken);
+
+            await permission.RemovePermissionsAsync(TestContext.Current.CancellationToken);
+
+            var delete = Assert.Single(stub.Requests, request => request.StartsWith("DELETE ", StringComparison.Ordinal));
+
+            Assert.Contains("/applications/Sample/permissions/g1?group=true ", delete);
+        }
+
         #endregion
 
         #region Helpers
+
+        private const string _identityCloudRefusal = "This operation is not supported. Contact administrator";
+
+        /// <summary>
+        /// Returns a stub of a server in Identity Cloud mode: it reports the mode in its instance details, answers each of the given
+        /// operations with its body, refuses every other users and groups request as such a server does (HTTP 400), and answers
+        /// every other request with a 404.
+        /// </summary>
+        /// <param name="operations">The HTTP method and path (after the base path), and the body to answer with.</param>
+        private static LoopbackEssbaseStub IdentityCloudStub( params (string method, string path, string body)[] operations )
+        {
+            var stub  = Stub(operations.Append((method: "GET", path: "/about/instance", body: @"{""idcs"":true,""appRoleProvisioningSupported"":true}")).ToArray());
+            var inner = stub.ResponseProvider;
+
+            stub.ResponseProvider = requestLine =>
+            {
+                var path = (requestLine.Split(' ').ElementAtOrDefault(1) ?? string.Empty).Split('?')[0];
+
+                if (inner(requestLine) is { StatusCode: HttpStatusCode.OK } answer)
+                    return answer;
+
+                return path.StartsWith("/essbase/rest/v1/users", StringComparison.Ordinal) || path.StartsWith("/essbase/rest/v1/groups", StringComparison.Ordinal)
+                    ? (HttpStatusCode.BadRequest, $@"{{""errorMessage"":""{_identityCloudRefusal}""}}")
+                    : (HttpStatusCode.NotFound, @"{""message"":""Not Found""}");
+            };
+
+            return stub;
+        }
 
         /// <summary>
         /// Returns a stub that answers each of the given operations with its body, as <c>application/octet-stream</c> where the
