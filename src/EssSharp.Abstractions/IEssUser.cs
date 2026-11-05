@@ -29,18 +29,15 @@ namespace EssSharp
         public List<string> GroupNames { get; }
 
         /// <summary>
-        /// Returns the links the server gave with the user, to the operations on it.
-        /// </summary>
-        public List<EssLink> Links { get; }
-
-        /// <summary>
         /// Deletes a user from the server.
         /// </summary>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public void Delete();
 
         /// <summary>
         /// Asynchronously deletes a user from the server.
         /// </summary>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task DeleteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -52,6 +49,7 @@ namespace EssSharp
         /// <param name="password">The new password.</param>
         /// <returns>This user, as edited.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public IEssUser Edit( string fullName = null, string email = null, EssServerRole? role = null, string password = null );
 
         /// <summary>
@@ -64,6 +62,7 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <returns>This user, as edited.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task<IEssUser> EditAsync( string fullName = null, string email = null, EssServerRole? role = null, string password = null, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -85,6 +84,7 @@ namespace EssSharp
         /// Returns what the user holds in each application.
         /// </summary>
         /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
+        /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
         public List<EssApplicationProvisioning> GetApplicationProvisioningReports();
 
         /// <summary>
@@ -92,20 +92,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
+        /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
         public Task<List<EssApplicationProvisioning>> GetApplicationProvisioningReportsAsync( CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Returns the user's provisioning report: the service roles it holds, and what it holds in each application.
-        /// </summary>
-        /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
-        public EssProvisioningReport GetProvisioningReport();
-
-        /// <summary>
-        /// Asynchronously returns the user's provisioning report: the service roles it holds, and what it holds in each application.
-        /// </summary>
-        /// <param name="cancellationToken" />
-        /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
-        public Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns the filters the user holds in an application, by cube.
@@ -151,5 +139,20 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
         public Task<List<EssDatabaseProvisioning>> GetProvisionedScriptsAsync( string applicationName, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns the user's provisioning report: the service roles it holds, and what it holds in each application.
+        /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
+        /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
+        public EssProvisioningReport GetProvisioningReport();
+
+        /// <summary>
+        /// Asynchronously returns the user's provisioning report: the service roles it holds, and what it holds in each application.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
+        /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
+        public Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default );
     }
 }

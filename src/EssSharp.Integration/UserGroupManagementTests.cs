@@ -81,10 +81,6 @@ namespace EssSharp.Integration
                 Assert.Equal("again@example.com", reread.Email);
                 Assert.Equal(EssServerRole.User,  reread.Role);
 
-                // Assert that the server sent links with the user.
-                Assert.Contains(reread.Links, link => link.Rel == "get");
-                Assert.Contains(reread.Links, link => link.Rel == "delete" && link.Method == "DELETE");
-
                 // Edit the role, to each role.
                 foreach ( var role in new[] { EssServerRole.PowerUser, EssServerRole.ServiceAdministrator, EssServerRole.User } )
                 {
@@ -320,7 +316,6 @@ namespace EssSharp.Integration
 
                 Assert.Equal(EssServerRole.ServiceAdministrator, reread.Role);
                 Assert.Equal("Described",                        reread.Description);
-                Assert.Contains(reread.Links, link => link.Rel == "get");
             }
             finally
             {

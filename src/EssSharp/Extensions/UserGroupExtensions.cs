@@ -14,20 +14,6 @@ namespace EssSharp
     /// </summary>
     internal static class UserGroupExtensions
     {
-        #region Links
-
-        /// <summary>
-        /// Returns the given API links as <see cref="EssLink"/> objects.
-        /// </summary>
-        /// <param name="links">The links the server gave.</param>
-        internal static List<EssLink> ToEssLinks( this List<Link> links ) =>
-            links?
-                .Where(link => link is not null)
-                .Select(link => new EssLink(link.Rel, link.Href, link.Method))
-                .ToList() ?? new List<EssLink>();
-
-        #endregion
-
         #region Bulk Operations
 
         /// <summary>

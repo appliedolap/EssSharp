@@ -499,7 +499,7 @@ namespace EssSharp
             var api = GetApi<GroupsApi>();
 
             var response = await RequestUsersAndGroupsAsync(
-                () => api.GroupsDeleteGroupsFromFileWithHttpInfoAsync(file, cancellationToken: cancellationToken),
+                () => api.UsersDeleteGroupsWithHttpInfoAsync(file, cancellationToken: cancellationToken),
                 $@"Unable to delete the groups on ""{Name}"".",
                 cancellationToken).ConfigureAwait(false);
 
@@ -522,7 +522,7 @@ namespace EssSharp
             var api = GetApi<UsersApi>();
 
             var response = await RequestUsersAndGroupsAsync(
-                () => api.UsersDeleteUsersFromFileWithHttpInfoAsync(file, cancellationToken: cancellationToken),
+                () => api.UsersDeleteUsersWithHttpInfoAsync(file, cancellationToken: cancellationToken),
                 $@"Unable to delete the users on ""{Name}"".",
                 cancellationToken).ConfigureAwait(false);
 

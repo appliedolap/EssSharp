@@ -62,12 +62,20 @@
         /// them, and managing group members. Not available in EPM Shared Services security mode or Identity Cloud mode, where the
         /// users and groups live outside the server.
         /// </summary>
+        /// <remarks>
+        /// Whether the server supports this does not show what the connected user may do: managing users and groups takes service
+        /// administrator privilege, and the server refuses any other user.
+        /// </remarks>
         UserGroupManagement = 11,
 
         /// <summary>
         /// Getting the provisioning report of a user or group, which lists the roles, filters and scripts it holds. Not available
         /// in EPM Shared Services security mode or Identity Cloud mode.
         /// </summary>
+        /// <remarks>
+        /// Whether the server supports this does not show what the connected user may read: a user who is not a service administrator
+        /// gets an empty report for another user.
+        /// </remarks>
         ProvisioningReports = 12
     }
 }

@@ -206,8 +206,9 @@ namespace EssSharp
         /// Deletes several groups from the server in one call.
         /// </summary>
         /// <param name="names">The names of the groups to delete.</param>
-        /// <returns>What the server reported for each group. The server answers successfully even when it cannot delete some of them, such as one that does not exist, so check each result.</returns>
+        /// <returns>What the server reported for each group. The server answers successfully even when it cannot delete some of them, such as one that does not exist or one the connected user may not delete, so check each result.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. For any other user the call does not fail: the server reports each one as not deleted, with a message that says why, so check each result.</remarks>
         public List<EssBulkResult> DeleteGroups( IEnumerable<string> names );
 
         /// <summary>
@@ -215,16 +216,18 @@ namespace EssSharp
         /// </summary>
         /// <param name="names">The names of the groups to delete.</param>
         /// <param name="cancellationToken" />
-        /// <returns>What the server reported for each group. The server answers successfully even when it cannot delete some of them, such as one that does not exist, so check each result.</returns>
+        /// <returns>What the server reported for each group. The server answers successfully even when it cannot delete some of them, such as one that does not exist or one the connected user may not delete, so check each result.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. For any other user the call does not fail: the server reports each one as not deleted, with a message that says why, so check each result.</remarks>
         public Task<List<EssBulkResult>> DeleteGroupsAsync( IEnumerable<string> names, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Deletes several users from the server in one call.
         /// </summary>
         /// <param name="ids">The IDs of the users to delete.</param>
-        /// <returns>What the server reported for each user. The server answers successfully even when it cannot delete some of them, such as one that does not exist, so check each result.</returns>
+        /// <returns>What the server reported for each user. The server answers successfully even when it cannot delete some of them, such as one that does not exist or one the connected user may not delete, so check each result.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. For any other user the call does not fail: the server reports each one as not deleted, with a message that says why, so check each result.</remarks>
         public List<EssBulkResult> DeleteUsers( IEnumerable<string> ids );
 
         /// <summary>
@@ -232,8 +235,9 @@ namespace EssSharp
         /// </summary>
         /// <param name="ids">The IDs of the users to delete.</param>
         /// <param name="cancellationToken" />
-        /// <returns>What the server reported for each user. The server answers successfully even when it cannot delete some of them, such as one that does not exist, so check each result.</returns>
+        /// <returns>What the server reported for each user. The server answers successfully even when it cannot delete some of them, such as one that does not exist or one the connected user may not delete, so check each result.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. For any other user the call does not fail: the server reports each one as not deleted, with a message that says why, so check each result.</remarks>
         public Task<List<EssBulkResult>> DeleteUsersAsync( IEnumerable<string> ids, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -242,6 +246,7 @@ namespace EssSharp
         /// </summary>
         /// <returns>A stream of the CSV, which the caller disposes.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Stream ExportGroups();
 
         /// <summary>
@@ -251,6 +256,7 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <returns>A stream of the CSV, which the caller disposes.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task<Stream> ExportGroupsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -259,6 +265,7 @@ namespace EssSharp
         /// </summary>
         /// <returns>A stream of the CSV, which the caller disposes.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Stream ExportUsers();
 
         /// <summary>
@@ -268,6 +275,7 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <returns>A stream of the CSV, which the caller disposes.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task<Stream> ExportUsersAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -609,6 +617,7 @@ namespace EssSharp
         /// <param name="csv">A stream of the CSV, including its header line.</param>
         /// <returns>What the server reported for each group. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public List<EssBulkResult> ImportGroups( Stream csv );
 
         /// <summary>
@@ -619,6 +628,7 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <returns>What the server reported for each group. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task<List<EssBulkResult>> ImportGroupsAsync( Stream csv, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -629,6 +639,7 @@ namespace EssSharp
         /// <param name="csv">A stream of the CSV, including its header line.</param>
         /// <returns>What the server reported for each user. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public List<EssBulkResult> ImportUsers( Stream csv );
 
         /// <summary>
@@ -640,6 +651,7 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <returns>What the server reported for each user. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task<List<EssBulkResult>> ImportUsersAsync( Stream csv, CancellationToken cancellationToken = default );
 
         /// <summary>

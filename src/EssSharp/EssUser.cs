@@ -59,9 +59,6 @@ namespace EssSharp
         /// <inheritdoc />
         public List<string> GroupNames => _user?.Groups;
 
-        /// <inheritdoc />
-        public List<EssLink> Links => _user.Links.ToEssLinks();
-
         #endregion
 
         #region IEssUser Members
@@ -153,19 +150,6 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public EssProvisioningReport GetProvisioningReport() => GetProvisioningReportAsync().GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        public async Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default )
-        {
-            var api = GetApi<UserProvisioningReportApi>();
-
-            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
-                () => api.UserProvisioningReportGetFullReportAsync(userId: Name, expand: "all", cancellationToken: cancellationToken),
-                $@"Unable to get the provisioning report of user ""{Name}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisioningReport();
-        }
-
-        /// <inheritdoc />
         public List<EssDatabaseProvisioning> GetProvisionedFilters( string applicationName ) =>
             GetProvisionedFiltersAsync(applicationName).GetAwaiter().GetResult();
 
@@ -205,6 +189,19 @@ namespace EssSharp
             return (await _server.RequestAsync(EssFeature.ProvisioningReports,
                 () => api.UserProvisioningReportGetScriptsAsync(application: applicationName, userId: Name, cancellationToken: cancellationToken),
                 $@"Unable to get the scripts of user ""{Name}"" in application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssDatabaseProvisionings();
+        }
+
+        /// <inheritdoc />
+        public EssProvisioningReport GetProvisioningReport() => GetProvisioningReportAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UserProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.UserProvisioningReportGetFullReportAsync(userId: Name, expand: "all", cancellationToken: cancellationToken),
+                $@"Unable to get the provisioning report of user ""{Name}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisioningReport();
         }
 
         #endregion

@@ -31,11 +31,6 @@ namespace EssSharp
         public EssServerRole Role { get; }
 
         /// <summary>
-        /// Returns the links the server gave with the group, to the operations on it.
-        /// </summary>
-        public List<EssLink> Links { get; }
-
-        /// <summary>
         /// Adds a group or groups by id to a group.
         /// </summary>
         /// <param name="groupIds"></param>
@@ -66,6 +61,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="role"></param>
         /// <param name="description"></param>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public IEssGroup Edit( EssServerRole? role = null, string description = null );
 
         /// <summary>
@@ -74,17 +70,20 @@ namespace EssSharp
         /// <param name="role"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task<IEssGroup> EditAsync( EssServerRole? role = null, string description = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Delete group.
         /// </summary>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public void Delete();
 
         /// <summary>
         /// Asynchronously delete group.
         /// </summary>
         /// <param name="cancellationToken"></param>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task DeleteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -139,6 +138,7 @@ namespace EssSharp
         /// Returns the members of the group, its users and its groups together.
         /// </summary>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public EssGroupMembers GetMembers();
 
         /// <summary>
@@ -146,6 +146,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task<EssGroupMembers> GetMembersAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -167,6 +168,7 @@ namespace EssSharp
         /// Returns what the group holds in each application.
         /// </summary>
         /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
+        /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
         public List<EssApplicationProvisioning> GetApplicationProvisioningReports();
 
         /// <summary>
@@ -174,20 +176,8 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
+        /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
         public Task<List<EssApplicationProvisioning>> GetApplicationProvisioningReportsAsync( CancellationToken cancellationToken = default );
-
-        /// <summary>
-        /// Returns the group's provisioning report: the service roles it holds, and what it holds in each application.
-        /// </summary>
-        /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
-        public EssProvisioningReport GetProvisioningReport();
-
-        /// <summary>
-        /// Asynchronously returns the group's provisioning report: the service roles it holds, and what it holds in each application.
-        /// </summary>
-        /// <param name="cancellationToken" />
-        /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
-        public Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns the filters the group holds in an application, by cube.
@@ -233,5 +223,20 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
         public Task<List<EssDatabaseProvisioning>> GetProvisionedScriptsAsync( string applicationName, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns the group's provisioning report: the service roles it holds, and what it holds in each application.
+        /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
+        /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
+        public EssProvisioningReport GetProvisioningReport();
+
+        /// <summary>
+        /// Asynchronously returns the group's provisioning report: the service roles it holds, and what it holds in each application.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
+        /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
+        public Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default );
     }
 }

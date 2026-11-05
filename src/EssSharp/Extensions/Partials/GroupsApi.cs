@@ -11,14 +11,14 @@ namespace EssSharp.Api
     {
         /// <summary>
         /// Delete Groups in a File &lt;p&gt;Deletes the groups whose names are listed in the file, one to a line.&lt;/p&gt;
-        /// The generated <c>UsersDeleteGroupsWithHttpInfoAsync</c> sends no file, and the specification documents none.
+        /// Overloads the generated <c>UsersDeleteGroupsWithHttpInfoAsync</c>, which sends no file because the specification documents none.
         /// </summary>
         /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="file">The text file of group names, one to a line.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (a CSV text of <c>name,result</c> lines, as the bytes the server sent)</returns>
-        public Task<ApiResponse<byte[]>> GroupsDeleteGroupsFromFileWithHttpInfoAsync( Stream file, int operationIndex = 0, CancellationToken cancellationToken = default ) =>
+        public Task<ApiResponse<byte[]>> UsersDeleteGroupsWithHttpInfoAsync( Stream file, int operationIndex = 0, CancellationToken cancellationToken = default ) =>
             UserGroupFileRequests.PostAsync(AsynchronousClient, Configuration, ExceptionFactory, "/groups/actions/delete", "GroupsApi.UsersDeleteGroups", file, operationIndex, cancellationToken);
 
         /// <summary>

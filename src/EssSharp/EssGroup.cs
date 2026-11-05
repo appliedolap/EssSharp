@@ -55,9 +55,6 @@ namespace EssSharp
         /// <inheritdoc />
         public EssServerRole Role => _group.Role.ToEssServerRole();
 
-        /// <inheritdoc />
-        public List<EssLink> Links => _group.Links.ToEssLinks();
-
         #endregion
 
         #region IEssGroup Members
@@ -298,19 +295,6 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
-        public EssProvisioningReport GetProvisioningReport() => GetProvisioningReportAsync().GetAwaiter().GetResult();
-
-        /// <inheritdoc />
-        public async Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default )
-        {
-            var api = GetApi<GroupProvisioningReportApi>();
-
-            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
-                () => api.GroupProvisioningReportGetFullReportAsync(groupId: Name, expand: "all", cancellationToken: cancellationToken),
-                $@"Unable to get the provisioning report of group ""{Name}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisioningReport();
-        }
-
-        /// <inheritdoc />
         public List<EssDatabaseProvisioning> GetProvisionedFilters( string applicationName ) =>
             GetProvisionedFiltersAsync(applicationName).GetAwaiter().GetResult();
 
@@ -350,6 +334,19 @@ namespace EssSharp
             return (await _server.RequestAsync(EssFeature.ProvisioningReports,
                 () => api.GroupProvisioningReportGetScriptsAsync(application: applicationName, groupId: Name, cancellationToken: cancellationToken),
                 $@"Unable to get the scripts of group ""{Name}"" in application ""{applicationName}"".", cancellationToken).ConfigureAwait(false)).ToEssDatabaseProvisionings();
+        }
+
+        /// <inheritdoc />
+        public EssProvisioningReport GetProvisioningReport() => GetProvisioningReportAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupProvisioningReportApi>();
+
+            return (await _server.RequestAsync(EssFeature.ProvisioningReports,
+                () => api.GroupProvisioningReportGetFullReportAsync(groupId: Name, expand: "all", cancellationToken: cancellationToken),
+                $@"Unable to get the provisioning report of group ""{Name}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisioningReport();
         }
 
         #endregion

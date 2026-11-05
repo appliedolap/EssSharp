@@ -21,7 +21,7 @@ namespace EssSharp.Test.Library
         private const string _octetStream = "application/octet-stream";
 
         private const string _users = @"{""items"":[
-            {""id"":""u1"",""name"":""One"",""email"":""one@example.com"",""role"":""Service Administrator"",""groups"":[""g1""],""links"":[{""rel"":""get"",""href"":""http://localhost/users/u1"",""method"":""GET""},{""rel"":""delete"",""href"":""http://localhost/users/u1"",""method"":""DELETE""}]},
+            {""id"":""u1"",""name"":""One"",""email"":""one@example.com"",""role"":""Service Administrator"",""groups"":[""g1""]},
             {""id"":""u2"",""name"":""Two"",""email"":"""",""role"":""Power User""},
             {""id"":""u3"",""name"":"""",""email"":"""",""role"":""user""}]}";
 
@@ -204,8 +204,8 @@ namespace EssSharp.Test.Library
 
         #region Model
 
-        [Fact(DisplayName = "UserGroupTests - GetUsersAsync_CarriesTheLinks_AndReadsEachRole")]
-        public async Task GetUsersAsync_CarriesTheLinks_AndReadsEachRole()
+        [Fact(DisplayName = "UserGroupTests - GetUsersAsync_ReadsTheRoleOfEachUser")]
+        public async Task GetUsersAsync_ReadsTheRoleOfEachUser()
         {
             using var stub = Stub((method: "GET", path: "/users", body: _users));
 
@@ -213,10 +213,6 @@ namespace EssSharp.Test.Library
             var users  = await server.GetUsersAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(new[] { EssServerRole.ServiceAdministrator, EssServerRole.PowerUser, EssServerRole.User }, users.Select(user => user.Role));
-
-            Assert.Equal(new[] { "get", "delete" }, users[0].Links.Select(link => link.Rel));
-            Assert.Equal("DELETE", users[0].Links[1].Method);
-            Assert.Empty(users[1].Links);
         }
 
         [Fact(DisplayName = "UserGroupTests - GetUsersAsync_ReadsEveryFormOfARoleName")]
@@ -419,6 +415,135 @@ namespace EssSharp.Test.Library
 
         #endregion
 
+        #region Permissions
+
+        // What Essbase 26.1 answered to a User and a Power User, who may not manage users and groups: HTTP 400 with this message for most
+        // operations, and for deleting several, HTTP 200 with the refusal in each row.
+
+        private const string _notAuthorized = "User is not authorized to perform this operation";
+
+        private const string _notAllowed = "oracle.essbase.security.EssbaseSecurityException: User [reg] is not allowed to perform operation.";
+
+        [Theory(DisplayName = "UserGroupTests - DeleteAsync_WhenTheServerRefusesTheUser_ReturnsAFailedResultForEachRowWithoutThrowing")]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async Task DeleteAsync_WhenTheServerRefusesTheUser_ReturnsAFailedResultForEachRowWithoutThrowing( bool users )
+        {
+            using var stub = Stub((method: "POST", path: users ? "/users/actions/delete" : "/groups/actions/delete", body: $"a,{_notAllowed}\nb,{_notAllowed}\n"));
+
+            var server  = new EssServer(stub.BasePath, "reg", "password");
+            var results = users
+                ? await server.DeleteUsersAsync(new[] { "a", "b" }, TestContext.Current.CancellationToken)
+                : await server.DeleteGroupsAsync(new[] { "a", "b" }, TestContext.Current.CancellationToken);
+
+            Assert.Equal(new[] { "a", "b" }, results.Select(result => result.Id));
+
+            Assert.All(results, result =>
+            {
+                Assert.False(result.Succeeded);
+                Assert.Equal(_notAllowed, result.Message);
+            });
+        }
+
+        [Fact(DisplayName = "UserGroupTests - DeleteUsersAsync_WhenOnlySomeRowsAreRefused_ReportsEachRowOnItsOwn")]
+        public async Task DeleteUsersAsync_WhenOnlySomeRowsAreRefused_ReportsEachRowOnItsOwn()
+        {
+            // The server never lets a user delete themselves, and answers that row alone.
+            using var stub = Stub((method: "POST", path: "/users/actions/delete", body: $"u1,Deleted\nadmin,oracle.essbase.security.EssbaseSecurityException: Self delete operation not supported.\nu3,{_notAllowed}\n"));
+
+            var server  = new EssServer(stub.BasePath, "admin", "password");
+            var results = await server.DeleteUsersAsync(new[] { "u1", "admin", "u3" }, TestContext.Current.CancellationToken);
+
+            Assert.Equal(new[] { true, false, false }, results.Select(result => result.Succeeded));
+            Assert.Contains("Self delete operation not supported", results[1].Message);
+            Assert.Contains("not allowed to perform operation",    results[2].Message);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - GetUsersAsync_WhenTheServerRefusesTheUser_ThrowsWithTheServersMessage_NotNotSupported")]
+        public async Task GetUsersAsync_WhenTheServerRefusesTheUser_ThrowsWithTheServersMessage_NotNotSupported()
+        {
+            using var stub = Stub();
+
+            stub.ResponseProvider = Refuse(stub.ResponseProvider, "/users");
+
+            var server = new EssServer(stub.BasePath, "reg", "password");
+
+            var exception = await Assert.ThrowsAnyAsync<Exception>(() => server.GetUsersAsync(TestContext.Current.CancellationToken));
+
+            Assert.IsNotType<NotSupportedException>(exception);
+            Assert.Contains(_notAuthorized, exception.Message);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - ImportUsersAsync_WhenTheServerRefusesTheUser_ThrowsWithTheServersMessage_NotNotSupported")]
+        public async Task ImportUsersAsync_WhenTheServerRefusesTheUser_ThrowsWithTheServersMessage_NotNotSupported()
+        {
+            using var stub = Stub();
+
+            stub.ResponseProvider = Refuse(stub.ResponseProvider, "/users");
+
+            var server = new EssServer(stub.BasePath, "reg", "password");
+
+            var exception = await Assert.ThrowsAnyAsync<Exception>(() => server.ImportUsersAsync(new MemoryStream(Encoding.UTF8.GetBytes("id,name,email,password,role,groups\nu4,,,Password1,User,\n")), TestContext.Current.CancellationToken));
+
+            Assert.IsNotType<NotSupportedException>(exception);
+            Assert.Contains(_notAuthorized, exception.Message);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - EditAsync_WhenTheServerRefusesTheUser_ThrowsWithTheServersMessage_AndLeavesTheUserAsItWas")]
+        public async Task EditAsync_WhenTheServerRefusesTheUser_ThrowsWithTheServersMessage_AndLeavesTheUserAsItWas()
+        {
+            using var stub = Stub((method: "GET", path: "/users", body: _users));
+
+            stub.ResponseProvider = Refuse(stub.ResponseProvider, "/users/u2");
+
+            var server = new EssServer(stub.BasePath, "reg", "password");
+            var user   = await server.GetUserAsync("u2", TestContext.Current.CancellationToken);
+
+            var exception = await Assert.ThrowsAnyAsync<Exception>(() => user.EditAsync(role: EssServerRole.ServiceAdministrator, cancellationToken: TestContext.Current.CancellationToken));
+
+            Assert.IsNotType<NotSupportedException>(exception);
+            Assert.Contains(@"Unable to edit user ""u2""", exception.Message);
+            Assert.Contains(_notAuthorized,                exception.Message);
+
+            Assert.Equal(EssServerRole.PowerUser, user.Role);
+            Assert.DoesNotContain(stub.Requests, request => request.StartsWith("PUT "));
+        }
+
+        [Fact(DisplayName = "UserGroupTests - GetProvisioningReportAsync_WhenTheServerAnswersAUserWhoMayNotSeeIt_ReturnsAnEmptyReport")]
+        public async Task GetProvisioningReportAsync_WhenTheServerAnswersAUserWhoMayNotSeeIt_ReturnsAnEmptyReport()
+        {
+            // The server answers a user who is not a service administrator, asking for the report of another user, with 200 and no applications.
+            using var stub = Stub(
+                (method: "GET", path: "/users/u2/provisionReport", body: @"{""applications"":{}}"),
+                (method: "GET", path: "/users",                    body: _users));
+
+            var server = new EssServer(stub.BasePath, "reg", "password");
+            var user   = await server.GetUserAsync("u2", TestContext.Current.CancellationToken);
+
+            var result = await user.GetProvisioningReportAsync(TestContext.Current.CancellationToken);
+
+            Assert.Empty(result.ServiceRoles);
+            Assert.Empty(result.Applications);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - GetProvisionedRolesAsync_WhenTheServerRefusesTheApplication_ThrowsWithTheServersMessage")]
+        public async Task GetProvisionedRolesAsync_WhenTheServerRefusesTheApplication_ThrowsWithTheServersMessage()
+        {
+            using var stub = Stub((method: "GET", path: "/users", body: _users));
+
+            stub.ResponseProvider = Refuse(stub.ResponseProvider, "/users/u2/provisionReport/applications/Sample/roles");
+
+            var server = new EssServer(stub.BasePath, "reg", "password");
+            var user   = await server.GetUserAsync("u2", TestContext.Current.CancellationToken);
+
+            var exception = await Assert.ThrowsAnyAsync<Exception>(() => user.GetProvisionedRolesAsync("Sample", TestContext.Current.CancellationToken));
+
+            Assert.IsNotType<NotSupportedException>(exception);
+            Assert.Contains(_notAuthorized, exception.Message);
+        }
+
+        #endregion
+
         #region Features
 
         [Fact(DisplayName = "UserGroupTests - GetUsersAsync_WithServedSpecificationLackingTheOperations_ThrowsNotSupported")]
@@ -513,6 +638,22 @@ namespace EssSharp.Test.Library
             }
 
             return inner(requestLine);
+        };
+
+        /// <summary>
+        /// Returns a response provider that answers every request for each of the given paths, whatever its method, as Essbase answers
+        /// a user who may not do it (HTTP 400, with a message), and every other request as the given provider does.
+        /// </summary>
+        /// <param name="inner">The provider for every other request.</param>
+        /// <param name="paths">The paths (after the base path) to refuse.</param>
+        private static Func<string, (HttpStatusCode StatusCode, string Body)?> Refuse( Func<string, (HttpStatusCode StatusCode, string Body)?> inner, params string[] paths ) => requestLine =>
+        {
+            var parts = requestLine.Split(' ');
+            var path  = (parts.ElementAtOrDefault(1) ?? string.Empty).Split('?')[0];
+
+            return paths.Any(refused => path == "/essbase/rest/v1" + refused)
+                ? (HttpStatusCode.BadRequest, $@"{{""errorMessage"":""{_notAuthorized}""}}")
+                : inner(requestLine);
         };
 
         /// <summary>
