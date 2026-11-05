@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
@@ -252,6 +254,38 @@ namespace EssSharp.Integration
 
             // Assert that the lock object name is the same as the one we passed.
             Assert.Equal("CalcAll", lockedScript.Name);
+        }
+
+        [Fact(DisplayName = @"CreateServerObjectTests - 09 - Essbase_AfterCubeCreation_CanCreateCalcScriptWithRuntimeSubstitutionVariables"), Priority(09)]
+        public async Task Essbase_AfterCubeCreation_CanCreateCalcScriptWithRuntimeSubstitutionVariables()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube.
+            var cube = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
+
+            // Read the calc script the scoop essbase stack adds to Sample.Basic when it sets up, from the same definition:
+            // CalcProduct, which calculates one product (the runtime substitution variable CalcProduct, a single Product member)
+            // in the markets the user chooses (CalcMarkets, one or more Market members).
+            using var definition = JsonDocument.Parse(await File.ReadAllTextAsync(Path.Combine(AppContext.BaseDirectory, "Scripts", "Essbase", "json", "create-calc-product-script.json"), TestContext.Current.CancellationToken));
+
+            var name    = definition.RootElement.GetProperty("name").GetString();
+            var content = definition.RootElement.GetProperty("content").GetString();
+
+            // Assert that the cube does not contain the calc script before we create it.
+            Assert.DoesNotContain(collection: await cube.GetScriptsAsync<IEssCalcScript>(cancellationToken: TestContext.Current.CancellationToken), calc => string.Equals(calc?.Name, name, StringComparison.Ordinal));
+
+            // Create the script on the server with the definition's content.
+            await cube.CreateScriptAsync<IEssCalcScript>(name, content, cancellationToken: TestContext.Current.CancellationToken);
+
+            // Get the script back from the server.
+            var script = await cube.GetScriptAsync<IEssCalcScript>(name, getContent: true, TestContext.Current.CancellationToken);
+
+            // Assert that the script exists and contains the content we gave it, runtime substitution variables included.
+            Assert.Equal(content, script?.Content);
+            Assert.Contains("SET RUNTIMESUBVARS", script?.Content, StringComparison.Ordinal);
         }
     }
 }
