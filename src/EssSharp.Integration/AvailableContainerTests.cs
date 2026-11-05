@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 using EssSharp.Integration.Setup;
 
@@ -60,6 +63,44 @@ namespace EssSharp.Integration
 
             // Assert
             Assert.True(state?.Running);
+        }
+
+        [Fact(DisplayName = "AvailableContainerTests - 05 - EssbaseContainer_StartedThroughTheWrapper_RunsTheManagedServerWithItsHeap"), Priority(05)]
+        public async Task EssbaseContainer_StartedThroughTheWrapper_RunsTheManagedServerWithItsHeap()
+        {
+            // Get a docker client.
+            using var client = GetClient();
+
+            // The wrapper sets the heap; a container started some other way, such as one a developer started by hand, is not
+            // the harness's to judge.
+            var config = (await client.Containers.InspectContainerAsync(Essbase, TestContext.Current.CancellationToken))?.Config;
+
+            Assert.SkipUnless(config?.Cmd?.Any(argument => argument.EndsWith("/wrapper.sh", StringComparison.Ordinal)) is true,
+                $@"The Essbase container was not started through wrapper.sh (its command is ""{string.Join(" ", config?.Cmd ?? new List<string>())}"").");
+
+            // The heap the wrapper gives Essbase's managed server: the profile's ESSBASE_MANAGED_SERVER_HEAP, or 4g.
+            var expected = IntegrationTestFactory.EssbaseProfile.Environment.TryGetValue("ESSBASE_MANAGED_SERVER_HEAP", out var heap) && heap is { Length: > 0 } ? heap : "4g";
+
+            // Read the command line of the managed server's JVM, which the domain starts some minutes after the container.
+            var commandLine = string.Empty;
+            var deadline    = DateTime.UtcNow.AddMinutes(10);
+
+            while (DateTime.UtcNow < deadline)
+            {
+                var (_, stdout) = await ExecEssbaseAsync(@"for p in /proc/[0-9]*; do tr '\0' ' ' < $p/cmdline 2>/dev/null; echo; done | grep -- '-Dweblogic.Name=essbase_server1' | grep -v grep", TestContext.Current.CancellationToken);
+
+                if ((commandLine = stdout?.Trim() ?? string.Empty).Length > 0)
+                    break;
+
+                await Task.Delay(TimeSpan.FromSeconds(15), TestContext.Current.CancellationToken);
+            }
+
+            Assert.False(commandLine.Length == 0, "Essbase's managed server (essbase_server1) did not start within 10 minutes.");
+
+            // The JVM takes the last -Xmx it is given.
+            var xmx = commandLine.Split(' ', StringSplitOptions.RemoveEmptyEntries).LastOrDefault(argument => argument.StartsWith("-Xmx", StringComparison.Ordinal));
+
+            Assert.Equal($@"-Xmx{expected}", xmx, ignoreCase: true);
         }
 
     }
