@@ -536,6 +536,11 @@ namespace EssSharp
             // EssJobType.Unknown (Multiple)
             Script = options.Script,
 
+            // EssJobType.Calc
+            Rtsv = options.RuntimeSubstitutionVariables is { Count: > 0 } runtimeSubstitutionVariables ?
+                        runtimeSubstitutionVariables.Select(variable => new RTSV() { Name = variable.Key, Value = variable.Value }).ToList() :
+                        null,
+
             // EssJobType.Clear
             Option                = options.Option?.ToString(),
             PartialDataExpression = options.PartialDataExpression,

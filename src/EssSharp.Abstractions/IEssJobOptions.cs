@@ -27,6 +27,18 @@ namespace EssSharp
 
         #endregion
 
+        #region IEssJobOptions EssJobType.Calc Members
+
+        /// <summary>
+        /// Returns or sets the values of the runtime substitution variables an <see cref="EssJobType.Calc" /> job's calc
+        /// script declares, by variable name. Each value is written as the script would write it: a member in quotes, for
+        /// example <c>"100-10"</c>, and several members separated by commas, for example <c>"New York","California"</c>.
+        /// A variable not given keeps the value its script declares.
+        /// </summary>
+        public Dictionary<string, string> RuntimeSubstitutionVariables { get; set; }
+
+        #endregion
+
         #region IEssJobOptions EssJobType.Clear Members
 
         /// <summary>

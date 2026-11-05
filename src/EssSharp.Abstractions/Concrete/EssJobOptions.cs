@@ -40,6 +40,13 @@ namespace EssSharp
 
         #endregion
 
+        #region Explicit IEssJobOptions EssJobType.Calc Members
+
+        /// <inheritdoc />
+        Dictionary<string, string> IEssJobOptions.RuntimeSubstitutionVariables { get; set; }
+
+        #endregion
+
         #region Explicit IEssJobOptions EssJobType.Clear Members
 
         /// <inheritdoc />

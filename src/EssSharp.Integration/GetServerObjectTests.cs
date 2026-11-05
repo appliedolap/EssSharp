@@ -692,5 +692,39 @@ namespace EssSharp.Integration
             Assert.Equal(Flag("appRoleProvisioningSupported", "provisioningSupported"),     await server.SupportsAsync(EssFeature.ApplicationRoleProvisioning, TestContext.Current.CancellationToken));
             Assert.Equal(Flag("resetPasswordSupported"),                          await server.SupportsAsync(EssFeature.PasswordReset, TestContext.Current.CancellationToken));
         }
+
+        [Fact(DisplayName = @"GetServerObjectTests - 25 - Essbase_AfterScriptCreation_CanGetRuntimeSubstitutionVariables"), Priority(25)]
+        public async Task Essbase_AfterScriptCreation_CanGetRuntimeSubstitutionVariables()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
+
+            // Get the runtime substitution variables of CalcProduct, which the create tests add to Sample.Basic.
+            var variables = await cube
+                .GetScriptAsync<IEssCalcScript>("CalcProduct", cancellationToken: TestContext.Current.CancellationToken)
+                .GetRuntimeSubstitutionVariablesAsync(TestContext.Current.CancellationToken);
+
+            // Assert that the script declares its two variables, as their prompt hints describe them.
+            Assert.Equal(2, variables.Count);
+
+            var product = Assert.Single(variables, variable => variable.Name == "CalcProduct");
+            var markets = Assert.Single(variables, variable => variable.Name == "CalcMarkets");
+
+            Assert.Equal(("Product to calculate", EssRuntimeSubstitutionVariableType.Member, "Product", true, false, @"""100-10"""),
+                         (product.Description, product.Type, product.Dimension, product.SingleChoice, product.AllowMissing, product.DefaultValue));
+            Assert.Equal(("Markets to calculate", EssRuntimeSubstitutionVariableType.Member, "Market", false, false, @"""New York"""),
+                         (markets.Description, markets.Type, markets.Dimension, markets.SingleChoice, markets.AllowMissing, markets.DefaultValue));
+            Assert.Equal("CalcProduct", product.Script.Name);
+
+            // Assert that a calc script that declares none returns none.
+            Assert.Empty(await cube
+                .GetScriptAsync<IEssCalcScript>("CalcAll", cancellationToken: TestContext.Current.CancellationToken)
+                .GetRuntimeSubstitutionVariablesAsync(TestContext.Current.CancellationToken));
+        }
     }
 }

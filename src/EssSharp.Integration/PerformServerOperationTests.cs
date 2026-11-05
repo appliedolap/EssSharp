@@ -2370,6 +2370,57 @@ namespace EssSharp.Integration
             Assert.Equal(2, rows.Types[0, 2]);
         }
 
+        [Fact(DisplayName = @"PerformServerFunctionTests - 62 - Essbase_AfterScriptCreation_CanExecuteCalcScriptWithRuntimeSubstitutionVariables"), Priority(62)]
+        public async Task Essbase_AfterScriptCreation_CanExecuteCalcScriptWithRuntimeSubstitutionVariables()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get CalcProduct, which the create tests add to Sample.Basic.
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssCalcScript>("CalcProduct", cancellationToken: TestContext.Current.CancellationToken);
+
+            // Choose a product and two markets, one of whose names has a blank.
+            var options = new EssJobCalcScriptOptions(script)
+            {
+                RuntimeSubstitutionVariables =
+                {
+                    ["CalcProduct"] = @"""100-20""",
+                    ["CalcMarkets"] = @"""New York"",""California"""
+                }
+            };
+
+            // Execute the script with the chosen values.
+            var job = await script.ExecuteAsync(options, TestContext.Current.CancellationToken);
+
+            // Assert that the calculation completed.
+            Assert.Equal(EssJobStatus.Completed, job.JobStatus);
+        }
+
+        [Fact(DisplayName = @"PerformServerFunctionTests - 63 - Essbase_AfterScriptCreation_CannotExecuteCalcScriptWithAnUnknownMember"), Priority(63)]
+        public async Task Essbase_AfterScriptCreation_CannotExecuteCalcScriptWithAnUnknownMember()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get CalcProduct, which the create tests add to Sample.Basic.
+            var script = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken)
+                .GetScriptAsync<IEssCalcScript>("CalcProduct", cancellationToken: TestContext.Current.CancellationToken);
+
+            // Choose a market Sample.Basic does not have, leaving the product at the value the script declares.
+            var options = new EssJobCalcScriptOptions(script)
+            {
+                RuntimeSubstitutionVariables = { ["CalcMarkets"] = @"""Nowhere""" }
+            };
+
+            // Assert that the server ran the script with the given value, and so failed naming it.
+            var exception = await Assert.ThrowsAnyAsync<Exception>(() => script.ExecuteAsync(options, TestContext.Current.CancellationToken));
+
+            Assert.Contains("Nowhere", exception.Message);
+        }
+
         /// <summary>An MDX query with two column members and two row members of Sample.Basic.</summary>
         private const string MemberAxesQuery = "SELECT {[Jan], [Feb]} ON COLUMNS, {[New York], [California]} ON ROWS FROM [Sample].[Basic] WHERE ([Sales], [Actual], [Product])";
     }
