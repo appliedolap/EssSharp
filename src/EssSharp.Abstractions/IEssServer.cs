@@ -203,6 +203,84 @@ namespace EssSharp
         public Task<IEssServerVariable> CreateVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Deletes several groups from the server in one call.
+        /// </summary>
+        /// <param name="names">The names of the groups to delete.</param>
+        /// <returns>What the server reported for each group. The server answers successfully even when it cannot delete some of them, such as one that does not exist or one the connected user may not delete, so check each result.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. For any other user the call does not fail: the server reports each one as not deleted, with a message that says why, so check each result.</remarks>
+        public List<EssBulkResult> DeleteGroups( IEnumerable<string> names );
+
+        /// <summary>
+        /// Asynchronously deletes several groups from the server in one call.
+        /// </summary>
+        /// <param name="names">The names of the groups to delete.</param>
+        /// <param name="cancellationToken" />
+        /// <returns>What the server reported for each group. The server answers successfully even when it cannot delete some of them, such as one that does not exist or one the connected user may not delete, so check each result.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. For any other user the call does not fail: the server reports each one as not deleted, with a message that says why, so check each result.</remarks>
+        public Task<List<EssBulkResult>> DeleteGroupsAsync( IEnumerable<string> names, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Deletes several users from the server in one call.
+        /// </summary>
+        /// <param name="ids">The IDs of the users to delete.</param>
+        /// <returns>What the server reported for each user. The server answers successfully even when it cannot delete some of them, such as one that does not exist or one the connected user may not delete, so check each result.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. For any other user the call does not fail: the server reports each one as not deleted, with a message that says why, so check each result.</remarks>
+        public List<EssBulkResult> DeleteUsers( IEnumerable<string> ids );
+
+        /// <summary>
+        /// Asynchronously deletes several users from the server in one call.
+        /// </summary>
+        /// <param name="ids">The IDs of the users to delete.</param>
+        /// <param name="cancellationToken" />
+        /// <returns>What the server reported for each user. The server answers successfully even when it cannot delete some of them, such as one that does not exist or one the connected user may not delete, so check each result.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. For any other user the call does not fail: the server reports each one as not deleted, with a message that says why, so check each result.</remarks>
+        public Task<List<EssBulkResult>> DeleteUsersAsync( IEnumerable<string> ids, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Exports all the groups on the server as CSV, with the columns <c>name,description,role,groups</c>. The server leaves the descriptions out,
+        /// and exports every group whatever filter it is given, so there is none. An import replaces a group's description with the file's, so
+        /// importing this file unchanged clears every description.
+        /// </summary>
+        /// <returns>A stream of the CSV, which the caller disposes.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
+        public Stream ExportGroups();
+
+        /// <summary>
+        /// Asynchronously exports all the groups on the server as CSV, with the columns <c>name,description,role,groups</c>. The server leaves the
+        /// descriptions out, and exports every group whatever filter it is given, so there is none. An import replaces a group's description with
+        /// the file's, so importing this file unchanged clears every description.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <returns>A stream of the CSV, which the caller disposes.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
+        public Task<Stream> ExportGroupsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Exports all the users on the server as CSV, with the columns <c>id,name,email,password,role,groups</c>. The password column is empty. The
+        /// server exports every user whatever filter it is given, so there is none.
+        /// </summary>
+        /// <returns>A stream of the CSV, which the caller disposes.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
+        public Stream ExportUsers();
+
+        /// <summary>
+        /// Asynchronously exports all the users on the server as CSV, with the columns <c>id,name,email,password,role,groups</c>. The password column
+        /// is empty. The server exports every user whatever filter it is given, so there is none.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <returns>A stream of the CSV, which the caller disposes.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
+        public Task<Stream> ExportUsersAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Returns a specified datasource connection as an <see cref="IEssDatasourceConnection"/>.
         /// </summary>
         /// <param name="connectionName" />
@@ -310,6 +388,21 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns the groups whose names match a filter, as <see cref="IEssGroup"/> objects.
+        /// </summary>
+        /// <param name="filter">A name pattern, where * matches any characters. A name without a * matches that group alone.</param>
+        /// <param name="limit">The most groups to return. Null or negative means no maximum. The server ignores a limit, so EssSharp applies it.</param>
+        public List<IEssGroup> GetGroups( string filter, int? limit = null );
+
+        /// <summary>
+        /// Asynchronously returns the groups whose names match a filter, as <see cref="IEssGroup"/> objects.
+        /// </summary>
+        /// <param name="filter">A name pattern, where * matches any characters. A name without a * matches that group alone.</param>
+        /// <param name="limit">The most groups to return. Null or negative means no maximum. The server ignores a limit, so EssSharp applies it.</param>
+        /// <param name="cancellationToken" />
+        public Task<List<IEssGroup>> GetGroupsAsync( string filter, int? limit = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns a about information of this server as an <see cref="IEssAbout"/>.
@@ -463,6 +556,21 @@ namespace EssSharp
         public Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Returns the users whose IDs match a filter, as <see cref="IEssUser"/> objects.
+        /// </summary>
+        /// <param name="filter">An ID pattern, where * matches any characters. An ID without a * matches that user alone.</param>
+        /// <param name="limit">The most users to return. Null or negative means no maximum. The server ignores a limit, so EssSharp applies it.</param>
+        public List<IEssUser> GetUsers( string filter, int? limit = null );
+
+        /// <summary>
+        /// Asynchronously returns the users whose IDs match a filter, as <see cref="IEssUser"/> objects.
+        /// </summary>
+        /// <param name="filter">An ID pattern, where * matches any characters. An ID without a * matches that user alone.</param>
+        /// <param name="limit">The most users to return. Null or negative means no maximum. The server ignores a limit, so EssSharp applies it.</param>
+        /// <param name="cancellationToken" />
+        public Task<List<IEssUser>> GetUsersAsync( string filter, int? limit = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Returns a list of server-scoped variables available to the connected user as <see cref="IEssServerVariable"/> objects.
         /// </summary>
         public List<IEssServerVariable> GetVariables();
@@ -472,6 +580,29 @@ namespace EssSharp
         /// </summary>
         /// <param name="cancellationToken" />
         public Task<List<IEssServerVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns the service roles that users and groups hold directly, as <see cref="EssServiceRoleAssignment"/> objects.
+        /// A user or group that holds no service role is not returned.
+        /// </summary>
+        /// <param name="idPattern">A user ID or group name pattern, where * matches any characters. Null matches every user and group.</param>
+        /// <param name="type">Whether to return the roles of users, of groups, or of both.</param>
+        /// <param name="roles">The roles to return. Null or empty returns every role.</param>
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        /// <remarks>Works on a server in Identity Cloud mode, where <see cref="GetUsers()"/> and <see cref="GetGroups()"/> do not.</remarks>
+        public List<EssServiceRoleAssignment> GetServiceRoleAssignments( string idPattern = null, EssPermissionType type = EssPermissionType.All, EssServerRole[] roles = null );
+
+        /// <summary>
+        /// Asynchronously returns the service roles that users and groups hold directly, as <see cref="EssServiceRoleAssignment"/> objects.
+        /// A user or group that holds no service role is not returned.
+        /// </summary>
+        /// <param name="idPattern">A user ID or group name pattern, where * matches any characters. Null matches every user and group.</param>
+        /// <param name="type">Whether to return the roles of users, of groups, or of both.</param>
+        /// <param name="roles">The roles to return. Null or empty returns every role.</param>
+        /// <param name="cancellationToken" />
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        /// <remarks>Works on a server in Identity Cloud mode, where <see cref="GetUsersAsync(CancellationToken)"/> and <see cref="GetGroupsAsync(CancellationToken)"/> do not.</remarks>
+        public Task<List<EssServiceRoleAssignment>> GetServiceRoleAssignmentsAsync( string idPattern = null, EssPermissionType type = EssPermissionType.All, EssServerRole[] roles = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns a list of server sessions available to the connected user as <see cref="IEssSession"/> objects.
@@ -503,6 +634,54 @@ namespace EssSharp
         /// Asynchronously returns a list of server utilities available to the connected user as <see cref="IEssUtility"/> objects..
         /// </summary>
         public Task<List<IEssUtility>> GetUtilitiesAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Imports groups from CSV, with the columns <c>name,description,role,groups</c>. A group that exists is edited and one that does not is
+        /// created; several groups in one cell are quoted and separated by commas. An edit replaces the group's description, role and groups with
+        /// the file's. An export from <see cref="ExportGroups()"/> leaves every description blank, so importing one unchanged clears them: fill them
+        /// in first.
+        /// </summary>
+        /// <param name="csv">A stream of the CSV, including its header line.</param>
+        /// <returns>What the server reported for each group. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
+        public List<EssBulkResult> ImportGroups( Stream csv );
+
+        /// <summary>
+        /// Asynchronously imports groups from CSV, with the columns <c>name,description,role,groups</c>. A group that exists is edited and one that
+        /// does not is created; several groups in one cell are quoted and separated by commas. An edit replaces the group's description, role and
+        /// groups with the file's. An export from <see cref="ExportGroupsAsync(CancellationToken)"/> leaves every description blank, so importing
+        /// one unchanged clears them: fill them in first.
+        /// </summary>
+        /// <param name="csv">A stream of the CSV, including its header line.</param>
+        /// <param name="cancellationToken" />
+        /// <returns>What the server reported for each group. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
+        public Task<List<EssBulkResult>> ImportGroupsAsync( Stream csv, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Imports users from CSV, with the columns <c>id,name,email,password,role,groups</c>, such as an export from <see cref="ExportUsers()"/>
+        /// with the passwords filled in. A user that exists is edited and one that does not is created; several groups in one cell are quoted and
+        /// separated by commas.
+        /// </summary>
+        /// <param name="csv">A stream of the CSV, including its header line.</param>
+        /// <returns>What the server reported for each user. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
+        public List<EssBulkResult> ImportUsers( Stream csv );
+
+        /// <summary>
+        /// Asynchronously imports users from CSV, with the columns <c>id,name,email,password,role,groups</c>, such as an export from
+        /// <see cref="ExportUsersAsync(CancellationToken)"/> with the passwords filled in. A user that exists is edited and one that
+        /// does not is created; several groups in one cell are quoted and separated by commas.
+        /// </summary>
+        /// <param name="csv">A stream of the CSV, including its header line.</param>
+        /// <param name="cancellationToken" />
+        /// <returns>What the server reported for each user. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
+        /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
+        public Task<List<EssBulkResult>> ImportUsersAsync( Stream csv, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Kills the active sessions on the server, optionally only those of the given application, cube, and/or user.

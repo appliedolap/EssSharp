@@ -1089,20 +1089,54 @@ namespace EssSharp
             _ => throw new NotSupportedException()
         };
 
-        internal static EssServerRole ToEssServerRole( this string role ) => role.ToLowerInvariant() switch
+        /// <summary>
+        /// Returns the <see cref="EssServerRole"/> the given server role name names, or <see cref="EssServerRole.Unkown"/> when it names none
+        /// or is null, as it is for a user or group that the server describes in brief, such as a member of a group.
+        /// </summary>
+        /// <param name="role">
+        /// The role name the server reports, such as "Service Administrator". The server does not distinguish case, and reports the same
+        /// role in several forms: "Service Administrator" in a list of users, "ServiceAdministrator" for one user, and
+        /// "service_administrator" in a session.
+        /// </param>
+        internal static EssServerRole ToEssServerRole( this string role ) => role?.Replace(" ", string.Empty).Replace("_", string.Empty).ToLowerInvariant() switch
         {
             "user" => EssServerRole.User,
-            "power user" => EssServerRole.PowerUser,
-            "service admininistrator" => EssServerRole.ServiceAdministrator,
+            "poweruser" => EssServerRole.PowerUser,
+            "serviceadministrator" => EssServerRole.ServiceAdministrator,
             _ => EssServerRole.Unkown
         };
 
+        /// <summary>
+        /// Returns the given role name as the name the server accepts for the role it names, or the given name as it is when it names
+        /// no role that EssSharp knows.
+        /// </summary>
+        /// <param name="role">The role name the server reported.</param>
+        internal static string ToServerRoleName( this string role ) =>
+            role.ToEssServerRole() is var essRole && essRole != EssServerRole.Unkown ? essRole.EssServerRoleToString() : role;
+
+        /// <summary>
+        /// Returns the name the server knows the given role by.
+        /// </summary>
+        /// <param name="role">The role.</param>
         internal static string EssServerRoleToString( this EssServerRole role ) => role switch
         {
-            EssServerRole.User => "user",
-            EssServerRole.PowerUser => "power user",
-            EssServerRole.ServiceAdministrator => "service administration",
+            EssServerRole.User => "User",
+            EssServerRole.PowerUser => "Power User",
+            EssServerRole.ServiceAdministrator => "Service Administrator",
             _ => throw new NotSupportedException("Unsupported user role.")
+        };
+
+        /// <summary>
+        /// Returns the name that the server's service role provisioning knows the given role by, such as "service_administrator".
+        /// </summary>
+        /// <param name="role">The role.</param>
+        /// <exception cref="ArgumentException">The role is <see cref="EssServerRole.Unkown"/>, which names no role.</exception>
+        internal static string ToServiceRoleName( this EssServerRole role ) => role switch
+        {
+            EssServerRole.User                 => "user",
+            EssServerRole.PowerUser            => "power_user",
+            EssServerRole.ServiceAdministrator => "service_administrator",
+            _                                  => throw new ArgumentException($"{role} names no service role.", nameof(role))
         };
 
         internal static EssDimStorageType ToEssEnum( this MemberBean.DimStorageTypeEnum? dim ) => dim switch
