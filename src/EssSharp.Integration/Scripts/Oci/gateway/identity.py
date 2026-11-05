@@ -23,6 +23,7 @@ binary, so no package is needed. Every request is logged on one line. Standard l
 """
 import base64
 import hashlib
+import hmac
 import json
 import os
 import secrets
@@ -30,6 +31,7 @@ import subprocess
 import time
 import urllib.parse
 import uuid
+from html import escape
 
 CERT_DIR = os.environ.get("OCI_CERT_DIR", "/opt/oci-certs")
 TENANT = os.environ.get("IDCS_TENANT", "idcs-essbase")
@@ -98,6 +100,22 @@ def load_directory():
 
 
 USERS, GROUPS, CLIENTS = load_directory()
+DIRECTORY_STAMP = os.stat(USERS_FILE).st_mtime_ns
+
+
+def refresh_directory():
+    """Reads users.json again when it changed since it was last read, so that an edit takes effect without a restart. A
+    file that does not parse (one being saved, say) leaves the directory as it was until the file changes again."""
+    global USERS, GROUPS, CLIENTS, DIRECTORY_STAMP
+    try:
+        stamp = os.stat(USERS_FILE).st_mtime_ns
+        if stamp == DIRECTORY_STAMP:
+            return
+        DIRECTORY_STAMP = stamp
+        USERS, GROUPS, CLIENTS = load_directory()
+        log("read %s again: %d users, %d clients" % (USERS_FILE, len(USERS), len(CLIENTS)))
+    except (OSError, ValueError) as error:
+        log("  !! %s could not be read again, so the directory is unchanged: %r" % (USERS_FILE, error))
 
 
 def scim_user(user):
@@ -204,9 +222,34 @@ def sign(claims):
     return signing_input + "." + b64u(signature)
 
 
+MODULUS = int.from_bytes(b64u_decode(N), "big")
+SHA256_DIGEST_INFO = bytes.fromhex("3031300d060960864801650304020105000420")
+
+
 def claims_of(token):
+    """Returns a token's claims without checking it; for logging who called."""
     try:
         return json.loads(b64u_decode(token.split(".")[1]))
+    except Exception:
+        return None
+
+
+def verified_claims(token):
+    """Returns the claims of a token this gateway signed (RS256 with signing.key), or None for any other token."""
+    try:
+        header, body, signature = token.split(".")
+        if json.loads(b64u_decode(header)).get("alg") != "RS256":
+            return None
+        size = (MODULUS.bit_length() + 7) // 8
+        signature = b64u_decode(signature)
+        if len(signature) != size:
+            return None
+        decoded = pow(int.from_bytes(signature, "big"), 65537, MODULUS).to_bytes(size, "big")
+        digest = hashlib.sha256((header + "." + body).encode()).digest()
+        padding = b"\xff" * (size - 3 - len(SHA256_DIGEST_INFO) - len(digest))
+        if not hmac.compare_digest(decoded, b"\x00\x01" + padding + b"\x00" + SHA256_DIGEST_INFO + digest):
+            return None
+        return json.loads(b64u_decode(body))
     except Exception:
         return None
 
@@ -231,13 +274,15 @@ def split_scope(scope):
 CODES, DEVICES, REFRESH_TOKENS = {}, {}, {}
 
 
-def issue(client, user=None, scope="", grant="password", nonce=None):
-    """Returns a token response for a user (or, without one, for the client itself) with Identity Cloud's claims."""
+def issue(client, user=None, scope="", grant="password", nonce=None, ttl=None):
+    """Returns a token response for a user (or, without one, for the client itself) with Identity Cloud's claims, lasting
+    ttl seconds (TOKEN_TTL when not given)."""
+    ttl = TOKEN_TTL if ttl is None else ttl
     audiences, scopes = split_scope(scope)
     issued = now()
     access = {"user_tz": "America/Chicago", "iss": ISSUER, "tok_type": "AT", "client_id": client["clientId"],
               "client_name": client["name"], "client_guid": client["id"], "client_tenantname": TENANT, "tenant": TENANT,
-              "user.tenant.name": TENANT, "iat": issued, "exp": issued + TOKEN_TTL, "jti": uuid.uuid4().hex, "gtp": grant,
+              "user.tenant.name": TENANT, "iat": issued, "exp": issued + ttl, "jti": uuid.uuid4().hex, "gtp": grant,
               "aud": list(dict.fromkeys(audiences + [BASE, "https://%s.%s:443" % (TENANT, HOST)])),
               "scope": " ".join(scopes), "sidle": 480, "tenant_iss": BASE, "ca_guid": guid("ca:" + TENANT), "primTenant": True}
     if user:
@@ -246,10 +291,10 @@ def issue(client, user=None, scope="", grant="password", nonce=None):
                        "user_isAdmin": "essbase-admins" in user["groups"], "user_tenantname": TENANT})
     else:
         access.update({"sub": client["clientId"], "sub_type": "client", "sub_mappingattr": "clientId"})
-    response = {"access_token": sign(access), "token_type": "Bearer", "expires_in": TOKEN_TTL}
+    response = {"access_token": sign(access), "token_type": "Bearer", "expires_in": ttl}
     if user and "openid" in scopes:
         identity = {"iss": ISSUER, "sub": user["userName"], "aud": client["clientId"], "iat": issued,
-                    "exp": issued + TOKEN_TTL, "tok_type": "IT", "user_id": user["id"],
+                    "exp": issued + ttl, "tok_type": "IT", "user_id": user["id"],
                     "user_displayname": user["displayName"], "user.tenant.name": TENANT, "upn": user["userName"],
                     "preferred_username": user["userName"], "email": user.get("email", ""),
                     "given_name": user.get("givenName", ""), "family_name": user.get("familyName", ""),
@@ -264,16 +309,17 @@ def issue(client, user=None, scope="", grant="password", nonce=None):
     return response
 
 
-def find_user(username, password=None):
+def find_user(username, password):
+    """Returns the user whose password this is; a request without a password, or a user without one, never matches."""
     user = USERS.get((username or "").lower())
-    if user and (password is None or (user.get("password") or None) == password):
+    if user and password is not None and user.get("password") and user["password"] == password:
         return user
     return None
 
 
 def bearer_user(handler):
     """Returns (user, claims) for the request's bearer token; user is None for a client token or a bad token."""
-    claims = claims_of((handler.headers.get("Authorization") or "")[7:])
+    claims = verified_claims((handler.headers.get("Authorization") or "")[7:])
     if not claims or claims.get("exp", 0) < now():
         return None, claims
     return (USERS.get(str(claims.get("sub", "")).lower()) if claims.get("sub_type") == "user" else None), claims
@@ -288,7 +334,7 @@ SIGN_IN_PAGE = """<html><head><title>Essbase stack identity</title></head>
 
 
 def hidden_fields(params, skip=()):
-    return "".join('<input type="hidden" name="%s" value="%s">' % (key, value.replace('"', "&quot;"))
+    return "".join('<input type="hidden" name="%s" value="%s">' % (escape(key), escape(value))
                    for key, value in params.items() if key not in skip)
 
 
@@ -387,58 +433,70 @@ def token(handler, form):
         return send_json(handler, 401, {"error": "invalid_client", "error_description": "Unknown client or bad secret"})
     grant = form.get("grant_type", [""])[0]
     scope = form.get("scope", [""])[0]
-    # For tests: a lifetime of the caller's choosing (seconds, negative for a token that has already expired).
-    global TOKEN_TTL
-    default_ttl = TOKEN_TTL
-    try:
-        if form.get("expires_in", [""])[0].strip():
-            TOKEN_TTL = int(form["expires_in"][0])
-        if grant == "client_credentials":
-            return send_json(handler, 200, issue(client, None, scope, grant))
-        return token_for_user(handler, client, grant, scope, form)
-    finally:
-        TOKEN_TTL = default_ttl
+    # For tests: a lifetime of the caller's choosing (seconds, negative for a token that has already expired). It is passed
+    # along rather than set globally, because the server answers requests on parallel threads.
+    ttl = int(form["expires_in"][0]) if form.get("expires_in", [""])[0].strip() else None
+    if grant == "client_credentials":
+        return send_json(handler, 200, issue(client, None, scope, grant, ttl=ttl))
+    return token_for_user(handler, client, grant, scope, form, ttl)
 
 
-def token_for_user(handler, client, grant, scope, form):
+def token_for_user(handler, client, grant, scope, form, ttl=None):
     """The grants that end in a user's token."""
     if grant == "password":
         user = find_user(form.get("username", [""])[0], form.get("password", [""])[0])
         if not user:
             return send_json(handler, 401, {"error": "invalid_grant", "error_description": "Bad user name or password"})
-        return send_json(handler, 200, issue(client, user, scope, grant))
+        return send_json(handler, 200, issue(client, user, scope, grant, ttl=ttl))
     if grant == "authorization_code":
         code = CODES.pop(form.get("code", [""])[0], None)
-        if not code:
+        if not code or code["client"] != client["clientId"] or code["user"] not in USERS:
             return send_json(handler, 400, {"error": "invalid_grant", "error_description": "Unknown or used code"})
-        return send_json(handler, 200, issue(client, USERS[code["user"]], code["scope"], grant, code.get("nonce")))
+        return send_json(handler, 200, issue(client, USERS[code["user"]], code["scope"], grant, code.get("nonce"), ttl))
     if grant == "refresh_token":
         refresh = REFRESH_TOKENS.pop(form.get("refresh_token", [""])[0], None)
-        if not refresh:
+        if not refresh or refresh[0] != client["clientId"] or refresh[1] not in USERS:
             return send_json(handler, 400, {"error": "invalid_grant", "error_description": "Unknown refresh token"})
-        return send_json(handler, 200, issue(client, USERS[refresh[1]], refresh[2], grant))
+        return send_json(handler, 200, issue(client, USERS[refresh[1]], refresh[2], grant, ttl=ttl))
     if grant == "urn:ietf:params:oauth:grant-type:device_code":
         device_code = form.get("device_code", [""])[0]
         device = DEVICES.get(device_code)
-        if not device:
+        if not device or device["client"] != client["clientId"]:
             return send_json(handler, 400, {"error": "invalid_grant"})
         if not device.get("user"):
             return send_json(handler, 400, {"error": "authorization_pending"})
         DEVICES.pop(device_code, None)
-        return send_json(handler, 200, issue(client, USERS[device["user"]], device["scope"], "device_code"))
+        if device["user"] not in USERS:
+            return send_json(handler, 400, {"error": "invalid_grant"})
+        return send_json(handler, 200, issue(client, USERS[device["user"]], device["scope"], "device_code", ttl=ttl))
     return send_json(handler, 400, {"error": "unsupported_grant_type", "error_description": grant})
 
 
+def redirect_allowed(client, redirect):
+    """The addresses a client's codes may go to: the local machine (http or https on localhost, 127.0.0.1 or [::1], any
+    port and path), as native applications' listeners use, and the client's redirectUris in users.json (an exact match,
+    or a listed address ending in / that the redirect starts with), such as the address an embedded browser stops at."""
+    parsed = urllib.parse.urlparse(redirect)
+    if parsed.scheme in ("http", "https") and parsed.hostname in ("localhost", "127.0.0.1", "::1"):
+        return True
+    return any(redirect == uri or (uri.endswith("/") and redirect.startswith(uri)) for uri in client.get("redirectUris") or [])
+
+
 def authorize(handler, method, params):
+    client = CLIENTS.get(params.get("client_id", ""))
+    if not client:
+        return send_html(handler, 400, SIGN_IN_PAGE % ("Unknown client.", ""))
+    if not redirect_allowed(client, params.get("redirect_uri", "")):
+        return send_html(handler, 400, SIGN_IN_PAGE % ("The redirect address is not one %s may use." % escape(client["name"]), ""))
     if method == "GET" or not params.get("username"):
-        return send_html(handler, 200, SIGN_IN_PAGE % ("Sign in to continue to %s." % params.get("client_id", "the application"),
+        return send_html(handler, 200, SIGN_IN_PAGE % ("Sign in to continue to %s." % escape(client["name"]),
                                                         hidden_fields(params)))
     user = find_user(params.get("username"), params.get("password"))
     if not user:
         return send_html(handler, 200, SIGN_IN_PAGE % ("Bad user name or password.", hidden_fields(params, ("username", "password"))))
     code = secrets.token_urlsafe(24)
     CODES[code] = {"user": user["userName"].lower(), "scope": params.get("scope", ""), "nonce": params.get("nonce"),
-                   "client": params.get("client_id")}
+                   "client": client["clientId"]}
     redirect = params.get("redirect_uri", "")
     location = "%s%scode=%s" % (redirect, "&" if "?" in redirect else "?", code)
     if params.get("state"):
@@ -462,7 +520,7 @@ def device(handler, form):
 def device_verify(handler, method, params):
     hidden = hidden_fields({"user_code": params.get("user_code", "")})
     if method == "GET" or not params.get("username"):
-        return send_html(handler, 200, SIGN_IN_PAGE % ("Approve device code %s." % params.get("user_code", "?"), hidden))
+        return send_html(handler, 200, SIGN_IN_PAGE % ("Approve device code %s." % escape(params.get("user_code", "?")), hidden))
     user = find_user(params.get("username"), params.get("password"))
     pending = next((item for item in DEVICES.values() if item["user_code"] == params.get("user_code")), None)
     if not user or not pending:
@@ -553,6 +611,7 @@ def handles(path):
 
 def handle(handler, method, raw):
     """Answers an identity request. Returns after sending the response; errors are answered as 500 and logged."""
+    refresh_directory()
     parsed = urllib.parse.urlparse(handler.path)
     path, query = parsed.path.rstrip("/") or "/", urllib.parse.parse_qs(parsed.query)
     content_type = (handler.headers.get("Content-Type") or "").lower()
@@ -585,7 +644,7 @@ def handle(handler, method, raw):
                                             "email_verified": True, "preferred_username": user["userName"], "user_id": user["id"],
                                             "user_displayname": user["displayName"], "user.tenant.name": TENANT, "groups": user["groups"]})
         if path == "/oauth2/v1/introspect" and method == "POST":
-            claims = claims_of(form.get("token", [""])[0])
+            claims = verified_claims(form.get("token", [""])[0])
             if not claims or claims.get("exp", 0) < now():
                 return send_json(handler, 200, {"active": False})
             return send_json(handler, 200, dict(claims, active=True, username=claims.get("sub"), token_type="Bearer"))

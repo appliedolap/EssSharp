@@ -7,12 +7,14 @@
     "an Identity Cloud server cannot create itself. Each \"essbase\" entry is applied to Essbase by the gateway on",
     "every start and every two minutes after: \"role\" is the service role, \"applications\" the roles per application;",
     "an application that does not exist yet is skipped until it does.",
-    "alice (service administrator) and bob (user, Sample only) are the OAuth tests' users; carol holds no role."
+    "alice (service administrator) and bob (user, Sample only) are the OAuth tests' users; carol holds no role.",
+    "A client's codes may go to the local machine, and to its \"redirectUris\" (Dodeca's embedded browser stops at",
+    "https://sso.appliedolap.com/oauth/nativeclient). An edit takes effect on the next sign-in; no restart is needed."
   ],
   "clients": {
     "essbase": {"name": "Essbase", "secret": "EssbaseIdentityClient1"},
     "esssharp": {"name": "EssSharp", "secret": ""},
-    "dodeca": {"name": "Dodeca", "secret": ""}
+    "dodeca": {"name": "Dodeca", "secret": "", "redirectUris": ["https://sso.appliedolap.com/oauth/nativeclient"]}
   },
   "groups": ["essbase-admins", "essbase-users"],
   "users": [

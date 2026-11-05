@@ -3,7 +3,8 @@
 
 Its identity role (identity.py) is an Identity Cloud tenant for the stack: in Identity Cloud mode Essbase takes it for its
 identity provider, so Essbase REST accepts the bearer tokens it issues (OAuth). Its AI role, below, answers the calls an
-Oracle AI Database makes for Essbase's AI features.
+Oracle AI Database makes for Essbase's AI features. Its drill role (drill.py) answers URL drill-through definitions it
+makes on Sample.Basic, and records what each drill sent, for testing clients.
 
 Essbase's AI features do not call a model themselves. They ask an Oracle database to do it, through DBMS_CLOUD_AI (chat)
 and DBMS_VECTOR_CHAIN (embeddings), and the database calls
@@ -47,6 +48,7 @@ import urllib.error
 import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
+import drill
 import essbase_hints
 import identity
 
@@ -408,6 +410,8 @@ class Handler(BaseHTTPRequestHandler):
         raw = self.read_body()
         if identity.handles(self.path):
             return identity.handle(self, self.command, raw)
+        if drill.handles(self.path):
+            return drill.handle(self, self.command, raw)
         try:
             body = json.loads(raw or b"{}")
         except ValueError:
@@ -451,6 +455,23 @@ class Handler(BaseHTTPRequestHandler):
 
     do_GET = do_POST
 
+    def do_DELETE(self):
+        # Only the drill role takes a DELETE (to forget its recorded requests); everything else refuses it, as before.
+        if drill.handles(self.path):
+            return self.do_POST()
+        self.send_error(501, "Unsupported method ('DELETE')")
+
+
+class PlainHandler(Handler):
+    """The host's plain-HTTP port serves identity and /drill only. The AI routes (OCI's inference API puts every model
+    call under /actions/) stay inside the stack, because a chat call goes out with the chat API key."""
+
+    def handle_request(self):
+        if "/actions/" in self.path.split("?")[0]:
+            self.read_body()
+            return self.send_json(404, {"code": "NotFound", "message": "The OCI gateway has no handler for " + self.path})
+        return super().handle_request()
+
 
 if __name__ == "__main__":
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
@@ -461,12 +482,15 @@ if __name__ == "__main__":
     # that connects and never completes it cannot stop the server accepting everyone else.
     server.socket = context.wrap_socket(server.socket, server_side=True, do_handshake_on_connect=False)
     if HTTP_PORT:
-        plain = ThreadingHTTPServer(("0.0.0.0", HTTP_PORT), Handler)
+        plain = ThreadingHTTPServer(("0.0.0.0", HTTP_PORT), PlainHandler)
         threading.Thread(target=plain.serve_forever, daemon=True).start()
     print("OCI gateway listening on %d (https) and %d (http): identity for %s, AI with %s" % (
         PORT, HTTP_PORT, identity.BASE, "chat %s at %s, embeddings %s at %s" % (CHAT_MODEL, CHAT_URL or MODEL_URL, EMBED_MODEL, MODEL_URL)
         if MODE == "model" else "canned answers from " + ANSWERS_FILE), flush=True)
     sys.stdout.flush()
+
+    # The URL drill-through definitions on Sample.Basic, made once Essbase answers and kept from then on.
+    drill.start()
 
     # The outline hints are read ahead of the questions, and kept fresh, because a large outline takes longer to read
     # than Essbase waits for an answer.
