@@ -10,8 +10,9 @@ URLs on the gateway's plain HTTP port (9005 on the host), records what arrived, 
 
 The sso value, passwords and credential headers are recorded by their length only, as Drillbridge's url-listener.py does.
 
-When the gateway starts, ensure_definitions() creates the URL drill-through definitions below on Sample.Basic over
-Actual (or updates their URL when it changed), so the stack offers one relational and two URL reports on the same cells:
+From the gateway's start, ensure_definitions() keeps the URL drill-through definitions below on Sample.Basic over Actual
+(creating them, or updating their URL when it changed), checking every two minutes so that a rebuilt Sample.Basic gets
+them back. The stack then offers one relational and two URL reports on the same cells:
 
     drillthrough_url_samplebasic   Drillbridge's own form: ?sso=$SSO_TOKEN$&$ATTR(ds,id,pos,gen,level.edge)$
     drillthrough_url_values        the $$<Dimension>-VALUE$$ form, one query parameter per dimension
@@ -162,37 +163,44 @@ def rest(method, path, body=None):
         return status, text
 
 
-def ensure_definitions(minutes=60):
-    """Creates the URL drill-through definitions on Sample.Basic, or updates a URL that changed. Gives up quietly when
-    Sample.Basic does not appear within the given minutes (a stack whose user removed it)."""
+def ensure_definitions(interval=120):
+    """Keeps the URL drill-through definitions on Sample.Basic: every interval seconds, creates a missing one and updates
+    a URL that changed, so a Sample.Basic that is rebuilt (by the import watcher, or by hand) gets them back. While
+    Sample.Basic does not exist (it is being rebuilt, or its user removed it) nothing is made, and nothing is logged."""
     if not BASE_URL:
         log("DRILL_BASE_URL is not set; no URL drill-through definitions were made")
         return
     cube = "applications/%s/databases/%s" % (APPLICATION, CUBE)
-    deadline = time.time() + minutes * 60
-    while rest("GET", cube)[0] != 200:
-        if time.time() >= deadline:
-            log("%s.%s did not appear; no URL drill-through definitions were made" % (APPLICATION, CUBE))
-            return
-        time.sleep(30)
+    in_place = set()  # the definitions already reported as in place, so a steady stack logs nothing
+    while True:
+        if rest("GET", cube)[0] == 200:
+            for name, target in DEFINITIONS.items():
+                ensure_definition(cube, name, BASE_URL + target, in_place)
+        else:
+            in_place.clear()
+        time.sleep(interval)
 
-    for name, target in DEFINITIONS.items():
-        url = BASE_URL + target
-        definition = {"name": name, "type": "URL", "url": url, "drillableRegions": REGIONS}
-        status, existing = rest("GET", "%s/reports/%s" % (cube, name))
-        if status == 200 and isinstance(existing, dict):
-            if existing.get("url") == url:
+
+def ensure_definition(cube, name, url, in_place):
+    definition = {"name": name, "type": "URL", "url": url, "drillableRegions": REGIONS}
+    status, existing = rest("GET", "%s/reports/%s" % (cube, name))
+    if status == 200 and isinstance(existing, dict):
+        if existing.get("url") == url:
+            if name not in in_place:
                 log("%s is in place" % name)
-                continue
-            status, answer = rest("PUT", "%s/reports/%s" % (cube, name), definition)
-            verb = "updated"
-        else:
-            status, answer = rest("POST", "%s/reports" % cube, definition)
-            verb = "created"
-        if 200 <= status < 300:
-            log("%s %s: %s" % (verb, name, url))
-        else:
-            log("could not make %s: HTTP %d %s" % (name, status, answer))
+                in_place.add(name)
+            return
+        status, answer = rest("PUT", "%s/reports/%s" % (cube, name), definition)
+        verb = "updated"
+    else:
+        status, answer = rest("POST", "%s/reports" % cube, definition)
+        verb = "created"
+    if 200 <= status < 300:
+        log("%s %s: %s" % (verb, name, url))
+        in_place.add(name)
+    else:
+        log("could not make %s: HTTP %d %s" % (name, status, answer))
+        in_place.discard(name)
 
 
 def start():

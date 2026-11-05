@@ -462,6 +462,17 @@ class Handler(BaseHTTPRequestHandler):
         self.send_error(501, "Unsupported method ('DELETE')")
 
 
+class PlainHandler(Handler):
+    """The host's plain-HTTP port serves identity and /drill only. The AI routes (OCI's inference API puts every model
+    call under /actions/) stay inside the stack, because a chat call goes out with the chat API key."""
+
+    def handle_request(self):
+        if "/actions/" in self.path.split("?")[0]:
+            self.read_body()
+            return self.send_json(404, {"code": "NotFound", "message": "The OCI gateway has no handler for " + self.path})
+        return super().handle_request()
+
+
 if __name__ == "__main__":
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     context.load_cert_chain(CERTIFICATE, PRIVATE_KEY)
@@ -471,14 +482,14 @@ if __name__ == "__main__":
     # that connects and never completes it cannot stop the server accepting everyone else.
     server.socket = context.wrap_socket(server.socket, server_side=True, do_handshake_on_connect=False)
     if HTTP_PORT:
-        plain = ThreadingHTTPServer(("0.0.0.0", HTTP_PORT), Handler)
+        plain = ThreadingHTTPServer(("0.0.0.0", HTTP_PORT), PlainHandler)
         threading.Thread(target=plain.serve_forever, daemon=True).start()
     print("OCI gateway listening on %d (https) and %d (http): identity for %s, AI with %s" % (
         PORT, HTTP_PORT, identity.BASE, "chat %s at %s, embeddings %s at %s" % (CHAT_MODEL, CHAT_URL or MODEL_URL, EMBED_MODEL, MODEL_URL)
         if MODE == "model" else "canned answers from " + ANSWERS_FILE), flush=True)
     sys.stdout.flush()
 
-    # The URL drill-through definitions on Sample.Basic, made once Essbase answers.
+    # The URL drill-through definitions on Sample.Basic, made once Essbase answers and kept from then on.
     drill.start()
 
     # The outline hints are read ahead of the questions, and kept fresh, because a large outline takes longer to read
