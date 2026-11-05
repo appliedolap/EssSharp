@@ -12,7 +12,7 @@
   "clients": {
     "essbase": {"name": "Essbase", "secret": "EssbaseIdentityClient1"},
     "esssharp": {"name": "EssSharp", "secret": ""},
-    "dodeca": {"name": "Dodeca", "secret": ""}
+    "dodeca": {"name": "Dodeca", "secret": "", "redirectUris": ["https://sso.appliedolap.com/oauth/nativeclient"]}
   },
   "groups": ["essbase-admins", "essbase-users"],
   "users": [

@@ -247,8 +247,8 @@ namespace EssSharp.Integration
         {
             SkipUnlessHarnessGateway();
 
-            // A client that registers no redirect addresses may send its codes to the local machine only, as native
-            // applications do; anywhere else would hand the code to whoever owns that address.
+            // A client may always send its codes to the local machine, as native applications' listeners do; an address
+            // it has not registered elsewhere would hand the code to whoever owns that address.
             using var elsewhere = await SendAsync(HttpMethod.Get, AuthorizeQuery("esssharp", "https://example.com/callback"));
             using var local     = await SendAsync(HttpMethod.Get, AuthorizeQuery("esssharp", "http://localhost:51234/callback"));
             using var unknown   = await SendAsync(HttpMethod.Get, AuthorizeQuery("no-such-client", "http://localhost/"));
@@ -298,6 +298,22 @@ namespace EssSharp.Integration
             using var response = await SendAsync(HttpMethod.Post, path, new StringContent(@"{""chatRequest"":{},""inputs"":[""a""]}", Encoding.UTF8, "application/json"));
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+
+        [Fact(DisplayName = @"OAuthTests - 18 - IdentityService_AllowsRegisteredRedirect_ForItsClientOnly"), Priority(18)]
+        public async Task IdentityService_AllowsRegisteredRedirect_ForItsClientOnly()
+        {
+            SkipUnlessHarnessGateway();
+
+            // Dodeca's Oracle and OAuth connections default to this address, where their embedded browser stops to read
+            // the code; users.json registers it for the dodeca client, and only for that client.
+            const string nativeClient = "https://sso.appliedolap.com/oauth/nativeclient";
+
+            using var dodeca   = await SendAsync(HttpMethod.Get, AuthorizeQuery("dodeca", nativeClient));
+            using var esssharp = await SendAsync(HttpMethod.Get, AuthorizeQuery("esssharp", nativeClient));
+
+            Assert.Equal(HttpStatusCode.OK, dodeca.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, esssharp.StatusCode);
         }
 
         #region Helpers

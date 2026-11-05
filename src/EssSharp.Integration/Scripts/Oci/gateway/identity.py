@@ -473,14 +473,13 @@ def token_for_user(handler, client, grant, scope, form, ttl=None):
 
 
 def redirect_allowed(client, redirect):
-    """A client's redirectUris in users.json, when it lists them, are the addresses its codes may go to (an exact match,
-    or a listed address ending in / that the redirect starts with). A client that lists none may redirect to the local
-    machine only (http or https on localhost, 127.0.0.1 or [::1], any port and path), as native applications do."""
-    listed = client.get("redirectUris")
-    if listed:
-        return any(redirect == uri or (uri.endswith("/") and redirect.startswith(uri)) for uri in listed)
+    """The addresses a client's codes may go to: the local machine (http or https on localhost, 127.0.0.1 or [::1], any
+    port and path), as native applications' listeners use, and the client's redirectUris in users.json (an exact match,
+    or a listed address ending in / that the redirect starts with), such as the address an embedded browser stops at."""
     parsed = urllib.parse.urlparse(redirect)
-    return parsed.scheme in ("http", "https") and parsed.hostname in ("localhost", "127.0.0.1", "::1")
+    if parsed.scheme in ("http", "https") and parsed.hostname in ("localhost", "127.0.0.1", "::1"):
+        return True
+    return any(redirect == uri or (uri.endswith("/") and redirect.startswith(uri)) for uri in client.get("redirectUris") or [])
 
 
 def authorize(handler, method, params):
