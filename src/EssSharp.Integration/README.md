@@ -92,6 +92,11 @@ work and are still tested. The `PowerUser` and `User` connections must then name
 harness's (`Scripts/Oci/gateway/users.json`) has `poweruser` and `user` with the committed passwords, and gives them
 their service roles.
 
+Tests 11 to 18 hold the OCI gateway itself to the checks its clients rely on: a password check needs a password, each
+token gets the lifetime it asked for under parallel requests, a forged token is inactive, codes go only to the local
+machine or a client's registered `redirectUris` and only that client redeems them, the sign-in page is escaped, and
+its host port refuses the AI actions (`/actions/`). They run only when the tokens come from the harness's gateway.
+
 The Build / Test workflow leaves the OAuth tests off on pushes and pull requests; a manual run with the `oauth_tests`
 input runs the whole suite with `OAuth:Mode` set to `Managed`.
 
