@@ -43,7 +43,9 @@ fi
 # user it deletes holds one of them until its three-minute read timeout ends. Nine deletes within three minutes leave
 # the pool empty, and until connections come back every request fails: a 400 "Error while getting group" or a 403, for
 # the administrator too. The pool is raised to ESSBASE_IDENTITY_POOL_SIZE (100 unless it is set), at the same points as
-# the heap, so that deleting users in bulk cannot shut the server out.
+# the heap, so that deleting users in bulk cannot shut the server out. The servers write the domain's adapters.os_xml
+# afresh from libOVD's template for that kind of adapter (WLS_OVD in the Oracle home) each time they start, so the
+# template is set, and the domain's file too.
 identity_pool="${ESSBASE_IDENTITY_POOL_SIZE:-100}"
 if ! [[ "$identity_pool" =~ ^[1-9][0-9]*$ ]]; then
   echo "ESSBASE_IDENTITY_POOL_SIZE=$identity_pool is not a number of connections such as 100; using 100" >&2
@@ -52,6 +54,9 @@ fi
 cat > "$script_dir/setIdentityPool.sh" <<POOL
 #!/usr/bin/env bash
 # Written by wrapper.sh: sets the most connections Essbase's managed server keeps to the embedded LDAP to ${identity_pool}.
+for f in /u01/oracle/oracle_common/modules/oracle.ovd/templates/adapter_template.xml; do
+  [ -w "\$f" ] && sed -i -E '/<ldap id="WLS_OVD"/,/<\/ldap>/ s#<maxPoolSize>[0-9]+</maxPoolSize>#<maxPoolSize>${identity_pool}</maxPoolSize>#' "\$f"
+done
 for f in /u01/config/domains/*/config/fmwconfig/ovd/default/adapters.os_xml; do
   [ -e "\$f" ] && sed -i -E 's#<maxPoolSize>[0-9]+</maxPoolSize>#<maxPoolSize>${identity_pool}</maxPoolSize>#g' "\$f"
 done
