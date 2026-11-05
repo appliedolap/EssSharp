@@ -31,6 +31,11 @@ namespace EssSharp
         /// <summary>
         /// Whether the operation succeeded for the user or group.
         /// </summary>
+        /// <remarks>
+        /// The server reports a row's outcome only as text, so this is read from that text: a deleted row's message is "Deleted",
+        /// and an imported row's status is "Info" rather than "Error". These are the texts Essbase 26.1 answers with in English;
+        /// a server that answers in other words reports every row as failed, and <see cref="Message"/> still says what happened.
+        /// </remarks>
         public bool Succeeded { get; }
 
         /// <inheritdoc />

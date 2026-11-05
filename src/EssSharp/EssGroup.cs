@@ -115,10 +115,10 @@ namespace EssSharp
         /// <returns>A <see cref="IEssGroup"/> object.</returns>
         public async Task<IEssGroup> EditAsync( EssServerRole? role = null, string description = null, CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<GroupsApi>();
+            var api = GetApi<GroupsApi>();
 
+            return await _server.RequestAsync(EssFeature.UserGroupManagement, async () =>
+            {
                 // The server replaces the whole group, and requires a role, so what the caller leaves out is read from the group as the server has it.
                 // That includes the groups this group is in: a group sent without them is taken out of every group it is in.
                 var current = await api.GroupsGetAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) ?? _group;
@@ -135,13 +135,8 @@ namespace EssSharp
 
                 _group = groupBean;
 
-                return this;
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to edit group ""{Name}"". {e.Message}", e);
-            }
+                return this as IEssGroup;
+            }, $@"Unable to edit group ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
