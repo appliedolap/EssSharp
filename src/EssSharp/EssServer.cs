@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -1027,6 +1028,33 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>A list of <see cref="EssServiceRoleAssignment"/> objects.</returns>
+        public List<EssServiceRoleAssignment> GetServiceRoleAssignments( string idPattern = null, EssPermissionType type = EssPermissionType.All, EssServerRole[] roles = null ) =>
+            GetServiceRoleAssignmentsAsync(idPattern, type, roles).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssServiceRoleAssignment"/> objects.</returns>
+        public async Task<List<EssServiceRoleAssignment>> GetServiceRoleAssignmentsAsync( string idPattern = null, EssPermissionType type = EssPermissionType.All, EssServerRole[] roles = null, CancellationToken cancellationToken = default )
+        {
+            var roleNames   = roles is { Length: > 0 } ? string.Join(",", roles.Select(role => role.ToServiceRoleName())) : null;
+            var api         = GetApi<ServiceRoleProvisioningApi>();
+            var assignments = new List<EssServiceRoleAssignment>();
+
+            // The server's answer does not say whether an item is a user or a group, so ask for each kind apart.
+            foreach (var kind in type == EssPermissionType.All ? new[] { EssPermissionType.User, EssPermissionType.Group } : new[] { type })
+            {
+                var items = await RequestAsync(EssFeature.ServiceRoleProvisioning,
+                    () => api.ServiceRoleProvisioningSearchProvisionAsync(id: idPattern, role: roleNames, filter: kind == EssPermissionType.Group ? "group" : "user", cancellationToken: cancellationToken),
+                    $@"Unable to get the service roles on ""{Name}"".", cancellationToken).ConfigureAwait(false);
+
+                if (items?.Items is { } found)
+                    assignments.AddRange(found.Where(item => item is not null).Select(item => new EssServiceRoleAssignment(item.Id, kind, item.Role.ToEssServerRole())));
+            }
+
+            return assignments;
+        }
+
+        /// <inheritdoc />
         /// <returns>A list of <see cref="IEssSession"/> objects.</returns>
         public List<IEssSession> GetSessions() => GetSessionsAsync()?.GetAwaiter().GetResult() ?? new List<IEssSession>();
 
@@ -1426,6 +1454,79 @@ namespace EssSharp
 
                 throw new Exception($"{failure} {e.Message}", e);
             }
+        }
+
+        /// <summary>
+        /// Asynchronously returns the service role the given user or group holds directly, or null when it holds none.
+        /// </summary>
+        /// <param name="id">The ID of the user, or the name of the group.</param>
+        /// <param name="type">Whether <paramref name="id"/> names a user or a group.</param>
+        /// <param name="cancellationToken" />
+        internal Task<EssServerRole?> GetServiceRoleAsync( string id, EssPermissionType type, CancellationToken cancellationToken )
+        {
+            var api = GetApi<ServiceRoleProvisioningApi>();
+
+            return RequestAsync(EssFeature.ServiceRoleProvisioning, async () =>
+            {
+                try
+                {
+                    var provision = await api.ServiceRoleProvisioningGetProvisionAsync(id: id, group: type == EssPermissionType.Group, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                    return string.IsNullOrEmpty(provision?.Role) ? null : (EssServerRole?)provision.Role.ToEssServerRole();
+                }
+                catch (Exception e) when (EssFeatureSupport.GetStatusCode(e) == HttpStatusCode.NotFound)
+                {
+                    // The server answers 404 for a user or group that holds no service role, as it does for a server that lacks the feature.
+                    if (await FeatureSupport.GetNotSupportedExceptionAsync(EssFeature.ServiceRoleProvisioning, e, cancellationToken).ConfigureAwait(false) is { } notSupportedException)
+                        throw notSupportedException;
+
+                    return null;
+                }
+            }, $@"Unable to get the service role of {type.ToString().ToLowerInvariant()} ""{id}"".", cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously removes the service role the given user or group holds directly.
+        /// </summary>
+        /// <param name="id">The ID of the user, or the name of the group.</param>
+        /// <param name="type">Whether <paramref name="id"/> names a user or a group.</param>
+        /// <param name="cancellationToken" />
+        internal Task RemoveServiceRoleAsync( string id, EssPermissionType type, CancellationToken cancellationToken )
+        {
+            var api = GetApi<ServiceRoleProvisioningApi>();
+
+            return RequestAsync<object>(EssFeature.ServiceRoleProvisioning, async () =>
+            {
+                await api.ServiceRoleProvisioningDeprovisionAsync(id: id, group: type == EssPermissionType.Group, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return null;
+            }, $@"Unable to remove the service role of {type.ToString().ToLowerInvariant()} ""{id}"".", cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously gives the given user or group the given service role, in place of any it holds directly.
+        /// </summary>
+        /// <param name="id">The ID of the user, or the name of the group.</param>
+        /// <param name="type">Whether <paramref name="id"/> names a user or a group.</param>
+        /// <param name="role">The service role.</param>
+        /// <param name="cancellationToken" />
+        internal Task SetServiceRoleAsync( string id, EssPermissionType type, EssServerRole role, CancellationToken cancellationToken )
+        {
+            var body = new UserGroupProvisionInfo()
+            {
+                Id    = id,
+                Role  = role.ToServiceRoleName(),
+                Group = type == EssPermissionType.Group
+            };
+
+            var api = GetApi<ServiceRoleProvisioningApi>();
+
+            return RequestAsync<object>(EssFeature.ServiceRoleProvisioning, async () =>
+            {
+                await api.ServiceRoleProvisioningProvisionAsync(id: id, body: body, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return null;
+            }, $@"Unable to give {type.ToString().ToLowerInvariant()} ""{id}"" the {role} service role.", cancellationToken);
         }
 
         /// <summary>

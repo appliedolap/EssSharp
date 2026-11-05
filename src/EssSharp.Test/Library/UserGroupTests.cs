@@ -733,6 +733,142 @@ namespace EssSharp.Test.Library
 
         #endregion
 
+        #region Service Roles
+
+        [Fact(DisplayName = "UserGroupTests - SetServiceRoleAsync_OnAUser_SendsTheRoleAsServiceRoleProvisioningNamesIt")]
+        public async Task SetServiceRoleAsync_OnAUser_SendsTheRoleAsServiceRoleProvisioningNamesIt()
+        {
+            using var stub = Stub((method: "GET", path: "/users", body: _users), (method: "PUT", path: "/permissions/u3", body: "{}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var user   = await server.GetUserAsync("u3", TestContext.Current.CancellationToken);
+
+            await user.SetServiceRoleAsync(EssServerRole.PowerUser, TestContext.Current.CancellationToken);
+
+            var put  = Assert.Single(stub.Requests, request => request.StartsWith("PUT ", StringComparison.Ordinal));
+            var body = JObject.Parse(Body(put));
+
+            Assert.StartsWith("PUT /essbase/rest/v1/permissions/u3 ", put);
+            Assert.Equal("u3",         (string)body["id"]);
+            Assert.Equal("power_user", (string)body["role"]);
+            Assert.False((bool)body["group"]);
+            Assert.Equal(EssServerRole.PowerUser, user.Role);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - SetServiceRoleAsync_OnAGroup_TellsTheServerItIsAGroup")]
+        public async Task SetServiceRoleAsync_OnAGroup_TellsTheServerItIsAGroup()
+        {
+            using var stub = Stub((method: "GET", path: "/groups/g1", body: @"{""name"":""g1"",""role"":""User""}"), (method: "PUT", path: "/permissions/g1", body: "{}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var group  = await server.GetGroupAsync("g1", TestContext.Current.CancellationToken);
+
+            await group.SetServiceRoleAsync(EssServerRole.ServiceAdministrator, TestContext.Current.CancellationToken);
+
+            var body = JObject.Parse(Body(Assert.Single(stub.Requests, request => request.StartsWith("PUT ", StringComparison.Ordinal))));
+
+            Assert.Equal("service_administrator", (string)body["role"]);
+            Assert.True((bool)body["group"]);
+            Assert.Equal(EssServerRole.ServiceAdministrator, group.Role);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - SetServiceRoleAsync_WithUnkown_ThrowsWithoutAskingTheServer")]
+        public async Task SetServiceRoleAsync_WithUnkown_ThrowsWithoutAskingTheServer()
+        {
+            using var stub = Stub((method: "GET", path: "/users", body: _users));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var user   = await server.GetUserAsync("u3", TestContext.Current.CancellationToken);
+
+            stub.Requests.Clear();
+
+            await Assert.ThrowsAsync<ArgumentException>(() => user.SetServiceRoleAsync(EssServerRole.Unkown, TestContext.Current.CancellationToken));
+            Assert.Empty(stub.Requests);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - GetServiceRoleAsync_ReadsTheRole_OrNullWhenTheServerReportsNone")]
+        public async Task GetServiceRoleAsync_ReadsTheRole_OrNullWhenTheServerReportsNone()
+        {
+            // The server answers 404 for a group that holds no service role.
+            using var stub = Stub(
+                (method: "GET", path: "/users",          body: _users),
+                (method: "GET", path: "/groups/g1",      body: @"{""name"":""g1""}"),
+                (method: "GET", path: "/permissions/u1", body: @"{""id"":""u1"",""role"":""service_administrator""}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var user   = await server.GetUserAsync("u1", TestContext.Current.CancellationToken);
+            var group  = await server.GetGroupAsync("g1", TestContext.Current.CancellationToken);
+
+            Assert.Equal(EssServerRole.ServiceAdministrator, await user.GetServiceRoleAsync(TestContext.Current.CancellationToken));
+            Assert.Null(await group.GetServiceRoleAsync(TestContext.Current.CancellationToken));
+
+            Assert.Contains(stub.Requests, request => request.StartsWith("GET /essbase/rest/v1/permissions/g1?group=true ", StringComparison.Ordinal));
+        }
+
+        [Fact(DisplayName = "UserGroupTests - RemoveServiceRoleAsync_OnAGroup_TellsTheServerItIsAGroup")]
+        public async Task RemoveServiceRoleAsync_OnAGroup_TellsTheServerItIsAGroup()
+        {
+            using var stub = Stub((method: "GET", path: "/groups/g1", body: @"{""name"":""g1"",""role"":""Power User""}"), (method: "DELETE", path: "/permissions/g1", body: "{}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var group  = await server.GetGroupAsync("g1", TestContext.Current.CancellationToken);
+
+            await group.RemoveServiceRoleAsync(TestContext.Current.CancellationToken);
+
+            Assert.Contains(stub.Requests, request => request.StartsWith("DELETE /essbase/rest/v1/permissions/g1?group=true ", StringComparison.Ordinal));
+            Assert.Equal(EssServerRole.Unkown, group.Role);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - GetServiceRoleAssignmentsAsync_AsksForUsersAndGroupsApart_AndSaysWhichEachIs")]
+        public async Task GetServiceRoleAssignmentsAsync_AsksForUsersAndGroupsApart_AndSaysWhichEachIs()
+        {
+            using var stub = new LoopbackEssbaseStub();
+
+            stub.ResponseProvider = requestLine => requestLine switch
+            {
+                _ when requestLine.Contains("/permissions?") && requestLine.Contains("filter=user")  => (HttpStatusCode.OK, @"{""items"":[{""id"":""alice"",""role"":""service_administrator""},{""id"":""bob"",""role"":""user""}]}"),
+                _ when requestLine.Contains("/permissions?") && requestLine.Contains("filter=group") => (HttpStatusCode.OK, @"{""items"":[{""id"":""admins"",""role"":""power_user""}]}"),
+                _                                                                                     => (HttpStatusCode.NotFound, @"{""message"":""Not Found""}")
+            };
+
+            var server      = new EssServer(stub.BasePath, "admin", "password");
+            var assignments = await server.GetServiceRoleAssignmentsAsync("a*", roles: new[] { EssServerRole.ServiceAdministrator, EssServerRole.PowerUser }, cancellationToken: TestContext.Current.CancellationToken);
+
+            Assert.Collection(assignments,
+                assignment => { Assert.Equal("alice",  assignment.Id); Assert.Equal(EssPermissionType.User,  assignment.Type); Assert.Equal(EssServerRole.ServiceAdministrator, assignment.Role); },
+                assignment => { Assert.Equal("bob",    assignment.Id); Assert.Equal(EssPermissionType.User,  assignment.Type); Assert.Equal(EssServerRole.User,                 assignment.Role); },
+                assignment => { Assert.Equal("admins", assignment.Id); Assert.Equal(EssPermissionType.Group, assignment.Type); Assert.Equal(EssServerRole.PowerUser,            assignment.Role); });
+
+            Assert.All(stub.Requests.Where(request => request.Contains("/permissions?")), request =>
+            {
+                var requestLine = Uri.UnescapeDataString(request.Split('\r')[0]);
+
+                Assert.Contains("id=a*", requestLine);
+                Assert.Contains("role=service_administrator,power_user", requestLine);
+            });
+        }
+
+        [Fact(DisplayName = "UserGroupTests - SetServiceRoleAsync_InIdentityCloudMode_Works_WhereEditDoesNot")]
+        public async Task SetServiceRoleAsync_InIdentityCloudMode_Works_WhereEditDoesNot()
+        {
+            using var stub = IdentityCloudStub(
+                (method: "GET", path: "/users/carol",       body: @"{""id"":""carol"",""name"":""Carol""}"),
+                (method: "PUT", path: "/permissions/carol", body: "{}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var user   = await server.GetUserAsync("carol", TestContext.Current.CancellationToken);
+
+            Assert.True(await server.SupportsAsync(EssFeature.ServiceRoleProvisioning, TestContext.Current.CancellationToken));
+
+            await Assert.ThrowsAsync<NotSupportedException>(() => user.EditAsync(role: EssServerRole.PowerUser, cancellationToken: TestContext.Current.CancellationToken));
+
+            await user.SetServiceRoleAsync(EssServerRole.PowerUser, TestContext.Current.CancellationToken);
+
+            Assert.Equal(EssServerRole.PowerUser, user.Role);
+        }
+
+        #endregion
+
         #region Helpers
 
         private const string _identityCloudRefusal = "This operation is not supported. Contact administrator";
@@ -745,7 +881,7 @@ namespace EssSharp.Test.Library
         /// <param name="operations">The HTTP method and path (after the base path), and the body to answer with.</param>
         private static LoopbackEssbaseStub IdentityCloudStub( params (string method, string path, string body)[] operations )
         {
-            var stub  = Stub(operations.Append((method: "GET", path: "/about/instance", body: @"{""idcs"":true,""appRoleProvisioningSupported"":true}")).ToArray());
+            var stub  = Stub(operations.Append((method: "GET", path: "/about/instance", body: @"{""idcs"":true,""serviceRoleProvisioningSupported"":true,""appRoleProvisioningSupported"":true}")).ToArray());
             var inner = stub.ResponseProvider;
 
             stub.ResponseProvider = requestLine =>

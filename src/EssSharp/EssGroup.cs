@@ -346,6 +346,35 @@ namespace EssSharp
                 $@"Unable to get the provisioning report of group ""{Name}"".", cancellationToken).ConfigureAwait(false)).ToEssProvisioningReport();
         }
 
+        /// <inheritdoc />
+        public EssServerRole? GetServiceRole() => GetServiceRoleAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public Task<EssServerRole?> GetServiceRoleAsync( CancellationToken cancellationToken = default ) =>
+            _server.GetServiceRoleAsync(Name, EssPermissionType.Group, cancellationToken);
+
+        /// <inheritdoc />
+        public void RemoveServiceRole() => RemoveServiceRoleAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task RemoveServiceRoleAsync( CancellationToken cancellationToken = default )
+        {
+            await _server.RemoveServiceRoleAsync(Name, EssPermissionType.Group, cancellationToken).ConfigureAwait(false);
+
+            _group.Role = null;
+        }
+
+        /// <inheritdoc />
+        public void SetServiceRole( EssServerRole role ) => SetServiceRoleAsync(role).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public async Task SetServiceRoleAsync( EssServerRole role, CancellationToken cancellationToken = default )
+        {
+            await _server.SetServiceRoleAsync(Name, EssPermissionType.Group, role, cancellationToken).ConfigureAwait(false);
+
+            _group.Role = role.EssServerRoleToString();
+        }
+
         #endregion
     }
 }

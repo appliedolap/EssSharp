@@ -444,6 +444,88 @@ namespace EssSharp.Integration
             Assert.Contains(report.ServiceRoles, role => role.Name == "service_administrator");
         }
 
+        [Fact(DisplayName = "UserGroupManagementTests - 09 - Essbase_CanSetGetAndRemoveServiceRolesOfUsersAndGroups"), Priority(09)]
+        public async Task Essbase_CanSetGetAndRemoveServiceRolesOfUsersAndGroups()
+        {
+            SkipUnlessServerManagesUsers();
+
+            var server    = GetEssServer();
+            var userId    = Id("role_u");
+            var groupName = Id("role_g");
+
+            try
+            {
+                var user  = await server.CreateUserAsync(new EssUserCreationOptions(userId, _password, EssServerRole.User), TestContext.Current.CancellationToken);
+                var group = await server.CreateGroupAsync(groupName, EssServerRole.User, "service roles", TestContext.Current.CancellationToken);
+
+                Assert.Equal(EssServerRole.User, await user.GetServiceRoleAsync(TestContext.Current.CancellationToken));
+
+                // Give the user a role, and assert that the server, its user record and the search all say so.
+                await user.SetServiceRoleAsync(EssServerRole.PowerUser, TestContext.Current.CancellationToken);
+
+                Assert.Equal(EssServerRole.PowerUser, user.Role);
+                Assert.Equal(EssServerRole.PowerUser, await user.GetServiceRoleAsync(TestContext.Current.CancellationToken));
+                Assert.Equal(EssServerRole.PowerUser, (await GetUserAsync(server, userId)).Role);
+
+                var assignments = await server.GetServiceRoleAssignmentsAsync(userId, EssPermissionType.User, cancellationToken: TestContext.Current.CancellationToken);
+
+                Assert.Contains(assignments, assignment => assignment.Id == userId && assignment.Type == EssPermissionType.User && assignment.Role == EssServerRole.PowerUser);
+
+                // Give the group a role, find it among the groups, and remove it.
+                group.SetServiceRole(EssServerRole.ServiceAdministrator);
+
+                Assert.Equal(EssServerRole.ServiceAdministrator, group.GetServiceRole());
+                Assert.Contains(await server.GetServiceRoleAssignmentsAsync(groupName, EssPermissionType.Group, new[] { EssServerRole.ServiceAdministrator }, TestContext.Current.CancellationToken),
+                    assignment => assignment.Id == groupName && assignment.Type == EssPermissionType.Group);
+
+                await group.RemoveServiceRoleAsync(TestContext.Current.CancellationToken);
+
+                Assert.Null(await group.GetServiceRoleAsync(TestContext.Current.CancellationToken));
+                Assert.DoesNotContain(await server.GetServiceRoleAssignmentsAsync(groupName, EssPermissionType.Group, cancellationToken: TestContext.Current.CancellationToken),
+                    assignment => assignment.Id == groupName);
+            }
+            finally
+            {
+                await CleanUpAsync(server);
+            }
+        }
+
+        [Fact(DisplayName = "UserGroupManagementTests - 10 - Essbase_InIdentityCloudMode_CanSetGetAndRemoveTheServiceRoleOfAUser"), Priority(10)]
+        public async Task Essbase_InIdentityCloudMode_CanSetGetAndRemoveTheServiceRoleOfAUser()
+        {
+            Assert.SkipWhen(ServerManagesUsers, "The server manages its own users and groups, so it is not in Identity Cloud mode.");
+
+            // A user of the identity service whom the suite gives no service role.
+            var userId = IntegrationTestFactory.OAuth?.Users?.FirstOrDefault(user => user.Role == EssServerRole.Unkown)?.Username;
+
+            Assert.SkipWhen(string.IsNullOrEmpty(userId), "The settings name no identity service user without a service role.");
+
+            var server = GetEssServer();
+            var user   = await server.GetUserAsync(userId, TestContext.Current.CancellationToken);
+
+            Assert.True(await server.SupportsAsync(EssFeature.ServiceRoleProvisioning, TestContext.Current.CancellationToken));
+            Assert.Null(await user.GetServiceRoleAsync(TestContext.Current.CancellationToken));
+
+            // Editing the user is not supported here, but giving the user a service role is.
+            await Assert.ThrowsAsync<NotSupportedException>(() => user.EditAsync(role: EssServerRole.PowerUser, cancellationToken: TestContext.Current.CancellationToken));
+
+            try
+            {
+                await user.SetServiceRoleAsync(EssServerRole.PowerUser, TestContext.Current.CancellationToken);
+
+                Assert.Equal(EssServerRole.PowerUser, await user.GetServiceRoleAsync(TestContext.Current.CancellationToken));
+                Assert.Contains(await server.GetServiceRoleAssignmentsAsync(userId, EssPermissionType.User, cancellationToken: TestContext.Current.CancellationToken),
+                    assignment => string.Equals(assignment.Id, userId, StringComparison.OrdinalIgnoreCase) && assignment.Role == EssServerRole.PowerUser);
+            }
+            finally
+            {
+                // Leave the user without a role, as the suite gave it.
+                await RetryAsync($"Removing the service role of {userId}", () => user.RemoveServiceRoleAsync(CancellationToken.None));
+            }
+
+            Assert.Null(await user.GetServiceRoleAsync(TestContext.Current.CancellationToken));
+        }
+
         #region Helpers
 
         /// <summary>

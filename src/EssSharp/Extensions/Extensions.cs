@@ -1126,6 +1126,19 @@ namespace EssSharp
             _ => throw new NotSupportedException("Unsupported user role.")
         };
 
+        /// <summary>
+        /// Returns the name that the server's service role provisioning knows the given role by, such as "service_administrator".
+        /// </summary>
+        /// <param name="role">The role.</param>
+        /// <exception cref="ArgumentException">The role is <see cref="EssServerRole.Unkown"/>, which names no role.</exception>
+        internal static string ToServiceRoleName( this EssServerRole role ) => role switch
+        {
+            EssServerRole.User                 => "user",
+            EssServerRole.PowerUser            => "power_user",
+            EssServerRole.ServiceAdministrator => "service_administrator",
+            _                                  => throw new ArgumentException($"{role} names no service role.", nameof(role))
+        };
+
         internal static EssDimStorageType ToEssEnum( this MemberBean.DimStorageTypeEnum? dim ) => dim switch
         {
             MemberBean.DimStorageTypeEnum.DENSE => EssDimStorageType.Dense,

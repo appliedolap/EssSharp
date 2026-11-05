@@ -266,7 +266,7 @@ namespace EssSharp
         /// Returns the HTTP status code of the response the given <paramref name="exception"/> (or one of its inner exceptions) reports, if any.
         /// </summary>
         /// <param name="exception">The exception.</param>
-        private static HttpStatusCode? GetStatusCode( Exception exception )
+        internal static HttpStatusCode? GetStatusCode( Exception exception )
         {
             for (var current = exception; current is not null; current = current.InnerException)
             {

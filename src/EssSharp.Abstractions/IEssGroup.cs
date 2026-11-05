@@ -238,5 +238,56 @@ namespace EssSharp
         /// <exception cref="NotSupportedException">The server does not support provisioning reports (<see cref="EssFeature.ProvisioningReports"/>).</exception>
         /// <remarks>For a user who is not a service administrator the server answers with an empty report instead of refusing, so an empty report does not show that nothing is provisioned.</remarks>
         public Task<EssProvisioningReport> GetProvisioningReportAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Returns the service role the group holds directly, or null when the group holds none.
+        /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        public EssServerRole? GetServiceRole();
+
+        /// <summary>
+        /// Asynchronously returns the service role the group holds directly, or null when the group holds none.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        public Task<EssServerRole?> GetServiceRoleAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Removes the service role the group holds directly.
+        /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        /// <remarks>Takes service administrator privilege.</remarks>
+        public void RemoveServiceRole();
+
+        /// <summary>
+        /// Asynchronously removes the service role the group holds directly.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        /// <remarks>Takes service administrator privilege.</remarks>
+        public Task RemoveServiceRoleAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gives the group the given service role, in place of any it holds directly. Its users hold the role through it.
+        /// </summary>
+        /// <param name="role">The service role.</param>
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        /// <remarks>
+        /// Unlike <see cref="Edit"/>, this works on a server in Identity Cloud mode, where the groups live in the identity service and
+        /// only their roles are provisioned on the server. Takes service administrator privilege.
+        /// </remarks>
+        public void SetServiceRole( EssServerRole role );
+
+        /// <summary>
+        /// Asynchronously gives the group the given service role, in place of any it holds directly. Its users hold the role through it.
+        /// </summary>
+        /// <param name="role">The service role.</param>
+        /// <param name="cancellationToken" />
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        /// <remarks>
+        /// Unlike <see cref="EditAsync"/>, this works on a server in Identity Cloud mode, where the groups live in the identity service and
+        /// only their roles are provisioned on the server. Takes service administrator privilege.
+        /// </remarks>
+        public Task SetServiceRoleAsync( EssServerRole role, CancellationToken cancellationToken = default );
     }
 }

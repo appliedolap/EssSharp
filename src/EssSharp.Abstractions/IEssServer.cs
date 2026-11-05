@@ -582,6 +582,29 @@ namespace EssSharp
         public Task<List<IEssServerVariable>> GetVariablesAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Returns the service roles that users and groups hold directly, as <see cref="EssServiceRoleAssignment"/> objects.
+        /// A user or group that holds no service role is not returned.
+        /// </summary>
+        /// <param name="idPattern">A user ID or group name pattern, where * matches any characters. Null matches every user and group.</param>
+        /// <param name="type">Whether to return the roles of users, of groups, or of both.</param>
+        /// <param name="roles">The roles to return. Null or empty returns every role.</param>
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        /// <remarks>Works on a server in Identity Cloud mode, where <see cref="GetUsers()"/> and <see cref="GetGroups()"/> do not.</remarks>
+        public List<EssServiceRoleAssignment> GetServiceRoleAssignments( string idPattern = null, EssPermissionType type = EssPermissionType.All, EssServerRole[] roles = null );
+
+        /// <summary>
+        /// Asynchronously returns the service roles that users and groups hold directly, as <see cref="EssServiceRoleAssignment"/> objects.
+        /// A user or group that holds no service role is not returned.
+        /// </summary>
+        /// <param name="idPattern">A user ID or group name pattern, where * matches any characters. Null matches every user and group.</param>
+        /// <param name="type">Whether to return the roles of users, of groups, or of both.</param>
+        /// <param name="roles">The roles to return. Null or empty returns every role.</param>
+        /// <param name="cancellationToken" />
+        /// <exception cref="NotSupportedException">The server does not support service role provisioning (<see cref="EssFeature.ServiceRoleProvisioning"/>).</exception>
+        /// <remarks>Works on a server in Identity Cloud mode, where <see cref="GetUsersAsync(CancellationToken)"/> and <see cref="GetGroupsAsync(CancellationToken)"/> do not.</remarks>
+        public Task<List<EssServiceRoleAssignment>> GetServiceRoleAssignmentsAsync( string idPattern = null, EssPermissionType type = EssPermissionType.All, EssServerRole[] roles = null, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Returns a list of server sessions available to the connected user as <see cref="IEssSession"/> objects.
         /// </summary>
         public List<IEssSession> GetSessions();
