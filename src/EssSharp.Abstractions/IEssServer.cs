@@ -242,7 +242,8 @@ namespace EssSharp
 
         /// <summary>
         /// Exports all the groups on the server as CSV, with the columns <c>name,description,role,groups</c>. The server leaves the descriptions out,
-        /// and exports every group whatever filter it is given, so there is none.
+        /// and exports every group whatever filter it is given, so there is none. An import replaces a group's description with the file's, so
+        /// importing this file unchanged clears every description.
         /// </summary>
         /// <returns>A stream of the CSV, which the caller disposes.</returns>
         /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
@@ -251,7 +252,8 @@ namespace EssSharp
 
         /// <summary>
         /// Asynchronously exports all the groups on the server as CSV, with the columns <c>name,description,role,groups</c>. The server leaves the
-        /// descriptions out, and exports every group whatever filter it is given, so there is none.
+        /// descriptions out, and exports every group whatever filter it is given, so there is none. An import replaces a group's description with
+        /// the file's, so importing this file unchanged clears every description.
         /// </summary>
         /// <param name="cancellationToken" />
         /// <returns>A stream of the CSV, which the caller disposes.</returns>
@@ -611,8 +613,10 @@ namespace EssSharp
         public Task<List<IEssUtility>> GetUtilitiesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Imports groups from CSV, with the columns <c>name,description,role,groups</c>, such as an export from <see cref="ExportGroups()"/>.
-        /// A group that exists is edited and one that does not is created; several groups in one cell are quoted and separated by commas.
+        /// Imports groups from CSV, with the columns <c>name,description,role,groups</c>. A group that exists is edited and one that does not is
+        /// created; several groups in one cell are quoted and separated by commas. An edit replaces the group's description, role and groups with
+        /// the file's. An export from <see cref="ExportGroups()"/> leaves every description blank, so importing one unchanged clears them: fill them
+        /// in first.
         /// </summary>
         /// <param name="csv">A stream of the CSV, including its header line.</param>
         /// <returns>What the server reported for each group. The server answers successfully even when it cannot import some of them, such as one with a role that does not exist, so check each result.</returns>
@@ -621,8 +625,10 @@ namespace EssSharp
         public List<EssBulkResult> ImportGroups( Stream csv );
 
         /// <summary>
-        /// Asynchronously imports groups from CSV, with the columns <c>name,description,role,groups</c>, such as an export from <see cref="ExportGroupsAsync(CancellationToken)"/>.
-        /// A group that exists is edited and one that does not is created; several groups in one cell are quoted and separated by commas.
+        /// Asynchronously imports groups from CSV, with the columns <c>name,description,role,groups</c>. A group that exists is edited and one that
+        /// does not is created; several groups in one cell are quoted and separated by commas. An edit replaces the group's description, role and
+        /// groups with the file's. An export from <see cref="ExportGroupsAsync(CancellationToken)"/> leaves every description blank, so importing
+        /// one unchanged clears them: fill them in first.
         /// </summary>
         /// <param name="csv">A stream of the CSV, including its header line.</param>
         /// <param name="cancellationToken" />

@@ -281,12 +281,18 @@ namespace EssSharp.Integration
             var parentName = Id("mem_p");
             var childName  = Id("mem_c");
             var userId     = Id("mem_u");
+            var grandName  = Id("mem_gp");
 
             try
             {
                 var parent = await server.CreateGroupAsync(parentName, EssServerRole.PowerUser, "parent", TestContext.Current.CancellationToken);
                 await server.CreateGroupAsync(childName, EssServerRole.User, null, TestContext.Current.CancellationToken);
                 await server.CreateUserAsync(new EssUserCreationOptions(userId, _password), TestContext.Current.CancellationToken);
+
+                // Put the group in another group, which an edit of the group has to leave it in.
+                var grand = await server.CreateGroupAsync(grandName, EssServerRole.User, null, TestContext.Current.CancellationToken);
+
+                await grand.AddGroupsAsync(new List<string> { parentName }, TestContext.Current.CancellationToken);
 
                 // Assert that there are no members yet.
                 var none = await parent.GetMembersAsync(TestContext.Current.CancellationToken);
@@ -303,6 +309,13 @@ namespace EssSharp.Integration
                 Assert.Equal(userId,    Assert.Single(members.Users).Name);
                 Assert.Equal(childName, Assert.Single(members.Groups).Name);
 
+                // Edit the user who is a member, and assert that the edit left the user in the group.
+                var member = await GetUserAsync(server, userId);
+
+                await member.EditAsync(role: EssServerRole.PowerUser, cancellationToken: TestContext.Current.CancellationToken);
+
+                Assert.Contains(parentName, (await GetUserAsync(server, userId)).GroupNames);
+
                 // Edit the group's description alone, which keeps its role.
                 var edited = await parent.EditAsync(description: "Described", cancellationToken: TestContext.Current.CancellationToken);
 
@@ -316,6 +329,14 @@ namespace EssSharp.Integration
 
                 Assert.Equal(EssServerRole.ServiceAdministrator, reread.Role);
                 Assert.Equal("Described",                        reread.Description);
+
+                // Assert that the edits left the group in the group it was in, and its members in it.
+                Assert.Contains(grandName, reread.GroupNames);
+
+                var after = await reread.GetMembersAsync(TestContext.Current.CancellationToken);
+
+                Assert.Equal(userId,    Assert.Single(after.Users).Name);
+                Assert.Equal(childName, Assert.Single(after.Groups).Name);
             }
             finally
             {

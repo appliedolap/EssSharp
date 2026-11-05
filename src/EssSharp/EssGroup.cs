@@ -120,12 +120,14 @@ namespace EssSharp
                 var api = GetApi<GroupsApi>();
 
                 // The server replaces the whole group, and requires a role, so what the caller leaves out is read from the group as the server has it.
+                // That includes the groups this group is in: a group sent without them is taken out of every group it is in.
                 var current = await api.GroupsGetAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) ?? _group;
 
                 var body = new GroupBean()
                 {
                     Role = role?.EssServerRoleToString() ?? current.Role.ToServerRoleName(),
-                    Description = description ?? current.Description
+                    Description = description ?? current.Description,
+                    Groups = current.Groups
                 };
 
                 if ( await api.GroupsEditAsync(id: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groupBean )

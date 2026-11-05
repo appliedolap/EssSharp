@@ -98,7 +98,8 @@ namespace EssSharp
                 // The server replaces the whole user, and requires a role, so what the caller leaves out is read from the user as the server has it.
                 // A user sent without a name or email is left with none (the server stores the name as the text "null"). The server's answer for
                 // one user is not always as complete as its list of users (for the built-in admin user it leaves out the email), so a value it
-                // leaves empty is taken from this user as it was last read.
+                // leaves empty is taken from this user as it was last read. The groups are not: a user sent without groups is taken out of every
+                // group they are in, and the server leaves the groups out of its answer for a user in none, so what it says is what is sent.
                 var current = await api.UsersGetAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) ?? _user;
 
                 var body = new UserBean()
@@ -106,7 +107,8 @@ namespace EssSharp
                     Name     = fullName ?? (string.IsNullOrEmpty(current.Name)  ? _user.Name  : current.Name),
                     Email    = email    ?? (string.IsNullOrEmpty(current.Email) ? _user.Email : current.Email),
                     Role     = role?.EssServerRoleToString() ?? (string.IsNullOrEmpty(current.Role) ? _user.Role : current.Role).ToServerRoleName(),
-                    Password = password
+                    Password = password,
+                    Groups   = current.Groups
                 };
 
                 if ( await api.UsersPUTAsync(id: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )

@@ -329,6 +329,71 @@ namespace EssSharp.Test.Library
             Assert.Equal("Service Administrator", (string)body["role"]);
         }
 
+        [Fact(DisplayName = "UserGroupTests - EditAsync_SendsTheGroupsTheUserIsIn_SoTheServerKeepsThem")]
+        public async Task EditAsync_SendsTheGroupsTheUserIsIn_SoTheServerKeepsThem()
+        {
+            // The server takes a user sent without groups out of every group they are in. Its answer for one user is the one to send
+            // (here it has the user in g2 as well, since the list was read).
+            using var stub = Stub(
+                (method: "GET", path: "/users",    body: _users),
+                (method: "GET", path: "/users/u1", body: @"{""id"":""u1"",""name"":""One"",""email"":""one@example.com"",""role"":""ServiceAdministrator"",""groups"":[""g1"",""g2""]}"),
+                (method: "PUT", path: "/users/u1", body: @"{""id"":""u1"",""name"":""One"",""email"":""one@example.com"",""role"":""Power User"",""groups"":[""g1"",""g2""]}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var user   = await server.GetUserAsync("u1", TestContext.Current.CancellationToken);
+
+            await user.EditAsync(role: EssServerRole.PowerUser, cancellationToken: TestContext.Current.CancellationToken);
+
+            var body = JObject.Parse(Body(Assert.Single(stub.Requests, request => request.StartsWith("PUT "))));
+
+            Assert.Equal(new[] { "g1", "g2" }, body["groups"].Select(group => (string)group));
+            Assert.Equal("Power User",         (string)body["role"]);
+            Assert.Equal(new[] { "g1", "g2" }, user.GroupNames);
+        }
+
+        [Fact(DisplayName = "UserGroupTests - EditAsync_TakesTheGroupsFromTheServersAnswerForOneUser_NotFromTheUserAsLastRead")]
+        public async Task EditAsync_TakesTheGroupsFromTheServersAnswerForOneUser_NotFromTheUserAsLastRead()
+        {
+            // The list had the user in g1. Since then the user was taken out of it, and the server leaves the groups out of its answer for a user in none.
+            using var stub = Stub(
+                (method: "GET", path: "/users",    body: _users),
+                (method: "GET", path: "/users/u1", body: @"{""id"":""u1"",""name"":""One"",""email"":""one@example.com"",""role"":""ServiceAdministrator""}"),
+                (method: "PUT", path: "/users/u1", body: @"{""id"":""u1"",""name"":""One"",""email"":""one@example.com"",""role"":""Power User""}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var user   = await server.GetUserAsync("u1", TestContext.Current.CancellationToken);
+
+            Assert.Equal(new[] { "g1" }, user.GroupNames);
+
+            await user.EditAsync(role: EssServerRole.PowerUser, cancellationToken: TestContext.Current.CancellationToken);
+
+            var body = JObject.Parse(Body(Assert.Single(stub.Requests, request => request.StartsWith("PUT "))));
+
+            Assert.Empty(body["groups"] ?? new JArray());
+            Assert.Empty(user.GroupNames ?? new List<string>());
+        }
+
+        [Fact(DisplayName = "UserGroupTests - EditAsync_OnAGroup_SendsTheGroupsTheGroupIsIn_SoTheServerKeepsThem")]
+        public async Task EditAsync_OnAGroup_SendsTheGroupsTheGroupIsIn_SoTheServerKeepsThem()
+        {
+            // The server takes a group sent without groups out of every group it is in.
+            using var stub = Stub(
+                (method: "GET", path: "/groups/g1", body: @"{""name"":""g1"",""description"":""Old"",""role"":""Power User"",""groups"":[""parent""]}"),
+                (method: "PUT", path: "/groups/g1", body: @"{""name"":""g1"",""description"":""New"",""role"":""Power User"",""groups"":[""parent""]}"));
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+            var group  = await server.GetGroupAsync("g1", TestContext.Current.CancellationToken);
+
+            await group.EditAsync(description: "New", cancellationToken: TestContext.Current.CancellationToken);
+
+            var body = JObject.Parse(Body(Assert.Single(stub.Requests, request => request.StartsWith("PUT "))));
+
+            Assert.Equal(new[] { "parent" }, body["groups"].Select(parent => (string)parent));
+            Assert.Equal("Power User",       (string)body["role"]);
+            Assert.Equal("New",              (string)body["description"]);
+            Assert.Equal(new[] { "parent" }, group.GroupNames);
+        }
+
         [Fact(DisplayName = "UserGroupTests - EditAsync_OnAGroup_KeepsTheRoleTheCallerLeavesOut")]
         public async Task EditAsync_OnAGroup_KeepsTheRoleTheCallerLeavesOut()
         {
