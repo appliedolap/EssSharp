@@ -190,26 +190,24 @@ namespace EssSharp.Integration.Setup
                 .WithEnvironment("DATABASE_WAIT_TIMEOUT", profile.DatabaseWaitTimeout)                // "240"
                 .WithCreateParameterModifier(pm => pm.HostConfig.DNS = new[] { "8.8.8.8", "8.8.4.4" });
 
+            // Every container starts through the wrapper the scoop essbase stack uses (Scripts/Essbase/wrapper.sh), which
+            // gives Essbase's managed server a heap Essbase runs drill-through reports with, and then runs the image's start
+            // command (its argument). WithCommand appends to the command, so the command is set once, here.
+            builder = builder
+                .WithResourceMapping(IntegrationTestOciGateway.ReadScript("Essbase", null, "wrapper.sh"), "/u01/container-scripts/wrapper.sh", fileMode: ScriptMode)
+                .WithCommand("/u01/container-scripts/wrapper.sh", profile.StartupCommand);           // "/u01/container-scripts/createAndStartDomain.sh"
+
             // In the OAuth tests' Managed mode the domain is created in Identity Cloud mode, with the harness's OCI
             // gateway as its Identity Cloud tenant, the way the scoop essbase stack creates it: the gateway's certificate
-            // authority mounted for the domain to trust, and a wrapper that adds that trust right after the image's own
-            // IDCS step and then runs the image's normal start (Scripts/Essbase).
+            // authority mounted for the domain to trust, which the wrapper adds right after the image's own IDCS step.
             if (OAuth?.Mode is IntegrationTestOAuthMode.Managed)
             {
                 foreach (var variable in IntegrationTestOciGateway.EssbaseIdentityEnvironment(containerName))
                     builder = builder.WithEnvironment(variable.Key, variable.Value);
 
-                // The wrapper runs the image's start command (its argument) once the trust is in place. WithCommand
-                // appends to the command, so the command is set once, here or below, never in both places.
                 builder = builder
                     .WithVolumeMount(IntegrationTestOciGateway.CertificateVolumeName, IntegrationTestOciGateway.CertificateMountPath, AccessMode.ReadOnly)
-                    .WithResourceMapping(IntegrationTestOciGateway.ReadScript("Essbase", null, "identity-wrapper.sh"), "/u01/container-scripts/identity-wrapper.sh", fileMode: ScriptMode)
-                    .WithResourceMapping(IntegrationTestOciGateway.ReadScript("Essbase", null, "trustOciGateway.sh"), "/u01/container-scripts/trustOciGateway.sh", fileMode: ScriptMode)
-                    .WithCommand("/u01/container-scripts/identity-wrapper.sh", profile.StartupCommand);
-            }
-            else
-            {
-                builder = builder.WithCommand(profile.StartupCommand);                               // "/u01/container-scripts/createAndStartDomain.sh"
+                    .WithResourceMapping(IntegrationTestOciGateway.ReadScript("Essbase", null, "trustOciGateway.sh"), "/u01/container-scripts/trustOciGateway.sh", fileMode: ScriptMode);
             }
 
             // Apply the profile environment last, so that a profile may override any variable set above.

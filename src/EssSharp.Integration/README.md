@@ -11,6 +11,11 @@ The collections run in a fixed order: the available-server checks, then `CleanSe
 application, cube, user and group on the server**, then the create, get and perform tests. Do not run the clean
 collection against a server you want to keep (`--filter-not-trait "type=clean"` skips it).
 
+A container the harness starts runs `Scripts/Essbase/wrapper.sh`, as the scoop `essbase` stack does, before the image's
+start command: it gives Essbase's managed server a 4 GB heap (`ESSBASE_MANAGED_SERVER_HEAP` in the profile's
+environment sets another), since with the image's 1 GB Essbase refuses drill-through reports once the heap is busy. A
+reused container keeps the heap it was started with.
+
 ## Settings
 
 Settings are read from `appsettings.json`, and from `appsettings.local.json` next to it if one exists (it is not
@@ -71,7 +76,7 @@ service's users also sign in with their passwords. `OAuth:Mode` decides where th
 | Mode | What happens |
 |---|---|
 | `Disabled` (the committed default) | The OAuth tests are skipped. |
-| `Managed` | The harness provides the identity service: it starts its OCI gateway (`Scripts/Oci/gateway`, the same scripts the scoop `essbase` stack runs) before Essbase, with the identity tenant and the GenAI inference host as network aliases, and creates the Essbase container in Identity Cloud mode against it (`IDENTITY_PROVIDER=IDCS`, with `Scripts/Essbase/identity-wrapper.sh` adding the gateway's certificate authority to the domain's trust). The tokens come from the gateway's identity port, published on a random host port. A running Essbase container is reused; if it was not created in Identity Cloud mode, the tests are skipped with that reason. |
+| `Managed` | The harness provides the identity service: it starts its OCI gateway (`Scripts/Oci/gateway`, the same scripts the scoop `essbase` stack runs) before Essbase, with the identity tenant and the GenAI inference host as network aliases, and creates the Essbase container in Identity Cloud mode against it (`IDENTITY_PROVIDER=IDCS`, with `Scripts/Essbase/wrapper.sh` adding the gateway's certificate authority to the domain's trust). The tokens come from the gateway's identity port, published on a random host port. A running Essbase container is reused; if it was not created in Identity Cloud mode, the tests are skipped with that reason. |
 | `External` | The Essbase server already accepts an identity service's tokens, and `OAuth:TokenUrl` names its token endpoint; for the scoop stack created with `essbase identity idcs`, `http://localhost:9005/oauth2/v1/token`. |
 
 The tests take their tokens with the password grant, unattended; Essbase gets the same bearer token whichever grant

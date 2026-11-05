@@ -77,7 +77,7 @@ namespace EssSharp.Integration.Setup
         /// </summary>
         private static readonly string[] GatewayFiles =
         {
-            "gateway.py", "identity.py", "essbase_hints.py", "configure-essbase-ai.py", "provision-essbase-users.py",
+            "gateway.py", "identity.py", "drill.py", "essbase_hints.py", "configure-essbase-ai.py", "provision-essbase-users.py",
             "generate-certs.sh", "start.sh", "answers.json", "users.json"
         };
 
