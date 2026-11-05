@@ -1,0 +1,4 @@
+{
+    "name": "CalcProduct",
+    "content": "/* Calculates the measures and periods of one product in the markets the user chooses when the script runs. */\nSET UPDATECALC OFF;\nSET RUNTIMESUBVARS\n{\n    CalcProduct = \"100-10\"\n    <RTSV_HINT><svLaunch>\n        <description>Product to calculate</description>\n        <type>member</type>\n        <dimension>Product</dimension>\n        <allowMissing>false</allowMissing>\n        <choice>single</choice>\n    </svLaunch></RTSV_HINT>;\n    CalcMarkets = \"New York\"\n    <RTSV_HINT><svLaunch>\n        <description>Markets to calculate</description>\n        <type>member</type>\n        <dimension>Market</dimension>\n        <allowMissing>false</allowMissing>\n        <choice>multiple</choice>\n    </svLaunch></RTSV_HINT>;\n};\n\nFIX(&CalcProduct, &CalcMarkets)\n    CALC DIM(Measures, Year);\nENDFIX\n"
+}
