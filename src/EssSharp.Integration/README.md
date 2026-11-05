@@ -13,8 +13,11 @@ collection against a server you want to keep (`--filter-not-trait "type=clean"` 
 
 A container the harness starts runs `Scripts/Essbase/wrapper.sh`, as the scoop `essbase` stack does, before the image's
 start command: it gives Essbase's managed server a 4 GB heap (`ESSBASE_MANAGED_SERVER_HEAP` in the profile's
-environment sets another), since with the image's 1 GB Essbase refuses drill-through reports once the heap is busy. A
-reused container keeps the heap it was started with.
+environment sets another), since with the image's 1 GB Essbase refuses drill-through reports once the heap is busy. It
+also raises the managed server's pool of connections to the embedded LDAP from 10 to 100 (`ESSBASE_IDENTITY_POOL_SIZE`
+sets another): each user the server deletes holds one of them for three minutes, and once the pool is used up every
+request fails, for the administrator too, with a 400 "Error while getting group" or a 403. A reused container keeps the
+heap and pool it was started with.
 
 ## Settings
 

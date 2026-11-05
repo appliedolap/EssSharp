@@ -140,5 +140,38 @@ namespace EssSharp.Integration
             // Assert that the status code was 401/unauthorized.
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
+
+        [Fact(DisplayName = "AvailableServerTests - 04 - Essbase_AfterDeletingUsersInARow_StillAnswers"), Priority(04)]
+        public async Task Essbase_AfterDeletingUsersInARow_StillAnswers()
+        {
+            // More users than the domain's default pool of ten connections to the embedded LDAP has room for: each user the
+            // server deletes holds one of them for three minutes.
+            const int count = 15;
+
+            SkipUnlessServerManagesUsers();
+
+            // With a pool too small for the deletes, the test would shut the server out for three minutes, failing the tests
+            // after it too, so it runs only where the pool holds them (wrapper.sh gives it 100).
+            Assert.SkipUnless(await GetIdentityPoolSizeAsync(TestContext.Current.CancellationToken) is > count + 5,
+                "The Essbase server's pool of connections to the embedded LDAP is too small for this test, or could not be read.");
+
+            var server = GetEssServer();
+            var prefix = $"esspool_{Guid.NewGuid():N}".Substring(0, 16);
+
+            for (var i = 1; i <= count; i++)
+            {
+                var user = await server.CreateUserAsync(new EssUserCreationOptions($"{prefix}_{i}", "Passw0rd!2026", EssServerRole.User), TestContext.Current.CancellationToken);
+
+                await user.DeleteAsync(TestContext.Current.CancellationToken);
+            }
+
+            // A server whose pool is used up waits ten seconds for a connection and then refuses the request (400 or 403).
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            await server.GetGroupsAsync(TestContext.Current.CancellationToken);
+            await server.GetUsersAsync(TestContext.Current.CancellationToken);
+
+            Assert.True(watch.Elapsed < TimeSpan.FromSeconds(5), $"Listing the groups and users took {watch.Elapsed.TotalSeconds:F1} seconds after {count} users were deleted.");
+        }
     }
 }
