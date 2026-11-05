@@ -327,6 +327,29 @@ namespace EssSharp.Integration.Setup
             IntegrationTestFactory.ExecAsync(Essbase, new[] { "/bin/bash", "-lc", command }, cancellationToken);
 
         /// <summary>
+        /// Returns the most connections Essbase's managed server keeps to the domain's embedded LDAP (the maxPoolSize of the
+        /// DefaultAuthenticator adapter in fmwconfig/ovd/default/adapters.os_xml), or null when there is no Essbase container
+        /// to read it from or its domain has no such setting, as one in Identity Cloud mode has none.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        protected async Task<int?> GetIdentityPoolSizeAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var (_, stdout) = await ExecEssbaseAsync(
+                    "grep -h -o -E '<maxPoolSize>[0-9]+</maxPoolSize>' /u01/config/domains/*/config/fmwconfig/ovd/default/adapters.os_xml 2>/dev/null | head -n 1 | grep -o -E '[0-9]+'",
+                    cancellationToken);
+
+                return int.TryParse(stdout?.Trim(), out var size) ? size : null;
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// The profile resolved for the default (first configured) Essbase image.
         /// </summary>
         protected static EssbaseContainerProfile EssbaseProfile => IntegrationTestFactory.EssbaseProfile;

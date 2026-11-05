@@ -103,5 +103,26 @@ namespace EssSharp.Integration
             Assert.Equal($@"-Xmx{expected}", xmx, ignoreCase: true);
         }
 
+        [Fact(DisplayName = "AvailableContainerTests - 06 - EssbaseContainer_StartedThroughTheWrapper_GivesTheIdentityStoreItsPool"), Priority(06)]
+        public async Task EssbaseContainer_StartedThroughTheWrapper_GivesTheIdentityStoreItsPool()
+        {
+            // A server in Identity Cloud mode has no adapter for the embedded LDAP, so it has no such pool.
+            SkipUnlessServerManagesUsers();
+
+            // Get a docker client.
+            using var client = GetClient();
+
+            // The wrapper sets the pool; a container started some other way is not the harness's to judge.
+            var config = (await client.Containers.InspectContainerAsync(Essbase, TestContext.Current.CancellationToken))?.Config;
+
+            Assert.SkipUnless(config?.Cmd?.Any(argument => argument.EndsWith("/wrapper.sh", StringComparison.Ordinal)) is true,
+                $@"The Essbase container was not started through wrapper.sh (its command is ""{string.Join(" ", config?.Cmd ?? new List<string>())}"").");
+
+            // The pool the wrapper gives the managed server: the profile's ESSBASE_IDENTITY_POOL_SIZE, or 100.
+            var expected = IntegrationTestFactory.EssbaseProfile.Environment.TryGetValue("ESSBASE_IDENTITY_POOL_SIZE", out var size) && size is { Length: > 0 } ? int.Parse(size) : 100;
+
+            Assert.Equal(expected, await GetIdentityPoolSizeAsync(TestContext.Current.CancellationToken));
+        }
+
     }
 }

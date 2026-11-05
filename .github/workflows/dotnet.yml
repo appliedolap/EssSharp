@@ -10,18 +10,30 @@ on:
     branches: [ "develop" ]
   workflow_dispatch:
     inputs:
-      oauth_tests:
-        description: Run the whole suite against an Essbase created in Identity Cloud mode, with the harness's OCI gateway as its identity provider, and run the OAuth tests. User and group management tests are skipped on such a server.
-        type: boolean
-        default: false
+      security_modes:
+        description: The security modes to create Essbase in, one job each. Native security holds its own users and groups; Identity Cloud mode takes them from the harness's OCI gateway as its identity provider, and runs the OAuth tests. Pushes and pull requests always run both.
+        type: choice
+        options: [ both, native, identity-cloud ]
+        default: both
       ai_query_tests:
-        description: Run the AI query integration tests. They build their own test environment (an Oracle AI Database container and the AI gateway beside it), which adds about five minutes. Pushes and pull requests always run them; clear this to skip them in a manual run.
+        description: Run the AI query integration tests, in the native security job. They build their own test environment (an Oracle AI Database container and the AI gateway beside it), which adds about five minutes. Pushes and pull requests always run them; clear this to skip them in a manual run.
         type: boolean
         default: true
 
 jobs:
   build:
-    
+
+    # One job for each security mode Essbase can be created in, so that every push and pull request is tested against
+    # both: a server that holds its own users and groups (native), and one whose users and groups live in an identity
+    # service (identity-cloud), where user and group management is not supported and service roles are provisioned
+    # instead. Each job creates its own containers on its own runner, so the two never share a server.
+    name: Build / Test (${{ matrix.security }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        security: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.security_modes != 'both' && format('["{0}"]', inputs.security_modes) || '["native","identity-cloud"]') }}
+
     # Linux containers are not supported on the windows-latest runner.
     # We use the ubuntu-latest runner to workaround this issue:
     # https://github.com/actions/runner-images/issues/1143
@@ -33,35 +45,37 @@ jobs:
     # The integration tests start Docker containers, and a stuck one would otherwise hold the runner for the default
     # six hours. The run normally takes about ten minutes.
     timeout-minutes: 60
-    
+
+    env:
+      # The AI query tests do not depend on the security mode, so only the native job builds their environment.
+      AI_QUERY_TESTS: ${{ matrix.security == 'native' && (github.event_name != 'workflow_dispatch' || inputs.ai_query_tests) }}
+      OAUTH_TESTS: ${{ matrix.security == 'identity-cloud' }}
+
     steps:
     - uses: actions/checkout@v7
-    
+
     # Setup .NET 10.0
     - name: Setup .NET 10.0
       uses: actions/setup-dotnet@v6
       with:
         dotnet-version: 10.0.x
-    
+
     # The AI query tests build an Oracle AI Database container next to the Essbase and SQL Server containers. Remove what
     # the runner image carries and this job does not use, to leave room for the images.
     - name: Free disk space for the AI query tests
-      if: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests }}
+      if: ${{ env.AI_QUERY_TESTS == 'true' }}
       run: |
         sudo rm -rf /usr/local/lib/android /usr/share/swift /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL
         df -h /
 
-    # The AI query tests are off in appsettings.json, so that a local run does not have to build their environment, and
-    # this job turns them on with a local settings file (see src/EssSharp.Integration/README.md). The OAuth tests are off
-    # unless a manual run asks for them (oauth_tests): then the Essbase container is created in Identity Cloud mode, and
-    # the same file sets OAuth:Mode to Managed. The file replaces only
-    # the AiQuery section; the rest of the settings still come from appsettings.json. It has to exist before the build,
-    # which copies it next to the tests. The question is one the AI gateway has a canned answer for (Scripts/Oci/gateway/answers.json).
+    # The AI query and OAuth tests are off in appsettings.json, so that a local run does not have to build their
+    # environment, and this job turns them on with a local settings file (see src/EssSharp.Integration/README.md). In the
+    # identity-cloud job the file sets OAuth:Mode to Managed, so the Essbase container is created in Identity Cloud mode.
+    # The file replaces only the sections it names; the rest of the settings still come from appsettings.json. It has to
+    # exist before the build, which copies it next to the tests. The question is one the AI gateway has a canned answer
+    # for (Scripts/Oci/gateway/answers.json).
     - name: Enable the AI query and OAuth tests
-      if: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests || inputs.oauth_tests }}
-      env:
-        AI_QUERY_TESTS: ${{ github.event_name != 'workflow_dispatch' || inputs.ai_query_tests }}
-        OAUTH_TESTS: ${{ github.event_name == 'workflow_dispatch' && inputs.oauth_tests }}
+      if: ${{ env.AI_QUERY_TESTS == 'true' || env.OAUTH_TESTS == 'true' }}
       run: |
         sections=()
         if [ "$AI_QUERY_TESTS" = "true" ]; then
@@ -78,26 +92,26 @@ jobs:
     # We build and test a solution filter without the MAUI client to workaround this issue.
     #- name: Install MAUI Workload
     #  run: dotnet workload install maui --ignore-failed-sources
-    
+
     # Restore the dependencies of the EssSharp and EssSharp.Abstractions libraries.
     - name: Restore EssSharp dependencies
       run: dotnet restore EssSharp.slnf
-    
+
     # Build the EssSharp and EssSharp.Abstractions
     - name: Build EssSharp
       run: dotnet build EssSharp.slnf --no-restore
-    
+
     # Login to Docker Hub using the username and token secrets.
     - name: Login to Docker Hub
       uses: docker/login-action@v4
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
+
     # Create a dedicated bridge network for the test containers.
     - name: Create Docker network
       run: docker network create --driver bridge standalone || true
-    
+
     # Test the EssSharp and EssSharp.Abstractions libraries.
     # global.json opts dotnet test into Microsoft.Testing.Platform (required for xUnit.net v3 on the .NET 10 SDK).
     # Run one test module at a time; the integration tests share containers and must never overlap.

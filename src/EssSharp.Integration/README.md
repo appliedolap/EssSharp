@@ -13,8 +13,11 @@ collection against a server you want to keep (`--filter-not-trait "type=clean"` 
 
 A container the harness starts runs `Scripts/Essbase/wrapper.sh`, as the scoop `essbase` stack does, before the image's
 start command: it gives Essbase's managed server a 4 GB heap (`ESSBASE_MANAGED_SERVER_HEAP` in the profile's
-environment sets another), since with the image's 1 GB Essbase refuses drill-through reports once the heap is busy. A
-reused container keeps the heap it was started with.
+environment sets another), since with the image's 1 GB Essbase refuses drill-through reports once the heap is busy. It
+also raises the managed server's pool of connections to the embedded LDAP from 10 to 100 (`ESSBASE_IDENTITY_POOL_SIZE`
+sets another): each user the server deletes holds one of them for three minutes, and once the pool is used up every
+request fails, for the administrator too, with a 400 "Error while getting group" or a 403. A reused container keeps the
+heap and pool it was started with.
 
 ## Settings
 
@@ -63,8 +66,9 @@ To run them locally, add a complete `AiQuery` section to `appsettings.local.json
 ```
 
 The AI tests are off by default so that a local run does not have to build the AI environment. The Build / Test
-workflow turns them on for every push, pull request and manual run (a manual run can clear the `ai_query_tests`
-input); it does so by writing an `appsettings.local.json` like the one above, in `.github/workflows/dotnet.yml`.
+workflow turns them on in its native security job for every push, pull request and manual run (a manual run can
+clear the `ai_query_tests` input); it does so by writing an `appsettings.local.json` like the one above, in
+`.github/workflows/dotnet.yml`. They do not depend on the security mode, so the Identity Cloud mode job leaves them off.
 Against an Essbase 21.x server (older than 21.8) the tests assert that the AI endpoints are refused.
 
 ## OAuth tests
@@ -97,8 +101,10 @@ token gets the lifetime it asked for under parallel requests, a forged token is 
 machine or a client's registered `redirectUris` and only that client redeems them, the sign-in page is escaped, and
 its host port refuses the AI actions (`/actions/`). They run only when the tokens come from the harness's gateway.
 
-The Build / Test workflow leaves the OAuth tests off on pushes and pull requests; a manual run with the `oauth_tests`
-input runs the whole suite with `OAuth:Mode` set to `Managed`.
+The Build / Test workflow runs two jobs on every push and pull request, each on its own runner with its own
+containers: `native`, where Essbase holds its own users and groups and the OAuth tests are off, and `identity-cloud`,
+which runs the whole suite with `OAuth:Mode` set to `Managed`, so Essbase is created in Identity Cloud mode. A manual run
+can pick one with the `security_modes` input.
 
 The collection depends only on the `Sample` application and the identity users, so it can be run on its own against a
 prepared server: `dotnet test --project src/EssSharp.Integration/EssSharp.Integration.csproj --filter-class EssSharp.Integration.OAuthTests`.
