@@ -19,8 +19,7 @@ namespace EssSharp.Integration
     /// <see cref="IEssGrid.DisplayUnknownMembers"/> against Essbase: a grid that holds text that is not a member of the cube,
     /// which Essbase REST refuses unless the grid preferences keep comments, is retrieved with comments kept, keeps that text
     /// in its cells, and lists it, as the Essbase Java API's DisplayUnknownMembers option has Essbase do. A sheet of nothing
-    /// but such text, as Dodeca's function tester has, is left as it is rather than replaced by Essbase's default grid. The
-    /// tests only read Sample.Basic.
+    /// but such text is left as it is rather than replaced by Essbase's default grid. The tests only read Sample.Basic.
     /// </summary>
     [Collection(nameof(GridUnknownMemberTests)), Trait("type", "execute")]
     public class GridUnknownMemberTests : IntegrationTestBase
@@ -136,7 +135,7 @@ namespace EssSharp.Integration
         public async Task Essbase_RefreshUnderAnotherAliasTable_TakesTheGridItReturned()
         {
             // Under GermanNames, Essbase returns every member of this grid under another name than the one it was sent.
-            // A numeric member name is sent with a leading apostrophe, as Dodeca writes one a sheet holds as text.
+            // A numeric member name is sent with a leading apostrophe, as a client writes one that a sheet holds as text.
             var values = new[]
             {
                 new[] { "",    "Jan" },

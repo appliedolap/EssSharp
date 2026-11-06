@@ -2,7 +2,8 @@
 
 With IDENTITY_PROVIDER=IDCS ("essbase identity idcs"), the Essbase domain is created in the image's own Identity Cloud
 mode, pointed at the gateway as https://<tenant>.<host>. WebLogic's Identity Cloud integrator then accepts
-"Authorization: Bearer <access token>" on Essbase REST, which is how Dodeca and EssSharp use OAuth against Essbase, and
+"Authorization: Bearer <access token>" on Essbase REST, which is how EssSharp and other clients use OAuth against
+Essbase, and
 the OPSS identity store resolves users and groups here. Users, groups and OAuth clients come from users.json, next to
 this file; the Essbase administrator (ESSBASE_USER) is always present. provision-essbase-users.py gives the users their
 Essbase roles.

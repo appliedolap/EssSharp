@@ -26,7 +26,7 @@ namespace EssSharp.Test.Library
         [Fact(DisplayName = "GridCellTypeTests - RefreshAsync_WithARowOfNumbersBetweenTheHeadersAndTheMembers_SendsTheNumbersBlank")]
         public async Task RefreshAsync_WithARowOfNumbersBetweenTheHeadersAndTheMembers_SendsTheNumbersBlank()
         {
-            // A template row of zeros under the month headers, above the first product, as Dodeca's Planning by Attribute has.
+            // A template row of zeros under the month headers, above the first product, as a planning sheet may have.
             using var stub = Stub();
 
             var grid = await GridAsync(stub, new[]
@@ -111,7 +111,7 @@ namespace EssSharp.Test.Library
         [Fact(DisplayName = "GridCellTypeTests - RefreshAsync_WithANumberAmongTheColumnHeaderMembers_SendsItAsAMember")]
         public async Task RefreshAsync_WithANumberAmongTheColumnHeaderMembers_SendsItAsAMember()
         {
-            // Product 100 entered as a number beside the members of its header row, as Dodeca's Income Statement Variance by Product has.
+            // Product 100 entered as a number beside the members of its header row, as a variance report by product may have.
             using var stub = Stub();
 
             var grid = await GridAsync(stub, new[]

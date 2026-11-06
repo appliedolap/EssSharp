@@ -21,9 +21,9 @@ namespace EssSharp.Integration.Setup
     /// <c>essbase</c> stack's, <c>http://localhost:9005/oauth2/v1/token</c>).
     /// </summary>
     /// <remarks>
-    /// The tokens are taken with the password grant, which a test can use unattended. It is not how Dodeca signs a
-    /// user in (that is the authorization code or device code grant through its Oracle authorization connector), but
-    /// what Essbase gets is the same bearer token, and that is what these tests exercise.
+    /// The tokens are taken with the password grant, which a test can use unattended. An interactive client signs a
+    /// user in with the authorization code or device code grant instead, but what Essbase gets is the same bearer
+    /// token, and that is what these tests exercise.
     /// </remarks>
     public static class IntegrationTestIdentity
     {

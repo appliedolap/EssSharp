@@ -78,7 +78,7 @@ namespace EssSharp.Integration
             var server = await GetTokenServerAsync(IntegrationTestIdentity.GetUser(EssServerRole.ServiceAdministrator));
             var cube   = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken).GetCubeAsync("Basic", TestContext.Current.CancellationToken);
 
-            // A grid retrieve is the first thing a Dodeca view does with a connection, so it is the operation to prove.
+            // A grid retrieve is usually the first thing a client does with a connection, so it is the operation to prove.
             var grid      = await cube.GetDefaultGridAsync(cancellationToken: TestContext.Current.CancellationToken);
             var refreshed = await grid.RefreshAsync(TestContext.Current.CancellationToken);
 
@@ -305,8 +305,8 @@ namespace EssSharp.Integration
         {
             SkipUnlessHarnessGateway();
 
-            // Dodeca's Oracle and OAuth connections default to this address, where their embedded browser stops to read
-            // the code; users.json registers it for the dodeca client, and only for that client.
+            // A native client's embedded browser can stop at this address to read the code; users.json registers it for
+            // the dodeca client, and only for that client.
             const string nativeClient = "https://sso.appliedolap.com/oauth/nativeclient";
 
             using var dodeca   = await SendAsync(HttpMethod.Get, AuthorizeQuery("dodeca", nativeClient));
