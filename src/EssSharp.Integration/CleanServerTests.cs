@@ -159,17 +159,26 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CleanServerTests - 06 - Essbase_AfterConnection_CanRemoveUsers"), Priority(06)]
         public async Task Essbase_AfterConnection_CanRemoveUsers()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get a service admin connection.
             var connection = GetEssConnection();
+
+            // Get an unconnected server.
+            var server = GetEssServer(connection);
+
+            // Assert that a server in Identity Cloud mode refuses to list its users, and to delete one it can look up.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.GetUsersAsync(TestContext.Current.CancellationToken));
+
+                var identityUser = await server.GetUserAsync(GetEssConnection(EssServerRole.User).Username, TestContext.Current.CancellationToken);
+
+                await AssertUserManagementRefusedAsync(() => identityUser.DeleteAsync(TestContext.Current.CancellationToken));
+                return;
+            }
 
             // If the connection uses an access-token, throw a not supported exception.
             if (connection is { AccessToken.Length: > 0 })
                 throw new NotSupportedException("EssSharp tests do not support the deletion of all cloud users ");
-
-            // Get an unconnected server.
-            var server = GetEssServer(connection);
 
             // Get and delete all existing users except admin.
             foreach ( var user in (await server.GetUsersAsync(TestContext.Current.CancellationToken)).Where(u => !string.Equals(u.Name, "admin")) )
@@ -237,17 +246,26 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CleanServerTests - 08 - Essbase_AfterConnection_CanRemoveGroups"), Priority(08)]
         public async Task Essbase_AfterConnection_CanRemoveGroups()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get a service admin connection.
             var connection = GetEssConnection();
+
+            // Get an unconnected server.
+            var server = GetEssServer(connection);
+
+            // Assert that a server in Identity Cloud mode refuses to list its groups, and to delete one it can look up.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.GetGroupsAsync(TestContext.Current.CancellationToken));
+
+                var identityGroup = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+
+                await AssertUserManagementRefusedAsync(() => identityGroup.DeleteAsync(TestContext.Current.CancellationToken));
+                return;
+            }
 
             // If the connection uses an access-token, throw a not supported exception.
             if (connection is { AccessToken.Length: > 0 })
                 throw new NotSupportedException("EssSharp tests do not support the deletion of all cloud user groups ");
-
-            // Get an unconnected server.
-            var server = GetEssServer(connection);
 
             // Get the list of existing applications.
             foreach ( var group in await server.GetGroupsAsync(TestContext.Current.CancellationToken) )

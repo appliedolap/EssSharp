@@ -35605,6 +35605,7 @@ components:
         aiEnabled: true
         aiCalcEnabled: true
         easInstalled: true
+        idcs: true
         aiMdxEnabled: true
         serviceRoleProvisioningSupported: true
       properties:
@@ -35627,6 +35628,8 @@ components:
         aiCalcEnabled:
           type: boolean
         aiSemanticSearchEnabled:
+          type: boolean
+        idcs:
           type: boolean
       type: object
       xml:

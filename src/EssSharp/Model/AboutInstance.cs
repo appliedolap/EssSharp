@@ -44,7 +44,8 @@ namespace EssSharp.Model
         /// <param name="aiAskEssbaseEnabled">aiAskEssbaseEnabled.</param>
         /// <param name="aiCalcEnabled">aiCalcEnabled.</param>
         /// <param name="aiSemanticSearchEnabled">aiSemanticSearchEnabled.</param>
-        public AboutInstance(bool provisioningSupported = default, bool serviceRoleProvisioningSupported = default, bool appRoleProvisioningSupported = default, bool resetPasswordSupported = default, bool easInstalled = default, bool aiEnabled = default, bool aiMdxEnabled = default, bool aiAskEssbaseEnabled = default, bool aiCalcEnabled = default, bool aiSemanticSearchEnabled = default)
+        /// <param name="idcs">idcs.</param>
+        public AboutInstance(bool provisioningSupported = default, bool serviceRoleProvisioningSupported = default, bool appRoleProvisioningSupported = default, bool resetPasswordSupported = default, bool easInstalled = default, bool aiEnabled = default, bool aiMdxEnabled = default, bool aiAskEssbaseEnabled = default, bool aiCalcEnabled = default, bool aiSemanticSearchEnabled = default, bool idcs = default)
         {
             this.ProvisioningSupported = provisioningSupported;
             this.ServiceRoleProvisioningSupported = serviceRoleProvisioningSupported;
@@ -56,6 +57,7 @@ namespace EssSharp.Model
             this.AiAskEssbaseEnabled = aiAskEssbaseEnabled;
             this.AiCalcEnabled = aiCalcEnabled;
             this.AiSemanticSearchEnabled = aiSemanticSearchEnabled;
+            this.Idcs = idcs;
         }
 
         /// <summary>
@@ -119,6 +121,12 @@ namespace EssSharp.Model
         public bool AiSemanticSearchEnabled { get; set; }
 
         /// <summary>
+        /// Gets or Sets Idcs
+        /// </summary>
+        [DataMember(Name = "idcs", EmitDefaultValue = true)]
+        public bool Idcs { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -136,6 +144,7 @@ namespace EssSharp.Model
             sb.Append("  AiAskEssbaseEnabled: ").Append(AiAskEssbaseEnabled).Append("\n");
             sb.Append("  AiCalcEnabled: ").Append(AiCalcEnabled).Append("\n");
             sb.Append("  AiSemanticSearchEnabled: ").Append(AiSemanticSearchEnabled).Append("\n");
+            sb.Append("  Idcs: ").Append(Idcs).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

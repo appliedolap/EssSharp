@@ -1216,6 +1216,13 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        public EssSecurityMode GetSecurityMode() => GetSecurityModeAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public Task<EssSecurityMode> GetSecurityModeAsync( CancellationToken cancellationToken = default ) =>
+            FeatureSupport.GetSecurityModeAsync(cancellationToken);
+
+        /// <inheritdoc />
         public bool Supports( EssFeature feature ) => SupportsAsync(feature).GetAwaiter().GetResult();
 
         /// <inheritdoc />
