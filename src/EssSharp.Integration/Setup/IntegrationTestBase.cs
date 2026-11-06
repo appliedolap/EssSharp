@@ -287,11 +287,13 @@ namespace EssSharp.Integration.Setup
         /// <summary>
         /// Returns the group the group tests work with on a server in the given security mode: in Identity Cloud mode, which
         /// cannot create a group, a group of the identity service (<c>Scripts/Oci/gateway/users.json</c>) that the server
-        /// can look up; otherwise, the one <see cref="CreateServerObjectTests" /> creates.
+        /// can look up; otherwise, the one <see cref="CreateServerObjectTests" /> creates. In Identity Cloud mode it is
+        /// <c>essbase-admins</c>, whose only member is a service administrator: the application role the group tests give
+        /// it must not change what the test users, all members of <c>essbase-users</c>, may do.
         /// </summary>
         /// <param name="securityMode">The security mode the server reports.</param>
         protected static string GetTestGroupName( EssSecurityMode securityMode ) =>
-            securityMode is EssSecurityMode.IdentityCloud ? "essbase-users" : "Test_Group";
+            securityMode is EssSecurityMode.IdentityCloud ? "essbase-admins" : "Test_Group";
 
         /// <summary>
         /// The message an Essbase server in Identity Cloud mode refuses user and group management with.

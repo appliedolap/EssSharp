@@ -96,7 +96,8 @@ reports the mode itself (`idcs` in `/about/instance`), and the library exposes i
 the server under test reports `EssSecurityMode.IdentityCloud`, the user and group tests assert that refusal instead,
 and fail if a server starts to allow the operation or refuses it another way; `AvailableServerTests` checks that the
 server reports the mode the harness created its container in. The group tests then work with the identity service's
-`essbase-users` group, which the server can find but not create; application permissions, a group's included, still
+`essbase-admins` group, which the server can find but not create, and whose only member is a service administrator, so
+the role the tests give it changes no test user's access; application permissions, a group's included, still
 work and are still tested. The `PowerUser` and `User` connections must name users of the identity service: the
 harness's (`Scripts/Oci/gateway/users.json`) has `poweruser` and `user` with the committed passwords, and gives them
 their service roles.
