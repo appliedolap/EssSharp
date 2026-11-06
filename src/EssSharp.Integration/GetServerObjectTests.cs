@@ -726,5 +726,47 @@ namespace EssSharp.Integration
                 .GetScriptAsync<IEssCalcScript>("CalcAll", cancellationToken: TestContext.Current.CancellationToken)
                 .GetRuntimeSubstitutionVariablesAsync(TestContext.Current.CancellationToken));
         }
+
+        /// <summary>
+        /// A dimension's top member belongs to its own dimension, so its <see cref="IEssMember.DimensionName"/> is its own name,
+        /// though Essbase marks it with <c>dimension</c> and gives it no <c>dimensionName</c>. Before the fix it was null, so a
+        /// client looking a member's dimension up by name failed for every top member.
+        /// </summary>
+        [Fact(DisplayName = @"GetServerObjectTests - 26 - Essbase_AfterReportCreation_DimensionTopMembersNameTheirDimension"), Priority(26)]
+        public async Task Essbase_AfterReportCreation_DimensionTopMembersNameTheirDimension()
+        {
+            // Get an unconnected server.
+            var server = GetEssServer();
+
+            // Get the Sample.Basic cube from the server.
+            var cube = await server
+                .GetApplicationAsync("Sample", TestContext.Current.CancellationToken)
+                .GetCubeAsync("Basic", TestContext.Current.CancellationToken);
+
+            // Assert that a top member fetched with every field names its own dimension.
+            var product = await cube.GetMemberAsync("Product", cancellationToken: TestContext.Current.CancellationToken);
+
+            Assert.True(product.Dimension);
+            Assert.Equal("Product", product.DimensionName);
+
+            // Assert that a top member fetched with only its dimension name asked for still names its own dimension.
+            var productDimensionNameOnly = await cube.GetMemberAsync("Product", EssMemberFields.dimensionName, TestContext.Current.CancellationToken);
+
+            Assert.Equal("Product", productDimensionNameOnly.DimensionName);
+
+            // Assert that every dimension's top member names its own dimension.
+            var dimensionMembers = await cube.GetDimensionMembersAsync(cancellationToken: TestContext.Current.CancellationToken);
+
+            Assert.All(dimensionMembers, member => Assert.Equal(member.Name, member.DimensionName));
+
+            // Assert that a member below the top still names the dimension Essbase gives it, with every field and with only
+            // its dimension name asked for.
+            var colaWithEveryField = await cube.GetMemberAsync("100-10", cancellationToken: TestContext.Current.CancellationToken);
+            var colaDimensionNameOnly = await cube.GetMemberAsync("100-10", EssMemberFields.dimensionName, TestContext.Current.CancellationToken);
+
+            Assert.False(colaWithEveryField.Dimension);
+            Assert.Equal("Product", colaWithEveryField.DimensionName);
+            Assert.Equal("Product", colaDimensionNameOnly.DimensionName);
+        }
     }
 }
