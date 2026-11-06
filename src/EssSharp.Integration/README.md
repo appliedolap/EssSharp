@@ -73,9 +73,9 @@ Against an Essbase 21.x server (older than 21.8) the tests assert that the AI en
 
 ## OAuth tests
 
-`OAuthTests` send Essbase REST the bearer tokens of an identity service, which is how Dodeca and the library use OAuth
-against Essbase: a token signs the library in as the token's user, a forged or expired token is refused, and the
-service's users also sign in with their passwords. `OAuth:Mode` decides where the tokens come from:
+`OAuthTests` send Essbase REST the bearer tokens of an identity service, which is how the library uses OAuth against
+Essbase: a token signs the library in as the token's user, a forged or expired token is refused, and the service's
+users also sign in with their passwords. `OAuth:Mode` decides where the tokens come from:
 
 | Mode | What happens |
 |---|---|
@@ -90,9 +90,14 @@ role): the users of the harness's identity service (`Scripts/Oci/gateway/users.j
 identity service also knows by default.
 
 An Essbase server in Identity Cloud mode keeps no users of its own: it looks them up in the identity service and only
-keeps the roles, and refuses to create, list or delete users and groups. So when `OAuth:Mode` is `Managed` or
-`External`, the tests that create or remove users and every group test are skipped; application permissions still
-work and are still tested. The `PowerUser` and `User` connections must then name users of the identity service: the
+keeps the roles. It still finds a single user or group by name, but refuses to list, create, edit or delete users and
+groups and to list or change a group's members, with status 400 and "This operation is not supported." The server
+reports the mode itself (`idcs` in `/about/instance`), and the library exposes it as `IEssServer.GetSecurityMode`. When
+the server under test reports `EssSecurityMode.IdentityCloud`, the user and group tests assert that refusal instead,
+and fail if a server starts to allow the operation or refuses it another way; `AvailableServerTests` checks that the
+server reports the mode the harness created its container in. The group tests then work with the identity service's
+`essbase-users` group, which the server can find but not create; application permissions, a group's included, still
+work and are still tested. The `PowerUser` and `User` connections must name users of the identity service: the
 harness's (`Scripts/Oci/gateway/users.json`) has `poweruser` and `user` with the committed passwords, and gives them
 their service roles.
 

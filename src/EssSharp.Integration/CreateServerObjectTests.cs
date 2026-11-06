@@ -68,10 +68,15 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"CreateServerObjectTests - 02 - Essbase_AfterClean_CanCreateGroup"), Priority(02)]
         public async Task Essbase_AfterClean_CanCreateGroups()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get an unconnected server.
             var server = GetEssServer();
+
+            // Assert that a server in Identity Cloud mode refuses to create a group.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.CreateGroupAsync("Test_Group", EssServerRole.PowerUser, "test group", TestContext.Current.CancellationToken));
+                return;
+            }
 
             // TODO: create Group Creation Class and a proper To
 
@@ -95,8 +100,6 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CreateServerObjectTests - 03 - Essbase_AfterCubeCreation_CanCreateUser"), Priority(03)]
         public async Task Essbase_AfterCubeCreation_CanCreateUser()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get an unconnected server.
             var server = GetEssServer();
 
@@ -104,6 +107,13 @@ namespace EssSharp.Integration
 
             // Create EssUserCreationOptions
             var options = new EssUserCreationOptions(userConnection.Username, userConnection.Password, userConnection.Role);
+
+            // Assert that a server in Identity Cloud mode refuses to create a user.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.CreateUserAsync(options, TestContext.Current.CancellationToken));
+                return;
+            }
 
             var newUser = await server.CreateUserAsync(options, TestContext.Current.CancellationToken);
 
@@ -132,12 +142,12 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "CreateServerObjectTests - 05 - Essbase_AfterCubeCreation_CanCreateGroupPermissions"), Priority(05)]
         public async Task Essbase_AfterCubeCreation_CanCreateGroupPermissions()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
+            // A server in Identity Cloud mode cannot create a group, but gives application permissions to the identity
+            // service's groups.
+            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
 
             var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
@@ -145,7 +155,7 @@ namespace EssSharp.Integration
 
             Assert.Equal(EssApplicationRole.db_update, groupPermissions.Role);
 
-            Assert.Equal("Test_Group", groupPermissions.Name);
+            Assert.Equal(group.Name, groupPermissions.Name);
         }
 
         [Fact(DisplayName = "CreateServerObjectTests - 05 - Essbase_AfterCubeCreation_CanCreateMdxScript"), Priority(05)]

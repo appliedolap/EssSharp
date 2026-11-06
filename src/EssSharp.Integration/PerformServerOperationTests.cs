@@ -335,15 +335,16 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 12 - Essbase_AfterPermissionCreation_CanGetListOfGroupPermissions"), Priority(12)]
         public async Task Essbase_AfterPermissionCreation_CanGetListOfPermissions()
         {
-            SkipUnlessServerManagesUsers();
-
             var server = GetEssServer();
 
             var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
-            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.User, new[] { EssApplicationRole.db_access }, cancellationToken: TestContext.Current.CancellationToken);
+            var groupName = await GetTestGroupNameAsync(server);
 
-            Assert.NotEmpty(permissionsList);
+            // CreateServerObjectTests gives the test group db_update on Sample.
+            var permissionsList = await app.GetPermissionsAsync(EssPermissionType.Group, new[] { EssApplicationRole.db_update }, cancellationToken: TestContext.Current.CancellationToken);
+
+            Assert.Contains(permissionsList, permission => permission.Name == groupName && permission.PermissionType is EssPermissionType.Group);
         }
 
 
@@ -364,14 +365,20 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 14 - Essbase_AfterGroupCreation_CanAddUser"), Priority(14)]
         public async Task Essbase_AfterGroupCreation_CanAddUser()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get an unconnected server.
             var server = GetEssServer();
 
             var userConnection = GetEssConnection(EssServerRole.User);
 
-            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
+            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+
+            // Assert that a server in Identity Cloud mode refuses to list a group's users or to add one.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => group.GetUsersAsync(TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => group.AddUsersAsync(new List<string>() { userConnection.Username }, TestContext.Current.CancellationToken));
+                return;
+            }
 
             Assert.Empty(await group.GetUsersAsync(TestContext.Current.CancellationToken));
 
@@ -383,12 +390,18 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 15 - Essbase_AfterGroupCreation_CanAddGroup"), Priority(15)]
         public async Task Essbase_AfterGroupCreation_CanAddGroup()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
+            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+
+            // Assert that a server in Identity Cloud mode refuses to list a group's groups or to add one.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => group.GetGroupsAsync(TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => group.AddGroupsAsync(new List<string>() { "Test_Group_2" }, TestContext.Current.CancellationToken));
+                return;
+            }
 
             Assert.Empty(await group.GetGroupsAsync(TestContext.Current.CancellationToken));
 
@@ -400,12 +413,17 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 16 - Essbase_AfterGroupCreation_EditGroup"), Priority(16)]
         public async Task Essbase_AfterGroupCreation_EditGroup()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
+            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+
+            // Assert that a server in Identity Cloud mode refuses to edit a group.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => group.EditAsync(EssServerRole.User, "Edited test group", TestContext.Current.CancellationToken));
+                return;
+            }
 
             var editedGroup = await group.EditAsync( EssServerRole.User, "Edited test group", TestContext.Current.CancellationToken);
 
@@ -416,14 +434,19 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 17 - Essbase_AfterGroupCreation_CanRemoveUser"), Priority(17)]
         public async Task Essbase_AfterGroupCreation_CanRemoveUser()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get an unconnected server.
             var server = GetEssServer();
 
             var userConnection = GetEssConnection(EssServerRole.User);
 
-            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
+            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+
+            // Assert that a server in Identity Cloud mode refuses to remove a user from a group.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => group.RemoveUsersAsync(new List<string>() { userConnection.Username }, TestContext.Current.CancellationToken));
+                return;
+            }
 
             Assert.NotEmpty(await group.GetUsersAsync(TestContext.Current.CancellationToken));
 
@@ -435,12 +458,17 @@ namespace EssSharp.Integration
         [Fact(DisplayName = @"PerformServerFunctionTests - 18 - Essbase_AfterGroupCreation_CanRemoveGroup"), Priority(18)]
         public async Task Essbase_AfterGroupCreation_CanRemoveGroup()
         {
-            SkipUnlessServerManagesUsers();
-
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync("Test_Group", TestContext.Current.CancellationToken);
+            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+
+            // Assert that a server in Identity Cloud mode refuses to remove a group from a group.
+            if (await IsIdentityCloudAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => group.RemoveGroupsAsync(new List<string>() { "Test_Group_2" }, TestContext.Current.CancellationToken));
+                return;
+            }
 
             Assert.NotEmpty(await group.GetGroupsAsync(TestContext.Current.CancellationToken));
 
