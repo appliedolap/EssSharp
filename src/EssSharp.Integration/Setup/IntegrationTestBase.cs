@@ -285,31 +285,13 @@ namespace EssSharp.Integration.Setup
         protected static IntegrationTestOAuthSettings OAuthSettings => IntegrationTestFactory.OAuth;
 
         /// <summary>
-        /// Asynchronously returns whether the given server reports that it is in Identity Cloud mode
-        /// (<see cref="EssSecurityMode.IdentityCloud" />): its users and groups live in the identity service, and it refuses
-        /// to manage them. A server that reports no security mode is taken to manage its own users, so that a user or group
-        /// test fails, rather than passes on an assumption, if it does not.
+        /// Returns the group the group tests work with on a server in the given security mode: in Identity Cloud mode, which
+        /// cannot create a group, a group of the identity service (<c>Scripts/Oci/gateway/users.json</c>) that the server
+        /// can look up; otherwise, the one <see cref="CreateServerObjectTests" /> creates.
         /// </summary>
-        /// <param name="server">The server under test.</param>
-        protected static async Task<bool> IsIdentityCloudAsync( IEssServer server ) =>
-            await server.GetSecurityModeAsync(TestContext.Current.CancellationToken) is EssSecurityMode.IdentityCloud;
-
-        /// <summary>
-        /// Asynchronously returns the group the group tests work with on the given server: on a server that manages its
-        /// users, the one <see cref="CreateServerObjectTests" /> creates; on one in Identity Cloud mode, which cannot create
-        /// a group, a group of the identity service (<c>Scripts/Oci/gateway/users.json</c>), which the server can look up.
-        /// </summary>
-        /// <param name="server">The server under test.</param>
-        protected static async Task<string> GetTestGroupNameAsync( IEssServer server ) =>
-            await IsIdentityCloudAsync(server) ? "essbase-users" : "Test_Group";
-
-        /// <summary>
-        /// Skips a test whose subject a server in Identity Cloud mode does not have, when the server under test reports
-        /// that mode.
-        /// </summary>
-        /// <param name="reason">What the server in Identity Cloud mode does not have.</param>
-        protected async Task SkipIfIdentityCloudAsync( string reason ) =>
-            Assert.SkipWhen(await IsIdentityCloudAsync(GetEssServer()), reason);
+        /// <param name="securityMode">The security mode the server reports.</param>
+        protected static string GetTestGroupName( EssSecurityMode securityMode ) =>
+            securityMode is EssSecurityMode.IdentityCloud ? "essbase-users" : "Test_Group";
 
         /// <summary>
         /// The message an Essbase server in Identity Cloud mode refuses user and group management with.

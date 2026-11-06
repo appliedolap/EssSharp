@@ -337,9 +337,12 @@ namespace EssSharp.Integration
         {
             var server = GetEssServer();
 
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
             var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
-            var groupName = await GetTestGroupNameAsync(server);
+            var groupName = GetTestGroupName(securityMode);
 
             // CreateServerObjectTests gives the test group db_update on Sample.
             var permissionsList = await app.GetPermissionsAsync(EssPermissionType.Group, new[] { EssApplicationRole.db_update }, cancellationToken: TestContext.Current.CancellationToken);
@@ -368,12 +371,15 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
             var userConnection = GetEssConnection(EssServerRole.User);
 
-            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+            var group = await server.GetGroupAsync(GetTestGroupName(securityMode), TestContext.Current.CancellationToken);
 
             // Assert that a server in Identity Cloud mode refuses to list a group's users or to add one.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => group.GetUsersAsync(TestContext.Current.CancellationToken));
                 await AssertUserManagementRefusedAsync(() => group.AddUsersAsync(new List<string>() { userConnection.Username }, TestContext.Current.CancellationToken));
@@ -393,10 +399,13 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
+            var group = await server.GetGroupAsync(GetTestGroupName(securityMode), TestContext.Current.CancellationToken);
 
             // Assert that a server in Identity Cloud mode refuses to list a group's groups or to add one.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => group.GetGroupsAsync(TestContext.Current.CancellationToken));
                 await AssertUserManagementRefusedAsync(() => group.AddGroupsAsync(new List<string>() { "Test_Group_2" }, TestContext.Current.CancellationToken));
@@ -416,10 +425,13 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
+            var group = await server.GetGroupAsync(GetTestGroupName(securityMode), TestContext.Current.CancellationToken);
 
             // Assert that a server in Identity Cloud mode refuses to edit a group.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => group.EditAsync(EssServerRole.User, "Edited test group", TestContext.Current.CancellationToken));
                 return;
@@ -437,12 +449,15 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
             var userConnection = GetEssConnection(EssServerRole.User);
 
-            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+            var group = await server.GetGroupAsync(GetTestGroupName(securityMode), TestContext.Current.CancellationToken);
 
             // Assert that a server in Identity Cloud mode refuses to remove a user from a group.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => group.RemoveUsersAsync(new List<string>() { userConnection.Username }, TestContext.Current.CancellationToken));
                 return;
@@ -461,10 +476,13 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
-            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
+            var group = await server.GetGroupAsync(GetTestGroupName(securityMode), TestContext.Current.CancellationToken);
 
             // Assert that a server in Identity Cloud mode refuses to remove a group from a group.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => group.RemoveGroupsAsync(new List<string>() { "Test_Group_2" }, TestContext.Current.CancellationToken));
                 return;

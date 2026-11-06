@@ -162,7 +162,7 @@ namespace EssSharp.Integration
             // server deletes holds one of them for three minutes.
             const int count = 15;
 
-            await SkipIfIdentityCloudAsync("A server in Identity Cloud mode cannot create or delete users.");
+            Assert.SkipWhen(await GetEssServer().GetSecurityModeAsync(TestContext.Current.CancellationToken) is EssSecurityMode.IdentityCloud, "A server in Identity Cloud mode cannot create or delete users.");
 
             // With a pool too small for the deletes, the test would shut the server out for three minutes, failing the tests
             // after it too, so it runs only where the pool holds them (wrapper.sh gives it 100).

@@ -165,8 +165,11 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer(connection);
 
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
             // Assert that a server in Identity Cloud mode refuses to list its users, and to delete one it can look up.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => server.GetUsersAsync(TestContext.Current.CancellationToken));
 
@@ -252,12 +255,15 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer(connection);
 
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
             // Assert that a server in Identity Cloud mode refuses to list its groups, and to delete one it can look up.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => server.GetGroupsAsync(TestContext.Current.CancellationToken));
 
-                var identityGroup = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+                var identityGroup = await server.GetGroupAsync(GetTestGroupName(securityMode), TestContext.Current.CancellationToken);
 
                 await AssertUserManagementRefusedAsync(() => identityGroup.DeleteAsync(TestContext.Current.CancellationToken));
                 return;

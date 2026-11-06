@@ -71,8 +71,11 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
             // Assert that a server in Identity Cloud mode refuses to create a group.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => server.CreateGroupAsync("Test_Group", EssServerRole.PowerUser, "test group", TestContext.Current.CancellationToken));
                 return;
@@ -103,13 +106,16 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
             var userConnection = GetEssConnection(EssServerRole.User);
 
             // Create EssUserCreationOptions
             var options = new EssUserCreationOptions(userConnection.Username, userConnection.Password, userConnection.Role);
 
             // Assert that a server in Identity Cloud mode refuses to create a user.
-            if (await IsIdentityCloudAsync(server))
+            if (securityMode is EssSecurityMode.IdentityCloud)
             {
                 await AssertUserManagementRefusedAsync(() => server.CreateUserAsync(options, TestContext.Current.CancellationToken));
                 return;
@@ -145,9 +151,12 @@ namespace EssSharp.Integration
             // Get an unconnected server.
             var server = GetEssServer();
 
+            // Ask the server whether it is in Identity Cloud mode, where it does not manage its users and groups.
+            var securityMode = await server.GetSecurityModeAsync(TestContext.Current.CancellationToken);
+
             // A server in Identity Cloud mode cannot create a group, but gives application permissions to the identity
             // service's groups.
-            var group = await server.GetGroupAsync(await GetTestGroupNameAsync(server), TestContext.Current.CancellationToken);
+            var group = await server.GetGroupAsync(GetTestGroupName(securityMode), TestContext.Current.CancellationToken);
 
             var app = await server.GetApplicationAsync("Sample", TestContext.Current.CancellationToken);
 
