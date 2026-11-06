@@ -322,6 +322,27 @@ namespace EssSharp
         public Task<IEssAbout> GetAboutAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Returns where this server's users and groups come from, as the server reports in its instance details.
+        /// </summary>
+        /// <remarks>
+        /// The instance details are read once and cached for the server, with the flags <see cref="Supports(EssFeature)"/>
+        /// reads. A server that does not report its security mode, or does not answer for its instance details, is
+        /// <see cref="EssSecurityMode.Unknown"/>.
+        /// </remarks>
+        public EssSecurityMode GetSecurityMode();
+
+        /// <summary>
+        /// Asynchronously returns where this server's users and groups come from, as the server reports in its instance
+        /// details.
+        /// </summary>
+        /// <remarks>
+        /// The instance details are read once and cached for the server, with the flags <see cref="Supports(EssFeature)"/>
+        /// reads. A server that does not report its security mode, or does not answer for its instance details, is
+        /// <see cref="EssSecurityMode.Unknown"/>.
+        /// </remarks>
+        public Task<EssSecurityMode> GetSecurityModeAsync( CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Returns a about information of this server as an <see cref="IEssAbout"/>.
         /// </summary>
         public IEssAboutInstance GetAboutInstance();

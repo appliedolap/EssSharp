@@ -34379,6 +34379,9 @@
           },
           "aiSemanticSearchEnabled": {
             "type": "boolean"
+          },
+          "idcs": {
+            "type": "boolean"
           }
         },
         "xml": {

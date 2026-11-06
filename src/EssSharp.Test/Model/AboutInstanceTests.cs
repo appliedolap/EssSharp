@@ -143,5 +143,14 @@ namespace EssSharp.Test.Model
         {
             // TODO unit test for the property 'AiSemanticSearchEnabled'
         }
+
+        /// <summary>
+        /// Test the property 'Idcs'
+        /// </summary>
+        [Fact]
+        public void IdcsTest()
+        {
+            // TODO unit test for the property 'Idcs'
+        }
     }
 }

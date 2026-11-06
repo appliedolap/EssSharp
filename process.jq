@@ -238,7 +238,8 @@ tag_untagged_operations({
       "aiMdxEnabled": {"type": "boolean"},
       "aiAskEssbaseEnabled": {"type": "boolean"},
       "aiCalcEnabled": {"type": "boolean"},
-      "aiSemanticSearchEnabled": {"type": "boolean"}
+      "aiSemanticSearchEnabled": {"type": "boolean"},
+      "idcs": {"type": "boolean"}
     },
     "xml": {"name": "aboutInstance"}
   })
