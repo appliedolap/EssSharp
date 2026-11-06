@@ -861,18 +861,19 @@ namespace EssSharp
         {
             try
             {
+                // Get the group by name rather than search the groups: a search matches a name's prefix, and a server in
+                // Identity Cloud mode refuses to list its groups but finds one by name.
                 var api = GetApi<GroupsApi>();
-                foreach ( var group in (await api.GroupsSearchAsync(filter: name, cancellationToken: cancellationToken).ConfigureAwait(false)).Items )
-                {
-                    return new EssGroup(group, this);
-                }
 
-                throw new Exception("Groups not found.");
+                if ( await api.GroupsGetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } group )
+                    throw new Exception($@"Cannot get group {name}.");
+
+                return new EssGroup(group, this);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get the groups on ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get the group ""{name}"" on ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -987,19 +988,19 @@ namespace EssSharp
         {
             try
             {
-                foreach (var user in await GetUsersAsync( cancellationToken ).ConfigureAwait(false))
-                {
-                    if ( string.Equals(id, user.Name, StringComparison.OrdinalIgnoreCase) ) 
-                    { 
-                        return user; 
-                    }
-                }
-                throw new Exception($@"Cannot get user {id}.");
+                // Get the user by ID rather than list the users: a server in Identity Cloud mode refuses to list its users
+                // but finds one by ID.
+                var api = GetApi<UsersApi>();
+
+                if ( await api.UsersGetAsync(id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )
+                    throw new Exception($@"Cannot get user {id}.");
+
+                return new EssUser(user, this);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get the user ""{id}"" on ""{Name}"". {e.Message}", e);
             }
         }
 

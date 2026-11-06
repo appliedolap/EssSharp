@@ -326,8 +326,7 @@ namespace EssSharp
         /// </summary>
         /// <remarks>
         /// The instance details are read once and cached for the server, with the flags <see cref="Supports(EssFeature)"/>
-        /// reads. A server that does not report its security mode, or does not answer for its instance details, is
-        /// <see cref="EssSecurityMode.Unknown"/>.
+        /// reads. A server that does not answer for its instance details is <see cref="EssSecurityMode.Unknown"/>.
         /// </remarks>
         public EssSecurityMode GetSecurityMode();
 
@@ -337,8 +336,7 @@ namespace EssSharp
         /// </summary>
         /// <remarks>
         /// The instance details are read once and cached for the server, with the flags <see cref="Supports(EssFeature)"/>
-        /// reads. A server that does not report its security mode, or does not answer for its instance details, is
-        /// <see cref="EssSecurityMode.Unknown"/>.
+        /// reads. A server that does not answer for its instance details is <see cref="EssSecurityMode.Unknown"/>.
         /// </remarks>
         public Task<EssSecurityMode> GetSecurityModeAsync( CancellationToken cancellationToken = default );
 

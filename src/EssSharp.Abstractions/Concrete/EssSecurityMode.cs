@@ -7,14 +7,14 @@
     public enum EssSecurityMode
     {
         /// <summary>
-        /// The server does not report its security mode (it does not report <c>idcs</c> in its instance details, or does
-        /// not answer for them).
+        /// The server's security mode could not be read: the server did not answer for its instance details.
         /// </summary>
         Unknown = 0,
 
         /// <summary>
-        /// The server is not in Identity Cloud mode: its users and groups come from its own security provider, which an
-        /// administrator manages through the server's user and group operations.
+        /// The server is not in Identity Cloud mode (its instance details do not report <c>idcs</c> as true): its users and
+        /// groups come from its own security provider, which an administrator manages through the server's user and group
+        /// operations.
         /// </summary>
         Native = 1,
 

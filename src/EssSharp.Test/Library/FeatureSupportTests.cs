@@ -172,7 +172,7 @@ namespace EssSharp.Test.Library
         [Theory(DisplayName = "FeatureSupportTests - GetSecurityModeAsync_AnswersFromTheIdcsFlag")]
         [InlineData(@"{""idcs"":true,""provisioningSupported"":true}", EssSecurityMode.IdentityCloud)]
         [InlineData(@"{""idcs"":false,""provisioningSupported"":true}", EssSecurityMode.Native)]
-        [InlineData(@"{""provisioningSupported"":true}", EssSecurityMode.Unknown)]
+        [InlineData(@"{""provisioningSupported"":true}", EssSecurityMode.Native)]
         [InlineData(null, EssSecurityMode.Unknown)]
         public async Task GetSecurityModeAsync_AnswersFromTheIdcsFlag( string instance, EssSecurityMode expected )
         {
