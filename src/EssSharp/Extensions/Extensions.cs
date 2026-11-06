@@ -902,6 +902,28 @@ namespace EssSharp
             }
         };
 
+        /// <summary>
+        /// Adds to the given member fields, when any are given, the fields that other members of <see cref="IEssMember"/> are
+        /// worked out from: <see cref="EssMemberFields.dataStorageType"/>, which <see cref="IEssMember.IsSharedMember"/> needs,
+        /// and, when <see cref="EssMemberFields.dimensionName"/> is asked for, <see cref="EssMemberFields.dimension"/> and
+        /// <see cref="EssMemberFields.name"/>, since Essbase gives a dimension's top member no dimension name and
+        /// <see cref="IEssMember.DimensionName"/> is then the member's own name. No fields means every field, which needs none
+        /// added.
+        /// </summary>
+        /// <param name="fields">The member fields a caller asked for, or null for every field.</param>
+        internal static EssMemberFields? WithRequiredFields( this EssMemberFields? fields )
+        {
+            if (fields is not { } given)
+                return null;
+
+            given |= EssMemberFields.dataStorageType;
+
+            if (given.HasFlag(EssMemberFields.dimensionName))
+                given |= EssMemberFields.dimension | EssMemberFields.name;
+
+            return given;
+        }
+
         internal static string ToDelimitedString( this EssMemberFields filterOption )
         {
             var values = new List<string>();

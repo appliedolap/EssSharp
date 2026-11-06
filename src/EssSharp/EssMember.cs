@@ -103,7 +103,13 @@ namespace EssSharp
         public int MemberSolveOrder => _memberBean.MemberSolveOrder;
 
         /// <inheritdoc />
-        public string DimensionName => _memberBean.DimensionName;
+        /// <remarks>
+        /// Essbase gives a dimension's top member no dimension name, so for that member, which <see cref="Dimension" /> marks,
+        /// the dimension name is the member's own name.
+        /// </remarks>
+        public string DimensionName => _memberBean.DimensionName is { Length: > 0 } dimensionName
+            ? dimensionName
+            : Dimension ? Name : _memberBean.DimensionName;
 
         /// <inheritdoc />
         public bool IsAttributeDimension => _memberBean.Attribute;
@@ -154,9 +160,8 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if ( await api.OutlineGetAncestorsMemberInfoAsync(app: _cube.Application.Name, cube: _cube.Name, memberUniqueName: UniqueName, fields: fields?.ToDelimitedString(), cancellationToken: cancellationToken ).ConfigureAwait(false) is not { } ancestor )
                     throw new Exception("Cannot get ancestors.");
@@ -191,9 +196,8 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if ( await api.OutlineGetMembersAsync(app: _cube.Application.Name, cube: _cube.Name, parent: Name, fields: fields?.ToDelimitedString()).ConfigureAwait(false) is not { } children )
                     throw new Exception("Cannot get children.");
@@ -217,9 +221,8 @@ namespace EssSharp
         {
             try
             {
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if ( Dimension ) { return this; }
 
@@ -243,9 +246,8 @@ namespace EssSharp
         {
             try
             {
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 var descendants = new List<IEssMember>();
 
@@ -287,9 +289,8 @@ namespace EssSharp
         {
             try
             {
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 var memberList = await (await _cube.GetMemberAsync(ParentName, fields: fields)).GetChildrenAsync(fields: fields);
 

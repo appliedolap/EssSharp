@@ -767,9 +767,8 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if ( await api.OutlineGetMemberInfoAsync(app: _application?.Name, _cube?.Name, memberUniqueName: uniqueName, fields: fields?.ToDelimitedString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } member )
                     throw new Exception("Cannot get member.");
@@ -816,9 +815,8 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if ( await api.OutlineGetMembersAsync(app: Application.Name, cube: Name, fields: fields?.ToDelimitedString()).ConfigureAwait(false) is not { } children )
                     throw new Exception("Cannot get children.");
@@ -844,9 +842,8 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, parent: parentUniqueName, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
@@ -872,9 +869,8 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if ( await api.OutlineGetDynamicTimeSeriesMemberInfoAsync(app: Application?.Name, cube: Name, fields: fields?.ToDelimitedString(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } dtsMembers ) //.ConfigureAwait(false) is not { } ancestor )
                     throw new Exception("Cannot get Dynamic Time Series members.");
@@ -952,9 +948,8 @@ namespace EssSharp
                     return members.ToEssSharpList(this) ?? new List<IEssMember>();
                 }
 
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if (searchType == EssMemberSearchType.wildSearch)
                     search = $@"*{search?.Trim('*')}*";
@@ -987,9 +982,8 @@ namespace EssSharp
             {
                 var api = GetApi<OutlineViewerApi>();
 
-                // If fields are given but lacking dataStorageType (needed for IsSharedMember), add it.
-                if ( fields?.HasFlag(EssMemberFields.dataStorageType) is false )
-                    fields |= EssMemberFields.dataStorageType;
+                // If fields are given, add the ones the returned members' derived properties need (WithRequiredFields).
+                fields = fields.WithRequiredFields();
 
                 if ( await api.OutlineGetMembersAsync(app: _application?.Name, _cube?.Name, keyword: keyword, matchWholeWord: matchWholeWord, fields: fields?.ToDelimitedString(), limit: limit, cancellationToken: cancellationTokenn).ConfigureAwait(false) is not { } membersList )
                     throw new Exception("Cannot get Members.");
