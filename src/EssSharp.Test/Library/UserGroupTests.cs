@@ -318,7 +318,7 @@ namespace EssSharp.Test.Library
                 (method: "PUT", path: "/users/u1", body: @"{""id"":""u1"",""name"":""Renamed"",""email"":""admin@example.com"",""role"":""Service Administrator""}"));
 
             var server = new EssServer(stub.BasePath, "admin", "password");
-            var user   = await server.GetUserAsync("u1", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u1");
 
             await user.EditAsync(fullName: "Renamed", cancellationToken: TestContext.Current.CancellationToken);
 
@@ -340,7 +340,7 @@ namespace EssSharp.Test.Library
                 (method: "PUT", path: "/users/u1", body: @"{""id"":""u1"",""name"":""One"",""email"":""one@example.com"",""role"":""Power User"",""groups"":[""g1"",""g2""]}"));
 
             var server = new EssServer(stub.BasePath, "admin", "password");
-            var user   = await server.GetUserAsync("u1", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u1");
 
             await user.EditAsync(role: EssServerRole.PowerUser, cancellationToken: TestContext.Current.CancellationToken);
 
@@ -361,7 +361,7 @@ namespace EssSharp.Test.Library
                 (method: "PUT", path: "/users/u1", body: @"{""id"":""u1"",""name"":""One"",""email"":""one@example.com"",""role"":""Power User""}"));
 
             var server = new EssServer(stub.BasePath, "admin", "password");
-            var user   = await server.GetUserAsync("u1", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u1");
 
             Assert.Equal(new[] { "g1" }, user.GroupNames);
 
@@ -444,7 +444,7 @@ namespace EssSharp.Test.Library
                 (method: "GET", path: "/users",                    body: _users));
 
             var server = new EssServer(stub.BasePath, "admin", "password");
-            var user   = await server.GetUserAsync("u2", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u2");
 
             var result = await user.GetProvisioningReportAsync(TestContext.Current.CancellationToken);
 
@@ -562,7 +562,7 @@ namespace EssSharp.Test.Library
             stub.ResponseProvider = Refuse(stub.ResponseProvider, "/users/u2");
 
             var server = new EssServer(stub.BasePath, "reg", "password");
-            var user   = await server.GetUserAsync("u2", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u2");
 
             var exception = await Assert.ThrowsAnyAsync<Exception>(() => user.EditAsync(role: EssServerRole.ServiceAdministrator, cancellationToken: TestContext.Current.CancellationToken));
 
@@ -583,7 +583,7 @@ namespace EssSharp.Test.Library
                 (method: "GET", path: "/users",                    body: _users));
 
             var server = new EssServer(stub.BasePath, "reg", "password");
-            var user   = await server.GetUserAsync("u2", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u2");
 
             var result = await user.GetProvisioningReportAsync(TestContext.Current.CancellationToken);
 
@@ -599,7 +599,7 @@ namespace EssSharp.Test.Library
             stub.ResponseProvider = Refuse(stub.ResponseProvider, "/users/u2/provisionReport/applications/Sample/roles");
 
             var server = new EssServer(stub.BasePath, "reg", "password");
-            var user   = await server.GetUserAsync("u2", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u2");
 
             var exception = await Assert.ThrowsAnyAsync<Exception>(() => user.GetProvisionedRolesAsync("Sample", TestContext.Current.CancellationToken));
 
@@ -741,7 +741,7 @@ namespace EssSharp.Test.Library
             using var stub = Stub((method: "GET", path: "/users", body: _users), (method: "PUT", path: "/permissions/u3", body: "{}"));
 
             var server = new EssServer(stub.BasePath, "admin", "password");
-            var user   = await server.GetUserAsync("u3", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u3");
 
             await user.SetServiceRoleAsync(EssServerRole.PowerUser, TestContext.Current.CancellationToken);
 
@@ -778,7 +778,7 @@ namespace EssSharp.Test.Library
             using var stub = Stub((method: "GET", path: "/users", body: _users));
 
             var server = new EssServer(stub.BasePath, "admin", "password");
-            var user   = await server.GetUserAsync("u3", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u3");
 
             stub.Requests.Clear();
 
@@ -796,7 +796,7 @@ namespace EssSharp.Test.Library
                 (method: "GET", path: "/permissions/u1", body: @"{""id"":""u1"",""role"":""service_administrator""}"));
 
             var server = new EssServer(stub.BasePath, "admin", "password");
-            var user   = await server.GetUserAsync("u1", TestContext.Current.CancellationToken);
+            var user   = await GetListedUserAsync(server, "u1");
             var group  = await server.GetGroupAsync("g1", TestContext.Current.CancellationToken);
 
             Assert.Equal(EssServerRole.ServiceAdministrator, await user.GetServiceRoleAsync(TestContext.Current.CancellationToken));
@@ -872,6 +872,15 @@ namespace EssSharp.Test.Library
         #region Helpers
 
         private const string _identityCloudRefusal = "This operation is not supported. Contact administrator";
+
+        /// <summary>
+        /// Returns the user with the given ID as the server's list of users reads it. <see cref="IEssServer.GetUserAsync(string, System.Threading.CancellationToken)" />
+        /// gets the one user instead, so a test of how a member treats the user as last read gets the user here.
+        /// </summary>
+        /// <param name="server">The server.</param>
+        /// <param name="id">The user's ID.</param>
+        private static async Task<IEssUser> GetListedUserAsync( IEssServer server, string id ) =>
+            Assert.Single(await server.GetUsersAsync(TestContext.Current.CancellationToken), user => user.Name == id);
 
         /// <summary>
         /// Returns a stub of a server in Identity Cloud mode: it reports the mode in its instance details, answers each of the given

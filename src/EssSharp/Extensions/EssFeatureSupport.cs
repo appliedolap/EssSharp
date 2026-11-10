@@ -189,6 +189,26 @@ namespace EssSharp
         }
 
         /// <summary>
+        /// Asynchronously returns the security mode the server reports in its instance details, which are read once and
+        /// cached, or <see cref="EssSecurityMode.Unknown"/> when it does not answer for them.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        internal async Task<EssSecurityMode> GetSecurityModeAsync( CancellationToken cancellationToken = default ) =>
+            GetSecurityMode(await _instance.GetAsync(ReadInstanceAsync, cancellationToken).ConfigureAwait(false));
+
+        /// <summary>
+        /// Returns the security mode the given instance details report with their <c>idcs</c> flag. Essbase reports the flag
+        /// only in Identity Cloud mode, so instance details without it are those of a server that is not.
+        /// </summary>
+        /// <param name="instance">The instance details, as reported by <c>/about/instance</c>, or null when there are none.</param>
+        internal static EssSecurityMode GetSecurityMode( JObject instance ) => instance switch
+        {
+            null                                                                         => EssSecurityMode.Unknown,
+            _ when instance["idcs"] is JValue { Type: JTokenType.Boolean, Value: true } => EssSecurityMode.IdentityCloud,
+            _                                                                            => EssSecurityMode.Native
+        };
+
+        /// <summary>
         /// Returns whether the given instance details report every one of the given flags as true, under one of its names.
         /// </summary>
         /// <param name="instance">The instance details, as reported by <c>/about/instance</c>.</param>

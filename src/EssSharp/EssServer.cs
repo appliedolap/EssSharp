@@ -944,17 +944,19 @@ namespace EssSharp
         {
             try
             {
-                // The server's list of groups leaves out each group's description, so get the group itself.
+                // Get the group by name rather than search the groups: a search matches a name's prefix, and a server in
+                // Identity Cloud mode refuses to list its groups but finds one by name.
                 var api = GetApi<GroupsApi>();
-                if ( await api.GroupsGetAsync(id: name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } group )
-                    throw new Exception("Groups not found.");
+
+                if ( await api.GroupsGetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } group )
+                    throw new Exception($@"Cannot get group {name}.");
 
                 return new EssGroup(group, this);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get the groups on ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get the group ""{name}"" on ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -1108,34 +1110,19 @@ namespace EssSharp
         {
             try
             {
-                List<IEssUser> users;
+                // Get the user by ID rather than list the users: a server in Identity Cloud mode refuses to list its users
+                // but finds one by ID.
+                var api = GetApi<UsersApi>();
 
-                try
-                {
-                    users = await GetUsersAsync( cancellationToken ).ConfigureAwait(false);
-                }
-                catch (NotSupportedException)
-                {
-                    // A server in Identity Cloud mode refuses to list its users, but answers for one, as its provisioning report needs.
-                    if (await GetApi<UsersApi>().UsersGetAsync(id: id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } single)
-                        throw new Exception($@"Cannot get user {id}.");
+                if ( await api.UsersGetAsync(id, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )
+                    throw new Exception($@"Cannot get user {id}.");
 
-                    return new EssUser(single, this);
-                }
-
-                foreach (var user in users)
-                {
-                    if ( string.Equals(id, user.Name, StringComparison.OrdinalIgnoreCase) )
-                    {
-                        return user;
-                    }
-                }
-                throw new Exception($@"Cannot get user {id}.");
+                return new EssUser(user, this);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to get the user ""{id}"" on ""{Name}"". {e.Message}", e);
             }
         }
 
@@ -1404,6 +1391,13 @@ namespace EssSharp
                     throw new Exception($@"Unable to sign out of the current session. {e.Message}", e);
             }
         }
+
+        /// <inheritdoc />
+        public EssSecurityMode GetSecurityMode() => GetSecurityModeAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        public Task<EssSecurityMode> GetSecurityModeAsync( CancellationToken cancellationToken = default ) =>
+            FeatureSupport.GetSecurityModeAsync(cancellationToken);
 
         /// <inheritdoc />
         public bool Supports( EssFeature feature ) => SupportsAsync(feature).GetAwaiter().GetResult();

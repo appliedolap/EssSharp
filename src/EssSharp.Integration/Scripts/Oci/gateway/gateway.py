@@ -53,7 +53,7 @@ import essbase_hints
 import identity
 
 PORT = int(os.environ.get("AI_GATEWAY_PORT", "443"))
-# The identity service again in plain HTTP, for the host (Dodeca, EssSharp tests); 0 for none.
+# The identity service again in plain HTTP, for clients on the host (such as the EssSharp tests); 0 for none.
 HTTP_PORT = int(os.environ.get("OCI_IDENTITY_HTTP_PORT", "8080"))
 CERTIFICATE = os.environ.get("AI_GATEWAY_CERTIFICATE", "/opt/oci-certs/server.crt")
 PRIVATE_KEY = os.environ.get("AI_GATEWAY_PRIVATE_KEY", "/opt/oci-certs/server.key")

@@ -109,7 +109,21 @@ namespace EssSharp.Integration
             Assert.Equal(username, session.UserId);
         }
 
-        [Fact(DisplayName = "AvailableServerTests - 03 - Essbase_AfterStartup_CannotConnectWithBadCredentials"), Priority(03)]
+        [Fact(DisplayName = "AvailableServerTests - 03 - Essbase_AfterStartup_ReportsTheSecurityModeItWasCreatedIn"), Priority(03)]
+        public async Task Essbase_AfterStartup_ReportsTheSecurityModeItWasCreatedIn()
+        {
+            // Only a container the harness started or adopted says how the server was created.
+            var identityCloud = IntegrationTestFactory.EssbaseInIdentityCloudMode;
+
+            Assert.SkipUnless(identityCloud.HasValue, "The server under test is not an Essbase container of the harness's, so there is no security mode to expect.");
+
+            var expected = identityCloud is true ? EssSecurityMode.IdentityCloud : EssSecurityMode.Native;
+
+            // Assert that the server reports the security mode its container was created in (IDENTITY_PROVIDER).
+            Assert.Equal(expected, await GetEssServer().GetSecurityModeAsync(TestContext.Current.CancellationToken));
+        }
+
+        [Fact(DisplayName = "AvailableServerTests - 04 - Essbase_AfterStartup_CannotConnectWithBadCredentials"), Priority(04)]
         public async Task Essbase_AfterStartup_CannotConnectWithBadCredentials()
         {
             // Get a connection (and invalidate the credentials).
@@ -141,14 +155,14 @@ namespace EssSharp.Integration
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
 
-        [Fact(DisplayName = "AvailableServerTests - 04 - Essbase_AfterDeletingUsersInARow_StillAnswers"), Priority(04)]
+        [Fact(DisplayName = "AvailableServerTests - 05 - Essbase_AfterDeletingUsersInARow_StillAnswers"), Priority(05)]
         public async Task Essbase_AfterDeletingUsersInARow_StillAnswers()
         {
             // More users than the domain's default pool of ten connections to the embedded LDAP has room for: each user the
             // server deletes holds one of them for three minutes.
             const int count = 15;
 
-            SkipUnlessServerManagesUsers();
+            Assert.SkipWhen(await GetEssServer().GetSecurityModeAsync(TestContext.Current.CancellationToken) is EssSecurityMode.IdentityCloud, "A server in Identity Cloud mode cannot create or delete users.");
 
             // With a pool too small for the deletes, the test would shut the server out for three minutes, failing the tests
             // after it too, so it runs only where the pool holds them (wrapper.sh gives it 100).

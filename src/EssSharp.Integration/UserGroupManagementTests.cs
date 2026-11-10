@@ -41,21 +41,25 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 01 - Essbase_CanSupportUserGroupManagementAndProvisioningReports"), Priority(01)]
         public async Task Essbase_CanSupportUserGroupManagementAndProvisioningReports()
         {
-            SkipUnlessServerManagesUsers();
-
             var server = GetEssServer();
 
-            Assert.True(await server.SupportsAsync(EssFeature.UserGroupManagement, TestContext.Current.CancellationToken));
+            // A server in Identity Cloud mode reports the mode, which rules user and group management out.
+            Assert.Equal(!await IsInIdentityCloudModeAsync(server), await server.SupportsAsync(EssFeature.UserGroupManagement, TestContext.Current.CancellationToken));
             Assert.True(await server.SupportsAsync(EssFeature.ProvisioningReports, TestContext.Current.CancellationToken));
         }
 
         [Fact(DisplayName = "UserGroupManagementTests - 02 - Essbase_CanEditUser"), Priority(02)]
         public async Task Essbase_CanEditUser()
         {
-            SkipUnlessServerManagesUsers();
-
             var server = GetEssServer();
             var id     = Id("edit");
+
+            // Assert that a server in Identity Cloud mode, which does not manage its users and groups, refuses.
+            if (await IsInIdentityCloudModeAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.CreateUserAsync(new EssUserCreationOptions(id, _password, EssServerRole.User), TestContext.Current.CancellationToken));
+                return;
+            }
 
             try
             {
@@ -108,9 +112,15 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 03 - Essbase_CanSearchUsersAndGroupsWithFilterAndLimit"), Priority(03)]
         public async Task Essbase_CanSearchUsersAndGroupsWithFilterAndLimit()
         {
-            SkipUnlessServerManagesUsers();
-
             var server = GetEssServer();
+
+            // Assert that a server in Identity Cloud mode, which does not manage its users and groups, refuses.
+            if (await IsInIdentityCloudModeAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.GetUsersAsync(_prefix + "find_*", cancellationToken: TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => server.GetGroupsAsync(_prefix + "find_*", cancellationToken: TestContext.Current.CancellationToken));
+                return;
+            }
 
             string[] userIds    = { Id("find_a"), Id("find_b") };
             string[] groupNames = { Id("find_g1"), Id("find_g2") };
@@ -152,9 +162,17 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 04 - Essbase_CanImportAndExportUsersAndGroups"), Priority(04)]
         public async Task Essbase_CanImportAndExportUsersAndGroups()
         {
-            SkipUnlessServerManagesUsers();
-
             var server = GetEssServer();
+
+            // Assert that a server in Identity Cloud mode, which does not manage its users and groups, refuses.
+            if (await IsInIdentityCloudModeAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.ImportGroupsAsync(Csv("name,description,role,groups", $"{Id("csv_g")},Imported group,Power User,"), TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => server.ImportUsersAsync(Csv("id,name,email,password,role,groups", $"{Id("csv_a")},,,{_password},User,"), TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => server.ExportUsersAsync(TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => server.ExportGroupsAsync(TestContext.Current.CancellationToken));
+                return;
+            }
 
             var group = Id("csv_g");
             var userA = Id("csv_a");
@@ -231,9 +249,15 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 05 - Essbase_CanDeleteSeveralUsersAndGroups"), Priority(05)]
         public async Task Essbase_CanDeleteSeveralUsersAndGroups()
         {
-            SkipUnlessServerManagesUsers();
-
             var server = GetEssServer();
+
+            // Assert that a server in Identity Cloud mode, which does not manage its users and groups, refuses.
+            if (await IsInIdentityCloudModeAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.DeleteUsersAsync(new[] { Id("del_a") }, TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => server.DeleteGroupsAsync(new[] { Id("del_g1") }, TestContext.Current.CancellationToken));
+                return;
+            }
 
             string[] userIds    = { Id("del_a"), Id("del_b") };
             string[] groupNames = { Id("del_g1"), Id("del_g2") };
@@ -274,9 +298,19 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 06 - Essbase_CanGetGroupMembersAndEditGroup"), Priority(06)]
         public async Task Essbase_CanGetGroupMembersAndEditGroup()
         {
-            SkipUnlessServerManagesUsers();
-
             var server = GetEssServer();
+
+            // Assert that a server in Identity Cloud mode, which does not manage its users and groups, refuses. Its group of
+            // the identity service can be looked up, but not have its members listed or be edited.
+            if (await IsInIdentityCloudModeAsync(server))
+            {
+                var identityGroup = await server.GetGroupAsync(GetTestGroupName(EssSecurityMode.IdentityCloud), TestContext.Current.CancellationToken);
+
+                await AssertUserManagementRefusedAsync(() => identityGroup.GetMembersAsync(TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => identityGroup.EditAsync(description: "Described", cancellationToken: TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => server.CreateGroupAsync(Id("mem_p"), EssServerRole.PowerUser, "parent", TestContext.Current.CancellationToken));
+                return;
+            }
 
             var parentName = Id("mem_p");
             var childName  = Id("mem_c");
@@ -347,9 +381,16 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 07 - Essbase_CanGetUserAndGroupProvisioningReports"), Priority(07)]
         public async Task Essbase_CanGetUserAndGroupProvisioningReports()
         {
-            SkipUnlessServerManagesUsers();
-
             var server       = GetEssServer();
+
+            // A server in Identity Cloud mode cannot create the group and user the test reports on; test 08 gets the
+            // reports there.
+            if (await IsInIdentityCloudModeAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.CreateGroupAsync(Id("prov_g"), EssServerRole.PowerUser, "provisioning", TestContext.Current.CancellationToken));
+                return;
+            }
+
             var applications = await server.GetApplicationsAsync(TestContext.Current.CancellationToken);
             var application  = applications.FirstOrDefault(application => application.Name == "Sample") ?? applications.FirstOrDefault();
 
@@ -424,16 +465,16 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 08 - Essbase_InIdentityCloudMode_HasNoUserGroupManagement_ButGivesProvisioningReports"), Priority(08)]
         public async Task Essbase_InIdentityCloudMode_HasNoUserGroupManagement_ButGivesProvisioningReports()
         {
-            Assert.SkipWhen(ServerManagesUsers, "The server manages its own users and groups, so it is not in Identity Cloud mode.");
-
             var server = GetEssServer();
+
+            Assert.SkipUnless(await IsInIdentityCloudModeAsync(server), "The server reports that it is not in Identity Cloud mode.");
 
             // The server reports the mode, so the support check rules user and group management out, and its members say so.
             Assert.False(await server.SupportsAsync(EssFeature.UserGroupManagement, TestContext.Current.CancellationToken));
             Assert.True(await server.SupportsAsync(EssFeature.ProvisioningReports, TestContext.Current.CancellationToken));
 
-            await Assert.ThrowsAsync<NotSupportedException>(() => server.GetUsersAsync(TestContext.Current.CancellationToken));
-            await Assert.ThrowsAsync<NotSupportedException>(() => server.GetGroupsAsync(_prefix + "*", cancellationToken: TestContext.Current.CancellationToken));
+            await AssertUserManagementRefusedAsync(() => server.GetUsersAsync(TestContext.Current.CancellationToken));
+            await AssertUserManagementRefusedAsync(() => server.GetGroupsAsync(_prefix + "*", cancellationToken: TestContext.Current.CancellationToken));
 
             // The server still answers for one user, and gives that user's provisioning report.
             var userId = (await server.SignInAsync(cancellationToken: TestContext.Current.CancellationToken)).UserId;
@@ -447,11 +488,17 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 09 - Essbase_CanSetGetAndRemoveServiceRolesOfUsersAndGroups"), Priority(09)]
         public async Task Essbase_CanSetGetAndRemoveServiceRolesOfUsersAndGroups()
         {
-            SkipUnlessServerManagesUsers();
-
             var server    = GetEssServer();
             var userId    = Id("role_u");
             var groupName = Id("role_g");
+
+            // Assert that a server in Identity Cloud mode, which does not manage its users and groups, refuses.
+            if (await IsInIdentityCloudModeAsync(server))
+            {
+                await AssertUserManagementRefusedAsync(() => server.CreateUserAsync(new EssUserCreationOptions(userId, _password, EssServerRole.User), TestContext.Current.CancellationToken));
+                await AssertUserManagementRefusedAsync(() => server.CreateGroupAsync(groupName, EssServerRole.User, "service roles", TestContext.Current.CancellationToken));
+                return;
+            }
 
             try
             {
@@ -493,7 +540,7 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "UserGroupManagementTests - 10 - Essbase_InIdentityCloudMode_CanSetGetAndRemoveTheServiceRoleOfAUser"), Priority(10)]
         public async Task Essbase_InIdentityCloudMode_CanSetGetAndRemoveTheServiceRoleOfAUser()
         {
-            Assert.SkipWhen(ServerManagesUsers, "The server manages its own users and groups, so it is not in Identity Cloud mode.");
+            Assert.SkipUnless(await IsInIdentityCloudModeAsync(GetEssServer()), "The server reports that it is not in Identity Cloud mode.");
 
             // A user of the identity service whom the suite gives no service role.
             var userId = IntegrationTestFactory.OAuth?.Users?.FirstOrDefault(user => user.Role == EssServerRole.Unkown)?.Username;
@@ -527,6 +574,14 @@ namespace EssSharp.Integration
         }
 
         #region Helpers
+
+        /// <summary>
+        /// Asynchronously returns whether the server reports that it is in Identity Cloud mode, where its users and groups live
+        /// in an identity service and it does not manage them.
+        /// </summary>
+        /// <param name="server">The server.</param>
+        private static async Task<bool> IsInIdentityCloudModeAsync( IEssServer server ) =>
+            await server.GetSecurityModeAsync(TestContext.Current.CancellationToken) is EssSecurityMode.IdentityCloud;
 
         /// <summary>
         /// Returns the ID or name that the given stem has in this test run.

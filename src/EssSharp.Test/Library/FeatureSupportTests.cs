@@ -169,6 +169,34 @@ namespace EssSharp.Test.Library
             Assert.Single(stub.Requests, request => request.Contains("/about/instance"));
         }
 
+        [Theory(DisplayName = "FeatureSupportTests - GetSecurityModeAsync_AnswersFromTheIdcsFlag")]
+        [InlineData(@"{""idcs"":true,""provisioningSupported"":true}", EssSecurityMode.IdentityCloud)]
+        [InlineData(@"{""idcs"":false,""provisioningSupported"":true}", EssSecurityMode.Native)]
+        [InlineData(@"{""provisioningSupported"":true}", EssSecurityMode.Native)]
+        [InlineData(null, EssSecurityMode.Unknown)]
+        public async Task GetSecurityModeAsync_AnswersFromTheIdcsFlag( string instance, EssSecurityMode expected )
+        {
+            using var stub = new LoopbackEssbaseStub() { ResponseProvider = Respond(specification: null, instance: instance) };
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+
+            Assert.Equal(expected, await server.GetSecurityModeAsync(TestContext.Current.CancellationToken));
+        }
+
+        [Fact(DisplayName = "FeatureSupportTests - GetSecurityModeAsync_WithFeatures_SharesOneReadOfTheInstanceDetails")]
+        public async Task GetSecurityModeAsync_WithFeatures_SharesOneReadOfTheInstanceDetails()
+        {
+            using var stub = new LoopbackEssbaseStub() { ResponseProvider = Respond(AISpecification, instance: @"{""idcs"":true,""aiEnabled"":true}") };
+
+            var server = new EssServer(stub.BasePath, "admin", "password");
+
+            Assert.Equal(EssSecurityMode.IdentityCloud, await server.GetSecurityModeAsync(TestContext.Current.CancellationToken));
+            Assert.True(await server.SupportsAsync(EssFeature.AI, TestContext.Current.CancellationToken));
+            Assert.Equal(EssSecurityMode.IdentityCloud, server.GetSecurityMode());
+
+            Assert.Single(stub.Requests, request => request.Contains("/about/instance"));
+        }
+
         /// <summary>
         /// A specification that declares the AI connection and MDX generation operations, but not calculation generation.
         /// </summary>

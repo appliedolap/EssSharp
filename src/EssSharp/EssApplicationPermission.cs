@@ -65,13 +65,14 @@ namespace EssSharp
             {
                 var api = GetApi<ApplicationRoleProvisioningApi>();
 
-                // The server looks for a user of the given ID unless it is told the permission is a group's.
-                await api.ApplicationRoleProvisioningDeprovisionAsync(app: _application.Name, id: Name, group: _provisionInfo.Group, cancellationToken: cancellationToken).ConfigureAwait(false);
+                // A group's permission is named with group=true; without it, Essbase looks for a user of that name, which
+                // a server in Identity Cloud mode refuses for a group of the identity service.
+                await api.ApplicationRoleProvisioningDeprovisionAsync(_application.Name, Name, group: PermissionType is EssPermissionType.Group ? true : null, cancellationToken: cancellationToken).ConfigureAwait(false);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to remove permissions for {(_provisionInfo.Group ? "group" : "user")} {Name} on application ""{_application.Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to remove permissions for {PermissionType.ToString().ToLowerInvariant()} {Name} on application ""{_application.Name}"". {e.Message}", e);
             }
         }
 
@@ -97,14 +98,14 @@ namespace EssSharp
 
                 await api.ApplicationRoleProvisioningProvisionAsync(app: _application.Name, id: Name, body: body, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-                _provisionInfo = await api.ApplicationRoleProvisioningGetProvisionAsync(app: _application.Name, id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                _provisionInfo = await api.ApplicationRoleProvisioningGetProvisionAsync(app: _application.Name, id: Name, group: isGroup ? true : null, cancellationToken: cancellationToken).ConfigureAwait(false);
 
                 return this;
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
-                throw new Exception($@"Unable to update permissions for user {Name} on application ""{Name}"". {e.Message}", e);
+                throw new Exception($@"Unable to update permissions for {(isGroup ? "group" : "user")} {Name} on application ""{_application.Name}"". {e.Message}", e);
             }
         }
 

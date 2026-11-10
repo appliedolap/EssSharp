@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -284,24 +285,38 @@ namespace EssSharp.Integration.Setup
         protected static IntegrationTestOAuthSettings OAuthSettings => IntegrationTestFactory.OAuth;
 
         /// <summary>
-        /// Whether the server under test manages its own users and groups. A server in Identity Cloud mode looks its users
-        /// up in the identity service, keeps only their roles, and refuses to create, list or delete users and groups. In
-        /// <c>OAuth:Mode</c> External the server is taken to be one; in Managed mode it is one if the Essbase container was
-        /// created that way, which a container that was already running may not have been.
+        /// Returns the group the group tests work with on a server in the given security mode: in Identity Cloud mode, which
+        /// cannot create a group, a group of the identity service (<c>Scripts/Oci/gateway/users.json</c>) that the server
+        /// can look up; otherwise, the one <see cref="CreateServerObjectTests" /> creates. In Identity Cloud mode it is
+        /// <c>essbase-admins</c>, whose only member is a service administrator: the application role the group tests give
+        /// it must not change what the test users, all members of <c>essbase-users</c>, may do.
         /// </summary>
-        protected static bool ServerManagesUsers => IntegrationTestFactory.OAuth?.Mode switch
-        {
-            IntegrationTestOAuthMode.External => false,
-            IntegrationTestOAuthMode.Managed  => IntegrationTestFactory.EssbaseInIdentityCloudMode is not true,
-            _                                 => true
-        };
+        /// <param name="securityMode">The security mode the server reports.</param>
+        protected static string GetTestGroupName( EssSecurityMode securityMode ) =>
+            securityMode is EssSecurityMode.IdentityCloud ? "essbase-admins" : "Test_Group";
 
         /// <summary>
-        /// Skips a test that creates, lists or deletes users or groups when the server does not manage them (see
-        /// <see cref="ServerManagesUsers" />).
+        /// The message an Essbase server in Identity Cloud mode refuses user and group management with.
         /// </summary>
-        protected static void SkipUnlessServerManagesUsers() =>
-            Assert.SkipUnless(ServerManagesUsers, "The server is in Identity Cloud mode: its users and groups live in the identity service, and it has no user or group management.");
+        protected const string UserManagementNotSupportedMessage = "This operation is not supported.";
+
+        /// <summary>
+        /// Asserts that an operation is refused as an Essbase server in Identity Cloud mode refuses user and group
+        /// management: with status 400 (Bad Request) and <see cref="UserManagementNotSupportedMessage" />, which it answers
+        /// before it looks for the user or group named, and which the library throws as a <see cref="NotSupportedException" />
+        /// of <see cref="EssFeature.UserGroupManagement" />. A server that starts to support the operation, or that refuses it
+        /// another way, fails the test.
+        /// </summary>
+        /// <param name="operation">The user or group management operation.</param>
+        protected static async Task AssertUserManagementRefusedAsync( Func<Task> operation )
+        {
+            var exception = await Assert.ThrowsAsync<NotSupportedException>(operation);
+
+            Assert.True(exception.GetBaseException() is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } },
+                $@"Expected Essbase to refuse the operation with status 400 (Bad Request), but it failed with: {exception}");
+
+            Assert.Contains(UserManagementNotSupportedMessage, exception.Message);
+        }
 
         /// <summary />
         /// <param name="id" />

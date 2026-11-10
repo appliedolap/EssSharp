@@ -106,8 +106,9 @@ namespace EssSharp.Integration
         [Fact(DisplayName = "AvailableContainerTests - 06 - EssbaseContainer_StartedThroughTheWrapper_GivesTheIdentityStoreItsPool"), Priority(06)]
         public async Task EssbaseContainer_StartedThroughTheWrapper_GivesTheIdentityStoreItsPool()
         {
-            // A server in Identity Cloud mode has no adapter for the embedded LDAP, so it has no such pool.
-            SkipUnlessServerManagesUsers();
+            // This collection inspects the container before the server's first sessions have settled, so it goes by how the
+            // container was created rather than by what the server reports.
+            Assert.SkipWhen(IntegrationTestFactory.EssbaseInIdentityCloudMode is true, "A container created in Identity Cloud mode has no adapter for the embedded LDAP, so it has no such pool.");
 
             // Get a docker client.
             using var client = GetClient();

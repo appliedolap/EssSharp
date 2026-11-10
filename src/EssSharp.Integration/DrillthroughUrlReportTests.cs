@@ -23,8 +23,8 @@ namespace EssSharp.Integration
     /// <summary>
     /// URL drill-through reports, such as Drillbridge and FDMEE deploy, against Essbase: a URL report on Sample.Basic over
     /// Actual is listed with its type and URL, for the cube and for its cells, to a user who may read its definition, and
-    /// its definition is refused to a user who may only read the database. Clients such as Dodeca read a report's type and
-    /// URL this way over REST, to open the report's page with the cell's members filled in. The tests define the report
+    /// its definition is refused to a user who may only read the database. A client reads a report's type and URL this
+    /// way over REST, to open the report's page with the cell's members filled in. The tests define the report
     /// themselves, over REST, and delete it at the end.
     /// </summary>
     [Collection(nameof(DrillthroughUrlReportTests)), Trait("type", "execute")]
