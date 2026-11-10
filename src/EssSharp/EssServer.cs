@@ -399,30 +399,25 @@ namespace EssSharp
         /// <returns>An <see cref="IEssGroup"/> object.</returns>
         public async Task<IEssGroup> CreateGroupAsync( string groupName, EssServerRole role = EssServerRole.User, string description = null, CancellationToken cancellationToken = default )
         {
-            try
+            if (string.IsNullOrEmpty(groupName))
+                throw new ArgumentException("Name is required to create a new group.");
+
+            var api = GetApi<GroupsApi>();
+
+            var body = new GroupBean()
             {
-                if ( string.IsNullOrEmpty(groupName) )
-                    throw new ArgumentException("Name is required to create a new group.");
+                Name = groupName,
+                Role = role.EssServerRoleToString(),
+                Description = description
+            };
 
-                var api = GetApi<GroupsApi>();
-
-                var body = new GroupBean()
-                {
-                    Name = groupName,
-                    Role = role.EssServerRoleToString(),
-                    Description = description
-                };
-
+            return await RequestUsersAndGroupsAsync(async () =>
+            {
                 if ( await api.GroupsAddAsync(body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } group )
                     throw new Exception("cannot create new group.");
 
-                return new EssGroup(group, this);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to create the group ""{groupName}"". {e.Message}", e);
-            }
+                return new EssGroup(group, this) as IEssGroup;
+            }, $@"Unable to create group {groupName} on server ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -437,20 +432,15 @@ namespace EssSharp
         /// <returns>An <see cref="IEssUser"/></returns>
         public async Task<IEssUser> CreateUserAsync( EssUserCreationOptions options, CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<UsersApi>();
+            var api = GetApi<UsersApi>();
 
+            return await RequestUsersAndGroupsAsync(async () =>
+            {
                 if ( await api.UsersAddAsync(body: options.ToUserBean(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )
                     throw new Exception($@"Cannot create new user.");
 
-                return new EssUser(user, this);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to create user {options.ID} on server ""{Name}"". {e.Message}", e);
-            }
+                return new EssUser(user, this) as IEssUser;
+            }, $@"Unable to create user {options.ID} on server ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

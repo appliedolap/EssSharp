@@ -34,6 +34,7 @@ namespace EssSharp
         /// Adds a group or groups by id to a group.
         /// </summary>
         /// <param name="groupIds"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public List<IEssGroup> AddGroups( List<string> groupIds );
         
         /// <summary>
@@ -41,12 +42,14 @@ namespace EssSharp
         /// </summary>
         /// <param name="groupIds"></param>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public Task<List<IEssGroup>> AddGroupsAsync( List<string> groupIds, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Add user or users by id to group.
         /// </summary>
         /// <param name="userIds"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public List<IEssUser> AddUsers( List<string> userIds );
 
         /// <summary>
@@ -54,6 +57,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="userIds"></param>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public Task<List<IEssUser>> AddUsersAsync( List<string> userIds, CancellationToken cancellationToken = default );
 
         /// <summary>
@@ -61,6 +65,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="role"></param>
         /// <param name="description"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public IEssGroup Edit( EssServerRole? role = null, string description = null );
 
@@ -70,12 +75,14 @@ namespace EssSharp
         /// <param name="role"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task<IEssGroup> EditAsync( EssServerRole? role = null, string description = null, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Delete group.
         /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public void Delete();
 
@@ -83,35 +90,41 @@ namespace EssSharp
         /// Asynchronously delete group.
         /// </summary>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task DeleteAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Returns a list of <see cref="IEssUser"/> objects.
         /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public List<IEssUser> GetUsers();
 
         /// <summary>
         /// Returns a list of <see cref="IEssUser"/> objects.
         /// </summary>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Get child groups of a parent Group
         /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public List<IEssGroup> GetGroups();
 
         /// <summary>
         /// Gets child groups of a parent group
         /// </summary>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Remove group or groups from group.
         /// </summary>
         /// <param name="groupIds"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public void RemoveGroups( List<string> groupIds );
 
         /// <summary>
@@ -119,12 +132,14 @@ namespace EssSharp
         /// </summary>
         /// <param name="groupIds"></param>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public Task RemoveGroupsAsync( List<string> groupIds, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Remove a user or users from group.
         /// </summary>
         /// <param name="userIds"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public void RemoveUsers( List<string> userIds );
 
         /// <summary>
@@ -132,6 +147,7 @@ namespace EssSharp
         /// </summary>
         /// <param name="userIds"></param>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public Task RemoveUsersAsync( List<string> userIds, CancellationToken cancellationToken = default );
 
         /// <summary>

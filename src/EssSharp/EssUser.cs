@@ -69,17 +69,13 @@ namespace EssSharp
         /// <inheritdoc />
         public async Task DeleteAsync( CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<UsersApi>();
+            var api = GetApi<UsersApi>();
 
-                await api.UsersDeleteAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
+            await _server.RequestAsync(EssFeature.UserGroupManagement, async () =>
             {
-                throw new Exception($@"Unable to delete user ""{Name}"". {e.Message}", e);
-            }
+                await api.UsersDeleteAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return true;
+            }, $@"Unable to delete user ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

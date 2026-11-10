@@ -31,12 +31,14 @@ namespace EssSharp
         /// <summary>
         /// Deletes a user from the server.
         /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public void Delete();
 
         /// <summary>
         /// Asynchronously deletes a user from the server.
         /// </summary>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         /// <remarks>Service administrator privilege is required. The server refuses any other user with a "not authorized" error, which this throws as an exception.</remarks>
         public Task DeleteAsync( CancellationToken cancellationToken = default );
 

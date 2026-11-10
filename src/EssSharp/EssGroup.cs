@@ -67,20 +67,13 @@ namespace EssSharp
         /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
         public async Task<List<IEssUser>> AddUsersAsync( List<string> userIds, CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<GroupsApi>();
+            var api = GetApi<GroupsApi>();
 
-                if ( await api.GroupsAddUserMembersToGroupAsync(id: Name, body: userIds, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } users )
-                    throw new Exception("Cannot add user(s)");
+            var users = await _server.RequestAsync(EssFeature.UserGroupManagement,
+                () => api.GroupsAddUserMembersToGroupAsync(id: Name, body: userIds, cancellationToken: cancellationToken),
+                $@"Unable to add users to group ""{Name}"".", cancellationToken).ConfigureAwait(false);
 
-                return users?.ToEssSharpList(_server) ?? new List<IEssUser>();
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to add user to group ""{Name}"". {e.Message}", e);
-            }
+            return users?.ToEssSharpList(_server) ?? new List<IEssUser>();
         }
 
         /// <inheritdoc />
@@ -91,20 +84,13 @@ namespace EssSharp
         /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
         public async Task<List<IEssGroup>> AddGroupsAsync( List<string> groupIds, CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<GroupsApi>();
+            var api = GetApi<GroupsApi>();
 
-                if ( await api.GroupsAddGroupMembersToGroupAsync(id: Name, body: groupIds, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groups )
-                    throw new Exception("Cannot add user(s)");
+            var groups = await _server.RequestAsync(EssFeature.UserGroupManagement,
+                () => api.GroupsAddGroupMembersToGroupAsync(id: Name, body: groupIds, cancellationToken: cancellationToken),
+                $@"Unable to add groups to group ""{Name}"".", cancellationToken).ConfigureAwait(false);
 
-                return groups?.ToEssSharpList(_server) ?? new List<IEssGroup>();
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to add user to group ""{Name}"". {e.Message}", e);
-            }
+            return groups?.ToEssSharpList(_server) ?? new List<IEssGroup>();
         }
 
         /// <inheritdoc />
@@ -145,17 +131,13 @@ namespace EssSharp
         /// <inheritdoc />
         public async Task DeleteAsync( CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<GroupsApi>();
+            var api = GetApi<GroupsApi>();
 
-                await api.GroupsDeleteAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
+            await _server.RequestAsync(EssFeature.UserGroupManagement, async () =>
             {
-                throw new Exception($@"Unable to delete group ""{Name}"". {e.Message}", e);
-            }
+                await api.GroupsDeleteAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return true;
+            }, $@"Unable to delete group ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -166,19 +148,13 @@ namespace EssSharp
         /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
         public async Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<GroupsApi>();
-                if (await api.GroupsGetUserMembersOfGroupAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } users )
-                    throw new Exception("Could not get members of group.");
+            var api = GetApi<GroupsApi>();
 
-                return users?.ToEssSharpList(Server as EssServer) ?? new List<IEssUser>();
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to get members of group: ""{Name}"". {e.Message}", e);
-            }
+            var users = await _server.RequestAsync(EssFeature.UserGroupManagement,
+                () => api.GroupsGetUserMembersOfGroupAsync(id: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the users in group ""{Name}"".", cancellationToken).ConfigureAwait(false);
+
+            return users?.ToEssSharpList(_server) ?? new List<IEssUser>();
         }
         
         /// <inheritdoc />
@@ -189,19 +165,13 @@ namespace EssSharp
         /// <returns>A Task<list> of <see cref="IEssGroup"/> objects. </list></returns>
         public async Task<List<IEssGroup>> GetGroupsAsync( CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<GroupsApi>();
-                if ( await api.GroupsGetGroupMembersOfGroupAsync(id: Name, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groups )
-                    throw new Exception("Could not get groups.");
+            var api = GetApi<GroupsApi>();
 
-                return groups?.ToEssSharpList(Server as EssServer) ?? new List<IEssGroup>();
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to get group ""{Name}"" groups. {e.Message}", e);
-            }
+            var groups = await _server.RequestAsync(EssFeature.UserGroupManagement,
+                () => api.GroupsGetGroupMembersOfGroupAsync(id: Name, cancellationToken: cancellationToken),
+                $@"Unable to get the groups in group ""{Name}"".", cancellationToken).ConfigureAwait(false);
+
+            return groups?.ToEssSharpList(_server) ?? new List<IEssGroup>();
         }
 
         /// <inheritdoc />
@@ -210,17 +180,13 @@ namespace EssSharp
         /// <inheritdoc />
         public async Task RemoveGroupsAsync( List<string> groupIds, CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<GroupsApi>();
+            var api = GetApi<GroupsApi>();
 
-                await api.GroupsRemoveGroupMembersFromGroupAsync(id: Name, body: groupIds, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
+            await _server.RequestAsync(EssFeature.UserGroupManagement, async () =>
             {
-                throw new Exception($@"Unable to remove group(s) from group ""{Name}"" groups. {e.Message}", e);
-            }
+                await api.GroupsRemoveGroupMembersFromGroupAsync(id: Name, body: groupIds, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return true;
+            }, $@"Unable to remove groups from group ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -229,17 +195,13 @@ namespace EssSharp
         /// <inheritdoc />
         public async Task RemoveUsersAsync( List<string> userIds, CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<GroupsApi>();
+            var api = GetApi<GroupsApi>();
 
-                await api.GroupsRemoveUserMembersFromGroupAsync(id: Name, body: userIds, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
+            await _server.RequestAsync(EssFeature.UserGroupManagement, async () =>
             {
-                throw new Exception($@"Unable to remove user(s) from group ""{Name}"" groups. {e.Message}", e);
-            }
+                await api.GroupsRemoveUserMembersFromGroupAsync(id: Name, body: userIds, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return true;
+            }, $@"Unable to remove users from group ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

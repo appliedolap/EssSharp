@@ -156,6 +156,7 @@ namespace EssSharp
         /// <param name="role"></param>
         /// <param name="description"></param>
         /// <returns></returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public IEssGroup CreateGroup( string name, EssServerRole role = EssServerRole.User, string description = null );
 
         /// <summary>
@@ -165,6 +166,7 @@ namespace EssSharp
         /// <param name="role"></param>
         /// <param name="description"></param>
         /// <param name="cancellationToken"></param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public Task<IEssGroup> CreateGroupAsync( string name, EssServerRole role = EssServerRole.User, string description = null, CancellationToken cancellationToken = default );
         
         /// <summary>
@@ -177,6 +179,7 @@ namespace EssSharp
         /// Creates a new user on the server.
         /// </summary>
         /// <param name="options">Options for creating a new user.</param>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public IEssUser CreateUser( EssUserCreationOptions options );
 
         /// <summary>
@@ -185,6 +188,7 @@ namespace EssSharp
         /// <param name="options">Options for creating a new user.</param>
         /// <param name="cancellationToken" />
         /// <returns></returns>
+        /// <exception cref="NotSupportedException">The server does not support managing users and groups (<see cref="EssFeature.UserGroupManagement"/>).</exception>
         public Task<IEssUser> CreateUserAsync( EssUserCreationOptions options, CancellationToken cancellationToken = default );
 
         /// <summary>

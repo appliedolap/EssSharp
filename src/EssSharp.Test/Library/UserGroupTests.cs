@@ -678,20 +678,35 @@ namespace EssSharp.Test.Library
         public async Task Members_InIdentityCloudMode_ThrowNotSupported_WhatTheServerAnswered()
         {
             // The server declares the operations and answers them with HTTP 400, so only its report of the mode shows it lacks them.
-            using var stub = IdentityCloudStub((method: "GET", path: "/groups/g1", body: @"{""name"":""g1"",""role"":""User""}"));
+            using var stub = IdentityCloudStub(
+                (method: "GET", path: "/groups/g1", body: @"{""name"":""g1"",""role"":""User""}"),
+                (method: "GET", path: "/users/u1",  body: @"{""id"":""u1"",""name"":""One"",""role"":""User""}"));
 
             var server = new EssServer(stub.BasePath, "admin", "password");
+            var token  = TestContext.Current.CancellationToken;
 
-            var exception = await Assert.ThrowsAsync<NotSupportedException>(() => server.GetUsersAsync(TestContext.Current.CancellationToken));
+            var exception = await Assert.ThrowsAsync<NotSupportedException>(() => server.GetUsersAsync(token));
 
             Assert.Contains(_identityCloudRefusal, exception.Message);
 
-            await Assert.ThrowsAsync<NotSupportedException>(() => server.GetGroupsAsync("g*", cancellationToken: TestContext.Current.CancellationToken));
-            await Assert.ThrowsAsync<NotSupportedException>(() => server.ExportUsersAsync(TestContext.Current.CancellationToken));
+            await Assert.ThrowsAsync<NotSupportedException>(() => server.GetGroupsAsync("g*", cancellationToken: token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => server.ExportUsersAsync(token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => server.CreateUserAsync(new EssUserCreationOptions("u2", "Passw0rd!"), token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => server.CreateGroupAsync("g2", cancellationToken: token));
 
-            var group = await server.GetGroupAsync("g1", TestContext.Current.CancellationToken);
+            // A group and a user of the identity service can be looked up, but not changed, deleted, or have members.
+            var group = await server.GetGroupAsync("g1", token);
+            var user  = await server.GetUserAsync("u1", token);
 
-            await Assert.ThrowsAsync<NotSupportedException>(() => group.EditAsync(description: "Described", cancellationToken: TestContext.Current.CancellationToken));
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.EditAsync(description: "Described", cancellationToken: token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.GetUsersAsync(token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.GetGroupsAsync(token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.AddUsersAsync(new List<string> { "u1" }, token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.AddGroupsAsync(new List<string> { "g2" }, token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.RemoveUsersAsync(new List<string> { "u1" }, token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.RemoveGroupsAsync(new List<string> { "g2" }, token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => group.DeleteAsync(token));
+            await Assert.ThrowsAsync<NotSupportedException>(() => user.DeleteAsync(token));
         }
 
         [Fact(DisplayName = "UserGroupTests - GetUserAsync_InIdentityCloudMode_GetsTheOneUser_SoItsProvisioningReportCanBeRead")]
