@@ -303,13 +303,14 @@ namespace EssSharp.Integration.Setup
         /// <summary>
         /// Asserts that an operation is refused as an Essbase server in Identity Cloud mode refuses user and group
         /// management: with status 400 (Bad Request) and <see cref="UserManagementNotSupportedMessage" />, which it answers
-        /// before it looks for the user or group named. A server that starts to support the operation, or that refuses it
+        /// before it looks for the user or group named, and which the library throws as a <see cref="NotSupportedException" />
+        /// of <see cref="EssFeature.UserGroupManagement" />. A server that starts to support the operation, or that refuses it
         /// another way, fails the test.
         /// </summary>
         /// <param name="operation">The user or group management operation.</param>
         protected static async Task AssertUserManagementRefusedAsync( Func<Task> operation )
         {
-            var exception = await Assert.ThrowsAsync<Exception>(operation);
+            var exception = await Assert.ThrowsAsync<NotSupportedException>(operation);
 
             Assert.True(exception.GetBaseException() is WebException { Response: EssSharp.Api.WebExceptionRestResponse { StatusCode: HttpStatusCode.BadRequest } },
                 $@"Expected Essbase to refuse the operation with status 400 (Bad Request), but it failed with: {exception}");

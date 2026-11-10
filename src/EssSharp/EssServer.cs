@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -398,30 +399,25 @@ namespace EssSharp
         /// <returns>An <see cref="IEssGroup"/> object.</returns>
         public async Task<IEssGroup> CreateGroupAsync( string groupName, EssServerRole role = EssServerRole.User, string description = null, CancellationToken cancellationToken = default )
         {
-            try
+            if (string.IsNullOrEmpty(groupName))
+                throw new ArgumentException("Name is required to create a new group.");
+
+            var api = GetApi<GroupsApi>();
+
+            var body = new GroupBean()
             {
-                if ( string.IsNullOrEmpty(groupName) )
-                    throw new ArgumentException("Name is required to create a new group.");
+                Name = groupName,
+                Role = role.EssServerRoleToString(),
+                Description = description
+            };
 
-                var api = GetApi<GroupsApi>();
-
-                var body = new GroupBean()
-                {
-                    Name = groupName,
-                    Role = role.EssServerRoleToString(),
-                    Description = description
-                };
-
+            return await RequestUsersAndGroupsAsync(async () =>
+            {
                 if ( await api.GroupsAddAsync(body: body, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } group )
                     throw new Exception("cannot create new group.");
 
-                return new EssGroup(group, this);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to create the group ""{groupName}"". {e.Message}", e);
-            }
+                return new EssGroup(group, this) as IEssGroup;
+            }, $@"Unable to create group {groupName} on server ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -436,20 +432,15 @@ namespace EssSharp
         /// <returns>An <see cref="IEssUser"/></returns>
         public async Task<IEssUser> CreateUserAsync( EssUserCreationOptions options, CancellationToken cancellationToken = default )
         {
-            try
-            {
-                var api = GetApi<UsersApi>();
+            var api = GetApi<UsersApi>();
 
+            return await RequestUsersAndGroupsAsync(async () =>
+            {
                 if ( await api.UsersAddAsync(body: options.ToUserBean(), cancellationToken: cancellationToken).ConfigureAwait(false) is not { } user )
                     throw new Exception($@"Cannot create new user.");
 
-                return new EssUser(user, this);
-            }
-            catch ( OperationCanceledException ) { throw; }
-            catch ( Exception e )
-            {
-                throw new Exception($@"Unable to create user {options.ID} on server ""{Name}"". {e.Message}", e);
-            }
+                return new EssUser(user, this) as IEssUser;
+            }, $@"Unable to create user {options.ID} on server ""{Name}"".", cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -481,6 +472,88 @@ namespace EssSharp
             {
                 throw new Exception($@"Unable to create the server variable ""{name}"". {e.Message}", e);
             }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssBulkResult"/> objects, one for each group.</returns>
+        public List<EssBulkResult> DeleteGroups( IEnumerable<string> names ) => DeleteGroupsAsync(names).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssBulkResult"/> objects, one for each group.</returns>
+        public async Task<List<EssBulkResult>> DeleteGroupsAsync( IEnumerable<string> names, CancellationToken cancellationToken = default )
+        {
+            using var file = names.ToLineFile("group name");
+
+            if ( file.Length == 0 )
+                return new List<EssBulkResult>();
+
+            var api = GetApi<GroupsApi>();
+
+            var response = await RequestUsersAndGroupsAsync(
+                () => api.UsersDeleteGroupsWithHttpInfoAsync(file, cancellationToken: cancellationToken),
+                $@"Unable to delete the groups on ""{Name}"".",
+                cancellationToken).ConfigureAwait(false);
+
+            return response?.Data.ToEssBulkResults(hasStatus: false) ?? new List<EssBulkResult>();
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssBulkResult"/> objects, one for each user.</returns>
+        public List<EssBulkResult> DeleteUsers( IEnumerable<string> ids ) => DeleteUsersAsync(ids).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssBulkResult"/> objects, one for each user.</returns>
+        public async Task<List<EssBulkResult>> DeleteUsersAsync( IEnumerable<string> ids, CancellationToken cancellationToken = default )
+        {
+            using var file = ids.ToLineFile("user ID");
+
+            if ( file.Length == 0 )
+                return new List<EssBulkResult>();
+
+            var api = GetApi<UsersApi>();
+
+            var response = await RequestUsersAndGroupsAsync(
+                () => api.UsersDeleteUsersWithHttpInfoAsync(file, cancellationToken: cancellationToken),
+                $@"Unable to delete the users on ""{Name}"".",
+                cancellationToken).ConfigureAwait(false);
+
+            return response?.Data.ToEssBulkResults(hasStatus: false) ?? new List<EssBulkResult>();
+        }
+
+        /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/> of CSV.</returns>
+        public Stream ExportGroups() => ExportGroupsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/> of CSV.</returns>
+        public async Task<Stream> ExportGroupsAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<GroupsApi>();
+
+            var response = await RequestUsersAndGroupsAsync(
+                () => api.GroupsExportWithHttpInfoAsync(cancellationToken: cancellationToken),
+                $@"Unable to export the groups on ""{Name}"".",
+                cancellationToken).ConfigureAwait(false);
+
+            return new MemoryStream(response?.Data ?? Array.Empty<byte>());
+        }
+
+        /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/> of CSV.</returns>
+        public Stream ExportUsers() => ExportUsersAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A <see cref="Stream"/> of CSV.</returns>
+        public async Task<Stream> ExportUsersAsync( CancellationToken cancellationToken = default )
+        {
+            var api = GetApi<UsersApi>();
+
+            var response = await RequestUsersAndGroupsAsync(
+                () => api.UsersExportWithHttpInfoAsync(cancellationToken: cancellationToken),
+                $@"Unable to export the users on ""{Name}"".",
+                cancellationToken).ConfigureAwait(false);
+
+            return new MemoryStream(response?.Data ?? Array.Empty<byte>());
         }
 
         /// <inheritdoc />
@@ -883,19 +956,31 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
-        public async Task<List<IEssGroup>> GetGroupsAsync(CancellationToken cancellationToken = default )
+        public Task<List<IEssGroup>> GetGroupsAsync(CancellationToken cancellationToken = default ) => GetGroupsAsync(filter: null, limit: null, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
+        public List<IEssGroup> GetGroups( string filter, int? limit = null ) => GetGroupsAsync(filter, limit).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssGroup"/> objects.</returns>
+        public async Task<List<IEssGroup>> GetGroupsAsync( string filter, int? limit = null, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<GroupsApi>();
-                if ( await api.GroupsSearchAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groups ) 
+                if ( await api.GroupsSearchAsync(filter: filter, limit: limit, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } groups )
                     throw new Exception("Groups not found.");
 
-                return groups?.ToEssSharpList(this) ?? new List<IEssGroup>();
+                // The server ignores the limit.
+                return (groups?.ToEssSharpList(this) ?? new List<IEssGroup>()).Limit(limit);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
+                if ( await FeatureSupport.GetNotSupportedExceptionAsync(EssFeature.UserGroupManagement, e, cancellationToken).ConfigureAwait(false) is { } notSupportedException )
+                    throw notSupportedException;
+
                 throw new Exception($@"Unable to get the groups on ""{Name}"". {e.Message}", e);
             }
         }
@@ -932,6 +1017,33 @@ namespace EssSharp
             {
                 throw;
             }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssServiceRoleAssignment"/> objects.</returns>
+        public List<EssServiceRoleAssignment> GetServiceRoleAssignments( string idPattern = null, EssPermissionType type = EssPermissionType.All, EssServerRole[] roles = null ) =>
+            GetServiceRoleAssignmentsAsync(idPattern, type, roles).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssServiceRoleAssignment"/> objects.</returns>
+        public async Task<List<EssServiceRoleAssignment>> GetServiceRoleAssignmentsAsync( string idPattern = null, EssPermissionType type = EssPermissionType.All, EssServerRole[] roles = null, CancellationToken cancellationToken = default )
+        {
+            var roleNames   = roles is { Length: > 0 } ? string.Join(",", roles.Select(role => role.ToServiceRoleName())) : null;
+            var api         = GetApi<ServiceRoleProvisioningApi>();
+            var assignments = new List<EssServiceRoleAssignment>();
+
+            // The server's answer does not say whether an item is a user or a group, so ask for each kind apart.
+            foreach (var kind in type == EssPermissionType.All ? new[] { EssPermissionType.User, EssPermissionType.Group } : new[] { type })
+            {
+                var items = await RequestAsync(EssFeature.ServiceRoleProvisioning,
+                    () => api.ServiceRoleProvisioningSearchProvisionAsync(id: idPattern, role: roleNames, filter: kind == EssPermissionType.Group ? "group" : "user", cancellationToken: cancellationToken),
+                    $@"Unable to get the service roles on ""{Name}"".", cancellationToken).ConfigureAwait(false);
+
+                if (items?.Items is { } found)
+                    assignments.AddRange(found.Where(item => item is not null).Select(item => new EssServiceRoleAssignment(item.Id, kind, item.Role.ToEssServerRole())));
+            }
+
+            return assignments;
         }
 
         /// <inheritdoc />
@@ -1094,19 +1206,31 @@ namespace EssSharp
 
         /// <inheritdoc />
         /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
-        public async Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default )
+        public Task<List<IEssUser>> GetUsersAsync( CancellationToken cancellationToken = default ) => GetUsersAsync(filter: null, limit: null, cancellationToken);
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
+        public List<IEssUser> GetUsers( string filter, int? limit = null ) => GetUsersAsync(filter, limit).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssUser"/> objects.</returns>
+        public async Task<List<IEssUser>> GetUsersAsync( string filter, int? limit = null, CancellationToken cancellationToken = default )
         {
             try
             {
                 var api = GetApi<UsersApi>();
-                if ( await api.UsersSearchAsync(cancellationToken: cancellationToken).ConfigureAwait(false) is not { } userList )
+                if ( await api.UsersSearchAsync(filter: filter, limit: limit, cancellationToken: cancellationToken).ConfigureAwait(false) is not { } userList )
                     throw new Exception("No users were found.");
 
-                return userList?.ToEssSharpList(this) ?? new List<IEssUser>();
+                // The server ignores the limit.
+                return (userList?.ToEssSharpList(this) ?? new List<IEssUser>()).Limit(limit);
             }
             catch ( OperationCanceledException ) { throw; }
             catch ( Exception e )
             {
+                if ( await FeatureSupport.GetNotSupportedExceptionAsync(EssFeature.UserGroupManagement, e, cancellationToken).ConfigureAwait(false) is { } notSupportedException )
+                    throw notSupportedException;
+
                 throw new Exception($@"Unable to get the users on ""{Name}"". {e.Message}", e);
             }
         }
@@ -1157,6 +1281,48 @@ namespace EssSharp
             {
                 throw;
             }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssBulkResult"/> objects, one for each group in the CSV.</returns>
+        public List<EssBulkResult> ImportGroups( Stream csv ) => ImportGroupsAsync(csv).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssBulkResult"/> objects, one for each group in the CSV.</returns>
+        public async Task<List<EssBulkResult>> ImportGroupsAsync( Stream csv, CancellationToken cancellationToken = default )
+        {
+            if ( csv is null )
+                throw new ArgumentNullException(nameof(csv), "A stream of CSV is required to import groups.");
+
+            var api = GetApi<GroupsApi>();
+
+            var response = await RequestUsersAndGroupsAsync(
+                () => api.GroupsImportWithHttpInfoAsync(csv, cancellationToken: cancellationToken),
+                $@"Unable to import groups to ""{Name}"".",
+                cancellationToken).ConfigureAwait(false);
+
+            return response?.Data.ToEssBulkResults(hasStatus: true) ?? new List<EssBulkResult>();
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssBulkResult"/> objects, one for each user in the CSV.</returns>
+        public List<EssBulkResult> ImportUsers( Stream csv ) => ImportUsersAsync(csv).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="EssBulkResult"/> objects, one for each user in the CSV.</returns>
+        public async Task<List<EssBulkResult>> ImportUsersAsync( Stream csv, CancellationToken cancellationToken = default )
+        {
+            if ( csv is null )
+                throw new ArgumentNullException(nameof(csv), "A stream of CSV is required to import users.");
+
+            var api = GetApi<UsersApi>();
+
+            var response = await RequestUsersAndGroupsAsync(
+                () => api.UsersImportWithHttpInfoAsync(csv, cancellationToken: cancellationToken),
+                $@"Unable to import users to ""{Name}"".",
+                cancellationToken).ConfigureAwait(false);
+
+            return response?.Data.ToEssBulkResults(hasStatus: true) ?? new List<EssBulkResult>();
         }
 
         /// <inheritdoc />
@@ -1232,7 +1398,120 @@ namespace EssSharp
 
         #endregion
 
+        #region Private Methods
+
+        /// <summary>
+        /// Asynchronously sends a request that needs the users and groups of the server, and turns a failure that shows the server
+        /// holds none (or cannot manage them) into a <see cref="NotSupportedException"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the response.</typeparam>
+        /// <param name="request">Sends the request.</param>
+        /// <param name="failure">The sentence that begins the message of any other failure.</param>
+        /// <param name="cancellationToken" />
+        private Task<T> RequestUsersAndGroupsAsync<T>( Func<Task<T>> request, string failure, CancellationToken cancellationToken ) =>
+            RequestAsync(EssFeature.UserGroupManagement, request, failure, cancellationToken);
+
+        #endregion
+
         #region Internal Methods
+
+        /// <summary>
+        /// Asynchronously sends a request that needs the given <paramref name="feature"/>, and turns a failure that shows the server
+        /// does not support it into a <see cref="NotSupportedException"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the response.</typeparam>
+        /// <param name="feature">The feature the request needs.</param>
+        /// <param name="request">Sends the request.</param>
+        /// <param name="failure">The sentence that begins the message of any other failure.</param>
+        /// <param name="cancellationToken" />
+        internal async Task<T> RequestAsync<T>( EssFeature feature, Func<Task<T>> request, string failure, CancellationToken cancellationToken )
+        {
+            try
+            {
+                return await request().ConfigureAwait(false);
+            }
+            catch ( OperationCanceledException ) { throw; }
+            catch ( Exception e )
+            {
+                if ( await FeatureSupport.GetNotSupportedExceptionAsync(feature, e, cancellationToken).ConfigureAwait(false) is { } notSupportedException )
+                    throw notSupportedException;
+
+                throw new Exception($"{failure} {e.Message}", e);
+            }
+        }
+
+        /// <summary>
+        /// Asynchronously returns the service role the given user or group holds directly, or null when it holds none.
+        /// </summary>
+        /// <param name="id">The ID of the user, or the name of the group.</param>
+        /// <param name="type">Whether <paramref name="id"/> names a user or a group.</param>
+        /// <param name="cancellationToken" />
+        internal Task<EssServerRole?> GetServiceRoleAsync( string id, EssPermissionType type, CancellationToken cancellationToken )
+        {
+            var api = GetApi<ServiceRoleProvisioningApi>();
+
+            return RequestAsync(EssFeature.ServiceRoleProvisioning, async () =>
+            {
+                try
+                {
+                    var provision = await api.ServiceRoleProvisioningGetProvisionAsync(id: id, group: type == EssPermissionType.Group, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                    return string.IsNullOrEmpty(provision?.Role) ? null : (EssServerRole?)provision.Role.ToEssServerRole();
+                }
+                catch (Exception e) when (EssFeatureSupport.GetStatusCode(e) == HttpStatusCode.NotFound)
+                {
+                    // The server answers 404 for a user or group that holds no service role, as it does for a server that lacks the feature.
+                    if (await FeatureSupport.GetNotSupportedExceptionAsync(EssFeature.ServiceRoleProvisioning, e, cancellationToken).ConfigureAwait(false) is { } notSupportedException)
+                        throw notSupportedException;
+
+                    return null;
+                }
+            }, $@"Unable to get the service role of {type.ToString().ToLowerInvariant()} ""{id}"".", cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously removes the service role the given user or group holds directly.
+        /// </summary>
+        /// <param name="id">The ID of the user, or the name of the group.</param>
+        /// <param name="type">Whether <paramref name="id"/> names a user or a group.</param>
+        /// <param name="cancellationToken" />
+        internal Task RemoveServiceRoleAsync( string id, EssPermissionType type, CancellationToken cancellationToken )
+        {
+            var api = GetApi<ServiceRoleProvisioningApi>();
+
+            return RequestAsync<object>(EssFeature.ServiceRoleProvisioning, async () =>
+            {
+                await api.ServiceRoleProvisioningDeprovisionAsync(id: id, group: type == EssPermissionType.Group, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return null;
+            }, $@"Unable to remove the service role of {type.ToString().ToLowerInvariant()} ""{id}"".", cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously gives the given user or group the given service role, in place of any it holds directly.
+        /// </summary>
+        /// <param name="id">The ID of the user, or the name of the group.</param>
+        /// <param name="type">Whether <paramref name="id"/> names a user or a group.</param>
+        /// <param name="role">The service role.</param>
+        /// <param name="cancellationToken" />
+        internal Task SetServiceRoleAsync( string id, EssPermissionType type, EssServerRole role, CancellationToken cancellationToken )
+        {
+            var body = new UserGroupProvisionInfo()
+            {
+                Id    = id,
+                Role  = role.ToServiceRoleName(),
+                Group = type == EssPermissionType.Group
+            };
+
+            var api = GetApi<ServiceRoleProvisioningApi>();
+
+            return RequestAsync<object>(EssFeature.ServiceRoleProvisioning, async () =>
+            {
+                await api.ServiceRoleProvisioningProvisionAsync(id: id, body: body, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return null;
+            }, $@"Unable to give {type.ToString().ToLowerInvariant()} ""{id}"" the {role} service role.", cancellationToken);
+        }
 
         /// <summary>
         /// Logs off all active sessions for the given <paramref name="username"/> (including sessions with active requests).

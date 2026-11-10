@@ -55,6 +55,29 @@
         /// <summary>
         /// Resetting a user's password. Not available in EPM Shared Services security mode.
         /// </summary>
-        PasswordReset = 10
+        PasswordReset = 10,
+
+        /// <summary>
+        /// Managing the users and groups the server holds: updating, deleting several at once, searching, importing and exporting
+        /// them, and managing group members. Not available in Identity Cloud mode, where the users and groups live in the identity
+        /// service: such a server reports the mode, so it is reported as not supported, and its members throw
+        /// <see cref="System.NotSupportedException"/>.
+        /// </summary>
+        /// <remarks>
+        /// Whether the server supports this does not show what the connected user may do: managing users and groups takes service
+        /// administrator privilege, and the server refuses any other user. Nor is EPM Shared Services security mode, which the server
+        /// does not report, ruled out in advance.
+        /// </remarks>
+        UserGroupManagement = 11,
+
+        /// <summary>
+        /// Getting the provisioning report of a user or group, which lists the roles, filters and scripts it holds. Available in
+        /// Identity Cloud mode too.
+        /// </summary>
+        /// <remarks>
+        /// Whether the server supports this does not show what the connected user may read: a user who is not a service administrator
+        /// gets an empty report for another user.
+        /// </remarks>
+        ProvisioningReports = 12
     }
 }
