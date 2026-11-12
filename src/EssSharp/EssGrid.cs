@@ -561,12 +561,8 @@ namespace EssSharp
                     // only hit cells within the data block.
                     if ( (index % Slice.Columns) >= dataBlockStartAddress.startColumn && (index / Slice.Columns) >= dataBlockStartAddress.startRow )//( dataBlockStartIndex <= index && dataBlockEndIndex >= index )
                     {
-                        // Gets the dimension members for the cell that has changed.
-                        // Returns a Dictionary<string, tuple<string, string>.
-                        // The key is the dimension name
-                        // tuple value 1 is the dimension members alias, if there is one.
-                        // tuple value 2 is the dimension members name.
-                        dimMemberDict = GetDimensionMembersForDataCell(index, newGrid);//await GetDimensionMembersForDataCell(rowIndex, dataBlockStartIndex, index, dimMemberDict, cancellationToken).ConfigureAwait(false);
+                        // Gets the member of each of the grid's dimensions for the cell that has changed, keyed by dimension name.
+                        dimMemberDict = GetDimensionMembersForDataCell(index, newGrid, dataBlockStartAddress);
 
                         // if the Dimensions property on the cube is empty, get the dimensions.
                         if ( Cube.Dimensions.Count == 0 )
@@ -580,15 +576,15 @@ namespace EssSharp
                             // the grid's new value
                             NewValue = double.TryParse(newValues[index], NumberStyles.Float, CultureInfo.InvariantCulture, out var nv) ? nv : null,
                             // Grid Dimension and Dimension member information
-                            DataPoints = dimMemberDict//newGrid.Dimensions
+                            DataPoints = dimMemberDict
                             .Select(gd => new EssDataPoint()
                             {
                                 DimensionName = gd.Key,
-                                DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Key)).DimensionNumber,
-                                // first value of the tuple returned from the GetDimensionMembersForDataCell() method, null if no value.
-                                Alias = UseAliases ? string.Empty /*dimMemberDict[gd.Name].Item1*/ : null,
-                                // second value of the tuple returned from the GetDimensionMembersForDataCell() method, null if no value.
-                                Member = UseAliases ? dimMemberDict[gd.Key]/*dimMemberDict[gd.Name].Item2*/ : null
+                                // the dimension's number in the outline, or zero if the cube does not list it.
+                                DimensionNumber = Cube.Dimensions.FirstOrDefault(cd => string.Equals(cd.Name, gd.Key))?.DimensionNumber ?? 0,
+                                Alias = UseAliases ? string.Empty : null,
+                                // the member as the grid names it.
+                                Member = gd.Value
                             })
                             .ToList()
                         });
@@ -599,69 +595,52 @@ namespace EssSharp
         }
 
         /// <summary>
-        /// 
+        /// Returns the member of each of the grid's dimensions for a data cell, keyed by dimension name, as the grid names it.
         /// </summary>
-        /// <param name="dataCellIndex"></param>
-        /// <param name="grid"></param>
-        /// <returns></returns>
-        private Dictionary<string, string> GetDimensionMembersForDataCell( int dataCellIndex, Grid grid)
+        /// <remarks>
+        /// Each dimension's member is read from where the grid places the dimension. A row dimension's members lie in its
+        /// column, and a column dimension's in its row; a member Essbase does not repeat is the nearest one above the cell, or
+        /// to its left, within the data block. A dimension on neither axis is the grid's point of view, whose member the grid
+        /// names apart from its cells, so the column dimensions need not begin in the grid's first row. A dimension the grid
+        /// names no member of is left out.
+        /// </remarks>
+        /// <param name="dataCellIndex">The data cell's index, counting row by row.</param>
+        /// <param name="grid">The grid.</param>
+        /// <param name="dataBlockStartAddress">The first row and column of the grid's data block.</param>
+        private static Dictionary<string, string> GetDimensionMembersForDataCell( int dataCellIndex, Grid grid, EssGridSelection dataBlockStartAddress )
         {
-            Dictionary<string, string> memDict = new Dictionary<string, string>();
-            int columnCount = grid.Slice.Columns;
-            var dimensions = grid.Dimensions;
+            var memDict = new Dictionary<string, string>();
+            var columnCount = grid.Slice.Columns;
             var values = grid.Slice.Data.Ranges[0].Values;
-            var dataGridStartIndex = GetCoordinate(GetDataBlockStartAddress(Slice), Slice.Columns);
+            var row = dataCellIndex / columnCount;
+            var column = dataCellIndex % columnCount;
 
-
-            int currRowIndex = (dataCellIndex / columnCount) * columnCount;
-
-            for ( int i = 0; i < (dataGridStartIndex % columnCount); i++ )
+            foreach ( var dimension in grid.Dimensions ?? new List<GridDimension>() )
             {
-                var index = currRowIndex;
-                while ( string.IsNullOrEmpty(values[index]) )
-                    index -= columnCount;
+                var member = default(string);
 
-                memDict[dimensions.FirstOrDefault(dim => dim.Column == (currRowIndex % columnCount)).Name] = values[index];
-                currRowIndex++;
-            }
-
-            // Find the row index where the data block starts
-            var dbStartRow = dataGridStartIndex / columnCount;
-
-            // and use them to find the index of the current cells dimension member
-            var columnMemberIndex = dataCellIndex - (((dataCellIndex / columnCount) + 1 - dbStartRow) * Slice.Columns);
-            var columnLimiter = (columnMemberIndex / columnCount + 1);
-            var columnStartIndex = dataGridStartIndex - grid.Slice.Columns;
-            var columnEndIndex = (columnStartIndex / grid.Slice.Columns + 1) * grid.Slice.Columns - 1;
-
-            for ( int i = 0; i < columnLimiter; i++ )
-            {
-                var index = columnMemberIndex;
-                var distance = 1;
-
-                while ( string.IsNullOrEmpty(values[index]) )
+                if ( dimension.Column >= 0 )
                 {
-                    if ( !string.IsNullOrEmpty(values[index - distance]) && (index - distance) != columnStartIndex )
-                    {
-                        index -= distance;
-                        break;
-                    }
-                    else if ( !string.IsNullOrEmpty(values[index] + distance) && (index - distance) != columnEndIndex )
-                    {
-                        index += distance;
-                        break;
-                    }
-                    else
-                    {
-                        distance++;
-                    }
+                    for ( var r = row; member is null && r >= dataBlockStartAddress.startRow; r-- )
+                        member = NonEmpty(values[r * columnCount + dimension.Column]);
                 }
-                memDict[dimensions.FirstOrDefault(dim => dim.Row == i).Name] = values[index];
-                columnMemberIndex -= columnCount;
-                columnEndIndex -= columnCount;
-                columnStartIndex -= columnCount;
+                else if ( dimension.Row >= 0 )
+                {
+                    for ( var c = column; member is null && c >= dataBlockStartAddress.startColumn; c-- )
+                        member = NonEmpty(values[dimension.Row * columnCount + c]);
+                }
+                else
+                {
+                    member = NonEmpty(dimension.Pov);
+                }
+
+                if ( member is not null )
+                    memDict[dimension.Name] = member;
             }
+
             return memDict;
+
+            static string NonEmpty( string value ) => string.IsNullOrEmpty(value) ? null : value;
         }
 
         /// <summary>
