@@ -29,6 +29,7 @@
         Generation,
         Level,
         Lock,
-        Layout
+        Layout,
+        SmartList
     }
 }

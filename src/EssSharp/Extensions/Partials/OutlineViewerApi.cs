@@ -261,5 +261,73 @@ namespace EssSharp.Api
 
             return localVarResponse;
         }
+
+        /// <summary>
+        /// Get Text Lists. Returns the smart lists (text lists) of the cube's outline: an object with a property for each
+        /// list, holding its labels and entries as <c>pairs</c> and their order as <c>keys</c>. The generated
+        /// <c>OutlineGetAllSmartList</c> returns nothing, requires connection parameters the server does not need, and sends
+        /// no Accept header, to which the server answers with an empty body.
+        /// </summary>
+        /// <exception cref="EssSharp.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="app">Application name.</param>
+        /// <param name="cube">Database name.</param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of JObject</returns>
+        public async System.Threading.Tasks.Task<Newtonsoft.Json.Linq.JObject> OutlineGetSmartListsAsync( string app, string cube, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default )
+        {
+            if (app == null)
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'app' when calling OutlineViewerApi->OutlineGetAllSmartList");
+
+            if (cube == null)
+                throw new EssSharp.Client.ApiException(400, "Missing required parameter 'cube' when calling OutlineViewerApi->OutlineGetAllSmartList");
+
+            EssSharp.Client.RequestOptions localVarRequestOptions = new EssSharp.Client.RequestOptions();
+
+            localVarRequestOptions.HeaderParameters.Add("Accept", "application/json");
+
+            localVarRequestOptions.PathParameters.Add("app", EssSharp.Client.ClientUtils.ParameterToString(app)); // path parameter
+            localVarRequestOptions.PathParameters.Add("cube", EssSharp.Client.ClientUtils.ParameterToString(cube)); // path parameter
+
+            localVarRequestOptions.Operation = "OutlineViewerApi.OutlineGetAllSmartList";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (OAuth2) required
+            // oauth required
+            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+                {
+                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+                }
+                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                         this.Configuration.OAuthFlow != null)
+                {
+                    localVarRequestOptions.OAuth = true;
+                }
+            }
+            // authentication (basicAuth) required
+            // http basic authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.Username) || !string.IsNullOrEmpty(this.Configuration.Password) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Basic " + EssSharp.Client.ClientUtils.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<Newtonsoft.Json.Linq.JObject>("/outline/{app}/{cube}/settings/smartlist", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("OutlineGetAllSmartList", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse.Data;
+        }
     }
 }

@@ -88,6 +88,27 @@ namespace EssSharp
         public Task<IEssCubeVariable> CreateCubeVariableAsync( string name, string value, CancellationToken cancellationToken = default );
 
         /// <summary>
+        /// Creates a smart list (text list) in the cube's outline.
+        /// </summary>
+        /// <param name="name">The name of the smart list.</param>
+        /// <param name="entries">The entries of the list: each numeric value and the text displayed for it.</param>
+        /// <param name="missingName">The text displayed for a cell that holds no value.</param>
+        /// <param name="outOfRangeName">The text displayed for a cell whose value is not an entry of the list.</param>
+        /// <remarks>Essbase requires the outline to have typed measures enabled. A name the outline already uses for a smart list is refused.</remarks>
+        public IEssSmartList CreateSmartList( string name, IEnumerable<EssSmartListEntry> entries, string missingName, string outOfRangeName );
+
+        /// <summary>
+        /// Asynchronously creates a smart list (text list) in the cube's outline.
+        /// </summary>
+        /// <param name="name">The name of the smart list.</param>
+        /// <param name="entries">The entries of the list: each numeric value and the text displayed for it.</param>
+        /// <param name="missingName">The text displayed for a cell that holds no value.</param>
+        /// <param name="outOfRangeName">The text displayed for a cell whose value is not an entry of the list.</param>
+        /// <param name="cancellationToken" />
+        /// <remarks>Essbase requires the outline to have typed measures enabled. A name the outline already uses for a smart list is refused.</remarks>
+        public Task<IEssSmartList> CreateSmartListAsync( string name, IEnumerable<EssSmartListEntry> entries, string missingName, string outOfRangeName, CancellationToken cancellationToken = default );
+
+        /// <summary>
         /// Lock an object on the server.
         /// </summary>
         /// <param name="lockOptions">Includes file name, and file type</param>
@@ -639,6 +660,30 @@ namespace EssSharp
         /// <param name="cancellationToken" />
         /// <remarks>Returns a list of <see cref="IEssScript"/> objects of the specific given type <typeparamref name="T"/>.</remarks>
         public Task<List<T>> GetScriptsAsync<T>( bool getContent = false, CancellationToken cancellationToken = default ) where T : class, IEssScript;
+
+        /// <summary>
+        /// Gets the smart list (text list) of the given name from the cube's outline.
+        /// </summary>
+        /// <param name="smartListName">The name of the smart list.</param>
+        public IEssSmartList GetSmartList( string smartListName );
+
+        /// <summary>
+        /// Asynchronously gets the smart list (text list) of the given name from the cube's outline.
+        /// </summary>
+        /// <param name="smartListName">The name of the smart list.</param>
+        /// <param name="cancellationToken" />
+        public Task<IEssSmartList> GetSmartListAsync( string smartListName, CancellationToken cancellationToken = default );
+
+        /// <summary>
+        /// Gets the smart lists (text lists) of the cube's outline.
+        /// </summary>
+        public List<IEssSmartList> GetSmartLists();
+
+        /// <summary>
+        /// Asynchronously gets the smart lists (text lists) of the cube's outline.
+        /// </summary>
+        /// <param name="cancellationToken" />
+        public Task<List<IEssSmartList>> GetSmartListsAsync( CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Gets the list of cube-scoped variables available to the connected user.

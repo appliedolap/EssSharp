@@ -11,6 +11,8 @@ using EssSharp.Client;
 using EssSharp;
 using EssSharp.Model;
 
+using Newtonsoft.Json.Linq;
+
 namespace EssSharp
 {
     /// <summary />
@@ -201,6 +203,55 @@ namespace EssSharp
             catch ( Exception e )
             {
                 throw new Exception($@"Unable to create cube variable ""{name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssSmartList"/> object.</returns>
+        public IEssSmartList CreateSmartList( string name, IEnumerable<EssSmartListEntry> entries, string missingName, string outOfRangeName ) =>
+            CreateSmartListAsync(name, entries, missingName, outOfRangeName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssSmartList"/> object.</returns>
+        public async Task<IEssSmartList> CreateSmartListAsync( string name, IEnumerable<EssSmartListEntry> entries, string missingName, string outOfRangeName, CancellationToken cancellationToken = default )
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException($"A name is required to create an {nameof(EssSmartList)}.", nameof(name));
+
+            if (entries is null)
+                throw new ArgumentNullException(nameof(entries), $"Entries are required to create an {nameof(EssSmartList)}.");
+
+            try
+            {
+                var entryList = entries.ToList();
+
+                var action = new JObject
+                {
+                    [@"smartListAdd"] = new JObject
+                    {
+                        [@"smartListName"] = name,
+                        [@"smartlistitem"] = new JObject
+                        {
+                            [@"smartListMissingName"]    = missingName,
+                            [@"smartListOutOfRangeName"] = outOfRangeName,
+                            [@"smartlistIDTextPair"]     = new JArray(entryList.Select(entry => new JObject
+                            {
+                                [@"smartListID"]   = entry.Id.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                                [@"smartListText"] = entry.Text
+                            }))
+                        }
+                    }
+                };
+
+                // The server only warns when the outline already has a smart list of the name, and leaves that list as it is.
+                await EditSmartListsAsync(action, warningsAreFailures: true, cancellationToken).ConfigureAwait(false);
+
+                return new EssSmartList(name, missingName, outOfRangeName, entryList, this);
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to create smart list ""{name}"". {e.Message}", e);
             }
         }
         /// <inheritdoc />
@@ -1133,6 +1184,52 @@ namespace EssSharp
         }
 
         /// <inheritdoc />
+        /// <returns>An <see cref="IEssSmartList"/> object.</returns>
+        public IEssSmartList GetSmartList( string smartListName ) => GetSmartListAsync(smartListName).GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>An <see cref="IEssSmartList"/> object.</returns>
+        public async Task<IEssSmartList> GetSmartListAsync( string smartListName, CancellationToken cancellationToken = default )
+        {
+            if (string.IsNullOrWhiteSpace(smartListName))
+                throw new ArgumentException($"A smart list name is required to get an {nameof(EssSmartList)}.", nameof(smartListName));
+
+            try
+            {
+                if ((await GetSmartListsAsync(cancellationToken).ConfigureAwait(false)).FirstOrDefault(list => string.Equals(list?.Name, smartListName, StringComparison.OrdinalIgnoreCase)) is not { } smartList)
+                    throw new Exception($@"The given {nameof(smartListName)} could not be found.");
+
+                return smartList;
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to get smart list ""{smartListName}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssSmartList"/> objects.</returns>
+        public List<IEssSmartList> GetSmartLists() => GetSmartListsAsync().GetAwaiter().GetResult();
+
+        /// <inheritdoc />
+        /// <returns>A list of <see cref="IEssSmartList"/> objects.</returns>
+        public async Task<List<IEssSmartList>> GetSmartListsAsync( CancellationToken cancellationToken = default )
+        {
+            try
+            {
+                var listing = await GetApi<OutlineViewerApi>().OutlineGetSmartListsAsync(app: _application.Name, cube: Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+                return EssSmartList.FromListing(listing, this);
+            }
+            catch (OperationCanceledException) { throw; }
+            catch (Exception e)
+            {
+                throw new Exception($@"Unable to get the smart lists of cube ""{Name}"". {e.Message}", e);
+            }
+        }
+
+        /// <inheritdoc />
         /// <returns>A list of <see cref="IEssCubeVariable"/> objects.</returns>
         public List<IEssCubeVariable> GetVariables() => GetVariablesAsync()?.GetAwaiter().GetResult() ?? new List<IEssCubeVariable>();
 
@@ -1252,6 +1349,31 @@ namespace EssSharp
                 throw new Exception($@"Unable to load data to cube ""{Name}"". {e.Message}", e);
             }
         }
+        #endregion
+
+        #region Internal Methods
+
+        /// <summary>
+        /// Runs one smart list edit action on the cube's outline as a batch outline edit.
+        /// </summary>
+        /// <param name="action">The edit action: an object with one property, named for the action.</param>
+        /// <param name="warningsAreFailures">Whether a warning from the server means the action did not take effect.</param>
+        /// <param name="cancellationToken" />
+        internal async Task EditSmartListsAsync( JObject action, bool warningsAreFailures, CancellationToken cancellationToken )
+        {
+            var body   = new JObject { [@"editActions"] = new JArray { action } };
+            var output = await GetApi<BatchOutlineEditingApi>().BatchOutlineEditingExecuteJsonAsync(_application.Name, Name, body, cancellationToken: cancellationToken).ConfigureAwait(false);
+
+            // The server answers a refused edit with success, and says what it refused in its messages, one to a line.
+            var refusal = (output?.Messages ?? string.Empty)
+                .Split('\n')
+                .Select(line => line.Trim())
+                .FirstOrDefault(line => line.StartsWith(@"Error[", StringComparison.Ordinal) || (warningsAreFailures && line.StartsWith(@"Warn[", StringComparison.Ordinal)));
+
+            if (refusal != null)
+                throw new Exception(refusal);
+        }
+
         #endregion
 
         #region Private Methods
