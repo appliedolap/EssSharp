@@ -13,7 +13,8 @@ namespace EssSharp.Test.Library
     /// turn. With <see cref="EssGridPreferences.TrackDataChanges"/> on, a submit refreshes the grid first, and lists each data
     /// cell whose value the submit changed with the member of every one of the grid's dimensions. Essbase places each
     /// dimension in the grid it answers with: a row dimension in a column, a column dimension in a row, and a dimension on
-    /// neither axis in the point of view, which a grid may show in a row of its own above the column headers.
+    /// neither axis in the point of view, which a grid may show in a row of its own above the column headers. A change lists
+    /// the row dimensions from left to right, then the column dimensions from top to bottom, and then the point of view.
     /// </summary>
     [Collection(nameof(LibraryCollection))]
     public class GridDataChangeTests
@@ -56,7 +57,7 @@ namespace EssSharp.Test.Library
 
             Assert.Equal(640.0, change.OldValue);
             Assert.Equal(641.0, change.NewValue);
-            Assert.Equal(new[] { "Year=Jan#1", "Measures=Sales#2", "Product=Cola#3", "Market=New York#4", "Scenario=Budget#5" }, DataPoints(change));
+            Assert.Equal(new[] { "Product=Cola#3", "Year=Jan#1", "Measures=Sales#2", "Market=New York#4", "Scenario=Budget#5" }, DataPoints(change));
             Assert.All(change.DataPoints, dataPoint => Assert.Equal(string.Empty, dataPoint.Alias));
         }
 
@@ -97,7 +98,7 @@ namespace EssSharp.Test.Library
 
             var change = Assert.Single(grid.DataChanges.DataChanges);
 
-            Assert.Equal(new[] { "Year=Feb#1", "Measures=Sales#2", "Product=Diet Cola#3", "Market=East#4", "Scenario=Actual#5" }, DataPoints(change));
+            Assert.Equal(new[] { "Market=East#4", "Product=Diet Cola#3", "Scenario=Actual#5", "Year=Feb#1", "Measures=Sales#2" }, DataPoints(change));
         }
 
         [Fact(DisplayName = "GridDataChangeTests - SubmitAsync_WithoutAliases_TracksTheMembersByName")]
@@ -114,7 +115,7 @@ namespace EssSharp.Test.Library
 
             var change = Assert.Single(grid.DataChanges.DataChanges);
 
-            Assert.Equal(new[] { "Year=Jan#1", "Measures=Sales#2", "Product=Cola#3", "Market=New York#4", "Scenario=Budget#5" }, DataPoints(change));
+            Assert.Equal(new[] { "Product=Cola#3", "Year=Jan#1", "Measures=Sales#2", "Market=New York#4", "Scenario=Budget#5" }, DataPoints(change));
             Assert.All(change.DataPoints, dataPoint => Assert.Null(dataPoint.Alias));
         }
 

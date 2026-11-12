@@ -602,7 +602,8 @@ namespace EssSharp
         /// column, and a column dimension's in its row; a member Essbase does not repeat is the nearest one above the cell, or
         /// to its left, within the data block. A dimension on neither axis is the grid's point of view, whose member the grid
         /// names apart from its cells, so the column dimensions need not begin in the grid's first row. A dimension the grid
-        /// names no member of is left out.
+        /// names no member of is left out. The row dimensions come first, from left to right, then the column dimensions, from
+        /// top to bottom, and then the point of view.
         /// </remarks>
         /// <param name="dataCellIndex">The data cell's index, counting row by row.</param>
         /// <param name="grid">The grid.</param>
@@ -615,7 +616,13 @@ namespace EssSharp
             var row = dataCellIndex / columnCount;
             var column = dataCellIndex % columnCount;
 
-            foreach ( var dimension in grid.Dimensions ?? new List<GridDimension>() )
+            var dimensions = grid.Dimensions ?? new List<GridDimension>();
+
+            var ordered = dimensions.Where(dimension => dimension.Column >= 0).OrderBy(dimension => dimension.Column)
+                .Concat(dimensions.Where(dimension => dimension.Column < 0 && dimension.Row >= 0).OrderBy(dimension => dimension.Row))
+                .Concat(dimensions.Where(dimension => dimension.Column < 0 && dimension.Row < 0));
+
+            foreach ( var dimension in ordered )
             {
                 var member = default(string);
 
